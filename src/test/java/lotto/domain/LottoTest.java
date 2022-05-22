@@ -1,13 +1,13 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import lotto.enums.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -38,29 +38,5 @@ class LottoTest {
     @Test
     void lottoEmptyList() {
         assertThatThrownBy(() -> new Lotto(new ArrayList<>())).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @DisplayName("로또 숫자 3개 매칭시 5등")
-    @Test
-    void lottoMatchingThree() {
-        List<Integer> referenceList = Arrays.asList(1, 5, 10, 23, 42, 3);
-        Lotto reference = new Lotto(referenceList.stream().map(LottoNumber::new).collect(Collectors.toList()));
-
-        List<Integer> lottoList = Arrays.asList(1, 5, 7, 8, 23, 41);
-        Lotto lotto = new Lotto(lottoList.stream().map(LottoNumber::new).collect(Collectors.toList()));
-
-        assertThat(reference.match(lotto, new LottoNumber(45)).convertToLottoRank()).isEqualTo(LottoRank.FIFTH);
-    }
-
-    @DisplayName("로또 숫자 6개 매칭시 1등")
-    @Test
-    void lottoMatchingSix() {
-        List<Integer> referenceList = Arrays.asList(1, 5, 10, 23, 42, 3);
-        Lotto reference = new Lotto(referenceList.stream().map(LottoNumber::new).collect(Collectors.toList()));
-
-        List<Integer> lottoList = Arrays.asList(23, 5, 1, 42, 3, 10);
-        Lotto lotto = new Lotto(lottoList.stream().map(LottoNumber::new).collect(Collectors.toList()));
-
-        assertThat(reference.match(lotto, new LottoNumber(45)).convertToLottoRank()).isEqualTo(LottoRank.FIRST);
     }
 }

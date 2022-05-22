@@ -56,7 +56,7 @@ class LottosTest {
         Lotto firstLotto = new Lotto(
                 Stream.of(1, 5, 10, 12, 20, 40).map(LottoNumber::new).collect(Collectors.toList()));
         Lottos lottos = new Lottos(Collections.singletonList(firstLotto));
-        LottosResults results = lottos.matchWithReference(referenceLotto, new LottoNumber(45));
+        LottosResults results = lottos.matchWithWinningLotto(new WinningLotto(referenceLotto, new LottoNumber(45)));
 
         assertThat(results.getRankCount(LottoRank.FIRST)).isEqualTo(1);
     }
@@ -72,7 +72,7 @@ class LottosTest {
         Lotto thirdLotto_2 = new Lotto(
                 Stream.of(1, 5, 2, 12, 20, 40).map(LottoNumber::new).collect(Collectors.toList()));
         Lottos lottos = new Lottos(Arrays.asList(thirdLotto_1, thirdLotto_2));
-        LottosResults results = lottos.matchWithReference(referenceLotto, new LottoNumber(45));
+        LottosResults results = lottos.matchWithWinningLotto(new WinningLotto(referenceLotto, new LottoNumber(45)));
 
         assertThat(results.getRankCount(LottoRank.THIRD)).isEqualTo(2);
     }
@@ -87,7 +87,7 @@ class LottosTest {
                 Stream.of(1, 5, 3, 12, 20, 29).map(LottoNumber::new).collect(Collectors.toList()));
 
         Lottos lottos = new Lottos(Collections.singletonList(fourthLotto));
-        LottosResults results = lottos.matchWithReference(referenceLotto, new LottoNumber(45));
+        LottosResults results = lottos.matchWithWinningLotto(new WinningLotto(referenceLotto, new LottoNumber(45)));
 
         assertThat(results.getRankCount(LottoRank.FOURTH)).isEqualTo(1);
     }
@@ -106,7 +106,7 @@ class LottosTest {
                 Stream.of(2, 5, 11, 15, 23, 40).map(LottoNumber::new).collect(Collectors.toList()));
 
         Lottos lottos = new Lottos(Arrays.asList(missLotto_zero, missLotto_one, missLotto_two));
-        LottosResults results = lottos.matchWithReference(referenceLotto, new LottoNumber(45));
+        LottosResults results = lottos.matchWithWinningLotto(new WinningLotto(referenceLotto, new LottoNumber(45)));
 
         assertThat(results.getRankCount(LottoRank.MISS)).isEqualTo(3);
     }
@@ -123,32 +123,19 @@ class LottosTest {
                 Stream.of(1, 5, 33, 12, 20, 40).map(LottoNumber::new).collect(Collectors.toList()));
 
         Lottos lottos = new Lottos(Arrays.asList(secondLotto_1, secondLotto_2));
-        LottosResults results = lottos.matchWithReference(referenceLotto, new LottoNumber(33));
+        LottosResults results = lottos.matchWithWinningLotto(new WinningLotto(referenceLotto, new LottoNumber(33)));
 
         assertThat(results.getRankCount(LottoRank.SECOND)).isEqualTo(2);
     }
 
-    @DisplayName("비교대상 bonusNumber를 null 로 입력했을시 Exception 발생 확인")
+    @DisplayName("winningLotto를 null 로 입력했을시 Exception 발생 확인")
     @Test
-    void matchWithNullReference() {
-        Lotto referenceLotto = new Lotto(
-                Stream.of(1, 5, 10, 12, 20, 40).map(LottoNumber::new).collect(Collectors.toList()));
-
+    void matchWithNullWinningLotto() {
         Lotto lotto = new Lotto(
                 Stream.of(1, 5, 10, 12, 20, 40).map(LottoNumber::new).collect(Collectors.toList()));
         Lottos lottos = new Lottos(Collections.singletonList(lotto));
 
-        assertThatThrownBy(() -> lottos.matchWithReference(referenceLotto, null)).isInstanceOf(
-                IllegalArgumentException.class);
-    }
-
-    @DisplayName("비교대상 referenceLotto를 null 로 입력했을시 Exception 발생 확인")
-    @Test
-    void matchWithNullBonus() {
-        Lotto lotto = new Lotto(
-                Stream.of(1, 5, 10, 12, 20, 40).map(LottoNumber::new).collect(Collectors.toList()));
-        Lottos lottos = new Lottos(Collections.singletonList(lotto));
-        assertThatThrownBy(() -> lottos.matchWithReference(null, new LottoNumber(45))).isInstanceOf(
+        assertThatThrownBy(() -> lottos.matchWithWinningLotto(null)).isInstanceOf(
                 IllegalArgumentException.class);
     }
 }

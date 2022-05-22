@@ -8,8 +8,8 @@ import lotto.enums.LottoRank;
 public class Lottos {
 
     private static final String ERROR_MESSAGE_LOTTO_LIST_NULL_OR_EMPTY = "[ERROR] lottoList is null or empty.";
-    private static final String ERROR_MESSAGE_REFERENCE_LOTTO_NULL = "[ERROR] referenceLotto is null.";
-    private static final String ERROR_MESSAGE_BONUS_NUMBER_NULL = "[ERROR] bonusNumber is null.";
+    private static final String ERROR_MESSAGE_WINNING_LOTTO_NULL = "[ERROR] winning lotto is null.";
+
     private final List<Lotto> lottoList;
 
     public Lottos(List<Lotto> lottoList) {
@@ -31,21 +31,17 @@ public class Lottos {
         return lottoList.size();
     }
 
-    public LottosResults matchWithReference(Lotto referenceLotto, LottoNumber bonusNumber) {
-        validateReferenceArguments(referenceLotto, bonusNumber);
+    public LottosResults matchWithWinningLotto(WinningLotto winningLotto) {
+        validateArguments(winningLotto);
 
         Map<LottoRank, Integer> rankCountMap = new HashMap<>();
 
         for (Lotto lotto : lottoList) {
-            LottoRank lottoRank = matchLottoWithReference(referenceLotto, bonusNumber, lotto);
-            countRank(rankCountMap, lottoRank);
+            LottoRank rank = winningLotto.match(lotto);
+            countRank(rankCountMap, rank);
         }
 
         return new LottosResults(rankCountMap);
-    }
-
-    private LottoRank matchLottoWithReference(Lotto referenceLotto, LottoNumber bonusNumber, Lotto targetLotto) {
-        return targetLotto.match(referenceLotto, bonusNumber).convertToLottoRank();
     }
 
     private void countRank(Map<LottoRank, Integer> rankCountMap, LottoRank lottoRank) {
@@ -57,13 +53,9 @@ public class Lottos {
         rankCountMap.put(lottoRank, 1);
     }
 
-    private void validateReferenceArguments(Lotto referenceLotto, LottoNumber bonusNumber) {
-        if (referenceLotto == null) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_REFERENCE_LOTTO_NULL);
-        }
-
-        if (bonusNumber == null) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_BONUS_NUMBER_NULL);
+    private void validateArguments(WinningLotto winningLotto) {
+        if (winningLotto == null) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_WINNING_LOTTO_NULL);
         }
     }
 }

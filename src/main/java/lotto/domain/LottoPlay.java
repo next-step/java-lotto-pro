@@ -21,9 +21,8 @@ public class LottoPlay {
         PurchaseMoney purchaseMoney = getPurchaseMoney();
         Lottos lottos = lottoGenerator.generateLottos(purchaseMoney.getAmountOfLotto());
         resultView.printPurchasedLottos(lottos);
-        Lotto referenceLotto = getReferenceLotto();
-        LottoNumber bonusLottoNumber = getBonusLottoNumber();
-        LottosResults results = lottos.matchWithReference(referenceLotto, bonusLottoNumber);
+        WinningLotto winningLotto = getWinningLotto();
+        LottosResults results = lottos.matchWithWinningLotto(winningLotto);
         resultView.printLottoStatisticsResult(results, purchaseMoney);
     }
 
@@ -32,7 +31,11 @@ public class LottoPlay {
         return new PurchaseMoney(money);
     }
 
-    private Lotto getReferenceLotto() {
+    private WinningLotto getWinningLotto() {
+        return new WinningLotto(getLastWeekLotto(), getBonusLottoNumber());
+    }
+
+    private Lotto getLastWeekLotto() {
         String lottoNumberString = inputView.inputReferenceLottoNumbers();
         List<Integer> numberList = StringUtil.splitNumbersString(lottoNumberString, ",");
         return new Lotto(numberList.stream().map(LottoNumber::new).collect(Collectors.toList()));
