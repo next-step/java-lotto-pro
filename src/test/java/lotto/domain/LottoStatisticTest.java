@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -37,14 +38,14 @@ class LottoStatisticTest {
 
     @Test
     void 셋업에_맞는_담청_결과를_반환() {
-
         Map<MatchResult, Integer> winingResult = lottoStatistic.winningMatchResultCount();
-
-        assertThat(winingResult.get(MatchResult.FIFTH)).isEqualTo(1);
-        assertThat(winingResult.get(MatchResult.FIRST)).isEqualTo(0);
-        assertThat(winingResult.get(MatchResult.SECOND)).isEqualTo(0);
-        assertThat(winingResult.get(MatchResult.THIRD)).isEqualTo(0);
-        assertThat(winingResult.get(MatchResult.FOURTH)).isEqualTo(0);
+        assertAll(
+                () -> assertThat(winingResult.get(MatchResult.FIFTH)).isEqualTo(1),
+                () -> assertThat(winingResult.get(MatchResult.FIRST)).isEqualTo(0),
+                () -> assertThat(winingResult.get(MatchResult.SECOND)).isEqualTo(0),
+                () -> assertThat(winingResult.get(MatchResult.THIRD)).isEqualTo(0),
+                () -> assertThat(winingResult.get(MatchResult.FOURTH)).isEqualTo(0)
+        );
     }
 
     private List<Lotto> createNotWinningLottos(int[] notWinningNumbers, int size) {
