@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.generator.AutoLottoNumbersGenerator;
 import lotto.generator.WinningLottoNumbersGenerator;
 import lotto.model.*;
 import lotto.view.ResultView;
@@ -13,7 +14,7 @@ public class LottoController {
         Purchase purchaseInfo = Purchase.createPurchase(convertToInteger(readPurchaseAmount()));
         ResultView.printPurchaseCountView(purchaseInfo.getCount());
 
-        Lottos lottos = purchaseInfo.createLottos();
+        Lottos lottos = purchaseInfo.createLottos(new AutoLottoNumbersGenerator());
         lottos.printLottos();
 
         LottoNumbers winningNumbers = LottoNumbers.createLottoNumbers(new WinningLottoNumbersGenerator());
