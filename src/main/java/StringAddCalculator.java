@@ -2,10 +2,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final String DEFAULT_DELIMITERS = ",|:";
-    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
-    private static final int CUSTOM_DELIMITER_GROUP_1 = 1;
-    private static final int CUSTOM_DELIMITER_GROUP_2 = 2;
+    private static final int CUSTOM_GROUP_DELIMITER = 1;
+    private static final int CUSTOM_GROUP_INPUT = 2;
 
     public static int splitAndSum(String text) {
         int result = 0;
@@ -21,13 +21,13 @@ public class StringAddCalculator {
     private static int addStrings(String[] strings) {
         int result = 0;
         for (String string : strings) {
-            int number = numberValidate(string);
+            int number = validateNumber(string);
             result += number;
         }
         return result;
     }
 
-    private static int numberValidate(String string) throws RuntimeException {
+    private static int validateNumber(String string) {
         int number;
         try {
             number = Integer.parseInt(string);
@@ -41,10 +41,10 @@ public class StringAddCalculator {
     }
 
     private static String[] splitString(String text) {
-        Matcher m = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(text);
+        Matcher m = CUSTOM_PATTERN.matcher(text);
         if (m.find()) {
-            String customDelimiter = m.group(CUSTOM_DELIMITER_GROUP_1);
-            return m.group(CUSTOM_DELIMITER_GROUP_2).split(customDelimiter);
+            String customDelimiter = m.group(CUSTOM_GROUP_DELIMITER);
+            return m.group(CUSTOM_GROUP_INPUT).split(customDelimiter);
         }
 
         return text.split(DEFAULT_DELIMITERS);
