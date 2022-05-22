@@ -8,12 +8,12 @@ import static step3.lotto.utils.LottoNumberUtils.generateLottoNumbers;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step3.lotto.domain.customer.wrap.ManualAttemptsCount;
 import step3.lotto.domain.customer.wrap.Price;
 import step3.lotto.domain.lotto.Lotto;
+import step3.lotto.domain.lotto.Lottos;
 
 /**
  * @author : choi-ys
@@ -28,13 +28,13 @@ class CustomerTest {
         // Given
         final Price price = Price.of(15_000);
         final ManualAttemptsCount manualAttemptsCount = ManualAttemptsCount.of(5, price);
-        final List<Lotto> manualLottos = Arrays.asList(
+        Lottos manualLottos = new Lottos(Arrays.asList(
             Lotto.of(generateLottoNumbers()),
             Lotto.of(generateLottoNumbers()),
             Lotto.of(generateLottoNumbers()),
             Lotto.of(generateLottoNumbers()),
             Lotto.of(generateLottoNumbers())
-        );
+        ));
 
         // When
         Customer actual = new Customer(price, manualAttemptsCount, manualLottos);
@@ -55,7 +55,7 @@ class CustomerTest {
         // Given
         final Price price = Price.of(15_000);
         final ManualAttemptsCount manualAttemptsCount = ManualAttemptsCount.of(5, price);
-        final List<Lotto> manualLottos = Collections.emptyList();
+        final Lottos manualLottos = new Lottos(Collections.emptyList());
 
         // When & THen
         assertThatExceptionOfType(IllegalArgumentException.class)

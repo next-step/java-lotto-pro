@@ -25,7 +25,7 @@ public class Customer {
         this.lottos = publishLottos();
     }
 
-    public Customer(Price price, ManualAttemptsCount manualAttemptsCount, List<Lotto> manualLottos) {
+    public Customer(Price price, ManualAttemptsCount manualAttemptsCount, Lottos manualLottos) {
         validateManualLottos(manualAttemptsCount, manualLottos);
         this.price = price;
         this.manualAttemptsCount = manualAttemptsCount;
@@ -33,13 +33,13 @@ public class Customer {
         addManualLottos(manualLottos);
     }
 
-    private void validateManualLottos(ManualAttemptsCount manualAttemptsCount, List<Lotto> manualLottos) {
-        if (manualAttemptsCount.getManualAttemptsCount() != manualLottos.size()) {
+    private void validateManualLottos(ManualAttemptsCount manualAttemptsCount, Lottos manualLottos) {
+        if (manualAttemptsCount.getManualAttemptsCount() != manualLottos.getLottosSize()) {
             throw new IllegalArgumentException(INVALID_MANUAL_LOTTOS_SIZE_ERROR);
         }
     }
 
-    public void addManualLottos(List<Lotto> manualLottos) {
+    public void addManualLottos(Lottos manualLottos) {
         lottos.addAll(manualLottos);
     }
 

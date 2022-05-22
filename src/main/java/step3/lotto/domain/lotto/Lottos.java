@@ -22,7 +22,13 @@ public class Lottos {
         return lottos.size();
     }
 
-    public void addAll(List<Lotto> lottos) {
-        this.lottos.addAll(lottos);
+    public void addAll(Lottos lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
+            add(lotto);
+        }
+    }
+
+    private void add(Lotto lotto) {
+        lottos.add(lotto);
     }
 }
