@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum LottoRank {
     FIRST(6, 2000000000, false),
@@ -31,6 +32,10 @@ public enum LottoRank {
         }
 
         return LottoRank.NONE;
+    }
+
+    public static List<LottoRank> filteredHasPrize(List<LottoRank> lottoRanks) {
+        return lottoRanks.stream().filter(LottoRank::hasPrize).collect(Collectors.toList());
     }
 
     private boolean matchBonus(boolean hasBonus) {

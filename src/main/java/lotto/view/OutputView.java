@@ -7,7 +7,6 @@ import lotto.domain.LottoTicket;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static lotto.domain.LottoStore.LOTTO_PRICE;
 
@@ -22,8 +21,8 @@ public class OutputView {
 
     private static void printLottoRank(List<LottoRank> lottoRanks, LottoRanks lottoResult) {
         System.out.println("\n당첨 통계\n---------");
-
-        List<LottoRank> filteredLottoRanks = lottoRanks.stream().filter(LottoRank::hasPrize).collect(Collectors.toList());
+        
+        List<LottoRank> filteredLottoRanks = LottoRank.filteredHasPrize(lottoRanks);
         for (LottoRank lottoRank : filteredLottoRanks) {
             int matchRank = lottoRank.matchRank(lottoResult);
             printMatch(lottoRank, matchRank);
