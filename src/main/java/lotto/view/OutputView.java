@@ -5,15 +5,10 @@ import lotto.domain.TotalLotto;
 
 import java.util.Map;
 
+import static lotto.constants.Message.*;
 import static lotto.domain.LottoStatistic.*;
 
 public class OutputView {
-    private static final String QUANTITY = "개를 구매하였습니다.";
-    private static final String LOTTO_STATISTIC_START = "\n당첨 통계\n---------";
-    private static final String LOTTO_MATCH = "개 일치";
-    private static final String INPUT_ERROR = "잘못된 값을 입력하였습니다.";
-    private static final String PROFIT = "총 이익률은 %.2f 입니다.";
-
     public static void printQuantity(TotalLotto totalLotto) {
         System.out.println(totalLotto.getCount() + QUANTITY);
         System.out.println(totalLotto.lottoListToString());
@@ -32,6 +27,6 @@ public class OutputView {
     }
 
     public static void printErrorMessage() {
-        System.out.println(INPUT_ERROR);
+        System.out.println(INPUT_AMOUNT_ERROR);
     }
 }
