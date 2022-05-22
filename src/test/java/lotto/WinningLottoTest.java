@@ -4,7 +4,6 @@ import lotto.domain.*;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class WinningLottoTest {
     @Test

@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 import static lotto.constants.Message.INPUT_BONUS_ERROR;
 
 public class WinningLotto {

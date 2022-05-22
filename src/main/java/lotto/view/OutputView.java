@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.LottoScore;
 import lotto.domain.Rank;
 import lotto.domain.TotalLotto;
 
@@ -26,9 +25,5 @@ public class OutputView {
 
     public static void printProfit(double profit) {
         System.out.println(String.format(PROFIT, profit));
-    }
-
-    public static void printErrorMessage() {
-        System.out.println(INPUT_AMOUNT_ERROR);
     }
 }
