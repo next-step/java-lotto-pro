@@ -1,9 +1,7 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.sql.Array;
+import java.util.*;
 
 public class LottoNumbers {
 
@@ -14,7 +12,7 @@ public class LottoNumbers {
     public LottoNumbers(List<LottoNumber> numbers) {
         validateLottoNumbers(numbers);
         Collections.sort(numbers);
-        this.numbers = numbers;
+        this.numbers = new ArrayList<>(numbers);
     }
 
     public int[] getNumbersAsArray() {
