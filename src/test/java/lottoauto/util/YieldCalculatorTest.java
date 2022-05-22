@@ -9,9 +9,10 @@ public class YieldCalculatorTest {
         int two = 0;
         int three = 0;
         int four = 0;
+        int five = 0;
         int price = 1000;
         YieldCalculator yieldCalculator = new YieldCalculator();
 
-        yieldCalculator.getYield(price, one, two, three, four);
+        yieldCalculator.getYield(price, one, two, three, four, five);
     }
 }
