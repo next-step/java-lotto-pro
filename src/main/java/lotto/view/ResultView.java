@@ -8,6 +8,8 @@ public class ResultView {
     private static final String PURCHASE_COUNT_OUTPUT_MESSAGE = "%d개를 구매했습니다.";
     private static final String EARNINGS_RATE_OUTPUT_MESSAGE = "총 수익률은 %s입니다.";
 
+    private ResultView() {}
+
     public static void printPurchaseCountView(int count) {
         System.out.printf(PURCHASE_COUNT_OUTPUT_MESSAGE + "\n", count);
     }
