@@ -39,9 +39,7 @@ public class InputViewer {
         InputNumberValidator inputNumberValidator = new InputNumberValidator(sc.nextLine());
         System.out.println("보너스 볼을 입력해 주세요.");
         Number bonusBall = new Number(sc.nextLine());
-        inputNumberValidator.addBonusNumber(bonusBall.getNumber());
-        Lotto winNumbers = new Lotto(inputNumberValidator.getNumbers());
-
+        Lotto winNumbers = new Lotto(inputNumberValidator.getNumbers(), bonusBall);
         makeDefaultWinnerMap(winnerMap);
 
         WinnerChecker winnerChecker = new WinnerChecker(winNumbers);
@@ -55,5 +53,6 @@ public class InputViewer {
         winnerMap.put(Rank.SECOND.getLottoRank(), 0);
         winnerMap.put(Rank.THIRD.getLottoRank(), 0);
         winnerMap.put(Rank.FOURTH.getLottoRank(), 0);
+        winnerMap.put(Rank.FIFTH.getLottoRank(), 0);
     }
 }

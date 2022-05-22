@@ -25,7 +25,8 @@ public class LottoTicket {
 
     public void printAll() {
         for (Lotto lotto : listLotto) {
-            System.out.println(lotto.toString());
+            System.out.print(lotto.toString());
+            System.out.println("||"+lotto.getBonusNumber());
         }
     }
 

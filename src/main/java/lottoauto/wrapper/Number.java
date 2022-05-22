@@ -24,7 +24,6 @@ public class Number {
         }
     }
 
-
     public int getNumber() {
         return this.number;
     }
