@@ -14,17 +14,15 @@ public class LottoMachine {
             .boxed()
             .collect(Collectors.toList());
 
-    private static void shuffleNumbers() {
-        Collections.shuffle(LOTTO_NUMBERS);
-    }
+    public static Lottos issueLottos(List<Lotto> manualLottos, int purchaseCount) {
+        int autoIssueCount = purchaseCount - manualLottos.size();
+        List<Lotto> autoIssueLottos = issueAutoLottos(autoIssueCount);
 
-    private static List<Integer> divideNumberList() {
-        return LOTTO_NUMBERS.subList(0, LOTTO_NUMBER_SIZE_VALUE);
-    }
+        List<Lotto> issueLottos = Stream.of(manualLottos, autoIssueLottos)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
 
-    private static Set<Integer> issueAutoNumber() {
-        shuffleNumbers();
-        return new HashSet<>(divideNumberList());
+        return new Lottos(issueLottos);
     }
 
     public static List<Lotto> issueAutoLottos(int autoIssueCount) {
@@ -35,14 +33,16 @@ public class LottoMachine {
         return lottos;
     }
 
-    public static Lottos issueLottos(List<Lotto> manualLottos, int purchaseCount) {
-        int autoIssueCount = purchaseCount - manualLottos.size();
-        List<Lotto> autoIssueLottos = issueAutoLottos(autoIssueCount);
+    private static Set<Integer> issueAutoNumber() {
+        shuffleNumbers();
+        return new HashSet<>(divideNumberList());
+    }
 
-        List<Lotto> issueLottos = Stream.of(manualLottos, autoIssueLottos)
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList());
+    private static void shuffleNumbers() {
+        Collections.shuffle(LOTTO_NUMBERS);
+    }
 
-        return new Lottos(issueLottos);
+    private static List<Integer> divideNumberList() {
+        return LOTTO_NUMBERS.subList(0, LOTTO_NUMBER_SIZE_VALUE);
     }
 }
