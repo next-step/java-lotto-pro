@@ -14,9 +14,9 @@ import lotto.model.lotto.Lotto;
 
 public class LottoFactory implements ILottoFactory {
 
-    private final List<LottoNumber> rangeLottoNumbers = new ArrayList<>();
+    private static final List<LottoNumber> rangeLottoNumbers = new ArrayList<>();
 
-    private LottoFactory() {
+    static {
         IntStream.rangeClosed(LOTTO_NUMBER_RANGE_MIN, LOTTO_NUMBER_RANGE_MAX)
             .forEach(i -> rangeLottoNumbers.add(new LottoNumber(i)));
     }
@@ -27,7 +27,7 @@ public class LottoFactory implements ILottoFactory {
 
     private Lotto generateAuto() {
         Collections.shuffle(rangeLottoNumbers);
-        return Lotto.of(rangeLottoNumbers.stream()
+        return Lotto.fromLottoNumber(rangeLottoNumbers.stream()
             .limit(LOTTO_SIZE)
             .collect(Collectors.toSet()));
     }

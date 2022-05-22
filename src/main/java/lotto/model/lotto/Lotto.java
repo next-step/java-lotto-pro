@@ -2,6 +2,7 @@ package lotto.model.lotto;
 
 import static lotto.constant.LottoSetting.LOTTO_SIZE;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -16,16 +17,23 @@ public class Lotto {
         this.lottoNumbers = lottoNumberSet;
     }
 
-    public static Lotto of(Set<LottoNumber> lottoNumberSet) {
+    public static Lotto fromLottoNumber(Set<LottoNumber> lottoNumberSet) {
         return new Lotto(lottoNumberSet);
     }
-
-    public static Lotto of(List<String> lottoStringList) {
-        Set<LottoNumber> lottoNumberSet =lottoStringList.stream()
+    public static Lotto fromInteger(Set<Integer> lottoIntegerSet) {
+        Set<LottoNumber> lottoNumberSet = lottoIntegerSet.stream()
             .map(LottoNumber::new)
             .collect(Collectors.toSet());
 
-        return of(lottoNumberSet);
+        return new Lotto(lottoNumberSet);
+    }
+
+    public static Lotto fromInteger(List<Integer> lottoIntegerList) {
+        Set<LottoNumber> lottoNumberSet = lottoIntegerList.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toSet());
+
+        return new Lotto(lottoNumberSet);
     }
 
     public int match(Lotto lotto) {

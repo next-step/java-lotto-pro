@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum LottoRank {
+    NONE(-1, 0),
     THREE(3, 5_000),
     FOUR(4, 50_000),
     FIVE(5, 1_500_000),
@@ -18,14 +19,15 @@ public enum LottoRank {
         this.winningPrice = winningPrice;
     }
 
-    public static Optional<LottoRank> rankMatch(int matchCount, boolean bonusMatch) {
-        if(matchCount == 4 && bonusMatch) {
-            return Optional.of(LottoRank.FIVE_BONUS);
+    public static LottoRank rankMatch(int matchCount, boolean bonusMatch) {
+        if(matchCount == 5 && bonusMatch) {
+            return LottoRank.FIVE_BONUS;
         }
 
         return Arrays.stream(LottoRank.values())
             .filter(lottoRank -> lottoRank.correctCount == matchCount)
-            .findFirst();
+            .findFirst()
+            .orElse(NONE);
     }
 
     public int getWinningPrice() {
