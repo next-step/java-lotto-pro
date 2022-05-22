@@ -19,6 +19,7 @@ public class ResultView {
     private final static String LOTTO_RESULT_MESSAGE = "\n당첨 통계\n---------";
     private final static String LOTTO_RANK_MESSAGE = "%d개 일치 (%d원)- %d개%s";
     private final static String LOTTO_PROFIT_MESSAGE = "총 수익률은 %.2f입니다.%s";
+    private final static String LOTTO_PURCHASE_COMPLETE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
 
     public static void printPurchaseLottoCount(int purchaseCount) {
         System.out.printf(PURCHASE_LOTTO_COUNT_MESSAGE, purchaseCount);
@@ -82,5 +83,9 @@ public class ResultView {
 
     private static void printLottoProfit(double lottoProfit) {
         System.out.printf(LOTTO_PROFIT_MESSAGE, lottoProfit, NEW_LINE);
+    }
+
+    public static void printLottoPurchaseComplete(int manualIssuedCount, int autoIssuedCount) {
+        System.out.printf(LOTTO_PURCHASE_COMPLETE_MESSAGE, manualIssuedCount, autoIssuedCount);
     }
 }
