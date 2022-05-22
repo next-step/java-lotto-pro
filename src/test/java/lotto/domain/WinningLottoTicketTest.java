@@ -62,8 +62,8 @@ class WinningLottoTicketTest {
                 .hasMessageContaining(
                         String.format(
                                 LottoNumberErrorCode.INVALID_LOTTO_NUMBER.getMessage(),
-                                LottoNumber.LOTTO_MIN_NUMBER,
-                                LottoNumber.LOTTO_MAX_NUMBER)
+                                LottoNumber.MIN,
+                                LottoNumber.MAX)
                 );
     }
 

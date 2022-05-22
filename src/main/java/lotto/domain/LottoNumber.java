@@ -5,8 +5,8 @@ import lotto.infrastructure.util.StringUtils;
 
 public class LottoNumber {
 
-    public static final int LOTTO_MIN_NUMBER = 1;
-    public static final int LOTTO_MAX_NUMBER = 45;
+    public static final int MIN = 1;
+    public static final int MAX = 45;
 
     private final int lottoNumber;
 
@@ -34,14 +34,12 @@ public class LottoNumber {
         if (!isLottoNumberInRange(lottoNumber)) {
             throw new IllegalArgumentException(
                     String.format(
-                            LottoNumberErrorCode.INVALID_LOTTO_NUMBER.getMessage(),
-                            LOTTO_MIN_NUMBER,
-                            LOTTO_MAX_NUMBER));
+                            LottoNumberErrorCode.INVALID_LOTTO_NUMBER.getMessage(), MIN, MAX));
         }
     }
 
     private boolean isLottoNumberInRange(final Integer lottoNumber) {
-        return lottoNumber >= LOTTO_MIN_NUMBER && lottoNumber <= LOTTO_MAX_NUMBER;
+        return lottoNumber >= MIN && lottoNumber <= MAX;
     }
 
     public int getLottoNumber() {

@@ -27,7 +27,7 @@ class LottoNumberTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(
                         String.format(LottoNumberErrorCode.INVALID_LOTTO_NUMBER.getMessage(),
-                                LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER));
+                                LottoNumber.MIN, LottoNumber.MAX));
     }
 
     @ParameterizedTest(name = "int lottoNumber가 로또 번호가 아닐 때")
@@ -37,7 +37,7 @@ class LottoNumberTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(
                         String.format(LottoNumberErrorCode.INVALID_LOTTO_NUMBER.getMessage(),
-                                LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER));
+                                LottoNumber.MIN, LottoNumber.MAX));
     }
 
     @Test
