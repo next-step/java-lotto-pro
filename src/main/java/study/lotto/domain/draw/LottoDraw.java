@@ -9,8 +9,8 @@ public class LottoDraw {
     private final LottoNumber bonusNumber;
     private final Lotto winningLotto;
 
-    public LottoDraw(Lotto winningLotto, int bonusNumber) {
-        this.bonusNumber = validateBonusDuplicates(winningLotto, new LottoNumber(bonusNumber));
+    public LottoDraw(Lotto winningLotto, LottoNumber bonusNumber) {
+        this.bonusNumber = validateBonusDuplicates(winningLotto, bonusNumber);
         this.winningLotto = winningLotto;
     }
 

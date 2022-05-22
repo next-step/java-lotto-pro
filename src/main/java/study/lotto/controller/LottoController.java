@@ -1,16 +1,12 @@
 package study.lotto.controller;
 
 import study.lotto.domain.AutomaticLottoGenerator;
-import study.lotto.domain.Lotto;
 import study.lotto.domain.Lottos;
 import study.lotto.domain.draw.DrawResult;
 import study.lotto.domain.draw.LottoDraw;
 import study.lotto.domain.lottomachine.LottoMachine;
-import study.lotto.domain.lottomachine.LottoPrice;
 import study.lotto.domain.lottomachine.LottoPurchaseHistory;
-import study.lotto.dto.PurchasePrice;
-import study.lotto.dto.PurchasedLottos;
-import study.lotto.dto.WinningStatistics;
+import study.lotto.domain.lottomachine.sorter.LottoAscendingSorter;
 import study.lotto.view.LottoView;
 
 public class LottoController {
@@ -22,35 +18,31 @@ public class LottoController {
 
     public void start() {
         LottoPurchaseHistory lottoPurchaseHistory = purchaseLotto();
-        Lottos purchasedLotto = lottoPurchaseHistory.getLottos();
-        showPurchaseResult(purchasedLotto);
+        showPurchaseResult(lottoPurchaseHistory);
 
-        DrawResult drawResult = draw(purchasedLotto);
+        DrawResult drawResult = draw(lottoPurchaseHistory.getLottos());
         showResult(drawResult, lottoPurchaseHistory);
     }
 
     private void showResult(DrawResult drawResult, LottoPurchaseHistory lottoPurchaseHistory) {
-        view.showWinningStatictics(WinningStatistics.of(drawResult, lottoPurchaseHistory.getTotalCost()));
+        view.showWinningStatictics(drawResult, lottoPurchaseHistory);
     }
 
     private DrawResult draw(Lottos purchasedLotto) {
-        Lotto winningLotto = Lotto.from(view.getWinningLottoNumbers().get());
-        LottoDraw lottoDraw = new LottoDraw(winningLotto, view.getBonusBall().get());
+        LottoDraw lottoDraw = new LottoDraw(view.getWinningLotto(), view.getBonusBall());
         return lottoDraw.match(purchasedLotto);
     }
 
     private LottoPurchaseHistory purchaseLotto() {
-        PurchasePrice purchasePrice = view.getPurchasePrice();
-
         LottoMachine machine = getLottoMachine();
-        return machine.issueLotto(purchasePrice.get());
+        return machine.issueLotto(view.getPurchasePrice(), view.getManualLottos());
     }
 
     private LottoMachine getLottoMachine() {
-        return new LottoMachine(new AutomaticLottoGenerator(), new LottoPrice());
+        return new LottoMachine(new AutomaticLottoGenerator(), new LottoAscendingSorter());
     }
 
-    private void showPurchaseResult(Lottos purchasedLottos) {
-        view.showPurchaseResult(PurchasedLottos.from(purchasedLottos.get()));
+    private void showPurchaseResult(LottoPurchaseHistory lottoPurchaseHistory) {
+        view.showPurchaseResult(lottoPurchaseHistory);
     }
 }

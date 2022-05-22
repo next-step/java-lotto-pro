@@ -10,11 +10,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import study.lotto.domain.Lotto;
+import study.lotto.domain.LottoNumber;
 import study.lotto.domain.Lottos;
 
 class LottoDrawTest {
     private Lotto lotto;
-    private int bonusNumber;
+    private LottoNumber bonusNumber;
 
     @BeforeEach
     void setUp() {
@@ -26,7 +27,7 @@ class LottoDrawTest {
     class 생성_성공 {
         @BeforeEach
         void setUp() {
-            bonusNumber = 10;
+            bonusNumber = new LottoNumber(10);
         }
 
         @Test
@@ -41,7 +42,7 @@ class LottoDrawTest {
     class 생성_실패 {
         @BeforeEach
         void setUp() {
-            bonusNumber = 1;
+            bonusNumber = new LottoNumber(1);
         }
 
         @Test
@@ -59,7 +60,7 @@ class LottoDrawTest {
 
         @BeforeEach
         void setUp() {
-            lottoDraw = new LottoDraw(lotto, 10);
+            lottoDraw = new LottoDraw(lotto, new LottoNumber(10));
         }
 
         @Test

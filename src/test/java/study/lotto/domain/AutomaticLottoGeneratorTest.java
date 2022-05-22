@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 import study.lotto.domain.lottomachine.LottoGenerator;
 
 class AutomaticLottoGeneratorTest {
-    private final LottoGenerator lottoGenerator = new AutomaticLottoGenerator();
+    private final LottoGenerator lottoSorter = new AutomaticLottoGenerator();
 
     @Test
     @DisplayName("로또 번호를 자동 생성한다.")
     void 로또번호를_자동으로_생성() {
-        assertThat(lottoGenerator.generate()).isNotEmpty();
+        assertThat(lottoSorter.generate()).isNotEmpty();
     }
 }

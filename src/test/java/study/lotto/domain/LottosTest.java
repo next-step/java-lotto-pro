@@ -14,7 +14,7 @@ class LottosTest {
     @Test
     @DisplayName("당첨번호를 입력하면 당첨 결과를 받을 수 있다.")
     void 당첨결과_확인() {
-        Lottos lottos = fixturesLotto();
+        Lottos lottos = new Lottos(fixturesLotto());
         Lotto winningLotto = Lotto.from(Arrays.asList(1, 3, 5, 22, 44, 45));
 
         DrawResult expected = getExpectedDrawResult();
@@ -31,14 +31,12 @@ class LottosTest {
         ));
     }
 
-    private Lottos fixturesLotto() {
-        List<Lotto> lottoList = Arrays.asList(
+    private List<Lotto> fixturesLotto() {
+        return Arrays.asList(
                 Lotto.from(Arrays.asList(8, 21, 23, 41, 42, 43)),
                 Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 38)),
                 Lotto.from(Arrays.asList(7, 11, 16, 35, 36, 44)),
                 Lotto.from(Arrays.asList(13, 14, 16, 38, 42, 45)),
                 Lotto.from(Arrays.asList(1, 3, 5, 14, 22, 45)));
-        Lottos lottos = new Lottos(lottoList);
-        return lottos;
     }
 }
