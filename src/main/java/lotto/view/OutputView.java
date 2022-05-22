@@ -39,7 +39,7 @@ public class OutputView {
 
     private static void printRateOfReturn(LottoRanks lottoResult) {
         int prize = lottoResult.prize();
-        float rateOfReturn = prize / (lottoResult.size() * LOTTO_PRICE);
+        double rateOfReturn = (double) prize / (lottoResult.size() * LOTTO_PRICE);
 
         System.out.print(String.format("총 수익률은 %.2f입니다.", rateOfReturn));
         if (rateOfReturn < 1) {
