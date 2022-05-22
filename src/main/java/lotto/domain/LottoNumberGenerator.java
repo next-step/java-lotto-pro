@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumberGenerator implements NumberGenerator {
 
@@ -12,14 +14,9 @@ public class LottoNumberGenerator implements NumberGenerator {
 
     public static final int NUMBER_RANGE_TO = 45;
 
-    private static List<Integer> numberPool;
+    private static List<Integer> numberPool = IntStream.rangeClosed(NUMBER_RANGE_FROM, NUMBER_RANGE_TO)
+            .boxed().collect(Collectors.toList());
 
-    static {
-        numberPool = new ArrayList<>();
-        for (int i = NUMBER_RANGE_FROM; i <= NUMBER_RANGE_TO; i++) {
-            numberPool.add(i);
-        }
-    }
 
     @Override
     public List<Integer> generate() {
