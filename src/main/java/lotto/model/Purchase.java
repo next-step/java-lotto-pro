@@ -3,8 +3,6 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.utils.InputUtils.convertToInteger;
-import static lotto.view.InputView.readPurchaseAmount;
 import static lotto.view.ResultView.printPurchaseCountView;
 
 public class Purchase {
