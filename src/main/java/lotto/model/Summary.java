@@ -1,24 +1,24 @@
 package lotto.model;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Summary {
-    private final List<Result> results;
+    private final Map<Rank, Integer> ranks;
 
-    public Summary(List<Result> results) {
-        this.results = new LinkedList<>(results);
+    public Summary(Map<Rank, Integer> ranks) {
+        this.ranks = ranks;
     }
 
-    public List<Result> list() {
-        return Collections.unmodifiableList(results);
+    public void printWinningDetails() {
+        for (Map.Entry<Rank, Integer> rank : this.ranks.entrySet()) {
+            System.out.println(rank.getKey().payPrize(rank.getValue()));
+        }
     }
 
-    public long sum() {
+    public long totalPrizeMoney() {
         long sum = 0;
-        for (Result result : results) {
-            sum += result.sum();
+        for (Map.Entry<Rank, Integer> rank : this.ranks.entrySet()) {
+            sum += (long) rank.getKey().prize() * rank.getValue();
         }
         return sum;
     }
