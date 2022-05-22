@@ -10,6 +10,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 
+import static lotto.domain.ExceptionMessage.ILLEGAL_SIZE;
+import static lotto.domain.ExceptionMessage.NUMBER_DUPLICATE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -19,14 +21,14 @@ public class LottoGameTest {
     void 생성_예외_개수() {
         assertThatThrownBy(() -> new LottoGame(Arrays.asList(1, 2, 5, 25, 30, 42, 44)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoGame.ILLEGAL_SIZE_EXCEPTION_MESSAGE);
+                .hasMessage(ILLEGAL_SIZE.getMessage());
     }
 
     @Test
     void 생성_예외_중복() {
         assertThatThrownBy(() -> new LottoGame(Arrays.asList(1, 2, 25, 25, 30, 42)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoGame.NUMBER_DUPLICATE_EXCEPTION_MESSAGE);
+                .hasMessage(NUMBER_DUPLICATE.getMessage());
     }
 
     @ParameterizedTest

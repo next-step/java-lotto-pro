@@ -8,10 +8,12 @@ import lotto.dto.LottoResult;
 import lotto.dto.LottoResultItem;
 import lotto.dto.LottoWin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoVendingMachine {
 
+    public static final int PRICE_PER_GAME = 1000;
     private final LottoNumbersGenerator lottoNumbersGenerator;
 
     public LottoVendingMachine(LottoNumbersGenerator lottoNumbersGenerator) {
@@ -19,8 +21,15 @@ public class LottoVendingMachine {
     }
 
     public LottoTicket sellTicket(Money money) {
+        return sellTicket(money, new ArrayList<>());
+    }
+
+    public LottoTicket sellTicket(Money money, List<LottoGame> manualLottoGames) {
         LottoTicket lottoTicket = new LottoTicket();
-        for (int i = 0; i < lottoTicket.numberOfGames(money); i++) {
+        lottoTicket.addAllGames(manualLottoGames);
+
+        int autoNumberOfGames = money.numberOfGames(PRICE_PER_GAME) - manualLottoGames.size();
+        for (int i = 0; i < autoNumberOfGames; i++) {
             lottoTicket.addGame(new LottoGame(lottoNumbersGenerator.generate()));
         }
 
@@ -32,14 +41,14 @@ public class LottoVendingMachine {
         List<LottoResultItem> items = result.mapLottoResultItemList(lottoWin);
 
         return new LottoResult(
-                calculateRateOfReturn(ticket.moneyValue(), items),
+                calculateRateOfReturn(ticket.moneyValue(PRICE_PER_GAME), items),
                 items);
     }
 
     private String calculateRateOfReturn(int investment, List<LottoResultItem> items) {
         double totalProfit = items.stream()
-                .mapToDouble(item -> item.getPrizeMoney() * item.getCount())
-                .reduce(0, (acc, profit) -> acc + profit);
+                .mapToDouble(item -> (double)item.getPrizeMoney() * item.getCount())
+                .reduce(0.0, Double::sum);
 
         return String.format("%.2f", totalProfit / investment);
     }

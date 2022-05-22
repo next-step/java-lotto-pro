@@ -1,7 +1,5 @@
 package lotto;
 
-import lotto.LottoNumbersGeneratorKr;
-import lotto.LottoVendingMachine;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
@@ -26,10 +24,23 @@ public class LottoVendingMachineTest {
 
     @ParameterizedTest
     @CsvSource(value = {"14000:14", "2900:2"}, delimiter = ':')
-    void 구매(String money, int numberOfGames) {
+    void 티켓_판매_자동(String money, int numberOfGames) {
         LottoVendingMachine lottoVendingMachine = new LottoVendingMachine(new LottoNumbersGeneratorKr());
 
-        LottoTicket lottoTicket = lottoVendingMachine.sellTicket(new Money(money));
+        LottoTicket lottoTicket = lottoVendingMachine.sellTicket(new Money(money, LottoVendingMachine.PRICE_PER_GAME));
+
+        assertThat(lottoTicket.size()).isEqualTo(numberOfGames);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"14000:14", "2900:2"}, delimiter = ':')
+    void 티켓_판매_수동_포함(String money, int numberOfGames) {
+        LottoVendingMachine lottoVendingMachine = new LottoVendingMachine(new LottoNumbersGeneratorKr());
+
+        LottoTicket lottoTicket = lottoVendingMachine.sellTicket(
+                new Money(money, LottoVendingMachine.PRICE_PER_GAME), Arrays.asList(
+                        new LottoGame("1,2,3,4,5,6"),
+                        new LottoGame("6,7,8,9,10,11")));
 
         assertThat(lottoTicket.size()).isEqualTo(numberOfGames);
     }
@@ -63,7 +74,7 @@ public class LottoVendingMachineTest {
 
         assertThat(result).isEqualTo(
                 new LottoResult(
-                        String.format("%.2f", (double) (Rank.FIFTH.getPrize() + Rank.SECOND.getPrize()) / ticket.moneyValue()),
+                        String.format("%.2f", (double) (Rank.FIFTH.getPrize() + Rank.SECOND.getPrize()) / ticket.moneyValue(LottoVendingMachine.PRICE_PER_GAME)),
                         Arrays.asList(
                                 new LottoResultItem(Rank.MISS, 12),
                                 new LottoResultItem(Rank.FIFTH, 1),

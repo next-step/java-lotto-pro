@@ -1,13 +1,16 @@
 package lotto.domain;
 
+import static lotto.domain.ExceptionMessage.NOT_ENOUGH_AMOUNT;
+import static lotto.domain.ExceptionMessage.NOT_UNSIGNED_INT;
+
 public class Money {
 
     private final int value;
 
-    public Money(String money) {
+    public Money(String money, int pricePerGame) {
         validateUnsignedInt(money);
         int value = Integer.parseUnsignedInt(money);
-        validateNotZero(value);
+        validateEnoughAmount(value, pricePerGame);
         this.value = value;
     }
 
@@ -15,13 +18,13 @@ public class Money {
         try {
             Integer.parseUnsignedInt(money);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("구입 금액은 자연수만 가능합니다.");
+            throw new IllegalArgumentException(NOT_UNSIGNED_INT.getMessage());
         }
     }
 
-    private void validateNotZero(int value) {
-        if (value == 0) {
-            throw new IllegalArgumentException("구입 금액은 0보다 커야 합니다.");
+    private void validateEnoughAmount(int value, int pricePerGame) {
+        if (value / pricePerGame < 1) {
+            throw new IllegalArgumentException(NOT_ENOUGH_AMOUNT.getMessage());
         }
     }
 

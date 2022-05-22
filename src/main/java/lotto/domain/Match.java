@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import static lotto.domain.ExceptionMessage.OUT_OF_BOUNDS;
+
 public class Match {
     private final int value;
 
@@ -12,7 +14,7 @@ public class Match {
 
     private void validateBounds(int value) {
         if (value < 0 || value > LottoGame.SIZE) {
-            throw new IllegalArgumentException("당첨 번호 일치 개수는 0 ~ " + LottoGame.SIZE + "입니다.");
+            throw new IllegalArgumentException(OUT_OF_BOUNDS.getMessage());
         }
     }
 

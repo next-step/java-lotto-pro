@@ -1,17 +1,17 @@
 package lotto;
 
-import lotto.domain.Money;
+import lotto.domain.NumberOfGames;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class MoneyTest {
+class NumberOfGamesTest {
 
     @ParameterizedTest
-    @ValueSource(strings = {"-123", "0", "14000.3"})
+    @ValueSource(strings = {"a", "-1"})
     void 생성_예외(String input) {
-        assertThatThrownBy(() -> new Money(input, LottoVendingMachine.PRICE_PER_GAME))
+        assertThatThrownBy(() -> new NumberOfGames(input, LottoVendingMachine.PRICE_PER_GAME))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
