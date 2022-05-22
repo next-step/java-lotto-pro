@@ -26,7 +26,7 @@ public enum LottoRank {
     public static LottoRank valueOf(int match, boolean hasBonus) {
         List<LottoRank> ranks = new ArrayList<>(Arrays.asList(LottoRank.values()));
         for (LottoRank rank : ranks) {
-            if (rank.isMatch(match) && rank.matchBonus(hasBonus)) {
+            if (rank.isMatchRank(match, hasBonus)) {
                 return rank;
             }
         }
