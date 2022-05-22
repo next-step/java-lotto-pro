@@ -16,7 +16,7 @@ public class WinningLottoTicket {
         List<Integer> winningLottoNumbers = StringUtils.convertIntegers(inputWinningLottoNumbers);
 
         this.winningLottoTicket = new LottoTicket(winningLottoNumbers);
-        this.bonusBall = new LottoNumber(bonusBall);
+        this.bonusBall = new LottoNumber(Integer.parseInt(bonusBall));
 
         validateDuplicate(this.winningLottoTicket, this.bonusBall);
     }

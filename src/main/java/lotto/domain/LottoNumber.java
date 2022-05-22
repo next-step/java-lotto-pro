@@ -9,15 +9,7 @@ public class LottoNumber {
     public static final int MAX = 45;
 
     private final int lottoNumber;
-
-    public LottoNumber(final String lottoNumber) {
-        validateNullOrEmpty(lottoNumber);
-
-        this.lottoNumber = Integer.parseInt(lottoNumber);
-
-        validateLottoNumber(this.lottoNumber);
-    }
-
+    
     public LottoNumber(final int lottoNumber) {
         validateLottoNumber(lottoNumber);
 
