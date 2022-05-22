@@ -31,7 +31,7 @@ public class LottoWinningTicket {
         for (LottoTicket ticket : tickets) {
             int match = ticket.match(lottoWinningTicket);
             boolean hasBonus = ticket.contains(bonusNumber);
-            lottoRanks.add(LottoRank.find(match, hasBonus));
+            lottoRanks.add(LottoRank.valueOf(match, hasBonus));
         }
         return new LottoRanks(lottoRanks);
     }

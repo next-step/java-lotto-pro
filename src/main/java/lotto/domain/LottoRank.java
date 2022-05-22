@@ -23,7 +23,7 @@ public enum LottoRank {
         this.hasBonus = hasBonus;
     }
 
-    public static LottoRank find(int match, boolean hasBonus) {
+    public static LottoRank valueOf(int match, boolean hasBonus) {
         List<LottoRank> ranks = new ArrayList<>(Arrays.asList(LottoRank.values()));
         for (LottoRank rank : ranks) {
             if (rank.isMatch(match) && rank.matchBonus(hasBonus)) {

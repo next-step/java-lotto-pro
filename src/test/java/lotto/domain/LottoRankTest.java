@@ -28,8 +28,8 @@ class LottoRankTest {
     @DisplayName("match와 hasBonus로 일치하는 ENUM값을 찾는다.")
     void checkFindEnum() {
         assertAll(
-            () -> assertThat(LottoRank.find(5, true)).isEqualTo(LottoRank.SECOND),
-            () -> assertThat(LottoRank.find(5, false)).isEqualTo(LottoRank.THIRD)
+            () -> assertThat(LottoRank.valueOf(5, true)).isEqualTo(LottoRank.SECOND),
+            () -> assertThat(LottoRank.valueOf(5, false)).isEqualTo(LottoRank.THIRD)
         );
     }
 }
