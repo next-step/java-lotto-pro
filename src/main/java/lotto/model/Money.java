@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.Objects;
+
 import static lotto.constants.LottoConstant.LOTTO_PRICE;
 
 public class Money {
@@ -35,5 +37,18 @@ public class Money {
             String message = String.format("[ERROR] 구매금액은 %s원 단위만 가능합니다! : 입력금액 [%d]", LOTTO_PRICE, amount);
             throw new IllegalArgumentException(message);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Money money = (Money) o;
+        return amount == money.amount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(amount);
     }
 }
