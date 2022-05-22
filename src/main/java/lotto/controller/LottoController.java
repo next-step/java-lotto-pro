@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoGame;
 import lotto.domain.LottoLine;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoPayment;
 import lotto.domain.LottoResult;
 import lotto.service.LottoService;
@@ -23,7 +24,8 @@ public class LottoController {
         LottoPayment lottoPayment = inputLottoPayment();
         LottoGame lottoGame = buyLotto(lottoPayment);
         LottoLine winLottoLine = inputWinInformation();
-        printResult(lottoGame, winLottoLine, lottoPayment);
+        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
+        printResult(lottoGame, winLottoLine, lottoPayment, bonusNumber);
     }
 
     private LottoPayment inputLottoPayment(){
@@ -40,8 +42,8 @@ public class LottoController {
         return LottoStringGenerator.toWinLottoLine(InputView.inputLastWeekWinningLottoLine());
     }
 
-    private void printResult(LottoGame lottoGame, LottoLine winLottoLine, LottoPayment lottoPayment){
-        LottoResult lottoResult = lottoService.getLottoResult(lottoGame, winLottoLine);
+    private void printResult(LottoGame lottoGame, LottoLine winLottoLine, LottoPayment lottoPayment, LottoNumber bonusNumber){
+        LottoResult lottoResult = lottoService.getLottoResult(lottoGame, winLottoLine, bonusNumber);
         LottoPayment prize = new LottoPayment(lottoResult.getLottoPrize());
         outputView.printLottoResult(outputView.getLottoResultString(lottoResult));
         outputView.printEarningRate(outputView.getEarningRateString(lottoPayment.toLottoPaymentDTO(), prize.toLottoPaymentDTO()));

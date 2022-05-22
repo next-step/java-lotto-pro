@@ -23,10 +23,10 @@ public class LottoGame {
         return new LottoGame(lottoLines);
     }
 
-    public LottoResult getLottoResult(LottoLine winLottoLine) {
+    public LottoResult getLottoResult(LottoLine winLottoLine, LottoNumber bonusNumber) {
         LottoResult lottoResult = new LottoResult();
         for (LottoLine lottoLine : lottoGame) {
-            lottoResult.add(lottoLine.getMatchCount(winLottoLine));
+            lottoResult.add(lottoLine.getMatchCount(winLottoLine, bonusNumber));
         }
         return lottoResult;
     }

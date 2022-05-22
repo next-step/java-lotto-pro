@@ -51,12 +51,12 @@ public class LottoLine {
             .collect(Collectors.toList());
     }
 
-    public int getMatchCount(LottoLine compareLottoLine) {
+    public LottoRank getMatchCount(LottoLine compareLottoLine, LottoNumber bonusNumber) {
         int matchCount = 0;
         for (LottoNumber lottoNumber : lottoLine) {
             matchCount = calculateMatchCount(compareLottoLine, matchCount, lottoNumber);
         }
-        return matchCount;
+        return LottoRank.findMatch(matchCount, hasBonusNumber(bonusNumber));
     }
 
     private int calculateMatchCount(LottoLine compareLottoLine, int matchCount,
@@ -69,6 +69,10 @@ public class LottoLine {
 
     private boolean contains(LottoNumber lottoNumber) {
         return lottoLine.contains(lottoNumber);
+    }
+
+    public boolean hasBonusNumber(LottoNumber bonusNumber) {
+        return lottoLine.contains(bonusNumber);
     }
 
     public LottoLineDTO toLottoLineDTO() {

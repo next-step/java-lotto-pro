@@ -21,4 +21,9 @@ public final class InputView {
         System.out.println(Message.INPUT_LAST_WEEK_WINNING_LOTTO_LINE);
         return scanner.nextLine();
     }
+
+    public static int inputBonusNumber(){
+        System.out.println(Message.INPUT_BONUS_NUMBER);
+        return Integer.parseInt(scanner.nextLine());
+    }
 }

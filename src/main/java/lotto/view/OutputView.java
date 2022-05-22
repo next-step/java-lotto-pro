@@ -1,12 +1,9 @@
 package lotto.view;
 
-import static lotto.constant.LottoConstant.LINE_BREAK;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.constant.LottoConstant;
 import lotto.constant.Message;
-import lotto.domain.LottoPayment;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
 import lotto.dto.LottoGameDTO;
@@ -15,8 +12,17 @@ import lotto.dto.LottoPaymentDTO;
 
 public class OutputView {
 
+    private static final int DEFAULT_MATCH_COUNT = 0;
+    private static final String LINE_BREAK = "\n";
+    private static final String LOTTO_PAYMENT_COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String LOTTO_RESULT_STRING_PREFIX = "\n당첨 통계\n---------";
+    private static final String RESULT_MESSAGE_PREFIX_NO_BONUS = "%d개 일치 (";
+    private static final String RESULT_MESSAGE_PREFIX_BONUS = "%d개 일치, 보너스 볼 일치(";
+    private static final String RESULT_MESSAGE_POSTFIX = "%s%d원)- %d개";
+
+
     public void printPayment(LottoGameDTO lottoGameDTO){
-        System.out.println(lottoGameDTO.size() + Message.LOTTO_PAYMENT_COUNT);
+        System.out.println(lottoGameDTO.size() + LOTTO_PAYMENT_COUNT_MESSAGE);
         System.out.println(getLottoGameString(lottoGameDTO));
     }
 
@@ -29,6 +35,7 @@ public class OutputView {
     }
 
     public void printLottoResult(String result){
+        System.out.println(LOTTO_RESULT_STRING_PREFIX);
         System.out.println(result);
     }
 
@@ -41,15 +48,25 @@ public class OutputView {
     }
 
     private StringBuilder appendWithoutZeroMatch(LottoRank lottoRank, LottoResult lottoResult, StringBuilder sb){
-        if(lottoRank.getMatchCount() > LottoConstant.DEFAULT_MATCH_COUNT){
-            sb.append(lottoRank.getMatchCount())
-                .append(Message.LOTTO_RESULT_STRING_START)
-                .append(lottoRank.getPrize())
-                .append(Message.LOTTO_RESULT_STRING_MIDDLE)
-                .append(lottoResult.getMatchCount(lottoRank.getMatchCount()))
-                .append(Message.LOTTO_RESULT_STRING_END);
+        if(lottoRank.getMatchCount() > DEFAULT_MATCH_COUNT){
+            sb.append(chooseMessage(lottoRank, lottoResult))
+                .append(LINE_BREAK);
         }
         return sb;
+    }
+
+    private String choosePrefixMessage(LottoRank lottoRank) {
+        if (lottoRank == LottoRank.SECOND) {
+            return String.format(RESULT_MESSAGE_PREFIX_BONUS,
+                lottoRank.getMatchCount());
+        }
+        return String.format(RESULT_MESSAGE_PREFIX_NO_BONUS,
+            lottoRank.getMatchCount());
+    }
+
+    private String chooseMessage(LottoRank lottoRank, LottoResult lottoResult){
+        return String.format(RESULT_MESSAGE_POSTFIX,
+            choosePrefixMessage(lottoRank), lottoRank.getPrize(), lottoResult.getMatchCount(lottoRank));
     }
 
     public void printEarningRate(String earningRate){
