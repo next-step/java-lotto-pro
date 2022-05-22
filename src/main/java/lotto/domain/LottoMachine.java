@@ -21,7 +21,7 @@ public class LottoMachine {
         return LOTTO_NUMBERS.subList(0, LOTTO_NUMBER_SIZE_VALUE);
     }
 
-    public Set<Integer> issueLottoNumber() {
+    public Set<Integer> autoIssueLotto() {
         shuffleNumbers();
         return new HashSet<>(divideNumberList());
     }

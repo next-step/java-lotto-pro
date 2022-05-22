@@ -13,7 +13,7 @@ public class Lottos {
     public Lottos( LottoMachine LottoMachine, int lottoPurchaseCount) {
         this.lottos = new ArrayList<>();
         for (int i = 0; i < lottoPurchaseCount; i++)
-            this.lottos.add(new Lotto(LottoMachine.issueLottoNumber()));
+            this.lottos.add(new Lotto(LottoMachine.autoIssueLotto()));
     }
 
     public Lottos(List<Lotto> lottos) {
