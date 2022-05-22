@@ -5,7 +5,10 @@ import static lotto.constant.LottoConstant.LOTTO_NUMBER_LOWER_BOUND;
 import static lotto.constant.LottoConstant.LOTTO_NUMBER_UPPER_BOUND;
 import static lotto.constant.LottoConstant.LOTTO_PRICE_EACH;
 
-public class Message {
+public final class Message {
+
+    private Message(){}
+
     public static final String INPUT_TOTAL_PAYMENT = "구입금액을 입력해 주세요.";
     public static final String INPUT_LAST_WEEK_WINNING_LOTTO_LINE = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String ERROR_NUMBER_RANGE_VIOLATION = "[ERROR] 로또번호는 " + LOTTO_NUMBER_LOWER_BOUND

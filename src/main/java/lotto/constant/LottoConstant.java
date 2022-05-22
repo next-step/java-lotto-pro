@@ -1,6 +1,9 @@
 package lotto.constant;
 
-public class LottoConstant {
+public final class LottoConstant {
+
+    private LottoConstant(){}
+
     public static final int LOTTO_NUMBER_LOWER_BOUND = 1;
     public static final int LOTTO_NUMBER_UPPER_BOUND = 45;
     public static final int LOTTO_LINE_LENGTH = 6;
