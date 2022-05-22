@@ -48,8 +48,8 @@ public class LottoVendingMachine {
 
     private String calculateRateOfReturn(int investment, List<LottoResultItem> items) {
         double totalProfit = items.stream()
-                .mapToDouble(item -> item.getPrizeMoney() * item.getCount())
-                .reduce(0, (acc, profit) -> acc + profit);
+                .mapToDouble(item -> (double)item.getPrizeMoney() * item.getCount())
+                .reduce(0.0, Double::sum);
 
         return String.format("%.2f", totalProfit / investment);
     }
