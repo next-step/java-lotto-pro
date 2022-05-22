@@ -35,7 +35,7 @@ public class InputReader {
         Price price = inputPrice();
         ManualAttemptsCount manualAttemptsCount = inputManualAttemptsCount(price);
         Lottos manualLottos = inputManualLottos(manualAttemptsCount);
-        Customer customer = new Customer(price, manualAttemptsCount, manualLottos);
+        Customer customer = Customer.of(price, manualAttemptsCount, manualLottos);
 
         InputView.printPurchaseCompletionAndPublishedLottosGuidMessage(customer);
         return customer;

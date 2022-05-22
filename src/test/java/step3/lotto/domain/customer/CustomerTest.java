@@ -37,7 +37,7 @@ class CustomerTest {
         ));
 
         // When
-        Customer actual = new Customer(price, manualAttemptsCount, manualLottos);
+        Customer actual = Customer.of(price, manualAttemptsCount, manualLottos);
 
         // Then
         assertAll(
@@ -59,7 +59,7 @@ class CustomerTest {
 
         // When & THen
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new Customer(price, manualAttemptsCount, manualLottos))
+            .isThrownBy(() -> Customer.of(price, manualAttemptsCount, manualLottos))
             .withMessageMatching(INVALID_MANUAL_LOTTOS_SIZE_ERROR);
     }
 }

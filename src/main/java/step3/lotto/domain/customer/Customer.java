@@ -20,27 +20,22 @@ public class Customer {
     private ManualAttemptsCount manualAttemptsCount;
     private Lottos lottos;
 
-    public Customer(int price) {
-        this.price = Price.of(price);
-        this.lottos = publishLottos();
-    }
-
-    public Customer(Price price, ManualAttemptsCount manualAttemptsCount, Lottos manualLottos) {
-        validateManualLottos(manualAttemptsCount, manualLottos);
+    private Customer(Price price, ManualAttemptsCount manualAttemptsCount, Lottos manualLottos) {
         this.price = price;
         this.manualAttemptsCount = manualAttemptsCount;
         this.lottos = publishLottos();
         addManualLottos(manualLottos);
     }
 
-    private void validateManualLottos(ManualAttemptsCount manualAttemptsCount, Lottos manualLottos) {
+    public static Customer of(Price price, ManualAttemptsCount manualAttemptsCount, Lottos manualLottos) {
+        validateManualLottos(manualAttemptsCount, manualLottos);
+        return new Customer(price, manualAttemptsCount, manualLottos);
+    }
+
+    private static void validateManualLottos(ManualAttemptsCount manualAttemptsCount, Lottos manualLottos) {
         if (manualAttemptsCount.getManualAttemptsCount() != manualLottos.getLottosSize()) {
             throw new IllegalArgumentException(INVALID_MANUAL_LOTTOS_SIZE_ERROR);
         }
-    }
-
-    public void addManualLottos(Lottos manualLottos) {
-        lottos.addAll(manualLottos);
     }
 
     private Lottos publishLottos() {
@@ -49,6 +44,10 @@ public class Customer {
             lottos.add(Lotto.of(LottoNumberUtils.generateLottoNumbers()));
         }
         return new Lottos(lottos);
+    }
+
+    private void addManualLottos(Lottos manualLottos) {
+        lottos.addAll(manualLottos);
     }
 
     public Lottos getLottos() {
