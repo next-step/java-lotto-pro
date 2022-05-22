@@ -1,8 +1,7 @@
 package lotto.view;
 
-import lotto.model.Earning;
 import lotto.model.LottoNumbers;
-import lotto.model.RankCount;
+import lotto.model.Statistics;
 
 public class ResultView {
     private static final String PURCHASE_COUNT_OUTPUT_MESSAGE = "%d개를 구매했습니다.";
@@ -18,17 +17,14 @@ public class ResultView {
         System.out.println(lottoNumbers);
     }
 
-    public static void printStatisticsHeader() {
+    public static void printStatistics(Statistics statistics) {
+        printStatisticsHeader();
+        System.out.println(statistics.getRankCount());
+        System.out.printf(EARNINGS_RATE_OUTPUT_MESSAGE, statistics.getEarning());
+    }
+
+    private static void printStatisticsHeader() {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-    }
-
-    public static void printRankCount(RankCount rankCount) {
-        System.out.println(rankCount);
-    }
-
-    public static void printEarning(Earning earning) {
-        System.out.printf(EARNINGS_RATE_OUTPUT_MESSAGE, earning);
-        System.out.println();
     }
 }
