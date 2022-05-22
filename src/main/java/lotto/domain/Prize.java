@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.view.ResultView;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
