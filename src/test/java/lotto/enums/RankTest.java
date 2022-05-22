@@ -1,8 +1,6 @@
 package lotto.enums;
 
-import lotto.model.Prize;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -18,13 +16,6 @@ class RankTest {
     void getRank_일치하는_개수(int numberOfMatch, Rank expected) {
         assertThat(getRank(numberOfMatch))
                 .isEqualTo(expected);
-    }
-
-    @Test
-    @DisplayName("해당 등수의 총 당첨금액을 계산하여 리턴한다.")
-    void getPrizeWithCount_총_당첨금액() {
-        assertThat(THIRD.getPrizeWithCount(3))
-                .isEqualTo(Prize.of(150_000));
     }
 
     @ParameterizedTest

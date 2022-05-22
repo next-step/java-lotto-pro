@@ -32,8 +32,8 @@ class PrizeTest {
     }
 
     @Test
-    @DisplayName("뺄셈 연산을 확인한다.")
-    void Prize_뺄셈() {
+    @DisplayName("곰셉 연산을 확인한다.")
+    void Prize_곱셈() {
         Prize secondPrize = SECOND.getPrize();
 
         Prize testPrize = secondPrize.multiply(2);
