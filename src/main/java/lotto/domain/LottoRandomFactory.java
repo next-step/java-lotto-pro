@@ -8,12 +8,12 @@ public class LottoRandomFactory {
     }
 
     public Lotto create() {
-        LottoNumber[] lottoNumberList = new LottoNumber[Lotto.SIZE];
+        LottoNumber[] lottoNumbers = new LottoNumber[Lotto.SIZE];
         for (int index = 0; index < Lotto.SIZE; index++) {
-            lottoNumberList[index] = randomNumberMachine.popRandomNumber();
+            lottoNumbers[index] = randomNumberMachine.popRandomNumber();
         }
         randomNumberMachine.refill();
 
-        return new Lotto(lottoNumberList);
+        return new Lotto(lottoNumbers);
     }
 }

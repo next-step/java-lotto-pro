@@ -15,7 +15,7 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public Lottos matchedLottoList(WinningLotto winningNumbers, MatchResult matchResult) {
+    public Lottos matchedLottos(WinningLotto winningNumbers, MatchResult matchResult) {
         List<Lotto> matchedLottos = lottos.stream()
                 .filter(lotto -> winningNumbers.isMatched(lotto, matchResult))
                 .collect(Collectors.toList());

@@ -10,17 +10,17 @@ public class LottoStatistic {
     private Map<MatchResult, Lottos> matchedLottos;
 
     public LottoStatistic(Lottos lottos, WinningLotto winningLotto) {
-        initializePrizeLottoList(lottos, winningLotto);
+        initializePrizeLottos(lottos, winningLotto);
     }
 
     public LottoStatistic(Lottos lottos, String[] winningNumbers, String bonusNumber) {
         this(lottos, new WinningLotto(winningNumbers, bonusNumber));
     }
 
-    private void initializePrizeLottoList(Lottos lottos, WinningLotto winningNumbers) {
+    private void initializePrizeLottos(Lottos lottos, WinningLotto winningNumbers) {
         matchedLottos = new HashMap<>();
         for (MatchResult matchResult : MatchResult.values()) {
-            matchedLottos.put(matchResult, lottos.matchedLottoList(winningNumbers, matchResult));
+            matchedLottos.put(matchResult, lottos.matchedLottos(winningNumbers, matchResult));
         }
     }
 
