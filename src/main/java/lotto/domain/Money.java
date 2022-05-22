@@ -1,16 +1,16 @@
 package lotto.domain;
 
+import static lotto.domain.ExceptionMessage.NOT_ENOUGH_AMOUNT;
 import static lotto.domain.ExceptionMessage.NOT_UNSIGNED_INT;
-import static lotto.domain.ExceptionMessage.ZERO;
 
 public class Money {
 
     private final int value;
 
-    public Money(String money) {
+    public Money(String money, int pricePerGame) {
         validateUnsignedInt(money);
         int value = Integer.parseUnsignedInt(money);
-        validateNotZero(value);
+        validateEnoughAmount(value, pricePerGame);
         this.value = value;
     }
 
@@ -22,9 +22,9 @@ public class Money {
         }
     }
 
-    private void validateNotZero(int value) {
-        if (value == 0) {
-            throw new IllegalArgumentException(ZERO.getMessage());
+    private void validateEnoughAmount(int value, int pricePerGame) {
+        if (value / pricePerGame < 1) {
+            throw new IllegalArgumentException(NOT_ENOUGH_AMOUNT.getMessage());
         }
     }
 

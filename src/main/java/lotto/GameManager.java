@@ -20,12 +20,14 @@ public class GameManager {
     public void run() {
         LottoVendingMachine machine = new LottoVendingMachine(new LottoNumbersGeneratorKr());
 
-        Money money = money(machine);
-        int numberOfManual = numberOfManualLottoGames().getValue();
-        LottoTicket lottoTicket = machine.sellTicket(money, manualLottoGames(numberOfManual));
-        int numberOfGames = lottoTicket.numberOfGames(money);
-        int numberOfAuto = numberOfGames - numberOfManual;
-        ResultView.printTicket(numberOfAuto, numberOfManual, lottoTicket);
+        Money money = money();
+
+        int numberOfTotalGames = money.numberOfGames(LottoVendingMachine.PRICE_PER_GAME);
+        int numberOfManualGames = numberOfManualLottoGames(numberOfTotalGames).getValue();
+        int numberOfAutoGames = numberOfTotalGames - numberOfManualGames;
+
+        LottoTicket lottoTicket = machine.sellTicket(money, manualLottoGames(numberOfManualGames));
+        ResultView.printTicket(numberOfAutoGames, numberOfManualGames, lottoTicket);
 
         WinningNumbers winningNumbers = winningNumbers();
         LottoNumber bonusLottoNumber = bonusLottoNumber(winningNumbers);
@@ -35,18 +37,17 @@ public class GameManager {
         ResultView.printStats(result);
     }
 
-    private Money money(LottoVendingMachine machine) {
-        Money money = takeMoney(machine);
+    private Money money() {
+        Money money = takeMoney();
         while (money == null) {
-            money = takeMoney(machine);
+            money = takeMoney();
         }
         return money;
     }
 
-    private Money takeMoney(LottoVendingMachine machine) {
+    private Money takeMoney() {
         try {
-            Money money = new Money(InputView.readMoney());
-            machine.validateMoneyAmount(money);
+            Money money = new Money(InputView.readMoney(), LottoVendingMachine.PRICE_PER_GAME);
             return money;
         } catch (IllegalArgumentException e) {
             ResultView.printExceptionMessage(e.getMessage());
@@ -54,17 +55,17 @@ public class GameManager {
         }
     }
 
-    private NumberOfGames numberOfManualLottoGames() {
-        NumberOfGames number = getNumberOfManualLottoGames();
+    private NumberOfGames numberOfManualLottoGames(int limit) {
+        NumberOfGames number = getNumberOfManualLottoGames(limit);
         while (number == null) {
-            number = getNumberOfManualLottoGames();
+            number = getNumberOfManualLottoGames(limit);
         }
         return number;
     }
 
-    private NumberOfGames getNumberOfManualLottoGames() {
+    private NumberOfGames getNumberOfManualLottoGames(int limit) {
         try {
-            return new NumberOfGames(InputView.readNumberOfManualLottoGames());
+            return new NumberOfGames(InputView.readNumberOfManualLottoGames(), limit);
         } catch (IllegalArgumentException e) {
             ResultView.printExceptionMessage(e.getMessage());
             return null;

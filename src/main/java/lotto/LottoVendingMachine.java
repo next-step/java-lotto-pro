@@ -11,10 +11,9 @@ import lotto.dto.LottoWin;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.domain.ExceptionMessage.NOT_ENOUGH_AMOUNT;
-
 public class LottoVendingMachine {
 
+    public static final int PRICE_PER_GAME = 1000;
     private final LottoNumbersGenerator lottoNumbersGenerator;
 
     public LottoVendingMachine(LottoNumbersGenerator lottoNumbersGenerator) {
@@ -29,7 +28,7 @@ public class LottoVendingMachine {
         LottoTicket lottoTicket = new LottoTicket();
         lottoTicket.addAllGames(manualLottoGames);
 
-        int autoNumberOfGames = lottoTicket.numberOfGames(money) - manualLottoGames.size();
+        int autoNumberOfGames = money.numberOfGames(PRICE_PER_GAME) - manualLottoGames.size();
         for (int i = 0; i < autoNumberOfGames; i++) {
             lottoTicket.addGame(new LottoGame(lottoNumbersGenerator.generate()));
         }
@@ -42,7 +41,7 @@ public class LottoVendingMachine {
         List<LottoResultItem> items = result.mapLottoResultItemList(lottoWin);
 
         return new LottoResult(
-                calculateRateOfReturn(ticket.moneyValue(), items),
+                calculateRateOfReturn(ticket.moneyValue(PRICE_PER_GAME), items),
                 items);
     }
 
@@ -52,12 +51,5 @@ public class LottoVendingMachine {
                 .reduce(0.0, Double::sum);
 
         return String.format("%.2f", totalProfit / investment);
-    }
-
-    public void validateMoneyAmount(Money money) {
-        LottoTicket lottoTicket = new LottoTicket();
-        if (lottoTicket.numberOfGames(money) < 1) {
-            throw new IllegalArgumentException(NOT_ENOUGH_AMOUNT.getMessage());
-        }
     }
 }

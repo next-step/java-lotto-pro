@@ -8,15 +8,10 @@ import java.util.Objects;
 
 public class LottoTicket {
 
-    private static final int PRICE_PER_GAME = 1000;
     private final List<LottoGame> lottoGames;
 
     public LottoTicket() {
         this.lottoGames = new ArrayList<>();
-    }
-
-    public int numberOfGames(Money money) {
-        return money.numberOfGames(PRICE_PER_GAME);
     }
 
     public void addGame(LottoGame lottoGame) {
@@ -31,8 +26,8 @@ public class LottoTicket {
         return lottoGames.size();
     }
 
-    public int moneyValue() {
-        return lottoGames.size() * PRICE_PER_GAME;
+    public int moneyValue(int pricePerGame) {
+        return lottoGames.size() * pricePerGame;
     }
 
     public TicketCheckResult check(WinningNumbers winningNumbers, LottoNumber bonusNumber) {

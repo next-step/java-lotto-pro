@@ -11,6 +11,7 @@ class NumberOfGamesTest {
     @ParameterizedTest
     @ValueSource(strings = {"a", "-1"})
     void 생성_예외(String input) {
-        assertThatThrownBy(() -> new NumberOfGames(input)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new NumberOfGames(input, LottoVendingMachine.PRICE_PER_GAME))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

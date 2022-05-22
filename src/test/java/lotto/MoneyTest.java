@@ -11,7 +11,7 @@ public class MoneyTest {
     @ParameterizedTest
     @ValueSource(strings = {"-123", "0", "14000.3"})
     void 생성_예외(String input) {
-        assertThatThrownBy(() -> new Money(input))
+        assertThatThrownBy(() -> new Money(input, LottoVendingMachine.PRICE_PER_GAME))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
