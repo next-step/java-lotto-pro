@@ -9,7 +9,6 @@ import lotto.view.ResultView;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class LottoController {
     private final static String LOTTO_NUMBER_TEXT_SPLIT_VALUE = ", ";
@@ -36,7 +35,7 @@ public class LottoController {
     }
 
     private Lottos issueLottos(int purchaseCount) {
-        Lottos lottos = LottoMachine.issueAutoLottos(purchaseCount);
+        Lottos lottos = new Lottos(LottoMachine.issueAutoLottos(purchaseCount));
         ResultView.printIssuedLottoNumber(lottos);
 
         return lottos;
