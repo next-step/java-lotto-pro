@@ -14,14 +14,6 @@ public enum MatchResult {
     SEVENTH(1, Money.from(0)),
     EIGHTH(0, Money.from(0));
 
-    private static final MatchResult[] winningMatchResults = {
-            MatchResult.FIRST,
-            MatchResult.SECOND,
-            MatchResult.THIRD,
-            MatchResult.FOURTH,
-            MatchResult.FIFTH
-    };
-
     private final int matchCount;
     private final Money cashPrize;
 
@@ -65,7 +57,9 @@ public enum MatchResult {
     }
 
     public static MatchResult[] winningMatchResults() {
-        return winningMatchResults;
+        return Arrays.stream(MatchResult.values())
+                .filter(MatchResult::isWinningMatchResult)
+                .toArray(MatchResult[]::new);
     }
 
     public int getMatchCount() {
@@ -74,6 +68,10 @@ public enum MatchResult {
 
     public Money getCashPrize() {
         return cashPrize;
+    }
+
+    private static boolean isWinningMatchResult(MatchResult matchResult) {
+        return !matchResult.getCashPrize().equals(Money.from(0));
     }
 
 }

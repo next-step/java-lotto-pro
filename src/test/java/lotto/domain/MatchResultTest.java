@@ -32,4 +32,15 @@ class MatchResultTest {
         int input = 7;
         assertThatThrownBy(() -> MatchResult.of(input, false)).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 당첨_매치결과_반환() {
+        assertThat(MatchResult.winningMatchResults()).contains(
+                MatchResult.FIRST,
+                MatchResult.SECOND,
+                MatchResult.THIRD,
+                MatchResult.FOURTH,
+                MatchResult.FIFTH
+        );
+    }
 }
