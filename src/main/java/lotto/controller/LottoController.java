@@ -40,7 +40,9 @@ public class LottoController {
 
     private Lottos issueLottos(int purchaseCount) {
         List<Lotto> manualIssueLottos = issueManualLottos();
-        ResultView.printLottoPurchaseComplete(manualIssueLottos.size(), purchaseCount - manualIssueLottos.size());
+        int manualIssueLottosCount = manualIssueLottos.size();
+
+        ResultView.printLottoPurchaseComplete(manualIssueLottosCount, purchaseCount - manualIssueLottosCount);
 
         Lottos lottos = LottoMachine.issueLottos(manualIssueLottos, purchaseCount);
         ResultView.printIssuedLottoNumber(lottos);
