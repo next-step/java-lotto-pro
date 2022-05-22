@@ -60,8 +60,8 @@ public class LottoController {
             for (int i = 0; i < manualIssueCount; i++) {
                 String lottoNumbersText = InputView.inputLottoNumber();
 
-                List<Integer> lastWeekLottoNumbers = ListUtil.stringToArrayInteger(lottoNumbersText, LOTTO_NUMBER_TEXT_SPLIT_VALUE);
-                manualIssueLottos.add(new Lotto(new HashSet<>(lastWeekLottoNumbers)));
+                List<Integer> manualIssueNumbers = ListUtil.stringToArrayInteger(lottoNumbersText, LOTTO_NUMBER_TEXT_SPLIT_VALUE);
+                manualIssueLottos.add(LottoMachine.issueManualLotto(manualIssueNumbers));
             }
 
             return manualIssueLottos;
@@ -80,9 +80,9 @@ public class LottoController {
     private Lotto answerLotto() {
         InputView.printinputLottoNumber();
         String lastWeekLottoNumberText = InputView.inputLottoNumber();
-        List<Integer> lastWeekLottoNumbers = ListUtil.stringToArrayInteger(lastWeekLottoNumberText, LOTTO_NUMBER_TEXT_SPLIT_VALUE);
+        List<Integer> lastWeekNumbers = ListUtil.stringToArrayInteger(lastWeekLottoNumberText, LOTTO_NUMBER_TEXT_SPLIT_VALUE);
 
-        return  new Lotto(new HashSet<>(lastWeekLottoNumbers));
+        return  new Lotto(new HashSet<>(lastWeekNumbers));
     }
 
     public LottoNumber bonusLottoNumber() {

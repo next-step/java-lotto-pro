@@ -45,4 +45,8 @@ public class LottoMachine {
     private static List<Integer> divideNumberList() {
         return LOTTO_NUMBERS.subList(0, LOTTO_NUMBER_SIZE_VALUE);
     }
+
+    public static Lotto issueManualLotto(List<Integer> manualIssueNumberst) {
+        return new Lotto(new HashSet<>(manualIssueNumberst));
+    }
 }
