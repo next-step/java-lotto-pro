@@ -1,13 +1,12 @@
 package lotto.domain;
 
-import java.sql.Array;
 import java.util.*;
 
 public class LottoNumbers {
 
     private List<LottoNumber> numbers;
 
-    private int SIZE = 6;
+    private static final int SIZE = 6;
 
     public LottoNumbers(List<Integer> numbers) {
         List<LottoNumber> result = convertToLottoNumbers(numbers);
