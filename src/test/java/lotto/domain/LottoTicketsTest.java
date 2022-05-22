@@ -8,18 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketsTest {
     LottoTickets lottoTickets;
     LottoTicket winningNumbers;
     LottoNumber bonusNumber;
+    List<LottoTicket> lottoTicketList;
 
     @BeforeEach
     void init() {
         winningNumbers = new LottoTicket("1, 2, 3, 4, 5, 6");
         bonusNumber = new LottoNumber(7);
 
-        List<LottoTicket> lottoTicketList = new ArrayList<>();
+        lottoTicketList = new ArrayList<>();
         lottoTicketList.add(new LottoTicket("1, 2, 3, 4, 5, 6"));
         lottoTickets = new LottoTickets(lottoTicketList);
     }
@@ -29,5 +31,22 @@ public class LottoTicketsTest {
     void match() {
         WinningResult winningResult = lottoTickets.match(winningNumbers, bonusNumber);
         assertThat(winningResult.size()).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("입력한 수량과 로또 번호의 수가 일치하지 않을 경우 Exception 발생 확인")
+    void notMachedQuantity() {
+        assertThatThrownBy(() -> {
+            new LottoTickets(lottoTicketList, 4);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("로또 티켓 합친 후 수량 확인")
+    void add() {
+        List<LottoTicket> addTicketList = new ArrayList<>();
+        addTicketList.add(new LottoTicket("1, 2, 3, 4, 5, 6"));
+        addTicketList.add(new LottoTicket("2, 3, 4, 5, 6, 7"));
+        assertThat(lottoTickets.add(new LottoTickets(addTicketList)).size()).isEqualTo(3);
     }
 }

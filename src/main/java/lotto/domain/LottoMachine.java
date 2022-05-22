@@ -20,6 +20,11 @@ public class LottoMachine {
         return createLottoTickets(money.findPurchaseTicketQuantity());
     }
 
+    public LottoTickets buyLottoTicketWithManual(Money money, LottoTickets manualTickets) {
+        LottoTickets autoTickets = createLottoTickets(money.findPurchaseTicketQuantity() - manualTickets.size());
+        return manualTickets.add(autoTickets);
+    }
+
     private LottoTickets createLottoTickets(int ticketQuantity) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < ticketQuantity; i++) {
