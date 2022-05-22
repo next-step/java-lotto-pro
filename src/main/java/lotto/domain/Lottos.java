@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.service.LottoIssuedService;
 import lotto.type.LottoRank;
 
 import java.util.ArrayList;
@@ -11,10 +10,10 @@ import java.util.Map;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos( LottoIssuedService lottoIssuedService, int lottoPurchaseCount) {
+    public Lottos( LottoMachine LottoMachine, int lottoPurchaseCount) {
         this.lottos = new ArrayList<>();
         for (int i = 0; i < lottoPurchaseCount; i++)
-            this.lottos.add(new Lotto(lottoIssuedService.issueLottoNumber()));
+            this.lottos.add(new Lotto(LottoMachine.issueLottoNumber()));
     }
 
     public Lottos(List<Lotto> lottos) {

@@ -1,8 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.service.LottoAutoIssuedServiceImpl;
-import lotto.service.LottoIssuedService;
+import lotto.domain.LottoMachine;
 import lotto.utils.ListUtil;
 import lotto.utils.NumberUtil;
 import lotto.view.InputView;
@@ -19,7 +18,7 @@ public class LottoController {
         String purchasePriceText = InputView.inputPurchasePrice();
         int purchaseCount = purchaseLotto(purchasePriceText);
 
-        Lottos lottos = issueLottos(new LottoAutoIssuedServiceImpl(), purchaseCount);
+        Lottos lottos = issueLottos(new LottoMachine(), purchaseCount);
         Lotto answerLotto = answerLotto();
         LottoNumber bonusLottoNumber = bonusLottoNumber();
 
@@ -35,8 +34,8 @@ public class LottoController {
         return purchaseCount;
     }
 
-    private Lottos issueLottos(LottoIssuedService lottoIssuedService, int purchaseCount) {
-        Lottos lottos = new Lottos(lottoIssuedService, purchaseCount);
+    private Lottos issueLottos(LottoMachine LottoMachine, int purchaseCount) {
+        Lottos lottos = new Lottos(LottoMachine, purchaseCount);
         ResultView.printIssuedLottoNumber(lottos);
 
         return lottos;

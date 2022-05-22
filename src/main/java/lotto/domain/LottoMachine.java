@@ -1,10 +1,10 @@
-package lotto.service;
+package lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoAutoIssuedServiceImpl implements LottoIssuedService{
+public class LottoMachine {
     private final static int LOTTO_NUMBER_SIZE_VALUE = 6;
     private final static int LOTTO_NUMBER_MIN_VALUE = 1;
     private final static int LOTTO_NUMBER_MAX_VALUE = 45;
@@ -21,7 +21,6 @@ public class LottoAutoIssuedServiceImpl implements LottoIssuedService{
         return LOTTO_NUMBERS.subList(0, LOTTO_NUMBER_SIZE_VALUE);
     }
 
-    @Override
     public Set<Integer> issueLottoNumber() {
         shuffleNumbers();
         return new HashSet<>(divideNumberList());
