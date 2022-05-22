@@ -24,22 +24,20 @@ public enum LottoRank {
         this.prize = prize;
     }
 
-    /*private static final Map<Integer, LottoRank> LOTTO_RANK_MAP =
+    private static final Map<Integer, LottoRank> LOTTO_RANK_MAP =
         Collections.unmodifiableMap(Stream.of(values())
+            .filter(LottoRank::isNotSecond)
             .collect(Collectors.toMap(LottoRank::getMatchCount, Function.identity())));
-
-    public static LottoRank findMatch(int matchCount) {
-        return Optional.ofNullable(LOTTO_RANK_MAP.get(matchCount)).orElse(LOSE);
-    }*/
 
     public static LottoRank findMatch(int matchCount, boolean matchBonus) {
         if(matchCount == LottoRank.SECOND.getMatchCount() && matchBonus){
             return LottoRank.SECOND;
         }
-        return Arrays.stream(values())
-            .filter(rank -> rank.matchCount == matchCount)
-            .findFirst()
-            .orElse(LOSE);
+        return Optional.ofNullable(LOTTO_RANK_MAP.get(matchCount)).orElse(LOSE);
+    }
+
+    private boolean isNotSecond() {
+        return this != SECOND;
     }
 
     public int getMatchCount() {
