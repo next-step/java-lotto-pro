@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoScore;
 import lotto.domain.Rank;
 import lotto.domain.TotalLotto;
 
