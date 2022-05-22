@@ -8,7 +8,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
+
     public static final int SIZE = 6;
+    public static final int PRICE_LOTTO = 1_000;
 
     private final Set<LottoNumber> lotto;
 
