@@ -9,10 +9,25 @@ public class LottoNumbers {
 
     private int SIZE = 6;
 
-    public LottoNumbers(List<LottoNumber> numbers) {
-        validateLottoNumbers(numbers);
-        Collections.sort(numbers);
-        this.numbers = new ArrayList<>(numbers);
+//    public LottoNumbers(List<LottoNumber> numbers) {
+//        validateLottoNumbers(numbers);
+//        Collections.sort(numbers);
+//        this.numbers = new ArrayList<>(numbers);
+//    }
+
+    public LottoNumbers(List<Integer> numbers) {
+        List<LottoNumber> result = convertToLottoNumbers(numbers);
+        validateLottoNumbers(result);
+        Collections.sort(result);
+        this.numbers = new ArrayList<>(result);
+    }
+
+    private static List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
+        List<LottoNumber> result = new ArrayList<>();
+        for (Integer number : numbers) {
+            result.add(new LottoNumber(number));
+        }
+        return result;
     }
 
     public int[] getNumbersAsArray() {

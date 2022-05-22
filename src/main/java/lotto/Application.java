@@ -1,6 +1,8 @@
 package lotto;
 
 import lotto.domain.LottoGame;
+import lotto.domain.LottoNumberGenerator;
+import lotto.domain.NumberGenerator;
 import lotto.domain.WinnerTicket;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
@@ -13,7 +15,8 @@ public class Application {
 
     private void startGame() {
         int purchasePrice = InputView.getPurchasePrice();
-        LottoGame game = new LottoGame(purchasePrice);
+        NumberGenerator numberGenerator = new LottoNumberGenerator();
+        LottoGame game = new LottoGame(purchasePrice, numberGenerator);
         ResultView.printTicketCount(game.getTicketCount());
         game.printTickets();
 

@@ -12,12 +12,8 @@ public class WinnerTicket {
     }
 
     private LottoNumbers convertStringNumberToLottoNumbers(String stringNumber) {
-        String[] stringNumbers = stringNumber.split(",");
-        List<LottoNumber> number = new ArrayList<>();
-        for (String str : stringNumbers) {
-            number.add(new LottoNumber(Integer.parseInt(str.trim())));
-        }
-        return new LottoNumbers(number);
+        NumberGenerator generator = new LottoNumberGenerator();
+        return new LottoNumbers(generator.generate(stringNumber));
     }
 
     public int[] getNumbersAsArray() {

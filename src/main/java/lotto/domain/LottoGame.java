@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.ui.ResultView;
-import lotto.util.RandomNumberUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,7 @@ public class LottoGame {
         this.lottoResult = new LottoResult();
     }
 
-    public LottoGame(int purchasePrice) {
+    public LottoGame(int purchasePrice, NumberGenerator numberGenerator) {
         this();
 
         isValidPurchasePrice(purchasePrice);
@@ -32,8 +31,7 @@ public class LottoGame {
         this.tickets = new ArrayList<>();
         int ticketCount = this.getTicketCount();
         for (int i = 1; i <= ticketCount; i++) {
-            LottoNumbers numbers = RandomNumberUtils.generateRandomNumber();
-            this.tickets.add(new LottoTicket(numbers));
+            this.tickets.add(new LottoTicket(numberGenerator));
         }
     }
 

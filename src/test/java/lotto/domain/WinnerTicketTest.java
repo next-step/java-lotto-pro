@@ -21,9 +21,7 @@ public class WinnerTicketTest {
     @Test
     void 지난주_당첨_번호_공백_입력() {
         List<LottoTicket> tickets = new ArrayList<>();
-        List<LottoNumber> numbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)
-                , new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        tickets.add(new LottoTicket(new LottoNumbers(numbers)));
+        tickets.add(new LottoTicket(new LottoNumbers(Arrays.asList(1,2,3,4,5,6))));
         LottoGame game = new LottoGame(tickets);
         game.generateGameResult(new WinnerTicket("4, 5, 6, 7, 8, 9"));
         assertThat(game.getScore().get(3)).isEqualTo(1);
@@ -43,7 +41,7 @@ public class WinnerTicketTest {
 
     @Test
     void 지난주_당첨_번호_숫자_범위_초과() {
-        LottoGame game = new LottoGame(14000);
+        LottoGame game = new LottoGame(14000, new LottoNumberGenerator());
         assertThatThrownBy(() -> new WinnerTicket("-1,2,3,4,5,6"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
