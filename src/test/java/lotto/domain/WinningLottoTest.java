@@ -3,13 +3,16 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class WinningLottoTest {
-    
+
     private Lotto lotto;
 
     @BeforeEach
@@ -19,43 +22,52 @@ class WinningLottoTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {
-            "1:2:3:4:5:6:45:false:6",
-            "1:2:3:4:5:7:6:true:5",
-            "1:2:3:4:5:7:45:false:5",
-            "1:2:3:4:7:8:45:false:4",
-            "1:2:3:7:8:9:45:false:3",
-            "1:2:7:8:9:10:45:false:2",
-            "1:7:8:9:10:11:45:false:1",
-            "7:8:9:10:11:12:45:false:0"},
-            delimiter = ':')
-    void 로또번호와_당첨번호에_따른_매치결과_반환(int input0, int input1, int input2, int input3, int input4, int input5,
-                                int bonusNumber, boolean isBonus, int matchCount) {
-        LottoNumber[] inputs = createNumbers(new int[]{input0, input1, input2, input3, input4, input5});
-        WinningLotto winningNumbers = new WinningLotto(inputs, LottoNumber.from(bonusNumber));
-        MatchResult matchResult = MatchResult.of(matchCount, isBonus);
-        assertThat(winningNumbers.isMatched(lotto, matchResult)).isEqualTo(true);
+    @MethodSource("winningLottoAndExpectedMatchResult")
+    void 로또번호와_당첨번호에_따른_매치결과_반환(WinningLotto winningLotto, MatchResult expect) {
+        assertThat(winningLotto.isMatched(lotto, expect)).isEqualTo(true);
     }
 
     @Test
     void 중복_숫자_예외() {
         assertThatThrownBy(
-                () -> new WinningLotto(createNumbers(new int[]{1, 1, 2, 3, 4, 5}), LottoNumber.from(45))).isInstanceOf(
+                () -> createWinningLotto(new int[]{1, 2, 3, 4, 5, 6}, 1)).isInstanceOf(
                 IllegalArgumentException.class);
     }
 
     @Test
     void 보너스_중복_숫자_예외() {
+
         assertThatThrownBy(
-                () -> new WinningLotto(createNumbers(new int[]{1, 2, 3, 4, 5, 6}), LottoNumber.from(1))).isInstanceOf(
+                () -> createWinningLotto(new int[]{1, 2, 3, 4, 5, 6}, 1)).isInstanceOf(
                 IllegalArgumentException.class);
     }
 
-    private LottoNumber[] createNumbers(int[] inputs) {
+    static private LottoNumber[] createNumbers(int[] inputs) {
         LottoNumber[] lottoNumbers = new LottoNumber[inputs.length];
         for (int index = 0; index < inputs.length; index++) {
             lottoNumbers[index] = LottoNumber.from(inputs[index]);
         }
         return lottoNumbers;
+    }
+
+    static private WinningLotto createWinningLotto(int[] inputs, int bonusNumber) {
+        LottoNumber[] lottoNumbers = new LottoNumber[inputs.length];
+        for (int index = 0; index < inputs.length; index++) {
+            lottoNumbers[index] = LottoNumber.from(inputs[index]);
+        }
+        return new WinningLotto(lottoNumbers, LottoNumber.from(bonusNumber));
+    }
+
+    static private Stream<Arguments> winningLottoAndExpectedMatchResult() {
+        return Stream.of(
+                Arguments.of(createWinningLotto(new int[]{1, 2, 3, 4, 5, 6}, 45), MatchResult.of(6, false)),
+                Arguments.of(createWinningLotto(new int[]{1, 2, 3, 4, 5, 45}, 6), MatchResult.of(5, true)),
+                Arguments.of(createWinningLotto(new int[]{1, 2, 3, 4, 5, 7}, 45), MatchResult.of(5, false)),
+                Arguments.of(createWinningLotto(new int[]{1, 2, 3, 4, 7, 8}, 45), MatchResult.of(4, false)),
+                Arguments.of(createWinningLotto(new int[]{1, 2, 3, 7, 8, 9}, 45), MatchResult.of(3, false)),
+                Arguments.of(createWinningLotto(new int[]{1, 2, 7, 8, 9, 10}, 45), MatchResult.of(2, false)),
+                Arguments.of(createWinningLotto(new int[]{1, 7, 8, 9, 10, 11}, 45), MatchResult.of(1, false)),
+                Arguments.of(createWinningLotto(new int[]{7, 8, 9, 10, 11, 12}, 45), MatchResult.of(0, false))
+        );
     }
 }
