@@ -43,10 +43,6 @@ public enum Rank {
         return matchingCount;
     }
 
-    public Prize getPrizeWithCount(int count) {
-        return prize.multiply(count);
-    }
-
     public boolean isOverMinWinningRank() {
         return matchingCount >= MIN_WINNING_RANK;
     }
