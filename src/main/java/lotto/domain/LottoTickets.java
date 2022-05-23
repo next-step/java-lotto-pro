@@ -32,4 +32,8 @@ public class LottoTickets {
 			.map(Lotto::getLotto)
 			.collect(Collectors.toList()));
 	}
+
+	public void sum(LottoTickets lottoTickets) {
+		this.lottoTickets.addAll(lottoTickets.lottoTickets);
+	}
 }
