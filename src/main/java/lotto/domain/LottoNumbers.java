@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
@@ -16,11 +17,9 @@ public class LottoNumbers {
     }
 
     private static List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
-        List<LottoNumber> result = new ArrayList<>();
-        for (Integer number : numbers) {
-            result.add(new LottoNumber(number));
-        }
-        return result;
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     public int[] getNumbersAsArray() {
