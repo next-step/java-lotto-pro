@@ -35,6 +35,10 @@ public class Money {
         return Money.from(this.value.add(target.value));
     }
 
+    public Money multiply(double value) {
+        return Money.from(this.value.multiply(BigDecimal.valueOf(value)));
+    }
+
     private void validate(BigDecimal value) {
         if (value.compareTo(MIN_VALUE) == -1) {
             throw new IllegalArgumentException("돈은 음수 일 수 없습니다.");
