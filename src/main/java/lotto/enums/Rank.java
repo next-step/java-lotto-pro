@@ -56,7 +56,7 @@ public enum Rank {
 
     @Override
     public String toString() {
-        if (this == SECOND) {
+        if (hasBonus) {
             return String.format("%d개 일치, 보너스 볼 일치 (%s원)", matchingCount, prize);
         }
         return String.format("%d개 일치 (%s원)", matchingCount, prize);
