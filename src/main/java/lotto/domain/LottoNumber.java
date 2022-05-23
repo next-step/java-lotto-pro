@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.error.LottoNumberErrorCode;
-import lotto.infrastructure.util.StringUtils;
 
 public class LottoNumber {
 
@@ -9,19 +8,13 @@ public class LottoNumber {
     public static final int MAX = 45;
 
     private final int lottoNumber;
-    
+
     public LottoNumber(final int lottoNumber) {
         validateLottoNumber(lottoNumber);
 
         this.lottoNumber = lottoNumber;
     }
-
-    private void validateNullOrEmpty(final String lottoNumber) {
-        if (StringUtils.isBlank(lottoNumber)) {
-            throw new IllegalArgumentException(LottoNumberErrorCode.NOT_ALLOW_NULL.getMessage());
-        }
-    }
-
+    
     private void validateLottoNumber(final Integer lottoNumber) {
         if (!isLottoNumberInRange(lottoNumber)) {
             throw new IllegalArgumentException(

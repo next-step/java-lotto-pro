@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberTest {
 
-    @ParameterizedTest(name = "int lottoNumber가 로또 번호가 아닐 때 IllegalArgumentException 발생")
+    @ParameterizedTest(name = "int lottoNumber가 로또 번호가 아닐 때 에러발생")
     @ValueSource(ints = {0, 46})
     public void 생성자_테스트(int lottoNumber) {
         assertThatThrownBy(() -> new LottoNumber(lottoNumber))
@@ -21,7 +21,7 @@ class LottoNumberTest {
     }
 
     @Test
-    @DisplayName("LottoNumber 동등성")
+    @DisplayName("LottoNumber 동등성 테스트")
     public void equals_identity_test() {
         LottoNumber lottoNumber = new LottoNumber(1);
 
