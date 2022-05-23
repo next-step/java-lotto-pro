@@ -6,6 +6,7 @@ import lotto.model.*;
 import lotto.view.ResultView;
 
 import static lotto.utils.InputUtils.convertToInteger;
+import static lotto.view.InputView.readBonusNumber;
 import static lotto.view.InputView.readPurchaseAmount;
 
 public class LottoController {
@@ -18,8 +19,9 @@ public class LottoController {
         lottos.printLottos();
 
         LottoNumbers winningNumbers = LottoNumbers.createLottoNumbers(new WinningLottoNumbersGenerator());
+        LottoNumber bonusNumber = LottoNumber.of(convertToInteger(readBonusNumber()));
 
-        RankCount rankCount = lottos.rankCount(winningNumbers);
+        RankCount rankCount = lottos.rankCount(winningNumbers, bonusNumber);
         Earning earningRate = rankCount.earningRate(purchaseInfo);
 
         Statistics statistics = Statistics.of(rankCount, earningRate);
