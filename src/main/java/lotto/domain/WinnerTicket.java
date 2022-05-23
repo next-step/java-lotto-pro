@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.StringParserUtils;
+
 public class WinnerTicket {
 
     private LottoNumbers numbers;
@@ -19,8 +21,7 @@ public class WinnerTicket {
     }
 
     private LottoNumbers convertStringNumberToLottoNumbers(String stringNumber) {
-        NumberGenerator generator = new LottoNumberGenerator();
-        return new LottoNumbers(generator.generate(stringNumber));
+        return new LottoNumbers(StringParserUtils.parseNumbers(stringNumber));
     }
 
     public int[] getNumbersAsArray() {

@@ -6,6 +6,4 @@ public interface NumberGenerator {
 
     List<Integer> generate();
 
-    List<Integer> generate(String numbers);
-
 }

@@ -32,20 +32,4 @@ public class LottoNumberGenerator implements NumberGenerator {
         return numbers;
     }
 
-    @Override
-    public List<Integer> generate(String numbers) {
-        String[] stringNumbers = numbers.split(",");
-        if (stringNumbers.length != 6) {
-            throw new IllegalArgumentException("Array size should be 6.");
-        }
-
-        List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < stringNumbers.length; i++) {
-            result.add(Integer.parseInt(stringNumbers[i].trim()));
-        }
-
-        Collections.sort(result);
-        return result;
-    }
-
 }
