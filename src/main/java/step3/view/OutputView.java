@@ -13,6 +13,9 @@ public class OutputView {
     private static final String REWARD_RATE_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
     private static final String LOTTOS_INFO_FORMAT = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
     private static final String OVERVIEW_INIT_MESSAGE = "\n당첨 통계\n---------";
+    private static final String IS_BENEFIT_MAPPER = "isBenefit";
+    private static final String REWARD_MAPPER = "reward";
+    private static final String PROFIT_RATE_MAPPER = "profitRate";
     private Map<LottoReward, String> LOTTO_OVERVIEW_FORMAT = new HashMap<>();
 
 
@@ -27,8 +30,8 @@ public class OutputView {
             int matchCount = matchCountStatistics.get(lottoReward);
             printOverViewPerEntry(lottoReward, matchCount);
         }
-        printRewardRate(matchLottoResult.get(LottoWinInfoResearcher.PROFIT_RATE_MAPPER),
-            matchLottoResult.get(LottoWinInfoResearcher.IS_BENEFIT_MAPPER));
+        printRewardRate(matchLottoResult.get(OutputView.PROFIT_RATE_MAPPER),
+            matchLottoResult.get(OutputView.IS_BENEFIT_MAPPER));
     }
 
     private void printRewardRate(String profitRate, String isBenefit) {

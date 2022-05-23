@@ -14,8 +14,8 @@ public class LottoWinChecker {
     private LottoElement bonusNumber;
     private LottoTicket winnerLottoTicket;
     private static final String SET_BONUS_NUMBER_EXCEPTION_MSG = "정답티켓과 다른 번호를 설정해야합니다";
-    public static final int MATCH = 1;
-    public static final int NOT_MATCH = 0;
+    private static final int MATCH = 1;
+    private static final int NOT_MATCH = 0;
     private static final int MATCH_COUNT_BASE = 0;
 
     public void setBonusNumber(String lottoElementSource) {

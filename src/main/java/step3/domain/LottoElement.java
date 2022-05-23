@@ -6,6 +6,8 @@ import step3.model.LottoGenerator;
 public class LottoElement implements Comparable<LottoElement>, Cloneable {
 
     private final int element;
+    private static final int LOTTO_MIN = 1;
+    private static final int LOTTO_MAX = 45;
     private static final String CREATE_ELEMENT_EXCEPTION_MSG = "로또 번호는 %s 이상 %s 이하의 숫자여야합니다";
     private static final String COPY_ELEMENT_EXCEPTION_MSG = "LottoElement 복사중 에러가 발생하였습니다";
 
@@ -16,9 +18,9 @@ public class LottoElement implements Comparable<LottoElement>, Cloneable {
     }
 
     private void validateElement(int element) {
-        if (element < LottoGenerator.LOTTO_MIN || element > LottoGenerator.LOTTO_MAX) {
+        if (element < LottoElement.LOTTO_MIN || element > LottoElement.LOTTO_MAX) {
             throw new IllegalArgumentException(
-                String.format(LottoElement.CREATE_ELEMENT_EXCEPTION_MSG, LottoGenerator.LOTTO_MIN, LottoGenerator.LOTTO_MAX));
+                String.format(LottoElement.CREATE_ELEMENT_EXCEPTION_MSG, LottoElement.LOTTO_MIN, LottoElement.LOTTO_MAX));
         }
     }
 

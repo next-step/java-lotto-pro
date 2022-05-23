@@ -11,7 +11,7 @@ public class LottoMachine {
     private final LottoGenerator lottoGenerator;
     private final LottoWinChecker lottoWinChecker;
     private final LottoWinInfoResearcher lottoWinInfoResearcher;
-    public static final int LOTTO_PRICE = 1_000;
+    private static final int LOTTO_PRICE = 1_000;
     private static final int EMPTY = 0;
 
     private static final String CANT_BUY_LOTTO_EXCEPTION_MSG =

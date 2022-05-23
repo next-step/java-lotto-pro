@@ -10,9 +10,9 @@ import step3.domain.LottoTicket;
 
 public class LottoGenerator {
 
-    public static final int LOTTO_MIN = 1;
-    public static final int LOTTO_MAX = 45;
-    public static final int LOTTO_ELEMENTS_SIZE = 6;
+    private static final int LOTTO_MIN = 1;
+    private static final int LOTTO_MAX = 45;
+    private static final int LOTTO_ELEMENTS_SIZE = 6;
     private static final List<Integer> LOTTO_VALID_ELEMENTS = IntStream.rangeClosed(LottoGenerator.LOTTO_MIN, LottoGenerator.LOTTO_MAX).boxed()
         .collect(Collectors.toList());
 

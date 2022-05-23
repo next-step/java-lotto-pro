@@ -7,11 +7,12 @@ import step3.enums.LottoReward;
 public class LottoWinInfoResearcher {
 
     private static final double BREAK_EVEN_POINT = 1.0;
+    private static final int LOTTO_PRICE = 1_000;
     private static final String IS_LOSS = "손해";
     private static final String IS_BENEFIT = "이득";
-    public static final String IS_BENEFIT_MAPPER = "isBenefit";
-    public static final String REWARD_MAPPER = "reward";
-    public static final String PROFIT_RATE_MAPPER = "profitRate";
+    private static final String IS_BENEFIT_MAPPER = "isBenefit";
+    private static final String REWARD_MAPPER = "reward";
+    private static final String PROFIT_RATE_MAPPER = "profitRate";
 
     public Map<String, String> checkMatchLottoResult(Map<LottoReward, Integer> checkWinResult,
         int ticketCount) {
@@ -28,7 +29,7 @@ public class LottoWinInfoResearcher {
     }
 
     private double getProfitRate(long reward, int ticketCount) {
-        int usingMoney = ticketCount * LottoMachine.LOTTO_PRICE;
+        int usingMoney = ticketCount * LottoWinInfoResearcher.LOTTO_PRICE;
         return reward * 1.0 / usingMoney;
     }
 
