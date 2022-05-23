@@ -6,7 +6,7 @@ import step3.enums.LottoReward;
 
 public class LottoWinInfoResearcher {
 
-    private static final double BREAK_EVEN_POINT = 1.0;
+    private static final int BREAK_EVEN_POINT = 1;
     private static final int LOTTO_PRICE = 1_000;
     private static final String IS_LOSS = "손해";
     private static final String IS_BENEFIT = "이득";
