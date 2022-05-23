@@ -69,6 +69,6 @@ public class LottoMachineTest {
 		UserMoney userMoney = new UserMoney("4300");
 		Lottos manualLottos = lottoMachine.buyManualLottos(userMoney, lottos);
 
-		assertAll(() -> assertEquals(manualLottos.size(), 4), () -> assertEquals(userMoney.getMoney(), 300));
+		assertEquals(manualLottos.size(), 4);
 	}
 }

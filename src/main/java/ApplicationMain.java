@@ -22,6 +22,7 @@ public class ApplicationMain {
 		Lottos writeLotto = inputManualLottoCount(buyCount);
 
 		Lottos manualLottos = lottoMachine.buyManualLottos(userMoney, writeLotto);
+		userMoney = new UserMoney(String.valueOf(userMoney.getMoney() - manualLottos.size() * lottoMachine.lottoPrice()));
 		Lottos autoLottos = lottoMachine.buyAutoLottos(userMoney, userMoney.getMoney() / lottoMachine.lottoPrice());
 
 		ResultView.printLottos(manualLottos, autoLottos);

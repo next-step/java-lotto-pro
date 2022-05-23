@@ -15,10 +15,6 @@ public class UserMoney {
 		return this.money;
 	}
 
-	public void buyLotto(int lottoPrice) {
-		this.money -= lottoPrice;
-	}
-
 	private void validation(String money) {
 		if (!NumberUtil.isNumber(money)) {
 			throw new IllegalArgumentException(String.format("nubmer: %d 숫자가 아닙니다.", money));

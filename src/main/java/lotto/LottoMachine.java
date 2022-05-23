@@ -16,7 +16,6 @@ public class LottoMachine {
 
 	public Lottos buyManualLottos(UserMoney userMoney, Lottos lottos) {
 		validationCanNotBuyLotto(userMoney, lottos.size());
-		userMoney.buyLotto(lottos.size() * LOTTO_PRICE);
 		return lottos;
 	}
 
@@ -27,8 +26,7 @@ public class LottoMachine {
 		for (int i = 0; i < pieceCount; ++i) {
 			lottos.add(randomLottoNumbers());
 		}
-
-		userMoney.buyLotto(lottos.size() * LOTTO_PRICE);
+		
 		return new Lottos(lottos);
 	}
 
