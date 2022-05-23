@@ -1,7 +1,6 @@
 package lotto.domain;
 
 public class Quantity {
-
     private final int quantity;
     private final int maxQuantity;
     private final int manualQuantity;

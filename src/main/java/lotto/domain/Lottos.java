@@ -6,30 +6,30 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lottos {
-    private final List<Lotto> lottos;
+    private final List<Lotto> values;
 
     public Lottos() {
         this(new ArrayList<>());
     }
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = new ArrayList<>(lottos);
+        this.values = new ArrayList<>(lottos);
     }
 
     public void add(Lotto lotto) {
-        this.lottos.add(lotto);
+        this.values.add(lotto);
     }
 
-    public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
+    public List<Lotto> getValues() {
+        return Collections.unmodifiableList(values);
     }
 
     public LottoResult getLottoResult(WinningNumber winningNumber) {
-        return new LottoResult(lottos, winningNumber);
+        return new LottoResult(values, winningNumber);
     }
 
     public int size() {
-        return lottos.size();
+        return values.size();
     }
 
     @Override
@@ -37,18 +37,18 @@ public class Lottos {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lottos lottos1 = (Lottos) o;
-        return Objects.equals(lottos, lottos1.lottos);
+        return Objects.equals(values, lottos1.values);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottos);
+        return Objects.hash(values);
     }
 
     @Override
     public String toString() {
         return "Lottos{" +
-                "lottos=" + lottos +
+                "lottos=" + values +
                 '}';
     }
 }
