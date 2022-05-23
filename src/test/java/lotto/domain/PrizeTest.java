@@ -6,18 +6,20 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PrizeTest {
-    private static Lotto answerLotto;
+    private static WinningNumbers answerLotto;
 
     @BeforeAll
     static void beforeAll() {
-        answerLotto = new Lotto(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3)
+        Lotto winner = new Lotto(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3)
                 , LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
+        answerLotto = new WinningNumbers(winner, LottoNumber.of(8));
     }
 
     @Test
@@ -71,13 +73,21 @@ public class PrizeTest {
         Lotto lotto2 = new Lotto("1, 44, 43, 42, 41, 40");
         Lotto lotto3 = new Lotto("1, 2, 43, 42, 41, 40");
 
-
         Winners winners = Prize.matchLotto(Stream.of(lotto, lotto2, lotto3)
                 .collect(Collectors.toList()), answerLotto);
 
         assertThat(winners.getWinners().get(0)).isEqualTo(Prize.FAIL);
         assertThat(winners.getWinners().get(1)).isEqualTo(Prize.FAIL);
         assertThat(winners.getWinners().get(2)).isEqualTo(Prize.FAIL);
+    }
+
+    @Test
+    @DisplayName("보너스 당첨 테스트")
+    void get_bounus_prize_test() {
+        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 8");
+
+        Winners winners = Prize.matchLotto(Collections.singletonList(lotto), answerLotto);
+        System.out.println(winners);
     }
 
 }
