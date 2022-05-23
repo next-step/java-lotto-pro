@@ -22,7 +22,7 @@ public enum Rank {
     private final int matchingCount;
     private final Prize prize;
     private final boolean hasBonus;
-    private final static Map<Integer, Rank> ranks = Collections.unmodifiableMap(Stream.of(values())
+    private static final Map<Integer, Rank> ranks = Collections.unmodifiableMap(Stream.of(values())
             .collect(Collectors.toMap(Rank::rankKey, Function.identity())));
 
     Rank(int matchingCount, boolean hasBonus, Prize prize) {
