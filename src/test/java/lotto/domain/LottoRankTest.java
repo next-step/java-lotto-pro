@@ -20,9 +20,8 @@ class LottoRankTest {
             "2, false, MISS", "2, true, MISS",
             "3, false, FIFTH", "3, true, FIFTH",
             "4, false, FOURTH", "4, true, FOURTH",
-            "5, false, THIRD",
-            "5, true, SECOND",
-            "6, false, FIRST"})
+            "5, false, THIRD", "5, true, SECOND",
+            "6, false, FIRST", "6, true, FIRST"})
     void of(int matchCount, boolean bonus, LottoRank expected) {
         assertThat(LottoRank.of(matchCount, bonus)).isEqualTo(expected);
     }
