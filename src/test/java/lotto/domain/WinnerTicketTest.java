@@ -3,7 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class WinnerTicketTest {
+class WinnerTicketTest {
 
     private LottoNumber bonusNumber = new LottoNumber(45);
 
@@ -24,7 +23,7 @@ public class WinnerTicketTest {
     @Test
     void 지난주_당첨_번호_공백_입력() {
         List<LottoTicket> tickets = new ArrayList<>();
-        tickets.add(new LottoTicket(new LottoNumbers(Arrays.asList(1,2,3,4,5,6))));
+        tickets.add(new LottoTicket(new TestNumberGenerator()));
         LottoGame game = new LottoGame(tickets);
         game.generateGameResult(new WinnerTicket("4, 5, 6, 7, 8, 9", bonusNumber));
         assertThat(game.getScore().get(Rank.FIFTH)).isEqualTo(1);
