@@ -21,10 +21,9 @@ public class LottoResult {
     public void countLottoRank(final WinningLottoTicket winningLottoTicket, final LottoTicket purchasedLottoTicket) {
         validateNull(winningLottoTicket, purchasedLottoTicket);
 
-        int countOfMatch = winningLottoTicket.countMatchNumber(purchasedLottoTicket);
-        boolean matchBonus = winningLottoTicket.matchBonus(purchasedLottoTicket);
+        LottoRank lottoRank = winningLottoTicket.match(purchasedLottoTicket);
 
-        increaseCount(LottoRank.valueOf(countOfMatch, matchBonus));
+        increaseCount(lottoRank);
     }
 
     private void validateNull(WinningLottoTicket winningLottoTicket, LottoTicket purchasedLottoTicket) {
