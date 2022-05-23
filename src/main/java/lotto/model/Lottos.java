@@ -2,7 +2,7 @@ package lotto.model;
 
 import lotto.enums.Rank;
 
-import java.util.LinkedHashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +46,7 @@ public class Lottos {
     }
 
     private Map<Rank, Integer> initRankCount() {
-        Map<Rank, Integer> rankCount = new LinkedHashMap<>();
+        Map<Rank, Integer> rankCount = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
             rankCount.put(rank, 0);
         }
