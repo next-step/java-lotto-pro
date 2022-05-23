@@ -9,14 +9,14 @@ import lotto.dto.PrizeReport;
 public class OutputView {
 	private static final String WINNING_STATS = "당첨 통계";
 	private static final String UNDER_LINE = "---------";
-	private static final String PURCHASE_MESSAGE = "%d개를 구매했습니다.\n";
+	private static final String PURCHASE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
 	private static final String RATIO_MESSAGE = "총 수익률은 %5.2f입니다.\n";
 	private static final String MATCH_COUNT_MESSAGE = "%d개 일치";
 	private static final String BONUS_MATCH_MESSAGE = ", 보너스 볼 일치";
 	private static final String WINNING_MESSAGE = " (%d원)- %d개";
 
-	public static void printPurchaseCount(int count) {
-		System.out.printf(PURCHASE_MESSAGE, count);
+	public static void printPurchaseCount(int manualCount, int autoCount) {
+		System.out.printf(PURCHASE_MESSAGE, manualCount, autoCount);
 	}
 
 	public static void printLottoTickets(List<LottoNumber> lottoTickets) {
