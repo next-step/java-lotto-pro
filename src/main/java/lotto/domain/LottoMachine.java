@@ -10,12 +10,12 @@ public class LottoMachine {
 		this.lottoNumberStrategy = lottoNumberStrategy;
 	}
 
-	public List<Lotto> generate(int count) {
+	public LottoTickets generate(int count) {
 		List<Lotto> lottoTickets = new ArrayList<>();
 		for(int index = 0; index < count; index +=1 ) {
 			lottoTickets.add(new Lotto(lottoNumberStrategy.generate(Lotto.LOTTO_SIZE)));
 		}
 
-		return lottoTickets;
+		return new LottoTickets(lottoTickets);
 	}
 }
