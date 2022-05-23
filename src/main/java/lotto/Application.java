@@ -17,12 +17,12 @@ public class Application {
         ResultView.printTicketCount(game.getTicketCount());
         game.printTickets();
 
-        System.out.println();
+        ResultView.printEmptyLine();
         String winnerNumbers = InputView.getWinnerNumbers();
         int bonusBallNumber = InputView.getBonusBallNumber();
         game.generateGameResult(new WinnerTicket(winnerNumbers, new LottoNumber(bonusBallNumber)));
 
-        System.out.println();
+        ResultView.printEmptyLine();
         game.printGameResult();
     }
 }

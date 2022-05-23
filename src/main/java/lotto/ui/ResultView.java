@@ -36,6 +36,10 @@ public class ResultView {
         printEarningRate(earningRate);
     }
 
+    public static void printEmptyLine() {
+        System.out.println();
+    }
+
     private static void printEarningRate(double earningRate) {
         StringBuilder earningRateMessage = new StringBuilder(String.format("총 수익률은 %.2f입니다.", earningRate));
         if (earningRate < 1) {
