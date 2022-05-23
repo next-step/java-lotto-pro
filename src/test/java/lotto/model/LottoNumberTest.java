@@ -28,4 +28,5 @@ class LottoNumberTest {
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 로또 번호는 %d와 %d 사이 입니다!", MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
     }
+
 }

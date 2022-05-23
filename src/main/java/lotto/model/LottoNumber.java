@@ -5,7 +5,7 @@ import java.util.Objects;
 import static lotto.constants.LottoConstant.MAX_LOTTO_NUMBER;
 import static lotto.constants.LottoConstant.MIN_LOTTO_NUMBER;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     private LottoNumber(int number) {
@@ -40,5 +40,10 @@ public class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return (this.number - o.number);
     }
 }

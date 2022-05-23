@@ -2,7 +2,12 @@ package lotto.enums;
 
 import lotto.model.Prize;
 
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static lotto.constants.LottoConstant.MIN_WINNING_RANK;
 
@@ -18,6 +23,8 @@ public enum Rank {
 
     private final int matchingCount;
     private final Prize prize;
+    private final static Map<Integer, Rank> ranks = Collections.unmodifiableMap(Stream.of(values())
+            .collect(Collectors.toMap(Rank::getMatchingCount, Function.identity())));
 
     Rank(int matchingCount, Prize prize) {
         this.matchingCount = matchingCount;
@@ -25,32 +32,29 @@ public enum Rank {
     }
 
     public static Rank getRank(int numberOfMatch) {
-        return Arrays.stream(values())
-                .filter(rank -> rank.matchingCount == numberOfMatch)
-                .findAny()
+        return Optional.ofNullable(ranks.get(numberOfMatch))
                 .orElse(LOSE);
     }
 
     public static Rank getRank(int numberOfMatch, boolean hasBonusNumber) {
-        return Arrays.stream(values())
-                .filter(rank -> rank.matchingCount == numberOfMatch)
-                .map(rank -> rank == THIRD && hasBonusNumber ? SECOND : rank)
-                .findAny()
+        Rank rank = Optional.ofNullable(ranks.get(numberOfMatch))
                 .orElse(LOSE);
+        if (rank == THIRD && hasBonusNumber)
+            return SECOND;
+        return rank;
     }
 
     public Prize getPrize() {
         return prize;
     }
 
-    public Prize getPrizeWithCount(int count) {
-        return prize.multiply(count);
+    public int getMatchingCount() {
+        return matchingCount;
     }
 
     public boolean isOverMinWinningRank() {
         return matchingCount >= MIN_WINNING_RANK;
     }
-
 
     @Override
     public String toString() {

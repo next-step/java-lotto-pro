@@ -52,4 +52,8 @@ public class Lottos {
         }
         return rankCount;
     }
+
+    public int lottosCount() {
+        return lottos.size();
+    }
 }

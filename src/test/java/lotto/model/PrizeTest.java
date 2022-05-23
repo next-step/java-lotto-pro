@@ -28,11 +28,11 @@ class PrizeTest {
 
         Prize testPrize = secondPrize.add(thirdPrize);
         assertThat(testPrize.getAmount())
-                .isEqualTo(31_500_000);
+                .isEqualTo(1_550_000);
     }
 
     @Test
-    @DisplayName("곱셈 연산을 확인한다.")
+    @DisplayName("곰셉 연산을 확인한다.")
     void Prize_곱셈() {
         Prize secondPrize = SECOND.getPrize();
 
