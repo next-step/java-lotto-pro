@@ -7,16 +7,15 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+import step3.model.LottoGenerator;
+import step3.model.LottoWinChecker;
 import step3.utls.NumberUtil;
 
 public class LottoTicket {
 
     private final List<LottoElement> lottoElements = new ArrayList();
-    private final int LOTTO_ELEMENTS_SIZE = 6;
-    private final int MATCH = 1;
-    private final int NOT_MATCH = 0;
     private static final String LOTTO_DELIMITER = ",";
-    private final String CREATE_TICKET_EXCEPTION_MSG = "로또는 중복되지 않은 %s 개의 숫자로 이루어져있습니다";
+    private static final String CREATE_TICKET_EXCEPTION_MSG = "로또는 중복되지 않은 %s 개의 숫자로 이루어져있습니다";
 
     public LottoTicket(List<String> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
@@ -32,9 +31,9 @@ public class LottoTicket {
     }
 
     private void validateLottoNumbers(List<String> lottoElementsSource) {
-        if (new HashSet<>(lottoElementsSource).size() != LOTTO_ELEMENTS_SIZE) {
+        if (new HashSet<>(lottoElementsSource).size() != LottoGenerator.LOTTO_ELEMENTS_SIZE) {
             throw new IllegalArgumentException(
-                String.format(CREATE_TICKET_EXCEPTION_MSG, LOTTO_ELEMENTS_SIZE));
+                String.format(LottoTicket.CREATE_TICKET_EXCEPTION_MSG, LottoGenerator.LOTTO_ELEMENTS_SIZE));
         }
     }
 
@@ -52,9 +51,9 @@ public class LottoTicket {
 
     private int isMatch(LottoElement lottoElement) {
         if (lottoElements.contains(lottoElement)) {
-            return MATCH;
+            return LottoWinChecker.MATCH;
         }
-        return NOT_MATCH;
+        return LottoWinChecker.NOT_MATCH;
     }
 
     public List<LottoElement> getLottoNumbers() {

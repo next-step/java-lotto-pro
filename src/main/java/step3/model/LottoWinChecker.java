@@ -13,9 +13,10 @@ public class LottoWinChecker {
 
     private LottoElement bonusNumber;
     private LottoTicket winnerLottoTicket;
-    private final String SET_BONUS_NUMBER_EXCEPTION_MSG = "정답티켓과 다른 번호를 설정해야합니다";
-    private final int MATCH = 1;
-    private final int MATCH_COUNT_BASE = 0;
+    private static final String SET_BONUS_NUMBER_EXCEPTION_MSG = "정답티켓과 다른 번호를 설정해야합니다";
+    public static final int MATCH = 1;
+    public static final int NOT_MATCH = 0;
+    private static final int MATCH_COUNT_BASE = 0;
 
     public void setBonusNumber(String lottoElementSource) {
         LottoElement bonusLottoElement = new LottoElement(NumberUtil.parseInt(lottoElementSource));
@@ -30,7 +31,7 @@ public class LottoWinChecker {
             Arrays.asList(bonusLottoElement));
 
         if (bonusExistInWinnerTicket == isExist) {
-            throw new IllegalArgumentException(SET_BONUS_NUMBER_EXCEPTION_MSG);
+            throw new IllegalArgumentException(LottoWinChecker.SET_BONUS_NUMBER_EXCEPTION_MSG);
         }
     }
 
@@ -46,19 +47,19 @@ public class LottoWinChecker {
                 winnerLottoTicket.getLottoNumbers());
 
             boolean haveBonusNumberInUserLottoTicket =
-                lottoTicket.getMatchCountWith(Arrays.asList(bonusNumber)) == MATCH;
+                lottoTicket.getMatchCountWith(Arrays.asList(bonusNumber)) == LottoWinChecker.MATCH;
 
             LottoReward lottoReward = LottoReward.valueOf(matchCountWithUserAndWinnerLotto,
                 haveBonusNumberInUserLottoTicket);
 
-            statistics.replace(lottoReward, statistics.get(lottoReward) + MATCH);
+            statistics.replace(lottoReward, statistics.get(lottoReward) + LottoWinChecker.MATCH);
         }
         return statistics;
     }
 
     private void initStatistics(LinkedHashMap<LottoReward, Integer> statistics) {
         for (LottoReward lottoReward : LottoReward.values()) {
-            statistics.put(lottoReward, MATCH_COUNT_BASE);
+            statistics.put(lottoReward, LottoWinChecker.MATCH_COUNT_BASE);
         }
     }
 }

@@ -1,14 +1,13 @@
 package step3.domain;
 
 import java.util.Objects;
+import step3.model.LottoGenerator;
 
 public class LottoElement implements Comparable<LottoElement>, Cloneable {
 
     private final int element;
-    private final int LOTTO_MIN = 1;
-    private final int LOTTO_MAX = 45;
-    private final String CREATE_ELEMENT_EXCEPTION_MSG = "로또 번호는 %s 이상 %s 이하의 숫자여야합니다";
-    private final String COPY_ELEMENT_EXCEPTION_MSG = "LottoElement 복사중 에러가 발생하였습니다";
+    private static final String CREATE_ELEMENT_EXCEPTION_MSG = "로또 번호는 %s 이상 %s 이하의 숫자여야합니다";
+    private static final String COPY_ELEMENT_EXCEPTION_MSG = "LottoElement 복사중 에러가 발생하였습니다";
 
 
     public LottoElement(int element) {
@@ -17,9 +16,9 @@ public class LottoElement implements Comparable<LottoElement>, Cloneable {
     }
 
     private void validateElement(int element) {
-        if (element < LOTTO_MIN || element > LOTTO_MAX) {
+        if (element < LottoGenerator.LOTTO_MIN || element > LottoGenerator.LOTTO_MAX) {
             throw new IllegalArgumentException(
-                String.format(CREATE_ELEMENT_EXCEPTION_MSG, LOTTO_MIN, LOTTO_MAX));
+                String.format(LottoElement.CREATE_ELEMENT_EXCEPTION_MSG, LottoGenerator.LOTTO_MIN, LottoGenerator.LOTTO_MAX));
         }
     }
 
@@ -61,7 +60,7 @@ public class LottoElement implements Comparable<LottoElement>, Cloneable {
         try {
             return (LottoElement) super.clone();
         } catch (CloneNotSupportedException e) {
-            throw new IllegalArgumentException(COPY_ELEMENT_EXCEPTION_MSG);
+            throw new IllegalArgumentException(LottoElement.COPY_ELEMENT_EXCEPTION_MSG);
         }
     }
 }

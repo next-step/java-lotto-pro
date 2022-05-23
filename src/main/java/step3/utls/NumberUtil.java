@@ -8,7 +8,7 @@ public class NumberUtil {
         try {
             return Integer.parseInt(source);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(PARSE_INT_ERROR);
+            throw new IllegalArgumentException(NumberUtil.PARSE_INT_ERROR);
         }
 
     }
