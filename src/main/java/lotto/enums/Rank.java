@@ -51,7 +51,7 @@ public enum Rank {
     }
 
     private int rankKey() {
-        return Objects.hash(this.matchingCount, this.hasBonus);
+        return Objects.hash(matchingCount, hasBonus);
     }
 
     @Override
