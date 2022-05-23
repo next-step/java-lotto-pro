@@ -27,9 +27,13 @@ public enum LottoRank {
     public static LottoRank of(int matchCount, boolean hasBonus) {
         return Arrays.stream(LottoRank.values())
                 .filter(r -> r.matchCount == matchCount)
-                .filter(r -> r.bonus == hasBonus)
+                .map(r -> SECOND.isMatchCountAndBonus(matchCount, hasBonus) ? SECOND : r)
                 .findFirst()
                 .orElse(MISS);
+    }
+
+    private boolean isMatchCountAndBonus(int matchCount, boolean bonus) {
+        return this.matchCount == matchCount && this.bonus == bonus;
     }
 
     public int getMatchCount() {
