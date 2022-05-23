@@ -28,15 +28,16 @@ public class WinningListTest {
 	@Test
 	@DisplayName("당첨내역 생성 테스트")
 	void create_winningList_data() {
-		assertEquals(
-				new WinningList(lottos, new LottoNumbers("1,2,3,4,5,6"), "8").getWinningList().get(WinningMoney.FIRST),
-				1);
+		WinningLotto winningLotto = new WinningLotto(new LottoNumbers("1,2,3,4,5,6"));
+		winningLotto.addBonusLottoNumber("8");
+		assertEquals(new WinningList(lottos, winningLotto).getWinningList().get(WinningMoney.FIRST), 1);
 	}
 
 	@Test
 	@DisplayName("2등 당첨내역 생성 테스트")
 	void create_winningList_second_data() {
-		assertEquals(new WinningList(lottos, 
-				new LottoNumbers("1,2,3,4,5,8"), "6").getWinningList().get(WinningMoney.SECOND), 1);
+		WinningLotto winningLotto = new WinningLotto(new LottoNumbers("1,2,3,4,5,8"));
+		winningLotto.addBonusLottoNumber("6");
+		assertEquals(new WinningList(lottos, winningLotto).getWinningList().get(WinningMoney.SECOND), 1);
 	}
 }

@@ -1,9 +1,9 @@
 import lotto.LottoMachine;
 import lotto.LottoResult;
 import lotto.User;
-import lotto.model.LottoNumbers;
 import lotto.model.Lottos;
 import lotto.model.WinningList;
+import lotto.model.WinningLotto;
 import view.InputView;
 import view.ResultView;
 
@@ -24,8 +24,8 @@ public class ApplicationMain {
 		user.buyAutoLottos(lottoMachine);
 		ResultView.printLottos(user.getManualLottos(), user.getAutoLottos());
 
-		LottoResult lottoResult = lastWinningLotto(user);
-
+		WinningLotto lastWinningLotto = lastWinningLotto(user);
+		LottoResult lottoResult = new LottoResult(lastWinningLotto, user.getManualLottos(), user.getAutoLottos());
 		WinningList winningList = lottoResult.winningList();
 		ResultView.printWinStatistics(winningList);
 		ResultView.printProfitRate(lottoResult.profitRate(lottoMachine.lottoPrice()));
@@ -49,11 +49,12 @@ public class ApplicationMain {
 		}
 	}
 
-	private static LottoResult lastWinningLotto(User user) {
+	private static WinningLotto lastWinningLotto(User user) {
 		try {
-			LottoNumbers lastWinningLotto = InputView.inputWinLottoNumbers();
+			WinningLotto lastWinningLotto = InputView.inputWinLottoNumbers();
 			String bonusLottoNumber = InputView.inputBonusLottoNumber();
-			return new LottoResult(lastWinningLotto, bonusLottoNumber, user.getManualLottos(), user.getAutoLottos());
+			lastWinningLotto.addBonusLottoNumber(bonusLottoNumber);
+			return lastWinningLotto;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return lastWinningLotto(user);

@@ -8,6 +8,7 @@ import lotto.User;
 import lotto.model.LottoNumbers;
 import lotto.model.Lottos;
 import lotto.model.UserMoney;
+import lotto.model.WinningLotto;
 
 public class InputView {
 	private InputView() {
@@ -27,20 +28,20 @@ public class InputView {
 
 	public static Lottos inputManualLotto(String manualLottoCount) {
 		List<LottoNumbers> lottos = new ArrayList<>();
-		if(Integer.parseInt(manualLottoCount) == 0) {
+		if (Integer.parseInt(manualLottoCount) == 0) {
 			return new Lottos(lottos);
 		}
-		
+
 		System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-		for(int i=0; i<Integer.parseInt(manualLottoCount); i++) {
+		for (int i = 0; i < Integer.parseInt(manualLottoCount); i++) {
 			lottos.add(inputLottoNumbers());
 		}
 		return new Lottos(lottos);
 	}
 
-	public static LottoNumbers inputWinLottoNumbers() {
+	public static WinningLotto inputWinLottoNumbers() {
 		System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-		return inputLottoNumbers();
+		return new WinningLotto(inputLottoNumbers());
 	}
 
 	private static LottoNumbers inputLottoNumbers() {

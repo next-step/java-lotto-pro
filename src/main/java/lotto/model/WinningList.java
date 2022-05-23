@@ -11,9 +11,9 @@ public class WinningList {
 		initWinningList();
 	}
 
-	public WinningList(Lottos lottos, LottoNumbers winningLottoNumbers, String bonusLottoNumber) {
+	public WinningList(Lottos lottos, WinningLotto winningLotto) {
 		this();
-		match(lottos, winningLottoNumbers, bonusLottoNumber);
+		match(lottos, winningLotto.getLottoNumbers(), winningLotto.getBonusLottoNumber());
 	}
 
 	public Map<WinningMoney, Integer> getWinningList() {
@@ -50,5 +50,4 @@ public class WinningList {
 	private void increase(WinningMoney winningMoney) {
 		winningList.put(winningMoney, winningList.get(winningMoney) + 1);
 	}
-
 }
