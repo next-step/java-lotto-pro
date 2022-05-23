@@ -13,7 +13,8 @@ public class InputView {
     private static final String GET_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String GET_MANUAL_LOTTO_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
     private static final int TICKET_EXIST_BOUNDARY = 1;
-
+    private static final String BEFORE_REPLACE = " ";
+    private static final String AFTER_REPLACE = "";
     public String getMoney() {
         System.out.println(InputView.GET_MONEY_MESSAGE);
         return customTrim(InputView.scanIn.nextLine());
@@ -46,6 +47,6 @@ public class InputView {
     }
 
     private String customTrim(String source) {
-        return source.replace(" ", "");
+        return source.replace(InputView.BEFORE_REPLACE, InputView.AFTER_REPLACE);
     }
 }
