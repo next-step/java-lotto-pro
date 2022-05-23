@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.LinkedHashMap;
+import java.util.EnumMap;
 
 import static lotto.enums.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,7 +17,7 @@ class RankCountTest {
     @DisplayName("수익률 계산 로직을 확인한다.")
     void earningRate_수익률_계산() {
         Purchase purchase = Purchase.createPurchase(10000);
-        RankCount rankCount = RankCount.from(new LinkedHashMap<Rank, Integer>() {{
+        RankCount rankCount = RankCount.from(new EnumMap<Rank, Integer>(Rank.class) {{
             put(THIRD, 1);  //  1_500_000
             put(SECOND, 1); // 30_000_000
         }});
@@ -31,7 +31,7 @@ class RankCountTest {
     @Test
     @DisplayName("toString 메서드가 정상적으로 문자열을 리턴하는지 확인한다.")
     void earningRate_toString() {
-        RankCount rankCount = RankCount.from(new LinkedHashMap<Rank, Integer>() {{
+        RankCount rankCount = RankCount.from(new EnumMap<Rank, Integer>(Rank.class) {{
             put(SECOND, 3);
             put(FOURTH, 1);
             put(THIRD, 2);
