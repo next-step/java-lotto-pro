@@ -4,7 +4,6 @@ import lotto.domain.error.LottoNumberErrorCode;
 import lotto.domain.error.LottoTicketErrorCode;
 import lotto.infrastructure.generator.LottoNumberGenerator;
 import lotto.infrastructure.generator.NumberGenerator;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -49,7 +48,7 @@ class LottoTicketTest {
             currentLottoNumber = lottoNumbers.get(i).getLottoNumber();
             nextLottoNumber = lottoNumbers.get(i + 1).getLottoNumber();
 
-            Assertions.assertThat(currentLottoNumber < nextLottoNumber).isTrue();
+            assertThat(currentLottoNumber < nextLottoNumber).isTrue();
         }
     }
 

@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.domain.error.LottoCountErrorCode;
 import lotto.domain.error.LottoResultErrorCode;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -54,9 +53,7 @@ class LottoResultTest {
         lottoResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
         Map<LottoRank, Integer> countByRank = lottoResult.getRankCounter();
 
-        countByRank.entrySet().stream()
-                .filter(e -> e.getValue() != 0)
-                .forEach(e -> assertThat(e.getValue()).isEqualTo(e.getKey().getCountOfMatch()));
+        assertThat(countByRank.get(winningLottoTicket.match(purchasedLottoTicket))).isEqualTo(1);
     }
 
     @Test
@@ -69,7 +66,7 @@ class LottoResultTest {
 
         Map<LottoRank, Integer> rankCounter = lottoResult.getRankCounter();
 
-        Assertions.assertThat(rankCounter.get(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(rankCounter.get(LottoRank.SECOND)).isEqualTo(1);
     }
 
     @Test

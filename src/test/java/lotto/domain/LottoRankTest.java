@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -46,7 +45,7 @@ class LottoRankTest {
         Collections.reverse(reverseLottoRanks);
 
         for (int i = 0; i < lottoRanks.size(); i++) {
-            Assertions.assertThat(lottoRanks.get(i)).isSameAs(reverseLottoRanks.get(i));
+            assertThat(lottoRanks.get(i)).isSameAs(reverseLottoRanks.get(i));
         }
     }
 }
