@@ -11,7 +11,6 @@ public class LottoWinInfoResearcher {
     private static final String IS_LOSS = "손해";
     private static final String IS_BENEFIT = "이득";
     private static final String IS_BENEFIT_MAPPER = "isBenefit";
-    private static final String REWARD_MAPPER = "reward";
     private static final String PROFIT_RATE_MAPPER = "profitRate";
 
     public Map<String, String> checkMatchLottoResult(Map<LottoReward, Integer> checkWinResult,
@@ -21,7 +20,6 @@ public class LottoWinInfoResearcher {
         String isBenefit = isBenefit(profitRate);
 
         Map<String, String> matchLottoResult = new HashMap<>();
-        matchLottoResult.put(REWARD_MAPPER, String.valueOf(reward));
         matchLottoResult.put(PROFIT_RATE_MAPPER, String.valueOf(profitRate));
         matchLottoResult.put(IS_BENEFIT_MAPPER, isBenefit);
 

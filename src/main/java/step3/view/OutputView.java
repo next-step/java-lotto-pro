@@ -14,7 +14,6 @@ public class OutputView {
     private static final String LOTTOS_INFO_FORMAT = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
     private static final String OVERVIEW_INIT_MESSAGE = "\n당첨 통계\n---------";
     private static final String IS_BENEFIT_MAPPER = "isBenefit";
-    private static final String REWARD_MAPPER = "reward";
     private static final String PROFIT_RATE_MAPPER = "profitRate";
     private Map<LottoReward, String> LOTTO_OVERVIEW_FORMAT = new HashMap<>();
 
