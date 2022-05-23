@@ -29,8 +29,7 @@ public class LottoResultTest {
 	@Test
 	@DisplayName("수익률 구하기")
 	void buy_lotto_auto() {
-		WinningLotto winningLotto = new WinningLotto(new LottoNumbers("1,2,3,4,5,7"));
-		winningLotto.addBonusLottoNumber("6");
+		WinningLotto winningLotto = new WinningLotto(new LottoNumbers("1,2,3,4,5,7"), "6");
 		LottoResult lottoResult = new LottoResult(winningLotto, this.lottos);
 		assertEquals(lottoResult.profitRate(1000),
 				(WinningMoney.FIRST.getWinningMoney() + WinningMoney.SECOND.getWinningMoney()) / 2000);
@@ -43,8 +42,7 @@ public class LottoResultTest {
 		lottos.add(new LottoNumbers("1,2,3,4,5,6"));
 		lottos.add(new LottoNumbers("1,2,3,4,5,7"));
 
-		WinningLotto winningLotto = new WinningLotto(new LottoNumbers("1,2,3,4,5,8"));
-		winningLotto.addBonusLottoNumber("7");
+		WinningLotto winningLotto = new WinningLotto(new LottoNumbers("1,2,3,4,5,8"), "7");
 		LottoResult lottoResult = new LottoResult(winningLotto, this.lottos);
 		assertEquals(lottoResult.profitRate(1000),
 				(WinningMoney.THIRD.getWinningMoney() + WinningMoney.SECOND.getWinningMoney()) / 2000);

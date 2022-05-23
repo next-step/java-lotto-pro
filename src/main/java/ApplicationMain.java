@@ -1,5 +1,6 @@
 import lotto.LottoMachine;
 import lotto.LottoResult;
+import lotto.model.LottoNumbers;
 import lotto.model.Lottos;
 import lotto.model.UserMoney;
 import lotto.model.WinningList;
@@ -54,9 +55,9 @@ public class ApplicationMain {
 
 	private static WinningLotto lastWinningLotto() {
 		try {
-			WinningLotto lastWinningLotto = InputView.inputWinLottoNumbers();
+			LottoNumbers lastWinningLottoNumbers = InputView.inputWinLottoNumbers();
 			String bonusLottoNumber = InputView.inputBonusLottoNumber();
-			lastWinningLotto.addBonusLottoNumber(bonusLottoNumber);
+			WinningLotto lastWinningLotto = new WinningLotto(lastWinningLottoNumbers, bonusLottoNumber);
 			return lastWinningLotto;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

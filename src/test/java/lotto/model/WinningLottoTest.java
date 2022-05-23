@@ -10,7 +10,6 @@ public class WinningLottoTest {
 	@Test
 	@DisplayName("당첨번호에 보너스볼이 있는 경우 테스트")
 	void winninglotto_contains_bonus() {
-		WinningLotto winningLotto = new WinningLotto(new LottoNumbers("1,2,3,4,5,6"));
-		assertThrows(IllegalArgumentException.class, () -> winningLotto.addBonusLottoNumber("6"));
+		assertThrows(IllegalArgumentException.class, () -> new WinningLotto(new LottoNumbers("1,2,3,4,5,6"), "6"));
 	}
 }

@@ -7,7 +7,6 @@ import lotto.LottoMachine;
 import lotto.model.LottoNumbers;
 import lotto.model.Lottos;
 import lotto.model.UserMoney;
-import lotto.model.WinningLotto;
 
 public class InputView {
 	private InputView() {
@@ -38,9 +37,9 @@ public class InputView {
 		return new Lottos(lottos);
 	}
 
-	public static WinningLotto inputWinLottoNumbers() {
+	public static LottoNumbers inputWinLottoNumbers() {
 		System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-		return new WinningLotto(inputLottoNumbers());
+		return inputLottoNumbers();
 	}
 
 	private static LottoNumbers inputLottoNumbers() {

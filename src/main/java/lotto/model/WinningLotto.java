@@ -1,18 +1,12 @@
 package lotto.model;
 
 public class WinningLotto {
-	private static String DEFAULT_BOUNS_LOTTO_NUMBER = "-1";
-	private LottoNumbers lottoNumbers;
-	private String bonusLottoNumber;
+	private final LottoNumbers lottoNumbers;
+	private final String bonusLottoNumber;
 	
-	public WinningLotto(LottoNumbers lottoNumbers) {
-		this.lottoNumbers = lottoNumbers;
-		this.bonusLottoNumber = DEFAULT_BOUNS_LOTTO_NUMBER;
-	}
-	
-	public void addBonusLottoNumber(String bonusLottoNumber) {
+	public WinningLotto(LottoNumbers lottoNumbers, String bonusLottoNumber) {
 		validationBonus(lottoNumbers, bonusLottoNumber);
-
+		this.lottoNumbers = lottoNumbers;
 		this.bonusLottoNumber = bonusLottoNumber;
 	}
 	
