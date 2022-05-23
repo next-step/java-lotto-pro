@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.ui.ResultView;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -63,7 +64,7 @@ public class LottoGame {
         return this.purchasePrice / TICKET_UNIT_PRICE;
     }
 
-    public Map<Rank, Integer> getScore() {
+    public EnumMap<Rank, Integer> getScore() {
         return lottoResult.getScore();
     }
 
