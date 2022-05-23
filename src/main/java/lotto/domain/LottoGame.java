@@ -2,9 +2,10 @@ package lotto.domain;
 
 import lotto.ui.ResultView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoGame {
 
@@ -28,11 +29,10 @@ public class LottoGame {
         isValidPurchasePrice(purchasePrice);
         this.purchasePrice = purchasePrice;
 
-        this.tickets = new ArrayList<>();
         int ticketCount = this.getTicketCount();
-        for (int i = 1; i <= ticketCount; i++) {
-            this.tickets.add(new LottoTicket(numberGenerator));
-        }
+        this.tickets = IntStream.rangeClosed(1, ticketCount)
+                .mapToObj(x -> new LottoTicket(numberGenerator))
+                .collect(Collectors.toList());
     }
 
     public LottoGame(List<LottoTicket> tickets) {
@@ -94,7 +94,7 @@ public class LottoGame {
 
     private static void isValidPurchasePrice(int purchasePrice) {
         if (purchasePrice < TICKET_UNIT_PRICE) {
-            throw new RuntimeException("Can't buy ticket. Game will exit.");
+            throw new IllegalArgumentException("Can't buy ticket. Game will exit.");
         }
     }
 
