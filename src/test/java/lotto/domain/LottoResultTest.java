@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoResultTest {
 
-    private final String bonusBall = "45";
+    private final Integer bonusBall = 45;
     private LottoResult lottoResult;
 
     @BeforeEach
@@ -37,7 +37,7 @@ class LottoResultTest {
     @Test
     @DisplayName("구매한 로또 LottoTicket 이 null인 경우 에러발생")
     public void countLottoRank_purchasedLottoTicket_null() {
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList("1", "2", "3", "4", "5", "6"), bonusBall);
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
         LottoTicket purchasedLottoTicket = null;
 
         assertThatThrownBy(() -> lottoResult.countLottoRank(winningLottoTicket, purchasedLottoTicket))
@@ -48,7 +48,7 @@ class LottoResultTest {
     @Test
     @DisplayName("당첨로또와 구매한 로또를 비교하여 해당 LottoRank를 count한다.")
     public void countLottoRank() {
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList("1", "2", "3", "4", "5", "6"), bonusBall);
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
         LottoTicket purchasedLottoTicket = new LottoTicket(Arrays.asList(1, 12, 13, 14, 15, 16));
 
         lottoResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
@@ -62,7 +62,7 @@ class LottoResultTest {
     @Test
     @DisplayName("보너스볼 포함, 2등 당첨 확인")
     public void countLottoRank_bonus_ball() {
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList("1", "2", "3", "4", "5", "6"), bonusBall);
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
         LottoTicket purchasedLottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 45));
 
         lottoResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
@@ -75,7 +75,7 @@ class LottoResultTest {
     @Test
     @DisplayName("당첨로또와 구매한 로또를 비교한 결과를 및 구매한 로또수를 이용하여 수익률을 계산한다.")
     public void calculateYield() {
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList("1", "2", "3", "4", "5", "6"), bonusBall);
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
         LottoTicket purchasedLottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 14, 15, 16));
 
         lottoResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
@@ -86,7 +86,7 @@ class LottoResultTest {
     @Test
     @DisplayName("구매한 로또수 0이면 수익률 계산 시 에러발생")
     public void calculateYield_lotto_count_0() {
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList("1", "2", "3", "4", "5", "6"), bonusBall);
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
         LottoTicket purchasedLottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 14, 15, 16));
 
         lottoResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
