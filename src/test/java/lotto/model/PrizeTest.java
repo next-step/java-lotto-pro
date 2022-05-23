@@ -28,7 +28,7 @@ class PrizeTest {
 
         Prize testPrize = secondPrize.add(thirdPrize);
         assertThat(testPrize.getAmount())
-                .isEqualTo(1_550_000);
+                .isEqualTo(31_500_000);
     }
 
     @Test
