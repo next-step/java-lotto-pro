@@ -12,22 +12,22 @@ import step3.model.LottoGenerator;
 import step3.model.LottoMachine;
 import step3.model.LottoTickets;
 import step3.model.LottoWinChecker;
-import step3.model.LottoWinInfoChecker;
+import step3.model.LottoWinInfoResearcher;
 
 
-public class LottoWinInfoCheckerTest {
+public class LottoWinInfoResearcherTest {
 
-    private LottoWinInfoChecker lottoWinInfoChecker;
+    private LottoWinInfoResearcher lottoWinInfoResearcher;
     private LottoMachine lottoMachine;
 
 
     @BeforeEach
     public void init(){
-        lottoWinInfoChecker = new LottoWinInfoChecker();
+        lottoWinInfoResearcher = new LottoWinInfoResearcher();
         lottoMachine = new LottoMachine(
             new LottoGenerator(),
             new LottoWinChecker(),
-            new LottoWinInfoChecker());
+            new LottoWinInfoResearcher());
     }
     @Test
     public void checkMatchLottoResultTest() {
@@ -35,7 +35,7 @@ public class LottoWinInfoCheckerTest {
         LottoTickets userLottoTickets = createUserLottoTickets();
         Map<LottoReward, Integer> matchCountPerLottoReward = lottoMachine.checkWin(
             userLottoTickets.getLottoTickets());
-        Map<String, String> lottoResult = lottoWinInfoChecker.checkMatchLottoResult(
+        Map<String, String> lottoResult = lottoWinInfoResearcher.checkMatchLottoResult(
             matchCountPerLottoReward, 4);
 
 

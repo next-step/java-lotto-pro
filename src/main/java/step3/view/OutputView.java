@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import step3.domain.LottoElement;
 import step3.enums.LottoReward;
-import step3.model.LottoWinInfoChecker;
+import step3.model.LottoWinInfoResearcher;
 
 public class OutputView {
 
@@ -27,8 +27,8 @@ public class OutputView {
             int matchCount = matchCountStatistics.get(lottoReward);
             printOverViewPerEntry(lottoReward, matchCount);
         }
-        printRewardRate(matchLottoResult.get(LottoWinInfoChecker.PROFIT_RATE_MAPPER),
-            matchLottoResult.get(LottoWinInfoChecker.IS_BENEFIT_MAPPER));
+        printRewardRate(matchLottoResult.get(LottoWinInfoResearcher.PROFIT_RATE_MAPPER),
+            matchLottoResult.get(LottoWinInfoResearcher.IS_BENEFIT_MAPPER));
     }
 
     private void printRewardRate(String profitRate, String isBenefit) {

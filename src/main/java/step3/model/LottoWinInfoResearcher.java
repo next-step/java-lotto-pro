@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import step3.enums.LottoReward;
 
-public class LottoWinInfoChecker {
+public class LottoWinInfoResearcher {
 
     private static final double BREAK_EVEN_POINT = 1.0;
     private static final String IS_LOSS = "손해";
@@ -33,10 +33,10 @@ public class LottoWinInfoChecker {
     }
 
     private String isBenefit(double profitRate) {
-        if (profitRate >= LottoWinInfoChecker.BREAK_EVEN_POINT) {
-            return LottoWinInfoChecker.IS_BENEFIT;
+        if (profitRate >= LottoWinInfoResearcher.BREAK_EVEN_POINT) {
+            return LottoWinInfoResearcher.IS_BENEFIT;
         }
-        return LottoWinInfoChecker.IS_LOSS;
+        return LottoWinInfoResearcher.IS_LOSS;
     }
 
     private long calcReward(Map<LottoReward, Integer> checkWinResult) {

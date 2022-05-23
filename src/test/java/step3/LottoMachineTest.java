@@ -19,7 +19,7 @@ import step3.model.LottoGenerator;
 import step3.model.LottoMachine;
 import step3.model.LottoTickets;
 import step3.model.LottoWinChecker;
-import step3.model.LottoWinInfoChecker;
+import step3.model.LottoWinInfoResearcher;
 
 public class LottoMachineTest {
 
@@ -28,7 +28,7 @@ public class LottoMachineTest {
     @BeforeEach
     public void init() {
         lottoMachine = new LottoMachine(new LottoGenerator(), new LottoWinChecker(),
-            new LottoWinInfoChecker());
+            new LottoWinInfoResearcher());
     }
 
     @ParameterizedTest

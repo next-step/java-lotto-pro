@@ -10,7 +10,7 @@ import step3.enums.LottoReward;
 public class LottoMachine {
     private final LottoGenerator lottoGenerator;
     private final LottoWinChecker lottoWinChecker;
-    private final LottoWinInfoChecker lottoWinInfoChecker;
+    private final LottoWinInfoResearcher lottoWinInfoResearcher;
     public static final int LOTTO_PRICE = 1_000;
     private static final int EMPTY = 0;
 
@@ -19,10 +19,10 @@ public class LottoMachine {
     private static final String MANUAL_LOTTO_COUNT_OVER_TICKET_EXCEPTION_MSG = "입금한 돈을 초과할수 없습니다.";
 
     public LottoMachine(LottoGenerator lottoGenerator, LottoWinChecker lottoWinChecker,
-        LottoWinInfoChecker lottoWinInfoChecker) {
+        LottoWinInfoResearcher lottoWinInfoResearcher) {
         this.lottoGenerator = lottoGenerator;
         this.lottoWinChecker = lottoWinChecker;
-        this.lottoWinInfoChecker = lottoWinInfoChecker;
+        this.lottoWinInfoResearcher = lottoWinInfoResearcher;
     }
 
     public List<LottoTicket> makeRandomLottoTickets(int randomTicketCount) {
@@ -71,7 +71,7 @@ public class LottoMachine {
 
     public Map<String, String> checkMatchLottoResult(Map<LottoReward, Integer> checkWinResult,
         int ticketCount) {
-        return lottoWinInfoChecker.checkMatchLottoResult(checkWinResult, ticketCount);
+        return lottoWinInfoResearcher.checkMatchLottoResult(checkWinResult, ticketCount);
     }
 
 }
