@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class Lotto {
     public static final int SIZE = 6;
-    private static final Money LOTTO_PRICE = Money.from(1000);
+    public static final Money LOTTO_PRICE = Money.from(1000);
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -17,10 +17,6 @@ public class Lotto {
         validateNumbersCount(lottoNumbers);
         validateDuplicated(lottoNumbers);
         this.lottoNumbers = new HashSet<>(Arrays.asList(lottoNumbers));
-    }
-
-    public Money price() {
-        return LOTTO_PRICE;
     }
 
     public MatchResult match(Set<LottoNumber> prizeNumbers, LottoNumber bonusNumber) {

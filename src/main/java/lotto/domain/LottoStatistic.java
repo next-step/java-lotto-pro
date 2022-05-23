@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 
 public class LottoStatistic {
 
-    private Map<MatchResult, Lottos> matchedLottos;
+    private Map<MatchResult, Integer> matchedCount;
 
     public LottoStatistic(Lottos lottos, WinningLotto winningLotto) {
         initializePrizeLottos(lottos, winningLotto);
@@ -18,18 +18,23 @@ public class LottoStatistic {
     }
 
     private void initializePrizeLottos(Lottos lottos, WinningLotto winningNumbers) {
-        matchedLottos = new HashMap<>();
+        matchedCount = new HashMap<>();
         for (MatchResult matchResult : MatchResult.values()) {
-            matchedLottos.put(matchResult, lottos.matchedLottos(winningNumbers, matchResult));
+            matchedCount.put(matchResult, lottos.matchedLottos(winningNumbers, matchResult).size());
         }
     }
 
     public BigDecimal calculateLottoEarning() {
-        Money totalLottoPrice = Money.from(0);
-        for (Lottos lottos : matchedLottos.values()) {
-            totalLottoPrice = totalLottoPrice.add(lottos.totalPrice());
-        }
+        Money totalLottoPrice = getTotalLottoPrice();
         return totalPrize().divide(totalLottoPrice);
+    }
+
+    private Money getTotalLottoPrice() {
+        Money totalLottoPrice = Money.from(0);
+        for (int count : matchedCount.values()) {
+            totalLottoPrice = totalLottoPrice.add(Lotto.LOTTO_PRICE.multiply(count));
+        }
+        return totalLottoPrice;
     }
 
     public Map<MatchResult, Integer> winningMatchResultCount() {
@@ -41,22 +46,20 @@ public class LottoStatistic {
     }
 
     private int matchedCount(MatchResult matchResult) {
-        return matchedLottos.get(matchResult).size();
+        return matchedCount.get(matchResult);
     }
 
     private Money totalPrize() {
         Money result = Money.from(0);
-        for (Map.Entry<MatchResult, Lottos> entry : matchedLottos.entrySet()) {
+        for (Map.Entry<MatchResult, Integer> entry : matchedCount.entrySet()) {
             result = result.add(calculatePrize(entry));
         }
         return result;
     }
 
-    private Money calculatePrize(Entry<MatchResult, Lottos> entry) {
-        Money result = Money.from(0);
-        for (int index = entry.getValue().size(); index > 0; index--) {
-            result = result.add(entry.getKey().getCashPrize());
-        }
-        return result;
+    private Money calculatePrize(Entry<MatchResult, Integer> entry) {
+        Money cashPrize = entry.getKey().getCashPrize();
+        int matchedCount = entry.getValue();
+        return cashPrize.multiply(matchedCount);
     }
 }

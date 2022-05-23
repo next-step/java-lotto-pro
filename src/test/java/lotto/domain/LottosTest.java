@@ -50,13 +50,7 @@ class LottosTest {
                 () -> assertThat(lottos.matchedLottos(winningNumbers, MatchResult.FIFTH).size()).isEqualTo(1)
         );
     }
-
-    @Test
-    void 로또_총_금액() {
-        assertThat(lottos.totalPrice()).isEqualTo(Money.from(5000));
-
-    }
-
+    
     private Lotto createLotto(int[] inputs) {
         LottoNumber[] lottoNumbers = new LottoNumber[inputs.length];
 

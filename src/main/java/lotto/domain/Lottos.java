@@ -21,16 +21,7 @@ public class Lottos {
                 .collect(Collectors.toList());
         return Lottos.from(matchedLottos);
     }
-
-    public Money totalPrice() {
-        Money result = Money.from(0);
-        for (Lotto lotto : lottos) {
-            result = result.add(lotto.price());
-        }
-
-        return result;
-    }
-
+    
     public int size() {
         return this.lottos.size();
     }
