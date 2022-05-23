@@ -2,12 +2,13 @@ package lotto.domain;
 
 import java.util.Objects;
 
-import static lotto.util.RandomNumberUtils.NUMBER_RANGE_FROM;
-import static lotto.util.RandomNumberUtils.NUMBER_RANGE_TO;
-
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
+
+    private final int NUMBER_RANGE_FROM = 1;
+
+    private final int NUMBER_RANGE_TO = 45;
 
     public LottoNumber(int number) {
         validateLottoNumber(number);

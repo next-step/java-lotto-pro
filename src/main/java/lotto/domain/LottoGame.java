@@ -1,11 +1,12 @@
 package lotto.domain;
 
 import lotto.ui.ResultView;
-import lotto.util.RandomNumberUtils;
 
-import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoGame {
 
@@ -23,18 +24,16 @@ public class LottoGame {
         this.lottoResult = new LottoResult();
     }
 
-    public LottoGame(int purchasePrice) {
+    public LottoGame(int purchasePrice, NumberGenerator numberGenerator) {
         this();
 
         isValidPurchasePrice(purchasePrice);
         this.purchasePrice = purchasePrice;
 
-        this.tickets = new ArrayList<>();
         int ticketCount = this.getTicketCount();
-        for (int i = 1; i <= ticketCount; i++) {
-            LottoNumbers numbers = RandomNumberUtils.generateRandomNumber();
-            this.tickets.add(new LottoTicket(numbers));
-        }
+        this.tickets = IntStream.rangeClosed(1, ticketCount)
+                .mapToObj(x -> new LottoTicket(numberGenerator))
+                .collect(Collectors.toList());
     }
 
     public LottoGame(List<LottoTicket> tickets) {
@@ -65,7 +64,7 @@ public class LottoGame {
         return this.purchasePrice / TICKET_UNIT_PRICE;
     }
 
-    public Map<Integer, Integer> getScore() {
+    public EnumMap<Rank, Integer> getScore() {
         return lottoResult.getScore();
     }
 
@@ -75,9 +74,9 @@ public class LottoGame {
 
     private void calculateEarningRate() {
         long totalEarning = 0;
-        Map<Integer, Integer> scoreMap = lottoResult.getScore();
-        for (Map.Entry<Integer, Integer> entry : scoreMap.entrySet()) {
-            totalEarning += (long) Score.getPrizeBySameNumberCount(entry.getKey()) * entry.getValue();
+        Map<Rank, Integer> scoreMap = lottoResult.getScore();
+        for (Map.Entry<Rank, Integer> entry : scoreMap.entrySet()) {
+            totalEarning += (long) entry.getKey().getWinningMoney() * entry.getValue();
         }
 
         if (totalEarning == 0) {
@@ -90,12 +89,13 @@ public class LottoGame {
 
     private void calculateGameScore(LottoTicket ticket, WinnerTicket winnerTicket) {
         int score = equalNumberCount(ticket, winnerTicket);
-        lottoResult.add(score);
+        boolean matchBonus = winnerTicket.matchBonus(ticket);
+        lottoResult.add(score, matchBonus);
     }
 
     private static void isValidPurchasePrice(int purchasePrice) {
         if (purchasePrice < TICKET_UNIT_PRICE) {
-            throw new RuntimeException("Can't buy ticket. Game will exit.");
+            throw new IllegalArgumentException("Can't buy ticket. Game will exit.");
         }
     }
 

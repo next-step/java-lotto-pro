@@ -1,22 +1,22 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.EnumMap;
 
 public class LottoResult {
 
-    private final Map<Integer, Integer> result;
+    private final EnumMap<Rank, Integer> result;
 
     public LottoResult() {
-        this.result = new HashMap<>();
+        this.result = new EnumMap<>(Rank.class);
     }
 
-    public void add(int sameNumberCount) {
-        result.put(sameNumberCount, result.getOrDefault(sameNumberCount, 0) + 1);
+    public void add(int sameNumberCount, boolean matchBonus) {
+        Rank rank = Rank.valueOf(sameNumberCount, matchBonus);
+        result.put(rank, result.getOrDefault(rank, 0) + 1);
     }
 
-    public Map<Integer, Integer> getScore() {
-        return new HashMap<>(this.result);
+    public EnumMap<Rank, Integer> getScore() {
+        return new EnumMap<>(this.result);
     }
 
 }

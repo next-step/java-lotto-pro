@@ -1,20 +1,25 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
     private List<LottoNumber> numbers;
 
-    private int SIZE = 6;
+    private static final int SIZE = 6;
 
-    public LottoNumbers(List<LottoNumber> numbers) {
-        validateLottoNumbers(numbers);
-        Collections.sort(numbers);
-        this.numbers = numbers;
+    public LottoNumbers(List<Integer> numbers) {
+        List<LottoNumber> result = convertToLottoNumbers(numbers);
+        validateLottoNumbers(result);
+        Collections.sort(result);
+        this.numbers = new ArrayList<>(result);
+    }
+
+    private static List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     public int[] getNumbersAsArray() {
