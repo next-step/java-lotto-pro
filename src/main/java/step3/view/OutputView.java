@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 import step3.domain.LottoElement;
 import step3.enums.LottoReward;
-import step3.model.LottoWinInfoResearcher;
 
 public class OutputView {
 
-    private static final String REWARD_RATE_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
+    private static final int BREAK_EVEN_POINT = 1;
+    private static final String REWARD_RATE_FORMAT = "총 수익률은 %.2f입니다.(기준이 %d이기 때문에 결과적으로 %s라는 의미임)";
     private static final String LOTTOS_INFO_FORMAT = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
     private static final String OVERVIEW_INIT_MESSAGE = "\n당첨 통계\n---------";
     private static final String IS_BENEFIT_MAPPER = "isBenefit";
@@ -35,7 +35,8 @@ public class OutputView {
 
     private void printRewardRate(String profitRate, String isBenefit) {
         System.out.println(
-            String.format(OutputView.REWARD_RATE_FORMAT, Float.valueOf(profitRate), isBenefit));
+            String.format(OutputView.REWARD_RATE_FORMAT, Float.valueOf(profitRate),
+                BREAK_EVEN_POINT, isBenefit));
     }
 
 
