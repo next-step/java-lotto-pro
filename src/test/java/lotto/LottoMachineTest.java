@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,23 +42,31 @@ public class LottoMachineTest {
 	@Test
 	@DisplayName("수동 로또 구매 실패 테스트")
 	void buy_lotto_manual_fail() {
-		Lottos lottos = new Lottos(new LottoNumbers("1,2,3,4,5,6"), new LottoNumbers("1,2,3,4,5,7"),
-				new LottoNumbers("1,2,3,4,5,8"), new LottoNumbers("1,2,3,4,5,9"));
+		List<LottoNumbers> tempLottos = new ArrayList<>();
+		tempLottos.add(new LottoNumbers("1,2,3,4,5,6"));
+		tempLottos.add(new LottoNumbers("1,2,3,4,5,7"));
+		tempLottos.add(new LottoNumbers("1,2,3,4,5,8"));
+		tempLottos.add(new LottoNumbers("1,2,3,4,5,9"));
 
-		assertThrows(IllegalArgumentException.class, 
-				() -> lottoMachine.buyManualLottos(new UserMoney("2300"), lottos));
+		Lottos lottos = new Lottos(tempLottos);
+
+		assertThrows(IllegalArgumentException.class, () -> lottoMachine.buyManualLottos(new UserMoney("2300"), lottos));
 	}
 
 	@Test
 	@DisplayName("수동 로또 구매")
 	void buy_lotto_manual() {
-		Lottos lottos = new Lottos(new LottoNumbers("1,2,3,4,5,6"), new LottoNumbers("1,2,3,4,5,7"),
-				new LottoNumbers("1,2,3,4,5,8"), new LottoNumbers("1,2,3,4,5,9"));
+		List<LottoNumbers> tempLottos = new ArrayList<>();
+		tempLottos.add(new LottoNumbers("1,2,3,4,5,6"));
+		tempLottos.add(new LottoNumbers("1,2,3,4,5,7"));
+		tempLottos.add(new LottoNumbers("1,2,3,4,5,8"));
+		tempLottos.add(new LottoNumbers("1,2,3,4,5,9"));
+
+		Lottos lottos = new Lottos(tempLottos);
 
 		UserMoney userMoney = new UserMoney("4300");
 		Lottos manualLottos = lottoMachine.buyManualLottos(userMoney, lottos);
 
-		assertAll(() -> assertEquals(manualLottos.size(), 4), 
-				() -> assertEquals(userMoney.getMoney(), 300));
+		assertAll(() -> assertEquals(manualLottos.size(), 4), () -> assertEquals(userMoney.getMoney(), 300));
 	}
 }
