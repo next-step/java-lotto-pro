@@ -28,6 +28,10 @@ public class LottoNumbers {
         return lottoNumbers.size();
     }
 
+    public boolean hasBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
     @Override
     public String toString() {
         return lottoNumbers.toString();
