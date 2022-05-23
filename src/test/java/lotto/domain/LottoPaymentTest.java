@@ -24,8 +24,14 @@ class LottoPaymentTest {
     @Test
     @DisplayName("구입금액에 맞게 로또개수가 계산되어야 한다.")
     void 구입_로또개수_테스트() {
+        // given
         LottoPayment lottoPayment = new LottoPayment(14000);
-        Assertions.assertThat(lottoPayment.getLottoLineCount()).isEqualTo(14);
+
+        // when
+        int expectedCount = lottoPayment.getLottoLineCount();
+
+        // then
+        Assertions.assertThat(expectedCount).isEqualTo(14);
     }
 
 }
