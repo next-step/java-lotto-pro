@@ -69,9 +69,9 @@ public class LottoMachine {
         }
     }
 
-    public Map<String, String> checkMatchLottoResult(Map<LottoReward, Integer> checkWinResult,
+    public Map<String, String> getLottoRewardStatistics(Map<LottoReward, Integer> checkWinResult,
         int ticketCount) {
-        return lottoWinInfoResearcher.checkMatchLottoResult(checkWinResult, ticketCount);
+        return lottoWinInfoResearcher.getLottoRewardStatistics(checkWinResult, ticketCount);
     }
 
 }

@@ -45,9 +45,9 @@ public class LottoController {
 
         Map<LottoReward, Integer> matchCountStatistics = lottoMachine.checkWin(
             lottoTickets.getLottoTickets());
-        Map<String, String> matchLottoResult = lottoMachine.checkMatchLottoResult(matchCountStatistics,
+        Map<String, String> lottoRewardStatistics = lottoMachine.getLottoRewardStatistics(matchCountStatistics,
             ticketCount);
-        outputView.printOutput(matchCountStatistics, matchLottoResult);
+        outputView.printOutput(matchCountStatistics, lottoRewardStatistics);
     }
 
     private int getTicketCountByMoney() {

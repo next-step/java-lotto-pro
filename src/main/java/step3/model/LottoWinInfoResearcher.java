@@ -13,17 +13,17 @@ public class LottoWinInfoResearcher {
     private static final String IS_BENEFIT_MAPPER = "isBenefit";
     private static final String PROFIT_RATE_MAPPER = "profitRate";
 
-    public Map<String, String> checkMatchLottoResult(Map<LottoReward, Integer> checkWinResult,
+    public Map<String, String> getLottoRewardStatistics(Map<LottoReward, Integer> checkWinResult,
         int ticketCount) {
         long reward = calcReward(checkWinResult);
         double profitRate = getProfitRate(reward, ticketCount);
         String isBenefit = isBenefit(profitRate);
 
-        Map<String, String> matchLottoResult = new HashMap<>();
-        matchLottoResult.put(PROFIT_RATE_MAPPER, String.valueOf(profitRate));
-        matchLottoResult.put(IS_BENEFIT_MAPPER, isBenefit);
+        Map<String, String> lottoRewardStatistics = new HashMap<>();
+        lottoRewardStatistics.put(PROFIT_RATE_MAPPER, String.valueOf(profitRate));
+        lottoRewardStatistics.put(IS_BENEFIT_MAPPER, isBenefit);
 
-        return matchLottoResult;
+        return lottoRewardStatistics;
     }
 
     private double getProfitRate(long reward, int ticketCount) {

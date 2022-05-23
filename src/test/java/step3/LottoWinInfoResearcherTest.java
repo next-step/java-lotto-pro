@@ -35,7 +35,7 @@ public class LottoWinInfoResearcherTest {
         LottoTickets userLottoTickets = createUserLottoTickets();
         Map<LottoReward, Integer> matchCountPerLottoReward = lottoMachine.checkWin(
             userLottoTickets.getLottoTickets());
-        Map<String, String> lottoResult = lottoWinInfoResearcher.checkMatchLottoResult(
+        Map<String, String> lottoResult = lottoWinInfoResearcher.getLottoRewardStatistics(
             matchCountPerLottoReward, 4);
 
 

@@ -144,7 +144,7 @@ public class LottoMachineTest {
         LottoTickets userLottoTickets = createUserLottoTickets();
         Map<LottoReward, Integer> matchCountPerLottoReward = lottoMachine.checkWin(
             userLottoTickets.getLottoTickets());
-        Map<String, String> lottoResult = lottoMachine.checkMatchLottoResult(
+        Map<String, String> lottoResult = lottoMachine.getLottoRewardStatistics(
             matchCountPerLottoReward, 4);
         long reward = 30_000_000 + 50_000 + 5_000 + 2_000_000_000;
 
