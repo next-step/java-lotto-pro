@@ -26,16 +26,6 @@ public class Lotto {
         return numberList.size();
     }
 
-    public LottoMatchingResult match(Lotto lotto) {
-        int countOfMatch = 0;
-
-        for (int index = 0; index < lotto.size(); index++) {
-            countOfMatch += hasNumber(lotto.get(index)) ? 1 : 0;
-        }
-
-        return new LottoMatchingResult(countOfMatch, false);
-    }
-
     public boolean hasNumber(LottoNumber lottoNumber) {
         return numberList.contains(lottoNumber);
     }
@@ -59,7 +49,7 @@ public class Lotto {
     }
 
     private void validateDuplication(List<LottoNumber> list) {
-        if(new HashSet<>(list).size() < list.size()) {
+        if (new HashSet<>(list).size() < list.size()) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NUMBER_LIST_DUPLICATION);
         }
     }

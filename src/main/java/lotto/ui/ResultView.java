@@ -14,6 +14,7 @@ public class ResultView {
     private static final String MESSAGE_TITLE_RESULT_STATISTICS = "당첨 통계";
     private static final String MESSAGE_SPLIT_LINE = "---------";
     private static final String MESSAGE_LOTTO_RESULT = "%d개 일치 (%d원)- %d개";
+    private static final String MESSAGE_LOTTO_RESULT_BONUS = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String MESSAGE_STATISTICS_RESULT = "총 수익률은 %f입니다.(%s)";
     private static final String MESSAGE_LOTTO_FAIL = "기준이 1이기 때문에 결과적으로 손해라는 의미임";
     private static final String MESSAGE_LOTTO_SUCCESS = "대박남 역시 인생은 한방임.";
@@ -77,11 +78,17 @@ public class ResultView {
         printLottosResult(results, LottoRank.FIFTH);
         printLottosResult(results, LottoRank.FOURTH);
         printLottosResult(results, LottoRank.THIRD);
+        printLottosResult(results, LottoRank.SECOND);
         printLottosResult(results, LottoRank.FIRST);
     }
 
     private void printLottosResult(LottosResults results, LottoRank rank) {
-        System.out.println(String.format(MESSAGE_LOTTO_RESULT, rank.getCountOfMatch(), rank.getWinningMoney(),
+        String message = MESSAGE_LOTTO_RESULT;
+        if (rank.equals(LottoRank.SECOND)) {
+            message = MESSAGE_LOTTO_RESULT_BONUS;
+        }
+
+        System.out.println(String.format(message, rank.getCountOfMatch(), rank.getWinningMoney(),
                 results.getRankCount(rank)));
     }
 
