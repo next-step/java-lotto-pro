@@ -17,11 +17,12 @@ public class ApplicationMain {
 		if (userMoney.getMoney() < lottoMachine.lottoPrice()) {
 			return;
 		}
+
 		String buyCount = inputManualLottoCount(userMoney, lottoMachine);
 		Lottos writeLotto = inputManualLottoCount(buyCount);
 
 		Lottos manualLottos = lottoMachine.buyManualLottos(userMoney, writeLotto);
-		Lottos autoLottos = lottoMachine.buyAutoLottos(userMoney);
+		Lottos autoLottos = lottoMachine.buyAutoLottos(userMoney, userMoney.getMoney() / lottoMachine.lottoPrice());
 
 		ResultView.printLottos(manualLottos, autoLottos);
 

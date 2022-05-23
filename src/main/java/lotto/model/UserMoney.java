@@ -14,7 +14,7 @@ public class UserMoney {
 	public int getMoney() {
 		return this.money;
 	}
-	
+
 	public void buyLotto(int lottoPrice) {
 		this.money -= lottoPrice;
 	}

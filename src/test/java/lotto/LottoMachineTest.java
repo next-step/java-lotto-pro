@@ -29,7 +29,9 @@ public class LottoMachineTest {
 	@Test
 	@DisplayName("금액에 맞는 자동 로또 구입")
 	void buy_lotto_auto() {
-		assertEquals(lottoMachine.buyAutoLottos(new UserMoney("2300")).getLottos().size(), 2);
+		UserMoney userMoney = new UserMoney("2300");
+		Lottos lottos = lottoMachine.buyAutoLottos(userMoney, userMoney.getMoney() / lottoMachine.lottoPrice());
+		assertEquals(lottos.getLottos().size(), 2);
 	}
 
 	@Test
