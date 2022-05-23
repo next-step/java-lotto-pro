@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Objects;
-import java.util.Set;
 
 public class LottoNumber {
     private final static int LOTTO_NUMBER_MIN_VALUE = 1;

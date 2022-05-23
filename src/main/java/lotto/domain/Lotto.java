@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.type.LottoRank;
 
-import java.util.Comparator;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -52,5 +51,12 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
     }
 }
