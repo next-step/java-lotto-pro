@@ -2,12 +2,11 @@ package step3.lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static step3.lotto.domain.lotto.Lotto.INVALID_LOTTO_NUMBER_COUNT_ERROR;
-import static step3.lotto.domain.lotto.Lotto.LOTTO_NUMBER_DUPLICATED_ERROR;
+import static step3.lotto.domain.lotto.Lotto.INVALID_LOTTO_NUMBER_ERROR;
 import static step3.lotto.domain.lotto.LottoNumber.INVALID_LOTTO_NUMBER_RANGE_ERROR;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -33,21 +32,37 @@ class LottoTest {
         Lotto lotto = Lotto.of(given);
 
         // Then
-        assertAll(
-            () -> assertThat(lotto.size()).isEqualTo(given.size())
-        );
+        assertThat(lotto).as("객체 동등성 비교").isEqualTo(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @Test
-    @DisplayName("6개의 로또 번호를 입력하지 않는 경우 예외")
-    public void throwException_WhenGivenNumberIsNotEnoughCount() {
+    @DisplayName("Set으로 저장된 6자리 로또 번호 반환시 정렬 여부 검증")
+    public void getLottoNumbersTest() {
         // Given
-        final List<Integer> given = Arrays.asList(1, 2, 3);
+        final List<Integer> given = Arrays.asList(6, 5, 4, 3, 2, 1);
+        Lotto actual = Lotto.of(given);
 
+        // When & Then
+        Collections.sort(given);
+        assertThat(actual).isEqualTo(Lotto.of(given));
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    @DisplayName("유효하지 않은 로또 번호를 입력한 경우 예외")
+    public void throwException_WhenGivenNumbersIsInvalid(final List<Integer> given, final String givenDescription) {
         // When & Then
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> Lotto.of(given))
-            .withMessageMatching(INVALID_LOTTO_NUMBER_COUNT_ERROR);
+            .as(givenDescription)
+            .withMessageMatching(INVALID_LOTTO_NUMBER_ERROR);
+    }
+
+    private static Stream throwException_WhenGivenNumbersIsInvalid() {
+        return Stream.of(
+            Arguments.of(Arrays.asList(1, 2, 3), "6개의 로또 번호를 입력하지 않는 경우 예외"),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 6, 6), "중복된 수를 포함한 로또 객체 생성 시 예외")
+        );
     }
 
     @Test
@@ -60,18 +75,6 @@ class LottoTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> Lotto.of(given))
             .withMessageMatching(INVALID_LOTTO_NUMBER_RANGE_ERROR);
-    }
-
-    @Test
-    @DisplayName("중복된 수를 포함한 로또 객체 생성 시 예외")
-    public void throwException_WhenGivenNumberIsDuplicated() {
-        // Given
-        final List<Integer> given = Arrays.asList(1, 2, 3, 4, 6, 6);
-
-        // When & Then
-        assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> Lotto.of(given))
-            .withMessageMatching(LOTTO_NUMBER_DUPLICATED_ERROR);
     }
 
     @ParameterizedTest

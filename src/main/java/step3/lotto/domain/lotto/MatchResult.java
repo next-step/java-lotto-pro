@@ -22,19 +22,23 @@ public enum MatchResult {
         this.rewardPrice = rewardPrice;
     }
 
-    public static MatchResult valueOf(int countOfMatch, boolean matchBonus) {
-        if (isNotReachedCount(countOfMatch)) {
+    public static MatchResult valueOf(int matchCount, boolean matchBonus) {
+        if (isLittleThanFifthPlaceCount(matchCount)) {
             return MatchResult.NOTHING;
         }
 
-        if (isSecondPlaceCandidate(countOfMatch)) {
+        if (isSecondPlaceCandidate(matchCount)) {
             return choiceSecondPlaceOrThirdPlace(matchBonus);
         }
 
         return Arrays.stream(MatchResult.values())
-            .filter(matchResult -> matchResult.getMatchCount() == countOfMatch)
+            .filter(matchResult -> matchResult.isMatchCount(matchCount))
             .findFirst()
-            .get();
+            .orElseThrow(IllegalArgumentException::new);
+    }
+
+    private boolean isMatchCount(int countOfMatch) {
+        return this.matchCount == countOfMatch;
     }
 
     private static MatchResult choiceSecondPlaceOrThirdPlace(boolean matchBonus) {
@@ -48,8 +52,8 @@ public enum MatchResult {
         return countOfMatch == SECOND_PLACE.getMatchCount();
     }
 
-    private static boolean isNotReachedCount(int countOfMatch) {
-        return countOfMatch < 3;
+    private static boolean isLittleThanFifthPlaceCount(int countOfMatch) {
+        return countOfMatch < FIFTH_PLACE.getMatchCount();
     }
 
     public int getMatchCount() {

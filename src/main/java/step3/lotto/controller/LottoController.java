@@ -1,11 +1,9 @@
 package step3.lotto.controller;
 
-import java.io.IOException;
 import step3.lotto.domain.customer.Customer;
 import step3.lotto.domain.lotto.MatchStatistic;
 import step3.lotto.domain.lotto.Winnings;
 import step3.lotto.service.LottoService;
-import step3.lotto.view.InputView;
 import step3.lotto.view.ResultView;
 import step3.lotto.view.reader.InputReader;
 
@@ -15,11 +13,9 @@ import step3.lotto.view.reader.InputReader;
  */
 public class LottoController {
 
-    public void run() throws IOException {
-        InputReader inputReader = new InputReader();
-        Customer customer = new Customer(inputReader.inputPrice());
-        InputView.printPurchaseCompletionAndPublishedLottosGuidMessage(customer);
-        Winnings winnings = inputReader.inputWinnings();
+    public void run() {
+        Customer customer = InputReader.InputCustomer();
+        Winnings winnings = InputReader.inputWinnings();
 
         LottoService lottoService = new LottoService();
         MatchStatistic matchStatistic = lottoService.play(customer, winnings);

@@ -14,16 +14,21 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public MatchStatistic match(Winnings winnings) {
-        MatchStatistic matchStatistic = new MatchStatistic();
-        for (Lotto lotto : lottos) {
-            matchStatistic.add(lotto.match(winnings));
-        }
-        return matchStatistic;
-    }
-
-
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public int getLottosSize() {
+        return lottos.size();
+    }
+
+    public void addAll(Lottos lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
+            add(lotto);
+        }
+    }
+
+    private void add(Lotto lotto) {
+        lottos.add(lotto);
     }
 }

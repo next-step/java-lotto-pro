@@ -11,9 +11,21 @@ public class Winnings {
     private Lotto winningsLotto;
     private LottoNumber bonusNumber;
 
-    public Winnings(Lotto winningsLotto, LottoNumber bonusNumber) {
+    private Winnings(Lotto winningsLotto, LottoNumber bonusNumber) {
         this.winningsLotto = winningsLotto;
         this.bonusNumber = bonusNumber;
+    }
+
+    public MatchStatistic match(Lottos lottos) {
+        MatchStatistic matchStatistic = new MatchStatistic();
+        for (Lotto lotto : lottos.getLottos()) {
+            matchStatistic.add(match(lotto));
+        }
+        return matchStatistic;
+    }
+
+    private MatchResult match(Lotto lotto) {
+        return MatchResult.valueOf(lotto.matchCount(winningsLotto), lotto.contains(bonusNumber));
     }
 
     public static Winnings of(Lotto winningsLotto, LottoNumber bonusNumber) {
