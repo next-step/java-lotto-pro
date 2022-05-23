@@ -5,6 +5,8 @@ import lotto.domain.LottoRanks;
 import lotto.domain.LottoTicket;
 import lotto.domain.Money;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +21,6 @@ public class OutputView {
 
     private static void printLottoRank(List<LottoRank> lottoRanks, LottoRanks lottoResult) {
         System.out.println("\n당첨 통계\n---------");
-
 
         // TODO: 여기를 도메인으로 옮겨보자
         List<LottoRank> filteredLottoRanks = LottoRank.filteredHasPrize(lottoRanks);
@@ -40,11 +41,11 @@ public class OutputView {
 
     public static void printRateOfReturn(Money money, LottoRanks lottoResult) {
         int totalPrize = lottoResult.prize();
-        // TODO: BIG Decimal로 수정해보자. 그것이 무엇일까
-        double rateOfReturn = (double) totalPrize / money.getMoney();
+
+        BigDecimal rateOfReturn = new BigDecimal(Integer.toString(totalPrize)).divide(new BigDecimal(Integer.toString(money.getMoney())), 2, RoundingMode.HALF_UP);
 
         System.out.print(String.format("총 수익률은 %.2f입니다.", rateOfReturn));
-        if (rateOfReturn < 1) {
+        if (rateOfReturn.compareTo(new BigDecimal("1")) < 0) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
     }
