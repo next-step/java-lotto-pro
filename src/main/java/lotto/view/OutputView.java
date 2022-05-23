@@ -23,6 +23,8 @@ public class OutputView {
 		for(LottoNumber number: lottoTickets) {
 			printLotto(number);
 		}
+
+		System.out.println();
 	}
 
 	public static void printPrizeResult(List<PrizeReport> report) {

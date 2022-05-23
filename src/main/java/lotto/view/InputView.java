@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import lotto.dto.StringLotto;
+import lotto.dto.StringLottoTickets;
+
 public class InputView {
 	private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
 	private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 	private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
 	private static final String INPUT_MANUAL_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
 	private static final String INPUT_MANUAL_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
+	private static final String EOL = "\n";
 	private static final String COMMA = ",";
 
 	private static final Scanner scanner = new Scanner(System.in);
@@ -18,6 +22,8 @@ public class InputView {
 		System.out.println(INPUT_MONEY_MESSAGE);
 		int money = scanner.nextInt();
 		scanner.nextLine();
+		System.out.print(EOL);
+
 		return money;
 	}
 
@@ -31,6 +37,7 @@ public class InputView {
 		System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
 		int number = scanner.nextInt();
 		scanner.nextLine();
+		System.out.print(EOL);
 
 		return number;
 	}
@@ -39,13 +46,22 @@ public class InputView {
 		System.out.println(INPUT_MANUAL_COUNT_MESSAGE);
 		int count = scanner.nextInt();
 		scanner.nextLine();
+		System.out.print(EOL);
+
 		return count;
 	}
 
-	public static List<String> inputManualNumbers() {
+	public static StringLottoTickets inputManualNumbers(int manualCount) {
 		System.out.println(INPUT_MANUAL_MESSAGE);
 
-		return getNumbersFromString();
+		List<StringLotto> lottoTickets = new ArrayList<>();
+
+		for(int index = 0; index < manualCount; index += 1) {
+			lottoTickets.add(StringLotto.of(getNumbersFromString()));
+		}
+		System.out.print(EOL);
+
+		return new StringLottoTickets(lottoTickets);
 	}
 
 	private static List<String> getNumbersFromString() {
