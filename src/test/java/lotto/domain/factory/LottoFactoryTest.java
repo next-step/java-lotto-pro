@@ -9,7 +9,6 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoFactoryTest {
 
@@ -29,7 +28,7 @@ class LottoFactoryTest {
     @Test
     @DisplayName("랜덤 로또 번호 6개를 가진 Lotto 객체를 반환한다")
     void createAuto() {
-        assertThat(LottoFactory.createAuto().getLottoNumbers()).hasSize(6);
+        assertThat(LottoFactory.createAuto().getValues()).hasSize(6);
     }
 
     @Test

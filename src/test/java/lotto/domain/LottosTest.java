@@ -4,10 +4,7 @@ import lotto.domain.factory.LottoFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottosTest {
 
@@ -17,7 +14,7 @@ class LottosTest {
         Lottos lottos = new Lottos();
         lottos.add(LottoFactory.createAuto());
         lottos.add(LottoFactory.createAuto());
-        assertThat(lottos.getLottos()).hasSize(2);
+        assertThat(lottos.getValues()).hasSize(2);
 
     }
 
