@@ -20,6 +20,8 @@ public class OutputView {
     private static void printLottoRank(List<LottoRank> lottoRanks, LottoRanks lottoResult) {
         System.out.println("\n당첨 통계\n---------");
 
+
+        // TODO: 여기를 도메인으로 옮겨보자
         List<LottoRank> filteredLottoRanks = LottoRank.filteredHasPrize(lottoRanks);
         for (LottoRank lottoRank : filteredLottoRanks) {
             int matchRank = lottoRank.matchRank(lottoResult);
@@ -38,6 +40,7 @@ public class OutputView {
 
     public static void printRateOfReturn(Money money, LottoRanks lottoResult) {
         int totalPrize = lottoResult.prize();
+        // TODO: BIG Decimal로 수정해보자. 그것이 무엇일까
         double rateOfReturn = (double) totalPrize / money.getMoney();
 
         System.out.print(String.format("총 수익률은 %.2f입니다.", rateOfReturn));

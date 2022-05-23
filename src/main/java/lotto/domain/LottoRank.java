@@ -25,6 +25,7 @@ public enum LottoRank {
 
     public static LottoRank valueOf(int match, boolean hasBonus) {
         List<LottoRank> ranks = new ArrayList<>(Arrays.asList(LottoRank.values()));
+        // TODO: stream을 써서 depth를 줄이자
         for (LottoRank rank : ranks) {
             if (rank.isMatchRank(match, hasBonus)) {
                 return rank;
@@ -60,6 +61,7 @@ public enum LottoRank {
 
     public int matchRank(LottoRanks lottoRanks) {
         int count = 0;
+        // TODO: getter를 없애보자
         for (LottoRank rankResult : lottoRanks.getLottoRanks()) {
             count += isMatchRank(rankResult.match, rankResult.hasBonus) ? 1 : 0;
         }
