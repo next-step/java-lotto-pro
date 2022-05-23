@@ -9,7 +9,8 @@ public enum LottoRank {
     SECOND(5, true, 30_000_000),
     THIRD(5, false, 1_500_000),
     FOURTH(4, false, 50_000),
-    FIFTH(3, false, 5_000);
+    FIFTH(3, false, 5_000),
+    MISS(0, false, 0);
 
     private final int countOfMatch;
     private final int winningMoney;
@@ -36,13 +37,13 @@ public enum LottoRank {
     public static List<LottoRank> reverse() {
         return Arrays.asList(FIFTH, FOURTH, THIRD, SECOND, FIRST);
     }
-    
+
     public static LottoRank valueOf(int countOfMatch, boolean matchBonus) {
         return Arrays.stream(values())
                 .filter(rank -> countOfMatch == rank.countOfMatch)
                 .filter(rank -> rank.matchBonus == matchBonus)
                 .findFirst()
-                .orElse(null);
+                .orElse(MISS);
     }
 
     public static boolean isSecond(LottoRank rank) {
