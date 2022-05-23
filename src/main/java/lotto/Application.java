@@ -2,6 +2,8 @@ package lotto;
 
 import lotto.controller.LottoController;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -15,8 +17,9 @@ public class Application {
         List<Lotto> lottoes = lottoController.buyLotto(money);
         ResultView.printLottoNumber(lottoes);
 
-        Lotto answer = new Lotto(InputView.inputAnswer());
-        long totalPrize = lottoController.exchangePrize(lottoes, answer);
+        Lotto winner = new Lotto(InputView.inputAnswer());
+        LottoNumber bonusNumber = LottoNumber.ofString(InputView.inputBonusAnswer());
+        long totalPrize = lottoController.exchangePrize(lottoes, new WinningNumbers(winner, bonusNumber));
         lottoController.printYield(totalPrize, money);
     }
 }

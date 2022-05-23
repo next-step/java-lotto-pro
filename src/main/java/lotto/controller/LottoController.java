@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoMachine;
-import lotto.domain.Prize;
-import lotto.domain.Winners;
+import lotto.domain.*;
 import lotto.view.ResultView;
 
 import java.math.BigDecimal;
@@ -36,7 +33,7 @@ public class LottoController {
         ResultView.resultBuyCount(buyCount);
     }
 
-    public long exchangePrize(final List<Lotto> lottoes, final Lotto answer) {
+    public long exchangePrize(final List<Lotto> lottoes, final WinningNumbers answer) {
         Winners winners = Prize.matchLotto(lottoes, answer);
         Map<Prize, Long> rankCount = winners.getRankCount();
         ResultView.printEachPrize(rankCount);

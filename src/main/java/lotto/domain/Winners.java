@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.*;
 
 public class Winners {
-    private static final Prize[] RANK = {Prize.FOURTH_PLACE, Prize.THIRD_PLACE, Prize.SECOND_PLACE, Prize.FIRST_PLACE};
+    private static final Prize[] RANK = {Prize.FOURTH_PLACE, Prize.THIRD_PLACE, Prize.SECOND_PLACE, Prize.BONUS_PLACE, Prize.FIRST_PLACE};
     private final List<Prize> winners;
 
     public Winners(List<Prize> prizes) {
@@ -34,5 +34,12 @@ public class Winners {
             totalPrize += prize.getPrize() * eachPrize.get(prize);
         }
         return totalPrize;
+    }
+
+    @Override
+    public String toString() {
+        return "Winners{" +
+                "winners=" + winners +
+                '}';
     }
 }

@@ -1,6 +1,8 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +29,8 @@ class LottoControllerTest {
     @DisplayName("당첨 금액 환전 테스트")
     void exchange_prize_test() {
         Lotto lotto = new Lotto("1,2,3,7,8,9");
-        assertThat(lottoController.exchangePrize(Collections.singletonList(lotto), lotto)).isEqualTo(2000000000L);
+        LottoNumber bonusNUmber = LottoNumber.of(45);
+        assertThat(lottoController.exchangePrize(Collections.singletonList(lotto), new WinningNumbers(lotto, bonusNUmber))).isEqualTo(2000000000L);
     }
 
 }
