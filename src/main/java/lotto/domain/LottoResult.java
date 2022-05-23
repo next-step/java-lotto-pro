@@ -5,8 +5,8 @@ import java.util.*;
 public class LottoResult {
     private final Map<LottoRank, Integer> winningRanks = new EnumMap<>(LottoRank.class);
 
-    public LottoResult(List<Lotto> buyLottos, WinningNumber winningLotto) {
-        for (Lotto lotto : new ArrayList<>(buyLottos)) {
+    public LottoResult(List<Lotto> lottos, WinningNumber winningLotto) {
+        for (Lotto lotto : new ArrayList<>(lottos)) {
             LottoRank lottoRank = LottoRank.of(winningLotto.matchCount(lotto), winningLotto.bonus(lotto));
             winningRanks.put(lottoRank, winningCount(lottoRank) + 1);
         }

@@ -10,10 +10,10 @@ public class LottoGame {
 
     private Quantity quantity;
 
-    public LottoGame(String money, Lottos manualLottos) {
-        this.lottos = manualLottos;
+    public LottoGame(String money, Lottos lottos) {
+        this.lottos = lottos;
         this.buyPrice = new Money(money);
-        this.quantity = new Quantity(this.buyPrice.getQuantity(), manualLottos.size());
+        this.quantity = new Quantity(this.buyPrice.getQuantity(), lottos.size());
     }
 
     public void buyLottos() {
@@ -35,7 +35,7 @@ public class LottoGame {
     }
 
     public List<Lotto> getLottos() {
-        return this.lottos.getLottos();
+        return this.lottos.getValues();
     }
 
     public LottoResult getLottoResult(String winningNumber, String bonusNumber) {
