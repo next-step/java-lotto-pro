@@ -29,23 +29,22 @@ public class LottoWinInfoResearcherTest {
             new LottoWinChecker(),
             new LottoWinInfoResearcher());
     }
-//    @Test
-//    public void checkMatchLottoResultTest() {
-//        initMachine();
-//        LottoTickets userLottoTickets = createUserLottoTickets();
-//        Map<LottoReward, Integer> matchCountPerLottoReward = lottoMachine.checkWin(
-//            userLottoTickets.getLottoTickets());
-//        Map<String, String> lottoResult = lottoWinInfoResearcher.checkMatchLottoResult(
-//            matchCountPerLottoReward, 4);
-//
-//
-//        long reward = 30_000_000 + 50_000 + 5_000 + 2_000_000_000;
-//
-//        assertThat(lottoResult)
-//            .containsEntry("isBenefit", "이득")
-//            .containsEntry("profitRate", String.valueOf(reward * 1.0 / (1000 * 4)))
-//            .containsEntry("reward", String.valueOf(reward));
-//    }
+    @Test
+    public void checkMatchLottoResultTest() {
+        initMachine();
+        LottoTickets userLottoTickets = createUserLottoTickets();
+        Map<LottoReward, Integer> matchCountPerLottoReward = lottoMachine.checkWin(
+            userLottoTickets.getLottoTickets());
+        Map<String, String> lottoResult = lottoWinInfoResearcher.checkMatchLottoResult(
+            matchCountPerLottoReward, 4);
+
+
+        long reward = 30_000_000 + 50_000 + 5_000 + 2_000_000_000;
+
+        assertThat(lottoResult)
+            .containsEntry("isBenefit", "이득")
+            .containsEntry("profitRate", String.valueOf(reward * 1.0 / (1000 * 4)));
+    }
 
     private void initMachine() {
         lottoMachine.setWinnerLottoTicket("1,2,3,4,5,6");
