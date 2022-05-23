@@ -31,6 +31,7 @@ public class LottoResult {
 	}
 
 	private long totalWinningMoney(WinningList winningList) {
+
 		return winningList.getWinningList().entrySet().stream()
 				.mapToLong(entry -> entry.getKey().winningMoney(entry.getValue())).sum();
 	}

@@ -22,7 +22,7 @@ public class LottoMachine {
 
 	public Lottos buyAutoLottos(UserMoney userMoney, int pieceCount) {
 		validationCanNotBuyLotto(userMoney, pieceCount);
-		
+
 		List<LottoNumbers> lottos = new ArrayList<>();
 		for (int i = 0; i < pieceCount; ++i) {
 			lottos.add(randomLottoNumbers());
