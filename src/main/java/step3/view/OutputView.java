@@ -20,15 +20,15 @@ public class OutputView {
         initOverviewMap();
     }
 
-    public void printOutput(Map<LottoReward, Integer> statistics,
-        Map<String, String> lottoIncomeResult) {
+    public void printOutput(Map<LottoReward, Integer> matchCountStatistics,
+        Map<String, String> matchLottoResult) {
         System.out.println(OutputView.OVERVIEW_INIT_MESSAGE);
         for (LottoReward lottoReward : LOTTO_OVERVIEW_FORMAT.keySet()) {
-            int matchCount = statistics.get(lottoReward);
+            int matchCount = matchCountStatistics.get(lottoReward);
             printOverViewPerEntry(lottoReward, matchCount);
         }
-        printRewardRate(lottoIncomeResult.get(LottoWinInfoChecker.PROFIT_RATE_MAPPER),
-            lottoIncomeResult.get(LottoWinInfoChecker.IS_BENEFIT_MAPPER));
+        printRewardRate(matchLottoResult.get(LottoWinInfoChecker.PROFIT_RATE_MAPPER),
+            matchLottoResult.get(LottoWinInfoChecker.IS_BENEFIT_MAPPER));
     }
 
     private void printRewardRate(String profitRate, String isBenefit) {

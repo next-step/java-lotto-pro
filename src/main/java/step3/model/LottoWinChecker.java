@@ -40,8 +40,8 @@ public class LottoWinChecker {
     }
 
     public Map<LottoReward, Integer> checkWin(List<LottoTicket> userLottoTickets) {
-        LinkedHashMap<LottoReward, Integer> statistics = new LinkedHashMap<>();
-        initStatistics(statistics);
+        LinkedHashMap<LottoReward, Integer> matchCountStatistics = new LinkedHashMap<>();
+        initStatistics(matchCountStatistics);
         for (LottoTicket lottoTicket : userLottoTickets) {
             int matchCountWithUserAndWinnerLotto = lottoTicket.getMatchCountWith(
                 winnerLottoTicket.getLottoNumbers());
@@ -52,9 +52,9 @@ public class LottoWinChecker {
             LottoReward lottoReward = LottoReward.valueOf(matchCountWithUserAndWinnerLotto,
                 haveBonusNumberInUserLottoTicket);
 
-            statistics.replace(lottoReward, statistics.get(lottoReward) + LottoWinChecker.MATCH);
+            matchCountStatistics.replace(lottoReward, matchCountStatistics.get(lottoReward) + LottoWinChecker.MATCH);
         }
-        return statistics;
+        return matchCountStatistics;
     }
 
     private void initStatistics(LinkedHashMap<LottoReward, Integer> statistics) {

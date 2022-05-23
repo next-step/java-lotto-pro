@@ -43,11 +43,11 @@ public class LottoController {
         setWinnerLotto(); /*정상 값을 입력할때까지 반복입력*/
         setBonusNumber(); /*정상 값을 입력할때까지 반복입력*/
 
-        Map<LottoReward, Integer> checkWinResult = lottoMachine.checkWin(
+        Map<LottoReward, Integer> matchCountStatistics = lottoMachine.checkWin(
             lottoTickets.getLottoTickets());
-        Map<String, String> matchLottoResult = lottoMachine.checkMatchLottoResult(checkWinResult,
+        Map<String, String> matchLottoResult = lottoMachine.checkMatchLottoResult(matchCountStatistics,
             ticketCount);
-        outputView.printOutput(checkWinResult, matchLottoResult);
+        outputView.printOutput(matchCountStatistics, matchLottoResult);
     }
 
     private int getTicketCountByMoney() {
