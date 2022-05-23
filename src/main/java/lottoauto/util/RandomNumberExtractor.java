@@ -9,7 +9,6 @@ import java.util.stream.IntStream;
 public class RandomNumberExtractor {
     private static final int MIN_SIZE = 0;
     private static final int MAX_SIZE = 6;
-    private static final int BONUS_INDEX = 7;
     private List<Integer> allNumbers;
     public List<Integer> getRandomNumbers() {
         allNumbers = IntStream.range(1, 45).boxed().collect(Collectors.toList());
@@ -19,7 +18,4 @@ public class RandomNumberExtractor {
         return randomNumbers;
     }
 
-    public Integer getBonusNumbers() {
-        return allNumbers.get(BONUS_INDEX);
-    }
 }

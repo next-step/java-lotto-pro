@@ -16,14 +16,13 @@ public class InputViewer {
 
     private LottoTicket lottoTicket = new LottoTicket();
     private Map<Integer, Integer> winnerMap = new HashMap<>();
-    private Price price;
+
 
     public Price getInputPrice() {
         System.out.println("구입금액을 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
         Price price = new Price();
         price.makeNewTryTimes(sc.nextLine());
-        this.price = price;
         return price;
     }
 
@@ -42,17 +41,17 @@ public class InputViewer {
         Lotto winNumbers = new Lotto(inputNumberValidator.getNumbers(), bonusBall);
         makeDefaultWinnerMap(winnerMap);
 
-        WinnerChecker winnerChecker = new WinnerChecker(winNumbers);
-        winnerChecker.makeWinnerMap(lottoTicket, winnerMap);
+        WinnerChecker winnerChecker = new WinnerChecker(lottoTicket, winNumbers);
+        winnerChecker.makeWinnerMap(winnerMap);
 
         return winnerMap;
     }
 
     private void makeDefaultWinnerMap(Map<Integer, Integer> winnerMap) {
-        winnerMap.put(Rank.FIRST.getLottoRank(), 0);
-        winnerMap.put(Rank.SECOND.getLottoRank(), 0);
-        winnerMap.put(Rank.THIRD.getLottoRank(), 0);
-        winnerMap.put(Rank.FOURTH.getLottoRank(), 0);
-        winnerMap.put(Rank.FIFTH.getLottoRank(), 0);
+        Rank rank[] = Rank.values();
+
+        for (Rank value : rank) {
+            winnerMap.put(value.getLottoRank(), 0);
+        }
     }
 }

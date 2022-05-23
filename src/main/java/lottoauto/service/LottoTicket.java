@@ -9,8 +9,14 @@ import java.util.List;
 
 public class LottoTicket {
     List<Lotto> listLotto;
+    Lotto winnerLotto;
     public LottoTicket() {
         this.listLotto = new ArrayList<>();
+    }
+
+    public LottoTicket(Lotto winnerLotto) {
+        this.listLotto = new ArrayList<>();
+        this.winnerLotto = winnerLotto;
     }
 
     public void add(Lotto lotto) {
@@ -25,8 +31,7 @@ public class LottoTicket {
 
     public void printAll() {
         for (Lotto lotto : listLotto) {
-            System.out.print(lotto.toString());
-            System.out.println("||"+lotto.getBonusNumber());
+            System.out.println(lotto.toString());
         }
     }
 
@@ -37,5 +42,17 @@ public class LottoTicket {
 
     public int size() {
         return listLotto.size();
+    }
+
+    public int compareTickets(Lotto compareLotto) {
+        return winnerLotto.compare(compareLotto.toList());
+    }
+
+    public boolean compareBonusTickets(Lotto compareLotto) {
+        return winnerLotto.compareBonus(compareLotto.toList());
+    }
+
+    public void getWinnerLotto(Lotto winnerLotto) {
+        this.winnerLotto = winnerLotto;
     }
 }

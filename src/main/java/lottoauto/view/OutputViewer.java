@@ -1,12 +1,9 @@
 package lottoauto.view;
 
-import lottoauto.util.YieldCalculator;
 import lottoauto.util.Rank;
 import lottoauto.wrapper.Price;
 
 import java.util.Map;
-
-import static lottoauto.wrapper.LottoString.*;
 
 public class OutputViewer {
 
@@ -15,15 +12,15 @@ public class OutputViewer {
         System.out.println();
         System.out.println("당첨통계");
         System.out.println("--------");
-        System.out.println(FIRST_STR.getPrintValue() + " " + winNumbers.get(Rank.FIRST.getLottoRank()));
-        System.out.println(SECOND_STR.getPrintValue() + " " + winNumbers.get(Rank.SECOND.getLottoRank()));
-        System.out.println(THIRD_STR.getPrintValue() + " " + winNumbers.get(Rank.THIRD.getLottoRank()));
-        System.out.println(FOURTH_STR.getPrintValue() + " " + winNumbers.get(Rank.FOURTH.getLottoRank()));
-        System.out.println(FIFTH_STR.getPrintValue() + " " + winNumbers.get(Rank.FIFTH.getLottoRank()));
-        System.out.println("총 수익률은 " + YieldCalculator.getYield(price.getPrice(),
-                winNumbers.get(Rank.FIRST.getLottoRank()), winNumbers.get(Rank.SECOND.getLottoRank()),
-                winNumbers.get(Rank.THIRD.getLottoRank()), winNumbers.get(Rank.FOURTH.getLottoRank()),
-                winNumbers.get(Rank.FIRST.getLottoRank())) + "% 입니다.");
+        Rank rank[] = Rank.values();
+        for (Rank r : rank) {
+            System.out.println(r.getLottoString() + " " + winNumbers.get(r.getLottoRank()));
+        }
+
+        Double yield = Rank.getYield(winNumbers, price);
+
+        System.out.println("총 수익률은 " + yield + "% 입니다.");
+
     }
 
     public static void printTryTimes(int tryTimes) {
