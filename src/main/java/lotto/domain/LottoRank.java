@@ -25,14 +25,7 @@ public enum LottoRank {
 
     public static LottoRank valueOf(int match, boolean hasBonus) {
         List<LottoRank> ranks = new ArrayList<>(Arrays.asList(LottoRank.values()));
-        // TODO: stream을 써서 depth를 줄이자
-        for (LottoRank rank : ranks) {
-            if (rank.isMatchRank(match, hasBonus)) {
-                return rank;
-            }
-        }
-
-        return LottoRank.NONE;
+        return ranks.stream().filter(rank -> rank.isMatchRank(match, hasBonus)).findFirst().orElse(LottoRank.NONE);
     }
 
     public static List<LottoRank> filteredHasPrize(List<LottoRank> lottoRanks) {
