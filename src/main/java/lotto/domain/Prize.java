@@ -34,7 +34,7 @@ public enum Prize {
         return new Winners(lottoes.stream()
                 .map(lotto -> {
                     long count = lotto.matchCount(winningNumber.getWinner());
-                    boolean bonus = winningNumber.bonus(lotto);
+                    boolean bonus = lotto.contains(winningNumber.getBonusNumber());
                     return createPrize(count, bonus);
                 }).collect(Collectors.toCollection(ArrayList::new)));
     }
