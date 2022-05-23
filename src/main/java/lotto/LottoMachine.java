@@ -8,6 +8,7 @@ import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
 import lotto.model.Lottos;
 import lotto.model.UserMoney;
+import util.NumberUtil;
 
 public class LottoMachine {
 	private static final int LOTTO_PRICE = 1000;
@@ -29,6 +30,11 @@ public class LottoMachine {
 		return new Lottos(lottos);
 	}
 
+	public void isCanBuyLotto(UserMoney userMoney, String pieceCount) {
+		validationNumber(pieceCount);
+		validationCanNotBuyLotto(userMoney, Integer.parseInt(pieceCount));
+	}
+	
 	private void validationCanNotBuyLotto(UserMoney userMoney, int pieceCount) {
 		if (!isCanBuyLotto(userMoney, pieceCount)) {
 			throw new IllegalArgumentException("로또를 구매할 수 있는 수량을 초과했습니다. 구입가능 로또의 갯수 : " + canBuyLottoCount(userMoney));
@@ -37,6 +43,12 @@ public class LottoMachine {
 
 	public boolean isCanBuyLotto(UserMoney userMoney, int pieceCount) {
 		return canBuyLottoCount(userMoney) >= pieceCount;
+	}
+
+	private void validationNumber(String pieceCount) {
+		if (!NumberUtil.isNumber(pieceCount)) {
+			throw new IllegalArgumentException(String.format("nubmer: %d 숫자가 아닙니다.", pieceCount));
+		}
 	}
 
 	public int lottoPrice() {

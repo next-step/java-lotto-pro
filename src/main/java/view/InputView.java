@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.LottoMachine;
-import lotto.User;
 import lotto.model.LottoNumbers;
 import lotto.model.Lottos;
 import lotto.model.UserMoney;
@@ -19,10 +18,10 @@ public class InputView {
 		return new UserMoney(readMessage());
 	}
 
-	public static String inputManualLottoCount(User user, LottoMachine lottoMachine) {
+	public static String inputManualLottoCount(UserMoney userMoney, LottoMachine lottoMachine) {
 		System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
 		String buyCount = readMessage();
-		user.isCanBuyLotto(lottoMachine, buyCount);
+		lottoMachine.isCanBuyLotto(userMoney, buyCount);
 		return buyCount;
 	}
 
