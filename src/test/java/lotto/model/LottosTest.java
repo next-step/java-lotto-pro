@@ -30,24 +30,26 @@ class LottosTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"LOSE:1", "SIXTH:1", "FIFTH:1", "FOURTH:1", "THIRD:1", "SECOND:2", "FIRST:1"}, delimiter = ':')
+    @CsvSource(value = {"LOSE:1", "SIXTH:1", "FIFTH:1", "FOURTH:1", "THIRD:2", "SECOND:1", "FIRST:1"}, delimiter = ':')
     @DisplayName("당첨번호와 비교하여 등수별로 카운트 한다.")
     void rankCount_등수별_카운트(Rank rank, int expected) {
         List<LottoNumbers> lottoNumbersList = Arrays.asList(
                 createLottoNumbers(new TestLottoNumbersGenerator("2, 4, 20, 27, 43, 45")),  // LOSE
-                createLottoNumbers(new TestLottoNumbersGenerator("1, 3, 6, 27, 40, 45")),   // SIXTH
-                createLottoNumbers(new TestLottoNumbersGenerator("1, 2, 5, 27, 40, 45")),   // FIFTH
-                createLottoNumbers(new TestLottoNumbersGenerator("1, 5, 25, 30, 40, 41")),  // FOURTH
-                createLottoNumbers(new TestLottoNumbersGenerator("3, 5, 18, 37, 42, 45")),  // THIRD
-                createLottoNumbers(new TestLottoNumbersGenerator("1, 5, 18, 25, 37, 43")),  // SECOND
+                createLottoNumbers(new TestLottoNumbersGenerator("1, 4, 20, 27, 43, 45")),  // SEVENTH
+                createLottoNumbers(new TestLottoNumbersGenerator("1, 5, 6, 27, 40, 45")),   // SIXTH
+                createLottoNumbers(new TestLottoNumbersGenerator("1, 5, 18, 27, 40, 45")),  // FIFTH
+                createLottoNumbers(new TestLottoNumbersGenerator("1, 5, 18, 25, 40, 41")),  // FOURTH
+                createLottoNumbers(new TestLottoNumbersGenerator("1, 5, 18, 25, 37, 45")),  // THIRD
+                createLottoNumbers(new TestLottoNumbersGenerator("1, 5, 18, 25, 37, 43")),  // THIRD
                 createLottoNumbers(new TestLottoNumbersGenerator("1, 5, 18, 25, 37, 44")),  // SECOND
                 createLottoNumbers(new TestLottoNumbersGenerator("1, 5, 18, 25, 37, 42"))   // FIRST
         );
         Lottos lottos = Lottos.from(lottoNumbersList);
 
         LottoNumbers winningNumbers = createLottoNumbers(new TestLottoNumbersGenerator("1, 5, 18, 25, 37, 42"));
+        LottoNumber bonusNumber = LottoNumber.of(44);
 
-        RankCount rankCount = lottos.rankCount(winningNumbers);
+        RankCount rankCount = lottos.rankCount(winningNumbers, bonusNumber);
         assertThat(rankCount)
                 .isExactlyInstanceOf(RankCount.class);
         assertThat(rankCount.getCount(rank))
