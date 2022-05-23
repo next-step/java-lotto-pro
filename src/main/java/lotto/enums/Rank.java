@@ -2,9 +2,7 @@ package lotto.enums;
 
 import lotto.model.Prize;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,22 +10,24 @@ import java.util.stream.Stream;
 import static lotto.constants.LottoConstant.MIN_WINNING_RANK;
 
 public enum Rank {
-    LOSE(0, Prize.of(0)),
-    SEVENTH(1, Prize.of(0)),
-    SIXTH(2, Prize.of(0)),
-    FIFTH(3, Prize.of(5_000)),
-    FOURTH(4, Prize.of(50_000)),
-    THIRD(5, Prize.of(1_500_000)),
-    SECOND(5, Prize.of(30_000_000)),
-    FIRST(6, Prize.of(2_000_000_000));
+    LOSE(0, false, Prize.of(0)),
+    SEVENTH(1, false, Prize.of(0)),
+    SIXTH(2, false, Prize.of(0)),
+    FIFTH(3, false, Prize.of(5_000)),
+    FOURTH(4, false, Prize.of(50_000)),
+    THIRD(5, false, Prize.of(1_500_000)),
+    SECOND(5, true, Prize.of(30_000_000)),
+    FIRST(6, false, Prize.of(2_000_000_000));
 
     private final int matchingCount;
     private final Prize prize;
+    private final boolean hasBonus;
     private final static Map<Integer, Rank> ranks = Collections.unmodifiableMap(Stream.of(values())
-            .collect(Collectors.toMap(Rank::getMatchingCount, Function.identity())));
+            .collect(Collectors.toMap(Rank::rankKey, Function.identity())));
 
-    Rank(int matchingCount, Prize prize) {
+    Rank(int matchingCount, boolean hasBonus, Prize prize) {
         this.matchingCount = matchingCount;
+        this.hasBonus = hasBonus;
         this.prize = prize;
     }
 
@@ -37,11 +37,9 @@ public enum Rank {
     }
 
     public static Rank getRank(int numberOfMatch, boolean hasBonusNumber) {
-        Rank rank = Optional.ofNullable(ranks.get(numberOfMatch))
+        int rankKey = Objects.hash(numberOfMatch, hasBonusNumber);
+        return Optional.ofNullable(ranks.get(rankKey))
                 .orElse(LOSE);
-        if (rank == THIRD && hasBonusNumber)
-            return SECOND;
-        return rank;
     }
 
     public Prize getPrize() {
@@ -54,6 +52,10 @@ public enum Rank {
 
     public boolean isOverMinWinningRank() {
         return matchingCount >= MIN_WINNING_RANK;
+    }
+
+    private int rankKey() {
+        return Objects.hash(this.matchingCount, this.hasBonus);
     }
 
     @Override
