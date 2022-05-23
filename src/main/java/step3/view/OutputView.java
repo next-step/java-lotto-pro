@@ -21,33 +21,21 @@ public class OutputView {
         initOverviewMap();
     }
 
-    public void printOutput(Map<LottoReward, Integer> statistics, int usingMoney) {
+    public void printOutput(Map<LottoReward, Integer> statistics,
+        Map<String, String> lottoIncomeResult) {
         System.out.println(OutputView.OVERVIEW_INIT_MESSAGE);
-        long reward = 0L;
         for (LottoReward lottoReward : LOTTO_OVERVIEW_FORMAT.keySet()) {
             int matchCount = statistics.get(lottoReward);
             printOverViewPerEntry(lottoReward, matchCount);
-            reward += calcRewardPerEntry(lottoReward, matchCount);
         }
-        printRewardRate(reward, usingMoney);
+        printRewardRate(lottoIncomeResult.get("profitRate"), lottoIncomeResult.get("isBenefit"));
     }
 
-    private void printRewardRate(long reward, int usingMoney) {
-        System.out.println(String.format(OutputView.REWARD_RATE_FORMAT, getProfitRate(reward, usingMoney),
-            isBenefit(reward, usingMoney)));
+    private void printRewardRate(String profitRate, String isBenefit) {
+        System.out.println(
+            String.format(OutputView.REWARD_RATE_FORMAT, Float.valueOf(profitRate), isBenefit));
     }
 
-    private String isBenefit(long reward, int usingMoney) {
-
-        if (usingMoney > reward) {
-            return OutputView.IS_LOSS;
-        }
-        return OutputView.IS_BENEFIT;
-    }
-
-    private double getProfitRate(long reward, int usingMoney) {
-        return reward * 1.0 / usingMoney;
-    }
 
     private void printOverViewPerEntry(LottoReward lottoReward, int matchCount) {
         System.out.println(
@@ -55,13 +43,11 @@ public class OutputView {
                 lottoReward.getReward(), matchCount));
     }
 
-    private long calcRewardPerEntry(LottoReward lottoReward, int matchCount) {
-        return lottoReward.getReward() * matchCount;
-    }
 
     public void printLottoInfo(List<List<LottoElement>> lottoTickets, int manualTicketCount,
         int randomTicketCount) {
-        System.out.println(String.format(OutputView.LOTTOS_INFO_FORMAT, manualTicketCount, randomTicketCount));
+        System.out.println(
+            String.format(OutputView.LOTTOS_INFO_FORMAT, manualTicketCount, randomTicketCount));
         for (List<LottoElement> lottoTicketNumbers : lottoTickets) {
             System.out.println(lottoTicketNumbers.toString());
         }

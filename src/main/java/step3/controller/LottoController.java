@@ -1,8 +1,10 @@
 package step3.controller;
 
 import java.util.List;
+import java.util.Map;
 import step3.domain.LottoTicket;
 import step3.domain.Money;
+import step3.enums.LottoReward;
 import step3.model.LottoMachine;
 import step3.model.LottoTickets;
 import step3.utls.NumberUtil;
@@ -41,8 +43,11 @@ public class LottoController {
         setWinnerLotto(); /*정상 값을 입력할때까지 반복입력*/
         setBonusNumber(); /*정상 값을 입력할때까지 반복입력*/
 
-        outputView.printOutput(lottoMachine.checkWin(lottoTickets.getLottoTickets()),
-            lottoMachine.getUsingMoneyByTicketCount(ticketCount));
+        Map<LottoReward, Integer> checkWinResult = lottoMachine.checkWin(
+            lottoTickets.getLottoTickets());
+        Map<String, String> matchLottoResult = lottoMachine.checkMatchLottoResult(checkWinResult,
+            ticketCount);
+        outputView.printOutput(checkWinResult, matchLottoResult);
     }
 
     private int getTicketCountByMoney() {
