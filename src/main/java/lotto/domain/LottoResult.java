@@ -18,7 +18,7 @@ public class LottoResult {
     public int getLottoPrize() {
         int prize = 0;
         for (LottoRank lottoRank : LottoRank.values()) {
-            prize += lottoResult.getOrDefault(lottoRank.getMatchCount(), 0) * lottoRank.getPrize();
+            prize += lottoResult.getOrDefault(lottoRank, 0) * lottoRank.getPrize();
         }
         return prize;
     }
