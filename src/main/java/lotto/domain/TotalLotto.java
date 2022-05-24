@@ -6,11 +6,15 @@ public class TotalLotto {
 
     private Lottos lottoList;
 
+    private TotalLotto(Money money, Lottos lottoList) {
+        this.money = money;
+        this.lottoList = lottoList;
+    }
+
     public static TotalLotto from(int amount) {
-        TotalLotto totalLotto = new TotalLotto();
-        totalLotto.money = Money.from(amount);
-        totalLotto.lottoList = LottoShop.generateLottos(totalLotto.money.getCount());
-        return totalLotto;
+        Money money = Money.from(amount);
+        Lottos lottoList = LottoShop.generateLottos(money.getCount());
+        return new TotalLotto(money, lottoList);
     }
 
     public int getCount() {
