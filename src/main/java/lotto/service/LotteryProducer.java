@@ -18,10 +18,7 @@ public class LotteryProducer {
         }
     }
 
-    public LotteryProducer() {
-        for (int idx = Lottery.MINIMUM_NUMBER; idx < Lottery.MAXIMUM_NUMBER; idx ++) {
-            numbers.add(new Number(idx));
-        }
+    private LotteryProducer() {
     }
 
     public static List<Number> issue() {
