@@ -2,10 +2,7 @@ package lotto.model;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.NoSuchElementException;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class RankTest {
     @Test
@@ -40,7 +37,8 @@ class RankTest {
 
     @Test
     void 예외() {
-        assertThatThrownBy(() -> Rank.valueOf(2, false)
-                                     .prize()).isInstanceOf(NoSuchElementException.class);
+        assertThat(Rank.valueOf(6, true)).isEqualTo(Rank.MISS);
+        assertThat(Rank.valueOf(2, true)).isEqualTo(Rank.MISS);
+        assertThat(Rank.valueOf(1, false)).isEqualTo(Rank.MISS);
     }
 }

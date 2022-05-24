@@ -58,10 +58,7 @@ public enum Rank {
         Optional<Rank> find = Stream.of(values())
                                     .filter(rank -> rank.condition == count && rank.bonus == bonus)
                                     .findFirst();
-        if (!find.isPresent()) {
-            throw new NoSuchElementException();
-        }
-        return find.get();
+        return find.orElse(MISS);
     }
 
     public static Rank[] reverseValues() {
