@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.LottoConstants;
 import lotto.ui.ResultView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -11,15 +10,13 @@ import java.util.stream.IntStream;
 
 public class LottoGame {
 
-    private int autoTicketCount;
+    private LottoTickets autoTickets = new LottoTickets();
 
-    private int selfTicketCount;
+    private LottoTickets selfTickets = new LottoTickets();
 
     private double earningRate;
 
-    private LottoResult lottoResult;
-
-    private List<LottoTicket> tickets;
+    private final LottoResult lottoResult;
 
     LottoGame() {
         this.lottoResult = new LottoResult();
@@ -31,16 +28,12 @@ public class LottoGame {
         isValidPurchasePrice(purchasePrice);
 
         int ticketCount = purchasePrice / LottoConstants.TICKET_UNIT_PRICE;
-        this.tickets = generateAutoTickets(numberGenerator, ticketCount);
-
-        saveTicketCountByIssueType(ticketCount, 0);
+        this.autoTickets = new LottoTickets(generateAutoTickets(numberGenerator, ticketCount));
     }
 
     public LottoGame(List<LottoTicket> tickets) {
         this();
-        this.tickets = tickets;
-
-        saveTicketCountByIssueType(tickets.size(), 0);
+        this.autoTickets = new LottoTickets(tickets);
     }
 
     public LottoGame(int purchasePrice, List<LottoTicket> selfTickets, NumberGenerator numberGenerator) {
@@ -52,10 +45,8 @@ public class LottoGame {
             throw new IllegalArgumentException("Price is not enough to by self ticket");
         }
 
-        this.tickets = new ArrayList<>(selfTickets);
-        this.tickets.addAll(generateAutoTickets(numberGenerator, remainingAutoTicketCount));
-
-        saveTicketCountByIssueType(remainingAutoTicketCount, selfTickets.size());
+        this.selfTickets = new LottoTickets(selfTickets);
+        this.autoTickets = new LottoTickets(generateAutoTickets(numberGenerator, remainingAutoTicketCount));
     }
 
     private List<LottoTicket> generateAutoTickets(NumberGenerator numberGenerator, int autoTicketCount) {
@@ -69,21 +60,23 @@ public class LottoGame {
     }
 
     public void printTickets() {
-        for (LottoTicket ticket : this.tickets) {
+        LottoTickets tickets = generateAllTickets();
+        for (LottoTicket ticket : tickets.getTicketList()) {
             ResultView.printTicket(ticket.toString());
         }
     }
 
     public int getAutoTicketCount() {
-        return this.autoTicketCount;
+        return this.autoTickets.count();
     }
 
     public int getSelfTicketCount() {
-        return this.selfTicketCount;
+        return this.selfTickets.count();
     }
 
     public void generateGameResult(WinnerTicket winnerTicket, int purchasePrice) {
-        for (LottoTicket ticket : this.tickets) {
+        LottoTickets tickets = generateAllTickets();
+        for (LottoTicket ticket : tickets.getTicketList()) {
             calculateGameScore(ticket, winnerTicket);
         }
 
@@ -138,8 +131,7 @@ public class LottoGame {
         return equalNumberCount;
     }
 
-    private void saveTicketCountByIssueType(int autoTicketCount, int selfTicketCount) {
-        this.selfTicketCount = selfTicketCount;
-        this.autoTicketCount = autoTicketCount;
+    private LottoTickets generateAllTickets() {
+        return new LottoTickets(this.autoTickets, this.selfTickets);
     }
 }
