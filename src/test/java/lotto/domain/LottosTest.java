@@ -50,7 +50,17 @@ class LottosTest {
                 () -> assertThat(lottos.matchedLottos(winningNumbers, MatchResult.FIFTH).size()).isEqualTo(1)
         );
     }
-    
+
+    @Test
+    void 기존의_로또_리스트에_로또_리스트_추가() {
+
+        List<Lotto> addedLottos = new ArrayList<>();
+        addedLottos.add(createLotto(new int[]{1, 2, 3, 4, 5, 6}));
+        addedLottos.add(createLotto(new int[]{1, 2, 3, 4, 5, 7}));
+
+        assertThat(lottos.add(Lottos.from(addedLottos)).size()).isEqualTo(addedLottos.size() + lottos.size());
+    }
+
     private Lotto createLotto(int[] inputs) {
         LottoNumber[] lottoNumbers = new LottoNumber[inputs.length];
 
