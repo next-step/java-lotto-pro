@@ -13,15 +13,7 @@ public class LottoManager {
     public LottoManager() {
         winningStatistics = new WinningStatistics();
     }
-
-    public Lottos makeLottos(int autoLottoCount) {
-        List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < autoLottoCount; i++) {
-            lottoList.add(new Lotto(new AutoPickNumberStrategy()));
-        }
-        return new Lottos(lottoList);
-    }
-
+    
     public Lottos makeLottos(int autoLottoCount, int[][] manualLottos) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < autoLottoCount; i++) {

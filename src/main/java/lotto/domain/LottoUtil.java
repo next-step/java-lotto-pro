@@ -47,4 +47,11 @@ public class LottoUtil {
             throw new IllegalArgumentException("6자리 숫자를 중복 없이 입력하세요.");
         }
     }
+
+    public static void checkManualLottoBuyCount(int numberOfLottoCanBuy,
+        int purchaseManualLottoCount) {
+        if (numberOfLottoCanBuy < purchaseManualLottoCount) {
+            throw new IllegalArgumentException("구매할 수 있는 금액이 부족합니다");
+        }
+    }
 }

@@ -13,7 +13,8 @@ public class LottoController {
 
     public static void startLotto() {
         int purchaseAmount = InputView.enterPurchaseAmount();
-        int manualLottoCount = InputView.enterManualLottoCount();
+        int numberOfLottoCanBuy = LottoPrice.numberOfLottoCanBuy(purchaseAmount);
+        int manualLottoCount = InputView.enterManualLottoCount(numberOfLottoCanBuy);
         int autoLottoCount = LottoPrice.numberOfLottoCanBuy(purchaseAmount) - manualLottoCount;
         int[][] manualLottos = InputView.enterManualLottos(manualLottoCount);
 
@@ -21,7 +22,7 @@ public class LottoController {
         Lottos lottos = lottoManager.makeLottos(autoLottoCount, manualLottos);
         List<Lotto> lottoElements = lottos.getElements();
 
-        ResultView.purchaseLottoResult(autoLottoCount, lottoElements);
+        ResultView.purchaseLottoResult(manualLottoCount, autoLottoCount, lottoElements);
 
         WinningLotto winningLotto = InputView.enterWinningLotto();
         lottoManager.makeWinningLotto(winningLotto, lottos);

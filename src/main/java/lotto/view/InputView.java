@@ -53,9 +53,17 @@ public class InputView {
         return enterNumber();
     }
 
-    public static int enterManualLottoCount() {
+    public static int enterManualLottoCount(int numberOfLottoCanBuy) {
         System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
-        return enterNumber();
+        while (true) {
+            try {
+                int purchaseManualLottoCount = enterNumber();
+                LottoUtil.checkManualLottoBuyCount(numberOfLottoCanBuy, purchaseManualLottoCount);
+                return purchaseManualLottoCount;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private static int enterNumber() {
