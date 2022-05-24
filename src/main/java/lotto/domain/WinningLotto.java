@@ -23,14 +23,12 @@ public class WinningLotto {
     }
 
     public int match(Lotto target) {
-        int count = (int) target.getLottoNumbers().stream()
-                .filter(lottoNumber -> this.winningNumbers.getLottoNumbers().contains(lottoNumber))
+        return (int) target.getLottoNumbers().stream()
+                .filter(this.winningNumbers::isMatch)
                 .count();
-
-        return count;
     }
 
     public boolean isContainsBonus(Lotto target) {
-        return target.getLottoNumbers().contains(this.bonusNumber);
+        return target.isMatch(this.bonusNumber);
     }
 }

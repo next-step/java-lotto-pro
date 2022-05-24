@@ -13,14 +13,12 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    public int match(Lotto target) {
-        int count = 0;
-        for (LottoNumber lottoNumber : target.getLottoNumbers()) {
-            if (this.lottoNumbers.contains(lottoNumber)) {
-                count++;
-            }
+    public boolean isMatch(LottoNumber lottoNumber) {
+        boolean result = false;
+        if (this.lottoNumbers.contains(lottoNumber)) {
+            result = true;
         }
-        return count;
+        return result;
     }
 
     @Override
