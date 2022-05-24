@@ -1,9 +1,11 @@
 package lotto.controller;
 
 import lotto.domain.AutoLottoIssuer;
+import lotto.domain.Lotto;
 import lotto.domain.LottoRandomFactory;
 import lotto.domain.LottoStatistic;
 import lotto.domain.Lottos;
+import lotto.domain.ManualLottos;
 import lotto.domain.Money;
 import lotto.domain.RandomNumberMachine;
 import lotto.view.View;
@@ -41,13 +43,34 @@ public class LottoController {
     }
 
     private Lottos issueLottos() {
+
         view.outputOrderPrice();
-        String orderPrice = view.inputOrderPrice();
+        Money orderPrice = Money.from(view.inputOrderPrice());
 
-        Lottos lottos = autoLottoIssuer.issue(Money.from(orderPrice));
+        Lottos manualLottos = issueManualLotto();
+        Money leftMoney = orderPrice.subtract(Lotto.LOTTO_PRICE.multiply(manualLottos.size()));
+        
+        Lottos autoLottos = issueAutoLottos(leftMoney);
+        view.outputOrderLottoList(manualLottos, autoLottos);
 
-        view.outputOrderLottoList(lottos);
+        return manualLottos.add(autoLottos);
+    }
+
+    private Lottos issueAutoLottos(Money leftMoney) {
+        Lottos lottos = autoLottoIssuer.issue(leftMoney);
+
         return lottos;
+    }
+
+    private Lottos issueManualLotto() {
+        view.outputManualLottoSize();
+        int manualLottoSize = view.inputManualLottoSize();
+
+        view.outputManualLottoNumbers();
+        String[] manualLottoNumbers = view.inputManualNumbers(manualLottoSize);
+
+        ManualLottos manualLottos = ManualLottos.of(manualLottoSize, manualLottoNumbers);
+        return manualLottos.getLottos();
     }
 
 
