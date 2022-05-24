@@ -1,6 +1,5 @@
 package lotto.view;
 
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import lotto.WinningLotto;
@@ -49,12 +48,17 @@ public class InputView {
     }
 
 
-    public static int enterPurchaseAmount() throws InputMismatchException {
+    public static int enterPurchaseAmount() {
         System.out.println("구입금액을 입력해주세요");
         return enterNumber();
     }
 
-    private static int enterNumber() throws InputMismatchException {
+    public static int enterManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
+        return enterNumber();
+    }
+
+    private static int enterNumber() {
         while (true) {
             try {
                 return Integer.parseInt(SCANNER.nextLine());
