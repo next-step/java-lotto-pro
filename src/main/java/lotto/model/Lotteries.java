@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.model;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -21,7 +21,7 @@ public class Lotteries {
         return lotteries == null;
     }
 
-    public List<Lottery> list() {
+    public List<Lottery> getLotteries() {
         return Collections.unmodifiableList(lotteries);
     }
 

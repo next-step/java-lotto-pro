@@ -1,7 +1,7 @@
-package lotto;
+package lotto.service;
 
-import lotto.domain.Lotteries;
-import lotto.domain.Money;
+import lotto.model.Lotteries;
+import lotto.model.Money;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -15,7 +15,7 @@ class LotteryStoreTest {
     @MethodSource("로또_교환_쿠폰")
     void 로또_교환(Money money, int buyCount) {
         Lotteries lotteries = LotteryStore.exchangeTicketToLotteries(LotteryClerk.exchangeTicket(money));
-        assertThat(lotteries.list()).hasSize(buyCount);
+        assertThat(lotteries.getLotteries()).hasSize(buyCount);
     }
 
     static Stream<Arguments> 로또_교환_쿠폰() {

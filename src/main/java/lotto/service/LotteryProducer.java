@@ -1,7 +1,7 @@
-package lotto;
+package lotto.service;
 
-import lotto.domain.Lottery;
-import lotto.domain.Number;
+import lotto.model.Lottery;
+import lotto.model.Number;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,10 +18,7 @@ public class LotteryProducer {
         }
     }
 
-    public LotteryProducer() {
-        for (int idx = Lottery.MINIMUM_NUMBER; idx < Lottery.MAXIMUM_NUMBER; idx ++) {
-            numbers.add(new Number(idx));
-        }
+    private LotteryProducer() {
     }
 
     public static List<Number> issue() {

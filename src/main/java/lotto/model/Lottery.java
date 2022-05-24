@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.model;
 
 import java.util.*;
 
@@ -9,11 +9,11 @@ public class Lottery {
 
     private final static String LOTTERY_NUMBERS_WERE_NOT_GENERATED = "로또 번호가 생성되지 않았습니다.";
 
-    private List<Number> numbers;
+    private final List<Number> numbers;
 
     public Lottery(List<Number> numbers) {
         validate(numbers);
-        this.numbers = numbers;
+        this.numbers = new LinkedList<>(numbers);
     }
 
     private void validate(List<Number> numbers) {
@@ -34,7 +34,7 @@ public class Lottery {
         return set.size() < SIZE || set.size() > SIZE;
     }
 
-    public List<Number> list() {
+    public List<Number> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
 

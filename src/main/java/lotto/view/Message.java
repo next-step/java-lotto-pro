@@ -1,9 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Lotteries;
-import lotto.domain.Lottery;
-import lotto.domain.Number;
-import lotto.domain.Result;
+import lotto.model.*;
+import lotto.model.Number;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,13 +19,13 @@ public class Message {
     }
 
     public static void printBuyingLotteries(Lotteries lotteries) {
-        for (Lottery lottery : lotteries.list()) {
+        for (Lottery lottery : lotteries.getLotteries()) {
             printLotteryNumbers(lottery);
         }
     }
 
     private static void printLotteryNumbers(Lottery lottery) {
-        List<Number> numbers = lottery.list();
+        List<Number> numbers = lottery.getNumbers();
         int[] array = new int[numbers.size()];
         int idx = 0;
         for (Number number : numbers) {
@@ -44,6 +42,10 @@ public class Message {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
+    public static void printEnterBonusBallNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+    }
+
     public static void printWinningStatistics() {
         System.out.println("당첨 통계");
     }
@@ -56,8 +58,11 @@ public class Message {
         System.out.println(sb);
     }
 
-    public static void printLotteriesResult(Result result) {
-        System.out.printf("%d개 일치 (%d원)- %d개%n", result.matches(), result.reward(), result.count());
+    public static void printLotteriesResult(Summary summary) {
+        List<String> details = summary.winningDetails();
+        for (String detail : details) {
+            System.out.println(detail);
+        }
     }
 
     public static void printLotteriesEarningsRate(double ratio) {
