@@ -21,14 +21,14 @@ public class TotalLotto {
         return this.money.getCount();
     }
 
-    public Lottos getLottoList() {
-        return this.lottoList;
-    }
-
     public String lottoListToString() {
         StringBuilder sb = new StringBuilder();
         this.lottoList.getLottoList().stream()
                 .forEach(lotto -> sb.append(lotto.toString() + "\n"));
         return sb.toString();
+    }
+
+    public LottoScore getLottoScore(WinningLotto winningLotto) {
+        return new LottoScore(this.lottoList.matchLottoStaticToString(winningLotto));
     }
 }
