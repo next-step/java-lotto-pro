@@ -28,15 +28,16 @@ public class Application {
 
         NumberGenerator numberGenerator = new LottoNumberGenerator();
         LottoGame game = new LottoGame(purchasePrice, selfTickets, numberGenerator);
-        ResultView.printTicketCount(game.getTicketCount());
-        game.printTickets();
+        ResultView.printTicketCount(game.getAutoTicketCount(), game.getSelfTicketCount());
 
+        game.printTickets();
         ResultView.printEmptyLine();
+
         String winnerNumbers = InputView.getWinnerNumbers();
         int bonusBallNumber = InputView.getBonusBallNumber();
         game.generateGameResult(new WinnerTicket(winnerNumbers, new LottoNumber(bonusBallNumber)));
-
         ResultView.printEmptyLine();
+
         game.printGameResult();
     }
 }

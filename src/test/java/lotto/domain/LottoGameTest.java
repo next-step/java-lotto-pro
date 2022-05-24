@@ -26,7 +26,7 @@ class LottoGameTest {
     @Test
     void 구매장수_계산() {
         LottoGame game = new LottoGame(9999, new LottoNumberGenerator());
-        assertEquals(9, game.getTicketCount());
+        assertEquals(9, game.getAutoTicketCount());
     }
 
     @Test
@@ -50,7 +50,7 @@ class LottoGameTest {
 
         NumberGenerator numberGenerator = new TestNumberGenerator();
         LottoGame game = new LottoGame(purchasePrice, selfTickets, numberGenerator);
-        assertThat(game.getTicketCount()).isEqualTo(5);
+        assertThat(game.getSelfTicketCount() + game.getAutoTicketCount()).isEqualTo(5);
     }
 
     @Test

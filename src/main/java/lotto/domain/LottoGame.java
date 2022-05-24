@@ -14,6 +14,10 @@ public class LottoGame {
 
     private int purchasePrice;
 
+    private int autoTicketCount;
+
+    private int selfTicketCount;
+
     private double earningRate;
 
     private LottoResult lottoResult;
@@ -30,26 +34,32 @@ public class LottoGame {
         isValidPurchasePrice(purchasePrice);
         this.purchasePrice = purchasePrice;
 
-        int ticketCount = this.getTicketCount();
+        int ticketCount = purchasePrice / TICKET_UNIT_PRICE;
         this.tickets = generateAutoTickets(numberGenerator, ticketCount);
+
+        saveTicketCountByIssueType(ticketCount, 0);
     }
 
     public LottoGame(List<LottoTicket> tickets) {
         this();
         this.purchasePrice = tickets.size() * TICKET_UNIT_PRICE;
         this.tickets = tickets;
+
+        saveTicketCountByIssueType(tickets.size(), 0);
     }
 
     public LottoGame(int purchasePrice, List<LottoTicket> selfTickets, NumberGenerator numberGenerator) {
         this();
-        int autoTicketCount = (purchasePrice - (TICKET_UNIT_PRICE * selfTickets.size())) / TICKET_UNIT_PRICE;
-        if (autoTicketCount < 0) {
+        int autoCount = (purchasePrice - (TICKET_UNIT_PRICE * selfTickets.size())) / TICKET_UNIT_PRICE;
+        if (autoCount < 0) {
             throw new IllegalArgumentException("Price is not enough to by self ticket");
         }
 
         this.purchasePrice = purchasePrice;
         this.tickets = new ArrayList<>(selfTickets);
-        this.tickets.addAll(generateAutoTickets(numberGenerator, autoTicketCount));
+        this.tickets.addAll(generateAutoTickets(numberGenerator, autoCount));
+
+        saveTicketCountByIssueType(autoCount, selfTickets.size());
     }
 
     private List<LottoTicket> generateAutoTickets(NumberGenerator numberGenerator, int autoTicketCount) {
@@ -68,16 +78,20 @@ public class LottoGame {
         }
     }
 
+    public int getAutoTicketCount() {
+        return this.autoTicketCount;
+    }
+
+    public int getSelfTicketCount() {
+        return this.selfTicketCount;
+    }
+
     public void generateGameResult(WinnerTicket winnerTicket) {
         for (LottoTicket ticket : this.tickets) {
             calculateGameScore(ticket, winnerTicket);
         }
 
         calculateEarningRate();
-    }
-
-    public int getTicketCount() {
-        return this.purchasePrice / TICKET_UNIT_PRICE;
     }
 
     public Map<Rank, Integer> getScore() {
@@ -124,5 +138,10 @@ public class LottoGame {
         }
 
         return equalNumberCount;
+    }
+
+    private void saveTicketCountByIssueType(int autoTicketCount, int selfTicketCount) {
+        this.selfTicketCount = selfTicketCount;
+        this.autoTicketCount = autoTicketCount;
     }
 }
