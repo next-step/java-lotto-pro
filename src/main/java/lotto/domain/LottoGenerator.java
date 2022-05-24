@@ -23,6 +23,18 @@ public class LottoGenerator {
 
     public Lottos generateLottos(int size) {
         List<Lotto> lottoList = new ArrayList<>();
+        return generateLottosWithList(lottoList, size);
+    }
+
+    public Lottos generateLottos(List<Lotto> manualLottoList, int autoSize) {
+        List<Lotto> lottoList = new ArrayList<>();
+        if (manualLottoList != null) {
+            lottoList.addAll(manualLottoList);
+        }
+        return generateLottosWithList(lottoList, autoSize);
+    }
+
+    private Lottos generateLottosWithList(List<Lotto> lottoList, int size) {
         for (int i = 0; i < size; i++) {
             lottoList.add(generateLotto());
         }
