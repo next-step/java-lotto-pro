@@ -12,4 +12,8 @@ public class Lottos {
 	public List<LottoNumbers> getLottos() {
 		return lottos;
 	}
+
+	public int size() {
+		return lottos.size();
+	}
 }
