@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.error.LottoNumberErrorCode;
 import lotto.domain.error.LottoTicketErrorCode;
 import lotto.infrastructure.generator.LottoNumberGenerator;
 import lotto.infrastructure.generator.NumberGenerator;
@@ -13,6 +14,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -36,18 +39,24 @@ class LottoTicketTest {
     @Test
     @DisplayName("로또 번호가 정렬된 순서인지 테스트")
     public void getLottoNumbers_정렬() {
-        List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
+        List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
+
+        int currentLottoNumber;
+        int nextLottoNumber;
 
         for (int i = 0; i < lottoNumbers.size() - 1; i++) {
-            assertThat(lottoNumbers.get(i) < lottoNumbers.get(i + 1)).isTrue();
+            currentLottoNumber = lottoNumbers.get(i).getLottoNumber();
+            nextLottoNumber = lottoNumbers.get(i + 1).getLottoNumber();
+
+            assertThat(currentLottoNumber < nextLottoNumber).isTrue();
         }
     }
 
     @Test
     @DisplayName("로로 번호에 중복된 숫자가 있는지 테스트")
     public void getLottoNumbers_중복검사() {
-        List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
-        Set<Integer> nonDuplicatedInteger = new HashSet<>(lottoNumbers);
+        List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
+        Set<LottoNumber> nonDuplicatedInteger = new HashSet<>(lottoNumbers);
 
         assertThat(lottoNumbers.size()).isEqualTo(nonDuplicatedInteger.size());
     }
@@ -55,9 +64,9 @@ class LottoTicketTest {
     @Test
     @DisplayName("해당 로또번호를 포함하고 있다면 true 반환")
     public void contains_true() {
-        List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
+        List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
 
-        for (Integer lottoNumber : lottoNumbers) {
+        for (LottoNumber lottoNumber : lottoNumbers) {
             assertThat(lottoTicket.contains(lottoNumber)).isTrue();
         }
     }
@@ -65,15 +74,16 @@ class LottoTicketTest {
     @Test
     @DisplayName("해당 로또번호를 포함하고 있지 않다면 false 반환")
     public void contains_false() {
-        List<Integer> lottoTotalNumbers = lottoNumberGenerator.generate();
-        List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
+        List<Integer> fullLottoNumbers = getFullLottoNumbers();
+        List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
 
-        for (Integer lottoNumber : lottoNumbers) {
-            lottoTotalNumbers.remove(lottoNumber);
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            int index = fullLottoNumbers.indexOf(lottoNumber.getLottoNumber());
+            fullLottoNumbers.remove(index);
         }
 
-        for (Integer integer : lottoTotalNumbers) {
-            assertThat(lottoTicket.contains(integer)).isFalse();
+        for (Integer integer : fullLottoNumbers) {
+            assertThat(lottoTicket.contains(new LottoNumber(integer))).isFalse();
         }
     }
 
@@ -114,9 +124,15 @@ class LottoTicketTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(
                         String.format(
-                                LottoTicketErrorCode.INVALID_LOTTO_NUMBER.getMessage(),
-                                LottoTicket.LOTTO_MIN_NUMBER,
-                                LottoTicket.LOTTO_MAX_NUMBER)
+                                LottoNumberErrorCode.INVALID_LOTTO_NUMBER.getMessage(),
+                                LottoNumber.MIN,
+                                LottoNumber.MAX)
                 );
+    }
+
+    private List<Integer> getFullLottoNumbers() {
+        return IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX)
+                .boxed()
+                .collect(Collectors.toList());
     }
 }

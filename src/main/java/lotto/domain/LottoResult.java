@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.error.LottoWinningResultErrorCode;
+import lotto.domain.error.LottoResultErrorCode;
 
 import java.util.*;
 
@@ -13,7 +13,7 @@ public class LottoResult {
         init();
     }
 
-    public void init() {
+    private void init() {
         Arrays.stream(LottoRank.values())
                 .forEach(rank -> rankCounter.put(rank, 0));
     }
@@ -21,14 +21,14 @@ public class LottoResult {
     public void countLottoRank(final WinningLottoTicket winningLottoTicket, final LottoTicket purchasedLottoTicket) {
         validateNull(winningLottoTicket, purchasedLottoTicket);
 
-        int countOfMatch = winningLottoTicket.countMatchNumber(purchasedLottoTicket);
+        LottoRank lottoRank = winningLottoTicket.match(purchasedLottoTicket);
 
-        increaseCount(LottoRank.valueOf(countOfMatch));
+        increaseCount(lottoRank);
     }
 
     private void validateNull(WinningLottoTicket winningLottoTicket, LottoTicket purchasedLottoTicket) {
         if (Objects.isNull(winningLottoTicket) || Objects.isNull(purchasedLottoTicket)) {
-            throw new IllegalArgumentException(LottoWinningResultErrorCode.NOW_ALLOW_NULL.getMessage());
+            throw new IllegalArgumentException(LottoResultErrorCode.NOT_ALLOW_NULL.getMessage());
         }
     }
 
@@ -60,5 +60,4 @@ public class LottoResult {
         }
         return totalWinningMoney;
     }
-
 }

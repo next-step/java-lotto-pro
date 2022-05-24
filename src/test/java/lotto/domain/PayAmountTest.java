@@ -1,12 +1,12 @@
 package lotto.domain;
 
 import lotto.domain.error.PayAmountErrorCode;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PayAmountTest {
@@ -74,6 +74,6 @@ class PayAmountTest {
         int lottoCount = 1;
         int payAmount = PayAmount.calculate(new LottoCount(lottoCount));
 
-        Assertions.assertThat(payAmount).isEqualTo(lottoCount * MIN_PAY_AMOUNT);
+        assertThat(payAmount).isEqualTo(lottoCount * MIN_PAY_AMOUNT);
     }
 }

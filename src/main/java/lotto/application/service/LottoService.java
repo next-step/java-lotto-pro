@@ -3,7 +3,6 @@ package lotto.application.service;
 import lotto.domain.*;
 import lotto.infrastructure.generator.NumberGenerator;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -24,8 +23,8 @@ public class LottoService {
         return createLottoTickets(lottoCount);
     }
 
-    public LottoResult getRankCount(final String[] winningLottoNumbers, final LottoTickets purchasedLottoTickets) {
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList(winningLottoNumbers));
+    public LottoResult getRankCount(final List<Integer> winningLottoNumbers, final Integer bonusBall, final LottoTickets purchasedLottoTickets) {
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningLottoNumbers, bonusBall);
 
         return purchasedLottoTickets.compareWinningLottoTicket(winningLottoTicket);
     }

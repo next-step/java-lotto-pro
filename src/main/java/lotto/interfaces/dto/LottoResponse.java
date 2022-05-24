@@ -1,5 +1,6 @@
-package lotto.dto;
+package lotto.interfaces.dto;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
@@ -27,9 +28,10 @@ public class LottoResponse {
             return lottoDtos;
         }
 
-        private List<LottoResponse.LottoDto> convertLottoDtos(final List<LottoTicket> lottos) {
-            return lottos.stream()
-                    .map(lotto -> new LottoDto(lotto.getLottoNumbers()))
+        private List<LottoResponse.LottoDto> convertLottoDtos(final List<LottoTicket> lottoTickets) {
+            return lottoTickets.stream()
+                    .map(lottoTicket -> lottoTicket.getLottoNumbers())
+                    .map(lottoNumbers -> new LottoDto(lottoNumbers))
                     .collect(Collectors.toList());
         }
     }
@@ -55,8 +57,10 @@ public class LottoResponse {
     public static class LottoDto {
         private final List<Integer> lottoNumbers;
 
-        public LottoDto(final List<Integer> lottoNumbers) {
-            this.lottoNumbers = lottoNumbers;
+        public LottoDto(final List<LottoNumber> lottoNumbers) {
+            this.lottoNumbers = lottoNumbers.stream()
+                    .map(LottoNumber::getLottoNumber)
+                    .collect(Collectors.toList());
         }
 
         public List<Integer> getLottoNumbers() {

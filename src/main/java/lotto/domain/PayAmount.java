@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class PayAmount {
 
-    private final static int MIN_PAY_AMOUNT = 1_000;
+    private static final int MIN_PAY_AMOUNT = 1_000;
     private final int payAmount;
 
     public static int calculate(LottoCount lottoCount) {
