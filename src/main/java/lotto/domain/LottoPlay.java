@@ -22,7 +22,7 @@ public class LottoPlay {
         PurchaseMoney purchaseMoney = getPurchaseMoney();
         PurchaseQuantity purchaseQuantity = getPurchaseQuantity(purchaseMoney);
         Lottos lottos = getPurchasedLottos(purchaseQuantity);
-        resultView.printPurchasedLottos(lottos);
+        resultView.printPurchasedLottos(purchaseQuantity, lottos);
         WinningLotto winningLotto = getWinningLotto();
         LottosResults results = lottos.matchWithWinningLotto(winningLotto);
         resultView.printLottoStatisticsResult(results, purchaseMoney);
