@@ -3,43 +3,29 @@ package lotto.domain;
 import java.util.*;
 
 public class Lottos {
+
     private List<Lotto> lottoList;
 
-    public Lottos() {
-    }
-
-    public void autoGenerator(int count) {
-        List<Lotto> list = new ArrayList<>();
-        for (int i=0; i<count; i++) {
-            list.add(LottoFactory.autoGenerator());
-        }
-        this.lottoList = list;
-    }
-
-    public void manualGenerator(String[] input) {
-        List<Lotto> list = new ArrayList<>();
-        for (String s : input) {
-            list.add(LottoFactory.manualGenerator(s));
-        }
-        this.lottoList = list;
+    public Lottos(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
     }
 
     public List<Lotto> getLottoList() {
         return this.lottoList;
     }
 
-    public List<LottoStatistic> matchLottoStatic(Lotto winningLotto) {
-        List<LottoStatistic> lottoStatistics = new ArrayList<>();
+    public List<Rank> matchLottoStatic(WinningLotto winningLotto) {
+        List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : this.lottoList) {
-            lottoStatistics.add(LottoStatistic.valueOf(winningLotto.match(lotto)));
+            ranks.add(Rank.valueOf(winningLotto.match(lotto), winningLotto.isContainsBonus(lotto)));
         }
-        return lottoStatistics;
+        return ranks;
     }
 
-    public Map<LottoStatistic, Integer> matchLottoStaticToString(Lotto winningLotto) {
-        Map<LottoStatistic, Integer> map = new HashMap<>();
-        List<LottoStatistic> lottoStatistics = matchLottoStatic(winningLotto);
-        lottoStatistics.stream()
+    public Map<Rank, Integer> matchLottoStaticToString(WinningLotto winningLotto) {
+        Map<Rank, Integer> map = new HashMap<>();
+        List<Rank> ranks = matchLottoStatic(winningLotto);
+        ranks.stream()
                 .forEach(lottoStatistic -> map.put(lottoStatistic, map.getOrDefault(lottoStatistic, 1)));
         return map;
     }

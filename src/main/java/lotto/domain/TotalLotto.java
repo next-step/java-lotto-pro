@@ -6,21 +6,19 @@ public class TotalLotto {
 
     private Lottos lottoList;
 
-    public static TotalLotto from(int amount) {
-        TotalLotto totalLotto = new TotalLotto();
-        totalLotto.money = Money.from(amount);
+    private TotalLotto(Money money, Lottos lottoList) {
+        this.money = money;
+        this.lottoList = lottoList;
+    }
 
-        totalLotto.lottoList = new Lottos();
-        totalLotto.lottoList.autoGenerator(totalLotto.money.getCount());
-        return totalLotto;
+    public static TotalLotto from(int amount) {
+        Money money = Money.from(amount);
+        Lottos lottoList = LottoShop.generateLottos(money.getCount());
+        return new TotalLotto(money, lottoList);
     }
 
     public int getCount() {
         return this.money.getCount();
-    }
-
-    public Lottos getLottoList() {
-        return this.lottoList;
     }
 
     public String lottoListToString() {
@@ -28,5 +26,9 @@ public class TotalLotto {
         this.lottoList.getLottoList().stream()
                 .forEach(lotto -> sb.append(lotto.toString() + "\n"));
         return sb.toString();
+    }
+
+    public LottoScore getLottoScore(WinningLotto winningLotto) {
+        return new LottoScore(this.lottoList.matchLottoStaticToString(winningLotto));
     }
 }
