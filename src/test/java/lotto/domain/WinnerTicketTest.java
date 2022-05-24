@@ -12,7 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class WinnerTicketTest {
 
-    private LottoNumber bonusNumber = new LottoNumber(45);
+    private final LottoNumber bonusNumber = new LottoNumber(45);
+
+    private static final int purchasePrice = 1000;
 
     @Test
     void 지난주_당첨_번호_5개만_입력() {
@@ -25,8 +27,8 @@ class WinnerTicketTest {
         List<LottoTicket> tickets = new ArrayList<>();
         tickets.add(new LottoTicket(new TestNumberGenerator()));
         LottoGame game = new LottoGame(tickets);
-        game.generateGameResult(new WinnerTicket("4, 5, 6, 7, 8, 9", bonusNumber));
-        assertThat(game.getScore().get(Rank.FIFTH)).isEqualTo(1);
+        game.generateGameResult(new WinnerTicket("4, 5, 6, 7, 8, 9", bonusNumber), purchasePrice);
+        assertThat(game.getScore()).containsEntry(Rank.FIFTH, 1);
     }
 
     @Test

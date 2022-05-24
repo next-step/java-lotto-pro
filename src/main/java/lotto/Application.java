@@ -22,7 +22,7 @@ public class Application {
 
         game.printTickets();
         game.generateGameResult(new WinnerTicket(InputView.getWinnerNumbers()
-                , new LottoNumber(InputView.getBonusBallNumber())));
+                , new LottoNumber(InputView.getBonusBallNumber())), purchasePrice);
 
         game.printGameResult();
     }
