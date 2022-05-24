@@ -4,6 +4,9 @@ import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Application {
 
     public static void main(String[] args) {
@@ -12,8 +15,15 @@ public class Application {
 
     private void startGame() {
         int purchasePrice = InputView.getPurchasePrice();
+        ResultView.printEmptyLine();
+
+        List<String> selfTicketNumbers = InputView.getSelfTickets(1);
+        List<LottoTicket> selfTickets = selfTicketNumbers.stream()
+                .map(stringNumbers -> new LottoTicket(new LottoNumbers(StringParserUtils.parseNumbers(stringNumbers))))
+                .collect(Collectors.toList());
+
         NumberGenerator numberGenerator = new LottoNumberGenerator();
-        LottoGame game = new LottoGame(purchasePrice, numberGenerator);
+        LottoGame game = new LottoGame(purchasePrice, selfTickets, numberGenerator);
         ResultView.printTicketCount(game.getTicketCount());
         game.printTickets();
 

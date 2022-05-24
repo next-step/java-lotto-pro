@@ -1,5 +1,7 @@
 package lotto.ui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -33,5 +35,16 @@ public class InputView {
             throw new IllegalArgumentException("Bonus ball number should be a number.");
         }
 
+    }
+
+    public static List<String> getSelfTickets(int selfTicketCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        List<String> selfTicketNumbers = new ArrayList<>();
+        for (int i = 1; i <= selfTicketCount; i++) {
+            selfTicketNumbers.add((SCANNER.next()));
+        }
+
+        return selfTicketNumbers;
     }
 }
