@@ -5,19 +5,15 @@ import java.util.*;
 public class LottoResult {
     private final Map<LottoRank, Integer> winningRanks = new EnumMap<>(LottoRank.class);
 
-    public LottoResult(List<Lotto> buyLottos, WinningNumber winningLotto) {
-        for (Lotto lotto : new ArrayList<>(buyLottos)) {
+    public LottoResult(List<Lotto> lottos, WinningNumber winningLotto) {
+        for (Lotto lotto : new ArrayList<>(lottos)) {
             LottoRank lottoRank = LottoRank.of(winningLotto.matchCount(lotto), winningLotto.bonus(lotto));
             winningRanks.put(lottoRank, winningCount(lottoRank) + 1);
         }
     }
 
     public int winningCount(LottoRank lottoRank) {
-        Integer winningCount = winningRanks.get(lottoRank);
-        if (winningCount == null) {
-            return 0;
-        }
-        return winningCount;
+        return winningRanks.getOrDefault(lottoRank, 0);
     }
 
     public double rateOfReturn(Money buyPrice) {
@@ -33,7 +29,7 @@ public class LottoResult {
     }
 
     private Money sumRankMoney(Money moneySum, LottoRank lottoRank) {
-        for (int i = 0; i < winningCount(lottoRank); i++) {
+        for (int i = 0, end = winningCount(lottoRank); i < end; i++) {
             moneySum = lottoRank.sumWinningMoney(moneySum);
         }
         return moneySum;

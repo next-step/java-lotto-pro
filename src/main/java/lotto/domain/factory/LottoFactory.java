@@ -52,7 +52,7 @@ public class LottoFactory {
     }
 
     public static Lotto createAuto() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumber.lottoNumbersCache.values());
+        List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumber.cachedLottoNumberGroup.values());
         Collections.shuffle(lottoNumbers);
         return new Lotto(
                 lottoNumbers.stream().

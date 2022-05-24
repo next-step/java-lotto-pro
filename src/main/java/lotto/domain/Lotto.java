@@ -5,11 +5,11 @@ import java.util.*;
 public class Lotto {
     private static final int LOTTO_COUNT = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> values;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+        this.values = new ArrayList<>(lottoNumbers);
         sort();
     }
 
@@ -21,22 +21,21 @@ public class Lotto {
     }
 
     private void sort() {
-        this.lottoNumbers
-                .sort(Comparator.comparingInt(LottoNumber::getLottoNumber));
+        this.values.sort(Comparator.comparingInt(LottoNumber::getValue));
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public List<LottoNumber> getValues() {
+        return Collections.unmodifiableList(values);
     }
 
     public int matchCount(Lotto winningLotto) {
-        return (int) lottoNumbers.stream()
-                .filter(winningLotto.lottoNumbers::contains)
+        return (int) values.stream()
+                .filter(winningLotto.values::contains)
                 .count();
     }
 
     public boolean contains(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
+        return values.contains(lottoNumber);
     }
 
     @Override
@@ -44,17 +43,17 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+        return Objects.equals(values, lotto.values);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumbers);
+        return Objects.hash(values);
     }
 
     @Override
     public String toString() {
-        return lottoNumbers.toString();
+        return values.toString();
     }
 
 }

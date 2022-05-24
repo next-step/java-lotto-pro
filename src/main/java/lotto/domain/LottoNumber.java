@@ -5,19 +5,19 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
-    public static final Map<Integer, LottoNumber> lottoNumbersCache = new HashMap();
+    public static final Map<Integer, LottoNumber> cachedLottoNumberGroup = new HashMap();
     private static final int FIRST_LOTTO_NUMBER = 1;
     private static final int LAST_LOTTO_NUMBER = 45;
 
-    private final int lottoNumber;
+    private final int value;
 
     static {
         IntStream.rangeClosed(FIRST_LOTTO_NUMBER, LAST_LOTTO_NUMBER)
-                .forEach(lottoNumber -> lottoNumbersCache.put(lottoNumber, new LottoNumber(lottoNumber)));
+                .forEach(lottoNumber -> cachedLottoNumberGroup.put(lottoNumber, new LottoNumber(lottoNumber)));
     }
 
     private LottoNumber(int lottoNumber) {
-        this.lottoNumber = lottoNumber;
+        this.value = lottoNumber;
     }
 
     public static LottoNumber of(String lottoNumber) {
@@ -25,7 +25,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber of(int lottoNumber) {
-        LottoNumber cachedLottoNumber = lottoNumbersCache.get(lottoNumber);
+        LottoNumber cachedLottoNumber = cachedLottoNumberGroup.get(lottoNumber);
         validateLottoNumber(cachedLottoNumber);
         return cachedLottoNumber;
     }
@@ -36,12 +36,12 @@ public class LottoNumber {
         }
     }
 
-    public int getLottoNumber() {
-        return lottoNumber;
+    public int getValue() {
+        return value;
     }
 
     @Override
     public String toString() {
-        return Integer.toString(lottoNumber);
+        return Integer.toString(value);
     }
 }

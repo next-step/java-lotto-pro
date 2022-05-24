@@ -14,12 +14,6 @@ class MoneyTest {
     }
 
     @Test
-    @DisplayName("구입금액이 1000원 이하로 입력되면 예외가 발생한다")
-    void lessThen_1000() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Money(999)).withMessage("금액이 부족합니다.(최소필요금액: 1000)");
-    }
-
-    @Test
     @DisplayName("구입금액이 로또 최소금액 1000원 미만이면 true 를 반환한다")
     void lessThenLottoPriceTrue() {
         assertThat(new Money(999).lessThenLottoPrice()).isTrue();

@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ResultView {
-    private static final String BUY_COUNT_MESSAGE = "%d개를 구매했습니다.%n";
+    private static final String BUY_COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d장을 구매했습니다.%n";
     private static final String DASH = "----------";
     private static final String RESULT_TITLE = "당첨 통계";
     private static final String RESULT = "%d개 일치%s (%s) - %d개%n";
@@ -24,7 +24,7 @@ public class ResultView {
     private static final int BASE_RETURN_RATE = 1;
 
     public static void printBuyLottos(LottoGame lottoGame) {
-        System.out.printf(BUY_COUNT_MESSAGE, lottoGame.getMaxQuantity());
+        System.out.printf(BUY_COUNT_MESSAGE, lottoGame.manualQuantity(), lottoGame.autoQuantity());
         printLottoNumbers(lottoGame.getLottos());
     }
 

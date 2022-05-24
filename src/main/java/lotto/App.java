@@ -9,7 +9,7 @@ import lotto.ui.ResultView;
 public class App {
     public static void main(String[] args) {
         String buyPrice = InputView.getBuyPrice();
-        LottoGame lottoGame = new LottoGame(buyPrice);
+        LottoGame lottoGame = new LottoGame(buyPrice, InputView.getManualLottoNumbers());
         lottoGame.buyLottos();
         ResultView.printBuyLottos(lottoGame);
 

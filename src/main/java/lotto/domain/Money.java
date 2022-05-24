@@ -7,7 +7,7 @@ public class Money {
     public static final int LOTTO_PRICE = 1000;
     private static final String NUMBER_DIGITS = "###,###";
 
-    private final double money;
+    private final double value;
 
     public Money() {
         this(0);
@@ -18,27 +18,27 @@ public class Money {
     }
 
     public Money(double money) {
-        this.money = money;
+        this.value = money;
     }
 
     public boolean lessThenLottoPrice() {
-        return money < LOTTO_PRICE;
+        return value < LOTTO_PRICE;
     }
 
     public int getQuantity() {
-        return (int) (this.money / LOTTO_PRICE);
+        return (int) (this.value / LOTTO_PRICE);
     }
 
     public Money sumMoney(Money money) {
-        return new Money(money.money + this.money);
+        return new Money(money.value + this.value);
     }
 
     public double calculateRateOfReturn(Money winningMoneySum) {
-        return winningMoneySum.money / this.money;
+        return winningMoneySum.value / this.value;
     }
 
     public String krw() {
-        return String.format("₩ %s", new DecimalFormat(NUMBER_DIGITS).format(this.money));
+        return String.format("₩ %s", new DecimalFormat(NUMBER_DIGITS).format(this.value));
     }
 
     @Override
@@ -46,16 +46,16 @@ public class Money {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money1 = (Money) o;
-        return Double.compare(money1.money, money) == 0;
+        return Double.compare(money1.value, value) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(money);
+        return Objects.hash(value);
     }
 
     @Override
     public String toString() {
-        return Double.toString(money);
+        return Double.toString(value);
     }
 }
