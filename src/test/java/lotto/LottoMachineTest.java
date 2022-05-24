@@ -29,7 +29,7 @@ public class LottoMachineTest {
 	@Test
 	@DisplayName("금액에 맞는 자동 로또 구입")
 	void buy_lotto_auto() {
-		UserMoney userMoney = new UserMoney("2300");
+		UserMoney userMoney = new UserMoney("2300", 1000);
 		Lottos lottos = lottoMachine.buyAutoLottos(userMoney, userMoney.getMoney() / lottoMachine.lottoPrice());
 		assertEquals(lottos.getLottos().size(), 2);
 	}
@@ -37,8 +37,8 @@ public class LottoMachineTest {
 	@Test
 	@DisplayName("수동 로또 구매 금액 초과 오류")
 	void buy_lotto_manual_throws() {
-		assertAll(() -> assertTrue(lottoMachine.isCanBuyLotto(new UserMoney("2300"), 2)),
-				() -> assertFalse(lottoMachine.isCanBuyLotto(new UserMoney("2300"), 3)));
+		assertAll(() -> assertTrue(lottoMachine.isCanBuyLotto(new UserMoney("2300", 1000), 2)),
+				() -> assertFalse(lottoMachine.isCanBuyLotto(new UserMoney("2300", 1000), 3)));
 	}
 
 	@Test
@@ -52,7 +52,7 @@ public class LottoMachineTest {
 
 		Lottos lottos = new Lottos(tempLottos);
 
-		assertThrows(IllegalArgumentException.class, () -> lottoMachine.buyManualLottos(new UserMoney("2300"), lottos));
+		assertThrows(IllegalArgumentException.class, () -> lottoMachine.buyManualLottos(new UserMoney("2300", 1000), lottos));
 	}
 
 	@Test
@@ -66,7 +66,7 @@ public class LottoMachineTest {
 
 		Lottos lottos = new Lottos(tempLottos);
 
-		UserMoney userMoney = new UserMoney("4300");
+		UserMoney userMoney = new UserMoney("4300", 1000);
 		Lottos manualLottos = lottoMachine.buyManualLottos(userMoney, lottos);
 
 		assertEquals(manualLottos.size(), 4);

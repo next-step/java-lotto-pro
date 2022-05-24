@@ -12,9 +12,9 @@ public class InputView {
 	private InputView() {
 	}
 
-	public static UserMoney inputMoney() {
+	public static UserMoney inputMoney(int lottoPrice) {
 		System.out.println("구입금액을 입력해 주세요.");
-		return new UserMoney(readMessage());
+		return new UserMoney(readMessage(), lottoPrice);
 	}
 
 	public static String inputManualLottoCount(UserMoney userMoney, LottoMachine lottoMachine) {

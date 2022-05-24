@@ -11,19 +11,16 @@ import view.ResultView;
 public class ApplicationMain {
 
 	public static void main(String[] args) {
-		UserMoney userMoney = userMoney();
 		LottoMachine lottoMachine = new LottoMachine();
+		UserMoney userMoney = userMoney(lottoMachine.lottoPrice());
 
-		// 로또금액보다 소지금액이 적은 경우 아래로직을 실행 할 필요가 없음
-		if (userMoney.getMoney() < lottoMachine.lottoPrice()) {
-			return;
-		}
+		String manualLottosBuyCount = inputManualLottoCount(userMoney, lottoMachine);
 
-		String buyCount = inputManualLottoCount(userMoney, lottoMachine);
-		Lottos writeLotto = inputManualLottoCount(buyCount);
-
+		Lottos writeLotto = inputManualLottoCount(manualLottosBuyCount);
 		Lottos manualLottos = lottoMachine.buyManualLottos(userMoney, writeLotto);
-		userMoney = new UserMoney(String.valueOf(userMoney.getMoney() - manualLottos.size() * lottoMachine.lottoPrice()));
+		userMoney = new UserMoney(
+				String.valueOf(userMoney.getMoney() - manualLottos.size() * lottoMachine.lottoPrice()),
+				lottoMachine.lottoPrice());
 		Lottos autoLottos = lottoMachine.buyAutoLottos(userMoney, userMoney.getMoney() / lottoMachine.lottoPrice());
 
 		ResultView.printLottos(manualLottos, autoLottos);
@@ -35,12 +32,12 @@ public class ApplicationMain {
 		ResultView.printProfitRate(lottoResult.profitRate(lottoMachine.lottoPrice()));
 	}
 
-	private static UserMoney userMoney() {
+	private static UserMoney userMoney(int lottoPrice) {
 		try {
-			return InputView.inputMoney();
+			return InputView.inputMoney(lottoPrice);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			return userMoney();
+			return userMoney(lottoPrice);
 		}
 	}
 
