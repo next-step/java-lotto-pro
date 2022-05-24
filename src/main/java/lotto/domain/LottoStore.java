@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static lotto.domain.LottoNumbers.LOTTO_NUMBERS;
-import static lotto.domain.LottoTicket.LOTTO_SIZE;
 
 public class LottoStore {
     public List<LottoTicket> buy(Money money) {
@@ -31,6 +30,6 @@ public class LottoStore {
     }
 
     private static List<LottoNumber> subList(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.subList(0, LOTTO_SIZE);
+        return lottoNumbers.subList(0, LottoTicket.SIZE);
     }
 }
