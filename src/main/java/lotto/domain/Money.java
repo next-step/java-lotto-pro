@@ -11,13 +11,13 @@ public class Money {
     }
 
     private void validateMinimum(int money) {
-        if (money < LottoStore.LOTTO_PRICE) {
+        if (money < LottoTicket.PRICE) {
             throw new IllegalArgumentException(InputMessage.INVALID_MINIMUM_MONEY);
         }
     }
 
     public int ticketCount() {
-        return money / LottoStore.LOTTO_PRICE;
+        return money / LottoTicket.PRICE;
     }
 
     public int getMoney() {
