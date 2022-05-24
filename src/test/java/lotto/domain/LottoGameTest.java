@@ -1,10 +1,12 @@
 package lotto.domain;
 
+import lotto.StringParserUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -34,6 +36,39 @@ class LottoGameTest {
         LottoGame game = new LottoGame(tickets);
         game.generateGameResult(new WinnerTicket("4,5,6,7,8,9", bonusNumber));
         assertThat(game.getScore()).containsEntry(Rank.FIFTH, 1);
+    }
+
+    @Test
+    void 수동_3개_자동_2개() {
+        int purchasePrice = 5000;
+        List<String> selfTicketNumber = Arrays.asList(
+                "8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38", "7, 11, 16, 35, 36, 44");
+
+        List<LottoTicket> selfTickets = selfTicketNumber.stream()
+                .map(stringNumbers -> new LottoTicket(new LottoNumbers(StringParserUtils.parseNumbers(stringNumbers))))
+                .collect(Collectors.toList());
+
+        NumberGenerator numberGenerator = new TestNumberGenerator();
+        LottoGame game = new LottoGame(purchasePrice, selfTickets, numberGenerator);
+        assertThat(game.getTicketCount()).isEqualTo(5);
+    }
+
+    @Test
+    void 수동_로또_점수_계산() {
+        int purchasePrice = 5000;
+        List<String> selfTicketNumber = Arrays.asList(
+                "8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38", "7, 11, 16, 35, 36, 44");
+
+        List<LottoTicket> selfTickets = selfTicketNumber.stream()
+                .map(stringNumbers -> new LottoTicket(new LottoNumbers(StringParserUtils.parseNumbers(stringNumbers))))
+                .collect(Collectors.toList());
+
+        NumberGenerator numberGenerator = new TestNumberGenerator();
+        LottoGame game = new LottoGame(purchasePrice, selfTickets, numberGenerator);
+
+        WinnerTicket winnerTicket = new WinnerTicket("8, 21 ,23, 41, 42, 43", bonusNumber);
+        game.generateGameResult(winnerTicket);
+        assertThat(game.getScore()).containsEntry(Rank.FIRST, 1);
     }
 
     @Test

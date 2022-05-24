@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.ui.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -30,15 +31,31 @@ public class LottoGame {
         this.purchasePrice = purchasePrice;
 
         int ticketCount = this.getTicketCount();
-        this.tickets = IntStream.rangeClosed(1, ticketCount)
-                .mapToObj(x -> new LottoTicket(numberGenerator))
-                .collect(Collectors.toList());
+        this.tickets = generateAutoTickets(numberGenerator, ticketCount);
     }
 
     public LottoGame(List<LottoTicket> tickets) {
         this();
         this.purchasePrice = tickets.size() * TICKET_UNIT_PRICE;
         this.tickets = tickets;
+    }
+
+    public LottoGame(int purchasePrice, List<LottoTicket> selfTickets, NumberGenerator numberGenerator) {
+        this();
+        int autoTicketCount = (purchasePrice - (TICKET_UNIT_PRICE * selfTickets.size())) / TICKET_UNIT_PRICE;
+        if (autoTicketCount < 0) {
+            throw new IllegalArgumentException("Price is not enough to by self ticket");
+        }
+
+        this.purchasePrice = purchasePrice;
+        this.tickets = new ArrayList<>(selfTickets);
+        this.tickets.addAll(generateAutoTickets(numberGenerator, autoTicketCount));
+    }
+
+    private List<LottoTicket> generateAutoTickets(NumberGenerator numberGenerator, int autoTicketCount) {
+        return IntStream.rangeClosed(1, autoTicketCount)
+                .mapToObj(x -> new LottoTicket(numberGenerator))
+                .collect(Collectors.toList());
     }
 
     public double getEarningRate() {
