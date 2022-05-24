@@ -7,42 +7,42 @@ import java.util.Random;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
 import lotto.model.Lottos;
-import lotto.model.UserMoney;
 import util.NumberUtil;
 
 public class LottoMachine {
 	private static final int LOTTO_PRICE = 1000;
 	private static final Random random = new Random();
 
-	public Lottos buyManualLottos(UserMoney userMoney, Lottos lottos) {
-		validationCanNotBuyLotto(userMoney, lottos.size());
-		return lottos;
-	}
-
-	public Lottos buyAutoLottos(UserMoney userMoney, int pieceCount) {
-		validationCanNotBuyLotto(userMoney, pieceCount);
-
-		List<LottoNumbers> lottos = new ArrayList<>();
-		for (int i = 0; i < pieceCount; ++i) {
-			lottos.add(randomLottoNumbers());
-		}
-		
+	public Lottos buyLottos(int userCoin, List<LottoNumbers> lottos) {
+		validationCanNotBuyLotto(userCoin, lottos.size());
+		lottos.addAll(buyAutoLottos(userCoin, lottos));
 		return new Lottos(lottos);
 	}
 
-	public void isCanBuyLotto(UserMoney userMoney, String pieceCount) {
-		validationNumber(pieceCount);
-		validationCanNotBuyLotto(userMoney, Integer.parseInt(pieceCount));
-	}
-
-	private void validationCanNotBuyLotto(UserMoney userMoney, int pieceCount) {
-		if (!isCanBuyLotto(userMoney, pieceCount)) {
-			throw new IllegalArgumentException("로또를 구매할 수 있는 수량을 초과했습니다. 구입가능 로또의 갯수 : " + canBuyLottoCount(userMoney));
+	private List<LottoNumbers> buyAutoLottos(int userCoin, List<LottoNumbers> manualLottos) {
+		List<LottoNumbers> lottos = new ArrayList<>();
+		for (int i = 0; i < userCoin - manualLottos.size(); ++i) {
+			lottos.add(randomLottoNumbers());
 		}
+
+		return lottos;
 	}
 
-	public boolean isCanBuyLotto(UserMoney userMoney, int pieceCount) {
-		return canBuyLottoCount(userMoney) >= pieceCount;
+	public int tradeCoin(String userMoney) {
+		validationNumber(userMoney);
+		validationMinMoney(Integer.parseInt(userMoney));
+		return Integer.parseInt(userMoney) / LOTTO_PRICE;
+	}
+
+	public void isCanBuyLotto(int userCoin, String pieceCount) {
+		validationNumber(pieceCount);
+		validationCanNotBuyLotto(userCoin, Integer.parseInt(pieceCount));
+	}
+
+	private void validationCanNotBuyLotto(int userCoin, int pieceCount) {
+		if (userCoin < pieceCount) {
+			throw new IllegalArgumentException("로또를 구매할 수 있는 수량을 초과했습니다. 구매할 수 있는 로뜨의 갯수 : " + userCoin);
+		}
 	}
 
 	private void validationNumber(String pieceCount) {
@@ -51,12 +51,15 @@ public class LottoMachine {
 		}
 	}
 
-	public int lottoPrice() {
-		return LOTTO_PRICE;
+	private void validationMinMoney(int userMoney) {
+		if (userMoney < LOTTO_PRICE) {
+			throw new IllegalArgumentException(
+					String.format("로또는 %d원이므로 최소 %d원 이상 입력해야합니다.", LOTTO_PRICE, LOTTO_PRICE));
+		}
 	}
 
-	private int canBuyLottoCount(UserMoney userMoney) {
-		return userMoney.getMoney() / LOTTO_PRICE;
+	public int lottoPrice() {
+		return LOTTO_PRICE;
 	}
 
 	private LottoNumbers randomLottoNumbers() {

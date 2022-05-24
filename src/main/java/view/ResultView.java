@@ -15,10 +15,9 @@ public class ResultView {
 	private ResultView() {
 	}
 
-	public static void printLottos(Lottos manualLottos, Lottos autoLottos) {
-		System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottos.size(), autoLottos.size());
-		lottosPrint(manualLottos.getLottos());
-		lottosPrint(autoLottos.getLottos());
+	public static void printLottos(Lottos lottos, int manualLottosBuyCount) {
+		System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottosBuyCount, lottos.size()-manualLottosBuyCount);
+		lottosPrint(lottos.getLottos());
 	}
 
 	public static void printWinStatistics(WinningList winningList) {

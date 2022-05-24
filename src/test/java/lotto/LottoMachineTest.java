@@ -2,73 +2,74 @@ package lotto;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.model.LottoNumbers;
 import lotto.model.Lottos;
-import lotto.model.UserMoney;
 
 public class LottoMachineTest {
 
 	private LottoMachine lottoMachine;
+	private int userCoin;
 
 	@BeforeEach
 	void setUp() {
 		lottoMachine = new LottoMachine();
+		userCoin = lottoMachine.tradeCoin("10000");
 	}
 
 	@Test
-	@DisplayName("금액에 맞는 자동 로또 구입")
-	void buy_lotto_auto() {
-		UserMoney userMoney = new UserMoney("2300", 1000);
-		Lottos lottos = lottoMachine.buyAutoLottos(userMoney, userMoney.getMoney() / lottoMachine.lottoPrice());
-		assertEquals(lottos.getLottos().size(), 2);
+	void 구매_실패_테스트() {
+		int userCoin = lottoMachine.tradeCoin("1000");
+
+		List<LottoNumbers> lottos = new ArrayList<>();
+		lottos.add(new LottoNumbers("1,2,3,4,5,6"));
+		lottos.add(new LottoNumbers("1,2,3,4,5,7"));
+
+		assertAll(() -> assertThrows(IllegalArgumentException.class, () -> lottoMachine.isCanBuyLotto(userCoin, "2")),
+				() -> assertThrows(IllegalArgumentException.class, () -> lottoMachine.buyLottos(userCoin, lottos)));
 	}
 
 	@Test
-	@DisplayName("수동 로또 구매 금액 초과 오류")
-	void buy_lotto_manual_throws() {
-		assertAll(() -> assertTrue(lottoMachine.isCanBuyLotto(new UserMoney("2300", 1000), 2)),
-				() -> assertFalse(lottoMachine.isCanBuyLotto(new UserMoney("2300", 1000), 3)));
+	void buy_lotto_수동_0장_구매() {
+		List<LottoNumbers> lottos = new ArrayList<>();
+		Lottos manualLottos = lottoMachine.buyLottos(userCoin, lottos);
+		assertEquals(manualLottos.size(), 10);
 	}
 
 	@Test
-	@DisplayName("수동 로또 구매 실패 테스트")
-	void buy_lotto_manual_fail() {
-		List<LottoNumbers> tempLottos = new ArrayList<>();
-		tempLottos.add(new LottoNumbers("1,2,3,4,5,6"));
-		tempLottos.add(new LottoNumbers("1,2,3,4,5,7"));
-		tempLottos.add(new LottoNumbers("1,2,3,4,5,8"));
-		tempLottos.add(new LottoNumbers("1,2,3,4,5,9"));
+	void buy_lotto_수동_4장_구매() {
+		List<LottoNumbers> lottos = new ArrayList<>();
+		lottos.add(new LottoNumbers("1,2,3,4,5,6"));
+		lottos.add(new LottoNumbers("1,2,3,4,5,7"));
+		lottos.add(new LottoNumbers("1,2,3,4,5,8"));
+		lottos.add(new LottoNumbers("1,2,3,4,5,9"));
 
-		Lottos lottos = new Lottos(tempLottos);
-
-		assertThrows(IllegalArgumentException.class, () -> lottoMachine.buyManualLottos(new UserMoney("2300", 1000), lottos));
+		Lottos manualLottos = lottoMachine.buyLottos(userCoin, lottos);
+		assertEquals(manualLottos.size(), 10);
 	}
 
 	@Test
-	@DisplayName("수동 로또 구매")
-	void buy_lotto_manual() {
-		List<LottoNumbers> tempLottos = new ArrayList<>();
-		tempLottos.add(new LottoNumbers("1,2,3,4,5,6"));
-		tempLottos.add(new LottoNumbers("1,2,3,4,5,7"));
-		tempLottos.add(new LottoNumbers("1,2,3,4,5,8"));
-		tempLottos.add(new LottoNumbers("1,2,3,4,5,9"));
+	void buy_lotto_수동전체구매() {
+		List<LottoNumbers> lottos = new ArrayList<>();
+		lottos.add(new LottoNumbers("1,2,3,4,5,6"));
+		lottos.add(new LottoNumbers("1,2,3,4,5,7"));
+		lottos.add(new LottoNumbers("1,2,3,4,5,8"));
+		lottos.add(new LottoNumbers("1,2,3,4,5,9"));
+		lottos.add(new LottoNumbers("1,2,3,4,5,9"));
+		lottos.add(new LottoNumbers("1,2,3,4,5,6"));
+		lottos.add(new LottoNumbers("1,2,3,4,5,7"));
+		lottos.add(new LottoNumbers("1,2,3,4,5,8"));
+		lottos.add(new LottoNumbers("1,2,3,4,5,9"));
+		lottos.add(new LottoNumbers("1,2,3,4,5,9"));
 
-		Lottos lottos = new Lottos(tempLottos);
-
-		UserMoney userMoney = new UserMoney("4300", 1000);
-		Lottos manualLottos = lottoMachine.buyManualLottos(userMoney, lottos);
-
-		assertEquals(manualLottos.size(), 4);
+		Lottos manualLottos = lottoMachine.buyLottos(userCoin, lottos);
+		assertEquals(manualLottos.size(), 10);
 	}
 }

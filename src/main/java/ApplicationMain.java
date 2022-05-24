@@ -1,8 +1,9 @@
+import java.util.List;
+
 import lotto.LottoMachine;
 import lotto.LottoResult;
 import lotto.model.LottoNumbers;
 import lotto.model.Lottos;
-import lotto.model.UserMoney;
 import lotto.model.WinningList;
 import lotto.model.WinningLotto;
 import view.InputView;
@@ -12,41 +13,36 @@ public class ApplicationMain {
 
 	public static void main(String[] args) {
 		LottoMachine lottoMachine = new LottoMachine();
-		UserMoney userMoney = userMoney(lottoMachine.lottoPrice());
+		int userCoin = userCoin(lottoMachine);
 
-		String manualLottosBuyCount = inputManualLottoCount(userMoney, lottoMachine);
+		int manualLottosBuyCount = inputManualLottoCount(userCoin, lottoMachine);
+		List<LottoNumbers> writeLotto = inputManualLottoCount(manualLottosBuyCount);
+		Lottos lottos = lottoMachine.buyLottos(userCoin, writeLotto);
 
-		Lottos writeLotto = inputManualLottoCount(manualLottosBuyCount);
-		Lottos manualLottos = lottoMachine.buyManualLottos(userMoney, writeLotto);
-		userMoney = new UserMoney(
-				String.valueOf(userMoney.getMoney() - manualLottos.size() * lottoMachine.lottoPrice()),
-				lottoMachine.lottoPrice());
-		Lottos autoLottos = lottoMachine.buyAutoLottos(userMoney, userMoney.getMoney() / lottoMachine.lottoPrice());
-
-		ResultView.printLottos(manualLottos, autoLottos);
+		ResultView.printLottos(lottos, manualLottosBuyCount);
 
 		WinningLotto lastWinningLotto = lastWinningLotto();
-		LottoResult lottoResult = new LottoResult(lastWinningLotto, manualLottos, autoLottos);
+		LottoResult lottoResult = new LottoResult(lastWinningLotto, lottos);
 		WinningList winningList = lottoResult.winningList();
 		ResultView.printWinStatistics(winningList);
 		ResultView.printProfitRate(lottoResult.profitRate(lottoMachine.lottoPrice()));
 	}
 
-	private static UserMoney userMoney(int lottoPrice) {
+	private static int userCoin(LottoMachine lottoMachine) {
 		try {
-			return InputView.inputMoney(lottoPrice);
+			return InputView.inputMoney(lottoMachine);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			return userMoney(lottoPrice);
+			return userCoin(lottoMachine);
 		}
 	}
 
-	private static String inputManualLottoCount(UserMoney userMoney, LottoMachine lottoMachine) {
+	private static int inputManualLottoCount(int userCoin, LottoMachine lottoMachine) {
 		try {
-			return InputView.inputManualLottoCount(userMoney, lottoMachine);
+			return InputView.inputManualLottoCount(userCoin, lottoMachine);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			return inputManualLottoCount(userMoney, lottoMachine);
+			return inputManualLottoCount(userCoin, lottoMachine);
 		}
 	}
 
@@ -62,7 +58,7 @@ public class ApplicationMain {
 		}
 	}
 
-	private static Lottos inputManualLottoCount(String buyCount) {
+	private static List<LottoNumbers> inputManualLottoCount(int buyCount) {
 		try {
 			return InputView.inputManualLotto(buyCount);
 		} catch (Exception e) {

@@ -5,36 +5,34 @@ import java.util.List;
 
 import lotto.LottoMachine;
 import lotto.model.LottoNumbers;
-import lotto.model.Lottos;
-import lotto.model.UserMoney;
 
 public class InputView {
 	private InputView() {
 	}
 
-	public static UserMoney inputMoney(int lottoPrice) {
+	public static int inputMoney(LottoMachine lottoMachine) {
 		System.out.println("구입금액을 입력해 주세요.");
-		return new UserMoney(readMessage(), lottoPrice);
+		return lottoMachine.tradeCoin(readMessage());
 	}
 
-	public static String inputManualLottoCount(UserMoney userMoney, LottoMachine lottoMachine) {
+	public static int inputManualLottoCount(int userCoin, LottoMachine lottoMachine) {
 		System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
 		String buyCount = readMessage();
-		lottoMachine.isCanBuyLotto(userMoney, buyCount);
-		return buyCount;
+		lottoMachine.isCanBuyLotto(userCoin, buyCount);
+		return Integer.parseInt(buyCount);
 	}
 
-	public static Lottos inputManualLotto(String manualLottoCount) {
+	public static List<LottoNumbers> inputManualLotto(int manualLottoCount) {
 		List<LottoNumbers> lottos = new ArrayList<>();
-		if (Integer.parseInt(manualLottoCount) == 0) {
-			return new Lottos(lottos);
+		if (manualLottoCount == 0) {
+			return lottos;
 		}
 
 		System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-		for (int i = 0; i < Integer.parseInt(manualLottoCount); i++) {
+		for (int i = 0; i < manualLottoCount; i++) {
 			lottos.add(inputLottoNumbers());
 		}
-		return new Lottos(lottos);
+		return lottos;
 	}
 
 	public static LottoNumbers inputWinLottoNumbers() {
