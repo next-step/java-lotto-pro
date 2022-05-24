@@ -18,7 +18,7 @@ public class ResultView {
     }
 
     public static void printGameResult(Map<Rank, Integer> score, double earningRate) {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
 
         List<Rank> printRankList = Arrays.stream(Rank.values())

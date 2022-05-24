@@ -15,22 +15,14 @@ public class Application {
 
     private void startGame() {
         int purchasePrice = InputView.getPurchasePrice();
-        ResultView.printEmptyLine();
 
-        int selfTicketCount = InputView.getSelfTicketCount();
-        ResultView.printEmptyLine();
-
-        List<LottoTicket> selfTickets = getSelfLottoTickets(selfTicketCount);
+        List<LottoTicket> selfTickets = getSelfLottoTickets(InputView.getSelfTicketCount());
         LottoGame game = new LottoGame(purchasePrice, selfTickets, new LottoNumberGenerator());
         ResultView.printTicketCount(game.getAutoTicketCount(), game.getSelfTicketCount());
 
         game.printTickets();
-        ResultView.printEmptyLine();
-
-        String winnerNumbers = InputView.getWinnerNumbers();
-        int bonusBallNumber = InputView.getBonusBallNumber();
-        game.generateGameResult(new WinnerTicket(winnerNumbers, new LottoNumber(bonusBallNumber)));
-        ResultView.printEmptyLine();
+        game.generateGameResult(new WinnerTicket(InputView.getWinnerNumbers()
+                , new LottoNumber(InputView.getBonusBallNumber())));
 
         game.printGameResult();
     }
