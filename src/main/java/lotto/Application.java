@@ -17,10 +17,14 @@ public class Application {
         int purchasePrice = InputView.getPurchasePrice();
         ResultView.printEmptyLine();
 
-        List<String> selfTicketNumbers = InputView.getSelfTickets(1);
+        int selfTicketCount = InputView.getSelfTicketCount();
+        ResultView.printEmptyLine();
+
+        List<String> selfTicketNumbers = InputView.getSelfTickets(selfTicketCount);
         List<LottoTicket> selfTickets = selfTicketNumbers.stream()
                 .map(stringNumbers -> new LottoTicket(new LottoNumbers(StringParserUtils.parseNumbers(stringNumbers))))
                 .collect(Collectors.toList());
+        ResultView.printEmptyLine();
 
         NumberGenerator numberGenerator = new LottoNumberGenerator();
         LottoGame game = new LottoGame(purchasePrice, selfTickets, numberGenerator);
