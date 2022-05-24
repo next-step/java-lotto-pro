@@ -20,4 +20,8 @@ public class LottoRanks {
     public int matchRank(LottoRank lottoRank) {
         return (int) lottoRanks.stream().filter(rank -> rank.isMatchRank(lottoRank.getMatch(), lottoRank.hasBonus())).count();
     }
+
+    public List<LottoRank> getLottoRanks() {
+        return lottoRanks;
+    }
 }
