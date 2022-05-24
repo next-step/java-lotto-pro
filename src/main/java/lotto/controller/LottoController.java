@@ -13,10 +13,12 @@ public class LottoController {
 
     public static void startLotto() {
         int purchaseAmount = InputView.enterPurchaseAmount();
-        int autoLottoCount = LottoPrice.numberOfLottoCanBuy(purchaseAmount);
+        int manualLottoCount = InputView.enterManualLottoCount();
+        int autoLottoCount = LottoPrice.numberOfLottoCanBuy(purchaseAmount) - manualLottoCount;
+        int[][] manualLottos = InputView.enterManualLottos(manualLottoCount);
 
         LottoManager lottoManager = new LottoManager();
-        Lottos lottos = lottoManager.makeLottos(autoLottoCount);
+        Lottos lottos = lottoManager.makeLottos(autoLottoCount, manualLottos);
         List<Lotto> lottoElements = lottos.getElements();
 
         ResultView.purchaseLottoResult(autoLottoCount, lottoElements);

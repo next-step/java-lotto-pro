@@ -68,4 +68,26 @@ public class InputView {
             }
         }
     }
+
+    public static int[][] enterManualLottos(int manualLottoCount) {
+        System.out.println("수동으로 구매할 번호를 입력해주세요.");
+        int[][] manualLottos = new int[manualLottoCount][LottoUtil.LOTTO_SIZE];
+        for (int i = 0; i < manualLottoCount; i++) {
+            enterManualLotto(manualLottos, i);
+        }
+        return manualLottos;
+    }
+
+    public static int[] enterManualLotto(int[][] manualLottos, int index) {
+        while (true) {
+            try {
+                manualLottos[index] = LottoUtil.convertLottoStringToIntArray(
+                    enterString().split(SPLIT_DELIMITER));
+                LottoUtil.validateDuplication(manualLottos[index]);
+                return manualLottos[index];
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 }

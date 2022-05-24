@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.WinningLotto;
 import lotto.strategy.AutoPickNumberStrategy;
+import lotto.strategy.ManualPickNumberStrategy;
 
 public class LottoManager {
 
@@ -17,6 +18,18 @@ public class LottoManager {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < autoLottoCount; i++) {
             lottoList.add(new Lotto(new AutoPickNumberStrategy()));
+        }
+        return new Lottos(lottoList);
+    }
+
+    public Lottos makeLottos(int autoLottoCount, int[][] manualLottos) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < autoLottoCount; i++) {
+            lottoList.add(new Lotto(new AutoPickNumberStrategy()));
+        }
+        for (int i = 0; i < manualLottos.length; i++) {
+            List<LottoNumber> lottoNumbers = LottoUtil.convertToLottoNumber(manualLottos[i]);
+            lottoList.add(new Lotto(new ManualPickNumberStrategy(lottoNumbers)));
         }
         return new Lottos(lottoList);
     }
