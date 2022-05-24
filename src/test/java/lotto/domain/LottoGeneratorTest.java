@@ -45,13 +45,14 @@ class LottoGeneratorTest {
     }
 
     @DisplayName("랜덤 로또번호 5개 생성시 size 5 확인")
+    @Test
     void generateLottos() {
         Lottos lottos = lottoGenerator.generateLottos(5);
         assertThat(lottos.size()).isEqualTo(5);
     }
 
     @DisplayName("수동 로또번호 2개에 랜덤 로또번호 5개 생성시 size 7 확인")
-    @RepeatedTest(10)
+    @Test
     void generateLottosWithManual() {
         Lotto lottoFirst = new Lotto(
                 Stream.of(1, 5, 10, 12, 20, 33).map(LottoNumber::new).collect(Collectors.toList()));
