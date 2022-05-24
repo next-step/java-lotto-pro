@@ -2,29 +2,29 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LottoGameTest {
+class LottoGameTest {
 
     private LottoNumber bonusNumber = new LottoNumber(45);
 
     @Test
     void 구입금액이_음수인_경우() {
-        assertThatThrownBy(() -> new LottoGame(-1, new LottoNumberGenerator()))
+        NumberGenerator numberGenerator = new LottoNumberGenerator();
+        assertThatThrownBy(() -> new LottoGame(-1, numberGenerator))
                 .isInstanceOf(RuntimeException.class);
     }
 
     @Test
     void 구매장수_계산() {
         LottoGame game = new LottoGame(9999, new LottoNumberGenerator());
-        assertEquals(game.getTicketCount(), 9);
+        assertEquals(9, game.getTicketCount());
     }
 
     @Test
@@ -33,7 +33,7 @@ public class LottoGameTest {
         tickets.add(new LottoTicket(new LottoNumbers(Arrays.asList(1,2,3,4,5,6))));
         LottoGame game = new LottoGame(tickets);
         game.generateGameResult(new WinnerTicket("4,5,6,7,8,9", bonusNumber));
-        assertThat(game.getScore().get(Rank.FIFTH)).isEqualTo(1);
+        assertThat(game.getScore()).containsEntry(Rank.FIFTH, 1);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class LottoGameTest {
 
         LottoGame game = new LottoGame(tickets);
         game.generateGameResult(new WinnerTicket("4,5,6,7,8,9", bonusNumber));
-        assertThat(game.getScore().get(Rank.FIFTH)).isEqualTo(2);
+        assertThat(game.getScore()).containsEntry(Rank.FIFTH, 2);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class LottoGameTest {
 
         LottoGame game = new LottoGame(tickets);
         game.generateGameResult(new WinnerTicket("1,2,3,4,8,9", bonusNumber));
-        assertThat(game.getScore().get(Rank.FOURTH)).isEqualTo(1);
+        assertThat(game.getScore()).containsEntry(Rank.FOURTH, 1);
     }
 
     @Test
@@ -69,7 +69,7 @@ public class LottoGameTest {
 
         LottoGame game = new LottoGame(tickets);
         game.generateGameResult(new WinnerTicket("1,2,3,4,5,6", bonusNumber));
-        assertThat(game.getScore().get(Rank.FOURTH)).isEqualTo(2);
+        assertThat(game.getScore()).containsEntry(Rank.FOURTH, 2);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class LottoGameTest {
 
         LottoGame game = new LottoGame(tickets);
         game.generateGameResult(new WinnerTicket("1,2,3,4,5,9", bonusNumber));
-        assertThat(game.getScore().get(Rank.THIRD)).isEqualTo(1);
+        assertThat(game.getScore()).containsEntry(Rank.THIRD, 1);
     }
 
     @Test
@@ -93,7 +93,7 @@ public class LottoGameTest {
 
         LottoGame game = new LottoGame(tickets);
         game.generateGameResult(new WinnerTicket("1,2,3,4,5,6", bonusNumber));
-        assertThat(game.getScore().get(Rank.THIRD)).isEqualTo(2);
+        assertThat(game.getScore()).containsEntry(Rank.THIRD, 2);
     }
 
     @Test
@@ -104,7 +104,7 @@ public class LottoGameTest {
 
         LottoGame game = new LottoGame(tickets);
         game.generateGameResult(new WinnerTicket("1,2,3,4,5,6", bonusNumber));
-        assertThat(game.getScore().get(Rank.FIRST)).isEqualTo(1);
+        assertThat(game.getScore()).containsEntry(Rank.FIRST, 1);
     }
 
     @Test
@@ -117,7 +117,7 @@ public class LottoGameTest {
 
         LottoGame game = new LottoGame(tickets);
         game.generateGameResult(new WinnerTicket("1,2,3,4,5,6", bonusNumber));
-        assertThat(game.getScore().get(Rank.FIRST)).isEqualTo(2);
+        assertThat(game.getScore()).containsEntry(Rank.FIRST, 2);
     }
 
     @Test
@@ -161,6 +161,6 @@ public class LottoGameTest {
         WinnerTicket winnerTicket = new WinnerTicket("1,2,3,4,5,10", bonusNumber);
         LottoGame game = new LottoGame(tickets);
         game.generateGameResult(winnerTicket);
-        assertThat(game.getScore().get(Rank.THIRD)).isEqualTo(1);
+        assertThat(game.getScore()).containsEntry(Rank.THIRD, 1);
     }
 }
