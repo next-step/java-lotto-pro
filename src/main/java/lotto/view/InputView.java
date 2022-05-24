@@ -11,13 +11,14 @@ import lotto.strategy.ManualPickNumberStrategy;
 
 public class InputView {
 
+    private static final String SPLIT_DELIMITER = ", ";
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static int[] enterManualLotto() {
         while (true) {
             try {
                 System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-                return LottoUtil.convertLottoStringToIntArray(enterString().split(","));
+                return LottoUtil.convertLottoStringToIntArray(enterString().split(SPLIT_DELIMITER));
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -39,7 +40,7 @@ public class InputView {
     }
 
     public static String enterString() {
-        return SCANNER.next();
+        return SCANNER.nextLine();
     }
 
     public static int enterBonusNumber() {
@@ -56,10 +57,10 @@ public class InputView {
     private static int enterNumber() throws InputMismatchException {
         while (true) {
             try {
-                return SCANNER.nextInt();
-            } catch (InputMismatchException e) {
+                return Integer.parseInt(SCANNER.nextLine());
+            } catch (NumberFormatException e) {
                 System.out.println("숫자가 아닌 값을 입력하였습니다");
-                SCANNER.next();
+                SCANNER.reset();
             }
         }
     }

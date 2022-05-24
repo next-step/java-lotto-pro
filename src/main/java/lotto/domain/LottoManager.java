@@ -22,7 +22,9 @@ public class LottoManager {
     }
 
     public void makeWinningLotto(WinningLotto winningLotto, Lottos lottos) {
-        lottos.makeWinningResult(winningLotto, winningStatistics);
+        for (Lotto lotto : lottos.getElements()) {
+            winningStatistics.addLottoRanking(LottoRanking.findLottoRaking(lotto, winningLotto));
+        }
     }
 
     public double calculateRateOfReturn(int purchaseAmount) {
