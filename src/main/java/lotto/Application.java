@@ -20,14 +20,8 @@ public class Application {
         int selfTicketCount = InputView.getSelfTicketCount();
         ResultView.printEmptyLine();
 
-        List<String> selfTicketNumbers = InputView.getSelfTickets(selfTicketCount);
-        List<LottoTicket> selfTickets = selfTicketNumbers.stream()
-                .map(stringNumbers -> new LottoTicket(new LottoNumbers(StringParserUtils.parseNumbers(stringNumbers))))
-                .collect(Collectors.toList());
-        ResultView.printEmptyLine();
-
-        NumberGenerator numberGenerator = new LottoNumberGenerator();
-        LottoGame game = new LottoGame(purchasePrice, selfTickets, numberGenerator);
+        List<LottoTicket> selfTickets = getSelfLottoTickets(selfTicketCount);
+        LottoGame game = new LottoGame(purchasePrice, selfTickets, new LottoNumberGenerator());
         ResultView.printTicketCount(game.getAutoTicketCount(), game.getSelfTicketCount());
 
         game.printTickets();
@@ -39,5 +33,14 @@ public class Application {
         ResultView.printEmptyLine();
 
         game.printGameResult();
+    }
+
+    private List<LottoTicket> getSelfLottoTickets(int selfTicketCount) {
+        List<String> selfTicketNumbers = InputView.getSelfTickets(selfTicketCount);
+        List<LottoTicket> selfTickets = selfTicketNumbers.stream()
+                .map(stringNumbers -> new LottoTicket(new LottoNumbers(StringParserUtils.parseNumbers(stringNumbers))))
+                .collect(Collectors.toList());
+        ResultView.printEmptyLine();
+        return selfTickets;
     }
 }
