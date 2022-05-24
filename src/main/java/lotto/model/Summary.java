@@ -24,4 +24,24 @@ public class Summary {
         }
         return sum;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Summary summary = (Summary) o;
+        return Objects.equals(ranks, summary.ranks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ranks);
+    }
+
+    @Override
+    public String toString() {
+        return "Summary{" +
+                "ranks=" + ranks +
+                '}';
+    }
 }
