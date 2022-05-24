@@ -4,6 +4,7 @@ import calculator.utils.Splitter;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoWinningTicket;
+import lotto.domain.ManualNumber;
 import lotto.message.InputMessage;
 
 import java.util.ArrayList;
@@ -39,5 +40,10 @@ public class InputView {
             numbers.add(new LottoNumber(stringNumber));
         }
         return numbers;
+    }
+
+    public static ManualNumber inputManualNumber() {
+        System.out.println(InputMessage.INPUT_MANUAL_NUMBER);
+        return new ManualNumber(scanner.nextInt());
     }
 }
