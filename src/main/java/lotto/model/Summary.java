@@ -9,10 +9,12 @@ public class Summary {
         this.ranks = ranks;
     }
 
-    public void printWinningDetails() {
+    public List<String> winningDetails() {
+        List<String> details = new LinkedList<>();
         for (Map.Entry<Rank, Integer> rank : this.ranks.entrySet()) {
-            System.out.println(rank.getKey().payPrize(rank.getValue()));
+            details.add(rank.getKey().detail(rank.getValue()));
         }
+        return details;
     }
 
     public long totalPrizeMoney() {

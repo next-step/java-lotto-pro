@@ -59,7 +59,10 @@ public class Message {
     }
 
     public static void printLotteriesResult(Summary summary) {
-        summary.printWinningDetails();
+        List<String> details = summary.winningDetails();
+        for (String detail : details) {
+            System.out.println(detail);
+        }
     }
 
     public static void printLotteriesEarningsRate(double ratio) {
