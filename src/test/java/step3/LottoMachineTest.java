@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,9 @@ import step3.domain.Money;
 import step3.enums.LottoReward;
 import step3.model.LottoGenerator;
 import step3.model.LottoMachine;
+import step3.model.LottoTickets;
+import step3.model.LottoWinChecker;
+import step3.model.LottoWinInfoResearcher;
 
 public class LottoMachineTest {
 
@@ -23,14 +27,17 @@ public class LottoMachineTest {
 
     @BeforeEach
     public void init() {
-        lottoMachine = new LottoMachine(new LottoGenerator());
+        lottoMachine = new LottoMachine(new LottoGenerator(), new LottoWinChecker(),
+            new LottoWinInfoResearcher());
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6:false", "1,2,3,4,5:true", "a,b,c,d,e,f:true"}, delimiter = ':')
     public void setWinnerTicket(String manualLottoSource, boolean isThrowable) {
         if (isThrowable) {
-            assertThatThrownBy(() -> lottoMachine.setWinnerLottoTicket(manualLottoSource)).isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(
+                () -> lottoMachine.setWinnerLottoTicket(manualLottoSource)).isInstanceOf(
+                IllegalArgumentException.class);
         } else {
             assertDoesNotThrow(() -> lottoMachine.setWinnerLottoTicket(manualLottoSource));
         }
@@ -44,21 +51,25 @@ public class LottoMachineTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1:false", "2:false", "40:false", "3:true", "-a:true", "-1:true"}, delimiter = ':')
+    @CsvSource(value = {"1:false", "2:false", "40:false", "3:true", "-a:true",
+        "-1:true"}, delimiter = ':')
     public void setBonusTest(String bonusElement, boolean isThrowable) {
         lottoMachine.setWinnerLottoTicket("3,4,5,6,7,8");
         if (isThrowable) {
-            assertThatThrownBy(() -> lottoMachine.setBonusNumber(bonusElement)).isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> lottoMachine.setBonusNumber(bonusElement)).isInstanceOf(
+                IllegalArgumentException.class);
         } else {
             assertDoesNotThrow(() -> lottoMachine.setBonusNumber(bonusElement));
         }
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5,6:false", "-a:true", "1,2,3,4,5:true", "-1,2,3,4,5,6:true"}, delimiter = ':')
+    @CsvSource(value = {"1,2,3,4,5,6:false", "-a:true", "1,2,3,4,5:true",
+        "-1,2,3,4,5,6:true"}, delimiter = ':')
     public void setWinnerLottoTest(String winnerSource, boolean isThrowable) {
         if (isThrowable) {
-            assertThatThrownBy(() -> lottoMachine.setWinnerLottoTicket(winnerSource)).isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> lottoMachine.setWinnerLottoTicket(winnerSource)).isInstanceOf(
+                IllegalArgumentException.class);
         } else {
             assertDoesNotThrow(() -> lottoMachine.setWinnerLottoTicket(winnerSource));
         }
@@ -76,7 +87,8 @@ public class LottoMachineTest {
         lottoTickets.add(new LottoTicket("1,2,11,12,13,14")); //MISS
         lottoTickets.add(new LottoTicket("1,2,3,4,7,5")); //5_bonus
         lottoTickets.add(new LottoTicket("11,12,13,14,15,16")); // MISS
-        assertThat(lottoMachine.checkWin(lottoTickets)).containsEntry(LottoReward.MISS, 2).containsEntry(LottoReward.FIVE_BONUS, 1)
+        assertThat(lottoMachine.checkWin(lottoTickets)).containsEntry(LottoReward.MISS, 2)
+            .containsEntry(LottoReward.FIVE_BONUS, 1)
             .containsEntry(LottoReward.FIVE, 1).containsEntry(LottoReward.SIX, 1);
     }
 
@@ -87,9 +99,75 @@ public class LottoMachineTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1:1000", "3:3000", "4:4000", "11:11000"}, delimiter = ':')
-    public void getUsingMoneyByTicketTest(int ticket, int expect) {
-        assertThat(lottoMachine.getUsingMoneyByTicket(ticket)).isEqualTo(expect);
+    @CsvSource(value = {"1:2:true", "2:1:false", "3:1:false", "2:2:false"}, delimiter = ':')
+    public void validateManualLottoCountTest(int ticket, int manualLottoCount,
+        boolean isThrowable) {
+        if (isThrowable) {
+            assertThatThrownBy(
+                () -> lottoMachine.validateManualLottoCount(ticket, manualLottoCount)).isInstanceOf(
+                IllegalArgumentException.class);
+        } else {
+            assertDoesNotThrow(
+                () -> lottoMachine.validateManualLottoCount(ticket, manualLottoCount));
+        }
+    }
+
+    @Test
+    @DisplayName("정상적인 수동 로또 생성")
+    public void makeManualLottoTicketOK() {
+        List<String> manualLottoTicketSources = new ArrayList();
+        manualLottoTicketSources.add("1,2,3,4,5,6");
+        manualLottoTicketSources.add("2,3,4,5,6,7");
+        manualLottoTicketSources.add("4,5,6,7,8,9");
+
+        assertThat(lottoMachine.makeManualLottoTickets(manualLottoTicketSources))
+            .hasSize(3);
+    }
+
+    @Test
+    @DisplayName("비정상적 수동 로또 생성")
+    public void makeManualLottoTicketThrow() {
+        List<String> manualLottoTicketSources = new ArrayList();
+        manualLottoTicketSources.add("a,2,3,4,5,6");
+        manualLottoTicketSources.add("2,3,5,6,7");
+        manualLottoTicketSources.add("4,5,6,7,,8");
+        manualLottoTicketSources.add("4,5,6,7,,46");
+
+        assertThatThrownBy(
+            () -> lottoMachine.makeManualLottoTickets(manualLottoTicketSources)).isInstanceOf(
+            IllegalArgumentException.class);
+    }
+
+    @Test
+    public void checkMatchLottoResultTest() {
+        initMachine();
+        LottoTickets userLottoTickets = createUserLottoTickets();
+        Map<LottoReward, Integer> matchCountPerLottoReward = lottoMachine.checkWin(
+            userLottoTickets.getLottoTickets());
+        Map<String, String> lottoResult = lottoMachine.getLottoRewardStatistics(
+            matchCountPerLottoReward, 4);
+        long reward = 30_000_000 + 50_000 + 5_000 + 2_000_000_000;
+
+        assertThat(lottoResult)
+            .containsEntry("isBenefit", "이득")
+            .containsEntry("profitRate", String.valueOf(reward * 1.0 / (1000 * 4)));
+    }
+
+    private void initMachine() {
+        lottoMachine.setWinnerLottoTicket("1,2,3,4,5,6");
+        lottoMachine.setBonusNumber("7");
+
+    }
+
+    private LottoTickets createUserLottoTickets() {
+        ArrayList<LottoTicket> lottoTicketsArray = new ArrayList<>();
+        lottoTicketsArray.add(new LottoTicket("1,2,3,4,5,7")); //5_b
+        lottoTicketsArray.add(new LottoTicket("1,2,3,4,10,8"));//4
+        lottoTicketsArray.add(new LottoTicket("1,2,3,11,12,13"));//3
+        lottoTicketsArray.add(new LottoTicket("1,2,3,4,5,6"));//6
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.addLottoTickets(lottoTicketsArray);
+        return lottoTickets;
     }
 }
 

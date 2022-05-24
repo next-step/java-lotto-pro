@@ -9,11 +9,12 @@ import step3.enums.LottoReward;
 
 public class OutputView {
 
-    private final String REWARD_RATE_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
-    private final String LOTTOS_INFO_FORMAT = "%s개를 구매했습니다.";
-    private final String OVERVIEW_INIT_MESSAGE = "\n당첨 통계\n---------";
-    private final String IS_LOSS = "손해";
-    private final String IS_BENEFIT = "이득";
+    private static final int BREAK_EVEN_POINT = 1;
+    private static final String REWARD_RATE_FORMAT = "총 수익률은 %.2f입니다.(기준이 %d이기 때문에 결과적으로 %s라는 의미임)";
+    private static final String LOTTOS_INFO_FORMAT = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
+    private static final String OVERVIEW_INIT_MESSAGE = "\n당첨 통계\n---------";
+    private static final String IS_BENEFIT_MAPPER = "isBenefit";
+    private static final String PROFIT_RATE_MAPPER = "profitRate";
     private Map<LottoReward, String> LOTTO_OVERVIEW_FORMAT = new HashMap<>();
 
 
@@ -21,49 +22,37 @@ public class OutputView {
         initOverviewMap();
     }
 
-    public void printOutput(Map<LottoReward, Integer> statistics,int usingMoney) {
-        System.out.println(OVERVIEW_INIT_MESSAGE);
-        long reward = printOverview(statistics);
-        printRewardRate(reward, usingMoney);
-    }
-
-    private void printRewardRate(long reward, int usingMoney) {
-        System.out.println(String.format(REWARD_RATE_FORMAT, getProfitRate(reward, usingMoney), isBenefit(reward, usingMoney)));
-    }
-
-    private String isBenefit(long reward, int usingMoney) {
-
-        if (usingMoney > reward) {
-            return IS_LOSS;
+    public void printOutput(Map<LottoReward, Integer> matchCountStatistics,
+        Map<String, String> lottoRewardStatistics) {
+        System.out.println(OutputView.OVERVIEW_INIT_MESSAGE);
+        for (LottoReward lottoReward : LOTTO_OVERVIEW_FORMAT.keySet()) {
+            int matchCount = matchCountStatistics.get(lottoReward);
+            printOverViewPerEntry(lottoReward, matchCount);
         }
-        return IS_BENEFIT;
+        printRewardRate(lottoRewardStatistics.get(OutputView.PROFIT_RATE_MAPPER),
+            lottoRewardStatistics.get(OutputView.IS_BENEFIT_MAPPER));
     }
 
-    private double getProfitRate(long reward, int usingMoney) {
-        return reward * 1.0 / usingMoney;
+    private void printRewardRate(String profitRate, String isBenefit) {
+        System.out.println(
+            String.format(OutputView.REWARD_RATE_FORMAT, Float.valueOf(profitRate),
+                BREAK_EVEN_POINT, isBenefit));
     }
 
-    private long printOverview(Map<LottoReward, Integer> statistics) {
-        long reward = 0;
-        for (LottoReward printRewardTarget : LOTTO_OVERVIEW_FORMAT.keySet()) {
-            reward += printOverViewPerEntry(printRewardTarget, statistics.get(printRewardTarget));
-        }
-        return reward;
+
+    private void printOverViewPerEntry(LottoReward lottoReward, int matchCount) {
+        System.out.println(
+            String.format(LOTTO_OVERVIEW_FORMAT.get(lottoReward), lottoReward.getMatchCount(),
+                lottoReward.getReward(), matchCount));
     }
 
-    private long printOverViewPerEntry(LottoReward lottoReward, int matchCount) {
-        System.out.println(String.format(
-            LOTTO_OVERVIEW_FORMAT.get(lottoReward),
-            lottoReward.getMatchCount(),
-            lottoReward.getReward(),
-            matchCount));
-        return lottoReward.getReward() * matchCount;
-    }
 
-    public void printLottoInfo(List<List<LottoElement>> lottoNumbers) {
-        System.out.println(String.format(LOTTOS_INFO_FORMAT, lottoNumbers.size()));
-        for (List<LottoElement> lottoNumber : lottoNumbers) {
-            System.out.println(lottoNumber.toString());
+    public void printLottoInfo(List<List<LottoElement>> lottoTickets, int manualTicketCount,
+        int randomTicketCount) {
+        System.out.println(
+            String.format(OutputView.LOTTOS_INFO_FORMAT, manualTicketCount, randomTicketCount));
+        for (List<LottoElement> lottoTicketNumbers : lottoTickets) {
+            System.out.println(lottoTicketNumbers.toString());
         }
     }
 

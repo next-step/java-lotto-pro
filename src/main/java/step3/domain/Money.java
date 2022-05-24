@@ -2,15 +2,16 @@ package step3.domain;
 
 
 import java.util.Objects;
+import step3.utls.NumberUtil;
 
 public class Money {
 
     private final int money;
-    private final String MONEY_RANGE_EXCEPTION = "돈은 양수의 자연수여야 합니다";
-    private final int MONEY_BOTTOM_BOUNDARY = 0;
+    private static final String MONEY_RANGE_EXCEPTION = "돈은 양수의 자연수여야 합니다";
+    private static final int MONEY_BOTTOM_BOUNDARY = 0;
+
     public Money(String money) {
-        validateMoney(money);
-        this.money = Integer.parseInt(money);
+        this(NumberUtil.parseInt(money));
     }
 
     public Money(int money) {
@@ -18,21 +19,9 @@ public class Money {
         this.money = money;
     }
 
-    private void validateMoney(String money) {
-        boolean validateResult = true;
-        try {
-            validateResult = Integer.parseInt(money) >= MONEY_BOTTOM_BOUNDARY;
-        } catch (NumberFormatException e) {
-            validateResult = false;
-        }
-        if (!validateResult) {
-            throw new IllegalArgumentException(MONEY_RANGE_EXCEPTION);
-        }
-    }
-
     private void validateMoney(int money) {
-        if (money < MONEY_BOTTOM_BOUNDARY) {
-            throw new IllegalArgumentException(MONEY_RANGE_EXCEPTION);
+        if (money < Money.MONEY_BOTTOM_BOUNDARY) {
+            throw new IllegalArgumentException(Money.MONEY_RANGE_EXCEPTION);
         }
     }
 
