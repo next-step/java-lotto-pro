@@ -10,7 +10,7 @@ import static lotto.domain.LottoNumber.LOTTO_MIN_NUMBER;
 
 public class LottoFactory {
     private static final List<LottoNumber> LOTTO_NUMBERS = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
-            .mapToObj(LottoNumber::new)
+            .mapToObj(LottoNumber::from)
             .collect(Collectors.toList());
     private static final int LOTTO_NUMBERS_COUNT = 6;
 

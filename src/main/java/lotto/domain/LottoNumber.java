@@ -10,9 +10,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private int number;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         isValidRange(number);
         this.number = number;
+    }
+    public static LottoNumber from(int number) {
+        return new LottoNumber(number);
     }
 
     public LottoNumber(String stringNumber) {

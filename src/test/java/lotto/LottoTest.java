@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class LottoTest {
+class LottoTest {
     private Lotto stringToLotto;
 
     @BeforeEach
@@ -22,27 +22,27 @@ public class LottoTest {
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
-    public void 로또_생성_입력(int input) {
+    void 로또_생성_입력(int input) {
         long count = stringToLotto.getLottoNumbers().stream()
-                .filter(lottoNumber -> lottoNumber.equals(new LottoNumber(input)))
+                .filter(lottoNumber -> lottoNumber.equals(LottoNumber.from(input)))
                 .count();
         assertThat(count).isEqualTo(1);
     }
 
     @Test
-    public void 로또_생성_0보다_작은_수() {
+    void 로또_생성_0보다_작은_수() {
         assertThatThrownBy(() -> LottoFactory.manualGenerator("-1, 2, 3, 4, 5, 6"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    public void 로또_생성_45보다_큰_수() {
+    void 로또_생성_45보다_큰_수() {
         assertThatThrownBy(() -> LottoFactory.manualGenerator("46, 2, 3, 4, 5, 6"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    public void 로또_생성_중복_수() {
+    void 로또_생성_중복_수() {
         assertThatThrownBy(() -> LottoFactory.manualGenerator("1, 1, 3, 4, 5, 6"))
                 .isInstanceOf(IllegalArgumentException.class);
     }

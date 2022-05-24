@@ -8,15 +8,15 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class LottosTest {
+class LottosTest {
     @Test
-    public void 로또_그룹_생성() {
+    void 로또_그룹_생성() {
         Lottos lottos = LottoShop.generateLottos(5);
         assertThat(lottos.getLottoList().size()).isEqualTo(5);
     }
 
     @Test
-    public void 로또_매치() {
+    void 로또_매치() {
         String[] input = new String[3];
         input[0] = "1,2,3,4,5,6";
         input[1] = "1,2,3,7,8,9";
@@ -28,8 +28,8 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoList);
 
         Lotto winningLottoNumbers = LottoFactory.manualGenerator(input[0]);
-        LottoNumber bonusNumber = new LottoNumber(7);
-        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
+        LottoNumber bonusNumber = LottoNumber.from(7);
+        WinningLotto winningLotto = WinningLotto.of(winningLottoNumbers, bonusNumber);
         List<Rank> list = lottos.matchLottoStatic(winningLotto);
         assertThat(list.get(0)).isEqualTo(Rank.FIRST);
         assertThat(list.get(1)).isEqualTo(Rank.FIFTH);

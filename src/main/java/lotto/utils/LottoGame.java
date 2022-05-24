@@ -11,8 +11,8 @@ public class LottoGame {
         OutputView.printQuantity(totalLotto);
 
         Lotto lotto = LottoFactory.manualGenerator(InputView.printRequestWinningLotto());
-        LottoNumber lottoNumber = new LottoNumber(InputView.printRequestBonusNumber());
-        WinningLotto winningLotto = new WinningLotto(lotto, lottoNumber);
+        LottoNumber lottoNumber = LottoNumber.from(InputView.printRequestBonusNumber());
+        WinningLotto winningLotto = WinningLotto.of(lotto, lottoNumber);
         LottoScore lottoScore = new LottoScore(totalLotto.getLottoList().matchLottoStaticToString(winningLotto));
 
         OutputView.printLottoStatistic(lottoScore.getLottoScore());
