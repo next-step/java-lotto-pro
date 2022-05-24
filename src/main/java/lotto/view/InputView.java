@@ -10,7 +10,7 @@ public class InputView {
     private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static int printRequestAmount() {
+    public static int getAmountPrint() {
         System.out.println(START_LOTTO);
         try {
             return SCANNER.nextInt();
@@ -21,7 +21,7 @@ public class InputView {
         }
     }
 
-    public static int printRequestBonusNumber() {
+    public static int getBonusNumberPrint() {
         System.out.println(BONUS_NUMBER);
         try {
             return SCANNER.nextInt();
@@ -32,7 +32,7 @@ public class InputView {
         }
     }
 
-    public static String printRequestWinningLotto() {
+    public static String getWinningLottoPrint() {
         System.out.println(WINNING_LOTTO);
         String input = SCANNER.nextLine();
         return input;
