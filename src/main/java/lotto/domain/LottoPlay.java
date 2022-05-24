@@ -19,7 +19,7 @@ public class LottoPlay {
 
     public void play() {
         PurchaseMoney purchaseMoney = getPurchaseMoney();
-        Lottos lottos = lottoGenerator.generateLottos(purchaseMoney.getAmountOfLotto());
+        Lottos lottos = lottoGenerator.generateLottos(purchaseMoney.getPurchasableQuantity());
         resultView.printPurchasedLottos(lottos);
         WinningLotto winningLotto = getWinningLotto();
         LottosResults results = lottos.matchWithWinningLotto(winningLotto);

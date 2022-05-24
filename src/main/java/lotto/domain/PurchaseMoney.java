@@ -7,21 +7,19 @@ public class PurchaseMoney {
     private static final int LOTTO_PRICE = 1000;
 
     private final int money;
-    private final int amountOfLotto;
     
     public PurchaseMoney(int money) {
         validate(money);
 
         this.money = money;
-        this.amountOfLotto = money / LOTTO_PRICE;
     }
 
     public int getMoney() {
         return money;
     }
 
-    public int getAmountOfLotto() {
-        return amountOfLotto;
+    public int getPurchasableQuantity() {
+        return money / LOTTO_PRICE;
     }
 
     private void validate(int money) {

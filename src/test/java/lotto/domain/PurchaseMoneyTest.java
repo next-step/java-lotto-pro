@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.ArrayList;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ class PurchaseMoneyTest {
     @Test
     void getAmountOfLotto() {
         PurchaseMoney result = new PurchaseMoney(7600);
-        assertThat(result.getAmountOfLotto()).isEqualTo(7);
+        assertThat(result.getPurchasableQuantity()).isEqualTo(7);
     }
 
     @DisplayName("수익률 계산이 정상적으로 동작하는지 확인")
