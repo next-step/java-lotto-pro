@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.LottoConstants;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,11 +12,7 @@ public class LottoNumberGenerator implements NumberGenerator {
 
     public static final int MAX_COUNT = 6;
 
-    public static final int NUMBER_RANGE_FROM = 1;
-
-    public static final int NUMBER_RANGE_TO = 45;
-
-    private static List<Integer> numberPool = IntStream.rangeClosed(NUMBER_RANGE_FROM, NUMBER_RANGE_TO)
+    private static final List<Integer> numberPool = IntStream.rangeClosed(LottoConstants.NUMBER_RANGE_FROM, LottoConstants.NUMBER_RANGE_TO)
             .boxed().collect(Collectors.toList());
 
 

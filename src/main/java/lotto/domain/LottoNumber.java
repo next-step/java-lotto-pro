@@ -1,14 +1,12 @@
 package lotto.domain;
 
+import lotto.LottoConstants;
+
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
-
-    private static final int NUMBER_RANGE_FROM = 1;
-
-    private static final int NUMBER_RANGE_TO = 45;
 
     public LottoNumber(int number) {
         validateLottoNumber(number);
@@ -20,7 +18,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateLottoNumber(int number) {
-        if (number < NUMBER_RANGE_FROM || number > NUMBER_RANGE_TO) {
+        if (number < LottoConstants.NUMBER_RANGE_FROM || number > LottoConstants.NUMBER_RANGE_TO) {
             throw new IllegalArgumentException("Lotto number should be from 1 to 45.");
         }
     }
