@@ -50,16 +50,17 @@ public class LottoGame {
 
     public LottoGame(int purchasePrice, List<LottoTicket> selfTickets, NumberGenerator numberGenerator) {
         this();
-        int autoCount = (purchasePrice - (TICKET_UNIT_PRICE * selfTickets.size())) / TICKET_UNIT_PRICE;
-        if (autoCount < 0) {
+        int remainingAutoTicketCount = (purchasePrice - (TICKET_UNIT_PRICE * selfTickets.size())) / TICKET_UNIT_PRICE;
+        final int MINIMUM_AUTO_TICKET_COUNT = 0;
+        if (remainingAutoTicketCount < MINIMUM_AUTO_TICKET_COUNT) {
             throw new IllegalArgumentException("Price is not enough to by self ticket");
         }
 
         this.purchasePrice = purchasePrice;
         this.tickets = new ArrayList<>(selfTickets);
-        this.tickets.addAll(generateAutoTickets(numberGenerator, autoCount));
+        this.tickets.addAll(generateAutoTickets(numberGenerator, remainingAutoTicketCount));
 
-        saveTicketCountByIssueType(autoCount, selfTickets.size());
+        saveTicketCountByIssueType(remainingAutoTicketCount, selfTickets.size());
     }
 
     private List<LottoTicket> generateAutoTickets(NumberGenerator numberGenerator, int autoTicketCount) {
@@ -114,7 +115,9 @@ public class LottoGame {
             return ;
         }
 
-        this.earningRate = (double) Math.round((double) totalEarning / this.purchasePrice * 100) / 100;
+        final int ROUND_UP_TO_TWO_DECIMAL = 100;
+        this.earningRate = (double) Math.round((double) totalEarning / this.purchasePrice
+                * ROUND_UP_TO_TWO_DECIMAL) / ROUND_UP_TO_TWO_DECIMAL;
     }
 
     private void calculateGameScore(LottoTicket ticket, WinnerTicket winnerTicket) {
