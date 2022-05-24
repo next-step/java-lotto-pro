@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.EnumMap;
+import java.util.Map;
 
 public class LottoResult {
 
@@ -15,7 +16,7 @@ public class LottoResult {
         result.put(rank, result.getOrDefault(rank, 0) + 1);
     }
 
-    public EnumMap<Rank, Integer> getScore() {
+    public Map<Rank, Integer> getScore() {
         return new EnumMap<>(this.result);
     }
 
