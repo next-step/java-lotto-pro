@@ -19,7 +19,6 @@ public class InputView {
     }
 
     public static LottoWinningTicket inputWinningNumbers() {
-        // TODO: LottoNumbers로 바꾸면 좋을 듯
         List<LottoNumber> lottoNumbers = inputLottoNumbers();
         LottoNumber bonusNumber = inputBonusNumber();
 
