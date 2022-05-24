@@ -40,10 +40,8 @@ public class LottoFactory {
 
     private static void vaildCount(String[] input) {
         Set<String> set = new HashSet<>();
-        for (String s : input) {
-            set.add(s);
-        }
-        if (set.size() != 6) {
+        Collections.addAll(set, input);
+        if (set.size() != LOTTO_NUMBERS_COUNT) {
             throw new IllegalArgumentException(INPUT_LOTTO_ERROR);
         }
     }
