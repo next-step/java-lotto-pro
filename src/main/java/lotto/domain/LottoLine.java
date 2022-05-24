@@ -13,6 +13,7 @@ import lotto.exception.LottoLineSizeException;
 
 public class LottoLine {
 
+    private static final int DEFAULT_VALUE = 0;
     private final List<LottoNumber> lottoLine;
 
     public LottoLine(List<Integer> lottoNumbers) {
@@ -52,7 +53,7 @@ public class LottoLine {
     }
 
     public LottoRank getMatchCount(LottoLine compareLottoLine, LottoNumber bonusNumber) {
-        int matchCount = 0;
+        int matchCount = DEFAULT_VALUE;
         for (LottoNumber lottoNumber : lottoLine) {
             matchCount = calculateMatchCount(compareLottoLine, matchCount, lottoNumber);
         }

@@ -8,6 +8,7 @@ import lotto.util.LottoNumbersGenerator;
 
 public class LottoGame {
 
+    private static final int LOOP_START_VALUE = 0;
     private final List<LottoLine> lottoGame;
 
     public LottoGame(List<LottoLine> lottoGame) {
@@ -16,7 +17,7 @@ public class LottoGame {
 
     public static LottoGame issueLotto(int totalCount) {
         List<LottoLine> lottoLines = new ArrayList<>();
-        for (int i = 0; i < totalCount; i++) {
+        for (int i = LOOP_START_VALUE; i < totalCount; i++) {
             List<Integer> lottoNumbers = LottoNumbersGenerator.generateLottoNumbers();
             lottoLines.add(new LottoLine(lottoNumbers));
         }

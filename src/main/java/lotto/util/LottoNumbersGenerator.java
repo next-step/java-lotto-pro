@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbersGenerator {
+    private static final int DEFAULT_VALUE = 0;
     private static final List<Integer> LOTTO_NUMBERS_CANDIDATE;
 
     static {
@@ -23,7 +24,7 @@ public class LottoNumbersGenerator {
     public static List<Integer> generateLottoNumbers() {
         List<Integer> lottoNumbersCandidate = new ArrayList<>(LOTTO_NUMBERS_CANDIDATE);
         Collections.shuffle(lottoNumbersCandidate);
-        List<Integer> lottoNumbers = lottoNumbersCandidate.subList(0, LOTTO_LINE_LENGTH);
+        List<Integer> lottoNumbers = lottoNumbersCandidate.subList(DEFAULT_VALUE, LOTTO_LINE_LENGTH);
         Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
