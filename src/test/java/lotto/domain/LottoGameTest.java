@@ -10,9 +10,11 @@ import org.junit.jupiter.api.Test;
 class LottoGameTest {
 
     LottoGame lottoGame;
+    OutputView outputView;
 
     @BeforeEach
     void 초기화(){
+        outputView = new OutputView();
         lottoGame = new LottoGame(
             Arrays.asList(
                 new LottoLine("1, 2, 3, 4, 5, 6"),
@@ -26,16 +28,21 @@ class LottoGameTest {
     }
 
     @Test
-    @DisplayName("주어진 개수만큼 로또 생성 테스트")
+    @DisplayName("주어진 개수만큼 로또가 생성되어야 한다.")
     void 로또게임_생성_테스트(){
+        // given
         LottoGame lottoGameByCount = LottoGame.issueLotto(14);
-        Assertions.assertThat(lottoGameByCount.toLottoGameDTO().size()).isEqualTo(14);
+
+        // when
+        int expectedSize = lottoGameByCount.toLottoGameDTO().size();
+
+        // then
+        Assertions.assertThat(expectedSize).isEqualTo(14);
     }
 
     @Test
-    @DisplayName("생성된 로또 문자열 테스트")
+    @DisplayName("생성된 로또 문자열이 정상적으로 출력되어야 한다.")
     void 로또게임_출력_테스트(){
-        OutputView outputView = new OutputView();
         Assertions.assertThat(outputView.getLottoGameString(lottoGame.toLottoGameDTO()))
             .isEqualTo(
                 "[1, 2, 3, 4, 5, 6]\n"
@@ -48,29 +55,36 @@ class LottoGameTest {
     }
 
     @Test
-    @DisplayName("생성된 로또 문자열 출력 테스트")
+    @DisplayName("로또 통계 문자열이 정상적으로 출력되어야 한다.")
     void 로또게임_결과_테스트(){
-        OutputView outputView = new OutputView();
-        LottoResult lottoResult = lottoGame.getLottoResult(new LottoLine("1, 17, 23, 35, 39, 45"));
-        Assertions.assertThat(outputView.getLottoResultString(lottoResult))
-            .isEqualTo(
+        // given
+        LottoResult lottoResult = lottoGame.getLottoResult(new LottoLine("1, 17, 23, 35, 39, 45"), new LottoNumber(45));
+
+        // when
+        String expectedString = outputView.getLottoResultString(lottoResult);
+
+        // then
+        Assertions.assertThat(expectedString).isEqualTo(
                 "3개 일치 (5000원)- 1개\n"
                 + "4개 일치 (50000원)- 0개\n"
-                + "5개 일치 (1500000원)- 1개\n"
+                + "5개 일치 (1500000원)- 0개\n"
+                + "5개 일치, 보너스 볼 일치(30000000원)- 1개\n"
                 + "6개 일치 (2000000000원)- 0개\n"
         );
     }
 
     @Test
-    @DisplayName("생성된 로또 수익률 문자열 출력 테스트")
+    @DisplayName("생성된 로또 수익률 문자열이 정상적으로 출력되어야 한다.")
     void 로또게임_수익률_테스트(){
-        OutputView outputView = new OutputView();
-        LottoResult lottoResult = lottoGame.getLottoResult(new LottoLine("1, 17, 23, 35, 39, 45"));
+        // given
+        LottoResult lottoResult = lottoGame.getLottoResult(new LottoLine("1, 17, 23, 35, 39, 45"), new LottoNumber(45));
         LottoPayment payment = new LottoPayment(14000);
         LottoPayment prize = new LottoPayment(lottoResult.getLottoPrize());
-        Assertions.assertThat(outputView.getEarningRateString(payment.toLottoPaymentDTO(), prize.toLottoPaymentDTO()))
-            .isEqualTo(
-                "총 수익률은 107.5입니다."
-            );
+
+        // when
+        String expectedString = outputView.getEarningRateString(payment.toLottoPaymentDTO(), prize.toLottoPaymentDTO());
+
+        // then
+        Assertions.assertThat(expectedString).isEqualTo("총 수익률은 2143.2144입니다.");
     }
 }

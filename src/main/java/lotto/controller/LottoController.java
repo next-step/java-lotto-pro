@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoGame;
 import lotto.domain.LottoLine;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoPayment;
 import lotto.domain.LottoResult;
 import lotto.service.LottoService;
@@ -11,12 +12,10 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    private final InputView inputView;
     private final OutputView outputView;
     private final LottoService lottoService;
 
-    public LottoController(InputView inputView, OutputView outputView) {
-        this.inputView = inputView;
+    public LottoController(OutputView outputView) {
         this.outputView = outputView;
         this.lottoService = new LottoService();
     }
@@ -25,11 +24,12 @@ public class LottoController {
         LottoPayment lottoPayment = inputLottoPayment();
         LottoGame lottoGame = buyLotto(lottoPayment);
         LottoLine winLottoLine = inputWinInformation();
-        printResult(lottoGame, winLottoLine, lottoPayment);
+        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
+        printResult(lottoGame, winLottoLine, lottoPayment, bonusNumber);
     }
 
     private LottoPayment inputLottoPayment(){
-        return new LottoPayment(inputView.inputTotalPayment());
+        return new LottoPayment(InputView.inputTotalPayment());
     }
 
     private LottoGame buyLotto(LottoPayment lottoPayment){
@@ -39,11 +39,11 @@ public class LottoController {
     }
 
     private LottoLine inputWinInformation(){
-        return LottoStringGenerator.toWinLottoLine(inputView.inputLastWeekWinningLottoLine());
+        return LottoStringGenerator.toWinLottoLine(InputView.inputLastWeekWinningLottoLine());
     }
 
-    private void printResult(LottoGame lottoGame, LottoLine winLottoLine, LottoPayment lottoPayment){
-        LottoResult lottoResult = lottoService.getLottoResult(lottoGame, winLottoLine);
+    private void printResult(LottoGame lottoGame, LottoLine winLottoLine, LottoPayment lottoPayment, LottoNumber bonusNumber){
+        LottoResult lottoResult = lottoService.getLottoResult(lottoGame, winLottoLine, bonusNumber);
         LottoPayment prize = new LottoPayment(lottoResult.getLottoPrize());
         outputView.printLottoResult(outputView.getLottoResultString(lottoResult));
         outputView.printEarningRate(outputView.getEarningRateString(lottoPayment.toLottoPaymentDTO(), prize.toLottoPaymentDTO()));

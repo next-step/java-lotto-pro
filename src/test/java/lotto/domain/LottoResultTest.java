@@ -25,9 +25,15 @@ class LottoResultTest {
     }
 
     @Test
-    @DisplayName("상금 액수 계산 테스트")
+    @DisplayName("상금 액수가 정상적으로 계산되어야 한다.")
     void 로또상금_계산_테스트(){
-        LottoResult lottoResult = lottoGame.getLottoResult(new LottoLine("1, 17, 23, 35, 39, 45"));
-        Assertions.assertThat(lottoResult.getLottoPrize()).isEqualTo(1_505_000);
+        // given
+        LottoResult lottoResult = lottoGame.getLottoResult(new LottoLine("1, 17, 23, 35, 39, 45"), new LottoNumber(45));
+
+        // when
+        int expectedPrize = lottoResult.getLottoPrize();
+
+        // then
+        Assertions.assertThat(expectedPrize).isEqualTo(30_005_000);
     }
 }

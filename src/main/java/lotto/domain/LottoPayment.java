@@ -1,14 +1,13 @@
 package lotto.domain;
 
-import static lotto.constant.LottoConstant.LOTTO_PAYMENT_MIN;
-import static lotto.constant.LottoConstant.LOTTO_PRICE_EACH;
-
 import java.util.Objects;
 import lotto.dto.LottoPaymentDTO;
 import lotto.exception.LottoPaymentException;
 
 public class LottoPayment {
 
+    private static final int LOTTO_PAYMENT_MIN = 0;
+    private static final int LOTTO_PRICE_EACH = 1000;
     private final int totalPayment;
 
     public LottoPayment(int totalPayment) {
