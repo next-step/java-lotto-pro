@@ -2,18 +2,18 @@ package lotto.model;
 
 import lotto.Config;
 
-public class Counter {
+public class Money {
     private final int receiveAmount;
 
-    public Counter(int money) {
+    public Money(int money) {
         this.receiveAmount = checkAmount(money);
     }
 
-    public int receiveAmount () {
+    public int receiveAmount() {
         return this.receiveAmount;
     }
 
-    public int buyCount () {
+    public int buyCount() {
         return this.receiveAmount / Config.LOTTO_ONE_GAME_PRICE;
     }
 
@@ -27,5 +27,4 @@ public class Counter {
         }
         return amount;
     }
-
 }

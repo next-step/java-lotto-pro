@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
     Lotto lotto;
@@ -40,5 +41,17 @@ public class LottoTest {
     public void containNumber() {
         lotto = new Lotto("11, 14, 24, 25, 37, 39");
         assertThat(lotto.contain(11)).isTrue();
+    }
+
+    @Test
+    @DisplayName("로또숫자가 6개 미만일 경우 검증")
+    public void notValidLottoNoCount() {
+        assertThatThrownBy(() -> new Lotto("11, 14, 24, 25, 37")).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("입력받은 로또숫자 형식이 잘못되었을 경우 검증")
+    public void notValidLottoNumbers() {
+        assertThatThrownBy(() -> new Lotto("a, 14, 24, 25, 37")).isInstanceOf(IllegalArgumentException.class);
     }
 }

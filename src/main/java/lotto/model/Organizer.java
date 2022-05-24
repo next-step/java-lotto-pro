@@ -8,14 +8,14 @@ public class Organizer {
     private static final int COMPARE_FALSE = 0;
     private static final int INIT_RESULT_COUNT = 0;
 
-    private final WinningNumber winnerNumbers;
-    private final BonusNumber bonusNumber;
+    private final Lotto winningLotto;
+    private final LottoNo bonusLottoNo;
     private Map<Rank, Integer> winningResults;
     private long totalWinningMoney;
 
-    public Organizer(WinningNumber winningNumbers, BonusNumber bonusNumber) {
-        this.winnerNumbers = winningNumbers;
-        this.bonusNumber = bonusNumber;
+    public Organizer(Lotto winningLotto, LottoNo bonusLottoNo) {
+        this.winningLotto = winningLotto;
+        this.bonusLottoNo = checkBonusNumber(bonusLottoNo, winningLotto);
     }
 
     public Map<Rank, Integer> winningResults(Lottos lottos) {
@@ -31,7 +31,7 @@ public class Organizer {
     }
 
     private boolean sameBonusNumber(Lotto lotto) {
-        return lotto.contain(this.bonusNumber.value());
+        return lotto.contain(this.bonusLottoNo.value());
     }
 
     private int userNumberSameCount(Lotto lotto) {
@@ -59,6 +59,13 @@ public class Organizer {
     }
 
     private int compare(LottoNo number) {
-        return this.winnerNumbers.contains(number) ? COMPARE_TRUE : COMPARE_FALSE;
+        return this.winningLotto.contain(number) ? COMPARE_TRUE : COMPARE_FALSE;
+    }
+
+    private LottoNo checkBonusNumber(LottoNo bonusLottoNo, Lotto winningLotto) {
+        if (winningLotto.contain(bonusLottoNo)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨번호와 달라야합니다.");
+        }
+        return bonusLottoNo;
     }
 }

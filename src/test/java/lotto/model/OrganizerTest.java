@@ -5,18 +5,19 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class OrganizerTest {
 
     Organizer organizer;
+    Lotto winningLotto;
 
     @BeforeEach
     private void setup() {
-        LottoNumbersInput numbersInput = new LottoNumbersInput("1, 12, 21, 33, 41, 45");
-        WinningNumber winningNumber = new WinningNumber(numbersInput);
+        winningLotto = new Lotto("1, 12, 21, 33, 41, 45");
         organizer = new Organizer(
-                winningNumber,
-                new BonusNumber(7, winningNumber)
+                winningLotto,
+                new LottoNo(7)
         );
     }
 
@@ -46,6 +47,13 @@ public class OrganizerTest {
         );
         organizer.winningResults(lottos);
         assertThat(organizer.winningRate(15000)).isEqualTo("0.33");
+    }
+
+    @Test
+    @DisplayName("보너스 번호 비정상 값 검증")
+    public void checkNotValidBonusNumber() {
+        assertThatThrownBy(() -> {new Organizer(new Lotto(1, 2, 21, 3, 4, 5), new LottoNo(2));})
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
 

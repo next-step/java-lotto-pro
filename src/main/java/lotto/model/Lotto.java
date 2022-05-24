@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -14,17 +15,19 @@ public class Lotto {
     private final List<LottoNo> pickNumbers;
 
     public Lotto() {
-        pickNumbers = createNumbers();
+        List<Integer> numbers = LottoNumbers.PREPARED_NUMBERS;
+        Collections.shuffle(numbers);
+        numbers = numbers.subList(START_INDEX, END_INDEX);
+        pickNumbers = createNumbers(numbers);
     }
 
     public Lotto(Integer... customNumbers) {
-        pickNumbers = LottoNo.toLottoNoList(Arrays.asList(customNumbers));
+        pickNumbers = createNumbers(Arrays.asList(customNumbers));
     }
 
     public Lotto(String customNumbers) {
-        pickNumbers = Arrays.stream(customNumbers.split(","))
-                .map(String::trim)
-                .map(v -> new LottoNo(Integer.parseInt(v))).collect(Collectors.toList());
+        this(Arrays.stream(customNumbers.split(","))
+                .map(String::trim).map(Integer::parseInt).toArray(Integer[]::new));
     }
 
     public List<LottoNo> seeNumbers() {
@@ -35,6 +38,10 @@ public class Lotto {
         return this.pickNumbers.stream().anyMatch(lottoNo -> lottoNo.value() == number);
     }
 
+    public boolean contain(LottoNo number) {
+        return this.pickNumbers.stream().anyMatch(lottoNo -> lottoNo.value() == number.value());
+    }
+
     public String printText() {
         String joinNumber = this.pickNumbers.stream()
                 .map(LottoNo::value)
@@ -43,9 +50,16 @@ public class Lotto {
         return String.format(PRINT_FORM, joinNumber);
     }
 
-    private List<LottoNo> createNumbers() {
-        List<Integer> preparedNumbers = LottoNumbers.PREPARED_NUMBERS;
-        Collections.shuffle(preparedNumbers);
-        return LottoNo.toLottoNoList(preparedNumbers.subList(START_INDEX, END_INDEX));
+    private List<LottoNo> createNumbers(List<Integer> numbers) {
+        if (numbers.size() != END_INDEX) {
+            throw new IllegalArgumentException("숫자는 6개만 입력 가능합니다.");
+        }
+
+        Collections.sort(numbers);
+        List<LottoNo> result = new ArrayList<>();
+        for (int number : numbers.subList(START_INDEX, END_INDEX)) {
+            result.add(new LottoNo(number));
+        }
+        return result;
     }
 }

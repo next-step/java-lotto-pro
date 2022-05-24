@@ -6,14 +6,14 @@ import lotto.view.ResultView;
 
 public class LottoController {
     public static void buy() {
-        Counter counter = new Counter(InputView.inputBuyAmount());
-        Lottos lottos = new Lottos(counter.buyCount());
+        Money money = new Money(InputView.inputBuyAmount());
+        Lottos lottos = new Lottos(money.buyCount());
         ResultView.printLottoNumbers(lottos);
 
-        WinningNumber winningNumber = new WinningNumber(new LottoNumbersInput(InputView.inputWinningNumbers()));
-        BonusNumber bonusNumber = new BonusNumber(InputView.inputBonusNumbers(), winningNumber);
-        Organizer organizer = new Organizer(winningNumber, bonusNumber);
+        Lotto winningLotto = new Lotto(InputView.inputWinningNumbers());
+        LottoNo bonusLottoNo = new LottoNo(InputView.inputBonusNumbers());
+        Organizer organizer = new Organizer(winningLotto, bonusLottoNo);
         ResultView.printWinningResult(organizer.winningResults(lottos));
-        ResultView.printRateOfReturn(organizer.winningRate(counter.receiveAmount()));
+        ResultView.printRateOfReturn(organizer.winningRate(money.receiveAmount()));
     }
 }
