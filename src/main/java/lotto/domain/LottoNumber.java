@@ -2,11 +2,10 @@ package lotto.domain;
 
 import java.util.Objects;
 
-import static lotto.constants.Message.INPUT_LOTTO_ERROR;
-
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int LOTTO_MIN_NUMBER = 1;
     public static final int LOTTO_MAX_NUMBER = 45;
+    private static final String INPUT_LOTTO_ERROR = "잘못된 로또 번호를 입력하였습니다.";
 
     private int number;
 

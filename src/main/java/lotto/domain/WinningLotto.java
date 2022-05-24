@@ -1,8 +1,7 @@
 package lotto.domain;
 
-import static lotto.constants.Message.INPUT_BONUS_ERROR;
-
 public class WinningLotto {
+    private static final String INPUT_BONUS_ERROR = "잘못된 보너스 번호를 입력하였습니다.";
     private final Lotto winningNumbers;
     private LottoNumber bonusNumber;
 

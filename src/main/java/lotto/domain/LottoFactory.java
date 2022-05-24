@@ -4,11 +4,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.constants.Message.INPUT_LOTTO_ERROR;
 import static lotto.domain.LottoNumber.LOTTO_MAX_NUMBER;
 import static lotto.domain.LottoNumber.LOTTO_MIN_NUMBER;
 
 public class LottoFactory {
+    private static final String INPUT_LOTTO_ERROR = "잘못된 로또 번호를 입력하였습니다.";
     private static final List<LottoNumber> LOTTO_NUMBERS = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
             .mapToObj(LottoNumber::from)
             .collect(Collectors.toList());

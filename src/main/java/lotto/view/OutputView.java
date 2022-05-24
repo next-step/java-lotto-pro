@@ -5,10 +5,12 @@ import lotto.domain.TotalLotto;
 
 import java.util.Map;
 
-import static lotto.constants.Message.*;
 import static lotto.domain.Rank.*;
 
 public class OutputView {
+    private static final String QUANTITY = "개를 구매하였습니다.";
+    private static final String LOTTO_STATISTIC_START = "\n당첨 통계\n---------";
+    private static final String PROFIT = "총 이익률은 %.2f 입니다.";
     public static void printQuantity(TotalLotto totalLotto) {
         System.out.println(totalLotto.getCount() + QUANTITY);
         System.out.println(totalLotto.lottoListToString());

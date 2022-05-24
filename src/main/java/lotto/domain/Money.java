@@ -1,8 +1,7 @@
 package lotto.domain;
 
-import static lotto.constants.Message.INPUT_AMOUNT_ERROR;
-
 public class Money {
+    private static final String INPUT_AMOUNT_ERROR = "잘못된 금액을 입력하였습니다.";
     private static final int LOTTO_PRICE = 1000;
 
     private int amount;
