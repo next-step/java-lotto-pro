@@ -4,7 +4,6 @@ import calculator.domain.StringSplitter;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Scanner;
-import lotto.domain.LottoStatistic;
 import lotto.domain.Lottos;
 import lotto.domain.MatchResult;
 
@@ -19,8 +18,11 @@ public class View {
         System.out.println("구입 금액을 입력해 주세요. (자연수만 가능하며, 1게임 가격에 따라 구입 개수가 정해짐)");
     }
 
-    public void outputOrderLottoList(Lottos lottos) {
-        System.out.println(lottos.toString());
+    public void outputOrderLottoList(Lottos manualLottos, Lottos autoLottos) {
+
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottos.size(), autoLottos.size()));
+        System.out.print(manualLottos.toString());
+        System.out.println(autoLottos.toString());
     }
 
     public void outputWinningNumbers() {
@@ -47,6 +49,14 @@ public class View {
 
     public void outputEarning(BigDecimal totalEarning) {
         System.out.println(toEarningString(totalEarning));
+    }
+
+    public void outputManualLottoSize() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public void outputManualLottoNumbers() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 
     private String toMatchResultString(MatchResult matchResult, int matchCount) {
@@ -84,6 +94,18 @@ public class View {
 
     public String inputBonusNumber() {
         return scanner.nextLine();
+    }
+
+    public int inputManualLottoSize() {
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    public String[] inputManualNumbers(int size) {
+        String[] manualNumbers = new String[size];
+        for (int index = 0; index < size; index++) {
+            manualNumbers[index] = scanner.nextLine();
+        }
+        return manualNumbers;
     }
 
 
