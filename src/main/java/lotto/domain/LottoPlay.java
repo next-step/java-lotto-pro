@@ -19,7 +19,8 @@ public class LottoPlay {
 
     public void play() {
         PurchaseMoney purchaseMoney = getPurchaseMoney();
-        Lottos lottos = lottoGenerator.generateLottos(purchaseMoney.getPurchasableQuantity());
+        PurchaseQuantity purchaseQuantity = getPurchaseQuantity(purchaseMoney);
+        Lottos lottos = lottoGenerator.generateLottos(purchaseQuantity.getTotalQuantity());
         resultView.printPurchasedLottos(lottos);
         WinningLotto winningLotto = getWinningLotto();
         LottosResults results = lottos.matchWithWinningLotto(winningLotto);
@@ -29,6 +30,11 @@ public class LottoPlay {
     private PurchaseMoney getPurchaseMoney() {
         int money = inputView.inputMoneyForPurchase();
         return new PurchaseMoney(money);
+    }
+
+    private PurchaseQuantity getPurchaseQuantity(PurchaseMoney purchaseMoney) {
+        int manualQuantity = inputView.inputManualQuantity();
+        return new PurchaseQuantity(purchaseMoney, manualQuantity);
     }
 
     private WinningLotto getWinningLotto() {
