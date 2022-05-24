@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -24,24 +25,27 @@ class LottoStatisticTest {
         List<Lotto> lottoList = createNotWinningLottos(notWinningNumbers, 9);
         lottoList.add(createLotto(threeWinningNumbers));
 
-        lottoStatistic = new LottoStatistic(Lottos.from(lottoList), winningNumbers);
+        String bonusNumber = "45";
+
+        lottoStatistic = new LottoStatistic(Lottos.from(lottoList), winningNumbers, bonusNumber);
     }
 
 
     @Test
     void 수익률_계산() {
-        assertThat(lottoStatistic.lottoEarning()).isEqualTo(BigDecimal.valueOf(0.5));
+        assertThat(lottoStatistic.calculateLottoEarning()).isEqualTo(BigDecimal.valueOf(0.5));
     }
 
     @Test
     void 셋업에_맞는_담청_결과를_반환() {
-
         Map<MatchResult, Integer> winingResult = lottoStatistic.winningMatchResultCount();
-
-        assertThat(winingResult.get(MatchResult.THREE)).isEqualTo(1);
-        assertThat(winingResult.get(MatchResult.FOUR)).isEqualTo(0);
-        assertThat(winingResult.get(MatchResult.FIVE)).isEqualTo(0);
-        assertThat(winingResult.get(MatchResult.SIX)).isEqualTo(0);
+        assertAll(
+                () -> assertThat(winingResult.get(MatchResult.FIFTH)).isEqualTo(1),
+                () -> assertThat(winingResult.get(MatchResult.FIRST)).isEqualTo(0),
+                () -> assertThat(winingResult.get(MatchResult.SECOND)).isEqualTo(0),
+                () -> assertThat(winingResult.get(MatchResult.THIRD)).isEqualTo(0),
+                () -> assertThat(winingResult.get(MatchResult.FOURTH)).isEqualTo(0)
+        );
     }
 
     private List<Lotto> createNotWinningLottos(int[] notWinningNumbers, int size) {

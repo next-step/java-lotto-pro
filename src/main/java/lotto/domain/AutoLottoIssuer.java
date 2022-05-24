@@ -13,12 +13,12 @@ public class AutoLottoIssuer {
     }
 
     public Lottos issue(Money orderPrice) {
-        List<Lotto> lottoList = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
 
         for (int index = 0; index < orderPrice.divide(LOTTO_PRICE).intValue(); index++) {
-            lottoList.add(lottoRandomFactory.create());
+            lottos.add(lottoRandomFactory.create());
         }
 
-        return Lottos.from(lottoList);
+        return Lottos.from(lottos);
     }
 }

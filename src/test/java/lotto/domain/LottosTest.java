@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.ArrayList;
@@ -11,20 +10,22 @@ import org.junit.jupiter.api.Test;
 
 class LottosTest {
 
-    private WinningNumbers winningNumbers;
+    private WinningLotto winningNumbers;
     private Lottos lottos;
 
     @BeforeEach
     void setUp() {
         int[] winningInputs = {1, 2, 3, 4, 5, 6};
-        winningNumbers = new WinningNumbers(createLottoNumbers(winningInputs));
+        LottoNumber bonusNumber = LottoNumber.from(7);
+        winningNumbers = new WinningLotto(createLottoNumbers(winningInputs), bonusNumber);
 
         List<Lotto> lottoList = new ArrayList<>();
 
         lottoList.add(createLotto(new int[]{1, 2, 3, 4, 5, 6}));
         lottoList.add(createLotto(new int[]{1, 2, 3, 4, 5, 7}));
-        lottoList.add(createLotto(new int[]{1, 2, 3, 4, 7, 8}));
-        lottoList.add(createLotto(new int[]{1, 2, 3, 7, 8, 9}));
+        lottoList.add(createLotto(new int[]{1, 2, 3, 4, 5, 8}));
+        lottoList.add(createLotto(new int[]{1, 2, 3, 4, 8, 9}));
+        lottoList.add(createLotto(new int[]{1, 2, 3, 8, 9, 10}));
 
         lottos = Lottos.from(lottoList);
     }
@@ -41,21 +42,15 @@ class LottosTest {
 
     @Test
     void 셋업에_맞는_당첨_로또_리스트_반환() {
-
         assertAll(
-                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.THREE).size()).isEqualTo(1),
-                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.FOUR).size()).isEqualTo(1),
-                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.FIVE).size()).isEqualTo(1),
-                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.SIX).size()).isEqualTo(1)
+                () -> assertThat(lottos.matchedLottos(winningNumbers, MatchResult.FIRST).size()).isEqualTo(1),
+                () -> assertThat(lottos.matchedLottos(winningNumbers, MatchResult.SECOND).size()).isEqualTo(1),
+                () -> assertThat(lottos.matchedLottos(winningNumbers, MatchResult.THIRD).size()).isEqualTo(1),
+                () -> assertThat(lottos.matchedLottos(winningNumbers, MatchResult.FOURTH).size()).isEqualTo(1),
+                () -> assertThat(lottos.matchedLottos(winningNumbers, MatchResult.FIFTH).size()).isEqualTo(1)
         );
     }
-
-    @Test
-    void 로또_총_금액() {
-        assertThat(lottos.totalPrice()).isEqualTo(Money.from(4000));
-
-    }
-
+    
     private Lotto createLotto(int[] inputs) {
         LottoNumber[] lottoNumbers = new LottoNumber[inputs.length];
 

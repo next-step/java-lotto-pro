@@ -1,41 +1,53 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public enum MatchResult {
-
-    ZERO(0, Money.from(0)),
-    ONE(1, Money.from(0)),
-    TWO(2, Money.from(0)),
-    THREE(3, Money.from(5000)),
-    FOUR(4, Money.from(50000)),
-    FIVE(5, Money.from(1500000)),
-    SIX(6, Money.from(2000000000));
-
-    private static final MatchResult[] winningMatchResults = {
-            MatchResult.THREE,
-            MatchResult.FOUR,
-            MatchResult.FIVE,
-            MatchResult.SIX
-    };
+    FIRST(6, Money.from(2000000000), false),
+    SECOND(5, Money.from(30000000), true),
+    THIRD(5, Money.from(1500000), false),
+    FOURTH(4, Money.from(50000), false),
+    FIFTH(3, Money.from(5000), false),
+    SIXTH(2, Money.from(0), false),
+    SEVENTH(1, Money.from(0), false),
+    EIGHTH(0, Money.from(0), false);
 
     private final int matchCount;
     private final Money cashPrize;
+    private final boolean isBonus;
 
-    private MatchResult(int matchCount, Money cashPrize) {
+
+    MatchResult(int matchCount, Money cashPrize, boolean isBonus) {
         this.matchCount = matchCount;
         this.cashPrize = cashPrize;
+        this.isBonus = isBonus;
     }
 
-    public static MatchResult from(int matchCount) {
-        for (MatchResult matchResult : MatchResult.values()) {
-            if (matchResult.matchCount == matchCount) {
-                return matchResult;
-            }
+    public static MatchResult of(int matchCount, boolean isBonus) {
+
+        return getMatchResult(matchCount, isBonus);
+    }
+
+    private static MatchResult getMatchResult(int matchCount, boolean isBonus) {
+        Optional<MatchResult> result = Arrays.stream(MatchResult.values())
+                .filter(matchResult -> isSameMatchResult(matchResult, matchCount, isBonus))
+                .findAny();
+
+        if (result.isPresent()) {
+            return result.get();
         }
-        throw new IllegalArgumentException("당첨 번호와 일치하는 로또 숫자의 개수는 0과 6 범위이어야 합니다");
+        throw new IllegalArgumentException("당첨번호 매칭 결과 케이스에 존재하지 않는 케이스입니다.");
+    }
+
+    private static boolean isSameMatchResult(MatchResult matchResult, int matchCount, boolean isBonus) {
+        return matchResult.matchCount == matchCount && matchResult.isBonus == isBonus;
     }
 
     public static MatchResult[] winningMatchResults() {
-        return winningMatchResults;
+        return Arrays.stream(MatchResult.values())
+                .filter(MatchResult::isWinningMatchResult)
+                .toArray(MatchResult[]::new);
     }
 
     public int getMatchCount() {
@@ -44,6 +56,10 @@ public enum MatchResult {
 
     public Money getCashPrize() {
         return cashPrize;
+    }
+
+    private static boolean isWinningMatchResult(MatchResult matchResult) {
+        return !matchResult.getCashPrize().equals(Money.from(0));
     }
 
 }

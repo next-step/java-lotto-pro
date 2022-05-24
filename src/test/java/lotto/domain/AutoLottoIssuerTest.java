@@ -20,6 +20,6 @@ class AutoLottoIssuerTest {
     @Test
     void 주문금액이_맞아_떨어지지_않으면_최대금액_주문() {
         Money input = Money.from(10100);
-        assertThat(issuer.issue(input).totalPrice()).isEqualTo(Money.from(10000));
+        assertThat(issuer.issue(input).size()).isEqualTo(10);
     }
 }

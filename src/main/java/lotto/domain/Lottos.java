@@ -1,8 +1,8 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -15,25 +15,13 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public Lottos matchedLottoList(WinningNumbers winningNumbers, MatchResult matchResult) {
-        List<Lotto> matchedLottos = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            if (winningNumbers.matchWinningLotto(lotto).equals(matchResult)) {
-                matchedLottos.add(lotto);
-            }
-        }
+    public Lottos matchedLottos(WinningLotto winningNumbers, MatchResult matchResult) {
+        List<Lotto> matchedLottos = lottos.stream()
+                .filter(lotto -> winningNumbers.isMatched(lotto, matchResult))
+                .collect(Collectors.toList());
         return Lottos.from(matchedLottos);
     }
-
-    public Money totalPrice() {
-        Money result = Money.from(0);
-        for (Lotto lotto : lottos) {
-            result = result.add(lotto.price());
-        }
-
-        return result;
-    }
-
+    
     public int size() {
         return this.lottos.size();
     }
@@ -43,7 +31,7 @@ public class Lottos {
         StringBuilder builder = new StringBuilder();
 
         for (Lotto lotto : lottos) {
-            builder.append(lotto.sortedLottoNumbers().toString() + "\n");
+            builder.append(lotto.sortLottoNumbers().toString() + "\n");
         }
         return builder.toString();
     }

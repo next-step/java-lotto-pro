@@ -16,7 +16,7 @@ public class Money {
     }
 
     public static Money from(double value) {
-        return new Money(new BigDecimal(Double.toString(value)));
+        return new Money(BigDecimal.valueOf(value));
     }
 
     public static Money from(String value) {
@@ -33,6 +33,10 @@ public class Money {
 
     public Money add(Money target) {
         return Money.from(this.value.add(target.value));
+    }
+
+    public Money multiply(double value) {
+        return Money.from(this.value.multiply(BigDecimal.valueOf(value)));
     }
 
     private void validate(BigDecimal value) {

@@ -4,18 +4,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
     private Set<LottoNumber> prizeNumbers;
+    private LottoNumber bonusNumber;
     private int NUMBER_COUNT;
 
     @BeforeEach
@@ -28,30 +29,21 @@ class LottoTest {
         prizeNumbers.add(LottoNumber.from(4));
         prizeNumbers.add(LottoNumber.from(5));
         prizeNumbers.add(LottoNumber.from(6));
+
+        bonusNumber = LottoNumber.from(45);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {
-            "1:2:3:4:5:6:6",
-            "1:2:3:4:5:7:5",
-            "1:2:3:4:7:8:4",
-            "1:2:3:7:8:9:3",
-            "1:2:7:8:9:10:2",
-            "1:7:8:9:10:11:1",
-            "7:8:9:10:11:12:0"},
-            delimiter = ':')
-    void 로또번호와_당첨번호에_따른_매치결과_반환(int input0, int input1, int input2, int input3, int input4, int input5,
-                                int matchCount) {
-
-        Lotto lotto = createLotto(new int[]{input0, input1, input2, input3, input4, input5});
-        MatchResult matchResult = lotto.match(prizeNumbers);
-        assertThat(matchResult).isEqualTo(MatchResult.from(matchCount));
+    @MethodSource("lottoAndExpectedMatchResult")
+    void 로또번호와_당첨번호에_따른_매치결과_반환(Lotto lotto, MatchResult expect) {
+        MatchResult matchResult = lotto.match(prizeNumbers, bonusNumber);
+        assertThat(matchResult).isEqualTo(expect);
     }
 
     @Test
     void 정렬된_로또_번호_반환() {
         Lotto lotto = createLotto(new int[]{3, 4, 1, 2, 5, 6});
-        assertThat(lotto.sortedLottoNumbers()).containsExactly(getLottoNumbers(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.sortLottoNumbers()).containsExactly(getLottoNumbers(1, 2, 3, 4, 5, 6));
     }
 
     @Test
@@ -80,7 +72,7 @@ class LottoTest {
         return lottoNumbers;
     }
 
-    private Lotto createLotto(int[] inputs) {
+    private static Lotto createLotto(int[] inputs) {
         LottoNumber[] lottoNumbers = new LottoNumber[inputs.length];
 
         for (int index = 0; index < inputs.length; index++) {
@@ -88,6 +80,19 @@ class LottoTest {
         }
 
         return new Lotto(lottoNumbers);
+    }
+
+    static private Stream<Arguments> lottoAndExpectedMatchResult() {
+        return Stream.of(
+                Arguments.of(createLotto(new int[]{1, 2, 3, 4, 5, 6}), MatchResult.of(6, false)),
+                Arguments.of(createLotto(new int[]{1, 2, 3, 4, 5, 45}), MatchResult.of(5, true)),
+                Arguments.of(createLotto(new int[]{1, 2, 3, 4, 5, 7}), MatchResult.of(5, false)),
+                Arguments.of(createLotto(new int[]{1, 2, 3, 4, 7, 8}), MatchResult.of(4, false)),
+                Arguments.of(createLotto(new int[]{1, 2, 3, 7, 8, 9}), MatchResult.of(3, false)),
+                Arguments.of(createLotto(new int[]{1, 2, 7, 8, 9, 10}), MatchResult.of(2, false)),
+                Arguments.of(createLotto(new int[]{1, 7, 8, 9, 10, 11}), MatchResult.of(1, false)),
+                Arguments.of(createLotto(new int[]{7, 8, 9, 10, 11, 12}), MatchResult.of(0, false))
+        );
     }
 
 }
