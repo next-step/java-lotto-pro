@@ -51,17 +51,8 @@ public enum LottoRank {
     public boolean hasBonus() {
         return this.hasBonus;
     }
-
-    public int matchRank(LottoRanks lottoRanks) {
-        int count = 0;
-        // TODO: getter를 없애보자
-        for (LottoRank rankResult : lottoRanks.getLottoRanks()) {
-            count += isMatchRank(rankResult.match, rankResult.hasBonus) ? 1 : 0;
-        }
-        return count;
-    }
-
-    private boolean isMatchRank(int match, boolean hasBonus) {
+    
+    public boolean isMatchRank(int match, boolean hasBonus) {
         if (!isMatch(match)) {
             return false;
         }

@@ -17,10 +17,8 @@ public class OutputView {
     private static void printLottoRank(List<LottoRank> lottoRanks, LottoRanks lottoResult) {
         System.out.println("\n당첨 통계\n---------");
 
-        // TODO: 여기를 도메인으로 옮겨보자
         for (LottoRank lottoRank : lottoRanks) {
-            int matchRank = lottoRank.matchRank(lottoResult);
-            printMatch(lottoRank, matchRank);
+            printMatch(lottoRank, lottoResult.matchRank(lottoRank));
         }
     }
 
@@ -36,7 +34,7 @@ public class OutputView {
     public static void printRateOfReturn(Money money, LottoRanks lottoResult) {
         int totalPrize = lottoResult.prize();
         RateOfReturn rateOfReturn = new RateOfReturn(totalPrize, money.getMoney());
-        
+
         System.out.print(String.format("총 수익률은 %.2f입니다.", rateOfReturn.getRateOfReturn()));
         if (rateOfReturn.isLoss()) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
