@@ -2,7 +2,11 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -38,5 +42,24 @@ class LottoGeneratorTest {
         for(int i = 0; i < lotto.size(); i++) {
             assertThat(lotto.get(i).getNumber()).isGreaterThanOrEqualTo(1).isLessThanOrEqualTo(45);
         }
+    }
+
+    @DisplayName("랜덤 로또번호 5개 생성시 size 5 확인")
+    void generateLottos() {
+        Lottos lottos = lottoGenerator.generateLottos(5);
+        assertThat(lottos.size()).isEqualTo(5);
+    }
+
+    @DisplayName("수동 로또번호 2개에 랜덤 로또번호 5개 생성시 size 7 확인")
+    @RepeatedTest(10)
+    void generateLottosWithManual() {
+        Lotto lottoFirst = new Lotto(
+                Stream.of(1, 5, 10, 12, 20, 33).map(LottoNumber::new).collect(Collectors.toList()));
+        Lotto lottoSecond = new Lotto(
+                Stream.of(1, 5, 33, 12, 20, 40).map(LottoNumber::new).collect(Collectors.toList()));
+        List<Lotto> manualList = Arrays.asList(lottoFirst, lottoSecond);
+
+        Lottos lottos = lottoGenerator.generateLottos(manualList, 5);
+        assertThat(lottos.size()).isEqualTo(7);
     }
 }
