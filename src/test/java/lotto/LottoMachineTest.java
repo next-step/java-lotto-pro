@@ -38,7 +38,7 @@ class LottoMachineTest {
     void 입력받은_금액만큼_자동_로또발급(int price, int quantity) {
         LottoMachine lottoMachine = new LottoMachine();
 
-        Lottos lottos = lottoMachine.buy(quantity, Collections.emptyList());
+        Lottos lottos = lottoMachine.buy(quantity, new Lottos(Collections.emptyList()));
         int expected = lottoMachine.getQuantity(price);
 
         assertThat(lottos.getLottos()).hasSize(expected);
@@ -46,17 +46,17 @@ class LottoMachineTest {
 
     @ParameterizedTest
     @MethodSource(value = "buyTestParameter")
-    void 자동_수동_동시발급(int autoQuantity, List<String[]> quantity) {
+    void 자동_수동_동시발급(int autoQuantity, Lottos manualLottos) {
         LottoMachine lottoMachine = new LottoMachine();
 
-        Lottos lottos = lottoMachine.buy(autoQuantity, quantity);
+        Lottos lottos = lottoMachine.buy(autoQuantity, manualLottos);
 
-        assertThat(lottos.getLottos()).hasSize(autoQuantity + quantity.size());
+        assertThat(lottos.getLottos()).hasSize(autoQuantity + manualLottos.getLottos().size());
     }
 
     static Stream<Arguments> buyTestParameter() {
         return Stream.of(
-                arguments(3, Arrays.asList(new String[]{"8", "21", "23", "41", "42", "43"}, new String[]{"8", "21", "23", "41", "42", "43"})));
+                arguments(3, new Lottos(Arrays.asList(new Lotto(new int[]{8, 21, 23, 41, 42, 43}), new Lotto(new int[]{8, 21, 23, 41, 42, 43})))));
     }
 
     @ParameterizedTest

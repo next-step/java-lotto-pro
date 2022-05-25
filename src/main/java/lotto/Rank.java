@@ -25,7 +25,7 @@ public enum Rank {
         }
 
         return Arrays.stream(values())
-                .filter(rank -> rank.getCount() == count)
+                .filter(rank -> rank.equalsCount(count))
                 .findFirst()
                 .orElse(LOSE);
     }
@@ -36,6 +36,10 @@ public enum Rank {
 
     public int getWinningMoney() {
         return winningMoney;
+    }
+
+    private boolean equalsCount(int count) {
+        return this.getCount() == count;
     }
 
 }

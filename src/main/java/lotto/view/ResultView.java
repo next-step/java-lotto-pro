@@ -23,8 +23,8 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printQuantity(int passiveQuantity, int autoQuantity) {
-        System.out.printf((PRINT_QUANTITY_MESSAGE) + "%n", passiveQuantity, autoQuantity);
+    public static void printQuantity(int manualQuantity, int autoQuantity) {
+        System.out.printf((PRINT_QUANTITY_MESSAGE) + "%n", manualQuantity, autoQuantity);
     }
 
     ;

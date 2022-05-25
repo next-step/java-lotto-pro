@@ -3,7 +3,8 @@ package lotto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class Lotto {
 
@@ -11,17 +12,19 @@ public class Lotto {
 
     private final List<Number> numbers = new ArrayList<>();
 
-    public Lotto(int[] numbers) {
-        checkSize(numbers);
-        Arrays.stream(numbers).forEach(number -> this.addNumber(new Number(number)));
+    public Lotto(List<Number> numbers) {
+        validationSize(numbers);
+        this.numbers.addAll(numbers);
+    }
+
+    public Lotto(int[] inputs) {
+        List<Number> numbers = Arrays.stream(inputs).mapToObj(Number::new).collect(toList());
+        validationSize(numbers);
+        numbers.forEach(this::addNumber);
     }
 
     public Lotto(String[] numbers) {
         this(Arrays.stream(numbers).mapToInt(Integer::parseInt).toArray());
-    }
-
-    public Lotto(List<Number> numbers) {
-        this.numbers.addAll(numbers);
     }
 
     public int getCount(Lotto winningLotto) {
@@ -30,9 +33,9 @@ public class Lotto {
                 .count();
     }
 
-    private void checkSize(int[] numbers) {
-        if (numbers.length != NUMBER_SIZE) {
-            throw new IllegalArgumentException("로또의 번호는 6개만 가능합니다.");
+    private void validationSize(List<Number> numbers) {
+        if (numbers.size() != NUMBER_SIZE) {
+            throw new IllegalArgumentException(String.format("로또의 번호는 %d개만 가능합니다.", NUMBER_SIZE));
         }
     }
 
@@ -56,7 +59,7 @@ public class Lotto {
     }
 
     public List<Integer> getNumberValues() {
-        return numbers.stream().map(Number::getValue).sorted().collect(Collectors.toList());
+        return numbers.stream().map(Number::getValue).sorted().collect(toList());
     }
 
     public List<Number> getNumber() {

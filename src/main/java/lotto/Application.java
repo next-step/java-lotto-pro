@@ -12,16 +12,16 @@ public class Application {
     public static void main(String[] args) {
         int price = InputView.inputPrice();
         int maxQuantity = lottoMachine.getQuantity(price);
-        int passiveQuantity = InputView.inputPassiveNumberCount(maxQuantity);
-        int autoQuantity = maxQuantity - passiveQuantity;
-        List<String[]> numbersArray =  InputView.inputPassiveNumbers(passiveQuantity);
+        int manualQuantity = InputView.inputManualNumberCount(maxQuantity);
+        int autoQuantity = maxQuantity - manualQuantity;
+        Lottos manualLottos =  InputView.inputManualNumbers(manualQuantity);
 
-        Lottos lottos = lottoMachine.buy(autoQuantity, numbersArray);
+        Lottos lottos = lottoMachine.buy(autoQuantity, manualLottos);
 
-        ResultView.printQuantity(passiveQuantity, autoQuantity);
+        ResultView.printQuantity(manualQuantity, autoQuantity);
         ResultView.printLottos(lottos);
 
-        String[] winningNumbers = InputView.inputWinningNumbers();
+        List<Number> winningNumbers = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
         WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), new Number(bonusNumber));
 

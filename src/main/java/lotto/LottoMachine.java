@@ -2,13 +2,14 @@ package lotto;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 public class LottoMachine {
 
     private static final int ZERO = 0;
-    private static final List<Number> NUMBERS = IntStream.rangeClosed(1, 45).mapToObj(Number::new).collect(Collectors.toList());
+    private static final List<Number> NUMBERS = IntStream.rangeClosed(1, 45).mapToObj(Number::new).collect(toList());
     private static final int SALE_PRICE = 1000;
     private static final int DECIMAL_PLACES = 100;
 
@@ -17,10 +18,9 @@ public class LottoMachine {
         return NUMBERS.subList(0, 6);
     }
 
-    public Lottos buy(int autoQuantity, List<String[]> numbersArray) {
+    public Lottos buy(int autoQuantity, Lottos manualLottos) {
         Lottos lottos = new Lottos(autoQuantity);
-        List<Lotto> passiveLottos = numbersArray.stream().map(Lotto::new).collect(Collectors.toList());
-        lottos.addLottos(passiveLottos);
+        lottos.addLottos(manualLottos);
         return lottos;
     }
 
