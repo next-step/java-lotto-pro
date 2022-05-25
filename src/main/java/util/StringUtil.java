@@ -6,7 +6,6 @@ import java.util.List;
 public class StringUtil {
 
     private static final String DEFAULT_DELIMITER = ",";
-    private static final String ERROR_MESSAGE_NOT_NUMBER_FORMAT = "[ERROR] %s is not a number";
 
     private StringUtil() {
     }
@@ -43,11 +42,6 @@ public class StringUtil {
             return;
         }
 
-        try {
-            numberList.add(Integer.parseInt(numberString));
-        } catch (NumberFormatException ex) {
-            System.out.println(String.format(ERROR_MESSAGE_NOT_NUMBER_FORMAT, numberString));
-            throw ex;
-        }
+        numberList.add(Integer.parseInt(numberString));
     }
 }
