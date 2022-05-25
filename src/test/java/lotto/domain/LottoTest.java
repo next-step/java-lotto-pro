@@ -16,9 +16,14 @@ class LottoTest {
     @Test
     void lottoSize() {
         List<Integer> inputList = Arrays.asList(5, 41, 23, 7, 8, 1);
-        Lotto result = new Lotto(inputList.stream().map(LottoNumber::new).collect(Collectors.toList()));
+        Lotto lotto = new Lotto(inputList.stream().map(LottoNumber::new).collect(Collectors.toList()));
 
-        assertThat(result.size()).isEqualTo(inputList.size());
+        assertThat(lotto.hasNumber(new LottoNumber(5))).isTrue();
+        assertThat(lotto.hasNumber(new LottoNumber(41))).isTrue();
+        assertThat(lotto.hasNumber(new LottoNumber(23))).isTrue();
+        assertThat(lotto.hasNumber(new LottoNumber(7))).isTrue();
+        assertThat(lotto.hasNumber(new LottoNumber(8))).isTrue();
+        assertThat(lotto.hasNumber(new LottoNumber(1))).isTrue();
     }
 
     @DisplayName("로또 생성시 정의된 로또숫자 사이즈가 아닌경우 Exception 발생 확인")
@@ -32,5 +37,30 @@ class LottoTest {
     @Test
     void lottoEmptyList() {
         assertThatThrownBy(() -> new Lotto(new ArrayList<>())).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또번호 문자열을 통한 로또 객체 생성 테스트")
+    @Test
+    void lottoByString() {
+        Lotto lotto = new Lotto("5, 41, 23, 7, 8, 1");
+
+        assertThat(lotto.hasNumber(new LottoNumber(5))).isTrue();
+        assertThat(lotto.hasNumber(new LottoNumber(41))).isTrue();
+        assertThat(lotto.hasNumber(new LottoNumber(23))).isTrue();
+        assertThat(lotto.hasNumber(new LottoNumber(7))).isTrue();
+        assertThat(lotto.hasNumber(new LottoNumber(8))).isTrue();
+        assertThat(lotto.hasNumber(new LottoNumber(1))).isTrue();
+    }
+
+    @DisplayName("6개 미만의 숫자가 포함된 문자열로 Lotto 생성시 Exception 확인")
+    @Test
+    void lottoByShortString() {
+        assertThatThrownBy(() -> new Lotto("5, 41, 23, 7,")).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("숫자가 아닌 문자열로 Lotto 생성시 Exception 확인")
+    @Test
+    void lottoByAlphabetString() {
+        assertThatThrownBy(() -> new Lotto("a, b, c, d, e, f")).isInstanceOf(IllegalArgumentException.class);
     }
 }
