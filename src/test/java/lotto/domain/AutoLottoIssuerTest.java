@@ -31,4 +31,25 @@ class AutoLottoIssuerTest {
 
         assertThat(issuer.issueManually(inputs).size()).isEqualTo(2);
     }
+
+    @Test
+    void 추가_발행() {
+
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(createLotto(new int[]{1, 2, 3, 4, 5, 6}));
+
+        Lottos lottos = Lottos.from(lottoList);
+
+        assertThat(issuer.issueMore(lottos, Money.from(2000)).size()).isEqualTo(1);
+    }
+
+    private Lotto createLotto(int[] inputs) {
+        LottoNumber[] lottoNumbers = new LottoNumber[inputs.length];
+
+        for (int index = 0; index < inputs.length; index++) {
+            lottoNumbers[index] = LottoNumber.from(inputs[index]);
+        }
+
+        return new Lotto(lottoNumbers);
+    }
 }

@@ -30,7 +30,14 @@ public class AutoLottoIssuer {
         }
         return Lottos.from(manualLottos);
     }
-    
+
+    public Lottos issueMore(Lottos lottos, Money orderPrice) {
+
+        Money leftMoney = orderPrice.subtract(Lotto.LOTTO_PRICE.multiply(lottos.size()));
+
+        return issueAutomatically(leftMoney);
+    }
+
     private static LottoNumber[] createLottoNumbers(String[] numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String lottoNumber : numbers) {
