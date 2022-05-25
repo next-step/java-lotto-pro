@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +21,7 @@ public class LottoMachineTest {
 		LottoMachine lottoMachine = new LottoMachine(new AutoNumbers());
 		LottoPrice lottoPrice = new LottoPrice(4000);
 		Ledger ledger = new Ledger(lottoPrice, lottoList);
-		LottoTickets tickets = lottoMachine.generate(ledger);
+		LottoTickets tickets = lottoMachine.generateByManual(ledger);
 
 		assertThat(tickets.getLottTickets()).hasSize(2);
 	}
@@ -32,7 +33,7 @@ public class LottoMachineTest {
 		LottoPrice lottoPrice = new LottoPrice(1000);
 		Ledger ledger = new Ledger(lottoPrice, lottoList);
 
-		assertThatThrownBy(() -> lottoMachine.generate(ledger))
+		assertThatThrownBy(() -> lottoMachine.generateByManual(ledger))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 }
