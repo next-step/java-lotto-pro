@@ -28,12 +28,6 @@ class LottoTest {
                 Stream.of(1, 5, 10, 12, 20, 40, 3).map(LottoNumber::new).collect(Collectors.toList())));
     }
 
-    @DisplayName("로또 생성시 숫자열을 null 로 입력할 경우 Exception 발생 확인")
-    @Test
-    void lottoNull() {
-        assertThatThrownBy(() -> new Lotto(null)).isInstanceOf(IllegalArgumentException.class);
-    }
-
     @DisplayName("로또 생성시 숫자열을 empty list 로 입력할 경우 Exception 발생 확인")
     @Test
     void lottoEmptyList() {
