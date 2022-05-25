@@ -1,8 +1,8 @@
 package lotto.domain;
 
+import lotto.LottoConstants;
 import lotto.ui.ResultView;
 
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -10,15 +10,13 @@ import java.util.stream.IntStream;
 
 public class LottoGame {
 
-    static final int TICKET_UNIT_PRICE = 1000;
+    private LottoTickets autoTickets = new LottoTickets();
 
-    private int purchasePrice;
+    private LottoTickets selfTickets = new LottoTickets();
 
     private double earningRate;
 
-    private LottoResult lottoResult;
-
-    private List<LottoTicket> tickets;
+    private final LottoResult lottoResult;
 
     LottoGame() {
         this.lottoResult = new LottoResult();
@@ -28,18 +26,33 @@ public class LottoGame {
         this();
 
         isValidPurchasePrice(purchasePrice);
-        this.purchasePrice = purchasePrice;
 
-        int ticketCount = this.getTicketCount();
-        this.tickets = IntStream.rangeClosed(1, ticketCount)
-                .mapToObj(x -> new LottoTicket(numberGenerator))
-                .collect(Collectors.toList());
+        int ticketCount = purchasePrice / LottoConstants.TICKET_UNIT_PRICE;
+        this.autoTickets = new LottoTickets(generateAutoTickets(numberGenerator, ticketCount));
     }
 
     public LottoGame(List<LottoTicket> tickets) {
         this();
-        this.purchasePrice = tickets.size() * TICKET_UNIT_PRICE;
-        this.tickets = tickets;
+        this.autoTickets = new LottoTickets(tickets);
+    }
+
+    public LottoGame(int purchasePrice, List<LottoTicket> selfTickets, NumberGenerator numberGenerator) {
+        this();
+        int selfTicketTotalPrice = LottoConstants.TICKET_UNIT_PRICE * selfTickets.size();
+        int remainingAutoTicketCount = (purchasePrice - selfTicketTotalPrice) / LottoConstants.TICKET_UNIT_PRICE;
+        final int MINIMUM_AUTO_TICKET_COUNT = 0;
+        if (remainingAutoTicketCount < MINIMUM_AUTO_TICKET_COUNT) {
+            throw new IllegalArgumentException("Price is not enough to by self ticket");
+        }
+
+        this.selfTickets = new LottoTickets(selfTickets);
+        this.autoTickets = new LottoTickets(generateAutoTickets(numberGenerator, remainingAutoTicketCount));
+    }
+
+    private List<LottoTicket> generateAutoTickets(NumberGenerator numberGenerator, int autoTicketCount) {
+        return IntStream.rangeClosed(1, autoTicketCount)
+                .mapToObj(x -> new LottoTicket(numberGenerator))
+                .collect(Collectors.toList());
     }
 
     public double getEarningRate() {
@@ -47,24 +60,30 @@ public class LottoGame {
     }
 
     public void printTickets() {
-        for (LottoTicket ticket : this.tickets) {
+        LottoTickets tickets = generateAllTickets();
+        for (LottoTicket ticket : tickets.getTicketList()) {
             ResultView.printTicket(ticket.toString());
         }
     }
 
-    public void generateGameResult(WinnerTicket winnerTicket) {
-        for (LottoTicket ticket : this.tickets) {
+    public int getAutoTicketCount() {
+        return this.autoTickets.count();
+    }
+
+    public int getSelfTicketCount() {
+        return this.selfTickets.count();
+    }
+
+    public void generateGameResult(WinnerTicket winnerTicket, int purchasePrice) {
+        LottoTickets tickets = generateAllTickets();
+        for (LottoTicket ticket : tickets.getTicketList()) {
             calculateGameScore(ticket, winnerTicket);
         }
 
-        calculateEarningRate();
+        calculateEarningRate(purchasePrice);
     }
 
-    public int getTicketCount() {
-        return this.purchasePrice / TICKET_UNIT_PRICE;
-    }
-
-    public EnumMap<Rank, Integer> getScore() {
+    public Map<Rank, Integer> getScore() {
         return lottoResult.getScore();
     }
 
@@ -72,7 +91,7 @@ public class LottoGame {
         ResultView.printGameResult(this.getScore(), this.earningRate);
     }
 
-    private void calculateEarningRate() {
+    private void calculateEarningRate(int purchasePrice) {
         long totalEarning = 0;
         Map<Rank, Integer> scoreMap = lottoResult.getScore();
         for (Map.Entry<Rank, Integer> entry : scoreMap.entrySet()) {
@@ -84,7 +103,9 @@ public class LottoGame {
             return ;
         }
 
-        this.earningRate = (double) Math.round((double) totalEarning / this.purchasePrice * 100) / 100;
+        final int ROUND_UP_TO_TWO_DECIMAL = 100;
+        this.earningRate = (double) Math.round((double) totalEarning / purchasePrice
+                * ROUND_UP_TO_TWO_DECIMAL) / ROUND_UP_TO_TWO_DECIMAL;
     }
 
     private void calculateGameScore(LottoTicket ticket, WinnerTicket winnerTicket) {
@@ -94,7 +115,7 @@ public class LottoGame {
     }
 
     private static void isValidPurchasePrice(int purchasePrice) {
-        if (purchasePrice < TICKET_UNIT_PRICE) {
+        if (purchasePrice < LottoConstants.TICKET_UNIT_PRICE) {
             throw new IllegalArgumentException("Can't buy ticket. Game will exit.");
         }
     }
@@ -108,5 +129,9 @@ public class LottoGame {
         }
 
         return equalNumberCount;
+    }
+
+    private LottoTickets generateAllTickets() {
+        return new LottoTickets(this.autoTickets, this.selfTickets);
     }
 }

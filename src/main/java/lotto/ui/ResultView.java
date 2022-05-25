@@ -2,26 +2,23 @@ package lotto.ui;
 
 import lotto.domain.Rank;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.EnumMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ResultView {
 
     private ResultView() { }
 
-    public static void printTicketCount(int purchasePrice) {
-        System.out.println(String.format("%d개를 구매했습니다.", purchasePrice));
+    public static void printTicketCount(int autoTicketCount, int selfTicketCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", selfTicketCount, autoTicketCount);
     }
 
     public static void printTicket(String ticketLottoNumbers) {
         System.out.println(ticketLottoNumbers);
     }
 
-    public static void printGameResult(EnumMap<Rank, Integer> score, double earningRate) {
-        System.out.println("당첨 통계");
+    public static void printGameResult(Map<Rank, Integer> score, double earningRate) {
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
 
         List<Rank> printRankList = Arrays.stream(Rank.values())
@@ -48,14 +45,14 @@ public class ResultView {
         System.out.println(earningRateMessage);
     }
 
-    private static void printGameResultByRank(EnumMap<Rank, Integer> score, Rank rank) {
+    private static void printGameResultByRank(Map<Rank, Integer> score, Rank rank) {
         if (rank == Rank.SECOND) {
-            System.out.println(String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개"
-                    , rank.getCountOfMatch(), rank.getWinningMoney(), score.getOrDefault(rank, 0)));
+            System.out.printf("%d개 일치, 보너스 볼 일치 (%d원)- %d개%n"
+                    , rank.getCountOfMatch(), rank.getWinningMoney(), score.getOrDefault(rank, 0));
             return;
         }
 
-        System.out.println(String.format("%d개 일치 (%d원)- %d개"
-                , rank.getCountOfMatch(), rank.getWinningMoney(), score.getOrDefault(rank, 0)));
+        System.out.printf("%d개 일치 (%d원)- %d개%n"
+                , rank.getCountOfMatch(), rank.getWinningMoney(), score.getOrDefault(rank, 0));
     }
 }

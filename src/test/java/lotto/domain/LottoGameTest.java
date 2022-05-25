@@ -1,30 +1,33 @@
 package lotto.domain;
 
+import lotto.LottoConstants;
+import lotto.StringParserUtils;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LottoGameTest {
+class LottoGameTest {
 
-    private LottoNumber bonusNumber = new LottoNumber(45);
+    private final LottoNumber bonusNumber = new LottoNumber(45);
 
     @Test
     void 구입금액이_음수인_경우() {
-        assertThatThrownBy(() -> new LottoGame(-1, new LottoNumberGenerator()))
+        NumberGenerator numberGenerator = new LottoNumberGenerator();
+        assertThatThrownBy(() -> new LottoGame(-1, numberGenerator))
                 .isInstanceOf(RuntimeException.class);
     }
 
     @Test
     void 구매장수_계산() {
         LottoGame game = new LottoGame(9999, new LottoNumberGenerator());
-        assertEquals(game.getTicketCount(), 9);
+        assertEquals(9, game.getAutoTicketCount());
     }
 
     @Test
@@ -32,8 +35,42 @@ public class LottoGameTest {
         List<LottoTicket> tickets = new ArrayList<>();
         tickets.add(new LottoTicket(new LottoNumbers(Arrays.asList(1,2,3,4,5,6))));
         LottoGame game = new LottoGame(tickets);
-        game.generateGameResult(new WinnerTicket("4,5,6,7,8,9", bonusNumber));
-        assertThat(game.getScore().get(Rank.FIFTH)).isEqualTo(1);
+        game.generateGameResult(new WinnerTicket("4,5,6,7,8,9", bonusNumber)
+                , tickets.size() * LottoConstants.TICKET_UNIT_PRICE);
+        assertThat(game.getScore()).containsEntry(Rank.FIFTH, 1);
+    }
+
+    @Test
+    void 수동_3개_자동_2개() {
+        int purchasePrice = 5000;
+        List<String> selfTicketNumber = Arrays.asList(
+                "8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38", "7, 11, 16, 35, 36, 44");
+
+        List<LottoTicket> selfTickets = selfTicketNumber.stream()
+                .map(stringNumbers -> new LottoTicket(new LottoNumbers(StringParserUtils.parseNumbers(stringNumbers))))
+                .collect(Collectors.toList());
+
+        NumberGenerator numberGenerator = new TestNumberGenerator();
+        LottoGame game = new LottoGame(purchasePrice, selfTickets, numberGenerator);
+        assertThat(game.getSelfTicketCount() + game.getAutoTicketCount()).isEqualTo(5);
+    }
+
+    @Test
+    void 수동_로또_점수_계산() {
+        int purchasePrice = 5000;
+        List<String> selfTicketNumber = Arrays.asList(
+                "8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38", "7, 11, 16, 35, 36, 44");
+
+        List<LottoTicket> selfTickets = selfTicketNumber.stream()
+                .map(stringNumbers -> new LottoTicket(new LottoNumbers(StringParserUtils.parseNumbers(stringNumbers))))
+                .collect(Collectors.toList());
+
+        NumberGenerator numberGenerator = new TestNumberGenerator();
+        LottoGame game = new LottoGame(purchasePrice, selfTickets, numberGenerator);
+
+        WinnerTicket winnerTicket = new WinnerTicket("8, 21 ,23, 41, 42, 43", bonusNumber);
+        game.generateGameResult(winnerTicket, purchasePrice);
+        assertThat(game.getScore()).containsEntry(Rank.FIRST, 1);
     }
 
     @Test
@@ -45,8 +82,9 @@ public class LottoGameTest {
         tickets.add(new LottoTicket(new LottoNumbers(Arrays.asList(1,12,13,14,5,6))));
 
         LottoGame game = new LottoGame(tickets);
-        game.generateGameResult(new WinnerTicket("4,5,6,7,8,9", bonusNumber));
-        assertThat(game.getScore().get(Rank.FIFTH)).isEqualTo(2);
+        game.generateGameResult(new WinnerTicket("4,5,6,7,8,9", bonusNumber)
+                , tickets.size() * LottoConstants.TICKET_UNIT_PRICE);
+        assertThat(game.getScore()).containsEntry(Rank.FIFTH, 2);
     }
 
     @Test
@@ -55,8 +93,9 @@ public class LottoGameTest {
         tickets.add(new LottoTicket(new LottoNumbers(Arrays.asList(1,2,3,4,5,6))));
 
         LottoGame game = new LottoGame(tickets);
-        game.generateGameResult(new WinnerTicket("1,2,3,4,8,9", bonusNumber));
-        assertThat(game.getScore().get(Rank.FOURTH)).isEqualTo(1);
+        game.generateGameResult(new WinnerTicket("1,2,3,4,8,9", bonusNumber)
+                ,tickets.size() * LottoConstants.TICKET_UNIT_PRICE);
+        assertThat(game.getScore()).containsEntry(Rank.FOURTH, 1);
     }
 
     @Test
@@ -68,8 +107,9 @@ public class LottoGameTest {
         tickets.add(new LottoTicket(new LottoNumbers(Arrays.asList(21,22,23,4,5,6))));
 
         LottoGame game = new LottoGame(tickets);
-        game.generateGameResult(new WinnerTicket("1,2,3,4,5,6", bonusNumber));
-        assertThat(game.getScore().get(Rank.FOURTH)).isEqualTo(2);
+        game.generateGameResult(new WinnerTicket("1,2,3,4,5,6", bonusNumber)
+                , tickets.size() * LottoConstants.TICKET_UNIT_PRICE);
+        assertThat(game.getScore()).containsEntry(Rank.FOURTH, 2);
     }
 
     @Test
@@ -79,8 +119,8 @@ public class LottoGameTest {
         tickets.add(new LottoTicket(new LottoNumbers(Arrays.asList(1,2,3,4,5,6))));
 
         LottoGame game = new LottoGame(tickets);
-        game.generateGameResult(new WinnerTicket("1,2,3,4,5,9", bonusNumber));
-        assertThat(game.getScore().get(Rank.THIRD)).isEqualTo(1);
+        game.generateGameResult(new WinnerTicket("1,2,3,4,5,9", bonusNumber), 1000);
+        assertThat(game.getScore()).containsEntry(Rank.THIRD, 1);
     }
 
     @Test
@@ -92,8 +132,8 @@ public class LottoGameTest {
         tickets.add(new LottoTicket(new LottoNumbers(Arrays.asList(21,32,3,4,5,6))));
 
         LottoGame game = new LottoGame(tickets);
-        game.generateGameResult(new WinnerTicket("1,2,3,4,5,6", bonusNumber));
-        assertThat(game.getScore().get(Rank.THIRD)).isEqualTo(2);
+        game.generateGameResult(new WinnerTicket("1,2,3,4,5,6", bonusNumber), 3000);
+        assertThat(game.getScore()).containsEntry(Rank.THIRD, 2);
     }
 
     @Test
@@ -103,8 +143,9 @@ public class LottoGameTest {
         tickets.add(new LottoTicket(new LottoNumbers(Arrays.asList(1,2,3,4,5,6))));
 
         LottoGame game = new LottoGame(tickets);
-        game.generateGameResult(new WinnerTicket("1,2,3,4,5,6", bonusNumber));
-        assertThat(game.getScore().get(Rank.FIRST)).isEqualTo(1);
+        game.generateGameResult(new WinnerTicket("1,2,3,4,5,6", bonusNumber)
+                , tickets.size() * LottoConstants.TICKET_UNIT_PRICE);
+        assertThat(game.getScore()).containsEntry(Rank.FIRST, 1);
     }
 
     @Test
@@ -116,8 +157,8 @@ public class LottoGameTest {
         tickets.add(new LottoTicket(new LottoNumbers(Arrays.asList(21,32,3,4,5,6))));
 
         LottoGame game = new LottoGame(tickets);
-        game.generateGameResult(new WinnerTicket("1,2,3,4,5,6", bonusNumber));
-        assertThat(game.getScore().get(Rank.FIRST)).isEqualTo(2);
+        game.generateGameResult(new WinnerTicket("1,2,3,4,5,6", bonusNumber), 3000);
+        assertThat(game.getScore()).containsEntry(Rank.FIRST, 2);
     }
 
     @Test
@@ -126,7 +167,7 @@ public class LottoGameTest {
         tickets.add(new LottoTicket(new LottoNumbers(Arrays.asList(1,2,3,4,5,6))));
 
         LottoGame game = new LottoGame(tickets);
-        game.generateGameResult(new WinnerTicket("4,5,6,7,8,9", bonusNumber));
+        game.generateGameResult(new WinnerTicket("4,5,6,7,8,9", bonusNumber), 1000);
         assertThat(game.getEarningRate()).isEqualTo(5.00);
     }
 
@@ -148,7 +189,8 @@ public class LottoGameTest {
         tickets.add(new LottoTicket(new LottoNumbers(failTicketNumber)));
 
         LottoGame game = new LottoGame(tickets);
-        game.generateGameResult(new WinnerTicket("4,5,6,7,8,9", bonusNumber));
+        game.generateGameResult(new WinnerTicket("4,5,6,7,8,9", bonusNumber)
+                ,tickets.size() * LottoConstants.TICKET_UNIT_PRICE);
         assertThat(game.getEarningRate()).isEqualTo(0.50);
     }
 
@@ -160,7 +202,7 @@ public class LottoGameTest {
 
         WinnerTicket winnerTicket = new WinnerTicket("1,2,3,4,5,10", bonusNumber);
         LottoGame game = new LottoGame(tickets);
-        game.generateGameResult(winnerTicket);
-        assertThat(game.getScore().get(Rank.THIRD)).isEqualTo(1);
+        game.generateGameResult(winnerTicket, tickets.size() * LottoConstants.TICKET_UNIT_PRICE);
+        assertThat(game.getScore()).containsEntry(Rank.THIRD, 1);
     }
 }
