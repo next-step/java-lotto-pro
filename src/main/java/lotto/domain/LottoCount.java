@@ -7,6 +7,8 @@ import lotto.exception.LottoCountException;
 public class LottoCount {
 
     private static final int DEFAULT_COUNT = 0;
+    private static final String ERROR_LOTTO_COUNT_NEGATIVE = "[ERROR] 수동으로 구매할 로또 수는 음수일 수 없습니다.";
+
     private final int lottoCount;
 
     public LottoCount(int lottoCount) {
@@ -16,7 +18,7 @@ public class LottoCount {
 
     private void validateLottoCount(int lottoCount) {
         if (lottoCount < DEFAULT_COUNT) {
-            throw new LottoCountException();
+            throw new LottoCountException(ERROR_LOTTO_COUNT_NEGATIVE);
         }
     }
 

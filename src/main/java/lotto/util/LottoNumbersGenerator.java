@@ -15,6 +15,8 @@ public class LottoNumbersGenerator {
     private static final int DEFAULT_VALUE = 0;
     private static final List<Integer> LOTTO_NUMBERS_CANDIDATE;
 
+    private LottoNumbersGenerator(){}
+
     static {
         LOTTO_NUMBERS_CANDIDATE = IntStream.rangeClosed(LOTTO_NUMBER_LOWER_BOUND, LOTTO_NUMBER_UPPER_BOUND)
             .boxed()
