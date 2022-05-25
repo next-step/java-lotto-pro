@@ -13,12 +13,12 @@ public class TotalLotto {
     }
 
     public static TotalLotto of(Money money, Lottos lottoList) {
-        validGenerateCount(money.getCount(), lottoList.getCount());
+        validGenerateCount(money.getAllCount(), lottoList.getCount());
         return new TotalLotto(money, lottoList);
     }
 
     public int getCount() {
-        return this.money.getCount();
+        return this.money.getAllCount();
     }
 
     private static void validGenerateCount(int moneyCount, int lottoListCount) {
