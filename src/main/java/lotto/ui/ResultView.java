@@ -12,7 +12,6 @@ public class ResultView {
     static final String PRINT_SEPERATOR = "-----------";
     static final String PRINT_LOSS_INFO = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     static final String PRINT_RANK_START_MESSAGE = "당첨 통계";
-    static final String PROFIT_RATE_FORMAT = "%.2f";
     static final String LOTTO_PRINT_START_CHAR = "[";
     static final String LOTTO_PRINT_END_CHAR = "]";
     static final String LOTTO_PRINT_DELIMITER = ", ";
@@ -20,7 +19,7 @@ public class ResultView {
 
     public static void printLottoPurchase(Lottos lottos) {
         System.out.println(lottos.getLottosSize() + PRINT_PURCHASE_COUNT_MESSAGE);
-        for (Lotto lotto : lottos.getLottoList()) {
+        for (Lotto lotto : lottos.getLottoSheets()) {
             printLotto(lotto);
         }
     }
@@ -30,20 +29,17 @@ public class ResultView {
         System.out.println(PRINT_SEPERATOR);
 
         WinRanks winRanks = new WinRanks();
-        winRanks.calculateWinPriceMap(winningLotto, lottos);
+        winRanks.calculateWinPriceTotals(winningLotto, lottos);
 
         printRanks(winRanks);
     }
 
-    public static double printProfit(int purchaseMoney, int profitMoney) {
-        String profitRate = String.format(PROFIT_RATE_FORMAT, (double) profitMoney / purchaseMoney);
+    public static void printProfit(String profitRate) {
         System.out.println("총 수익률은 " + profitRate + " 입니다.");
 
         if (Double.parseDouble(profitRate) < 1) {
             System.out.println(PRINT_LOSS_INFO);
         }
-
-        return Double.parseDouble(profitRate);
     }
 
     public static void printLotto(Lotto lotto) {
@@ -60,9 +56,9 @@ public class ResultView {
     }
 
     private static void printRanks(WinRanks winRanks) {
-        Map<Rank, Integer> winMap = winRanks.getWinMap();
-        for (Rank key : winMap.keySet()) {
-            printRank(key, winMap.get(key));
+        Map<Rank, Integer> getWinTotals = winRanks.getWinTotals();
+        for (Rank key : getWinTotals.keySet()) {
+            printRank(key, getWinTotals.get(key));
         }
     }
 

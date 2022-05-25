@@ -34,19 +34,7 @@ public class InputView {
         String winningLottoString = scanner.nextLine();
 
         String[] splitWinningLottoString = winningLottoString.split(WINNING_LOTTO_DELIMITER);
-        Lotto lotto = new Lotto();
 
-        validateWinningLottoNumberLength(splitWinningLottoString);
-
-        for (String s : splitWinningLottoString) {
-            lotto.addLottoNumber(s.trim());
-        }
-        return lotto;
-    }
-
-    private static void validateWinningLottoNumberLength(String[] splitWinningLottoString) {
-        if (splitWinningLottoString == null || splitWinningLottoString.length != 6) {
-            throw new IllegalArgumentException("로또는 6개의 숫자입니다.");
-        }
+        return new Lotto(splitWinningLottoString);
     }
 }

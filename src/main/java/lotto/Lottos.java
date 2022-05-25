@@ -19,7 +19,7 @@ public class Lottos {
         }
     }
 
-    public List<Lotto> getLottoList() {
+    public List<Lotto> getLottoSheets() {
         return lottoSheets;
     }
 

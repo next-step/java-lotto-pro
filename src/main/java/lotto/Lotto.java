@@ -13,6 +13,15 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public Lotto(String[] splitWinningLottoString) {
+        if (splitWinningLottoString == null || splitWinningLottoString.length != 6) {
+            throw new IllegalArgumentException("로또는 6개의 숫자입니다.");
+        }
+        for (String s : splitWinningLottoString) {
+            addLottoNumber(s.trim());
+        }
+    }
+
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }

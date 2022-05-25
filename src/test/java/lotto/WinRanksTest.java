@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import lotto.ui.ResultView;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -29,8 +28,8 @@ public class WinRanksTest {
         Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         WinRanks winRanks = new WinRanks();
-        winRanks.calculateWinPriceMap(winningLotto, lottos);
-        Map<Rank, Integer> winPriceMap = winRanks.getWinMap();
+        winRanks.calculateWinPriceTotals(winningLotto, lottos);
+        Map<Rank, Integer> winPriceMap = winRanks.getWinTotals();
 
         assertThat(winPriceMap.get(Rank.FIFTH)).isEqualTo(1);
         assertThat(winPriceMap.get(Rank.FOURTH)).isEqualTo(1);
@@ -47,10 +46,10 @@ public class WinRanksTest {
         Lottos lottoRank = new Lottos(lottoSheets);
 
         WinRanks winRanks = new WinRanks();
-        winRanks.calculateWinPriceMap(winningLotto, lottoRank);
-        Map<Rank, Integer> winPriceMap = winRanks.getWinMap();
+        winRanks.calculateWinPriceTotals(winningLotto, lottoRank);
+        Map<Rank, Integer> winPriceTotals = winRanks.getWinTotals();
 
-        assertThat(winPriceMap.get(Rank.FOURTH)).isEqualTo(1);
+        assertThat(winPriceTotals.get(Rank.FOURTH)).isEqualTo(1);
     }
 
     @Test
@@ -71,8 +70,8 @@ public class WinRanksTest {
 
         WinRanks winRanks = new WinRanks();
         int winPrice = winRanks.winningPrice(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), lossLottos);
-        double profitRate = ResultView.printProfit(lossLottos.getLottosSize() * 1000, winPrice);
-        assertThat(profitRate).isGreaterThan(1);
+        String profitRate = winRanks.calulateProfitRate(winPrice, lossLottos.getLottosSize() * 1000);
+        assertThat(Double.parseDouble(profitRate)).isGreaterThan(1);
     }
 
     @Test
@@ -88,8 +87,8 @@ public class WinRanksTest {
 
         WinRanks winRanks = new WinRanks();
         int winPrice = winRanks.winningPrice(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), winLottos);
-        double profitRate = ResultView.printProfit(winLottos.getLottosSize() * 1000, winPrice);
-        assertThat(profitRate).isLessThan(1);
+        String profitRate = winRanks.calulateProfitRate(winPrice, winLottos.getLottosSize() * 1000);
+        assertThat(Double.parseDouble(profitRate)).isLessThan(1);
     }
 
 }
