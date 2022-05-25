@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.List;
 
+import lotto.view.PurchaseHistory;
+
 public class Ledger {
 	private LottoPrice lottoPrice;
 	private List<List<String>> manualLottoList;
@@ -18,5 +20,12 @@ public class Ledger {
 
 	public List<List<String>> getManualLottoList() {
 		return Collections.unmodifiableList(manualLottoList);
+	}
+
+	public PurchaseHistory getPurchaseHistory() {
+		int quantity = lottoPrice.availableQuantity();
+		int manualCount = manualLottoList.size();
+
+		return new PurchaseHistory(quantity - manualCount, manualCount);
 	}
 }

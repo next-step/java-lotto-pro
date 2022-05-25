@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.List;
 
 import lotto.domain.AutoNumbers;
+import lotto.domain.Ledger;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoPrice;
@@ -10,49 +11,43 @@ import lotto.domain.LottoTickets;
 import lotto.domain.Number;
 import lotto.domain.RankResult;
 import lotto.dto.PrizeReport;
-import lotto.dto.StringLottoTickets;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+import lotto.view.PurchaseHistory;
 
 public class LottoController {
 	public void start() {
 		LottoPrice lottoPrice = new LottoPrice(InputView.inputMoney());
 		int manualCount = InputView.inputNumberOfAttempts();
+		List<List<String>> manualLottoList = InputView.inputManualNumbers(manualCount);
 
-		LottoTickets lottoTickets = getLottoTicketsByManual(lottoPrice, manualCount);
+		Ledger ledger = new Ledger(lottoPrice, manualLottoList);
+		LottoMachine lottoMachine = new LottoMachine(new AutoNumbers());
 
-		int autoCount = lottoPrice.availableQuantity() - manualCount;
-		OutputView.printPurchaseCount(manualCount, autoCount);
-
-		lottoTickets.sum(automaticallyBuyLotto(autoCount));
-
-		Lotto winningLotto = Lotto.getInstanceByString(InputView.inputWinningNumbers());
-		Number number = new Number(InputView.inputBonusNumber());
-		RankResult result = lottoTickets.getResult(winningLotto, number);
+		LottoTickets lottoTickets = getLottoTickets(ledger, lottoMachine);
+		RankResult result = getRankResult(lottoTickets, lottoMachine);
 
 		reportLottoResult(lottoPrice, result);
 	}
 
-	private LottoTickets automaticallyBuyLotto(int autoCount) {
-		LottoTickets lottoTickets = getLottoTicketsByAuto(autoCount);
-		OutputView.printLottoTickets(lottoTickets.getLottTickets());
+	private LottoTickets getLottoTickets(Ledger ledger, LottoMachine lottoMachine) {
+		PurchaseHistory purchaseHistory = ledger.getPurchaseHistory();
+
+		LottoTickets lottoTickets = lottoMachine.generateByManual(ledger);
+		LottoTickets autoLottoTickets = lottoMachine.generateByAuto(purchaseHistory.getAutoCount());
+		lottoTickets.sum(autoLottoTickets);
+
+		OutputView.printPurchaseCount(purchaseHistory);
+		OutputView.printLottoTickets(autoLottoTickets.getLottTickets());
 
 		return lottoTickets;
 	}
 
-	private LottoTickets getLottoTicketsByAuto(int count) {
-		LottoMachine lottoMachine = new LottoMachine(new AutoNumbers());
+	private RankResult getRankResult(LottoTickets lottoTickets, LottoMachine lottoMachine) {
+		Lotto winningLotto = lottoMachine.createLottoInstance(InputView.inputWinningNumbers());
+		Number number = new Number(InputView.inputBonusNumber());
 
-		return lottoMachine.generate(count);
-	}
-
-	private LottoTickets getLottoTicketsByManual(LottoPrice lottoPrice, int manualCount) {
-		lottoPrice.validateOrder(manualCount);
-
-		StringLottoTickets lottoTickets = InputView.inputManualNumbers(manualCount);
-		List<Lotto> lottoList = lottoTickets.convertToLottoList();
-
-		return new LottoTickets(lottoList);
+		return lottoTickets.getResult(winningLotto, number);
 	}
 
 	private void reportLottoResult(LottoPrice lottoPrice, RankResult result) {

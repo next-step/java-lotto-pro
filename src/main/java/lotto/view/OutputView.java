@@ -15,8 +15,8 @@ public class OutputView {
 	private static final String BONUS_MATCH_MESSAGE = ", 보너스 볼 일치";
 	private static final String WINNING_MESSAGE = " (%d원)- %d개";
 
-	public static void printPurchaseCount(int manualCount, int autoCount) {
-		System.out.printf(PURCHASE_MESSAGE, manualCount, autoCount);
+	public static void printPurchaseCount(PurchaseHistory purchaseHistory) {
+		System.out.printf(PURCHASE_MESSAGE, purchaseHistory.getManualCount(), purchaseHistory.getAutoCount());
 	}
 
 	public static void printLottoTickets(List<LottoNumber> lottoTickets) {
