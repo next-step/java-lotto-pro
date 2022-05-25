@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Lotto {
 
-    private static final String ERROR_MESSAGE_NUMBER_LIST_NULL_OR_EMPTY = "[ERROR] numberList is null or empty.";
-    private static final String ERROR_MESSAGE_NUMBER_LIST_SIZE_WRONG = "[ERROR] numberList size is wrong.";
-    private static final String ERROR_MESSAGE_NUMBER_LIST_DUPLICATION = "[ERROR] numberList has duplicated number";
+    private static final String ERROR_MESSAGE_NUMBER_LIST_NULL_OR_EMPTY = "[ERROR] 로또 숫자 가 비었거나 null 입니다.";
+    private static final String ERROR_MESSAGE_NUMBER_LIST_SIZE_WRONG = "[ERROR] 로또 숫자의 수가 잘못되었습니다.";
+    private static final String ERROR_MESSAGE_NUMBER_LIST_DUPLICATION = "[ERROR] 로또 숫자에 중복된 숫자가 존재합니다.";
 
     public static final int LOTTO_SIZE = 6;
 
