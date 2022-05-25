@@ -7,8 +7,8 @@ public class Lottos {
 
     final List<Lotto> lottoSheets;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottoSheets = lottos;
+    public Lottos(List<Lotto> lottoSheets) {
+        this.lottoSheets = lottoSheets;
     }
 
     public Lottos(int paperCount) {
