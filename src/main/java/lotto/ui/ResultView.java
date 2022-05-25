@@ -30,6 +30,7 @@ public class ResultView {
     }
 
     private void printQuantityOfPurchasedLottos(PurchaseQuantity purchaseQuantity) {
+        System.out.println();
         System.out.println(String.format(MESSAGE_PURCHASE_LOTTO, purchaseQuantity.getManualQuantity(),
                 purchaseQuantity.getAutoQuantity()));
     }
@@ -97,5 +98,9 @@ public class ResultView {
         double earningsRate = purchaseMoney.calculateEarningsRate(results.calculateTotalMoney());
         System.out.println(String.format(MESSAGE_STATISTICS_RESULT, earningsRate,
                 earningsRate < 1 ? MESSAGE_LOTTO_FAIL : MESSAGE_LOTTO_SUCCESS));
+    }
+
+    public void printExceptionMessage(Exception exception) {
+        System.out.println(exception.getMessage());
     }
 }
