@@ -51,17 +51,17 @@ public class InputView {
 		return count;
 	}
 
-	public static StringLottoTickets inputManualNumbers(int manualCount) {
+	public static List<List<String>> inputManualNumbers(int manualCount) {
 		System.out.println(INPUT_MANUAL_MESSAGE);
 
-		List<StringLotto> lottoTickets = new ArrayList<>();
+		List<List<String>> manualLottoList = new ArrayList<>();
 
 		for(int index = 0; index < manualCount; index += 1) {
-			lottoTickets.add(StringLotto.of(getNumbersFromString()));
+			manualLottoList.add(getNumbersFromString());
 		}
 		System.out.print(EOL);
 
-		return new StringLottoTickets(lottoTickets);
+		return manualLottoList;
 	}
 
 	private static List<String> getNumbersFromString() {

@@ -35,11 +35,11 @@ public class LottoPriceTest {
 	}
 
 	@Test
-	@DisplayName("살 수 없는 개수를 입력하면 오류 발생")
-	void validateOrder() {
+	@DisplayName("살 수 있는 유효한 주문")
+	void isValidOrder() {
 		LottoPrice lottoPrice = new LottoPrice(3000);
 
-		assertThatThrownBy(() -> lottoPrice.validateOrder(5))
-			.isInstanceOf(IllegalArgumentException.class);
+		assertThat(lottoPrice.isValidOrder(2)).isTrue();
+		assertThat(lottoPrice.isValidOrder(5)).isFalse();
 	}
 }
