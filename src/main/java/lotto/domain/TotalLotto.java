@@ -1,6 +1,7 @@
 package lotto.domain;
 
 public class TotalLotto {
+    private static final String INPUT_ERROR = "잘못된 값을 입력하였습니다.";
 
     private Money money;
 
@@ -11,14 +12,19 @@ public class TotalLotto {
         this.lottoList = lottoList;
     }
 
-    public static TotalLotto from(int amount) {
-        Money money = Money.from(amount);
-        Lottos lottoList = LottoShop.generateLottos(money.getCount());
+    public static TotalLotto of(Money money, Lottos lottoList) {
+        validGenerateCount(money.getCount(), lottoList.getCount());
         return new TotalLotto(money, lottoList);
     }
 
     public int getCount() {
         return this.money.getCount();
+    }
+
+    private static void validGenerateCount(int moneyCount, int lottoListCount) {
+        if (moneyCount != lottoListCount) {
+            throw new IllegalArgumentException(INPUT_ERROR);
+        }
     }
 
     public String lottoListToString() {

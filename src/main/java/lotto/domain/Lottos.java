@@ -14,6 +14,10 @@ public class Lottos {
         return this.lottoList;
     }
 
+    public int getCount() {
+        return lottoList.size();
+    }
+
     public List<Rank> matchLottoStatic(WinningLotto winningLotto) {
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : this.lottoList) {
