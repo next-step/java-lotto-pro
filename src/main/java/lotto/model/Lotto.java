@@ -1,39 +1,65 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int MAX_NUMBER = 45;
+    private static final String PRINT_FORM = "[%s]";
+    private static final String PRINT_DELIMITER = ", ";
     private static final int START_INDEX = 0;
     private static final int END_INDEX = 6;
-    private static final String PRINT_FORM = "%s";
-    private static final String PRINT_DELIMITER = ", ";
 
-    private final List<Integer> numbers;
+    private final List<LottoNo> pickNumbers;
 
     public Lotto() {
-        numbers = createNumbers();
+        List<Integer> numbers = LottoNumbers.PREPARED_NUMBERS;
+        Collections.shuffle(numbers);
+        numbers = numbers.subList(START_INDEX, END_INDEX);
+        pickNumbers = createNumbers(numbers);
     }
 
     public Lotto(Integer... customNumbers) {
-        numbers = Arrays.asList(customNumbers);
+        pickNumbers = createNumbers(Arrays.asList(customNumbers));
     }
 
-    public List<Integer> seeNumbers() {
-        return this.numbers;
+    public Lotto(String customNumbers) {
+        this(Arrays.stream(customNumbers.split(","))
+                .map(String::trim).map(Integer::parseInt).toArray(Integer[]::new));
+    }
+
+    public List<LottoNo> seeNumbers() {
+        return this.pickNumbers;
+    }
+
+    public boolean contain(int number) {
+        return this.pickNumbers.stream().anyMatch(lottoNo -> lottoNo.value() == number);
+    }
+
+    public boolean contain(LottoNo number) {
+        return this.pickNumbers.stream().anyMatch(lottoNo -> lottoNo.value() == number.value());
     }
 
     public String printText() {
-        return String.format(PRINT_FORM, String.join(PRINT_DELIMITER, this.numbers.toString()));
+        String joinNumber = this.pickNumbers.stream()
+                .map(LottoNo::value)
+                .map(Object::toString)
+                .collect(Collectors.joining(PRINT_DELIMITER));
+        return String.format(PRINT_FORM, joinNumber);
     }
 
-    private List<Integer> createNumbers() {
-        List<Integer> preparedNumbers = LottoNumbers.PREPARED_NUMBERS;
-        Collections.shuffle(preparedNumbers);
-        preparedNumbers = preparedNumbers.subList(START_INDEX, END_INDEX);
-        Collections.sort(preparedNumbers);
-        return preparedNumbers;
+    private List<LottoNo> createNumbers(List<Integer> numbers) {
+        if (numbers.size() != END_INDEX) {
+            throw new IllegalArgumentException("숫자는 6개만 입력 가능합니다.");
+        }
+
+        Collections.sort(numbers);
+        List<LottoNo> result = new ArrayList<>();
+        for (int number : numbers.subList(START_INDEX, END_INDEX)) {
+            result.add(new LottoNo(number));
+        }
+        return result;
     }
 }

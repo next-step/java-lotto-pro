@@ -15,7 +15,7 @@ public class Lottos {
         lottos = Arrays.asList(lottoArgs);
     }
 
-    public List<Lotto> allGames () {
+    public List<Lotto> allGames() {
         return lottos;
     }
 

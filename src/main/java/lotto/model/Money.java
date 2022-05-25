@@ -2,15 +2,19 @@ package lotto.model;
 
 import lotto.Config;
 
-public class Cashier {
+public class Money {
     private final int receiveAmount;
 
-    public Cashier(int money) {
+    public Money(int money) {
         this.receiveAmount = checkAmount(money);
     }
 
-    public int receiveAmount () {
+    public int receiveAmount() {
         return this.receiveAmount;
+    }
+
+    public int buyCount() {
+        return this.receiveAmount / Config.LOTTO_ONE_GAME_PRICE;
     }
 
     private int checkAmount(int amount) {
@@ -23,5 +27,4 @@ public class Cashier {
         }
         return amount;
     }
-
 }

@@ -1,23 +1,19 @@
 package lotto.controller;
 
-import lotto.*;
-import lotto.model.Cashier;
-import lotto.model.Lottos;
-import lotto.model.Organizer;
-import lotto.model.Store;
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoController {
-    private static final Store store = new Store(Config.LOTTO_ONE_GAME_PRICE);
-
     public static void buy() {
-        Cashier cashier = new Cashier(InputView.inputBuyAmount());
-        Lottos lottos = store.giveLotto(cashier.receiveAmount());
+        Money money = new Money(InputView.inputBuyAmount());
+        Lottos lottos = new Lottos(money.buyCount());
         ResultView.printLottoNumbers(lottos);
 
-        Organizer organizer = new Organizer(InputView.inputWinningNumbers());
+        Lotto winningLotto = new Lotto(InputView.inputWinningNumbers());
+        LottoNo bonusLottoNo = new LottoNo(InputView.inputBonusNumbers());
+        Organizer organizer = new Organizer(winningLotto, bonusLottoNo);
         ResultView.printWinningResult(organizer.winningResults(lottos));
-        ResultView.printRateOfReturn(organizer.winningRate(cashier.receiveAmount()));
+        ResultView.printRateOfReturn(organizer.winningRate(money.receiveAmount()));
     }
 }
