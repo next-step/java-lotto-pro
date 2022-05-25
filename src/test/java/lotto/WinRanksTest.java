@@ -15,13 +15,13 @@ public class WinRanksTest {
 
     @BeforeAll
     public static void createLottosList() {
-        List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
-        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8)));
-        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
-        lottoList.add(new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10)));
-        lottos = new Lottos(lottoList);
+        List<Lotto> lottoSheets = new ArrayList<>();
+        lottoSheets.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoSheets.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        lottoSheets.add(new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8)));
+        lottoSheets.add(new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
+        lottoSheets.add(new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10)));
+        lottos = new Lottos(lottoSheets);
     }
 
     @Test
@@ -39,6 +39,21 @@ public class WinRanksTest {
     }
 
     @Test
+    public void 당첨순위_4등_확인() {
+        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        List<Lotto> lottoSheets = new ArrayList<>();
+        lottoSheets.add(new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8)));
+        Lottos lottoRank = new Lottos(lottoSheets);
+
+        WinRanks winRanks = new WinRanks();
+        winRanks.calculateWinPriceMap(winningLotto, lottoRank);
+        Map<Rank, Integer> winPriceMap = winRanks.getWinMap();
+
+        assertThat(winPriceMap.get(Rank.FOURTH)).isEqualTo(1);
+    }
+
+    @Test
     public void 전체로또_당첨금액_확인() {
         Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         WinRanks winRanks = new WinRanks();
@@ -48,11 +63,11 @@ public class WinRanksTest {
 
     @Test
     public void 수익률_수익_확인() {
-        List<Lotto> lossLottoList = new ArrayList<>();
-        lossLottoList.add(new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
-        lossLottoList.add(new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10)));
-        lossLottoList.add(new Lotto(Arrays.asList(1, 7, 8, 9, 10, 11)));
-        Lottos lossLottos = new Lottos(lossLottoList);
+        List<Lotto> lossLottoSheet = new ArrayList<>();
+        lossLottoSheet.add(new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
+        lossLottoSheet.add(new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10)));
+        lossLottoSheet.add(new Lotto(Arrays.asList(1, 7, 8, 9, 10, 11)));
+        Lottos lossLottos = new Lottos(lossLottoSheet);
 
         WinRanks winRanks = new WinRanks();
         int winPrice = winRanks.winningPrice(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), lossLottos);
@@ -62,14 +77,14 @@ public class WinRanksTest {
 
     @Test
     public void 수익률_손해_확인() {
-        List<Lotto> winLottoList = new ArrayList<>();
-        winLottoList.add(new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
-        winLottoList.add(new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10)));
-        winLottoList.add(new Lotto(Arrays.asList(1, 7, 8, 9, 10, 11)));
-        winLottoList.add(new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)));
-        winLottoList.add(new Lotto(Arrays.asList(8, 9, 10, 11, 12, 13)));
-        winLottoList.add(new Lotto(Arrays.asList(9, 10, 11, 12, 13, 14)));
-        Lottos winLottos = new Lottos(winLottoList);
+        List<Lotto> winLottoSheets = new ArrayList<>();
+        winLottoSheets.add(new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
+        winLottoSheets.add(new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10)));
+        winLottoSheets.add(new Lotto(Arrays.asList(1, 7, 8, 9, 10, 11)));
+        winLottoSheets.add(new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)));
+        winLottoSheets.add(new Lotto(Arrays.asList(8, 9, 10, 11, 12, 13)));
+        winLottoSheets.add(new Lotto(Arrays.asList(9, 10, 11, 12, 13, 14)));
+        Lottos winLottos = new Lottos(winLottoSheets);
 
         WinRanks winRanks = new WinRanks();
         int winPrice = winRanks.winningPrice(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), winLottos);
