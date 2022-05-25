@@ -6,6 +6,7 @@ import lotto.Lotto;
 public class InputView {
     static final String PRINT_INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     static final String PRINT_INPUT_WINNING_LOTTO_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    static final String PRINT_INPUT_BONUS_BALL_LOTTO_MESSAGE = "보너스 볼 입력해 주세요.";
     static final String WINNING_LOTTO_DELIMITER = ",";
     static final Scanner scanner = new Scanner(System.in);
 
@@ -36,5 +37,12 @@ public class InputView {
         String[] splitWinningLottoString = winningLottoString.split(WINNING_LOTTO_DELIMITER);
 
         return new Lotto(splitWinningLottoString);
+    }
+
+    public static int getBonusNumberInput(Lotto winningLotto) {
+        System.out.println(PRINT_INPUT_BONUS_BALL_LOTTO_MESSAGE);
+        String bonusBall = scanner.nextLine();
+
+        return Lotto.validateBonus(winningLotto, bonusBall);
     }
 }

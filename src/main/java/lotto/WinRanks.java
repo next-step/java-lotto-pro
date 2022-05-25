@@ -9,6 +9,7 @@ public class WinRanks {
     public WinRanks() {
         winTotals = new HashMap<>();
         winTotals.put(Rank.FIRST, 0);
+        winTotals.put(Rank.SECOND, 0);
         winTotals.put(Rank.THIRD, 0);
         winTotals.put(Rank.FOURTH, 0);
         winTotals.put(Rank.FIFTH, 0);
@@ -18,24 +19,25 @@ public class WinRanks {
         return winTotals;
     }
 
-    public int winningPrice(Lotto winningLotto, Lottos lottos) {
+    public int winningPrice(Lotto winningLotto, Lottos lottos, int bonusNumber) {
         int totalPrice = 0;
-        calculateWinPriceTotals(winningLotto, lottos);
+        calculateWinPriceTotals(winningLotto, lottos, bonusNumber);
         for (Rank rankEnum : winTotals.keySet()) {
             totalPrice += winTotals.get(rankEnum) * rankEnum.getWinningMoney();
         }
         return totalPrice;
     }
 
-    public void calculateWinPriceTotals(Lotto winningLotto, Lottos lottos) {
+    public void calculateWinPriceTotals(Lotto winningLotto, Lottos lottos, int bonusNumber) {
         for (Lotto lotto : lottos.getLottoSheets()) {
             int checkMatchCount = lotto.checkMatchCount(winningLotto);
-            addRankCount(winTotals, checkMatchCount);
+            boolean bonusMatch = lotto.checkBonusMatch(bonusNumber);
+            addRankCount(winTotals, checkMatchCount, bonusMatch);
         }
     }
 
-    private void addRankCount(Map<Rank, Integer> winTotals, int checkMatchCount) {
-        Rank key = Rank.valueOf(checkMatchCount);
+    private void addRankCount(Map<Rank, Integer> winTotals, int checkMatchCount, boolean bonusMatch) {
+        Rank key = Rank.matchedRank(checkMatchCount, bonusMatch);
         if (winTotals.containsKey(key)) {
             winTotals.put(key, winTotals.get(key) + 1);
         }

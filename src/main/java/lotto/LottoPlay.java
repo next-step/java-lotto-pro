@@ -10,9 +10,10 @@ public class LottoPlay {
 
         ResultView.printLottoPurchase(lottos);
         Lotto winningLottoInput = InputView.getWinningLottoInput();
+        int bonusNumber = InputView.getBonusNumberInput(winningLottoInput);
 
         WinRanks winRanks = new WinRanks();
-        int winningPrice = winRanks.winningPrice(winningLottoInput, lottos);
+        int winningPrice = winRanks.winningPrice(winningLottoInput, lottos, bonusNumber);
         ResultView.printLottoResult(lottos, winningLottoInput);
         String profitRate = winRanks.calulateProfitRate(winningPrice, moneyInput);
         ResultView.printProfit(profitRate);

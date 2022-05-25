@@ -29,7 +29,6 @@ public class ResultView {
         System.out.println(PRINT_SEPERATOR);
 
         WinRanks winRanks = new WinRanks();
-        winRanks.calculateWinPriceTotals(winningLotto, lottos);
 
         printRanks(winRanks);
     }
