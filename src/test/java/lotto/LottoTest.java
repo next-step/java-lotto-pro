@@ -1,6 +1,7 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,5 +25,18 @@ public class LottoTest {
         Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
 
         assertThat(lotto1.checkMatchCount(lotto)).isEqualTo(3);
+    }
+
+    @Test
+    public void 보너스_확인() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.checkBonusMatch(6)).isTrue();
+    }
+
+    @Test
+    public void 보너스_당첨번호_중복성검사() {
+        assertThatThrownBy(
+                () -> Lotto.validateBonus(new Lotto(new String[]{"1", "2", "3", "4", "5", "6"}), "6")).isInstanceOf(
+                IllegalArgumentException.class);
     }
 }
