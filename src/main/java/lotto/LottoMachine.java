@@ -1,16 +1,15 @@
 package lotto;
 
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 public class LottoMachine {
 
     private static final int ZERO = 0;
-    private static final List<Number> NUMBERS = IntStream.rangeClosed(1, 45).mapToObj(Number::new).collect(Collectors.toList());
+    private static final List<Number> NUMBERS = IntStream.rangeClosed(1, 45).mapToObj(Number::new).collect(toList());
     private static final int SALE_PRICE = 1000;
     private static final int DECIMAL_PLACES = 100;
 
@@ -19,12 +18,13 @@ public class LottoMachine {
         return NUMBERS.subList(0, 6);
     }
 
-    public Lottos buy(int price) {
-        int quantity = getQuantity(price);
-        return new Lottos(quantity);
+    public Lottos buy(int autoQuantity, Lottos manualLottos) {
+        Lottos lottos = new Lottos(autoQuantity);
+        lottos.addLottos(manualLottos);
+        return lottos;
     }
 
-    private int getQuantity(int price) {
+    public int getQuantity(int price) {
         if (!isCorrect(price)) {
             throw new IllegalArgumentException("금액이 올바르지 않습니다.");
         }
@@ -42,14 +42,6 @@ public class LottoMachine {
 
     private int getMoneySum(List<Rank> ranks) {
         return ranks.stream().mapToInt(Rank::getWinningMoney).sum();
-    }
-
-    public Map<Rank, Integer> getGameResult(List<Rank> ranks) {
-        Map<Rank, Integer> gameResult = new LinkedHashMap<>();
-        for (Rank value : Rank.values()) {
-            gameResult.put(value, (int) ranks.stream().filter(rank -> rank.equals(value)).count());
-        }
-        return gameResult;
     }
 
 }

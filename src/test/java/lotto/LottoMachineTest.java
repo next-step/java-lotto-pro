@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -34,12 +35,28 @@ class LottoMachineTest {
 
     @ParameterizedTest
     @CsvSource({"3000,3", "14000,14"})
-    void 입력받은_금액만큼_로또발급(int price, int quantity) {
+    void 입력받은_금액만큼_자동_로또발급(int price, int quantity) {
         LottoMachine lottoMachine = new LottoMachine();
 
-        Lottos lottos = lottoMachine.buy(price);
+        Lottos lottos = lottoMachine.buy(quantity, new Lottos(Collections.emptyList()));
+        int expected = lottoMachine.getQuantity(price);
 
-        assertThat(lottos.getLottos()).hasSize(quantity);
+        assertThat(lottos.getLottos()).hasSize(expected);
+    }
+
+    @ParameterizedTest
+    @MethodSource(value = "buyTestParameter")
+    void 자동_수동_동시발급(int autoQuantity, Lottos manualLottos) {
+        LottoMachine lottoMachine = new LottoMachine();
+
+        Lottos lottos = lottoMachine.buy(autoQuantity, manualLottos);
+
+        assertThat(lottos.getLottos()).hasSize(autoQuantity + manualLottos.getLottos().size());
+    }
+
+    static Stream<Arguments> buyTestParameter() {
+        return Stream.of(
+                arguments(3, new Lottos(Arrays.asList(new Lotto(new int[]{8, 21, 23, 41, 42, 43}), new Lotto(new int[]{8, 21, 23, 41, 42, 43})))));
     }
 
     @ParameterizedTest
@@ -47,7 +64,7 @@ class LottoMachineTest {
     void 예외테스트_잘못된_금액입력(int price) {
         LottoMachine lottoMachine = new LottoMachine();
 
-        assertThatThrownBy(() -> lottoMachine.buy(price)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> lottoMachine.getQuantity(price)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest

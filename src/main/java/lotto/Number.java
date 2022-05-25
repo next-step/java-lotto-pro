@@ -10,13 +10,17 @@ public class Number {
     private final int value;
 
     public Number(int input) {
-        checkRange(input);
+        validateRange(input);
         this.value = input;
     }
 
-    private void checkRange(int input) {
+    public Number(String input) {
+        this(Integer.parseInt(input));
+    }
+
+    private void validateRange(int input) {
         if (input < MIN_RANGE_NUMBER || input > MAX_RANGE_NUMBER) {
-            throw new IllegalArgumentException("로또 숫자 범위에서 아닙니다.");
+            throw new IllegalArgumentException(String.format("%d부터 %d까지의 숫자만 입력 가능합니다.", MIN_RANGE_NUMBER, MAX_RANGE_NUMBER));
         }
     }
 
