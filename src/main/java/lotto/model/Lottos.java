@@ -25,16 +25,6 @@ public class Lottos {
         }
     }
 
-    public RankCount rankCount(LottoNumbers winningNumbers) {
-        Map<Rank, Integer> rankCount = initRankCount();
-        lottos.forEach(lottoNumbers -> {
-            int matchCount = lottoNumbers.matchCount(winningNumbers);
-            Rank rank = Rank.getRank(matchCount);
-            rankCount.put(rank, rankCount.get(rank) + 1);
-        });
-        return RankCount.from(rankCount);
-    }
-
     public RankCount rankCount(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         Map<Rank, Integer> rankCount = initRankCount();
         lottos.forEach(lottoNumbers -> {
