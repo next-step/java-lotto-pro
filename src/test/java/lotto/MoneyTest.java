@@ -3,25 +3,32 @@ package lotto;
 import lotto.domain.Money;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class MoneyTest {
     @Test
-    public void Money_생성() {
-        Money money = Money.from(2000);
-        assertThat(money.getCount()).isEqualTo(2);
+     void Money_생성() {
+        Money money = Money.of(6000, 1);
+        assertThat(money.getAllCount()).isEqualTo(6);
+        assertThat(money.getAutoCount()).isEqualTo(5);
+        assertThat(money.getManualCount()).isEqualTo(1);
     }
 
     @Test
-    public void amount_negative() {
-        assertThatThrownBy(() -> Money.from(-2000))
+     void amount_negative() {
+        assertThatThrownBy(() -> Money.of(-2000, 1))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    public void 잔액_존재() {
-        assertThatThrownBy(() -> Money.from(2500))
+    void 잔액_존재() {
+        assertThatThrownBy(() -> Money.of(2500, 1))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 수동_입력_개수_초과() {
+        assertThatThrownBy(() -> Money.of(2500, 5))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

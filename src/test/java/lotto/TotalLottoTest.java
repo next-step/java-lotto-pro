@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TotalLottoTest {
     private TotalLotto generatorTotalLotto() {
-        Money money = Money.from(2000);
+        Money money = Money.of(2000, 0);
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(LottoFactory.manualGenerator("1,2,3,4,5,6"));
         lottoList.add(LottoFactory.manualGenerator("2,3,4,5,6,45"));
