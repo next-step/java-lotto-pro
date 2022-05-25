@@ -31,6 +31,11 @@ class MoneyTest {
     }
 
     @Test
+    void 빼기() {
+        assertThat(money1.subtract(money2)).isEqualTo(Money.from(9000));
+    }
+
+    @Test
     void 음수_예외() {
         assertThatThrownBy(() -> Money.from(-10)).isInstanceOf(
                 IllegalArgumentException.class);

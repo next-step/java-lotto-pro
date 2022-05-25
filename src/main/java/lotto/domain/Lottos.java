@@ -21,7 +21,13 @@ public class Lottos {
                 .collect(Collectors.toList());
         return Lottos.from(matchedLottos);
     }
-    
+
+    public Lottos add(Lottos target) {
+        List<Lotto> addedList = new ArrayList<>(lottos);
+        addedList.addAll(new ArrayList<>(target.lottos));
+        return Lottos.from(addedList);
+    }
+
     public int size() {
         return this.lottos.size();
     }

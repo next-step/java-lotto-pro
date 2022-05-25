@@ -1,6 +1,9 @@
 package lotto.controller;
 
-import lotto.domain.AutoLottoIssuer;
+import calculator.domain.StringSplitter;
+import java.util.ArrayList;
+import java.util.List;
+import lotto.domain.LottoIssuer;
 import lotto.domain.LottoRandomFactory;
 import lotto.domain.LottoStatistic;
 import lotto.domain.Lottos;
@@ -10,12 +13,12 @@ import lotto.view.View;
 
 public class LottoController {
     private final View view;
-    private final AutoLottoIssuer autoLottoIssuer;
+    private final LottoIssuer autoLottoIssuer;
 
     public LottoController(View view) {
         this.view = view;
         LottoRandomFactory factory = new LottoRandomFactory(new RandomNumberMachine());
-        autoLottoIssuer = new AutoLottoIssuer(factory);
+        autoLottoIssuer = new LottoIssuer(factory);
     }
 
     public void start() {
@@ -41,14 +44,36 @@ public class LottoController {
     }
 
     private Lottos issueLottos() {
+
         view.outputOrderPrice();
-        String orderPrice = view.inputOrderPrice();
+        Money orderPrice = Money.from(view.inputOrderPrice());
 
-        Lottos lottos = autoLottoIssuer.issue(Money.from(orderPrice));
+        Lottos manualLottos = issueManualLotto();
+        Lottos autoLottos = autoLottoIssuer.issueMore(manualLottos, orderPrice);
 
-        view.outputOrderLottoList(lottos);
-        return lottos;
+        view.outputOrderLottoList(manualLottos, autoLottos);
+
+        return manualLottos.add(autoLottos);
     }
 
 
+    private Lottos issueManualLotto() {
+        view.outputManualLottoSize();
+        int manualLottoSize = view.inputManualLottoSize();
+
+        view.outputManualLottoNumbers();
+        String[] manualLottoNumbers = view.inputManualNumbers(manualLottoSize);
+
+        List<String[]> manualLottos = createManualLottos(manualLottoNumbers);
+        return autoLottoIssuer.issueManually(manualLottos);
+    }
+
+    private List<String[]> createManualLottos(String[] manualLottoNumbers) {
+        List<String[]> manualLottos = new ArrayList<>();
+
+        for (String lottoNumber : manualLottoNumbers) {
+            manualLottos.add(StringSplitter.split(lottoNumber));
+        }
+        return manualLottos;
+    }
 }

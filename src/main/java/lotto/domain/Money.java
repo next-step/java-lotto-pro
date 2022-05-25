@@ -35,6 +35,10 @@ public class Money {
         return Money.from(this.value.add(target.value));
     }
 
+    public Money subtract(Money target) {
+        return Money.from(this.value.subtract(target.value));
+    }
+
     public Money multiply(double value) {
         return Money.from(this.value.multiply(BigDecimal.valueOf(value)));
     }

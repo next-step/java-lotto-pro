@@ -30,14 +30,10 @@ public enum MatchResult {
     }
 
     private static MatchResult getMatchResult(int matchCount, boolean isBonus) {
-        Optional<MatchResult> result = Arrays.stream(MatchResult.values())
+        return Arrays.stream(MatchResult.values())
                 .filter(matchResult -> isSameMatchResult(matchResult, matchCount, isBonus))
-                .findAny();
+                .findAny().orElseThrow(() -> new IllegalArgumentException("당첨번호 매칭 결과 케이스에 존재하지 않는 케이스입니다."));
 
-        if (result.isPresent()) {
-            return result.get();
-        }
-        throw new IllegalArgumentException("당첨번호 매칭 결과 케이스에 존재하지 않는 케이스입니다.");
     }
 
     private static boolean isSameMatchResult(MatchResult matchResult, int matchCount, boolean isBonus) {
