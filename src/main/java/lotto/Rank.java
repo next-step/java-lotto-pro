@@ -25,7 +25,8 @@ public enum Rank {
     public static Rank valueOf(int countOfMatch) {
         Rank rank = null;
         for (Rank value : Rank.values()) {
-            rank = getRankCountOfMatch(countOfMatch, value);
+            Rank rankCountOfMatch = getRankCountOfMatch(countOfMatch, value);
+            rank = rankCountOfMatch != null ? rankCountOfMatch : rank;
         }
         return rank;
     }
