@@ -2,6 +2,8 @@ package lotto.view;
 
 import calculator.utils.Splitter;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoWinningTicket;
 import lotto.message.InputMessage;
 
 import java.util.ArrayList;
@@ -16,7 +18,19 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<LottoNumber> inputWinningNumbers() {
+    public static LottoWinningTicket inputWinningNumbers() {
+        List<LottoNumber> lottoNumbers = inputLottoNumbers();
+        LottoNumber bonusNumber = inputBonusNumber();
+
+        return new LottoWinningTicket(new LottoTicket(lottoNumbers), bonusNumber);
+    }
+
+    private static LottoNumber inputBonusNumber() {
+        System.out.println(InputMessage.INPUT_BONUS_NUMBER);
+        return new LottoNumber(scanner.nextInt());
+    }
+
+    private static List<LottoNumber> inputLottoNumbers() {
         System.out.println(InputMessage.INPUT_WINNING_NUMBERS);
         String[] stringNumbers = Splitter.splitString(scanner.next());
 

@@ -1,9 +1,7 @@
 package lotto.controller;
 
 
-import lotto.domain.LottoStore;
-import lotto.domain.LottoTicket;
-import lotto.domain.Money;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -12,10 +10,13 @@ import java.util.List;
 public class LottoController {
     public void startSales() {
         LottoStore lottoStore = new LottoStore();
-        List<LottoTicket> lottoAutoNumbers = lottoStore.buy(new Money(InputView.inputMoney()));
+        Money money = new Money(InputView.inputMoney());
+        List<LottoTicket> lottoAutoNumbers = lottoStore.buy(money);
         OutputView.printLottoAutoTickets(lottoAutoNumbers);
 
-        LottoTicket winningLottoTicket = new LottoTicket(InputView.inputWinningNumbers());
-        OutputView.printLottoResult(winningLottoTicket, lottoAutoNumbers);
+        LottoWinningTicket lottoWinningNumbers = InputView.inputWinningNumbers();
+        LottoRanks lottoRanks = lottoWinningNumbers.analyzeResult(lottoAutoNumbers);
+        OutputView.printLottoResult(lottoRanks);
+        OutputView.printRateOfReturn(money, lottoRanks);
     }
 }

@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 public class LottoTicket {
-    public static final int LOTTO_SIZE = 6;
+    public static final int SIZE = 6;
+    public static final int PRICE = 1000;
 
     private final List<LottoNumber> lottoTicket;
 
@@ -28,13 +29,13 @@ public class LottoTicket {
             numbers.add(lottoNumber.getLottoNumber());
         }
 
-        if (numbers.size() != LOTTO_SIZE) {
+        if (numbers.size() != SIZE) {
             throw new IllegalArgumentException(InputMessage.INVALID_LOTTO_UNIQUE);
         }
     }
 
     private void validateDigits(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_SIZE) {
+        if (lottoNumbers.size() != SIZE) {
             throw new IllegalArgumentException(InputMessage.INVALID_LOTTO_DIGITS);
         }
     }
@@ -45,15 +46,11 @@ public class LottoTicket {
         return copyLottoTicket.size();
     }
 
-    public List<Integer> matchList(List<LottoTicket> tickets) {
-        List<Integer> matchList = new ArrayList<>();
-        for (LottoTicket ticket : tickets) {
-            matchList.add(match(ticket));
-        }
-        return matchList;
-    }
-
     public List<LottoNumber> getLottoTicket() {
         return new ArrayList<>(lottoTicket);
+    }
+
+    public boolean contains(LottoNumber bonusNumber) {
+        return lottoTicket.contains(bonusNumber);
     }
 }

@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.message.InputMessage;
 
 public class Money {
-    public static final int MINIMUM_MONEY = 1000;
     private final int money;
 
     public Money(int money) {
@@ -12,9 +11,13 @@ public class Money {
     }
 
     private void validateMinimum(int money) {
-        if (money < MINIMUM_MONEY) {
+        if (money < LottoTicket.PRICE) {
             throw new IllegalArgumentException(InputMessage.INVALID_MINIMUM_MONEY);
         }
+    }
+
+    public int ticketCount() {
+        return money / LottoTicket.PRICE;
     }
 
     public int getMoney() {
