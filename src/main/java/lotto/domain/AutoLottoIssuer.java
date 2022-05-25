@@ -12,7 +12,7 @@ public class AutoLottoIssuer {
         this.lottoRandomFactory = lottoRandomFactory;
     }
 
-    public Lottos issue(Money orderPrice) {
+    public Lottos issueAutomatically(Money orderPrice) {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int index = 0; index < orderPrice.divide(LOTTO_PRICE).intValue(); index++) {
@@ -20,5 +20,22 @@ public class AutoLottoIssuer {
         }
 
         return Lottos.from(lottos);
+    }
+
+    public Lottos issueManually(List<String[]> ManualLottoNumbers) {
+        List<Lotto> manualLottos = new ArrayList<>();
+
+        for (String[] manualLottoNumber : ManualLottoNumbers) {
+            manualLottos.add(new Lotto(createLottoNumbers(manualLottoNumber)));
+        }
+        return Lottos.from(manualLottos);
+    }
+    
+    private static LottoNumber[] createLottoNumbers(String[] numbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (String lottoNumber : numbers) {
+            lottoNumbers.add(LottoNumber.from(lottoNumber));
+        }
+        return lottoNumbers.toArray(new LottoNumber[numbers.length]);
     }
 }
