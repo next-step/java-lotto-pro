@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.PurchaseQuantity;
@@ -12,6 +13,8 @@ public class InputView {
     private static final String MESSAGE_PLEASE_INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String MESSAGE_PLEASE_INPUT_MANUAL_QUANTITY = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String MESSAGE_PLEASE_INPUT_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
+
+    private static final String ERROR_MESSAGE_SCAN_MISMATCH = "숫자를 입력해 주세요.";
 
     public int inputMoneyForPurchase() {
         printMessage(MESSAGE_PLEASE_INPUT_MONEY);
@@ -40,8 +43,26 @@ public class InputView {
 
 
     private int scanNumber() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        Integer number = null;
+
+        while (number == null) {
+            number = scanNumberWithoutException();
+        }
+
+        return number;
+    }
+
+    private Integer scanNumberWithoutException() {
+        Integer number = null;
+
+        try {
+            Scanner scanner = new Scanner(System.in);
+            number = scanner.nextInt();
+        } catch (InputMismatchException exception) {
+            printMessage(ERROR_MESSAGE_SCAN_MISMATCH);
+        }
+
+        return number;
     }
 
     private String scanNumbersString() {
@@ -51,7 +72,7 @@ public class InputView {
 
     private List<String> scanNumbersStringList(int size) {
         List<String> list = new ArrayList<>();
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             list.add(scanNumbersString());
         }
         return list;
