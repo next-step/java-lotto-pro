@@ -2,7 +2,6 @@ package lottoauto.view;
 
 import lottoauto.service.LottoTicket;
 import lottoauto.service.InputNumberValidator;
-import lottoauto.util.WinnerChecker;
 import lottoauto.util.Rank;
 import lottoauto.wrapper.Lotto;
 import lottoauto.wrapper.Number;
@@ -41,7 +40,7 @@ public class InputViewer {
         Lotto winNumbers = new Lotto(inputNumberValidator.getNumbers(), bonusBall);
         makeDefaultWinnerMap(winnerMap);
 
-        WinnerChecker winnerChecker = new WinnerChecker(lottoTicket, winNumbers);
+        LottoTicket winnerChecker = new LottoTicket(lottoTicket.getListLotto(), winNumbers);
         winnerChecker.makeWinnerMap(winnerMap);
 
         return winnerMap;
