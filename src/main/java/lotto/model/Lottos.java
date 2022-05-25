@@ -2,9 +2,7 @@ package lotto.model;
 
 import lotto.enums.Rank;
 
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static lotto.view.ResultView.printLottoNumbers;
 
@@ -16,7 +14,7 @@ public class Lottos {
     }
 
     public static Lottos from(List<LottoNumbers> lottos) {
-        return new Lottos(lottos);
+        return new Lottos(new ArrayList<>(lottos));
     }
 
     public void printLottos() {
