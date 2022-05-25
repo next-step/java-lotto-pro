@@ -3,12 +3,12 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AutoLottoIssuer {
+public class LottoIssuer {
     private static final Money LOTTO_PRICE = Money.from(1000);
 
     private final LottoRandomFactory lottoRandomFactory;
 
-    public AutoLottoIssuer(LottoRandomFactory lottoRandomFactory) {
+    public LottoIssuer(LottoRandomFactory lottoRandomFactory) {
         this.lottoRandomFactory = lottoRandomFactory;
     }
 

@@ -8,13 +8,13 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class AutoLottoIssuerTest {
+class LottoIssuerTest {
 
-    private AutoLottoIssuer issuer;
+    private LottoIssuer issuer;
 
     @BeforeEach
     void setUp() {
-        issuer = new AutoLottoIssuer(new LottoRandomFactory(new RandomNumberMachine()));
+        issuer = new LottoIssuer(new LottoRandomFactory(new RandomNumberMachine()));
     }
 
     @Test

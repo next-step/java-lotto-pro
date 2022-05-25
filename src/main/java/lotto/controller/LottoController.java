@@ -3,7 +3,7 @@ package lotto.controller;
 import calculator.domain.StringSplitter;
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.AutoLottoIssuer;
+import lotto.domain.LottoIssuer;
 import lotto.domain.LottoRandomFactory;
 import lotto.domain.LottoStatistic;
 import lotto.domain.Lottos;
@@ -13,12 +13,12 @@ import lotto.view.View;
 
 public class LottoController {
     private final View view;
-    private final AutoLottoIssuer autoLottoIssuer;
+    private final LottoIssuer autoLottoIssuer;
 
     public LottoController(View view) {
         this.view = view;
         LottoRandomFactory factory = new LottoRandomFactory(new RandomNumberMachine());
-        autoLottoIssuer = new AutoLottoIssuer(factory);
+        autoLottoIssuer = new LottoIssuer(factory);
     }
 
     public void start() {
