@@ -1,11 +1,9 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
-import util.StringUtil;
 
 public class LottoPlay {
     private final InputView inputView;
@@ -29,37 +27,104 @@ public class LottoPlay {
     }
 
     private PurchaseMoney getPurchaseMoney() {
-        int money = inputView.inputMoneyForPurchase();
-        return new PurchaseMoney(money);
+        PurchaseMoney purchaseMoney = null;
+
+        while (purchaseMoney == null) {
+            purchaseMoney = getPurchaseMoneyWithoutException();
+        }
+
+        return purchaseMoney;
+    }
+
+    private PurchaseMoney getPurchaseMoneyWithoutException() {
+        PurchaseMoney purchaseMoney = null;
+
+        try {
+            int money = inputView.inputMoneyForPurchase();
+            purchaseMoney = new PurchaseMoney(money);
+        } catch (IllegalArgumentException exception) {
+            resultView.printExceptionMessage(exception);
+        }
+
+        return purchaseMoney;
     }
 
     private PurchaseQuantity getPurchaseQuantity(PurchaseMoney purchaseMoney) {
-        int manualQuantity = inputView.inputManualQuantity();
-        return new PurchaseQuantity(purchaseMoney, manualQuantity);
+        PurchaseQuantity purchaseQuantity = null;
+
+        while (purchaseQuantity == null) {
+            purchaseQuantity = getPurchaseQuantityWithoutException(purchaseMoney);
+        }
+
+        return purchaseQuantity;
+    }
+
+    private PurchaseQuantity getPurchaseQuantityWithoutException(PurchaseMoney purchaseMoney) {
+        PurchaseQuantity purchaseQuantity = null;
+
+        try {
+            int manualQuantity = inputView.inputManualQuantity();
+            purchaseQuantity = new PurchaseQuantity(purchaseMoney, manualQuantity);
+        } catch (IllegalArgumentException exception) {
+            resultView.printExceptionMessage(exception);
+        }
+
+        return purchaseQuantity;
     }
 
     private Lottos getPurchasedLottos(PurchaseQuantity purchaseQuantity) {
-        List<Lotto> manualList = getManualLottoList(purchaseQuantity);
-        return lottoGenerator.generateLottos(manualList, purchaseQuantity.getAutoQuantity());
+        Lottos lottos = null;
+
+        while (lottos == null) {
+            lottos = getPurchasedLottosWithoutException(purchaseQuantity);
+        }
+
+        return lottos;
+    }
+
+    private Lottos getPurchasedLottosWithoutException(PurchaseQuantity purchaseQuantity) {
+        Lottos lottos = null;
+
+        try {
+            List<Lotto> manualList = getManualLottoList(purchaseQuantity);
+            lottos = lottoGenerator.generateLottos(manualList, purchaseQuantity.getAutoQuantity());
+        } catch (IllegalArgumentException exception) {
+            resultView.printExceptionMessage(exception);
+        }
+
+        return lottos;
     }
 
     private List<Lotto> getManualLottoList(PurchaseQuantity purchaseQuantity) {
         List<String> numbersStrings = inputView.inputManualLottoNumbers(purchaseQuantity);
-        return numbersStrings.stream().map(this::getLottoFromNumbersString).collect(Collectors.toList());
+        return numbersStrings.stream().map(Lotto::new).collect(Collectors.toList());
     }
 
     private WinningLotto getWinningLotto() {
-        return new WinningLotto(getLastWeekLotto(), getBonusLottoNumber());
+        WinningLotto winningLotto = null;
+
+        while (winningLotto == null) {
+            winningLotto = getWinningLottoWithoutException();
+        }
+
+        return winningLotto;
+    }
+
+    private WinningLotto getWinningLottoWithoutException() {
+        WinningLotto winningLotto = null;
+
+        try {
+            winningLotto = new WinningLotto(getLastWeekLotto(), getBonusLottoNumber());
+        } catch (IllegalArgumentException exception) {
+            resultView.printExceptionMessage(exception);
+        }
+
+        return winningLotto;
     }
 
     private Lotto getLastWeekLotto() {
         String numbersString = inputView.inputReferenceLottoNumbers();
-        return getLottoFromNumbersString(numbersString);
-    }
-
-    private Lotto getLottoFromNumbersString(String numbersString) {
-        List<Integer> numberList = StringUtil.splitNumbersString(numbersString, ",");
-        return new Lotto(numberList.stream().map(LottoNumber::new).collect(Collectors.toList()));
+        return new Lotto(numbersString);
     }
 
     private LottoNumber getBonusLottoNumber() {
