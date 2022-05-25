@@ -8,12 +8,13 @@ import lotto.strategy.ManualPickNumberStrategy;
 
 public class LottoManager {
 
+    private static final int LOTTO_PRICE = 1000;
     private WinningStatistics winningStatistics;
 
     public LottoManager() {
         winningStatistics = new WinningStatistics();
     }
-    
+
     public Lottos makeLottos(int autoLottoCount, int[][] manualLottos) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < autoLottoCount; i++) {
@@ -38,5 +39,9 @@ public class LottoManager {
 
     public WinningStatistics getWinningStatistics() {
         return winningStatistics;
+    }
+    
+    public int numberOfLottoCanBuy(Money money) {
+        return money.getMoney() / LOTTO_PRICE;
     }
 }

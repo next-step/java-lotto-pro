@@ -4,21 +4,24 @@ import java.util.List;
 import lotto.WinningLotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoManager;
-import lotto.domain.LottoPrice;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoController {
 
     public static void startLotto() {
+        LottoManager lottoManager = new LottoManager();
+
         int purchaseAmount = InputView.enterPurchaseAmount();
-        int numberOfLottoCanBuy = LottoPrice.numberOfLottoCanBuy(purchaseAmount);
+        Money money = new Money(purchaseAmount);
+        int numberOfLottoCanBuy = lottoManager.numberOfLottoCanBuy(money);
         int manualLottoCount = InputView.enterManualLottoCount(numberOfLottoCanBuy);
-        int autoLottoCount = LottoPrice.numberOfLottoCanBuy(purchaseAmount) - manualLottoCount;
+        int autoLottoCount = numberOfLottoCanBuy - manualLottoCount;
+
         int[][] manualLottos = InputView.enterManualLottos(manualLottoCount);
 
-        LottoManager lottoManager = new LottoManager();
         Lottos lottos = lottoManager.makeLottos(autoLottoCount, manualLottos);
         List<Lotto> lottoElements = lottos.getElements();
 
