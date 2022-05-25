@@ -4,11 +4,13 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoGame {
     public void start() {
-        int amount = InputView.getAmountPrint();
-        Money money = Money.from(amount);
-        Lottos lottos = LottoShop.generateLottos(money.getCount());
+        Money money = generateMoney();
+        List<String> inputManualLottoNumbers = InputView.getManualLottoNumbers(money.getManualCount());
+        Lottos lottos = LottoShop.generateLottos(money, inputManualLottoNumbers);
         TotalLotto totalLotto = TotalLotto.of(money, lottos);
         OutputView.printQuantity(totalLotto);
 
@@ -18,6 +20,12 @@ public class LottoGame {
         LottoScore lottoScore = totalLotto.getLottoScore(winningLotto);
 
         OutputView.printLottoStatistic(lottoScore.getLottoScore());
-        OutputView.printProfit(lottoScore.calculatorProfit(amount));
+        OutputView.printProfit(lottoScore.calculatorProfit(money.getAmount()));
+    }
+
+    private Money generateMoney() {
+        int amount = InputView.getAmountPrint();
+        int manualCount = InputView.getManualCountPrint();
+        return Money.of(amount, manualCount);
     }
 }

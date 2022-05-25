@@ -44,6 +44,9 @@ public class Money {
         }
     }
 
+    public int getAmount() {
+        return this.amount;
+    }
     public int getAllCount() {
         return this.allCount;
     }
