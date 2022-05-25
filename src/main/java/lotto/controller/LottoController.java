@@ -1,11 +1,12 @@
 package lotto.controller;
 
+import calculator.domain.StringSplitter;
+import java.util.ArrayList;
+import java.util.List;
 import lotto.domain.AutoLottoIssuer;
-import lotto.domain.Lotto;
 import lotto.domain.LottoRandomFactory;
 import lotto.domain.LottoStatistic;
 import lotto.domain.Lottos;
-import lotto.domain.ManualLottos;
 import lotto.domain.Money;
 import lotto.domain.RandomNumberMachine;
 import lotto.view.View;
@@ -48,19 +49,13 @@ public class LottoController {
         Money orderPrice = Money.from(view.inputOrderPrice());
 
         Lottos manualLottos = issueManualLotto();
-        Money leftMoney = orderPrice.subtract(Lotto.LOTTO_PRICE.multiply(manualLottos.size()));
-        
-        Lottos autoLottos = issueAutoLottos(leftMoney);
+        Lottos autoLottos = autoLottoIssuer.issueMore(manualLottos, orderPrice);
+
         view.outputOrderLottoList(manualLottos, autoLottos);
 
         return manualLottos.add(autoLottos);
     }
 
-    private Lottos issueAutoLottos(Money leftMoney) {
-        Lottos lottos = autoLottoIssuer.issue(leftMoney);
-
-        return lottos;
-    }
 
     private Lottos issueManualLotto() {
         view.outputManualLottoSize();
@@ -69,9 +64,16 @@ public class LottoController {
         view.outputManualLottoNumbers();
         String[] manualLottoNumbers = view.inputManualNumbers(manualLottoSize);
 
-        ManualLottos manualLottos = ManualLottos.of(manualLottoSize, manualLottoNumbers);
-        return manualLottos.getLottos();
+        List<String[]> manualLottos = createManualLottos(manualLottoNumbers);
+        return autoLottoIssuer.issueManually(manualLottos);
     }
 
+    private List<String[]> createManualLottos(String[] manualLottoNumbers) {
+        List<String[]> manualLottos = new ArrayList<>();
 
+        for (String lottoNumber : manualLottoNumbers) {
+            manualLottos.add(StringSplitter.split(lottoNumber));
+        }
+        return manualLottos;
+    }
 }
