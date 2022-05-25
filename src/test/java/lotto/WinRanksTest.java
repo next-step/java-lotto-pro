@@ -105,6 +105,21 @@ public class WinRanksTest {
     }
 
     @Test
+    public void 당첨순위_4등_확인() {
+        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        List<Lotto> lottoSheets = new ArrayList<>();
+        lottoSheets.add(new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8)));
+        Lottos lottoRank = new Lottos(lottoSheets);
+
+        WinRanks winRanks = new WinRanks();
+        winRanks.calculateWinPriceMap(winningLotto, lottoRank);
+        Map<Rank, Integer> winPriceMap = winRanks.getWinMap();
+
+        assertThat(winPriceMap.get(Rank.FOURTH)).isEqualTo(1);
+    }
+
+    @Test
     public void 전체로또_당첨금액_확인() {
         Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         WinRanks winRanks = new WinRanks();
