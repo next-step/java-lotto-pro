@@ -20,6 +20,10 @@ public class LottoNumber {
 
     private final int value;
 
+    public static LottoNumber ofString(final String inputNumber) {
+      return of(Integer.parseInt(inputNumber));
+    }
+
     public static LottoNumber of(final int inputNumber) {
         validate(inputNumber);
         return COLLECTION[inputNumber - ARRAY_MINUS];
