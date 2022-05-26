@@ -4,11 +4,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class MoneyTest {
+public class LottoPriceTest {
 	@ParameterizedTest
 	@ValueSource(ints = {-2, -10, -30000})
 	@DisplayName("0 이상의 숫자 입력 검증")
@@ -31,5 +32,14 @@ public class MoneyTest {
 	void expenses(int money, int cost) {
 		LottoPrice lottoPrice = new LottoPrice(money);
 		assertThat(lottoPrice.expenses()).isEqualTo(cost);
+	}
+
+	@Test
+	@DisplayName("살 수 있는 유효한 주문")
+	void isValidOrder() {
+		LottoPrice lottoPrice = new LottoPrice(3000);
+
+		assertThat(lottoPrice.isValidOrder(2)).isTrue();
+		assertThat(lottoPrice.isValidOrder(5)).isFalse();
 	}
 }

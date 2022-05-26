@@ -16,10 +16,9 @@ public class LottoTickets {
 	}
 
 	public RankResult getResult(Lotto winningLotto, Number number) {
-		List<Rank> rankList = new ArrayList<>();
-		for(Lotto lotto: lottoTickets) {
-			rankList.add(lotto.match(winningLotto, number));
-		}
+		List<Rank> rankList = lottoTickets.stream()
+			.map(lotto -> lotto.match(winningLotto, number))
+			.collect(Collectors.toList());
 
 		Map<Rank, Long> countingResult = rankList.stream()
 			.collect(Collectors.groupingBy(Rank::winnings, Collectors.counting()));
@@ -31,5 +30,9 @@ public class LottoTickets {
 		return Collections.unmodifiableList(lottoTickets.stream()
 			.map(Lotto::getLotto)
 			.collect(Collectors.toList()));
+	}
+
+	public void sum(LottoTickets lottoTickets) {
+		this.lottoTickets.addAll(lottoTickets.lottoTickets);
 	}
 }

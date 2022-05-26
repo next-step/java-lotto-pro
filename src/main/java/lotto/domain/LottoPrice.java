@@ -20,9 +20,21 @@ public class LottoPrice {
 		return availableQuantity() * LOTTO_PRICE;
 	}
 
-	private void validatePositiveNumber(int money) {
-		if(money < ZERO) {
+	public boolean isValidOrder(int quantity) {
+		return !(isNegativeNumber(quantity) || lessQuantityThan(quantity));
+	}
+
+	private void validatePositiveNumber(int number) {
+		if(isNegativeNumber(number)) {
 			throw new IllegalArgumentException(INVALID_NUMBER);
 		}
+	}
+
+	private boolean isNegativeNumber(int number) {
+		return number < ZERO;
+	}
+
+	private boolean lessQuantityThan(int quantity) {
+		return quantity > availableQuantity();
 	}
 }
