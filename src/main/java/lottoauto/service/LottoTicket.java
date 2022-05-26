@@ -3,6 +3,7 @@ package lottoauto.service;
 import lottoauto.util.Rank;
 import lottoauto.wrapper.Lotto;
 import lottoauto.wrapper.Price;
+import lottoauto.wrapper.TryTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,15 +33,15 @@ public class LottoTicket {
         listLotto.add(lotto);
     }
 
-    public void addAll(Price price) {
-        for (int i = 0; i < price.getTryTimes(); i++) {
+    public void addAll(TryTime tryTime) {
+        for (int i = 0; i < tryTime.getTryTimes(); i++) {
             listLotto.add(new Lotto());
         }
     }
 
-    public void addManualLotto(Price price) {
+    public void addManualLotto(TryTime tryTime) {
         Scanner sc = new Scanner(System.in);
-        for(int i = 0 ; i < price.getManualTryTimes() ; i++) {
+        for (int i = 0; i < tryTime.getManualTryTimes(); i++) {
             InputNumberValidator inputNumberValidator = new InputNumberValidator(sc.nextLine());
             listLotto.add(new Lotto(inputNumberValidator.getNumbers()));
         }
@@ -63,6 +64,7 @@ public class LottoTicket {
     public boolean compareBonusTickets(Lotto compareLotto) {
         return winnerLotto.compareBonus(compareLotto.toList());
     }
+
     public void makeWinnerMap(Map<Integer, Integer> winnerMap) {
         for (int indexKey = 0; indexKey < listLotto.size(); indexKey++) {
             addWinnerMapValueByKey(winnerMap, indexKey);

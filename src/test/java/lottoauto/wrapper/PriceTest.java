@@ -12,7 +12,7 @@ public class PriceTest {
         String input = "10000";
 
         Price price = new Price();
-        price.makeNewTryTimes(input);
+        new Price(input);
         assertThat(price.toString()).isEqualTo("Price{price=10000, tryTimes=10}");
     }
 
@@ -21,14 +21,13 @@ public class PriceTest {
         String input = "10000a";
         Price price = new Price();
 
-        assertThatThrownBy(() -> price.makeNewTryTimes(input)).isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> new Price(input)).isInstanceOf(NumberFormatException.class);
     }
 
     @Test
     void 숫자입력안받아_나눌수없음() {
         String input = "";
-        Price price = new Price();
-        assertThatThrownBy(() -> price.makeNewTryTimes(input)).isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> new Price(input)).isInstanceOf(NumberFormatException.class);
     }
 
     @Test
@@ -36,6 +35,6 @@ public class PriceTest {
         String input = "-10000";
 
         Price price = new Price();
-        assertThatThrownBy(() -> price.makeNewTryTimes(input)).isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> new Price(input)).isInstanceOf(NumberFormatException.class);
     }
 }

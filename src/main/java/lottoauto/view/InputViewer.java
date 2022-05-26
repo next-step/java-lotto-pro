@@ -6,6 +6,7 @@ import lottoauto.util.Rank;
 import lottoauto.wrapper.Lotto;
 import lottoauto.wrapper.Number;
 import lottoauto.wrapper.Price;
+import lottoauto.wrapper.TryTime;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,31 +21,31 @@ public class InputViewer {
     public Price getInputPrice() {
         System.out.println("구입금액을 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
-        Price price = new Price();
-        price.makeNewTryTimes(sc.nextLine());
+        Price price = new Price(sc.nextLine());
+        TryTime tryTime = new TryTime(price.getPrice());
 
         return price;
     }
 
-    public void inputLotto(Price price) {
+    public void inputLotto(TryTime tryTime) {
         lottoTicket = new LottoTicket();
-        inputManualLotto(price);
-        printTryTimes(price);
-        lottoTicket.addManualLotto(price);
-        lottoTicket.addAll(price);
+        inputManualLotto(tryTime);
+        printTryTimes(tryTime);
+        lottoTicket.addManualLotto(tryTime);
+        lottoTicket.addAll(tryTime);
         lottoTicket.printAll();
     }
 
-    public Price inputManualLotto(Price price) {
+    public TryTime inputManualLotto(TryTime tryTime) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
-        price.makeManualTryTimes(sc.nextLine());
-        return price;
+        tryTime.makeManualTryTimes(sc.nextLine());
+        return tryTime;
     }
 
 
-    public static void printTryTimes(Price price) {
-        System.out.println("수동으로 " + price.getManualTryTimes() + "장 자동으로 " + price.getTryTimes() + "개를 구매했습니다.");
+    public static void printTryTimes(TryTime tryTime) {
+        System.out.println("수동으로 " + tryTime.getManualTryTimes() + "장 자동으로 " + tryTime.getTryTimes() + "개를 구매했습니다.");
     }
 
     public Map<Integer, Integer> getWinNumbers() {

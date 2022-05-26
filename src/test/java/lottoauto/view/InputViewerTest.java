@@ -1,6 +1,7 @@
 package lottoauto.view;
 
 import lottoauto.wrapper.Price;
+import lottoauto.wrapper.TryTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,15 +23,14 @@ class InputViewerTest {
     @DisplayName("수동 입력 시 구매숫자 확인 테스트")
     @ValueSource(strings = {"4"})
     void manualLottoPriceTest(String input) {
-        Price price = new Price(14000, 14, 0);
+        TryTime tryTime = new TryTime(14000);
         InputViewer inputViewer = new InputViewer();
 
         InputStream in = generateUserInput(input);
         System.setIn(in);
-        inputViewer.inputManualLotto(price);
+        tryTime.makeManualTryTimes("4");
 
-        scanner = new Scanner(System.in);
-        assertThat(price.getTryTimes()).isEqualTo(10);
+        assertThat(tryTime.getTryTimes()).isEqualTo(10);
 
     }
 
