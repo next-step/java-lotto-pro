@@ -13,6 +13,15 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public Lotto(String[] splitWinningLottoString) {
+        if (splitWinningLottoString == null || splitWinningLottoString.length != 6) {
+            throw new IllegalArgumentException("로또는 6개의 숫자입니다.");
+        }
+        for (String s : splitWinningLottoString) {
+            addLottoNumber(s.trim());
+        }
+    }
+
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
@@ -23,6 +32,22 @@ public class Lotto {
             countMatch = lottoNumbers.contains(lotto) ? countMatch + 1 : countMatch;
         }
         return countMatch;
+    }
+
+    public static int validateBonus(Lotto winningLotto, String bonusBall) {
+        int bonusNumber;
+        try {
+            bonusNumber = Integer.parseInt(bonusBall);
+        } catch (NumberFormatException numberFormatException) {
+            throw new IllegalArgumentException("보너스볼은 숫자입니다.");
+        }
+        if (bonusNumber < 1 || bonusNumber > 45) {
+            throw new IllegalArgumentException("보너스는 1~45 사이입니다.");
+        }
+        if (winningLotto.checkBonusMatch(bonusNumber)) {
+            throw new IllegalArgumentException("보너스는 당첨 숫자와 달라야합니다.");
+        }
+        return bonusNumber;
     }
 
     public void addLottoNumber(String lottoNumber) {
@@ -36,5 +61,9 @@ public class Lotto {
             throw new IllegalArgumentException("당첨번호은 1~45 사이 숫자입니다.");
         }
         lottoNumbers.add(number);
+    }
+
+    public boolean checkBonusMatch(int bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 }
