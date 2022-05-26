@@ -1,6 +1,6 @@
 package lottoauto.wrapper;
 
-import lottoauto.util.InputNumberValidator;
+import lottoauto.service.InputNumberValidator;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

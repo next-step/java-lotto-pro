@@ -1,6 +1,5 @@
 package lottoauto.wrapper;
 
-import lottoauto.util.InputNumberValidator;
 import lottoauto.util.RandomNumberExtractor;
 
 import java.util.ArrayList;
@@ -11,6 +10,9 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private List<Number> numbers;
+    private int bonusNumber;
+
+    private static final int MAX_USER_LOTTO_COUNT = 6;
 
     public Lotto(List<Integer> numbers) {
         checkEmpty(numbers);
@@ -19,12 +21,21 @@ public class Lotto {
         insertIntegerList(numbers);
     }
 
+    public Lotto(List<Integer> numbers, Number bonusNumber) {
+        checkEmpty(numbers);
+        checkLength(numbers);
+
+        this.bonusNumber = bonusNumber.getNumber();
+        insertIntegerList(numbers);
+    }
+
 
     private void checkLength(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != MAX_USER_LOTTO_COUNT) {
             throw new ArrayIndexOutOfBoundsException("6개의 숫자가 필요합니다.");
         }
     }
+
 
     private void checkEmpty(List<Integer> numbers) {
         if (numbers.isEmpty()) {
@@ -39,11 +50,11 @@ public class Lotto {
 
     private void insertIntegerList(List<Integer> tempLottoList) {
         this.numbers = new ArrayList<>();
-        for (int i = 0; i < tempLottoList.size(); i++) {
-            Integer integer = tempLottoList.get(i);
+        for (Integer integer : tempLottoList) {
             Number tempNumber = new Number(integer);
             this.numbers.add(tempNumber);
         }
+
     }
 
     private List<Integer> insertNumberList(List<Number> tempLottoList) {
@@ -56,7 +67,8 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return insertNumberList(numbers).toString();
+        List<Integer> tempIntegerList = insertNumberList(numbers);
+        return tempIntegerList.toString();
     }
 
     public List<Integer> toList() {
@@ -66,6 +78,11 @@ public class Lotto {
     public int compare(List<Integer> compareLotto) {
         Collections.sort(compareLotto);
         List<Integer> tempLotto = insertNumberList(this.numbers);
+        Collections.sort(tempLotto);
         return (compareLotto.size() - tempLotto.stream().filter(win -> compareLotto.stream().noneMatch(Predicate.isEqual(win))).collect(Collectors.toList()).size());
+    }
+
+    public boolean compareBonus(List<Integer> compareLotto) {
+        return compareLotto.contains(this.bonusNumber);
     }
 }
