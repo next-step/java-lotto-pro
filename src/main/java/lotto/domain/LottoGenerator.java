@@ -21,11 +21,6 @@ public class LottoGenerator {
         return new Lotto(drawLottoNumbers());
     }
 
-    public Lottos generateLottos(int size) {
-        List<Lotto> lottoList = new ArrayList<>();
-        return generateLottosWithList(lottoList, size);
-    }
-
     public Lottos generateLottos(List<Lotto> manualLottoList, int autoSize) {
         List<Lotto> lottoList = new ArrayList<>();
         if (manualLottoList != null) {
