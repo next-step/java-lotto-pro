@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGenerator {
 
@@ -21,20 +22,25 @@ public class LottoGenerator {
         return new Lotto(drawLottoNumbers());
     }
 
-    public Lottos generateLottos(List<Lotto> manualLottoList, int autoSize) {
-        List<Lotto> lottoList = new ArrayList<>();
-        if (manualLottoList != null) {
-            lottoList.addAll(manualLottoList);
-        }
-        return generateLottosWithList(lottoList, autoSize);
+    public Lottos generateLottos(List<String> manualNumbersStrings, int autoSize) {
+        List<Lotto> manualLottoList = generateManualLottoList(manualNumbersStrings);
+        List<Lotto> autoLottoList = generateAutoLottoList(autoSize);
+
+        manualLottoList.addAll(autoLottoList);
+        return new Lottos(manualLottoList);
     }
 
-    private Lottos generateLottosWithList(List<Lotto> lottoList, int size) {
+    private List<Lotto> generateManualLottoList(List<String> manualNumbersStrings) {
+        return manualNumbersStrings.stream().map(Lotto::new).collect(Collectors.toList());
+    }
+
+    private List<Lotto> generateAutoLottoList(int size) {
+        List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             lottoList.add(generateLotto());
         }
 
-        return new Lottos(lottoList);
+        return lottoList;
     }
 
     private void shuffleLottoNumberList() {

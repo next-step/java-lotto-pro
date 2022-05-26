@@ -43,14 +43,9 @@ public class LottoPlay {
 
     private Lottos getPurchasedLottos(PurchaseQuantity purchaseQuantity) {
         return retryUntilNoException(() -> {
-            List<Lotto> manualList = getManualLottoList(purchaseQuantity);
-            return lottoGenerator.generateLottos(manualList, purchaseQuantity.getAutoQuantity());
+            List<String> numbersStrings = inputView.inputManualLottoNumbers(purchaseQuantity);
+            return lottoGenerator.generateLottos(numbersStrings, purchaseQuantity.getAutoQuantity());
         });
-    }
-
-    private List<Lotto> getManualLottoList(PurchaseQuantity purchaseQuantity) {
-        List<String> numbersStrings = inputView.inputManualLottoNumbers(purchaseQuantity);
-        return numbersStrings.stream().map(Lotto::new).collect(Collectors.toList());
     }
 
     private WinningLotto getWinningLotto() {
