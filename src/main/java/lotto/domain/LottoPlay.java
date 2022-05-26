@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
@@ -27,72 +28,24 @@ public class LottoPlay {
     }
 
     private PurchaseMoney getPurchaseMoney() {
-        PurchaseMoney purchaseMoney = null;
-
-        while (purchaseMoney == null) {
-            purchaseMoney = getPurchaseMoneyWithoutException();
-        }
-
-        return purchaseMoney;
-    }
-
-    private PurchaseMoney getPurchaseMoneyWithoutException() {
-        PurchaseMoney purchaseMoney = null;
-
-        try {
+        return retryUntilNoException(() -> {
             int money = inputView.inputMoneyForPurchase();
-            purchaseMoney = new PurchaseMoney(money);
-        } catch (IllegalArgumentException exception) {
-            resultView.printExceptionMessage(exception);
-        }
-
-        return purchaseMoney;
+            return new PurchaseMoney(money);
+        });
     }
 
     private PurchaseQuantity getPurchaseQuantity(PurchaseMoney purchaseMoney) {
-        PurchaseQuantity purchaseQuantity = null;
-
-        while (purchaseQuantity == null) {
-            purchaseQuantity = getPurchaseQuantityWithoutException(purchaseMoney);
-        }
-
-        return purchaseQuantity;
-    }
-
-    private PurchaseQuantity getPurchaseQuantityWithoutException(PurchaseMoney purchaseMoney) {
-        PurchaseQuantity purchaseQuantity = null;
-
-        try {
+        return retryUntilNoException(() -> {
             int manualQuantity = inputView.inputManualQuantity();
-            purchaseQuantity = new PurchaseQuantity(purchaseMoney, manualQuantity);
-        } catch (IllegalArgumentException exception) {
-            resultView.printExceptionMessage(exception);
-        }
-
-        return purchaseQuantity;
+            return new PurchaseQuantity(purchaseMoney, manualQuantity);
+        });
     }
 
     private Lottos getPurchasedLottos(PurchaseQuantity purchaseQuantity) {
-        Lottos lottos = null;
-
-        while (lottos == null) {
-            lottos = getPurchasedLottosWithoutException(purchaseQuantity);
-        }
-
-        return lottos;
-    }
-
-    private Lottos getPurchasedLottosWithoutException(PurchaseQuantity purchaseQuantity) {
-        Lottos lottos = null;
-
-        try {
+        return retryUntilNoException(() -> {
             List<Lotto> manualList = getManualLottoList(purchaseQuantity);
-            lottos = lottoGenerator.generateLottos(manualList, purchaseQuantity.getAutoQuantity());
-        } catch (IllegalArgumentException exception) {
-            resultView.printExceptionMessage(exception);
-        }
-
-        return lottos;
+            return lottoGenerator.generateLottos(manualList, purchaseQuantity.getAutoQuantity());
+        });
     }
 
     private List<Lotto> getManualLottoList(PurchaseQuantity purchaseQuantity) {
@@ -101,25 +54,7 @@ public class LottoPlay {
     }
 
     private WinningLotto getWinningLotto() {
-        WinningLotto winningLotto = null;
-
-        while (winningLotto == null) {
-            winningLotto = getWinningLottoWithoutException();
-        }
-
-        return winningLotto;
-    }
-
-    private WinningLotto getWinningLottoWithoutException() {
-        WinningLotto winningLotto = null;
-
-        try {
-            winningLotto = new WinningLotto(getLastWeekLotto(), getBonusLottoNumber());
-        } catch (IllegalArgumentException exception) {
-            resultView.printExceptionMessage(exception);
-        }
-
-        return winningLotto;
+        return retryUntilNoException(() -> new WinningLotto(getLastWeekLotto(), getBonusLottoNumber()));
     }
 
     private Lotto getLastWeekLotto() {
@@ -130,5 +65,19 @@ public class LottoPlay {
     private LottoNumber getBonusLottoNumber() {
         int bonusNumber = inputView.inputBonusLottoNumber();
         return new LottoNumber(bonusNumber);
+    }
+
+    public <T> T retryUntilNoException(Supplier<T> supplier) {
+        T value = null;
+
+        while (value == null) {
+            try {
+                value = supplier.get();
+            } catch (IllegalArgumentException e) {
+                resultView.printExceptionMessage(e);
+            }
+        }
+
+        return value;
     }
 }
