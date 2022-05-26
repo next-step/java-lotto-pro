@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import util.StringUtil;
+import util.ValidationUtil;
 
 public class Lotto {
 
@@ -18,7 +19,7 @@ public class Lotto {
     private final List<LottoNumber> numberList;
 
     public Lotto(final List<LottoNumber> list) {
-        validate(list);
+        validateList(list);
         numberList = list;
     }
 
@@ -27,7 +28,7 @@ public class Lotto {
 
         List<Integer> numbers = StringUtil.splitNumbersString(numbersString, ",");
         List<LottoNumber> list = numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
-        validate(list);
+        validateList(list);
 
         numberList = list;
     }
@@ -36,54 +37,32 @@ public class Lotto {
         return numberList.get(index);
     }
 
+    private void validateList(List<LottoNumber> list) {
+        ValidationUtil.validatePredicate((x) -> x == null || x.isEmpty(), list,
+                ERROR_MESSAGE_NUMBER_LIST_NULL_OR_EMPTY);
+        ValidationUtil.validatePredicate((x) -> x.size() != LOTTO_SIZE, list, ERROR_MESSAGE_NUMBER_LIST_SIZE_WRONG);
+        ValidationUtil.validatePredicate((x) -> new HashSet<>(x).size() < x.size(), list,
+                ERROR_MESSAGE_NUMBER_LIST_DUPLICATION);
+    }
+
+    private void validateString(String numbersString) {
+        ValidationUtil.validatePredicate((x) -> x == null || x.isEmpty(), numbersString, ERROR_MESSAGE_STRING_NULL_OR_EMPTY);
+        validateNumbersStringNotNumber(numbersString);
+    }
+
+    private void validateNumbersStringNotNumber(String numbersString) {
+        try {
+            StringUtil.splitNumbersString(numbersString, ",");
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_STRING_NOT_NUMBER);
+        }
+    }
+
     public int size() {
         return numberList.size();
     }
 
     public boolean hasNumber(LottoNumber lottoNumber) {
         return numberList.contains(lottoNumber);
-    }
-
-    private void validate(List<LottoNumber> list) {
-        validateNullOrEmpty(list);
-        validateSize(list);
-        validateDuplication(list);
-    }
-
-    private void validateNullOrEmpty(List<LottoNumber> list) {
-        if (list == null || list.isEmpty()) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_NUMBER_LIST_NULL_OR_EMPTY);
-        }
-    }
-
-    private void validateSize(List<LottoNumber> list) {
-        if (list.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_NUMBER_LIST_SIZE_WRONG);
-        }
-    }
-
-    private void validateDuplication(List<LottoNumber> list) {
-        if (new HashSet<>(list).size() < list.size()) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_NUMBER_LIST_DUPLICATION);
-        }
-    }
-
-    private void validateString(String numbersString) {
-        validateStringNullOrEmpty(numbersString);
-        validateStringNotNumber(numbersString);
-    }
-
-    private void validateStringNullOrEmpty(String numbersString) {
-        if (numbersString == null || numbersString.isEmpty()) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_STRING_NULL_OR_EMPTY);
-        }
-    }
-
-    private void validateStringNotNumber(String numbersString) {
-        try {
-            StringUtil.splitNumbersString(numbersString, ",");
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_STRING_NOT_NUMBER);
-        }
     }
 }

@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.Objects;
 import lotto.enums.LottoRank;
+import util.ValidationUtil;
 
 public class WinningLotto {
     private static final String ERROR_MESSAGE_WINNING_LOTTO_NULL = "[ERROR] 당첨로또가 null 입니다.";
@@ -18,8 +20,15 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
+    private void validate(Lotto winningLotto, LottoNumber bonusNumber) {
+        ValidationUtil.validatePredicate(Objects::isNull, winningLotto, ERROR_MESSAGE_WINNING_LOTTO_NULL);
+        ValidationUtil.validatePredicate(Objects::isNull, bonusNumber, ERROR_MESSAGE_BONUS_NUMBER_NULL);
+        ValidationUtil.validateBiPredicate(Lotto::hasNumber, winningLotto, bonusNumber,
+                ERROR_MESSAGE_WINNING_LOTTO_NULL);
+    }
+
     public LottoRank match(Lotto lotto) {
-        validateMatch(lotto);
+        validateLottoIsNull(lotto);
 
         int countOfMatch = 0;
         for (int index = 0; index < referenceLotto.size(); index++) {
@@ -30,41 +39,17 @@ public class WinningLotto {
         return result.convertToLottoRank();
     }
 
+    private void validateLottoIsNull(Lotto lotto) {
+        if (lotto == null) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_MATCHING_LOTTO_NULL);
+        }
+    }
+
     private int countOneLottoHasNumber(Lotto lotto, LottoNumber lottoNumber) {
         if (lotto.hasNumber(lottoNumber)) {
             return 1;
         }
 
         return 0;
-    }
-
-    private void validate(Lotto winningLotto, LottoNumber bonusNumber) {
-        validateWinningLotto(winningLotto);
-        validateBonusNumber(bonusNumber);
-        validateBonusNumber(winningLotto, bonusNumber);
-    }
-
-    private void validateWinningLotto(Lotto winningLotto) {
-        if (winningLotto == null) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_WINNING_LOTTO_NULL);
-        }
-    }
-
-    private void validateBonusNumber(LottoNumber bonusNumber) {
-        if (bonusNumber == null) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_BONUS_NUMBER_NULL);
-        }
-    }
-
-    private void validateBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
-        if (winningLotto.hasNumber(bonusNumber)) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_BONUS_ALREADY_EXIST);
-        }
-    }
-
-    private void validateMatch(Lotto lotto) {
-        if (lotto == null) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_MATCHING_LOTTO_NULL);
-        }
     }
 }

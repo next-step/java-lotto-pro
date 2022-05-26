@@ -13,11 +13,11 @@ public class Lottos {
     private final List<Lotto> lottoList;
 
     public Lottos(List<Lotto> lottoList) {
-        validate(lottoList);
+        validateLottoListNullOrEmpty(lottoList);
         this.lottoList = lottoList;
     }
 
-    private void validate(List<Lotto> lottoList) {
+    private void validateLottoListNullOrEmpty(List<Lotto> lottoList) {
         if (lottoList == null || lottoList.isEmpty()) {
             throw new IllegalArgumentException(ERROR_MESSAGE_LOTTO_LIST_NULL_OR_EMPTY);
         }
@@ -32,7 +32,7 @@ public class Lottos {
     }
 
     public LottosResults matchWithWinningLotto(WinningLotto winningLotto) {
-        validateArguments(winningLotto);
+        validateWinningLottoIsNull(winningLotto);
 
         Map<LottoRank, Integer> rankCountMap = new HashMap<>();
 
@@ -53,7 +53,7 @@ public class Lottos {
         rankCountMap.put(lottoRank, 1);
     }
 
-    private void validateArguments(WinningLotto winningLotto) {
+    private void validateWinningLottoIsNull(WinningLotto winningLotto) {
         if (winningLotto == null) {
             throw new IllegalArgumentException(ERROR_MESSAGE_WINNING_LOTTO_NULL);
         }

@@ -10,7 +10,7 @@ public class LottosResults {
     private final Map<LottoRank, Integer> resultMap;
 
     public LottosResults(Map<LottoRank, Integer> resultMap) {
-        validateNullOrEmpty(resultMap);
+        validateResultMapIsNullOrEmpty(resultMap);
 
         this.resultMap = resultMap;
     }
@@ -33,7 +33,7 @@ public class LottosResults {
         return totalMoney;
     }
 
-    private void validateNullOrEmpty(Map<LottoRank, Integer> resultMap) {
+    private void validateResultMapIsNullOrEmpty(Map<LottoRank, Integer> resultMap) {
         if (resultMap == null || resultMap.isEmpty()) {
             throw new IllegalArgumentException(ERROR_MESSAGE_RESULT_MAP_NULL_OR_EMPTY);
         }
