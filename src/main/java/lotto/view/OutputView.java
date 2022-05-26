@@ -24,10 +24,14 @@ public class OutputView {
     private static final String LOTTO_EARNING_RATE_STRING_REFERENCE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     public void printPayment(LottoGameDTO lottoGameDTO, LottoCount manualLottoCount) {
-        System.out.println(String.format(LOTTO_PAYMENT_COUNT_MESSAGE,
-                manualLottoCount.toLottoCountDTO().getLottoCount(),
-                lottoGameDTO.size() - manualLottoCount.toLottoCountDTO().getLottoCount()));
+        System.out.println(getLottoCountString(lottoGameDTO, manualLottoCount));
         System.out.println(getLottoGameString(lottoGameDTO));
+    }
+
+    public String getLottoCountString(LottoGameDTO lottoGameDTO, LottoCount manualLottoCount){
+        return String.format(LOTTO_PAYMENT_COUNT_MESSAGE,
+            manualLottoCount.toLottoCountDTO().getLottoCount(),
+            lottoGameDTO.size() - manualLottoCount.toLottoCountDTO().getLottoCount());
     }
 
     public String getLottoGameString(LottoGameDTO lottoGameDTO) {
