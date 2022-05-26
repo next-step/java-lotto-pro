@@ -46,6 +46,10 @@ public class LottoResult {
     }
 
     public double calculateYield(final LottoCount lottoCount) {
+        if (Objects.isNull(lottoCount) || lottoCount.isZero()) {
+            return 0;
+        }
+
         int payAmount = PayAmount.calculate(lottoCount);
         long totalWinningMoney = calculateTotalWinningMoney();
 
