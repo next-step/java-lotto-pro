@@ -22,13 +22,29 @@ public class InputViewer {
         Scanner sc = new Scanner(System.in);
         Price price = new Price();
         price.makeNewTryTimes(sc.nextLine());
+
         return price;
     }
 
     public void inputLotto(Price price) {
         lottoTicket = new LottoTicket();
+        inputManualLotto(price);
+        printTryTimes(price);
+        lottoTicket.addManualLotto(price);
         lottoTicket.addAll(price);
         lottoTicket.printAll();
+    }
+
+    public Price inputManualLotto(Price price) {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        Scanner sc = new Scanner(System.in);
+        price.makeManualTryTimes(sc.nextLine());
+        return price;
+    }
+
+
+    public static void printTryTimes(Price price) {
+        System.out.println("수동으로 " + price.getManualTryTimes() + "장 자동으로 " + price.getTryTimes() + "개를 구매했습니다.");
     }
 
     public Map<Integer, Integer> getWinNumbers() {
