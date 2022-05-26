@@ -17,10 +17,11 @@ public class InputView {
     }
 
     public static LottoWinningTicket inputWinningNumbers() {
-        List<LottoNumber> lottoNumbers = inputLottoNumbers();
+        System.out.println(InputMessage.INPUT_WINNING_NUMBERS);
+        LottoTicket lottoTicket = inputLottoNumbers();
         LottoNumber bonusNumber = inputBonusNumber();
 
-        return new LottoWinningTicket(new LottoTicket(lottoNumbers), bonusNumber);
+        return new LottoWinningTicket(lottoTicket, bonusNumber);
     }
 
     private static LottoNumber inputBonusNumber() {
@@ -28,15 +29,14 @@ public class InputView {
         return new LottoNumber(scanner.nextInt());
     }
 
-    private static List<LottoNumber> inputLottoNumbers() {
-        System.out.println(InputMessage.INPUT_WINNING_NUMBERS);
+    private static LottoTicket inputLottoNumbers() {
         String[] stringNumbers = Splitter.splitString(scanner.next());
 
         List<LottoNumber> numbers = new ArrayList<>();
         for (String stringNumber : stringNumbers) {
             numbers.add(new LottoNumber(stringNumber));
         }
-        return numbers;
+        return new LottoTicket(numbers);
     }
 
     public static ManualNumber inputManualNumber(Money money) {
