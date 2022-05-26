@@ -4,8 +4,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Organizer {
-    private static final int COMPARE_TRUE = 1;
-    private static final int COMPARE_FALSE = 0;
     private static final int INIT_RESULT_COUNT = 0;
 
     private final Lotto winningLotto;
@@ -31,15 +29,13 @@ public class Organizer {
     }
 
     private boolean sameBonusNumber(Lotto lotto) {
-        return lotto.contain(this.bonusLottoNo.value());
+        return lotto.contain(this.bonusLottoNo);
     }
 
     private int userNumberSameCount(Lotto lotto) {
-        int sameCount = 0;
-        for (LottoNo lottoNo : lotto.seeNumbers()) {
-            sameCount += compare(lottoNo);
-        }
-        return sameCount;
+        return (int) lotto.seeNumbers().stream()
+                .filter(this::compare)
+                .count();
     }
 
     private void initWinningResult() {
@@ -58,8 +54,8 @@ public class Organizer {
         this.winningResults.put(winningRank, this.winningResults.get(winningRank) + 1);
     }
 
-    private int compare(LottoNo number) {
-        return this.winningLotto.contain(number) ? COMPARE_TRUE : COMPARE_FALSE;
+    private boolean compare(LottoNo number) {
+        return this.winningLotto.contain(number);
     }
 
     private LottoNo checkBonusNumber(LottoNo bonusLottoNo, Lotto winningLotto) {

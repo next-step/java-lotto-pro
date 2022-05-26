@@ -15,10 +15,7 @@ public class Lotto {
     private final List<LottoNo> pickNumbers;
 
     public Lotto() {
-        List<Integer> numbers = LottoNumbers.PREPARED_NUMBERS;
-        Collections.shuffle(numbers);
-        numbers = numbers.subList(START_INDEX, END_INDEX);
-        pickNumbers = createNumbers(numbers);
+        pickNumbers = createNumbers();
     }
 
     public Lotto(Integer... customNumbers) {
@@ -34,10 +31,6 @@ public class Lotto {
         return this.pickNumbers;
     }
 
-    public boolean contain(int number) {
-        return this.pickNumbers.stream().anyMatch(lottoNo -> lottoNo.value() == number);
-    }
-
     public boolean contain(LottoNo number) {
         return this.pickNumbers.stream().anyMatch(lottoNo -> lottoNo.value() == number.value());
     }
@@ -48,6 +41,13 @@ public class Lotto {
                 .map(Object::toString)
                 .collect(Collectors.joining(PRINT_DELIMITER));
         return String.format(PRINT_FORM, joinNumber);
+    }
+
+    private List<LottoNo> createNumbers() {
+        List<Integer> numbers = LottoNumbers.PREPARED_NUMBERS;
+        Collections.shuffle(numbers);
+        numbers = numbers.subList(START_INDEX, END_INDEX);
+        return createNumbers(numbers);
     }
 
     private List<LottoNo> createNumbers(List<Integer> numbers) {

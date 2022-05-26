@@ -40,7 +40,7 @@ public class LottoTest {
     @DisplayName("로또에 특정 번호가 포함되어 있는지 확인")
     public void containNumber() {
         lotto = new Lotto("11, 14, 24, 25, 37, 39");
-        assertThat(lotto.contain(11)).isTrue();
+        assertThat(lotto.contain(new LottoNo(11))).isTrue();
     }
 
     @Test
