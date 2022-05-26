@@ -7,9 +7,9 @@ import java.util.Map;
 
 public class ResultView {
 
-    private static final String PURCHASE_LOTTO_TICKET_COUNT_MESSAGE = "%d개 구매했습니다.";
+    private static final String PURCHASE_LOTTO_TICKET_COUNT_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String RANK_BY_MONEY_AND_COUNT_MESSAGE = "%d개 일치 (%d원) %d개";
-    private static final String RANK_BY_MONEY_AND_COUNT_BONUS_MESSAGE = "%d개 일치, 보너스볼 일치(%d원) %d개";
+    private static final String RANK_BY_MONEY_AND_COUNT_BONUS_MESSAGE = "%d개 일치, 보너스볼 일치(%d원)- %d개";
     private static final String TOTAL_YIELD_MESSAGE = "총 수익률은 %.2f입니다.";
     private static final String LOTTO_STATISTICS = "\n당첨 통계\n---------";
     private static final String LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
@@ -26,7 +26,7 @@ public class ResultView {
     }
 
     private void outputPurchasedTicketCount(final LottoResponse.PurchasedLottoResultDto response) {
-        System.out.println(String.format(PURCHASE_LOTTO_TICKET_COUNT_MESSAGE, response.getLottoCount()));
+        System.out.println(String.format(PURCHASE_LOTTO_TICKET_COUNT_MESSAGE, response.getManualLottoCount(), response.getAutoLottoCount()));
     }
 
     private void outputPurchasedTicket(final LottoResponse.PurchasedLottoResultDto response) {
