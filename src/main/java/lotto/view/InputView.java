@@ -16,7 +16,7 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static LottoWinningTicket inputWinningNumbers() {
+    public static LottoWinningTicket inputWinningTicket() {
         System.out.println(InputMessage.INPUT_WINNING_NUMBERS);
         LottoTicket lottoTicket = inputLottoNumbers();
         LottoNumber bonusNumber = inputBonusNumber();
@@ -44,7 +44,7 @@ public class InputView {
         return new ManualNumber(scanner.nextInt(), money);
     }
 
-    public static List<LottoTicket> inputManualNumbers(ManualNumber manualNumber) {
+    public static List<LottoTicket> inputManualTickets(ManualNumber manualNumber) {
         System.out.println(InputMessage.INPUT_MANUAL_TICKETS);
         List<LottoTicket> manualTickets = new ArrayList<>();
         for (int i = 0; i < manualNumber.getManual(); i++) {
