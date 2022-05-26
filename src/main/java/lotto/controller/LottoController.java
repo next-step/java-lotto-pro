@@ -11,7 +11,7 @@ public class LottoController {
     public void startSales() {
         LottoStore lottoStore = new LottoStore();
         Money money = new Money(InputView.inputMoney());
-        ManualNumber manualNumber = InputView.inputManualNumber();
+        ManualNumber manualNumber = InputView.inputManualNumber(money);
         List<LottoTicket> lottoAutoNumbers = lottoStore.buy(money);
         OutputView.printLottoAutoTickets(lottoAutoNumbers);
 
