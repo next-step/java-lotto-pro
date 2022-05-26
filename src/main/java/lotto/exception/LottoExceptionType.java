@@ -8,7 +8,9 @@ public enum LottoExceptionType {
     LOTTO_MONEY_LEAK("로또 구매 금액이 부족 합니다."),
     INPUT_NUMBER_FORMAT("로또 구입 금액 입력 오류"),
     INPUT_IO("입력 오류"),
-    DUPLICATE_BONUS_NUMBER("보너스 볼의 값과 당첨번 호 값이 중복이 포함 됩니다.");
+    DUPLICATE_BONUS_NUMBER("보너스 볼의 값과 당첨 번호 값이 중복이 포함 됩니다."),
+    MANUAL_COUNT_INVALID("구입한 로또 수보다 큰 값을 입력 하였습니다."),
+    MANUAL_COUNT_MINUS_INVALID("음수는 입력 불가능 합니다.");
 
     private final String message;
 

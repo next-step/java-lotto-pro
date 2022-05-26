@@ -3,10 +3,10 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoMachineTest {
     private final LottoMachine lottoMachine;
@@ -37,6 +37,16 @@ class LottoMachineTest {
 
         assertThat(lottoes).hasSize(5);
         assertThat(lottoes.get(0)).isExactlyInstanceOf(Lotto.class);
+    }
+
+    @Test
+    @DisplayName("수동 복권 구입 테스트")
+    void manual_lotto_test() {
+        List<String> lotto = Arrays.asList("1,2,3,4,5,6", "1,2,3,4,5,6");
+        List<Lotto> lottoes = lottoMachine.buyLottos(lotto, 3);
+
+        assertThat(lottoes).hasSize(5);
+        assertThat(lottoes).contains(new Lotto("1,2,3,4,5,6"));
     }
 
 }

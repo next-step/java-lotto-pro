@@ -6,13 +6,16 @@ import lotto.view.ResultView;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoController {
     private static final LottoController INSTANCE = new LottoController();
     private static final int YIELD_SCALE = 2;
+    private static final int MIN = 0;
 
     private final LottoMachine lottoMachine;
 
@@ -38,13 +41,33 @@ public class LottoController {
 
     public List<Lotto> buyLotto(final long money) {
         int buyCount = lottoMachine.purchase(money);
-        printBuyCount(buyCount);
 
-        return lottoMachine.generateAutos(buyCount);
+        ManualCount manualCount = inputManualCount(buyCount);
+        List<String> manualNumbers = inputManualLottoNumber(manualCount);
+        int autoCount = autoCount(buyCount, manualCount.getValue());
+
+        List<Lotto> lottoes = lottoMachine.buyLottos(manualNumbers, autoCount);
+        printBuyCount(manualCount.getValue(), autoCount);
+
+        return lottoes;
     }
 
-    private void printBuyCount(final int buyCount) {
-        ResultView.resultBuyCount(buyCount);
+    private ManualCount inputManualCount(final int buyCount) {
+        return ManualCount.of(buyCount, InputView.inputManualBuyCount());
+    }
+
+    private List<String> inputManualLottoNumber(final ManualCount manualCount) {
+        return IntStream.range(MIN, manualCount.getValue())
+                .mapToObj(v -> InputView.inputLottoNumber())
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    private void printBuyCount(final int manualCount, final int autoCount) {
+        ResultView.resultBuyCount(manualCount, autoCount);
+    }
+
+    private int autoCount(final int buyCount, final int manualCount) {
+        return buyCount - manualCount;
     }
 
     public long exchangePrize(final List<Lotto> lottoes, final WinningNumbers winningNumbers) {

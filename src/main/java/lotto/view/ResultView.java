@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    private static final String BUY_COUNT_MESSAGE = "%s개를 구매 했습니다.";
+    private static final String BUY_COUNT_MESSAGE = "수동으로 %s장, 자동으로 %s개를 구매 했습니다.";
     private static final String STATISTIC_MESSAGE = "\n당첨 통계";
     private static final String LINE_MESSAGE = "---------";
     private static final String YIELD_MESSAGE = "총 수익률은 %s입니다";
@@ -23,8 +23,8 @@ public class ResultView {
     private static final String EMPTY = "";
 
 
-    public static void resultBuyCount(final int count) {
-        System.out.printf((BUY_COUNT_MESSAGE) + "%n", count);
+    public static void resultBuyCount(final int manualCount, final int autoCount) {
+        System.out.printf((BUY_COUNT_MESSAGE) + "%n" + "%n", manualCount, autoCount);
     }
 
     public static void printLottoNumber(final List<Lotto> lottoes) {

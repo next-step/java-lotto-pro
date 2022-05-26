@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoMachine {
     public static final LottoMachine INSTANCE = new LottoMachine();
@@ -39,6 +40,19 @@ public class LottoMachine {
         }
     }
 
+    public List<Lotto> buyLottos(final List<String> lottoes, final int autoCount) {
+        List<Lotto> manualLottoes = generateManual(lottoes);
+        List<Lotto> autoLottoes = generateAutos(autoCount);
+
+        return mergeLotto(manualLottoes, autoLottoes);
+    }
+
+    private List<Lotto> generateManual(final List<String> lottoes) {
+        return lottoes.stream()
+                .map(Lotto::new)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
     public List<Lotto> generateAutos(final int count) {
         return IntStream.range(MIN_RANGE, count)
                 .mapToObj(v -> this.generateAuto())
@@ -55,7 +69,14 @@ public class LottoMachine {
         return new Lotto(lottoNumbers);
     }
 
+    private ArrayList<Lotto> mergeLotto(List<Lotto> manualLottoes, List<Lotto> autoLottoes) {
+        return Stream.concat(manualLottoes.stream(), autoLottoes.stream())
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
     private void shuffle() {
         Collections.shuffle(NUMBERS);
     }
+
+
 }
