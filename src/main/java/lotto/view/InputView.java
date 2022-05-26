@@ -37,7 +37,9 @@ public class InputView {
     }
 
     public static List<String> getManualLottoNumbers(int manualCount) {
-        System.out.println(MANUAL_LOTTO_NUMBERS);
+        if (manualCount > 0) {
+            System.out.println(MANUAL_LOTTO_NUMBERS);
+        }
         List<String> inputManualLottoNumbers = new ArrayList<>();
         int count = 0;
         while (count < manualCount) {
