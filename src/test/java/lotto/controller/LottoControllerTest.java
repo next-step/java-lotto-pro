@@ -33,4 +33,5 @@ class LottoControllerTest {
         assertThat(lottoController.exchangePrize(Collections.singletonList(lotto), new WinningNumbers(lotto, bonusNUmber))).isEqualTo(2000000000L);
     }
 
+
 }
