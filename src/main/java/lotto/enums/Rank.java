@@ -31,11 +31,6 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank getRank(int numberOfMatch) {
-        return Optional.ofNullable(ranks.get(numberOfMatch))
-                .orElse(LOSE);
-    }
-
     public static Rank getRank(int numberOfMatch, boolean hasBonusNumber) {
         int rankKey = Objects.hash(numberOfMatch, hasBonusNumber);
         return Optional.ofNullable(ranks.get(rankKey))
