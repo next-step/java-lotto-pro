@@ -28,4 +28,8 @@ public class ManualNumber {
             throw new IllegalArgumentException(InputMessage.INVALID_MANUAL_MINIMUM);
         }
     }
+
+    public int getManual() {
+        return manual;
+    }
 }

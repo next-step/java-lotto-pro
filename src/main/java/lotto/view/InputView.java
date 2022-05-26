@@ -43,4 +43,13 @@ public class InputView {
         System.out.println(InputMessage.INPUT_MANUAL_NUMBER);
         return new ManualNumber(scanner.nextInt(), money);
     }
+
+    public static List<LottoTicket> inputManualNumbers(ManualNumber manualNumber) {
+        System.out.println(InputMessage.INPUT_MANUAL_TICKETS);
+        List<LottoTicket> manualTickets = new ArrayList<>();
+        for (int i = 0; i < manualNumber.getManual(); i++) {
+            manualTickets.add(inputLottoNumbers());
+        }
+        return manualTickets;
+    }
 }

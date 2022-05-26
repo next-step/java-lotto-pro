@@ -53,4 +53,11 @@ public class LottoTicket {
     public boolean contains(LottoNumber bonusNumber) {
         return lottoTicket.contains(bonusNumber);
     }
+
+    @Override
+    public String toString() {
+        return "LottoTicket{" +
+            "lottoTicket=" + lottoTicket +
+            '}';
+    }
 }
