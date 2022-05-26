@@ -7,7 +7,7 @@ import java.util.List;
 import static lotto.domain.LottoNumbers.LOTTO_NUMBERS;
 
 public class LottoStore {
-    public List<LottoTicket> buy(Money money) {
+    public List<LottoTicket> buyAuto(Money money) {
         List<LottoTicket> lottoAutoNumbers = new ArrayList<>();
         for (int i = 0; i < money.ticketCount(); i++) {
             lottoAutoNumbers.add(makeAuto());
