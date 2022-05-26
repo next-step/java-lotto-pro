@@ -21,10 +21,6 @@ public class LottoService {
         return LottoGame.issueLotto(getLottoLineCount(lottoPayment), manualLottoCount.toLottoCountDTO().getLottoCount());
     }
 
-    public LottoCount getManualLottoCount(LottoPayment lottoPayment, int manualCount){
-        return new LottoCount(manualCount);
-    }
-
     public void validateManualLottoCount(LottoPayment lottoPayment, LottoCount lottoCount){
         int autoCount = lottoPayment.getLottoLineCount() - lottoCount.toLottoCountDTO().getLottoCount();
         if(autoCount < DEFAULT_VALUE){
