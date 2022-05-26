@@ -2,13 +2,15 @@ package lotto.domain;
 
 import lotto.domain.error.LottoCountErrorCode;
 
+import java.util.Objects;
+
 public class LottoCount {
 
-    private static final int MIN_LOTTO_COUNT = 1;
+    private static final int MIN = 0;
     private final int lottoCount;
 
     public LottoCount(int lottoCount) {
-        if (lottoCount < MIN_LOTTO_COUNT) {
+        if (lottoCount < MIN) {
             throw new IllegalArgumentException(LottoCountErrorCode.NOT_ALLOW_SMALLER_THAN_ONE.getMessage());
         }
         this.lottoCount = lottoCount;
@@ -16,6 +18,10 @@ public class LottoCount {
 
     public int getLottoCount() {
         return lottoCount;
+    }
+
+    public boolean isZero() {
+        return Objects.equals(lottoCount, MIN);
     }
 
     @Override
