@@ -3,6 +3,7 @@ package lotto.ui;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNo;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 import lotto.domain.WinRanks;
@@ -42,7 +43,7 @@ public class ResultView {
     public static void printLotto(Lotto lotto) {
         System.out.print(LOTTO_PRINT_START_CHAR);
 
-        List<Integer> lottoNumbers = lotto.getLottoNumbers();
+        List<LottoNo> lottoNumbers = lotto.getLottoNumbers();
         for (int i = 0; i < LOTTO_COUNT - 1; i++) {
             System.out.print(lottoNumbers.get(i));
             System.out.print(LOTTO_PRINT_DELIMITER);

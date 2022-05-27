@@ -1,10 +1,10 @@
-package lotto;
+package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class WinRanks {
-    private final Map<Rank, Integer> winTotals;
+    private Map<Rank, Integer> winTotals;
 
     public WinRanks() {
         winTotals = new HashMap<>();
@@ -19,7 +19,7 @@ public class WinRanks {
         return winTotals;
     }
 
-    public int winningPrice(Lotto winningLotto, Lottos lottos, int bonusNumber) {
+    public int winningPrice(Lotto winningLotto, Lottos lottos, LottoNo bonusNumber) {
         int totalPrice = 0;
         calculateWinPriceTotals(winningLotto, lottos, bonusNumber);
         for (Rank rankEnum : winTotals.keySet()) {
@@ -28,15 +28,15 @@ public class WinRanks {
         return totalPrice;
     }
 
-    public void calculateWinPriceTotals(Lotto winningLotto, Lottos lottos, int bonusNumber) {
+    public void calculateWinPriceTotals(Lotto winningLotto, Lottos lottos, LottoNo bonusNumber) {
         for (Lotto lotto : lottos.getLottoSheets()) {
             int checkMatchCount = lotto.checkMatchCount(winningLotto);
             boolean bonusMatch = lotto.checkBonusMatch(bonusNumber);
-            addRankCount(winTotals, checkMatchCount, bonusMatch);
+            addRankCount(checkMatchCount, bonusMatch);
         }
     }
 
-    private void addRankCount(Map<Rank, Integer> winTotals, int checkMatchCount, boolean bonusMatch) {
+    private void addRankCount( int checkMatchCount, boolean bonusMatch) {
         Rank key = Rank.matchedRank(checkMatchCount, bonusMatch);
         if (winTotals.containsKey(key)) {
             winTotals.put(key, winTotals.get(key) + 1);

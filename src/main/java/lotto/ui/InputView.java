@@ -1,7 +1,8 @@
 package lotto.ui;
 
 import java.util.Scanner;
-import lotto.Lotto;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNo;
 
 public class InputView {
     static final String PRINT_INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
@@ -39,10 +40,12 @@ public class InputView {
         return new Lotto(splitWinningLottoString);
     }
 
-    public static int getBonusNumberInput(Lotto winningLotto) {
+    public static LottoNo getBonusNumberInput(Lotto winningLotto) {
         System.out.println(PRINT_INPUT_BONUS_BALL_LOTTO_MESSAGE);
-        String bonusBall = scanner.nextLine();
+        String bonusBallInput = scanner.nextLine();
 
-        return Lotto.validateBonus(winningLotto, bonusBall);
+        LottoNo bonusBall = new LottoNo(bonusBallInput);
+
+        return bonusBall.validateBonus(winningLotto);
     }
 }

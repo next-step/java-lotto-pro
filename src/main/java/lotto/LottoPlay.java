@@ -1,5 +1,9 @@
 package lotto;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNo;
+import lotto.domain.Lottos;
+import lotto.domain.WinRanks;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -10,11 +14,12 @@ public class LottoPlay {
 
         ResultView.printLottoPurchase(lottos);
         Lotto winningLottoInput = InputView.getWinningLottoInput();
-        int bonusNumber = InputView.getBonusNumberInput(winningLottoInput);
+        LottoNo bonusNumber = InputView.getBonusNumberInput(winningLottoInput);
 
         WinRanks winRanks = new WinRanks();
         int winningPrice = winRanks.winningPrice(winningLottoInput, lottos, bonusNumber);
-        ResultView.printLottoResult(lottos, winningLottoInput);
+
+        ResultView.printLottoResult(lottos, winningLottoInput, winRanks);
         String profitRate = winRanks.calulateProfitRate(winningPrice, moneyInput);
         ResultView.printProfit(profitRate);
     }
