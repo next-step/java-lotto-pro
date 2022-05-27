@@ -55,15 +55,9 @@ public class ResultView {
     }
 
     private static void printRanks(WinRanks winRanks) {
-<<<<<<< HEAD
         Map<Rank, Integer> getWinTotals = winRanks.getWinTotals();
         for (Rank key : getWinTotals.keySet()) {
             printRank(key, getWinTotals.get(key));
-=======
-        Map<Rank, Integer> winMap = winRanks.getWinMap();
-        for (Rank key : winMap.keySet()) {
-            printRank(key, winMap.get(key));
->>>>>>> 119371d (refactor : Rank enum으로 변경)
         }
     }
 

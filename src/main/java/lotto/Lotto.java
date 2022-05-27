@@ -5,13 +5,6 @@ import java.util.List;
 
 public class Lotto {
     private List<Integer> lottoNumbers = new ArrayList<>();
-<<<<<<< HEAD
-
-    public Lotto(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
-    }
-=======
->>>>>>> 119371d (refactor : Rank enum으로 변경)
 
     public Lotto() {
     }
@@ -41,7 +34,6 @@ public class Lotto {
         return countMatch;
     }
 
-<<<<<<< HEAD
     public static int validateBonus(Lotto winningLotto, String bonusBall) {
         int bonusNumber;
         try {
@@ -58,8 +50,6 @@ public class Lotto {
         return bonusNumber;
     }
 
-=======
->>>>>>> 119371d (refactor : Rank enum으로 변경)
     public void addLottoNumber(String lottoNumber) {
         int number;
         try {
@@ -75,13 +65,5 @@ public class Lotto {
 
     public boolean checkBonusMatch(int bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
-    }
-
-    public int checkMatchCount(Lotto checkLotto) {
-        int countMatch = 0;
-        for (Integer lotto : checkLotto.getLottoNumbers()) {
-            countMatch = lottoNumbers.contains(lotto) ? countMatch + 1 : countMatch;
-        }
-        return countMatch;
     }
 }
