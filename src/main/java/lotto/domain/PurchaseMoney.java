@@ -25,8 +25,8 @@ public class PurchaseMoney {
     }
 
     private void validate(int money) {
-        ValidationUtil.validatePredicate((x) -> money < 0, money, ERROR_MESSAGE_MONEY_NEGATIVE);
-        ValidationUtil.validatePredicate((x) -> money < LOTTO_PRICE, money, ERROR_MESSAGE_MONEY_LOWER_THAN_PRICE);
+        ValidationUtil.validateCorrectArguments(money < 0, ERROR_MESSAGE_MONEY_NEGATIVE);
+        ValidationUtil.validateCorrectArguments(money < LOTTO_PRICE, ERROR_MESSAGE_MONEY_LOWER_THAN_PRICE);
     }
 
     public double calculateEarningsRate(int resultMoney) {

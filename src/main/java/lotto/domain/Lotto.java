@@ -38,15 +38,16 @@ public class Lotto {
     }
 
     private void validateList(List<LottoNumber> list) {
-        ValidationUtil.validatePredicate((x) -> x == null || x.isEmpty(), list,
+        ValidationUtil.validateCorrectArguments(list == null || list.isEmpty(),
                 ERROR_MESSAGE_NUMBER_LIST_NULL_OR_EMPTY);
-        ValidationUtil.validatePredicate((x) -> x.size() != LOTTO_SIZE, list, ERROR_MESSAGE_NUMBER_LIST_SIZE_WRONG);
-        ValidationUtil.validatePredicate((x) -> new HashSet<>(x).size() < x.size(), list,
+        ValidationUtil.validateCorrectArguments(list.size() != LOTTO_SIZE, ERROR_MESSAGE_NUMBER_LIST_SIZE_WRONG);
+        ValidationUtil.validateCorrectArguments(new HashSet<>(list).size() < list.size(),
                 ERROR_MESSAGE_NUMBER_LIST_DUPLICATION);
     }
 
     private void validateString(String numbersString) {
-        ValidationUtil.validatePredicate((x) -> x == null || x.isEmpty(), numbersString, ERROR_MESSAGE_STRING_NULL_OR_EMPTY);
+        ValidationUtil.validateCorrectArguments(numbersString == null || numbersString.isEmpty(),
+                ERROR_MESSAGE_STRING_NULL_OR_EMPTY);
         validateNumbersStringNotNumber(numbersString);
     }
 

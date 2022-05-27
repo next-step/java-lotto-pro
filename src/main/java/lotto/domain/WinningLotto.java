@@ -21,10 +21,9 @@ public class WinningLotto {
     }
 
     private void validate(Lotto winningLotto, LottoNumber bonusNumber) {
-        ValidationUtil.validatePredicate(Objects::isNull, winningLotto, ERROR_MESSAGE_WINNING_LOTTO_NULL);
-        ValidationUtil.validatePredicate(Objects::isNull, bonusNumber, ERROR_MESSAGE_BONUS_NUMBER_NULL);
-        ValidationUtil.validateBiPredicate(Lotto::hasNumber, winningLotto, bonusNumber,
-                ERROR_MESSAGE_WINNING_LOTTO_NULL);
+        ValidationUtil.validateCorrectArguments(Objects.isNull(winningLotto), ERROR_MESSAGE_WINNING_LOTTO_NULL);
+        ValidationUtil.validateCorrectArguments(Objects.isNull(bonusNumber), ERROR_MESSAGE_BONUS_NUMBER_NULL);
+        ValidationUtil.validateCorrectArguments(winningLotto.hasNumber(bonusNumber), ERROR_MESSAGE_BONUS_ALREADY_EXIST);
     }
 
     public LottoRank match(Lotto lotto) {

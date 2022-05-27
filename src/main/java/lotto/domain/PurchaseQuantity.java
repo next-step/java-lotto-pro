@@ -33,9 +33,9 @@ public class PurchaseQuantity {
     }
 
     private void validate(PurchaseMoney purchaseMoney, int manualQuantity) {
-        ValidationUtil.validatePredicate(Objects::isNull, purchaseMoney, ERROR_MESSAGE_PURCHASE_MONEY_NULL);
-        ValidationUtil.validatePredicate((x) -> x < 0, manualQuantity, ERROR_MESSAGE_MANUAL_QUANTITY_NEGATIVE);
-        ValidationUtil.validateBiPredicate((x, y) -> y > x.getPurchasableQuantity(), purchaseMoney, manualQuantity,
+        ValidationUtil.validateCorrectArguments(Objects.isNull(purchaseMoney), ERROR_MESSAGE_PURCHASE_MONEY_NULL);
+        ValidationUtil.validateCorrectArguments(manualQuantity < 0, ERROR_MESSAGE_MANUAL_QUANTITY_NEGATIVE);
+        ValidationUtil.validateCorrectArguments(manualQuantity > purchaseMoney.getPurchasableQuantity(),
                 ERROR_MESSAGE_MANUAL_QUANTITY_OVER_TOTAL);
     }
 }
