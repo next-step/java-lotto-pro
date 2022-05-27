@@ -2,10 +2,10 @@ package lotto.ui;
 
 import java.util.List;
 import java.util.Map;
-import lotto.Lotto;
-import lotto.Lottos;
-import lotto.Rank;
-import lotto.WinRanks;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.Rank;
+import lotto.domain.WinRanks;
 
 public class ResultView {
     static final String PRINT_PURCHASE_COUNT_MESSAGE = "개를 구매했습니다.";
@@ -24,11 +24,9 @@ public class ResultView {
         }
     }
 
-    public static void printLottoResult(Lottos lottos, Lotto winningLotto) {
+    public static void printLottoResult(Lottos lottos, Lotto winningLotto, WinRanks winRanks) {
         System.out.println(PRINT_RANK_START_MESSAGE);
         System.out.println(PRINT_SEPERATOR);
-
-        WinRanks winRanks = new WinRanks();
 
         printRanks(winRanks);
     }
