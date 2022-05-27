@@ -11,12 +11,12 @@ public class WinningLotto {
     private LottoNumber bonusLottoNumber;
 
     public WinningLotto(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+        validate(winningLotto, bonusLottoNumber);
         this.winningLotto = winningLotto;
         this.bonusLottoNumber = bonusLottoNumber;
-        validate();
     }
 
-    private void validate() {
+    private void validate(Lotto winningLotto, LottoNumber bonusLottoNumber) {
         if (winningLotto.getNumbers().existLottoNumber(bonusLottoNumber)) {
             throw new IllegalArgumentException("보너스 번호를 중복된 숫자를 입력할 수 없습니다");
         }

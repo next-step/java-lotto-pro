@@ -1,11 +1,14 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoUtil {
 
-    private static final int LOTTO_SIZE = 6;
+    public static final int LOTTO_SIZE = 6;
 
     private LottoUtil() {
         throw new UnsupportedOperationException();
@@ -13,7 +16,7 @@ public class LottoUtil {
 
     public static List<LottoNumber> convertToLottoNumber(int[] intArray) {
         validateLottoSize(intArray.length);
-
+        validateDuplication(intArray);
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int number : intArray) {
             lottoNumbers.add(new LottoNumber(number));
@@ -34,6 +37,21 @@ public class LottoUtil {
     private static void validateLottoSize(int lottoLength) {
         if (lottoLength != LOTTO_SIZE) {
             throw new IllegalArgumentException("6자리 숫자를 , 로 구분하여 입력하세요");
+        }
+    }
+
+    public static void validateDuplication(int[] lottoNumberArray) {
+        Set<Integer> lottoNumberSet = Arrays.stream(lottoNumberArray).boxed()
+            .collect(Collectors.toSet());
+        if (lottoNumberSet.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("6자리 숫자를 중복 없이 입력하세요.");
+        }
+    }
+
+    public static void checkManualLottoBuyCount(int numberOfLottoCanBuy,
+        int purchaseManualLottoCount) {
+        if (numberOfLottoCanBuy < purchaseManualLottoCount) {
+            throw new IllegalArgumentException("구매할 수 있는 금액이 부족합니다");
         }
     }
 }

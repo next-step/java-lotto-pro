@@ -4,25 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.WinningLotto;
 import lotto.strategy.AutoPickNumberStrategy;
+import lotto.strategy.ManualPickNumberStrategy;
 
 public class LottoManager {
 
+    private static final int LOTTO_PRICE = 1000;
     private WinningStatistics winningStatistics;
 
     public LottoManager() {
         winningStatistics = new WinningStatistics();
     }
 
-    public Lottos makeLottos(int autoLottoCount) {
+    public Lottos makeLottos(int autoLottoCount, int[][] manualLottos) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < autoLottoCount; i++) {
             lottoList.add(new Lotto(new AutoPickNumberStrategy()));
+        }
+        for (int i = 0; i < manualLottos.length; i++) {
+            List<LottoNumber> lottoNumbers = LottoUtil.convertToLottoNumber(manualLottos[i]);
+            lottoList.add(new Lotto(new ManualPickNumberStrategy(lottoNumbers)));
         }
         return new Lottos(lottoList);
     }
 
     public void makeWinningLotto(WinningLotto winningLotto, Lottos lottos) {
-        lottos.makeWinningResult(winningLotto, winningStatistics);
+        for (Lotto lotto : lottos.getElements()) {
+            winningStatistics.addLottoRanking(LottoRanking.findLottoRaking(lotto, winningLotto));
+        }
     }
 
     public double calculateRateOfReturn(int purchaseAmount) {
@@ -31,5 +39,9 @@ public class LottoManager {
 
     public WinningStatistics getWinningStatistics() {
         return winningStatistics;
+    }
+    
+    public int numberOfLottoCanBuy(Money money) {
+        return money.getMoney() / LOTTO_PRICE;
     }
 }
