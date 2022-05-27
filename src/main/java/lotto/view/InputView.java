@@ -29,7 +29,7 @@ public class InputView {
 
         int manualLottoCount = inputManualLottoCount();
 
-        List<List<String>> manualLottoNumbers = inputManualLottoNumbers(manualLottoCount);
+        List<List<Integer>> manualLottoNumbers = inputManualLottoNumbers(manualLottoCount);
 
         return new LottoRequest.PurchaseRequest(payAmount, manualLottoCount, manualLottoNumbers);
     }
@@ -44,12 +44,13 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    private List<List<String>> inputManualLottoNumbers(int manualLottoCount) {
+    private List<List<Integer>> inputManualLottoNumbers(int manualLottoCount) {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBER);
 
         return Stream.generate(() -> scanner.nextLine())
                 .map(str -> StringUtils.splitAndTrim(str, NUMBER_SPLIT_REGEX))
                 .map(Arrays::asList)
+                .map(StringUtils::convertIntegers)
                 .limit(manualLottoCount)
                 .collect(Collectors.toList());
     }

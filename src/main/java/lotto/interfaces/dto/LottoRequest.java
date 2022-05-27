@@ -4,7 +4,6 @@ import lotto.infrastructure.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoRequest {
 
@@ -13,12 +12,10 @@ public class LottoRequest {
         private final int manualLottoCount;
         private final List<List<Integer>> manualLottoNumbers;
 
-        public PurchaseRequest(int payAmount, int manualLottoCount, List<List<String>> manualLottoNumbers) {
+        public PurchaseRequest(int payAmount, int manualLottoCount, List<List<Integer>> manualLottoNumbers) {
             this.payAmount = payAmount;
             this.manualLottoCount = manualLottoCount;
-            this.manualLottoNumbers = manualLottoNumbers.stream()
-                    .map(StringUtils::convertIntegers)
-                    .collect(Collectors.toList());
+            this.manualLottoNumbers = manualLottoNumbers;
         }
 
         public int getPayAmount() {
