@@ -11,9 +11,18 @@ import java.util.Scanner;
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int inputMoney() {
-        System.out.println(InputMessage.INPUT_MONEY);
-        return scanner.nextInt();
+    public static Money inputMoney() {
+        Money money = null;
+
+        while (money == null) {
+            try {
+                System.out.println(InputMessage.INPUT_MONEY);
+                money = new Money(scanner.nextInt());
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return money;
     }
 
     public static LottoWinningTicket inputWinningTicket() {
@@ -25,23 +34,53 @@ public class InputView {
     }
 
     private static LottoNumber inputBonusNumber() {
-        System.out.println(InputMessage.INPUT_BONUS_NUMBER);
-        return new LottoNumber(scanner.nextInt());
+        LottoNumber bonusNumber = null;
+
+        while (bonusNumber == null) {
+            try {
+                System.out.println(InputMessage.INPUT_BONUS_NUMBER);
+                bonusNumber = new LottoNumber(scanner.nextInt());
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        return bonusNumber;
     }
 
     private static LottoTicket inputLottoNumbers() {
-        String[] stringNumbers = Splitter.splitString(scanner.next());
+        LottoTicket lottoTicket = null;
 
-        List<LottoNumber> numbers = new ArrayList<>();
-        for (String stringNumber : stringNumbers) {
-            numbers.add(new LottoNumber(stringNumber));
+        while (lottoTicket == null) {
+            try {
+                String[] stringNumbers = Splitter.splitString(scanner.next());
+
+                List<LottoNumber> numbers = new ArrayList<>();
+                for (String stringNumber : stringNumbers) {
+                    numbers.add(new LottoNumber(stringNumber));
+                }
+                lottoTicket = new LottoTicket(numbers);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
         }
-        return new LottoTicket(numbers);
+
+        return lottoTicket;
     }
 
     public static ManualNumber inputManualNumber(Money money) {
-        System.out.println(InputMessage.INPUT_MANUAL_NUMBER);
-        return new ManualNumber(scanner.nextInt(), money);
+        ManualNumber manualNumber = null;
+
+        while (manualNumber == null) {
+            try {
+                System.out.println(InputMessage.INPUT_MANUAL_NUMBER);
+                manualNumber = new ManualNumber(scanner.nextInt(), money);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        return manualNumber;
     }
 
     public static LottoTickets inputManualTickets(ManualNumber manualNumber) {

@@ -9,7 +9,7 @@ public class LottoController {
     public void startSales() {
         LottoStore lottoStore = new LottoStore();
 
-        Money money = new Money(InputView.inputMoney());
+        Money money = InputView.inputMoney();
         ManualNumber manualNumber = InputView.inputManualNumber(money);
         LottoTickets manualTickets = InputView.inputManualTickets(manualNumber);
         AutoNumber autoNumber = new AutoNumber(money.autoCount(manualNumber));
