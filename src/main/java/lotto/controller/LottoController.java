@@ -9,29 +9,26 @@ import lotto.domain.LottoResult;
 import lotto.exception.LottoCountException;
 import lotto.exception.LottoPaymentException;
 import lotto.exception.LottoStringFormatException;
-import lotto.exception.NotNumberException;
-import lotto.service.LottoService;
+import lotto.util.LottoStringGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
 
     private final OutputView outputView;
-    private final LottoService lottoService;
 
     public LottoController(OutputView outputView) {
         this.outputView = outputView;
-        this.lottoService = new LottoService();
     }
 
-    public void run(){
+    public void run() {
         LottoPayment lottoPayment = inputLottoPayment();
 
         LottoCount manualLottoCount = getManualLottoCount(lottoPayment);
         LottoGame manualLottoGame = getManualLottoGame(manualLottoCount);
 
         LottoGame autoLottoGame = buyAutoLotto(lottoPayment, manualLottoCount);
-        LottoGame joinedLottoGame = lottoService.joinLottoGame(manualLottoGame, autoLottoGame);
+        LottoGame joinedLottoGame = LottoGame.joinLottoGame(manualLottoGame, autoLottoGame);
         outputView.printPayment(joinedLottoGame.toLottoGameDTO(), manualLottoCount);
 
         LottoLine winLottoLine = inputLastWeekWinningLottoLine();
@@ -39,55 +36,58 @@ public class LottoController {
         printResult(joinedLottoGame, winLottoLine, lottoPayment, bonusNumber);
     }
 
-    private LottoPayment inputLottoPayment(){
-        try{
+    private LottoPayment inputLottoPayment() {
+        try {
             return new LottoPayment(InputView.inputTotalPayment());
-        }catch (LottoPaymentException e){
+        } catch (LottoPaymentException e) {
             System.out.println(e.getMessage());
             return inputLottoPayment();
         }
     }
 
-    private LottoCount getManualLottoCount(LottoPayment lottoPayment){
-        try{
+    private LottoCount getManualLottoCount(LottoPayment lottoPayment) {
+        try {
             LottoCount manualLottoCount = new LottoCount(InputView.inputManualCount());
-            lottoService.validateManualLottoCount(lottoPayment, manualLottoCount);
+            lottoPayment.validateManualLottoCount(manualLottoCount);
             return manualLottoCount;
-        }catch (LottoCountException e){
+        } catch (LottoCountException e) {
             System.out.println(e.getMessage());
             return getManualLottoCount(lottoPayment);
         }
     }
 
-    private LottoGame getManualLottoGame(LottoCount manualLottoCount){
-        try{
+    private LottoGame getManualLottoGame(LottoCount manualLottoCount) {
+        try {
             InputView.inputManualLottoLines();
-            LottoGame manualLottoGame = lottoService.getManualLottoGame(manualLottoCount);
+            LottoGame manualLottoGame = LottoGame.generateManualLottoGame(manualLottoCount);
             return manualLottoGame;
-        }catch (LottoStringFormatException e){
+        } catch (LottoStringFormatException e) {
             System.out.println(e.getMessage());
             return getManualLottoGame(manualLottoCount);
         }
     }
 
-    private LottoGame buyAutoLotto(LottoPayment lottoPayment, LottoCount manualLottoCount){
-        LottoGame autoLottoGame = lottoService.buyAutoLotto(lottoPayment, manualLottoCount);
-        return autoLottoGame;
+    private LottoGame buyAutoLotto(LottoPayment lottoPayment, LottoCount manualLottoCount) {
+        return LottoGame.issueLotto(lottoPayment.countLine(),
+            manualLottoCount.toLottoCountDTO().getLottoCount());
     }
 
-    private LottoLine inputLastWeekWinningLottoLine(){
-        try{
-            return lottoService.inputLastWeekWinningLottoLine();
-        }catch (LottoStringFormatException e){
+    private LottoLine inputLastWeekWinningLottoLine() {
+        try {
+            return LottoStringGenerator.toLottoLine(InputView.inputLastWeekWinningLottoLine());
+        } catch (LottoStringFormatException e) {
             System.out.println(e.getMessage());
             return inputLastWeekWinningLottoLine();
         }
     }
 
-    private void printResult(LottoGame lottoGame, LottoLine winLottoLine, LottoPayment lottoPayment, LottoNumber bonusNumber){
-        LottoResult lottoResult = lottoService.getLottoResult(lottoGame, winLottoLine, bonusNumber);
+    private void printResult(LottoGame lottoGame, LottoLine winLottoLine, LottoPayment lottoPayment,
+        LottoNumber bonusNumber) {
+        LottoResult lottoResult = lottoGame.getLottoResult(winLottoLine, bonusNumber);
         LottoPayment prize = new LottoPayment(lottoResult.getLottoPrize());
         outputView.printLottoResult(outputView.getLottoResultString(lottoResult));
-        outputView.printEarningRate(outputView.getEarningRateString(lottoPayment.toLottoPaymentDTO(), prize.toLottoPaymentDTO()));
+        outputView.printEarningRate(
+            outputView.getEarningRateString(lottoPayment.toLottoPaymentDTO(),
+                prize.toLottoPaymentDTO()));
     }
 }

@@ -17,9 +17,9 @@ public final class InputView {
 
     public static int inputTotalPayment() {
         System.out.println(INPUT_TOTAL_PAYMENT);
-        try{
+        try {
             return Integer.parseInt(scanner.nextLine());
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println(new NotNumberException().getMessage());
             return inputTotalPayment();
         }
@@ -36,25 +36,25 @@ public final class InputView {
 
     public static int inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER);
-        try{
+        try {
             return Integer.parseInt(scanner.nextLine());
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println(new NotNumberException().getMessage());
             return inputBonusNumber();
         }
     }
 
-    public static int inputManualCount(){
+    public static int inputManualCount() {
         System.out.println(INPUT_MANUAL_COUNT);
-        try{
+        try {
             return Integer.parseInt(scanner.nextLine());
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println(new NotNumberException().getMessage());
             return inputManualCount();
         }
     }
 
-    public static void inputManualLottoLines(){
+    public static void inputManualLottoLines() {
         System.out.println(INPUT_MANUAL_LINES);
     }
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.dto.LottoGameDTO;
 import lotto.util.LottoNumbersGenerator;
+import lotto.util.LottoStringGenerator;
+import lotto.view.InputView;
 
 public class LottoGame {
 
@@ -28,6 +30,17 @@ public class LottoGame {
     public static LottoGame joinLottoGame(LottoGame source, LottoGame destination) {
         source.lottoGame.addAll(destination.lottoGame);
         return source;
+    }
+
+    public static LottoGame generateManualLottoGame(LottoCount manualLottoCount) {
+        LottoGame manualLottoGame = new LottoGame(new ArrayList<>());
+        for (int i = LOOP_START_VALUE; i < manualLottoCount.toLottoCountDTO().getLottoCount();
+            i++) {
+            manualLottoGame.addLottoLine(
+                LottoStringGenerator.toLottoLine(InputView.inputManualLottoLine())
+            );
+        }
+        return manualLottoGame;
     }
 
     public void addLottoLine(LottoLine lottoLine) {
