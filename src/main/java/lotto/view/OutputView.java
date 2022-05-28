@@ -41,19 +41,19 @@ public class OutputView {
         }
     }
 
-    public static void printLottoAutoTickets(List<LottoTicket> tickets) {
+    public static void printLottoAutoTickets(LottoTickets tickets) {
         printLottoCount(tickets);
         printLottoNumbers(tickets);
         System.out.println();
     }
 
-    private static void printLottoNumbers(List<LottoTicket> tickets) {
-        for (LottoTicket ticket : tickets) {
+    private static void printLottoNumbers(LottoTickets tickets) {
+        for (LottoTicket ticket : tickets.getLottoTickets()) {
             System.out.println(ticket.getLottoTicket());
         }
     }
 
-    private static void printLottoCount(List<LottoTicket> tickets) {
-        System.out.println(String.format("%d개를 구매했습니다.", tickets.size()));
+    private static void printLottoCount(LottoTickets tickets) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", tickets.getManualCount(), tickets.getAutoCount()));
     }
 }

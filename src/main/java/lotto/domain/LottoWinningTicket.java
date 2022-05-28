@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static lotto.message.InputMessage.*;
 
 public class LottoWinningTicket {
@@ -35,15 +32,8 @@ public class LottoWinningTicket {
         }
     }
 
-    public LottoRanks analyzeResult(List<LottoTicket> tickets) {
-        List<LottoRank> lottoRanks = new ArrayList<>();
-
-        for (LottoTicket ticket : tickets) {
-            int match = ticket.match(lottoWinningTicket);
-            boolean hasBonus = ticket.contains(bonusNumber);
-            lottoRanks.add(LottoRank.valueOf(match, hasBonus));
-        }
-        return new LottoRanks(lottoRanks);
+    public LottoRanks analyzeResult(LottoTickets tickets) {
+        return tickets.lottoResult(lottoWinningTicket, bonusNumber);
     }
 }
 

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +25,16 @@ public class LottoTickets {
         return Stream.of(lottoTickets, otherTickets.lottoTickets)
             .flatMap(Collection::stream)
             .collect(Collectors.toList());
+    }
+
+    public LottoRanks lottoResult(LottoTicket lottoWinningTicket, LottoNumber bonusNumber) {
+        List<LottoRank> lottoRanks = new ArrayList<>();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            int match = lottoTicket.match(lottoWinningTicket);
+            boolean hasBonus = lottoTicket.contains(bonusNumber);
+            lottoRanks.add(LottoRank.valueOf(match, hasBonus));
+        }
+        return new LottoRanks(lottoRanks);
     }
 
     public int getAutoCount() {

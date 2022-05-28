@@ -44,12 +44,12 @@ public class InputView {
         return new ManualNumber(scanner.nextInt(), money);
     }
 
-    public static List<LottoTicket> inputManualTickets(ManualNumber manualNumber) {
+    public static LottoTickets inputManualTickets(ManualNumber manualNumber) {
         System.out.println(InputMessage.INPUT_MANUAL_TICKETS);
         List<LottoTicket> manualTickets = new ArrayList<>();
         for (int i = 0; i < manualNumber.getManual(); i++) {
             manualTickets.add(inputLottoNumbers());
         }
-        return manualTickets;
+        return new LottoTickets(manualTickets);
     }
 }
