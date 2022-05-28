@@ -22,7 +22,7 @@ public class Purchase {
         return new Purchase(purchaseAmount, manualCount, totalCount - manualCount);
     }
 
-    public Lottos createLottos(LottoNumbersGenerator lottoNumbersGenerator) {
+    public Lottos createLottos(LottoNumbersGenerator lottoNumbersGenerator, int count) {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottoNumbers.add(LottoNumbers.createLottoNumbers(lottoNumbersGenerator));
