@@ -5,20 +5,20 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
-
 public class LottoController {
     public void startSales() {
         LottoStore lottoStore = new LottoStore();
 
         Money money = new Money(InputView.inputMoney());
         ManualNumber manualNumber = InputView.inputManualNumber(money);
-        List<LottoTicket> manualTickets = InputView.inputManualTickets(manualNumber);
-        List<LottoTicket> autoTickets = lottoStore.buyAuto(money);
-        OutputView.printLottoAutoTickets(autoTickets);
+        LottoTickets manualTickets = InputView.inputManualTickets(manualNumber);
+        AutoNumber autoNumber = new AutoNumber(money.autoCount(manualNumber));
+        LottoTickets autoTickets = lottoStore.buyAuto(autoNumber.getAutoNumber());
+        LottoTickets purchasedTickets = new LottoTickets(manualTickets, autoTickets);
+        OutputView.printLottoAutoTickets(purchasedTickets);
 
         LottoWinningTicket lottoWinningTicket = InputView.inputWinningTicket();
-        LottoRanks lottoRanks = lottoWinningTicket.analyzeResult(autoTickets);
+        LottoRanks lottoRanks = lottoWinningTicket.analyzeResult(purchasedTickets);
         OutputView.printLottoResult(lottoRanks);
         OutputView.printRateOfReturn(money, lottoRanks);
     }

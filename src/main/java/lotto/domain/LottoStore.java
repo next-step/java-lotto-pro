@@ -7,12 +7,12 @@ import java.util.List;
 import static lotto.domain.LottoNumbers.LOTTO_NUMBERS;
 
 public class LottoStore {
-    public List<LottoTicket> buyAuto(Money money) {
+    public LottoTickets buyAuto(int size) {
         List<LottoTicket> lottoAutoNumbers = new ArrayList<>();
-        for (int i = 0; i < money.ticketCount(); i++) {
+        for (int i = 0; i < size; i++) {
             lottoAutoNumbers.add(makeAuto());
         }
-        return lottoAutoNumbers;
+        return new LottoTickets(lottoAutoNumbers);
     }
 
     public static LottoTicket makeAuto() {
