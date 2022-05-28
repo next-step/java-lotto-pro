@@ -22,8 +22,11 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String readManualLottoNumbers() {
+    public static void printManualLottoNumbersInputMessage() {
         System.out.println(MANUAL_LOTTO_NUMBERS_INPUT_MESSAGE);
+    }
+
+    public static String readManualLottoNumbers() {
         return scanner.nextLine();
     }
 
