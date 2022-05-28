@@ -1,16 +1,16 @@
 package lotto.ui;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.LottosResults;
 import lotto.domain.PurchaseMoney;
+import lotto.domain.PurchaseQuantity;
 import lotto.enums.LottoRank;
 
 public class ResultView {
-    private static final String MESSAGE_PURCHASE_LOTTO = "%d개를 구매했습니다.";
+    private static final String MESSAGE_PURCHASE_LOTTO = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String MESSAGE_TITLE_RESULT_STATISTICS = "당첨 통계";
     private static final String MESSAGE_SPLIT_LINE = "---------";
     private static final String MESSAGE_LOTTO_RESULT = "%d개 일치 (%d원)- %d개";
@@ -24,13 +24,15 @@ public class ResultView {
     private static final String DELIMITER_LOTTO_NUMBERS = ", ";
 
 
-    public void printPurchasedLottos(Lottos lottos) {
-        printAmountOfPurchasedLottos(lottos);
+    public void printPurchasedLottos(PurchaseQuantity purchaseQuantity, Lottos lottos) {
+        printQuantityOfPurchasedLottos(purchaseQuantity);
         printLottos(lottos);
     }
 
-    private void printAmountOfPurchasedLottos(Lottos lottos) {
-        System.out.println(String.format(MESSAGE_PURCHASE_LOTTO, lottos.size()));
+    private void printQuantityOfPurchasedLottos(PurchaseQuantity purchaseQuantity) {
+        System.out.println();
+        System.out.println(String.format(MESSAGE_PURCHASE_LOTTO, purchaseQuantity.getManualQuantity(),
+                purchaseQuantity.getAutoQuantity()));
     }
 
     private void printLottos(Lottos lottos) {
@@ -96,5 +98,9 @@ public class ResultView {
         double earningsRate = purchaseMoney.calculateEarningsRate(results.calculateTotalMoney());
         System.out.println(String.format(MESSAGE_STATISTICS_RESULT, earningsRate,
                 earningsRate < 1 ? MESSAGE_LOTTO_FAIL : MESSAGE_LOTTO_SUCCESS));
+    }
+
+    public void printExceptionMessage(Exception exception) {
+        System.out.println(exception.getMessage());
     }
 }

@@ -2,7 +2,9 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -23,7 +25,7 @@ class LottoGeneratorTest {
         Lotto lotto = lottoGenerator.generateLotto();
 
         HashSet<Integer> integerSet = new HashSet<>();
-        for(int i = 0; i < lotto.size(); i++) {
+        for (int i = 0; i < lotto.size(); i++) {
             integerSet.add(lotto.get(i).getNumber());
         }
 
@@ -35,8 +37,16 @@ class LottoGeneratorTest {
     void generateLottoInRange() {
         Lotto lotto = lottoGenerator.generateLotto();
 
-        for(int i = 0; i < lotto.size(); i++) {
+        for (int i = 0; i < lotto.size(); i++) {
             assertThat(lotto.get(i).getNumber()).isGreaterThanOrEqualTo(1).isLessThanOrEqualTo(45);
         }
+    }
+
+    @DisplayName("수동 로또번호 2개에 랜덤 로또번호 5개 생성시 size 7 확인")
+    @Test
+    void generateLottosWithManual() {
+        List<String> lottoNumbersString = Arrays.asList("1, 5, 10, 12, 20, 33", "1, 5, 33, 12, 20, 40");
+        Lottos lottos = lottoGenerator.generateLottos(lottoNumbersString, 5);
+        assertThat(lottos.size()).isEqualTo(7);
     }
 }

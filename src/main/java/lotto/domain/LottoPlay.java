@@ -1,10 +1,10 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
-import util.StringUtil;
 
 public class LottoPlay {
     private final InputView inputView;
@@ -19,30 +19,60 @@ public class LottoPlay {
 
     public void play() {
         PurchaseMoney purchaseMoney = getPurchaseMoney();
-        Lottos lottos = lottoGenerator.generateLottos(purchaseMoney.getAmountOfLotto());
-        resultView.printPurchasedLottos(lottos);
+        PurchaseQuantity purchaseQuantity = getPurchaseQuantity(purchaseMoney);
+        Lottos lottos = getPurchasedLottos(purchaseQuantity);
+        resultView.printPurchasedLottos(purchaseQuantity, lottos);
         WinningLotto winningLotto = getWinningLotto();
         LottosResults results = lottos.matchWithWinningLotto(winningLotto);
         resultView.printLottoStatisticsResult(results, purchaseMoney);
     }
 
     private PurchaseMoney getPurchaseMoney() {
-        int money = inputView.inputMoneyForPurchase();
-        return new PurchaseMoney(money);
+        return retryUntilNoException(() -> {
+            int money = inputView.inputMoneyForPurchase();
+            return new PurchaseMoney(money);
+        });
+    }
+
+    private PurchaseQuantity getPurchaseQuantity(PurchaseMoney purchaseMoney) {
+        return retryUntilNoException(() -> {
+            int manualQuantity = inputView.inputManualQuantity();
+            return new PurchaseQuantity(purchaseMoney, manualQuantity);
+        });
+    }
+
+    private Lottos getPurchasedLottos(PurchaseQuantity purchaseQuantity) {
+        return retryUntilNoException(() -> {
+            List<String> numbersStrings = inputView.inputManualLottoNumbers(purchaseQuantity);
+            return lottoGenerator.generateLottos(numbersStrings, purchaseQuantity.getAutoQuantity());
+        });
     }
 
     private WinningLotto getWinningLotto() {
-        return new WinningLotto(getLastWeekLotto(), getBonusLottoNumber());
+        return retryUntilNoException(() -> new WinningLotto(getLastWeekLotto(), getBonusLottoNumber()));
     }
 
     private Lotto getLastWeekLotto() {
-        String lottoNumberString = inputView.inputReferenceLottoNumbers();
-        List<Integer> numberList = StringUtil.splitNumbersString(lottoNumberString, ",");
-        return new Lotto(numberList.stream().map(LottoNumber::new).collect(Collectors.toList()));
+        String numbersString = inputView.inputReferenceLottoNumbers();
+        return new Lotto(numbersString);
     }
 
     private LottoNumber getBonusLottoNumber() {
         int bonusNumber = inputView.inputBonusLottoNumber();
         return new LottoNumber(bonusNumber);
+    }
+
+    public <T> T retryUntilNoException(Supplier<T> supplier) {
+        T value = null;
+
+        while (value == null) {
+            try {
+                value = supplier.get();
+            } catch (IllegalArgumentException e) {
+                resultView.printExceptionMessage(e);
+            }
+        }
+
+        return value;
     }
 }

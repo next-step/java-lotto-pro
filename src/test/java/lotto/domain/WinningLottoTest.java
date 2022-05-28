@@ -22,7 +22,16 @@ class WinningLottoTest {
         List<Integer> inputList = Arrays.asList(5, 41, 23, 7, 8, 1);
         Lotto lotto = new Lotto(inputList.stream().map(LottoNumber::new).collect(Collectors.toList()));
 
-        assertThatThrownBy(() -> new WinningLotto(lotto, null));
+        assertThatThrownBy(() -> new WinningLotto(lotto, null)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("보너스 볼이 당첨로또에 포함되어 있는 숫자일 경우 Exception 발생 확인")
+    @Test
+    void winningLottoWithExistedBonusNull() {
+        List<Integer> inputList = Arrays.asList(5, 41, 23, 7, 8, 1);
+        Lotto lotto = new Lotto(inputList.stream().map(LottoNumber::new).collect(Collectors.toList()));
+
+        assertThatThrownBy(() -> new WinningLotto(lotto, new LottoNumber(5))).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("로또 숫자 3개 매칭시 5등")
