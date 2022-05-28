@@ -37,6 +37,11 @@ public class Lottos {
         return lottos.size();
     }
 
+    public Lottos union(Lottos addedLottos) {
+        lottos.addAll(addedLottos.lottos);
+        return Lottos.from(lottos);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
