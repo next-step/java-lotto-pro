@@ -4,8 +4,6 @@ import lotto.enums.Rank;
 
 import java.util.*;
 
-import static lotto.view.ResultView.printLottoNumbers;
-
 public class Lottos {
     private List<LottoNumbers> lottos;
 
@@ -15,12 +13,6 @@ public class Lottos {
 
     public static Lottos from(List<LottoNumbers> lottos) {
         return new Lottos(new ArrayList<>(lottos));
-    }
-
-    public void printLottos() {
-        for (LottoNumbers lottoNumbers : lottos) {
-            printLottoNumbers(lottoNumbers);
-        }
     }
 
     public RankCount rankCount(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
@@ -43,5 +35,12 @@ public class Lottos {
 
     public int lottosCount() {
         return lottos.size();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        lottos.forEach(lottoNumbers -> sb.append(lottoNumbers).append("\n"));
+        return sb.toString();
     }
 }
