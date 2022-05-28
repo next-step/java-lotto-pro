@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Objects;
-import lotto.dto.LottoCountDTO;
 import lotto.exception.LottoCountException;
 
 public class LottoCount {
@@ -22,8 +21,8 @@ public class LottoCount {
         }
     }
 
-    public LottoCountDTO toLottoCountDTO() {
-        return new LottoCountDTO(lottoCount);
+    public int value() {
+        return lottoCount;
     }
 
     @Override

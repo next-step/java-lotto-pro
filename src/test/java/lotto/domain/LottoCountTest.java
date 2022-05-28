@@ -13,7 +13,7 @@ class LottoCountTest {
     @Test
     @DisplayName("입력된 수동 로또 개수가 의도된 개수와 일치해야 한다.")
     void 수동_로또번호_생성_정상() {
-        Assertions.assertThat(new LottoCount(3).toLottoCountDTO().getLottoCount())
+        Assertions.assertThat(new LottoCount(3).value())
             .isEqualTo(3);
     }
 

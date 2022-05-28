@@ -12,7 +12,7 @@ class LottoNumberTest {
     @Test
     @DisplayName("생성된 로또번호가 의도된 번호와 일치해야 한다.")
     void 로또번호_생성_정상() {
-        Assertions.assertThat(new LottoNumber(10).toLottoNumberDTO().getLottoNumber())
+        Assertions.assertThat(new LottoNumber(10).value())
             .isEqualTo(10);
     }
 

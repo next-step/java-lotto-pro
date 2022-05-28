@@ -16,7 +16,7 @@ class LottoLineTest {
     @DisplayName("로또번호 세트 1개를 구성하는 로또번호가 6개여야 한다.")
     void 로또번호_1개_세트_숫자개수() {
         Assertions.assertThat(
-                new LottoLine(Arrays.asList(1, 2, 3, 4, 5, 6)).toLottoLineDTO().getLottoLineSize())
+                new LottoLine(Arrays.asList(1, 2, 3, 4, 5, 6)).size())
             .isEqualTo(6);
     }
 

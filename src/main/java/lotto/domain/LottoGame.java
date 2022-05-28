@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.dto.LottoGameDTO;
 import lotto.util.LottoNumbersGenerator;
 import lotto.util.LottoStringGenerator;
 import lotto.view.InputView;
@@ -11,6 +10,7 @@ import lotto.view.InputView;
 public class LottoGame {
 
     private static final int LOOP_START_VALUE = 0;
+    private static final String LINE_BREAK = "\n";
     private final List<LottoLine> lottoGame;
 
     public LottoGame(List<LottoLine> lottoGame) {
@@ -34,8 +34,7 @@ public class LottoGame {
 
     public static LottoGame generateManualLottoGame(LottoCount manualLottoCount) {
         LottoGame manualLottoGame = new LottoGame(new ArrayList<>());
-        for (int i = LOOP_START_VALUE; i < manualLottoCount.toLottoCountDTO().getLottoCount();
-            i++) {
+        for (int i = LOOP_START_VALUE; i < manualLottoCount.value();i++) {
             manualLottoGame.addLottoLine(
                 LottoStringGenerator.toLottoLine(InputView.inputManualLottoLine())
             );
@@ -55,11 +54,15 @@ public class LottoGame {
         return lottoResult;
     }
 
-    public LottoGameDTO toLottoGameDTO() {
-        return new LottoGameDTO(lottoGame
-            .stream()
-            .map(LottoLine::toLottoLineDTO)
-            .collect(Collectors.toList()));
+    public int size(){
+        return lottoGame.size();
+    }
+
+    public String toLottoGameString() {
+        List<String> lottoGameString = lottoGame.stream()
+            .map(LottoLine::toString)
+            .collect(Collectors.toList());
+        return String.join(LINE_BREAK, lottoGameString);
     }
 
 }

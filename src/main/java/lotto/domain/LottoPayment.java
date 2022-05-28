@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Objects;
-import lotto.dto.LottoPaymentDTO;
 import lotto.exception.LottoCountException;
 import lotto.exception.LottoPaymentException;
 
@@ -26,19 +25,19 @@ public class LottoPayment {
         }
     }
 
-    public LottoPaymentDTO toLottoPaymentDTO() {
-        return new LottoPaymentDTO(totalPayment);
-    }
-
     public int countLine() {
         return totalPayment / LOTTO_PRICE_EACH;
     }
 
     public void validateManualLottoCount(LottoCount lottoCount) {
-        int autoCount = countLine() - lottoCount.toLottoCountDTO().getLottoCount();
+        int autoCount = countLine() - lottoCount.value();
         if (autoCount < DEFAULT_VALUE) {
             throw new LottoCountException(ERROR_LOTTO_COUNT_LIMIT);
         }
+    }
+
+    public int value() {
+        return totalPayment;
     }
 
     @Override

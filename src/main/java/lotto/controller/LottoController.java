@@ -29,7 +29,7 @@ public class LottoController {
 
         LottoGame autoLottoGame = buyAutoLotto(lottoPayment, manualLottoCount);
         LottoGame joinedLottoGame = LottoGame.joinLottoGame(manualLottoGame, autoLottoGame);
-        outputView.printPayment(joinedLottoGame.toLottoGameDTO(), manualLottoCount);
+        outputView.printPayment(joinedLottoGame, manualLottoCount);
 
         LottoLine winLottoLine = inputLastWeekWinningLottoLine();
         LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
@@ -69,7 +69,7 @@ public class LottoController {
 
     private LottoGame buyAutoLotto(LottoPayment lottoPayment, LottoCount manualLottoCount) {
         return LottoGame.issueLotto(lottoPayment.countLine(),
-            manualLottoCount.toLottoCountDTO().getLottoCount());
+            manualLottoCount.value());
     }
 
     private LottoLine inputLastWeekWinningLottoLine() {
@@ -87,7 +87,7 @@ public class LottoController {
         LottoPayment prize = new LottoPayment(lottoResult.getLottoPrize());
         outputView.printLottoResult(outputView.getLottoResultString(lottoResult));
         outputView.printEarningRate(
-            outputView.getEarningRateString(lottoPayment.toLottoPaymentDTO(),
-                prize.toLottoPaymentDTO()));
+            outputView.getEarningRateString(lottoPayment, prize)
+        );
     }
 }

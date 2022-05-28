@@ -1,10 +1,5 @@
 package lotto.util;
 
-import static lotto.constant.LottoConstant.LOTTO_LINE_LENGTH;
-import static lotto.constant.LottoConstant.LOTTO_NUMBER_LOWER_BOUND;
-import static lotto.constant.LottoConstant.LOTTO_NUMBER_UPPER_BOUND;
-
-import lotto.constant.LottoConstant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,6 +8,9 @@ import java.util.stream.IntStream;
 
 public class LottoNumbersGenerator {
     private static final int DEFAULT_VALUE = 0;
+    private static final int LOTTO_NUMBER_LOWER_BOUND = 1;
+    private static final int LOTTO_NUMBER_UPPER_BOUND = 45;
+    private static final int LOTTO_LINE_LENGTH = 6;
     private static final List<Integer> LOTTO_NUMBERS_CANDIDATE;
 
     private LottoNumbersGenerator(){}

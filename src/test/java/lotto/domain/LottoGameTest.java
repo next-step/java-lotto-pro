@@ -35,7 +35,7 @@ class LottoGameTest {
         LottoGame lottoGameByCount = LottoGame.issueLotto(14, 3);
 
         // when
-        int expectedManualSize = lottoGameByCount.toLottoGameDTO().size();
+        int expectedManualSize = lottoGameByCount.size();
 
         // then
         Assertions.assertThat(expectedManualSize).isEqualTo(11);
@@ -44,7 +44,7 @@ class LottoGameTest {
     @Test
     @DisplayName("생성된 로또 문자열이 정상적으로 출력되어야 한다.")
     void 로또게임_출력_테스트(){
-        Assertions.assertThat(outputView.getLottoGameString(lottoGame.toLottoGameDTO()))
+        Assertions.assertThat(lottoGame.toLottoGameString())
             .isEqualTo(
                 "[1, 2, 3, 4, 5, 6]\n"
                 + "[4, 12, 23, 34, 41, 45]\n"
@@ -83,7 +83,7 @@ class LottoGameTest {
         LottoPayment prize = new LottoPayment(lottoResult.getLottoPrize());
 
         // when
-        String expectedString = outputView.getEarningRateString(payment.toLottoPaymentDTO(), prize.toLottoPaymentDTO());
+        String expectedString = outputView.getEarningRateString(payment, prize);
 
         // then
         Assertions.assertThat(expectedString).isEqualTo("총 수익률은 2143.2144입니다.");
