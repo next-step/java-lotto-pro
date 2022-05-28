@@ -20,8 +20,10 @@ public class LottoNo {
     }
 
     private int validateNumberRange(int lottoNumber) {
-        if (lottoNumber < 1 || lottoNumber > 45) {
-            throw new IllegalArgumentException("번호는 1~45 사이 숫자입니다.");
+        if (lottoNumber < LottoConst.LOTTO_NO_START_NUMBER || lottoNumber > LottoConst.LOTTO_NO_END_NUMBER) {
+            String exceptionMessage = String.format("번호는 %d ~ %d 사이 숫자입니다.", LottoConst.LOTTO_NO_START_NUMBER,
+                    LottoConst.LOTTO_NO_END_NUMBER);
+            throw new IllegalArgumentException(exceptionMessage);
         }
         return lottoNumber;
     }

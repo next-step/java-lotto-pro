@@ -9,11 +9,12 @@ public class Lotto {
     public Lotto() {
     }
 
-    public Lotto(String[] splitWinningLottoString) {
-        if (splitWinningLottoString == null || splitWinningLottoString.length != 6) {
-            throw new IllegalArgumentException("로또는 6개의 숫자입니다.");
+    public Lotto(String[] splitWinningLotto) {
+        if (splitWinningLotto == null || splitWinningLotto.length != LottoConst.LOTTO_NO_SIZE) {
+            String exceptionMessage = String.format("로또는 %d개의 숫자입니다.", LottoConst.LOTTO_NO_SIZE);
+            throw new IllegalArgumentException(exceptionMessage);
         }
-        for (String s : splitWinningLottoString) {
+        for (String s : splitWinningLotto) {
             LottoNo lottoNo = new LottoNo(s.trim());
             addLottoNumber(lottoNo);
         }

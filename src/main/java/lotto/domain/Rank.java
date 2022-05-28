@@ -28,18 +28,12 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank matchedRank(int countOfMatch, boolean bonusMatch) {
-        Rank resultRank = null;
-
+    public static Optional<Rank> matchedRank(int countOfMatch, boolean bonusMatch) {
         Optional<Rank> matchedCountAndBonus = Arrays.stream(values())
                 .filter(rank -> countOfMatch == rank.getCountOfMatch())
                 .filter(rank -> bonusMatch == rank.bonusMatch || !rank.bonusMatch)
                 .findFirst();
 
-        if (matchedCountAndBonus.isPresent()) {
-            resultRank = matchedCountAndBonus.get();
-        }
-
-        return resultRank;
+        return matchedCountAndBonus;
     }
 }

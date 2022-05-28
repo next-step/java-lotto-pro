@@ -6,8 +6,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.Arrays;
 import java.util.List;
 import lotto.RandomUtils;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNo;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +37,6 @@ public class LottoTest {
     @Test
     void 당첨번호_일치개수_구하기() {
         Lotto lotto1 = new TestLotto(Arrays.asList(1, 2, 3, 7, 8, 9));
-
         assertThat(lotto1.checkMatchCount(lotto)).isEqualTo(3);
     }
 

@@ -4,20 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoConst;
 
 public class RandomUtils {
-    static final int LOTTO_MIN_NUMBER = 1;
-    static final int LOTTO_MAX_NUMBER = 45;
-    static final int LOTTO_COUNT = 6;
-
     public static Lotto createRandomLotto() {
         List<Integer> randomLottoNumbers = new ArrayList<>();
-        for (int i = LOTTO_MIN_NUMBER; i < LOTTO_MAX_NUMBER; i++) {
+        for (int i = LottoConst.LOTTO_NO_START_NUMBER; i < LottoConst.LOTTO_NO_END_NUMBER; i++) {
             randomLottoNumbers.add(i);
         }
 
         Collections.shuffle(randomLottoNumbers);
-        List<Integer> lottoNumbers = randomLottoNumbers.subList(0, LOTTO_COUNT);
+        List<Integer> lottoNumbers = randomLottoNumbers.subList(0, LottoConst.LOTTO_NO_SIZE);
         Collections.sort(lottoNumbers);
 
         return Lotto.createRandomLotto(lottoNumbers);

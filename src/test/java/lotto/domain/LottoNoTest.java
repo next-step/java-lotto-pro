@@ -13,9 +13,7 @@ class LottoNoTest {
     void numberRangeFail() {
         assertAll(
                 () -> assertThatThrownBy(() -> new LottoNo(46)).isInstanceOf(IllegalArgumentException.class),
-                () -> assertThatThrownBy(() -> new LottoNo(0)).isInstanceOf(IllegalArgumentException.class),
-                () -> assertThatThrownBy(() -> new LottoNo("0")).isInstanceOf(IllegalArgumentException.class),
-                () -> assertThatThrownBy(() -> new LottoNo("46")).isInstanceOf(IllegalArgumentException.class)
+                () -> assertThatThrownBy(() -> new LottoNo(0)).isInstanceOf(IllegalArgumentException.class)
         );
     }
 

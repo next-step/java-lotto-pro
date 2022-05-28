@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class WinRanks {
     private Map<Rank, Integer> winTotals;
@@ -37,7 +38,11 @@ public class WinRanks {
     }
 
     private void addRankCount(int checkMatchCount, boolean bonusMatch) {
-        Rank key = Rank.matchedRank(checkMatchCount, bonusMatch);
+        Optional<Rank> rank = Rank.matchedRank(checkMatchCount, bonusMatch);
+        Rank key = null;
+        if(rank.isPresent()){
+            key = rank.get();
+        }
         if (winTotals.containsKey(key)) {
             winTotals.put(key, winTotals.get(key) + 1);
         }

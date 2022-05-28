@@ -14,7 +14,7 @@ public class Lottos {
 
     public Lottos(int paperCount) {
         lottoSheets = new ArrayList<>();
-        for (int i = 0; i < paperCount / 1000; i++) {
+        for (int i = 0; i < paperCount; i++) {
             lottoSheets.add(RandomUtils.createRandomLotto());
         }
     }
@@ -25,6 +25,10 @@ public class Lottos {
 
     public int getLottosSize() {
         return lottoSheets.size();
+    }
+
+    public void mergeLottos(Lottos targetLottos) {
+        lottoSheets.addAll(targetLottos.getLottoSheets());
     }
 
 }
