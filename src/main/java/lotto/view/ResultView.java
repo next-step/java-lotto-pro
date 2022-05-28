@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.model.Lottos;
 import lotto.model.Purchase;
 import lotto.model.Statistics;
 
@@ -13,8 +14,8 @@ public class ResultView {
         System.out.printf(PURCHASE_COUNT_OUTPUT_MESSAGE + "\n", purchase.getManualCount(), purchase.getAutoCount());
     }
 
-    public static void printLottoNumbers(LottoNumbers lottoNumbers) {
-        System.out.println(lottoNumbers);
+    public static void printLottos(Lottos lottos) {
+        System.out.println(lottos);
     }
 
     public static void printStatistics(Statistics statistics) {
