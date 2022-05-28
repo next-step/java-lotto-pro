@@ -6,8 +6,9 @@ import lotto.view.ResultView;
 
 public class LottoController {
     public static void buy() {
-        Money money = new Money(InputView.inputBuyAmount());
-        Lottos lottos = new Lottos(money.buyCount());
+        Money money = new Money(InputView.inputBuyAmount(), InputView.inputManualCount());
+        Lottos lottos = InputView.inputManualNumbers(money.buyManualCount());
+        lottos.merge(new Lottos(money.buyCount() - money.buyManualCount()));
         ResultView.printLottoNumbers(lottos);
 
         Lotto winningLotto = new Lotto(InputView.inputWinningNumbers());

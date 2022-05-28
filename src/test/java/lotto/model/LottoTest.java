@@ -54,4 +54,10 @@ public class LottoTest {
     public void notValidLottoNumbers() {
         assertThatThrownBy(() -> new Lotto("a, 14, 24, 25, 37")).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("중복된 로또 번호 검증")
+    public void duplicatedLottoNumbers() {
+        assertThatThrownBy(() -> new Lotto("1, 1, 14, 24, 25, 37")).isInstanceOf(IllegalArgumentException.class);
+    }
 }

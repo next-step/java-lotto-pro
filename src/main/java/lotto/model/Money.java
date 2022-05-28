@@ -4,9 +4,16 @@ import lotto.Config;
 
 public class Money {
     private final int receiveAmount;
+    private final int manualCount;
 
     public Money(int money) {
         this.receiveAmount = checkAmount(money);
+        this.manualCount = 0;
+    }
+
+    public Money(int money, int manualCount) {
+        this.receiveAmount = checkAmount(money);
+        this.manualCount = manualCount;
     }
 
     public int receiveAmount() {
@@ -15,6 +22,10 @@ public class Money {
 
     public int buyCount() {
         return this.receiveAmount / Config.LOTTO_ONE_GAME_PRICE;
+    }
+
+    public int buyManualCount() {
+        return this.manualCount;
     }
 
     private int checkAmount(int amount) {
