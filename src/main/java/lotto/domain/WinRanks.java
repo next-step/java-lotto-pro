@@ -36,15 +36,14 @@ public class WinRanks {
         }
     }
 
-    private void addRankCount( int checkMatchCount, boolean bonusMatch) {
+    private void addRankCount(int checkMatchCount, boolean bonusMatch) {
         Rank key = Rank.matchedRank(checkMatchCount, bonusMatch);
         if (winTotals.containsKey(key)) {
             winTotals.put(key, winTotals.get(key) + 1);
         }
     }
 
-    public String calulateProfitRate(int profitMoney, int purchaseMoney) {
-        final String PROFIT_RATE_FORMAT = "%.2f";
-        return String.format(PROFIT_RATE_FORMAT, (double) profitMoney / purchaseMoney);
+    public double calulateProfitRate(int profitMoney, int purchaseMoney) {
+        return (double) profitMoney / purchaseMoney;
     }
 }

@@ -1,21 +1,20 @@
-package lotto;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNo;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
-import lotto.domain.WinRanks;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class WinRanksTest {
     static Lottos lottos;
+    static Lotto winningLotto1;
+    static Lotto winningLotto2;
 
     static class TestLotto extends Lotto{
         public TestLotto(List<Integer> lottoNos) {
@@ -34,46 +33,47 @@ public class WinRanksTest {
         lottoSheets.add(new TestLotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
         lottoSheets.add(new TestLotto(Arrays.asList(1, 2, 7, 8, 9, 10)));
         lottos = new Lottos(lottoSheets);
+
+        winningLotto1 = new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winningLotto2 = new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 11));
     }
 
     @Test
     public void 전체로또_당첨순위_확인() {
-        Lotto winningLotto = new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-
         WinRanks winRanks = new WinRanks();
-        winRanks.calculateWinPriceTotals(winningLotto, lottos, new LottoNo(30));
+        winRanks.calculateWinPriceTotals(winningLotto1, lottos, new LottoNo(30));
         Map<Rank, Integer> winPriceMap = winRanks.getWinTotals();
 
-        assertThat(winPriceMap.get(Rank.FIFTH)).isEqualTo(1);
-        assertThat(winPriceMap.get(Rank.FOURTH)).isEqualTo(1);
-        assertThat(winPriceMap.get(Rank.THIRD)).isEqualTo(1);
-        assertThat(winPriceMap.get(Rank.FIRST)).isEqualTo(1);
+        assertAll(
+                ()-> assertEquals(1,winPriceMap.get(Rank.FIFTH)),
+                ()-> assertEquals(1,winPriceMap.get(Rank.FOURTH)),
+                ()-> assertEquals(1,winPriceMap.get(Rank.THIRD)),
+                ()-> assertEquals(1,winPriceMap.get(Rank.FIRST))
+        );
     }
 
     @Test
     public void 전체로또_당첨순위_2등포함_확인() {
-        Lotto winningLotto = new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-
         WinRanks winRanks = new WinRanks();
-        winRanks.calculateWinPriceTotals(winningLotto, lottos, new LottoNo(7));
+        winRanks.calculateWinPriceTotals(winningLotto1, lottos, new LottoNo(7));
         Map<Rank, Integer> winPriceMap = winRanks.getWinTotals();
 
-        assertThat(winPriceMap.get(Rank.FIFTH)).isEqualTo(1);
-        assertThat(winPriceMap.get(Rank.FOURTH)).isEqualTo(1);
-        assertThat(winPriceMap.get(Rank.SECOND)).isEqualTo(1);
-        assertThat(winPriceMap.get(Rank.FIRST)).isEqualTo(1);
+        assertAll(
+                ()-> assertEquals(1,winPriceMap.get(Rank.FIFTH)),
+                ()-> assertEquals(1,winPriceMap.get(Rank.FOURTH)),
+                ()-> assertEquals(1,winPriceMap.get(Rank.SECOND)),
+                ()-> assertEquals(1,winPriceMap.get(Rank.FIRST))
+        );
     }
 
     @Test
     public void 당첨순위_4등_확인() {
-        Lotto winningLotto = new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-
         List<Lotto> lottoSheets = new ArrayList<>();
         lottoSheets.add(new TestLotto(Arrays.asList(1, 2, 3, 4, 7, 8)));
         Lottos lottoRank = new Lottos(lottoSheets);
 
         WinRanks winRanks = new WinRanks();
-        winRanks.calculateWinPriceTotals(winningLotto, lottoRank, new LottoNo(40));
+        winRanks.calculateWinPriceTotals(winningLotto1, lottoRank, new LottoNo(40));
         Map<Rank, Integer> winPriceTotals = winRanks.getWinTotals();
 
         assertThat(winPriceTotals.get(Rank.FOURTH)).isEqualTo(1);
@@ -81,14 +81,12 @@ public class WinRanksTest {
 
     @Test
     public void 당첨순위_2등_확인() {
-        Lotto winningLotto = new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 11));
-
         List<Lotto> lottoSheets = new ArrayList<>();
         lottoSheets.add(new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 8)));
         Lottos lottoRank = new Lottos(lottoSheets);
 
         WinRanks winRanks = new WinRanks();
-        winRanks.calculateWinPriceTotals(winningLotto, lottoRank, new LottoNo(8));
+        winRanks.calculateWinPriceTotals(winningLotto2, lottoRank, new LottoNo(8));
         Map<Rank, Integer> winPriceTotals = winRanks.getWinTotals();
 
         assertThat(winPriceTotals.get(Rank.SECOND)).isEqualTo(1);
@@ -96,14 +94,12 @@ public class WinRanksTest {
 
     @Test
     public void 당첨순위_3등_확인() {
-        Lotto winningLotto = new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 11));
-
         List<Lotto> lottoSheets = new ArrayList<>();
         lottoSheets.add(new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 8)));
         Lottos lottoRank = new Lottos(lottoSheets);
 
         WinRanks winRanks = new WinRanks();
-        winRanks.calculateWinPriceTotals(winningLotto, lottoRank, new LottoNo(40));
+        winRanks.calculateWinPriceTotals(winningLotto2, lottoRank, new LottoNo(40));
         Map<Rank, Integer> winPriceTotals = winRanks.getWinTotals();
 
         assertThat(winPriceTotals.get(Rank.THIRD)).isEqualTo(1);
@@ -111,17 +107,15 @@ public class WinRanksTest {
 
     @Test
     public void 전체로또_당첨금액_확인() {
-        Lotto winningLotto = new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         WinRanks winRanks = new WinRanks();
-        int winningPrice = winRanks.winningPrice(winningLotto, lottos, new LottoNo(40));
+        int winningPrice = winRanks.winningPrice(winningLotto1, lottos, new LottoNo(40));
         assertThat(winningPrice).isEqualTo(2_000_000_000 + 1_500_000 + 50_000 + 5_000);
     }
 
     @Test
     public void 전체로또_2등포함_당첨금액_확인() {
-        Lotto winningLotto = new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         WinRanks winRanks = new WinRanks();
-        int winningPrice = winRanks.winningPrice(winningLotto, lottos, new LottoNo(7));
+        int winningPrice = winRanks.winningPrice(winningLotto1, lottos, new LottoNo(7));
         assertThat(winningPrice).isEqualTo(
                 Rank.FIRST.getWinningMoney() + Rank.SECOND.getWinningMoney() + Rank.FOURTH.getWinningMoney()
                         + Rank.FIFTH.getWinningMoney());
@@ -137,8 +131,8 @@ public class WinRanksTest {
 
         WinRanks winRanks = new WinRanks();
         int winPrice = winRanks.winningPrice(new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 6)), lossLottos, new LottoNo(40));
-        String profitRate = winRanks.calulateProfitRate(winPrice, lossLottos.getLottosSize() * 1000);
-        assertThat(Double.parseDouble(profitRate)).isGreaterThan(1);
+        double profitRate = winRanks.calulateProfitRate(winPrice, lossLottos.getLottosSize() * 1000);
+        assertThat(profitRate).isGreaterThan(1);
     }
 
     @Test
@@ -154,7 +148,7 @@ public class WinRanksTest {
 
         WinRanks winRanks = new WinRanks();
         int winPrice = winRanks.winningPrice(new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 6)), winLottos, new LottoNo(40));
-        String profitRate = winRanks.calulateProfitRate(winPrice, winLottos.getLottosSize() * 1000);
-        assertThat(Double.parseDouble(profitRate)).isLessThan(1);
+        double profitRate = winRanks.calulateProfitRate(winPrice, winLottos.getLottosSize() * 1000);
+        assertThat(profitRate).isLessThan(1);
     }
 }

@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public enum Rank {
     FIRST(6, 2_000_000_000, false),
     SECOND(5, 30_000_000, true),
@@ -25,25 +28,18 @@ public enum Rank {
         return winningMoney;
     }
 
-    private static Rank matchCountOfMatchAndBonus(int countOfMatch, boolean bonusMatch, Rank value) {
-        if (countOfMatch == Rank.SECOND.getCountOfMatch() && bonusMatch) {
-            return Rank.SECOND;
-        }
-        if (countOfMatch == Rank.THIRD.getCountOfMatch() && !bonusMatch) {
-            return Rank.THIRD;
-        }
-        if (value.getCountOfMatch() == countOfMatch) {
-            return value;
-        }
-        return null;
-    }
-
     public static Rank matchedRank(int countOfMatch, boolean bonusMatch) {
-        Rank rank = null;
-        for (Rank value : Rank.values()) {
-            Rank rankMatch = matchCountOfMatchAndBonus(countOfMatch, bonusMatch, value);
-            rank = rankMatch != null ? rankMatch : rank;
+        Rank resultRank = null;
+
+        Optional<Rank> matchedCountAndBonus = Arrays.stream(values())
+                .filter(rank -> countOfMatch == rank.getCountOfMatch())
+                .filter(rank -> bonusMatch == rank.bonusMatch || !rank.bonusMatch)
+                .findFirst();
+
+        if (matchedCountAndBonus.isPresent()) {
+            resultRank = matchedCountAndBonus.get();
         }
-        return rank;
+
+        return resultRank;
     }
 }

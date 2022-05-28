@@ -9,10 +9,6 @@ public class Lotto {
     public Lotto() {
     }
 
-    public Lotto(List<LottoNo> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
-    }
-
     public Lotto(String[] splitWinningLottoString) {
         if (splitWinningLottoString == null || splitWinningLottoString.length != 6) {
             throw new IllegalArgumentException("로또는 6개의 숫자입니다.");
@@ -45,6 +41,9 @@ public class Lotto {
     }
 
     public void addLottoNumber(LottoNo lottoNo) {
+        if (lottoNumbers.contains(lottoNo)) {
+            throw new IllegalArgumentException("이미 존재하는 번호는 중복 될 수 없습니다.");
+        }
         lottoNumbers.add(lottoNo);
     }
 

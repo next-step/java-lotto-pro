@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoNo{
+public class LottoNo {
     private final int lottoNumber;
 
     public LottoNo(int lottoNumber) {
@@ -10,12 +10,13 @@ public class LottoNo{
     }
 
     public LottoNo(String lottoString) {
+        int checkLottoNoInput;
         try {
-            lottoNumber = Integer.parseInt(lottoString);
+            checkLottoNoInput = Integer.parseInt(lottoString);
         } catch (NumberFormatException numberFormatException) {
             throw new IllegalArgumentException("로또볼은 숫자입니다.");
         }
-        validateNumberRange(lottoNumber);
+        this.lottoNumber = validateNumberRange(checkLottoNoInput);
     }
 
     private int validateNumberRange(int lottoNumber) {
@@ -31,13 +32,11 @@ public class LottoNo{
     }
 
     public LottoNo validateBonus(Lotto winningLotto) {
-        if(winningLotto.getLottoNumbers().contains(this)){
+        if (winningLotto.getLottoNumbers().contains(this)) {
             throw new IllegalArgumentException("보너스는 당첨 숫자와 달라야합니다.");
         }
         return this;
     }
-
-
 
     @Override
     public boolean equals(Object o) {

@@ -32,10 +32,13 @@ public class ResultView {
         printRanks(winRanks);
     }
 
-    public static void printProfit(String profitRate) {
-        System.out.println("총 수익률은 " + profitRate + " 입니다.");
+    public static void printProfit(double profitRate) {
+        final String PROFIT_RATE_FORMAT = "%.2f";
+        String profitRateFormatted = String.format(PROFIT_RATE_FORMAT, profitRate);
 
-        if (Double.parseDouble(profitRate) < 1) {
+        System.out.println("총 수익률은 " + profitRateFormatted + " 입니다.");
+
+        if (profitRate < 1) {
             System.out.println(PRINT_LOSS_INFO);
         }
     }

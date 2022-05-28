@@ -20,7 +20,8 @@ public class LottoPlay {
         int winningPrice = winRanks.winningPrice(winningLottoInput, lottos, bonusNumber);
 
         ResultView.printLottoResult(lottos, winningLottoInput, winRanks);
-        String profitRate = winRanks.calulateProfitRate(winningPrice, moneyInput);
+        double profitRate = winRanks.calulateProfitRate(winningPrice, moneyInput);
+
         ResultView.printProfit(profitRate);
     }
 }
