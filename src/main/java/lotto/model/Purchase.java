@@ -7,17 +7,19 @@ import java.util.List;
 
 public class Purchase {
     private final Money purchaseAmount;
-    private final int count;
+    private final int manualCount;
+    private final int autoCount;
 
-    private Purchase(Money purchaseAmount, int count) {
+    public Purchase(Money purchaseAmount, int manualCount, int autoCount) {
         this.purchaseAmount = purchaseAmount;
-        this.count = count;
+        this.manualCount = manualCount;
+        this.autoCount = autoCount;
     }
 
-    public static Purchase createPurchase(int amount) {
+    public static Purchase createPurchase(int amount, int manualCount) {
         Money purchaseAmount = Money.of(amount);
-        int count = purchaseAmount.purchaseCount();
-        return new Purchase(purchaseAmount, count);
+        int totalCount = purchaseAmount.purchaseCount();
+        return new Purchase(purchaseAmount, manualCount, totalCount - manualCount);
     }
 
     public Lottos createLottos(LottoNumbersGenerator lottoNumbersGenerator) {
@@ -32,7 +34,11 @@ public class Purchase {
         return purchaseAmount;
     }
 
-    public int getCount() {
-        return count;
+    public int getManualCount() {
+        return manualCount;
+    }
+
+    public int getAutoCount() {
+        return autoCount;
     }
 }
