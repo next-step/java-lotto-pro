@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoTest {
 
@@ -29,10 +30,12 @@ class LottoTest {
         LottoWinner forth = lotto.judge(Arrays.asList(1, 2, 3, 4, 15, 16), 0);
         LottoWinner fifth = lotto.judge(Arrays.asList(1, 2, 3, 14, 15, 16), 0);
 
-        assertThat(first).isEqualTo(LottoWinner.FIRST);
-        assertThat(second).isEqualTo(LottoWinner.SECOND);
-        assertThat(third).isEqualTo(LottoWinner.THIRD);
-        assertThat(forth).isEqualTo(LottoWinner.FOURTH);
-        assertThat(fifth).isEqualTo(LottoWinner.FIFTH);
+        assertAll(
+                () -> assertThat(first).isEqualTo(LottoWinner.FIRST),
+                () -> assertThat(second).isEqualTo(LottoWinner.SECOND),
+                () -> assertThat(third).isEqualTo(LottoWinner.THIRD),
+                () -> assertThat(forth).isEqualTo(LottoWinner.FOURTH),
+                () -> assertThat(fifth).isEqualTo(LottoWinner.FIFTH)
+        );
     }
 }
