@@ -20,13 +20,13 @@ public class LottoTest {
     @Test
     @DisplayName("로또 번호의 숫자가 6개인지 확인")
     public void validNumberCount() {
-        assertThat(lotto.seeNumbers().size()).isEqualTo(6);
+        assertThat(lotto.numbers().size()).isEqualTo(6);
     }
 
     @Test
     @DisplayName("로또 게임의 숫자가 모두 다른지 확인")
     public void differentValue() {
-        assertThat(new HashSet<>(lotto.seeNumbers()).size()).isEqualTo(6);
+        assertThat(new HashSet<>(lotto.numbers()).size()).isEqualTo(6);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class LottoTest {
     @DisplayName("로또에 특정 번호가 포함되어 있는지 확인")
     public void containNumber() {
         lotto = new Lotto("11, 14, 24, 25, 37, 39");
-        assertThat(lotto.contain(11)).isTrue();
+        assertThat(lotto.contain(new LottoNo(11))).isTrue();
     }
 
     @Test
@@ -53,5 +53,11 @@ public class LottoTest {
     @DisplayName("입력받은 로또숫자 형식이 잘못되었을 경우 검증")
     public void notValidLottoNumbers() {
         assertThatThrownBy(() -> new Lotto("a, 14, 24, 25, 37")).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("중복된 로또 번호 검증")
+    public void duplicatedLottoNumbers() {
+        assertThatThrownBy(() -> new Lotto("1, 1, 14, 24, 25, 37")).isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -1,9 +1,6 @@
 package lotto.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -12,13 +9,10 @@ public class Lotto {
     private static final int START_INDEX = 0;
     private static final int END_INDEX = 6;
 
-    private final List<LottoNo> pickNumbers;
+    private final Set<LottoNo> pickNumbers;
 
     public Lotto() {
-        List<Integer> numbers = LottoNumbers.PREPARED_NUMBERS;
-        Collections.shuffle(numbers);
-        numbers = numbers.subList(START_INDEX, END_INDEX);
-        pickNumbers = createNumbers(numbers);
+        pickNumbers = createAutoNumbers();
     }
 
     public Lotto(Integer... customNumbers) {
@@ -30,12 +24,8 @@ public class Lotto {
                 .map(String::trim).map(Integer::parseInt).toArray(Integer[]::new));
     }
 
-    public List<LottoNo> seeNumbers() {
+    public Set<LottoNo> numbers() {
         return this.pickNumbers;
-    }
-
-    public boolean contain(int number) {
-        return this.pickNumbers.stream().anyMatch(lottoNo -> lottoNo.value() == number);
     }
 
     public boolean contain(LottoNo number) {
@@ -50,15 +40,21 @@ public class Lotto {
         return String.format(PRINT_FORM, joinNumber);
     }
 
-    private List<LottoNo> createNumbers(List<Integer> numbers) {
-        if (numbers.size() != END_INDEX) {
-            throw new IllegalArgumentException("숫자는 6개만 입력 가능합니다.");
-        }
+    private Set<LottoNo> createAutoNumbers() {
+        List<Integer> numbers = LottoNumbers.PREPARED_NUMBERS;
+        Collections.shuffle(numbers);
+        numbers = numbers.subList(START_INDEX, END_INDEX);
+        return createNumbers(numbers);
+    }
 
+    private Set<LottoNo> createNumbers(List<Integer> numbers) {
         Collections.sort(numbers);
-        List<LottoNo> result = new ArrayList<>();
-        for (int number : numbers.subList(START_INDEX, END_INDEX)) {
+        Set<LottoNo> result = new LinkedHashSet<>();
+        for (int number : numbers) {
             result.add(new LottoNo(number));
+        }
+        if (result.size() != END_INDEX) {
+            throw new IllegalArgumentException("숫자는 6개만 입력 가능합니다.");
         }
         return result;
     }
