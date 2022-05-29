@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.BonusBall;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,13 +25,6 @@ public class LottoNumberValidator {
 
         if (duplicatedNumberChecker.size() != LOTTO_GAME_NUMBER_COUNT) {
             throw new IllegalArgumentException("Lotto number는 중복되지 않은 숫자 6개입니다.");
-        }
-    }
-
-    public static void validBonusBall(int bonusBall, List<Integer> numbers) {
-        validLottoNumber(bonusBall);
-        if (numbers.contains(bonusBall)) {
-            throw new IllegalArgumentException("bonusBall은 당첨번호와 중복되선 안됩니다.");
         }
     }
 }

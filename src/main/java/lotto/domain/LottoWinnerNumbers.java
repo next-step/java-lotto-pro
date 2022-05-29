@@ -5,9 +5,9 @@ import java.util.List;
 
 public class LottoWinnerNumbers {
     private List<Integer> winnerNumbers;
-    private Integer bonusBall;
+    private BonusBall bonusBall;
 
-    public LottoWinnerNumbers(List<Integer> winnerNumbers, Integer bonusBall) {
+    public LottoWinnerNumbers(List<Integer> winnerNumbers, BonusBall bonusBall) {
         this.winnerNumbers = winnerNumbers;
         this.bonusBall = bonusBall;
     }
@@ -17,13 +17,13 @@ public class LottoWinnerNumbers {
     }
 
     public Integer getBonusBall() {
-        return bonusBall;
+        return bonusBall.value();
     }
 
     public List<LottoWinner> calculateLottoResults(Lottos lottos) {
         List<LottoWinner> lottoResults = new ArrayList<>();
         for (int i = 0; i < lottos.gameCount(); i++) {
-            LottoWinner judge = lottos.getLotto(i).judge(winnerNumbers, bonusBall);
+            LottoWinner judge = lottos.getLotto(i).judge(winnerNumbers, bonusBall.value());
             lottoResults.add(judge);
         }
         return lottoResults;
