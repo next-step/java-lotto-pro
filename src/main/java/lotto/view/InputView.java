@@ -64,12 +64,12 @@ public class InputView {
         }
     }
 
-    public static LottoTickets inputManualTickets(ManualLottoTicketCount manualNumber) {
+    public static List<LottoTicket> inputManualTickets(ManualLottoTicketCount manualNumber) {
         System.out.println(InputMessage.INPUT_MANUAL_TICKETS);
         List<LottoTicket> manualTickets = new ArrayList<>();
         for (int i = 0; i < manualNumber.getTicketCount(); i++) {
             manualTickets.add(inputLottoNumbers());
         }
-        return new LottoTickets(manualTickets);
+        return manualTickets;
     }
 }

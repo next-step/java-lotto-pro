@@ -5,11 +5,13 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoController {
     public void startSales() {
         Money money = InputView.inputMoney();
         ManualLottoTicketCount manualTicketCount = InputView.inputManualNumber(money);
-        LottoTickets manualTickets = InputView.inputManualTickets(manualTicketCount);
+        List<LottoTicket> manualTickets = InputView.inputManualTickets(manualTicketCount);
         LottoTickets purchasedTickets = LottoStore.buy(money, manualTickets);
         OutputView.printLottoAutoTickets(purchasedTickets, manualTicketCount);
 

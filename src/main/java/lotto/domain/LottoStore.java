@@ -7,12 +7,12 @@ import java.util.List;
 import static lotto.domain.LottoNumbers.LOTTO_NUMBERS;
 
 public class LottoStore {
-    private static LottoTickets buyAuto(int size) {
+    private static List<LottoTicket> buyAuto(int size) {
         List<LottoTicket> lottoAutoNumbers = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             lottoAutoNumbers.add(makeAuto());
         }
-        return new LottoTickets(lottoAutoNumbers);
+        return lottoAutoNumbers;
     }
 
     private static LottoTicket makeAuto() {
@@ -33,8 +33,8 @@ public class LottoStore {
         return lottoNumbers.subList(0, LottoTicket.SIZE);
     }
 
-    public static LottoTickets buy(Money money, LottoTickets manualTickets) {
-        LottoTickets autoTickets = buyAuto(money.autoCount(manualTickets.size()));
+    public static LottoTickets buy(Money money, List<LottoTicket> manualTickets) {
+        List<LottoTicket> autoTickets = buyAuto(money.autoCount(manualTickets.size()));
         return new LottoTickets(manualTickets, autoTickets);
     }
 }

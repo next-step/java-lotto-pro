@@ -10,36 +10,34 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketsTest {
-    private static LottoTickets manualTickets;
-    private static LottoTickets autoTickets;
+    private static List<LottoTicket> manualTickets;
+    private static List<LottoTicket> autoTickets;
 
     @BeforeAll
     static void beforeAll() {
         // manualTickets 생성
-        List<LottoTicket> manualNumbers = new ArrayList<>();
+        manualTickets = new ArrayList<>();
 
         List<LottoNumber> ticketManual = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             ticketManual.add(new LottoNumber(i + 1));
         }
-        manualNumbers.add(new LottoTicket(ticketManual));
-        manualTickets = new LottoTickets(manualNumbers);
+        manualTickets.add(new LottoTicket(ticketManual));
 
         // autoTickets 생성
-        List<LottoTicket> autoNumbers = new ArrayList<>();
+        autoTickets = new ArrayList<>();
 
         List<LottoNumber> ticketAuto1 = new ArrayList<>();
         for (int i = 4; i < 10; i++) {
             ticketAuto1.add(new LottoNumber(i + 1));
         }
-        autoNumbers.add(new LottoTicket(ticketAuto1));
+        autoTickets.add(new LottoTicket(ticketAuto1));
 
         List<LottoNumber> ticketAuto2 = new ArrayList<>();
         for (int i = 10; i < 16; i++) {
             ticketAuto2.add(new LottoNumber(i + 1));
         }
-        autoNumbers.add(new LottoTicket(ticketAuto2));
-        autoTickets = new LottoTickets(autoNumbers);
+        autoTickets.add(new LottoTicket(ticketAuto2));
     }
 
     @Test

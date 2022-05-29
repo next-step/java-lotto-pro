@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -9,17 +8,16 @@ import java.util.stream.Stream;
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(LottoTickets manualTickets, LottoTickets autoTickets) {
-        this.lottoTickets = manualTickets.merge(autoTickets);
+    public LottoTickets(List<LottoTicket> manualTickets, List<LottoTicket> autoTickets) {
+        this.lottoTickets = join(manualTickets, autoTickets);
     }
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 
-    private List<LottoTicket> merge(LottoTickets otherTickets) {
-        return Stream.of(lottoTickets, otherTickets.lottoTickets)
-            .flatMap(Collection::stream)
+    private List<LottoTicket> join(List<LottoTicket> manualTickets, List<LottoTicket> autoTickets) {
+        return Stream.concat(manualTickets.stream(), autoTickets.stream())
             .collect(Collectors.toList());
     }
 
