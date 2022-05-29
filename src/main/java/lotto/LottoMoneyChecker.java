@@ -8,9 +8,9 @@ public class LottoMoneyChecker {
         return money / LottoGameConfig.PURCHASE_MONEY;
     }
 
-    private void validateMoney(int money) {
-        if (money < 0) {
-            throw new IllegalArgumentException("money는 음수일 수 없습니다.");
+    public void validateMoney(int money) {
+        if (money <= 0) {
+            throw new IllegalArgumentException("money는 1 이상이어야 합니다.");
         }
     }
 }

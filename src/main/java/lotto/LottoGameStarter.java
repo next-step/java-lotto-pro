@@ -14,7 +14,7 @@ public class LottoGameStarter {
 
     public void start() {
         InputView.printEnterGameMoney();
-        int gameMoney = InputView.scanGameMoney();
+        int gameMoney = scanGameMoney();
         Lottos lottos = purchaseLottos(gameMoney);
         List<Integer> winnerNumber = inputWinnerNumbers();
         Integer bonusNumber = inputBonusNumber();
@@ -22,6 +22,12 @@ public class LottoGameStarter {
         LottosWinnerCounts lottosWinnerCounts = new LottosWinnerCounts(lottoWinners);
         LottosResult lottosResult = new LottosResult(gameMoney, lottosWinnerCounts);
         ResultView.printLottoResults(lottosWinnerCounts, lottosResult);
+    }
+
+    private int scanGameMoney() {
+        int gameMoney = InputView.scanGameMoney();
+        lottoMoneyChecker.validateMoney(gameMoney);
+        return gameMoney;
     }
 
     private List<LottoWinner> calculateLottoResults(Lottos lottos, LottoWinnerNumbers lottoWinnerNumbers) {
