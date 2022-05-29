@@ -9,20 +9,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-class ManualNumberTest {
+class ManualNumberTicketCountTest {
 
     @DisplayName("수동 구매 개수를 입력하면 객체가 생성된다.")
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2, 3})
-    void createManualNumber(int manual) {
-        assertThat(new ManualNumber(manual)).isNotNull();
+    void createManualNumber(int manualTicketCount) {
+        assertThat(new ManualLottoTicketCount(manualTicketCount)).isNotNull();
     }
 
     @DisplayName("0보다 작은 수를 입력하면 오류가 발생한다.")
     @ParameterizedTest
     @ValueSource(ints = {-1, -2, -3})
-    void throwRangeErrorByManual(int manual) {
-        assertThatThrownBy(() -> new ManualNumber(manual)).isInstanceOf(IllegalArgumentException.class);
+    void throwRangeErrorByManual(int manualTicketCount) {
+        assertThatThrownBy(() -> new ManualLottoTicketCount(manualTicketCount)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -30,8 +30,8 @@ class ManualNumberTest {
     void throwRangeErrorByMoney() {
         Money money = new Money(5000);
         assertAll(
-            () -> assertThatThrownBy(() -> new ManualNumber(6, money)).isInstanceOf(IllegalArgumentException.class),
-            () -> assertThatThrownBy(() -> new ManualNumber(7, money)).isInstanceOf(IllegalArgumentException.class)
+            () -> assertThatThrownBy(() -> new ManualLottoTicketCount(6, money)).isInstanceOf(IllegalArgumentException.class),
+            () -> assertThatThrownBy(() -> new ManualLottoTicketCount(7, money)).isInstanceOf(IllegalArgumentException.class)
         );
     }
 
@@ -40,9 +40,9 @@ class ManualNumberTest {
     void createManualNumberWithMoney() {
         Money money = new Money(5000);
         assertAll(
-            () -> assertThat(new ManualNumber(0, money)).isNotNull(),
-            () -> assertThat(new ManualNumber(1, money)).isNotNull(),
-            () -> assertThat(new ManualNumber(5, money)).isNotNull()
+            () -> assertThat(new ManualLottoTicketCount(0, money)).isNotNull(),
+            () -> assertThat(new ManualLottoTicketCount(1, money)).isNotNull(),
+            () -> assertThat(new ManualLottoTicketCount(5, money)).isNotNull()
         );
     }
 }

@@ -59,10 +59,10 @@ public class InputView {
         return null;
     }
 
-    public static ManualNumber inputManualNumber(Money money) {
+    public static ManualLottoTicketCount inputManualNumber(Money money) {
         try {
             System.out.println(InputMessage.INPUT_MANUAL_NUMBER);
-            return new ManualNumber(scanner.nextInt(), money);
+            return new ManualLottoTicketCount(scanner.nextInt(), money);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -70,10 +70,10 @@ public class InputView {
         return null;
     }
 
-    public static LottoTickets inputManualTickets(ManualNumber manualNumber) {
+    public static LottoTickets inputManualTickets(ManualLottoTicketCount manualNumber) {
         System.out.println(InputMessage.INPUT_MANUAL_TICKETS);
         List<LottoTicket> manualTickets = new ArrayList<>();
-        for (int i = 0; i < manualNumber.getManual(); i++) {
+        for (int i = 0; i < manualNumber.getTicketCount(); i++) {
             manualTickets.add(inputLottoNumbers());
         }
         return new LottoTickets(manualTickets);

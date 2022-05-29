@@ -34,9 +34,9 @@ public class MoneyTest {
         Money money = new Money(3000);
 
         assertAll(
-            () -> assertThat(money.autoCount(new ManualNumber(0))).isEqualTo(3),
-            () -> assertThat(money.autoCount(new ManualNumber(1))).isEqualTo(2),
-            () -> assertThat(money.autoCount(new ManualNumber(3))).isEqualTo(0)
+            () -> assertThat(money.autoCount(new ManualLottoTicketCount(0))).isEqualTo(3),
+            () -> assertThat(money.autoCount(new ManualLottoTicketCount(1))).isEqualTo(2),
+            () -> assertThat(money.autoCount(new ManualLottoTicketCount(3))).isEqualTo(0)
         );
     }
 }
