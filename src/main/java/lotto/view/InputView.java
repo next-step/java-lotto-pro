@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class InputView {
     private static final String ENTER_GAME_MONEY = "구입금액을 입력해 주세요.";
     private static final String ENTER_WINNER_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String ENTER_BONUS_BALL = "보너스 볼을 입력해 주세요.";
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -22,10 +23,12 @@ public class InputView {
         System.out.println(ENTER_WINNER_NUMBER);
     }
 
+    public static void printEnterBonusBall() {
+        System.out.println(ENTER_BONUS_BALL);
+    }
+
     public static int scanGameMoney() {
-        int gameMoney = scanner.nextInt();
-        // todo validate gameMoney
-        return gameMoney;
+        return scanner.nextInt();
     }
 
     public static List<Integer> scanWinnerNumber() {
@@ -45,5 +48,9 @@ public class InputView {
 
     private static void clearScannerBuffer() {
         scanner.nextLine();
+    }
+
+    public static Integer scanBonusBall() {
+        return scanner.nextInt();
     }
 }

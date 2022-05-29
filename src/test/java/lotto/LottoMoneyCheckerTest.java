@@ -15,7 +15,7 @@ class LottoMoneyCheckerTest {
     @DisplayName("calculatePurchasingCount 예상한 갯수만큼 구매 가능한지 테스트")
     @ParameterizedTest
     @CsvSource(delimiter = ',', value = {
-            "0,0",
+            "1,0",
             "500,0",
             "1000,1",
             "1500,1",

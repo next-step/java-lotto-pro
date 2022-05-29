@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoWinner;
-import lotto.domain.Lottos;
-import lotto.domain.LottosResult;
-import lotto.domain.LottosWinnerCounts;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -17,28 +14,33 @@ public class LottoGameStarter {
 
     public void start() {
         InputView.printEnterGameMoney();
-        int gameMoney = InputView.scanGameMoney();
+        int gameMoney = scanGameMoney();
         Lottos lottos = purchaseLottos(gameMoney);
         List<Integer> winnerNumber = inputWinnerNumbers();
-        List<LottoWinner> lottoWinners = calculateLottoResults(lottos, winnerNumber);
+        BonusBall bonusNumber = inputBonusNumber(winnerNumber);
+        LottoWinnerNumbers lottoWinnerNumbers = new LottoWinnerNumbers(winnerNumber, bonusNumber);
+        List<LottoWinner> lottoWinners = lottoWinnerNumbers.calculateLottoResults(lottos);
         LottosWinnerCounts lottosWinnerCounts = new LottosWinnerCounts(lottoWinners);
         LottosResult lottosResult = new LottosResult(gameMoney, lottosWinnerCounts);
         ResultView.printLottoResults(lottosWinnerCounts, lottosResult);
     }
 
-    private List<LottoWinner> calculateLottoResults(Lottos lottos, List<Integer> winnerNumber) {
-        List<LottoWinner> lottoResults = new ArrayList<>();
-        for (int i = 0; i < lottos.gameCount(); i++) {
-            LottoWinner judge = lottos.getLotto(i).judge(winnerNumber);
-            lottoResults.add(judge);
-        }
-        return lottoResults;
+    private int scanGameMoney() {
+        int gameMoney = InputView.scanGameMoney();
+        lottoMoneyChecker.validateMoney(gameMoney);
+        return gameMoney;
     }
 
     private List<Integer> inputWinnerNumbers() {
         InputView.printEnterWinnerNumber();
         List<Integer> winnerNumber = InputView.scanWinnerNumber();
+        LottoNumberValidator.validLottoNumbers(winnerNumber);
         return winnerNumber;
+    }
+
+    private BonusBall inputBonusNumber(List<Integer> winnerNumber) {
+        InputView.printEnterBonusBall();
+        return new BonusBall(InputView.scanBonusBall(), winnerNumber);
     }
 
     private Lottos purchaseLottos(int gameMoney) {
