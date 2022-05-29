@@ -17,10 +17,8 @@ public class InputView {
             return new Money(scanner.nextInt());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            inputMoney();
+            return inputMoney();
         }
-
-        return null;
     }
 
     public static LottoWinningTicket inputWinningTicket() {
@@ -37,10 +35,8 @@ public class InputView {
             return new LottoNumber(scanner.nextInt());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            inputBonusNumber();
+            return inputBonusNumber();
         }
-
-        return null;
     }
 
     private static LottoTicket inputLottoNumbers() {
@@ -54,9 +50,8 @@ public class InputView {
             return new LottoTicket(numbers);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            return inputLottoNumbers();
         }
-
-        return null;
     }
 
     public static ManualLottoTicketCount inputManualNumber(Money money) {
@@ -65,9 +60,8 @@ public class InputView {
             return new ManualLottoTicketCount(scanner.nextInt(), money);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            return inputManualNumber(money);
         }
-
-        return null;
     }
 
     public static LottoTickets inputManualTickets(ManualLottoTicketCount manualNumber) {
