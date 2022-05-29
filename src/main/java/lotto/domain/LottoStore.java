@@ -7,7 +7,7 @@ import java.util.List;
 import static lotto.domain.LottoNumbers.LOTTO_NUMBERS;
 
 public class LottoStore {
-    public LottoTickets buyAuto(int size) {
+    private static LottoTickets buyAuto(int size) {
         List<LottoTicket> lottoAutoNumbers = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             lottoAutoNumbers.add(makeAuto());
@@ -15,7 +15,7 @@ public class LottoStore {
         return new LottoTickets(lottoAutoNumbers);
     }
 
-    public static LottoTicket makeAuto() {
+    private static LottoTicket makeAuto() {
         List<LottoNumber> shuffledNumbers = shuffle();
         List<LottoNumber> autoNumbers = subList(shuffledNumbers);
         Collections.sort(autoNumbers);
@@ -33,7 +33,7 @@ public class LottoStore {
         return lottoNumbers.subList(0, LottoTicket.SIZE);
     }
 
-    public LottoTickets buy(Money money, LottoTickets manualTickets) {
+    public static LottoTickets buy(Money money, LottoTickets manualTickets) {
         LottoTickets autoTickets = buyAuto(money.autoCount(manualTickets.size()));
         return new LottoTickets(manualTickets, autoTickets);
     }

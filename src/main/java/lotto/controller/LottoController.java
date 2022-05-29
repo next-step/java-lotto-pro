@@ -7,12 +7,10 @@ import lotto.view.OutputView;
 
 public class LottoController {
     public void startSales() {
-        LottoStore lottoStore = new LottoStore();
-
         Money money = InputView.inputMoney();
         ManualLottoTicketCount manualTicketCount = InputView.inputManualNumber(money);
         LottoTickets manualTickets = InputView.inputManualTickets(manualTicketCount);
-        LottoTickets purchasedTickets = lottoStore.buy(money, manualTickets);
+        LottoTickets purchasedTickets = LottoStore.buy(money, manualTickets);
         OutputView.printLottoAutoTickets(purchasedTickets, manualTicketCount);
 
         LottoWinningTicket lottoWinningTicket = InputView.inputWinningTicket();
