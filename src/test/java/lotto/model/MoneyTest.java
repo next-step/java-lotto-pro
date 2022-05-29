@@ -37,4 +37,10 @@ public class MoneyTest {
     public void returnManualLottoCount() {
         assertThat(new Money(15000, 3).buyManualCount()).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("구입할 수 있는 수동 구매 개수를 초과할 경우 검증")
+    public void exceedManualLottoCount() {
+        assertThatThrownBy(() -> new Money(15000, 16)).isInstanceOf(IllegalArgumentException.class);
+    }
 }

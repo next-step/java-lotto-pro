@@ -33,7 +33,7 @@ public class Organizer {
     }
 
     private int userNumberSameCount(Lotto lotto) {
-        return (int) lotto.seeNumbers().stream()
+        return (int) lotto.numbers().stream()
                 .filter(this::compare)
                 .count();
     }

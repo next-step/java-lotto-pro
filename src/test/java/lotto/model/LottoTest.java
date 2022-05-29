@@ -20,13 +20,13 @@ public class LottoTest {
     @Test
     @DisplayName("로또 번호의 숫자가 6개인지 확인")
     public void validNumberCount() {
-        assertThat(lotto.seeNumbers().size()).isEqualTo(6);
+        assertThat(lotto.numbers().size()).isEqualTo(6);
     }
 
     @Test
     @DisplayName("로또 게임의 숫자가 모두 다른지 확인")
     public void differentValue() {
-        assertThat(new HashSet<>(lotto.seeNumbers()).size()).isEqualTo(6);
+        assertThat(new HashSet<>(lotto.numbers()).size()).isEqualTo(6);
     }
 
     @Test

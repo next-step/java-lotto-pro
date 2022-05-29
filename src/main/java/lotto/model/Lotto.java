@@ -12,7 +12,7 @@ public class Lotto {
     private final Set<LottoNo> pickNumbers;
 
     public Lotto() {
-        pickNumbers = createNumbers();
+        pickNumbers = createAutoNumbers();
     }
 
     public Lotto(Integer... customNumbers) {
@@ -24,7 +24,7 @@ public class Lotto {
                 .map(String::trim).map(Integer::parseInt).toArray(Integer[]::new));
     }
 
-    public Set<LottoNo> seeNumbers() {
+    public Set<LottoNo> numbers() {
         return this.pickNumbers;
     }
 
@@ -40,7 +40,7 @@ public class Lotto {
         return String.format(PRINT_FORM, joinNumber);
     }
 
-    private Set<LottoNo> createNumbers() {
+    private Set<LottoNo> createAutoNumbers() {
         List<Integer> numbers = LottoNumbers.PREPARED_NUMBERS;
         Collections.shuffle(numbers);
         numbers = numbers.subList(START_INDEX, END_INDEX);
