@@ -46,7 +46,7 @@ public class LottoTickets {
     }
 
     public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
+        return new ArrayList<>(lottoTickets);
     }
 
     @Override
