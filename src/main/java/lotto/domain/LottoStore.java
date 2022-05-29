@@ -32,4 +32,9 @@ public class LottoStore {
     private static List<LottoNumber> subList(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.subList(0, LottoTicket.SIZE);
     }
+
+    public LottoTickets buy(Money money, LottoTickets manualTickets) {
+        LottoTickets autoTickets = buyAuto(money.autoCount(manualTickets.size()));
+        return new LottoTickets(manualTickets, autoTickets);
+    }
 }

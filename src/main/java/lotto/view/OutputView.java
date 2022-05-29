@@ -41,8 +41,8 @@ public class OutputView {
         }
     }
 
-    public static void printLottoAutoTickets(LottoTickets tickets) {
-        printLottoCount(tickets);
+    public static void printLottoAutoTickets(LottoTickets tickets, ManualLottoTicketCount manualTicketCount) {
+        printLottoCount(tickets, manualTicketCount);
         printLottoNumbers(tickets);
         System.out.println();
     }
@@ -53,7 +53,7 @@ public class OutputView {
         }
     }
 
-    private static void printLottoCount(LottoTickets tickets) {
-        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", tickets.getManualCount(), tickets.getAutoCount()));
+    private static void printLottoCount(LottoTickets tickets, ManualLottoTicketCount manualTicketCount) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualTicketCount.getTicketCount(), tickets.size() - manualTicketCount.getTicketCount()));
     }
 }

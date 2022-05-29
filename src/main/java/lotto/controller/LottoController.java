@@ -12,9 +12,8 @@ public class LottoController {
         Money money = InputView.inputMoney();
         ManualLottoTicketCount manualTicketCount = InputView.inputManualNumber(money);
         LottoTickets manualTickets = InputView.inputManualTickets(manualTicketCount);
-        LottoTickets autoTickets = lottoStore.buyAuto(money.autoCount(manualTicketCount));
-        LottoTickets purchasedTickets = new LottoTickets(manualTickets, autoTickets);
-        OutputView.printLottoAutoTickets(purchasedTickets);
+        LottoTickets purchasedTickets = lottoStore.buy(money, manualTickets);
+        OutputView.printLottoAutoTickets(purchasedTickets, manualTicketCount);
 
         LottoWinningTicket lottoWinningTicket = InputView.inputWinningTicket();
         LottoRanks lottoRanks = lottoWinningTicket.analyzeResult(purchasedTickets);

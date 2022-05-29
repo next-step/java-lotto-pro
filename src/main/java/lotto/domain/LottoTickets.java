@@ -8,12 +8,8 @@ import java.util.stream.Stream;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
-    private int autoCount;
-    private int manualCount;
 
     public LottoTickets(LottoTickets manualTickets, LottoTickets autoTickets) {
-        this.manualCount = manualTickets.lottoTickets.size();
-        this.autoCount = autoTickets.lottoTickets.size();
         this.lottoTickets = manualTickets.merge(autoTickets);
     }
 
@@ -37,14 +33,6 @@ public class LottoTickets {
         return new LottoRanks(lottoRanks);
     }
 
-    public int getAutoCount() {
-        return autoCount;
-    }
-
-    public int getManualCount() {
-        return manualCount;
-    }
-
     public List<LottoTicket> getLottoTickets() {
         return new ArrayList<>(lottoTickets);
     }
@@ -54,5 +42,9 @@ public class LottoTickets {
         return "LottoTickets{" +
             "lottoTickets=" + lottoTickets +
             '}';
+    }
+
+    public int size() {
+        return lottoTickets.size();
     }
 }

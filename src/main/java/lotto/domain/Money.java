@@ -24,7 +24,7 @@ public class Money {
         return money;
     }
 
-    public int autoCount(ManualLottoTicketCount manualTicketCount) {
-        return ticketCount() - manualTicketCount.getTicketCount();
+    public int autoCount(int manualTicketCount) {
+        return ticketCount() - manualTicketCount;
     }
 }

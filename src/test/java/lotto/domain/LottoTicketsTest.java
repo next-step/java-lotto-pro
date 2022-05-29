@@ -47,8 +47,6 @@ public class LottoTicketsTest {
         LottoTickets auto = new LottoTickets(autoTickets);
         LottoTickets tickets = new LottoTickets(manual, auto);
 
-        assertThat(tickets.getManualCount()).isEqualTo(manualTickets.size());
-        assertThat(tickets.getAutoCount()).isEqualTo(autoTickets.size());
-        assertThat(tickets.getLottoTickets().size()).isEqualTo(manualTickets.size() + autoTickets.size());
+        assertThat(tickets.size()).isEqualTo(manualTickets.size() + autoTickets.size());
     }
 }
