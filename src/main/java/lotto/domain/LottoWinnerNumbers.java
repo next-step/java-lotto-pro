@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoWinnerNumbers {
@@ -17,5 +18,14 @@ public class LottoWinnerNumbers {
 
     public Integer getBonusBall() {
         return bonusBall;
+    }
+
+    public List<LottoWinner> calculateLottoResults(Lottos lottos) {
+        List<LottoWinner> lottoResults = new ArrayList<>();
+        for (int i = 0; i < lottos.gameCount(); i++) {
+            LottoWinner judge = lottos.getLotto(i).judge(winnerNumbers, bonusBall);
+            lottoResults.add(judge);
+        }
+        return lottoResults;
     }
 }

@@ -18,7 +18,8 @@ public class LottoGameStarter {
         Lottos lottos = purchaseLottos(gameMoney);
         List<Integer> winnerNumber = inputWinnerNumbers();
         Integer bonusNumber = inputBonusNumber(winnerNumber);
-        List<LottoWinner> lottoWinners = calculateLottoResults(lottos, new LottoWinnerNumbers(winnerNumber, bonusNumber));
+        LottoWinnerNumbers lottoWinnerNumbers = new LottoWinnerNumbers(winnerNumber, bonusNumber);
+        List<LottoWinner> lottoWinners = lottoWinnerNumbers.calculateLottoResults(lottos);
         LottosWinnerCounts lottosWinnerCounts = new LottosWinnerCounts(lottoWinners);
         LottosResult lottosResult = new LottosResult(gameMoney, lottosWinnerCounts);
         ResultView.printLottoResults(lottosWinnerCounts, lottosResult);
@@ -28,15 +29,6 @@ public class LottoGameStarter {
         int gameMoney = InputView.scanGameMoney();
         lottoMoneyChecker.validateMoney(gameMoney);
         return gameMoney;
-    }
-
-    private List<LottoWinner> calculateLottoResults(Lottos lottos, LottoWinnerNumbers lottoWinnerNumbers) {
-        List<LottoWinner> lottoResults = new ArrayList<>();
-        for (int i = 0; i < lottos.gameCount(); i++) {
-            LottoWinner judge = lottos.getLotto(i).judge(lottoWinnerNumbers);
-            lottoResults.add(judge);
-        }
-        return lottoResults;
     }
 
     private List<Integer> inputWinnerNumbers() {
