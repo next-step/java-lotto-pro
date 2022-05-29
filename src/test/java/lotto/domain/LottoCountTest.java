@@ -16,7 +16,8 @@ class LottoCountTest {
             new LottoCount(lottoCount);
         })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LottoCountErrorCode.NOT_ALLOW_SMALLER_THAN_ONE.getMessage());
+                .hasMessageContaining(
+                        String.format(LottoCountErrorCode.NOT_ALLOW_SMALLER_THAN_ONE.getMessage(), LottoCount.MIN));
     }
 
     @ParameterizedTest(name = "lottoCount가 0 이상인 경우 정상적으로 값이 들어갔는지 확인")

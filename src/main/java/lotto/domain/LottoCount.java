@@ -6,12 +6,13 @@ import java.util.Objects;
 
 public class LottoCount {
 
-    private static final int MIN = 0;
+    public static final int MIN = 0;
     private final int lottoCount;
 
     public LottoCount(int lottoCount) {
         if (lottoCount < MIN) {
-            throw new IllegalArgumentException(LottoCountErrorCode.NOT_ALLOW_SMALLER_THAN_ONE.getMessage());
+            throw new IllegalArgumentException(
+                    String.format(LottoCountErrorCode.NOT_ALLOW_SMALLER_THAN_ONE.getMessage(), MIN));
         }
         this.lottoCount = lottoCount;
     }
