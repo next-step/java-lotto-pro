@@ -9,28 +9,23 @@ public class LottoNo {
         this.lottoNumber = validateNumberRange(lottoNumber);
     }
 
-    public LottoNo(String lottoString) {
+    public static LottoNo createLotto(String lottoString) {
         int checkLottoNoInput;
         try {
             checkLottoNoInput = Integer.parseInt(lottoString);
         } catch (NumberFormatException numberFormatException) {
             throw new IllegalArgumentException("로또볼은 숫자입니다.");
         }
-        this.lottoNumber = validateNumberRange(checkLottoNoInput);
+        return new LottoNo(checkLottoNoInput);
     }
 
     private int validateNumberRange(int lottoNumber) {
-        if (lottoNumber < LottoConst.LOTTO_NO_START_NUMBER || lottoNumber > LottoConst.LOTTO_NO_END_NUMBER) {
-            String exceptionMessage = String.format("번호는 %d ~ %d 사이 숫자입니다.", LottoConst.LOTTO_NO_START_NUMBER,
-                    LottoConst.LOTTO_NO_END_NUMBER);
+        if (lottoNumber < Lotto.LOTTO_NO_START_NUMBER || lottoNumber > Lotto.LOTTO_NO_END_NUMBER) {
+            String exceptionMessage = String.format("번호는 %d ~ %d 사이 숫자입니다.", Lotto.LOTTO_NO_START_NUMBER,
+                    Lotto.LOTTO_NO_END_NUMBER);
             throw new IllegalArgumentException(exceptionMessage);
         }
         return lottoNumber;
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(lottoNumber);
     }
 
     public LottoNo validateBonus(Lotto winningLotto) {
@@ -55,5 +50,10 @@ public class LottoNo {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lottoNumber);
     }
 }

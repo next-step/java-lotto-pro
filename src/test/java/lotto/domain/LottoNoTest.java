@@ -21,8 +21,8 @@ class LottoNoTest {
     @DisplayName("로또번호 문자열 입력시 1~45 유효성 검사")
     void stringNumberRangeFail() {
         assertAll(
-                () -> assertThatThrownBy(() -> new LottoNo("0")).isInstanceOf(IllegalArgumentException.class),
-                () -> assertThatThrownBy(() -> new LottoNo("46")).isInstanceOf(IllegalArgumentException.class)
+                () -> assertThatThrownBy(() -> LottoNo.createLotto("0")).isInstanceOf(IllegalArgumentException.class),
+                () -> assertThatThrownBy(() -> LottoNo.createLotto("46")).isInstanceOf(IllegalArgumentException.class)
         );
     }
 
@@ -30,8 +30,8 @@ class LottoNoTest {
     @DisplayName("로또번호 문자열 입력시 숫자 이외 값 검사")
     void stringInputFail() {
         assertAll(
-                () -> assertThatThrownBy(() -> new LottoNo("1I")).isInstanceOf(IllegalArgumentException.class),
-                () -> assertThatThrownBy(() -> new LottoNo("45I")).isInstanceOf(IllegalArgumentException.class)
+                () -> assertThatThrownBy(() -> LottoNo.createLotto("1I")).isInstanceOf(IllegalArgumentException.class),
+                () -> assertThatThrownBy(() -> LottoNo.createLotto("45I")).isInstanceOf(IllegalArgumentException.class)
         );
     }
 

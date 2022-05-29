@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.Lotto;
-import lotto.domain.LottoConst;
 import lotto.domain.LottoNo;
 import lotto.domain.Lottos;
 
@@ -40,7 +39,7 @@ public class InputView {
 
     private static int validateManualCount(String inputManualCount, int totalMoney) {
         int manualCount = validateNumberType(inputManualCount, "수량");
-        if (manualCount > totalMoney / LottoConst.LOTTO_PRICE) {
+        if (manualCount > totalMoney / Lotto.LOTTO_PRICE) {
             throw new IllegalArgumentException(EXCEPTION_MESSAGE_MANUAL_COUNT);
         }
         return manualCount;
@@ -87,7 +86,7 @@ public class InputView {
         System.out.println(PRINT_INPUT_BONUS_BALL_LOTTO_MESSAGE);
         String bonusBallInput = scanner.nextLine();
 
-        LottoNo bonusBall = new LottoNo(bonusBallInput);
+        LottoNo bonusBall = LottoNo.createLotto(bonusBallInput);
 
         return bonusBall.validateBonus(winningLotto);
     }

@@ -4,39 +4,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
+    public static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_NO_START_NUMBER = 1;
+    public static final int LOTTO_NO_END_NUMBER = 45;
+    public static final int LOTTO_NO_SIZE = 6;
+
     private List<LottoNo> lottoNumbers = new ArrayList<>();
 
     public Lotto() {
     }
 
     public Lotto(String[] splitWinningLotto) {
-        if (splitWinningLotto == null || splitWinningLotto.length != LottoConst.LOTTO_NO_SIZE) {
-            String exceptionMessage = String.format("로또는 %d개의 숫자입니다.", LottoConst.LOTTO_NO_SIZE);
+        if (splitWinningLotto == null || splitWinningLotto.length != LOTTO_NO_SIZE) {
+            String exceptionMessage = String.format("로또는 %d개의 숫자입니다.", LOTTO_NO_SIZE);
             throw new IllegalArgumentException(exceptionMessage);
         }
         for (String s : splitWinningLotto) {
-            LottoNo lottoNo = new LottoNo(s.trim());
+            LottoNo lottoNo = LottoNo.createLotto(s.trim());
             addLottoNumber(lottoNo);
         }
     }
 
-    public static Lotto createRandomLotto(List<Integer> lottoNumbers) {
-        Lotto lotto = new Lotto();
-        for (Integer lottoNumber : lottoNumbers) {
-            lotto.getLottoNumbers().add(new LottoNo(lottoNumber));
+    public Lotto(List<Integer> lottoNos) {
+        for (Integer lottoNo : lottoNos) {
+            addLottoNumber(new LottoNo(lottoNo));
         }
-        return lotto;
     }
 
     public List<LottoNo> getLottoNumbers() {
         return lottoNumbers;
     }
 
-    public int checkMatchCount(Lotto checkLotto) {
+    public int calculateMatchCount(Lotto checkLotto) {
         int countMatch = 0;
 
         for (LottoNo lottoNo : checkLotto.getLottoNumbers()) {
-            countMatch = lottoNumbers.contains(lottoNo) ? countMatch + 1 : countMatch;
+            countMatch = containsLottoNo(lottoNo) ? countMatch + 1 : countMatch;
         }
         return countMatch;
     }
@@ -48,7 +51,7 @@ public class Lotto {
         lottoNumbers.add(lottoNo);
     }
 
-    public boolean checkBonusMatch(LottoNo bonusNumber) {
+    public boolean containsLottoNo(LottoNo bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
     }
 }

@@ -13,17 +13,9 @@ public class LottoTest {
 
     static Lotto lotto;
 
-    static class TestLotto extends Lotto {
-        TestLotto(List<Integer> lottoNos) {
-            for (Integer lottoNo : lottoNos) {
-                addLottoNumber(new LottoNo(lottoNo));
-            }
-        }
-    }
-
     @BeforeAll
     static void beforeAll() {
-        lotto = new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @Test
@@ -36,13 +28,13 @@ public class LottoTest {
 
     @Test
     void 당첨번호_일치개수_구하기() {
-        Lotto lotto1 = new TestLotto(Arrays.asList(1, 2, 3, 7, 8, 9));
-        assertThat(lotto1.checkMatchCount(lotto)).isEqualTo(3);
+        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
+        assertThat(lotto1.calculateMatchCount(lotto)).isEqualTo(3);
     }
 
     @Test
     void 보너스_확인() {
-        assertThat(lotto.checkBonusMatch(new LottoNo(6))).isTrue();
+        assertThat(lotto.containsLottoNo(new LottoNo(6))).isTrue();
     }
 
     @Test

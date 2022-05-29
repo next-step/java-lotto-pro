@@ -21,32 +21,24 @@ public class WinRanksTest {
     static Lotto winningLotto1;
     static Lotto winningLotto2;
 
-    static class TestLotto extends Lotto {
-        public TestLotto(List<Integer> lottoNos) {
-            for (Integer lottoNo : lottoNos) {
-                this.addLottoNumber(new LottoNo(lottoNo));
-            }
-        }
-    }
-
     @BeforeAll
     public static void createLottosList() {
         List<Lotto> lottoSheets = new ArrayList<>();
-        lottoSheets.add(new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottoSheets.add(new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
-        lottoSheets.add(new TestLotto(Arrays.asList(1, 2, 3, 4, 7, 8)));
-        lottoSheets.add(new TestLotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
-        lottoSheets.add(new TestLotto(Arrays.asList(1, 2, 7, 8, 9, 10)));
+        lottoSheets.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoSheets.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        lottoSheets.add(new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8)));
+        lottoSheets.add(new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
+        lottoSheets.add(new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10)));
         lottos = new Lottos(lottoSheets);
 
-        winningLotto1 = new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        winningLotto2 = new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 11));
+        winningLotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winningLotto2 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 11));
     }
 
     @Test
     public void 당첨순위_4등_확인() {
         List<Lotto> lottoSheets = new ArrayList<>();
-        lottoSheets.add(new TestLotto(Arrays.asList(1, 2, 3, 4, 7, 8)));
+        lottoSheets.add(new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8)));
         Lottos lottoRank = new Lottos(lottoSheets);
 
         WinRanks winRanks = new WinRanks();
@@ -59,7 +51,7 @@ public class WinRanksTest {
     @Test
     public void 당첨순위_2등_확인() {
         List<Lotto> lottoSheets = new ArrayList<>();
-        lottoSheets.add(new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 8)));
+        lottoSheets.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)));
         Lottos lottoRank = new Lottos(lottoSheets);
 
         WinRanks winRanks = new WinRanks();
@@ -72,7 +64,7 @@ public class WinRanksTest {
     @Test
     public void 당첨순위_3등_확인() {
         List<Lotto> lottoSheets = new ArrayList<>();
-        lottoSheets.add(new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 8)));
+        lottoSheets.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)));
         Lottos lottoRank = new Lottos(lottoSheets);
 
         WinRanks winRanks = new WinRanks();
@@ -122,13 +114,13 @@ public class WinRanksTest {
     @Test
     public void 수익률_수익_확인() {
         List<Lotto> lossLottoSheet = new ArrayList<>();
-        lossLottoSheet.add(new TestLotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
-        lossLottoSheet.add(new TestLotto(Arrays.asList(1, 2, 7, 8, 9, 10)));
-        lossLottoSheet.add(new TestLotto(Arrays.asList(1, 7, 8, 9, 10, 11)));
+        lossLottoSheet.add(new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
+        lossLottoSheet.add(new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10)));
+        lossLottoSheet.add(new Lotto(Arrays.asList(1, 7, 8, 9, 10, 11)));
         Lottos lossLottos = new Lottos(lossLottoSheet);
 
         WinRanks winRanks = new WinRanks();
-        int winPrice = winRanks.winningPrice(new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 6)), lossLottos,
+        int winPrice = winRanks.winningPrice(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), lossLottos,
                 new LottoNo(40));
         double profitRate = winRanks.calulateProfitRate(winPrice, lossLottos.getLottosSize() * 1000);
         assertThat(profitRate).isGreaterThan(1);
@@ -137,16 +129,16 @@ public class WinRanksTest {
     @Test
     public void 수익률_손해_확인() {
         List<Lotto> winLottoSheets = new ArrayList<>();
-        winLottoSheets.add(new TestLotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
-        winLottoSheets.add(new TestLotto(Arrays.asList(1, 2, 7, 8, 9, 10)));
-        winLottoSheets.add(new TestLotto(Arrays.asList(1, 7, 8, 9, 10, 11)));
-        winLottoSheets.add(new TestLotto(Arrays.asList(7, 8, 9, 10, 11, 12)));
-        winLottoSheets.add(new TestLotto(Arrays.asList(8, 9, 10, 11, 12, 13)));
-        winLottoSheets.add(new TestLotto(Arrays.asList(9, 10, 11, 12, 13, 14)));
+        winLottoSheets.add(new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
+        winLottoSheets.add(new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10)));
+        winLottoSheets.add(new Lotto(Arrays.asList(1, 7, 8, 9, 10, 11)));
+        winLottoSheets.add(new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)));
+        winLottoSheets.add(new Lotto(Arrays.asList(8, 9, 10, 11, 12, 13)));
+        winLottoSheets.add(new Lotto(Arrays.asList(9, 10, 11, 12, 13, 14)));
         Lottos winLottos = new Lottos(winLottoSheets);
 
         WinRanks winRanks = new WinRanks();
-        int winPrice = winRanks.winningPrice(new TestLotto(Arrays.asList(1, 2, 3, 4, 5, 6)), winLottos,
+        int winPrice = winRanks.winningPrice(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), winLottos,
                 new LottoNo(40));
         double profitRate = winRanks.calulateProfitRate(winPrice, winLottos.getLottosSize() * 1000);
         assertThat(profitRate).isLessThan(1);

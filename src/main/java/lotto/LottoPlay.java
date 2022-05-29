@@ -9,37 +9,43 @@ import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
 public class LottoPlay {
-    static int moneyInput;
-    static int manualCount;
-    static int autoCount;
-    static Lottos lottos;
-    static Lotto winningLottoInput;
-    static LottoNo bonusNumber;
-
     public static void main(String[] args) {
-        lottoInput();
-        printResult();
+        lottoPlay();
     }
 
-    private static void lottoInput() {
-        moneyInput = InputView.getMoneyInput();
-        manualCount = InputView.getManualCount(moneyInput);
+    private static void lottoPlay() {
+        int moneyInput = InputView.getMoneyInput();
+        Lottos manualLottos = createManualLottos(moneyInput);
+        Lottos userLottos = createAutoLottos(manualLottos, moneyInput);
+        int autoCount = userLottos.getLottosSize() - manualLottos.getLottosSize();
+
+        ResultView.printLottoPurchase(userLottos, manualLottos.getLottosSize(), autoCount);
+
+        Lotto winningLottoInput = InputView.getWinningLottoInput();
+        LottoNo bonusNumber = InputView.getBonusNumberInput(winningLottoInput);
+
+        printResult(userLottos, winningLottoInput, bonusNumber, moneyInput);
+    }
+
+    private static Lottos createManualLottos(int moneyInput) {
+        int manualCount = InputView.getManualCount(moneyInput);
         Lottos manualLottos = InputView.getManualLottosInput(manualCount);
-
-        autoCount = moneyInput / LottoConst.LOTTO_PRICE - manualCount;
-        lottos = new Lottos(autoCount);
-        lottos.mergeLottos(manualLottos);
-
-        ResultView.printLottoPurchase(lottos, manualCount, autoCount);
-        winningLottoInput = InputView.getWinningLottoInput();
-        bonusNumber = InputView.getBonusNumberInput(winningLottoInput);
+        return manualLottos;
     }
 
-    private static void printResult() {
-        WinRanks winRanks = new WinRanks();
-        int winningPrice = winRanks.winningPrice(winningLottoInput, lottos, bonusNumber);
+    private static Lottos createAutoLottos(Lottos manualLottos, int moneyInput) {
+        int manualCount = manualLottos.getLottosSize();
+        int autoCount = moneyInput / Lotto.LOTTO_PRICE - manualCount;
+        Lottos lottos = new Lottos(autoCount);
+        lottos.mergeLottos(manualLottos);
+        return lottos;
+    }
 
-        ResultView.printLottoResult(lottos, winningLottoInput, winRanks);
+    private static void printResult(Lottos userLottos, Lotto winningLottoInput, LottoNo bonusNumber, int moneyInput) {
+        WinRanks winRanks = new WinRanks();
+        int winningPrice = winRanks.winningPrice(winningLottoInput, userLottos, bonusNumber);
+
+        ResultView.printLottoResult(userLottos, winningLottoInput, winRanks);
         double profitRate = winRanks.calulateProfitRate(winningPrice, moneyInput);
 
         ResultView.printProfit(profitRate);

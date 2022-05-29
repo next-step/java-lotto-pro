@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -31,21 +32,17 @@ public class WinRanks {
 
     public void calculateWinPriceTotals(Lotto winningLotto, Lottos lottos, LottoNo bonusNumber) {
         for (Lotto lotto : lottos.getLottoSheets()) {
-            int checkMatchCount = lotto.checkMatchCount(winningLotto);
-            boolean bonusMatch = lotto.checkBonusMatch(bonusNumber);
-            addRankCount(checkMatchCount, bonusMatch);
+            int matchCount = lotto.calculateMatchCount(winningLotto);
+            boolean bonusMatch = lotto.containsLottoNo(bonusNumber);
+            addRankCount(matchCount, bonusMatch);
         }
     }
 
     private void addRankCount(int checkMatchCount, boolean bonusMatch) {
-        Optional<Rank> rank = Rank.matchedRank(checkMatchCount, bonusMatch);
-        Rank key = null;
-        if(rank.isPresent()){
-            key = rank.get();
-        }
-        if (winTotals.containsKey(key)) {
-            winTotals.put(key, winTotals.get(key) + 1);
-        }
+        Arrays.stream(Rank.values())
+                .filter(rank -> checkMatchCount == rank.getCountOfMatch())
+                .filter(rank -> bonusMatch == rank.isBonusMatch() || !rank.isBonusMatch()).findFirst()
+                .ifPresent(rank -> winTotals.put(rank, winTotals.get(rank) + 1));
     }
 
     public double calulateProfitRate(int profitMoney, int purchaseMoney) {
