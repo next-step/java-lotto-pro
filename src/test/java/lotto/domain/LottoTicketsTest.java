@@ -24,7 +24,7 @@ public class LottoTicketsTest {
         }
         manualTickets.add(new LottoTicket(ticketManual));
 
-        // manualTickets 생성
+        // autoTickets 생성
         autoTickets = new ArrayList<>();
 
         List<LottoNumber> ticketAuto1 = new ArrayList<>();
