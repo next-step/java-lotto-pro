@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import lotto.view.InputView;
 import lotto.view.OutputView;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,22 +29,22 @@ class LottoGameTest {
     }
 
     @Test
-    @DisplayName("주어진 개수만큼 로또가 생성되어야 한다.")
+    @DisplayName("주어진 개수(입력된 금액/개당 가격 - 입력된 수동로또 개수)만큼 로또가 생성되어야 한다.")
     void 로또게임_생성_테스트(){
         // given
-        LottoGame lottoGameByCount = LottoGame.issueLotto(14);
+        LottoGame lottoGameByCount = LottoGame.issueLotto(14, 3);
 
         // when
-        int expectedSize = lottoGameByCount.toLottoGameDTO().size();
+        int expectedManualSize = lottoGameByCount.size();
 
         // then
-        Assertions.assertThat(expectedSize).isEqualTo(14);
+        Assertions.assertThat(expectedManualSize).isEqualTo(11);
     }
 
     @Test
     @DisplayName("생성된 로또 문자열이 정상적으로 출력되어야 한다.")
     void 로또게임_출력_테스트(){
-        Assertions.assertThat(outputView.getLottoGameString(lottoGame.toLottoGameDTO()))
+        Assertions.assertThat(lottoGame.toLottoGameString())
             .isEqualTo(
                 "[1, 2, 3, 4, 5, 6]\n"
                 + "[4, 12, 23, 34, 41, 45]\n"
@@ -82,9 +83,10 @@ class LottoGameTest {
         LottoPayment prize = new LottoPayment(lottoResult.getLottoPrize());
 
         // when
-        String expectedString = outputView.getEarningRateString(payment.toLottoPaymentDTO(), prize.toLottoPaymentDTO());
+        String expectedString = outputView.getEarningRateString(payment, prize);
 
         // then
         Assertions.assertThat(expectedString).isEqualTo("총 수익률은 2143.2144입니다.");
     }
+
 }

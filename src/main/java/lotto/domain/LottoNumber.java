@@ -1,14 +1,12 @@
 package lotto.domain;
 
-import static lotto.constant.LottoConstant.LOTTO_NUMBER_LOWER_BOUND;
-import static lotto.constant.LottoConstant.LOTTO_NUMBER_UPPER_BOUND;
-
 import java.util.Objects;
-import lotto.dto.LottoNumberDTO;
 import lotto.exception.LottoNumberRangeException;
 
 public class LottoNumber {
 
+    private static final int LOTTO_NUMBER_LOWER_BOUND = 1;
+    private static final int LOTTO_NUMBER_UPPER_BOUND = 45;
     private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
@@ -20,14 +18,14 @@ public class LottoNumber {
         return new LottoNumber(lottoNumber);
     }
 
-    public LottoNumberDTO toLottoNumberDTO() {
-        return new LottoNumberDTO(lottoNumber);
-    }
-
     private void validateLottoNumber(int lottoNumber) {
         if (lottoNumber < LOTTO_NUMBER_LOWER_BOUND || lottoNumber > LOTTO_NUMBER_UPPER_BOUND) {
             throw new LottoNumberRangeException();
         }
+    }
+
+    public int value() {
+        return lottoNumber;
     }
 
     @Override
@@ -47,5 +45,9 @@ public class LottoNumber {
         return Objects.hash(lottoNumber);
     }
 
+    @Override
+    public String toString() {
+        return Integer.toString(lottoNumber);
+    }
 }
 

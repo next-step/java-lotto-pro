@@ -10,7 +10,7 @@ class LottoPaymentTest {
     @Test
     @DisplayName("구입금액이 정상입력된 경우 맞는 구입금액이 생성되어야 한다.")
     void 구입금액_정상() {
-        Assertions.assertThat(new LottoPayment(14000).toLottoPaymentDTO().getTotalPayment())
+        Assertions.assertThat(new LottoPayment(14000).value())
             .isEqualTo(14000);
     }
 
@@ -28,7 +28,7 @@ class LottoPaymentTest {
         LottoPayment lottoPayment = new LottoPayment(14000);
 
         // when
-        int expectedCount = lottoPayment.getLottoLineCount();
+        int expectedCount = lottoPayment.countLine();
 
         // then
         Assertions.assertThat(expectedCount).isEqualTo(14);

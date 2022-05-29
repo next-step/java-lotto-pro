@@ -1,19 +1,17 @@
 package lotto.view;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import lotto.constant.LottoConstant;
+import lotto.domain.LottoCount;
+import lotto.domain.LottoGame;
+import lotto.domain.LottoPayment;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
-import lotto.dto.LottoGameDTO;
-import lotto.dto.LottoLineDTO;
-import lotto.dto.LottoPaymentDTO;
 
 public class OutputView {
 
     private static final int DEFAULT_MATCH_COUNT = 0;
+    private static final int EARNING_RATE_STANDARD = 1;
     private static final String LINE_BREAK = "\n";
-    private static final String LOTTO_PAYMENT_COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String LOTTO_PAYMENT_COUNT_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String LOTTO_RESULT_STRING_PREFIX = "\n당첨 통계\n---------";
     private static final String RESULT_MESSAGE_PREFIX_NO_BONUS = "%d개 일치 (";
     private static final String RESULT_MESSAGE_PREFIX_BONUS = "%d개 일치, 보너스 볼 일치(";
@@ -22,17 +20,16 @@ public class OutputView {
     private static final String LOTTO_EARNING_RATE_STRING_END = "입니다.";
     private static final String LOTTO_EARNING_RATE_STRING_REFERENCE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public void printPayment(LottoGameDTO lottoGameDTO) {
-        System.out.println(lottoGameDTO.size() + LOTTO_PAYMENT_COUNT_MESSAGE);
-        System.out.println(getLottoGameString(lottoGameDTO));
+    public void printPayment(LottoGame lottoGame, LottoCount manualLottoCount) {
+        System.out.println(getLottoCountString(lottoGame, manualLottoCount));
+        System.out.println(lottoGame.toLottoGameString());
     }
 
-    public String getLottoGameString(LottoGameDTO lottoGameDTO) {
-        List<String> lottoGameString = lottoGameDTO.getLottoGameDTO()
-            .stream()
-            .map(LottoLineDTO::toString)
-            .collect(Collectors.toList());
-        return String.join(LINE_BREAK, lottoGameString);
+    public String getLottoCountString(LottoGame lottoGame, LottoCount manualLottoCount) {
+        return String.format(LOTTO_PAYMENT_COUNT_MESSAGE,
+            manualLottoCount.value(),
+            lottoGame.size() - manualLottoCount.value()
+        );
     }
 
     public void printLottoResult(String result) {
@@ -76,13 +73,13 @@ public class OutputView {
         System.out.println(earningRate);
     }
 
-    public String getEarningRateString(LottoPaymentDTO payment, LottoPaymentDTO prize) {
-        float earningRate = (float) prize.getTotalPayment() / payment.getTotalPayment();
+    public String getEarningRateString(LottoPayment payment, LottoPayment prize) {
+        float earningRate = (float) prize.value() / payment.value();
         StringBuilder sb = new StringBuilder();
         sb.append(LOTTO_EARNING_RATE_STRING_START)
             .append(earningRate)
             .append(LOTTO_EARNING_RATE_STRING_END);
-        if (earningRate < LottoConstant.EARNING_RATE_STANDARD) {
+        if (earningRate < EARNING_RATE_STANDARD) {
             sb.append(LOTTO_EARNING_RATE_STRING_REFERENCE);
         }
         return sb.toString();

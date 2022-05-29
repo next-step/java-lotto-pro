@@ -1,18 +1,17 @@
 package lotto.domain;
 
-import static lotto.constant.LottoConstant.LOTTO_LINE_LENGTH;
-import static lotto.constant.LottoConstant.SEPARATOR;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.dto.LottoLineDTO;
 import lotto.exception.LottoLineDuplicationException;
 import lotto.exception.LottoLineSizeException;
 
 public class LottoLine {
 
+    private static final int DEFAULT_VALUE = 0;
+    private static final int LOTTO_LINE_LENGTH = 6;
+    private static final String SEPARATOR = ", ";
     private final List<LottoNumber> lottoLine;
 
     public LottoLine(List<Integer> lottoNumbers) {
@@ -52,7 +51,7 @@ public class LottoLine {
     }
 
     public LottoRank getMatchCount(LottoLine compareLottoLine, LottoNumber bonusNumber) {
-        int matchCount = 0;
+        int matchCount = DEFAULT_VALUE;
         for (LottoNumber lottoNumber : lottoLine) {
             matchCount = calculateMatchCount(compareLottoLine, matchCount, lottoNumber);
         }
@@ -75,11 +74,8 @@ public class LottoLine {
         return lottoLine.contains(bonusNumber);
     }
 
-    public LottoLineDTO toLottoLineDTO() {
-        return new LottoLineDTO(lottoLine.stream()
-            .map(LottoNumber::toLottoNumberDTO)
-            .collect(Collectors
-                .toList()));
+    public int size() {
+        return lottoLine.size();
     }
 
     @Override
