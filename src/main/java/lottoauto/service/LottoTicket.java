@@ -2,6 +2,7 @@ package lottoauto.service;
 
 import lottoauto.util.Rank;
 import lottoauto.wrapper.Lotto;
+import lottoauto.wrapper.LottoNo;
 import lottoauto.wrapper.Price;
 import lottoauto.wrapper.TryTime;
 
@@ -15,14 +16,16 @@ public class LottoTicket {
 
     List<Lotto> listLotto;
     Lotto winnerLotto;
+    LottoNo bonusLotto;
 
     public LottoTicket() {
         this.listLotto = new ArrayList<>();
     }
 
-    public LottoTicket(List<Lotto> listLotto, Lotto winnerLotto) {
+    public LottoTicket(List<Lotto> listLotto, Lotto winnerLotto, LottoNo bonusLotto) {
         this.listLotto = listLotto;
         this.winnerLotto = winnerLotto;
+        this.bonusLotto = bonusLotto;
     }
 
     public List<Lotto> getListLotto() {
@@ -39,13 +42,7 @@ public class LottoTicket {
         }
     }
 
-    public void addManualLotto(TryTime tryTime) {
-        Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < tryTime.getManualTryTimes(); i++) {
-            InputNumberValidator inputNumberValidator = new InputNumberValidator(sc.nextLine());
-            listLotto.add(new Lotto(inputNumberValidator.getNumbers()));
-        }
-    }
+
 
     public void printAll() {
         for (Lotto lotto : listLotto) {
@@ -62,7 +59,7 @@ public class LottoTicket {
     }
 
     public boolean compareBonusTickets(Lotto compareLotto) {
-        return winnerLotto.compareBonus(compareLotto.toList());
+        return bonusLotto.compareBonus(compareLotto.toList());
     }
 
     public void makeWinnerMap(Map<Integer, Integer> winnerMap) {

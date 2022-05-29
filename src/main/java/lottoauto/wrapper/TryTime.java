@@ -4,9 +4,10 @@ public class TryTime {
     private int tryTimes;
     private int manualTryTimes;
 
-    public TryTime(int price) {
-        this.tryTimes = price / 1000;
+    private TryTime(int tryTimes) {
+        this.tryTimes = tryTimes;
     }
+
 
     public void makeManualTryTimes(String input) {
         try {
@@ -29,5 +30,9 @@ public class TryTime {
 
     public int getManualTryTimes() {
         return manualTryTimes;
+    }
+
+    public static TryTime of(int price, int divide) {
+        return new TryTime(price / divide);
     }
 }
