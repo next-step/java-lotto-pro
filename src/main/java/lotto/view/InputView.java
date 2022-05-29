@@ -28,9 +28,7 @@ public class InputView {
     }
 
     public static int scanGameMoney() {
-        int gameMoney = scanner.nextInt();
-        // todo validate gameMoney
-        return gameMoney;
+        return scanner.nextInt();
     }
 
     public static List<Integer> scanWinnerNumber() {
