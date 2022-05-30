@@ -12,16 +12,22 @@ import java.util.stream.Collectors;
 public class LottoResponse {
 
     public static class PurchasedLottoResultDto {
-        private final int lottoCount;
+        private final int autoLottoCount;
+        private final int manualLottoCount;
         private final List<LottoResponse.LottoDto> lottoDtos;
 
-        public PurchasedLottoResultDto(final LottoTickets lottoTickets) {
-            this.lottoCount = lottoTickets.getLottoTicketsCount().getLottoCount();
+        public PurchasedLottoResultDto(final LottoTickets lottoTickets, final int manualLottoCount) {
+            this.autoLottoCount = lottoTickets.getLottoTicketsCount().getLottoCount() - manualLottoCount;
+            this.manualLottoCount = manualLottoCount;
             this.lottoDtos = convertLottoDtos(lottoTickets.getValue());
         }
 
-        public int getLottoCount() {
-            return lottoCount;
+        public int getAutoLottoCount() {
+            return autoLottoCount;
+        }
+
+        public int getManualLottoCount() {
+            return manualLottoCount;
         }
 
         public List<LottoResponse.LottoDto> getLottoDtos() {

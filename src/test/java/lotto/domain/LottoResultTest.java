@@ -1,10 +1,12 @@
 package lotto.domain;
 
-import lotto.domain.error.LottoCountErrorCode;
 import lotto.domain.error.LottoResultErrorCode;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -81,15 +83,24 @@ class LottoResultTest {
     }
 
     @Test
-    @DisplayName("구매한 로또수 0이면 수익률 계산 시 에러발생")
+    @DisplayName("구매한 로또수 0이면 수익률은 0이다.")
     public void calculateYield_lotto_count_0() {
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
         LottoTicket purchasedLottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 14, 15, 16));
 
         lottoResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
 
-        assertThatThrownBy(() -> lottoResult.calculateYield(new LottoCount(0)))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LottoCountErrorCode.NOT_ALLOW_SMALLER_THAN_ONE.getMessage());
+        Assertions.assertThat(lottoResult.calculateYield(new LottoCount(0))).isZero();
+    }
+
+    @ParameterizedTest(name = "LottoCount가 null이면 수익률을 0이다.")
+    @NullSource
+    public void calculateYield_lotto_count_0(LottoCount lottoCount) {
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
+        LottoTicket purchasedLottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 14, 15, 16));
+
+        lottoResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
+
+        Assertions.assertThat(lottoResult.calculateYield(lottoCount)).isZero();
     }
 }

@@ -1,5 +1,6 @@
 package lotto.interfaces.controller;
 
+import lotto.application.command.LottoCommand;
 import lotto.application.service.LottoService;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
@@ -27,11 +28,12 @@ public class LottoController {
     }
 
     private LottoTickets purchaseLottoTickets() {
-        LottoRequest.PurchaseRequest purchaseRequest = inputView.inputPayAmount();
+        LottoRequest.PurchaseRequest purchaseRequest = inputView.inputPurchaseInfo();
 
-        LottoTickets lottoTickets = lottoService.purchaseLottoTicketsByAuto(purchaseRequest.getPayAmount());
+        LottoCommand.Purchase command = new LottoCommand.Purchase(purchaseRequest.getPayAmount(), purchaseRequest.getManualLottoCount(), purchaseRequest.getManualLottoNumbers());
+        LottoTickets lottoTickets = lottoService.purchaseLottoTicketsByAuto(command);
 
-        resultView.outPutPurchaseHistory(new LottoResponse.PurchasedLottoResultDto(lottoTickets));
+        resultView.outPutPurchaseHistory(new LottoResponse.PurchasedLottoResultDto(lottoTickets, purchaseRequest.getManualLottoCount()));
 
         return lottoTickets;
     }

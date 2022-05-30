@@ -1,8 +1,10 @@
 package lotto.application.service;
 
+import lotto.application.command.LottoCommand;
 import lotto.domain.*;
 import lotto.infrastructure.generator.NumberGenerator;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -15,26 +17,39 @@ public class LottoService {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    public LottoTickets purchaseLottoTicketsByAuto(final String payAmount) {
-        PayAmount lottoPayAmount = new PayAmount(payAmount);
+    public LottoTickets purchaseLottoTicketsByAuto(final LottoCommand.Purchase command) {
+        final LottoCount autoLottoCount = calculateAutoLottoCount(command);
 
-        LottoCount lottoCount = lottoPayAmount.calculateLottoCount();
+        return getLottoTickets(command, autoLottoCount);
+    }
 
-        return createLottoTickets(lottoCount);
+    private LottoCount calculateAutoLottoCount(final LottoCommand.Purchase command) {
+        final PayAmount lottoPayAmount = new PayAmount(command.getPayAmount());
+        final LottoCount manualLottoCount = new LottoCount(command.getManualLottoCount());
+
+        return lottoPayAmount.calculateAutoLottoCount(manualLottoCount);
+    }
+
+    private LottoTickets getLottoTickets(final LottoCommand.Purchase command, final LottoCount autoLottoCount) {
+        final List<List<Integer>> manualLottoNumbers = Collections.unmodifiableList(command.getManualLottoNumbers());
+        final List<List<Integer>> autoLottoNumbers = Collections.unmodifiableList(createAutoLottoNumbers(autoLottoCount));
+
+        final List<LottoTicket> totalLottoTickets = Stream.concat(manualLottoNumbers.stream(), autoLottoNumbers.stream())
+                .map(LottoTicket::new)
+                .collect(Collectors.toList());
+
+        return new LottoTickets(totalLottoTickets);
+    }
+
+    private List<List<Integer>> createAutoLottoNumbers(final LottoCount lottoCount) {
+        return Stream.generate(lottoNumberGenerator::generate)
+                .limit(lottoCount.getLottoCount())
+                .collect(Collectors.toList());
     }
 
     public LottoResult getRankCount(final List<Integer> winningLottoNumbers, final Integer bonusBall, final LottoTickets purchasedLottoTickets) {
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningLottoNumbers, bonusBall);
+        final WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningLottoNumbers, bonusBall);
 
         return purchasedLottoTickets.compareWinningLottoTicket(winningLottoTicket);
-    }
-
-    private LottoTickets createLottoTickets(LottoCount lottoCount) {
-        List<LottoTicket> lottoTickets = Stream.generate(lottoNumberGenerator::generate)
-                .map(LottoTicket::new)
-                .limit(lottoCount.getLottoCount())
-                .collect(Collectors.toList());
-
-        return new LottoTickets(lottoTickets);
     }
 }

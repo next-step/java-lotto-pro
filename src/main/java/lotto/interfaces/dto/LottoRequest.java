@@ -8,14 +8,26 @@ import java.util.List;
 public class LottoRequest {
 
     public static class PurchaseRequest {
-        private final String payAmount;
+        private final int payAmount;
+        private final int manualLottoCount;
+        private final List<List<Integer>> manualLottoNumbers;
 
-        public PurchaseRequest(String payAmount) {
+        public PurchaseRequest(int payAmount, int manualLottoCount, List<List<Integer>> manualLottoNumbers) {
             this.payAmount = payAmount;
+            this.manualLottoCount = manualLottoCount;
+            this.manualLottoNumbers = manualLottoNumbers;
         }
 
-        public String getPayAmount() {
+        public int getPayAmount() {
             return payAmount;
+        }
+
+        public int getManualLottoCount() {
+            return manualLottoCount;
+        }
+
+        public List<List<Integer>> getManualLottoNumbers() {
+            return manualLottoNumbers;
         }
     }
 

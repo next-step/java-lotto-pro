@@ -14,12 +14,11 @@ public class LottoNumber {
 
         this.lottoNumber = lottoNumber;
     }
-    
+
     private void validateLottoNumber(final Integer lottoNumber) {
         if (!isLottoNumberInRange(lottoNumber)) {
             throw new IllegalArgumentException(
-                    String.format(
-                            LottoNumberErrorCode.INVALID_LOTTO_NUMBER.getMessage(), MIN, MAX));
+                    String.format(LottoNumberErrorCode.INVALID_LOTTO_NUMBER.getMessage(), MIN, MAX));
         }
     }
 
