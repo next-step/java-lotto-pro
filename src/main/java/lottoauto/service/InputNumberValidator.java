@@ -28,10 +28,6 @@ public class InputNumberValidator {
                 '}';
     }
 
-    public void addBonusNumber(int bonusNumber) {
-        this.numbers.add(bonusNumber);
-    }
-
     public List<Integer> getNumbers() {
         return numbers;
     }

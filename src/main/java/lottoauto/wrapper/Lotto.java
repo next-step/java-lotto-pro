@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private List<Number> numbers;
-    private int bonusNumber;
 
     private static final int MAX_USER_LOTTO_COUNT = 6;
 
@@ -18,14 +17,6 @@ public class Lotto {
         checkEmpty(numbers);
         checkLength(numbers);
 
-        insertIntegerList(numbers);
-    }
-
-    public Lotto(List<Integer> numbers, Number bonusNumber) {
-        checkEmpty(numbers);
-        checkLength(numbers);
-
-        this.bonusNumber = bonusNumber.getNumber();
         insertIntegerList(numbers);
     }
 
@@ -82,7 +73,5 @@ public class Lotto {
         return (compareLotto.size() - tempLotto.stream().filter(win -> compareLotto.stream().noneMatch(Predicate.isEqual(win))).collect(Collectors.toList()).size());
     }
 
-    public boolean compareBonus(List<Integer> compareLotto) {
-        return compareLotto.contains(this.bonusNumber);
-    }
+
 }

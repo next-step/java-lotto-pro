@@ -23,7 +23,5 @@ public class OutputViewer {
 
     }
 
-    public static void printTryTimes(int tryTimes) {
-        System.out.println(tryTimes + "개를 구매했습니다.");
-    }
+
 }

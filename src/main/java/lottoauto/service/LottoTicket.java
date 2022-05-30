@@ -2,25 +2,30 @@ package lottoauto.service;
 
 import lottoauto.util.Rank;
 import lottoauto.wrapper.Lotto;
+import lottoauto.wrapper.LottoNo;
 import lottoauto.wrapper.Price;
+import lottoauto.wrapper.TryTime;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 public class LottoTicket {
 
 
     List<Lotto> listLotto;
     Lotto winnerLotto;
+    LottoNo bonusLotto;
 
     public LottoTicket() {
         this.listLotto = new ArrayList<>();
     }
 
-    public LottoTicket(List<Lotto> listLotto, Lotto winnerLotto) {
+    public LottoTicket(List<Lotto> listLotto, Lotto winnerLotto, LottoNo bonusLotto) {
         this.listLotto = listLotto;
         this.winnerLotto = winnerLotto;
+        this.bonusLotto = bonusLotto;
     }
 
     public List<Lotto> getListLotto() {
@@ -31,22 +36,19 @@ public class LottoTicket {
         listLotto.add(lotto);
     }
 
-    public void addAll(Price price) {
-        for (int i = 0; i < price.getTryTimes(); i++) {
+    public void addAll(TryTime tryTime) {
+        for (int i = 0; i < tryTime.getTryTimes(); i++) {
             listLotto.add(new Lotto());
         }
     }
+
+
 
     public void printAll() {
         for (Lotto lotto : listLotto) {
             System.out.println(lotto.toString());
         }
     }
-
-    public Lotto get(int index) {
-        return listLotto.get(index);
-    }
-
 
     public int size() {
         return listLotto.size();
@@ -57,11 +59,7 @@ public class LottoTicket {
     }
 
     public boolean compareBonusTickets(Lotto compareLotto) {
-        return winnerLotto.compareBonus(compareLotto.toList());
-    }
-
-    public void getWinnerLotto(Lotto winnerLotto) {
-        this.winnerLotto = winnerLotto;
+        return bonusLotto.compareBonus(compareLotto.toList());
     }
 
     public void makeWinnerMap(Map<Integer, Integer> winnerMap) {
@@ -69,6 +67,7 @@ public class LottoTicket {
             addWinnerMapValueByKey(winnerMap, indexKey);
         }
     }
+
 
     private void addWinnerMapValueByKey(Map<Integer, Integer> winnerMap, int indexKey) {
         Lotto compareLotto = listLotto.get(indexKey);
@@ -90,4 +89,6 @@ public class LottoTicket {
     private boolean matchedCount(Lotto compareLotto, Rank rank) {
         return compareTickets(compareLotto) == rank.getCountOfMatch();
     }
+
+
 }
