@@ -9,7 +9,11 @@ public class InputMessage {
     public static final String INVALID_LOTTO_UNIQUE = "로또 번호는 중복될 수 없습니다.";
     public static final String INVALID_LOTTO_TICKET = "로또 번호 6자리는 null일 수 없습니다.";
     public static final String INVALID_BONUS_NUMBER = "보너스 번호를 null일 수 없습니다.";
+    public static final String INVALID_MANUAL_MINIMUM = "0개 이상 구매할 수 있습니다.";
+    public static final String INVALID_MANUAL_RANGE = "구매 개수를 다시 확인하세요.";
     public static final String INPUT_MONEY = "구매금액을 입력해 주세요.";
     public static final String INPUT_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+    public static final String INPUT_MANUAL_NUMBER = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String INPUT_MANUAL_TICKETS = "수동으로 구매할 번호를 입력해 주세요.";
 }

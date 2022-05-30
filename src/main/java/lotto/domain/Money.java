@@ -23,4 +23,8 @@ public class Money {
     public int getMoney() {
         return money;
     }
+
+    public int autoCount(int manualTicketCount) {
+        return ticketCount() - manualTicketCount;
+    }
 }

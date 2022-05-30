@@ -27,4 +27,16 @@ public class MoneyTest {
             () -> assertThat(new Money(3000).getMoney()).isEqualTo(3000)
         );
     }
+
+    @Test
+    @DisplayName("돈과 수동 구매개수가 주어졌을 때 자동구매개수를 구한다.")
+    void checkMoney() {
+        Money money = new Money(3000);
+
+        assertAll(
+            () -> assertThat(money.autoCount(0)).isEqualTo(3),
+            () -> assertThat(money.autoCount(1)).isEqualTo(2),
+            () -> assertThat(money.autoCount(3)).isEqualTo(0)
+        );
+    }
 }

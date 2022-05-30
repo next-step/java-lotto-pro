@@ -69,7 +69,7 @@ public class LottoWinningTicketTest {
         lottoTickets.add(new LottoTicket(autoLottoNumbers2));
         lottoTickets.add(new LottoTicket(autoLottoNumbers3));
 
-        List<LottoRank> lottoResult = lottoWinningTicket.analyzeResult(lottoTickets).getLottoRanks();
+        List<LottoRank> lottoResult = lottoWinningTicket.analyzeResult(new LottoTickets(lottoTickets)).getLottoRanks();
         for (LottoRank lottoRank : lottoResult) {
             System.out.println(lottoRank.getMatch());
         }
