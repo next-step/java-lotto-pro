@@ -31,15 +31,9 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank getRank(int numberOfMatch) {
-        return Optional.ofNullable(ranks.get(numberOfMatch))
-                .orElse(LOSE);
-    }
-
     public static Rank getRank(int numberOfMatch, boolean hasBonusNumber) {
         int rankKey = Objects.hash(numberOfMatch, hasBonusNumber);
-        return Optional.ofNullable(ranks.get(rankKey))
-                .orElse(LOSE);
+        return ranks.getOrDefault(rankKey, LOSE);
     }
 
     public Prize getPrize() {
@@ -56,7 +50,7 @@ public enum Rank {
 
     @Override
     public String toString() {
-        if (hasBonus) {
+        if (this == SECOND) {
             return String.format("%d개 일치, 보너스 볼 일치 (%s원)", matchingCount, prize);
         }
         return String.format("%d개 일치 (%s원)", matchingCount, prize);

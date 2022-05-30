@@ -2,11 +2,7 @@ package lotto.model;
 
 import lotto.enums.Rank;
 
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-
-import static lotto.view.ResultView.printLottoNumbers;
+import java.util.*;
 
 public class Lottos {
     private List<LottoNumbers> lottos;
@@ -16,23 +12,7 @@ public class Lottos {
     }
 
     public static Lottos from(List<LottoNumbers> lottos) {
-        return new Lottos(lottos);
-    }
-
-    public void printLottos() {
-        for (LottoNumbers lottoNumbers : lottos) {
-            printLottoNumbers(lottoNumbers);
-        }
-    }
-
-    public RankCount rankCount(LottoNumbers winningNumbers) {
-        Map<Rank, Integer> rankCount = initRankCount();
-        lottos.forEach(lottoNumbers -> {
-            int matchCount = lottoNumbers.matchCount(winningNumbers);
-            Rank rank = Rank.getRank(matchCount);
-            rankCount.put(rank, rankCount.get(rank) + 1);
-        });
-        return RankCount.from(rankCount);
+        return new Lottos(new ArrayList<>(lottos));
     }
 
     public RankCount rankCount(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
@@ -55,5 +35,17 @@ public class Lottos {
 
     public int lottosCount() {
         return lottos.size();
+    }
+
+    public Lottos union(Lottos addedLottos) {
+        lottos.addAll(addedLottos.lottos);
+        return Lottos.from(lottos);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        lottos.forEach(lottoNumbers -> sb.append(lottoNumbers).append("\n"));
+        return sb.toString();
     }
 }

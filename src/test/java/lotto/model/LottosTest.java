@@ -55,4 +55,29 @@ class LottosTest {
         assertThat(rankCount.getCount(rank))
                 .isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("수동 및 자동 로또번호 리스트를 하나로 합친다.")
+    void union() {
+        List<LottoNumbers> manualLottoNumbers = Arrays.asList(
+                createLottoNumbers(new TestLottoNumbersGenerator("1, 2, 3, 4, 5, 6")),
+                createLottoNumbers(new TestLottoNumbersGenerator("7, 8, 9, 10, 11, 12"))
+        );
+        List<LottoNumbers> autoLottoNumbers = Arrays.asList(
+                createLottoNumbers(new TestLottoNumbersGenerator("2, 4, 20, 27, 43, 45")),
+                createLottoNumbers(new TestLottoNumbersGenerator("1, 4, 20, 27, 43, 45"))
+        );
+        Lottos manualLottos = Lottos.from(manualLottoNumbers);
+        Lottos autoLottos = Lottos.from(autoLottoNumbers);
+
+        Lottos allLottos = manualLottos.union(autoLottos);
+
+        assertThat(allLottos.lottosCount())
+                .isEqualTo(4);
+        assertThat(allLottos.toString())
+                .contains("[1, 2, 3, 4, 5, 6]")
+                .contains("[7, 8, 9, 10, 11, 12]")
+                .contains("[2, 4, 20, 27, 43, 45]")
+                .contains("[1, 4, 20, 27, 43, 45]");
+    }
 }

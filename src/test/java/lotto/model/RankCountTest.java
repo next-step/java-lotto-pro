@@ -16,7 +16,7 @@ class RankCountTest {
     @Test
     @DisplayName("수익률 계산 로직을 확인한다.")
     void earningRate_수익률_계산() {
-        Purchase purchase = Purchase.createPurchase(10000);
+        Purchase purchase = Purchase.createPurchase(10000, 10);
         RankCount rankCount = RankCount.from(new EnumMap<Rank, Integer>(Rank.class) {{
             put(THIRD, 1);  //  1_500_000
             put(SECOND, 1); // 30_000_000

@@ -1,21 +1,21 @@
 package lotto.view;
 
+import lotto.model.Purchase;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.api.Test;
 
 import static lotto.view.ResultView.printPurchaseCountView;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ResultViewTest extends ViewTest {
 
-    @ParameterizedTest
+    @Test
     @DisplayName("입력값을 활용해 구매개수 확인 메시지를 출력한다.")
-    @ValueSource(ints = {10, 20, 30, 0})
-    void printPurchaseCountView_구매개수(int input) {
-        printPurchaseCountView(input);
+    void printPurchaseCountView_구매개수() {
+        Purchase purchase = Purchase.createPurchase(10000, 3);
+        printPurchaseCountView(purchase);
         assertThat(output())
-                .isEqualTo(String.format("%d개를 구매했습니다.", input));
+                .isEqualTo(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", 3, 7));
     }
 
 }
