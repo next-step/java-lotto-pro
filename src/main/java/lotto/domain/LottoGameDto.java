@@ -1,21 +1,21 @@
 package lotto.domain;
 
-public class TotalLotto {
+public class LottoGameDto {
     private static final String INPUT_ERROR = "잘못된 값을 입력하였습니다.";
 
     private Money money;
 
     private Lottos lottoList;
 
-    private TotalLotto(Money money, Lottos lottoList) {
+    private LottoGameDto(Money money, Lottos lottoList) {
         this.money = money;
         this.lottoList = lottoList;
     }
 
-    public static TotalLotto of(ManualLotto manualLotto, Lottos lottoList) {
+    public static LottoGameDto of(ManualLotto manualLotto, Lottos lottoList) {
         Money money = manualLotto.getMoney();
         validGenerateCount(money.getAllCount(), lottoList.getCount());
-        return new TotalLotto(money, lottoList);
+        return new LottoGameDto(money, lottoList);
     }
 
     public int getCount() {

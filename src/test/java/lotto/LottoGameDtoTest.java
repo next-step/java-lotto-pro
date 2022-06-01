@@ -8,8 +8,8 @@ import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TotalLottoTest {
-    private TotalLotto generatorTotalLotto() {
+public class LottoGameDtoTest {
+    private LottoGameDto generatorLottoGameDto() {
         Money money = Money.of(2000, 0);
         List<String> stringList = new ArrayList<>();
         ManualLotto manualLotto = ManualLotto.of(money, stringList);
@@ -17,14 +17,14 @@ public class TotalLottoTest {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(LottoFactory.manualGenerator("1,2,3,4,5,6"));
         lottoList.add(LottoFactory.manualGenerator("2,3,4,5,6,45"));
-        TotalLotto totalLotto = TotalLotto.of(manualLotto, new Lottos(lottoList));
+        LottoGameDto totalLotto = LottoGameDto.of(manualLotto, new Lottos(lottoList));
         return totalLotto;
     }
 
     @Test
     @Description(value = "TotalLotto 생성 시 금액에 맞는 개수로 생성되는지 확인")
-    void getTotalLotto() {
-        TotalLotto totalLotto = generatorTotalLotto();
+    void getLottoGameDto() {
+        LottoGameDto totalLotto = generatorLottoGameDto();
         assertThat(totalLotto.getCount()).isEqualTo(2);
     }
 }

@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.domain.LottoScore;
 import lotto.domain.Money;
 import lotto.domain.Rank;
-import lotto.domain.TotalLotto;
+import lotto.domain.LottoGameDto;
 
 import java.util.Map;
 
@@ -13,7 +13,7 @@ public class OutputView {
     private static final String QUANTITY = "개를 구매하였습니다.";
     private static final String LOTTO_STATISTIC_START = "\n당첨 통계\n---------";
     private static final String PROFIT = "총 이익률은 %.2f 입니다.";
-    public static void printQuantity(TotalLotto totalLotto) {
+    public static void printQuantity(LottoGameDto totalLotto) {
         System.out.println(totalLotto.getCount() + QUANTITY);
         System.out.println(totalLotto.lottoListToString());
     }
