@@ -3,19 +3,13 @@ package lotto;
 import static lotto.config.LottoGameConfig.PURCHASE_MONEY;
 
 public class LottoMoneyChecker {
-    public int calculatePurchasingAutoGameCount(int countOfManualCount, int money) {
-        int change = money - (countOfManualCount * PURCHASE_MONEY);
-        int count = change / PURCHASE_MONEY;
-        return Math.max(count, 0);
-    }
-
-    public void validateMoney(int money) {
+    public static void validateMoney(int money) {
         if (money <= 0) {
             throw new IllegalArgumentException("money는 1 이상이어야 합니다.");
         }
     }
 
-    public void validateCountOfManualGame(int countOfManualGame, int money) {
+    public static void validateCountOfManualGame(int countOfManualGame, int money) {
         if (countOfManualGame < 0) {
             throw new IllegalArgumentException("CountOfManualGame는 0이상이어야 합니다.");
         }

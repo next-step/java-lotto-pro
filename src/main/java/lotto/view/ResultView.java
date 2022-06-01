@@ -2,6 +2,8 @@ package lotto.view;
 
 import lotto.config.LottoGameConfig;
 import lotto.domain.*;
+import lotto.domain.vo.AutoGameCount;
+import lotto.domain.vo.ManualGameCount;
 
 public class ResultView {
     private static final String RESULT_PURCHASE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
@@ -14,8 +16,8 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printResultPurchase(int countOfManualGame, int countOfAutoGame) {
-        System.out.printf(RESULT_PURCHASE + System.lineSeparator(), countOfManualGame, countOfAutoGame);
+    public static void printResultPurchase(ManualGameCount manualGameCount, AutoGameCount autoGameCount) {
+        System.out.printf(RESULT_PURCHASE + System.lineSeparator(), manualGameCount.getCount(), autoGameCount.getCount());
     }
 
     public static void printLottoResults(LottosWinnerCounts lottosWinnerCounts, LottosResult lottosResult) {
