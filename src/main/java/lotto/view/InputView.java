@@ -9,6 +9,7 @@ public class InputView {
     private static final String ENTER_GAME_MONEY = "구입금액을 입력해 주세요.";
     private static final String ENTER_WINNER_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String ENTER_BONUS_BALL = "보너스 볼을 입력해 주세요.";
+    private static final String ENTER_COUNT_OF_MANUAL_GAME = "수동으로 구매할 로또 수를 입력해 주세요.";
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -27,7 +28,7 @@ public class InputView {
         System.out.println(ENTER_BONUS_BALL);
     }
 
-    public static int scanGameMoney() {
+    public static int scanNumberValue() {
         return scanner.nextInt();
     }
 
@@ -52,5 +53,9 @@ public class InputView {
 
     public static Integer scanBonusBall() {
         return scanner.nextInt();
+    }
+
+    public static void printEnterCountOfManualGame() {
+        System.out.println(ENTER_COUNT_OF_MANUAL_GAME);
     }
 }

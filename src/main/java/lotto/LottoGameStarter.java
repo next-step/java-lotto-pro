@@ -4,7 +4,6 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGameStarter {
@@ -13,8 +12,8 @@ public class LottoGameStarter {
     private final LottoMoneyChecker lottoMoneyChecker = new LottoMoneyChecker();
 
     public void start() {
-        InputView.printEnterGameMoney();
-        int gameMoney = scanGameMoney();
+        int gameMoney = inputGameMoney();
+        int countOfManualGame = inputCountOfManualGame(gameMoney);
         Lottos lottos = purchaseLottos(gameMoney);
         List<Integer> winnerNumber = inputWinnerNumbers();
         BonusBall bonusNumber = inputBonusNumber(winnerNumber);
@@ -25,8 +24,24 @@ public class LottoGameStarter {
         ResultView.printLottoResults(lottosWinnerCounts, lottosResult);
     }
 
+    private int inputCountOfManualGame(int money) {
+        InputView.printEnterCountOfManualGame();
+        return scanCountOfManualGame(money);
+    }
+
+    private int scanCountOfManualGame(int money) {
+        int count = InputView.scanNumberValue();
+        lottoMoneyChecker.validateCountOfManualGame(count, money);
+        return count;
+    }
+
+    private int inputGameMoney() {
+        InputView.printEnterGameMoney();
+        return scanGameMoney();
+    }
+
     private int scanGameMoney() {
-        int gameMoney = InputView.scanGameMoney();
+        int gameMoney = InputView.scanNumberValue();
         lottoMoneyChecker.validateMoney(gameMoney);
         return gameMoney;
     }
