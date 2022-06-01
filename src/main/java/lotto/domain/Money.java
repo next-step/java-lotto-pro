@@ -6,15 +6,9 @@ public class Money {
     private static final int LOTTO_PRICE = 1000;
 
     private int amount;
-    private int allCount;
-    private int autoCount;
-    private int manualCount;
 
-    private Money(int amount, int allCount, int manualCount) {
+    private Money(int amount) {
         this.amount = amount;
-        this.allCount = allCount;
-        this.manualCount = manualCount;
-        this.autoCount = allCount - manualCount;
     }
 
     public static Money of(int amount, int manualCount) {
@@ -23,7 +17,7 @@ public class Money {
         int allCount = amount/LOTTO_PRICE;
         validManualCount(allCount, manualCount);
 
-        return new Money(amount, allCount, manualCount);
+        return new Money(amount);
     }
 
     private static void validAmount(int amount) {
@@ -48,14 +42,6 @@ public class Money {
         return this.amount;
     }
     public int getAllCount() {
-        return this.allCount;
-    }
-
-    public int getAutoCount() {
-        return this.autoCount;
-    }
-
-    public int getManualCount() {
-        return this.manualCount;
+        return amount/LOTTO_PRICE;
     }
 }
