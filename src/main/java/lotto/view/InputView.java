@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.LottoNumberValidator;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -10,6 +12,7 @@ public class InputView {
     private static final String ENTER_WINNER_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String ENTER_BONUS_BALL = "보너스 볼을 입력해 주세요.";
     private static final String ENTER_COUNT_OF_MANUAL_GAME = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String ENTER_MANUAL_GAME = "수동으로 구매할 번호를 입력해 주세요.";
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -29,14 +32,15 @@ public class InputView {
     }
 
     public static int scanNumberValue() {
-        return scanner.nextInt();
+        int number = scanner.nextInt();
+        clearScannerBuffer();
+        return number;
     }
 
-    public static List<Integer> scanWinnerNumber() {
-        clearScannerBuffer();
+    public static List<Integer> scanLottoNumber() {
         String winnerNumbers = scanner.nextLine();
         List<Integer> winnerNumber = splitWinnerNumber(winnerNumbers);
-        // todo validate winnerNumber
+        LottoNumberValidator.validLottoNumbers(winnerNumber);
         return winnerNumber;
     }
 
@@ -57,5 +61,9 @@ public class InputView {
 
     public static void printEnterCountOfManualGame() {
         System.out.println(ENTER_COUNT_OF_MANUAL_GAME);
+    }
+
+    public static void printManualGame() {
+        System.out.println(ENTER_MANUAL_GAME);
     }
 }
