@@ -8,10 +8,10 @@ import java.util.List;
 
 public class LottoGame {
     public void start() {
-        Money money = generateMoney();
-        List<String> inputManualLottoNumbers = InputView.getManualLottoNumbers(money.getManualCount());
-        Lottos lottos = LottoFactory.generateLottos(money, inputManualLottoNumbers);
-        TotalLotto totalLotto = TotalLotto.of(money, lottos);
+        ManualLotto manualLotto = generateManualLotto();
+        Lottos lottos = LottoFactory.generateTotalLottos(manualLotto);
+
+        LottoGameDto totalLotto = LottoGameDto.of(manualLotto, lottos);
         OutputView.printQuantity(totalLotto);
 
         Lotto lotto = LottoFactory.manualGenerator(InputView.getWinningLottoPrint());
@@ -20,12 +20,14 @@ public class LottoGame {
         LottoScore lottoScore = lottos.getLottoScore(winningLotto);
 
         OutputView.printLottoStatistic(lottoScore);
-        OutputView.printProfit(lottoScore, money);
+        OutputView.printProfit(lottoScore, manualLotto.getMoney());
     }
 
-    private Money generateMoney() {
+    private ManualLotto generateManualLotto() {
         int amount = InputView.getAmountPrint();
         int manualCount = InputView.getManualCountPrint();
-        return Money.of(amount, manualCount);
+        Money money = Money.of(amount, manualCount);
+        List<String> inputManualLottoNumbers = InputView.getManualLottoNumbers(manualCount);
+        return ManualLotto.of(money, inputManualLottoNumbers);
     }
 }
