@@ -14,11 +14,7 @@ public class Lotto {
     }
 
     public boolean isMatch(LottoNumber lottoNumber) {
-        boolean result = false;
-        if (this.lottoNumbers.contains(lottoNumber)) {
-            result = true;
-        }
-        return result;
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
     @Override

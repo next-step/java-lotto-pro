@@ -18,14 +18,6 @@ public enum Rank {
         this.winningAmount = winningAmount;
     }
 
-    public int getMatchCount() {
-        return this.matchCount;
-    }
-
-    public int getWinningAmount() {
-        return this.winningAmount;
-    }
-
     public static Rank valueOf(int matchCount, boolean bonusNumber) {
         if (matchCount==5 && bonusNumber) {
             return SECOND;
