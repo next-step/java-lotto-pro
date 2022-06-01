@@ -19,8 +19,8 @@ public class LottoGame {
         WinningLotto winningLotto = WinningLotto.of(lotto, lottoNumber);
         LottoScore lottoScore = lottos.getLottoScore(winningLotto);
 
-        OutputView.printLottoStatistic(lottoScore.getLottoScore());
-        OutputView.printProfit(lottoScore.calculatorProfit(money.getAmount()));
+        OutputView.printLottoStatistic(lottoScore);
+        OutputView.printProfit(lottoScore, money);
     }
 
     private Money generateMoney() {

@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.LottoScore;
+import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.TotalLotto;
 
@@ -16,7 +18,8 @@ public class OutputView {
         System.out.println(totalLotto.lottoListToString());
     }
 
-    public static void printLottoStatistic(Map<Rank, Integer> map) {
+    public static void printLottoStatistic(LottoScore lottoScore) {
+        Map<Rank, Integer> map = lottoScore.getLottoScore();
         System.out.println(LOTTO_STATISTIC_START);
         System.out.println(FIFTH.toString(map.get(Rank.FIFTH)));
         System.out.println(FOURTH.toString(map.get(Rank.FOURTH)));
@@ -25,7 +28,8 @@ public class OutputView {
         System.out.println(FIRST.toString(map.get(Rank.FIRST)));
     }
 
-    public static void printProfit(double profit) {
+    public static void printProfit(LottoScore lottoScore, Money money) {
+        double profit = lottoScore.calculatorProfit(money.getAmount());
         System.out.println(String.format(PROFIT, profit));
     }
 }
