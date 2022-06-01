@@ -10,8 +10,6 @@ public class MoneyTest {
      void Money_생성() {
         Money money = Money.of(6000, 1);
         assertThat(money.getAllCount()).isEqualTo(6);
-        assertThat(money.getAutoCount()).isEqualTo(5);
-        assertThat(money.getManualCount()).isEqualTo(1);
     }
 
     @Test
