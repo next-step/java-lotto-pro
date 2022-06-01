@@ -10,7 +10,7 @@ public class LottoGame {
     public void start() {
         Money money = generateMoney();
         List<String> inputManualLottoNumbers = InputView.getManualLottoNumbers(money.getManualCount());
-        Lottos lottos = LottoShop.generateLottos(money, inputManualLottoNumbers);
+        Lottos lottos = LottoFactory.generateLottos(money, inputManualLottoNumbers);
         TotalLotto totalLotto = TotalLotto.of(money, lottos);
         OutputView.printQuantity(totalLotto);
 

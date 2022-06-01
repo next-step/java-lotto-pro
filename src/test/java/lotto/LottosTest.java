@@ -12,7 +12,7 @@ class LottosTest {
     @Test
     void 로또_그룹_생성() {
         Money money = Money.of(5000, 0);
-        Lottos lottos = LottoShop.generateLottos(money, new ArrayList<String>());
+        Lottos lottos = LottoFactory.generateLottos(money, new ArrayList<String>());
         assertThat(lottos.getLottoList().size()).isEqualTo(5);
     }
 
