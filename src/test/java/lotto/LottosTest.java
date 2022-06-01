@@ -1,10 +1,13 @@
 package lotto;
 
 import lotto.domain.*;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -12,7 +15,9 @@ class LottosTest {
     @Test
     void 로또_그룹_생성() {
         Money money = Money.of(5000, 0);
-        Lottos lottos = LottoFactory.generateLottos(money, new ArrayList<String>());
+        List<String> stringList = new ArrayList<>();
+        ManualLotto manualLotto = ManualLotto.of(money, stringList);
+        Lottos lottos = LottoFactory.generateTotalLottos(manualLotto);
         assertThat(lottos.getLottoList().size()).isEqualTo(5);
     }
 
@@ -35,5 +40,27 @@ class LottosTest {
         assertThat(list.get(0)).isEqualTo(Rank.FIRST);
         assertThat(list.get(1)).isEqualTo(Rank.FIFTH);
         assertThat(list.get(2)).isEqualTo(Rank.SECOND);
+    }
+
+    @Test
+    void 로또_점수_계산() {
+        WinningLotto winningLotto = WinningLotto.of(LottoFactory.manualGenerator("1,2,3,4,5,6"), LottoNumber.from(7));
+
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(LottoFactory.manualGenerator("1,2,3,4,5,7"));
+        lottoList.add(LottoFactory.manualGenerator("1,2,3,4,5,6"));
+
+        Lottos lottos = new Lottos(lottoList);
+        LottoScore lottoScore = lottos.getLottoScore(winningLotto);
+
+        Map<Rank, Integer> map = new HashMap<>();
+        map.put(Rank.FIRST, 1);
+        map.put(Rank.SECOND, 1);
+
+        int result = (int) lottoScore.getLottoScore().entrySet().stream()
+                .filter(rankIntegerEntry -> map.get(rankIntegerEntry.getKey()).equals(rankIntegerEntry.getValue()))
+                .count();
+
+        Assertions.assertThat(result).isEqualTo(2);
     }
 }
