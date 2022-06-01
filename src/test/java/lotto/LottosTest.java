@@ -11,7 +11,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class LottosTest {
     @Test
     void 로또_그룹_생성() {
-        Lottos lottos = LottoShop.generateLottos(5);
+        Money money = Money.of(5000, 0);
+        Lottos lottos = LottoShop.generateLottos(money, new ArrayList<String>());
         assertThat(lottos.getLottoList().size()).isEqualTo(5);
     }
 
