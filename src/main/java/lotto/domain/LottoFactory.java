@@ -17,12 +17,12 @@ public class LottoFactory {
     private LottoFactory() {
     }
 
-    public static Lottos generateLottos(Money money, List<String> inputManualLottoNumbers) {
+    public static Lottos generateTotalLottos(ManualLotto manualLotto) {
         List<Lotto> lottos = new ArrayList<>();
-        for (String s : inputManualLottoNumbers) {
+        for (String s : manualLotto.getInputLottoNumbers()) {
             lottos.add(LottoFactory.manualGenerator(s));
         }
-        for (int i=0; i<money.getAutoCount(); i++) {
+        for (int i=0; i< manualLotto.getAutoCount(); i++) {
             lottos.add(LottoFactory.autoGenerator());
         }
         return new Lottos(lottos);

@@ -12,7 +12,8 @@ public class TotalLotto {
         this.lottoList = lottoList;
     }
 
-    public static TotalLotto of(Money money, Lottos lottoList) {
+    public static TotalLotto of(ManualLotto manualLotto, Lottos lottoList) {
+        Money money = manualLotto.getMoney();
         validGenerateCount(money.getAllCount(), lottoList.getCount());
         return new TotalLotto(money, lottoList);
     }
