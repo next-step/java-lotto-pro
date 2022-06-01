@@ -26,11 +26,11 @@ public class Lottos {
         return ranks;
     }
 
-    public Map<Rank, Integer> matchLottoStaticToString(WinningLotto winningLotto) {
+    public LottoScore getLottoScore(WinningLotto winningLotto) {
         Map<Rank, Integer> map = new HashMap<>();
         List<Rank> ranks = matchLottoStatic(winningLotto);
         ranks.stream()
                 .forEach(lottoStatistic -> map.put(lottoStatistic, map.getOrDefault(lottoStatistic, 1)));
-        return map;
+        return new LottoScore(map);
     }
 }

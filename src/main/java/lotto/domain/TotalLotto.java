@@ -33,8 +33,4 @@ public class TotalLotto {
                 .forEach(lotto -> sb.append(lotto.toString() + "\n"));
         return sb.toString();
     }
-
-    public LottoScore getLottoScore(WinningLotto winningLotto) {
-        return new LottoScore(this.lottoList.matchLottoStaticToString(winningLotto));
-    }
 }
