@@ -2,9 +2,11 @@ package lotto.view;
 
 import lotto.config.LottoGameConfig;
 import lotto.domain.*;
+import lotto.domain.vo.AutoGameCount;
+import lotto.domain.vo.ManualGameCount;
 
 public class ResultView {
-    private static final String RESULT_PURCHASE = "%d개를 구매했습니다.";
+    private static final String RESULT_PURCHASE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String WINNER_RESULT_FORMAT = "%d개 일치 (%d원)- %d개";
     private static final String LOTTOS_RETURN_MONEY_RESULT = "총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 %s라는 의미임)";
     private static final String LOSE = "손해";
@@ -14,8 +16,8 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printResultPurchase(int count) {
-        System.out.printf(RESULT_PURCHASE + System.lineSeparator(), count);
+    public static void printResultPurchase(ManualGameCount manualGameCount, AutoGameCount autoGameCount) {
+        System.out.printf(RESULT_PURCHASE + System.lineSeparator(), manualGameCount.getCount(), autoGameCount.getCount());
     }
 
     public static void printLottoResults(LottosWinnerCounts lottosWinnerCounts, LottosResult lottosResult) {

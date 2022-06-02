@@ -1,21 +1,21 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.domain.vo.AutoGameCount;
+import lotto.domain.vo.ManualGameCount;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGameStarter {
 
     private final LottoMachine lottoMachine = new LottoMachine();
-    private final LottoMoneyChecker lottoMoneyChecker = new LottoMoneyChecker();
 
     public void start() {
-        InputView.printEnterGameMoney();
-        int gameMoney = scanGameMoney();
-        Lottos lottos = purchaseLottos(gameMoney);
+        int gameMoney = inputGameMoney();
+        ManualGameCount manualGameCount = inputCountOfManualGame(gameMoney);
+        Lottos lottos = purchaseLottos(manualGameCount, gameMoney);
         List<Integer> winnerNumber = inputWinnerNumbers();
         BonusBall bonusNumber = inputBonusNumber(winnerNumber);
         LottoWinnerNumbers lottoWinnerNumbers = new LottoWinnerNumbers(winnerNumber, bonusNumber);
@@ -25,17 +25,30 @@ public class LottoGameStarter {
         ResultView.printLottoResults(lottosWinnerCounts, lottosResult);
     }
 
+    private ManualGameCount inputCountOfManualGame(int money) {
+        InputView.printEnterCountOfManualGame();
+        int count = scanCountOfManualGame(money);
+        return new ManualGameCount(count, money);
+    }
+
+    private int scanCountOfManualGame(int money) {
+        return InputView.scanNumberValue();
+    }
+
+    private int inputGameMoney() {
+        InputView.printEnterGameMoney();
+        return scanGameMoney();
+    }
+
     private int scanGameMoney() {
-        int gameMoney = InputView.scanGameMoney();
-        lottoMoneyChecker.validateMoney(gameMoney);
+        int gameMoney = InputView.scanNumberValue();
+        LottoMoneyChecker.validateMoney(gameMoney);
         return gameMoney;
     }
 
     private List<Integer> inputWinnerNumbers() {
         InputView.printEnterWinnerNumber();
-        List<Integer> winnerNumber = InputView.scanWinnerNumber();
-        LottoNumberValidator.validLottoNumbers(winnerNumber);
-        return winnerNumber;
+        return InputView.scanLottoNumber();
     }
 
     private BonusBall inputBonusNumber(List<Integer> winnerNumber) {
@@ -43,10 +56,10 @@ public class LottoGameStarter {
         return new BonusBall(InputView.scanBonusBall(), winnerNumber);
     }
 
-    private Lottos purchaseLottos(int gameMoney) {
-        int purchasingCount = lottoMoneyChecker.calculatePurchasingCount(gameMoney);
-        Lottos lottos = lottoMachine.purchase(purchasingCount);
-        ResultView.printResultPurchase(purchasingCount);
+    private Lottos purchaseLottos(ManualGameCount manualGameCount, int gameMoney) {
+        AutoGameCount autoGameCount = new AutoGameCount(manualGameCount, gameMoney);
+        Lottos lottos = lottoMachine.purchase(manualGameCount, autoGameCount);
+        ResultView.printResultPurchase(manualGameCount, autoGameCount);
         ResultView.printLottos(lottos);
         return lottos;
     }
