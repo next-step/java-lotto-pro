@@ -2,8 +2,7 @@ package calculator;
 
 public class StringAddCalculator {
     public static int splitAndSum(String input) {
-        String[] split = StringSeparator.split(StringUtils.readString(input));
-        Numbers numbers = new Numbers(split);
-        return numbers.sum();
+        String[] numbers = StringSeparator.split(StringUtils.readString(input));
+        return new Numbers(numbers).sum();
     }
 }
