@@ -3,25 +3,25 @@ package lotto.model;
 import java.util.Objects;
 
 public class Money {
-    private final static int MINIMUM_AMOUNT_AVAILABLE = 1;
-    private final static int STORE_LIMIT_AMOUNT = 100000;
-    private final static String NEGATIVE_AMOUNTS_OR_ZERO_CANNOT_BE_ENTERED = "1원 보다 작은 금액은 입력할 수 없습니다.";
-    private final static String AMOUNT_THAT_CAN_BE_USED_AT_THE_STORE_IS_LIMITED_TO_100000_AT_A_TIME = "판매점에서 사용 가능한 금액은 1회 10만원으로 제한됩니다.";
+    private static final int MINIMUM = 1000;
+    private static final int MAXIMUM = 100000;
+    private static final String OUT_OF_RANGE = "범위를 벗어난 금액입니다.";
 
-    private int money;
+    private final int money;
 
-    public Money(int money) {
-        if (money < MINIMUM_AMOUNT_AVAILABLE) {
-            throw new IllegalArgumentException(NEGATIVE_AMOUNTS_OR_ZERO_CANNOT_BE_ENTERED);
-        }
-        if (money > STORE_LIMIT_AMOUNT) {
-            throw new IllegalArgumentException(AMOUNT_THAT_CAN_BE_USED_AT_THE_STORE_IS_LIMITED_TO_100000_AT_A_TIME);
-        }
-        this.money = money;
+    public Money(int input) {
+        validate(input);
+        money = input;
     }
 
     public int value() {
         return money;
+    }
+
+    private void validate(int input) {
+        if (input < MINIMUM || input > MAXIMUM) {
+            throw new IllegalArgumentException(OUT_OF_RANGE);
+        }
     }
 
     @Override
