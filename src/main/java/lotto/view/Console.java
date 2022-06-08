@@ -38,8 +38,8 @@ public class Console {
         return true;
     }
 
-    public static Money readMoney() throws NumberFormatException {
-        return new Money(Integer.parseInt(readLine()));
+    public static Money readMoney() {
+        return new Money(readLine());
     }
 
     public static Lottery readLastWeeksWinningNumbers() {

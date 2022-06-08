@@ -14,11 +14,19 @@ public class Money {
         money = input;
     }
 
+    public Money(String input) {
+        this(readInt(input));
+    }
+
     public int value() {
         return money;
     }
 
-    private void validate(int input) {
+    private static int readInt(String input) throws NumberFormatException {
+        return Integer.parseInt(input);
+    }
+
+    private static void validate(int input) {
         if (input < MINIMUM || input > MAXIMUM) {
             throw new IllegalArgumentException(OUT_OF_RANGE);
         }
