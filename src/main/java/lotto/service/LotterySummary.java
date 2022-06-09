@@ -21,7 +21,7 @@ public class LotterySummary {
             compare(lottery, details);
             count();
         }
-
+        ranks.remove(Rank.MISS);
         return new Summary(ranks);
     }
 
