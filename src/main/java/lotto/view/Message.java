@@ -19,7 +19,7 @@ public class Message {
     }
 
     public static void printBuyingLotteries(Receipt receipt) {
-        for (Lottery lottery : receipt.getBuyingGames().getLotteries()) {
+        for (Lottery lottery : receipt.getAllLotteries()) {
             printLotteryNumbers(lottery);
         }
         printLineFeed();

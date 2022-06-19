@@ -13,8 +13,7 @@ import java.util.List;
 
 public class LotteryGame {
     public static void main(String[] args) {
-        Receipt receipt = new Receipt(readMoney());
-        buyGames(receipt);
+        Receipt receipt = buyGames(readMoney());
         Lottery numbers = readLastWeeksWinningNumbers();
         Winning details = readWinningDetails(numbers);
         printSummary(receipt, details);
@@ -31,16 +30,22 @@ public class LotteryGame {
         }
     }
 
-    private static void buyGames(Receipt receipt) {
+    private static Receipt buyGames(Money money) {
+        Receipt receipt;
+        Lotteries manual = null;
         int count = readManualGameCount();
         if (count > 0) {
-            receipt.addManualGames(readManualNumbers(count));
-
+            manual = readManualNumbers(count);
         }
-        receipt.addAutoGames(LotteryStore.exchangeToLotteries(receipt.getTicket()));
+
+        Ticket ticket = new Ticket(money);
+        ticket.use(count);
+        receipt = new Receipt(LotteryStore.exchangeToLotteries(ticket), manual);
+
         Message.printLineFeed();
         Message.printBuyingLotteriesCount(receipt);
         Message.printBuyingLotteries(receipt);
+        return receipt;
     }
 
     private static int readManualGameCount() {
@@ -96,8 +101,8 @@ public class LotteryGame {
     private static void printSummary(Receipt receipt, Winning details) {
         Message.printWinningStatistics();
         Message.printDottedLine(9);
-        Summary summary = LotterySummary.createDetails(details, receipt.getBuyingGames());
+        Summary summary = LotterySummary.createDetails(details, receipt.getLotteries());
         Message.printLotteriesResult(summary);
-        Message.printLotteriesEarningsRate(YieldCalculator.earningsRate(summary, receipt.getMoney()));
+        Message.printLotteriesEarningsRate(YieldCalculator.earningsRate(receipt.getMoney(), summary));
     }
 }

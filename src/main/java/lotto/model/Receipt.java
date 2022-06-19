@@ -4,32 +4,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Receipt {
-    private final Money money;
-    private Ticket ticket;
-    private Lotteries auto;
-    private Lotteries manual;
+    private final Lotteries auto;
+    private final Lotteries manual;
 
-    public Receipt(Money input) {
-        money = input;
-        exchange();
-    }
-
-    public Money getMoney() {
-        return money;
-    }
-
-    public Ticket getTicket() {
-        return ticket;
-    }
-
-    public void addManualGames(Lotteries games) {
-        manual = games;
-        ticket.use(manual.size());
-    }
-
-    public void addAutoGames(Lotteries games) {
-        auto = games;
-        ticket.use(auto.size());
+    public Receipt(Lotteries auto, Lotteries manual) {
+        this.auto = auto;
+        this.manual = manual;
     }
 
     public int getAutoGameCount() {
@@ -40,7 +20,7 @@ public class Receipt {
         return manual == null ? 0 : manual.size();
     }
 
-    public Lotteries getBuyingGames() {
+    public Lotteries getLotteries() {
         List<Lottery> lotteries = new LinkedList<>();
         if (getManualGameCount() > 0) {
             lotteries.addAll(manual.getLotteries());
@@ -49,7 +29,16 @@ public class Receipt {
         return new Lotteries(lotteries);
     }
 
-    private void exchange() {
-        ticket = new Ticket(money);
+    public List<Lottery> getAllLotteries() {
+        List<Lottery> lotteries = new LinkedList<>();
+        if (getManualGameCount() > 0) {
+            lotteries.addAll(manual.getLotteries());
+        }
+        lotteries.addAll(auto.getLotteries());
+        return lotteries;
+    }
+
+    public Money getMoney() {
+        return new Money((getAutoGameCount() + getManualGameCount() * 1000));
     }
 }
