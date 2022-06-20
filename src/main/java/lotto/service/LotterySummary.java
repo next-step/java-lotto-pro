@@ -39,19 +39,19 @@ public class LotterySummary {
 
     private static void compare(Lottery purchase, Winning details) {
         for (Number number : purchase.getNumbers()) {
-            match(details, number);
-            bonus(details, number);
+            containsNumber(details, number);
+            equalsBonus(details, number);
         }
     }
 
-    private static void match(Winning details, Number number) {
-        if (details.getLottery().contains(number)) {
+    private static void containsNumber(Winning details, Number number) {
+        if (details.containsNumber(number)) {
             count++;
         }
     }
 
-    private static void bonus(Winning details, Number number) {
-        if (details.getBonusNumber().equals(number)) {
+    private static void equalsBonus(Winning details, Number number) {
+        if (details.equalsBonus(number)) {
             bonus = true;
         }
     }
