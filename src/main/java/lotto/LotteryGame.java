@@ -3,7 +3,6 @@ package lotto;
 import lotto.model.Number;
 import lotto.model.*;
 import lotto.service.LotteryStore;
-import lotto.service.LotterySummary;
 import lotto.service.YieldCalculator;
 import lotto.view.Console;
 import lotto.view.Message;
@@ -101,7 +100,7 @@ public class LotteryGame {
     private static void printSummary(Receipt receipt, Winning details) {
         Message.printWinningStatistics();
         Message.printDottedLine(9);
-        Summary summary = LotterySummary.createDetails(details, receipt.getLotteries());
+        Summary summary = details.createSummary(receipt.getLotteries());
         Message.printLotteriesResult(summary);
         Message.printLotteriesEarningsRate(YieldCalculator.earningsRate(receipt.getMoney(), summary));
     }
