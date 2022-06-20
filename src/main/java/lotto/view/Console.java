@@ -49,13 +49,13 @@ public class Console {
     public static Lottery readNumbers() {
         List<Number> numbers = new LinkedList<>();
         for (String number : split(readLine())) {
-            numbers.add(new Number(number.trim()));
+            numbers.add(Number.of(number.trim()));
         }
         return new Lottery(numbers);
     }
 
     public static Number readBonusNumber() {
-        return new Number(readLine());
+        return Number.of(readLine());
     }
 
     private static String[] split(String input) {

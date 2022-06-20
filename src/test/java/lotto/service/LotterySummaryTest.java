@@ -26,8 +26,8 @@ class LotterySummaryTest {
         // when
         List<Number> numbers = new LinkedList<>();
         IntStream.rangeClosed(1, 6)
-                 .forEach(num -> numbers.add(new Number(num)));
-        Winning details = new Winning(new Lottery(numbers), new Number(7));
+                 .forEach(num -> numbers.add(Number.of(num)));
+        Winning details = new Winning(new Lottery(numbers), Number.of(7));
         Lotteries purchase = new Lotteries(Collections.singletonList(new Lottery(numbers)));
         Summary actual = LotterySummary.createDetails(details, purchase);
 

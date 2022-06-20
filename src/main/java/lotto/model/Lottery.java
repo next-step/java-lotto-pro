@@ -23,7 +23,7 @@ public class Lottery {
 
     private static List<Number> map(Set<Integer> numbers) {
         return numbers.stream()
-                      .map(Number::new)
+                      .map(Number::of)
                       .collect(Collectors.toList());
     }
 
