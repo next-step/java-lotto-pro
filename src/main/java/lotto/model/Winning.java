@@ -29,14 +29,6 @@ public class Winning {
         return bonusNumber;
     }
 
-    public boolean containsNumber(Number number) {
-        return lottery.contains(number);
-    }
-
-    public boolean equalsBonus(Number number) {
-        return bonusNumber.equals(number);
-    }
-
     public Summary createSummary(Lotteries purchase) {
         Map<Rank, Integer> ranks = createRanks();
 
