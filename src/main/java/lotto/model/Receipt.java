@@ -29,7 +29,7 @@ public class Receipt {
         return new Lotteries(lotteries);
     }
 
-    public List<Lottery> getAllLotteries() {
+    public List<Lottery> getAllLottery() {
         List<Lottery> lotteries = new LinkedList<>();
         if (getManualGameCount() > 0) {
             lotteries.addAll(manual.getLotteries());
