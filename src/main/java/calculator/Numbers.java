@@ -5,28 +5,26 @@ import java.util.List;
 import java.util.Objects;
 
 public class Numbers {
-    private static String NULL_WAS_ENTERED = "정수가 입력되지 않았습니다.";
+    private static final String NULL_WAS_ENTERED = "정수가 입력되지 않았습니다.";
 
     private final List<Number> numbers = new LinkedList<>();
 
     public Numbers() {
     }
 
-    public Numbers(String[] integers) {
-        if (integers == null) {
+    public Numbers(String[] numbers) {
+        if (numbers == null) {
             throw new NullPointerException(NULL_WAS_ENTERED);
         }
-        for (String integer : integers) {
-            numbers.add(new Number(integer));
+        for (String number : numbers) {
+            this.numbers.add(new Number(number));
         }
     }
 
     public int sum() {
-        int sum = 0;
-        for (Number number : numbers) {
-            sum += number.value();
-        }
-        return sum;
+        return numbers.stream()
+                      .mapToInt(Number::value)
+                      .sum();
     }
 
     public List<Number> list() {

@@ -1,112 +1,107 @@
 package lotto;
 
-import lotto.model.*;
 import lotto.model.Number;
-import lotto.service.LotteryClerk;
+import lotto.model.*;
 import lotto.service.LotteryStore;
-import lotto.service.LotterySummary;
 import lotto.service.YieldCalculator;
 import lotto.view.Console;
 import lotto.view.Message;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class LotteryGame {
     public static void main(String[] args) {
-        Money money = readMoney();
-        Lotteries purchase = buyLotteries(money);
+        Receipt receipt = buyGames(readMoney());
         Lottery numbers = readLastWeeksWinningNumbers();
         Winning details = readWinningDetails(numbers);
-        printSummary(money, details, purchase);
-    }
-
-    private static Lotteries buyLotteries(Money money) {
-        Lotteries lotteries = exchangeCouponToLotteries(exchangeMoneyToTicket(money));
-        printBuyingLotteriesCount(lotteries);
-        printBuyingLotteries(lotteries);
-        return lotteries;
+        printSummary(receipt, details);
     }
 
     private static Money readMoney(){
         try {
             Message.printEnterPurchaseAmount();
-            return Console.readMoney();
-        } catch (NumberFormatException ignored) {
+            Money money = Console.readMoney();
+            Message.printLineFeed();
+            return money;
+        } catch (IllegalArgumentException ignored) {
             return readMoney();
         }
     }
 
-    private static Ticket exchangeMoneyToTicket(Money money) {
+    private static Receipt buyGames(Money money) {
+        Receipt receipt;
+        Lotteries manual = null;
+        int count = readManualGameCount();
+        if (count > 0) {
+            manual = readManualNumbers(count);
+        }
+
+        Ticket ticket = new Ticket(money);
+        ticket.use(count);
+        receipt = new Receipt(LotteryStore.exchangeToLotteries(ticket), manual);
+
+        Message.printLineFeed();
+        Message.printBuyingLotteriesCount(receipt);
+        Message.printBuyingLotteries(receipt);
+        return receipt;
+    }
+
+    private static int readManualGameCount() {
         try {
-            return LotteryClerk.exchangeTicket(money);
-        } catch (IllegalArgumentException ignored) {
-            return exchangeMoneyToTicket(readMoney());
+            System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+            return Console.readManualGameCount();
+        } catch (NumberFormatException ignored) {
+            return readManualGameCount();
         }
     }
 
-    private static Lotteries exchangeCouponToLotteries(Ticket ticket) {
-        return LotteryStore.exchangeTicketToLotteries(ticket);
-    }
-
-    private static void printBuyingLotteriesCount(Lotteries lotteries) {
-        Message.printBuyingLotteriesCount(lotteries);
-    }
-
-    private static void printBuyingLotteries(Lotteries lotteries) {
-        Message.printBuyingLotteries(lotteries);
-        Message.printLineFeed();
+    private static Lotteries readManualNumbers(int count) {
+        List<Lottery> lotteries = new LinkedList<>();
+        while (count > 0) {
+            try {
+                lotteries.add(Console.readNumbers());
+                count--;
+            } catch (Exception ignored) {
+            }
+        }
+        return new Lotteries(lotteries);
     }
 
     private static Lottery readLastWeeksWinningNumbers() {
         try {
             Message.printEnterLastWeeksWinningNumbers();
-            return Console.readLastWeeksWinningNumbers();
+            return Console.readNumbers();
         } catch (IllegalArgumentException ignored) {
             return readLastWeeksWinningNumbers();
         }
     }
 
     private static Winning readWinningDetails(Lottery numbers) {
-        Number bonus = readBonusBallNumber();
+        Number bonus = readBonusNumber();
         try {
-            return new Winning(numbers, bonus);
+            Winning winning = new Winning(numbers, bonus);
+            Message.printLineFeed();
+            return winning;
         } catch (IllegalArgumentException ignored) {
             return readWinningDetails(numbers);
         }
     }
 
-    private static Number readBonusBallNumber() {
+    private static Number readBonusNumber() {
         try {
             Message.printEnterBonusBallNumber();
-            return Console.readBonusBallNumber();
+            return Console.readBonusNumber();
         } catch (IllegalArgumentException ignored) {
-            return readBonusBallNumber();
+            return readBonusNumber();
         }
     }
 
-    private static void printSummary(Money money, Winning details, Lotteries purchase) {
-        printWinningStatistics();
-        printDottedLine();
-        Summary summary = createDetails(details, purchase);
-        printLotteriesResult(summary);
-        printLotteriesEarningsRate(summary, money);
-    }
-
-    private static void printWinningStatistics() {
+    private static void printSummary(Receipt receipt, Winning details) {
         Message.printWinningStatistics();
-    }
-
-    private static void printDottedLine() {
         Message.printDottedLine(9);
-    }
-
-    private static Summary createDetails(Winning details, Lotteries purchase) {
-        return LotterySummary.createDetails(details, purchase);
-    }
-
-    private static void printLotteriesResult(Summary summary) {
+        Summary summary = details.createSummary(receipt.getLotteries());
         Message.printLotteriesResult(summary);
-    }
-
-    private static void printLotteriesEarningsRate(Summary summary, Money money) {
-        Message.printLotteriesEarningsRate(YieldCalculator.earningsRate(summary, money));
+        Message.printLotteriesEarningsRate(YieldCalculator.earningsRate(receipt.getMoney(), summary));
     }
 }

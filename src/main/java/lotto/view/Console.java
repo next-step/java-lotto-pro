@@ -38,23 +38,27 @@ public class Console {
         return true;
     }
 
-    public static Money readMoney() throws NumberFormatException {
-        return new Money(Integer.parseInt(readLine()));
+    public static Money readMoney() {
+        return new Money(readLine());
     }
 
-    public static Lottery readLastWeeksWinningNumbers() {
+    public static int readManualGameCount() {
+        return Integer.parseInt(readLine());
+    }
+
+    public static Lottery readNumbers() {
         List<Number> numbers = new LinkedList<>();
         for (String number : split(readLine())) {
-            numbers.add(new Number(number.trim()));
+            numbers.add(Number.of(number.trim()));
         }
         return new Lottery(numbers);
     }
 
-    private static String[] split(String input) {
-        return input.split(",");
+    public static Number readBonusNumber() {
+        return Number.of(readLine());
     }
 
-    public static Number readBonusBallNumber() {
-        return new Number(readLine());
+    private static String[] split(String input) {
+        return input.split(",");
     }
 }

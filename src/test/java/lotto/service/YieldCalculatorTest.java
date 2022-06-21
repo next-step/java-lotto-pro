@@ -20,7 +20,7 @@ class YieldCalculatorTest {
             ranks.put(rank, 0);
         }
         ranks.put(Rank.FIFTH, 1);
-        double actual = YieldCalculator.earningsRate(new Summary(ranks), new Money(14000));
+        double actual = YieldCalculator.earningsRate(new Money(14000), new Summary(ranks));
 
         assertThat(actual).isEqualTo(expected);
     }

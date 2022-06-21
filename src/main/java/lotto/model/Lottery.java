@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lottery {
     public final static int MINIMUM_NUMBER = 1;
@@ -14,6 +15,16 @@ public class Lottery {
     public Lottery(List<Number> numbers) {
         validate(numbers);
         this.numbers = new LinkedList<>(numbers);
+    }
+
+    public Lottery(Set<Integer> numbers) {
+        this(map(numbers));
+    }
+
+    private static List<Number> map(Set<Integer> numbers) {
+        return numbers.stream()
+                      .map(Number::of)
+                      .collect(Collectors.toList());
     }
 
     private void validate(List<Number> numbers) {

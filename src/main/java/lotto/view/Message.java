@@ -14,14 +14,15 @@ public class Message {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static void printBuyingLotteriesCount(Lotteries lotteries) {
-        System.out.printf("%d개를 구매했습니다.%n", lotteries.size());
+    public static void printBuyingLotteriesCount(Receipt receipt) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", receipt.getManualGameCount(), receipt.getAutoGameCount());
     }
 
-    public static void printBuyingLotteries(Lotteries lotteries) {
-        for (Lottery lottery : lotteries.getLotteries()) {
+    public static void printBuyingLotteries(Receipt receipt) {
+        for (Lottery lottery : receipt.getAllLottery()) {
             printLotteryNumbers(lottery);
         }
+        printLineFeed();
     }
 
     private static void printLotteryNumbers(Lottery lottery) {
@@ -32,10 +33,6 @@ public class Message {
             array[idx++] = number.value();
         }
         System.out.println(Arrays.toString(array));
-    }
-
-    public static void printLineFeed() {
-        System.out.println();
     }
 
     public static void printEnterLastWeeksWinningNumbers() {
@@ -75,5 +72,9 @@ public class Message {
 
     public static void printLotteriesEarningsRateExplanation() {
         System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+    }
+
+    public static void printLineFeed() {
+        System.out.println();
     }
 }

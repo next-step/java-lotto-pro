@@ -3,13 +3,13 @@ package calculator;
 import java.util.Objects;
 
 public class Number {
-    private static String NEGATIVE_INTEGER_IS_NOT_ALLOWED = "음의 정수는 허용되지 않습니다.";
+    private static final String NEGATIVE_NUMBERS_ARE_NOT_ALLOWED = "음수는 허용되지 않습니다.";
 
-    private int number;
+    private final int number;
 
     public Number(final int number) {
         if (number < 0) {
-            throw new IllegalArgumentException(NEGATIVE_INTEGER_IS_NOT_ALLOWED);
+            throw new IllegalArgumentException(NEGATIVE_NUMBERS_ARE_NOT_ALLOWED);
         }
         this.number = number;
     }

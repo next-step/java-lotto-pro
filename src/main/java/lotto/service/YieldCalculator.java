@@ -10,7 +10,7 @@ public class YieldCalculator {
     private YieldCalculator() {
     }
 
-    public static double earningsRate(Summary summary, Money money) {
+    public static double earningsRate(Money money, Summary summary) {
         BigDecimal value1 = BigDecimal.valueOf(summary.totalPrizeMoney());
         BigDecimal value2 = BigDecimal.valueOf(money.value());
         return value1.divide(value2, 2, RoundingMode.FLOOR).doubleValue();

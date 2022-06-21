@@ -13,9 +13,9 @@ class WinningTest {
         assertThatThrownBy(() -> {
             List<Number> numbers = new LinkedList<>();
             for (int idx = 1; idx <= 6; idx++) {
-                numbers.add(new Number(idx));
+                numbers.add(Number.of(idx));
             }
-            new Winning(new Lottery(numbers), new Number(1));
+            new Winning(new Lottery(numbers), Number.of(1));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

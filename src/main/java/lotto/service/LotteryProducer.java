@@ -14,7 +14,7 @@ public class LotteryProducer {
     static {
         numbers = new LinkedList<>();
         for (int idx = Lottery.MINIMUM_NUMBER; idx < Lottery.MAXIMUM_NUMBER; idx ++) {
-            numbers.add(new Number(idx));
+            numbers.add(Number.of(idx));
         }
     }
 

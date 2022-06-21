@@ -1,7 +1,7 @@
 package calculator;
 
 public class StringUtils {
-    private static final String NON_NUMERIC_VALUE_IS_NOT_ALLOWED = "숫자 이외의 값은 허용되지 않습니다.";
+    private static final String INVALID_STRING_WAS_ENTERED = "잘못된 문자열이 입력되었습니다.";
 
     private StringUtils() {
     }
@@ -10,8 +10,8 @@ public class StringUtils {
         if (isNull(input) || isEmpty(input)) {
             return "0";
         }
-        if (isValid(input)) {
-            throw new IllegalArgumentException(NON_NUMERIC_VALUE_IS_NOT_ALLOWED);
+        if (isInvalid(input)) {
+            throw new IllegalArgumentException(INVALID_STRING_WAS_ENTERED);
         }
         return input;
     }
@@ -25,7 +25,7 @@ public class StringUtils {
                     .isEmpty();
     }
 
-    private static boolean isValid(String input) {
-        return StringRegex.isValid(input);
+    private static boolean isInvalid(String input) {
+        return StringRegex.isInvalid(input);
     }
 }
