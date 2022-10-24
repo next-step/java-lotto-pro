@@ -25,4 +25,15 @@ public class StringTest {
         assertThat(result).contains("1");
         assertThat(result).containsExactly("1");
     }
+
+    @Test
+    @DisplayName("양끝 문자열 제거")
+    public void 문자열_제거() {
+        // given
+        String str = "(1,2)";
+        //  when
+        str = str.substring(1, str.length() - 1);
+        // then
+        assertThat(str).isEqualTo("1,2");
+    }
 }
