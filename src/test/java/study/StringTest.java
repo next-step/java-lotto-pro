@@ -3,6 +3,8 @@ package study;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.*;
+
 public class StringTest {
 
     @Test
@@ -14,6 +16,18 @@ public class StringTest {
         String[] sentenceSplitByComma = sentence.split(",");
 
         //then
-        Assertions.assertThat(sentenceSplitByComma).containsExactly("1", "2");
+        assertThat(sentenceSplitByComma).containsExactly("1", "2");
+    }
+
+    @Test
+    void substring() {
+        //given
+        String sentence = "(1,2)";
+
+        //when
+        String result = sentence.substring(sentence.indexOf("(")+1, sentence.lastIndexOf(")"));
+
+        //then
+        assertThat(result).isEqualTo("1,2");
     }
 }
