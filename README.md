@@ -29,12 +29,12 @@
       * assertThatExceptionOfType() 사용
     * [x] JUnit의 @DisplayName 활용해 테스트 메소드 의도 보일 것
 * Set Collection 학습 테스트
-  * [ ] Set 데이터 세팅
+  * [x] Set 데이터 세팅
   * 요구사항 1 - Set의 size() 사용하기
-    * [ ] Set 사이즈 확인
+    * [x] Set 사이즈 확인
   * 요구사항 2 - Set의 contains() 사용하기
-    * [ ] 주어진 Set 내에 1, 2, 3의 값 존재 여부 확인
+    * [x] 주어진 Set 내에 1, 2, 3의 값 존재 여부 확인
       * JUnit의 ParameterizedTest 및 ValueSource 사용
   * 요구사항 3 - Set의 contains() 사용하기
-    * [ ] 주어진 Set 내에 없는 값이면 false, 존재하는 값이면 ture 반환 확인
+    * [x] 주어진 Set 내에 없는 값이면 false, 존재하는 값이면 true 반환 확인
       * JUnit의 ParameterizedTest 및 CsvSource 사용
