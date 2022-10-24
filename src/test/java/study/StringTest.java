@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class StringTest {
     @DisplayName("split 은 구분자를 기준으로 분리한 배열을 반환한다.")
@@ -42,15 +44,13 @@ public class StringTest {
         assertThat(result).isEqualTo("1,2");
     }
 
-    @DisplayName("charAt 은 문자열에서 특정 인덱스의 문자를 반환한다")
-    @Test
-    void charAtTest() throws Exception {
+    @ParameterizedTest(name = "charAt() 은 문자열에서 특정 인덱스의 문자를 반환한다")
+    @CsvSource(value = {"0:a", "1:b", "2:c"}, delimiter = ':')
+    void charAtTest(int index, char c) throws Exception {
         //given
         String input = "abc";
         //when //then
-        assertThat(input.charAt(0)).isEqualTo('a');
-        assertThat(input.charAt(1)).isEqualTo('b');
-        assertThat(input.charAt(2)).isEqualTo('c');
+        assertThat(input.charAt(index)).isEqualTo(c);
     }
 
     @DisplayName("charAt 은 문자열 위치값을 벗어나면 StringIndexOutOfBoundsException 예외를 던진다")
