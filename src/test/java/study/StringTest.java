@@ -33,4 +33,16 @@ public class StringTest {
         assertThat(result).contains("1");
     }
 
+    @Test
+    @DisplayName("substring메소드는 (1,2)를 입력하면 1,2를 리턴한다")
+    void returns_1_comma_2(){
+        //given
+        String input = "(1,2)";
+
+        //when
+        String result = input.substring(1,input.length() - 1);
+
+        //then
+        assertThat(result).isEqualTo("1,2");
+    }
 }
