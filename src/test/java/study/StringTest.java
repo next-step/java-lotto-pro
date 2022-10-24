@@ -27,7 +27,6 @@ public class StringTest {
         public void string_split_test(String input, String[] expected) {
             String[] result = input.split(",");
 
-            assertThat(result).contains(expected);
             assertThat(result).containsExactly(expected);
         }
 
@@ -96,10 +95,6 @@ public class StringTest {
             assertThatThrownBy(when)
                     .isInstanceOf(StringIndexOutOfBoundsException.class)
                     .hasMessageContaining("String index out of range: " + index);
-
-            assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
-                    .isThrownBy(when)
-                    .withMessageMatching("String index out of range: \\d+");
         }
 
         private Stream<Arguments> string_charAt_exception_expected() {
