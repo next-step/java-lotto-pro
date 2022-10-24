@@ -3,7 +3,7 @@ package study;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringTest {
 
@@ -44,5 +44,28 @@ public class StringTest {
 
         //then
         assertThat(result).isEqualTo("1,2");
+    }
+
+    @Test
+    @DisplayName("charAt메소드는 위치값의 범위를 벗어나면 StringIndexOutOfBoundsException이 발생")
+    void throws_StringIndexOutOfBoundsException(){
+        //given
+        String input = "abc";
+
+        //when,then
+        assertThatThrownBy(() -> input.charAt(5))
+                .isInstanceOf(StringIndexOutOfBoundsException.class);
+    }
+
+    @Test
+    @DisplayName("charAt메소드는 위치값에 해당하는 문자를 리턴")
+    void returns_character_corresponding_position_value(){
+        //given
+        String input = "abc";
+
+        //when
+        char result = input.charAt(1);
+
+        assertThat(result).isEqualTo('b');
     }
 }
