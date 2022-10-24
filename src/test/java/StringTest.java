@@ -15,4 +15,11 @@ public class StringTest {
     void split_단일_분리_테스트() {
         assertThat("1".split(",")).containsExactly("1");
     }
+
+    @DisplayName("(1,2) 값을 substring 메소드를 이용해 1,2를 반환할 수 있다")
+    @Test
+    void substring_테스트() {
+        String input = "(1,2)";
+        assertThat(input.substring(1, input.length() - 1)).isEqualTo("1,2");
+    }
 }
