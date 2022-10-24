@@ -28,4 +28,19 @@ public class StringTest {
         Assertions.assertThat(result).isEqualTo("1,2");
     }
 
+
+    @Test
+    @DisplayName("charAt() 메서드는 문자열 위치반환, 벗어나면 StringIndexOutOfBoundsException 발생")
+    void charAt() {
+        String input = "abc";
+        Assertions.assertThat(input.charAt(1)).isEqualTo('b');
+        Assertions.assertThat(input.charAt(2)).isEqualTo('c');
+        int index = 3;
+        Assertions.assertThatThrownBy(() -> {
+                    input.charAt(index);
+                }).isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessageContaining(String.format("String index out of range: %s", index));
+
+    }
+
 }
