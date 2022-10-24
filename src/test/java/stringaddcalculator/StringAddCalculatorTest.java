@@ -45,6 +45,22 @@ class StringAddCalculatorTest {
         assertThat(result).isEqualTo(expected);
     }
 
+    @ParameterizedTest
+    @MethodSource("provideStringForCommaAndColonSeparate")
+    @DisplayName("쉼표(,) 또는 콜론(:) 구분자로 구분된 숫자들의 합을 반환")
+    void commaAndColonSeparatedNumbersTest(String input, int expected) {
+        int result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideStringForCustomDelimiter")
+    @DisplayName("커스텀 구분자로 구분된 숫자들의 합을 반환")
+    void customDelimiterSeparatedNumbersTest(String input, int expected) {
+        int result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(expected);
+    }
+
     private static Stream<Arguments> provideStringForCommaSeparate() {
         return Stream.of(
                 Arguments.of("1,2", 3),
@@ -63,5 +79,21 @@ class StringAddCalculatorTest {
         );
     }
 
+    private static Stream<Arguments> provideStringForCommaAndColonSeparate() {
+        return Stream.of(
+                Arguments.of("1,2:3", 6),
+                Arguments.of("1,2:3,4:5", 15),
+                Arguments.of("1:2,3:4,5", 15)
+        );
+    }
+
+    private static Stream<Arguments> provideStringForCustomDelimiter() {
+        return Stream.of(
+                Arguments.of("//;\n1;2;3", 6),
+                Arguments.of("//}\n1}2}3}4}5", 15),
+                Arguments.of("//=\n1=2=3=4=5", 15),
+                Arguments.of("//!\n1!2!3!4!5", 15)
+        );
+    }
 
 }
