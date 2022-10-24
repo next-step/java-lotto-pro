@@ -2,6 +2,7 @@ package study;
 
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 public class StringTest {
     @Test
@@ -15,5 +16,12 @@ public class StringTest {
     void substring() {
         String result = "(1,2)".substring(1,4);
         assertThat(result).isEqualTo("1,2");
+    }
+
+    @Test
+    void exception() {
+        assertThatExceptionOfType(IndexOutOfBoundsException.class)
+                .isThrownBy(() -> "abc".charAt(3)
+                ).withMessageContaining("String index out of range: 3");
     }
 }
