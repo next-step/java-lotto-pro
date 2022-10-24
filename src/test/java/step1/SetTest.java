@@ -1,7 +1,6 @@
-package study;
+package step1;
 
 import org.assertj.core.api.Assertions;
-import org.assertj.core.internal.Strings;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
