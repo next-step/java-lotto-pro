@@ -46,7 +46,7 @@ public class SetTest {
     }
 
     @DisplayName("ParameterizedTest & ValueSource 활용하여 중복코드 제거하고, contain 메소드 정상적으로 동작하는지 확인")
-    @ParameterizedTest(name ="{index} {displayName} input={0} ")
+    @ParameterizedTest(name ="{index} {displayName} {arguments}")
     @ValueSource(ints = {1, 2, 3})
     void contains2(int input) {
         // when
@@ -57,7 +57,7 @@ public class SetTest {
     }
 
     @DisplayName("ParameterizedTest & CsvSource 활용하여 중복코드 제거하고, contain 메소드 정상적으로 동작하는지 확인")
-    @ParameterizedTest(name ="{index} {displayName} input={0} ")
+    @ParameterizedTest(name ="{index} {displayName} input={arguments} ")
     @CsvSource(value = {"1>true", "2>true", "3>true", "4>false", "5>false"}, delimiter = '>')
     void contains3(int input, boolean expected) {
         // when
