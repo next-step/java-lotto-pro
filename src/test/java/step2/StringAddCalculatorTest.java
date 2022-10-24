@@ -59,7 +59,6 @@ public class StringAddCalculatorTest {
                 .count()).isEqualTo(3);
     }
 
-
     @Test
     public void splitAndSum_null_또는_빈문자() {
         int result = StringAddCalculator.splitAndSum(null);
