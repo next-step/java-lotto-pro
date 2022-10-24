@@ -7,3 +7,34 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 1단계 - 학습 테스트 실습
+### 기능 목록
+* String 클래스에 대한 학습 테스트
+  * 요구사항 1 - split() 사용하기
+    * [ ] "1,2"을 ,를 구분자로 하여 잘 분리되는지 확인
+      * assertj의 contains() 사용
+    * [ ] "1"과 같이 ,가 없을 때 사이즈 1개의 배열 반환 확인
+      * assertj의 containsExactly() 사용
+    * 구현 방향성
+      * 구분자가 달라져도 테스트할 수 있도록 구분자를 변수로 사용
+  * 요구사항 2 - substring() 사용하기
+    * [ ] "(1,2)"가 주어졌을 때 ()를 제거하고 "1,2"만 반환 확인
+      * assertj의 containsExactly() 사용
+  * 요구사항 3 - charAt() 사용하기
+    * [ ] "abc"가 주어졌을 때 charAt()을 통해 특정 위치 문자 확인
+      * assertj의 isEqualTo() 사용
+    * [ ] charAt() 사용 시, 문자열 길이를 벗어난 위치를 가져오고자 할 때 StringIndexOutOfBoundsException 발생 확인
+      * assertThatThrownBy() 사용
+      * assertThatExceptionOfType() 사용
+    * [ ] JUnit의 @DisplayName 활용해 테스트 메소드 의도 보일 것
+* Set Collection 학습 테스트
+  * [ ] Set 데이터 세팅
+  * 요구사항 1 - Set의 size() 사용하기
+    * [ ] Set 사이즈 확인
+  * 요구사항 2 - Set의 contains() 사용하기
+    * [ ] 주어진 Set 내에 1, 2, 3의 값 존재 여부 확인
+      * JUnit의 ParameterizedTest 및 ValueSource 사용
+  * 요구사항 3 - Set의 contains() 사용하기
+    * [ ] 주어진 Set 내에 없는 값이면 false, 존재하는 값이면 ture 반환 확인
+      * JUnit의 ParameterizedTest 및 CsvSource 사용
