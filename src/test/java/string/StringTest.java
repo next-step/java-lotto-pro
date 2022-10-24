@@ -27,4 +27,14 @@ public class StringTest {
         // then
         assertThat(results).containsExactly("1");
     }
+
+    @Test
+    @DisplayName("(a,b) 값으로 substring 메소드를 호출 했을 때 ()을 제거하고 a,b가 반환되는지 확인)")
+    void substring() {
+        // when
+        String results = "(1,2)".substring(1, 4);
+
+        // then
+        assertThat(results).isEqualTo("1,2");
+    }
 }
