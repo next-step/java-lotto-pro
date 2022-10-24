@@ -10,9 +10,9 @@
 
 ## 1단계 - 학습 테스트 실습 요구사항 
 ### String 클래스에 대한 학습 테스트
-- [ ] : split 테스트 코드 작성
-- [ ] : substring 테스트 코드 작성
-- [ ] : charAt을 활용한 StringIndexOutOfBoundsException 발생 테스트 코드 작성
+- [x] : split 테스트 코드 작성
+- [x] : substring 테스트 코드 작성
+- [x] : charAt을 활용한 StringIndexOutOfBoundsException 발생 테스트 코드 작성
 
 ### Set Collection에 대한 학습 테스트
 - [ ] : size를 활용한 크기 확인 테스트 코드 작성
