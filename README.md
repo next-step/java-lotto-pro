@@ -21,7 +21,8 @@
     - [x] "abc" 값이 주어졌을 때 String의 charAt() 메소드를 활용해 특정 위치의 문자를 가져올 수 잇다.
     - [x] String의 charAt() 메소드를 활용해 특정 위치의 문자를 가져올 때 위치 값을 벗어나면 StringIndexOutOfBoundsException을 발생시킨다.
 - Set Collection에 대한 학습 테스트
-    - [ ] Set의 size() 메소드를 활용해 Set의 크기를 확인한다.
-    - [ ] Set의 contains() 메소드를 활용해 1, 2, 3의 값이 존재하는지 확인한다. 
+    - [x] Set의 size() 메소드를 활용해 Set의 크기를 확인한다.
+    - [x] Set의 contains() 메소드를 활용해 값이 존재하는지 확인한다.
+    - [x] Set의 contains() 메소드를 활용해 값이 존재하지 않음을 확인한다.
 
 
