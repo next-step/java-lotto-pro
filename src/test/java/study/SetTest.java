@@ -1,8 +1,11 @@
 package study;
 
 import org.assertj.core.api.Assertions;
+import org.assertj.core.internal.Strings;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,5 +25,18 @@ public class SetTest {
     @Test
     void checkSetSize() {
         Assertions.assertThat(numbers.size()).isEqualTo(3);
+    }
+
+    @Test
+    void contains() {
+        Assertions.assertThat(numbers.contains(1)).isTrue();
+        Assertions.assertThat(numbers.contains(2)).isTrue();
+        Assertions.assertThat(numbers.contains(3)).isTrue();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3})
+    void refactoring_contains(int input) {
+        org.junit.jupiter.api.Assertions.assertTrue(numbers.contains(input));
     }
 }
