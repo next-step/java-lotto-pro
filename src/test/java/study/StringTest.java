@@ -30,4 +30,15 @@ public class StringTest {
         assertThat(result).containsOnly("1");
         assertThat(result).hasSize(1);
     }
+
+    @DisplayName("substring 은 first parameter 부터 second parameter -1 까지 문자열을 자른다")
+    @Test
+    void substringTest() throws Exception {
+        //given
+        String input = "(1,2)";
+        //when
+        String result = input.substring(1, 4);
+        //then
+        assertThat(result).isEqualTo("1,2");
+    }
 }
