@@ -1,15 +1,15 @@
 package stringaddcalculator;
 
+import static org.assertj.core.api.Assertions.*;
+
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class StringAddCalculatorTest {
 
@@ -59,6 +59,23 @@ class StringAddCalculatorTest {
     void customDelimiterSeparatedNumbersTest(String input, int expected) {
         int result = StringAddCalculator.splitAndSum(input);
         assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"-1,2,3", "1,-2,3", "1,2,-3"})
+    @DisplayName("음수를 전달할 경우 Error 발생")
+    void negativeNumberTest(String input) {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum(input))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a,b,c", "1:2:a", "!,@,#"})
+    @DisplayName("숫자 이외의 값을 전달할 경우 Error 발생")
+    void notNumberTest(String input) {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum(input))
+                .isInstanceOf(RuntimeException.class);
     }
 
     private static Stream<Arguments> provideStringForCommaSeparate() {
