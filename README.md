@@ -15,11 +15,11 @@
 
 ### 요구사항
 - String 클래스에 대한 학습 테스트
-    - [ ] "1,2"을 ,로 split 했을 때 1과 2로 분리된다.
-    - [ ] "1"을 ,로 split 했을 때 1만을 포함하는 배열 반환된다.
-    - [ ] "(1,2)" 값이 주어졌을 때 String의 substring() 메소드를 활용해 ()을 제거하고 "1,2" 를 반환할 수 있다.
-    - [ ] "abc" 값이 주어졌을 때 String의 charAt() 메소드를 활용해 특정 위치의 문자를 가져올 수 잇다.
-    - [ ] String의 charAt() 메소드를 활용해 특정 위치의 문자를 가져올 때 위치 값을 벗어나면 StringIndexOutOfBoundsException을 발생시킨다.
+    - [x] "1,2"을 ,로 split 했을 때 1과 2로 분리된다.
+    - [x] "1"을 ,로 split 했을 때 1만을 포함하는 배열 반환된다.
+    - [x] "(1,2)" 값이 주어졌을 때 String의 substring() 메소드를 활용해 ()을 제거하고 "1,2" 를 반환할 수 있다.
+    - [x] "abc" 값이 주어졌을 때 String의 charAt() 메소드를 활용해 특정 위치의 문자를 가져올 수 잇다.
+    - [x] String의 charAt() 메소드를 활용해 특정 위치의 문자를 가져올 때 위치 값을 벗어나면 StringIndexOutOfBoundsException을 발생시킨다.
 - Set Collection에 대한 학습 테스트
     - [ ] Set의 size() 메소드를 활용해 Set의 크기를 확인한다.
     - [ ] Set의 contains() 메소드를 활용해 1, 2, 3의 값이 존재하는지 확인한다. 
