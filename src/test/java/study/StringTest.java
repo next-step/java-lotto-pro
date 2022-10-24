@@ -41,4 +41,30 @@ public class StringTest {
         //then
         assertThat(result).isEqualTo("1,2");
     }
+
+    @DisplayName("charAt 은 문자열에서 특정 인덱스의 문자를 반환한다")
+    @Test
+    void charAtTest() throws Exception {
+        //given
+        String input = "abc";
+        //when //then
+        assertThat(input.charAt(0)).isEqualTo('a');
+        assertThat(input.charAt(1)).isEqualTo('b');
+        assertThat(input.charAt(2)).isEqualTo('c');
+    }
+
+    @DisplayName("charAt 은 문자열 위치값을 벗어나면 StringIndexOutOfBoundsException 예외를 던진다")
+    @Test
+    void charAtExceptionTest() throws Exception {
+        //given
+        String input = "abc";
+
+        //when //then
+        assertThatThrownBy(() -> input.charAt(3))
+            .isInstanceOf(IndexOutOfBoundsException.class)
+            .hasMessageContaining("String index out of range");
+        assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
+            .isThrownBy(() -> input.charAt(4))
+            .withMessageMatching("String index out of range: \\d+");
+    }
 }
