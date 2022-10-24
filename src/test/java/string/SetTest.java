@@ -3,6 +3,9 @@ package string;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,5 +34,36 @@ public class SetTest {
 
         // then
         assertThat(results).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("contain 메소드를 활용해 특정 값이 포함되는지 확인")
+    void contains1() {
+        // when & then
+        assertThat(numbers.contains(1)).isTrue();
+        assertThat(numbers.contains(2)).isTrue();
+        assertThat(numbers.contains(3)).isTrue();
+    }
+
+    @DisplayName("ParameterizedTest & ValueSource 활용하여 중복코드 제거하고, contain 메소드 정상적으로 동작하는지 확인")
+    @ParameterizedTest(name ="{index} {displayName} input={0} ")
+    @ValueSource(ints = {1, 2, 3})
+    void contains2(int input) {
+        // when
+        boolean result = numbers.contains(input);
+
+        // then
+        assertThat(result).isTrue();
+    }
+
+    @DisplayName("ParameterizedTest & CsvSource 활용하여 중복코드 제거하고, contain 메소드 정상적으로 동작하는지 확인")
+    @ParameterizedTest(name ="{index} {displayName} input={0} ")
+    @CsvSource(value = {"1>true", "2>true", "3>true", "4>false", "5>false"}, delimiter = '>')
+    void contains3(int input, boolean expected) {
+        // when
+        boolean result = numbers.contains(input);
+
+        // then
+        assertThat(result).isEqualTo(expected);
     }
 }
