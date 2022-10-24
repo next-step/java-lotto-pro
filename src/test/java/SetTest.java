@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class SetTest {
@@ -33,6 +34,13 @@ public class SetTest {
     @DisplayName("세트는 주어진 1,2,3의 값을 모두 포함하고 있다. 중복 검증 하지 않는다.")
     void checkSetContainsNumbers(int number) {
         Assertions.assertThat(numbers).contains(number);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+    @DisplayName("세트는 주어진 1,2,3을 포함하고, 4,5를 포함하지 않는다. 조건에 따라 결과값을 리턴한다")
+    void checkSetContainsNumbersOrNot(int number, boolean result) {
+        Assertions.assertThat(numbers.contains(number)).isEqualTo(result);
     }
 
 }
