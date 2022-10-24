@@ -29,11 +29,7 @@ public class SetTest {
     @Test
     @DisplayName("size() 메소드를 활용해 Set의 크기가 반환되는지 확인")
     void size() {
-        // when
-        int results = numbers.size();
-
-        // then
-        assertThat(results).isEqualTo(3);
+        assertThat(numbers).hasSize(3);
     }
 
     @Test
@@ -49,11 +45,7 @@ public class SetTest {
     @ParameterizedTest(name ="{index} {displayName} {arguments}")
     @ValueSource(ints = {1, 2, 3})
     void contains2(int input) {
-        // when
-        boolean result = numbers.contains(input);
-
-        // then
-        assertThat(result).isTrue();
+        assertThat(numbers).contains(input);
     }
 
     @DisplayName("ParameterizedTest & CsvSource 활용하여 중복코드 제거하고, contain 메소드 정상적으로 동작하는지 확인")
