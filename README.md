@@ -7,3 +7,15 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 1단계 - 학습 테스트 실습 요구사항 
+### String 클래스에 대한 학습 테스트
+- [ ] : split 테스트 코드 작성
+- [ ] : substring 테스트 코드 작성
+- [ ] : charAt을 활용한 StringIndexOutOfBoundsException 발생 테스트 코드 작성
+
+### Set Collection에 대한 학습 테스트
+- [ ] : size를 활용한 크기 확인 테스트 코드 작성
+- [ ] : contains를 활용해 값이 존재하는지 확인하는 테스트 코드 작성
+  - 중복코드를 줄이기 위해 JUnit의 `ParameterizedTest`를 활용 할 것
+- [ ] : @CsvSource를 활용하여 요구사항 2에서 false가 반환되는 테스트 코드 작성
