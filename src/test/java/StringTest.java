@@ -16,4 +16,9 @@ public class StringTest {
             .hasSize(1)
             .containsExactly("1");
     }
+
+    @Test
+    void remove_parentheses_test(){
+        Assertions.assertThat("(1,2)".substring(1,4)).isEqualTo("1,2");
+    }
 }
