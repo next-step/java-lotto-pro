@@ -38,4 +38,12 @@ public class SetCollectionTest {
     void isContains_ShouldReturnTrueForNumbersHad(int input) {
         assertTrue(numbers.contains(input));
     }
+
+    @DisplayName("CsvSource 활용하여 입력값에 따른 결과값 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+    void csvSourceTest(int input, boolean expected) {
+        boolean isContains = numbers.contains(input);
+        assertThat(isContains).isEqualTo(expected);
+    }
 }
