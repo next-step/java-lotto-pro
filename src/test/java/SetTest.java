@@ -31,16 +31,16 @@ public class SetTest {
     @Test
     @DisplayName("contains() 메소드를 활용해 1,2,3 의 값이 존재하는 지 테스트")
     void contains() {
-        assertThat(numbers.contains(1)).isTrue();
-        assertThat(numbers.contains(2)).isTrue();
-        assertThat(numbers.contains(3)).isTrue();
+        assertThat(numbers).contains(1);
+        assertThat(numbers).contains(2);
+        assertThat(numbers).contains(3);
     }
 
     @ParameterizedTest
     @DisplayName("ValueSource로 부터 값을 받아 contains() 메소트 ParameterizedTest")
     @ValueSource(ints = {1, 2, 3})
     void contains_with_Parameterized_from_ValueSource(int number) {
-        assertThat(numbers.contains(number)).isTrue();
+        assertThat(numbers).contains(number);
     }
 
     @ParameterizedTest
