@@ -65,7 +65,7 @@ public class StringTest {
 
         @SuppressWarnings("all")
         @Test
-        @DisplayName("charAt 테스트 - Exception: [StringIndexOutOfBoundsException]")
+        @DisplayName("charAt 테스트 - Text: [\"abc\"], Index: [3], Exception: [StringIndexOutOfBoundsException]")
         public void testInvalidCharAt() {
             assertThatThrownBy(() -> {
                 char result = text.charAt(3);
