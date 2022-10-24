@@ -15,7 +15,7 @@
 - [x] : charAt을 활용한 StringIndexOutOfBoundsException 발생 테스트 코드 작성
 
 ### Set Collection에 대한 학습 테스트
-- [ ] : size를 활용한 크기 확인 테스트 코드 작성
-- [ ] : contains를 활용해 값이 존재하는지 확인하는 테스트 코드 작성
+- [x] : size를 활용한 크기 확인 테스트 코드 작성
+- [x] : contains를 활용해 값이 존재하는지 확인하는 테스트 코드 작성
   - 중복코드를 줄이기 위해 JUnit의 `ParameterizedTest`를 활용 할 것
-- [ ] : @CsvSource를 활용하여 요구사항 2에서 false가 반환되는 테스트 코드 작성
+- [x] : @CsvSource를 활용하여 요구사항 2에서 false가 반환되는 테스트 코드 작성
