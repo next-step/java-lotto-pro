@@ -5,9 +5,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+
+    private static final int NULL_OR_EMPTY_VALUE = 0;
+    private static final String CUSTOM_SPLIT_TEXT = "//(.)\n(.*)";
+    private static final String MULTI_SPLIT_TEXT = "//(.)\n(.*)";
+
     public static int splitAndSum(String text) {
         if (isNullOrEmptyValue(text)) {
-            return 0;
+            return NULL_OR_EMPTY_VALUE;
         }
         String[] textArray = splitText(text);
         return sumText(textArray);
@@ -18,12 +23,12 @@ public class StringAddCalculator {
     }
 
     private static String[] splitText(String text) {
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(text);
+        Matcher matcher = Pattern.compile(CUSTOM_SPLIT_TEXT).matcher(text);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
             return matcher.group(2).split(customDelimiter);
         }
-        return text.split(",|:");
+        return text.split(MULTI_SPLIT_TEXT);
     }
 
     private static int sumText(String[] textArray) {
