@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -64,6 +65,14 @@ class StringAddCalculatorTest {
     @DisplayName("입력한 값에 음수가 있을 경우 예외를 발생시킨다")
     public void splitAndSum_throw_exception_if_text_contains_negative_number(String text, int expected) {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum(text))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("입력한 값에 숫자가 아닌 값이 있을 경우 예외를 발생시킨다")
+    public void splitAndSum_throw_exception_if_text_contains_not_number_format() {
+        String given = "가,나:다,0,2,3";
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum(given))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
