@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringAdderCalculatorTest {
 
@@ -66,6 +67,13 @@ class StringAdderCalculatorTest {
     void 기본_구분자_외에_커스텀_구분자를_지정할_수_있다(String 커스텀_숫자_문자열, int 덧셈_결과) {
         int 예상_덧셈_결과 = StringAdderCalculator.splitAndSum(커스텀_숫자_문자열);
         assertThat(예상_덧셈_결과).isEqualTo(덧셈_결과);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"abc", "1,2,a", "-1,-2", "-1:-2"})
+    void 문자열_계산기에_숫자_이외의_값_또는_음수를_전달하는_경우_RuntimeException_예외를_던진다(String 잘못된_문자열) {
+        assertThatThrownBy(() -> StringAdderCalculator.splitAndSum(잘못된_문자열))
+            .isInstanceOf(RuntimeException.class);
     }
 
     private static Stream<Arguments> provideCustomDelimiterNumbers() {
