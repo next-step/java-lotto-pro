@@ -8,7 +8,7 @@ public class StringAddCalculator {
 
     private static final int NULL_OR_EMPTY_VALUE = 0;
     private static final String CUSTOM_SPLIT_TEXT = "//(.)\n(.*)";
-    private static final String MULTI_SPLIT_TEXT = "//(.)\n(.*)";
+    private static final String MULTI_SPLIT_TEXT = ":|,";
 
     public static int splitAndSum(String text) {
         if (isNullOrEmptyValue(text)) {
