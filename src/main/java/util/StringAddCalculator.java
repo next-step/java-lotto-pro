@@ -11,7 +11,7 @@ public class StringAddCalculator {
 
     private static int sum(String text) {
         int result = 0;
-        for (String number : text.split(",")) {
+        for (String number : text.split("[,:]")) {
             result += Integer.parseInt(number);
         }
         return result;

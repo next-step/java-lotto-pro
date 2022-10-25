@@ -41,4 +41,11 @@ class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum(text);
         assertThat(result).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,2:3;6", "1,3,5:9;18", "0,3,6:9;18", "5,5,5:15;30"}, delimiter = ';')
+    public void splitAndSum_return_sum_if_text_split_by_comma_and_colon(String text, int expected) {
+        int result = StringAddCalculator.splitAndSum(text);
+        assertThat(result).isEqualTo(expected);
+    }
 }
