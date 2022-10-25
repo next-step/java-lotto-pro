@@ -43,10 +43,14 @@ public class StringAddCalculator {
 
     private static int getNumber(String text) {
         int number = convertToNumber(text);
+        validateNumberIsNotNegative(number);
+        return number;
+    }
+
+    private static void validateNumberIsNotNegative(int number) {
         if (number < ZERO) {
             throw new RuntimeException("Can not Convert NegativeNumber To Int");
         }
-        return number;
     }
 
     private static int convertToNumber(String text) {
