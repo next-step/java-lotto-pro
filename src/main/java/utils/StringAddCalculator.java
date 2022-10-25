@@ -1,5 +1,8 @@
 package utils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringAddCalculator {
 
     private static String DELIMITERS = ",|:";
@@ -8,7 +11,6 @@ public class StringAddCalculator {
         if(isTextNullOrEmpty(text)){
             return 0;
         }
-
         String[] texts = split(text);
         return sum(texts);
     }
@@ -35,6 +37,14 @@ public class StringAddCalculator {
         }
 
         return sum;
+    }
+
+    private static int parseInt(String text){
+        if(Integer.parseInt(text) < 0){
+            throw new RuntimeException();
+        }
+
+        return Integer.parseInt(text);
     }
 
 }

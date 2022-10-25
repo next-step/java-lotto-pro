@@ -1,7 +1,11 @@
 package utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class StringAddCalculatorTest {
 
@@ -39,6 +43,15 @@ public class StringAddCalculatorTest {
     public void splitAndSum_custom_구분자() throws Exception {
         int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
+    }
+
+
+    // 기능 요구사항3 - 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 발생 테스트
+    @ParameterizedTest
+    @ValueSource(strings = {"-1,2,3", "a,2,3"})
+    public void splitAndSum_negative(String strings) throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum(strings))
+                .isInstanceOf(RuntimeException.class);
     }
 
 
