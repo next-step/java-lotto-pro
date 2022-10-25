@@ -30,4 +30,21 @@ public class StringTest {
         assertThat(subStr).isEqualTo("1,2");
     }
 
+    @Test
+    @DisplayName("charAt 메소드를 활용해 특정 위치의 문자 위치 반환 테스트")
+    void StringCharAt() {
+        String str = "abc";
+
+        assertThat(str.charAt(0)).isEqualTo("a");
+        assertThat(str.charAt(1)).isEqualTo("b");
+        assertThat(str.charAt(2)).isEqualTo("c");
+
+        assertThatThrownBy(() -> {
+            str.charAt(str.length());
+        }).isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessageContaining("String index out of range: " + str.length());
+
+
+    }
+
 }
