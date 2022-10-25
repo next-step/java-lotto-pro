@@ -12,7 +12,7 @@ public class StringSplitter {
     private static final int MATCHER_GROUP_INDEX_FOR_TARGET_STRING = 2;
 
     private StringSplitter() {
-        throw new IllegalStateException("Utility class");
+        throw new IllegalStateException(MessageConstant.UTILITY_CLASS);
     }
 
     public static String[] split(String input) {

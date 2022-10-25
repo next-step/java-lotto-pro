@@ -9,7 +9,7 @@ public class StringAddCalculator {
     private static final String POSITIVE_NUMBER_REGEX = "^[0-9]+$";
 
     private StringAddCalculator() {
-        throw new IllegalStateException("Utility Class");
+        throw new IllegalStateException(MessageConstant.UTILITY_CLASS);
     }
 
     public static int splitAndSum(String input) {
