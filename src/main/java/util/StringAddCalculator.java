@@ -35,7 +35,11 @@ public class StringAddCalculator {
     private static int getSumByDefaultSplit(String text) {
         int result = 0;
         for (String number : text.split("[,:]")) {
-            result += Integer.parseInt(number);
+            int value = Integer.parseInt(number);
+            if (value < 0) {
+                throw new IllegalArgumentException();
+            }
+            result += value;
         }
         return result;
     }
