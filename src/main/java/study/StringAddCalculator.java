@@ -2,7 +2,10 @@ package study;
 
 public class StringAddCalculator {
 
-    public static int splitAndSum(Object o) {
-        return 0;
+    public static int splitAndSum(String input) {
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+        return Integer.parseInt(input);
     }
 }
