@@ -39,10 +39,14 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(6);
     }
 
+    @DisplayName("커스텀 구분자인 경우 숫자의 합")
     @Test
     public void splitAndSum_custom_구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
+        int result = StringAddCalculator.splitAndSum("//a\n1a2,3");
         assertThat(result).isEqualTo(6);
+
+        result = StringAddCalculator.splitAndSum("//!\n1!2!3!4");
+        assertThat(result).isEqualTo(10);
     }
 
     @DisplayName("음수가 오는 경우 Exception 발생")
