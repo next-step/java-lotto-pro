@@ -19,11 +19,16 @@ public class StringAddCalculator {
     }
 
     private static boolean isNumber(String text) {
-        return false;
+        try {
+            Integer.parseInt(text);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 
     private static boolean isStringNullOrEmpty(String text) {
-        return true;
+        return text == null || text.isEmpty();
     }
 
     private static String[] splitNumber(String text) {
