@@ -1,0 +1,58 @@
+package step2;
+
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class StringAddCalculator {
+    private static final String DEFAULT_DELIMITER = "[,:]";
+    private static final int ZERO = 0;
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+
+    private StringAddCalculator() {
+
+    }
+
+    public static int splitAndSum(String text) {
+        if (isNullOrEmpty(text)) {
+            return ZERO;
+        }
+        String[] numbersAsString = split(text);
+        return sum(numbersAsString);
+    }
+
+    private static boolean isNullOrEmpty(String text) {
+        return text == null || text.isEmpty();
+    }
+
+    private static String[] split(String text) {
+        Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(text);
+        if (matcher.find()) {
+            return matcher.group(2).split(matcher.group(1));
+        }
+        return text.split(DEFAULT_DELIMITER);
+    }
+
+    private static int sum(String[] numbersAsString) {
+        return Arrays.stream(numbersAsString)
+                .mapToInt(StringAddCalculator::getNumber)
+                .sum();
+    }
+
+    private static int getNumber(String text) {
+        int number = convertToNumber(text);
+        if (number < ZERO) {
+            throw new RuntimeException("Can not Convert NegativeNumber To Int");
+        }
+        return number;
+    }
+
+    private static int convertToNumber(String text) {
+        try {
+            return Integer.parseInt(text);
+        } catch (NumberFormatException exception) {
+            throw new RuntimeException("Is Not a Integer Format");
+        }
+    }
+
+}
