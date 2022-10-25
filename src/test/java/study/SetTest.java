@@ -25,14 +25,14 @@ public class SetTest {
 
     @Test
     void setSize(){
-        int size = numbers.size();
-        assertThat(size).isEqualTo(4);
+        assertThat(numbers).hasSize(3);
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 4})
+    @ValueSource(ints = {1, 2, 3})
     void contains(Integer ints){
-        assertThat(numbers.contains(ints)).isTrue();
+        assertThat(numbers).contains(ints);
+
     }
 
     @ParameterizedTest
