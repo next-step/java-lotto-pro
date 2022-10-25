@@ -18,6 +18,7 @@ public class SetCollectionTest {
     void setUp() {
         numbers = new HashSet<>();
         numbers.add(1);
+        numbers.add(1);
         numbers.add(2);
         numbers.add(3);
     }
@@ -28,10 +29,10 @@ public class SetCollectionTest {
         assertThat(numbers.size()).isEqualTo(3);
     }
 
-    @DisplayName("Set Collection 값이 올바른지 테스")
+    @DisplayName("Set Collection 값이 올바른지 테스트")
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
-    void isCorrectNumbers(String input) {
+    void isCorrectNumbers(int input) {
         assertThat(numbers.contains(input));
     }
 

@@ -35,9 +35,9 @@ public class StringTest {
     void StringCharAt() {
         String str = "abc";
 
-        assertThat(str.charAt(0)).isEqualTo("a");
-        assertThat(str.charAt(1)).isEqualTo("b");
-        assertThat(str.charAt(2)).isEqualTo("c");
+        assertThat(str.charAt(0)).isEqualTo('a');
+        assertThat(str.charAt(1)).isEqualTo('b');
+        assertThat(str.charAt(2)).isEqualTo('c');
 
         assertThatThrownBy(() -> {
             str.charAt(str.length());
