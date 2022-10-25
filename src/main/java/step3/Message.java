@@ -1,6 +1,6 @@
 package step3;
 
-public enum LottoMessage {
+public enum Message {
 
     START("구입금액을 입력해 주세요."),
     COUNT("개를 구매했습니다."),
@@ -14,7 +14,7 @@ public enum LottoMessage {
 
     private String message;
 
-    LottoMessage(String message) {
+    Message(String message) {
         this.message = message;
     }
 
