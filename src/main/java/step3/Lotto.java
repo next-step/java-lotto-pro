@@ -17,6 +17,7 @@ public class Lotto {
         initLotto();
         shuffle(range);
         this.lottoNumbers = range.subList(0, 6);
+        System.out.println(lottoNumbers);
     }
 
     public List<Integer> gainAutoNumbers() {
