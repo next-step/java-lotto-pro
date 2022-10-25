@@ -23,7 +23,6 @@ public class StatisticsResultTest {
 
         assertAll(
                 () -> assertThat(statisticsResult.getProfit()).isEqualTo(profit),
-                () -> assertThat(countsOfRanks).hasSize(1),
                 () -> assertThat(countsOfRanks).containsEntry(Rank.THIRD, 2)
         );
     }

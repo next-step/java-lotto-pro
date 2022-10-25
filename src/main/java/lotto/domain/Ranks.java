@@ -1,26 +1,25 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Ranks {
+
+    private static final List<Rank> ranks = Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.MISS);
     private final Map<Rank, Integer> countsOfRanks;
 
     public Ranks() {
         countsOfRanks = new HashMap<>();
+        for(Rank rank : ranks) {
+            countsOfRanks.put(rank, 0);
+        }
     }
 
     public void add(final Rank rank) {
-        Integer count = getCount(rank);
+        int count = countsOfRanks.get(rank);
         countsOfRanks.put(rank, count + 1);
-    }
-
-    private Integer getCount(final Rank rank) {
-        Integer count = countsOfRanks.get(rank);
-        if(count == null) {
-            count = 0;
-        }
-        return count;
     }
 
     public Map<Rank, Integer> getCountsOfRanks() {

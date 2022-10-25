@@ -96,7 +96,7 @@
 #### LottoTickets
 - 구입한 Lotto 리스트에 해당하는 필드를 포함한다. [V]
 #### StatisticsGenerator
-- 당첨 통계를 생성할 수 있다. [ ]
+- 당첨 통계를 생성할 수 있다. [V]
 #### StatisticsResult
 - 당첨내역 및 이익 필드를 포함하고 있다. [V]
 #### Rank
