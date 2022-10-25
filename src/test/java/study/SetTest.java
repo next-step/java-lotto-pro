@@ -27,9 +27,8 @@ public class SetTest {
     @DisplayName("Set 자료구조는 중복된 데이터를 제거하고, size()는 Collection 의 크기를 반환한다")
     @Test
     void sizeTest() throws Exception {
-        //when
         int size = numbers.size();
-        //then
+
         assertThat(size).isEqualTo(3);
     }
 
