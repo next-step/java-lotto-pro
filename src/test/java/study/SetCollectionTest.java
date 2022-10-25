@@ -33,7 +33,14 @@ public class SetCollectionTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     void isCorrectNumbers(int input) {
-        assertThat(numbers.contains(input));
+        assertThat(numbers.contains(input)).isTrue();
+    }
+
+    @DisplayName("잘못된 Collection 값 포함 테스트")
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+    @ParameterizedTest
+    void containIncorrectNumbers(int input, boolean result) {
+        assertThat(numbers.contains(input)).isEqualTo(result);
     }
 
 
