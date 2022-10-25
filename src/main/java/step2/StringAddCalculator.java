@@ -24,7 +24,7 @@ public class StringAddCalculator {
 
     private static int addAllNumbers(String[] splitNumbers) {
         return Arrays.stream(splitNumbers)
-                .mapToInt(s->changeToInt(s)).sum();
+                .mapToInt(s -> changeToInt(s)).sum();
     }
 
     private static boolean isNumber(String text) {
