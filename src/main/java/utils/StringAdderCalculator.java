@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class StringAdderCalculator {
 
-    private static final String DEFAULT_DELIMITERS = ",";
+    private static final String DEFAULT_DELIMITERS = "[,:]";
 
     public static int splitAndSum(String text) {
         if (isTextEmptyOrNull(text)) {
