@@ -45,14 +45,21 @@ class StringAdderCalculatorTest {
 
     @ParameterizedTest
     @CsvSource(value = {"0,1,2;3","1:2:4;7","100:200:300;600"}, delimiter = ';')
-    void 숫자_세_개_이상을_구분자와_입력할_경우_숫자를_분리하여_더한다(String 두_개_숫자, int 덧셈_결과) {
-        int 예상_덧셈_결과 = StringAdderCalculator.splitAndSum(두_개_숫자);
+    void 숫자_세_개_이상을_구분자와_입력할_경우_숫자를_분리하여_더한다(String 숫자_문자열, int 덧셈_결과) {
+        int 예상_덧셈_결과 = StringAdderCalculator.splitAndSum(숫자_문자열);
         assertThat(예상_덧셈_결과).isEqualTo(덧셈_결과);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"0,1:2;3","1,2:4;7","100:200,300;600"}, delimiter = ';')
-    void 구분자를_쉼표와_콜론을_혼용하여_입력할_경우_숫자를_분리하여_더한다(String 두_개_숫자, int 덧셈_결과) {
+    void 구분자를_쉼표와_콜론을_혼용하여_입력할_경우_숫자를_분리하여_더한다(String 숫자_문자열, int 덧셈_결과) {
+        int 예상_덧셈_결과 = StringAdderCalculator.splitAndSum(숫자_문자열);
+        assertThat(예상_덧셈_결과).isEqualTo(덧셈_결과);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"0,1:2;3","1,2:4;7","100:200,300;600"}, delimiter = ';')
+    void 기본_구분자_외에_커스텀_구분자를_지정할_수_있다(String 두_개_숫자, int 덧셈_결과) {
         int 예상_덧셈_결과 = StringAdderCalculator.splitAndSum(두_개_숫자);
         assertThat(예상_덧셈_결과).isEqualTo(덧셈_결과);
     }
