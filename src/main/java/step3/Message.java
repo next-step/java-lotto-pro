@@ -23,7 +23,7 @@ public enum Message {
     }
 
     public String resultStatistic(double value) {
-        return STATISTICS_RESULT.message + value + "입니다.";
+        return STATISTICS_RESULT.message + value + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     }
 
     public String resultMatchNumber(int value) {
