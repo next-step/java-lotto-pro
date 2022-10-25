@@ -1,21 +1,35 @@
 package utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.Test;
 
 public class StringAddCalculatorTest {
 
     @Test
-    void 빈_문자열을_입력할_경우_0을_반환한다(){
-        int result = StringAddCalculator.splitAndSum("");
+    void splitAndSum_null_또는_빈문자(){
+        int result = StringAddCalculator.splitAndSum(null);
+        assertThat(result).isEqualTo(0);
+
+        result = StringAddCalculator.splitAndSum("");
         assertThat(result).isEqualTo(0);
     }
 
     @Test
-    void null_값을_입력할_경우_0을_반환한다(){
-        int result = StringAddCalculator.splitAndSum(null);
-        assertThat(result).isEqualTo(0);
+    void splitAndSum_숫자하나(){
+        int result = StringAddCalculator.splitAndSum("1");
+        assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    public void splitAndSum_쉼표구분자() throws Exception {
+        int result = StringAddCalculator.splitAndSum("1,2");
+        assertThat(result).isEqualTo(3);
+    }
+
+    @Test
+    public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
+        int result = StringAddCalculator.splitAndSum("1,2:3");
+        assertThat(result).isEqualTo(6);
     }
 
 }
