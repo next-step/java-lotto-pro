@@ -35,7 +35,7 @@ public class SetTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     void contains(int number) {
-        assertThat(numbers.contains(number));
+        assertThat(numbers).contains(number);
     }
 
     @DisplayName("입력 값에 따라 결과 값이 다른 경우에 대한 테스트도 가능한지 확인")
