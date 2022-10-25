@@ -91,6 +91,8 @@
 - 1 ~ 45 에 해당하는 숫자 필드를 포함한다. [V]  
 #### Lotto
 - 6개의 LottoNumber로 구성되어 있는 필드를 포함한다. [V]
+#### WinningLotto (당첨 로또 번호)
+- 6개의 LottoNumber로 구성되어 있는 필드를 포함한다. [V]
 #### LottoTickets
 - 구입한 Lotto 리스트에 해당하는 필드를 포함한다. [V]
 #### StatisticsGenerator
