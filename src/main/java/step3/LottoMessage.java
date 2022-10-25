@@ -6,10 +6,10 @@ public enum LottoMessage {
     COUNT("개를 구매했습니다."),
     WIN_NUMBERS("지난 주 당첨 번호를 입력해 주세요."),
     STATISTICS("당첨 통계\n---------"),
-    MATCH_THREE("3개 일치 (5000원)- "),
-    MATCH_FOUR("4개 일치 (50000원)- "),
-    MATCH_FIVE("5개 일치 (1500000원)- "),
-    MATCH_SIX("6개 일치 (2000000000원)- "),
+    MATCH_THREE(Award.THREE.getCount() + "개 일치 (" + Award.THREE.getAmount() + "원)- "),
+    MATCH_FOUR(Award.FOUR.getCount() + "개 일치 (" + Award.FOUR.getAmount() + "원)- "),
+    MATCH_FIVE(Award.FIVE.getCount() + "개 일치 (" + Award.FIVE.getAmount() + "원)- "),
+    MATCH_SIX(Award.SIX.getCount() + "개 일치 (" + Award.SIX.getAmount() + "원)- "),
     STATISTICS_RESULT("총 수익률은 ");
 
     private String message;
