@@ -49,8 +49,8 @@
 * [x] else를 사용하지 마라.
 
 ### 피드백
-* [ ] StringAddCalculator 역할과 책임 분리
-* [ ] 메서드명은 영어로 작성하고 해당 메서드를 자세히 설명하는 것은 @DisplayName을 사용
-* [ ] Pattern.compile을 미리 compile해서 사용
-* [ ] 범위가 너무 큰 RuntimeException대신 IllegalArgumentException 사용
-* [ ] 테스트 시 값이 0인 경우 isEqualTo(0) -> isZero() 사용
+* [x] StringAddCalculator 역할과 책임 분리
+* [x] 메서드명은 영어로 작성하고 해당 메서드를 자세히 설명하는 것은 @DisplayName을 사용
+* [x] Pattern.compile을 미리 compile해서 사용
+* [x] 범위가 너무 큰 RuntimeException대신 IllegalArgumentException 사용
+* [x] 테스트 시 값이 0인 경우 isEqualTo(0) -> isZero() 사용
