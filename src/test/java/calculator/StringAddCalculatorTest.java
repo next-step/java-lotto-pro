@@ -2,6 +2,9 @@ package calculator;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,5 +14,11 @@ class StringAddCalculatorTest {
     void 빈문자열이나_null_입력시_0_반환() {
         Assertions.assertThat(StringAddCalculator.calculate("")).isEqualTo(0);
         Assertions.assertThat(StringAddCalculator.calculate(null)).isEqualTo(0);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:1", "2:2", "3:3", "10:10"}, delimiter = ':')
+    void 단일_숫자형_문자_입력시_숫자_반환(String actual, int expected){
+        Assertions.assertThat(StringAddCalculator.calculate(actual)).isEqualTo(expected);
     }
 }
