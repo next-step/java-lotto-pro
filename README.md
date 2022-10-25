@@ -88,7 +88,7 @@
 #### LottoGenerator
 - 1 ~ 45 숫자 6개로 구성된 숫자세트를 생성할 수 있다. [V] 
 #### LottoNumber
-- 1 ~ 45 에 해당하는 숫자 필드를 포함한다. [ ]  
+- 1 ~ 45 에 해당하는 숫자 필드를 포함한다. [V]  
 #### LottoNumbers
 - 6개의 LottoNumber로 구성되어 있는 필드를 포함한다. [ ]
 #### StatisticsGenerator
