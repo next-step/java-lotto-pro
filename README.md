@@ -90,7 +90,7 @@
 #### LottoNumber
 - 1 ~ 45 에 해당하는 숫자 필드를 포함한다. [V]  
 #### LottoNumbers
-- 6개의 LottoNumber로 구성되어 있는 필드를 포함한다. [ ]
+- 6개의 LottoNumber로 구성되어 있는 필드를 포함한다. [V]
 #### StatisticsGenerator
 - 당첨 통계를 생성할 수 있다. [ ]
 #### Rank

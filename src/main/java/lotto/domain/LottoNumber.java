@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int value;
     public static final int LOTTO_MIN_NUMBER = 1;
@@ -18,6 +18,36 @@ public class LottoNumber {
     }
 
     public int getValue() {
-        return value;
+        return this.value;
+    }
+
+    @Override
+    public int compareTo(final LottoNumber lottoNumber) {
+        if(lottoNumber.getValue() >= this.getValue()) {
+            return -1;
+        }
+        return 1;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        final LottoNumber that = (LottoNumber) o;
+        return this.value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        final int PRIME = 31;
+        int result = 1;
+        result = PRIME * result + this.value;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "LottoNumber{" +
+                "value=" + this.value +
+                '}';
     }
 }
