@@ -5,11 +5,12 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
+    private static int DEFAULT_VALUE = 0;
     private static String DELIMITERS = ",|:";
 
     public static int splitAndSum(String text) {
         if(isTextNullOrEmpty(text)){
-            return 0;
+            return DEFAULT_VALUE;
         }
         String[] texts = split(text);
         return sum(texts);
@@ -29,7 +30,7 @@ public class StringAddCalculator {
     }
 
     private static int sum(String[] texts){
-        int sum = 0;
+        int sum = DEFAULT_VALUE;
         for (String text: texts){
             sum += parseInt(text);
         }
@@ -37,7 +38,7 @@ public class StringAddCalculator {
     }
 
     private static int parseInt(String text){
-        if(Integer.parseInt(text) < 0){
+        if(Integer.parseInt(text) < DEFAULT_VALUE){
             throw new RuntimeException();
         }
         return Integer.parseInt(text);
