@@ -4,7 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class StringAddCalculatorTest {
 
@@ -18,6 +20,25 @@ class StringAddCalculatorTest {
 
         // then
         int expected = 0;
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"0", "1", "10", "100"})
+    public void splitAndSum_return_original_number_if_single_number(String number) {
+
+        // when
+        int result = StringAddCalculator.splitAndSum(number);
+
+        // then
+        int expected = Integer.parseInt(number);
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,2:3", "1,3,5:9", "0,3,6:9", "5,5,5:15"}, delimiter = ':')
+    public void splitAndSum_return_sum_if_text_split_by_comma(String text, int expected) {
+        int result = StringAddCalculator.splitAndSum(text);
         assertThat(result).isEqualTo(expected);
     }
 }
