@@ -29,6 +29,14 @@ class StringAdderCalculatorTest {
         assertThat(정수_변환(숫자하나)).isEqualTo(덧셈_결과);
     }
 
+
+    @ParameterizedTest
+    @CsvSource(value = {"0,1;1","-1,-2;-3","100,200;300"}, delimiter = ';')
+    void 숫자_두_개가_쉼표_구분자로_입력할_경우_두_숫자를_분리하여_더한다(String 두_개_숫자, int 덧셈_결과) {
+        int 예상_덧셈_결과 = StringAdderCalculator.splitAndSum(두_개_숫자);
+        assertThat(예상_덧셈_결과).isEqualTo(덧셈_결과);
+    }
+
     private int 정수_변환(String literalInteger) {
         return Integer.parseInt(literalInteger);
     }
