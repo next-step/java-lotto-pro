@@ -1,0 +1,24 @@
+package utils;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+class StringAdderCalculatorTest {
+
+    @ParameterizedTest
+    @ValueSource(strings = {"", " "})
+    void 빈_문자열을_전달할_경우_0을_반환한다(String 빈_문자열) {
+        int 덧셈_결과 = StringAdderCalculator.splitAndSum(빈_문자열);
+        assertThat(덧셈_결과).isEqualTo(0);
+    }
+
+    @Test
+    void Null을_전달할_경우_0을_반환한다() {
+        int 덧셈_결과 = StringAdderCalculator.splitAndSum(null);
+        assertThat(덧셈_결과).isEqualTo(0);
+    }
+
+}
