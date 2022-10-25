@@ -48,4 +48,13 @@ class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum(text);
         assertThat(result).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1;2;3!6", "1,2:3;6!12", "1,3,5:9;18!36", "0,3,6:9;18!36", "5,5,5:15;30!60"}, delimiter = '!')
+    @DisplayName("임의의 구분자를 지정하여 숫자의 합을 구할 수 있다")
+    public void splitAndSum_return_sum_if_text_split_by_custom(String text, int expected) {
+        String given = "//;\n" + text;
+        int result = StringAddCalculator.splitAndSum(given);
+        assertThat(result).isEqualTo(expected);
+    }
 }
