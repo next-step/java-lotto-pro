@@ -1,12 +1,11 @@
 package caclulator;
 
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
-    public static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\n(.*)");
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\n(.*)");
     private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
     private static final int DELIMITER_GROUP = 1;
     private static final int OPERANDS_GROUP = 2;
@@ -34,7 +33,9 @@ public class StringAddCalculator {
     }
 
     private static void validateOperand(final String operand) {
-        if(!Pattern.matches(OPERAND_REGEX, operand)) throw new RuntimeException();
+        if(!Pattern.matches(OPERAND_REGEX, operand)) {
+            throw new RuntimeException();
+        }
     }
 
     private static int calculate(final int[] operands) {
@@ -53,6 +54,6 @@ public class StringAddCalculator {
     }
 
     private static boolean isNullOrEmpty(final String input) {
-        return Objects.isNull(input) || input.isEmpty();
+        return input == null || input.isEmpty();
     }
 }
