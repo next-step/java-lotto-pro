@@ -1,6 +1,7 @@
 package step2;
 
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,7 +23,8 @@ public class StringAddCalculator {
     }
 
     private static int addAllNumbers(String[] splitNumbers) {
-        return 0;
+        return Arrays.stream(splitNumbers)
+                .mapToInt(s->changeToInt(s)).sum();
     }
 
     private static boolean isNumber(String text) {
