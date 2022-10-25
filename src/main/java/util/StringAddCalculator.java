@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
+    private static final Pattern numberPattern = Pattern.compile("\\d+");
     private static final Pattern customPattern = Pattern.compile("//(.)\n(.*)");
 
     public static int splitAndSum(String text) {
@@ -50,7 +51,7 @@ public class StringAddCalculator {
     }
 
     private static void validateNumberFormat(String number) {
-        if (!number.matches("\\d+")) {
+        if (!numberPattern.matcher(number).matches()) {
             throw new IllegalArgumentException();
         }
     }
