@@ -36,4 +36,13 @@ class StringSplitterTest {
 
         Assertions.assertThat(results).containsExactly("1", "2", "3");
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3", "//!\n1!2!3", "//#\n1#2#3"})
+    @DisplayName("커스텀 구분자를 가지는 문자열을 전달하는 경우 커스텀 구분자를 기준을 분리한다.")
+    void splitByCustomDelimiter(String input) {
+        String[] results = StringSplitter.split(input);
+
+        Assertions.assertThat(results).containsExactly("1", "2", "3");
+    }
 }
