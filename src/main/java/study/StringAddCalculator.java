@@ -8,12 +8,12 @@ public class StringAddCalculator {
 
     private static final String DEFAULT_SPLIT_REGEX = ",|:";
     private static final String FIND_CUSTOM_DELIMITER_PATTERN_REGEX = "//(.)\n(.*)";
-    private static final int BRANK_VALUE = 0;
+    private static final int BRANK_NUMBER = 0;
     private static final int VALIDATE_MINIMUM_NUMBER = 0;
 
     public static int splitAndSum(String text) {
         if (isBlank(text)) {
-            return BRANK_VALUE;
+            return BRANK_NUMBER;
         }
         String[] tokens = split(text);
         return sum(tokens);
