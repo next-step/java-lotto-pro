@@ -35,13 +35,24 @@ public class StringAddCalculator {
     private static int getSumByDefaultSplit(String text) {
         int result = 0;
         for (String number : text.split("[,:]")) {
-            int value = Integer.parseInt(number);
-            if (value < 0) {
-                throw new IllegalArgumentException();
-            }
-            result += value;
+            validateNumberFormat(number);
+            result += getNumber(number);
         }
         return result;
+    }
+
+    private static int getNumber(String number) {
+        int value = Integer.parseInt(number);
+        if (value < 0) {
+            throw new IllegalArgumentException();
+        }
+        return value;
+    }
+
+    private static void validateNumberFormat(String number) {
+        if (!number.matches("\\d+")) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private static boolean isNullOrEmpty(String text) {
