@@ -2,8 +2,12 @@ package utils;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -58,10 +62,18 @@ class StringAdderCalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"0,1:2;3","1,2:4;7","100:200,300;600"}, delimiter = ';')
-    void 기본_구분자_외에_커스텀_구분자를_지정할_수_있다(String 두_개_숫자, int 덧셈_결과) {
-        int 예상_덧셈_결과 = StringAdderCalculator.splitAndSum(두_개_숫자);
+    @MethodSource("provideCustomDelimiterNumbers")
+    void 기본_구분자_외에_커스텀_구분자를_지정할_수_있다(String 커스텀_숫자_문자열, int 덧셈_결과) {
+        int 예상_덧셈_결과 = StringAdderCalculator.splitAndSum(커스텀_숫자_문자열);
         assertThat(예상_덧셈_결과).isEqualTo(덧셈_결과);
+    }
+
+    private static Stream<Arguments> provideCustomDelimiterNumbers() {
+        return Stream.of(
+                Arguments.of("//;\n1;2;4", 7),
+                Arguments.of("//@\n1@2@4", 7),
+                Arguments.of("//#\n1#2#4", 7)
+        );
     }
 
     private int 정수_변환(String literalInteger) {
