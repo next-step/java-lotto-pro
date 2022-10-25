@@ -17,7 +17,6 @@ public class StringTest {
 
         assertAll(
             () -> assertThat(strings).hasSize(2),
-            () -> assertThat(strings).contains("1", "2"),
             () -> assertThat(strings).containsExactly("1", "2")
         );
     }
@@ -29,7 +28,6 @@ public class StringTest {
 
         assertAll(
             () -> assertThat(strings).hasSize(1),
-            () -> assertThat(strings).contains("1"),
             () -> assertThat(strings).containsExactly("1")
         );
     }
