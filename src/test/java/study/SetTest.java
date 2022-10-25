@@ -4,12 +4,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SetTest {
@@ -35,5 +37,12 @@ public class SetTest {
     @ValueSource(ints = {1, 2, 3})
     void contains(int input) {
         assertTrue(numbers.contains(input));
+    }
+
+    @DisplayName("1,2,3 실행결과 true, 4,5는 false")
+    @ParameterizedTest
+    @CsvSource(value = {"1,true", "2,true", "3,true", "4,false", "5,false"})
+    void contains_expectedResult(int input, boolean expected) {
+        assertEquals(numbers.contains(input), expected);
     }
 }
