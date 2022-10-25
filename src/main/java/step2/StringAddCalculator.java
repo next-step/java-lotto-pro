@@ -60,5 +60,4 @@ public class StringAddCalculator {
             throw new RuntimeException("Is Not a Integer Format");
         }
     }
-
 }
