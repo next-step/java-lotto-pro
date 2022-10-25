@@ -7,20 +7,13 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
 
     public static int splitAndSum(String value) {
-        String[] splitValue = new String[0];
         if (value == null || value.isEmpty()) {
             return 0;
         }
         if (isSingleNumber(value)) {
             return Integer.parseInt(value);
         }
-        if (value.contains(",") || value.contains(":")) {
-            splitValue = splitByCommaAndColon(value);
-        }
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(value);
-        if (m.find()) {
-            splitValue = splitByCustomPattern(m, value);
-        }
+        String[] splitValue = split(value);
         checkNegativeNumber(splitValue);
         return sumStringArray(splitValue);
     }
@@ -32,6 +25,18 @@ public class StringAddCalculator {
             return false;
         }
         return true;
+    }
+
+    private static String[] split(String value) {
+        String[] splitValue = new String[0];
+        if (value.contains(",") || value.contains(":")) {
+            splitValue = splitByCommaAndColon(value);
+        }
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(value);
+        if (m.find()) {
+            splitValue = splitByCustomPattern(m, value);
+        }
+        return splitValue;
     }
 
     private static String[] splitByCommaAndColon(String value) {
