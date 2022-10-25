@@ -8,6 +8,8 @@ public class StringAddCalculator {
     private static final String DEFAULT_DELIMITER = "[,:]";
     private static final int ZERO = 0;
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+    public static final int NUMBER_OF_DELIMITER_GROUP = 1;
+    public static final int NUMBER_OF_TEXT_GROUP = 2;
 
     private StringAddCalculator() {
 
@@ -28,7 +30,7 @@ public class StringAddCalculator {
     private static String[] split(String text) {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(text);
         if (matcher.find()) {
-            return matcher.group(2).split(matcher.group(1));
+            return matcher.group(NUMBER_OF_TEXT_GROUP).split(matcher.group(NUMBER_OF_DELIMITER_GROUP));
         }
         return text.split(DEFAULT_DELIMITER);
     }
