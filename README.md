@@ -89,8 +89,10 @@
 - 1 ~ 45 숫자 6개로 구성된 숫자세트를 생성할 수 있다. [V] 
 #### LottoNumber
 - 1 ~ 45 에 해당하는 숫자 필드를 포함한다. [V]  
-#### LottoNumbers
+#### Lotto
 - 6개의 LottoNumber로 구성되어 있는 필드를 포함한다. [V]
+#### LottoTickets
+- 구입한 Lotto 리스트에 해당하는 필드를 포함한다. [V]
 #### StatisticsGenerator
 - 당첨 통계를 생성할 수 있다. [ ]
 #### Rank

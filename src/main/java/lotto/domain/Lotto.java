@@ -6,10 +6,10 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class Lotto {
     private final Set<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(final List<Integer> numbers) {
+    public Lotto(final List<Integer> numbers) {
         HashSet<Integer> uniqueNumbers = new HashSet<>(numbers);
         validate(uniqueNumbers);
         this.lottoNumbers = uniqueNumbers.stream()
