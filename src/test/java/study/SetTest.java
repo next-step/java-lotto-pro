@@ -34,8 +34,7 @@ class SetTest {
 	@ParameterizedTest
 	@ValueSource(ints = {1, 2, 3})
 	void contains(int number) {
-		final boolean actual = numbers.contains(number);
-		assertThat(actual).isTrue();
+		assertThat(numbers).contains(number);
 	}
 
 	@DisplayName("값 존재 확인, 존재시 true 없을시 false")
