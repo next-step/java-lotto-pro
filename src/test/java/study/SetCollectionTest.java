@@ -25,8 +25,14 @@ public class SetCollectionTest {
     @Test
     @DisplayName("Set collection 사이즈 테스트")
     void numbersSizeCheck() {
-        Assertions.assertThat(numbers.size()).isEqualTo(3);
+        assertThat(numbers.size()).isEqualTo(3);
+    }
 
+    @DisplayName("Set Collection 값이 올바른지 테스")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3})
+    void isCorrectNumbers(String input) {
+        assertThat(numbers.contains(input));
     }
 
 
