@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
 
     private static String DELIMITER = ",|:";
+    private static String NOT_NUMBER = "숫자가 아닙니다.";
+    private static String MINUS_NUMBER = "음수입니다.";
 
     public static int splitAndSum(String text) {
         if (isStringNullOrEmpty(text)) {
@@ -47,5 +49,16 @@ public class StringAddCalculator {
 
     private static String[] splitByCommaAndColon(String text) {
         return text.split(DELIMITER);
+    }
+
+    private static int changeToInt(String text) {
+        if (!isNumber(text)) {
+            throw new RuntimeException(NOT_NUMBER);
+        }
+        int number = Integer.parseInt(text);
+        if (number < 0) {
+            throw new RuntimeException(MINUS_NUMBER);
+        }
+        return number;
     }
 }
