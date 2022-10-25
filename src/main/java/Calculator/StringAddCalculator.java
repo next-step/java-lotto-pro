@@ -46,7 +46,7 @@ public class StringAddCalculator {
     }
 
     private static Boolean isEmpty(String numbers) {
-        return numbers == null || numbers.isEmpty();
+        return numbers == null || numbers.trim().isEmpty();
     }
 
 
