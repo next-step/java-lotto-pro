@@ -65,6 +65,7 @@ public class StringAddCalculatorTest {
     }
 
     private static Stream<Arguments> custom_delimiter_testcase() {
+
         return Stream.of(
                 Arguments.of("//;\n1;2", 3),
                 Arguments.of("//~\n1~2:3,4", 10),
@@ -76,6 +77,7 @@ public class StringAddCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,a,3", "-1,2,3", "a,-3"})
     public void splitAndSum_negative(String text) throws Exception {
+
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum(text))
                 .isInstanceOf(RuntimeException.class);
     }
