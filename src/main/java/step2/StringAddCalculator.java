@@ -8,13 +8,19 @@ public class StringAddCalculator {
 
     public static int splitAndSum(String value) {
         String[] splitValue = new String[0];
-        if (value == null || value.isEmpty()) return 0;
-        if (isSingleNumber(value)) return Integer.parseInt(value);
-        if (value.contains(",") || value.contains(":"))
+        if (value == null || value.isEmpty()) {
+            return 0;
+        }
+        if (isSingleNumber(value)) {
+            return Integer.parseInt(value);
+        }
+        if (value.contains(",") || value.contains(":")) {
             splitValue = splitByCommaAndColon(value);
+        }
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(value);
-        if (m.find())
+        if (m.find()) {
             splitValue = splitByCustomPattern(m, value);
+        }
         checkNegativeNumber(splitValue);
         return sumStringArray(splitValue);
     }
@@ -46,7 +52,9 @@ public class StringAddCalculator {
                 .mapToInt(Integer::parseInt)
                 .filter(n -> n < 0)
                 .count();
-        if (count > 0) throw new RuntimeException("negative number included");
+        if (count > 0) {
+            throw new RuntimeException("negative number included");
+        }
     }
 
 }
