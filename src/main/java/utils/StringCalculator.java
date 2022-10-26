@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
 
     private static final String EMPTY_INPUT_REPLACE = "0";
     private static final String[] BASIC_DELIMITER = {",", ":"};
-    private static final String CUSTOM_DELIMITER_DEFINE_PATTERN = "//.\n";
-    private static final int CUSTOM_DELIMITER_START = 2;
-    private static final int CUSTOM_DELIMITER_END = 3;
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
 
     public static int splitAndSum(String inputText) {
         inputText = emptyInputHandle(inputText);
@@ -46,10 +46,11 @@ public class StringCalculator {
     }
 
     private static String getStandardForm(String inputText, List<String> delimiters) {
-        if (inputText.matches("^" + CUSTOM_DELIMITER_DEFINE_PATTERN + ".*")) {
+        Matcher m = CUSTOM_DELIMITER_PATTERN.matcher(inputText);
+        if (m.find()) {
             delimiters.clear(); // 지정한 구분자로만 분리하고자 할 때 (기본 구분자도 구분자로 인식하려면 주석처리)
-            delimiters.add(inputText.substring(CUSTOM_DELIMITER_START, CUSTOM_DELIMITER_END));
-            inputText = inputText.replaceFirst(CUSTOM_DELIMITER_DEFINE_PATTERN, "");
+            delimiters.add(m.group(1));
+            inputText = m.group(2);
         }
         return inputText;
     }
