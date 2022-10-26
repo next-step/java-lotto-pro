@@ -20,4 +20,12 @@ public class StringTest {
         assertThat(token).contains("1");
         assertThat(token).containsExactly("1");
     }
+
+    @Test
+    void 스트링_특정위치_값_가져오기() {
+        String str = "abc";
+        assertThat(str.charAt(0)).isSameAs('a');
+        assertThat(str.charAt(1)).isSameAs('b');
+        assertThat(str.charAt(2)).isSameAs('c');
+    }
 }
