@@ -20,6 +20,7 @@ public class StringAddCalculator {
         }
 
         String[] split = splitText(input);
+        validNumbers(split);
         return sum(split);
     }
 
@@ -36,17 +37,14 @@ public class StringAddCalculator {
         return input.split(REGEX_COMMA_OR_COLON_SEPARATOR);
     }
 
-    private static int parseInt(String text) {
-        int number;
-
-        try {
-            number = Integer.parseInt(text);
-        } catch (Exception e) {
-            throw new RuntimeException(ERROR_MESSAGE_ONLY_NUMBER);
+    private static void validNumbers(String[] numbers) {
+        for (String number : numbers) {
+            try {
+                validNegative(Integer.parseInt(number));
+            } catch (NumberFormatException e) {
+                throw new RuntimeException(ERROR_MESSAGE_ONLY_NUMBER);
+            }
         }
-
-        validNegative(number);
-        return number;
     }
 
     private static void validNegative(int number) {
@@ -57,7 +55,7 @@ public class StringAddCalculator {
 
     private static int sum(String[] split) {
         return Arrays.stream(split)
-                .mapToInt(StringAddCalculator::parseInt)
+                .mapToInt(Integer::parseInt)
                 .sum();
     }
 }
