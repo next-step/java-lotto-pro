@@ -13,6 +13,11 @@ public class StringAddCalculator {
     }
 
     private int splitAndSum(String inputText) {
-        return Integer.parseInt(inputText);
+        String[] stringNumbers = inputText.split(",");
+        int result = 0;
+        for (String stringNumber : stringNumbers) {
+            result += Integer.parseInt(stringNumber);
+        }
+        return result;
     }
 }
