@@ -1,7 +1,7 @@
 package domain;
 
 public class Numbers {
-    private String[] stringNumbers;
+    private final String[] stringNumbers;
 
     private Numbers(String[] split) {
         this.stringNumbers = split;
@@ -11,7 +11,15 @@ public class Numbers {
         return new Numbers(split);
     }
 
-    public int size(){
+    public int size() {
         return stringNumbers.length;
+    }
+
+    public int sum() {
+        int sum = 0;
+        for (String stringNum : stringNumbers) {
+            sum += Integer.parseInt(stringNum);
+        }
+        return sum;
     }
 }
