@@ -2,6 +2,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringTest {
     @Test
@@ -46,5 +48,44 @@ public class StringTest {
 
         //then
         assertThat(result).isEqualTo(expect);
+    }
+
+    @Test
+    @DisplayName("charAt()을 활용하여 특정 위치의 문자를 가져온다")
+    void charAt_test() {
+        //given
+        String input = "abc";
+
+        //when
+        char result = input.charAt(0);
+
+        //then
+        assertThat(result).isEqualTo('a');
+    }
+
+    @Test
+    @DisplayName("charAt()을 활용할 때 위치를 벗어났을 시 exception이 발생한다")
+    void charAt_exception_test_01() {
+        //given
+        String input = "abc";
+
+        //when, then
+        assertThatThrownBy(() ->
+            input.charAt(4)
+        ).isInstanceOf(IndexOutOfBoundsException.class)
+            .hasMessageContaining("String index out of range: 4");
+    }
+
+    @Test
+    @DisplayName("charAt()을 활용할 때 위치를 벗어났을 시 exception이 발생한다")
+    void charAt_exception_test_02() {
+        //given
+        String input = "abc";
+
+        //when, then
+        assertThatExceptionOfType(IndexOutOfBoundsException.class)
+            .isThrownBy(() ->
+                input.charAt(4)
+            ).withMessageMatching("String index out of range: \\d+");
     }
 }
