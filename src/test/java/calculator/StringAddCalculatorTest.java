@@ -26,4 +26,9 @@ class StringAddCalculatorTest {
     void 쉼표로_구분된_값을_합산(){
         Assertions.assertThat(StringAddCalculator.calculate("1,2")).isEqualTo(3);
     }
+
+    @Test
+    void 쉼표와_콜론으로_구분된_값을_합산(){
+        Assertions.assertThat(StringAddCalculator.calculate("1,2:3")).isEqualTo(6);
+    }
 }
