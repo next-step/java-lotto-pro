@@ -9,6 +9,7 @@ import step3.domain.Grades;
 import step3.domain.Lotto;
 import step3.domain.LottoQuantity;
 import step3.domain.Lottos;
+import step3.domain.ProfitRateCalculator;
 import step3.view.InputView;
 import step3.view.ResultView;
 
@@ -17,18 +18,20 @@ public class LottoController {
     private static final Scanner scanner = new Scanner(System.in);
 
     public void doLotto() {
-        LottoQuantity quantity = getLottoQuantity();
+        Integer amount = getAmount();
+        LottoQuantity quantity = LottoQuantity.of(amount);
         Lottos lottos = getLottos(quantity);
         List<Integer> winNumbers = getWinNumbers();
         Grades grades = GradeCalculator.getGrades(lottos, winNumbers);
+        Float profitRate = ProfitRateCalculator.getProfitRate(grades, amount);
         ResultView.printTotalGrades(grades);
+        ResultView.printProfitRate(profitRate);
     }
 
-    private LottoQuantity getLottoQuantity() {
+    private Integer getAmount() {
         InputView.printRequestAmountMessage();
         String amount = scanner.nextLine();
-        int value = Integer.parseInt(amount);
-        return LottoQuantity.of(value);
+        return Integer.parseInt(amount);
     }
 
     private Lottos getLottos(LottoQuantity quantity) {
