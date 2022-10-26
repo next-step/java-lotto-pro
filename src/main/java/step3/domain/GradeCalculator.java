@@ -5,10 +5,10 @@ import step3.domain.enums.Grade;
 
 public class GradeCalculator {
 
-    public static Grades getGrades(Lottos lottos, List<Integer> winNumbers) {
+    public static Grades getGrades(Lottos lottos, Lotto winLotto) {
         Grades grades = new Grades();
         for (Lotto lotto : lottos.getLottos()) {
-            long count = lotto.getNumberCountContainsBy(winNumbers);
+            long count = lotto.getNumberCountContainsBy(winLotto);
             Grade grade = Grade.getGradeBy(count);
             grades.increaseGradeCount(grade);
         }

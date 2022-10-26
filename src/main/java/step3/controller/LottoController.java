@@ -22,7 +22,8 @@ public class LottoController {
         LottoQuantity quantity = LottoQuantity.of(amount);
         Lottos lottos = getLottos(quantity);
         List<Integer> winNumbers = getWinNumbers();
-        Grades grades = GradeCalculator.getGrades(lottos, winNumbers);
+        Lotto winLotto = Lotto.of(winNumbers);
+        Grades grades = GradeCalculator.getGrades(lottos, winLotto);
         Float profitRate = ProfitRateCalculator.getProfitRate(grades, amount);
         ResultView.printTotalGrades(grades);
         ResultView.printProfitRate(profitRate);
@@ -47,7 +48,8 @@ public class LottoController {
     private List<Integer> getWinNumbers() {
         InputView.printRequestWinNumbersMessage();
         String winNumbers = scanner.nextLine();
-        String[] numbers = winNumbers.split(",");
+        String trimmedNumbers = winNumbers.replace(" ", "");
+        String[] numbers = trimmedNumbers.split(",");
         return Arrays.stream(numbers).map(Integer::parseInt)
                 .collect(Collectors.toList());
     }

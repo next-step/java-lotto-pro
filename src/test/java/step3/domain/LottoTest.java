@@ -1,6 +1,7 @@
 package step3.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
 
@@ -33,13 +35,25 @@ class LottoTest {
     void lotto_return_number_count_compare_winNumbers(String lottoNumbers, String winNumbers, int expected) {
         // given
         List<Integer> numbers = getIntegerCollectionBy(lottoNumbers);
-        List<Integer> wins = getIntegerCollectionBy(winNumbers);
+        Lotto winLotto = Lotto.of(getIntegerCollectionBy(winNumbers));
 
         // when
-        Lotto lotto = new Lotto(numbers);
+        Lotto lotto = Lotto.of(numbers);
 
         // then
-        assertThat(lotto.getNumberCountContainsBy(wins)).isEqualTo(expected);
+        assertThat(lotto.getNumberCountContainsBy(winLotto)).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3", "4,5,6", "1,2,3,10,15", "1,8,15,22,29,36,2,9,16,23,30,37"})
+    @DisplayName("로또 생성 시 로또 번호가 6개가 아닐경우 에러 발생")
+    void lotto_throw_exception_when_number_size_is_not_six(String lottoNumbers) {
+        // given
+        List<Integer> numbers = getIntegerCollectionBy(lottoNumbers);
+
+        // when && then
+        assertThatThrownBy(() -> Lotto.of(numbers))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     private List<Integer> getIntegerCollectionBy(String lottoNumbers) {

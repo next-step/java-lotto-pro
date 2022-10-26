@@ -7,8 +7,19 @@ import java.util.List;
 public class Lotto {
     private final List<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    private Lotto(List<Integer> numbers) {
         this.numbers = numbers;
+    }
+
+    public static Lotto of(List<Integer> numbers) {
+        validateLottoNumbers(numbers);
+        return new Lotto(numbers);
+    }
+
+    private static void validateLottoNumbers(List<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("로또는 6개의 숫자가 필수적으로 입력되어야 합니다.");
+        }
     }
 
     public static Lotto generate() {
@@ -21,9 +32,9 @@ public class Lotto {
         return numbers;
     }
 
-    public long getNumberCountContainsBy(List<Integer> winNumbers) {
+    public long getNumberCountContainsBy(Lotto winLotto) {
         return numbers.stream()
-                .filter(winNumbers::contains)
+                .filter(winLotto.getNumbers()::contains)
                 .count();
     }
 

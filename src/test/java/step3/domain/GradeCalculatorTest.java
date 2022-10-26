@@ -18,10 +18,11 @@ class GradeCalculatorTest {
     void calculate_grades_by_compare_LottoNumbers_and_winNumbers(String numbers, String winNumbers, int expectedCount) {
         // given
         Lottos lottos = new Lottos();
-        lottos.add(new Lotto(getIntegerCollectionBy(numbers)));
+        lottos.add(Lotto.of(getIntegerCollectionBy(numbers)));
+        Lotto winLotto = Lotto.of(getIntegerCollectionBy(winNumbers));
 
         // when
-        Grades grades = GradeCalculator.getGrades(lottos, getIntegerCollectionBy(winNumbers));
+        Grades grades = GradeCalculator.getGrades(lottos, winLotto);
 
         // then
         assertThat(grades.getGradeCount(Grade.getGradeBy(expectedCount))).isEqualTo(1);
