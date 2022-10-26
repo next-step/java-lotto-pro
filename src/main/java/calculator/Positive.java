@@ -5,6 +5,10 @@ import java.util.Objects;
 public class Positive {
     private final int positive;
 
+    public Positive() {
+        this(0);
+    }
+
     public Positive(String positive) {
         this(Integer.parseInt(positive));
     }
@@ -32,5 +36,9 @@ public class Positive {
     @Override
     public int hashCode() {
         return Objects.hash(positive);
+    }
+
+    public int value() {
+        return positive;
     }
 }
