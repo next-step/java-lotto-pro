@@ -1,5 +1,6 @@
 package step2;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,21 +11,20 @@ public class StringAddCalculator {
     public static int splitAndSum(String text) {
         if (text == null) return 0;
         if (text.isEmpty()) return 0;
-        if (isNumber(text)) return convertNumber(text);
-        return 0;
+        String[] numbers = parseText(text);
+
+        return sumCalculate(numbers);
     }
 
-    private static boolean isNumber(String text) {
+    static int convertNumber(String text) {
+        int result;
         try {
-            Integer.parseInt(text);
-            return true;
+            result = Integer.parseInt(text);
         } catch (NumberFormatException e) {
-            return false;
+            throw new RuntimeException();
         }
-    }
-
-    private static int convertNumber(String text) {
-        return Integer.parseInt(text);
+        if (result < 0) throw new RuntimeException();
+        return result;
     }
 
     static String[] parseText(String text) {
@@ -34,5 +34,11 @@ public class StringAddCalculator {
             return m.group(2).split(customDelimiter);
         }
         return text.split(BASE_DELIMITER);
+    }
+
+    private static int sumCalculate(String[] numbers) {
+        return Arrays.stream(numbers)
+                .mapToInt(StringAddCalculator::convertNumber)
+                .sum();
     }
 }
