@@ -27,6 +27,7 @@ public enum Grade {
     }
 
     private static final Map<Long, Grade> countPerGrade = new HashMap<>();
+
     static {
         for (Grade grade : values()) {
             countPerGrade.put(grade.count, grade);
@@ -34,8 +35,9 @@ public enum Grade {
     }
 
     public static Grade getGradeBy(long count) {
-        if (count >= 3 && count <= 6)
+        if (count >= 3 && count <= 6) {
             return countPerGrade.get(count);
+        }
         return DRAW;
     }
 }

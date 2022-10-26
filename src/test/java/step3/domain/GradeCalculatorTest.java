@@ -13,7 +13,8 @@ import step3.domain.enums.Grade;
 class GradeCalculatorTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5,6:1,2,3,10,15,20:3", "1,8,15,22,29,36:2,9,16,23,30,37:0", "1,2,3,4,5,6:1,2,3,4,5,6:6"}, delimiter = ':')
+    @CsvSource(value = {"1,2,3,4,5,6:1,2,3,10,15,20:3", "1,8,15,22,29,36:2,9,16,23,30,37:0",
+            "1,2,3,4,5,6:1,2,3,4,5,6:6"}, delimiter = ':')
     @DisplayName("로또 당첨번호와 생성된 로또를 비교해 일치한 개수를 카운팅하여 당첨 정보인 Grades를 리턴해야 한다")
     void calculate_grades_by_compare_LottoNumbers_and_winNumbers(String numbers, String winNumbers, int expectedCount) {
         // given
