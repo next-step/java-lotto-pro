@@ -16,13 +16,13 @@ public class StatisticsResultTest {
         Ranks ranks = new Ranks();
         ranks.add(Rank.THIRD);
         ranks.add(Rank.THIRD);
-        double profit = 10000.0;
+        double yields = 10000.0;
 
-        StatisticsResult statisticsResult = new StatisticsResult(ranks.getCountsOfRanks(), profit);
+        StatisticsResult statisticsResult = new StatisticsResult(ranks.getCountsOfRanks(), yields);
         Map<Rank, Integer> countsOfRanks = statisticsResult.getCountsOfRanks();
 
         assertAll(
-                () -> assertThat(statisticsResult.getProfit()).isEqualTo(profit),
+                () -> assertThat(statisticsResult.getYields()).isEqualTo(yields),
                 () -> assertThat(countsOfRanks).containsEntry(Rank.THIRD, 2)
         );
     }

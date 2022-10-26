@@ -17,9 +17,9 @@ public class StatisticsGeneratorTest {
         Lotto firstLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto secondLotto = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12));
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(firstLotto, secondLotto));
-        WinnerLotto winnerLotto = new WinnerLotto(Arrays.asList(7, 8, 9, 10, 11, 12));
+        WinningLotto winninglotto = new WinningLotto(Arrays.asList(7, 8, 9, 10, 11, 12));
 
-        StatisticsResult statisticsResult = StatisticsGenerator.create(lottoTicket, winnerLotto);
+        StatisticsResult statisticsResult = StatisticsGenerator.create(lottoTicket, winninglotto);
         Map<Rank, Integer> countsOfRanks = statisticsResult.getCountsOfRanks();
 
         assertAll(
@@ -28,7 +28,7 @@ public class StatisticsGeneratorTest {
                 () -> assertThat(countsOfRanks.get(Rank.THIRD)).isZero(),
                 () -> assertThat(countsOfRanks.get(Rank.FOURTH)).isZero(),
                 () -> assertThat(countsOfRanks.get(Rank.MISS)).isEqualTo(1),
-                () -> assertThat(statisticsResult.getProfit()).isEqualTo(1000000)
+                () -> assertThat(statisticsResult.getYields()).isEqualTo(1000000)
         );
     }
 }

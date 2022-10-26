@@ -5,18 +5,18 @@ import java.util.Map;
 public class StatisticsResult {
 
     private final Map<Rank, Integer> countsOfRanks;
-    private final Double profit;
+    private final Double yields;
 
-    public StatisticsResult(final Map<Rank, Integer> countsOfRanks, final Double profit) {
+    public StatisticsResult(final Map<Rank, Integer> countsOfRanks, final Double yields) {
         this.countsOfRanks = countsOfRanks;
-        this.profit = profit;
+        this.yields = yields;
     }
 
     public Map<Rank, Integer> getCountsOfRanks() {
         return countsOfRanks;
     }
 
-    public Double getProfit() {
-        return profit;
+    public Double getYields() {
+        return yields;
     }
 }
