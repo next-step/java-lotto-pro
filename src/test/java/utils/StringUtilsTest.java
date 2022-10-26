@@ -16,7 +16,7 @@ class StringUtilsTest {
     void splitTwoWords(String text) {
 
         String[] splitText = StringUtils.split(text);
-        
+
         assertAll(
                 () -> assertThat(splitText).contains("1"),
                 () -> assertThat(splitText).contains("2"),
@@ -35,6 +35,16 @@ class StringUtilsTest {
                 () -> assertThat(splitText).contains("1"),
                 () -> assertThat(splitText).containsExactly("1")
         );
+    }
+
+    @DisplayName("(1,2)의 ()를 제거하여  1,2를 반환한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"(1,2)"})
+    void substring(String text) {
+
+        String splitText = StringUtils.substring(text, 1, 5);
+
+        assertThat(splitText).contains("1,2");
     }
 
 }
