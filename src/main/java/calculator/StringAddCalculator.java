@@ -14,7 +14,7 @@ public class StringAddCalculator {
     private StringAddCalculator() {
     }
 
-    public static int splitAndSum(String input) {
+    public static int calculate(String input) {
         if (isNull(input) || input.isEmpty()) {
             return ZERO;
         }
