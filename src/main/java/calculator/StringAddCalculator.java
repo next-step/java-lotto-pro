@@ -10,6 +10,8 @@ public class StringAddCalculator {
     public static final int DEFAULT_VALUE = 0;
     public static final int MINIMUM = 0;
     public static final String DELIMITER = ",|:";
+    public static final String SHOULD_POSITIVE_MESSAGE = "입력값은 양수여야 합니다";
+    public static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
 
     public static int splitAndSum(String input) {
         if (isEmpty(input)) {
@@ -28,7 +30,7 @@ public class StringAddCalculator {
     }
 
     private static String[] split(String input) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        Matcher m = CUSTOM_PATTERN.matcher(input);
         if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
@@ -43,18 +45,18 @@ public class StringAddCalculator {
                     .map(StringAddCalculator::toPositive)
                     .collect(Collectors.toList());
         } catch (Exception e) {
-            throw new RuntimeException("입력값은 양수여야 합니다.");
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     private static int toPositive(String input) {
         int value = Integer.parseInt(input);
 
-        if (value > MINIMUM) {
+        if (value >= MINIMUM) {
             return value;
         }
 
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(SHOULD_POSITIVE_MESSAGE);
     }
 
     private static int sum(List<Integer> numbers) {
