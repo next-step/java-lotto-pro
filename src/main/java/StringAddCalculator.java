@@ -29,11 +29,8 @@ public class StringAddCalculator {
 
     private static String[] getTokensByCustomDelimiter(String text) {
         Matcher m = Pattern.compile(CUSTOM_DELIMITER_IDENTIFIER_REGEX).matcher(text);
-        String[] tokens = new String[0];
-        if (m.find()) {
-            String customDelimiter = m.group(1);
-            tokens = m.group(2).split(customDelimiter);
-        }
+        String customDelimiter = m.group(1);
+        String[] tokens = m.group(2).split(customDelimiter);
         return tokens;
     }
 
