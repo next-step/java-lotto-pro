@@ -5,6 +5,10 @@ import java.util.Objects;
 public class Positive {
     private final int positive;
 
+    public Positive(String positive) {
+        this(Integer.parseInt(positive));
+    }
+
     public Positive(int positive) {
         if(positive < 0){
             throw new RuntimeException("음수는 사용이 불가능");
