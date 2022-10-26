@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringAddCalculatorTest {
 
@@ -53,5 +54,13 @@ class StringAddCalculatorTest {
     void custom_separator_test() {
         int result = stringAddCalculator.sum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"-1,2=3", "1:2,-3=6"}, delimiter = '=')
+    @DisplayName("음수를 입력할 경우 RuntimeException 발생")
+    void minus_number_test(String input) {
+        assertThatThrownBy(() -> stringAddCalculator.sum(input))
+            .isInstanceOf(RuntimeException.class);
     }
 }
