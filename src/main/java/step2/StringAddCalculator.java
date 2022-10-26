@@ -1,6 +1,8 @@
 package step2;
 
 public class StringAddCalculator {
+    private static final String DEFAULT_DELIMITER = ",|:";
+
     public int sum(String inputText) {
         if (validateInputText(inputText)) {
             return 0;
@@ -13,7 +15,7 @@ public class StringAddCalculator {
     }
 
     private int splitAndSum(String inputText) {
-        String[] stringNumbers = inputText.split(",");
+        String[] stringNumbers = inputText.split(DEFAULT_DELIMITER);
         int result = 0;
         for (String stringNumber : stringNumbers) {
             result += Integer.parseInt(stringNumber);
