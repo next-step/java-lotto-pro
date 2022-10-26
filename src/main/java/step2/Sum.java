@@ -8,7 +8,7 @@ public class Sum {
 
     public static int from(int[] numbers){
         return Arrays.stream(numbers)
-                .filter(value -> filterPositive(value))
+                .filter(Sum::filterPositive)
                 .sum();
     }
 
