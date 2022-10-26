@@ -1,9 +1,9 @@
 # STEP1
 ## String 클래스에 대한 학습 테스트
-- [ ] "1,2"를 ,로 split 한다.
-  - [ ] 1과 2로 분리된다. 
-  - [ ] assertj contains()로 검증한다.
-  - [ ] assertj containsExactly()로 검증한다.
+- [x] "1,2"를 ,로 split 한다.
+  - [x] 1과 2로 분리된다. 
+  - [x] assertj contains()로 검증한다.
+  - [x] assertj containsExactly()로 검증한다.
 - [ ] "1"을 ,로 split 한다.
   - [ ] 1만을 포함하는 배열이 반환된다.
   - [ ] assertj contains()로  검증한다
