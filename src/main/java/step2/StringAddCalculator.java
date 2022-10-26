@@ -10,6 +10,8 @@ public class StringAddCalculator {
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final int NUMBER_OF_DELIMITER_GROUP = 1;
     private static final int NUMBER_OF_TEXT_GROUP = 2;
+    private static final String ERR_CAN_NOT_CONVERT_NEGATIVE_NUMBER_TO_INT = "Can not Convert NegativeNumber To Int";
+    private static final String ERR_IS_NOT_A_INTEGER_FORMAT = "Is Not a Integer Format";
 
     private StringAddCalculator() {
 
@@ -49,7 +51,7 @@ public class StringAddCalculator {
 
     private static void validateNumberIsNotNegative(int number) {
         if (number < ZERO) {
-            throw new RuntimeException("Can not Convert NegativeNumber To Int");
+            throw new RuntimeException(ERR_CAN_NOT_CONVERT_NEGATIVE_NUMBER_TO_INT);
         }
     }
 
@@ -57,7 +59,7 @@ public class StringAddCalculator {
         try {
             return Integer.parseInt(text);
         } catch (NumberFormatException exception) {
-            throw new RuntimeException("Is Not a Integer Format");
+            throw new RuntimeException(ERR_IS_NOT_A_INTEGER_FORMAT);
         }
     }
 }
