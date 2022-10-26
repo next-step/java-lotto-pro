@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,11 +39,9 @@ public class StringAddCalculator {
     }
 
     private static int sum(String[] tokens) {
-        int sum = 0;
-        for (String token : tokens) {
-            sum += getNumberFromToken(token);
-        }
-        return sum;
+        return Arrays.stream(tokens)
+                .mapToInt(i -> getNumberFromToken(i))
+                .sum();
     }
 
     private static int getNumberFromToken(String token) {
