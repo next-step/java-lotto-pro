@@ -35,10 +35,10 @@ public class StringAddCalculator {
         return tokens;
     }
 
-    private static int sum(String[] splitText) {
+    private static int sum(String[] tokens) {
         int sum = 0;
-        for (String number : splitText) {
-            sum += Integer.parseInt(number);
+        for (String token : tokens) {
+            sum += Integer.parseInt(token);
         }
         return sum;
     }
