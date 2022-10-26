@@ -87,6 +87,4 @@ class StringAdderCalculatorTest {
     private int 정수_변환(String literalInteger) {
         return Integer.parseInt(literalInteger);
     }
-
-
 }
