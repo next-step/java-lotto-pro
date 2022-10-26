@@ -21,11 +21,12 @@ public class LottoService {
         return money / LOTTO_PRICE;
     }
 
-    public void generateLottos(int count) {
+    public List<Lotto> generateLottos(int count) {
         System.out.println(count + Message.COUNT.getMessage());
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto());
         }
+        return lottos;
     }
 
     public void matchWinningNumbers(List<Integer> winningNumbers) {
