@@ -7,8 +7,7 @@ import java.util.stream.Stream;
 public class StringAddCalculator {
     public static int splitAndSum(String text) {
         if(isNullOrEmpty(text)){ return 0; }
-        String[] numbers = split(text);
-        return sum(numbers);
+        return sum(split(text));
     }
     private static String[] split(String text){
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
