@@ -23,4 +23,11 @@ class NumbersTest {
 		Numbers numbers = Numbers.from(new String[]{"1","2","3"});
 		assertThat(numbers.sum()).isEqualTo(Number.from(6));
 	}
+
+	@DisplayName("빈 Numbers 합계 0")
+	@Test
+	void sum_emptyNumbers() {
+		Numbers emptyNumbers = Numbers.from(new String[]{});
+		assertThat(emptyNumbers.sum()).isEqualTo(Number.from(0));
+	}
 }
