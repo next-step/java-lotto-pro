@@ -7,12 +7,13 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringAddCalculator {
-    public static final int DEFAULT = 0;
+    public static final int DEFAULT_VALUE = 0;
+    public static final int MINIMUM = 0;
     public static final String DELIMITER = ",|:";
 
     public static int splitAndSum(String input) {
         if (isEmpty(input)) {
-            return DEFAULT;
+            return DEFAULT_VALUE;
         }
 
         return sum(parse(split(input)));
@@ -37,13 +38,27 @@ public class StringAddCalculator {
     }
 
     private static List<Integer> parse(String[] inputs) {
-        return Arrays.stream(inputs)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        try {
+            return Arrays.stream(inputs)
+                    .map(StringAddCalculator::toPositive)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new RuntimeException("입력값은 양수여야 합니다.");
+        }
+    }
+
+    private static int toPositive(String input) {
+        int value = Integer.parseInt(input);
+
+        if (value > MINIMUM) {
+            return value;
+        }
+
+        throw new IllegalArgumentException();
     }
 
     private static int sum(List<Integer> numbers) {
         return numbers.stream()
-                .reduce(DEFAULT, (a, b) -> a + b);
+                .reduce(DEFAULT_VALUE, (a, b) -> a + b);
     }
 }
