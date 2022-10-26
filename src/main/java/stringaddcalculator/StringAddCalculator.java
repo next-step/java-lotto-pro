@@ -12,7 +12,7 @@ public class StringAddCalculator {
 			return Number.ZERO;
 		}
 
-		Numbers numbers = new Numbers(splitText(text));
+		Numbers numbers = Numbers.from(splitText(text));
 		validateNegative(numbers);
 
 		Number result = numbers.sum();

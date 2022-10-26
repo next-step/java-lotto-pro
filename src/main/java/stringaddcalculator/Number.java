@@ -4,14 +4,18 @@ import java.util.Objects;
 
 public class Number {
 	public static final int ZERO = 0;
-	private int number;
+	private final int number;
 
-	public Number(String s) {
-		this.number = Integer.parseInt(s);
+	private Number(int number) {
+		this.number = number;
 	}
 
-	public Number(int n) {
-		this.number = n;
+	public static Number from(String s) {
+		return new Number(Integer.parseInt(s));
+	}
+
+	public static Number from(int n) {
+		return new Number(n);
 	}
 
 	public boolean isNegative() {

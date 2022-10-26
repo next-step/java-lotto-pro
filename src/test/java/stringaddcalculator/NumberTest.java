@@ -12,13 +12,13 @@ class NumberTest {
 	@DisplayName("더하기")
 	@Test
 	void sum() {
-		assertThat(new Number(3).sum(new Number(5))).isEqualTo(new Number(8));
+		assertThat(Number.from(3).sum(Number.from(5))).isEqualTo(Number.from(8));
 	}
 
 	@DisplayName("음수 여부 확인")
 	@Test
 	void isNegative() {
-		assertThat(new Number(3).isNegative()).isFalse();
-		assertThat(new Number(-1).isNegative()).isTrue();
+		assertThat(Number.from(3).isNegative()).isFalse();
+		assertThat(Number.from(-1).isNegative()).isTrue();
 	}
 }

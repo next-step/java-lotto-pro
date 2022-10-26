@@ -7,10 +7,16 @@ import java.util.stream.Collectors;
 public class Numbers {
 	private final List<Number> numbers;
 
-	public Numbers(String[] numbers) {
-		this.numbers = Arrays.stream(numbers)
-			.map(Number::new)
-			.collect(Collectors.toList());
+	private Numbers(List<Number> numbers) {
+		this.numbers = numbers;
+	}
+
+	public static Numbers from(String[] numbers) {
+		return new Numbers(
+			Arrays.stream(numbers)
+				.map(Number::from)
+				.collect(Collectors.toList())
+		);
 	}
 
 	public boolean containsNegative() {
@@ -20,6 +26,6 @@ public class Numbers {
 	public Number sum() {
 		return numbers.stream()
 			.reduce(Number::sum)
-			.orElse(new Number(Number.ZERO));
+			.orElse(Number.from(Number.ZERO));
 	}
 }
