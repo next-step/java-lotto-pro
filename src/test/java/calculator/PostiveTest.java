@@ -12,8 +12,13 @@ public class PostiveTest {
     }
 
     @Test
-    void 합산_테스트(){
+    void 합산_테스트() {
         Positive one = new Positive(1);
         Assertions.assertThat(one.sum(new Positive(2))).isEqualTo(new Positive(3));
+    }
+
+    @Test
+    void 문자열_생성자_사용_가능() {
+        Assertions.assertThat(new Positive("1")).isEqualTo(new Positive(1));
     }
 }
