@@ -29,6 +29,16 @@ class StringTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = {"(1,2)", "(1,)"})
+    @DisplayName("숫자 1개가 있는 문자를 , 자를때 1개 숫자 문자를 가진 배열이 나온다.")
+    void givenTextWithParentheses_whenSubstringAndSplit_thenNumbers(String text) {
+        String textWithoutParentheses = text.substring(1, text.length() - 2);
+        String[] numbers = textWithoutParentheses.split(",");
+
+        assertThat(numbers).containsExactly("1");
+    }
+
+    @ParameterizedTest
     @CsvSource(value = {"abc:4", "abc:-1"}, delimiter = ':')
     @DisplayName("문자열이 주어질때 문자열 인덱스를 오버하는 인덱스로 charAt 할경우 에러 발생.")
     void givenOutOfIndex_whenCharAt_thenThrowStringIndexOutOfBoundsException(String text, int index) {
