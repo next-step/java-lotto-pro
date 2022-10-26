@@ -8,10 +8,10 @@ public class Numbers {
 
     public Numbers(String[] numberTexts) {
         if (numberTexts == null || numberTexts.length == 0) throw new RuntimeException();
-        this.numbers = getCarsFromInputName(numberTexts);
+        this.numbers = getNumbersFromTexts(numberTexts);
     }
 
-    private List<Number> getCarsFromInputName(String[] numberTexts) {
+    private List<Number> getNumbersFromTexts(String[] numberTexts) {
         List<Number> result = new ArrayList<>();
         for (String numberText : numberTexts) {
             result.add(new Number(numberText));
