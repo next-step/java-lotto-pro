@@ -1,32 +1,26 @@
 package step2;
 
 import java.util.List;
+import java.util.Objects;
 
 public class StringAddCalculator {
 
     private static final int ZERO = 0;
 
-    private static Calculation calculation;
-
     public static int splitAndSum(final String input) {
-        if (calculation.isNullOrEmpty(input)) {
+        if(isNullOrEmpty(input)) {
             return ZERO;
         }
-        calculation = new Calculation(input);
-
-        return sum(calculation.getSplitNumbers());
+        return sum(new SplitNumbers(Calculation.split(input)).getSplitNumbers());
     }
 
-    private static int sum(final List<String> splitNumbers) {
+    private static int sum(final List<Integer> splitNumbers) {
         return splitNumbers.stream()
-            .mapToInt(Integer::parseInt)
-            .peek(splitNumber -> checkNegative(splitNumber))
-            .sum();
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
-    private static void checkNegative(final int splitNumber) {
-        if (splitNumber < ZERO) {
-            throw new IllegalArgumentException("덧셈에 음수는 허용되지 않습니다.");
-        }
+    private static boolean isNullOrEmpty(final String input) {
+        return Objects.isNull(input) || input.isEmpty();
     }
 }
