@@ -15,6 +15,7 @@ public class StringAddCalculator {
             return Integer.parseInt(text);
         }
         String[] tokens = split(text);
+        checkTokenValidation(tokens);
         return getTokensSum(tokens);
     }
 
@@ -46,6 +47,19 @@ public class StringAddCalculator {
 
     private static String[] splitWithCustomSeparator(String text, String separator) {
         return text.split(separator);
+    }
+
+    private static void checkTokenValidation(String[] tokens) throws RuntimeException {
+        long charCount = Arrays.stream(tokens)
+                .filter(token -> !isNumberOnly(token))
+                .count();
+        long negativeCount = Arrays.stream(tokens)
+                .mapToInt(Integer::parseInt)
+                .filter(token -> token < 0)
+                .count();
+        if(charCount > 0 || negativeCount > 0) {
+            throw new RuntimeException("숫자 이외의 값 또는 음수는 지원하지 않습니다.");
+        }
     }
 
     private static int getTokensSum(String[] tokens) {
