@@ -11,7 +11,7 @@ public class BracketDestroyerTest {
     }
 
     @Test
-    void 괄호_제외하고_문자열_반환_예외() {
+    void 괄호_제외하고_사이_문자열_반환_예외() {
         String onlyOpenBracket = "(1,2";
         String onlyCloseBracket = "1,2)";
         assertThat(new BracketDestroyer(onlyOpenBracket).toString()).isEqualTo("1,2");
