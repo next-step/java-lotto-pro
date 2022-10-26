@@ -2,6 +2,8 @@ package calculator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringAddCalculator {
@@ -25,6 +27,12 @@ public class StringAddCalculator {
     }
 
     private static String[] split(String input) {
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            return m.group(2).split(customDelimiter);
+        }
+
         return input.split(DELIMITER);
     }
 
