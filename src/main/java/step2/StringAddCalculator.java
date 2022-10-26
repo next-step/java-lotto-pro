@@ -5,8 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
-    private static final String DEFAULT_DELIMITER = "[,:]";
     private static final int ZERO = 0;
+    private static final Pattern DEFAULT_DELIMITER_PATTERN = Pattern.compile("[,:]");
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final int NUMBER_OF_DELIMITER_GROUP = 1;
     private static final int NUMBER_OF_TEXT_GROUP = 2;
@@ -34,7 +34,7 @@ public class StringAddCalculator {
         if (matcher.find()) {
             return matcher.group(NUMBER_OF_TEXT_GROUP).split(matcher.group(NUMBER_OF_DELIMITER_GROUP));
         }
-        return text.split(DEFAULT_DELIMITER);
+        return DEFAULT_DELIMITER_PATTERN.split(text);
     }
 
     private static int sum(String[] numbersAsString) {
