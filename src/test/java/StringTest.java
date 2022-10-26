@@ -33,4 +33,18 @@ public class StringTest {
         assertThat(result).contains("1");
         assertThat(result).containsExactly(expect);
     }
+
+    @Test
+    @DisplayName("감싸진 괄호를 제거한다")
+    void remove_parentheses_test() {
+        //given
+        String input = "(1,2)";
+        String expect = "1,2";
+
+        //when
+        String result = input.substring(1, input.length() - 1);
+
+        //then
+        assertThat(result).isEqualTo(expect);
+    }
 }
