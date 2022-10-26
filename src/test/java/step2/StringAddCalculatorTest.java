@@ -27,7 +27,7 @@ class StringAddCalculatorTest {
         assertThat(StringAddCalculator.splitAndSum(text)).isEqualTo(Integer.parseInt(text));
     }
 
-    @DisplayName("NULL 또는 빈 문자를 입력 시 0")
+    @DisplayName("쉼표 구분자를 사용할 경우")
     @Test
     void splitAndSum_쉼표구분자() {
         assertThat(StringAddCalculator.splitAndSum("1,2")).isEqualTo(3);
