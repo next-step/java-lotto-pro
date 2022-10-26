@@ -11,8 +11,20 @@ public class StringAddCalculator {
         if(text == null || text.isEmpty()) {
             return 0;
         }
+        if(isNumberOnly(text)) {
+            return Integer.parseInt(text);
+        }
         String[] tokens = split(text);
         return getTokensSum(tokens);
+    }
+
+    private static boolean isNumberOnly(String text) {
+        try {
+            Integer.parseInt(text);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 
     private static String[] split(String text) {
