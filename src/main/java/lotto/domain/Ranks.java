@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Ranks {
 
@@ -11,7 +8,7 @@ public class Ranks {
     private final Map<Rank, Integer> countsOfRanks;
 
     public Ranks() {
-        countsOfRanks = new HashMap<>();
+        countsOfRanks = new TreeMap<>(Comparator.comparingInt(Rank::getCountOfMatch));
         for(Rank rank : ranks) {
             countsOfRanks.put(rank, 0);
         }
