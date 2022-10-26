@@ -33,9 +33,10 @@ class StringAddCalculatorTest {
         assertThat(StringAddCalculator.splitAndSum("1,2")).isEqualTo(3);
     }
 
+    @DisplayName("콜론 구분자를 사용할 경우")
     @Test
-    public void splitAndSum_쉼표_또는_콜론_구분자() {
-        assertThat(StringAddCalculator.splitAndSum("1,2:3")).isEqualTo(6);
+    public void splitAndSum_콜론_구분자() {
+        assertThat(StringAddCalculator.splitAndSum("1:2:3")).isEqualTo(6);
     }
 
     @DisplayName("커스텀 구분자를 사용 할 경우")
