@@ -22,3 +22,6 @@
 ## 테스트 코드를 우선 작성하고 이에 맞는 기능을 구현
 ## 프로그래밍 요구사항을 지키기 위해 메서드 최대한 구분 -  최대 10 라인
 ## stream 활용
+
+# Pattern 사용에 관련된 블로그 글 참고(원문 링크)
+## https://medium.com/webeveloper/%EC%9E%90%EB%B0%94-%EC%98%AC%EB%B0%94%EB%A5%B4%EA%B2%8C-%EC%A0%95%EA%B7%9C%EC%8B%9D-%ED%8C%A8%ED%84%B4-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-c2479c33ab8b
