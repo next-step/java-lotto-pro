@@ -50,8 +50,15 @@ public class StringAddCalculatorTest {
 
     @Test
     @DisplayName("구분된 숫자중 음수가 포함된 경우 RuntimeException 예외를 발생")
-    public void splitAndSum_negative() {
+    public void throw_exception_if_netative_number_included() {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("구분된 문자열에 숫자 이외에 값이 포함된 경우 RuntimeException 예외를 발생")
+    public void throw_exception_if_text_contains_value_other_than_number() {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("31,a,3"))
                 .isInstanceOf(RuntimeException.class);
     }
 
