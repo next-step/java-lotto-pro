@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SetTest {
+class SetTest {
     private Set<Integer> numbers;
 
     @BeforeEach
@@ -28,21 +28,21 @@ public class SetTest {
 
     @Test
     @DisplayName("Set의 size를 확인하는 테스트")
-    public void checkSize() {
+    void checkSize() {
         assertThat(numbers).hasSize(3);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     @DisplayName("주어진 각 원소가 Set에 포함되어 있는지 확인하는 테스트")
-    public void containsElement(int num) {
+    void containsElement(int num) {
         assertTrue(numbers.contains(num));
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
     @DisplayName("주어진 각 원소가 Set에 포함되어 있는지 확인하는 테스트(확장)")
-    public void containsElement(int num, boolean expected) {
+    void containsElement(int num, boolean expected) {
         assertEquals(expected, numbers.contains(num));
     }
 }
