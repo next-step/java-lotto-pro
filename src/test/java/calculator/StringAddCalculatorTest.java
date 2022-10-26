@@ -36,4 +36,11 @@ class StringAddCalculatorTest {
     void 구분자_지정_사용_합산() {
         Assertions.assertThat(StringAddCalculator.calculate("//;\n1;2;3")).isEqualTo(6);
     }
+
+    @Test
+    void 음수_입력시_에러() {
+        Assertions.assertThatThrownBy(() -> StringAddCalculator.calculate("-1,2:3"))
+            .isInstanceOf(RuntimeException.class)
+            .hasMessage("음수는 사용이 불가능");
+    }
 }
