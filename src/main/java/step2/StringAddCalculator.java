@@ -59,7 +59,7 @@ public class StringAddCalculator {
         try {
             return Integer.parseInt(text);
         } catch (NumberFormatException exception) {
-            throw new RuntimeException(ERR_IS_NOT_A_INTEGER_FORMAT);
+            throw new RuntimeException(ERR_IS_NOT_A_INTEGER_FORMAT, exception);
         }
     }
 }
