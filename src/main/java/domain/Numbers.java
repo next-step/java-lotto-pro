@@ -1,24 +1,44 @@
 package domain;
 
-public class Numbers {
-    private final String[] stringNumbers;
+import java.util.ArrayList;
+import java.util.List;
 
-    private Numbers(String[] split) {
-        this.stringNumbers = split;
+public class Numbers {
+    private final List<Integer> numbers;
+
+    private Numbers(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
     public static Numbers of(String[] split) {
-        return new Numbers(split);
+        List<Integer> numbers = parIntegers(split);
+        return new Numbers(numbers);
+    }
+
+    private static List<Integer> parIntegers(String[] split) {
+        List<Integer> numbers = new ArrayList<>();
+        for (String stringNum : split) {
+            numbers.add(parseInteger(stringNum));
+        }
+        return numbers;
+    }
+
+    private static int parseInteger(String stringNum) {
+        int i = Integer.parseInt(stringNum);
+        if(i < 0){
+            throw new RuntimeException("음수는 계산할 수 없습니다");
+        }
+        return i;
     }
 
     public int size() {
-        return stringNumbers.length;
+        return numbers.size();
     }
 
     public int sum() {
         int sum = 0;
-        for (String stringNum : stringNumbers) {
-            sum += Integer.parseInt(stringNum);
+        for (Integer num : this.numbers) {
+            sum += num;
         }
         return sum;
     }
