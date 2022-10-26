@@ -6,9 +6,9 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-    public static final String REGEX_SEPARATOR = "[,:]";
-    public static final String REGEX_CUSTOM_SEPARATOR = "//(.)\n(.*)";
-    public static final String ERROR_NEGATIVE_NUMBER = "음수는 포함될 수 없습니다.";
+    private static final String REGEX_SEPARATOR = "[,:]";
+    private static final String REGEX_CUSTOM_SEPARATOR = "//(.)\n(.*)";
+    private static final String ERROR_NEGATIVE_NUMBER = "음수는 포함될 수 없습니다.";
 
     public static int splitAndSum(String text) {
         if (validateBlank(text)) {
