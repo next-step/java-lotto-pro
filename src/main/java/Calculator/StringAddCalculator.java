@@ -18,11 +18,11 @@ public class StringAddCalculator {
             return 0;
         }
 
-        return Arrays.stream(toIntArray(text))
+        return Arrays.stream(split(text))
                 .sum();
     }
 
-    private static int[] toIntArray(String text) {
+    private static int[] split(String text) {
 
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(text);
         String delimiter = DEFAULT_DELIMITER;
@@ -33,11 +33,11 @@ public class StringAddCalculator {
         }
 
         return Arrays.stream(text.split(delimiter))
-                .mapToInt(StringAddCalculator::toInt)
+                .mapToInt(StringAddCalculator::stringToInt)
                 .toArray();
     }
 
-    private static int toInt(String token) {
+    private static int stringToInt(String token) {
         if (!token.matches(POSITIVE_NUMBER_REGEX)) {
             throw new RuntimeException("양수의 숫자만 입력 가능합니다.");
         }
