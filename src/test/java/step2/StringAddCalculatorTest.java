@@ -33,7 +33,8 @@ class StringAddCalculatorTest {
     }
 
     @Test
-    public void splitAndSum_comma() throws Exception {
+    @DisplayName("쉼표로 구분할 경우 숫자의 합을 반환한다.")
+    void splitAndSum_comma() {
         int result = stringAddCalculator.sum("1,2");
         assertThat(result).isEqualTo(3);
     }
