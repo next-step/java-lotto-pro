@@ -12,5 +12,5 @@
   - [x] "1,2"를 반환한다.
 - [x] 특정 위치의 문자를 가져온다. 
   - [x] charAt() 메소드를 활용한다.
-  - [ ] 위치 값을 벗어나면 StringIndexOutOfBoundsException이 발생한다. 
-- [ ] @DisplayName 활용해 테스트 메소드의 의도를 드러낸다.
+  - [x] 위치 값을 벗어나면 StringIndexOutOfBoundsException이 발생한다. 
+- [x] @DisplayName 활용해 테스트 메소드의 의도를 드러낸다.

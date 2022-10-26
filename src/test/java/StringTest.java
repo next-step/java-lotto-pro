@@ -4,6 +4,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayName("String 클래스에 대한 학습 테스트")
@@ -56,6 +57,15 @@ class StringTest {
         char actual = text.charAt(1);
 
         assertThat(actual).isEqualTo('b');
+    }
+
+    @DisplayName("특정 위치의 문자를 가져올때 위치 값을 벗어나면 StringIndexOutOfBoundsException이 발생한다.")
+    @ParameterizedTest
+    @CsvSource({"abcdef, 7", "1bevcs, 8", "ubsdfeve, 10"})
+    void StringIndexOutOfBoundsException(String text, int outOfIndex) {
+
+        assertThatThrownBy(() -> text.charAt(outOfIndex))
+                .isInstanceOf(IndexOutOfBoundsException.class);
     }
 
 }
