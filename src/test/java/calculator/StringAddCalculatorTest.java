@@ -14,6 +14,10 @@ public class StringAddCalculatorTest {
 
         result = StringAddCalculator.splitAndSum("");
         assertThat(result).isEqualTo(0);
+
+        // 공백 문자열도 0으로 처리한다
+        result = StringAddCalculator.splitAndSum("    ");
+        assertThat(result).isEqualTo(0);
     }
 
     @DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
@@ -48,6 +52,13 @@ public class StringAddCalculatorTest {
     @Test
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+            .isInstanceOf(RuntimeException.class);
+    }
+
+    @DisplayName("유효하지 않은 문자열이 입력됐을 경우 예외처리한다")
+    @Test
+    public void strangeInputTest() throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("123;\n1;2;3"))
             .isInstanceOf(RuntimeException.class);
     }
 }
