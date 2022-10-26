@@ -2,12 +2,11 @@ package utlis;
 
 public class StringUtils {
 
-    public static boolean isNullOrEmpty(String text) {
-        return text == null || text.isEmpty();
+    private StringUtils() {
     }
 
-    public static int toInt(String text) {
-        return Integer.parseInt(text);
+    public static boolean isNullOrEmpty(String text) {
+        return text == null || text.trim().isEmpty();
     }
 
 }
