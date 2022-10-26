@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,6 +38,14 @@ class StringAddCalculatorTest {
     void splitAndSum_comma() {
         int result = stringAddCalculator.sum("1,2");
         assertThat(result).isEqualTo(3);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,2=3", "1:2,3=6"}, delimiter = '=')
+    @DisplayName("쉼표와 콜론으로 split한 숫자를 합해서 반환하는지 확인한다.")
+    void split_colon_comma_test(String input, int expected) {
+        int result = stringAddCalculator.sum(input);
+        assertThat(result).isEqualTo(expected);
     }
 
 }
