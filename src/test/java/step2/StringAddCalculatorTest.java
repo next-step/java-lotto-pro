@@ -51,7 +51,8 @@ class StringAddCalculatorTest {
     @ValueSource(strings = {"-1,2,3", "1,-2,3", "1,2,-3", "-1,-2,-3"})
     public void splitAndSum_negative(String text) {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum(text))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("Can not Convert NegativeNumber To Int");
     }
 
     @DisplayName("숫자가 아닌 문자가 포함된 경우")
@@ -59,6 +60,7 @@ class StringAddCalculatorTest {
     @ValueSource(strings = {"A", "1,!", "1,2,B"})
     public void splitAndSum_숫자가_아닌_문자(String text) {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum(text))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("Is Not a Integer Format");
     }
 }
