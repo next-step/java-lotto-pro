@@ -30,11 +30,14 @@ public class StringAddCalculator {
     }
 
     private int sum(String[] stringNumbers) {
-        int number = 0;
-        for (String stringNumber: stringNumbers) {
-            number += Integer.parseInt(stringNumber);
+        int sum = 0;
+        Numbers numbers = new Numbers(stringNumbers);
+
+        for(int number : numbers.getNumbers()) {
+           sum += number;
         }
-        return number;
+
+        return sum;
     }
 
     public boolean isNullOrEmpty(String inputStr){
