@@ -12,14 +12,21 @@ public class StringAddCalculator {
         if (input == null || input.isEmpty()) {
             return 0;
         }
+        return sum(split(input));
+    }
+
+    private static String[] split(final String input){
         Matcher matcher = SPLITER.matcher(input);
         if(matcher.find()){
             String customDelimiter = matcher.group(1);
-            return Arrays.stream(matcher.group(2).split(customDelimiter))
-                .mapToInt(Integer::parseInt)
-                .sum();
+            String string = matcher.group(2);
+            return string.split(customDelimiter);
         }
-        return Arrays.stream(input.split("[,:]"))
+        return input.split("[,:]");
+    }
+
+    private static int sum(final String[] input) {
+        return Arrays.stream(input)
             .mapToInt(Integer::parseInt)
             .sum();
     }
