@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
 
@@ -35,9 +36,23 @@ public class StringAddCalculatorTest {
     @ParameterizedTest
     @CsvSource(value = {"1:2=3", "6:4,3=13", "7:2:9=18", "0,5:9=14"}, delimiter = '=')
     @DisplayName("숫자를 컴마(,)또는콜론(:) 구분자로 입력할 경우 숫자의 합을 반환")
-    public void returns_sum_if_number_entered_with_comma_or_delimiter(String text, int sum) throws Exception {
+    public void returns_sum_if_number_entered_with_comma_or_delimiter(String text, int sum) {
         int result = StringAddCalculator.splitAndSum(text);
         assertThat(result).isEqualTo(sum);
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자를 지정할 경우 구분된 숫자의 합을 반환")
+    public void returns_sum_if_number_entered_with_custom_delimite1r()  {
+        int result = StringAddCalculator.splitAndSum("//@\n1@2@3");
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("구분된 숫자중 음수가 포함된 경우 RuntimeException 예외를 발생")
+    public void splitAndSum_negative() {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+                .isInstanceOf(RuntimeException.class);
     }
 
 }
