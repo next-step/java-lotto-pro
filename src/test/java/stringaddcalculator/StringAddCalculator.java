@@ -1,43 +1,22 @@
 package stringaddcalculator;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.OptionalInt;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class StringAddCalculator {
-	private static final int ZERO = 0;
 	private static final String DEFAULT_SPLIT_REGEX = ",|:";
 	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
 
 	public static int splitAndSum(String text) {
-		if (text == null) {
-			return ZERO;
+		if (isNullOrEmpty(text)) {
+			return Number.ZERO;
 		}
-		if (text.isEmpty()) {
-			return ZERO;
-		}
-		String[] numbers = splitText(text);
 
-		List<Number> number = Arrays.stream(numbers)
-			.map(Number::new)
-			.collect(Collectors.toList());
+		Numbers numbers = new Numbers(splitText(text));
+		validateNegative(numbers);
 
-		validateNegative(number);
-
-		Optional<Number> numberOptional = number.stream()
-			.reduce(Number::sum);
-
-		return numberOptional.map(Number::getValue).orElse(ZERO);
-	}
-
-	private static void validateNegative(List<Number> number) {
-		if (number.stream().anyMatch(Number::isNegative)) {
-			throw new RuntimeException();
-		}
+		Number result = numbers.sum();
+		return result.getValue();
 	}
 
 	private static String[] splitText(String text) {
@@ -48,5 +27,21 @@ public class StringAddCalculator {
 			return targetText.split(customDelimiter);
 		}
 		return text.split(DEFAULT_SPLIT_REGEX);
+	}
+
+	private static void validateNegative(Numbers numbers) {
+		if (numbers.containsNegative()) {
+			throw new RuntimeException();
+		}
+	}
+
+	private static boolean isNullOrEmpty(String text) {
+		if (text == null) {
+			return true;
+		}
+		if (text.isEmpty()) {
+			return true;
+		}
+		return false;
 	}
 }

@@ -14,4 +14,11 @@ class NumberTest {
 	void sum() {
 		assertThat(new Number(3).sum(new Number(5))).isEqualTo(new Number(8));
 	}
+
+	@DisplayName("음수 여부 확인")
+	@Test
+	void isNegative() {
+		assertThat(new Number(3).isNegative()).isFalse();
+		assertThat(new Number(-1).isNegative()).isTrue();
+	}
 }
