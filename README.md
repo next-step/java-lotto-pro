@@ -38,3 +38,38 @@
   * 요구사항 3 - Set의 contains() 사용하기
     * [x] 주어진 Set 내에 없는 값이면 false, 존재하는 값이면 true 반환 확인
       * JUnit의 ParameterizedTest 및 CsvSource 사용
+
+## 2단계 - 문자열 덧셈 계산기
+### 기능 목록
+* [x] 기본 구분자로 문자열 split
+  * 기본 구분자: 쉼표(,) 또는 콜론(:)
+* [x] 커스텀 구분자로 문자열 split
+  * 커스텀 구분자: 문자열 **앞부분**의 "//"와 "\n" 사이 문자를 커스텀 구분자로 사용
+  ```java
+  // java.util.regex 패키지의 Matcher, Pattern import
+  Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+  if (m.find()) {
+    String customDelimiter = m.group(1);
+    String[] tokens= m.group(2).split(customDelimiter);
+    // 덧셈 구현
+  }
+  ```
+* [x] split한 숫자들 덧셈
+  * split한 문자열을 숫자로 변환하여 덧셈
+  ```java
+  int number = Integer.parseInt(text);
+  ```
+  * [x] 덧셈할 문자열이 숫자 이외의 값 또는 음수일 경우 RuntimeException 예외 throw
+    * [x] 원시값 포장 및 collection 포장을 위해 PositiveNumber, PositiveNumbers 구현
+    * 기본적으로 parseInt 할 때에 숫자가 아니면 NumberFormatException이 발생하여, 에러 발생 시, 메시지만 변경함
+    * 음수값은 잘못된 인자가 들어온 걸로 판단하여 IllegalArgumentException 발생시킴
+  * [x] 덧셈 시, 큰 int값들을 더해 결과값이 음수가 된 경우(예: 2147483645 + 123) 정상이 아니라고 판단하여, IllegalArgumentException 발생시킴
+### 테스트 케이스
+1. [x] null
+2. [x] ""
+3. [x] "1"
+4. [x] "1,2"
+5. [x] "1,2:3"
+6. [x] "//;\n1;2;3"
+8. [x] "-1,2:3"
+9. [x] "가,2:3"
