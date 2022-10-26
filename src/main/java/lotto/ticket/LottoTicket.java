@@ -8,7 +8,6 @@ import java.util.Set;
 import lotto.system.OutputView;
 
 public class LottoTicket {
-    // TODO: 인스턴스 3개로 줄이기
     private final int MIN_NUMBER = 1;
     private final int MAX_NUMBER = 45;
     private final int SLOT_SIZE = 6;
@@ -55,7 +54,7 @@ public class LottoTicket {
         return builder.toString();
     }
 
-    public int macth(LottoTicket winnerLottoTicket) {
+    public int match(LottoTicket winnerLottoTicket) {
         int count = 0;
         for (Integer number: numbers){
             if(winnerLottoTicket.contains(number)){

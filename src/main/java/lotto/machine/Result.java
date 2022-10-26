@@ -46,7 +46,7 @@ public class Result {
         }
     }
 
-    public float calculatorYieldRate() {
+    public float yieldRate() {
         yieldRate += threeCount * Match.THREE.getAmount();
         yieldRate += fourCount * Match.FOUR.getAmount();
         yieldRate += fiveCount * Match.FIVE.getAmount();

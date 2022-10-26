@@ -23,7 +23,7 @@ public class LottoTickets {
     public Result match(LottoTicket winningLottoTicket) {
         Result result = new Result();
         for (LottoTicket ticket : lottoTickets){
-            result.addCount(ticket.macth(winningLottoTicket));
+            result.addCount(ticket.match(winningLottoTicket));
         }
         return result;
     }

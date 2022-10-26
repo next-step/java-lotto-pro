@@ -28,9 +28,7 @@ public class OutputView {
         System.out.println(Match.FOUR.getCount() + "개 일치("+Match.FOUR.getAmount() + ")원-" + result.getFourCount() + "개");
         System.out.println(Match.FIVE.getCount() + "개 일치("+Match.FIVE.getAmount() + ")원-" + result.getFiveCount() + "개");
         System.out.println(Match.SIX.getCount() + "개 일치("+Match.SIX.getAmount()+ " )원-" + result.getSixCount() + "개");
-
-        float rate = result.calculatorYieldRate();
-        System.out.println("총 수익률은 " + rate + "입니다.(기준이 1이기 떄문에 결과적으로는 손해라는 의미임)");
+        System.out.println("총 수익률은 " + result.yieldRate() + "입니다.(기준이 1이기때문에, 1 이하는 손해임)");
 
     }
 }

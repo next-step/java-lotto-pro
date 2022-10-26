@@ -33,7 +33,7 @@ public class LottoTicketTest {
     void match(){
         LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,6");
         LottoTicket winnerLottoTicket = new LottoTicket("1,2,3,4,5,6");
-        int matchCount = lottoTicket.macth(winnerLottoTicket);
+        int matchCount = lottoTicket.match(winnerLottoTicket);
         assertThat(matchCount).isEqualTo(6);
     }
 
