@@ -35,17 +35,10 @@ class StringTest {
     @DisplayName("String - charAt 메소드 StringIndexOutOfBoundsException 테스트")
     @Test
     void charAt() {
-        //given:
-        String source = "abc";
-        //when:
-        char a = source.charAt(0);
-        char b = source.charAt(1);
-        char c = source.charAt(2);
-        //then:
-        assertThat(a).isEqualTo('a');
-        assertThat(b).isEqualTo('b');
-        assertThat(c).isEqualTo('c');
         assertThatThrownBy(() ->
-                source.charAt(3)).isInstanceOf(StringIndexOutOfBoundsException.class);
+        {
+            String source = "abc";
+            source.charAt(3);
+        }).isInstanceOf(StringIndexOutOfBoundsException.class);
     }
 }
