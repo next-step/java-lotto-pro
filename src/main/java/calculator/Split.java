@@ -9,10 +9,10 @@ public class Split {
   private static final String DEFAULT_SPLIT_SEPARATORS= ",|:";
   private static final Pattern CUSTOM_SPLIT_SEPARATOR_PATTERN = Pattern.compile("//(.)\n(.*)");
 
-  private String[] value;
+  private String[] stringArray;
 
   public Split(String input) {
-    this.value = validateInput(input);
+    this.stringArray = validateInput(input);
   }
 
   public String[] validateInput(String input) {
@@ -36,8 +36,8 @@ public class Split {
     return input.split(DEFAULT_SPLIT_SEPARATORS);
   }
 
-  public String[] getValue() {
-    return value;
+  public String[] getStringArray() {
+    return stringArray;
   }
 
 }
