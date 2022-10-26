@@ -8,10 +8,11 @@ public class StringAddCalculator {
     private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_DELIMITER);
     private static final String MINUS_NUMBER_EXCEPTION_MESSAGE = "음수는 입력할 수 없습니다.";
+    private static final int NUMBER_RETURNED_WHEN_EMPTY_OR_NULL = 0;
 
     public int sum(String inputText) {
         if (validateInputText(inputText)) {
-            return 0;
+            return NUMBER_RETURNED_WHEN_EMPTY_OR_NULL;
         }
         return splitAndSum(inputText);
     }
