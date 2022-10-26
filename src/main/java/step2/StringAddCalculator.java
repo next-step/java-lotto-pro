@@ -1,12 +1,21 @@
 package step2;
 
+import java.util.Arrays;
+
 public class StringAddCalculator {
+
+    public static final String REGEX_SEPARATOR = "[,:]";
 
     public static int splitAndSum(String text) {
         if (validateBlank(text)) {
             return 0;
         }
-        return 1;
+
+        String[] split = text.split(REGEX_SEPARATOR);
+
+        return Arrays.stream(split)
+                .mapToInt(Integer::parseInt)
+                .sum();
     }
 
     private static boolean validateBlank(String text) {
