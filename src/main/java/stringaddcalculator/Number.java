@@ -3,7 +3,7 @@ package stringaddcalculator;
 import java.util.Objects;
 
 public class Number {
-	public static final int ZERO = 0;
+	private static final int ZERO = 0;
 	private final int number;
 
 	private Number(int number) {

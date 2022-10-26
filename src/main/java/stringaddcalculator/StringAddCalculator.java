@@ -6,10 +6,11 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
 	private static final String DEFAULT_SPLIT_REGEX = ",|:";
 	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+	private static final int NULL_OR_EMPTY_DEFAULT_RETURN_VALUE = 0;
 
 	public static int splitAndSum(String text) {
 		if (isNullOrEmpty(text)) {
-			return Number.ZERO;
+			return NULL_OR_EMPTY_DEFAULT_RETURN_VALUE;
 		}
 
 		Numbers numbers = Numbers.from(splitText(text));

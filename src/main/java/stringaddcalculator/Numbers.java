@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Numbers {
+	private static final int SUM_DEFAULT_RETURN_VALUE = 0;
 	private final List<Number> numbers;
 
 	private Numbers(List<Number> numbers) {
@@ -22,6 +23,6 @@ public class Numbers {
 	public Number sum() {
 		return numbers.stream()
 			.reduce(Number::sum)
-			.orElse(Number.from(Number.ZERO));
+			.orElse(Number.from(SUM_DEFAULT_RETURN_VALUE));
 	}
 }
