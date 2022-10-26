@@ -9,6 +9,7 @@ public class StringAddCalculator {
     private static final int DEFAULT_VALUE = 0;
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\\n(.*)");
+    private static final String NEGATIVE_NUMBER_MESSAGE = "음수는 포함될 수 없습니다";
 
     public static int splitAndSum(String text) {
         if (isEmptyOrNull(text)) return DEFAULT_VALUE;
@@ -36,7 +37,7 @@ public class StringAddCalculator {
 
     private static int convertToInt(String number){
         int intValue = Integer.parseInt(number);
-        if(intValue < 0) throw new RuntimeException();
+        if(intValue < 0) throw new RuntimeException(NEGATIVE_NUMBER_MESSAGE);
         return intValue;
     }
 

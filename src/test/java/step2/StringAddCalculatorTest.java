@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -29,7 +28,7 @@ public class StringAddCalculatorTest {
     @ParameterizedTest
     @CsvSource(value = {"12:12", "13:13", "3:3"}, delimiter = ':')
     @DisplayName("숫자만 입력할 경우 입력한 숫자 반환")
-    public void returns_number_if_only_number_entered(String text,int value) throws Exception {
+    public void returns_number_if_only_number_entered(String text,int value){
         int result = StringAddCalculator.splitAndSum(text);
         assertThat(result).isEqualTo(value);
     }
