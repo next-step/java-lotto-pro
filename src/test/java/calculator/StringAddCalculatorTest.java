@@ -21,4 +21,9 @@ class StringAddCalculatorTest {
     void 단일_숫자형_문자_입력시_숫자_반환(String actual, int expected){
         Assertions.assertThat(StringAddCalculator.calculate(actual)).isEqualTo(expected);
     }
+
+    @Test
+    void 쉼표로_구분된_값을_합산(){
+        Assertions.assertThat(StringAddCalculator.calculate("1,2")).isEqualTo(3);
+    }
 }
