@@ -8,8 +8,8 @@ public class StringAddCalculator {
     private static final String DEFAULT_DELIMITER = "[,:]";
     private static final int ZERO = 0;
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
-    public static final int NUMBER_OF_DELIMITER_GROUP = 1;
-    public static final int NUMBER_OF_TEXT_GROUP = 2;
+    private static final int NUMBER_OF_DELIMITER_GROUP = 1;
+    private static final int NUMBER_OF_TEXT_GROUP = 2;
 
     private StringAddCalculator() {
 
