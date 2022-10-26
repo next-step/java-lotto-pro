@@ -19,10 +19,6 @@ public class Numbers {
 		);
 	}
 
-	public boolean containsNegative() {
-		return numbers.stream().anyMatch(Number::isNegative);
-	}
-
 	public Number sum() {
 		return numbers.stream()
 			.reduce(Number::sum)

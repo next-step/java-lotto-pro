@@ -13,7 +13,6 @@ public class StringAddCalculator {
 		}
 
 		Numbers numbers = Numbers.from(splitText(text));
-		validateNegative(numbers);
 
 		Number result = numbers.sum();
 		return result.getValue();
@@ -27,12 +26,6 @@ public class StringAddCalculator {
 			return targetText.split(customDelimiter);
 		}
 		return text.split(DEFAULT_SPLIT_REGEX);
-	}
-
-	private static void validateNegative(Numbers numbers) {
-		if (numbers.containsNegative()) {
-			throw new RuntimeException();
-		}
 	}
 
 	private static boolean isNullOrEmpty(String text) {

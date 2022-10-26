@@ -7,6 +7,7 @@ public class Number {
 	private final int number;
 
 	private Number(int number) {
+		validateNotNegative(number);
 		this.number = number;
 	}
 
@@ -18,8 +19,10 @@ public class Number {
 		return new Number(n);
 	}
 
-	public boolean isNegative() {
-		return this.number < ZERO;
+	private void validateNotNegative(int number) {
+		if (number < ZERO) {
+			throw new RuntimeException("음수일 수 없습니다.");
+		}
 	}
 
 	public Number sum(Number y) {
