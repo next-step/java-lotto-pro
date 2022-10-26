@@ -16,7 +16,7 @@ public class StringParser {
     }
 
 
-    public static String[] parseToStringArray(String text){
+    private static String[] parseToStringArray(String text){
         Matcher matcher = CUSTOM_PATTERN.matcher(text);
         if(matcher.find()) {
             return matcher.group(2).split(matcher.group(1));
