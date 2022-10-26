@@ -208,4 +208,4 @@
   * 구매한 로또의 결과물 출력하는 UI
   * 지난주 당첨번호 입력받는 UI
   * 당첨 통계결과 출력하는 UI
-* Controller
+* Controller 
