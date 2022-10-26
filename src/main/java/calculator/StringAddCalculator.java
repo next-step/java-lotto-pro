@@ -7,11 +7,11 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringAddCalculator {
-    public static final int DEFAULT_VALUE = 0;
-    public static final int MINIMUM = 0;
-    public static final String DELIMITER = ",|:";
-    public static final String SHOULD_POSITIVE_MESSAGE = "입력값은 양수여야 합니다";
-    public static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final int DEFAULT_VALUE = 0;
+    private static final int MINIMUM = 0;
+    private static final String DELIMITER = ",|:";
+    private static final String SHOULD_POSITIVE_MESSAGE = "입력값은 양수여야 합니다";
+    private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
 
     public static int splitAndSum(String input) {
         if (isEmpty(input)) {
