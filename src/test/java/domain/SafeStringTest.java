@@ -21,4 +21,12 @@ class SafeStringTest {
 
         assertThat(s.toString()).isEqualTo("0");
     }
+
+    @Test
+    @DisplayName("공백만 여러개 있는 문자가 넘어오면 \"0\"을 반환함")
+    void test3() {
+        SafeString s = SafeString.of("  ");
+
+        assertThat(s.toString()).isEqualTo("0");
+    }
 }

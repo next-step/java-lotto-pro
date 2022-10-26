@@ -3,14 +3,17 @@ package domain;
 import java.util.Objects;
 
 public class SafeString {
-    private String safeString;
+    private final String safeString;
 
     private SafeString(String s) {
         this.safeString = s;
     }
 
     public static SafeString of(String s) {
-        if(Objects.isNull(s) || s.isEmpty()){
+        if(Objects.isNull(s)){
+            return new SafeString("0");
+        }
+        if(s.trim().isEmpty()){
             return new SafeString("0");
         }
         return new SafeString(s);
