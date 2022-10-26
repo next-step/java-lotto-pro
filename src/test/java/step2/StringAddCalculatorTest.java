@@ -48,4 +48,10 @@ class StringAddCalculatorTest {
         assertThat(result).isEqualTo(expected);
     }
 
+    @Test
+    @DisplayName("쉼표와 콜론으로 split한 숫자를 합해서 반환하는지 확인한다.")
+    void custom_separator_test() {
+        int result = stringAddCalculator.sum("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
+    }
 }
