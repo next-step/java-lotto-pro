@@ -2,44 +2,43 @@ package study;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
     static class StringAddCalculator {
-
         public static int splitAndSum(String text) {
-            if(text == null || text.isEmpty()){
-                return 0;
-            }
-            String[] numbers;
+            if(isNullOrEmpty(text)){ return 0; }
+            String[] numbers = split(text);
+            return sum(numbers);
+        }
+        private static String[] split(String text){
             Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
             if (m.find()) {
-                String customDelimiter = m.group(1);
-                numbers= m.group(2).split(customDelimiter);
-                int result = 0;
-                for (String number : numbers) {
-                    if(Integer.parseInt(number) < 0){
-                        throw new RuntimeException();
-                    }
-                    result += Integer.parseInt(number);
-                }
-                return result;
+                return m.group(2).split(m.group(1));
             }
-            numbers = text.split(",|:");
+            return text.split("[,:]");
+        }
+        private static int sum(String[] numbers){
             int result = 0;
             for (String number : numbers) {
-                if(Integer.parseInt(number) < 0){
-                    throw new RuntimeException();
-                }
+                isValid(number);
                 result += Integer.parseInt(number);
             }
             return result;
         }
-
+        private static void isValid(String number){
+            if(Integer.parseInt(number) < 0)
+                throw new RuntimeException();
+        }
+        private static boolean isNullOrEmpty(String text){
+            return text == null || text.isEmpty();
+        }
     }
 
     @Test
