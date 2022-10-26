@@ -28,8 +28,7 @@ public class InputView {
     private static List<Integer> mapToWinningNumber(final String input) {
         String[] splitNumbers = split(input);
         return Arrays.stream(splitNumbers)
-                .map(String::trim)
-                .map(Integer::parseInt)
+                .map(o -> Integer.parseInt(o.trim()))
                 .collect(Collectors.toList());
     }
 
