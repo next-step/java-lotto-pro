@@ -31,4 +31,11 @@ class StringAddCalculatorTest {
         int result = stringAddCalculator.sum("2");
         assertThat(result).isEqualTo(2);
     }
+
+    @Test
+    public void splitAndSum_comma() throws Exception {
+        int result = stringAddCalculator.sum("1,2");
+        assertThat(result).isEqualTo(3);
+    }
+
 }
