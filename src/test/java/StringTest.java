@@ -28,4 +28,15 @@ public class StringTest {
         assertThat(str.charAt(1)).isSameAs('b');
         assertThat(str.charAt(2)).isSameAs('c');
     }
+
+    @Test
+    void 스트링_특정위치_값_가져오기_예외() {
+        String str = "abc";
+        assertThatThrownBy(() -> str.charAt(-1))
+            .isInstanceOf(StringIndexOutOfBoundsException.class)
+            .hasMessage("String index out of range: -1");
+        assertThatThrownBy(() -> str.charAt(3))
+            .isInstanceOf(StringIndexOutOfBoundsException.class)
+            .hasMessage("String index out of range: 3");
+    }
 }
