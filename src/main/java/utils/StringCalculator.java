@@ -9,12 +9,14 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-    private static final String EMPTY_INPUT_REPLACE = "0";
+    private static final int EMPTY_INPUT_REPLACE = 0;
     private static final String[] BASIC_DELIMITER = {",", ":"};
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
 
     public static int splitAndSum(String inputText) {
-        inputText = emptyInputHandle(inputText);
+        if (checkInputEmpty(inputText)) {
+            return EMPTY_INPUT_REPLACE;
+        }
         String[] splitResult = splitInputText(inputText);
         int[] convertResult = convertIntoInt(splitResult);
         for (int number : convertResult) {
@@ -23,11 +25,8 @@ public class StringCalculator {
         return addNumbers(convertResult);
     }
 
-    private static String emptyInputHandle(String inputText) {
-        if (inputText == null || inputText.isEmpty()) {
-            inputText = EMPTY_INPUT_REPLACE;
-        }
-        return inputText;
+    private static boolean checkInputEmpty(String inputText) {
+        return inputText == null || inputText.isEmpty();
     }
 
     private static String[] splitInputText(String inputText) {
