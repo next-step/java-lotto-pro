@@ -2,6 +2,7 @@ package stringaddcalculator;
 
 import static org.assertj.core.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class StringAddCalculatorTest {
@@ -41,6 +42,13 @@ class StringAddCalculatorTest {
 	@Test
 	void splitAndSum_negative() {
 		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+			.isInstanceOf(RuntimeException.class);
+	}
+
+	@DisplayName("숫자 이외의 값 전달")
+	@Test
+	void splitAndSum_notNumber() {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("assa,123,-as"))
 			.isInstanceOf(RuntimeException.class);
 	}
 }
