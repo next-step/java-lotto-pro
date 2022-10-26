@@ -1,7 +1,5 @@
 package step2;
 
-import java.util.Objects;
-
 public class SplitNumber {
 
     private static final int ZERO = 0;

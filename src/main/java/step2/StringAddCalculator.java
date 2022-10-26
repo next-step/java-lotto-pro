@@ -11,7 +11,7 @@ public class StringAddCalculator {
         if(isNullOrEmpty(input)) {
             return ZERO;
         }
-        return sum(new SplitNumbers(Calculation.split(input)).getSplitNumbers());
+        return sum(Calculation.split(input).getSplitNumbers());
     }
 
     private static int sum(final List<Integer> splitNumbers) {

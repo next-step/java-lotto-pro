@@ -16,14 +16,14 @@ public class Calculation {
 
     private static final int NUMBER_SEPARATOR_GROUP = 2;
 
-    public static List<SplitNumber> split(final String input) {
+    public static SplitNumbers split(final String input) {
         Matcher matcher = CUSTOM_SEPARATOR_PATTERN.matcher(input);
 
         if(matcher.find()) {
             String group = matcher.group(CUSTOM_SEPARATOR_GROUP);
-            return splitNumberList(matcher.group(NUMBER_SEPARATOR_GROUP).split(group));
+            return new SplitNumbers(splitNumberList(matcher.group(NUMBER_SEPARATOR_GROUP).split(group)));
         }
-        return splitNumberList(input.split(SEPARATOR));
+        return new SplitNumbers(splitNumberList(input.split(SEPARATOR)));
     }
 
     private static List<SplitNumber> splitNumberList(final String[] inputs) {
