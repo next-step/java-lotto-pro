@@ -22,5 +22,17 @@ public class SetTest {
         numbers.add(3);
     }
 
-    // Test Case 구현
+    @Test
+    @DisplayName("set의 size가 3인지 체크하는 테스트")
+    void sizeCheck(){
+        assertThat(numbers).hasSize(3);
+    }
+
+    @Test
+    void contains() {
+        assertThat(numbers.contains(1)).isTrue();
+        assertThat(numbers.contains(2)).isTrue();
+        assertThat(numbers.contains(3)).isTrue();
+    }
+
 }
