@@ -6,7 +6,7 @@ import static java.lang.String.format;
 
 public class StringAdderCalculator {
 
-    public static int splitAndSum(String text) {
+    public static int sum(String text) {
         List<String> splitNumbers = StringSplitter.split(text);
 
         verifyIsInvalidText(splitNumbers);
