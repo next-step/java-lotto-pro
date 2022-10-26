@@ -39,9 +39,6 @@ public class StringAddCalculator {
 		if (text == null) {
 			return true;
 		}
-		if (text.isEmpty()) {
-			return true;
-		}
-		return false;
+		return text.isEmpty();
 	}
 }
