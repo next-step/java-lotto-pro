@@ -27,41 +27,6 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(new Number(expectedData));
     }
 
-    @DisplayName("splitAndSum_쉼표구분자_파싱_성공")
-    @Test
-    public void splitAndSum_쉼표구분자_파싱_성공() throws Exception {
-        String[] result = StringAddCalculator.parseText("1,2");
-        assertThat(result).isEqualTo(new String[]{"1", "2"});
-    }
-
-    @DisplayName("splitAndSum_쉼표_또는_콜론_구분자_파싱_성공")
-    @Test
-    public void splitAndSum_쉼표_또는_콜론_구분자_파싱_성공() throws Exception {
-        String[] result = StringAddCalculator.parseText("1,2:3");
-        assertThat(result).isEqualTo(new String[]{"1", "2", "3"});
-    }
-
-    @DisplayName("splitAndSum_custom_구분자_파싱_성공")
-    @Test
-    public void splitAndSum_custom_구분자_파싱_성공() throws Exception {
-        String[] result = StringAddCalculator.parseText("//;\n1;2;3");
-        assertThat(result).isEqualTo(new String[]{"1", "2", "3"});
-    }
-
-    @DisplayName("splitAndSum_custom_구분자_없을경우_기본_구분자_파싱")
-    @Test
-    public void splitAndSum_custom_구분자_없을경우_기본_구분자_파싱() throws Exception {
-        String[] result = StringAddCalculator.parseText("//\n1:2:3");
-        assertThat(result).isEqualTo(new String[]{"//\n1", "2", "3"});
-    }
-
-    @DisplayName("splitAndSum_custom_구분자_기본_구분자_모두_없을_때_파싱_안됨")
-    @Test
-    public void splitAndSum_custom_구분자_기본_구분자_모두_없을_때_파싱_안됨() throws Exception {
-        String[] result = StringAddCalculator.parseText("//\n1;2;3");
-        assertThat(result).isEqualTo(new String[]{"//\n1;2;3"});
-    }
-
     @DisplayName("splitAndSum_쉼표구분자")
     @Test
     public void splitAndSum_쉼표구분자() throws Exception {
