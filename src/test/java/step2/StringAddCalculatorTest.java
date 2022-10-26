@@ -2,6 +2,8 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,18 +24,20 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(0);
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"1,2:3", "6,4,3:13", "7,2,9:18", "0,5,9:14"}, delimiter = ':')
     @DisplayName("숫자를 컴마(,) 구분자로 입력할 경우 숫자의 합을 반환")
-    public void returns_sum_if_number_entered_with_comma() {
-        int result = StringAddCalculator.splitAndSum("1,2,3,4,5");
-        assertThat(result).isEqualTo(15);
+    public void returns_sum_if_number_entered_with_comma(String text,int sum) {
+        int result = StringAddCalculator.splitAndSum(text);
+        assertThat(result).isEqualTo(sum);
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"1:2=3", "6:4,3=13", "7:2:9=18", "0,5:9=14"}, delimiter = '=')
     @DisplayName("숫자를 컴마(,)또는콜론(:) 구분자로 입력할 경우 숫자의 합을 반환")
-    public void returns_sum_if_number_entered_with_comma_or_delimiter() throws Exception {
-        int result = StringAddCalculator.splitAndSum("1,2:3:7");
-        assertThat(result).isEqualTo(13);
+    public void returns_sum_if_number_entered_with_comma_or_delimiter(String text, int sum) throws Exception {
+        int result = StringAddCalculator.splitAndSum(text);
+        assertThat(result).isEqualTo(sum);
     }
 
 }
