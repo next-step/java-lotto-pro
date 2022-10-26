@@ -2,7 +2,6 @@ package study;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -12,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
     static class StringAddCalculator {
+
         public static int splitAndSum(String text) {
             if(isNullOrEmpty(text)){ return 0; }
             String[] numbers = split(text);
@@ -25,20 +25,19 @@ public class StringAddCalculatorTest {
             return text.split("[,:]");
         }
         private static int sum(String[] numbers){
-            int result = 0;
-            for (String number : numbers) {
-                isValid(number);
-                result += Integer.parseInt(number);
-            }
-            return result;
+            return Stream.of(numbers)
+                    .mapToInt(Integer::parseInt)
+                    .peek(StringAddCalculator::isValid)
+                    .sum();
         }
-        private static void isValid(String number){
-            if(Integer.parseInt(number) < 0)
+        private static void isValid(int number){
+            if(number < 0)
                 throw new RuntimeException();
         }
         private static boolean isNullOrEmpty(String text){
             return text == null || text.isEmpty();
         }
+
     }
 
     @Test
