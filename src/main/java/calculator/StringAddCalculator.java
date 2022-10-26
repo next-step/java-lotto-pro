@@ -18,9 +18,8 @@ public class StringAddCalculator {
 	private static String[] split(final String input) {
 		Matcher matcher = SPLIT_REGEX_PATTERN.matcher(input);
 		if (matcher.find()) {
-			String customDelimiter = matcher.group(1);
-			String string = matcher.group(2);
-			return string.split(customDelimiter);
+			return Pattern.compile(matcher.group(1))
+				.split(matcher.group(2));
 		}
 		return input.split(DEFAULT_SPLIT_REGEX);
 	}
