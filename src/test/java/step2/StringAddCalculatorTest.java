@@ -29,6 +29,6 @@ class StringAddCalculatorTest {
     @DisplayName("숫자 하나 입력 테스트를 해본다.")
     void one_number_test() {
         int result = stringAddCalculator.sum("2");
-        assertThat(result).isEqualTo(1);
+        assertThat(result).isEqualTo(2);
     }
 }
