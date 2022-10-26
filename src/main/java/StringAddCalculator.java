@@ -5,6 +5,8 @@ public class StringAddCalculator {
 
     private static final String DELIMITER_REGEX = ",|:";
     private static final String CUSTOM_DELIMITER_IDENTIFIER_REGEX = "//(.)\n(.*)";
+    public static final String EXCEPTION_MESSAGE_FOR_EXIST_NEGATIVE_NUMBER = "음수가 존재합니다.";
+
 
     public static int splitAndSum(String text) {
         if (isEmpty(text)) {
@@ -38,8 +40,16 @@ public class StringAddCalculator {
     private static int sum(String[] tokens) {
         int sum = 0;
         for (String token : tokens) {
-            sum += Integer.parseInt(token);
+            sum += getNumberFromToken(token);
         }
         return sum;
+    }
+
+    private static int getNumberFromToken(String token) {
+        int number = Integer.parseInt(token);
+        if (number < 0) {
+            throw new RuntimeException(EXCEPTION_MESSAGE_FOR_EXIST_NEGATIVE_NUMBER);
+        }
+        return number;
     }
 }
