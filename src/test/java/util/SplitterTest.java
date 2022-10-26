@@ -26,4 +26,20 @@ class SplitterTest {
 
         assertThat(numbers.size()).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("custom delimiter 를 사용해도 3개의 숫자를 가진 일급 컬렉션을 반환함")
+    void test3() {
+        Numbers numbers = Splitter.split(SafeString.of("//;\n1;2;3"));
+
+        assertThat(numbers.size()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("custom delimiter와 기본 delimiter 를 사용해도 3개의 숫자를 가진 일급 컬렉션을 반환함")
+    void test4() {
+        Numbers numbers = Splitter.split(SafeString.of("//;\n1,2;3:4"));
+
+        assertThat(numbers.size()).isEqualTo(4);
+    }
 }
