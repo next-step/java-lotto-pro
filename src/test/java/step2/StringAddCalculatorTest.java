@@ -15,16 +15,16 @@ public class StringAddCalculatorTest {
     @ParameterizedTest
     @CsvSource(value = {"NIL:0", ":0"}, nullValues = "NIL", delimiter = ':')
     public void splitAndSum_null_or_empty(String text, int expectedData) {
-        int result = StringAddCalculator.splitAndSum(text);
-        assertThat(result).isEqualTo(expectedData);
+        Number result = StringAddCalculator.splitAndSum(text);
+        assertThat(result).isEqualTo(new Number(expectedData));
     }
 
     @DisplayName("splitAndSum_숫자만_있으면_숫자반환")
     @ParameterizedTest
     @CsvSource(value = {"0:0", "100:100"}, delimiter = ':')
     public void splitAndSum_only_number(String text, int expectedData) throws Exception {
-        int result = StringAddCalculator.splitAndSum(text);
-        assertThat(result).isEqualTo(expectedData);
+        Number result = StringAddCalculator.splitAndSum(text);
+        assertThat(result).isEqualTo(new Number(expectedData));
     }
 
     @DisplayName("splitAndSum_쉼표구분자_파싱_성공")
@@ -65,22 +65,22 @@ public class StringAddCalculatorTest {
     @DisplayName("splitAndSum_쉼표구분자")
     @Test
     public void splitAndSum_쉼표구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("1,2");
-        assertThat(result).isEqualTo(3);
+        Number result = StringAddCalculator.splitAndSum("1,2");
+        assertThat(result).isEqualTo(new Number(3));
     }
 
     @DisplayName("splitAndSum_쉼표_또는_콜론_구분자")
     @Test
     public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("1,2:3");
-        assertThat(result).isEqualTo(6);
+        Number result = StringAddCalculator.splitAndSum("1,2:3");
+        assertThat(result).isEqualTo(new Number(6));
     }
 
     @DisplayName("splitAndSum_custom_구분자")
     @Test
     public void splitAndSum_custom_구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
-        assertThat(result).isEqualTo(6);
+        Number result = StringAddCalculator.splitAndSum("//;\n1;2;3");
+        assertThat(result).isEqualTo(new Number(6));
     }
 
     @DisplayName("splitAndSum_custom_구분자_없을경우_에러")

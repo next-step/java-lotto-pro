@@ -1,6 +1,7 @@
 package step2;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,23 +9,12 @@ public class StringAddCalculator {
     private static final String BASE_DELIMITER = ",|:";
     private static final Pattern pattern = Pattern.compile("//(.)\n(.*)");
 
-    public static int splitAndSum(String text) {
-        if (text == null) return 0;
-        if (text.isEmpty()) return 0;
-        String[] numbers = parseText(text);
+    public static Number splitAndSum(String text) {
+        if (text == null) return new Number();
+        if (text.isEmpty()) return new Number();
+        List<Number> numbers = convertStringToNumbers(text);
 
         return sumCalculate(numbers);
-    }
-
-    static int convertNumber(String text) {
-        int result;
-        try {
-            result = Integer.parseInt(text);
-        } catch (NumberFormatException e) {
-            throw new RuntimeException();
-        }
-        if (result < 0) throw new RuntimeException();
-        return result;
     }
 
     static String[] parseText(String text) {
@@ -36,9 +26,22 @@ public class StringAddCalculator {
         return text.split(BASE_DELIMITER);
     }
 
-    private static int sumCalculate(String[] numbers) {
-        return Arrays.stream(numbers)
-                .mapToInt(StringAddCalculator::convertNumber)
-                .sum();
+    private static List<Number> convertStringToNumbers(String text) {
+        String[] numberTexts = parseText(text);
+        List<Number> result = new ArrayList<>();
+        for (String numberText : numberTexts) {
+            result.add(new Number(numberText));
+        }
+        return result;
+    }
+
+    private static Number sumCalculate(List<Number> numbers) {
+        Number result = new Number();
+
+        for (Number num : numbers) {
+            result.plus(num);
+        }
+
+        return result;
     }
 }
