@@ -18,7 +18,7 @@ public class StringAddCalculator {
             return EMPTY_RESULT;
         }
 
-        calculateResult(input);
+        return calculateResult(input);
     }
 
     private static int calculateResult(String input) {
@@ -30,8 +30,27 @@ public class StringAddCalculator {
             delimiter = delimiter + AND_DIVIDER + matchResult.group(MATCH_FIRST_GROUP);
             value = matchResult.group(MATCH_SECOND_GROUP);
         }
-
+        
         String[] splitNumber = value.split(delimiter);
+
+        return getSum(splitNumber);
+    }
+
+    private static int getSum(String[] splitNumber) {
+        int answer = 0;
+        for (String stringNumber : splitNumber) {
+            int number = Integer.parseInt(stringNumber);
+            validCheckMinus(number);
+            answer += number;
+        }
+
+        return answer;
+    }
+
+    private static void validCheckMinus(int number) {
+        if (number < VALID_CHECK_STANDARD_NUMBER) {
+            throw new RuntimeException(MINUS_EXCEPTION_MESSAGE);
+        }
     }
 
     private static boolean isNullOrEmpty(String value) {
