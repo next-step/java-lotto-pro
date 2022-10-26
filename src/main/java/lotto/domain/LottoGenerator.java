@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.ui.ResultView;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +18,7 @@ public class LottoGenerator {
         Collections.shuffle(availableNumbers);
         List<Integer> numbers = availableNumbers.subList(0, LOTTO_NUMBER_COUNT);
         Collections.sort(numbers);
+        ResultView.printMessage(numbers.toString());
         return numbers;
     }
 }
