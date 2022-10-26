@@ -38,8 +38,16 @@ public class StringAddCalculatorTest {
     }
 
     @Test
-    public void splitAndSum_negative() throws Exception {
+    public void splitAndSum_negative_음수_입력() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Number must be greater than or equal to 0");
+    }
+
+    @Test
+    public void splitAndSum_negative_숫자가_아닌_문자_입력() throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("Illegal,2,3"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Text must be in numeric form");
     }
 }

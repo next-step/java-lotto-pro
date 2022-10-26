@@ -50,13 +50,13 @@ public class StringAddCalculator {
         try {
             return Integer.parseInt(text);
         } catch (Exception e) {
-            throw new RuntimeException();
+            throw new IllegalArgumentException("Text must be in numeric form");
         }
     }
 
     private static void checkMinus(int number) {
         if (number < 0) {
-            throw new RuntimeException();
+            throw new IllegalArgumentException("Number must be greater than or equal to 0");
         }
     }
 }
