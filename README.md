@@ -44,7 +44,7 @@
 * 기본 구분자로 문자열 split
   * 기본 구분자: 쉼표(,) 또는 콜론(:)
 * 커스텀 구분자로 문자열 split
-  * 커스텀 구분자: "//"와 "\n" 사이 문자
+  * 커스텀 구분자: 문자열 **앞부분**의 "//"와 "\n" 사이 문자를 커스텀 구분자로 사용
   ```java
   // java.util.regex 패키지의 Matcher, Pattern import
   Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
@@ -55,18 +55,20 @@
   }
   ```
 * split한 숫자들 덧셈
-  * split한 문자열을 숫자로 변환
+  * split한 문자열을 숫자로 변환하여 덧셈
   ```java
   int number = Integer.parseInt(text);
   ```
-  * 덧셈할 문자열이 숫자 이외의 값 또는 음수일 경우 RuntimeException 예외 throw
+  * [x] 덧셈할 문자열이 숫자 이외의 값 또는 음수일 경우 RuntimeException 예외 throw
+    * [x] 원시값 포장 및 collection 포장을 위해 PositiveNumber, PositiveNumbers 구현
+    * 기본적으로 parseInt 할 때에 숫자가 아니면 NumberFormatException이 발생하여, 에러 발생 시, 메시지만 변경함
+    * 음수값은 잘못된 인자가 들어온 걸로 판단하여 IllegalArgumentException 발생시킴
 ### 테스트 케이스
 1. null
 2. ""
 3. "1"
 4. "1,2"
 5. "1,2:3"
-6. "//;\n1;2,3"
-7. "//;\n1;2;3:4,5+\\+\n6+7"
+6. "//;\n1;2;3"
 8. "-1,2:3"
 9. "가,2:3"
