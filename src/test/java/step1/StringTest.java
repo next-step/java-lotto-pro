@@ -1,9 +1,12 @@
+package step1;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static step1.CharUtils.charAt;
 
 public class StringTest {
 
@@ -49,9 +52,5 @@ public class StringTest {
                     String input = "abc";
                     charAt(input, input.length());
                 }).withMessageMatching("String index out of range: \\d+");
-    }
-
-    private char charAt(String input, int index) {
-        return input.charAt(index);
     }
 }
