@@ -29,4 +29,7 @@ public class PositiveNumber {
         }
     }
 
+    public int getPositiveNumber() {
+        return positiveNumber;
+    }
 }

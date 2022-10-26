@@ -63,6 +63,7 @@
     * [x] 원시값 포장 및 collection 포장을 위해 PositiveNumber, PositiveNumbers 구현
     * 기본적으로 parseInt 할 때에 숫자가 아니면 NumberFormatException이 발생하여, 에러 발생 시, 메시지만 변경함
     * 음수값은 잘못된 인자가 들어온 걸로 판단하여 IllegalArgumentException 발생시킴
+  * [x] 덧셈 시, 큰 int값들을 더해 결과값이 음수가 된 경우(예: 2147483645 + 123) 정상이 아니라고 판단하여, IllegalArgumentException 발생시킴
 ### 테스트 케이스
 1. null
 2. ""
