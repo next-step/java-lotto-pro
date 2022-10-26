@@ -1,20 +1,18 @@
 package utils;
 
-import java.util.List;
-
 import static java.lang.String.format;
 
 public class StringAdderCalculator {
 
     public static int sum(String text) {
-        List<String> splitNumbers = StringSplitter.split(text);
+        SplitStrings splitNumbers = StringSplitter.split(text);
 
         verifyIsInvalidText(splitNumbers);
 
         return sum(splitNumbers);
     }
 
-    private static void verifyIsInvalidText(List<String> splitNumbers) {
+    private static void verifyIsInvalidText(SplitStrings splitNumbers) {
         splitNumbers.stream()
             .filter(StringAdderCalculator::isInvalidText)
             .findAny()
@@ -44,7 +42,7 @@ public class StringAdderCalculator {
         }
     }
 
-    private static int sum(List<String> splitNumbers) {
+    private static int sum(SplitStrings splitNumbers) {
         return splitNumbers.stream()
                 .map(Integer::parseInt)
                 .mapToInt(Integer::intValue).sum();
