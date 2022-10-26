@@ -11,8 +11,8 @@ public class StringAddCalculator {
             return 0;
         }
         Matcher delimiterMatcher = delimiterPattern.matcher(text);
-        text = removeDelimiter(text, delimiterMatcher);
         String delimiter = generateDelimiter(delimiterMatcher);
+        text = removeDelimiter(text, delimiterMatcher);
         String[] split = text.split(delimiter);
         return sum(split);
     }
