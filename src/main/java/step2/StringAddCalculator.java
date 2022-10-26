@@ -8,14 +8,27 @@ public class StringAddCalculator {
 
     public static final String REGEX_SEPARATOR = "[,:]";
     public static final String REGEX_CUSTOM_SEPARATOR = "//(.)\n(.*)";
+    public static final String ERROR_NEGATIVE_NUMBER = "음수는 포함될 수 없습니다.";
 
     public static int splitAndSum(String text) {
         if (validateBlank(text)) {
             return 0;
         }
         return Arrays.stream(splitText(text))
-                .mapToInt(Integer::parseInt)
+                .mapToInt(StringAddCalculator::parseInt)
                 .sum();
+    }
+
+    private static int parseInt(String number){
+        int parseInt = Integer.parseInt(number);
+        validateNegativeNumber(parseInt);
+        return parseInt;
+    }
+
+    private static void validateNegativeNumber(int value) {
+        if (value < 0) {
+            throw new RuntimeException(ERROR_NEGATIVE_NUMBER);
+        }
     }
 
     private static String[] splitText(String text) {
