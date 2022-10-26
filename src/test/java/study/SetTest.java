@@ -29,7 +29,7 @@ public class SetTest {
     @Test
     @DisplayName("Set의 size를 확인하는 테스트")
     public void checkSize() {
-        assertThat(numbers.size()).isEqualTo(3);
+        assertThat(numbers).hasSize(3);
     }
 
     @ParameterizedTest

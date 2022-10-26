@@ -36,11 +36,11 @@ public class StringTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 4})
     @DisplayName("특정 위치의 문자를 가져올 때 위치값을 벗어나는 경우 테스트")
-    void charAt_ShouldThrowIndexOutOfBoundsException(int num) {
+    void charAt_ShouldThrowStringIndexOutOfBoundsException(int num) {
         String str = "abc";
         assertThatThrownBy(() -> {
             str.charAt(num);
-        }).isInstanceOf(IndexOutOfBoundsException.class)
+        }).isInstanceOf(StringIndexOutOfBoundsException.class)
                 .hasMessage("String index out of range: " + num);
     }
 }
