@@ -28,7 +28,13 @@ public class StringAddCalculator {
 
     private static int sum(final String[] input) {
         return Arrays.stream(input)
-            .mapToInt(Integer::parseInt)
+            .mapToInt(i -> {
+                int value = Integer.parseInt(i);
+                if(value < 0){
+                    throw new RuntimeException("음수는 사용이 불가능");
+                }
+                return value;
+            })
             .sum();
     }
 }
