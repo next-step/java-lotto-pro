@@ -19,4 +19,10 @@ public class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum("3");
         assertThat(result).isEqualTo(3);
     }
+
+    @Test
+    public void splitAndSum_쉼표구분자() throws Exception {
+        int result = StringAddCalculator.splitAndSum("1,2");
+        assertThat(result).isEqualTo(3);
+    }
 }
