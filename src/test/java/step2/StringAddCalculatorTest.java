@@ -23,17 +23,17 @@ public class StringAddCalculatorTest {
     }
 
     @Test
-    @DisplayName("숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환")
-    public void returns_sum_if_two_number_entered_with_comma_delimiter() {
-        int result = StringAddCalculator.splitAndSum("1,2");
-        assertThat(result).isEqualTo(3);
+    @DisplayName("숫자를 컴마(,) 구분자로 입력할 경우 숫자의 합을 반환")
+    public void returns_sum_if_number_entered_with_comma() {
+        int result = StringAddCalculator.splitAndSum("1,2,3,4,5");
+        assertThat(result).isEqualTo(15);
     }
 
     @Test
-    @DisplayName("숫자 두개를 컴마(,)또는콜론(:) 구분자로 입력할 경우 두 숫자의 합을 반환")
-    public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("1,2:3");
-        assertThat(result).isEqualTo(6);
+    @DisplayName("숫자를 컴마(,)또는콜론(:) 구분자로 입력할 경우 숫자의 합을 반환")
+    public void returns_sum_if_number_entered_with_comma_or_delimiter() throws Exception {
+        int result = StringAddCalculator.splitAndSum("1,2:3:7");
+        assertThat(result).isEqualTo(13);
     }
 
 }
