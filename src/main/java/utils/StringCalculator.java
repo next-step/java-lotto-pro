@@ -46,9 +46,9 @@ public class StringCalculator {
     }
 
     private static String getStandardForm(String inputText, List<String> delimiters) {
-        if(inputText.matches("^"+ CUSTOM_DELIMITER_DEFINE_PATTERN +".*")) {
+        if (inputText.matches("^" + CUSTOM_DELIMITER_DEFINE_PATTERN + ".*")) {
             delimiters.clear(); // 지정한 구분자로만 분리하고자 할 때 (기본 구분자도 구분자로 인식하려면 주석처리)
-            delimiters.add(inputText.substring(CUSTOM_DELIMITER_START,CUSTOM_DELIMITER_END));
+            delimiters.add(inputText.substring(CUSTOM_DELIMITER_START, CUSTOM_DELIMITER_END));
             inputText = inputText.replaceFirst(CUSTOM_DELIMITER_DEFINE_PATTERN, "");
         }
         return inputText;
@@ -67,7 +67,7 @@ public class StringCalculator {
     }
 
     private static void checkNumber(int number) {
-        if(number<0) {
+        if (number < 0) {
             throw new RuntimeException();
         }
     }
