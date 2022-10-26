@@ -13,13 +13,28 @@ class StringUtilsTest {
     @DisplayName("1,2를 ,로 split 하여 1,2로 분리한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1,2"})
-    void splitText(String text) {
+    void splitTwoWords(String text) {
+
         String[] splitText = StringUtils.split(text);
+        
         assertAll(
                 () -> assertThat(splitText).contains("1"),
                 () -> assertThat(splitText).contains("2"),
                 () -> assertThat(splitText).containsExactly("1", "2")
         );
-
     }
+
+    @DisplayName("1을 ,로 split 한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"1"})
+    void splitOneWord(String text) {
+
+        String[] splitText = StringUtils.split(text);
+
+        assertAll(
+                () -> assertThat(splitText).contains("1"),
+                () -> assertThat(splitText).containsExactly("1")
+        );
+    }
+
 }
