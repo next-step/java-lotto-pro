@@ -10,4 +10,10 @@ public class PostiveTest {
             .isInstanceOf(RuntimeException.class)
             .hasMessage("음수는 사용이 불가능");
     }
+
+    @Test
+    void 합산_테스트(){
+        Positive one = new Positive(1);
+        Assertions.assertThat(one.sum(new Positive(2))).isEqualTo(new Positive(3));
+    }
 }
