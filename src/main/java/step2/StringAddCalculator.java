@@ -1,6 +1,7 @@
 package step2;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,7 +15,7 @@ public class StringAddCalculator {
         if (isNullOrEmptyValue(text)) {
             return NULL_OR_EMPTY_VALUE;
         }
-        String[] textArray = splitText(text);
+        List<String> textArray = splitText(text);
         return sumText(textArray);
     }
 
@@ -22,17 +23,17 @@ public class StringAddCalculator {
         return text == null || text.isEmpty();
     }
 
-    private static String[] splitText(String text) {
+    private static List<String> splitText(String text) {
         Matcher matcher = Pattern.compile(CUSTOM_SPLIT_TEXT).matcher(text);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
-            return matcher.group(2).split(customDelimiter);
+            return Arrays.asList(matcher.group(2).split(customDelimiter));
         }
-        return text.split(MULTI_SPLIT_TEXT);
+        return Arrays.asList(text.split(MULTI_SPLIT_TEXT));
     }
 
-    private static int sumText(String[] textArray) {
-        return Arrays.stream(textArray)
+    private static int sumText(List<String> textArray) {
+        return textArray.stream()
                 .mapToInt(StringAddCalculator::convertInteger)
                 .sum();
     }
