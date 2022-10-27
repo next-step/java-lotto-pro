@@ -5,6 +5,8 @@ import java.util.Objects;
 import lotto.domain.strategy.GenerateStrategy;
 
 public class LottoTicket {
+	private static final String OPEN_BRACKET = "[";
+	private static final String CLOSE_BRACKET = "]";
 	private final LottoNumbers lottoNumbers;
 
 	private LottoTicket(LottoNumbers lottoNumbers) {
@@ -19,6 +21,10 @@ public class LottoTicket {
 		return lottoNumbers;
 	}
 
+	@Override
+	public String toString() {
+		return OPEN_BRACKET + lottoNumbers.toString() + CLOSE_BRACKET;
+	}
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
