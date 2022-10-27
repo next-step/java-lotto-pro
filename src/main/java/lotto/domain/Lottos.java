@@ -8,11 +8,11 @@ import java.util.stream.IntStream;
 public class Lottos {
 
     private final List<Lotto> lottos;
-    private final RandomNumberPickStrategy randomNumberPickStrategy;
+    private final NumberPickStrategy randomNumberPickStrategy;
 
-    public Lottos() {
+    public Lottos(NumberPickStrategy randomNumberPickStrategy) {
         lottos = new ArrayList<>();
-        randomNumberPickStrategy = new RandomNumberPickStrategy();
+        this.randomNumberPickStrategy = randomNumberPickStrategy;
     }
 
     public void buyRandomNumberLottos(int count) {
@@ -20,6 +20,16 @@ public class Lottos {
                 .limit(count)
                 .mapToObj(i -> new Lotto(randomNumberPickStrategy.pick()))
                 .forEach(lottos::add);
+    }
+
+    public LottoResultStat checkResultStat(WinningLotto winningLotto) {
+        LottoResultStat lottoResultStat = new LottoResultStat();
+
+        lottos.stream()
+                .map(winningLotto::checkResult)
+                .forEach(lottoResultStat::report);
+
+        return lottoResultStat;
     }
 
     public int getLottosSize() {
