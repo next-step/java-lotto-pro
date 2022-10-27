@@ -25,10 +25,11 @@ public class LottoApplication {
 
         output.winnerNumbers();
         String winnerNumbersWithComma = input.inputString();
-        lottos.matchWinningNumbers(winnerNumbersWithComma);
 
         output.bonusball();
         int bonusball = input.inputNumber();
+
+        lottos.matchWinningNumbers(winnerNumbersWithComma, bonusball);
 
         Map<Integer, Integer> statistics = lottos.calculateWinningBallsEachLotto();
         double returnOnInvestmentRate = lottoService.statisticLottos(statistics, money);

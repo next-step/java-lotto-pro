@@ -32,7 +32,8 @@ public class Output {
         System.out.println(Message.MATCH_THREE.resultMatchNumber(statistics.get(Award.THREE.getCount())));
         System.out.println(Message.MATCH_FOUR.resultMatchNumber(statistics.get(Award.FOUR.getCount())));
         System.out.println(Message.MATCH_FIVE.resultMatchNumber(statistics.get(Award.FIVE.getCount())));
-        System.out.println(Message.MATCH_FIVE_BONUS.resultMatchNumber(statistics.get(Award.FIVE_BONUS.getCount())));
+        System.out.println(Message.MATCH_FIVE_BONUS
+                .resultMatchNumber(statistics.get(Award.FIVE.getCount() + Award.BONUS.getCount())));
         System.out.println(Message.MATCH_SIX.resultMatchNumber(statistics.get(Award.SIX.getCount())));
         System.out.println(Message.STATISTICS_RESULT.resultStatistic(returnOnInvestmentRate));
     }
