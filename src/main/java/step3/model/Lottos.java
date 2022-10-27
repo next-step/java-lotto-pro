@@ -10,14 +10,8 @@ public class Lottos {
     public void generate(int generatorCount) {
         lottos = new ArrayList<>();
         for (int i = 0; i < generatorCount; i++) {
-            lottos.add(createLotto());
+            lottos.add(new Lotto());
         }
-    }
-
-    private Lotto createLotto() {
-        Lotto lotto = new Lotto();
-        lotto.create();
-        return lotto;
     }
 
     public int getSize() {
