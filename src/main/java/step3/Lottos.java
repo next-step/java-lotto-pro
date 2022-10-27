@@ -41,9 +41,10 @@ public class Lottos {
                 .sum();
     }
 
-    public List<List<Integer>> getAllLottoNumbers() {
+    public List<List<Integer>> getNumbersOfLottos() {
         return lottos.stream()
                 .map(Lotto::getNumbers)
                 .collect(Collectors.toList());
     }
+
 }

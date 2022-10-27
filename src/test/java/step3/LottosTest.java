@@ -21,9 +21,9 @@ public class LottosTest {
         lottos.addByAuto();
 
         //then
-        assertThat(lottos.getAllLottoNumbers()).hasSize(1);
-        assertThat(lottos.getAllLottoNumbers().get(0)).hasSize(6);
-        assertThat(lottos.getAllLottoNumbers().get(0)).hasSize(6);
+        assertThat(lottos.getNumbersOfLottos()).hasSize(1);
+        assertThat(lottos.getNumbersOfLottos().get(0)).hasSize(6);
+        assertThat(lottos.getNumbersOfLottos().get(0)).hasSize(6);
     }
 
     @ParameterizedTest

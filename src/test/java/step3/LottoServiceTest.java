@@ -23,7 +23,7 @@ public class LottoServiceTest {
         lottoService.purchaseByAuto();
 
         //then
-        assertThat(lottos.getAllLottoNumbers()).hasSize(count);
+        assertThat(lottos.getNumbersOfLottos()).hasSize(count);
 
     }
 
