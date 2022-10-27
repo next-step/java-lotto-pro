@@ -2,6 +2,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,6 +29,14 @@ public class StringAddCalculatorTest {
     public void splitAndSum_쉼표구분자() {
         int result = StringAddCalculator.splitAndSum("1,2");
         assertThat(result).isEqualTo(3);
+    }
+
+    @DisplayName("구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2:3", "1,2,3", "1:2:3"})
+    public void splitAndSum_쉼표_또는_콜론_구분자(String text) {
+        int result = StringAddCalculator.splitAndSum(text);
+        assertThat(result).isEqualTo(6);
     }
 
 }
