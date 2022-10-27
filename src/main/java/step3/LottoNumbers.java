@@ -1,7 +1,6 @@
 package step3;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbers {
@@ -12,18 +11,12 @@ public class LottoNumbers {
         this.numbers = new ArrayList<>();
     }
 
-    private LottoNumbers(int startNumber, int endNumber, int selectNumber) {
-        List<Integer> numbers = new ArrayList<>();
-        for (int number = startNumber; number <= endNumber; number++) {
-            numbers.add(number);
-        }
-        Collections.shuffle(numbers);
-        this.numbers = numbers.subList(0, selectNumber);
-        Collections.sort(this.numbers);
+    private LottoNumbers(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
-    public static LottoNumbers generate(int startNumber, int endNumber, int selectNumber) {
-        return new LottoNumbers(startNumber, endNumber, selectNumber);
+    public static LottoNumbers generate(List<Integer> numbers) {
+        return new LottoNumbers(numbers);
     }
 
     public int getSize() {

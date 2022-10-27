@@ -12,5 +12,7 @@ public class LottoTest {
     public void testGenerate() {
         Lotto lotto = Lotto.generate();
         assertThat(lotto).isNotNull();
+        assertThat(lotto.getNumbers().getSize())
+                .isEqualTo(Lotto.MAX_SELECT_NUMBER);
     }
 }
