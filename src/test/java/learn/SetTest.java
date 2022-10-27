@@ -33,7 +33,7 @@ public class SetTest {
     @ValueSource(ints = {1, 2, 3})
     @DisplayName("numbers Set은 숫자 1, 2, 3을 포함하고 있다.")
     void set_all_element_contains_test(int element) {
-        assertThat(numbers.contains(element)).isTrue();
+        assertThat(numbers).contains(element);
     }
 
     @ParameterizedTest
