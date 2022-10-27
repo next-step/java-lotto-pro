@@ -11,7 +11,7 @@ public class Lotto {
         this.winPolicy = winPolicy;
     }
 
-    public static Lotto from(LottoNumbers lottoNumbers, WinPolicy winPolicy) {
+    public static Lotto of(LottoNumbers lottoNumbers, WinPolicy winPolicy) {
         return new Lotto(lottoNumbers, winPolicy);
     }
 

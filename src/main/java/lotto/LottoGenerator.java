@@ -14,7 +14,7 @@ public class LottoGenerator {
         this.price = price;
     }
 
-    public static LottoGenerator from(LottoNumberGenerator lottoNumberGenerator, Money price) {
+    public static LottoGenerator of(LottoNumberGenerator lottoNumberGenerator, Money price) {
         return new LottoGenerator(lottoNumberGenerator, price);
     }
 
@@ -28,7 +28,7 @@ public class LottoGenerator {
 
         for (int i = 0; i < count; i++) {
             LottoNumbers lottoNumbers = LottoNumbers.from(lottoNumberGenerator.generate());
-            lottos.add(Lotto.from(lottoNumbers, new DefaultWinPolicy()));
+            lottos.add(Lotto.of(lottoNumbers, new DefaultWinPolicy()));
         }
 
         return Lottos.from(lottos);

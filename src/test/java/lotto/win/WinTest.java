@@ -75,7 +75,7 @@ class WinTest {
     @MethodSource(value = "winningNumbersWithWin")
     @DisplayName("로또가 당첨되었는지 확인")
     void lottoWin(List<LottoNumber> input, boolean expected) {
-        Lotto lotto = Lotto.from(LottoNumbers.from(numbers), new DefaultWinPolicy());
+        Lotto lotto = Lotto.of(LottoNumbers.from(numbers), new DefaultWinPolicy());
         LottoNumbers winningNumbers = LottoNumbers.from(input);
 
         boolean result = lotto.isWin(winningNumbers);
