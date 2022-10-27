@@ -4,19 +4,16 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class StringAddCalculatorTest {
-    @DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")
-    @Test
-    public void splitAndSum_null_또는_빈문자() {
-        int result = StringAddCalculator.splitAndSum(null);
-        assertThat(result).isEqualTo(0);
-
-        result = StringAddCalculator.splitAndSum("");
-        assertThat(result).isEqualTo(0);
-
-        // 공백 문자열도 0으로 처리한다
-        result = StringAddCalculator.splitAndSum("    ");
+    @ParameterizedTest(name = "빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")
+    @NullSource
+    @ValueSource(strings = {"", "   "})
+    public void splitAndSum_null_또는_빈문자(String text) {
+        int result = StringAddCalculator.splitAndSum(text);
         assertThat(result).isEqualTo(0);
     }
 
