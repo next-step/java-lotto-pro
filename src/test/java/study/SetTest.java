@@ -15,32 +15,32 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class SetTest {
 	private Set<Integer> numbers;
 
-    @BeforeEach
-    void setUp() {
-        numbers = new HashSet<>();
-        numbers.add(1);
-        numbers.add(1);
-        numbers.add(2);
-        numbers.add(3);
-    }
-    
-    @Test
-    @DisplayName("size() È°¿ëÇÏ¿© Set Å©±â¸¦ È®ÀÎÇÏ´Â Å×½ºÆ®")
-    void checkSize() {
-		assertThat(numbers.size()).isEqualTo(3);
-    }
-    
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3})
-    @DisplayName("contains() È°¿ëÇÏ¿© 1,2,3ÀÇ °ªÀÌ Á¸ÀçÇÏ´ÂÁö È®ÀÎ Å×½ºÆ®")
-    void contains(int number) {
-        assertThat(numbers.contains(number)).isTrue();
-    }
+	@BeforeEach
+	void setUp() {
+		numbers = new HashSet<>();
+		numbers.add(1);
+		numbers.add(1);
+		numbers.add(2);
+		numbers.add(3);
+	}
 
-    @ParameterizedTest
-    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
-    @DisplayName("contains() È°¿ëÇÏ¿© 1,2,3 °ªÀº true, 4,5 °ªÀº false ¹İÈ¯ Å×½ºÆ®")
-    void containsReturn(int number, boolean result) {
-        assertThat(numbers.contains(number)).isEqualTo(result);
-    }
+	@Test
+	@DisplayName("size() í™œìš©í•˜ì—¬ Set í¬ê¸°ë¥¼ í™•ì¸í•˜ëŠ” í…ŒìŠ¤íŠ¸")
+	void checkSize() {
+		assertThat(numbers.size()).isEqualTo(3);
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {1, 2, 3})
+	@DisplayName("contains() í™œìš©í•˜ì—¬ 1,2,3ì˜ ê°’ì´ ì¡´ì¬í•˜ëŠ”ì§€ í™•ì¸ í…ŒìŠ¤íŠ¸")
+	void contains(int number) {
+		assertThat(numbers.contains(number)).isTrue();
+	}
+
+	@ParameterizedTest
+	@CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+	@DisplayName("contains() í™œìš©í•˜ì—¬ 1,2,3 ê°’ì€ true, 4,5 ê°’ì€ false ë°˜í™˜ í…ŒìŠ¤íŠ¸")
+	void containsReturn(int number, boolean result) {
+		assertThat(numbers.contains(number)).isEqualTo(result);
+	}
 }
