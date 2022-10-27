@@ -17,6 +17,6 @@ class LottoNumberGeneratorTest {
         Set<Integer> expected = new HashSet<>(lottoNumbers);
 
         assertThat(lottoNumbers).hasSize(6);
-        assertThat(lottoNumbers).containsAll(expected);
+        assertThat(expected).containsAll(lottoNumbers);
     }
 }
