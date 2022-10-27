@@ -24,7 +24,9 @@ class Number {
         } catch (NumberFormatException e) {
             throw new RuntimeException(ErrorMessageConstant.NOT_NUMBER);
         }
-        if (result < 0) throw new RuntimeException(ErrorMessageConstant.NEGATIVE_NUMBER);
+        if (result < 0) {
+            throw new RuntimeException(ErrorMessageConstant.NEGATIVE_NUMBER);
+        }
         return result;
     }
 
@@ -34,8 +36,12 @@ class Number {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Number number = (Number) o;
         return num == number.num;
     }
