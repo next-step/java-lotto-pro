@@ -1,9 +1,11 @@
-package step3;
+package step3.domain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import step3.enums.Award;
+import step3.enums.Message;
 
 public class LottoService {
 

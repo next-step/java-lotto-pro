@@ -1,10 +1,12 @@
-package step3;
+package step3.views;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import step3.enums.Award;
+import step3.enums.Message;
 
 public class View {
 

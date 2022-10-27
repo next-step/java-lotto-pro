@@ -1,5 +1,8 @@
 package step3;
 
+import step3.domain.LottoService;
+import step3.views.View;
+
 public class LottoApplication {
     public static void main(String[] args) {
 
