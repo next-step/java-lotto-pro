@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RanksTest {
 
     @Test
-    @DisplayName("Rank 추가 성공")
+    @DisplayName("Ranks에 Rank를 추가하는 작업이 정상적으로 동작한다.")
     public void add() {
         Ranks ranks = new Ranks();
 

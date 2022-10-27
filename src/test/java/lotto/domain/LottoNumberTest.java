@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoNumberTest {
 
-    @DisplayName("1 ~ 45 에 해당하는 숫자 생성 성공")
+    @DisplayName("로또번호가 1 ~ 45 에 해당하면 생성 작업이 정상적으로 동작한다.")
     @ParameterizedTest(name ="{index} ) {displayName} [{arguments}]")
     @ValueSource(ints = {1, 11, 21, 31, 41})
     public void constructor(int number) {
@@ -19,7 +19,7 @@ public class LottoNumberTest {
         assertThat(lottoNumber.getValue()).isBetween(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER);
     }
 
-    @DisplayName("1 ~ 45 범위에 벗어난 숫자 생성 시 Exception")
+    @DisplayName("로또번호가 1 ~ 45 범위에 벗어나면 생성 작업 중 예외가 발생한다.")
     @ParameterizedTest(name ="{index} ) {displayName} [{arguments}]")
     @ValueSource(ints = {-1, 0, 46})
     public void constructor_fail(int number) {

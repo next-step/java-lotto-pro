@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class StatisticsResultTest {
 
     @Test
-    @DisplayName("당첨 통계 결과 생성 성공")
+    @DisplayName("당첨 통계 결과의 생성 작업이 정상적으로 동작한다.")
     public void constructor() {
         Ranks ranks = new Ranks();
         ranks.add(Rank.THIRD);

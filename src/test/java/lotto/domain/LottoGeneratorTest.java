@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class LottoGeneratorTest {
 
     @Test
-    @DisplayName("1 ~ 45 숫자 6개로 구성된 숫자세트를 생성할 수 있다.")
+    @DisplayName("1 ~ 45 숫자 6개로 구성된 숫자세트 생성 작업이 정상적으로 동작한다.")
     public void constructor() {
         List<Integer> lottoNumbers = LottoGenerator.create();
         assertThat(lottoNumbers).hasSize(LOTTO_NUMBER_COUNT);
