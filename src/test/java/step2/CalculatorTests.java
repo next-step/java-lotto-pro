@@ -42,7 +42,12 @@ class CalculatorTests {
                 Arguments.of("1,2:3,4:5,6", new Number(21)),
                 Arguments.of("1//a\\n2", new Number(3)),
                 Arguments.of("1//b\\n2", new Number(3)),
-                Arguments.of("1//가\\n2", new Number(3))
+                Arguments.of("1//가\\n2", new Number(3)),
+                Arguments.of("1//가\\n2", new Number(3)),
+                Arguments.of("", new Number(0)),
+                Arguments.of("1", new Number(1)),
+                Arguments.of(" ", new Number(0)),
+                Arguments.of(null, new Number(0))
         );
     }
 }
