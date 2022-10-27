@@ -21,7 +21,13 @@ public enum Rank {
                 .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
                 .orElse(MISS);
-
     }
 
+    public int getMatchCount(){
+        return matchCount;
+    }
+
+    public int getWinningPrice() {
+        return winningPrice;
+    }
 }
