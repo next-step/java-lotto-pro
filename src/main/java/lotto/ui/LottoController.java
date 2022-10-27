@@ -7,7 +7,7 @@ import java.util.List;
 
 public class LottoController {
     public void run() {
-        LottoGeneratorImpl lottoGenerator = new LottoGeneratorImpl();
+        RandomLottoGenerator lottoGenerator = new RandomLottoGenerator();
         int quantity = purchaseLotto();
         LottoTicket lottoTicket = createLotto(lottoGenerator, quantity);
         WinningLotto winningLotto = inputWinningNumber();
@@ -25,7 +25,7 @@ public class LottoController {
         return new WinningLotto(numbers);
     }
 
-    private LottoTicket createLotto(final LottoGeneratorImpl lottoGenerator, final int quantity) {
+    private LottoTicket createLotto(final RandomLottoGenerator lottoGenerator, final int quantity) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
             List<Integer> generatedNumbers = lottoGenerator.create();
