@@ -9,7 +9,7 @@ public class Main {
         Calculator calculator = new Calculator();
         Scanner sc = new Scanner(System.in);
 
-        Number number = calculator.sum(sc.next());
+        Number number = calculator.sum(sc.nextLine());
         System.out.println(number);
     }
 }
