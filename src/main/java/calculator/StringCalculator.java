@@ -14,11 +14,11 @@ import static calculator.utils.StringCalculateParser.parseStringToArray;
 
 public class StringCalculator {
 
-    public static final int NULL_OR_EMPTY_RETURN_VALUE = 0;
+    public static final int ZERO = 0;
 
     public static int addOperation(String input) {
         if (isNull(input) || isEmpty(input)) {
-            return NULL_OR_EMPTY_RETURN_VALUE;
+            return ZERO;
         }
 
         return add(parseStringToArray(input));
