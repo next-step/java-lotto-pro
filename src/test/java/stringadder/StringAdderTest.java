@@ -5,6 +5,7 @@ import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDE
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 /**
@@ -26,5 +27,15 @@ public class StringAdderTest {
     @NullAndEmptySource
     void nullOrEmpty(final String value) {
         assertThat(adder.calculate(value)).isZero();
+    }
+
+    @ParameterizedTest(name = "[{0}]을 넣으면 [{1}]을 반환한다.")
+    @CsvSource({
+            "1, 1",
+            "0, 0",
+            "3, 3"
+    })
+    void singleNumber(final String value, final int expected) {
+        assertThat(adder.calculate(value)).isEqualTo(expected);
     }
 }
