@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import static lotto.domain.Lotto.LottoPrice;
+import static lotto.domain.Lotto.LOTTO_PRICE;
 
 public class InputView {
 
@@ -42,6 +42,6 @@ public class InputView {
     }
 
     private static int getQuantity(final String purchaseAmount) {
-        return Integer.parseInt(purchaseAmount) / LottoPrice;
+        return Integer.parseInt(purchaseAmount) / LOTTO_PRICE;
     }
 }

@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.domain.Lotto.LottoPrice;
+import static lotto.domain.Lotto.LOTTO_PRICE;
 
 public class StatisticsGenerator {
 
@@ -28,7 +28,7 @@ public class StatisticsGenerator {
         for(Map.Entry<Rank, Integer> rankToCount: countsOfRanks.entrySet()) {
             totalWinnerAmount += rankToCount.getKey().getWinningMoney() * rankToCount.getValue();
         }
-        double investmentAmount = countOfLotto * LottoPrice;
+        double investmentAmount = countOfLotto * LOTTO_PRICE;
         return totalWinnerAmount / investmentAmount;
     }
 
