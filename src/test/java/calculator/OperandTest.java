@@ -27,7 +27,7 @@ public class OperandTest {
         //when:
         Operand operand = new Operand(source);
         //then:
-        assertThat(operand.getIntValue()).isEqualTo(10);
+        assertThat(operand.getSource()).isEqualTo(10);
     }
 
     @DisplayName("Operand 생성 실패 - 숫자형 데이터가 아닌 경우")
