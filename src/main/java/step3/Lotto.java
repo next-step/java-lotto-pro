@@ -1,8 +1,9 @@
 package step3;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lotto {
 
@@ -18,14 +19,18 @@ public class Lotto {
     }
 
     private List<Integer> generateAutoNumbers() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int number = START_NUMBER; number <= END_NUMBER; number++) {
-            numbers.add(number);
-        }
-        Collections.shuffle(numbers);
-        numbers = numbers.subList(0, MAX_SELECT_NUMBER);
-        Collections.sort(numbers);
-        return numbers;
+        return IntStream.range(START_NUMBER, END_NUMBER)
+                .boxed()
+                .collect(
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                list -> {
+                                    Collections.shuffle(list);
+                                    list = list.subList(0, MAX_SELECT_NUMBER);
+                                    Collections.sort(list);
+                                    return list;
+                                }
+                        ));
     }
 
     public static Lotto generate() {
