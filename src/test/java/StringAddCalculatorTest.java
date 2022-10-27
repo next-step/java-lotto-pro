@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
@@ -14,4 +15,12 @@ public class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum(text);
         assertThat(result).isEqualTo(0);
     }
+
+    @DisplayName("숫자하나 입력하면 해당 숫자를 반환한다.")
+    @Test
+    public void splitAndSum_숫자하나() {
+        int result = StringAddCalculator.splitAndSum("1");
+        assertThat(result).isEqualTo(1);
+    }
+
 }
