@@ -12,7 +12,14 @@ public class Calculator {
     private static final Pattern NUMBER_REGEX = Pattern.compile("[1-9]");
 
     public Number sum(String input) {
+        if (input == null || isBlank(input)) {
+            return Number.ZERO();
+        }
         return sum(parseNumber(split(input)));
+    }
+
+    private boolean isBlank(String input) {
+        return input.trim().isEmpty();
     }
 
     private Number sum(List<Number> numbers) {
