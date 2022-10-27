@@ -1,12 +1,31 @@
 package string.calculator;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DelimiterFinderTest {
+    @Test
+    @DisplayName("입력 문자열에서 구분자 찾아내기 결과 - 기본값 \"[;,]\"")
+    void findResultDefaultDelimiter() {
+        final String input = "//\\n";
+        final DelimiterFinder delimiterFinder = new DelimiterFinder(input);
+        final String findResult = delimiterFinder.find();
+        assertThat(findResult).isEqualTo("[;,]");
+    }
+
+    @Test
+    @DisplayName("입력 문자열에서 구분자 찾아내기 결과 - 커스텀 구분자 \".\"")
+    void findResultCustomDelimiter() {
+        final String input = "//.\\n";
+        final DelimiterFinder delimiterFinder = new DelimiterFinder(input);
+        final String findResult = delimiterFinder.find();
+        assertThat(findResult).isEqualTo(".");
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {"//\\n", "//~\\n", "//.,\\n"})
     @DisplayName("입력 문자열이 // 와 \\n 둘 다 포함하는 경우 ifIncludeBothSlashAndNewline 메서드의 결과값은 '참' 이 된다")
