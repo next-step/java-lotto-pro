@@ -29,4 +29,8 @@ public class LottoNumber {
             );
         }
     }
+
+    public int getNumber() {
+        return this.number;
+    }
 }
