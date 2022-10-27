@@ -2,8 +2,6 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,14 +39,14 @@ class LottoTicketMachineTest {
 		"10000:10"}, delimiter = ':')
 	@DisplayName("입력한 금액에 따라 로또 티켓 구매")
 	void buyLottoTicketsTest(int money, int expected) {
-		assertThat(lottoTicketMachine.buyLottoTickets(Money.of(money))).hasSize(expected);
+		assertThat(lottoTicketMachine.buyLottoTickets(Money.of(money)).size()).isEqualTo(expected);
 	}
 
 	@Test
 	@DisplayName("생성 전략에서 지정한 번호로 로또 티켓 생성")
 	void generateLottoTicketTest() {
-		List<LottoTicket> lottoTickets = lottoTicketMachine.buyLottoTickets(Money.of(1000));
-		LottoTicket lottoTicket = lottoTickets.get(0);
+		LottoTickets lottoTickets = lottoTicketMachine.buyLottoTickets(Money.of(1000));
+		LottoTicket lottoTicket = lottoTickets.getLottoTickets().get(0);
 		assertThat(lottoTicket.getNumbers()).isEqualTo(new TestGenerateStrategy().generate());
 
 	}

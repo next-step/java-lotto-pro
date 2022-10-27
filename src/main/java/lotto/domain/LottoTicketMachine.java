@@ -17,11 +17,12 @@ public class LottoTicketMachine {
 		this.ticketPrice = Money.of(LOTTO_COST_PER_TICKET);
 	}
 
-	public List<LottoTicket> buyLottoTickets(Money money) {
+	public LottoTickets buyLottoTickets(Money money) {
 		TicketCount ticketCount = getTicketCount(money);
-		return IntStream.range(0, ticketCount.count())
-			.mapToObj(i -> this.generateLottoTicket(generateStrategy))
-			.collect(Collectors.toList());
+		List<LottoTicket> tickets = IntStream.range(0, ticketCount.count())
+				.mapToObj(i -> this.generateLottoTicket(generateStrategy))
+				.collect(Collectors.toList());
+		return LottoTickets.of(tickets);
 	}
 
 	private TicketCount getTicketCount(Money money) {

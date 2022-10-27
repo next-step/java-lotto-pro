@@ -1,11 +1,12 @@
 package lotto.converter;
 
-import lotto.domain.LottoNumbers;
-import lotto.exception.InvalidUserInputException;
-
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import lotto.domain.LottoNumbers;
+import lotto.domain.Money;
+import lotto.exception.InvalidUserInputException;
 
 public class InputConverter {
 
@@ -21,6 +22,10 @@ public class InputConverter {
 			throw new InvalidUserInputException("숫자를 입력해주세요.");
 		}
 		return integer;
+	}
+
+	public static Money toMoney(String input) {
+		return Money.of(toInt(input));
 	}
 
 	public static LottoNumbers toLottoNumbers(String input) {
