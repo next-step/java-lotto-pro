@@ -16,13 +16,13 @@ public class LottoController {
 
     public void start(){
         InputView.printPurchasingAmount();
-        int amount = 14000;
+        int amount = Console.readInt();
         LottoService lottoService = new LottoService(amount,new Lottos(new ArrayList<>()));
         lottoService.purchaseByAuto();
         LottosNumberDto lottosNumberDto = lottoService.getLottoTicketState();
         ResultView.printPurchasingLottos(lottosNumberDto);
         InputView.printWinningNumber();
-        List<Integer> winningNumbers = new ArrayList<>();
+        List<Integer> winningNumbers = StringParser.parseToIntegerArray(Console.readLine());
         ResultView.printWinStats(lottoService.getRankStatus(winningNumbers));
     }
 
