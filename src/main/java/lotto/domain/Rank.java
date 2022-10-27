@@ -1,6 +1,9 @@
 package lotto.domain;
 
-import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
@@ -11,6 +14,9 @@ public enum Rank {
 
     private final int countOfMatch;
     private final int winningMoney;
+    private static final Map<Integer, Rank> countOfMatchToRank =
+            Stream.of(values())
+                    .collect(Collectors.toMap(Rank::getCountOfMatch, Function.identity()));
 
     Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
@@ -26,9 +32,6 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch) {
-        return Arrays.stream(values())
-                .filter(o -> o.countOfMatch == countOfMatch)
-                .findFirst()
-                .orElse(Rank.MISS);
+        return countOfMatchToRank.getOrDefault(countOfMatch, Rank.MISS);
     }
 }
