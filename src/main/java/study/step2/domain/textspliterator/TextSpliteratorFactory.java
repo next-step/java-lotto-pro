@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class TextSpliteratorFactory {
+public class TextSpliteratorFactory {
 
     private static final List<TextSpliterator> SPLITERATORS;
 
