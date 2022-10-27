@@ -96,7 +96,7 @@ public class LottosTest {
         Map<Rank,Integer> rankStats = lottos.getRankStatsOfLottos(Arrays.asList(1,2,3,43,44,45));
 
         //then
-        assertThat(rankStats.get(Rank.THIRD)).isEqualTo(3);
+        assertThat(rankStats.get(Rank.FIFTH)).isEqualTo(3);
     }
 
     @Test
