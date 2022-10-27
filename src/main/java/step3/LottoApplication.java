@@ -27,6 +27,9 @@ public class LottoApplication {
         String winnerNumbersWithComma = input.inputString();
         lottos.matchWinningNumbers(winnerNumbersWithComma);
 
+        output.bonusball();
+        int bonusball = input.inputNumber();
+
         Map<Integer, Integer> statistics = lottos.calculateWinningBallsEachLotto();
         double returnOnInvestmentRate = lottoService.statisticLottos(statistics, money);
         output.statistic(statistics, returnOnInvestmentRate);
