@@ -54,7 +54,7 @@
 * [x] Pattern.compile을 미리 compile해서 사용
 * [x] 범위가 너무 큰 RuntimeException대신 IllegalArgumentException 사용
 * [x] 테스트 시 값이 0인 경우 isEqualTo(0) -> isZero() 사용
-* [ ] SplitNumber 의 ZERO를 public으로 사용
-* [ ] Calculation 클래스명 좀더 직관적으로 변경
-* [ ] getSplitNumbers 메서드 제거
-* [ ] static 사용여부 정리
+* [x] SplitNumber 의 ZERO를 public으로 사용
+* [x] Calculation 클래스명 좀더 직관적으로 변경
+* [x] getSplitNumbers 메서드에 대한 필요유무
+* [x] static 사용여부 정리
