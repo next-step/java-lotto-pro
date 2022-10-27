@@ -27,14 +27,14 @@ public class SetTest {
     @DisplayName("size 메소드로 Set의 크기를 구할 수 있다")
     @Test
     void sizeTest() {
-        assertThat(numbers.size()).isEqualTo(3);
+        assertThat(numbers).hasSize(3);
     }
 
     @DisplayName("contains 메소드로 값이 존재하는지 알 수 있다")
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     void containsTest(int input) {
-        assertThat(numbers.contains(input)).isTrue();
+        assertThat(numbers).contains(input);
     }
 
     @DisplayName("contains 메소드 실행 시 값이 존재하면 true, 없으면 false를 반환한다")
