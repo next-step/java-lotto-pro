@@ -1,5 +1,7 @@
 package step3;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,8 +20,16 @@ public class LottoTest {
     @Test
     @DisplayName("자동 로또 번호와 당첨 번호 비교 로직이지만, 자동 로또번호 자신과 비교하면 무조건 6이 나옴")
     void 당첨번호_비교() {
-        lotto.match(lotto.gainAutoNumbers());
+        lotto.match(lotto.gainAutoNumbers(), 1);
         Assertions.assertEquals(6, lotto.getMatchCount());
+    }
+
+    @Test
+    @DisplayName("자동 로또 번호와 당첨 번호 비교 로직이지만, 자동 로또번호 자신과 비교하면 무조건 6이 나옴")
+    void 보너스볼_일치() {
+        Lotto lotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lotto.match(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7)), 6);
+        Assertions.assertTrue(lotto.hasBonusNumber());
     }
 
     @Test
