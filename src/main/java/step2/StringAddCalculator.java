@@ -9,15 +9,11 @@ public class StringAddCalculator {
 
     public static int splitAndSum(final String input) {
         if(isNullOrEmpty(input)) {
-            return ZERO;
+            return SplitNumber.ZERO;
         }
-        return sum(Calculation.split(input).getSplitNumbers());
-    }
+        SplitNumbers splitNumbers = Splitter.split(input);
 
-    private static int sum(final List<Integer> splitNumbers) {
-        return splitNumbers.stream()
-                .mapToInt(Integer::intValue)
-                .sum();
+        return splitNumbers.sum();
     }
 
     private static boolean isNullOrEmpty(final String input) {

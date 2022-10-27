@@ -11,9 +11,10 @@ public class SplitNumbers {
         this.splitNumbers = splitNumbers;
     }
 
-    public List<Integer> getSplitNumbers() {
+    public int sum() {
         return splitNumbers.stream()
                 .map(splitNumber -> splitNumber.getSplitNumber())
-                .collect(Collectors.toList());
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }
