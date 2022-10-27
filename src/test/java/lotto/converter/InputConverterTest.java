@@ -1,17 +1,17 @@
-package lotto.util;
+package lotto.converter;
 
-import static org.assertj.core.api.Assertions.*;
-
-import java.util.Set;
-
+import lotto.domain.LottoNumbers;
+import lotto.exception.InvalidLottoNumberException;
+import lotto.exception.InvalidUserInputException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import lotto.domain.LottoNumbers;
-import lotto.exception.InvalidLottoNumberException;
-import lotto.exception.InvalidUserInputException;
+import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("사용자 입력값 테스트")
 class InputConverterTest {
