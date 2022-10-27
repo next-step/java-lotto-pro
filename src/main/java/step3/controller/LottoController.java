@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import step3.domain.GradeCalculator;
 import step3.domain.Grades;
 import step3.domain.Lotto;
+import step3.domain.LottoGenerator;
 import step3.domain.LottoQuantity;
 import step3.domain.Lottos;
 import step3.domain.ProfitRateCalculator;
@@ -40,7 +41,7 @@ public class LottoController {
         ResultView.printLottoQuantityMessage(quantity);
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < quantity.getQuantity(); i++) {
-            lottoList.add(Lotto.generate());
+            lottoList.add(LottoGenerator.generate());
         }
         Lottos lottos = new Lottos(lottoList);
         ResultView.printLottosNumberMessage(lottos);
