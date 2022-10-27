@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.domain.CalculateString;
 import calculator.utils.CalculatorValidator;
 import calculator.utils.StringCalculateParser;
 
@@ -16,12 +17,11 @@ public class StringCalculator {
 
     public static final int ZERO = 0;
 
-    public static int addOperation(String input) {
-        if (isNull(input) || isEmpty(input)) {
+    public static int addOperation(CalculateString calculateString){
+        if(calculateString.isNull() || calculateString.isEmpty()){
             return ZERO;
         }
-
-        return add(parseStringToArray(input));
+        return add(parseStringToArray(calculateString.getExpression()));
     }
 
     private static int add(String[] numbers) {
