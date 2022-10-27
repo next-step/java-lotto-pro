@@ -11,6 +11,8 @@ public class Lotto {
         this.numbers = numbers.stream()
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
+
+        Collections.sort(this.numbers);
     }
 
     public List<LottoNumber> getLottoNumbers() {
