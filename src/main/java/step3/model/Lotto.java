@@ -6,27 +6,30 @@ import java.util.List;
 
 public class Lotto {
 
-    private static List<LottoNumber> allNumbers;
     private List<LottoNumber> numbers;
 
-    public static void initLottoNumberRangeList() {
-        allNumbers = new ArrayList<>();
+    public void create() {
+        List<LottoNumber> allNumbers = settingLottoRangeNumber();
+        Collections.shuffle(allNumbers);
+
+        this.numbers = allNumbers.subList(0, 6);
+        Collections.sort(this.numbers);
+    }
+
+    private List<LottoNumber> settingLottoRangeNumber() {
+        List<LottoNumber> allNumbers = new ArrayList<>();
         for (int i = 1; i <= 45; i++) {
             allNumbers.add(new LottoNumber(i));
         }
-    }
-
-    public Lotto createLotto() {
-        Collections.shuffle(allNumbers);
-        this.numbers = allNumbers.subList(0, 6);
-        return this;
-    }
-
-    public int getGeneratorLottoCount() {
-        return numbers.size();
+        return allNumbers;
     }
 
     public List<LottoNumber> getLottoNumbers() {
         return numbers;
+    }
+
+    @Override
+    public String toString() {
+        return "" + numbers;
     }
 }

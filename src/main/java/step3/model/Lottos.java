@@ -5,14 +5,26 @@ import java.util.List;
 
 public class Lottos {
 
-    private List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> lottos;
 
-    public void addLotto(Lotto lotto) {
-        this.lottos.add(lotto);
+    public void generate(int generatorCount) {
+        lottos = new ArrayList<>();
+        for (int i = 0; i < generatorCount; i++) {
+            lottos.add(createLotto());
+        }
+    }
+
+    private Lotto createLotto() {
+        Lotto lotto = new Lotto();
+        lotto.create();
+        return lotto;
     }
 
     public int getSize() {
-        return this.lottos.size();
+        return lottos.size();
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
 }
