@@ -8,7 +8,7 @@ import static lotto.domain.Lotto.LOTTO_PRICE;
 public class StatisticsGenerator {
 
     public static StatisticsResult create(final LottoTicket lottoTicket, final WinningLotto winninglotto) {
-        List<Lotto> lottoList = lottoTicket.getLottoList();
+        List<Lotto> lottoList = lottoTicket.getLottos();
         Ranks ranks = mapToRanks(winninglotto, lottoList);
         return new StatisticsResult(ranks.getCountsOfRanks(), calculateYields(ranks, lottoList.size()));
     }

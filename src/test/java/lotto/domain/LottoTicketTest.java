@@ -16,6 +16,6 @@ public class LottoTicketTest {
         Lotto secondLotto = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12));
 
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(firstLotto, secondLotto));
-        assertThat(lottoTicket.getLottoList()).hasSize(2);
+        assertThat(lottoTicket.getLottos()).hasSize(2);
     }
 }
