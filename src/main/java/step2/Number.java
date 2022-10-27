@@ -13,6 +13,10 @@ public class Number {
         this.value = value;
     }
 
+    public static Number ZERO() {
+        return new Number(0);
+    }
+
     public Number plus(Number number) {
         return new Number(this.value + number.value);
     }
