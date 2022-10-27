@@ -22,7 +22,6 @@ public class LottoMachine {
         Result result = buyLottoTickets.match(winningLottoTicket);
         result.setMoney(Integer.parseInt(money));
         printResult(result);
-        int v = (int) (Integer.parseInt(money) / result.yieldRate());
 
     }
 
