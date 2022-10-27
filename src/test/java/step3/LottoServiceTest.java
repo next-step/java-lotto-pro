@@ -35,12 +35,11 @@ public class LottoServiceTest {
 
         //then
         assertThat(lottos.getNumbersOfLottos()).hasSize(count);
-
     }
 
     @Test
     @DisplayName("당첨된 경우 수익률은 상금/구입금액")
-    void test_that_it_returns_winning_rate_if_wining_number_match(){
+    void test_that_it_returns_winning_rate_if_winning_number_match(){
         //given
         Lotto lotto = new Lotto(Arrays.stream(new int[]{1,2,3,14,15,16}).boxed().collect(Collectors.toList()));
         Lottos lottos = new Lottos(Arrays.asList(lotto));
@@ -51,7 +50,6 @@ public class LottoServiceTest {
         LottoStatusDto lottoStatusDto = lottoService.getRankStatus(winningNumbers);
 
         //then
-        assertThat(lottoStatusDto.getRanks()).hasSize(4);
         assertThat(lottoStatusDto.getWinnigPercent()).isEqualTo(Rank.FIFTH.getWinningPrice() / (double)14000);
     }
 

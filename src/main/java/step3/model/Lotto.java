@@ -7,17 +7,17 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final int PRICE = 1000;
     public static final int NUMBER_SIZE = 6;
     public static final int TICKET_MIN_VALUE = 1;
     public static final int TICKET_MAX_VALUE = 45;
+    private static final int PRICE = 1000;
 
     private static final String NUMBER_SIZE_MESSAGE = "번호는 6개만 허용합니다";
     private static final String DUPLICATE_NUMBER_MESSAGE = "중복없는 번호만 허용합니다";
     private static final String OUT_OF_RANGE_MESSAGE = "1에서 45사이 번호만 허용합니다";
 
-
     private final List<Integer> numbers;
+
     public Lotto(List<Integer> numbers){
         validateNumbers(numbers);
         this.numbers = numbers;
@@ -43,7 +43,7 @@ public class Lotto {
     public Rank getRank(List<Integer> winningNumbers){
         int count = (int) numbers
                 .stream()
-                .filter(number -> winningNumbers.contains(number))
+                .filter(winningNumbers::contains)
                 .count();
         return Rank.getRankFromMatchCount(count);
     }

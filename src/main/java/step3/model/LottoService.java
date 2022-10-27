@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class LottoService {
 
-    private int purchasePrice;
+    private final int purchasePrice;
     private final Lottos lottos;
 
     public LottoService(int purchasePrice,Lottos lottos){

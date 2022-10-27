@@ -56,7 +56,6 @@ public class LottosTest {
         lottoNumbers.add(new Lotto(Arrays.asList(1,2,3,14,15,16)));
         lottoNumbers.add(new Lotto(Arrays.asList(2,11,3,4,1,6)));
         lottoNumbers.add(new Lotto(Arrays.asList(1,11,33,2,35,3)));
-
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
@@ -74,7 +73,6 @@ public class LottosTest {
         lottoNumbers.add(new Lotto(Arrays.asList(1,2,3,14,15,16)));
         lottoNumbers.add(new Lotto(Arrays.asList(2,11,3,4,15,1)));
         lottoNumbers.add(new Lotto(Arrays.asList(1,11,33,2,15,3)));
-
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
@@ -92,7 +90,6 @@ public class LottosTest {
         lottoNumbers.add(new Lotto(Arrays.asList(1,2,3,14,15,16)));
         lottoNumbers.add(new Lotto(Arrays.asList(2,11,3,4,1,6)));
         lottoNumbers.add(new Lotto(Arrays.asList(1,11,33,2,35,3)));
-
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
@@ -110,7 +107,6 @@ public class LottosTest {
         lottoNumbers.add(new Lotto(Arrays.asList(1,2,3,14,15,16)));
         lottoNumbers.add(new Lotto(Arrays.asList(2,15,3,14,1,16)));
         lottoNumbers.add(new Lotto(Arrays.asList(1,16,15,2,14,3)));
-
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
