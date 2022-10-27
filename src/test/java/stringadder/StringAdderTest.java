@@ -1,5 +1,12 @@
 package stringadder;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDER;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+
 /**
  * 기능 요구사항
  * <p>
@@ -12,4 +19,12 @@ package stringadder;
  * - 문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw 한다.
  */
 public class StringAdderTest {
+    private final StringAdder adder = new StringAdder();
+
+    @DisplayName("null 혹은 빈 문자열은 0을 반환한다.")
+    @ParameterizedTest(name = DISPLAY_NAME_PLACEHOLDER)
+    @NullAndEmptySource
+    void nullOrEmpty(final String value) {
+        assertThat(adder.calculate(value)).isZero();
+    }
 }
