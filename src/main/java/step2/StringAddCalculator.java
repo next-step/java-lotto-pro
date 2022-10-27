@@ -15,7 +15,7 @@ public class StringAddCalculator {
             return Integer.parseInt(text);
         }
         String[] tokens = split(text);
-        checkTokenValidation(tokens);
+        validateTokens(tokens);
         return getTokensSum(tokens);
     }
 
@@ -49,7 +49,7 @@ public class StringAddCalculator {
         return text.split(separator);
     }
 
-    private static void checkTokenValidation(String[] tokens) throws RuntimeException {
+    private static void validateTokens(String[] tokens) throws RuntimeException {
         long charCount = Arrays.stream(tokens)
                 .filter(token -> !isNumberOnly(token))
                 .count();
