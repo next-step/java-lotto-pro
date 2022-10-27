@@ -7,7 +7,7 @@ public class Numbers {
     private final List<Number> numbers;
 
     public Numbers(String[] numberTexts) {
-        if (numberTexts == null || numberTexts.length == 0) throw new RuntimeException();
+        if (numberTexts == null || numberTexts.length == 0) throw new RuntimeException(ErrorMessageConstant.EMPTY_TEXT);
         this.numbers = getNumbersFromTexts(numberTexts);
     }
 

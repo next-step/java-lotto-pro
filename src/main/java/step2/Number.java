@@ -22,9 +22,9 @@ class Number {
         try {
             result = Integer.parseInt(text);
         } catch (NumberFormatException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(ErrorMessageConstant.NOT_NUMBER);
         }
-        if (result < 0) throw new RuntimeException();
+        if (result < 0) throw new RuntimeException(ErrorMessageConstant.NEGATIVE_NUMBER);
         return result;
     }
 
