@@ -1,17 +1,17 @@
-package step2;
+package step2.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringParser {
-    private static final String BASE_DELIMITER = ",|:";
+public final class StringUtil {
+    private static final String BASE_DELIMITER = "[,:]";
     private static final Pattern pattern = Pattern.compile("//(.)\n(.*)");
 
-    public StringParser() {
+    public StringUtil() {
 
     }
 
-    public String[] parseText(String text) {
+    public static String[] parseText(String text) {
         Matcher m = pattern.matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(1);

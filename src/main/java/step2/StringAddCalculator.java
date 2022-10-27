@@ -1,7 +1,8 @@
 package step2;
 
+import step2.util.StringUtil;
+
 public class StringAddCalculator {
-    static StringParser stringParser = new StringParser();
 
     public static Number splitAndSum(String text) {
         if (text == null) {
@@ -16,7 +17,7 @@ public class StringAddCalculator {
     }
 
     private static Numbers convertStringToNumbers(String text) {
-        String[] numberTexts = stringParser.parseText(text);
+        String[] numberTexts = StringUtil.parseText(text);
         return new Numbers(numberTexts);
     }
 
