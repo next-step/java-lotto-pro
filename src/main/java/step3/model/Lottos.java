@@ -1,4 +1,4 @@
-package step3;
+package step3.model;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static step3.Lotto.*;
+import static step3.model.Lotto.*;
 
 public class Lottos {
 

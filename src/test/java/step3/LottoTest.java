@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import step3.model.Lotto;
+import step3.model.Rank;
 
 import java.util.Arrays;
 import java.util.List;

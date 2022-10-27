@@ -3,6 +3,8 @@ package step3;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import step3.model.LottoService;
+import step3.model.Lottos;
 
 import java.util.ArrayList;
 
