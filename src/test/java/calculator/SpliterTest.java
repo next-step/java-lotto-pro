@@ -23,7 +23,7 @@ public class SpliterTest {
     }
 
     @Test
-    public void splitAndSum_custom_구분자() {
+    public void custom_delimiter() {
         Numbers numbers = spliter.split("//;\n1;2;3");
         assertThat(numbers.getNumbers()[0]).isEqualTo("1");
         assertThat(numbers.getNumbers()[1]).isEqualTo("2");

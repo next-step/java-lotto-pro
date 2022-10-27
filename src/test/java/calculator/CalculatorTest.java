@@ -19,13 +19,13 @@ public class CalculatorTest {
     }
 
     @Test
-    public void splitAndSum_일반문자() {
+    public void sum_일반문자() {
         assertThatThrownBy(() -> calculator.sum(new Numbers(new String[]{"a", "b", "ㄱ"})))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    public void splitAndSum_특수문자() {
+    public void sum_특수문자() {
         assertThatThrownBy(() -> calculator.sum(new Numbers(new String[]{"*", "/", "+"})))
                 .isInstanceOf(IllegalArgumentException.class);
     }
