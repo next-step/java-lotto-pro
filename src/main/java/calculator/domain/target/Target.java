@@ -5,6 +5,9 @@ import calculator.domain.target.splitter.CalculatorSplitter;
 import calculator.domain.target.splitter.CustomSplitter;
 import calculator.domain.target.validation.CalculatorValidator;
 import calculator.domain.target.validation.PositiveNumberValidator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Target {
 
@@ -18,15 +21,15 @@ public class Target {
         this.validator = new PositiveNumberValidator();
     }
 
-    public int[] target() {
-        return target == null || target.isEmpty() ? new int[]{0} : isNotNullAndNotEmptyThenSplit();
+    public List<Integer> target() {
+        return target == null || target.isEmpty() ? Collections.singletonList(0) : isNotNullAndNotEmptyThenSplit();
     }
 
-    private int[] isNotNullAndNotEmptyThenSplit() {
-        String[] split = splitter.split(target);
-        int[] result = new int[split.length];
-        for (int i = 0; i < split.length; i++) {
-            result[i] = isValidatedThenParseInt(split[i]);
+    private List<Integer> isNotNullAndNotEmptyThenSplit() {
+        String[] splits = splitter.split(target);
+        List<Integer> result = new ArrayList<>();
+        for (String split : splits) {
+            result.add(isValidatedThenParseInt(split));
         }
         return result;
     }

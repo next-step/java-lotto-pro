@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 public class CustomSplitter implements CalculatorSplitter {
 
+    private static final int CAPTURE_SEPARATOR = 1;
+    private static final int CAPTURE_TARGET = 2;
     private static Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
     private CalculatorSplitter splitter;
 
@@ -16,8 +18,8 @@ public class CustomSplitter implements CalculatorSplitter {
     public String[] split(String target) {
         Matcher m = CUSTOM_PATTERN.matcher(target);
         if (m.find()) {
-            String customDelimiter = m.group(1);
-            return m.group(2).split(customDelimiter);
+            String customDelimiter = m.group(CAPTURE_SEPARATOR);
+            return m.group(CAPTURE_TARGET).split(customDelimiter);
         }
         return splitter.split(target);
     }

@@ -9,7 +9,7 @@ public class PositiveNumberValidator implements CalculatorValidator {
     @Override
     public void validate(String target) {
         if (!NUMBER_PATTERN.matcher(target).matches()) {
-            throw new RuntimeException(ERROR_NUMBER_MESSAGE);
+            throw new IllegalArgumentException(ERROR_NUMBER_MESSAGE);
         }
     }
 }
