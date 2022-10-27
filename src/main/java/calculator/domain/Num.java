@@ -16,10 +16,9 @@ public class Num {
         int num = 0;
 
         try {
-            num =  Integer.parseInt(str);
+            num = Integer.parseInt(str);
         } catch (NumberFormatException e) {
-            System.out.println(ILLEGAL_ELEMENT_MESSAGE);
-            throw new RuntimeException();
+            handleIllegalArgument();
         }
 
         return num;
@@ -27,9 +26,13 @@ public class Num {
 
     private void isNegative(int num) {
         if (num < 0) {
-            System.out.println(ILLEGAL_ELEMENT_MESSAGE);
-            throw new RuntimeException();
+            handleIllegalArgument();
         }
+    }
+
+    private void handleIllegalArgument() {
+        System.out.println(ILLEGAL_ELEMENT_MESSAGE);
+        throw new RuntimeException();
     }
 
     public int getElement() {
