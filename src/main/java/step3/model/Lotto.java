@@ -6,13 +6,18 @@ import static step3.constant.ErrorMessage.TOTAL_6_COUNT_LOTTO_INPUT;
 
 public class Lotto {
 
+    private final static int ZERO = 0;
+    private final static int LOTTO_SIZE = 6;
+    private final static int LOTTO_START = 1;
+    private final static int LOTTO_END = 45;
+
     private List<LottoNumber> numbers;
 
     public Lotto() {
         List<LottoNumber> allNumbers = settingLottoRangeNumber();
         Collections.shuffle(allNumbers);
 
-        this.numbers = allNumbers.subList(0, 6);
+        this.numbers = allNumbers.subList(ZERO, LOTTO_SIZE);
         Collections.sort(this.numbers);
     }
 
@@ -29,7 +34,7 @@ public class Lotto {
     private List<String> convertNumberArray(String inputNumber) {
         inputNumber = inputNumber.replace(" ", "");
         List<String> result = Arrays.asList(inputNumber.split(","));
-        if (result.size() != 6) {
+        if (result.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(TOTAL_6_COUNT_LOTTO_INPUT);
         }
         return result;
@@ -37,7 +42,7 @@ public class Lotto {
 
     private List<LottoNumber> settingLottoRangeNumber() {
         List<LottoNumber> allNumbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = LOTTO_START; i <= LOTTO_END; i++) {
             allNumbers.add(new LottoNumber(i));
         }
         return allNumbers;
@@ -48,8 +53,8 @@ public class Lotto {
     }
 
     public int sameNumberCount(Lotto lotto) {
-        int sameCount = 0;
-        for (int i = 0; i < lotto.numbers.size(); i++) {
+        int sameCount = ZERO;
+        for (int i = ZERO; i < lotto.numbers.size(); i++) {
             sameCount += containNumber(lotto.numbers.get(i));
         }
         return sameCount;

@@ -1,7 +1,5 @@
 package step3.constant;
 
-import java.security.PublicKey;
-
 public class GameMessage {
 
     public final static String PURCHASE_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
