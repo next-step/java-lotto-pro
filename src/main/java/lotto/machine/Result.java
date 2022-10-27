@@ -4,12 +4,12 @@ import lotto.Match.Match;
 
 public class Result {
 
-    int threeCount = 0;
-    int fourCount = 0;
-    int fiveCount = 0;
-    int sixCount = 0;
-    int money = 0;
-    int yieldRate = 0;
+    private int threeCount = 0;
+    private int fourCount = 0;
+    private int fiveCount = 0;
+    private int sixCount = 0;
+    private int money = 0;
+    private int yieldRate = 0;
 
     public void setMoney(int money){
         this.money = money;
