@@ -3,11 +3,10 @@ package lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.constant.LottoConstant;
 
 public class DefaultNumberGeneratorStrategy implements LottoNumberGeneratorStrategy {
 
-    private static final int MAX_LOTTO_NUMBER = 45;
-    private static final int MIN_LOTTO_NUMBER = 1;
     private static final int LOTTO_NUMBER_COUNT = 6;
     private final List<Integer> seedNumbers;
 
@@ -16,13 +15,13 @@ public class DefaultNumberGeneratorStrategy implements LottoNumberGeneratorStrat
     }
 
     private List<Integer> createSeedNumbers() {
-        List<Integer> seedNumbers = new ArrayList<>();
+        List<Integer> numbers = new ArrayList<>();
 
-        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-            seedNumbers.add(i);
+        for (int i = LottoConstant.MIN_LOTTO_NUMBER; i <= LottoConstant.MAX_LOTTO_NUMBER; i++) {
+            numbers.add(i);
         }
 
-        return seedNumbers;
+        return numbers;
     }
 
     @Override

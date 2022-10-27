@@ -6,6 +6,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoNumberGeneratorTest {
 
@@ -42,4 +44,11 @@ class LottoNumberGeneratorTest {
                 .isBetween(LottoNumber.from(1), LottoNumber.from(45));
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0, 46})
+    @DisplayName("1 ~ 45 이외의 값이 입력되면 IllegalArgumentException 을 던진다.")
+    void lottoNumberException(int input) {
+        Assertions.assertThatThrownBy(() -> LottoNumber.from(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
