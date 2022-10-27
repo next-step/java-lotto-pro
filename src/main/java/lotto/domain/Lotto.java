@@ -8,7 +8,8 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = numbers.stream()
+        List<Integer> integers = Collections.unmodifiableList(numbers);
+        this.numbers = integers.stream()
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
 
@@ -27,5 +28,11 @@ public class Lotto {
         return this.numbers.stream()
                 .map(LottoNumber::toString)
                 .collect(Collectors.toList());
+    }
+
+    public int check(List<Integer> winningNumbers) {
+        return (int)winningNumbers.stream()
+                .map(w -> numbers.contains(LottoNumber.of(w)))
+                .filter(r -> r.equals(true)).count();
     }
 }
