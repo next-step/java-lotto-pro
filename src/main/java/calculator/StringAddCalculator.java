@@ -21,7 +21,7 @@ public class StringAddCalculator {
         return calculateSum(SplitDto.of(text));
     }
 
-    private static boolean hasText(CharSequence text) {
+    private static boolean hasText(String text) {
         if (text == null)
             return false;
         if (text.length() == 0)
@@ -29,17 +29,13 @@ public class StringAddCalculator {
         return containsText(text);
     }
 
-    private static boolean containsText(CharSequence text) {
-        int length = text.length();
-        boolean hasText = false;
-        for (int i = 0; i < length; i++) {
-            hasText = isNotWhiteSpace(text.charAt(i));
-        }
-        return hasText;
+    private static boolean containsText(String text) {
+        String trimmedString = text.trim();
+        return isNotEqualsEmptyString(trimmedString);
     }
 
-    private static boolean isNotWhiteSpace(char c) {
-        return !Character.isWhitespace(c);
+    private static boolean isNotEqualsEmptyString(String text) {
+        return !"".equals(text);
     }
 
     private static SplitDto makeCustomSplitDto(String text) {
