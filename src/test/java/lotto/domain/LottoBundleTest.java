@@ -11,11 +11,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoBundleTest {
 
-    @Test
-    void test1() {
-        List<Lotto> lottos = Arrays.asList(
+    private final List<Lotto> lottos;
+
+    public LottoBundleTest() {
+        lottos = Arrays.asList(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 45))
         );
+    }
+
+    @Test
+    void test1() {
         LottoBundle lottoBundle = new LottoBundle(lottos);
 
         List<String> lottoPrints = lottoBundle.printAll();

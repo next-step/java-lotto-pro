@@ -19,4 +19,10 @@ public class LottoBundle {
     public int size(){
         return lottoTickets.size();
     }
+
+    public List<Integer> checkAll(List<Integer> winningNumber) {
+        return lottoTickets.stream()
+                .map(t -> t.check(winningNumber))
+                .collect(Collectors.toList());
+    }
 }
