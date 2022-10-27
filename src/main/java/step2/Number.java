@@ -3,7 +3,7 @@ package step2;
 import java.util.Objects;
 
 class Number {
-    int num = 0;
+    private int num = 0;
 
     public Number() {
 
