@@ -22,10 +22,12 @@ public class StringAddCalculator {
     }
 
     private static boolean hasText(String text) {
-        if (text == null)
+        if (text == null) {
             return false;
-        if (text.length() == 0)
+        }
+        if (text.length() == 0) {
             return false;
+        }
         return containsText(text);
     }
 
