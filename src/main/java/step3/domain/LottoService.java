@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import step3.enums.Award;
-import step3.enums.Message;
 
 public class LottoService {
 
@@ -26,7 +25,6 @@ public class LottoService {
     }
 
     public List<Lotto> generateLottos(int count) {
-        System.out.println(count + Message.COUNT.getMessage());
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto());
         }

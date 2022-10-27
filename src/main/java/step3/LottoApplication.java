@@ -15,6 +15,8 @@ public class LottoApplication {
         output.purchase();
         int money = input.inputNumber();
         int purchasingNumber = lottoService.calculateLottoCount(money);
+
+        output.generateLottos(purchasingNumber);
         lottoService.generateLottos(purchasingNumber);
 
         output.winnerNumbers();

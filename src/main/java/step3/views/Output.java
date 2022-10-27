@@ -14,6 +14,10 @@ public class Output {
         System.out.println("\n" + Message.WIN_NUMBERS.getMessage());
     }
 
+    public void generateLottos(int count) {
+        System.out.println(count + Message.COUNT.getMessage());
+    }
+
     public void statistic(Map<Integer, Integer> statistics, double statisticLottos) {
         System.out.println("\n" + Message.STATISTICS.getMessage());
         System.out.println(Message.MATCH_THREE.resultMatchNumber(statistics.get(Award.THREE.getCount())));
