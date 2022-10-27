@@ -1,32 +1,17 @@
 package stringaddcalculator;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class StringAddCalculator {
-	private static final String DEFAULT_SPLIT_REGEX = ",|:";
-	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
 	private static final int NULL_OR_EMPTY_DEFAULT_RETURN_VALUE = 0;
 
 	public static int splitAndSum(String text) {
 		if (isNullOrEmpty(text)) {
 			return NULL_OR_EMPTY_DEFAULT_RETURN_VALUE;
 		}
-
-		Numbers numbers = Numbers.from(splitText(text));
+		String[] numberStrings = InputSplitter.splitText(text);
+		Numbers numbers = Numbers.from(numberStrings);
 
 		Number result = numbers.sum();
 		return result.getValue();
-	}
-
-	private static String[] splitText(String text) {
-		Matcher m = CUSTOM_DELIMITER_PATTERN.matcher(text);
-		if (m.find()) {
-			String customDelimiter = m.group(1);
-			String targetText = m.group(2);
-			return targetText.split(customDelimiter);
-		}
-		return text.split(DEFAULT_SPLIT_REGEX);
 	}
 
 	private static boolean isNullOrEmpty(String text) {
