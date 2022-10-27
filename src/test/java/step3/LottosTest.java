@@ -25,7 +25,7 @@ class LottosTest {
         lotto2 = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9)));
         lottos = new Lottos(new ArrayList<>(Arrays.asList(lotto1, lotto2)));
         winningNumbers = "1, 2, 3, 4, 5, 6";
-        lottos.matchWinningNumbers(winningNumbers);
+        lottos.matchWinningNumbers(winningNumbers, 45);
     }
 
     @ParameterizedTest
