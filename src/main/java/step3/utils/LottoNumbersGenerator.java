@@ -1,25 +1,19 @@
-package step3;
+package step3.utils;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import step3.domain.Numbers;
 
-public class Lotto {
+public class LottoNumbersGenerator {
 
     public static final int START_NUMBER = 1;
     public static final int END_NUMBER = 45;
     public static final int MAX_SELECT_NUMBER = 6;
 
-    private final LottoNumbers numbers;
-
-    private Lotto() {
-        List<Integer> numbers = generateAutoNumbers();
-        this.numbers = LottoNumbers.generate(numbers);
-    }
-
-    private List<Integer> generateAutoNumbers() {
-        return IntStream.range(START_NUMBER, END_NUMBER)
+    public static Numbers random() {
+        List<Integer> randomNumbers = IntStream.range(START_NUMBER, END_NUMBER)
                 .boxed()
                 .collect(
                         Collectors.collectingAndThen(
@@ -31,13 +25,6 @@ public class Lotto {
                                     return list;
                                 }
                         ));
-    }
-
-    public static Lotto generate() {
-        return new Lotto();
-    }
-
-    public LottoNumbers getNumbers() {
-        return numbers;
+        return Numbers.generate(randomNumbers);
     }
 }

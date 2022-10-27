@@ -1,7 +1,8 @@
-package step3;
+package step3.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import step3.utils.LottoNumbersGenerator;
 
 public class LottoStore {
 
@@ -14,7 +15,8 @@ public class LottoStore {
         List<Lotto> lottoList = new ArrayList<>();
         int totalAmount = (int) (price / PRICE_PER_LOTTO);
         for (int count = 0; count < totalAmount; count++) {
-            lottoList.add(Lotto.generate());
+            Numbers random = LottoNumbersGenerator.random();
+            lottoList.add(Lotto.generate(random));
         }
         return Lottos.generate(lottoList);
     }

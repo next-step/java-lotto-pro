@@ -1,4 +1,4 @@
-package step3;
+package step3.domain;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,15 +15,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class LottoNumbersTest {
+public class NumbersTest {
 
-    private final LottoNumbers winning = LottoNumbers.generate(Arrays.asList(1,2,3,4,5,6));
+    private final Numbers winning = Numbers.generate(Arrays.asList(1,2,3,4,5,6));
 
     @ParameterizedTest(name = "{displayName} - select: {0}, matchCount: [{1}]")
     @MethodSource("numberProvider")
     @DisplayName("일치하는 번호 개수 확인")
     public void testMatch(List<Integer> selectNumbers, int expected) {
-        LottoNumbers select = LottoNumbers.generate(selectNumbers);
+        Numbers select = Numbers.generate(selectNumbers);
         assertThat(winning.match(select)).isEqualTo(expected);
     }
 
@@ -43,7 +43,7 @@ public class LottoNumbersTest {
     @DisplayName("중복 번호 선택시 Exception 발생")
     public void testValidateError() {
         assertThatThrownBy(() -> {
-            LottoNumbers.generate(Arrays.asList(1,1,1,1,1,1));
+            Numbers.generate(Arrays.asList(1,1,1,1,1,1));
         })
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Duplicate numbers cannot input.");
@@ -53,7 +53,7 @@ public class LottoNumbersTest {
     @DisplayName("번호 비교시 대상 개수가 다른 경우 Exception 발생")
     public void testMatchError() {
         assertThatThrownBy(() -> {
-            LottoNumbers select = LottoNumbers.generate(Arrays.asList(1,2,3,4,5,6,7));
+            Numbers select = Numbers.generate(Arrays.asList(1,2,3,4,5,6,7));
             winning.match(select);
         })
                 .isInstanceOf(IndexOutOfBoundsException.class)
