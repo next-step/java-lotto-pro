@@ -24,4 +24,22 @@ public class DelimiterFinderTest {
         final boolean checkResult = delimiterFinder.ifIncludeBothSlashAndNewline();
         assertThat(checkResult).isFalse();
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//`\\n", "//[\\n", "//.\\n", "// \\n"})
+    @DisplayName("입력 문자열에 있는 // 와 \\n 사이에 다른 문자가 있는 경우 customDelimiterExistsInBetween '참' 이 된다")
+    void trueIfCustomDelimiterExistInBetween(String input) {
+        final DelimiterFinder delimiterFinder = new DelimiterFinder(input);
+        final boolean checkResult = delimiterFinder.customDelimiterExistsInBetween();
+        assertThat(checkResult).isTrue();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//\\n", "//0\\n"})
+    @DisplayName("입력 문자열에 있는 // 와 \\n 사이에 문자가 없거나 숫자가 있는 경우 customDelimiterExistsInBetween '거짓' 이 된다")
+    void falseIfCustomDelimiterDoesNotExistInBetween(String input) {
+        final DelimiterFinder delimiterFinder = new DelimiterFinder(input);
+        final boolean checkResult = delimiterFinder.customDelimiterExistsInBetween();
+        assertThat(checkResult).isFalse();
+    }
 }
