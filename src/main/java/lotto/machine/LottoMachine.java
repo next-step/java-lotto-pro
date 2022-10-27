@@ -21,7 +21,7 @@ public class LottoMachine {
 
         Result result = buyLottoTickets.match(winningLottoTicket);
         result.setMoney(Integer.parseInt(money));
-        printResult(result);
+        OutputView.printResult(result);
 
     }
 
@@ -34,10 +34,6 @@ public class LottoMachine {
             throw new IllegalArgumentException("금액이 부족합니다.");
         }
         return money / LOTTO_AMOUNT;
-    }
-
-    public static void printResult(Result result) {
-        OutputView.printResult(result);
     }
 
 }
