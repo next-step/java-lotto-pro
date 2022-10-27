@@ -13,6 +13,14 @@ public class StringCalculator {
         if (isEmpty(input)) {
             return 0;
         }
+        final String[] tokens = splitInput();
         return 0;
+    }
+
+    private String[] splitInput() {
+        final DelimiterFinder delimiterFinder = new DelimiterFinder(input);
+        final String delimiter = delimiterFinder.find();
+        final String[] tokens = input.split(delimiter);
+        return tokens;
     }
 }
