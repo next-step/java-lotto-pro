@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.domain.Nums;
 import calculator.util.Common;
 
 public class StringAddCalculator {
@@ -10,9 +11,13 @@ public class StringAddCalculator {
             return 0;
         }
 
-        return -1;
+        Nums nums = new Nums(input);
+
+        return nums.addElements();
 
     }
+
+
 
 
 }
