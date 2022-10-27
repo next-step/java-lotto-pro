@@ -1,6 +1,6 @@
 package lotto.winningnumber.validation;
 
-import java.util.List;
+import java.util.Set;
 
 public interface WinningNumberValidator {
 
@@ -8,5 +8,5 @@ public interface WinningNumberValidator {
     String ERROR_WINNING_NUMBER_TYPE_MESSAGE = "[ERROR] 당첨 번호에 숫자가 아닌 값이 포함되어 있습니다.";
     String ERROR_RANGE_MESSAGE = "[ERROR] 당첨번호에 1 ~ 45 사이의 숫자가 아닌 값이 포함되어 있습니다.";
 
-    void validate(List<String> winningNumbers);
+    void validate(Set<String> winningNumbers);
 }

@@ -1,6 +1,6 @@
 package lotto.winningnumber.validation;
 
-import java.util.List;
+import java.util.Set;
 
 public class RangeValidator implements WinningNumberValidator {
 
@@ -8,7 +8,7 @@ public class RangeValidator implements WinningNumberValidator {
     private static final int MAX_RANGE = 45;
 
     @Override
-    public void validate(List<String> winningNumbers) {
+    public void validate(Set<String> winningNumbers) {
         for (String winningNumber : winningNumbers) {
             isOverRangeThenThrow(winningNumber);
         }

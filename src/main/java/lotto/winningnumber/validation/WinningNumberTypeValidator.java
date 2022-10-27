@@ -1,6 +1,6 @@
 package lotto.winningnumber.validation;
 
-import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class WinningNumberTypeValidator implements WinningNumberValidator {
@@ -8,7 +8,7 @@ public class WinningNumberTypeValidator implements WinningNumberValidator {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]+$");
 
     @Override
-    public void validate(List<String> winningNumbers) {
+    public void validate(Set<String> winningNumbers) {
         for (String winningNumber : winningNumbers) {
             isNotNumberThenThrow(winningNumber);
         }
