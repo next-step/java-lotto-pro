@@ -12,11 +12,11 @@ public enum Rank {
     FOURTH(3, 5_000),
     MISS(0, 0);
 
+    private static final Map<Integer, Rank> countOfMatchToRank = Stream.of(values())
+            .collect(Collectors.toMap(Rank::getCountOfMatch, Function.identity()));
+
     private final int countOfMatch;
     private final int winningMoney;
-    private static final Map<Integer, Rank> countOfMatchToRank =
-            Stream.of(values())
-                    .collect(Collectors.toMap(Rank::getCountOfMatch, Function.identity()));
 
     Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;

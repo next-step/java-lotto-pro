@@ -9,12 +9,11 @@ import java.util.stream.Stream;
 
 public class LottoGeneratorImpl implements LottoGenerator {
 
+    public static final int LOTTO_NUMBER_COUNT = 6;
     public static final List<Integer> availableNumbers =
             Stream.iterate(1, number -> number + 1)
                     .limit(45)
                     .collect(Collectors.toList());
-
-    public static final int LOTTO_NUMBER_COUNT = 6;
 
     @Override
     public List<Integer> create() {
