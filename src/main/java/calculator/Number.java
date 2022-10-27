@@ -37,4 +37,8 @@ public class Number {
     public int hashCode() {
         return Objects.hash(number);
     }
+
+    public Number plus(Number number) {
+        return new Number(this.number + number.number);
+    }
 }

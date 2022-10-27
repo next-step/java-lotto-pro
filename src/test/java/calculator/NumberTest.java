@@ -24,4 +24,12 @@ public class NumberTest {
         assertThatThrownBy(() -> Number.valueOf(str))
             .isInstanceOf(RuntimeException.class);
     }
+
+    @Test
+    void 두개의_숫자를_더한다() {
+        Number first = Number.valueOf("3");
+        Number second = Number.valueOf("2");
+
+        assertThat(first.plus(second)).isEqualTo(Number.valueOf("5"));
+    }
 }
