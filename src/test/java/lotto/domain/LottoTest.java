@@ -18,7 +18,7 @@ class LottoTest {
     @MethodSource("lotto_getMatchCount_testcase")
     void lotto(List<Integer> number) {
 
-        assertThat(new Lotto(() -> number)).isInstanceOf(Lotto.class);
+        assertThat(new Lotto(number)).isInstanceOf(Lotto.class);
     }
 
     @DisplayName("서로 다른 로또의 일치 갯수를 구할 수 있다.")
@@ -26,8 +26,8 @@ class LottoTest {
     @MethodSource("lotto_getMatchCount_testcase")
     void match_count(List<Integer> numbers1, List<Integer> numbers2, int matchCount) {
 
-        Lotto targetLotto = new Lotto(() -> numbers1);
-        Lotto compareLotto = new Lotto(() -> numbers2);
+        Lotto targetLotto = new Lotto(numbers1);
+        Lotto compareLotto = new Lotto(numbers2);
 
         assertThat(targetLotto.getMatchCount(compareLotto)).isEqualTo(matchCount);
     }

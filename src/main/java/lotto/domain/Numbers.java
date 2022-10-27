@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class Numbers {
 
-    private static final int DEFAULT_LOTTO_SIZE = 6;
+    public static final int DEFAULT_LOTTO_SIZE = 6;
     private final Set<Number> numbers;
 
     public Numbers(List<Integer> integerNumbers) {
