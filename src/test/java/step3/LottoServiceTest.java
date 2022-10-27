@@ -1,10 +1,10 @@
 package step3;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +16,7 @@ public class LottoServiceTest {
     @DisplayName("로또를 구매하면 구매가격만큼 컬렉션에서 로또개수를 조회")
     void test_that_throw_exception_when_number_is_outofrange(int price,int count){
         //given
-        Lottos lottos = new Lottos();
+        Lottos lottos = new Lottos(new ArrayList());
         LottoService lottoService = new LottoService(price,lottos);
 
         //when

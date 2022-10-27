@@ -11,7 +11,7 @@ public class LottoService {
     }
 
     public void purchaseByAuto(){
-        while(lottos.getSumOfPriceLotto() < purchasePrice){
+        while(lottos.getSumOfPriceLottos() < purchasePrice){
             lottos.addByAuto();
         }
     }

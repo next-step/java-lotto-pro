@@ -1,8 +1,9 @@
 package step3;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -20,8 +21,9 @@ public class Lottos {
                 .boxed().collect(Collectors.toList());
     }
 
-    public Lottos(){
-        lottos = new ArrayList();
+    public Lottos(List<Lotto> lottos){
+
+        this.lottos = lottos;
     }
 
     public void addByAuto() {
@@ -33,7 +35,7 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    public int getSumOfPriceLotto(){
+    public int getSumOfPriceLottos(){
         return lottos.stream()
                 .mapToInt(Lotto::getPrice)
                 .sum();
