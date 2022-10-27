@@ -95,6 +95,7 @@
 - [X] 6개의 LottoNumber로 구성되어 있는 필드를 포함한다.
 #### LottoTickets
 - [X] 구입한 Lotto 리스트에 해당하는 필드를 포함한다.
+- [X] 구입한 Lotto 리스트를 당첨 로또 번호와 비교하여 당첨내역을 만들 수 있다.
 #### StatisticsGenerator
 - [X] 당첨 통계를 생성할 수 있다.
 #### StatisticsResult

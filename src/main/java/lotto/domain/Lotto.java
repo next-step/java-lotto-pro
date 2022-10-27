@@ -23,6 +23,12 @@ public class Lotto {
         }
     }
 
+    public Rank compareTo(Lotto other) {
+        Set<LottoNumber> copy = new HashSet<>(lottoNumbers);
+        copy.retainAll(other.lottoNumbers);
+        return Rank.valueOf(copy.size());
+    }
+
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }

@@ -12,4 +12,15 @@ public class LottoTicket {
     public List<Lotto> getLottos() {
         return lottos;
     }
+
+    public int getCount() {
+        return lottos.size();
+    }
+
+    public Ranks check(final Ranks ranks, final WinningLotto winninglotto) {
+        for(Lotto lotto : lottos) {
+            ranks.add(lotto.compareTo(winninglotto));
+        }
+        return ranks;
+    }
 }
