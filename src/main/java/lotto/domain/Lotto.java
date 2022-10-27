@@ -18,4 +18,14 @@ public class Lotto {
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(this.numbers);
     }
+
+    public String print(){
+        return String.format("[%s]", String.join(",", convertToStringNumbers()));
+    }
+
+    private List<String> convertToStringNumbers() {
+        return this.numbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.toList());
+    }
 }
