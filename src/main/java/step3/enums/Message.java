@@ -9,7 +9,7 @@ public enum Message {
     MATCH_THREE(Award.THREE.getCount() + "개 일치 (" + Award.THREE.getAmount() + "원)- "),
     MATCH_FOUR(Award.FOUR.getCount() + "개 일치 (" + Award.FOUR.getAmount() + "원)- "),
     MATCH_FIVE(Award.FIVE.getCount() + "개 일치 (" + Award.FIVE.getAmount() + "원)- "),
-    MATCH_FIVE_BONUS(Award.FIVE_BONUS.getCount() + "개 일치, 보너스 볼 일치(" + Award.FIVE_BONUS.getAmount() + "원)- "),
+    MATCH_FIVE_BONUS(Award.FIVE.getCount() + "개 일치, 보너스 볼 일치(" + Award.BONUS.getAmount() + "원)- "),
     MATCH_SIX(Award.SIX.getCount() + "개 일치 (" + Award.SIX.getAmount() + "원)- "),
     STATISTICS_RESULT("총 수익률은 "),
     BONUS("보너스 볼을 입력해 주세요.");;
