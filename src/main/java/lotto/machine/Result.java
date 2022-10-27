@@ -11,26 +11,6 @@ public class Result {
     private int money = 0;
     private int yieldRate = 0;
 
-    public void setMoney(int money){
-        this.money = money;
-    }
-
-    public int getThreeCount() {
-        return threeCount;
-    }
-
-    public int getFourCount() {
-        return fourCount;
-    }
-
-    public int getFiveCount() {
-        return fiveCount;
-    }
-
-    public int getSixCount() {
-        return sixCount;
-    }
-
     public void addCount(int matchCount) {
         if(matchCount == Match.THREE.getCount()){
             this.threeCount++;
@@ -52,5 +32,25 @@ public class Result {
         yieldRate += fiveCount * Match.FIVE.getAmount();
         yieldRate += sixCount * Match.SIX.getAmount();
         return yieldRate / money;
+    }
+
+    public void setMoney(int money){
+        this.money = money;
+    }
+
+    public int getThreeCount() {
+        return threeCount;
+    }
+
+    public int getFourCount() {
+        return fourCount;
+    }
+
+    public int getFiveCount() {
+        return fiveCount;
+    }
+
+    public int getSixCount() {
+        return sixCount;
     }
 }
