@@ -6,13 +6,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import step3.domain.LottoService;
-import step3.views.View;
 
 class LottoServiceTest {
 
     private LottoService lottoService = new LottoService();
-    private View view = new View();
-
 
     @DisplayName("로또 구입금액에 따른 로또 개수 추출")
     @ParameterizedTest

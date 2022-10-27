@@ -1,9 +1,11 @@
 package step3.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import step3.enums.Award;
 import step3.enums.Message;
 
@@ -57,6 +59,13 @@ public class LottoService {
         statistics.put(Award.FOUR.getCount(), 0);
         statistics.put(Award.FIVE.getCount(), 0);
         statistics.put(Award.SIX.getCount(), 0);
+    }
+
+    public List<Integer> gainWinnerNumbers(String numbersWithComma) {
+        return Arrays.asList(numbersWithComma.split(","))
+                .stream()
+                .mapToInt(Integer::parseInt).boxed()
+                .collect(Collectors.toList());
     }
 
 

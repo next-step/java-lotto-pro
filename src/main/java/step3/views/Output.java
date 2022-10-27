@@ -1,32 +1,17 @@
 package step3.views;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 import step3.enums.Award;
 import step3.enums.Message;
 
-public class View {
+public class Output {
 
-    private final Scanner sc;
-
-    public View() {
-        this.sc = new Scanner(System.in);
-    }
-
-    public int purchase() {
+    public void purchase() {
         System.out.println(Message.START.getMessage());
-        return sc.nextInt();
     }
 
-    public List<Integer> inputWinnerNumbers() {
+    public void winnerNumbers() {
         System.out.println("\n" + Message.WIN_NUMBERS.getMessage());
-        return Arrays.asList(sc.next().split(","))
-                .stream()
-                .mapToInt(Integer::parseInt).boxed()
-                .collect(Collectors.toList());
     }
 
     public void statistic(Map<Integer, Integer> statistics, double statisticLottos) {
@@ -37,5 +22,4 @@ public class View {
         System.out.println(Message.MATCH_SIX.resultMatchNumber(statistics.get(Award.SIX.getCount())));
         System.out.println(Message.STATISTICS_RESULT.resultStatistic(statisticLottos));
     }
-
 }
