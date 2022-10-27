@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@DisplayName("문자열 합 테스트")
 public class StringAddCalculatorTest {
 
     @DisplayName("숫자가 null 또는 \"\"인 경우 0 반환")

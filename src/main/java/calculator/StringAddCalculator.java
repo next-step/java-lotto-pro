@@ -1,6 +1,6 @@
 package calculator;
 
-import utlis.StringUtils;
+import lotto.utils.StringUtils;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -42,7 +42,7 @@ public class StringAddCalculator {
 
     private static int convertPositiveNumber(String text) {
         if (!text.matches(POSITIVE_NUMBER_REGEX)) {
-            throw new RuntimeException(String.format("문자열 계산기에 음수는 올 수 없습니다.", text));
+            throw new RuntimeException(String.format("문자열 계산기에 문자 또는 음수 올 수 없습니다. [%s]", text));
         }
         return Integer.parseInt(text);
     }

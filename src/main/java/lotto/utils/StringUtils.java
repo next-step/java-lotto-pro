@@ -1,4 +1,4 @@
-package utlis;
+package lotto.utils;
 
 public class StringUtils {
 
