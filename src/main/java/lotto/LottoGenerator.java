@@ -3,6 +3,7 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.money.Money;
+import lotto.win.DefaultWinPolicy;
 
 public class LottoGenerator {
     private final LottoNumberGenerator lottoNumberGenerator;
@@ -27,7 +28,7 @@ public class LottoGenerator {
 
         for (int i = 0; i < count; i++) {
             LottoNumbers lottoNumbers = LottoNumbers.from(lottoNumberGenerator.generate());
-            lottos.add(Lotto.from(lottoNumbers));
+            lottos.add(Lotto.from(lottoNumbers, new DefaultWinPolicy()));
         }
 
         return Lottos.from(lottos);
