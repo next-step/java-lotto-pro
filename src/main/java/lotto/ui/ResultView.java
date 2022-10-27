@@ -35,10 +35,12 @@ public class ResultView {
         if (rank == Rank.MISS) {
             return;
         }
-        ResultView.printMessage(ConsoleMessage.OUTPUT_WINNING_RESULT.getMessage(),
-                rank.getCountOfMatch(), rank.getWinningMoney(), countOfRanks.getValue());
-    }
 
+        String message = String.format(ConsoleMessage.OUTPUT_WINNING_RESULT.getMessage(),
+                rank.getCountOfMatch(), rank.getWinningMoney(), countOfRanks.getValue());
+
+        ResultView.printMessage(message);
+    }
     public static void printWinningStatistics() {
         printMessage(ConsoleMessage.OUTPUT_WINNING_RESULT_TITLE.getMessage());
     }
