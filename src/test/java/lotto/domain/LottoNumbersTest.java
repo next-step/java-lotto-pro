@@ -21,8 +21,7 @@ class LottoNumbersTest {
 			LottoNumber.of(3),
 			LottoNumber.of(4),
 			LottoNumber.of(5),
-			LottoNumber.of(6)
-		);
+			LottoNumber.of(6));
 		LottoNumbers lottoNumbers = LottoNumbers.of(lottoNumberSet);
 		assertThat(lottoNumbers).isInstanceOf(LottoNumbers.class);
 	}

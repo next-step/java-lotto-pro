@@ -4,31 +4,31 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import lotto.exception.InvalidMoneyException;
+import lotto.domain.strategy.GenerateStrategy;
 
 public class LottoTicketMachine {
 
-	public List<LottoTicket> lottoTickets(int money) {
-		int count = getCount(money);
-		return this.buyLottoTickets(count);
+	private static final int LOTTO_COST_PER_TICKET = 1000;
+	private final GenerateStrategy generateStrategy;
+	private final Money ticketPrice;
+
+	public LottoTicketMachine(GenerateStrategy generateStrategy) {
+		this.generateStrategy = generateStrategy;
+		this.ticketPrice = Money.of(LOTTO_COST_PER_TICKET);
 	}
 
-	private static int getCount(int money) {
-		int count = money / 1000;
-		if (count < 1) {
-			throw new InvalidMoneyException("로또 구입 금액은 1000원 이상이어야 합니다.");
-		}
-		return count;
-	}
-
-	private List<LottoTicket> buyLottoTickets(int count) {
-		return IntStream.range(0, count)
-			.mapToObj(i -> this.generateLottoTicket())
+	public List<LottoTicket> buyLottoTickets(Money money) {
+		TicketCount ticketCount = getTicketCount(money);
+		return IntStream.range(0, ticketCount.count())
+			.mapToObj(i -> this.generateLottoTicket(generateStrategy))
 			.collect(Collectors.toList());
 	}
 
-	private LottoTicket generateLottoTicket() {
-		LottoNumbersGenerator lottoNumbersGenerator = new LottoNumbersGenerator();
-		return LottoTicket.of(lottoNumbersGenerator);
+	private TicketCount getTicketCount(Money money) {
+		return money.ticketCount(ticketPrice);
+	}
+
+	private LottoTicket generateLottoTicket(GenerateStrategy generateStrategy) {
+		return LottoTicket.of(generateStrategy);
 	}
 }

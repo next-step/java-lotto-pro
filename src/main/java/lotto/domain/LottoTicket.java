@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import lotto.domain.strategy.GenerateStrategy;
+
 public class LottoTicket {
 	private final LottoNumbers lottoNumbers;
 
@@ -9,12 +11,12 @@ public class LottoTicket {
 		this.lottoNumbers = lottoNumbers;
 	}
 
-	public static LottoTicket of(LottoNumbers lottoNumbers) {
-		return new LottoTicket(lottoNumbers);
+	public static LottoTicket of(GenerateStrategy generator) {
+		return new LottoTicket(generator.generate());
 	}
 
-	public static LottoTicket of(LottoNumbersGenerator lottoNumbersGenerator) {
-		return new LottoTicket(LottoNumbers.of(lottoNumbersGenerator.generate()));
+	public LottoNumbers getNumbers() {
+		return lottoNumbers;
 	}
 
 	@Override
