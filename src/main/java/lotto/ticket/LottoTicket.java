@@ -18,9 +18,9 @@ public class LottoTicket {
         Collections.sort(numbers);
     }
 
-    public LottoTicket(String winningNumbers){
+    public LottoTicket(String winnerNumbers){
         Set<Integer> numbersSet = new HashSet<>();
-        for (String s: winningNumbers.split(",")) {
+        for (String s: winnerNumbers.split(",")) {
             numbersSet.add(Integer.parseInt(s));
         }
         if(numbersSet.size() != SLOT_SIZE){
@@ -64,7 +64,8 @@ public class LottoTicket {
         return count;
     }
 
-    private boolean contains(Integer number) {
+    public boolean contains(Integer number) {
         return numbers.contains(number);
     }
+
 }

@@ -20,10 +20,13 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public Result match(LottoTicket winningLottoTicket) {
+    public Result match(WinnerLottoTicket winnerLottoTicket) {
         Result result = new Result();
+
         for (LottoTicket ticket : lottoTickets){
-            result.addCount(ticket.match(winningLottoTicket));
+            result.addCount(
+                    ticket.match(winnerLottoTicket.getLotto()),
+                    winnerLottoTicket.matchBonus(ticket));
         }
         return result;
     }
