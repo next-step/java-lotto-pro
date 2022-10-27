@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class StringCalculatorTest {
 
-    private static int NOT_CALCULATED = 0;
+    private static final int NOT_CALCULATED = 0;
 
     @DisplayName("문자열 계산기 생성 테스트")
     @Test
@@ -35,7 +35,7 @@ class StringCalculatorTest {
 
     @DisplayName("문자열 계산기 null 입력 테스트")
     @Test
-    void empty() {
+    void nullValue() {
         //given:
         String input = null;
         //when:
