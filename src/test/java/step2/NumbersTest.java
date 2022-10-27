@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class NumbersTest {
     @DisplayName("문자열_배열이_입력되면_각각_객체가_생성된다")
     @Test
-    void 문자열_배열이_입력되면_각각_객체가_생성된다() {
+    void Numbers_pass_01() {
         String[] inputNumberTexts = new String[]{"1", "2", "3"};
         List<Number> numbers = new Numbers(inputNumberTexts).numbers();
         assertAll(
@@ -24,7 +24,7 @@ public class NumbersTest {
 
     @DisplayName("빈값이_입력되면_에러를_반환_한다")
     @Test
-    void 빈값이_입력되면_에러를_반환_한다() {
+    void Numbers_fail_01() {
         String[] inputNumberTexts = new String[]{};
         assertThatThrownBy(() -> new Numbers(inputNumberTexts))
                 .isInstanceOf(RuntimeException.class);

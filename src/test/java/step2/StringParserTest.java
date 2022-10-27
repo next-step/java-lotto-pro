@@ -16,35 +16,35 @@ public class StringParserTest {
 
     @DisplayName("splitAndSum_쉼표구분자_파싱_성공")
     @Test
-    public void splitAndSum_쉼표구분자_파싱_성공() throws Exception {
+    public void splitAndSum_01() {
         String[] result = stringParser.parseText("1,2");
         assertThat(result).isEqualTo(new String[]{"1", "2"});
     }
 
     @DisplayName("splitAndSum_쉼표_또는_콜론_구분자_파싱_성공")
     @Test
-    public void splitAndSum_쉼표_또는_콜론_구분자_파싱_성공() throws Exception {
+    public void splitAndSum_02() {
         String[] result = stringParser.parseText("1,2:3");
         assertThat(result).isEqualTo(new String[]{"1", "2", "3"});
     }
 
     @DisplayName("splitAndSum_custom_구분자_파싱_성공")
     @Test
-    public void splitAndSum_custom_구분자_파싱_성공() throws Exception {
+    public void splitAndSum_03() {
         String[] result = stringParser.parseText("//;\n1;2;3");
         assertThat(result).isEqualTo(new String[]{"1", "2", "3"});
     }
 
     @DisplayName("splitAndSum_custom_구분자_없을경우_기본_구분자_파싱")
     @Test
-    public void splitAndSum_custom_구분자_없을경우_기본_구분자_파싱() throws Exception {
+    public void splitAndSum_04() {
         String[] result = stringParser.parseText("//\n1:2:3");
         assertThat(result).isEqualTo(new String[]{"//\n1", "2", "3"});
     }
 
     @DisplayName("splitAndSum_custom_구분자_기본_구분자_모두_없을_때_파싱_안됨")
     @Test
-    public void splitAndSum_custom_구분자_기본_구분자_모두_없을_때_파싱_안됨() throws Exception {
+    public void splitAndSum_05() {
         String[] result = stringParser.parseText("//\n1;2;3");
         assertThat(result).isEqualTo(new String[]{"//\n1;2;3"});
     }
