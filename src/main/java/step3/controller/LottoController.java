@@ -19,8 +19,7 @@ public class LottoController {
 
     public void doLotto() {
         Integer amount = getAmount();
-        LottoQuantity quantity = LottoQuantity.of(amount);
-        Lottos lottos = getLottos(quantity);
+        Lottos lottos = getLottos(amount);
         List<Integer> winNumbers = getWinNumbers();
         Lotto winLotto = Lotto.of(winNumbers);
         Grades grades = GradeCalculator.getGrades(lottos, winLotto);
@@ -35,7 +34,8 @@ public class LottoController {
         return Integer.parseInt(amount);
     }
 
-    private Lottos getLottos(LottoQuantity quantity) {
+    private Lottos getLottos(Integer amount) {
+        LottoQuantity quantity = LottoQuantity.of(amount);
         ResultView.printLottoQuantityMessage(quantity);
         Lottos lottos = new Lottos();
         for (int i = 0; i < quantity.getQuantity(); i++) {
