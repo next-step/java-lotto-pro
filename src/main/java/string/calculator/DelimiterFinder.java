@@ -2,9 +2,17 @@ package string.calculator;
 
 public class DelimiterFinder {
     private final String input;
+    private String ultimateCustomDelimiter = null;
 
     public DelimiterFinder(String input) {
         this.input = input;
+    }
+
+    public String find() {
+        if (ifIncludeBothSlashAndNewline() && customDelimiterExistsInBetween()) {
+            return ultimateCustomDelimiter;
+        }
+        return "[;,]";
     }
 
     public boolean ifIncludeBothSlashAndNewline() {
@@ -25,6 +33,7 @@ public class DelimiterFinder {
         if (isCustomDelimiterDigit(charCustomDelimiter)) {
             return false;
         }
+        ultimateCustomDelimiter = "" + charCustomDelimiter;
         return true;
     }
 
