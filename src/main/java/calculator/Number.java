@@ -41,4 +41,8 @@ public class Number {
     public Number plus(Number number) {
         return new Number(this.number + number.number);
     }
+
+    public int toInt() {
+        return this.number;
+    }
 }
