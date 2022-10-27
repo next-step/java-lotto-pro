@@ -17,14 +17,11 @@ public class Result {
         if(matchCount == Rank.FIRST.getCountOfMatch()){
             this.firstCount++;
         }
-        if(matchBonus){
-            if(matchCount == Rank.SECOND.getCountOfMatch()){
-                this.secondCount++;
-            }
-        }else{
-            if(matchCount == Rank.THIRD.getCountOfMatch()){
-                this.threeCount++;
-            }
+        if(matchBonus && matchCount == Rank.SECOND.getCountOfMatch()){
+            this.secondCount++;
+        }
+        if(!matchBonus && matchCount == Rank.THIRD.getCountOfMatch()){
+            this.threeCount++;
         }
         if(matchCount == Rank.FOURTH.getCountOfMatch()){
             this.fourCount++;
