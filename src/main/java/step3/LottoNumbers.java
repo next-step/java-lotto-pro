@@ -12,6 +12,7 @@ public class LottoNumbers {
     }
 
     private LottoNumbers(List<Integer> numbers) {
+        validate(numbers);
         this.numbers = numbers;
     }
 
@@ -21,5 +22,13 @@ public class LottoNumbers {
 
     public int getSize() {
         return numbers.size();
+    }
+
+    private void validate(List<Integer> numbers) {
+        int size = numbers.size();
+        long count = numbers.stream().distinct().count();
+        if (size != count) {
+            throw new IllegalArgumentException("Duplicate numbers cannot input.");
+        }
     }
 }
