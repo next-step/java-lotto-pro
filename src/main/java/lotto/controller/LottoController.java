@@ -1,13 +1,15 @@
 package lotto.controller;
 
 import lotto.domain.LottoGame;
+import lotto.domain.LottoTickets;
 import lotto.view.InputView;
 
 public class LottoController {
 
     public void startLotto() {
-        System.out.println("LottoController.startLotto");
-        LottoGame lottoGame = new LottoGame(InputView.getLottoPurchasePrice());
+        int money = InputView.getLottoPurchasePrice();
+        LottoGame lottoGame = new LottoGame();
+        LottoTickets lottoTickets = lottoGame.buy(money);
 
     }
 }

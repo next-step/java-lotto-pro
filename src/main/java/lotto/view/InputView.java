@@ -13,7 +13,7 @@ public class InputView {
         try {
             purchasePrice = Integer.parseInt(SCANNER.nextLine());
         } catch (Exception e) {
-            throw new IllegalArgumentException("값이 올바르지 않습니다.");
+            throw new IllegalArgumentException("구매 금액이 올바르지 않습니다.");
         }
         return purchasePrice;
 
