@@ -13,7 +13,7 @@ public class StringAddCalculator {
     }
 
     public static int splitAndSum(String text) {
-        if (!hasText(text))
+        if (hasNotText(text))
             return 0;
         if (hasCustomDelimiter(text)) {
             return calculateSum(makeCustomSplitDto(text));
@@ -21,23 +21,23 @@ public class StringAddCalculator {
         return calculateSum(SplitDto.of(text));
     }
 
-    private static boolean hasText(String text) {
+    private static boolean hasNotText(String text) {
         if (text == null) {
-            return false;
+            return true;
         }
         if (text.length() == 0) {
-            return false;
+            return true;
         }
-        return containsText(text);
+        return doesNotContainText(text);
     }
 
-    private static boolean containsText(String text) {
+    private static boolean doesNotContainText(String text) {
         String trimmedString = text.trim();
-        return isNotEqualsEmptyString(trimmedString);
+        return isEmptyString(trimmedString);
     }
 
-    private static boolean isNotEqualsEmptyString(String text) {
-        return !"".equals(text);
+    private static boolean isEmptyString(String text) {
+        return "".equals(text);
     }
 
     private static SplitDto makeCustomSplitDto(String text) {
