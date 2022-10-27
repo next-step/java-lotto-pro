@@ -1,15 +1,13 @@
 package study;
 
+import java.util.HashSet;
+import java.util.Set;
 import org.assertj.core.api.Assertions;
-import org.assertj.core.internal.Strings;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class SetTest {
     private Set<Integer> numbers;
@@ -42,7 +40,7 @@ public class SetTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"} , delimiter = ':')
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
     void refactoring_contains_except(int input, boolean expected) {
 
         org.junit.jupiter.api.Assertions.assertEquals(expected, numbers.contains(input));

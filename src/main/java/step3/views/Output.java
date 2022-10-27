@@ -26,4 +26,5 @@ public class Output {
         System.out.println(Message.MATCH_SIX.resultMatchNumber(statistics.get(Award.SIX.getCount())));
         System.out.println(Message.STATISTICS_RESULT.resultStatistic(returnOnInvestmentRate));
     }
+
 }

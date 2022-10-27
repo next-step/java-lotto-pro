@@ -22,4 +22,5 @@ public enum Award {
     public int getAmount() {
         return amount;
     }
+
 }

@@ -29,4 +29,5 @@ public enum Message {
     public String resultMatchNumber(int value) {
         return this.message + value + "개";
     }
+
 }

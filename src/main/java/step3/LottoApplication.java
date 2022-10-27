@@ -33,4 +33,5 @@ public class LottoApplication {
         output.statistic(statistics, returnOnInvestmentRate);
 
     }
+
 }
