@@ -5,7 +5,7 @@ public class ParseData {
     private final String customDelimiter;
     private final String numberString;
 
-    public ParseData(String customDelimiter, String numberString) {
+    private ParseData(String customDelimiter, String numberString) {
         this.customDelimiter = customDelimiter;
         this.numberString = numberString;
     }
