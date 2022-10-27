@@ -1,13 +1,12 @@
 package step3.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    private List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
-    public void add(Lotto lotto) {
-        lottos.add(lotto);
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public List<Lotto> getLottos() {

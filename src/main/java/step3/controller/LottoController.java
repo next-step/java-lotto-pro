@@ -1,5 +1,6 @@
 package step3.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -37,10 +38,11 @@ public class LottoController {
     private Lottos getLottos(Integer amount) {
         LottoQuantity quantity = LottoQuantity.of(amount);
         ResultView.printLottoQuantityMessage(quantity);
-        Lottos lottos = new Lottos();
+        List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < quantity.getQuantity(); i++) {
-            lottos.add(Lotto.generate());
+            lottoList.add(Lotto.generate());
         }
+        Lottos lottos = new Lottos(lottoList);
         ResultView.printLottosNumberMessage(lottos);
         return lottos;
     }
