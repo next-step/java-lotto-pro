@@ -40,4 +40,12 @@ public class Lotto {
         });
     }
 
+    public Rank getRank(List<Integer> winningNumbers){
+        int count = (int) numbers
+                .stream()
+                .filter(number -> winningNumbers.contains(number))
+                .count();
+        return Rank.getRankFromMatchCount(count);
+    }
+
 }
