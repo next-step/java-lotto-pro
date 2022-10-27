@@ -15,13 +15,7 @@ class LottoNumbersTest {
 	@Test
 	@DisplayName("로또 번호 컬렉션 생성")
 	void createLottoNumbersTest() {
-		Set<LottoNumber> lottoNumberSet = Set.of(
-			LottoNumber.of(1),
-			LottoNumber.of(2),
-			LottoNumber.of(3),
-			LottoNumber.of(4),
-			LottoNumber.of(5),
-			LottoNumber.of(6));
+		Set<Integer> lottoNumberSet = Set.of(1, 2, 3, 4, 5, 6);
 		LottoNumbers lottoNumbers = LottoNumbers.of(lottoNumberSet);
 		assertThat(lottoNumbers).isInstanceOf(LottoNumbers.class);
 	}
@@ -29,13 +23,7 @@ class LottoNumbersTest {
 	@Test
 	@DisplayName("로또 번호가 6개가 아닐 시에 InvalidLottoNumberException 발생")
 	void throwInvalidLottoNumbersCountTest() {
-		Set<LottoNumber> lottoNumberSet = Set.of(
-			LottoNumber.of(1),
-			LottoNumber.of(2),
-			LottoNumber.of(3),
-			LottoNumber.of(4),
-			LottoNumber.of(5)
-		);
+		Set<Integer> lottoNumberSet = Set.of(1, 2, 3, 4, 5);
 		assertThatThrownBy(() -> LottoNumbers.of(lottoNumberSet))
 			.isInstanceOf(InvalidLottoNumberException.class);
 	}
@@ -43,14 +31,7 @@ class LottoNumbersTest {
 	@Test
 	@DisplayName("같은 로또 번호 컬렉션인지 확인")
 	void equalsTest() {
-		Set<LottoNumber> lottoNumberSet = Set.of(
-			LottoNumber.of(1),
-			LottoNumber.of(2),
-			LottoNumber.of(3),
-			LottoNumber.of(4),
-			LottoNumber.of(5),
-			LottoNumber.of(6)
-		);
+		Set<Integer> lottoNumberSet = Set.of(1, 2, 3, 4, 5, 6);
 		LottoNumbers lottoNumbers = LottoNumbers.of(lottoNumberSet);
 		assertThat(lottoNumbers).isEqualTo(LottoNumbers.of(lottoNumberSet));
 	}

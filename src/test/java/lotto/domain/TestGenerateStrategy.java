@@ -10,7 +10,7 @@ public class TestGenerateStrategy implements GenerateStrategy {
 	@Override
 	public LottoNumbers generate() {
 		return LottoNumbers.of(IntStream.range(1, 7)
-				.mapToObj(LottoNumber::of)
+				.boxed()
 				.collect(Collectors.toSet()));
 	}
 }

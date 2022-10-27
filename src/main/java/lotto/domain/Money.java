@@ -6,6 +6,7 @@ public class Money {
 
 	private static final String INVALID_INPUT_MONEY_MESSAGE = "로또 구입 금액은 1000원 이상이어야 합니다.";
 	private static final String INVALID_TICKET_PRICE_MESSAGE = "티켓 가격이 0원 일 수 없습니다.";
+	protected static final int PRICE_PER_TICKET = 1000;
 
 	private final int value;
 
@@ -29,7 +30,7 @@ public class Money {
 	}
 
 	public TicketCount ticketCount(Money ticketPrice) {
-		if (this.value < 1000) {
+		if (this.value < PRICE_PER_TICKET) {
 			throw new InvalidMoneyException(INVALID_INPUT_MONEY_MESSAGE);
 		}
 		try {

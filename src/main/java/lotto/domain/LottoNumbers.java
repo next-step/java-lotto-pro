@@ -1,13 +1,14 @@
 package lotto.domain;
 
-import lotto.exception.InvalidLottoNumberException;
-
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import lotto.exception.InvalidLottoNumberException;
 
 public class LottoNumbers {
 
-    private static final int LOTTO_NUMBER_COUNT = 6;
+    public static final int LOTTO_NUMBER_COUNT = 6;
     private static final String INVALID_LOTTO_NUMBERS_COUNT_MESSAGE = "로또 번호는 6개여야 합니다.";
     private final Set<LottoNumber> lottoNumbers;
 
@@ -22,8 +23,16 @@ public class LottoNumbers {
         }
     }
 
-    public static LottoNumbers of(Set<LottoNumber> lottoNumbers) {
-        return new LottoNumbers(lottoNumbers);
+
+    public static LottoNumbers of(Set<Integer> lottoNumbers) {
+        Set<LottoNumber> lottoNumberSet = getLottoNumbers(lottoNumbers);
+        return new LottoNumbers(lottoNumberSet);
+    }
+
+    private static Set<LottoNumber> getLottoNumbers(Set<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+            .map(LottoNumber::of)
+            .collect(Collectors.toSet());
     }
 
     @Override
