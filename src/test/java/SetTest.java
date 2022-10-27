@@ -25,9 +25,7 @@ public class SetTest {
     @DisplayName("Set의 크기는 추가한 요소에서 중복을 제거한 개수를 반환한다.")
     @Test
     void size() {
-        final int actual = numbers.size();
-
-        assertThat(actual).isEqualTo(3);
+        assertThat(numbers).hasSize(3);
     }
 
     @ParameterizedTest(name = "주어진 Set에 [{0}]을 요소로 포함하는가 = {1}.")
