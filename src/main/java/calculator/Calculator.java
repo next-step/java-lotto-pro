@@ -7,9 +7,8 @@ import java.util.stream.Stream;
 public class Calculator {
     int sum(Numbers numbers){
         return Stream.of(numbers.getNumbers())
-                .peek(Validator::isNumber)
-                .mapToInt(Integer::parseInt)
                 .peek(Validator::isPositiveNumber)
+                .mapToInt(Integer::parseInt)
                 .sum();
     }
 }
