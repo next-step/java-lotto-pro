@@ -24,4 +24,8 @@ public class LottoGenerator {
         return purchasePrice / 1000;
     }
 
+    public String calculatorResult(int totalWinningPrice) {
+        double calculatorResult = Double.valueOf(totalWinningPrice) / Double.valueOf(purchasePrice);
+        return String.format("%.2f", calculatorResult);
+    }
 }

@@ -24,7 +24,6 @@ public class Lotto {
             numbers.add(new LottoNumber(number));
         }
         Collections.sort(this.numbers);
-        System.out.println(this);
     }
 
     private List<String> convertNumberArray(String inputNumber) {

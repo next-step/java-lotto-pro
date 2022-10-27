@@ -21,4 +21,12 @@ public class Lottos {
     public List<Lotto> getLottos() {
         return lottos;
     }
+
+    public LottoResult calculatorLotto(Lotto lastWeekLotto) {
+        LottoResult lottoResult = new LottoResult();
+        for (Lotto lotto : lottos) {
+            lottoResult.addResult(lotto.sameNumberCount(lastWeekLotto));
+        }
+        return lottoResult;
+    }
 }
