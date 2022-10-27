@@ -9,6 +9,9 @@ public class StringAddCalculator {
     public static final String CUSTOM_EXPRESSION = "//(.)\n(.*)";
     public static final Pattern CUSTOM_PATTERN = Pattern.compile(CUSTOM_EXPRESSION);
 
+    private StringAddCalculator() {
+    }
+
     public static int splitAndSum(String text) {
         if (!hasText(text))
             return 0;
