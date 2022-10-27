@@ -1,5 +1,7 @@
 package string.calculator;
 
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+
 public class StringCalculator {
     private final String input;
 
@@ -8,6 +10,9 @@ public class StringCalculator {
     }
 
     public int calculate() {
+        if (isEmpty(input)) {
+            return 0;
+        }
         return 0;
     }
 }
