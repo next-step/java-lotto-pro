@@ -14,8 +14,9 @@ public class StringAddCalculator {
     public static int splitAndSum(String text) {
         if (hasNotText(text))
             return 0;
-        if (Pattern.matches(CUSTOM_EXPRESSION, text)) {
-            return calculateSum(makeCustomSplitDto(text));
+        Matcher matcher = CUSTOM_PATTERN.matcher(text);
+        if (matcher.find()) {
+            return calculateSum(makeCustomSplitDto(matcher));
         }
         return calculateSum(SplitDto.of(text));
     }
@@ -64,13 +65,9 @@ public class StringAddCalculator {
         }
     }
 
-    private static SplitDto makeCustomSplitDto(String text) {
-        Matcher matcher = CUSTOM_PATTERN.matcher(text);
-        if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            String extractedText = matcher.group(2);
-            return SplitDto.of(extractedText, customDelimiter);
-        }
-        throw new RuntimeException();
+    private static SplitDto makeCustomSplitDto(Matcher matcher) {
+        String customDelimiter = matcher.group(1);
+        String extractedText = matcher.group(2);
+        return SplitDto.of(extractedText, customDelimiter);
     }
 }
