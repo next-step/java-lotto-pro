@@ -27,20 +27,27 @@ public class Lottos {
         return lottos;
     }
 
-    public void matchWinningNumbers(String numbersWithComma) {
+    public void matchWinningNumbers(String numbersWithComma, int bonusball) {
         List<Integer> winningNumbers = this.gainWinnerNumbers(numbersWithComma);
         lottos.forEach(lotto -> {
-            lotto.match(winningNumbers);
+            lotto.match(winningNumbers, bonusball);
         });
     }
 
     public Map<Integer, Integer> calculateWinningBallsEachLotto() {
         Map<Integer, Integer> statistics = initStatistics();
-
         lottos.forEach(lotto -> {
+            if (isBonus(lotto)) {
+                statistics.computeIfPresent(Award.FIVE.getCount() + Award.BONUS.getCount(), (k, v) -> v + 1);
+                return;
+            }
             statistics.computeIfPresent(lotto.getMatchCount(), (k, v) -> v + 1);
         });
         return statistics;
+    }
+
+    private boolean isBonus(Lotto lotto) {
+        return lotto.getMatchCount() == Award.FIVE.getCount() && lotto.hasBonusNumber();
     }
 
     private Map<Integer, Integer> initStatistics() {
@@ -49,6 +56,7 @@ public class Lottos {
         statistics.put(Award.THREE.getCount(), 0);
         statistics.put(Award.FOUR.getCount(), 0);
         statistics.put(Award.FIVE.getCount(), 0);
+        statistics.put(Award.FIVE.getCount() + Award.BONUS.getCount(), 0);
         statistics.put(Award.SIX.getCount(), 0);
 
         return statistics;

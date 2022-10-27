@@ -16,6 +16,7 @@ public class LottoService {
         double sum = statistics.get(Award.THREE.getCount()) * Award.THREE.getAmount();
         sum += statistics.get(Award.FOUR.getCount()) * Award.FOUR.getAmount();
         sum += statistics.get(Award.FIVE.getCount()) * Award.FIVE.getAmount();
+        sum += statistics.get(Award.FIVE.getCount() + Award.BONUS.getCount()) * Award.BONUS.getAmount();
         sum += statistics.get(Award.SIX.getCount()) * Award.SIX.getAmount();
         return Math.floor(sum / money * 100) / 100;
     }
