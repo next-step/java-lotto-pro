@@ -12,7 +12,7 @@ public class DelimiterFinder {
         if (ifIncludeBothSlashAndNewline() && customDelimiterExistsInBetween()) {
             return ultimateCustomDelimiter;
         }
-        return "[;,]";
+        return "[:,]";
     }
 
     public boolean ifIncludeBothSlashAndNewline() {

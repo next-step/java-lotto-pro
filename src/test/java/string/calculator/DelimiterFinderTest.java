@@ -14,7 +14,7 @@ public class DelimiterFinderTest {
         final String input = "//\\n";
         final DelimiterFinder delimiterFinder = new DelimiterFinder(input);
         final String findResult = delimiterFinder.find();
-        assertThat(findResult).isEqualTo("[;,]");
+        assertThat(findResult).isEqualTo("[:,]");
     }
 
     @Test
