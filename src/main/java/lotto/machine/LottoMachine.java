@@ -6,7 +6,7 @@ import lotto.ticket.LottoTicket;
 import lotto.ticket.LottoTickets;
 
 public class LottoMachine {
-    private static int LOTTO_AMOUNT = 1000;
+    private static int LOTTO_AMOUNT = 1_000;
 
     public static void gameStart(){
 

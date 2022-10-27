@@ -10,7 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoMachineTest {
-    private static int LOTTO_AMOUNT = 1000;
+    private static int LOTTO_AMOUNT = 1_000;
     private LottoMachine lottoMachine;
 
     @BeforeEach
@@ -32,7 +32,7 @@ public class LottoMachineTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {1001, 1999})
+    @ValueSource(ints = {1_001, 1_999})
     void 로또_구매_금액_잔액이_남을경우_구매가능한_수량_반환(int money){
         int result = lottoMachine.getQuantity(money);
         assertThat(result).isEqualTo(money / LOTTO_AMOUNT);
@@ -40,7 +40,7 @@ public class LottoMachineTest {
 
     @Test
     void 로또_1장을_구매한다(){
-        LottoTickets lottoTickets = lottoMachine.buyLotto(1000);
+        LottoTickets lottoTickets = lottoMachine.buyLotto(1_000);
         assertThat(lottoTickets.getQuantity()).isEqualTo(1);
     }
 
