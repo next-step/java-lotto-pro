@@ -25,10 +25,9 @@ public class LottoApplication {
 
         output.winnerNumbers();
         String winnerNumbersWithComma = input.inputString();
-        List<Integer> winnerNumbers = lottoService.gainWinnerNumbers(winnerNumbersWithComma);
-        lottoService.matchWinningNumbers(lottoList, winnerNumbers);
+        lottos.matchWinningNumbers(winnerNumbersWithComma);
 
-        Map<Integer, Integer> statistics = lottoService.calculateWinningBallsEachLotto(lottoList);
+        Map<Integer, Integer> statistics = lottos.calculateWinningBallsEachLotto();
         double returnOnInvestmentRate = lottoService.statisticLottos(statistics, money);
         output.statistic(statistics, returnOnInvestmentRate);
 

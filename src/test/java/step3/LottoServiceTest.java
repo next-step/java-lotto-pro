@@ -17,4 +17,5 @@ class LottoServiceTest {
         Assertions.assertEquals(expected, lottoService.calculateLottoCount(input));
     }
 
+
 }
