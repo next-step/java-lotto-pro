@@ -1,7 +1,6 @@
 package lotto.converter;
 
 import java.util.Arrays;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import lotto.domain.LottoNumbers;
@@ -31,15 +30,14 @@ public class InputConverter {
 	public static LottoNumbers toLottoNumbers(String input) {
 		validate(input);
 		String[] split = input.split(",");
-		Set<Integer> numbers = toNumbers(split);
-		return LottoNumbers.of(numbers);
+		return lottoNumbers(split);
 	}
 
-	private static Set<Integer> toNumbers(String[] split) {
+	private static LottoNumbers lottoNumbers(String[] split) {
 		return Arrays.stream(split)
 			.map(InputConverter::removeBlank)
 			.map(InputConverter::toInt)
-			.collect(Collectors.toSet());
+			.collect(Collectors.collectingAndThen(Collectors.toSet(), LottoNumbers::of));
 	}
 
 	private static String removeBlank(String input) {

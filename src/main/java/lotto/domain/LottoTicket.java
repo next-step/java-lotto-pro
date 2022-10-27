@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Objects;
+import java.util.Set;
 
 import lotto.domain.strategy.GenerateStrategy;
 
@@ -9,7 +10,7 @@ public class LottoTicket {
 	private static final String CLOSE_BRACKET = "]";
 	private final LottoNumbers lottoNumbers;
 
-	private LottoTicket(LottoNumbers lottoNumbers) {
+	LottoTicket(LottoNumbers lottoNumbers) {
 		this.lottoNumbers = lottoNumbers;
 	}
 
@@ -17,7 +18,11 @@ public class LottoTicket {
 		return new LottoTicket(generator.generate());
 	}
 
-	public LottoNumbers getNumbers() {
+	public static LottoTicket of(Set<Integer> lottoNumbers) {
+		return new LottoTicket(LottoNumbers.of(lottoNumbers));
+	}
+
+	public LottoNumbers lottonumbers() {
 		return lottoNumbers;
 	}
 
@@ -41,4 +46,5 @@ public class LottoTicket {
 	public int hashCode() {
 		return lottoNumbers != null ? lottoNumbers.hashCode() : 0;
 	}
+
 }

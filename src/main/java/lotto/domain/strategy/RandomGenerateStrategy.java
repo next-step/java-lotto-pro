@@ -1,7 +1,6 @@
 package lotto.domain.strategy;
 
 import java.util.Random;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import lotto.domain.LottoNumbers;
@@ -14,15 +13,10 @@ public class RandomGenerateStrategy implements GenerateStrategy {
 
 	@Override
 	public LottoNumbers generate() {
-		Set<Integer> lottoNumbers = lottoNumbers();
-		return LottoNumbers.of(lottoNumbers);
-	}
-
-	private Set<Integer> lottoNumbers() {
 		return RANDOM.ints(MINIMUM_NUMBER_BOUND, MAXIMUM_NUMBER_BOUND)
 			.distinct()
 			.limit(MAX_LOTTO_NUMBER_SIZE)
 			.boxed()
-			.collect(Collectors.toSet());
+			.collect(Collectors.collectingAndThen(Collectors.toSet(), LottoNumbers::of));
 	}
 }

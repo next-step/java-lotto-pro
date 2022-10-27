@@ -58,4 +58,10 @@ public class LottoNumbers {
 	public int hashCode() {
 		return Objects.hash(lottoNumbers);
 	}
+
+	public int compare(LottoNumbers purchaseLottoNumbers) {
+		return (int) this.lottoNumbers.stream()
+			.filter(purchaseLottoNumbers.lottoNumbers::contains)
+			.count();
+	}
 }

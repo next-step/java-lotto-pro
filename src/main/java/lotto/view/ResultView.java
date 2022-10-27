@@ -9,17 +9,8 @@ public class ResultView {
 	public void printLottoTickets(LottoTickets lottoTickets) {
 		StringBuilder ticketStringBuilder = new StringBuilder();
 		appendLottoCount(lottoTickets, ticketStringBuilder);
-		appendTicketNumbers(lottoTickets, ticketStringBuilder);
+		ticketStringBuilder.append(lottoTickets);
 		System.out.println(ticketStringBuilder);
-	}
-
-	private void appendTicketNumbers(LottoTickets lottoTickets, StringBuilder ticketStringBuilder) {
-		lottoTickets.getLottoTickets()
-			.forEach(ticket -> {
-					ticketStringBuilder.append(ticket.toString());
-					ticketStringBuilder.append(NEXT_LINE);
-				}
-			);
 	}
 
 	private void appendLottoCount(LottoTickets lottoTickets, StringBuilder ticketStringBuilder) {

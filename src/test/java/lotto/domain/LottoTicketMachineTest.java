@@ -2,6 +2,8 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,7 +49,6 @@ class LottoTicketMachineTest {
 	void generateLottoTicketTest() {
 		LottoTickets lottoTickets = lottoTicketMachine.buyLottoTickets(Money.of(1000));
 		LottoTicket lottoTicket = lottoTickets.getLottoTickets().get(0);
-		assertThat(lottoTicket.getNumbers()).isEqualTo(new TestGenerateStrategy().generate());
-
+		assertThat(lottoTicket).isEqualTo(LottoTicket.of(Set.of(1, 2, 3, 4, 5, 6)));
 	}
 }
