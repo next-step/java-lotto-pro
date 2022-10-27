@@ -1,26 +1,26 @@
 package util;
 
 import domain.Numbers;
-import domain.SafeString;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Splitter {
-    private static final String defaultDelimiter = ",|:";
+    private static final String customParserRegEx = "^//(.)\n(.*)$";
+    private static final int customDelimiterGroupIndex = 1;
+    private static final int numberStringIndex = 2;
 
-    public static Numbers split(SafeString s) {
-        CustomDelimiterParseResult result = CustomDelimiterParser.parse(s);
-        String delimiter = getDelimiter(result.getCustomDelimiter());
-        String[] split = result.getNumberString().split(delimiter);
-        return Numbers.of(split);
+    private Splitter(){}
+
+    public static Numbers split(String text) {
+        return Numbers.of(parse(text).split());
     }
 
-    private static String getDelimiter(String customDelimiter) {
-        String delimiter = defaultDelimiter;
-        if(!customDelimiter.isEmpty()){
-            delimiter = String.format("%s|%s",defaultDelimiter,customDelimiter);
+    private static ParseData parse(String text) {
+        Matcher m = Pattern.compile(customParserRegEx).matcher(text);
+        if(m.find()){
+            return ParseData.of(m.group(customDelimiterGroupIndex),m.group(numberStringIndex));
         }
-        return delimiter;
+        return ParseData.of("",text);
     }
-
-
-
 }

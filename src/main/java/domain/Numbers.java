@@ -31,10 +31,6 @@ public class Numbers {
         return i;
     }
 
-    public int size() {
-        return numbers.size();
-    }
-
     public int sum() {
         int sum = 0;
         for (Integer num : this.numbers) {

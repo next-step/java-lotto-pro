@@ -3,9 +3,11 @@ import domain.SafeString;
 import util.Splitter;
 
 public class StringAddCalculator {
-    public static int splitAndSum(String o) {
-        SafeString s = SafeString.of(o);
-        Numbers split = Splitter.split(s);
-        return split.sum();
+    private StringAddCalculator(){}
+
+    public static int splitAndSum(String text) {
+        SafeString safeString = SafeString.of(text);
+        Numbers numbers = Splitter.split(safeString.toString());
+        return numbers.sum();
     }
 }
