@@ -17,10 +17,34 @@ public class StringCalculator {
         return 0;
     }
 
-    private String[] splitInput() {
+    public String[] splitInput() {
         final DelimiterFinder delimiterFinder = new DelimiterFinder(input);
         final String delimiter = delimiterFinder.find();
-        final String[] tokens = input.split(delimiter);
-        return tokens;
+        final String purifiedInput = purifyInput(input);
+        String splitRegex = delimiter;
+        if (ifDelimiterRegexReservedWord(delimiter)) {
+            splitRegex = String.format("\\%s", delimiter);
+        }
+        return purifiedInput.split(splitRegex);
+    }
+
+    private String purifyInput(String input) {
+        final int purifyTarget = findPurifyTarget(input);
+        if (purifyTargetNotFound(purifyTarget)) {
+            return input;
+        }
+        return input.substring(purifyTarget + 2);
+    }
+
+    private int findPurifyTarget(String input) {
+        return input.indexOf("\\n");
+    }
+
+    private boolean purifyTargetNotFound(int purifyTarget) {
+        return purifyTarget == -1;
+    }
+
+    private boolean ifDelimiterRegexReservedWord(String delimiter) {
+        return "+*?.^&".contains(delimiter);
     }
 }
