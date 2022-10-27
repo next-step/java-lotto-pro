@@ -11,7 +11,7 @@
   - [x] 위치 값을 벗어나면 StringIndexOutOfBoundsException이 발생한다. 
 
 ## Set Collection에 대한 학습 테스트
-- [ ] Set의 크기를 확인한다.
+- [x] Set의 크기를 확인한다.
 - [ ] Set의 값을 확인한다.
  - [ ] ParameterizedTest를 활용해 중복 코드를 제거한다.
  - [ ] 성공과 실패를 모두 검증하는 테스트를 구현한다.
