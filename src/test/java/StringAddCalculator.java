@@ -8,6 +8,11 @@ public class StringAddCalculator {
         if (text.length() == 1) {
             return Integer.parseInt(text);
         }
-        return 0;
+        String[] numbers = text.split(",");
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+        return sum;
     }
 }
