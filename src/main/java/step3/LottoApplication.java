@@ -20,8 +20,8 @@ public class LottoApplication {
         int money = input.inputNumber();
         int purchasingNumber = lottoService.calculateLottoCount(money);
 
-        output.generateLottos(purchasingNumber);
         List<Lotto> lottoList = lottos.generateLottos(purchasingNumber);
+        output.generateLottos(purchasingNumber, lottoList);
 
         output.winnerNumbers();
         String winnerNumbersWithComma = input.inputString();

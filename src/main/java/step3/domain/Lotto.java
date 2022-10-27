@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Lotto {
 
-    private final List<Integer> range;
+    private List<Integer> range;
 
     private List<Integer> lottoNumbers;
 
@@ -17,7 +17,10 @@ public class Lotto {
         initLotto();
         shuffle(range);
         this.lottoNumbers = range.subList(0, 6);
-        System.out.println(lottoNumbers);
+    }
+
+    public Lotto(List<Integer> manualLottoNumbers) {
+        this.lottoNumbers = manualLottoNumbers;
     }
 
     public List<Integer> gainAutoNumbers() {
@@ -33,6 +36,10 @@ public class Lotto {
 
     public int getMatchCount() {
         return matchCount;
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     private List<Integer> initLotto() {

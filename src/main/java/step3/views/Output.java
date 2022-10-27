@@ -1,6 +1,8 @@
 package step3.views;
 
+import java.util.List;
 import java.util.Map;
+import step3.domain.Lotto;
 import step3.enums.Award;
 import step3.enums.Message;
 
@@ -14,8 +16,11 @@ public class Output {
         System.out.println("\n" + Message.WIN_NUMBERS.getMessage());
     }
 
-    public void generateLottos(int count) {
+    public void generateLottos(int count, List<Lotto> lottos) {
         System.out.println(count + Message.COUNT.getMessage());
+        lottos.forEach(lotto -> {
+            System.out.println(lotto.getLottoNumbers());
+        });
     }
 
     public void statistic(Map<Integer, Integer> statistics, double returnOnInvestmentRate) {
