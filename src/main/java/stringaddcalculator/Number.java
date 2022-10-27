@@ -12,7 +12,11 @@ public class Number {
 	}
 
 	public static Number from(String s) {
-		return new Number(Integer.parseInt(s));
+		try {
+			return new Number(Integer.parseInt(s));
+		} catch (NumberFormatException e) {
+			throw new RuntimeException("입력 문자열은 숫자여야만 합니다.");
+		}
 	}
 
 	public static Number from(int n) {

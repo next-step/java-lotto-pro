@@ -39,16 +39,17 @@ class StringAddCalculatorTest {
 		assertThat(result).isEqualTo(6);
 	}
 
+	@DisplayName("음수값 전달")
 	@Test
 	void splitAndSum_negative() {
 		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-			.isInstanceOf(RuntimeException.class);
+			.isExactlyInstanceOf(RuntimeException.class);
 	}
 
 	@DisplayName("숫자 이외의 값 전달")
 	@Test
 	void splitAndSum_notNumber() {
 		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("assa,123,-as"))
-			.isInstanceOf(RuntimeException.class);
+			.isExactlyInstanceOf(RuntimeException.class);
 	}
 }
