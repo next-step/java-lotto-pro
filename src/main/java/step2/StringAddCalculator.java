@@ -1,12 +1,8 @@
 package step2;
 
 import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class StringAddCalculator {
-    private static final String DEFAULT_SEPARATOR = "[,:]";
-
     public static int splitAndSum(String text) {
         if(text == null || text.isEmpty()) {
             return 0;
@@ -14,7 +10,7 @@ public class StringAddCalculator {
         if(isNumberOnly(text)) {
             return Integer.parseInt(text);
         }
-        String[] tokens = split(text);
+        String[] tokens = TokenParser.split(text);
         validateTokens(tokens);
         return getTokensSum(tokens);
     }
@@ -26,27 +22,6 @@ public class StringAddCalculator {
             return false;
         }
         return true;
-    }
-
-    private static String[] split(String text) {
-        String[] tokens = null;
-        if(text.contains(",") || text.contains(":")) {
-            tokens = splitWithDefaultSeparator(text);
-        }
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
-        if (m.find()) {
-            String customSeparator = m.group(1);
-            tokens = splitWithCustomSeparator(m.group(2), customSeparator);
-        }
-        return tokens;
-    }
-
-    private static String[] splitWithDefaultSeparator(String text) {
-        return text.split(DEFAULT_SEPARATOR);
-    }
-
-    private static String[] splitWithCustomSeparator(String text, String separator) {
-        return text.split(separator);
     }
 
     private static void validateTokens(String[] tokens) throws RuntimeException {
