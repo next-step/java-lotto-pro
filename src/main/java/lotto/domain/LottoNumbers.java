@@ -9,7 +9,7 @@ import lotto.exception.InvalidLottoNumberException;
 public class LottoNumbers {
 
     public static final int LOTTO_NUMBER_COUNT = 6;
-    private static final String INVALID_LOTTO_NUMBERS_COUNT_MESSAGE = "로또 번호는 6개여야 합니다.";
+    private static final String INVALID_LOTTO_NUMBERS_COUNT_MESSAGE = "로또 번호는 중복되지 않는 6개의 숫자여야 합니다.";
     private final Set<LottoNumber> lottoNumbers;
 
     private LottoNumbers(Set<LottoNumber> lottoNumbers) {
