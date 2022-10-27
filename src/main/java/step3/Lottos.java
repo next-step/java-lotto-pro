@@ -47,4 +47,12 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
+    public Map<Rank, Integer> getRankStatsOfLottos(List<Integer> winningNumbers) {
+        HashMap<Rank, Integer> result = new HashMap<>();
+        lottos.stream().forEach(lottoTicket -> {
+            Rank rank = lottoTicket.getRank(winningNumbers);
+            result.put(rank, result.getOrDefault(rank, 0) + 1);
+        });
+        return result;
+    }
 }
