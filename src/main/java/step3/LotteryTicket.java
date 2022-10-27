@@ -4,24 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LotteryTicket {
-    private final List<Lotto> lotteryTicket;
-    public LotteryTicket(int count) {
-        lotteryTicket = new ArrayList<>();
-        addRepeatLotto(count);
+    private final List<Lotto> lotteryTicket = new ArrayList<>();
+    private final ArrayList<Integer> winningNumbers;
+    
+    public LotteryTicket(ArrayList<Integer> winningNumbers) {
+        this.winningNumbers = winningNumbers;
     }
     
+
     public List<Lotto> getLotteryTicket() {
         return this.lotteryTicket;
     }
     
-    private void addLotto(){
-        Lotto lotto = new Lotto();
-        lotteryTicket.add(lotto);
+    
+    public void add(Lotto lotto) {
+        this.lotteryTicket.add(lotto);
     }
     
-    private void addRepeatLotto(int count){
-        for(int i = 0; i < count; i++){
-            addLotto();
+    public long getTotalPrize() {
+        long totalPrize = 0;
+        for (Lotto lotto: this.lotteryTicket) {
+            lotto.compareMath(this.winningNumbers);
+            totalPrize += Rank.getPrize(lotto.getMatchCount());
         }
+        
+        return totalPrize;
     }
 }

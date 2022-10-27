@@ -31,6 +31,11 @@ public enum Rank {
         return rankByCount.get(matchCount);
     }
     
+    public static long getPrize(int matchCount) {
+       return getRank(matchCount).getPrize();
+    }
+    
+    
     public long getCount() {
         return count;
     }

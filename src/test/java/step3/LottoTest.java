@@ -1,44 +1,62 @@
 package step3;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
-    @Test
-    public void lotto_generation() {
-        Lotto lotto = new Lotto();
-        assertThat(lotto.getLottoNumbers()).hasSize(6);
+    private static ArrayList<Integer> lottoNumbers;
+    private static ArrayList<Integer> winningNumbers;
+    
+    @BeforeAll
+    static void beforeAll() {
+        lottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winningNumbers = new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7));
     }
     
     @Test
-    @DisplayName("당첨번호와 같은 숫자라면 카운트를 올린다")
-    public void lotto_compare_countUp() {
-        Lotto lotto = new Lotto();
-        int winningNumber = 5;
-        int expect = 0;
-        List<Integer> lottoNumber = lotto.getLottoNumbers();
-        
-        if(lottoNumber.contains((winningNumber))) {
-            expect = 1;
-        }
+    @DisplayName("로또 객체 생성")
+    public void lotto_create_object() {
+        assertThat(new Lotto(lottoNumbers)).isEqualTo(new Lotto(lottoNumbers));
+    }
     
-        lotto.compareCountUp(winningNumber);
-        assertThat(lotto.getMatchCount()).isEqualTo(expect);
+    @Test
+    @DisplayName("로또 객체에서 당첨번호가 포함되는지 매칭")
+    public void lotto_match_winningNumber() {
+        int winningNumber = 5;
+        Lotto lotto = new Lotto(lottoNumbers);
+        assertThat(lotto.match(winningNumber)).isEqualTo(true);
+    }
+    
+    @Test
+    @DisplayName("당첨번호와 같은 숫자가 있다면 카운트를 올린다")
+    public void lotto_match_countUp() {
+        Lotto lotto = new Lotto(lottoNumbers);
+        lotto.matchCountUp(5);
+        assertThat(lotto.getMatchCount()).isEqualTo(1);
     }
     
     @Test
     @DisplayName("당첨번호와 같은 숫자가 몇개 있는지 검증")
     public void lotto_compare_count() {
-        Lotto lotto = new Lotto();
-        ArrayList<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(lottoNumbers);
         lotto.compareMath(winningNumbers);
-        assertThat(lotto.getMatchCount()).isBetween(0,6);
+        assertThat(lotto.getMatchCount()).isEqualTo(5);
+    }
+    
+    @Test
+    @DisplayName("로또 번호와 당첨번호를 비교하여 순위 및 당첨금 확인")
+    void lotto_match_prize() {
+        Lotto lotto = new Lotto(lottoNumbers);
+        lotto.compareMath(winningNumbers);
+        int count = lotto.getMatchCount();
+        assertThat(Rank.getRank(count)).isEqualTo(Rank.SECOND);
+        assertThat(Rank.getPrize(count)).isEqualTo(Rank.SECOND.getPrize());
     }
     
 }

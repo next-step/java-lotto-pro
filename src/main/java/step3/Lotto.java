@@ -1,41 +1,20 @@
 package step3;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.Objects;
 
 public class Lotto {
     private final List<Integer> lottoNumbers;
-    private int matchCount = 0;
-    private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final int LOTTO_NUMBER_START = 1;
-    private static final int LOTTO_NUMBER_END = 45;
-   
+    private int matchCount;
     
-    public Lotto() {
-        List<Integer> lottoRange = convertList(getLottoRange());
-        Collections.shuffle(lottoRange);
-        this.lottoNumbers = lottoRange.subList(0,LOTTO_NUMBER_COUNT);
-        Collections.sort(this.lottoNumbers);
-    }
-    
-    private IntStream getLottoRange(){
-        return IntStream.range(LOTTO_NUMBER_START, LOTTO_NUMBER_END);
-    }
-    
-    private List<Integer> convertList(IntStream lottoRange){
-        return lottoRange.boxed().collect(Collectors.toList());
-    }
-    
-    public List<Integer> getLottoNumbers() {
-        return this.lottoNumbers;
+    public Lotto(ArrayList<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
     
     
-    public void compareCountUp(int winningNumber) {
-        if(lottoNumbers.contains(winningNumber)){
+    public void matchCountUp(int winningNumber) {
+        if(match(winningNumber)){
             matchCount++;
         }
     }
@@ -46,7 +25,25 @@ public class Lotto {
     
     public void compareMath(ArrayList<Integer> winningNumbers) {
         for (int winningNumber: winningNumbers) {
-            compareCountUp(winningNumber);
+            matchCountUp(winningNumber);
         }
     }
+    
+    public boolean match(int winningNumber) {
+        return this.lottoNumbers.contains(winningNumber);
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return matchCount == lotto.matchCount && Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers, matchCount);
+    }
+    
+
 }
