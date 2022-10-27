@@ -14,17 +14,29 @@ public class DelimiterFinder {
     public boolean customDelimiterExistsInBetween() {
         final int indexOfDoubleSlash = input.indexOf("//");
         final int indexOfNewline = input.indexOf("\\n");
-        if (indexOfDoubleSlash + 2 == indexOfNewline) {
+        if (noSpaceBetweenDoubleSlashAndNewline(indexOfDoubleSlash, indexOfNewline)) {
             return false;
         }
         final String customDelimiter = input.substring(indexOfDoubleSlash + 2, indexOfNewline);
-        if (1 < customDelimiter.length()) {
+        if (customDelimiterMoreThanOne(customDelimiter)) {
             return false;
         }
         final char charCustomDelimiter = customDelimiter.charAt(0);
-        if (Character.isDigit(charCustomDelimiter)) {
+        if (isCustomDelimiterDigit(charCustomDelimiter)) {
             return false;
         }
         return true;
+    }
+
+    private boolean noSpaceBetweenDoubleSlashAndNewline(int indexOfDoubleSlash, int indexOfNewline) {
+        return indexOfDoubleSlash + 2 == indexOfNewline;
+    }
+
+    private boolean customDelimiterMoreThanOne(String customDelimiter) {
+        return 1 < customDelimiter.length();
+    }
+
+    private boolean isCustomDelimiterDigit(char charCustomDelimiter) {
+        return Character.isDigit(charCustomDelimiter);
     }
 }
