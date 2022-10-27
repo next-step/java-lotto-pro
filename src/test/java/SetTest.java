@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,5 +27,12 @@ public class SetTest {
     @Test
     void size() {
         assertThat(numbers.size()).isEqualTo(3);
+    }
+
+    @DisplayName("Set의 값을 확인한다. - ParameterizedTest를 중복 코드를 제거한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3})
+    void contains(int input) {
+        assertThat(numbers.contains(input)).isTrue();
     }
 }
