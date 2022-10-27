@@ -19,14 +19,28 @@ public class StringTest {
     }
 
     @Test
+    @DisplayName("1을 ,로 split 했을 때 1만을 포함하는 배열이 반환되는지에 대한 학습 테스트를 구현한다.")
+    public void stringTest_split2(){
+        //given
+        final String given = "1";
+        final String[] expected = {"1"};
+        //when
+        final String[] actual = given.split(",");
+
+        //then
+        assertThat(actual).containsExactly(expected);
+    }
+    @Test
     @DisplayName("(1,2) 값이 주어졌을 때 String의 substring() 메소드를 활용해 ()을 제거하고 1,2 반환하도록 구현")
     public void stringTest_substring(){
         //given
         final String given = "(1,2)";
         final String expected = "1,2";
 
-        //when & then
-        assertThat(given.substring(1,given.length()-1)).isEqualTo(expected);
+        //when
+        final String actual = given.substring(1,given.length()-1);
+        //then
+        assertThat(actual).isEqualTo(expected);
     }
     
     @Test
