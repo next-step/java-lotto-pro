@@ -71,5 +71,58 @@
 4. [x] "1,2"
 5. [x] "1,2:3"
 6. [x] "//;\n1;2;3"
-8. [x] "-1,2:3"
-9. [x] "가,2:3"
+7. [x] "-1,2:3"
+8. [x] "가,2:3"
+
+## 3단계 - 로또(자동)
+### 기능 목록
+* [ ] 로또 구입 금액 입력
+* [ ] 입력 값에 따른 발급 가능한 최대 로또 개수 반환
+  * 입력 값 / 1000
+  * [ ] 돈과 관련된 기능을 나타낼 객체 생성
+    * 입력값에 따른 최대 로또 개수
+    * 로또 구입에 사용한 비용과 수입금에 따른 수익률 확인
+* [ ] 로또 자동 발급
+  * [ ] 1~45 사이의 서로 다른 6개의 숫자 랜덤하게 반환
+    * `Collections.shuffle()` 메소드 활용
+  * [ ] 로또 번호들은 오름차순으로 정렬 -> 오름차순으로 출력하기 위함
+    * `Collections.sort()` 메소드 활용
+* [ ] 당첨 번호 입력
+  * [ ] 당첨 번호 입력 시, 중복된 값 validation 필요
+    * 관련 지정된 요구사항이 없으므로, 임의로 try ~ catch 통해 다시 입력 받도록 구현
+* [ ] 구매한 로또 번호와 당첨 번호 간 일치 개수 확인
+  ```java
+  3개 일치 (5000원)
+  4개 일치 (50000원)
+  5개 일치 (1500000원)
+  6개 일치 (2000000000원)
+  ```
+* 당첨 개수에 따른 수익금 확인
+  * ENUM으로 복권 일치 개수와 그에 따른 수익금 매핑
+  ```java
+  import java.math.BigDecimal;   
+  
+  public enum LottoPrize {
+    THREE(3, 5000, "3개 일치 (5000원)"),
+    FOUR(4, 50000, "4개 일치 (50000원)"),
+    FIVE(5, 1500000, "5개 일치 (1500000원)"),
+    SIX(6, 2000000000, "6개 일치 (2000000000원)")
+    ;
+  
+    private final int matchCount;
+    private final BigDecimal lottoPrizeMoney;
+    private final String lottoPrizeMessage;
+  
+    LottoPrize(int matchCount, BigDecimal lottoPrizeMoney, String lottoPrizeMessage) {
+      this.matchCount = matchCount;
+      this.lottoPrizeMoney = lottoPrizeMoney;
+      this.lottoPrizeMessage = lottoPrizeMessage;
+    }
+  
+    public BigDecimal getLottoPrizeMoney() {
+      return lottoPrizeMoney;
+    }
+  }
+  ```
+* [ ] 수익금과 로또를 사는데 들인 비용(구입금액) 비교
+  * 구입 금액 대비 수익금 비율 확인(예: 5000/14000 = 0.357... = 0.35) -> 소숫점 셋째자리 버림
