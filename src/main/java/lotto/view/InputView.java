@@ -15,6 +15,11 @@ public class InputView {
         }
     }
 
+    public static String getWiningNumber() {
+        ResultView.printWinningNumber();
+        return read();
+    }
+
     private static String read() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();

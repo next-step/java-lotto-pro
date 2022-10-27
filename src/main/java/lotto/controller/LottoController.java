@@ -12,5 +12,6 @@ public class LottoController {
     public void run() {
         List<LottoTicket> tickets = LottoMarket.sell(InputView.getMoney(), new RandomLottoGenerator());
         ResultView.printTickets(tickets);
+        String winningNumber = InputView.getWiningNumber();
     }
 }

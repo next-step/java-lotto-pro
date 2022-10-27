@@ -15,5 +15,11 @@ public class ResultView {
         for (LottoTicket ticket : tickets) {
             System.out.println(ticket.getNumbers());
         }
+
+        System.out.println();
+    }
+
+    public static void printWinningNumber() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 }
