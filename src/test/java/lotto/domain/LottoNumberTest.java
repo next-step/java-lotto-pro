@@ -21,6 +21,6 @@ public class LottoNumberTest {
     @ValueSource(ints = {-1, 46, 0, 47, 123})
     void 로또의_각_숫자는_1이상_45이하가_아니면_에러_발생(int number) {
         assertThatThrownBy(() -> new LottoNumber(number)).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorCode.로또의_각_자리수는_1이상_45이하.getErrorMessage());
+                .hasMessage(ErrorCode.로또의_각_숫자는_1이상_45이하.getErrorMessage());
     }
 }

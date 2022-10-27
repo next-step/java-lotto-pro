@@ -17,7 +17,7 @@ public class LottoNumber {
 
     private void validateLottoNumber(int lottoNumber) {
         if(!isInLottoNumberRange(lottoNumber)) {
-            throw new IllegalArgumentException(ErrorCode.로또의_각_자리수는_1이상_45이하.getErrorMessage());
+            throw new IllegalArgumentException(ErrorCode.로또의_각_숫자는_1이상_45이하.getErrorMessage());
         }
     }
 
