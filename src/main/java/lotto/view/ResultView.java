@@ -7,7 +7,7 @@ import lotto.domain.WinStatistics;
 
 public class ResultView {
 	public void lottosResult(Lottos lottos) {
-		System.out.printf("%d개를 구매했습니다.\n", lottos.getSize());
+		System.out.printf("%d개를 구매했습니다.\n", lottos.getQuantity());
 		for (Lotto lotto : lottos.getLottos()) {
 			System.out.println(lotto.toString());
 		}

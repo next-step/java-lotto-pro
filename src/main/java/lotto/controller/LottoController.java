@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.Lottos;
 import lotto.domain.WinNumbers;
 import lotto.domain.WinStatistics;
+import lotto.util.InputSplitter;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
