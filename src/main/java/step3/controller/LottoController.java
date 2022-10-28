@@ -16,7 +16,7 @@ public class LottoController {
     public void start(){
         InputView.printPurchasingAmount();
         int amount = Console.readInt();
-        LottoService lottoService = new LottoService(amount,new Lottos(new ArrayList<>()));
+        LottoService lottoService = new LottoService(amount);
         lottoService.purchaseByAuto();
         LottosNumberDto lottosNumberDto = lottoService.getLottoTicketState();
         ResultView.printPurchasingLottos(lottosNumberDto);

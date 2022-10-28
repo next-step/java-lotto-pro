@@ -4,6 +4,7 @@ import step3.model.dto.LottoStatusDto;
 import step3.model.dto.LottosNumberDto;
 import step3.model.dto.RankDto;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -14,9 +15,10 @@ public class LottoService {
     private final int purchasePrice;
     private final Lottos lottos;
 
-    public LottoService(int purchasePrice,Lottos lottos){
+    public LottoService(int purchasePrice){
         this.purchasePrice = purchasePrice;
-        this.lottos = lottos;
+        int size = purchasePrice / Lotto.PRICE;
+        this.lottos = new Lottos(LottoFactory.createLottos(size));
     }
 
     public void purchaseByAuto(){
