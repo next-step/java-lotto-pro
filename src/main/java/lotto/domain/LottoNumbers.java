@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,10 +24,4 @@ public class LottoNumbers {
         // TODO: 입력한 값의 로또 번호가 중복인 경우
     }
 
-    @Override
-    public String toString() {
-        return "LottoNumbers{" +
-                "lottoNumbers=" + lottoNumbers +
-                '}';
-    }
 }

@@ -14,21 +14,19 @@ public class LottoGame {
     }
 
     public LottoTickets buy(int purchasePrice) {
-
         validLottoPrice(purchasePrice);
         int ticketCount = purchasePrice / LOTTO_PRICE;
 
-        // TODO: 로또 생성
         List<LottoTicket> lottoTicketList = new ArrayList<>();
-        for (int i = 0; i <ticketCount; i++) {
-            // TODO: 티켓에 로또 번호 넣기
+        for (int i = 0; i < ticketCount; i++) {
+            lottoTicketList.add(new LottoTicket(lottoGenerator.generateLottoNumber()));
         }
         return new LottoTickets(lottoTicketList);
     }
 
     private void validLottoPrice(int purchasePrice) {
         if (purchasePrice < LOTTO_PRICE || (purchasePrice % LOTTO_PRICE) != 0) {
-            throw new IllegalArgumentException("로또 구매에 실패했습니다.");
+            throw new IllegalArgumentException("로또 금액은 1000원 단위로 입력해야 합니다.");
         }
     }
 

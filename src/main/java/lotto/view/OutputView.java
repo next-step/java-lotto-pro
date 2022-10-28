@@ -2,10 +2,10 @@ package lotto.view;
 
 public class OutputView {
 
+    private static final String LOTTO_PURCHASE = "%d개를 구매했습니다.";
 
-    public static void printPurchasePriceCount(int price) {
-        System.out.println((price / 1000) + "개를 구매했습니다.");
+    public static void lottoPurchaseCount(int count) {
+        System.out.println(String.format(LOTTO_PURCHASE, count));
     }
 
-    // TODO: 카운팅
 }

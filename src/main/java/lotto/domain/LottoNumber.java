@@ -14,11 +14,8 @@ public class LottoNumber {
         this.number = number;
     }
 
-
     private boolean isRangeLottoNumber(int number) {
         return number < MIN_LOTTO_NUMBER || MAX_LOTTO_NUMBER < number;
     }
 
-
-    // TODO: 들어온 숫자가 올바른 범위에 들어있는지 확인
 }

@@ -10,4 +10,8 @@ public class LottoTickets {
         this.lottoTicketList = lottoTicketList;
     }
 
+    public int ticketCount() {
+        return this.lottoTicketList.size();
+    }
+
 }
