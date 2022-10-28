@@ -136,6 +136,22 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("당첨번호가 5개 일치하면 하고 보너스번호 일치하면 2등 조회")
+    void test_that_it_returns_2th_if_5_winning_numbers_and_bonus_match() {
+        //given
+        List<LottoNumber> numbers = IntStream.rangeClosed(1, 6).boxed()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
+
+        //when
+        Lotto lotto = new Lotto(numbers);
+        Rank rank = lotto.getRank(getLottoNumbers(1,2,3,4,5,13),LottoNumber.valueOf(6));
+
+        //then
+        assertThat(rank).isEqualTo(Rank.TWO);
+    }
+
+    @Test
     @DisplayName("당첨번호가 5개 일치하면 3등조회")
     void test_that_it_returns_3th_if_5_winning_numbers_match() {
         //given
@@ -145,7 +161,6 @@ public class LottoTest {
 
         //when
         Lotto lotto = new Lotto(numbers);
-        List<Integer> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 13}).boxed().collect(Collectors.toList());
         Rank rank = lotto.getRank(getLottoNumbers(1,2,3,4,5,13));
 
         //then

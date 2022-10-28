@@ -41,4 +41,13 @@ public class Lotto {
         return Rank.valueOf(count);
     }
 
+    public Rank getRank(List<LottoNumber> winningNumbers,LottoNumber bonusNumber) {
+        int count = (int) numbers
+                .stream()
+                .filter(lottoNumber -> winningNumbers.contains(lottoNumber))
+                .count();
+        boolean isBonus = numbers.contains(bonusNumber);
+        return Rank.valueOf(count,isBonus);
+    }
+
 }
