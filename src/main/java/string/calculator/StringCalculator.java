@@ -14,7 +14,7 @@ public class StringCalculator {
         }
         final String[] tokens = splitInput();
         final Operand[] operands = convertToOperand(tokens);
-        return 0;
+        return calculateOperands(operands);
     }
 
     private boolean inputNullOrEmpty() {
@@ -32,5 +32,10 @@ public class StringCalculator {
             operands[i] = new Operand(tokens[i]);
         }
         return operands;
+    }
+
+    private int calculateOperands(Operand[] operands) {
+        final SumOfOperands sumOfOperands = new SumOfOperands(operands);
+        return sumOfOperands.result();
     }
 }
