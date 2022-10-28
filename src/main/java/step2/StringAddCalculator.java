@@ -17,7 +17,6 @@ public class StringAddCalculator {
             return sum;
         }
 
-        isSingleNum(target);
         String[] numbers = doSplitAndSum(target);
 
         sumSplitedNumbers(numbers);
@@ -68,13 +67,6 @@ public class StringAddCalculator {
         delimiter = basicSplitRegex;
     }
 
-
-
-    private static void isSingleNum(String target) {
-        if(target.length() == 1) {
-            sum = 0;
-        }
-    }
 
     private static boolean isFind (String regex, String target) {
         return getMatcher(regex, target).find();
