@@ -24,9 +24,9 @@ class PositiveOperandTest {
         //given:
         String operand = "10";
         //when:
-        PositiveOperand operand = new PositiveOperand(operand);
+        PositiveOperand positiveOperand = new PositiveOperand(operand);
         //then:
-        assertThat(operand.getOperand()).isEqualTo(10);
+        assertThat(positiveOperand.getOperand()).isEqualTo(10);
     }
 
     @DisplayName("PositiveOperand 생성 실패 - 숫자형 데이터가 아닌 경우")
