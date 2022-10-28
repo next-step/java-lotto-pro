@@ -21,7 +21,7 @@ public class Lottos {
 
     public List<List<LottoNumber>> getNumbersOfLottos() {
         return lottos.stream()
-                .map(lotto -> lotto.getNumbers())
+                .map(Lotto::getNumbers)
                 .collect(Collectors.toList());
     }
 
