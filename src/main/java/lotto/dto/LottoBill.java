@@ -3,6 +3,7 @@ package lotto.dto;
 import lotto.domain.lotto.Lotto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoBill {
     private final int lottoPiece;
@@ -21,4 +22,10 @@ public class LottoBill {
         return lottos;
     }
 
+    @Override
+    public String toString() {
+        return this.lottos.stream()
+                .map(Lotto::toString)
+                .collect(Collectors.joining("\n"));
+    }
 }
