@@ -13,4 +13,8 @@ public class Money {
         }
         this.money = money;
     }
+
+    public int getBuyableLottoCount() {
+        return this.money / LOTTO_PRICE;
+    }
 }
