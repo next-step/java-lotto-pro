@@ -1,9 +1,12 @@
-package lotto;
+package lotto.model;
 
 import static org.assertj.core.api.Assertions.*;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 
 class LottoTest {
 

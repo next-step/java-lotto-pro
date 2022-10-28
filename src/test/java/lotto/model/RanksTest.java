@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -6,6 +6,9 @@ import java.util.Arrays;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import lotto.model.Rank;
+import lotto.model.Ranks;
 
 public class RanksTest {
 
