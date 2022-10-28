@@ -5,6 +5,7 @@ import java.util.*;
 public class LottoMachine {
     private static final int DEFAULT_MINIMUM_NUMBER = 1;
     private static final int DEFAULT_MAXIMUM_NUMBER = 45;
+    private static final int DEFAULT_SCORE = 0;
 
     private final int lottoPrice;
     private int lottoCount;
@@ -51,7 +52,8 @@ public class LottoMachine {
             int matchedCount = 0;
             matchedCount = getMatchedCount(luckyNumbers, lotto, matchedCount);
 
-            int count = this.lottoResult.getOrDefault(matchedCount, 0);
+            this.lottoResult = new HashMap<>();
+            int count = this.lottoResult.getOrDefault(matchedCount, DEFAULT_SCORE);
             this.lottoResult.put(matchedCount, ++count);
         }
     }
@@ -100,5 +102,9 @@ public class LottoMachine {
         Set<Integer> uniqueNumbers = new HashSet<>(luckyNumbers);
 
         return uniqueNumbers.size() != luckyNumbers.size();
+    }
+
+    public int showCountByScore(int score) {
+        return this.lottoResult.getOrDefault(score, DEFAULT_SCORE);
     }
 }
