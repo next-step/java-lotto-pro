@@ -24,6 +24,10 @@ public class Operand {
         return new Operand(Integer.toString(addResult));
     }
 
+    public int value() {
+        return value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
