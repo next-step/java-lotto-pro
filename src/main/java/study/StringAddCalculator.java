@@ -1,10 +1,13 @@
 package study;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
     public static final String DEFAULT_SEPARATOR = "[,:]";
+    public static final String CUSTOM_SEPARATOR = "//(.)\n(.*)";
 
     public static int splitAndSum(String text) {
         if (validateText(text)) {
@@ -13,12 +16,20 @@ public class StringAddCalculator {
         return sum(text);
     }
 
+    private static String[] splitWithCustomText(String text) {
+        Matcher matcher = Pattern.compile(CUSTOM_SEPARATOR).matcher(text);
+        if (matcher.find()) {
+            return matcher.group(2).split(matcher.group(1));
+        }
+        return splitText(text);
+    }
+
     private static String[] splitText(String text) {
         return text.split(DEFAULT_SEPARATOR);
     }
 
     private static int sum(String text){
-        return Arrays.stream(splitText(text))
+        return Arrays.stream(splitWithCustomText(text))
             .mapToInt(StringAddCalculator::parseInt)
             .sum();
     }
