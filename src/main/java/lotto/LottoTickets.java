@@ -51,4 +51,10 @@ public class LottoTickets {
 		return lottoTicketList.stream().map(LottoTicket::toString)
 			.collect(Collectors.joining("\n"));
 	}
+
+	public List<Integer> getEqualNumberCounts(LottoTicket comparedTicket) {
+		return lottoTicketList.stream()
+			.map(lottoTicket -> lottoTicket.getEqualNumberCount(comparedTicket))
+			.collect(Collectors.toList());
+	}
 }
