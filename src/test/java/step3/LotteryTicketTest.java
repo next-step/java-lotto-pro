@@ -3,6 +3,9 @@ package step3;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step3.domain.LotteryTicket;
+import step3.domain.Lotto;
+import step3.domain.Payment;
 
 import java.util.ArrayList;
 import java.util.Arrays;

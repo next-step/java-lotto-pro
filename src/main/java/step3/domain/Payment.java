@@ -1,4 +1,4 @@
-package step3;
+package step3.domain;
 
 public class Payment {
     private static final int LOTTO_PRICE = 1000;

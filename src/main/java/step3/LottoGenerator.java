@@ -1,5 +1,7 @@
 package step3;
 
+import step3.domain.Lotto;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;

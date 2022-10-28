@@ -1,4 +1,6 @@
-package step3;
+package step3.ui;
+
+import step3.domain.*;
 
 import java.util.ArrayList;
 import java.util.Collections;

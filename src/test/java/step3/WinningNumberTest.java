@@ -2,6 +2,7 @@ package step3;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step3.domain.WinningNumber;
 
 import java.util.ArrayList;
 import java.util.Arrays;
