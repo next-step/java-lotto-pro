@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDER;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -48,5 +49,11 @@ public class StringAdderTest {
     }, delimiter = '=')
     void multipleNumbers(final String value, final int expected) {
         assertThat(adder.calculate(value)).isEqualTo(expected);
+    }
+
+    @DisplayName("//과 \\n 사이에 커스텀 구분자를 넣으면, 커스텀 구분자로 숫자를 구분한다.")
+    @Test
+    void customDelimiter() {
+        assertThat(adder.calculate("//;\n1;2;3")).isEqualTo(6);
     }
 }
