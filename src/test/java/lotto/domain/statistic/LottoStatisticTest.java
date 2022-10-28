@@ -2,11 +2,10 @@ package lotto.domain.statistic;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
+import lotto.domain.TestLottoNumberGeneratorStrategy;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumbers;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.TestLottoNumberGeneratorStrategy;
-import lotto.domain.money.Money;
 import lotto.domain.win.WinRanking;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -46,7 +45,7 @@ class LottoStatisticTest {
     void profit() {
         LottoStatistic lottoStatistic = LottoStatistic.of(getTestLottos(), winningNumbers);
 
-        double result = lottoStatistic.profit(Money.from(1000));
+        double result = lottoStatistic.profit();
 
         Assertions.assertThat(result).isEqualTo(21.0);
     }

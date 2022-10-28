@@ -1,6 +1,8 @@
 package lotto.domain.money;
 
 import java.util.Objects;
+import lotto.constant.LottoConstant;
+import lotto.message.ErrorMessages;
 
 public class Money {
     private final double value;
@@ -10,22 +12,18 @@ public class Money {
     }
 
     public static Money from(double value) {
+        validate(value);
         return new Money(value);
     }
 
-    public double divide(Money money) {
-        if (money.value == 0) {
-            return 0;
+    private static void validate(double value) {
+        if (value < LottoConstant.PRICE_OF_ONE_LOTTO) {
+            throw new IllegalArgumentException(String.format(ErrorMessages.INVALID_PURCHASE_PRICE, (int) value));
         }
-        return Math.floor((this.value / money.value) * 100) / 100;
     }
 
-    public Money multiply(double count) {
-        return Money.from(value * count);
-    }
-
-    public Money add(Money money) {
-        return Money.from(value + money.value);
+    public int purchasableQuantity() {
+        return (int) (this.value / LottoConstant.PRICE_OF_ONE_LOTTO);
     }
 
     @Override

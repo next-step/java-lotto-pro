@@ -1,6 +1,5 @@
 package lotto.domain.statistic;
 
-import lotto.domain.money.Money;
 import lotto.domain.win.WinRanking;
 
 public class LottoStatisticResult {
@@ -24,7 +23,7 @@ public class LottoStatisticResult {
         return matchCount;
     }
 
-    public Money winningMoney() {
-        return ranking.getWinningMoney().multiply(matchCount);
+    public double winningMoney() {
+        return ranking.getWinningMoney() * matchCount;
     }
 }

@@ -41,9 +41,8 @@ public class ResultView {
     }
 
     private static void printProfit(LottoStatistic lottoStatistic) {
-        Money priceOfOneLotto = Money.from(100);
-        System.out.printf(LottoMessage.PROFIT, lottoStatistic.profit(priceOfOneLotto));
-        if (lottoStatistic.isLossProfit(priceOfOneLotto)) {
+        System.out.printf(LottoMessage.PROFIT, lottoStatistic.profit());
+        if (lottoStatistic.isLossProfit()) {
             System.out.println(LottoMessage.LOSS);
         }
     }

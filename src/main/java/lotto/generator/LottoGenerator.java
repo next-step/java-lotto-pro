@@ -9,20 +9,18 @@ import lotto.domain.money.Money;
 
 public class LottoGenerator {
     private final LottoNumberGenerator lottoNumberGenerator;
-    private final Money priceOfOneLotto;
 
-    private LottoGenerator(LottoNumberGenerator lottoNumberGenerator, Money priceOfOneLotto) {
+    private LottoGenerator(LottoNumberGenerator lottoNumberGenerator) {
         this.lottoNumberGenerator = lottoNumberGenerator;
-        this.priceOfOneLotto = priceOfOneLotto;
     }
 
-    public static LottoGenerator of(LottoNumberGenerator lottoNumberGenerator, Money priceOfOneLotto) {
-        return new LottoGenerator(lottoNumberGenerator, priceOfOneLotto);
+    public static LottoGenerator of(LottoNumberGenerator lottoNumberGenerator) {
+        return new LottoGenerator(lottoNumberGenerator);
     }
 
     public Lottos generate(Money purchaseAmount) {
-        double count = purchaseAmount.divide(priceOfOneLotto);
-        return generate((int) count);
+        int count = purchaseAmount.purchasableQuantity();
+        return generate(count);
     }
 
     private Lottos generate(int count) {

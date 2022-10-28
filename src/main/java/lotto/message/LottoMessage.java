@@ -9,7 +9,7 @@ public class LottoMessage {
     public static final String WINNING_STATISTIC = "당첨 통계";
     public static final String DIVIDER_LINE = "---------";
     public static final String WINNING_STATISTIC_RESULT = "%d개 일치 (%s원)- %d개";
-    public static final String PROFIT = "총 수익률은 %s입니다.";
+    public static final String PROFIT = "총 수익률은 %.2f입니다.";
     public static final String LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     private LottoMessage() {

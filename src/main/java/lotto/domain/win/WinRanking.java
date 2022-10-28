@@ -1,18 +1,17 @@
 package lotto.domain.win;
 
-import lotto.domain.money.Money;
 
 public enum WinRanking {
-    FOURTH(3, Money.from(5000)),
-    THIRD(4, Money.from(50000)),
-    SECOND(5, Money.from(1500000)),
-    FIRST(6, Money.from(2000000000)),
+    FOURTH(3, 5000),
+    THIRD(4, 50000),
+    SECOND(5, 1500000),
+    FIRST(6, 2000000000),
     ;
 
     private final int matchCount;
-    private final Money winningMoney;
+    private final int winningMoney;
 
-    WinRanking(int matchCount, Money winningMoney) {
+    WinRanking(int matchCount, int winningMoney) {
         this.matchCount = matchCount;
         this.winningMoney = winningMoney;
     }
@@ -21,7 +20,7 @@ public enum WinRanking {
         return matchCount;
     }
 
-    public Money getWinningMoney() {
+    public int getWinningMoney() {
         return winningMoney;
     }
 }
