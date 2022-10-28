@@ -13,7 +13,7 @@ class OperandTest {
     class OperandConstructor {
         @ParameterizedTest
         @ValueSource(ints = {0, 1, 20, 5555, Integer.MAX_VALUE})
-        @DisplayName("Operand 를 정상적으로 생성할 수 있다")
+        @DisplayName("Operand 객체를 성공적으로 생성할 수 있다")
         void createOperand(int value) {
             assertDoesNotThrow(() -> new Operand(value));
         }
