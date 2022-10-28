@@ -27,19 +27,18 @@ class LottoVendorTest {
 		);
 	}
 
-	private static LottoTicket createLottoTicket(int quantity) {
-		return LottoTicket.of(
+	private static LottoTickets createLottoTicket(int quantity) {
+		return LottoTickets.of(
 			IntStream.range(0, quantity)
-				.mapToObj(i -> LottoNumbers.of(FIXED_NUMBERS))
+				.mapToObj(i -> LottoTicket.of(FIXED_NUMBERS))
 				.collect(Collectors.toList()));
 	}
 
 	@ParameterizedTest
 	@MethodSource("provideLottoPurchasingMoney")
-	void 로또판매기는_구입금액을_입력받아_구입금액_만큼의_로또숫자를_발급한다(Money 구입금액, LottoTicket 예상_로또티켓) {
+	void 로또판매기는_구입금액을_입력받아_구입금액_만큼의_로또숫자를_발급한다(Money 구입금액, LottoTickets 예상_로또티켓) {
 		로또판매기 = new LottoVendor(LOTTO_PRICE, lottoNumberGenerator);
-		LottoTicket 로또티켓 = 로또판매기.purchase(구입금액);
+		LottoTickets 로또티켓 = 로또판매기.purchase(구입금액);
 		assertThat(로또티켓).isEqualTo(예상_로또티켓);
 	}
-
 }

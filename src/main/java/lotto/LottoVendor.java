@@ -12,15 +12,15 @@ public class LottoVendor {
 		this.lottoNumberGenerator = lottoNumberGenerator;
 	}
 
-	public LottoTicket purchase(Money amount) {
-		return purchase(amount, LottoTicket.create());
+	public LottoTickets purchase(Money amount) {
+		return purchase(amount, LottoTickets.create());
 	}
 
-	private LottoTicket purchase(Money budget, LottoTicket lottoTicket) {
+	private LottoTickets purchase(Money budget, LottoTickets lottoTickets) {
 		if (budget.equals(Money.ZERO)) {
-			return lottoTicket;
+			return lottoTickets;
 		}
-		lottoTicket.add(lottoNumberGenerator.generate());
-		return purchase(budget.subtract(lottoPrice), lottoTicket);
+		lottoTickets.add(lottoNumberGenerator.generate());
+		return purchase(budget.subtract(lottoPrice), lottoTickets);
 	}
 }

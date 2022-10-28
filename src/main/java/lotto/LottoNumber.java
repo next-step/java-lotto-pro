@@ -13,10 +13,18 @@ public class LottoNumber {
 	}
 
 	public static LottoNumber of(int number) {
-		if (MIN_NUMBER > number || MAX_NUMBER < number) {
+		verifyNumberInRange(number);
+		return new LottoNumber(number);
+	}
+
+	private static void verifyNumberInRange(int number) {
+		if (isNumberInRange(number)) {
 			throw new IllegalArgumentException("로또 번호는 1이상 45이하의 숫자여야 합니다.");
 		}
-		return new LottoNumber(number);
+	}
+
+	private static boolean isNumberInRange(int number) {
+		return MIN_NUMBER > number || MAX_NUMBER < number;
 	}
 
 	@Override

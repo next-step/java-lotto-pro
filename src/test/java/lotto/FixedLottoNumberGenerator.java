@@ -13,8 +13,8 @@ public class FixedLottoNumberGenerator implements LottoNumberGenerator {
 	}
 
 	@Override
-	public LottoNumbers generate() {
-		return LottoNumbers.of(
+	public LottoTicket generate() {
+		return LottoTicket.of(
 			numbers.stream()
 				.mapToInt(Integer::intValue)
 				.toArray());

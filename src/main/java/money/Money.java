@@ -28,16 +28,16 @@ public class Money {
 		}
 	}
 
+	private static boolean isNegative(BigDecimal amount) {
+		return amount.compareTo(BigDecimal.ZERO) < 0;
+	}
+
 	public Money subtract(Money other) {
 		BigDecimal subtractedAmount = amount.subtract(other.amount);
 		if (isNegative(subtractedAmount)) {
 			return ZERO;
 		}
 		return Money.wons(subtractedAmount);
-	}
-
-	private static boolean isNegative(BigDecimal amount) {
-		return amount.compareTo(BigDecimal.ZERO) < 0;
 	}
 
 	@Override

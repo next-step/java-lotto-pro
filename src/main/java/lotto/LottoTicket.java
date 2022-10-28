@@ -1,27 +1,55 @@
 package lotto;
 
-import java.util.ArrayList;
+import static java.lang.String.format;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
-	private final List<LottoNumbers> lottoNumbersList;
+	private static final int NUMBER_COUNT = 6;
 
-	private LottoTicket(List<LottoNumbers> lottoNumbersList) {
-		this.lottoNumbersList = lottoNumbersList;
+	private final List<LottoNumber> lottoNumbers;
+
+	private LottoTicket(List<LottoNumber> lottoNumbers) {
+		verifyIsValidNumbers(lottoNumbers);
+		this.lottoNumbers = lottoNumbers;
 	}
 
-	public static LottoTicket of(List<LottoNumbers> lottoNumbers) {
-		return new LottoTicket(lottoNumbers);
+	public static LottoTicket of(int... numbers) {
+		return of(Arrays.stream(numbers)
+			.boxed()
+			.collect(Collectors.toList()));
 	}
 
-	public static LottoTicket create() {
-		return new LottoTicket(new ArrayList<>());
+	public static LottoTicket of(List<Integer> numbers) {
+		return new LottoTicket(
+			numbers.stream()
+				.map(LottoNumber::of)
+				.collect(Collectors.toList()));
 	}
 
-	public void add(LottoNumbers lottoNumbers) {
-		lottoNumbersList.add(lottoNumbers);
+	private void verifyIsValidNumbers(List<LottoNumber> lottoNumbers) {
+		if (isNumberCountValid(lottoNumbers)) {
+			throw new IllegalArgumentException(format("한 장의 로또 번호 숫자 갯수는 %s개 여야 합니다.", NUMBER_COUNT));
+		}
+		if (isNumberNotUnique(lottoNumbers)) {
+			throw new IllegalArgumentException("중복된 숫자를 입력할 수 없습니다.");
+		}
+	}
+
+	private boolean isNumberNotUnique(List<LottoNumber> lottoNumbers) {
+		return isNumberCountEqual(lottoNumbers.stream().distinct().count());
+	}
+
+	private boolean isNumberCountValid(List<LottoNumber> lottoNumbers) {
+		return isNumberCountEqual(lottoNumbers.size());
+	}
+
+	private boolean isNumberCountEqual(long count) {
+		return count != NUMBER_COUNT;
 	}
 
 	@Override
@@ -33,11 +61,18 @@ public class LottoTicket {
 			return false;
 		}
 		LottoTicket that = (LottoTicket)o;
-		return lottoNumbersList.equals(that.lottoNumbersList);
+		return lottoNumbers.equals(that.lottoNumbers);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(lottoNumbersList);
+		return Objects.hash(lottoNumbers);
+	}
+
+	@Override
+	public String toString() {
+		return "LottoTicket{" +
+			"lottoNumbers=" + lottoNumbers +
+			'}';
 	}
 }
