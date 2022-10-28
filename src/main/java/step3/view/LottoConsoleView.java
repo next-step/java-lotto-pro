@@ -30,7 +30,7 @@ public class LottoConsoleView {
 
     public static void printPurchasingLottos(LottoTicketDto lottoTicketDto) {
         List<List<Integer>> lottoTickets = lottoTicketDto.getLottosNumber();
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lottoTicketDto.getManualLottoCount(),lottoTicketDto.getAutoLottoCount());
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lottoTicketDto.getManualLottoCount(), lottoTicketDto.getAutoLottoCount());
         lottoTickets.forEach(System.out::println);
         System.out.println();
     }
@@ -64,9 +64,13 @@ public class LottoConsoleView {
     public static List<String> printPurchasingManual() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int count = SCANNER.nextInt();
-        return count <= 0 ? Collections.EMPTY_LIST : IntStream.rangeClosed(1, count)
-                .mapToObj(operand -> SCANNER.next())
-                .collect(Collectors.toList());
+        if (count > 0) {
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+            return IntStream.rangeClosed(1, count)
+                    .mapToObj(operand -> SCANNER.next())
+                    .collect(Collectors.toList());
+        }
+        return Collections.EMPTY_LIST;
     }
 
 }

@@ -17,7 +17,6 @@ public class LottoController {
 
     public void start() {
         int amount = LottoConsoleView.printPurchasingAmount();
-        LottoConsoleView.printPurchasingManual();
         List<Lotto> lottos = LottoConsoleView.printPurchasingManual()
                 .stream()
                 .map(numbers -> StringParser.parseToIntegerArray(numbers))
