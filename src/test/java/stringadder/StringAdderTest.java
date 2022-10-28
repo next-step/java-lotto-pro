@@ -64,7 +64,7 @@ public class StringAdderTest {
     void negative() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> adder.calculate("-1"))
-                .withMessage("음수를 계산할 수 없습니다.");
+                .withMessageStartingWith("음수가 아니어야 합니다.");
     }
 
     @DisplayName("숫자가 아닌 값을 입력할 수 없다.")

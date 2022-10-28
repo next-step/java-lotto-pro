@@ -4,11 +4,9 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class StringAdder {
-    private static final int INIT_VALUE = 0;
-
     public int calculate(String value) {
         if (Objects.isNull(value) || value.isEmpty()) {
-            return INIT_VALUE;
+            return PositiveInt.ZERO.toInt();
         }
 
         final AddExpression expression = new AddExpression(value);
@@ -16,15 +14,8 @@ public class StringAdder {
         final String[] tokens = expression.parseTokens();
 
         return Arrays.stream(tokens)
-                .map(this::parsePositiveInt)
-                .reduce(INIT_VALUE, Integer::sum);
-    }
-
-    private int parsePositiveInt(String token) {
-        final int integer = Integer.parseInt(token);
-        if (integer < 0) {
-            throw new IllegalArgumentException("음수를 계산할 수 없습니다.");
-        }
-        return integer;
+                .map(PositiveInt::parse)
+                .reduce(PositiveInt.ZERO, PositiveInt::plus)
+                .toInt();
     }
 }
