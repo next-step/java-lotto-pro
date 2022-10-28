@@ -1,6 +1,7 @@
 package string.calculator;
 
 public class DelimiterFinder {
+    private static final String DEFAULT_DELIMITER_REGEX = "[:,]";
     private final String input;
     private String ultimateCustomDelimiter = null;
 
@@ -12,7 +13,7 @@ public class DelimiterFinder {
         if (ifIncludeBothSlashAndNewline() && customDelimiterExistsInBetween()) {
             return ultimateCustomDelimiter;
         }
-        return "[:,]";
+        return DelimiterFinder.DEFAULT_DELIMITER_REGEX;
     }
 
     public boolean ifIncludeBothSlashAndNewline() {
