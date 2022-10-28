@@ -38,7 +38,7 @@ public class Lotto {
                 .stream()
                 .filter(lottoNumber -> winningNumbers.contains(lottoNumber))
                 .count();
-        return Rank.getRankFromMatchCount(count);
+        return Rank.valueOf(count);
     }
 
 }
