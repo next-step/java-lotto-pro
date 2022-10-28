@@ -16,8 +16,7 @@ class StringCalculatorTest {
         //given:
         String input = "1,2,3";
         //when:
-        StringCalculator calculator = new StringCalculator();
-        int result = calculator.calculate(input);
+        int result = StringCalculator.calculate(input);
         //then:
         assertThat(result).isEqualTo(6);
     }
@@ -26,8 +25,7 @@ class StringCalculatorTest {
     @NullAndEmptySource
     void calculateNullAndEmpty(String input) {
         //when:
-        StringCalculator calculator = new StringCalculator();
-        int result = calculator.calculate(input);
+        int result = StringCalculator.calculate(input);
         //then:
         assertThat(result).isEqualTo(NOT_CALCULATED);
     }
