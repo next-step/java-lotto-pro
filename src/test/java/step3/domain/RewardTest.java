@@ -11,9 +11,10 @@ import org.junit.jupiter.api.Test;
 
 public class RewardTest {
 
-    private static final int TOTAL_TEST_COUNT = 10;
+    private static final int TOTAL_WINNING_COUNT = 10;
     private static final int MATCH_COUNT = 3;
     private static final long MONEY_PER_MATCH_COUNT = 5000L;
+    private static final long TOTAL_MONEY = 1000000L;
 
     private final CriteriaProvider criteriaProvider = () -> new HashMap<Integer, Long>() {
         {
@@ -22,7 +23,7 @@ public class RewardTest {
     };
 
     private final List<Integer> matchCounts = Stream.iterate(MATCH_COUNT, matchCount -> matchCount)
-            .limit(TOTAL_TEST_COUNT)
+            .limit(TOTAL_WINNING_COUNT)
             .collect(Collectors.toList());
 
     @Test
@@ -33,10 +34,11 @@ public class RewardTest {
     }
 
     @Test
-    @DisplayName("전체 당첨 금액 조회")
-    public void testGetTotalMoney() {
-        long totalMoney = generateTestReward().getTotalMoney();
-        assertThat(totalMoney).isEqualTo(MONEY_PER_MATCH_COUNT * TOTAL_TEST_COUNT);
+    @DisplayName("수익률 조회")
+    public void testGetWinningMoneyRate() {
+        String winningMoneyRate = generateTestReward().getWinningMoneyRate(TOTAL_MONEY);
+        assertThat(TOTAL_MONEY * Double.parseDouble(winningMoneyRate))
+                .isEqualTo(TOTAL_WINNING_COUNT * MONEY_PER_MATCH_COUNT);
     }
 
     private Reward generateTestReward() {

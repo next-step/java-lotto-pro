@@ -1,5 +1,6 @@
 package step3.domain;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,21 +50,26 @@ public class Reward {
     private String generateStatistic(int matchCount) {
         return matchCount
                 + "개 일치 ("
-                + getTotalMoney(matchCount)
+                + getWinningMoney(matchCount)
                 + "원)- "
                 + reward.get(matchCount)
                 + "개";
     }
 
-    public long getTotalMoney() {
+    private long getWinningMoney() {
         return criteria.keySet()
                 .stream()
-                .map(this::getTotalMoney)
+                .map(this::getWinningMoney)
                 .mapToLong(money -> money)
                 .sum();
     }
 
-    private long getTotalMoney(int matchCount) {
+    public String getWinningMoneyRate(long totalPurchaseMoney) {
+        return new DecimalFormat("#.##")
+                .format((float) getWinningMoney() / (float) totalPurchaseMoney);
+    }
+
+    private long getWinningMoney(int matchCount) {
         return criteria.get(matchCount) * reward.get(matchCount);
     }
 }
