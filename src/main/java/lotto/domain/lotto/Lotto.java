@@ -5,6 +5,7 @@ import lotto.status.ErrorStatus;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -42,5 +43,12 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return this.lottoNumbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(",","[","]"));
     }
 }
