@@ -5,12 +5,12 @@ import step3.model.LottoNumber;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottosNumberDto {
+public class LottoTicketDto {
 
 
     private final List<List<Integer>> lottosNumber;
 
-    public LottosNumberDto(List<List<LottoNumber>> lottosNumber) {
+    public LottoTicketDto(List<List<LottoNumber>> lottosNumber) {
         this.lottosNumber = lottosNumber.stream()
                 .map(lottoNumbers -> lottoNumbers.stream().map(LottoNumber::value).collect(Collectors.toList()))
                 .collect(Collectors.toList());

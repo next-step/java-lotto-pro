@@ -1,7 +1,7 @@
 package step3.model;
 
 import step3.model.dto.LottoResultDto;
-import step3.model.dto.LottosNumberDto;
+import step3.model.dto.LottoTicketDto;
 import step3.model.dto.RankDto;
 
 import java.util.Arrays;
@@ -43,8 +43,8 @@ public class LottoMachine {
         return new LottoResultDto(rankDtos, getPriceRatio);
     }
 
-    public LottosNumberDto getLottoNumber() {
-        return new LottosNumberDto(lottos.getNumbersOfLottos());
+    public LottoTicketDto getLottoNumber() {
+        return new LottoTicketDto(lottos.getNumbersOfLottos());
     }
 
     private List<RankDto> getRanks(Map<Rank, Integer> rankOfLottos) {

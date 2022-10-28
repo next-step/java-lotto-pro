@@ -6,7 +6,7 @@ import step3.model.LottoFactory;
 import step3.model.LottoMachine;
 import step3.model.LottoNumber;
 import step3.model.dto.LottoResultDto;
-import step3.model.dto.LottosNumberDto;
+import step3.model.dto.LottoTicketDto;
 import step3.parser.LottoInputParser;
 import step3.view.LottoConsoleView;
 
@@ -25,8 +25,8 @@ public class LottoController {
                 .collect(Collectors.toList());
 
         LottoMachine lottoMachine = new LottoMachine(amount, lottos);
-        LottosNumberDto lottosNumberDto = lottoMachine.getLottoNumber();
-        LottoConsoleView.printPurchasingLottos(lottosNumberDto);
+        LottoTicketDto lottoTicketDto = lottoMachine.getLottoNumber();
+        LottoConsoleView.printPurchasingLottos(lottoTicketDto);
 
         List<LottoNumber> lottoNumbers = LottoInputParser.parseToLottoNumberArray(LottoConsoleView.printWinningNumber());
         LottoNumber bonusNumber = LottoNumber.valueOf(LottoConsoleView.printBonusNumber());

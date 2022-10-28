@@ -1,7 +1,7 @@
 package step3.view;
 
 import step3.model.dto.LottoResultDto;
-import step3.model.dto.LottosNumberDto;
+import step3.model.dto.LottoTicketDto;
 
 import java.util.Collections;
 import java.util.List;
@@ -28,8 +28,8 @@ public class LottoConsoleView {
         return SCANNER.nextInt();
     }
 
-    public static void printPurchasingLottos(LottosNumberDto lottosNumberDto) {
-        List<List<Integer>> lottoTickets = lottosNumberDto.getLottosNumber();
+    public static void printPurchasingLottos(LottoTicketDto lottoTicketDto) {
+        List<List<Integer>> lottoTickets = lottoTicketDto.getLottosNumber();
         System.out.printf("%d개를 구매했습니다.\n", lottoTickets.size());
         lottoTickets.forEach(System.out::println);
         System.out.println();
