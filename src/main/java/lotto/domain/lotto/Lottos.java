@@ -2,7 +2,7 @@ package lotto.domain.lotto;
 
 import lotto.prize.Prize;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +15,7 @@ public class Lottos {
     }
 
     public Map<Prize, Integer> getPrizeOfLotto(Lotto winnerLotto) {
-        Map<Prize, Integer> prizes = new HashMap<>();
+        Map<Prize, Integer> prizes = new EnumMap<Prize, Integer>(Prize.class);
         this.lottos.stream()
                 .map(v -> v.matchCount(winnerLotto))
                 .filter(Prize.matchCounts::containsKey)
