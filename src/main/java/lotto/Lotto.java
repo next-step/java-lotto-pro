@@ -1,6 +1,6 @@
 package lotto;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
@@ -10,17 +10,8 @@ public class Lotto {
 
 	private final Set<LottoNumber> numbers;
 
-	public Lotto(final List<Integer> numbers) {
-		Set<LottoNumber> numberSet = new TreeSet<>();
-		for (final Integer number : numbers) {
-			numberSet.add(new LottoNumber(number));
-		}
-		this.numbers = numberSet;
-		validate();
-	}
-
-	public Lotto(final Set<LottoNumber> numbers) {
-		this.numbers = numbers;
+	public Lotto(final Collection<LottoNumber> numbers) {
+		this.numbers = new TreeSet<>(numbers);
 		validate();
 	}
 
