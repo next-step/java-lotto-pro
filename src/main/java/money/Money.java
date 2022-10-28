@@ -6,8 +6,9 @@ import java.util.Objects;
 
 public class Money {
 
+	private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#,##0");
+
 	public static final Money ZERO = new Money(BigDecimal.ZERO);
-	private final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#,##0");
 
 	private final BigDecimal amount;
 
