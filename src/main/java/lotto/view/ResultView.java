@@ -1,8 +1,8 @@
 package lotto.view;
 
 import lotto.domain.LottoTicket;
-import lotto.domain.Rank;
-import lotto.domain.StatisticDto;
+import lotto.domain.enums.Rank;
+import lotto.domain.dto.StatisticDto;
 
 import java.util.List;
 

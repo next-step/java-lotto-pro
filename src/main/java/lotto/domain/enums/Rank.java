@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.enums;
+
+import lotto.domain.dto.StatisticDto;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

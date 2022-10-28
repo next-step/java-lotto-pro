@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.dto;
+
+import lotto.domain.enums.Rank;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +17,7 @@ public class StatisticDto {
         }
     }
 
-    static StatisticDto create() {
+    public static StatisticDto create() {
         return new StatisticDto();
     }
 
