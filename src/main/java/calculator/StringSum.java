@@ -30,7 +30,7 @@ public class StringSum {
 
       return intValue;
     } catch (NumberFormatException e) {
-      throw new RuntimeException(ERROR_MESSAGE_BY_NOT_INT_VALUE);
+      throw new IllegalArgumentException(ERROR_MESSAGE_BY_NOT_INT_VALUE);
     }
 
   }
@@ -38,7 +38,7 @@ public class StringSum {
   private static void validateNegativeNumber(Integer input) {
 
     if (input < 0) {
-      throw new RuntimeException(ERROR_MESSAGE_BY_NEGATIVE_INT_VALUE);
+      throw new IllegalArgumentException(ERROR_MESSAGE_BY_NEGATIVE_INT_VALUE);
     }
 
   }
