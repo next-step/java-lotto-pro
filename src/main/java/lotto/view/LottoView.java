@@ -10,7 +10,7 @@ public interface LottoView {
 
     void showLotto(List<String> printAll);
 
-    void showMessageRequestWinningNubmers();
+    void showMessageRequestWinningNumbers();
 
     void showMessageStatistics();
 

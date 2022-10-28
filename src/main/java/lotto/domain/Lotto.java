@@ -21,13 +21,13 @@ public class Lotto {
     }
 
     public String print(){
-        return String.format("[%s]", String.join(",", convertToStringNumbers()));
+        return String.format("[%s]",convertToStringNumbers());
     }
 
-    private List<String> convertToStringNumbers() {
+    private String convertToStringNumbers() {
         return this.numbers.stream()
                 .map(LottoNumber::toString)
-                .collect(Collectors.toList());
+                .collect(Collectors.joining(","));
     }
 
     public int check(List<Integer> winningNumbers) {

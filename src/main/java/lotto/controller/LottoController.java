@@ -38,7 +38,7 @@ public class LottoController {
     }
 
     private List<Integer> getWinningNumbers() {
-        this.view.showMessageRequestWinningNubmers();
+        this.view.showMessageRequestWinningNumbers();
         String input2 = this.input.getInput();
         return Arrays.stream(input2.split(",")).map(Integer::valueOf).collect(Collectors.toList());
     }

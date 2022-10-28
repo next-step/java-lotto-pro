@@ -27,4 +27,8 @@ public enum WinningBonus {
     public boolean same(Integer c) {
         return this.getMatchCount() == c;
     }
+
+    public String getBonusString() {
+        return String.format("%d원",this.getBonus());
+    }
 }
