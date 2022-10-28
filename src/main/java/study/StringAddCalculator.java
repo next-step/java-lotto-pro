@@ -1,26 +1,26 @@
 package study;
 
+import java.util.Arrays;
+
 public class StringAddCalculator {
+
+    public static final String DEFAULT_SEPARATOR = "[,]";
 
     public static int splitAndSum(String text) {
         if (validateText(text)) {
             return 0;
         }
-        
-        if(inNumberOnly(text)){
-            return Integer.parseInt(text);
-        }
-
-        return 1;
+        return sum(text);
     }
 
-    private static boolean inNumberOnly(String text) {
-        try {
-            parseInt(text);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        return true;
+    private static String[] splitText(String text) {
+        return text.split(DEFAULT_SEPARATOR);
+    }
+
+    private static int sum(String text){
+        return Arrays.stream(splitText(text))
+            .mapToInt(StringAddCalculator::parseInt)
+            .sum();
     }
 
     private static int parseInt(String number){
