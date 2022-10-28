@@ -27,6 +27,15 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(3);
     }
 
+//    @Test
+//    public void splitAndSum_띄어쓰기구분자() throws Exception {
+//        int result = StringAddCalculator.splitAndSum("\\ \n1 2");
+//        assertThat(result).isEqualTo(3);
+//
+//        int result2 = StringAddCalculator.splitAndSum("1, 2");
+//        assertThat(result2).isEqualTo(3);
+//    }
+
     @Test
     public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
         int result = StringAddCalculator.splitAndSum("1,2:3");
@@ -37,6 +46,18 @@ public class StringAddCalculatorTest {
     public void splitAndSum_custom_구분자() throws Exception {
         int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    public void splitAndSum_custom_다양한_구분자() throws Exception {
+        int result = StringAddCalculator.splitAndSum("//*\n1*2*3");
+        assertThat(result).isEqualTo(6);
+
+        int result2 = StringAddCalculator.splitAndSum("//$\n1$2$3");
+        assertThat(result2).isEqualTo(6);
+
+        int result3 = StringAddCalculator.splitAndSum("//0\n10203");
+        assertThat(result3).isEqualTo(6);
     }
 
     @Test

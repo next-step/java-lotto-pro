@@ -22,6 +22,14 @@ public class StringAddCalculator {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(reqStr);
         if(m.find()) {
             String customDelimiter = m.group(1);
+
+            // 특수문자 변경
+            Pattern pattern = Pattern.compile("[!@#$%^&*(),.?\":{}|<>]");
+
+            if(pattern.matcher(reqStr).find()) {
+                customDelimiter = "[" + customDelimiter + "]";
+            }
+
             numbers = m.group(2).split(customDelimiter);
 
         } else {
