@@ -4,36 +4,38 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    public static int sum;
 
+    public static int splitAndSum(String target) {
+        initSum();
 
-    public static int splitAndSum(String reqStr) {
-        int resultSum = 0;
-
-        if(reqStr == null) {
-            return resultSum;
+        if(isNullOrEmpty(target)) {
+            return sum;
         }
 
-        if(reqStr.isEmpty()) {
-            return resultSum;
+
+        if(target.length() == 1) {
+            return sum = Integer.parseInt(target);
         }
+
 
         String[] numbers;
         // 패턴 그룹은 소괄호
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(reqStr);
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(target);
         if(m.find()) {
             String customDelimiter = m.group(1);
 
             // 특수문자 변경
             Pattern pattern = Pattern.compile("[!@#$%^&*(),.?\":{}|<>]");
 
-            if(pattern.matcher(reqStr).find()) {
+            if(pattern.matcher(target).find()) {
                 customDelimiter = "[" + customDelimiter + "]";
             }
 
             numbers = m.group(2).split(customDelimiter);
 
         } else {
-            numbers = reqStr.split(",|:");
+            numbers = target.split(",|:");
         }
 
         for(String i : numbers) {
@@ -41,10 +43,18 @@ public class StringAddCalculator {
                 throw new RuntimeException("negati");
             }
 
-            resultSum += Integer.parseInt(i);
+            sum += Integer.parseInt(i);
         }
 
 
-        return resultSum;
+        return sum;
+    }
+
+    private static void initSum() {
+        sum = 0;
+    }
+
+    private static boolean isNullOrEmpty(String target) {
+        return target == null || target.isEmpty();
     }
 }

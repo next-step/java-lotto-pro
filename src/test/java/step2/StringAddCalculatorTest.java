@@ -32,8 +32,8 @@ public class StringAddCalculatorTest {
 //        int result = StringAddCalculator.splitAndSum("\\ \n1 2");
 //        assertThat(result).isEqualTo(3);
 //
-//        int result2 = StringAddCalculator.splitAndSum("1, 2");
-//        assertThat(result2).isEqualTo(3);
+//        result = StringAddCalculator.splitAndSum("1, 2");
+//        assertThat(result).isEqualTo(3);
 //    }
 
     @Test
@@ -53,11 +53,11 @@ public class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum("//*\n1*2*3");
         assertThat(result).isEqualTo(6);
 
-        int result2 = StringAddCalculator.splitAndSum("//$\n1$2$3");
-        assertThat(result2).isEqualTo(6);
+        result = StringAddCalculator.splitAndSum("//$\n1$2$3");
+        assertThat(result).isEqualTo(6);
 
-        int result3 = StringAddCalculator.splitAndSum("//0\n10203");
-        assertThat(result3).isEqualTo(6);
+        result = StringAddCalculator.splitAndSum("//0\n10203");
+        assertThat(result).isEqualTo(6);
     }
 
     @Test
