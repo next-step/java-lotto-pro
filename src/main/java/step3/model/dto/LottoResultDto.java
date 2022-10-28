@@ -17,7 +17,7 @@ public class LottoResultDto {
     public List<RankDto> getRanks() {
         return ranks.stream()
                 .sorted(Comparator.comparingInt(RankDto::getMatchCount))
-                .filter(rankDto -> rankDto.getMatchCount() > 0)
+                .filter(RankDto::isWin)
                 .collect(Collectors.toList());
     }
 

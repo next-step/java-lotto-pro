@@ -8,12 +8,16 @@ public class RankDto {
     private final Rank rank;
     private final int count;
 
-    public RankDto(Rank rank, int count){
+    public RankDto(Rank rank, int count) {
         this.rank = rank;
         this.count = count;
     }
 
-    public int getMatchCount(){
+    public boolean isWin() {
+        return rank.getMatchCount() >= 3;
+    }
+
+    public int getMatchCount() {
         return rank.getMatchCount();
     }
 
@@ -21,7 +25,7 @@ public class RankDto {
         return rank.getWinningPrice();
     }
 
-    public int getWinningCount(){
+    public int getWinningCount() {
         return count;
     }
 
