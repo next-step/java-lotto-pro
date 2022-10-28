@@ -1,6 +1,10 @@
 package string.calculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class InputSplitter {
+    private static final String DEFAULT_DELIMITER_REGEX = "[:,]";
     private final String input;
 
     public InputSplitter(String input) {
@@ -8,33 +12,11 @@ public class InputSplitter {
     }
 
     public String[] split() {
-        final DelimiterFinder delimiterFinder = new DelimiterFinder(input);
-        final String delimiter = delimiterFinder.find();
-        final String purifiedInput = purifyInput(input);
-        String splitRegex = delimiter;
-        if (ifDelimiterRegexReservedWord(delimiter)) {
-            splitRegex = String.format("\\%s", delimiter);
+        final Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+        if (matcher.find()) {
+            final String customDelimiter = matcher.group(1);
+            return matcher.group(2).split(String.format("\\%s", customDelimiter));
         }
-        return purifiedInput.split(splitRegex);
-    }
-
-    private String purifyInput(String input) {
-        final int purifyTarget = findPurifyTarget(input);
-        if (purifyTargetNotFound(purifyTarget)) {
-            return input;
-        }
-        return input.substring(purifyTarget + 2);
-    }
-
-    private int findPurifyTarget(String input) {
-        return input.indexOf("\\n");
-    }
-
-    private boolean purifyTargetNotFound(int purifyTarget) {
-        return purifyTarget == -1;
-    }
-
-    private boolean ifDelimiterRegexReservedWord(String delimiter) {
-        return "+*?.^&".contains(delimiter);
+        return input.split(InputSplitter.DEFAULT_DELIMITER_REGEX);
     }
 }

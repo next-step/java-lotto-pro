@@ -17,7 +17,7 @@ public class InputSplitterTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//?\\n1?2?3", "//.\\n1.2.3", "//~\\n1~2~3", "//|\\n1|2|3", "//`\\n1`2`3"})
+    @ValueSource(strings = {"//?\n1?2?3", "//.\n1.2.3", "//~\n1~2~3", "//|\n1|2|3", "//`\n1`2`3"})
     @DisplayName("입력 문자열이 커스텀 구분자를 사용하는 경우")
     void splitInputWithCustomDelimiter(String input) {
         final InputSplitter inputSplitter = new InputSplitter(input);
