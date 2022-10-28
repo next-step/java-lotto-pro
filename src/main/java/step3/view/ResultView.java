@@ -25,6 +25,15 @@ public class ResultView {
         ranks.stream().forEach(rankDto -> {
             System.out.printf("%d개 일치 (%d원)- %d개\n", rankDto.getMatchCount(), rankDto.getWinningPrice(), rankDto.getWinningCount());
         });
-        System.out.printf("총 수익률은 %.2f입니다", (Math.floor(statusDto.getWinnigPercent() * 100) / 100.0));
+        double priceRatio = (Math.floor(statusDto.getWinnigPercent() * 100) / 100.0);
+        System.out.printf("총 수익률은 %.2f입니다.", priceRatio);
+        printMinusStatus(priceRatio);
+    }
+
+    public static void printMinusStatus(double priceRatio){
+        if(priceRatio < 1.0){
+            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
+
     }
 }

@@ -23,16 +23,24 @@ public class LottoMachine {
     public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers) {
         Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(winningNumbers);
         List<RankDto> rankDtos = getRanks(rankOfLottos);
-        return new LottoResultDto(rankDtos, purchasePrice);
+        double getPriceRatio = getPriceRatio(rankOfLottos, purchasePrice);
+        return new LottoResultDto(rankDtos, getPriceRatio);
     }
 
     public LottosNumberDto getLottoNumber() {
         return new LottosNumberDto(lottos.getNumbersOfLottos());
     }
 
-    private List<RankDto> getRanks(Map<Rank, Integer> rankOfLottos){
+    private List<RankDto> getRanks(Map<Rank, Integer> rankOfLottos) {
         return Arrays.stream(Rank.values())
                 .map(rank -> new RankDto(rank, rankOfLottos.getOrDefault(rank, 0)))
                 .collect(Collectors.toList());
+    }
+
+    private double getPriceRatio(Map<Rank, Integer> rankOfLottos, int purchasePrice) {
+        int sumOfRankPrice = Arrays.stream(Rank.values())
+                .mapToInt(rank -> rank.getWinningPrice() * rankOfLottos.getOrDefault(rank, 0))
+                .sum();
+        return sumOfRankPrice / (double) purchasePrice;
     }
 }
