@@ -28,7 +28,7 @@ public class LottoService {
     }
 
     public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        validateLottoNumbers(winningNumbers,bonusNumber);
+        validateLottoNumbers(winningNumbers, bonusNumber);
         Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(winningNumbers, bonusNumber);
         List<RankDto> rankDtos = getRanks(rankOfLottos);
         return new LottoResultDto(rankDtos, purchasePrice);
@@ -44,8 +44,8 @@ public class LottoService {
                 .collect(Collectors.toList());
     }
 
-    private void validateLottoNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber){
-        if(winningNumbers.contains(bonusNumber)){
+    private void validateLottoNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_NUMBER_MESSAGE);
         }
 

@@ -26,11 +26,12 @@ public enum Rank {
                 .orElse(MISS);
     }
 
-    public static Rank valueOf(int matchCount,boolean bonus) {
-        if(bonus) {
+    public static Rank valueOf(int matchCount, boolean bonus) {
+        Rank rank = valueOf(matchCount);
+        if (rank == Rank.THIRD && bonus) {
             return Rank.TWO;
         }
-        return valueOf(matchCount);
+        return rank;
     }
 
     public int getMatchCount() {
