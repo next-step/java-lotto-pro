@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class StringAdder {
-    private static final String DELIMITER = ",";
+    private static final String DELIMITER = "[,:]";
     private static final int INIT_VALUE = 0;
 
     public int calculate(String value) {

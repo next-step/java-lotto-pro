@@ -39,11 +39,12 @@ public class StringAdderTest {
         assertThat(adder.calculate(value)).isEqualTo(expected);
     }
 
-    @DisplayName("숫자 사이에 콤마(,)로 구분하면 합을 반환한다.")
+    @DisplayName("숫자 사이에 콤마(,)나 콜론(:)으로 구분하면 합을 반환한다.")
     @ParameterizedTest(name = DISPLAY_NAME_PLACEHOLDER + " [{0}] = [{1}] ")
     @CsvSource(value = {
             "'1,2'=3",
             "'1,2,3'=6",
+            "'1:2,3'=6"
     }, delimiter = '=')
     void multipleNumbers(final String value, final int expected) {
         assertThat(adder.calculate(value)).isEqualTo(expected);
