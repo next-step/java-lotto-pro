@@ -1,18 +1,28 @@
 package lotto.domain;
 
-import static lotto.util.LottoGeneratorUtil.*;
+import static lotto.util.LottoUtil.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumber {
+    //todo set
     private final List<Integer> numbers;
 
     public LottoNumber(List<Integer> numbers) {
         validate(numbers);
         this.numbers = new ArrayList<>(numbers);
-        //todo 여기서 정렬해야할까?
+    }
+
+    public Prize calculateWinPrize(LottoNumber winningLotto) {
+        int winCount = 0;
+        for (Integer number : this.numbers) {
+            if (winningLotto.contains(number)) {
+                winCount++;
+            }
+        }
+        return Prize.of(winCount);
     }
 
     private void validate(List<Integer> numbers) {
@@ -25,16 +35,15 @@ public class LottoNumber {
         if (numbers.stream().distinct().count() != LOTTO_NUMBERS_COUNT) {
             throw new IllegalStateException();
         }
+        for (Integer number : numbers) {
+            validateRange(number);
+        }
     }
 
-    public int calculateWinCount(LottoNumber myLotto) {
-        int winCount = 0;
-        for (Integer number : this.numbers) {
-            if (myLotto.contains(number)) {
-                winCount++;
-            }
+    private void validateRange(Integer number) {
+        if (number > 45 || number < 0) {
+            throw new IllegalStateException();
         }
-        return winCount;
     }
 
     private boolean contains(Integer number) {
@@ -45,5 +54,22 @@ public class LottoNumber {
     public String toString() {
         String printNumbers = numbers.stream().map(String::valueOf).collect(Collectors.joining(","));
         return String.format("%s%s%s", "[", printNumbers, "]");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        LottoNumber that = (LottoNumber)o;
+
+        return numbers != null ? numbers.equals(that.numbers) : that.numbers == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return numbers != null ? numbers.hashCode() : 0;
     }
 }
