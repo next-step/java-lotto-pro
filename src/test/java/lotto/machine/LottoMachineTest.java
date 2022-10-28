@@ -3,6 +3,7 @@ package lotto.machine;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.money.Money;
 import lotto.ticket.LottoTickets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,7 +41,7 @@ public class LottoMachineTest {
 
     @Test
     void 로또_1장을_구매한다(){
-        LottoTickets lottoTickets = lottoMachine.buyLotto(1_000);
+        LottoTickets lottoTickets = lottoMachine.buyLotto(new Money(1_000));
         assertThat(lottoTickets.getQuantity()).isEqualTo(1);
     }
 

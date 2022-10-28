@@ -1,5 +1,6 @@
 package lotto.machine;
 
+import lotto.money.Money;
 import lotto.system.InputView;
 import lotto.system.MessageConstant;
 import lotto.system.OutputView;
@@ -11,30 +12,24 @@ public class LottoMachine {
     private static int LOTTO_AMOUNT = 1_000;
 
     public static void gameStart(){
-
         OutputView.printInputMoney();
-        String money = InputView.inputText();
-
-        LottoTickets buyLottoTickets = buyLotto(Integer.parseInt(money));
+        Money money = new Money(InputView.inputText());
+        LottoTickets buyLottoTickets = buyLotto(money);
 
         OutputView.printInputWinnerNumbers();
         String winnerNumbers = InputView.inputText();
 
         OutputView.printInputBonusNumber();
         String bonusNumber = InputView.inputText();
-         WinnerLottoTicket winnerLottoTicket = new WinnerLottoTicket(
+        WinnerLottoTicket winnerLottoTicket2 = new WinnerLottoTicket(
                 new LottoTicket(winnerNumbers),
                 Integer.parseInt(bonusNumber));
 
-        Result result = buyLottoTickets.match(winnerLottoTicket);
-        result.setMoney(Integer.parseInt(money));
-
-        OutputView.printResult(result);
-
+        OutputView.printResult(buyLottoTickets.match(winnerLottoTicket2, money));
     }
 
-    public static LottoTickets buyLotto(int money) {
-        return new LottoTickets(getQuantity(money));
+    public static LottoTickets buyLotto(Money money) {
+        return new LottoTickets(getQuantity(money.amount()));
     }
 
     public static int getQuantity(int money) {

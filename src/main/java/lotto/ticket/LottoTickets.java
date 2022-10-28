@@ -3,6 +3,7 @@ package lotto.ticket;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.machine.Result;
+import lotto.money.Money;
 import lotto.system.OutputView;
 
 public class LottoTickets {
@@ -20,13 +21,14 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public Result match(WinnerLottoTicket winnerLottoTicket) {
+    public Result match(WinnerLottoTicket winnerLottoTicket, Money money) {
         Result result = new Result();
         for (LottoTicket ticket : lottoTickets){
             result.addCount(
                     ticket.match(winnerLottoTicket.getLotto()),
                     winnerLottoTicket.matchBonus(ticket));
         }
+        result.setMoney(money.amount());
         return result;
     }
 
