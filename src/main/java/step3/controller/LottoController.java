@@ -1,13 +1,11 @@
 package step3.controller;
 
-import step3.io.Console;
 import step3.io.LottoInputParser;
+import step3.model.LottoMachine;
 import step3.model.LottoNumber;
-import step3.model.LottoService;
 import step3.model.dto.LottoResultDto;
 import step3.model.dto.LottosNumberDto;
-import step3.view.InputView;
-import step3.view.ResultView;
+import step3.view.LottoConsoleView;
 
 import java.util.List;
 
@@ -15,17 +13,16 @@ public class LottoController {
 
 
     public void start() {
-        InputView.printPurchasingAmount();
-        int amount = Console.readInt();
-        LottoService lottoService = new LottoService(amount);
-        LottosNumberDto lottosNumberDto = lottoService.getLottoNumber();
-        ResultView.printPurchasingLottos(lottosNumberDto);
-        InputView.printWinningNumber();
-        String winningNumber = Console.readLine();
+        int amount = LottoConsoleView.printPurchasingAmount();
+
+        LottoMachine lottoMachine = new LottoMachine(amount);
+        LottosNumberDto lottosNumberDto = lottoMachine.getLottoNumber();
+        LottoConsoleView.printPurchasingLottos(lottosNumberDto);
+
+        String winningNumber = LottoConsoleView.printWinningNumber();
         List<LottoNumber> lottoNumbers = LottoInputParser.parseToLottoNumberArray(winningNumber);
-        InputView.printBonusNumber();
-        LottoResultDto lottoResultDto = lottoService.getLottoResult(lottoNumbers,LottoNumber.valueOf(Console.readInt()));
-        ResultView.printWinStats(lottoResultDto);
+        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(lottoNumbers);
+        LottoConsoleView.printWinStats(lottoResultDto);
     }
 
 

@@ -12,7 +12,7 @@ public class LottosNumberDto {
 
     public LottosNumberDto(List<List<LottoNumber>> lottosNumber) {
         this.lottosNumber = lottosNumber.stream()
-                .map(lottoNumbers -> lottoNumbers.stream().map(lottoNumber -> lottoNumber.value()).collect(Collectors.toList()))
+                .map(lottoNumbers -> lottoNumbers.stream().map(LottoNumber::value).collect(Collectors.toList()))
                 .collect(Collectors.toList());
     }
 

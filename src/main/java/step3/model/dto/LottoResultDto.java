@@ -7,23 +7,21 @@ import java.util.stream.Collectors;
 
 public class LottoResultDto {
     private final List<RankDto> ranks;
-    private final int price;
+    private final double priceRatio;
 
-    public LottoResultDto(List<RankDto> ranks, int price) {
+    public LottoResultDto(List<RankDto> ranks, double priceRatio) {
         this.ranks = ranks;
-        this.price = price;
+        this.priceRatio = priceRatio;
     }
 
     public List<RankDto> getRanks() {
         return ranks.stream()
                 .sorted(Comparator.comparingInt(RankDto::getMatchCount))
-                .filter(rankDto -> rankDto.getMatchCount() > 0)
+                .filter(RankDto::isWin)
                 .collect(Collectors.toList());
     }
 
-    public double getWinnigPercent() {
-        return ranks.stream()
-                .mapToInt(rank -> rank.getWinningCount() * rank.getWinningPrice())
-                .sum() / (double) price;
+    public double getPriceRatio() {
+        return priceRatio;
     }
 }

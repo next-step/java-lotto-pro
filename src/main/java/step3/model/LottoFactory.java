@@ -35,7 +35,7 @@ public class LottoFactory {
         List<LottoNumber> lottoNumbers = CANDIDATE_NUMBERS
                 .stream()
                 .limit(NUMBER_SIZE)
-                .map(number -> LottoNumber.valueOf(number))
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
         return new Lotto(lottoNumbers);
     }

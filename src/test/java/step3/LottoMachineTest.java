@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mockStatic;
 
-public class LottoServiceTest {
+public class LottoMachineTest {
 
     private static MockedStatic<LottoFactory> mock;
 
@@ -58,10 +58,10 @@ public class LottoServiceTest {
         }
         mock.when(() -> LottoFactory.createLottos(anyInt()))
                 .thenReturn(lottos);
-        LottoService lottoService = new LottoService(price);
+        LottoMachine lottoMachine = new LottoMachine(price);
 
         //when
-        LottosNumberDto lottosNumberDto = lottoService.getLottoNumber();
+        LottosNumberDto lottosNumberDto = lottoMachine.getLottoNumber();
 
         //then
         assertThat(lottosNumberDto.getLottosNumber()).hasSize(count);
@@ -79,17 +79,17 @@ public class LottoServiceTest {
         }
         mock.when(() -> LottoFactory.createLottos(anyInt()))
                 .thenReturn(lottos);
-        LottoService lottoService = new LottoService(14000);
+        LottoMachine lottoMachine = new LottoMachine(14000);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{11, 22, 23, 24, 25, 26})
                 .boxed()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
         //when
-        LottoResultDto lottoResultDto = lottoService.getLottoResult(winningNumbers);
+        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(winningNumbers);
 
         //then
-        assertThat(lottoResultDto.getWinnigPercent()).isEqualTo((Rank.MISS.getWinningPrice() * count) / (double) 14000);
+        assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.MISS.getWinningPrice() * count) / (double) 14000);
 
     }
 
@@ -105,16 +105,16 @@ public class LottoServiceTest {
         }
         mock.when(() -> LottoFactory.createLottos(anyInt()))
                 .thenReturn(lottos);
-        LottoService lottoService = new LottoService(14000);
+        LottoMachine lottoMachine = new LottoMachine(14000);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
         //when
-        LottoResultDto lottoResultDto = lottoService.getLottoResult(winningNumbers);
+        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(winningNumbers);
 
         //then
-        assertThat(lottoResultDto.getWinnigPercent()).isEqualTo((Rank.FIFTH.getWinningPrice() * count) / (double) 14000);
+        assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.FIFTH.getWinningPrice() * count) / (double) 14000);
 
     }
 
@@ -130,17 +130,17 @@ public class LottoServiceTest {
         }
         mock.when(() -> LottoFactory.createLottos(anyInt()))
                 .thenReturn(lottos);
-        LottoService lottoService = new LottoService(14000);
+        LottoMachine lottoMachine = new LottoMachine(14000);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 5, 6})
                 .boxed()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
         //when
-        LottoResultDto lottoResultDto = lottoService.getLottoResult(winningNumbers);
+        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(winningNumbers);
 
         //then
-        assertThat(lottoResultDto.getWinnigPercent()).isEqualTo((Rank.FOURTH.getWinningPrice() * count) / (double) 14000);
+        assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.FOURTH.getWinningPrice() * count) / (double) 14000);
 
     }
 
@@ -156,17 +156,17 @@ public class LottoServiceTest {
         }
         mock.when(() -> LottoFactory.createLottos(anyInt()))
                 .thenReturn(lottos);
-        LottoService lottoService = new LottoService(14000);
+        LottoMachine lottoMachine = new LottoMachine(14000);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 15, 6})
                 .boxed()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
         //when
-        LottoResultDto lottoResultDto = lottoService.getLottoResult(winningNumbers);
+        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(winningNumbers);
 
         //then
-        assertThat(lottoResultDto.getWinnigPercent()).isEqualTo((Rank.THIRD.getWinningPrice() * count) / (double) 14000);
+        assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.THIRD.getWinningPrice() * count) / (double) 14000);
 
     }
 
@@ -184,11 +184,11 @@ public class LottoServiceTest {
                 .thenReturn(lottos);
 
         //when
-        LottoService lottoService = new LottoService(14000);
-        LottoResultDto lottoResultDto = lottoService.getLottoResult(getLottoNumbers(1, 2, 3, 14, 15, 6), LottoNumber.valueOf(16));
+        LottoMachine lottoMachine = new LottoMachine(14000);
+        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(getLottoNumbers(1, 2, 3, 14, 15, 6), LottoNumber.valueOf(16));
 
         //then
-        assertThat(lottoResultDto.getWinnigPercent()).isEqualTo((Rank.TWO.getWinningPrice() * count) / (double) 14000);
+        assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.TWO.getWinningPrice() * count) / (double) 14000);
 
     }
 
@@ -197,7 +197,7 @@ public class LottoServiceTest {
     @DisplayName("보너스 번호가 다른번호와 중복될 경우 예외발생")
     void test_that_it_throw_exception_if_bonus_number_duplicate_with_winningnumber(int count) {
         //given
-        LottoService lottoService = new LottoService(14000);
+        LottoMachine lottoService = new LottoMachine(14000);
 
         //when,then
         assertThatThrownBy(() -> lottoService.getLottoResult(getLottoNumbers(1, 2, 3, 14, 15, 6), LottoNumber.valueOf(count)))
@@ -218,17 +218,17 @@ public class LottoServiceTest {
         }
         mock.when(() -> LottoFactory.createLottos(anyInt()))
                 .thenReturn(lottos);
-        LottoService lottoService = new LottoService(14000);
+        LottoMachine lottoMachine = new LottoMachine(14000);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 15, 16})
                 .boxed()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
         //when
-        LottoResultDto lottoResultDto = lottoService.getLottoResult(winningNumbers);
+        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(winningNumbers);
 
         //then
-        assertThat(lottoResultDto.getWinnigPercent()).isEqualTo((Rank.FIRST.getWinningPrice() * count) / (double) 14000);
+        assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.FIRST.getWinningPrice() * count) / (double) 14000);
 
     }
 

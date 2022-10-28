@@ -11,7 +11,6 @@ public class Lotto {
     public static final int NUMBER_SIZE = 6;
     private static final String NUMBER_SIZE_MESSAGE = "번호는 6개만 허용합니다";
     private static final String DUPLICATE_NUMBER_MESSAGE = "중복없는 번호만 허용합니다";
-
     private final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
@@ -36,7 +35,7 @@ public class Lotto {
     public Rank getRank(List<LottoNumber> winningNumbers) {
         int count = (int) numbers
                 .stream()
-                .filter(lottoNumber -> winningNumbers.contains(lottoNumber))
+                .filter(winningNumbers::contains)
                 .count();
         return Rank.valueOf(count);
     }
@@ -44,7 +43,7 @@ public class Lotto {
     public Rank getRank(List<LottoNumber> winningNumbers,LottoNumber bonusNumber) {
         int count = (int) numbers
                 .stream()
-                .filter(lottoNumber -> winningNumbers.contains(lottoNumber))
+                .filter(winningNumbers::contains)
                 .count();
         boolean isBonus = numbers.contains(bonusNumber);
         return Rank.valueOf(count,isBonus);
