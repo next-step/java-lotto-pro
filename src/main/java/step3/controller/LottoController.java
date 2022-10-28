@@ -21,7 +21,7 @@ public class LottoController {
         List<Lotto> lottos = LottoConsoleView.printPurchasingManual()
                 .stream()
                 .map(numbers -> StringParser.parseToIntegerArray(numbers))
-                .map(integers -> LottoFactory.createLotto(integers))
+                .map(integers -> LottoFactory.createLottoByManual(integers))
                 .collect(Collectors.toList());
 
         LottoMachine lottoMachine = new LottoMachine(amount, lottos);

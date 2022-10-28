@@ -23,17 +23,17 @@ public class LottoFactory {
     public static List<Lotto> createLottos(int size) {
         List<Lotto> lottos = new ArrayList();
         for (int i = 0; i < size; i++) {
-            lottos.add(createLotto());
+            lottos.add(createLottoByAuto());
         }
         return lottos;
     }
 
-    public static Lotto createLotto(List<Integer> numbers) {
+    public static Lotto createLottoByManual(List<Integer> numbers) {
         return new Lotto(numbers.stream()
                 .map(LottoNumber::valueOf).collect(Collectors.toList()),false);
     }
 
-    private static Lotto createLotto() {
+    private static Lotto createLottoByAuto() {
         Collections.shuffle(CANDIDATE_NUMBERS);
         List<LottoNumber> lottoNumbers = CANDIDATE_NUMBERS
                 .stream()
