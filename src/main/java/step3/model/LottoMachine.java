@@ -21,6 +21,13 @@ public class LottoMachine {
         this.lottos = new Lottos(LottoFactory.createLottos(size));
     }
 
+    public LottoMachine(int purchasePrice, List<Lotto> lottos) {
+        this.purchasePrice = purchasePrice;
+        int size = (purchasePrice - (Lotto.PRICE * lottos.size())) / Lotto.PRICE;
+        lottos.addAll(LottoFactory.createLottos(size));
+        this.lottos = new Lottos(lottos);
+    }
+
     public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers) {
         Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(winningNumbers);
         List<RankDto> rankDtos = getRanks(rankOfLottos);
@@ -50,7 +57,6 @@ public class LottoMachine {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_NUMBER_MESSAGE);
         }
-
     }
 
     private double getPriceRatio(Map<Rank, Integer> rankOfLottos, int purchasePrice) {
