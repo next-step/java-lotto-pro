@@ -1,6 +1,7 @@
 package lotto.machine;
 
 import lotto.system.InputView;
+import lotto.system.MessageConstant;
 import lotto.system.OutputView;
 import lotto.ticket.LottoTicket;
 import lotto.ticket.LottoTickets;
