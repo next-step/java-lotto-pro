@@ -17,10 +17,14 @@ public class LottoVendor {
 	}
 
 	private LottoTickets purchase(Money budget, LottoTickets lottoTickets) {
-		if (budget.equals(Money.ZERO)) {
+		if (isLessThanLottoPrice(budget)) {
 			return lottoTickets;
 		}
 		lottoTickets.add(lottoNumberGenerator.generate());
 		return purchase(budget.subtract(lottoPrice), lottoTickets);
+	}
+
+	private boolean isLessThanLottoPrice(Money budget) {
+		return budget.isLessThan(lottoPrice);
 	}
 }
