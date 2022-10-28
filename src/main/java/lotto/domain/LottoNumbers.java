@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private final List<Integer> lottoNumbers;
@@ -22,5 +23,12 @@ public class LottoNumbers {
         return lottoNumbers.stream()
                 .filter(numbers::contains)
                 .count();
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(", "));
     }
 }

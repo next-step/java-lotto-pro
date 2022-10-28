@@ -8,6 +8,10 @@ public class View {
     }
 
     public void printLottoCount(int count) {
-        OutputView.print(String.format(MSG_LOTTO_COUNT, count));
+        print(String.format(MSG_LOTTO_COUNT, count));
+    }
+
+    public void print(String text) {
+        OutputView.print(text);
     }
 }
