@@ -1,11 +1,11 @@
-package lotto.win;
+package lotto.domain.win;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.TestLottoNumberGeneratorStrategy;
-import lotto.model.lotto.LottoNumber;
-import lotto.model.lotto.LottoNumbers;
+import lotto.domain.TestLottoNumberGeneratorStrategy;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,7 +1,7 @@
-package lotto.model.statistic;
+package lotto.domain.statistic;
 
-import lotto.model.money.Money;
-import lotto.model.win.WinRanking;
+import lotto.domain.money.Money;
+import lotto.domain.win.WinRanking;
 
 public class LottoStatisticResult {
     private final WinRanking ranking;

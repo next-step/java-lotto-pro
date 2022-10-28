@@ -1,4 +1,4 @@
-package lotto.model.lotto;
+package lotto.domain.lotto;
 
 public class Lotto {
     private final LottoNumbers lottoNumbers;

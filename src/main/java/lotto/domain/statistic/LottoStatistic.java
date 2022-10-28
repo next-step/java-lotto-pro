@@ -1,11 +1,11 @@
-package lotto.model.statistic;
+package lotto.domain.statistic;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.model.lotto.LottoNumbers;
-import lotto.model.lotto.Lottos;
-import lotto.model.money.Money;
-import lotto.model.win.WinRanking;
+import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.money.Money;
+import lotto.domain.win.WinRanking;
 
 public class LottoStatistic {
     private final Lottos lottos;

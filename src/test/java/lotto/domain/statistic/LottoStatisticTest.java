@@ -1,15 +1,13 @@
-package lotto.statistic;
+package lotto.domain.statistic;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
-import lotto.model.lotto.Lotto;
-import lotto.model.lotto.LottoNumbers;
-import lotto.model.lotto.Lottos;
-import lotto.TestLottoNumberGeneratorStrategy;
-import lotto.model.money.Money;
-import lotto.model.statistic.LottoStatistic;
-import lotto.model.statistic.LottoStatisticResults;
-import lotto.model.win.WinRanking;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.TestLottoNumberGeneratorStrategy;
+import lotto.domain.money.Money;
+import lotto.domain.win.WinRanking;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,11 @@
-package lotto.model.lotto;
+package lotto.generator;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.model.money.Money;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.money.Money;
 
 public class LottoGenerator {
     private final LottoNumberGenerator lottoNumberGenerator;

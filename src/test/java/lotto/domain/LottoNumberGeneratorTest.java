@@ -1,10 +1,10 @@
-package lotto;
+package lotto.domain;
 
 import java.util.HashSet;
 import java.util.List;
-import lotto.model.lotto.DefaultNumberGeneratorStrategy;
-import lotto.model.lotto.LottoNumber;
-import lotto.model.lotto.LottoNumberGenerator;
+import lotto.generator.DefaultNumberGeneratorStrategy;
+import lotto.domain.lotto.LottoNumber;
+import lotto.generator.LottoNumberGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

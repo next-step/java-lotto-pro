@@ -1,6 +1,7 @@
-package lotto.model.lotto;
+package lotto.generator;
 
 import java.util.List;
+import lotto.domain.lotto.LottoNumber;
 
 public class LottoNumberGenerator {
     private final LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy;

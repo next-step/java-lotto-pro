@@ -1,10 +1,10 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.model.lotto.DefaultNumberGeneratorStrategy;
-import lotto.model.lotto.LottoGenerator;
-import lotto.model.lotto.LottoNumberGenerator;
-import lotto.model.money.Money;
+import lotto.generator.DefaultNumberGeneratorStrategy;
+import lotto.generator.LottoGenerator;
+import lotto.generator.LottoNumberGenerator;
+import lotto.domain.money.Money;
 
 public class Application {
     public static void main(String[] args) {

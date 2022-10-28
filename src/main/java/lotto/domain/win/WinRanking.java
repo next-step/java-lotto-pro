@@ -1,6 +1,6 @@
-package lotto.model.win;
+package lotto.domain.win;
 
-import lotto.model.money.Money;
+import lotto.domain.money.Money;
 
 public enum WinRanking {
     FOURTH(3, Money.from(5000)),

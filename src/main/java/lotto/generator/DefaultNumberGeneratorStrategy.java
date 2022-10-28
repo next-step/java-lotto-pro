@@ -1,9 +1,10 @@
-package lotto.model.lotto;
+package lotto.generator;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import lotto.constant.LottoConstant;
+import lotto.domain.lotto.LottoNumber;
 
 public class DefaultNumberGeneratorStrategy implements LottoNumberGeneratorStrategy {
 
