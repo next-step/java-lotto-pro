@@ -1,6 +1,6 @@
 package calculator.domain;
 
-import calculator.constant.ErrorCode;
+import common.constant.ErrorCode;
 
 /**
  * StringAddCalculator에서 덧셈 시 사용할 숫자값 Wrapping 클래스

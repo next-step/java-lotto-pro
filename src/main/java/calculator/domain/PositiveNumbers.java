@@ -1,6 +1,6 @@
 package calculator.domain;
 
-import calculator.constant.ErrorCode;
+import common.constant.ErrorCode;
 import java.util.ArrayList;
 import java.util.List;
 

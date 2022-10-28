@@ -3,7 +3,7 @@ package lotto.domain;
 import static lotto.domain.Lotto.LOTTO_PRICE;
 
 import java.util.Objects;
-import lotto.constant.ErrorCode;
+import common.constant.ErrorCode;
 
 public class Money {
 

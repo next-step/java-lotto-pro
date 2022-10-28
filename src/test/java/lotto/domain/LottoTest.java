@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
-import lotto.constant.ErrorCode;
+import common.constant.ErrorCode;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {

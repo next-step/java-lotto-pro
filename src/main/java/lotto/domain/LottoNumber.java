@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import lotto.constant.ErrorCode;
+import common.constant.ErrorCode;
 
 public class LottoNumber {
 
