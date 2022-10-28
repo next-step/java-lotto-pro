@@ -17,4 +17,10 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
         Collections.sort(lottoNumbers);
     }
+
+    public long getCorrectCount(List<Integer> numbers) {
+        return lottoNumbers.stream()
+                .filter(numbers::contains)
+                .count();
+    }
 }
