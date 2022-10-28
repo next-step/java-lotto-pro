@@ -7,8 +7,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class SumOfOperandsTest {
     @Test
-    @DisplayName("0 + 0 = 0")
+    @DisplayName("1 = 1")
     void case1() {
+        final Operand[] operands = { new Operand("1") };
+        final SumOfOperands sumOfOperands = new SumOfOperands(operands);
+        final int sumResult = sumOfOperands.result();
+        assertThat(sumResult).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("0 + 0 = 0")
+    void case2() {
         final Operand[] operands = { new Operand("0"), new Operand("0") };
         final SumOfOperands sumOfOperands = new SumOfOperands(operands);
         final int sumResult = sumOfOperands.result();
@@ -17,7 +26,7 @@ class SumOfOperandsTest {
 
     @Test
     @DisplayName("1 + 2 + 3 + 4 = 10")
-    void case2() {
+    void case3() {
         final Operand[] operands = {
                 new Operand("1"),
                 new Operand("2"),
