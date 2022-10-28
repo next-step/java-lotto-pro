@@ -17,7 +17,7 @@ public class Money {
 		return Money.wons(BigDecimal.valueOf(amount));
 	}
 
-	private static Money wons(BigDecimal amount) {
+	public static Money wons(BigDecimal amount) {
 		verifyIsLessThanZero(amount);
 		return new Money(amount);
 	}

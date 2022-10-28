@@ -1,6 +1,7 @@
 package lotto;
 
 import static java.lang.String.format;
+import static java.util.stream.Collectors.joining;
 
 import java.util.Arrays;
 import java.util.List;
@@ -71,8 +72,8 @@ public class LottoTicket {
 
 	@Override
 	public String toString() {
-		return "LottoTicket{" +
-			"lottoNumbers=" + lottoNumbers +
-			'}';
+		return lottoNumbers.stream()
+			.map(LottoNumber::toString)
+			.collect(joining(", ", "[", "]"));
 	}
 }

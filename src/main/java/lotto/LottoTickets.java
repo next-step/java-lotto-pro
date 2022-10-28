@@ -3,6 +3,7 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
 
@@ -24,6 +25,10 @@ public class LottoTickets {
 		lottoTicketList.add(lottoTicket);
 	}
 
+	public int getCount() {
+		return lottoTicketList.size();
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -39,5 +44,11 @@ public class LottoTickets {
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoTicketList);
+	}
+
+	@Override
+	public String toString() {
+		return lottoTicketList.stream().map(LottoTicket::toString)
+			.collect(Collectors.joining("\n"));
 	}
 }
