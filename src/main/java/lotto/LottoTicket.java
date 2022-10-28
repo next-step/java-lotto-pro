@@ -4,8 +4,10 @@ import static java.lang.String.format;
 import static java.util.stream.Collectors.joining;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
@@ -77,16 +79,14 @@ public class LottoTicket {
 			.collect(joining(", ", "[", "]"));
 	}
 
-	public int getEqualNumberCount(LottoTicket other) {
+	public int match(LottoTicket other) {
 		List<LottoNumber> lottoNumbers = this.lottoNumbers;
-		lottoNumbers.sort(LottoNumber::compare);
 
-		List<LottoNumber> otherLottoNumber = other.lottoNumbers;
-		otherLottoNumber.sort(LottoNumber::compare);
+		Set<LottoNumber> comparedLottoNumbers = new HashSet<>(other.lottoNumbers);
 
 		int equalNumberCount = 0;
-		for (int i = 0; i < lottoNumbers.size(); i++) {
-			equalNumberCount += lottoNumbers.get(i).equals(otherLottoNumber.get(i)) ? 1 : 0;
+		for (LottoNumber lottoNumber : lottoNumbers) {
+			equalNumberCount += comparedLottoNumbers.contains(lottoNumber) ? 1 : 0;
 		}
 
 		return equalNumberCount;
