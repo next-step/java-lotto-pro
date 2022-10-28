@@ -19,13 +19,13 @@ public class Statistics {
     }
     
     private void putDefault(Rank rank) {
-        if(rank != Rank.NONE){
+        if(!rank.isNone()){
             this.countByRank.put(rank, 0);
         }
     }
     
     private void mapMerge(Rank rank) {
-        if(rank != Rank.NONE){
+        if(!rank.isNone()){
             this.countByRank.merge(rank, 1 , Integer::sum);
         }
     }

@@ -44,4 +44,7 @@ public enum Rank {
         return prize;
     }
     
+    public boolean isNone() {
+        return this.count < Rank.FORTH.count;
+    }
 }

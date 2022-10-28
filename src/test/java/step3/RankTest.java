@@ -36,4 +36,11 @@ public class RankTest {
     void rank_match_count_multi(int input, long expected) {
         assertThat(Rank.getRank(input).getPrize()).isEqualTo(expected);
     }
+    
+    @Test
+    @DisplayName("순위권 밖 체크")
+    void rank_is_none() {
+        assertThat(Rank.NONE.isNone()).isEqualTo(true);
+    }
+    
 }
