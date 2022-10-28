@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Objects;
+import lotto.view.OutputView;
 
 public class LottoPurchaseAmount  {
     public static final int LOTTO_PRICE = 1000;
@@ -17,19 +18,19 @@ public class LottoPurchaseAmount  {
         try {
             return Integer.parseInt(inputAmount);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("숫자를 입력해주세요.");
+            throw new NumberFormatException(OutputView.ERROR_MESSAGE_INPUT_AMOUNT_ONLY_NUMBER);
         }
     }
 
     private void validThousands() {
         if (this.amount % LOTTO_PRICE > 0) {
-            throw new IllegalArgumentException("1000 단위로 입력해주세요.");
+            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_AMOUNT_UNIT_OF_1000);
         }
     }
 
     private void validPositive() {
-        if (this.amount < 0) {
-            throw new IllegalArgumentException("양수를 입력해주세요.");
+        if (this.amount <= 0) {
+            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_MINIMUM_PURCHASE_AMOUNT);
         }
     }
 

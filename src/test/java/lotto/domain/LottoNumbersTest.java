@@ -54,6 +54,6 @@ class LottoNumbersTest {
     @DisplayName("구매 내역 출력 포맷 [1, 2, 3, 4, 5, 6]")
     void lotto_lottery_print_format() {
         LottoNumbers lottoNumbers = LottoNumbers.of(new ManualNumberGenerator("6,2,3,4,5,1"));
-        assertThat(lottoNumbers.print()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+        assertThat(lottoNumbers.history()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 }

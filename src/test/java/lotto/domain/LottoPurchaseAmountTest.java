@@ -29,7 +29,7 @@ class LottoPurchaseAmountTest {
     void amount_only_positive_number() {
         assertThatThrownBy(() -> new LottoPurchaseAmount("-1000"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("양수를 입력해주세요.");
+                .hasMessage("최소 구매 금액은 1000원 입니다.");
     }
 
     @Test

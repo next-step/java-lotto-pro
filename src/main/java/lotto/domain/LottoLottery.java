@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.view.OutputView;
 
 public class LottoLottery {
     private final List<LottoNumbers> lottoLottery;
@@ -25,9 +26,11 @@ public class LottoLottery {
                 .collect(Collectors.toList()));
     }
 
-    public void print() {
+    public String lotteryHistory() {
+        List<String> historys = new ArrayList<>();
         for (LottoNumbers lottoNumbers : this.lottoLottery) {
-            System.out.println(lottoNumbers.print());
+            historys.add(lottoNumbers.history());
         }
+        return String.join(OutputView.NEWLINE_DELIMITER, historys);
     }
 }

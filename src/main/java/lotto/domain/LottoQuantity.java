@@ -1,9 +1,9 @@
 package lotto.domain;
 
 import java.util.Objects;
+import lotto.view.OutputView;
 
 public class LottoQuantity {
-    public static final String PRINT_QUANTITY_FORMAT = "%d개를 구매했습니다.";
     private final int quantity;
 
     private LottoQuantity(int quantity) {
@@ -14,8 +14,8 @@ public class LottoQuantity {
         return new LottoQuantity(quantity);
     }
 
-    public String print() {
-        return String.format(PRINT_QUANTITY_FORMAT, this.quantity);
+    public String getMessage() {
+        return String.format(OutputView.PRINT_QUANTITY_FORMAT, this.quantity);
     }
 
     public int getQuantity() {

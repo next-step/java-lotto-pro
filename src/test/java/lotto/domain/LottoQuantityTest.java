@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import lotto.view.OutputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,6 +23,6 @@ class LottoQuantityTest {
     void print_lotto_quantity(String input, int expect) {
         LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(input);
         LottoQuantity lottoQuantity = LottoQuantity.of(lottoPurchaseAmount.getQuantity());
-        assertThat(lottoQuantity.print()).isEqualTo(String.format(LottoQuantity.PRINT_QUANTITY_FORMAT, expect));
+        assertThat(lottoQuantity.getMessage()).isEqualTo(String.format(OutputView.PRINT_QUANTITY_FORMAT, expect));
     }
 }

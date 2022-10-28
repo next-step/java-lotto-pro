@@ -4,11 +4,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lotto.view.OutputView;
 
 public class LottoNumbers {
     public static final int LOTTO_LOTTERY_NUMBER_SIZE = 6;
-    public static final String PRINT_LOTTO_NUMBERS_FORMAT = "[%s]";
-    public static final String PRINT_LOTTO_NUMBERS_DELIMITER = ", ";
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -23,7 +22,7 @@ public class LottoNumbers {
 
     private void validSize() {
         if (this.lottoNumbers.size() != LOTTO_LOTTERY_NUMBER_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6개 입니다.");
+            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_LOTTO_NUMBERS_SIZE_IS_6);
         }
     }
 
@@ -33,15 +32,15 @@ public class LottoNumbers {
                 .count();
     }
 
-    public String print() {
+    public String history() {
         List<Integer> numberList = this.lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .sorted()
                 .collect(Collectors.toList());
         String numberFormat = numberList.stream()
                 .map(String::valueOf)
-                .collect(Collectors.joining(PRINT_LOTTO_NUMBERS_DELIMITER));
-        return String.format(PRINT_LOTTO_NUMBERS_FORMAT, numberFormat) ;
+                .collect(Collectors.joining(OutputView.PRINT_LOTTO_NUMBERS_DELIMITER));
+        return String.format(OutputView.PRINT_LOTTO_NUMBERS_FORMAT, numberFormat) ;
     }
 
     @Override
