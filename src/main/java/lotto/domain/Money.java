@@ -24,7 +24,7 @@ public class Money {
         return money / LOTTO_PRICE;
     }
 
-    public double findProfit(Money money) {
+    public double findProfitsRatio(Money money) {
         double profit = (double) money.money / this.money;
         return Math.floor(profit * 100) / 100;
     }

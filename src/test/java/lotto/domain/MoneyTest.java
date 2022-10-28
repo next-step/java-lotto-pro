@@ -29,6 +29,6 @@ public class MoneyTest {
     void 당첨금과_로또_구매_비용_간_비율은_소숫점_셋째자리_버림_반환(int totalPrize, int inputMoney, double profit) {
         Lottos lottos = new Lottos(new Money(inputMoney));
         Money totalPrice = lottos.findTotalPrice();
-        assertThat(totalPrice.findProfit(new Money(totalPrize))).isEqualTo(profit);
+        assertThat(totalPrice.findProfitsRatio(new Money(totalPrize))).isEqualTo(profit);
     }
 }

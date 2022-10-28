@@ -42,16 +42,16 @@ public class Lotto {
         }
     }
 
-    public LottoPrize findLottoPrize(Lotto prizeLotto) {
+    public LottoPrize findLottoPrize(Lotto winningLotto) {
         int matchCount = 0;
         for(LottoNumber lottoNumber: this.lottoNumbers) {
-            matchCount += findMatchLottoNumber(prizeLotto, lottoNumber);
+            matchCount += findMatchLottoNumber(winningLotto, lottoNumber);
         }
         return LottoPrize.findLottoPrize(matchCount);
     }
 
-    private int findMatchLottoNumber(Lotto prizeLotto, LottoNumber lottoNumber) {
-        if(prizeLotto.lottoNumbers.contains(lottoNumber)) {
+    private int findMatchLottoNumber(Lotto winningLotto, LottoNumber lottoNumber) {
+        if(winningLotto.lottoNumbers.contains(lottoNumber)) {
             return MATCH_LOTTO_NUMBER;
         }
         return NOT_MATCH_LOTTO_NUMBER;
