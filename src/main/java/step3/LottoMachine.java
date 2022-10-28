@@ -1,16 +1,23 @@
 package step3;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class LottoMachine {
 
     private final int lottoPrice;
     private int lottoCount;
+    private List<List<Integer>> havingLottos;
 
     public LottoMachine(int lottoPrice) {
         this.lottoPrice = lottoPrice;
+        this.havingLottos = new ArrayList<>();
     }
 
     public LottoMachine(int lottoPrice, int money) {
         this.lottoPrice = lottoPrice;
+        this.havingLottos = new ArrayList<>();
 
         receiveMoney(money);
     }
@@ -23,5 +30,12 @@ public class LottoMachine {
         this.lottoCount = money / lottoPrice + lottoCount;
 
         return this.lottoCount;
+    }
+
+    public List<Integer> addLotto(List<Integer> lottoNumbers) {
+        Collections.sort(lottoNumbers);
+        this.havingLottos.add(lottoNumbers);
+
+        return lottoNumbers;
     }
 }
