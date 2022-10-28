@@ -36,12 +36,7 @@ public class Lotto {
     public Rank getRank(List<LottoNumber> winningNumbers) {
         int count = (int) numbers
                 .stream()
-                .filter(lottoNumber -> {
-                    boolean isC = winningNumbers.contains(lottoNumber);
-
-                    return isC;
-
-                })
+                .filter(lottoNumber -> winningNumbers.contains(lottoNumber))
                 .count();
         return Rank.getRankFromMatchCount(count);
     }
