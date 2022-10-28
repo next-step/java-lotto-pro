@@ -29,4 +29,8 @@ public class Lotto {
                 .filter(winLotto.getNumbers()::contains)
                 .count();
     }
+
+    public boolean containsBy(Integer number) {
+        return numbers.contains(number);
+    }
 }

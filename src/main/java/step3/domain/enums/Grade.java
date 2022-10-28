@@ -4,11 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Grade {
-    DRAW(0, 0),
-    FORTH(3, 5000),
-    THIRD(4, 50000),
-    SECOND(5, 1500000),
-    FIRST(6, 2000000000);
+    MISS(0, 0),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
     private final long count;
     private final long amount;
@@ -34,10 +35,20 @@ public enum Grade {
         }
     }
 
-    public static Grade getGradeBy(long count) {
+    public static Grade getGradeBy(long count, boolean matchBonus) {
+        if (count == 5) {
+            return getSecondOrThird(matchBonus);
+        }
         if (count >= 3 && count <= 6) {
             return countPerGrade.get(count);
         }
-        return DRAW;
+        return MISS;
+    }
+
+    private static Grade getSecondOrThird(boolean matchBonus) {
+        if(matchBonus) {
+            return SECOND;
+        }
+        return THIRD;
     }
 }
