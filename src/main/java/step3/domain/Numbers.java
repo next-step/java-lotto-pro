@@ -1,6 +1,5 @@
 package step3.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Numbers {
@@ -8,7 +7,7 @@ public class Numbers {
     private final List<Integer> numbers;
 
     private Numbers() {
-        this.numbers = new ArrayList<>();
+        throw new RuntimeException("Cannot use default constructor.");
     }
 
     private Numbers(List<Integer> numbers) {
