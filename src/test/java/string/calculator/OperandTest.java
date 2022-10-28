@@ -25,5 +25,12 @@ class OperandTest {
         void cannotCreateOperandIfNegative(String token) {
             assertThrows(RuntimeException.class, () -> new Operand(token));
         }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"a", "b", "c", "abc", ".", "|", "?"})
+        @DisplayName("숫자가 아닌 값으로 Operand 객체를 생성하려고 하면 예외가 발생한다")
+        void cannotCreateOperandIfNonDigit(String token) {
+            assertThrows(RuntimeException.class, () -> new Operand(token));
+        }
     }
 }
