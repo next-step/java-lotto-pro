@@ -9,11 +9,11 @@ public class LottoTickets {
     List<LottoTicket> lottoTickets = new ArrayList<>();
 
     public LottoTickets(int quantity) {
+        OutputView.printReceipt(quantity);
         for (int i = 0; i < quantity; i++) {
             lottoTickets.add(new LottoTicket());
+            lottoTickets.get(i).printLotto();
         }
-        printReceipt();
-        System.out.println(lottoTickets);
     }
 
     public int getQuantity() {
@@ -22,22 +22,12 @@ public class LottoTickets {
 
     public Result match(WinnerLottoTicket winnerLottoTicket) {
         Result result = new Result();
-
         for (LottoTicket ticket : lottoTickets){
             result.addCount(
                     ticket.match(winnerLottoTicket.getLotto()),
                     winnerLottoTicket.matchBonus(ticket));
         }
         return result;
-    }
-
-    private void printReceipt() {
-        OutputView.printReceipt(lottoTickets.size());
-    }
-
-    @Override
-    public String toString() {
-        return lottoTickets.toString();
     }
 
 }
