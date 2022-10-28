@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.domain.dto.StatisticDto;
 import lotto.domain.enums.Rank;
+import lotto.util.ManualLottoGenerator;
 import lotto.util.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -26,7 +27,9 @@ public class LottoController {
     }
 
     private void showLottoResult(Money money, List<LottoTicket> tickets) {
-        LottoCommittee committee = new LottoCommittee(createWinningNumbers());
+        LottoCommittee committee = new LottoCommittee(
+                new ManualLottoGenerator(createWinningNumbers()).create()
+        );
         StatisticDto dto = committee.statistics(tickets);
 
         ResultView.printStatistics(dto);

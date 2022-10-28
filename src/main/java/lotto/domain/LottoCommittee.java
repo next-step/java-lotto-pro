@@ -3,20 +3,12 @@ package lotto.domain;
 import lotto.domain.dto.StatisticDto;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoCommittee {
     private final LottoTicket winningTicket;
 
-    public LottoCommittee(List<Integer> numbers) {
-        this.winningTicket = convertTicket(numbers);
-    }
-
-    private LottoTicket convertTicket(List<Integer> numbers) {
-        return LottoTicket.create(numbers.stream()
-                .map(v -> LottoNumber.get(v))
-                .collect(Collectors.toList())
-        );
+    public LottoCommittee(LottoTicket ticket) {
+        this.winningTicket = ticket;
     }
 
     public StatisticDto statistics(List<LottoTicket> tickets) {
