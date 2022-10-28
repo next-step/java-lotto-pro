@@ -20,4 +20,12 @@ public enum WinRanking {
     public static boolean isWin(int matchCount) {
         return matchCount >= FOURTH.matchCount && matchCount <= FIRST.matchCount;
     }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public Money getWinningMoney() {
+        return winningMoney;
+    }
 }

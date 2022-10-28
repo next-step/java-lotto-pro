@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.win.DefaultWinPolicy;
 import lotto.win.WinPolicy;
 
 public class Lotto {
@@ -15,8 +16,16 @@ public class Lotto {
         return new Lotto(lottoNumbers, winPolicy);
     }
 
+    public static Lotto from(LottoNumbers lottoNumbers) {
+        return new Lotto(lottoNumbers, new DefaultWinPolicy());
+    }
+
     public boolean isWin(LottoNumbers winningNumbers) {
         int matchCount = this.lottoNumbers.matches(winningNumbers);
         return winPolicy.isWin(matchCount);
+    }
+
+    public int matches(LottoNumbers winningNumbers) {
+        return this.lottoNumbers.matches(winningNumbers);
     }
 }

@@ -16,4 +16,19 @@ public class Lottos {
     public int size() {
         return this.values.size();
     }
+
+    public int matches(int expectedMatchCount, LottoNumbers winningNumbers) {
+        int matchCount = 0;
+        for (Lotto lotto : values) {
+            matchCount = getMatchCount(lotto, winningNumbers, expectedMatchCount, matchCount);
+        }
+        return matchCount;
+    }
+
+    private int getMatchCount(Lotto lotto, LottoNumbers winningNumbers, int expectedMatchCount, int matchCount) {
+        if (lotto.matches(winningNumbers) == expectedMatchCount) {
+            matchCount++;
+        }
+        return matchCount;
+    }
 }
