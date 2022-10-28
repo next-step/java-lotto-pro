@@ -76,4 +76,20 @@ public class LottoTicket {
 			.map(LottoNumber::toString)
 			.collect(joining(", ", "[", "]"));
 	}
+
+	public int getEqualNumberCount(LottoTicket other) {
+		List<LottoNumber> lottoNumbers = this.lottoNumbers;
+		lottoNumbers.sort(LottoNumber::compare);
+
+		List<LottoNumber> otherLottoNumber = other.lottoNumbers;
+		otherLottoNumber.sort(LottoNumber::compare);
+
+		int equalNumberCount = 0;
+		for (int i = 0; i < lottoNumbers.size(); i++) {
+			equalNumberCount += lottoNumbers.get(i).equals(otherLottoNumber.get(i)) ? 1 : 0;
+		}
+
+		return equalNumberCount;
+	}
+
 }

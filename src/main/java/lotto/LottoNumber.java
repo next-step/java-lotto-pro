@@ -52,4 +52,8 @@ public class LottoNumber {
 	public String toString() {
 		return String.valueOf(number);
 	}
+
+	public int compare(LottoNumber other) {
+		return Integer.compare(number, other.number);
+	}
 }

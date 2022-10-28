@@ -1,5 +1,6 @@
 package lotto;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
@@ -33,6 +34,24 @@ class LottoTicketTest {
 	void 로또_티켓에_입력_갯수가_유효하지_않으면_예외를_던진다(List<Integer> 로또_번호_입력) {
 		assertThatThrownBy(() -> LottoTicket.of(로또_번호_입력))
 			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@ParameterizedTest
+	@MethodSource("두개의_로또_티켓_입력")
+	void 두개의_로또_티켓을_비교하여_일치하는_숫자_갯수를_알_수_있다(LottoTicket 로또티켓, LottoTicket 비교_로또티켓, int 예상_동일_번호_갯수) {
+		int 동일_번호_갯수 = 로또티켓.getEqualNumberCount(비교_로또티켓);
+		assertThat(동일_번호_갯수).isEqualTo(예상_동일_번호_갯수);
+	}
+
+	private static Stream<Arguments> 두개의_로또_티켓_입력() {
+		return Stream.of(
+			Arguments.of(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoTicket.of(1, 7, 8, 9, 10, 11), 1),
+			Arguments.of(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoTicket.of(1, 2, 7, 8, 9, 10), 2),
+			Arguments.of(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoTicket.of(1, 2, 3, 7, 8, 9), 3),
+			Arguments.of(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoTicket.of(1, 2, 3, 4, 8, 9), 4),
+			Arguments.of(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoTicket.of(1, 2, 3, 4, 5, 9), 5),
+			Arguments.of(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoTicket.of(1, 2, 3, 4, 5, 6), 6)
+		);
 	}
 
 	private static Stream<Arguments> 중복된_로또번호_생성() {
