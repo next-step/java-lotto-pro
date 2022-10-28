@@ -28,6 +28,11 @@ public class LottoFactory {
         return lottos;
     }
 
+    public static Lotto createLotto(List<Integer> numbers) {
+        return new Lotto(numbers.stream()
+                .map(LottoNumber::valueOf).collect(Collectors.toList()),false);
+    }
+
     private static Lotto createLotto() {
         Collections.shuffle(CANDIDATE_NUMBERS);
         List<LottoNumber> lottoNumbers = CANDIDATE_NUMBERS
