@@ -1,16 +1,16 @@
 package string.calculator;
 
-public class StringCalculator {
+public class StringAddCalculator {
     private static final int DEFAULT_RESULT_ZERO = 0;
     private final String input;
 
-    public StringCalculator(String input) {
+    public StringAddCalculator(String input) {
         this.input = input;
     }
 
     public int calculate() {
         if (inputNullOrEmpty()) {
-            return StringCalculator.DEFAULT_RESULT_ZERO;
+            return StringAddCalculator.DEFAULT_RESULT_ZERO;
         }
         final String[] tokens = splitInput();
         final Operand[] operands = convertToOperand(tokens);
