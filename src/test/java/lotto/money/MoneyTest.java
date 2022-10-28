@@ -11,10 +11,10 @@ class MoneyTest {
     private final Money money = Money.from(1000);
 
     @ParameterizedTest
-    @CsvSource(value = {"1:1000", "11:90", "30:33"}, delimiter = ':')
-    @DisplayName("Money의 divide 메소드는 나눈 몫을 반환한다.")
-    void moneyDivide(int input, int expected) {
-        int result = money.divide(Money.from(input));
+    @CsvSource(value = {"1:1000", "11:90.9", "30:33.33"}, delimiter = ':')
+    @DisplayName("Money의 divide 한 값을 확인한다. (소수 3째자리에서 버림)")
+    void moneyDivide(double input, double expected) {
+        double result = money.divide(Money.from(input));
         Assertions.assertThat(result).isEqualTo(expected);
     }
 

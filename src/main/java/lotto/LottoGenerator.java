@@ -19,8 +19,8 @@ public class LottoGenerator {
     }
 
     public Lottos generate(Money money) {
-        int count = money.divide(price);
-        return generate(count);
+        double count = money.divide(price);
+        return generate((int) count);
     }
 
     private Lottos generate(int count) {
