@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class InputSplitterTest {
+class InputSplitterTest {
     @ParameterizedTest
     @ValueSource(strings = {"1:2:3", "1,2,3"})
     @DisplayName("입력 문자열이 기본 구분자를 사용하는 경우")
