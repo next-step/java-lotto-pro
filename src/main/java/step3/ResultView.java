@@ -1,5 +1,7 @@
 package step3;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +40,9 @@ public class ResultView {
     
     private void resultStatisticsContents(Statistics statistics) {
         Map<Rank, Integer> countByRank = statistics.countByRank();
-        for( Rank rank : countByRank.keySet() ){
+        ArrayList<Rank> keySet = new ArrayList<>(countByRank.keySet());
+        Collections.sort(keySet);
+        for( Rank rank : keySet ){
             System.out.printf(RESULT_STAT_CONTENTS, rank.getCount(), rank.getPrize(), countByRank.get(rank));
         }
     }
