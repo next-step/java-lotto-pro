@@ -7,8 +7,10 @@ public class StringAddCalculator {
     private static final int ZERO = 0;
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
+    private static final Pattern PATTERN = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
     private static final int NUMBER_STRING_GROUP = 2;
     private static final int NUMBER_DELIMITER_GROUP = 1;
+
     public static int splitAndSum(String input) {
         if (isNullOrEmpty(input)) {
             return ZERO;
@@ -42,7 +44,7 @@ public class StringAddCalculator {
     }
 
     private static String[] splitToTokens(String input) {
-        Matcher m = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
+        Matcher m = PATTERN.matcher(input);
         if (m.find()) {
             String customDelimiter = m.group(NUMBER_DELIMITER_GROUP);
             return m.group(NUMBER_STRING_GROUP).split(customDelimiter);
