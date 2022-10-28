@@ -20,7 +20,7 @@ class CalculatorInputTest {
     }
 
     @Test
-    public void 커스텀_구분자에_따른_숫자_추출_테스트() {
+    void 커스텀_구분자에_따른_숫자_추출_테스트() {
         int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
     }
