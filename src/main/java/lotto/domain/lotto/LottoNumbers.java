@@ -39,7 +39,7 @@ public class LottoNumbers {
         return NOT_MATCH;
     }
 
-    public boolean matches(LottoNumber lottoNumber) {
+    private boolean matches(LottoNumber lottoNumber) {
         return this.values.contains(lottoNumber);
     }
 

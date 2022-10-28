@@ -10,7 +10,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class WinTest {
@@ -28,15 +27,6 @@ class WinTest {
                 Arguments.of(TestLottoNumberGeneratorStrategy.from(Arrays.asList(1, 7, 8, 9, 10, 11)).generate(), 1),
                 Arguments.of(TestLottoNumberGeneratorStrategy.from(Arrays.asList(7, 8, 9, 10, 11, 12)).generate(), 0)
         );
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = {"1:true", "2:true", "7:false", "8:false", "9:false", "10:false"}, delimiter = ':')
-    @DisplayName("로또번호(로또 1장)와 당첨번호 1개 비교 테스트")
-    void lottoNumbersMatches1(int input, boolean expected) {
-        LottoNumbers lottoNumbers = LottoNumbers.from(numbers);
-        boolean result = lottoNumbers.matches(LottoNumber.from(input));
-        Assertions.assertThat(result).isEqualTo(expected);
     }
 
     @ParameterizedTest
