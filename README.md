@@ -40,4 +40,7 @@
   - [ ] 각 3,4,5개 일치 결과 반환 (MatchResult)
   - [ ] 총 수익률 결과 반환
 - 난수 생성기 (RandomNumbersGenerator)
-  - [ ] min~max 범위 n자리 난수 생성
+  - [X] begin~last 범위 n자리 난수 생성
+- 로또 랜덤 번호 선택 전략 (RandomLottoNumberStrategy)
+  - [X] 난수 생성기로부터 번호를 생성 받아 전달
+

@@ -3,8 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-	private static final int MIN_RANGE = 1;
-	private static final int MAX_RANGE = 45;
+	public static final int MIN_RANGE = 1;
+	public static final int MAX_RANGE = 45;
 	private final int lottoNumber;
 
 	public LottoNumber(final int lottoNumber) {
