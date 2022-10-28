@@ -8,7 +8,6 @@ public class Money {
 
 	public static final Money ZERO = new Money(BigDecimal.ZERO);
 	private final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#,##0");
-	;
 
 	private final BigDecimal amount;
 
