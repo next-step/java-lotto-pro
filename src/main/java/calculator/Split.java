@@ -7,29 +7,35 @@ public class Split {
 
   private static final String DEFAULT_SPLIT_SEPARATORS= ",|:";
   private static final Pattern CUSTOM_SPLIT_SEPARATOR_PATTERN = Pattern.compile("//(.)\n(.*)");
+  private static final int CUSTOM_PATTERN_DELIMITER_INDEX = 1;
+  private static final int CUSTOM_PATTERN_TEXT_INDEX = 2;
 
   private String[] stringArray;
 
   public Split(String input) {
-    this.stringArray = validateInput(input);
+    this.stringArray = parseInput(input);
   }
 
-  public String[] validateInput(String input) {
+  public boolean isValidInput(String input) {
 
     if(input == null || input.isEmpty()) {
-      return new String[]{};
+      return false;
     }
 
-    return parseInput(input);
+    return true;
   }
 
   private String[] parseInput(String input) {
 
-    Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+    if(!isValidInput(input)) {
+      return new String[]{};
+    }
+
+    Matcher matcher = CUSTOM_SPLIT_SEPARATOR_PATTERN.matcher(input);
 
     if (matcher.find()) {
-      String customToken = matcher.group(1);
-      return matcher.group(2).split(customToken);
+      String customToken = matcher.group(CUSTOM_PATTERN_DELIMITER_INDEX);
+      return matcher.group(CUSTOM_PATTERN_TEXT_INDEX).split(customToken);
     }
 
     return input.split(DEFAULT_SPLIT_SEPARATORS);
