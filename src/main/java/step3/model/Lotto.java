@@ -51,4 +51,7 @@ public class Lotto {
         return Rank.valueOf(count, isBonus);
     }
 
+    public boolean isAuto() {
+        return isAuto;
+    }
 }

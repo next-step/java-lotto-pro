@@ -30,7 +30,7 @@ public class LottoConsoleView {
 
     public static void printPurchasingLottos(LottoTicketDto lottoTicketDto) {
         List<List<Integer>> lottoTickets = lottoTicketDto.getLottosNumber();
-        System.out.printf("%d개를 구매했습니다.\n", lottoTickets.size());
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lottoTicketDto.getManualLottoCount(),lottoTicketDto.getAutoLottoCount());
         lottoTickets.forEach(System.out::println);
         System.out.println();
     }
