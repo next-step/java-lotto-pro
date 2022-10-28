@@ -42,8 +42,8 @@ public class StringAddCalculatorTest {
 
     @Test
     public void splitAndSum_custom_다양한_구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("//*\n1*2*3");
-        assertThat(result).isEqualTo(6);
+        int result = StringAddCalculator.splitAndSum("//*\n3*3*3");
+        assertThat(result).isEqualTo(9);
 
         result = StringAddCalculator.splitAndSum("//$\n1$2$3");
         assertThat(result).isEqualTo(6);
