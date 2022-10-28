@@ -26,6 +26,13 @@ public class LottoService {
         return new LottoResultDto(rankDtos, purchasePrice);
     }
 
+    public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers,LottoNumber bonusNumber) {
+        Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(winningNumbers,bonusNumber);
+        List<RankDto> rankDtos = getRanks(rankOfLottos);
+        return new LottoResultDto(rankDtos, purchasePrice);
+    }
+
+
     public LottosNumberDto getLottoNumber() {
         return new LottosNumberDto(lottos.getNumbersOfLottos());
     }

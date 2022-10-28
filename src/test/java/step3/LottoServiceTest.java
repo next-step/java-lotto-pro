@@ -168,6 +168,27 @@ public class LottoServiceTest {
 
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 5})
+    @DisplayName("2등 당첨된 경우 수익률은  ( 2등상금 * 당첨된 로또개수)/구입금액")
+    void test_that_it_returns_winning_rate_if_winning_number_match_at2(int count) {
+        //given
+        mock.reset();
+        List<Lotto> lottos = new ArrayList();
+        for (int i = 0; i < count; i++) {
+            lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
+        }
+        mock.when(() -> LottoFactory.createLottos(anyInt()))
+                .thenReturn(lottos);
+
+        //when
+        LottoService lottoService = new LottoService(14000);
+        LottoResultDto lottoResultDto = lottoService.getLottoResult(getLottoNumbers(1, 2, 3, 14, 15, 6), LottoNumber.valueOf(16));
+
+        //then
+        assertThat(lottoResultDto.getWinnigPercent()).isEqualTo((Rank.TWO.getWinningPrice() * count) / (double) 14000);
+
+    }
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5})
