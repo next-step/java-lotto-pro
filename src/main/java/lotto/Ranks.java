@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Ranks {
@@ -10,9 +9,15 @@ public class Ranks {
 		this.ranks = ranks;
 	}
 
-	public long getTotalPrize(){
+	public long getTotalPrize() {
 		return ranks.stream()
 			.mapToLong(Rank::prize)
 			.sum();
+	}
+
+	public long count(final Rank searchRank) {
+		return ranks.stream()
+			.filter(rank -> rank == searchRank)
+			.count();
 	}
 }
