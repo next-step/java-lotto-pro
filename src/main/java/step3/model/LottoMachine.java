@@ -24,14 +24,16 @@ public class LottoMachine {
     public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers) {
         Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(winningNumbers);
         List<RankDto> rankDtos = getRanks(rankOfLottos);
-        return new LottoResultDto(rankDtos, purchasePrice);
+        double getPriceRatio = getPriceRatio(rankOfLottos, purchasePrice);
+        return new LottoResultDto(rankDtos, getPriceRatio);
     }
 
     public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         validateLottoNumbers(winningNumbers, bonusNumber);
         Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(winningNumbers, bonusNumber);
         List<RankDto> rankDtos = getRanks(rankOfLottos);
-        return new LottoResultDto(rankDtos, purchasePrice);
+        double getPriceRatio = getPriceRatio(rankOfLottos, purchasePrice);
+        return new LottoResultDto(rankDtos, getPriceRatio);
     }
 
     public LottosNumberDto getLottoNumber() {
@@ -49,5 +51,12 @@ public class LottoMachine {
             throw new IllegalArgumentException(DUPLICATE_NUMBER_MESSAGE);
         }
 
+    }
+
+    private double getPriceRatio(Map<Rank, Integer> rankOfLottos, int purchasePrice) {
+        int sumOfRankPrice = Arrays.stream(Rank.values())
+                .mapToInt(rank -> rank.getWinningPrice() * rankOfLottos.getOrDefault(rank, 0))
+                .sum();
+        return sumOfRankPrice / (double) purchasePrice;
     }
 }
