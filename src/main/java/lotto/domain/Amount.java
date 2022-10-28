@@ -37,7 +37,7 @@ public class Amount {
     }
 
     private void validateNumber(final String amount) {
-        if (amount.chars().allMatch(Character::isDigit)) {
+        if (!amount.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException(ONLY_NUMBER_MESSAGE);
         }
     }
