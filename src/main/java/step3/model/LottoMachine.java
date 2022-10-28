@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class LottoService {
+public class LottoMachine {
 
     private final int purchasePrice;
     private final Lottos lottos;
 
-    public LottoService(int purchasePrice) {
+    public LottoMachine(int purchasePrice) {
         this.purchasePrice = purchasePrice;
         int size = purchasePrice / Lotto.PRICE;
         this.lottos = new Lottos(LottoFactory.createLottos(size));

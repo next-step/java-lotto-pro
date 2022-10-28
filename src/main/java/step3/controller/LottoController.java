@@ -3,7 +3,7 @@ package step3.controller;
 import step3.io.Console;
 import step3.io.LottoInputParser;
 import step3.model.LottoNumber;
-import step3.model.LottoService;
+import step3.model.LottoMachine;
 import step3.model.dto.LottoResultDto;
 import step3.model.dto.LottosNumberDto;
 import step3.view.InputView;
@@ -17,13 +17,13 @@ public class LottoController {
     public void start() {
         InputView.printPurchasingAmount();
         int amount = Console.readInt();
-        LottoService lottoService = new LottoService(amount);
-        LottosNumberDto lottosNumberDto = lottoService.getLottoNumber();
+        LottoMachine lottoMachine = new LottoMachine(amount);
+        LottosNumberDto lottosNumberDto = lottoMachine.getLottoNumber();
         ResultView.printPurchasingLottos(lottosNumberDto);
         InputView.printWinningNumber();
         String winningNumber = Console.readLine();
         List<LottoNumber> lottoNumbers = LottoInputParser.parseToLottoNumberArray(winningNumber);
-        LottoResultDto lottoResultDto = lottoService.getLottoResult(lottoNumbers);
+        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(lottoNumbers);
         ResultView.printWinStats(lottoResultDto);
     }
 
