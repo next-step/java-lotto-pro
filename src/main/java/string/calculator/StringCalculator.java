@@ -1,6 +1,7 @@
 package string.calculator;
 
 public class StringCalculator {
+    private static final int DEFAULT_RESULT_ZERO = 0;
     private final String input;
 
     public StringCalculator(String input) {
@@ -9,7 +10,7 @@ public class StringCalculator {
 
     public int calculate() {
         if (inputNullOrEmpty()) {
-            return 0;
+            return StringCalculator.DEFAULT_RESULT_ZERO;
         }
         final String[] tokens = splitInput();
         return 0;
