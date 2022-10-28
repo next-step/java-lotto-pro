@@ -37,6 +37,10 @@ public class LottoPurchaseAmount  {
         return this.amount / LOTTO_PRICE;
     }
 
+    public double calculateEarningRatio(long earningAmount) {
+        return Math.floor((double) earningAmount / this.amount * 100) / 100.0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

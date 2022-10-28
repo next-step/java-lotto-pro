@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoLottery {
     private final List<LottoNumbers> lottoLottery;
@@ -16,6 +17,12 @@ public class LottoLottery {
             lottoLottery.add(LottoNumbers.of(lottoNumberGenerator));
         }
         return new LottoLottery(lottoLottery);
+    }
+
+    public WinningRanks checkWinningRank(WinningNumbers winningNumbers) {
+        return WinningRanks.of(this.lottoLottery.stream()
+                .map(winningNumbers::checkWinningRank)
+                .collect(Collectors.toList()));
     }
 
     public void print() {

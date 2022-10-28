@@ -38,4 +38,11 @@ class LottoPurchaseAmountTest {
         LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount("10000");
         assertThat(lottoPurchaseAmount.getQuantity()).isEqualTo(10);
     }
+    
+    @Test
+    @DisplayName("수익률 구하기")
+    void calculate_earning_amount() {
+        LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount("14000");
+        assertThat(lottoPurchaseAmount.calculateEarningRatio(5000)).isEqualTo(0.35d);
+    }
 }
