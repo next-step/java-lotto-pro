@@ -2,23 +2,29 @@ package step3;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 import step3.model.Lotto;
 import step3.model.LottoNumber;
 import step3.model.Rank;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
+    List<LottoNumber> getLottoNumbers(int... numbers) {
+
+        List<LottoNumber> lottoNumbers = new ArrayList();
+        for (int number : numbers) {
+            lottoNumbers.add(LottoNumber.valueOf(number));
+        }
+        return lottoNumbers;
+    }
 
     @Test
     @DisplayName("가격조회하면 1000을 반환")
@@ -108,8 +114,7 @@ public class LottoTest {
 
         //when
         Lotto lotto = new Lotto(numbers);
-        List<Integer> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 11, 12, 13}).boxed().collect(Collectors.toList());
-        Rank rank = lotto.getRank(winningNumbers);
+        Rank rank = lotto.getRank(getLottoNumbers(1,2,3,11,12,13));
 
         //then
         assertThat(rank).isEqualTo(Rank.FIFTH);
@@ -124,8 +129,7 @@ public class LottoTest {
                 .collect(Collectors.toList());
         //when
         Lotto lotto = new Lotto(numbers);
-        List<Integer> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 12, 13}).boxed().collect(Collectors.toList());
-        Rank rank = lotto.getRank(winningNumbers);
+        Rank rank = lotto.getRank(getLottoNumbers(1,2,3,4,12,13));
 
         //then
         assertThat(rank).isEqualTo(Rank.FOURTH);
@@ -142,7 +146,7 @@ public class LottoTest {
         //when
         Lotto lotto = new Lotto(numbers);
         List<Integer> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 13}).boxed().collect(Collectors.toList());
-        Rank rank = lotto.getRank(winningNumbers);
+        Rank rank = lotto.getRank(getLottoNumbers(1,2,3,4,5,13));
 
         //then
         assertThat(rank).isEqualTo(Rank.THIRD);
@@ -158,18 +162,16 @@ public class LottoTest {
 
         //when
         Lotto lotto = new Lotto(numbers);
-        List<Integer> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed().collect(Collectors.toList());
-        Rank rank = lotto.getRank(winningNumbers);
+        Rank rank = lotto.getRank(getLottoNumbers(1,2,3,4,5,6));
 
         //then
         assertThat(rank).isEqualTo(Rank.FIRST);
     }
 
 
-    @ParameterizedTest
-    @MethodSource("missLottoNumberProvider")
+    @Test
     @DisplayName("당첨번호가 3개 미만 일치하면 MISS값 조회")
-    void test_that_it_returns_miss_if_less_then_3_winning_number_match(List<Integer> winningNumbers) {
+    void test_that_it_returns_miss_if_less_then_3_winning_number_match() {
         //given
         List<LottoNumber> numbers = IntStream.rangeClosed(1, 6).boxed()
                 .map(LottoNumber::valueOf)
@@ -178,18 +180,12 @@ public class LottoTest {
 
         //when
         Lotto lotto = new Lotto(numbers);
-        Rank rank = lotto.getRank(winningNumbers);
+        Rank rank = lotto.getRank(getLottoNumbers(1, 2, 13, 14, 15, 16));
 
         //then
         assertThat(rank).isEqualTo(Rank.MISS);
     }
 
-    static Stream<List> missLottoNumberProvider() {
-        return Stream.of(
-                Arrays.asList(1, 2, 13, 14, 15, 16),
-                Arrays.asList(1, 22, 13, 14, 15, 16),
-                Arrays.asList(11, 12, 13, 14, 15, 16));
-    }
 
 
 }

@@ -33,11 +33,15 @@ public class Lotto {
         if (distinctNumbers.size() != NUMBER_SIZE) throw new IllegalArgumentException(NUMBER_SIZE_MESSAGE);
     }
 
-    public Rank getRank(List<Integer> winningNumbers) {
+    public Rank getRank(List<LottoNumber> winningNumbers) {
         int count = (int) numbers
                 .stream()
-                .map(lottoNumber -> lottoNumber.value())
-                .filter(winningNumbers::contains)
+                .filter(lottoNumber -> {
+                    boolean isC = winningNumbers.contains(lottoNumber);
+
+                    return isC;
+
+                })
                 .count();
         return Rank.getRankFromMatchCount(count);
     }

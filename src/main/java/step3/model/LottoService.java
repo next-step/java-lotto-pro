@@ -20,7 +20,7 @@ public class LottoService {
         this.lottos = new Lottos(LottoFactory.createLottos(size));
     }
 
-    public LottoStatusDto getRankStatus(List<Integer> winningNumbers) {
+    public LottoStatusDto getRankStatus(List<LottoNumber> winningNumbers) {
         Map<Rank, Integer> rankIntegerMap = lottos.getRankStatsOfLottos(winningNumbers);
         List<RankDto> rankDtos = Arrays.stream(Rank.values())
                 .map(rank -> new RankDto(rank, rankIntegerMap.getOrDefault(rank, 0)))

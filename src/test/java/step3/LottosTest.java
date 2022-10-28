@@ -18,12 +18,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottosTest {
 
 
-    private static List<LottoNumber> lottoNumbers = IntStream.rangeClosed(1, 6).boxed().map(number -> LottoNumber.valueOf(number)).collect(Collectors.toList());
 
     List<LottoNumber> getLottoNumbers(int... numbers) {
-        int index = 0;
+
+        List<LottoNumber> lottoNumbers = new ArrayList();
         for (int number : numbers) {
-            lottoNumbers.set(index++, LottoNumber.valueOf(number));
+            lottoNumbers.add(LottoNumber.valueOf(number));
         }
         return lottoNumbers;
     }
@@ -51,7 +51,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankStatsOfLottos(Arrays.asList(1, 2, 3, 43, 44, 45));
+        Map<Rank, Integer> rankStats = lottos.getRankStatsOfLottos(getLottoNumbers(1, 2, 3, 43, 44, 45));
 
         //then
         assertThat(rankStats.get(Rank.FIFTH)).isEqualTo(3);
@@ -68,7 +68,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankStatsOfLottos(Arrays.asList(1, 2, 3, 43, 15, 45));
+        Map<Rank, Integer> rankStats = lottos.getRankStatsOfLottos(getLottoNumbers(1, 2, 3, 43, 15, 45));
 
         //then
         assertThat(rankStats.get(Rank.FOURTH)).isEqualTo(3);
@@ -85,7 +85,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankStatsOfLottos(Arrays.asList(1, 2, 3, 43, 44, 45));
+        Map<Rank, Integer> rankStats = lottos.getRankStatsOfLottos(getLottoNumbers(1, 2, 3, 43, 44, 45));
 
         //then
         assertThat(rankStats.get(Rank.FIFTH)).isEqualTo(3);
@@ -102,7 +102,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankStatsOfLottos(Arrays.asList(1, 2, 3, 14, 15, 16));
+        Map<Rank, Integer> rankStats = lottos.getRankStatsOfLottos(getLottoNumbers(1, 2, 3, 14, 15, 16));
 
         //then
         assertThat(rankStats.get(Rank.FIRST)).isEqualTo(3);

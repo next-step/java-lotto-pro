@@ -1,7 +1,8 @@
 package step3.controller;
 
-import step2.StringParser;
 import step3.io.Console;
+import step3.io.LottoInputParser;
+import step3.model.LottoNumber;
 import step3.model.LottoService;
 import step3.model.dto.LottosNumberDto;
 import step3.view.InputView;
@@ -19,9 +20,9 @@ public class LottoController {
         LottosNumberDto lottosNumberDto = lottoService.getLottoTicketState();
         ResultView.printPurchasingLottos(lottosNumberDto);
         InputView.printWinningNumber();
-        List<Integer> winningNumbers = StringParser.parseToIntegerArray(Console.readLine());
-
-        ResultView.printWinStats(lottoService.getRankStatus(winningNumbers));
+        String winningNumber = Console.readLine();
+        List<LottoNumber> lottoNumbers = LottoInputParser.parseToLottoNumberArray(winningNumber);
+        ResultView.printWinStats(lottoService.getRankStatus(lottoNumbers));
     }
 
 

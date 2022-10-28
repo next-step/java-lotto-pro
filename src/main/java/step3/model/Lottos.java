@@ -25,10 +25,12 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    public Map<Rank, Integer> getRankStatsOfLottos(List<Integer> winningNumbers) {
+    public Map<Rank, Integer> getRankStatsOfLottos(List<LottoNumber> winningNumbers) {
         HashMap<Rank, Integer> result = new HashMap<>();
-        lottos.forEach(lottoTicket -> {
-            Rank rank = lottoTicket.getRank(winningNumbers);
+        lottos.forEach(lotto -> {
+            lotto.getNumbers();
+
+            Rank rank = lotto.getRank(winningNumbers);
             result.put(rank, result.getOrDefault(rank, 0) + 1);
         });
         return result;

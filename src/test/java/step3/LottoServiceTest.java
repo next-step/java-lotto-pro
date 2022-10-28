@@ -35,15 +35,15 @@ public class LottoServiceTest {
         mock.close();
     }
 
-    private static List<LottoNumber> lottoNumbers = IntStream.rangeClosed(1, 6).boxed().map(number -> LottoNumber.valueOf(number)).collect(Collectors.toList());
-
     List<LottoNumber> getLottoNumbers(int... numbers) {
-        int index = 0;
+
+        List<LottoNumber> lottoNumbers = new ArrayList();
         for (int number : numbers) {
-            lottoNumbers.set(index++, LottoNumber.valueOf(number));
+            lottoNumbers.add(LottoNumber.valueOf(number));
         }
         return lottoNumbers;
     }
+
 
     @ParameterizedTest
     @CsvSource(value = {"1000:1", "6000:6", "5000:5", "12000:12"}, delimiter = ':')
@@ -79,7 +79,10 @@ public class LottoServiceTest {
         mock.when(() -> LottoFactory.createLottos(anyInt()))
                 .thenReturn(lottos);
         LottoService lottoService = new LottoService(14000);
-        List<Integer> winningNumbers = Arrays.stream(new int[]{11, 22, 23, 24, 25, 26}).boxed().collect(Collectors.toList());
+        List<LottoNumber> winningNumbers = Arrays.stream(new int[]{11, 22, 23, 24, 25, 26})
+                .boxed()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
 
         //when
         LottoStatusDto lottoStatusDto = lottoService.getRankStatus(winningNumbers);
@@ -102,7 +105,9 @@ public class LottoServiceTest {
         mock.when(() -> LottoFactory.createLottos(anyInt()))
                 .thenReturn(lottos);
         LottoService lottoService = new LottoService(14000);
-        List<Integer> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed().collect(Collectors.toList());
+        List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
 
         //when
         LottoStatusDto lottoStatusDto = lottoService.getRankStatus(winningNumbers);
@@ -125,7 +130,10 @@ public class LottoServiceTest {
         mock.when(() -> LottoFactory.createLottos(anyInt()))
                 .thenReturn(lottos);
         LottoService lottoService = new LottoService(14000);
-        List<Integer> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 5, 6}).boxed().collect(Collectors.toList());
+        List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 5, 6})
+                .boxed()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
 
         //when
         LottoStatusDto lottoStatusDto = lottoService.getRankStatus(winningNumbers);
@@ -148,7 +156,10 @@ public class LottoServiceTest {
         mock.when(() -> LottoFactory.createLottos(anyInt()))
                 .thenReturn(lottos);
         LottoService lottoService = new LottoService(14000);
-        List<Integer> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 15, 6}).boxed().collect(Collectors.toList());
+        List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 15, 6})
+                .boxed()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
 
         //when
         LottoStatusDto lottoStatusDto = lottoService.getRankStatus(winningNumbers);
@@ -172,7 +183,10 @@ public class LottoServiceTest {
         mock.when(() -> LottoFactory.createLottos(anyInt()))
                 .thenReturn(lottos);
         LottoService lottoService = new LottoService(14000);
-        List<Integer> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 15, 16}).boxed().collect(Collectors.toList());
+        List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 15, 16})
+                .boxed()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
 
         //when
         LottoStatusDto lottoStatusDto = lottoService.getRankStatus(winningNumbers);
