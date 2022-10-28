@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
     private static final int DEFAULT_VALUE = 0;
     private static final String DEFAULT_DELIMITER = "[,:]";
+    private static final Pattern DEFAULT_DELIMITER_PATTERN = Pattern.compile(DEFAULT_DELIMITER);
     private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_DELIMITER_REGEX);
     private static final int MATCHER_GROUP_INDEX_FOR_DELIMITER = 1;
@@ -30,18 +31,22 @@ public class StringAddCalculator {
         Matcher m = CUSTOM_DELIMITER_PATTERN.matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(MATCHER_GROUP_INDEX_FOR_DELIMITER);
-            return m.group(MATCHER_GROUP_INDEX_FOR_TARGET_STRING).split(customDelimiter);
+            return m.group(MATCHER_GROUP_INDEX_FOR_TARGET_STRING)
+                    .split(customDelimiter);
         }
-        return text.split(DEFAULT_DELIMITER);
+        return DEFAULT_DELIMITER_PATTERN.split(text);
     }
 
     private static int sumNumbers(String[] numbers) {
         validateNumbers(numbers);
-        return Arrays.stream(numbers).mapToInt(Integer::parseInt).sum();
+        return Arrays.stream(numbers)
+                .mapToInt(Integer::parseInt)
+                .sum();
     }
 
     private static void validateNumbers(String[] numbers) {
-        boolean isPositiveNumber = Arrays.stream(numbers).allMatch(number -> number.matches(POSITIVE_NUMBER_REGEX));
+        boolean isPositiveNumber = Arrays.stream(numbers)
+                .allMatch(number -> number.matches(POSITIVE_NUMBER_REGEX));
         if (!isPositiveNumber) {
             throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE);
         }
