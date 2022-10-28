@@ -18,6 +18,10 @@ public class LottoQuantity {
         return String.format(PRINT_QUANTITY_FORMAT, this.quantity);
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
