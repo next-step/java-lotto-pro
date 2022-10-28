@@ -24,6 +24,7 @@ public class LottoServiceTest {
 
     private static MockedStatic<LottoFactory> mock;
 
+
     @ParameterizedTest
     @CsvSource(value = {"1000:1", "6000:6", "5000:5", "12000:12"}, delimiter = ':')
     @DisplayName("로또를 구매하면 구매가격만큼 컬렉션에서 로또개수를 조회")
@@ -53,6 +54,7 @@ public class LottoServiceTest {
 
         //then
         assertThat(lottoStatusDto.getWinnigPercent()).isEqualTo(Rank.FIFTH.getWinningPrice() / (double)14000);
+
         mock.close();
 
     }
