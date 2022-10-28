@@ -7,11 +7,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import step3.model.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -51,7 +48,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankStatsOfLottos(getLottoNumbers(1, 2, 3, 43, 44, 45));
+        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 43, 44, 45));
 
         //then
         assertThat(rankStats.get(Rank.FIFTH)).isEqualTo(3);
@@ -68,7 +65,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankStatsOfLottos(getLottoNumbers(1, 2, 3, 43, 15, 45));
+        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 43, 15, 45));
 
         //then
         assertThat(rankStats.get(Rank.FOURTH)).isEqualTo(3);
@@ -85,7 +82,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankStatsOfLottos(getLottoNumbers(1, 2, 3, 43, 44, 45));
+        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 43, 44, 45));
 
         //then
         assertThat(rankStats.get(Rank.FIFTH)).isEqualTo(3);
@@ -102,7 +99,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankStatsOfLottos(getLottoNumbers(1, 2, 3, 14, 15, 16));
+        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 14, 15, 16));
 
         //then
         assertThat(rankStats.get(Rank.FIRST)).isEqualTo(3);
