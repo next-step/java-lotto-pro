@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class OperandTest {
     @Nested
@@ -16,6 +17,13 @@ class OperandTest {
         @DisplayName("Operand 객체를 성공적으로 생성할 수 있다")
         void createOperand(int value) {
             assertDoesNotThrow(() -> new Operand(value));
+        }
+
+        @ParameterizedTest
+        @ValueSource(ints = {Integer.MIN_VALUE, -9999, -5, -2, -1})
+        @DisplayName("음수 값으로 Operand 객체를 생성하려고 하면 예외가 발생한다")
+        void cannotCreateOperandIfNegative(int value) {
+            assertThrows(RuntimeException.class, () -> new Operand(value));
         }
     }
 }
