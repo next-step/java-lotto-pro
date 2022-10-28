@@ -125,7 +125,7 @@ chore (maintain)
     * 위 기능을 바탕으로 3~6개가 일치하는 수 구하기
     * 총 수익률 구하기
     
-* Enum
+* Constant
   * UI에 사용되는 메세지
 
 </details>
