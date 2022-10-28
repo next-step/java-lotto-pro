@@ -1,20 +1,21 @@
 package lotto.domain.enums;
 
+import lotto.domain.Money;
 import lotto.domain.dto.StatisticDto;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000);
+    FIRST(6, new Money(2_000_000_000L)),
+    SECOND(5, new Money(1_500_000L)),
+    THIRD(4, new Money(50_000L)),
+    FOURTH(3, new Money(5_000L));
 
     private final int matchCount;
-    private final int price;
+    private final Money price;
 
-    Rank(int matchCount, int price) {
+    Rank(int matchCount, Money price) {
         this.matchCount = matchCount;
         this.price = price;
     }
@@ -32,17 +33,17 @@ public enum Rank {
         return deque.toArray(new Rank[deque.size()]);
     }
 
-    public static Long calculatePrice(StatisticDto dto) {
-        Long sum = 0L;
+    public static Money calculatePrice(StatisticDto dto) {
+        Money totalMoney = new Money(0L);
         for (Rank rank : Rank.values()) {
             int count = dto.getCount(rank.matchCount);
-            sum += (long) rank.getPrice() * count;
+            totalMoney.sum(rank.getPrice().multiply(count));
         }
 
-        return sum;
+        return totalMoney;
     }
 
-    public int getPrice() {
+    public Money getPrice() {
         return price;
     }
 

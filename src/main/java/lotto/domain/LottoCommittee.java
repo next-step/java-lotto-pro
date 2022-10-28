@@ -32,7 +32,7 @@ public class LottoCommittee {
         return winningTicket.containCount(ticket);
     }
 
-    public double returnRate(long totalReturnMoney, int money) {
-        return totalReturnMoney / money;
+    public double returnRate(Money totalReturnMoney, Money money) {
+        return totalReturnMoney.divide(money);
     }
 }

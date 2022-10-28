@@ -12,7 +12,7 @@ public class LottoMarketTest {
     @DisplayName("마켓에서 로또를 구매할 수 있다")
     @Test
     void buy_lotto_test() {
-        List<LottoTicket> tickets = LottoMarket.sell(10_000, new RandomLottoGenerator());
+        List<LottoTicket> tickets = LottoMarket.sell(new Money(10_000L), new RandomLottoGenerator());
         assertThat(tickets).hasSize(10);
     }
 }

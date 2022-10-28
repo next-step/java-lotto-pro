@@ -6,19 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMarket {
-    private static final int TICKET_PRICE = 1_000;
+    private static final Money TICKET_PRICE = new Money(1_000L);
 
-    public static List<LottoTicket> sell(int money, LottoGenerator lottoGenerator) {
+    public static List<LottoTicket> sell(Money money, LottoGenerator lottoGenerator) {
         return make(lottoGenerator, getLottoAmount(money));
     }
 
-    private static int getLottoAmount(int money) {
-        return money / TICKET_PRICE;
+    private static long getLottoAmount(Money money) {
+        return money.divide(TICKET_PRICE);
     }
 
-    private static List<LottoTicket> make(LottoGenerator lottoGenerator, int amount) {
+    private static List<LottoTicket> make(LottoGenerator lottoGenerator, long amount) {
         List<LottoTicket> tickets = new ArrayList<>();
-        for (int i = 0; i < amount; i++) {
+        for (long i = 0; i < amount; i++) {
             tickets.add(lottoGenerator.create());
         }
 
