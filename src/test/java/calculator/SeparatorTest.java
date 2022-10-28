@@ -14,8 +14,7 @@ class SeparatorTest {
     @ValueSource(strings = { "1,2,3", "1:2:3", "1,2:3" })
     void separate(String operands) {
         //when:
-        Separator separator = new Separator();
-        List<String> separatedOperands = separator.separate(operands);
+        List<String> separatedOperands = Separator.separate(operands);
         //then:
         assertThat(separatedOperands).containsSequence("1", "2", "3");
     }
@@ -24,8 +23,7 @@ class SeparatorTest {
     @ValueSource(strings = { "//!\n1!2!3", "//@\n1@2@3", "//#\n1#2#3" })
     void separateCustom(String operands) {
         //when:
-        Separator separator = new Separator();
-        List<String> separatedOperands = separator.separate(operands);
+        List<String> separatedOperands = Separator.separate(operands);
         //then:
         assertThat(separatedOperands).containsSequence("1", "2", "3");
     }
