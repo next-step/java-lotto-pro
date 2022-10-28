@@ -15,8 +15,8 @@ public class Lottos {
         int maxLottoCount = money.maxLottoCount();
         for(int i = 0; i < maxLottoCount; i++) {
             lottos.add(new Lotto(Arrays.asList(
-                    new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)
-                    , new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)))); // TODO 테스트를 위해 임시로 하드코딩(generator 사용 필요)
+                    LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3)
+                    , LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)))); // TODO 테스트를 위해 임시로 하드코딩(generator 사용 필요)
         }
         this.lottos = lottos;
     }
