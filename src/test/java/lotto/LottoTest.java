@@ -28,11 +28,4 @@ class LottoTest {
 		assertThat(new Lotto(Arrays.asList(6, 5, 4, 3, 2, 1))).isEqualTo(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
 	}
 
-	@Test
-	void 로또의_숫자_범위는_1에서_45이다() {
-		assertThatIllegalArgumentException()
-			.isThrownBy(() -> new Lotto(Arrays.asList(6, 5, 4, 3, 2, 46)))
-			.withMessage("로또의 숫자 범위는 1~45 이다.");
-	}
-
 }
