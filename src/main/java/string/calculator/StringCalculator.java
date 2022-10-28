@@ -1,7 +1,5 @@
 package string.calculator;
 
-import static org.apache.commons.lang3.StringUtils.isEmpty;
-
 public class StringCalculator {
     private final String input;
 
@@ -10,11 +8,15 @@ public class StringCalculator {
     }
 
     public int calculate() {
-        if (isEmpty(input)) {
+        if (inputNullOrEmpty()) {
             return 0;
         }
         final String[] tokens = splitInput();
         return 0;
+    }
+
+    private boolean inputNullOrEmpty() {
+        return input == null || input.isEmpty();
     }
 
     private String[] splitInput() {
