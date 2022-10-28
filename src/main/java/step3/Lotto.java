@@ -15,7 +15,7 @@ public class Lotto {
     
     public void matchCountUp(int winningNumber) {
         if(match(winningNumber)){
-            matchCount++;
+            this.matchCount++;
         }
     }
     
@@ -23,10 +23,12 @@ public class Lotto {
         return this.matchCount;
     }
     
-    public void compareMath(ArrayList<Integer> winningNumbers) {
+    public int compareMath(ArrayList<Integer> winningNumbers) {
+        this.matchCount = 0;
         for (int winningNumber: winningNumbers) {
             matchCountUp(winningNumber);
         }
+        return this.matchCount;
     }
     
     public boolean match(int winningNumber) {

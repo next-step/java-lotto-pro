@@ -45,16 +45,14 @@ public class LottoTest {
     @DisplayName("당첨번호와 같은 숫자가 몇개 있는지 검증")
     public void lotto_compare_count() {
         Lotto lotto = new Lotto(lottoNumbers);
-        lotto.compareMath(winningNumbers);
-        assertThat(lotto.getMatchCount()).isEqualTo(5);
+        assertThat(lotto.compareMath(winningNumbers)).isEqualTo(5);
     }
     
     @Test
     @DisplayName("로또 번호와 당첨번호를 비교하여 순위 및 당첨금 확인")
     void lotto_match_prize() {
         Lotto lotto = new Lotto(lottoNumbers);
-        lotto.compareMath(winningNumbers);
-        int count = lotto.getMatchCount();
+        int count = lotto.compareMath(winningNumbers);
         assertThat(Rank.getRank(count)).isEqualTo(Rank.SECOND);
         assertThat(Rank.getPrize(count)).isEqualTo(Rank.SECOND.getPrize());
     }
