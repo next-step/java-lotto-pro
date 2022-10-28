@@ -2,6 +2,8 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.LottoNumberGeneratorStrategy;
 
 public class TestLottoNumberGeneratorStrategy implements LottoNumberGeneratorStrategy {
 

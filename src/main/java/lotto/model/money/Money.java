@@ -1,7 +1,6 @@
-package lotto.money;
+package lotto.model.money;
 
 import java.util.Objects;
-import lotto.message.ErrorMessages;
 
 public class Money {
     private final double value;
@@ -16,7 +15,7 @@ public class Money {
 
     public double divide(Money money) {
         if (money.value == 0) {
-            throw new IllegalArgumentException(ErrorMessages.INVALID_DENOMINATOR_VALUE);
+            return 0;
         }
         return Math.floor((this.value / money.value) * 100) / 100;
     }

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model.lotto;
 
 import java.util.Objects;
 import lotto.constant.LottoConstant;

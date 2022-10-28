@@ -1,11 +1,11 @@
-package lotto.statistic;
+package lotto.model.statistic;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.LottoNumbers;
-import lotto.Lottos;
-import lotto.money.Money;
-import lotto.win.WinRanking;
+import lotto.model.lotto.LottoNumbers;
+import lotto.model.lotto.Lottos;
+import lotto.model.money.Money;
+import lotto.model.win.WinRanking;
 
 public class LottoStatistic {
     private final Lottos lottos;
@@ -35,8 +35,8 @@ public class LottoStatistic {
     public double profit(Money priceOfOneLotto) {
         LottoStatisticResults results = this.results();
         Money winningAmount = results.winningMoney();
-        Money purchasePrice = priceOfOneLotto.multiply(lottos.size());
-        return winningAmount.divide(purchasePrice);
+        Money purchaseAmount = priceOfOneLotto.multiply(lottos.size());
+        return winningAmount.divide(purchaseAmount);
     }
 
     public boolean isLossProfit(Money priceOfOneLotto) {

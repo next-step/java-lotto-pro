@@ -1,8 +1,8 @@
-package lotto.statistic;
+package lotto.model.statistic;
 
 import java.util.List;
-import lotto.money.Money;
-import lotto.win.WinRanking;
+import lotto.model.money.Money;
+import lotto.model.win.WinRanking;
 
 public class LottoStatisticResults {
     private final List<LottoStatisticResult> results;

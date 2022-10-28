@@ -1,12 +1,12 @@
 package lotto.view;
 
-import lotto.Lotto;
-import lotto.Lottos;
+import lotto.model.lotto.Lotto;
+import lotto.model.lotto.Lottos;
 import lotto.message.LottoMessage;
-import lotto.money.Money;
-import lotto.statistic.LottoStatistic;
-import lotto.statistic.LottoStatisticResults;
-import lotto.win.WinRanking;
+import lotto.model.money.Money;
+import lotto.model.statistic.LottoStatistic;
+import lotto.model.statistic.LottoStatisticResults;
+import lotto.model.win.WinRanking;
 
 public class ResultView {
     private ResultView() {

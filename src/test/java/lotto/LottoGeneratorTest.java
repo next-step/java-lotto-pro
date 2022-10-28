@@ -1,6 +1,10 @@
 package lotto;
 
-import lotto.money.Money;
+import lotto.model.lotto.DefaultNumberGeneratorStrategy;
+import lotto.model.lotto.LottoGenerator;
+import lotto.model.lotto.LottoNumberGenerator;
+import lotto.model.lotto.Lottos;
+import lotto.model.money.Money;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

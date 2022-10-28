@@ -1,6 +1,6 @@
-package lotto.win;
+package lotto.model.win;
 
-import lotto.money.Money;
+import lotto.model.money.Money;
 
 public enum WinRanking {
     FOURTH(3, Money.from(5000)),
@@ -15,10 +15,6 @@ public enum WinRanking {
     WinRanking(int matchCount, Money winningMoney) {
         this.matchCount = matchCount;
         this.winningMoney = winningMoney;
-    }
-
-    public static boolean isWin(int matchCount) {
-        return matchCount >= FOURTH.matchCount && matchCount <= FIRST.matchCount;
     }
 
     public int getMatchCount() {

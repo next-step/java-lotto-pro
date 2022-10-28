@@ -3,10 +3,9 @@ package lotto.win;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.Lotto;
-import lotto.LottoNumber;
-import lotto.LottoNumbers;
 import lotto.TestLottoNumberGeneratorStrategy;
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.LottoNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -31,25 +30,6 @@ class WinTest {
         );
     }
 
-    private static Stream<Arguments> winningNumbersWithWin() {
-        return Stream.of(
-                Arguments.of(TestLottoNumberGeneratorStrategy.from(
-                        Arrays.asList(1, 2, 3, 4, 5, 6)).generate(), true),
-                Arguments.of(TestLottoNumberGeneratorStrategy.from(
-                        Arrays.asList(1, 2, 3, 4, 5, 7)).generate(), true),
-                Arguments.of(TestLottoNumberGeneratorStrategy.from(
-                        Arrays.asList(1, 2, 3, 4, 7, 8)).generate(), true),
-                Arguments.of(TestLottoNumberGeneratorStrategy.from(
-                        Arrays.asList(1, 2, 3, 7, 8, 9)).generate(), true),
-                Arguments.of(TestLottoNumberGeneratorStrategy.from(
-                        Arrays.asList(1, 2, 7, 8, 9, 10)).generate(), false),
-                Arguments.of(TestLottoNumberGeneratorStrategy.from(
-                        Arrays.asList(1, 7, 8, 9, 10, 11)).generate(), false),
-                Arguments.of(TestLottoNumberGeneratorStrategy.from(
-                        Arrays.asList(7, 8, 9, 10, 11, 12)).generate(), false)
-        );
-    }
-
     @ParameterizedTest
     @CsvSource(value = {"1:true", "2:true", "7:false", "8:false", "9:false", "10:false"}, delimiter = ':')
     @DisplayName("로또번호(로또 1장)와 당첨번호 1개 비교 테스트")
@@ -67,18 +47,6 @@ class WinTest {
         LottoNumbers winningNumbers = LottoNumbers.from(input);
 
         int result = lottoNumbers.matches(winningNumbers);
-
-        Assertions.assertThat(result).isEqualTo(expected);
-    }
-
-    @ParameterizedTest
-    @MethodSource(value = "winningNumbersWithWin")
-    @DisplayName("로또가 당첨되었는지 확인")
-    void lottoWin(List<LottoNumber> input, boolean expected) {
-        Lotto lotto = Lotto.of(LottoNumbers.from(numbers), new DefaultWinPolicy());
-        LottoNumbers winningNumbers = LottoNumbers.from(input);
-
-        boolean result = lotto.isWin(winningNumbers);
 
         Assertions.assertThat(result).isEqualTo(expected);
     }

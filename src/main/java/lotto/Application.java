@@ -1,7 +1,10 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.money.Money;
+import lotto.model.lotto.DefaultNumberGeneratorStrategy;
+import lotto.model.lotto.LottoGenerator;
+import lotto.model.lotto.LottoNumberGenerator;
+import lotto.model.money.Money;
 
 public class Application {
     public static void main(String[] args) {
