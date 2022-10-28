@@ -1,5 +1,9 @@
 package lotto;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoList;
+import lotto.domain.Money;
+import lotto.domain.Rank;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
