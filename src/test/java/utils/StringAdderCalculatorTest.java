@@ -14,14 +14,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class StringAdderCalculatorTest {
 
-	private static Stream<Arguments> provideCustomDelimiterNumbers() {
-		return Stream.of(
-			Arguments.of("//;\n1;2;4", 7),
-			Arguments.of("//@\n1@2@4", 7),
-			Arguments.of("//#\n1#2#4", 7)
-		);
-	}
-
 	@ParameterizedTest
 	@ValueSource(strings = {"", " "})
 	void 빈_문자열을_전달할_경우_0을_반환한다(String 빈_문자열) {
@@ -86,5 +78,13 @@ class StringAdderCalculatorTest {
 
 	private int 정수_변환(String literalInteger) {
 		return Integer.parseInt(literalInteger);
+	}
+
+	private static Stream<Arguments> provideCustomDelimiterNumbers() {
+		return Stream.of(
+			Arguments.of("//;\n1;2;4", 7),
+			Arguments.of("//@\n1@2@4", 7),
+			Arguments.of("//#\n1#2#4", 7)
+		);
 	}
 }
