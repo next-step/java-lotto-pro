@@ -9,9 +9,7 @@ public class StringAddCalculator {
     public static int splitAndSum(String target) {
         initSum();
 
-        if(isNullOrEmpty(target)) {
-            return sum;
-        }
+        isNullOrEmpty(target);
 
 
         if(target.length() == 1) {
@@ -54,7 +52,9 @@ public class StringAddCalculator {
         sum = 0;
     }
 
-    private static boolean isNullOrEmpty(String target) {
-        return target == null || target.isEmpty();
+    private static void isNullOrEmpty(String target) {
+        if(target == null || target.isEmpty()) {
+            sum = 0;
+        }
     }
 }
