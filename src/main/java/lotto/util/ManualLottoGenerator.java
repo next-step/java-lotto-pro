@@ -4,10 +4,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class ManualLottoGenerator implements LottoGenerator {
     private final List<Integer> numbers;
