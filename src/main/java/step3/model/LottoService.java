@@ -1,6 +1,6 @@
 package step3.model;
 
-import step3.model.dto.LottoStatusDto;
+import step3.model.dto.LottoResultDto;
 import step3.model.dto.LottosNumberDto;
 import step3.model.dto.RankDto;
 
@@ -20,12 +20,12 @@ public class LottoService {
         this.lottos = new Lottos(LottoFactory.createLottos(size));
     }
 
-    public LottoStatusDto getRankStatus(List<LottoNumber> winningNumbers) {
+    public LottoResultDto getRankStatus(List<LottoNumber> winningNumbers) {
         Map<Rank, Integer> rankIntegerMap = lottos.getRankStatsOfLottos(winningNumbers);
         List<RankDto> rankDtos = Arrays.stream(Rank.values())
                 .map(rank -> new RankDto(rank, rankIntegerMap.getOrDefault(rank, 0)))
                 .collect(Collectors.toList());
-        return new LottoStatusDto(rankDtos, purchasePrice);
+        return new LottoResultDto(rankDtos, purchasePrice);
     }
 
     public LottosNumberDto getLottoTicketState() {

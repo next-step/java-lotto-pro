@@ -5,11 +5,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoStatusDto {
+public class LottoResultDto {
     private final List<RankDto> ranks;
     private final int price;
 
-    public LottoStatusDto(List<RankDto> ranks, int price) {
+    public LottoResultDto(List<RankDto> ranks, int price) {
         this.ranks = ranks;
         this.price = price;
     }

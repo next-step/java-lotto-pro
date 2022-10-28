@@ -1,7 +1,7 @@
 package step3.view;
 
 
-import step3.model.dto.LottoStatusDto;
+import step3.model.dto.LottoResultDto;
 import step3.model.dto.LottosNumberDto;
 import step3.model.dto.RankDto;
 
@@ -17,7 +17,7 @@ public class ResultView {
     }
 
 
-    public static void printWinStats(LottoStatusDto statusDto) {
+    public static void printWinStats(LottoResultDto statusDto) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");

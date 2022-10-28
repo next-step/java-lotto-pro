@@ -8,14 +8,13 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.MockedStatic;
 import step3.model.*;
-import step3.model.dto.LottoStatusDto;
+import step3.model.dto.LottoResultDto;
 import step3.model.dto.LottosNumberDto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -85,10 +84,10 @@ public class LottoServiceTest {
                 .collect(Collectors.toList());
 
         //when
-        LottoStatusDto lottoStatusDto = lottoService.getRankStatus(winningNumbers);
+        LottoResultDto lottoResultDto = lottoService.getRankStatus(winningNumbers);
 
         //then
-        assertThat(lottoStatusDto.getWinnigPercent()).isEqualTo((Rank.MISS.getWinningPrice() * count) / (double) 14000);
+        assertThat(lottoResultDto.getWinnigPercent()).isEqualTo((Rank.MISS.getWinningPrice() * count) / (double) 14000);
 
     }
 
@@ -110,10 +109,10 @@ public class LottoServiceTest {
                 .collect(Collectors.toList());
 
         //when
-        LottoStatusDto lottoStatusDto = lottoService.getRankStatus(winningNumbers);
+        LottoResultDto lottoResultDto = lottoService.getRankStatus(winningNumbers);
 
         //then
-        assertThat(lottoStatusDto.getWinnigPercent()).isEqualTo((Rank.FIFTH.getWinningPrice() * count) / (double) 14000);
+        assertThat(lottoResultDto.getWinnigPercent()).isEqualTo((Rank.FIFTH.getWinningPrice() * count) / (double) 14000);
 
     }
 
@@ -136,10 +135,10 @@ public class LottoServiceTest {
                 .collect(Collectors.toList());
 
         //when
-        LottoStatusDto lottoStatusDto = lottoService.getRankStatus(winningNumbers);
+        LottoResultDto lottoResultDto = lottoService.getRankStatus(winningNumbers);
 
         //then
-        assertThat(lottoStatusDto.getWinnigPercent()).isEqualTo((Rank.FOURTH.getWinningPrice() * count) / (double) 14000);
+        assertThat(lottoResultDto.getWinnigPercent()).isEqualTo((Rank.FOURTH.getWinningPrice() * count) / (double) 14000);
 
     }
 
@@ -162,10 +161,10 @@ public class LottoServiceTest {
                 .collect(Collectors.toList());
 
         //when
-        LottoStatusDto lottoStatusDto = lottoService.getRankStatus(winningNumbers);
+        LottoResultDto lottoResultDto = lottoService.getRankStatus(winningNumbers);
 
         //then
-        assertThat(lottoStatusDto.getWinnigPercent()).isEqualTo((Rank.THIRD.getWinningPrice() * count) / (double) 14000);
+        assertThat(lottoResultDto.getWinnigPercent()).isEqualTo((Rank.THIRD.getWinningPrice() * count) / (double) 14000);
 
     }
 
@@ -189,10 +188,10 @@ public class LottoServiceTest {
                 .collect(Collectors.toList());
 
         //when
-        LottoStatusDto lottoStatusDto = lottoService.getRankStatus(winningNumbers);
+        LottoResultDto lottoResultDto = lottoService.getRankStatus(winningNumbers);
 
         //then
-        assertThat(lottoStatusDto.getWinnigPercent()).isEqualTo((Rank.FIRST.getWinningPrice() * count) / (double) 14000);
+        assertThat(lottoResultDto.getWinnigPercent()).isEqualTo((Rank.FIRST.getWinningPrice() * count) / (double) 14000);
 
     }
 
