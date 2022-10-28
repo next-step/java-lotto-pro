@@ -3,6 +3,7 @@ package step3;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mockStatic;
 
@@ -187,6 +189,20 @@ public class LottoServiceTest {
 
         //then
         assertThat(lottoResultDto.getWinnigPercent()).isEqualTo((Rank.TWO.getWinningPrice() * count) / (double) 14000);
+
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 14, 15,6})
+    @DisplayName("보너스 번호가 다른번호와 중복될 경우 예외발생")
+    void test_that_it_throw_exception_if_bonus_number_duplicate_with_winningnumber(int count) {
+        //given
+        LottoService lottoService = new LottoService(14000);
+
+        //when,then
+        assertThatThrownBy(() -> lottoService.getLottoResult(getLottoNumbers(1, 2, 3, 14, 15, 6), LottoNumber.valueOf(count)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("보너스번호는 유일한 번호만 허용합니다");
 
     }
 

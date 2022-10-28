@@ -23,7 +23,7 @@ public class LottoController {
         InputView.printWinningNumber();
         String winningNumber = Console.readLine();
         List<LottoNumber> lottoNumbers = LottoInputParser.parseToLottoNumberArray(winningNumber);
-        LottoResultDto lottoResultDto = lottoService.getLottoResult(lottoNumbers);
+        LottoResultDto lottoResultDto = lottoService.getLottoResult(lottoNumbers,LottoNumber.valueOf(Console.readInt()));
         ResultView.printWinStats(lottoResultDto);
     }
 
