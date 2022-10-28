@@ -1,6 +1,6 @@
-package lotto.purchase.validation;
+package lotto.lottonumber.purchase.validation;
 
-import static lotto.purchase.validation.PurchaseValidator.ERROR_NUMBER_MESSAGE;
+import static lotto.lottonumber.purchase.validation.PurchaseValidator.ERROR_NUMBER_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 

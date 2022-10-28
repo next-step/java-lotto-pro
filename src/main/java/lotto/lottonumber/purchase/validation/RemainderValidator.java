@@ -1,13 +1,14 @@
-package lotto.purchase.validation;
+package lotto.lottonumber.purchase.validation;
+
+import static lotto.lottonumber.purchase.Purchase.LOTTO_COST;
 
 public class RemainderValidator implements PurchaseValidator {
 
-    private static final int BASE_VALUE = 1000;
     private static final int REMAINDER_VALUE = 0;
 
     @Override
     public void validate(String purchase) {
-        if (Integer.parseInt(purchase) % BASE_VALUE != REMAINDER_VALUE) {
+        if (Integer.parseInt(purchase) % LOTTO_COST != REMAINDER_VALUE) {
             throw new IllegalArgumentException(ERROR_REMAINDER_MESSAGE);
         }
     }

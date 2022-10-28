@@ -1,4 +1,4 @@
-package lotto.purchase.validation;
+package lotto.lottonumber.purchase.validation;
 
 import java.util.regex.Pattern;
 

@@ -1,4 +1,4 @@
-package lotto.purchase.validation;
+package lotto.lottonumber.purchase.validation;
 
 public interface PurchaseValidator {
 
