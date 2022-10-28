@@ -8,5 +8,8 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    // 당첨여부를 확인하는 역할
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }

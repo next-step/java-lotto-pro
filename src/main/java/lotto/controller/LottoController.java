@@ -7,10 +7,15 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
+    private final LottoGame lottoGame;
+
+    public LottoController(LottoGame lottoGame) {
+        this.lottoGame = lottoGame;
+    }
+
     public void startLotto() {
-        int money = InputView.getLottoPurchasePrice();
-        LottoGame lottoGame = new LottoGame();
-        LottoTickets lottoTickets = lottoGame.buy(money);
+        LottoTickets lottoTickets = lottoGame.buy(InputView.getLottoPurchasePrice());
         OutputView.lottoPurchaseCount(lottoTickets.ticketCount());
+        OutputView.lottoPurchasePrint(lottoTickets.toString());
     }
 }

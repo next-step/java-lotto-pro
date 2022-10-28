@@ -8,14 +8,19 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
-        if (isRangeLottoNumber(number)) {
-            throw new IllegalArgumentException("로또 번호는 1~45 까지만 입력 가능합니다.");
-        }
+        checkRangeLottoNumber(number);
         this.number = number;
     }
 
-    private boolean isRangeLottoNumber(int number) {
-        return number < MIN_LOTTO_NUMBER || MAX_LOTTO_NUMBER < number;
+    private void checkRangeLottoNumber(int number) {
+        if (number < MIN_LOTTO_NUMBER || MAX_LOTTO_NUMBER < number) {
+            throw new IllegalArgumentException("로또 번호는 1~45 까지만 입력 가능합니다.");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 
 }

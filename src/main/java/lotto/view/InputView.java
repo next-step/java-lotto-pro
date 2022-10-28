@@ -9,6 +9,10 @@ public class InputView {
     private static final String ENTER_PURCHASE_AMOUNT = "구매금액을 입력해 주세요.";
     private static final Scanner SCANNER = new Scanner(System.in);
 
+    private InputView() {
+
+    }
+
     public static int getLottoPurchasePrice() {
         System.out.println(ENTER_PURCHASE_AMOUNT);
         int purchasePrice;
