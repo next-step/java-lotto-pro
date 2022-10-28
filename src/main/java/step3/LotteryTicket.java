@@ -1,18 +1,16 @@
 package step3;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class LotteryTicket {
     private final List<Lotto> lotteryTicket = new ArrayList<>();
-    private final ArrayList<Integer> winningNumbers;
+    private final Payment payment;
     
-    public LotteryTicket(ArrayList<Integer> winningNumbers) {
-        this.winningNumbers = winningNumbers;
+    public LotteryTicket(Payment payment) {
+        this.payment = payment;
     }
-
+    
     public List<Lotto> getLotteryTicket() {
         return this.lotteryTicket;
     }
@@ -21,22 +19,8 @@ public class LotteryTicket {
         this.lotteryTicket.add(lotto);
     }
     
-    public Map<Rank, Integer> countByRank() {
-        Map<Rank, Integer> countByRank = new HashMap<>();
-        for (Lotto lotto: this.lotteryTicket) {
-            countByRank.merge(Rank.getRank(lotto.compareMath(this.winningNumbers)), 1 , Integer::sum);
-        }
-        
-        return countByRank;
+    public Payment getPayment() {
+        return this.payment;
     }
-    
-    public long totalPrize() {
-        long totalPrize = 0;
-        Map<Rank, Integer> countByRank = countByRank();
-        for (Rank rank : countByRank.keySet()) {
-            totalPrize += countByRank.get(rank) * rank.getPrize();
-        }
-        
-        return totalPrize;
-    }
+
 }

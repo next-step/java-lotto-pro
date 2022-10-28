@@ -11,12 +11,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
     private static ArrayList<Integer> lottoNumbers;
-    private static ArrayList<Integer> winningNumbers;
+    private static WinningNumber winningNumber;
     
     @BeforeAll
     static void beforeAll() {
         lottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        winningNumbers = new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7));
+        winningNumber = new WinningNumber("2, 3, 4, 5, 6, 7");
     }
     
     @Test
@@ -45,14 +45,14 @@ public class LottoTest {
     @DisplayName("당첨번호와 같은 숫자가 몇개 있는지 검증")
     public void lotto_compare_count() {
         Lotto lotto = new Lotto(lottoNumbers);
-        assertThat(lotto.compareMath(winningNumbers)).isEqualTo(5);
+        assertThat(lotto.compareMath(winningNumber)).isEqualTo(5);
     }
     
     @Test
     @DisplayName("로또 번호와 당첨번호를 비교하여 순위 및 당첨금 확인")
     void lotto_match_prize() {
         Lotto lotto = new Lotto(lottoNumbers);
-        int count = lotto.compareMath(winningNumbers);
+        int count = lotto.compareMath(winningNumber);
         assertThat(Rank.getRank(count)).isEqualTo(Rank.SECOND);
         assertThat(Rank.getPrize(count)).isEqualTo(Rank.SECOND.getPrize());
     }

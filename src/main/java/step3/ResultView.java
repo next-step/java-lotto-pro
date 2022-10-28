@@ -14,11 +14,8 @@ public class ResultView {
     private static final String RESULT_STAT_NEGATIVE_CONCLUSION = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String RESULT_STAT_EQUAL_CONCLUSION = "(기준이 1이기 때문에 결과적으로 본전이라는 의미임)";
     
-    public void resultPayment(int count) {
-        System.out.printf(RESULT_COUNT,count);
-    }
-    
     public void resultLotteryTicket(LotteryTicket lotteryTicket) {
+        System.out.printf(RESULT_COUNT,lotteryTicket.getPayment().getLottoCount());
         List<Lotto> lottos = lotteryTicket.getLotteryTicket();
         for (Lotto lotto: lottos) {
             String lottoNumber = lotto.numberToString();
@@ -26,21 +23,24 @@ public class ResultView {
         }
     }
     
-    public void resultStatistics(LotteryTicket lotteryTicket, int payment) {
+    public void resultStatistics(Statistics statistics, Payment payment) {
         System.out.println(RESULT_STAT_TITLE);
         System.out.println(RESULT_STAT_LINE);
+        resultStatisticsContents(statistics);
         
-        Map<Rank, Integer> countByRank = lotteryTicket.countByRank();
-        for( Rank rank : countByRank.keySet() ){
-            System.out.printf(RESULT_STAT_CONTENTS, rank.getCount(), rank.getPrize(), countByRank.get(rank));
-        }
+        double ratio = (double)statistics.totalPrize() / payment.getPayment();
         
-        double ratio = (double)lotteryTicket.totalPrize() / payment;
         System.out.printf(RESULT_STAT_RATIO, ratio);
         if(ratio > 1) { System.out.println(RESULT_STAT_POSITIVE_CONCLUSION);}
         if(ratio < 1) { System.out.println(RESULT_STAT_NEGATIVE_CONCLUSION);}
         if(ratio == 1) { System.out.println(RESULT_STAT_EQUAL_CONCLUSION);}
-        
+    }
+    
+    private void resultStatisticsContents(Statistics statistics) {
+        Map<Rank, Integer> countByRank = statistics.countByRank();
+        for( Rank rank : countByRank.keySet() ){
+            System.out.printf(RESULT_STAT_CONTENTS, rank.getCount(), rank.getPrize(), countByRank.get(rank));
+        }
     }
     
 }

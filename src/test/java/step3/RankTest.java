@@ -35,5 +35,4 @@ public class RankTest {
     void rank_match_count_multi(int input, long expected) {
         assertThat(Rank.getRank(input).getPrize()).isEqualTo(expected);
     }
-
 }

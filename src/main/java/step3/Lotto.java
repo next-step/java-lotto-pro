@@ -1,6 +1,5 @@
 package step3;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -25,11 +24,9 @@ public class Lotto {
         return this.matchCount;
     }
     
-    public int compareMath(ArrayList<Integer> winningNumbers) {
+    public int compareMath(WinningNumber winningNumber) {
         this.matchCount = 0;
-        for (int winningNumber: winningNumbers) {
-            matchCountUp(winningNumber);
-        }
+        winningNumber.getWinningNumbers().forEach(this::matchCountUp);
         return this.matchCount;
     }
     
