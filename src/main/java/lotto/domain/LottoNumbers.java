@@ -2,21 +2,22 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    public LottoNumbers(List<Integer> lottoNumbers) {
         validLottoNumber(lottoNumbers);
-        this.lottoNumbers.addAll(lottoNumbers);
+        this.lottoNumbers = lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toList());
     }
 
     public int size() {
         return this.lottoNumbers.size();
     }
 
-    private void validLottoNumber(List<LottoNumber> lottoNumbers) {
+    private void validLottoNumber(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호 입력은 6개의 숫자로 이루어져야 합니다.");
         }

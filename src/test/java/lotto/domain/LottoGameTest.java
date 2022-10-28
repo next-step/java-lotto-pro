@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("로또 게임 테스트")
 class LottoGameTest {
 
     @DisplayName("로또 구입 실패")

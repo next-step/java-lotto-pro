@@ -14,11 +14,7 @@ class LottoNumbersTest {
     @DisplayName("로또 번호를 생성할 수 있다.")
     @Test
     void lotto_number_generated() {
-        // TODO: 이부분 테스트 코드 수정 필요
-        List<LottoNumber> lottoNumberList = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-
-        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lottoNumbers.size()).isEqualTo(6);
     }
 
@@ -30,14 +26,9 @@ class LottoNumbersTest {
     @DisplayName("로또는 6개의 숫자로 이루어져야 한다.")
     @Test
     void 로또_번호_범위_오류() {
-        // TODO: 이부분 테스트 코드 수정 필요
-        List<LottoNumber> small = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5));
-        List<LottoNumber> big = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6), new LottoNumber(7));
-        assertThatThrownBy(() -> new LottoNumbers(small))
+        assertThatThrownBy(() -> new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5)))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new LottoNumbers(big))
+        assertThatThrownBy(() -> new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

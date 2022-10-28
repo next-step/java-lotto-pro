@@ -21,6 +21,7 @@ public class LottoGame {
         // TODO: 로또 생성
         List<LottoTicket> lottoTicketList = new ArrayList<>();
         for (int i = 0; i <ticketCount; i++) {
+            // TODO: 티켓에 로또 번호 넣기
         }
         return new LottoTickets(lottoTicketList);
     }
