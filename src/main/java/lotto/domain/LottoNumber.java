@@ -41,8 +41,8 @@ public class LottoNumber {
     }
 
     private void validateRange(Integer number) {
-        if (number > 45 || number < 0) {
-            throw new IllegalStateException();
+        if (number > END_NUMBER || number < BEGIN_NUMBER) {
+            throw new IllegalStateException("유효한 숫자 범위가 아닙니다.");
         }
     }
 

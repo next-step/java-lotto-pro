@@ -16,9 +16,9 @@ class LottoNumberTest {
             .isInstanceOf(IllegalStateException.class);
         assertThatThrownBy(() -> new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
             .isInstanceOf(IllegalStateException.class);
-        assertThatThrownBy(() -> new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 50)))
+        assertThatThrownBy(() -> new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 46)))
             .isInstanceOf(IllegalStateException.class);
-        assertThatThrownBy(() -> new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, -1)))
+        assertThatThrownBy(() -> new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 0)))
             .isInstanceOf(IllegalStateException.class);
         assertDoesNotThrow(() -> new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }

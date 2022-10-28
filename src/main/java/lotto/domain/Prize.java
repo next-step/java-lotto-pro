@@ -17,6 +17,14 @@ public enum Prize {
         this.prizeMoney = prizeMoney;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getSumOfMoney(int count) {
+        return prizeMoney * count;
+    }
+
     public static Prize of(int matchCount) {
         return Arrays.stream(Prize.values())
             .filter(winPrize -> winPrize.matchCount == matchCount)

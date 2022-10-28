@@ -10,10 +10,11 @@ public class Lotto {
     public static final int PRICE = 1000;
     private final List<LottoNumber> purchaseLottoList;
 
-    public Lotto(int purchaseMoney) {
+    public Lotto(String purchaseMoney) {
         //todo money 객체화
-        validateMoney(purchaseMoney);
-        int count = purchaseMoney / PRICE;
+        int money = Integer.parseInt(purchaseMoney);
+        validateMoney(money);
+        int count = money / PRICE;
         this.purchaseLottoList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             purchaseLottoList.add(new LottoNumber(LottoUtil.generate()));
