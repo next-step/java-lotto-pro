@@ -89,6 +89,23 @@ public class LottosTest {
     }
 
     @Test
+    @DisplayName("2등이 당첨될 경우 당첨됫 횟수를 조회")
+    void test_that_it_returns_count_of_winning_if_2rd() {
+        //given
+        List<Lotto> lottoNumbers = new ArrayList();
+        lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
+        lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
+        lottoNumbers.add(new Lotto(getLottoNumbers(1, 11, 33, 2, 35, 3)));
+        Lottos lottos = new Lottos(lottoNumbers);
+
+        //when
+        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 14, 15, 45),LottoNumber.valueOf(16));
+
+        //then
+        assertThat(rankStats.get(Rank.TWO)).isEqualTo(1);
+    }
+
+    @Test
     @DisplayName("1등이 당첨될 경우 당첨됫 횟수를 조회")
     void test_that_it_returns_count_of_winning_if_1rd() {
         //given

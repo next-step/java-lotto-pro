@@ -21,7 +21,7 @@ public class Lottos {
 
     public List<List<LottoNumber>> getNumbersOfLottos() {
         return lottos.stream()
-                .map(lotto -> lotto.getNumbers())
+                .map(Lotto::getNumbers)
                 .collect(Collectors.toList());
     }
 
@@ -29,6 +29,15 @@ public class Lottos {
         HashMap<Rank, Integer> result = new HashMap<>();
         lottos.forEach(lotto -> {
             Rank rank = lotto.getRank(winningNumbers);
+            result.put(rank, result.getOrDefault(rank, 0) + 1);
+        });
+        return result;
+    }
+
+    public Map<Rank, Integer> getRankOfLottos(List<LottoNumber> winningNumbers,LottoNumber bonusNumber) {
+        HashMap<Rank, Integer> result = new HashMap<>();
+        lottos.forEach(lotto -> {
+            Rank rank = lotto.getRank(winningNumbers,bonusNumber);
             result.put(rank, result.getOrDefault(rank, 0) + 1);
         });
         return result;
