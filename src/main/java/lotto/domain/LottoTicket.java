@@ -23,15 +23,17 @@ public class LottoTicket {
         }
     }
 
-    public List<Integer> getNumbers() {
-        return this.lottoNumbers.stream()
-                .map(number -> number.getNumber())
-                .collect(Collectors.toList());
-    }
-
     public int containCount(LottoTicket ticket) {
         return (int) lottoNumbers.stream()
                 .filter(v -> ticket.lottoNumbers.contains(v))
                 .count();
+    }
+
+    @Override
+    public String toString() {
+        String result = lottoNumbers.stream()
+                .map(v -> v.toString())
+                .collect(Collectors.joining(", "));
+        return "[" + result + "]";
     }
 }

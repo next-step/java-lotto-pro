@@ -15,7 +15,7 @@ public class ResultView {
         System.out.println(tickets.size() + "개를 구매했습니다.");
 
         for (LottoTicket ticket : tickets) {
-            System.out.println(ticket.getNumbers());
+            System.out.println(ticket.toString());
         }
 
         System.out.println();
@@ -31,7 +31,7 @@ public class ResultView {
 
         for (Rank rank : Rank.reverseValues()) {
             int matchCount = rank.getMatchCount();
-            System.out.printf("%d개 일치 (%d원) - %d개\n", matchCount, rank.getPrice(), dto.getCount(matchCount));
+            System.out.printf("%d개 일치 (%d원) - %d개\n", matchCount, rank.getPriceValue(), dto.getCount(matchCount));
         }
     }
 

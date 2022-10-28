@@ -18,6 +18,10 @@ public class Money {
         }
     }
 
+    public long value() {
+        return this.value;
+    }
+
     public long divide(Money price) {
         return value / price.value;
     }

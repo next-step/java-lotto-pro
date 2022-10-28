@@ -47,6 +47,10 @@ public enum Rank {
         return price;
     }
 
+    public Long getPriceValue() {
+        return price.value();
+    }
+
     public int getMatchCount() {
         return matchCount;
     }
