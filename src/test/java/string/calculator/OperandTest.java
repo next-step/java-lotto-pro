@@ -13,17 +13,17 @@ class OperandTest {
     @DisplayName("Operand 생성자 테스트")
     class OperandConstructor {
         @ParameterizedTest
-        @ValueSource(ints = {0, 1, 20, 5555, Integer.MAX_VALUE})
+        @ValueSource(strings = {"0", "1", "20", "5555", "2147483647"})
         @DisplayName("Operand 객체를 성공적으로 생성할 수 있다")
-        void createOperand(int value) {
-            assertDoesNotThrow(() -> new Operand(value));
+        void createOperand(String token) {
+            assertDoesNotThrow(() -> new Operand(token));
         }
 
         @ParameterizedTest
-        @ValueSource(ints = {Integer.MIN_VALUE, -9999, -5, -2, -1})
+        @ValueSource(strings = {"-2147483648", "-9999", "-5", "-2", "-1"})
         @DisplayName("음수 값으로 Operand 객체를 생성하려고 하면 예외가 발생한다")
-        void cannotCreateOperandIfNegative(int value) {
-            assertThrows(RuntimeException.class, () -> new Operand(value));
+        void cannotCreateOperandIfNegative(String token) {
+            assertThrows(RuntimeException.class, () -> new Operand(token));
         }
     }
 }
