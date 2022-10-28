@@ -12,4 +12,8 @@ public class LottoList {
     public long getAllPrize() {
         return lottoList.stream().map(Lotto::getPrize).mapToInt(Integer::intValue).sum();
     }
+
+    public double getReturnRate() {
+        return (double)getAllPrize() / lottoList.size() * Money.LOTTO_PRICE;
+    }
 }
