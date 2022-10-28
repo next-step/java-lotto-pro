@@ -40,6 +40,14 @@ public class RankTest {
     }
 
     @Test
+    @DisplayName("valueOf값이 5이면서 보너스값이 true이면 TWO 반환")
+    void test_that_it_returns_rank_at_match_count_5_and_bonus_value_true() {
+        //then
+        assertThat(Rank.valueOf(5,true)).isEqualTo(Rank.TWO);
+    }
+
+
+    @Test
     @DisplayName("valueOf값이 6이면 FIRST 반환")
     void test_that_it_returns_rank_at_match_count_6() {
         //then
