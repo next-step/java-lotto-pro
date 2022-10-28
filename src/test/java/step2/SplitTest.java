@@ -2,6 +2,7 @@ package step2;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.in;
 
 import calculator.Split;
 import org.junit.jupiter.api.DisplayName;
@@ -16,9 +17,9 @@ public class SplitTest {
     //given
     String input = "";
     //when
-    Split result = new Split(input);
+    String[] result = Split.getStringArray(input);
     //then
-    assertThat(result.getStringArray()).isEqualTo(new String[] {});
+    assertThat(result).isEqualTo(new String[] {});
   }
 
   @DisplayName(" ',' 또는 ':' 기본 구분자로 입력할 경우 분리되는지 확인")
@@ -27,9 +28,9 @@ public class SplitTest {
     //given
     String input = "1,2:3";
     //when
-    Split result = new Split(input);
+    String[] result = Split.getStringArray(input);
     //then
-    assertThat(result.getStringArray()).isEqualTo(new String[] { "1", "2", "3" });
+    assertThat(result).isEqualTo(new String[] { "1", "2", "3" });
   }
 
   @DisplayName(" 커스텀 구분자로 입력할 경우 분리되는지 확인")
@@ -38,13 +39,8 @@ public class SplitTest {
     //given
     String input = "//;\n1;2;3";
     //when
-    Split result = new Split(input);
+    String[] result = Split.getStringArray(input);
     //then
-    assertThat(result.getStringArray()).isEqualTo(new String[] { "1", "2", "3" });
+    assertThat(result).isEqualTo(new String[] { "1", "2", "3" });
   }
-
-
-
-
-
 }

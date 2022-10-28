@@ -10,13 +10,7 @@ public class Split {
   private static final int CUSTOM_PATTERN_DELIMITER_INDEX = 1;
   private static final int CUSTOM_PATTERN_TEXT_INDEX = 2;
 
-  private String[] stringArray;
-
-  public Split(String input) {
-    this.stringArray = parseInput(input);
-  }
-
-  public boolean isValidInput(String input) {
+  private static  boolean isValidInput(String input) {
 
     if(input == null || input.isEmpty()) {
       return false;
@@ -25,7 +19,7 @@ public class Split {
     return true;
   }
 
-  private String[] parseInput(String input) {
+  private static  String[] parseInput(String input) {
 
     if(!isValidInput(input)) {
       return new String[]{};
@@ -41,8 +35,8 @@ public class Split {
     return input.split(DEFAULT_SPLIT_SEPARATORS);
   }
 
-  public String[] getStringArray() {
-    return stringArray;
+  public static String[] getStringArray(String input) {
+    return parseInput(input);
   }
 
 }

@@ -7,15 +7,11 @@ public class StringSum {
 
   private int sum;
 
-  public int getSum() {
-    return sum;
+  public static int getStringSum(String[] stringArray) {
+    return sum(stringArray);
   }
 
-  public StringSum(String[] stringArray) {
-    this.sum = sum(stringArray);
-  }
-
-  public int sum(String[] stringArray) {
+  private static int sum(String[] stringArray) {
 
     int sum = 0;
 
@@ -26,7 +22,7 @@ public class StringSum {
     return sum;
   }
 
-  private int convertIntValue(String input) {
+  private static  int convertIntValue(String input) {
 
     try {
       int intValue = Integer.parseInt(input);

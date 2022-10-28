@@ -3,13 +3,10 @@ package calculator;
 public class StringAddCalculator {
 
   public static int splitAndSum(String input) {
-    Split split = new Split(input);
 
-    String[] stringArray = split.getStringArray();
+    String[] stringArray = Split.getStringArray(input);
 
-    StringSum stringSum = new StringSum(stringArray);
-
-    return stringSum.getSum();
+    return StringSum.getStringSum(stringArray);
   }
 
 }

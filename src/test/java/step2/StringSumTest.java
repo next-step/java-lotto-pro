@@ -19,7 +19,7 @@ public class StringSumTest {
     //when, then
     assertThatThrownBy(
         () -> {
-          StringSum result = new StringSum(input);
+          int result = StringSum.getStringSum(input);
         }
     ).isInstanceOf(RuntimeException.class)
         .hasMessageContaining(ERROR_MESSAGE_BY_NOT_INT_VALUE);
@@ -33,7 +33,7 @@ public class StringSumTest {
     //when, then
     assertThatThrownBy(
         () -> {
-          StringSum result = new StringSum(input);
+          int result = StringSum.getStringSum(input);
         }
     ).isInstanceOf(RuntimeException.class)
         .hasMessageContaining(ERROR_MESSAGE_BY_NEGATIVE_INT_VALUE);
@@ -45,9 +45,9 @@ public class StringSumTest {
     //given
     String[] input = {"1", "2", "3", "4"};
     //when
-    StringSum result = new StringSum(input);
+    int result = StringSum.getStringSum(input);
     //then
-    assertThat(result.getSum()).isEqualTo(10);
+    assertThat(result).isEqualTo(10);
   }
 
 }
