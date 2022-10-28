@@ -31,4 +31,13 @@ public class RankTest {
     void price_test() {
         assertThat(Rank.FIRST.getPrice()).isEqualTo(2_000_000_000);
     }
+
+    @DisplayName("전체 랭크에 따른 수입을 계산할 수 있다")
+    @Test
+    void calculate_price_test() {
+        StatisticDto dto = StatisticDto.create();
+        dto.add(Rank.FIRST.getMatchCount());
+
+        assertThat(Rank.calculatePrice(dto)).isEqualTo(Rank.FIRST.getPrice());
+    }
 }

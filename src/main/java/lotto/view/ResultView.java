@@ -34,4 +34,8 @@ public class ResultView {
             System.out.printf("%d개 일치 (%d원) - %d개\n", matchCount, rank.getPrice(), dto.getCount(matchCount));
         }
     }
+
+    public static void printReturnRate(double returnRate) {
+        System.out.printf("총 수익률은 %.2f입니다.", returnRate);
+    }
 }

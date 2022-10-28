@@ -29,4 +29,8 @@ public class LottoCommittee {
     private int countOfMatch(LottoTicket ticket) {
         return winningTicket.containCount(ticket);
     }
+
+    public double returnRate(long totalReturnMoney, int money) {
+        return totalReturnMoney / money;
+    }
 }

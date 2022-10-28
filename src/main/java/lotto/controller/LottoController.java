@@ -1,8 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoCommittee;
-import lotto.domain.LottoMarket;
-import lotto.domain.LottoTicket;
+import lotto.domain.*;
 import lotto.util.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -18,11 +16,15 @@ public class LottoController {
     private static final String EMPTY = "";
 
     public void run() {
-        List<LottoTicket> tickets = LottoMarket.sell(InputView.getMoney(), new RandomLottoGenerator());
+        int money = InputView.getMoney();
+        List<LottoTicket> tickets = LottoMarket.sell(money, new RandomLottoGenerator());
         ResultView.printTickets(tickets);
 
         LottoCommittee committee = new LottoCommittee(createWinningNumbers());
-        ResultView.printStatistics(committee.statistics(tickets));
+        StatisticDto dto = committee.statistics(tickets);
+
+        ResultView.printStatistics(dto);
+        ResultView.printReturnRate(committee.returnRate(Rank.calculatePrice(dto), money));
     }
 
     private List<Integer> createWinningNumbers() {

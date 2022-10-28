@@ -18,4 +18,14 @@ public class LottoCommitteeTest {
 
         assertThat(committee.statistics(ticket)).isInstanceOf(StatisticDto.class);
     }
+
+    @DisplayName("로또 협회는 수익률을 구할 수 있다")
+    @Test
+    void return_rate_test() {
+        LottoCommittee committee = new LottoCommittee(Arrays.asList(1, 2, 3, 4, 5, 6));
+        int spendingMoney = 1000;
+        Long totalReturnMoney = 10000L;
+
+        assertThat(committee.returnRate(totalReturnMoney, spendingMoney)).isEqualTo(10.00);
+    }
 }

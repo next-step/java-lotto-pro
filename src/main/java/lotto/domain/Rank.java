@@ -30,6 +30,16 @@ public enum Rank {
         return deque.toArray(new Rank[deque.size()]);
     }
 
+    public static Long calculatePrice(StatisticDto dto) {
+        Long sum = 0L;
+        for (Rank rank : Rank.values()) {
+            int count = dto.getCount(rank.matchCount);
+            sum += (long) rank.getPrice() * count;
+        }
+
+        return sum;
+    }
+
     public int getPrice() {
         return price;
     }
