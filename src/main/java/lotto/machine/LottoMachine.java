@@ -38,7 +38,7 @@ public class LottoMachine {
 
     public static int getQuantity(int money) {
         if(money < LOTTO_AMOUNT){
-            throw new IllegalArgumentException("금액이 부족합니다.");
+            throw new IllegalArgumentException(MessageConstant.ERROR_VALID_MORE_MONEY);
         }
         return money / LOTTO_AMOUNT;
     }
