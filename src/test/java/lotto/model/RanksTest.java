@@ -7,9 +7,6 @@ import java.util.Arrays;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import lotto.model.Rank;
-import lotto.model.Ranks;
-
 public class RanksTest {
 
 	@Test
@@ -22,7 +19,7 @@ public class RanksTest {
 			)
 		);
 
-		assertThat(ranks.getTotalPrize()).isEqualTo(1_510_000L);
+		assertThat(ranks.getTotalPrize()).isEqualTo(new Money(1_510_000L));
 	}
 
 	@Test

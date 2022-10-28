@@ -1,5 +1,7 @@
 package lotto.model;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.List;
 
 public class Ranks {
@@ -9,10 +11,10 @@ public class Ranks {
 		this.ranks = ranks;
 	}
 
-	public long getTotalPrize() {
+	public Money getTotalPrize() {
 		return ranks.stream()
-			.mapToLong(Rank::prize)
-			.sum();
+			.map(Rank::prize)
+			.collect(collectingAndThen(summingLong(Long::longValue), Money::new));
 	}
 
 	public long count(final Rank searchRank) {
