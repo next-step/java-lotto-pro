@@ -44,6 +44,10 @@ public class Money {
 		}
 	}
 
+	public double profitRate(Money money) {
+		return (double)this.value / money.value;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
