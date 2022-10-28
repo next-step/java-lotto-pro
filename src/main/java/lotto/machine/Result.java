@@ -1,10 +1,8 @@
 package lotto.machine;
 
-import lotto.Match.Rank;
+import lotto.match.Rank;
 
 public class Result {
-
-    // TODO 인스턴수 가 많으므로 클래스로 만든다.
     private int firstCount = 0;
     private int secondCount = 0;
     private int threeCount = 0;
