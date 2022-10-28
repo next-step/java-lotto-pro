@@ -8,6 +8,7 @@ public class StringAddCalculator {
 
     public static final String DEFAULT_SEPARATOR = "[,:]";
     public static final String CUSTOM_SEPARATOR = "//(.)\n(.*)";
+    public static final String NEGATIVE_NUMBER_ERROR = "[ERROR] 음수 이거나 숫자 이외의 값은 처리할 수 없습니다.";
 
     public static int splitAndSum(String text) {
         if (validateText(text)) {
@@ -34,8 +35,15 @@ public class StringAddCalculator {
             .sum();
     }
 
+    private static void validateNegativeNumber(int number){
+        if (number < 0) {
+            throw new IllegalArgumentException(NEGATIVE_NUMBER_ERROR);
+        }
+    }
+
     private static int parseInt(String number){
         int parseInt = Integer.parseInt(number);
+        validateNegativeNumber(parseInt);
         return parseInt;
     }
 
