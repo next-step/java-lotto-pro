@@ -7,13 +7,14 @@ import step3.model.Lottos;
 import step3.model.dto.LottosNumberDto;
 import step3.view.InputView;
 import step3.view.ResultView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
 
 
-    public void start(){
+    public void start() {
         InputView.printPurchasingAmount();
         int amount = Console.readInt();
         LottoService lottoService = new LottoService(amount);
@@ -25,7 +26,7 @@ public class LottoController {
     }
 
 
-    public static void main(String[]args){
+    public static void main(String[] args) {
         new LottoController().start();
     }
 }
