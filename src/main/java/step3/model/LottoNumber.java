@@ -13,13 +13,12 @@ public class LottoNumber {
 
     private static final String OUT_OF_NUMBER_MESSAGE = "번호는 1에서 45사이만 허용합니다";
 
-    private static List<LottoNumber> LOTTO_NUMBERS;
+    private static final List<LottoNumber> LOTTO_NUMBERS;
 
     static {
         LOTTO_NUMBERS = IntStream
                 .rangeClosed(LOTTO_MIN_VALUE, LOTTO_MAX_VALUE)
-                .boxed()
-                .map(number -> new LottoNumber(number))
+                .mapToObj(number -> new LottoNumber(number))
                 .collect(Collectors.toList());
     }
 
