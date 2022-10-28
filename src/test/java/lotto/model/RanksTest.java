@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class RanksTest {
 
 	@Test
-	void 순위들의_총_수익을_구한다(){
+	void 순위들의_총_수익을_구한다() {
 		Ranks ranks = new Ranks(
 			Arrays.asList(
 				Rank.FOURTH,
@@ -23,7 +23,7 @@ public class RanksTest {
 	}
 
 	@Test
-	void 각_순위의_갯수를_구한다(){
+	void 각_순위의_갯수를_구한다() {
 		Ranks ranks = new Ranks(
 			Arrays.asList(
 				Rank.FIRST,

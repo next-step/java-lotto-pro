@@ -11,7 +11,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	private final int number;
 
-	public LottoNumber(final String number){
+	public LottoNumber(final String number) {
 		this(Integer.parseInt(number));
 	}
 
@@ -31,7 +31,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		return Integer.compare(this.number, otherNumber.number);
 	}
 
-	public static List<LottoNumber> of(final String ... numbers){
+	public static List<LottoNumber> of(final String... numbers) {
 		return Arrays.stream(numbers)
 			.map(LottoNumber::new)
 			.collect(Collectors.toList());

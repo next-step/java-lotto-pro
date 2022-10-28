@@ -13,7 +13,7 @@ public class Input {
 	private Input() {
 	}
 
-	private static String nextLine(){
+	private static String nextLine() {
 		return SCANNER.nextLine();
 	}
 
@@ -22,7 +22,7 @@ public class Input {
 			System.out.println("구입금액을 입력해 주세요.");
 			String money = nextLine();
 			return new Money(Integer.parseInt(money));
-		}catch (NumberFormatException e){
+		} catch (NumberFormatException e) {
 			return inputPayment();
 		}
 	}
@@ -33,9 +33,7 @@ public class Input {
 			String winnersNumber = nextLine();
 			System.out.println();
 			return new Lotto(LottoNumber.of(winnersNumber.split(SPLITER)));
-		}catch (NumberFormatException e){
-			return inputWinnerLotto();
-		}catch (IllegalArgumentException e){
+		} catch (IllegalArgumentException e) {
 			return inputWinnerLotto();
 		}
 	}

@@ -28,7 +28,7 @@ public class LottoRandomCreateStrategy implements LottoCreateStrategy {
 	public Lotto create() {
 		Set<LottoNumber> result = new HashSet<>();
 		Random random = new Random();
-		while(result.size() < LOTTO_SIZE){
+		while (result.size() < LOTTO_SIZE) {
 			result.add(numberPool.get(random.nextInt(MAX_NUMBER)));
 		}
 		return new Lotto(result);
