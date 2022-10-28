@@ -7,39 +7,39 @@ import java.util.stream.Collectors;
 
 public class Reward {
 
-    private final Map<Integer, Integer> result = new HashMap<>();
+    private final Map<Integer, Integer> reward = new HashMap<>();
     private final Map<Integer, Long> criteria;
 
     private Reward() {
         throw new RuntimeException("Cannot use default constructor.");
     }
 
-    private Reward(List<Lotto> lottos, Numbers winningNumbers, CriteriaProvider criteriaProvider) {
+    private Reward(List<Integer> matchCounts, CriteriaProvider criteriaProvider) {
         this.criteria = criteriaProvider.get();
-        initResult();
-        generateResult(lottos, winningNumbers);
+        init();
+        input(matchCounts);
     }
 
-    public static Reward generate(List<Lotto> lottos, Numbers winningNumbers,
-                                  CriteriaProvider criteriaProvider) {
-        return new Reward(lottos, winningNumbers, criteriaProvider);
+    public static Reward generate(List<Integer> matchCounts, CriteriaProvider criteriaProvider) {
+        return new Reward(matchCounts, criteriaProvider);
     }
 
-    private void initResult() {
+    private void init() {
         criteria.keySet()
-                .forEach(key -> result.put(key, 0));
+                .forEach(key -> reward.put(key, 0));
     }
 
-    private void generateResult(List<Lotto> lottos, Numbers winningNumbers) {
-        lottos.forEach(lotto -> {
-            int matchCount = lotto.getMatchCount(winningNumbers);
-            if (criteria.containsKey(matchCount)) {
-                result.put(matchCount, result.get(matchCount) + 1);
-            }
-        });
+    private void input(List<Integer> matchCounts) {
+        matchCounts.forEach(this::input);
     }
 
-    public List<String> generateStatistics() {
+    private void input(int matchCount) {
+        if (criteria.containsKey(matchCount)) {
+            reward.put(matchCount, reward.get(matchCount) + 1);
+        }
+    }
+
+    public List<String> getStatistics() {
         return criteria.keySet()
                 .stream()
                 .map(this::generateStatistic)
@@ -51,11 +51,19 @@ public class Reward {
                 + "개 일치 ("
                 + getTotalMoney(matchCount)
                 + "원)- "
-                + result.get(matchCount)
+                + reward.get(matchCount)
                 + "개";
     }
 
-    private String getTotalMoney(int matchCount) {
-        return String.valueOf(criteria.get(matchCount) * result.get(matchCount));
+    public long getTotalMoney() {
+        return criteria.keySet()
+                .stream()
+                .map(this::getTotalMoney)
+                .mapToLong(money -> money)
+                .sum();
+    }
+
+    private long getTotalMoney(int matchCount) {
+        return criteria.get(matchCount) * reward.get(matchCount);
     }
 }
