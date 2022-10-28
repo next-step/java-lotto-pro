@@ -1,3 +1,5 @@
+package view;
+
 import java.util.Scanner;
 
 import lotto.AutoLottoNumberGenerator;
@@ -5,9 +7,6 @@ import lotto.LottoTicket;
 import lotto.LottoTickets;
 import lotto.LottoVendor;
 import money.Money;
-import view.LastWeekWinLottoTicketView;
-import view.LottoPurchaseView;
-import view.LottoWinResultView;
 
 public class LottoApplication {
 
