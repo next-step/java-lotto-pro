@@ -1,6 +1,7 @@
 package stringadder;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDER;
 
 import org.junit.jupiter.api.DisplayName;
@@ -55,5 +56,13 @@ public class StringAdderTest {
     @Test
     void customDelimiter() {
         assertThat(adder.calculate("//;\n1;2;3")).isEqualTo(6);
+    }
+
+    @DisplayName("음수를 입력할 수 없다.")
+    @Test
+    void negative() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> adder.calculate("-1"))
+                .withMessage("음수를 계산할 수 없습니다.");
     }
 }

@@ -16,7 +16,15 @@ public class StringAdder {
         final String[] tokens = expression.parseTokens();
 
         return Arrays.stream(tokens)
-                .map(Integer::parseInt)
+                .map(this::parsePositiveInt)
                 .reduce(INIT_VALUE, Integer::sum);
+    }
+
+    private int parsePositiveInt(String token) {
+        final int integer = Integer.parseInt(token);
+        if (integer < 0) {
+            throw new IllegalArgumentException("음수를 계산할 수 없습니다.");
+        }
+        return integer;
     }
 }
