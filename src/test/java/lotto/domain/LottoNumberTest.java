@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -17,5 +18,10 @@ class LottoNumberTest {
 	void 로또_번호_범위_제한(final int number) {
 		assertThatThrownBy(() -> new LottoNumber(number))
 			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	void 로또_번호_반환() {
+		assertThat(new LottoNumber(1).toString()).isEqualTo("1");
 	}
 }
