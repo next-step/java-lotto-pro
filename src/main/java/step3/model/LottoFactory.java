@@ -13,7 +13,6 @@ import static step3.model.LottoNumber.LOTTO_MIN_VALUE;
 public class LottoFactory {
 
     private static final List<Integer> CANDIDATE_NUMBERS;
-    private static final String NONE_POSITIVE_MESSAGE = "로또 개수는 한개 이상만 허용됩니다";
 
     static {
         CANDIDATE_NUMBERS = IntStream
@@ -22,7 +21,6 @@ public class LottoFactory {
     }
 
     public static List<Lotto> createLottos(int size) {
-        if (size <= 0) throw new IllegalArgumentException(NONE_POSITIVE_MESSAGE);
         List<Lotto> lottos = new ArrayList();
         for (int i = 0; i < size; i++) {
             lottos.add(createLotto());
@@ -37,6 +35,6 @@ public class LottoFactory {
                 .limit(NUMBER_SIZE)
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
-        return new Lotto(lottoNumbers,true);
+        return new Lotto(lottoNumbers, true);
     }
 }
