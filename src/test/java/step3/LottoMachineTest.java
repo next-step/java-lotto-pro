@@ -2,6 +2,7 @@ package step3;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -53,5 +54,26 @@ class LottoMachineTest {
                 .collect(Collectors.joining());
 
         assertThat(sortedLotto).isEqualTo(expectedSortedLotto);
+    }
+
+    @Test
+    @DisplayName("receiveLuckLotto를 호출할때 널 리스트가 들어올경우 에러")
+    void givenNullNumbers_whenReceiveLuckLotto_thenThrow() {
+        assertThatThrownBy(() -> lottoMachine.receiveLuckLotto(null))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("receiveLuckLotto를 호출할때 증복된 수들이 들어올떄 에러")
+    void givenDuplicatedNumbers_whenReceiveLuckLotto_thenThrow() {
+        assertThatThrownBy(() -> lottoMachine.receiveLuckLotto(Arrays.asList(1, 1, 3, 5, 6, 8)))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("receiveLuckLotto를 호출할때 초과된 수들이 들어올떄 에러")
+    void givenExceedNumbers_whenReceiveLuckLotto_thenThrow() {
+        assertThatThrownBy(() -> lottoMachine.receiveLuckLotto(Arrays.asList(86, 1, 3, 5, 6, 8)))
+                .isInstanceOf(RuntimeException.class);
     }
 }
