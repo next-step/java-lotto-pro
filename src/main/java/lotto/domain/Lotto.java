@@ -7,16 +7,12 @@ import java.util.List;
 import lotto.util.LottoUtil;
 
 public class Lotto {
-    public static final int PRICE = 1000;
     private final List<LottoNumber> purchaseLottoList;
 
     public Lotto(String purchaseMoney) {
-        //todo money 객체화
-        int money = Integer.parseInt(purchaseMoney);
-        validateMoney(money);
-        int count = money / PRICE;
+        Money money = new Money(purchaseMoney);
         this.purchaseLottoList = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < money.count(); i++) {
             purchaseLottoList.add(new LottoNumber(LottoUtil.generate()));
         }
     }
@@ -35,11 +31,5 @@ public class Lotto {
             result.putPrize(lottoNumber.calculateWinPrize(winningLotto));
         }
         return result;
-    }
-
-    private void validateMoney(int money) {
-        if (money < 1000) {
-            throw new IllegalArgumentException("로또 1장 가격은 1000원입니다. 1000원 이상의 금액을 입력해주세요.");
-        }
     }
 }

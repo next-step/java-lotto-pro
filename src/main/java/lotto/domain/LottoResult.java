@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.domain.Lotto.*;
+import static lotto.domain.Money.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,17 +33,17 @@ public class LottoResult {
         return (float)sumOfPrizeMoney() / sumOfCost;
     }
 
-    private int sumOfPrizeMoney() {
-        int money = 0;
-        for (Map.Entry<Prize, Integer> entry : result.entrySet()) {
-            money += entry.getKey().getSumOfMoney(entry.getValue());
-        }
-        return money;
-    }
-
     private int sumOfCount() {
         return result.values().stream()
             .mapToInt(Integer::intValue)
             .sum();
+    }
+
+    private int sumOfPrizeMoney() {
+        int money = 0;
+        for (Prize prize : result.keySet()) {
+            money += prize.getSumOfMoney(result.get(prize));
+        }
+        return money;
     }
 }
