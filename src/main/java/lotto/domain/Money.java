@@ -8,24 +8,28 @@ public class Money {
 	private static final String INVALID_TICKET_PRICE_MESSAGE = "티켓 가격이 0원 일 수 없습니다.";
 	protected static final int PRICE_PER_TICKET = 1000;
 
-	private final int value;
+	private final long value;
 
-	private Money(int value) {
+	private Money(long value) {
+		validate(value);
 		this.value = value;
 	}
 
 	public static Money of(int value) {
-		validate(value);
 		return new Money(value);
 	}
 
-	private static void validate(int value) {
+	public static Money of(long value) {
+		return new Money( value);
+	}
+
+	private static void validate(long value) {
 		if (value < 0) {
 			throw new InvalidMoneyException("금액은 음수일 수 없습니다.");
 		}
 	}
 
-	public int getValue() {
+	public long getValue() {
 		return value;
 	}
 
@@ -34,7 +38,7 @@ public class Money {
 			throw new InvalidMoneyException(INVALID_INPUT_MONEY_MESSAGE);
 		}
 		try {
-			return TicketCount.of(this.value / ticketPrice.getValue());
+			return TicketCount.of((int) (this.value / ticketPrice.getValue()));
 		} catch (ArithmeticException e) {
 			throw new InvalidMoneyException(INVALID_TICKET_PRICE_MESSAGE);
 		}
@@ -54,7 +58,6 @@ public class Money {
 
 	@Override
 	public int hashCode() {
-		return value;
+		return (int)(value ^ (value >>> 32));
 	}
-
 }

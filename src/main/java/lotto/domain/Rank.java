@@ -9,7 +9,7 @@ public enum Rank {
 	FOURTH(3, 5_000),
 	LOSE(0, 0);
 
-	private final int prize;
+	private final long prize;
 	private final int matchCount;
 
 	Rank(int matchCount, int prize) {
@@ -24,4 +24,7 @@ public enum Rank {
 			.orElse(LOSE);
 	}
 
+	public long getPrize() {
+		return this.prize;
+	}
 }
