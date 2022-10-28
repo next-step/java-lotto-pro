@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Split Test")
 public class SplitTest {
 
-  @DisplayName("빈 문자열 또는 null 값을 입력할 경우 [\"0\"] 을 반환 하는지 확인")
+  @DisplayName("빈 문자열 또는 null 값을 입력할 경우 빈 문자열 배열 을 반환 하는지 확인")
   @Test
   void split_null() {
     //given
@@ -18,7 +18,7 @@ public class SplitTest {
     //when
     Split result = new Split(input);
     //then
-    assertThat(result.getStringArray()).isEqualTo(new String[] {"0"});
+    assertThat(result.getStringArray()).isEqualTo(new String[] {});
   }
 
   @DisplayName(" ',' 또는 ':' 기본 구분자로 입력할 경우 분리되는지 확인")
