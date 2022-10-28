@@ -19,16 +19,16 @@ public class LottoFactory {
                 .boxed().collect(Collectors.toList());
     }
 
-    public static List<Lotto> createLottos(int size){
-        if(size <= 0)throw new IllegalArgumentException(NONE_POSITIVE_MESSAGE);
+    public static List<Lotto> createLottos(int size) {
+        if (size <= 0) throw new IllegalArgumentException(NONE_POSITIVE_MESSAGE);
         List<Lotto> lottos = new ArrayList();
-        for(int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             lottos.add(createLotto());
         }
         return lottos;
     }
 
-    private static Lotto createLotto(){
+    private static Lotto createLotto() {
         Collections.shuffle(CANDIDATE_NUMBERS);
         return new Lotto(CANDIDATE_NUMBERS
                 .stream()

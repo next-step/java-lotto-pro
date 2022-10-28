@@ -9,11 +9,11 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos){
+    public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    public int getSumOfPriceLottos(){
+    public int getSumOfPriceLottos() {
         return lottos.stream()
                 .mapToInt(Lotto::getPrice)
                 .sum();

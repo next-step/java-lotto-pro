@@ -18,30 +18,30 @@ public class Lotto {
 
     private final List<Integer> numbers;
 
-    public Lotto(List<Integer> numbers){
+    public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers;
-
     }
 
-    public int getPrice(){
+    public int getPrice() {
         return PRICE;
     }
 
-    public List<Integer> getNumbers(){
+    public List<Integer> getNumbers() {
         return numbers.stream().collect(Collectors.toList());
     }
 
-    private void validateNumbers(List<Integer> numbers){
+    private void validateNumbers(List<Integer> numbers) {
         Set<Integer> distinctNumbers = new HashSet<>(numbers);
-        if(distinctNumbers.size() != numbers.size())throw new IllegalArgumentException(DUPLICATE_NUMBER_MESSAGE);
-        if(distinctNumbers.size() != NUMBER_SIZE)throw new IllegalArgumentException(NUMBER_SIZE_MESSAGE);
+        if (distinctNumbers.size() != numbers.size()) throw new IllegalArgumentException(DUPLICATE_NUMBER_MESSAGE);
+        if (distinctNumbers.size() != NUMBER_SIZE) throw new IllegalArgumentException(NUMBER_SIZE_MESSAGE);
         distinctNumbers.forEach(integer -> {
-            if(integer < TICKET_MIN_VALUE || integer > TICKET_MAX_VALUE) throw new IllegalArgumentException(OUT_OF_RANGE_MESSAGE);
+            if (integer < TICKET_MIN_VALUE || integer > TICKET_MAX_VALUE)
+                throw new IllegalArgumentException(OUT_OF_RANGE_MESSAGE);
         });
     }
 
-    public Rank getRank(List<Integer> winningNumbers){
+    public Rank getRank(List<Integer> winningNumbers) {
         int count = (int) numbers
                 .stream()
                 .filter(winningNumbers::contains)
