@@ -28,4 +28,10 @@ public class LottoTicket {
                 .map(number -> number.getNumber())
                 .collect(Collectors.toList());
     }
+
+    public int containCount(LottoTicket ticket) {
+        return (int) lottoNumbers.stream()
+                .filter(v -> ticket.lottoNumbers.contains(v))
+                .count();
+    }
 }
