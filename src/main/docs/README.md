@@ -21,7 +21,7 @@
   - ArrayList의 contains() 메소드를 활용하여 값 존재 유무 파악
   - LottoNumbers간 match 메소드를 이용하여 당첨된 번호 개수를 return 하도록 구현
   - 비교하는 각 LottoNumbers간 보유하고 있는 List의 개수가 다른 경우 예외처리
-- [ ] 당첨 통계 정보 생성
+- [X] 당첨 통계 정보 생성
   - [X] 당첨 결과 생성
     - 일치하는 번호 개수, 당첨에 사용되는 기준 정보를 바탕으로 결과 저장
       - 당첨 결과는 Map<Integer, Integer> 형식으로 번호 일치 개수와 전체 수의 쌍으로 저장

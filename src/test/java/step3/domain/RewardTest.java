@@ -8,13 +8,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step3.utils.CriteriaProvider;
 
 public class RewardTest {
 
     private static final int TOTAL_WINNING_COUNT = 10;
     private static final int MATCH_COUNT = 3;
     private static final long MONEY_PER_MATCH_COUNT = 5000L;
-    private static final long TOTAL_MONEY = 1000000L;
+    private static final Money payment = Money.generate(1000000L);
 
     private final CriteriaProvider criteriaProvider = () -> new HashMap<Integer, Long>() {
         {
@@ -31,14 +32,6 @@ public class RewardTest {
     public void testGetStatistics() {
         List<String> statistics = generateTestReward().getStatistics();
         assertThat(statistics.size()).isEqualTo(criteriaProvider.get().size());
-    }
-
-    @Test
-    @DisplayName("수익률 조회")
-    public void testGetWinningMoneyRate() {
-        String winningMoneyRate = generateTestReward().getWinningMoneyRate(TOTAL_MONEY);
-        assertThat(TOTAL_MONEY * Double.parseDouble(winningMoneyRate))
-                .isEqualTo(TOTAL_WINNING_COUNT * MONEY_PER_MATCH_COUNT);
     }
 
     private Reward generateTestReward() {

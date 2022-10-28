@@ -1,6 +1,7 @@
 package step3.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Numbers {
 
@@ -34,5 +35,12 @@ public class Numbers {
         return (int) numbers.stream()
                 .filter(selectNumbers.numbers::contains)
                 .count();
+    }
+
+    @Override
+    public String toString() {
+        return numbers.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(", "));
     }
 }

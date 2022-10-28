@@ -1,10 +1,10 @@
 package step3.domain;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import step3.utils.CriteriaProvider;
 
 public class Reward {
 
@@ -50,10 +50,14 @@ public class Reward {
     private String generateStatistic(int matchCount) {
         return matchCount
                 + "개 일치 ("
-                + getWinningMoney(matchCount)
+                + criteria.get(matchCount)
                 + "원)- "
                 + reward.get(matchCount)
                 + "개";
+    }
+
+    public String getWinningMoneyRate(Money payment) {
+        return payment.rate(getWinningMoney());
     }
 
     private long getWinningMoney() {
@@ -62,11 +66,6 @@ public class Reward {
                 .map(this::getWinningMoney)
                 .mapToLong(money -> money)
                 .sum();
-    }
-
-    public String getWinningMoneyRate(long totalPurchaseMoney) {
-        return new DecimalFormat("#.##")
-                .format((float) getWinningMoney() / (float) totalPurchaseMoney);
     }
 
     private long getWinningMoney(int matchCount) {

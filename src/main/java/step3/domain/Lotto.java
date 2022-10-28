@@ -19,4 +19,9 @@ public class Lotto {
     public int getMatchCount(Numbers numbers) {
         return this.numbers.match(numbers);
     }
+
+    @Override
+    public String toString() {
+        return "[" + numbers.toString() + "]";
+    }
 }

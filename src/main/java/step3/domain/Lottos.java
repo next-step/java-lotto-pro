@@ -1,6 +1,7 @@
 package step3.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -16,7 +17,15 @@ public class Lottos {
         return new Lottos(lottoList);
     }
 
-    public int getSize() {
-        return lottoList.size();
+    public List<Integer> getMatchCounts(Numbers numbers) {
+        return lottoList.stream()
+                .map(lotto -> lotto.getMatchCount(numbers))
+                .collect(Collectors.toList());
+    }
+
+    public String toString() {
+        return lottoList.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining("\n"));
     }
 }
