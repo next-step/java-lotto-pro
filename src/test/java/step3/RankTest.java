@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RankTest {
 
     @ParameterizedTest
-    @ValueSource(ints = {0,1,2})
+    @ValueSource(ints = {0, 1, 2})
     @DisplayName("valueOf값이 2이하면 MISS 반환")
     void test_that_it_returns_rank_at_match_count_less_than_2(int count) {
         //then
@@ -38,6 +38,7 @@ public class RankTest {
         //then
         assertThat(Rank.valueOf(5)).isEqualTo(Rank.THIRD);
     }
+
     @Test
     @DisplayName("valueOf값이 6이면 FIRST 반환")
     void test_that_it_returns_rank_at_match_count_6() {
