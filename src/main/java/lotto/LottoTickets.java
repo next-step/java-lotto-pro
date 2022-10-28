@@ -52,9 +52,10 @@ public class LottoTickets {
 			.collect(Collectors.joining("\n"));
 	}
 
-	public List<Integer> getEqualNumberCounts(LottoTicket comparedTicket) {
-		return lottoTicketList.stream()
-			.map(lottoTicket -> lottoTicket.getEqualNumberCount(comparedTicket))
-			.collect(Collectors.toList());
+	public LottoWinResult getEqualNumberCounts(LottoTicket comparedTicket) {
+		return LottoWinResult.of(
+			lottoTicketList.stream()
+				.map(lottoTicket -> lottoTicket.getEqualNumberCount(comparedTicket))
+				.collect(Collectors.toList()));
 	}
 }

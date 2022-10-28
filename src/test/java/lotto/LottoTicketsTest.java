@@ -2,7 +2,6 @@ package lotto;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 import org.assertj.core.util.Lists;
@@ -14,11 +13,11 @@ class LottoTicketsTest {
 
 	@ParameterizedTest
 	@MethodSource("로또_티켓_입력")
-	void 여러장의_로또_티켓과_한장을_비교하여_일치_갯수를_알_수_있다(LottoTickets 여러_로또티켓, LottoTicket 비교_로또티켓, List<Integer> 예상_일치_갯수) {
+	void 여러장의_로또_티켓과_한장을_비교하여_일치_갯수를_알_수_있다(LottoTickets 여러_로또티켓, LottoTicket 비교_로또티켓, LottoWinResult 예상_일치_갯수) {
 
-		List<Integer> 일치_갯수 = 여러_로또티켓.getEqualNumberCounts(비교_로또티켓);
+		LottoWinResult 일치_갯수 = 여러_로또티켓.getEqualNumberCounts(비교_로또티켓);
 
-		assertThat(일치_갯수).containsExactlyInAnyOrderElementsOf(예상_일치_갯수);
+		assertThat(일치_갯수).isEqualTo(예상_일치_갯수);
 	}
 
 	private static Stream<Arguments> 로또_티켓_입력() {
@@ -30,7 +29,7 @@ class LottoTicketsTest {
 						LottoTicket.of(1, 10, 11, 12, 13, 14),
 						LottoTicket.of(1, 2, 3, 4, 5, 6))),
 				LottoTicket.of(1, 2, 3, 4, 5, 6),
-				Lists.newArrayList(0, 1, 6)
+				LottoWinResult.of(Lists.newArrayList(0, 1, 6))
 			)
 		);
 	}
