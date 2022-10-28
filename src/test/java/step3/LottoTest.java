@@ -34,7 +34,7 @@ public class LottoTest {
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
         //when
-        Lotto lotto = new Lotto(numbers);
+        Lotto lotto = new Lotto(numbers,true);
 
         //then
         assertThat(lotto.getPrice()).isEqualTo(1000);
@@ -49,7 +49,7 @@ public class LottoTest {
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
         //when
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = new Lotto(lottoNumbers,true);
         List<LottoNumber> numbers = lotto.getNumbers();
 
         //then;
@@ -70,7 +70,7 @@ public class LottoTest {
                 .collect(Collectors.toList());
 
         //when,then
-        assertThatThrownBy(() -> new Lotto(numbers))
+        assertThatThrownBy(() -> new Lotto(numbers,true))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("번호는 6개만 허용합니다");
     }
@@ -85,7 +85,7 @@ public class LottoTest {
         numbers.add(LottoNumber.valueOf(6));
 
         //when,then
-        assertThatThrownBy(() -> new Lotto(numbers))
+        assertThatThrownBy(() -> new Lotto(numbers,true))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("중복없는 번호만 허용합니다");
     }
@@ -113,7 +113,7 @@ public class LottoTest {
                 .collect(Collectors.toList());
 
         //when
-        Lotto lotto = new Lotto(numbers);
+        Lotto lotto = new Lotto(numbers,true);
         Rank rank = lotto.getRank(getLottoNumbers(1,2,3,11,12,13));
 
         //then
@@ -128,7 +128,7 @@ public class LottoTest {
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
         //when
-        Lotto lotto = new Lotto(numbers);
+        Lotto lotto = new Lotto(numbers,true);
         Rank rank = lotto.getRank(getLottoNumbers(1,2,3,4,12,13));
 
         //then
@@ -144,7 +144,7 @@ public class LottoTest {
                 .collect(Collectors.toList());
 
         //when
-        Lotto lotto = new Lotto(numbers);
+        Lotto lotto = new Lotto(numbers,true);
         Rank rank = lotto.getRank(getLottoNumbers(1,2,3,4,5,13),LottoNumber.valueOf(6));
 
         //then
@@ -160,7 +160,7 @@ public class LottoTest {
                 .collect(Collectors.toList());
 
         //when
-        Lotto lotto = new Lotto(numbers);
+        Lotto lotto = new Lotto(numbers,true);
         Rank rank = lotto.getRank(getLottoNumbers(1,2,3,4,5,13));
 
         //then
@@ -176,7 +176,7 @@ public class LottoTest {
                 .collect(Collectors.toList());
 
         //when
-        Lotto lotto = new Lotto(numbers);
+        Lotto lotto = new Lotto(numbers,true);
         Rank rank = lotto.getRank(getLottoNumbers(1,2,3,4,5,6));
 
         //then
@@ -194,7 +194,7 @@ public class LottoTest {
 
 
         //when
-        Lotto lotto = new Lotto(numbers);
+        Lotto lotto = new Lotto(numbers,true);
         Rank rank = lotto.getRank(getLottoNumbers(1, 2, 13, 14, 15, 16));
 
         //then

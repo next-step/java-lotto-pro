@@ -54,7 +54,7 @@ public class LottoMachineTest {
         mock.reset();
         List<Lotto> lottos = new ArrayList();
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
+            lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16),true));
         }
         mock.when(() -> LottoFactory.createLottos(anyInt()))
                 .thenReturn(lottos);
@@ -75,7 +75,7 @@ public class LottoMachineTest {
         mock.reset();
         List<Lotto> lottos = new ArrayList();
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
+            lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16),true));
         }
         mock.when(() -> LottoFactory.createLottos(anyInt()))
                 .thenReturn(lottos);
@@ -101,7 +101,7 @@ public class LottoMachineTest {
         mock.reset();
         List<Lotto> lottos = new ArrayList();
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
+            lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16),true));
         }
         mock.when(() -> LottoFactory.createLottos(anyInt()))
                 .thenReturn(lottos);
@@ -126,7 +126,7 @@ public class LottoMachineTest {
         mock.reset();
         List<Lotto> lottos = new ArrayList();
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
+            lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16),true));
         }
         mock.when(() -> LottoFactory.createLottos(anyInt()))
                 .thenReturn(lottos);
@@ -152,7 +152,7 @@ public class LottoMachineTest {
         mock.reset();
         List<Lotto> lottos = new ArrayList();
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
+            lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16),true));
         }
         mock.when(() -> LottoFactory.createLottos(anyInt()))
                 .thenReturn(lottos);
@@ -178,7 +178,7 @@ public class LottoMachineTest {
         mock.reset();
         List<Lotto> lottos = new ArrayList();
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
+            lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16),true));
         }
         mock.when(() -> LottoFactory.createLottos(anyInt()))
                 .thenReturn(lottos);
@@ -214,7 +214,7 @@ public class LottoMachineTest {
         mock.reset();
         List<Lotto> lottos = new ArrayList();
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
+            lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16),true));
         }
         mock.when(() -> LottoFactory.createLottos(anyInt()))
                 .thenReturn(lottos);

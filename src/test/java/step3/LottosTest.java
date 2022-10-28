@@ -42,9 +42,9 @@ public class LottosTest {
     void test_that_it_returns_count_of_winning_if_5rd() {
         //given
         List<Lotto> lottoNumbers = new ArrayList();
-        lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
-        lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
-        lottoNumbers.add(new Lotto(getLottoNumbers(1, 11, 33, 2, 35, 3)));
+        lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16),true));
+        lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6),true));
+        lottoNumbers.add(new Lotto(getLottoNumbers(1, 11, 33, 2, 35, 3),true));
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
@@ -59,9 +59,9 @@ public class LottosTest {
     void test_that_it_returns_count_of_winning_if_4rd() {
         //given
         List<Lotto> lottoNumbers = new ArrayList();
-        lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
-        lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 15, 1)));
-        lottoNumbers.add(new Lotto(getLottoNumbers(1, 11, 33, 2, 15, 3)));
+        lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16),true));
+        lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 15, 1),true));
+        lottoNumbers.add(new Lotto(getLottoNumbers(1, 11, 33, 2, 15, 3),true));
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
@@ -76,9 +76,9 @@ public class LottosTest {
     void test_that_it_returns_count_of_winning_if_3rd() {
         //given
         List<Lotto> lottoNumbers = new ArrayList();
-        lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
-        lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
-        lottoNumbers.add(new Lotto(getLottoNumbers(1, 11, 33, 2, 35, 3)));
+        lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16),true));
+        lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6),true));
+        lottoNumbers.add(new Lotto(getLottoNumbers(1, 11, 33, 2, 35, 3),true));
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
@@ -93,9 +93,9 @@ public class LottosTest {
     void test_that_it_returns_count_of_winning_if_2rd() {
         //given
         List<Lotto> lottoNumbers = new ArrayList();
-        lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
-        lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
-        lottoNumbers.add(new Lotto(getLottoNumbers(1, 11, 33, 2, 35, 3)));
+        lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16),true));
+        lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6),true));
+        lottoNumbers.add(new Lotto(getLottoNumbers(1, 11, 33, 2, 35, 3),true));
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
@@ -110,9 +110,9 @@ public class LottosTest {
     void test_that_it_returns_count_of_winning_if_1rd() {
         //given
         List<Lotto> lottoNumbers = new ArrayList();
-        lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
-        lottoNumbers.add(new Lotto(getLottoNumbers(2, 15, 3, 14, 1, 16)));
-        lottoNumbers.add(new Lotto(getLottoNumbers(1, 16, 15, 2, 14, 3)));
+        lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16),true));
+        lottoNumbers.add(new Lotto(getLottoNumbers(2, 15, 3, 14, 1, 16),true));
+        lottoNumbers.add(new Lotto(getLottoNumbers(1, 16, 15, 2, 14, 3),true));
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when

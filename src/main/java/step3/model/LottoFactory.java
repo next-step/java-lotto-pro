@@ -37,6 +37,6 @@ public class LottoFactory {
                 .limit(NUMBER_SIZE)
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
-        return new Lotto(lottoNumbers);
+        return new Lotto(lottoNumbers,true);
     }
 }
