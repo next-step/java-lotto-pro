@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static step3.model.Lotto.*;
+import static step3.model.Lotto.NUMBER_SIZE;
+import static step3.model.LottoNumber.LOTTO_MAX_VALUE;
+import static step3.model.LottoNumber.LOTTO_MIN_VALUE;
 
 public class LottoFactory {
 
@@ -15,7 +17,7 @@ public class LottoFactory {
 
     static {
         CANDIDATE_NUMBERS = IntStream
-                .rangeClosed(TICKET_MIN_VALUE, TICKET_MAX_VALUE)
+                .rangeClosed(LOTTO_MIN_VALUE, LOTTO_MAX_VALUE)
                 .boxed().collect(Collectors.toList());
     }
 
@@ -30,9 +32,11 @@ public class LottoFactory {
 
     private static Lotto createLotto() {
         Collections.shuffle(CANDIDATE_NUMBERS);
-        return new Lotto(CANDIDATE_NUMBERS
+        List<LottoNumber> lottoNumbers = CANDIDATE_NUMBERS
                 .stream()
                 .limit(NUMBER_SIZE)
-                .collect(Collectors.toList()));
+                .map(number -> LottoNumber.valueOf(number))
+                .collect(Collectors.toList());
+        return new Lotto(lottoNumbers);
     }
 }

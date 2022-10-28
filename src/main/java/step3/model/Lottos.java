@@ -19,9 +19,9 @@ public class Lottos {
                 .sum();
     }
 
-    public List<List<Integer>> getNumbersOfLottos() {
+    public List<List<LottoNumber>> getNumbersOfLottos() {
         return lottos.stream()
-                .map(Lotto::getNumbers)
+                .map(lotto -> lotto.getNumbers())
                 .collect(Collectors.toList());
     }
 

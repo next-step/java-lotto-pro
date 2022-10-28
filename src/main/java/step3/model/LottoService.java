@@ -29,7 +29,7 @@ public class LottoService {
     }
 
     public LottosNumberDto getLottoTicketState() {
-        return new LottosNumberDto(lottos);
+        return new LottosNumberDto(lottos.getNumbersOfLottos());
     }
 
 }
