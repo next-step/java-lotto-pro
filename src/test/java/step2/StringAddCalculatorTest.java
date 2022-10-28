@@ -27,14 +27,6 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(3);
     }
 
-//    @Test
-//    public void splitAndSum_띄어쓰기구분자() throws Exception {
-//        int result = StringAddCalculator.splitAndSum("\\ \n1 2");
-//        assertThat(result).isEqualTo(3);
-//
-//        result = StringAddCalculator.splitAndSum("1, 2");
-//        assertThat(result).isEqualTo(3);
-//    }
 
     @Test
     public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
