@@ -87,7 +87,7 @@ public class LottoMachineTest {
         LottoResultDto lottoResultDto = lottoMachine.getLottoResult(winningNumbers);
 
         //then
-        assertThat(lottoResultDto.getWinnigPercent()).isEqualTo((Rank.MISS.getWinningPrice() * count) / (double) 14000);
+        assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.MISS.getWinningPrice() * count) / (double) 14000);
 
     }
 
@@ -112,7 +112,7 @@ public class LottoMachineTest {
         LottoResultDto lottoResultDto = lottoMachine.getLottoResult(winningNumbers);
 
         //then
-        assertThat(lottoResultDto.getWinnigPercent()).isEqualTo((Rank.FIFTH.getWinningPrice() * count) / (double) 14000);
+        assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.FIFTH.getWinningPrice() * count) / (double) 14000);
 
     }
 
@@ -138,7 +138,7 @@ public class LottoMachineTest {
         LottoResultDto lottoResultDto = lottoMachine.getLottoResult(winningNumbers);
 
         //then
-        assertThat(lottoResultDto.getWinnigPercent()).isEqualTo((Rank.FOURTH.getWinningPrice() * count) / (double) 14000);
+        assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.FOURTH.getWinningPrice() * count) / (double) 14000);
 
     }
 
@@ -164,7 +164,7 @@ public class LottoMachineTest {
         LottoResultDto lottoResultDto = lottoMachine.getLottoResult(winningNumbers);
 
         //then
-        assertThat(lottoResultDto.getWinnigPercent()).isEqualTo((Rank.THIRD.getWinningPrice() * count) / (double) 14000);
+        assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.THIRD.getWinningPrice() * count) / (double) 14000);
 
     }
 
@@ -191,7 +191,7 @@ public class LottoMachineTest {
         LottoResultDto lottoResultDto = lottoMachine.getLottoResult(winningNumbers);
 
         //then
-        assertThat(lottoResultDto.getWinnigPercent()).isEqualTo((Rank.FIRST.getWinningPrice() * count) / (double) 14000);
+        assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.FIRST.getWinningPrice() * count) / (double) 14000);
 
     }
 

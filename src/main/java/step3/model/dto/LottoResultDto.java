@@ -21,7 +21,7 @@ public class LottoResultDto {
                 .collect(Collectors.toList());
     }
 
-    public double getWinnigPercent() {
+    public double getPriceRatio() {
         return priceRatio;
     }
 }
