@@ -1,11 +1,12 @@
-package lotto;
+package lotto.domain;
+
+import static lotto.util.LottoGeneratorUtil.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumber {
-
-    public static final int LOTTO_NUMBERS_COUNT = 6;
     private final List<Integer> numbers;
 
     public LottoNumber(List<Integer> numbers) {
@@ -24,5 +25,25 @@ public class LottoNumber {
         if (numbers.stream().distinct().count() != LOTTO_NUMBERS_COUNT) {
             throw new IllegalStateException();
         }
+    }
+
+    public int calculateWinCount(LottoNumber myLotto) {
+        int winCount = 0;
+        for (Integer number : this.numbers) {
+            if (myLotto.contains(number)) {
+                winCount++;
+            }
+        }
+        return winCount;
+    }
+
+    private boolean contains(Integer number) {
+        return this.numbers.contains(number);
+    }
+
+    @Override
+    public String toString() {
+        String printNumbers = numbers.stream().map(String::valueOf).collect(Collectors.joining(","));
+        return String.format("%s%s%s", "[", printNumbers, "]");
     }
 }
