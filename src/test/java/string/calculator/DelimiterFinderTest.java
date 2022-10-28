@@ -1,64 +1,29 @@
 package string.calculator;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DelimiterFinderTest {
-    @Test
-    @DisplayName("입력 문자열에서 구분자 찾아내기 결과 - 기본값 \"[;,]\"")
-    void findResultDefaultDelimiter() {
-        final String input = "//\\n";
-        final DelimiterFinder delimiterFinder = new DelimiterFinder(input);
-        final String findResult = delimiterFinder.find();
-        assertThat(findResult).isEqualTo("[:,]");
-    }
+class DelimiterFinderTest {
+    private final String DEFAULT_DELIMITER_REGEX = "[:,]";
 
-    @Test
-    @DisplayName("입력 문자열에서 구분자 찾아내기 결과 - 커스텀 구분자 \".\"")
-    void findResultCustomDelimiter() {
-        final String input = "//.\\n";
+    @ParameterizedTest
+    @ValueSource(strings = {"1:2:3", "1,2,3"})
+    @DisplayName("입력 문자열에 // \\n 가 없다면 default delimiter 를 반환한다")
+    void findReturnDefaultDelimiter(String input) {
         final DelimiterFinder delimiterFinder = new DelimiterFinder(input);
-        final String findResult = delimiterFinder.find();
-        assertThat(findResult).isEqualTo(".");
+        final String delimiter = delimiterFinder.find();
+        assertThat(delimiter).isEqualTo(DEFAULT_DELIMITER_REGEX);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//\\n", "//~\\n", "//.,\\n"})
-    @DisplayName("입력 문자열이 // 와 \\n 둘 다 포함하는 경우 ifIncludeBothSlashAndNewline 메서드의 결과값은 '참' 이 된다")
-    void trueIfIncludeBothDoubleSlashAndNewline(String input) {
+    @ValueSource(strings = {"//?\\n1?2?3", "//.\\n1.2.3", "//~\\n1~2~3", "//|\\n1|2|3", "//`\\n1`2`3"})
+    @DisplayName("입력 문자열에서 // 와 \\n 사이에 다른 문자열이 있다면 custom delimiter 를 반환한다")
+    void findReturnCustomDelimiter(String input) {
         final DelimiterFinder delimiterFinder = new DelimiterFinder(input);
-        final boolean checkResult = delimiterFinder.ifIncludeBothSlashAndNewline();
-        assertThat(checkResult).isTrue();
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"", "//", "\\n"})
-    @DisplayName("입력 문자열에 // 와 \\n 둘 중에 하나라도 없는 경우 ifIncludeBothSlashAndNewline 메서드의 결과값은 '거짓' 이 된다")
-    void falseIfNeitherIncludeDoubleSlashNorNewline(String input) {
-        final DelimiterFinder delimiterFinder = new DelimiterFinder(input);
-        final boolean checkResult = delimiterFinder.ifIncludeBothSlashAndNewline();
-        assertThat(checkResult).isFalse();
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"//`\\n", "//[\\n", "//.\\n", "// \\n"})
-    @DisplayName("입력 문자열에 있는 // 와 \\n 사이에 다른 문자가 있는 경우 customDelimiterExistsInBetween 메서드의 결과값은 '참' 이 된다")
-    void trueIfCustomDelimiterExistInBetween(String input) {
-        final DelimiterFinder delimiterFinder = new DelimiterFinder(input);
-        final boolean checkResult = delimiterFinder.customDelimiterExistsInBetween();
-        assertThat(checkResult).isTrue();
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"//\\n", "//0\\n"})
-    @DisplayName("입력 문자열에 있는 // 와 \\n 사이에 문자가 없거나 숫자가 있는 경우 customDelimiterExistsInBetween 메서드의 결과값은 '거짓' 이 된다")
-    void falseIfCustomDelimiterDoesNotExistInBetween(String input) {
-        final DelimiterFinder delimiterFinder = new DelimiterFinder(input);
-        final boolean checkResult = delimiterFinder.customDelimiterExistsInBetween();
-        assertThat(checkResult).isFalse();
+        final String delimiter = delimiterFinder.find();
+        assertThat(delimiter).isEqualTo(DEFAULT_DELIMITER_REGEX);
     }
 }
