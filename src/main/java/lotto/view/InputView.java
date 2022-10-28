@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class InputView {
 
     private static final String ENTER_PURCHASE_AMOUNT = "구매금액을 입력해 주세요.";
+    private static final String ENTER_LAST_WEEK_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final Scanner SCANNER = new Scanner(System.in);
 
     private InputView() {
@@ -22,6 +23,11 @@ public class InputView {
             throw new IllegalArgumentException("입력한 값이 올바르지 않아 로또 구매에 실패했습니다.");
         }
         return purchasePrice;
-
     }
+
+    public static String getLastWeekWinningNumber() {
+        System.out.println(ENTER_LAST_WEEK_WINNING_NUMBER);
+        return SCANNER.nextLine();
+    }
+
 }

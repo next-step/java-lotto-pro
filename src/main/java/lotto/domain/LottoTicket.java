@@ -12,4 +12,5 @@ public class LottoTicket {
     public String toString() {
         return lottoNumbers.toString();
     }
+
 }

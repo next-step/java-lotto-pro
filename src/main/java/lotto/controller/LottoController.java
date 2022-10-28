@@ -1,7 +1,9 @@
 package lotto.controller;
 
 import lotto.domain.LottoGame;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTickets;
+import lotto.domain.WinningLottoNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -15,7 +17,11 @@ public class LottoController {
 
     public void startLotto() {
         LottoTickets lottoTickets = lottoGame.buy(InputView.getLottoPurchasePrice());
+
         OutputView.lottoPurchaseCount(lottoTickets.ticketCount());
         OutputView.lottoPurchasePrint(lottoTickets.toString());
+
+        LottoNumbers winningLottoNumbers = new LottoNumbers(
+                new WinningLottoNumbers(InputView.getLastWeekWinningNumber()).getLottoNumbers());
     }
 }
