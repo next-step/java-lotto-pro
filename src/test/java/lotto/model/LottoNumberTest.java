@@ -6,9 +6,13 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import lotto.model.LottoNumber;
-
 class LottoNumberTest {
+
+	@Test
+	void 숫자형_문자로_생성() {
+		assertThat(LottoNumber.of("1", "2", "3", "4", "5", "6"))
+			.isEqualTo(LottoNumber.of(1, 2, 3, 4, 5, 6));
+	}
 
 	@Test
 	void 로또의_숫자_범위는_1에서_45이다() {

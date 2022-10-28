@@ -11,6 +11,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	private final int number;
 
+	public LottoNumber(final String number){
+		this(Integer.parseInt(number));
+	}
+
 	public LottoNumber(final int number) {
 		validate(number);
 		this.number = number;
@@ -25,6 +29,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	@Override
 	public int compareTo(final LottoNumber otherNumber) {
 		return Integer.compare(this.number, otherNumber.number);
+	}
+
+	public static List<LottoNumber> of(final String ... numbers){
+		return Arrays.stream(numbers)
+			.map(LottoNumber::new)
+			.collect(Collectors.toList());
 	}
 
 	public static List<LottoNumber> of(final int... numbers) {
