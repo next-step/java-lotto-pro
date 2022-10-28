@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumbers {
@@ -12,6 +13,14 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers from(List<LottoNumber> values) {
+        return new LottoNumbers(values);
+    }
+
+    public static LottoNumbers fromBy(List<Integer> winningNumbers) {
+        List<LottoNumber> values = new ArrayList<>();
+        for (Integer winningNumber : winningNumbers) {
+            values.add(LottoNumber.from(winningNumber));
+        }
         return new LottoNumbers(values);
     }
 
@@ -32,5 +41,11 @@ public class LottoNumbers {
 
     public boolean matches(LottoNumber lottoNumber) {
         return this.values.contains(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        values.sort(LottoNumber::compareTo);
+        return values.toString();
     }
 }

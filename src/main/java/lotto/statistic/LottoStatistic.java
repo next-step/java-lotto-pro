@@ -38,4 +38,8 @@ public class LottoStatistic {
         Money purchasePrice = priceOfOneLotto.multiply(lottos.size());
         return winningAmount.divide(purchasePrice);
     }
+
+    public boolean isLossProfit(Money priceOfOneLotto) {
+        return this.profit(priceOfOneLotto) < 1;
+    }
 }

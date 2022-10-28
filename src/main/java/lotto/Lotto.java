@@ -28,4 +28,9 @@ public class Lotto {
     public int matches(LottoNumbers winningNumbers) {
         return this.lottoNumbers.matches(winningNumbers);
     }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }

@@ -7,7 +7,6 @@ import lotto.constant.LottoConstant;
 
 public class DefaultNumberGeneratorStrategy implements LottoNumberGeneratorStrategy {
 
-    private static final int LOTTO_NUMBER_COUNT = 6;
     private final List<Integer> seedNumbers;
 
     public DefaultNumberGeneratorStrategy() {
@@ -30,7 +29,7 @@ public class DefaultNumberGeneratorStrategy implements LottoNumberGeneratorStrat
 
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
+        for (int i = 0; i < LottoConstant.LOTTO_NUMBER_COUNT; i++) {
             lottoNumbers.add(LottoNumber.from(seedNumbers.get(i)));
         }
 

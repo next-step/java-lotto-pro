@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
@@ -30,5 +31,9 @@ public class Lottos {
             matchCount++;
         }
         return matchCount;
+    }
+
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(values);
     }
 }
