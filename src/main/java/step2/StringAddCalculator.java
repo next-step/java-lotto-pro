@@ -4,57 +4,97 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    private static String patternRegex = "//(.)\n(.*)";
+    private static String delimiterExceptionRegex = "[!@#$%^&*(),.?\":{}|<>]";
+    private static String basicSplitRegex = ",|:";
     public static int sum;
+    public static String delimiter = "";
+
 
     public static int splitAndSum(String target) {
-        initSum();
-
-        isNullOrEmpty(target);
-
-
-        if(target.length() == 1) {
-            return sum = Integer.parseInt(target);
+        init();
+        if(isNullOrEmpty(target)) {
+            return sum;
         }
 
+        isSingleNum(target);
+        String[] numbers = doSplitAndSum(target);
 
-        String[] numbers;
-        // 패턴 그룹은 소괄호
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(target);
-        if(m.find()) {
-            String customDelimiter = m.group(1);
-
-            // 특수문자 변경
-            Pattern pattern = Pattern.compile("[!@#$%^&*(),.?\":{}|<>]");
-
-            if(pattern.matcher(target).find()) {
-                customDelimiter = "[" + customDelimiter + "]";
-            }
-
-            numbers = m.group(2).split(customDelimiter);
-
-        } else {
-            numbers = target.split(",|:");
-        }
-
-        for(String i : numbers) {
-            if(Integer.parseInt(i) < 0) {
-                throw new RuntimeException("negati");
-            }
-
-            sum += Integer.parseInt(i);
-        }
-
-
+        sumSplitedNumbers(numbers);
         return sum;
     }
 
-    private static void initSum() {
-        sum = 0;
+    private static void sumSplitedNumbers(String[] numbers) {
+        for(String i : numbers) {
+            isUnderZeroNumber(i);
+            sum += Integer.parseInt(i);
+        }
     }
 
-    private static void isNullOrEmpty(String target) {
-        if(target == null || target.isEmpty()) {
+
+
+    private static String[] doSplitAndSum(String target) {
+        if(!isFind(patternRegex,target)) {
+            return target.split(basicSplitRegex);
+        }
+
+        return getCustomDelimiterNumbers(patternRegex, target);
+    }
+
+
+    private static String[] getCustomDelimiterNumbers(String regex, String target) {
+        Matcher m = getMatcher(regex, target);
+        if(m.find()) {
+            delimiter = m.group(1);
+        }
+
+        String originDelimiter = delimiter;
+        if(isFind(delimiterExceptionRegex, target)) {
+            setCustomDelimiter();
+        }
+        return m.group(2).split(originDelimiter);
+    }
+
+    private static void isUnderZeroNumber(String number) {
+        if(Integer.parseInt(number) < 0) {
+            throw new RuntimeException("negative Exception");
+        }
+    }
+
+
+
+    private static void init() {
+        sum = 0;
+        delimiter = basicSplitRegex;
+    }
+
+
+
+    private static void isSingleNum(String target) {
+        if(target.length() == 1) {
             sum = 0;
         }
     }
+
+    private static boolean isFind (String regex, String target) {
+        return getMatcher(regex, target).find();
+    }
+
+    private static Matcher getMatcher(String regex, String target) {
+        return patternCompile(regex).matcher(target);
+    }
+
+    private static Pattern patternCompile(String regex) {
+        return Pattern.compile(regex);
+    }
+
+    private static boolean isNullOrEmpty(String target) {
+        return target == null || target.isEmpty();
+    }
+
+    private static void setCustomDelimiter() {
+        delimiter = "[" + delimiter + "]";
+    }
+
+
 }
