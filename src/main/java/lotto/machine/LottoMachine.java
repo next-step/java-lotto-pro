@@ -22,7 +22,7 @@ public class LottoMachine {
 
         OutputView.printInputBonusNumber();
         String bonusNumber = InputView.inputText();
-        WinnerLottoTicket winnerLottoTicket  = new WinnerLottoTicket(
+         WinnerLottoTicket winnerLottoTicket = new WinnerLottoTicket(
                 new LottoTicket(winnerNumbers),
                 Integer.parseInt(bonusNumber));
 

@@ -43,15 +43,8 @@ public class LottoTicket {
         return numbers;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("[");
-        for (Integer number : numbers){
-            builder.append(number + ", ");
-        }
-        builder.append("]\n");
-        return builder.toString();
+    public void printLotto(){
+        OutputView.printLotto(numbers);
     }
 
     public int match(LottoTicket winnerLottoTicket) {
