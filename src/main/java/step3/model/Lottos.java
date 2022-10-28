@@ -28,8 +28,6 @@ public class Lottos {
     public Map<Rank, Integer> getRankStatsOfLottos(List<LottoNumber> winningNumbers) {
         HashMap<Rank, Integer> result = new HashMap<>();
         lottos.forEach(lotto -> {
-            lotto.getNumbers();
-
             Rank rank = lotto.getRank(winningNumbers);
             result.put(rank, result.getOrDefault(rank, 0) + 1);
         });
