@@ -20,16 +20,19 @@ public class LottoService {
         this.lottos = new Lottos(LottoFactory.createLottos(size));
     }
 
-    public LottoResultDto getRankStatus(List<LottoNumber> winningNumbers) {
-        Map<Rank, Integer> rankIntegerMap = lottos.getRankStatsOfLottos(winningNumbers);
-        List<RankDto> rankDtos = Arrays.stream(Rank.values())
-                .map(rank -> new RankDto(rank, rankIntegerMap.getOrDefault(rank, 0)))
-                .collect(Collectors.toList());
+    public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers) {
+        Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(winningNumbers);
+        List<RankDto> rankDtos = getRanks(rankOfLottos);
         return new LottoResultDto(rankDtos, purchasePrice);
     }
 
-    public LottosNumberDto getLottoTicketState() {
+    public LottosNumberDto getLottoNumber() {
         return new LottosNumberDto(lottos.getNumbersOfLottos());
     }
 
+    private List<RankDto> getRanks(Map<Rank, Integer> rankOfLottos){
+        return Arrays.stream(Rank.values())
+                .map(rank -> new RankDto(rank, rankOfLottos.getOrDefault(rank, 0)))
+                .collect(Collectors.toList());
+    }
 }

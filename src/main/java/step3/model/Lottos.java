@@ -25,7 +25,7 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    public Map<Rank, Integer> getRankStatsOfLottos(List<LottoNumber> winningNumbers) {
+    public Map<Rank, Integer> getRankOfLottos(List<LottoNumber> winningNumbers) {
         HashMap<Rank, Integer> result = new HashMap<>();
         lottos.forEach(lotto -> {
             Rank rank = lotto.getRank(winningNumbers);

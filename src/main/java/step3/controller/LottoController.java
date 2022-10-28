@@ -18,12 +18,12 @@ public class LottoController {
         InputView.printPurchasingAmount();
         int amount = Console.readInt();
         LottoService lottoService = new LottoService(amount);
-        LottosNumberDto lottosNumberDto = lottoService.getLottoTicketState();
+        LottosNumberDto lottosNumberDto = lottoService.getLottoNumber();
         ResultView.printPurchasingLottos(lottosNumberDto);
         InputView.printWinningNumber();
         String winningNumber = Console.readLine();
         List<LottoNumber> lottoNumbers = LottoInputParser.parseToLottoNumberArray(winningNumber);
-        LottoResultDto lottoResultDto = lottoService.getRankStatus(lottoNumbers);
+        LottoResultDto lottoResultDto = lottoService.getLottoResult(lottoNumbers);
         ResultView.printWinStats(lottoResultDto);
     }
 
