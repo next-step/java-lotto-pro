@@ -20,4 +20,14 @@ public class Lottos {
 	public int size() {
 		return lottos.size();
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (final Lotto lotto : lottos) {
+			sb.append(lotto);
+			sb.append("\n");
+		}
+		return sb.toString();
+	}
 }

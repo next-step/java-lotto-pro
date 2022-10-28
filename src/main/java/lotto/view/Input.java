@@ -13,15 +13,31 @@ public class Input {
 	private Input() {
 	}
 
+	private static String nextLine(){
+		return SCANNER.nextLine();
+	}
+
 	public static Money inputPayment() {
-		System.out.println("구입금액을 입력해 주세요.");
-		return new Money(SCANNER.nextInt());
+		try {
+			System.out.println("구입금액을 입력해 주세요.");
+			String money = nextLine();
+			return new Money(Integer.parseInt(money));
+		}catch (NumberFormatException e){
+			return inputPayment();
+		}
 	}
 
 	public static Lotto inputWinnerLotto() {
-		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-		String winnersNumber = SCANNER.nextLine();
-		return new Lotto(LottoNumber.of(winnersNumber.split(SPLITER)));
+		try {
+			System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+			String winnersNumber = nextLine();
+			System.out.println();
+			return new Lotto(LottoNumber.of(winnersNumber.split(SPLITER)));
+		}catch (NumberFormatException e){
+			return inputWinnerLotto();
+		}catch (IllegalArgumentException e){
+			return inputWinnerLotto();
+		}
 	}
 
 }

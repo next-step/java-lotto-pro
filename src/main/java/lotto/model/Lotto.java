@@ -50,8 +50,6 @@ public class Lotto {
 
 	@Override
 	public String toString() {
-		return "Lotto{" +
-			"numbers=" + numbers +
-			'}';
+		return numbers.toString();
 	}
 }
