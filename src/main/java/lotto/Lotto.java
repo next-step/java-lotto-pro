@@ -21,6 +21,16 @@ public class Lotto {
 		}
 	}
 
+	public int match(final Lotto winnerLotto) {
+		return (int)numbers.stream()
+			.filter(winnerLotto::contain)
+			.count();
+	}
+
+	private boolean contain(final LottoNumber number) {
+		return numbers.contains(number);
+	}
+
 	@Override
 	public boolean equals(final Object o) {
 		if (this == o) {
