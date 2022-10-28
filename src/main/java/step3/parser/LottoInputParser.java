@@ -1,4 +1,4 @@
-package step3.io;
+package step3.parser;
 
 import step2.StringParser;
 import step3.model.LottoNumber;
