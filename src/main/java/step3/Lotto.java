@@ -3,12 +3,14 @@ package step3;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
+    private final static String NUMBER_DELIMITER = ", ";
     private final List<Integer> lottoNumbers;
     private int matchCount;
     
-    public Lotto(ArrayList<Integer> lottoNumbers) {
+    public Lotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
     
@@ -31,6 +33,10 @@ public class Lotto {
         return this.matchCount;
     }
     
+    public String numberToString() {
+        return lottoNumbers.stream().map(String::valueOf).collect(Collectors.joining(NUMBER_DELIMITER));
+    }
+    
     public boolean match(int winningNumber) {
         return this.lottoNumbers.contains(winningNumber);
     }
@@ -46,6 +52,5 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lottoNumbers, matchCount);
     }
-    
 
 }

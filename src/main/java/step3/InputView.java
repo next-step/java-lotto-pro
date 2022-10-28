@@ -18,6 +18,6 @@ public class InputView {
     
     public String inputWinningNumber() {
         System.out.println(REQUEST_WINNING_NUMBER);
-        return sc.nextLine();
+        return sc.next();
     }
 }
