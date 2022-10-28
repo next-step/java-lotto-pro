@@ -1,11 +1,14 @@
 package money;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class Money {
 
 	public static final Money ZERO = new Money(BigDecimal.ZERO);
+	private final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#,##0");
+	;
 
 	private final BigDecimal amount;
 
@@ -55,6 +58,11 @@ public class Money {
 	@Override
 	public int hashCode() {
 		return Objects.hash(amount);
+	}
+
+	@Override
+	public String toString() {
+		return DECIMAL_FORMAT.format(amount);
 	}
 
 	public boolean isLessThan(Money other) {

@@ -20,7 +20,7 @@ public class LottoApplication {
 
 		LastWeekWinLottoTicketView lastWeekWinLottoTicketView = new LastWeekWinLottoTicketView(scanner);
 
-		LottoWinResultView lottoWinResultView = new LottoWinResultView(scanner);
+		LottoWinResultView lottoWinResultView = new LottoWinResultView();
 
 		LottoTickets purchaseLottoTickets = lottoPurchaseView.purchaseLotto();
 
