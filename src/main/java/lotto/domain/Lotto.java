@@ -7,16 +7,21 @@ import common.constant.ErrorCode;
 
 public class Lotto {
 
-    private static final int LOTTO_NUMBER_COUNT = 6;
+    public static final int LOTTO_NUMBER_COUNT = 6;
     public static final int LOTTO_PRICE = 1000;
     private static final int MATCH_LOTTO_NUMBER = 1;
     private static final int NOT_MATCH_LOTTO_NUMBER = 0;
 
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    private Lotto(List<LottoNumber> lottoNumbers) {
         validateLotto(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static Lotto generateLotto(LottoNumberGenerator lottoNumberGenerator) {
+        List<LottoNumber> lottoNumbers = lottoNumberGenerator.generateLottoNumbers();
+        return new Lotto(lottoNumbers);
     }
 
     private void validateLotto(List<LottoNumber> lottoNumbers) {

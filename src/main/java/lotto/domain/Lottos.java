@@ -14,9 +14,7 @@ public class Lottos {
         List<Lotto> lottos = new ArrayList<>();
         int maxLottoCount = money.maxLottoCount();
         for(int i = 0; i < maxLottoCount; i++) {
-            lottos.add(new Lotto(Arrays.asList(
-                    LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3)
-                    , LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)))); // TODO 테스트를 위해 임시로 하드코딩(generator 사용 필요)
+            lottos.add(Lotto.generateLotto(new RandomLottoNumberGenerator()));
         }
         this.lottos = lottos;
     }
