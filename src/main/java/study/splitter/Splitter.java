@@ -28,6 +28,6 @@ public class Splitter {
             String customDelimiter = m.group(CUSTOM_DELIMITER_GROUP);
             return m.group(CUSTOM_DELIMITER_NUMBERS_GROUP).split(customDelimiter);
         }
-        throw new RuntimeException("[ERROR] The given string cannot be matched with a custom pattern.");
+        throw new IllegalArgumentException("[ERROR] The given string cannot be matched with a custom pattern.");
     }
 }
