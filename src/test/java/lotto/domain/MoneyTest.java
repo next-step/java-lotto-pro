@@ -1,0 +1,26 @@
+package lotto.domain;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import lotto.constant.ErrorCode;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+public class MoneyTest {
+
+    @ParameterizedTest
+    @CsvSource(value = {"4000:4", "5550:5", "150001:150"}, delimiter = ':')
+    void 입력된_돈으로_살_수_있는_로또_개수_반환(int inputMoney, int expectLottoCount) {
+        Money money = new Money(inputMoney);
+        assertThat(money.maxLottoCount()).isEqualTo(expectLottoCount);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-100, 500, 999})
+    void 입력된_돈이_1000보다_작을_경우_에러_발생(int inputMoney) {
+        assertThatThrownBy(() -> new Money(inputMoney)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorCode.로또를_구매하기_위해서는_1000원_이상_필요.getErrorMessage());
+    }
+}
