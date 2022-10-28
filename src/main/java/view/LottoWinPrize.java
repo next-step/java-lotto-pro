@@ -8,11 +8,11 @@ public enum LottoWinPrize {
 	FIVE_MATCHES(5, Money.wons(1_500_000)),
 	SIX_MATCHES(6, Money.wons(2_000_000_000));
 
-	public final int MATCH_COUNT;
-	public final Money PRIZE;
+	public final int matchCount;
+	public final Money prize;
 
 	LottoWinPrize(int matchCount, Money prize) {
-		this.MATCH_COUNT = matchCount;
-		this.PRIZE = prize;
+		this.matchCount = matchCount;
+		this.prize = prize;
 	}
 }

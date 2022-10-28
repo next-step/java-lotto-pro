@@ -16,7 +16,7 @@ public class StringAdderCalculator {
 		splitNumbers.stream()
 			.filter(StringAdderCalculator::isInvalidText)
 			.findAny()
-			.ifPresent((nonDigit) -> {
+			.ifPresent(nonDigit -> {
 				throw new RuntimeException(format("숫자 이외의 값 또는 음수를 입력할 수 없습니다, 입력값=%s", nonDigit));
 			});
 	}

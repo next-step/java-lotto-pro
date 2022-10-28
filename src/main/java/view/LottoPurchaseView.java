@@ -9,8 +9,8 @@ import money.Money;
 
 public class LottoPurchaseView {
 
-	private final static String PURCHASE_PROMPT_OUTPUT = "구입금액을 입력해 주세요.";
-	private final static String PURCHASE_RESULT_OUTPUT = "%s개를 구매했습니다.\n";
+	private static final String PURCHASE_PROMPT_OUTPUT = "구입금액을 입력해 주세요.";
+	private static final String PURCHASE_RESULT_OUTPUT = "%s개를 구매했습니다.\n";
 
 	private final Scanner scanner;
 	private final LottoVendor lottoVendor;

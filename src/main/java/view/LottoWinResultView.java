@@ -22,8 +22,8 @@ public class LottoWinResultView {
 	}
 
 	private void getMatchCount(LottoMatchResult lottoMatchResult, LottoWinPrize lottoWinPrize) {
-		int matchCount = lottoMatchResult.getMatchCount(lottoWinPrize.MATCH_COUNT);
-		System.out.printf("%s개 일치(%s원) - %s개", lottoWinPrize.MATCH_COUNT, lottoWinPrize.PRIZE, matchCount);
+		int matchCount = lottoMatchResult.getMatchCount(lottoWinPrize.matchCount);
+		System.out.printf("%s개 일치(%s원) - %s개", lottoWinPrize.matchCount, lottoWinPrize.prize, matchCount);
 		System.out.println("");
 	}
 }
