@@ -100,27 +100,36 @@
   ```
 * 당첨 개수에 따른 수익금 확인
   * ENUM으로 복권 일치 개수와 그에 따른 수익금 매핑
-  ```java
-  import java.math.BigDecimal;   
-  
+  ```java   
   public enum LottoPrize {
-    THREE(3, 5000, "3개 일치 (5000원)"),
-    FOUR(4, 50000, "4개 일치 (50000원)"),
-    FIVE(5, 1500000, "5개 일치 (1500000원)"),
-    SIX(6, 2000000000, "6개 일치 (2000000000원)")
+    NO_PRIZE(0, 0, "0~2개 일치 (0원)"),
+    FOURTH(3, 5000, "3개 일치 (5000원)"),
+    THIRD(4, 50000, "4개 일치 (50000원)"),
+    SECOND(5, 1500000, "5개 일치 (1500000원)"),
+    FIRST(6, 2000000000, "6개 일치 (2000000000원)")
     ;
   
     private final int matchCount;
-    private final BigDecimal lottoPrizeMoney;
+    private final int lottoPrizeMoney;
     private final String lottoPrizeMessage;
   
-    LottoPrize(int matchCount, BigDecimal lottoPrizeMoney, String lottoPrizeMessage) {
+    LottoPrize(int matchCount, int lottoPrizeMoney, String lottoPrizeMessage) {
       this.matchCount = matchCount;
       this.lottoPrizeMoney = lottoPrizeMoney;
       this.lottoPrizeMessage = lottoPrizeMessage;
     }
-  
-    public BigDecimal getLottoPrizeMoney() {
+
+    public static LottoPrize findLottoPrize(int matchCount) {
+        return Arrays.stream(LottoPrize.values()).filter(prize -> prize.getMatchCount() == matchCount)
+                .findFirst()
+                .orElse(NO_PRIZE);
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+      
+    public int getLottoPrizeMoney() {
       return lottoPrizeMoney;
     }
   }
@@ -134,3 +143,4 @@
 3. 로또는 6개의 서로 다른 숫자로 이루어진다.
 4. 입력된 돈을 1000으로 나눈 몫을 로또 구매 가능 개수로 반환한다.
 5. 입력된 돈이 1000보다 작을 경우 에러 발생한다.
+6. 당첨 번호와 구매한 로또 번호 비교 후 일치한 개수 반환한다.

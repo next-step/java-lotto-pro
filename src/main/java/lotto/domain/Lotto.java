@@ -9,6 +9,8 @@ public class Lotto {
 
     private static final int LOTTO_NUMBER_COUNT = 6;
     public static final int LOTTO_PRICE = 1000;
+    private static final int MATCH_LOTTO_NUMBER = 1;
+    private static final int NOT_MATCH_LOTTO_NUMBER = 0;
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -33,5 +35,20 @@ public class Lotto {
         if(lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ErrorCode.로또는_6개의_숫자로_이루어져야함.getErrorMessage());
         }
+    }
+
+    public LottoPrize findLottoPrize(Lotto prizeLotto) {
+        int matchCount = 0;
+        for(LottoNumber lottoNumber: this.lottoNumbers) {
+            matchCount += findMatchLottoNumber(prizeLotto, lottoNumber);
+        }
+        return LottoPrize.findLottoPrize(matchCount);
+    }
+
+    private int findMatchLottoNumber(Lotto prizeLotto, LottoNumber lottoNumber) {
+        if(prizeLotto.lottoNumbers.contains(lottoNumber)) {
+            return MATCH_LOTTO_NUMBER;
+        }
+        return NOT_MATCH_LOTTO_NUMBER;
     }
 }
