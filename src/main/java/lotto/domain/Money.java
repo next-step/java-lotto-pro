@@ -22,8 +22,8 @@ public class Money {
         return this.value;
     }
 
-    public long divide(Money price) {
-        return value / price.value;
+    public long divide(Money money) {
+        return value / money.value;
     }
 
     public void sum(long other) {

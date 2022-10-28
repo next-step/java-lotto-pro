@@ -3,8 +3,8 @@ package lotto.util;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ManualLottoGenerator implements LottoGenerator {
     private final List<Integer> numbers;
@@ -15,10 +15,9 @@ public class ManualLottoGenerator implements LottoGenerator {
 
     @Override
     public LottoTicket create() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int number : numbers) {
-            lottoNumbers.add(LottoNumber.get(number));
-        }
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::get)
+                .collect(Collectors.toList());
 
         return LottoTicket.create(lottoNumbers);
     }

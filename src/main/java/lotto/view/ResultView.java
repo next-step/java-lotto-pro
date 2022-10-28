@@ -31,7 +31,7 @@ public class ResultView {
 
         for (Rank rank : Rank.reverseValues()) {
             int matchCount = rank.getMatchCount();
-            System.out.printf("%d개 일치 (%d원) - %d개\n", matchCount, rank.getPriceValue(), dto.getCount(matchCount));
+            System.out.printf("%d개 일치 (%d원) - %d개\n", matchCount, rank.getMoneyValue(), dto.getCount(matchCount));
         }
     }
 

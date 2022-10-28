@@ -41,7 +41,7 @@ public class LottoController {
                 .replaceAll(WHITE_SPACE_REGEX_STRING, EMPTY);
 
         return Arrays.asList(STANDARD_PATTERN.split(input)).stream()
-                .map(v -> Integer.parseInt(v))
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 }

@@ -31,7 +31,7 @@ public class RankTest {
     @DisplayName("각 랭크의 가격을 알 수 있다")
     @Test
     void price_test() {
-        assertThat(Rank.FIRST.getPrice()).isEqualTo(new Money(2_000_000_000L));
+        assertThat(Rank.FIRST.getMoney()).isEqualTo(new Money(2_000_000_000L));
     }
 
     @DisplayName("전체 랭크에 따른 수입을 계산할 수 있다")
@@ -40,6 +40,6 @@ public class RankTest {
         StatisticDto dto = StatisticDto.create();
         dto.add(Rank.FIRST.getMatchCount());
 
-        assertThat(Rank.calculatePrice(dto)).isEqualTo(Rank.FIRST.getPrice());
+        assertThat(Rank.calculatePrice(dto)).isEqualTo(Rank.FIRST.getMoney());
     }
 }

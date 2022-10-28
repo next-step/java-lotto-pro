@@ -13,11 +13,11 @@ public enum Rank {
     FOURTH(3, new Money(5_000L));
 
     private final int matchCount;
-    private final Money price;
+    private final Money money;
 
-    Rank(int matchCount, Money price) {
+    Rank(int matchCount, Money money) {
         this.matchCount = matchCount;
-        this.price = price;
+        this.money = money;
     }
 
     public static boolean isBiggerThanMinimum(int count) {
@@ -37,18 +37,18 @@ public enum Rank {
         Money totalMoney = new Money(0L);
         for (Rank rank : Rank.values()) {
             int count = dto.getCount(rank.matchCount);
-            totalMoney.sum(rank.getPrice().multiply(count));
+            totalMoney.sum(rank.getMoney().multiply(count));
         }
 
         return totalMoney;
     }
 
-    public Money getPrice() {
-        return price;
+    public Money getMoney() {
+        return money;
     }
 
-    public Long getPriceValue() {
-        return price.value();
+    public Long getMoneyValue() {
+        return money.value();
     }
 
     public int getMatchCount() {
