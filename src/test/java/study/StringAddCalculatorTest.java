@@ -31,4 +31,11 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(3);
     }
 
+    @Test
+    @DisplayName("숫자 구분자를 컴마(,)이외에 콜론(:)으로도 구분하여 숫자의 합을 계산할 수 있다.")
+    public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
+        int result = StringAddCalculator.splitAndSum("1,2:3");
+        assertThat(result).isEqualTo(6);
+    }
+
 }
