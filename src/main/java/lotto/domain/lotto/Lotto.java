@@ -7,8 +7,6 @@ import lotto.constant.LottoConstant;
 import lotto.message.ErrorMessages;
 
 public class Lotto {
-    private static final int MATCH = 1;
-    private static final int NOT_MATCH = 0;
     private final List<LottoNumber> lottoNumbers;
 
     private Lotto(List<LottoNumber> lottoNumbers) {
@@ -34,18 +32,7 @@ public class Lotto {
     }
 
     public int matches(List<LottoNumber> winningNumbers) {
-        int matches = 0;
-        for (LottoNumber lottoNumber : this.lottoNumbers) {
-            matches += matchCount(winningNumbers, lottoNumber);
-        }
-        return matches;
-    }
-
-    private int matchCount(List<LottoNumber> winningNumbers, LottoNumber lottoNumber) {
-        if (winningNumbers.contains(lottoNumber)) {
-            return MATCH;
-        }
-        return NOT_MATCH;
+        return (int) lottoNumbers.stream().filter(winningNumbers::contains).count();
     }
 
     @Override
