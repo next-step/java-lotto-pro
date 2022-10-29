@@ -65,7 +65,10 @@
         - [x] 입력 값 관련 유효성 처리
     - [ ] 당첨 통계 기능 추가
         - [x] 3~6개 일치하는 경우 개수 파악
-        - [ ] 총 수익률 관련 처리
+        - [x] 총 수익률 관련 처리기
+            - [x] 전체 로또 금액 계산
+            - [x] 일치하는 숫자별 당첨금 확인
+            - [x] 로또 당첨 금액 계산
 3. Reference
     - [랜덤 로또 번호 구현](https://mainia.tistory.com/2318?fbclid=IwAR1jsc1EZZr9DykSocbJiEx53ZKTSKrpc1PSBHnHankbpLvO-OOc0HnHemo)
     - [스트림 관련](https://ryan-han.com/post/dev/java-stream/)

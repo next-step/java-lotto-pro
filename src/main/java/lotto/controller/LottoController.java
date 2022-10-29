@@ -1,11 +1,8 @@
 package lotto.controller;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoTickets;
-import lotto.domain.WinningLottoNumbers;
+import lotto.domain.*;
 import lotto.view.InputView;
-import lotto.view.OutputView;
+import lotto.view.ResultView;
 
 public class LottoController {
 
@@ -16,12 +13,18 @@ public class LottoController {
     }
 
     public void startLotto() {
-        LottoTickets lottoTickets = lottoGame.buy(InputView.getLottoPurchasePrice());
+        int purchasePrice = InputView.getLottoPurchasePrice();
+        LottoTickets lottoTickets = lottoGame.buy(purchasePrice);
 
-        OutputView.lottoPurchaseCount(lottoTickets.ticketCount());
-        OutputView.lottoPurchasePrint(lottoTickets.toString());
+        ResultView.lottoPurchase(lottoTickets.ticketCount(), lottoTickets.toString());
 
         LottoNumbers winningLottoNumbers = new LottoNumbers(
                 new WinningLottoNumbers(InputView.getLastWeekWinningNumber()).getLottoNumbers());
+
+        lottoGame.makeLottoResult(winningLottoNumbers, lottoTickets);
+
+        ResultView.winningResult(lottoGame.winningResult());
+        ResultView.StatisticsPercent(lottoGame.statisticsPercent(purchasePrice));
     }
+
 }

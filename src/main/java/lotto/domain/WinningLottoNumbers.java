@@ -11,7 +11,8 @@ import java.util.stream.Collectors;
 public class WinningLottoNumbers {
 
     private static final String DELIMITER = ",";
-    private static final Pattern LOTTO_COMMA_PATTERN = Pattern.compile("^\\d,\\d,\\d,\\d,\\d,\\d$");
+    private static final Pattern LOTTO_COMMA_PATTERN
+            = Pattern.compile("^(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+$");
 
     private List<Integer> lottoNumbers;
 
@@ -39,7 +40,7 @@ public class WinningLottoNumbers {
     }
 
     private List<Integer> convertToInt(String lottoNumbers) {
-        return Arrays.stream(lottoNumbers.trim().split(DELIMITER))
+        return Arrays.stream(lottoNumbers.replaceAll("\\s","").split(DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }

@@ -6,11 +6,13 @@ import java.util.List;
 public class LottoGame {
 
     private final LottoGenerator lottoGenerator;
-    private static final int LOTTO_PRICE = 1000;
+    private final LottoResult lottoResult;
+    public static final int LOTTO_PRICE = 1000;
 
 
     public LottoGame() {
         this.lottoGenerator = new LottoGenerator();
+        this.lottoResult = new LottoResult();
     }
 
     public LottoTickets buy(int purchasePrice) {
@@ -28,6 +30,18 @@ public class LottoGame {
         if (purchasePrice < LOTTO_PRICE || (purchasePrice % LOTTO_PRICE) != 0) {
             throw new IllegalArgumentException("로또 금액은 1000원 단위로 입력해야 합니다.");
         }
+    }
+
+    public void makeLottoResult(LottoNumbers winningLottoNumber, LottoTickets lottoTickets) {
+        lottoTickets.matchLottoResult(winningLottoNumber, lottoResult);
+    }
+
+    public double statisticsPercent(int purchasePrice) {
+        return lottoResult.lottoProfitPercent(purchasePrice);
+    }
+
+    public LottoResult winningResult() {
+        return lottoResult;
     }
 
 }

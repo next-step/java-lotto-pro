@@ -15,6 +15,16 @@ public class LottoTickets {
         return this.lottoTicketList.size();
     }
 
+    public int ticketListPrice() {
+        return this.lottoTicketList.size() * 1000;
+    }
+
+    public void matchLottoResult(LottoNumbers winningLottoNumber, LottoResult lottoResult) {
+        for (LottoTicket lottoTicket : lottoTicketList) {
+            lottoResult.increaseRankCount(lottoTicket.compareLotto(winningLottoNumber));
+        }
+    }
+
     @Override
     public String toString() {
         return this.lottoTicketList.stream()
