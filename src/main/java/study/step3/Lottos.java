@@ -38,4 +38,8 @@ public class Lottos {
         }
         return winners;
     }
+
+    public Winners findWinners(String winLottoNumbers) {
+        return findWinners(new Lotto(LottoParser.stringToListInteger(winLottoNumbers)));
+    }
 }

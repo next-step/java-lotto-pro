@@ -9,4 +9,15 @@ public class ResultView {
             System.out.println(lotto);
         }
     }
+
+    public static void printLottoWinners(Winners winners) {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        for (Prize prize : Prize.values()) {
+            System.out.printf("%d개 일치 (%d원)- %d개\n"
+                    , prize.getWinNumber()
+                    , prize.getReward()
+                    , winners.nThPrizeSize(prize.getWinNumber()));
+        }
+    }
 }
