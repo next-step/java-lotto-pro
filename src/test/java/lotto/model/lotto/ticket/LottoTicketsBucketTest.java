@@ -160,23 +160,23 @@ class LottoTicketsBucketTest {
                     ),
                     Arguments.of(
                             new int[]{0, 0, 0, 0, 0, 0, 1},
-                            LottoConstant.PROFIT_SIX_DIGIT_MATCHES * 1
+                            LottoConstant.PROFIT_SIX_DIGITS_MATCH * 1
                     ),
                     Arguments.of(
                             new int[]{0, 0, 0, 0, 0, 0, 5},
-                            LottoConstant.PROFIT_SIX_DIGIT_MATCHES * 5
+                            LottoConstant.PROFIT_SIX_DIGITS_MATCH * 5
                     ),
                     Arguments.of(
                             new int[]{0, 0, 0, 1, 1, 1, 0},
-                            LottoConstant.PROFIT_THREE_DIGIT_MATCHES * 1 + LottoConstant.PROFIT_FOUR_DIGIT_MATCHES * 1 + LottoConstant.PROFIT_FIVE_DIGIT_MATCHES * 1
+                            LottoConstant.PROFIT_THREE_DIGITS_MATCH * 1 + LottoConstant.PROFIT_FOUR_DIGITS_MATCH * 1 + LottoConstant.PROFIT_FIVE_DIGITS_MATCH * 1
                     ),
                     Arguments.of(
                             new int[]{0, 0, 0, 3, 0, 2, 0},
-                            LottoConstant.PROFIT_THREE_DIGIT_MATCHES * 3 + LottoConstant.PROFIT_FIVE_DIGIT_MATCHES * 2
+                            LottoConstant.PROFIT_THREE_DIGITS_MATCH * 3 + LottoConstant.PROFIT_FIVE_DIGITS_MATCH * 2
                     ),
                     Arguments.of(
                             new int[]{0, 0, 0, 1, 2, 4, 0},
-                            LottoConstant.PROFIT_THREE_DIGIT_MATCHES * 1 + LottoConstant.PROFIT_FOUR_DIGIT_MATCHES * 2 + LottoConstant.PROFIT_FIVE_DIGIT_MATCHES * 4
+                            LottoConstant.PROFIT_THREE_DIGITS_MATCH * 1 + LottoConstant.PROFIT_FOUR_DIGITS_MATCH * 2 + LottoConstant.PROFIT_FIVE_DIGITS_MATCH * 4
                     )
             );
         }

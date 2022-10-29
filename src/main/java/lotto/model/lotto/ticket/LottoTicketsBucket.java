@@ -56,9 +56,9 @@ public class LottoTicketsBucket {
     }
 
     public int sumProfit() {
-        return lottoSameNumberCount[3] * LottoConstant.PROFIT_THREE_DIGIT_MATCHES +
-                lottoSameNumberCount[4] * LottoConstant.PROFIT_FOUR_DIGIT_MATCHES +
-                lottoSameNumberCount[5] * LottoConstant.PROFIT_FIVE_DIGIT_MATCHES +
-                lottoSameNumberCount[6] * LottoConstant.PROFIT_SIX_DIGIT_MATCHES;
+        return lottoSameNumberCount[3] * LottoConstant.PROFIT_THREE_DIGITS_MATCH +
+                lottoSameNumberCount[4] * LottoConstant.PROFIT_FOUR_DIGITS_MATCH +
+                lottoSameNumberCount[5] * LottoConstant.PROFIT_FIVE_DIGITS_MATCH +
+                lottoSameNumberCount[6] * LottoConstant.PROFIT_SIX_DIGITS_MATCH;
     }
 }
