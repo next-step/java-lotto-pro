@@ -8,8 +8,15 @@ public class StringAddCalculator {
     private static final String delimiterExceptionRegex = "[!@#$%^&*(),.?\":{}|<>]";
     private static final String basicSplitRegex = ",|:";
     private static final String negativeExceptionMessage = "negative number included Exception";
-    private static int sum = 0;
-    private static String delimiter = basicSplitRegex;
+    private static int sum;
+    private static String delimiter;
+    private static String exceptDelimiterString;
+
+    public StringAddCalculator() {
+        this.sum = 0;
+        this.delimiter = basicSplitRegex;
+        this.exceptDelimiterString = "";
+    }
 
     public static int splitAndSum(String target) {
         if (isNullOrEmpty(target)) {
@@ -35,7 +42,6 @@ public class StringAddCalculator {
     }
 
     private static String[] getCustomDelimiterNumbers(String regex, String target) {
-        String exceptDelimiterString = "";
         Matcher m = getMatcher(regex, target);
         if (m.find()) {
             delimiter = m.group(1);
