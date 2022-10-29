@@ -6,7 +6,20 @@ public class StringAddCalculator {
 		if (input == null || input.isEmpty()) {
 			return 0;
 		}
-		return Integer.parseInt(input);
+		String[] splitInput = splitInput(input,",");
+		return calculatorInput(splitInput);
+	}
+
+	private static String[] splitInput(String input, String separator) {
+		return input.split(separator);
+	}
+
+	private static int calculatorInput(String[] splitInput) {
+		int result = 0;
+		for (String str : splitInput) {
+			result += Integer.parseInt(str);
+		}
+		return result;
 	}
 
 }
