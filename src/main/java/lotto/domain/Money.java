@@ -37,6 +37,10 @@ public class Money {
         return Math.floor(profit * FLOOR_LOCATION) / FLOOR_LOCATION;
     }
 
+    public boolean isLessThan(Money otherMoney) {
+        return this.money < otherMoney.money;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -52,9 +56,5 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(money);
-    }
-
-    public boolean isLessThan(Money otherMoney) {
-        return this.money < otherMoney.money;
     }
 }
