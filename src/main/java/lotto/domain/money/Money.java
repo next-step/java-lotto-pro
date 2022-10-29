@@ -8,12 +8,10 @@ public class Money {
 
     private static final int MIN_AMOUNT = 0;
     private final int amount;
-    private int remain;
 
     public Money(int amount) {
         validate(amount);
         this.amount = amount;
-        this.remain = 0;
     }
 
     private void validate(int amount) {
@@ -30,14 +28,7 @@ public class Money {
         if (!isPossibleBuyLotto(price)) {
             throw new RuntimeException(ErrorStatus.CAN_NOT_PURCHASE_LOTTO.getMessage());
         }
-        int count = Math.floorDiv(amount, price);
-        this.remain = this.amount - (price * count);
-        return count;
-    }
-
-
-    public int useMoney() {
-        return this.amount - remain;
+        return Math.floorDiv(amount, price);
     }
 
     @Override

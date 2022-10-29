@@ -45,12 +45,12 @@ public class MoneyTest {
     }
 
     @ParameterizedTest
-    @DisplayName("금액이 로또 가격으로 딱 나누어 떨어지지 않았을때 사용금액 반환")
+    @DisplayName("금액이 로또 가격으로 딱 나누어 떨어지지 않았을때 로또 개수 반환")
     @MethodSource("useMoneyInfo")
     void return_use_money(int amount, int price, int expect) {
         Money money = new Money(amount);
         money.possibleBuyLottoCount(price);
-        assertThat(money.useMoney()).isEqualTo(expect);
+        assertThat(money.possibleBuyLottoCount(price)).isEqualTo(expect);
     }
 
 
@@ -70,8 +70,8 @@ public class MoneyTest {
 
     private static Stream<Arguments> useMoneyInfo() {
         return Stream.of(
-                Arguments.of(1000, 300, 900),
-                Arguments.of(1000, 400, 800)
+                Arguments.of(1000, 300, 3),
+                Arguments.of(1000, 400, 2)
         );
     }
 }
