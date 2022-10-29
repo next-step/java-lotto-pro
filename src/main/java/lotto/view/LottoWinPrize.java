@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.Arrays;
+
 import money.Money;
 
 public enum LottoWinPrize {
@@ -17,5 +19,12 @@ public enum LottoWinPrize {
 	LottoWinPrize(int matchCount, Money prize) {
 		this.matchCount = matchCount;
 		this.prize = prize;
+	}
+
+	public static LottoWinPrize matchCountOf(int matchCount) {
+		return Arrays.stream(LottoWinPrize.values())
+			.filter(winPrize -> winPrize.matchCount == matchCount)
+			.findAny()
+			.orElseThrow(IllegalArgumentException::new);
 	}
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import lotto.view.LottoWinPrize;
+
 public class LottoTickets {
 
 	private final List<LottoTicket> lottoTicketList;
@@ -29,10 +31,11 @@ public class LottoTickets {
 		return lottoTicketList.size();
 	}
 
-	public LottoWinResults match(LottoTicket comparedTicket) {
-		return LottoWinResults.computeWinResult(
+	public LottoWinPrizes match(LottoTicket comparedTicket) {
+		return LottoWinPrizes.of(
 			lottoTicketList.stream()
 				.map(lottoTicket -> lottoTicket.match(comparedTicket))
+				.map(LottoWinPrize::matchCountOf)
 				.collect(Collectors.toList()));
 	}
 

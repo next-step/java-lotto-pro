@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
-import lotto.domain.LottoWinResults;
+import lotto.domain.LottoWinPrizes;
 import lotto.domain.ProfitMargin;
 import money.Money;
 
@@ -21,13 +21,13 @@ public class LottoWinResultView {
 	public void printWinResult(LottoTickets purchaseLottoTickets, LottoTicket lastWeekWinLottoTicket) {
 		System.out.println(WIN_RESULT_OUTPUT);
 
-		LottoWinResults lottoWinResults = purchaseLottoTickets.match(lastWeekWinLottoTicket);
+		LottoWinPrizes lottoWinPrizes = purchaseLottoTickets.match(lastWeekWinLottoTicket);
 
-		printMatchCount(lottoWinResults);
-		printProfitMargin(lottoWinResults);
+		printMatchCount(lottoWinPrizes);
+		printProfitMargin(lottoWinPrizes);
 	}
 
-	private void printMatchCount(LottoWinResults lottoWinResults) {
+	private void printMatchCount(LottoWinPrizes lottoWinResults) {
 		printMatchCount(LottoWinPrize.THREE_MATCHES, lottoWinResults.getWinPrizeCount(LottoWinPrize.THREE_MATCHES));
 		printMatchCount(LottoWinPrize.FOUR_MATCHES, lottoWinResults.getWinPrizeCount(LottoWinPrize.FOUR_MATCHES));
 		printMatchCount(LottoWinPrize.FIVE_MATCHES, lottoWinResults.getWinPrizeCount(LottoWinPrize.FIVE_MATCHES));
@@ -39,7 +39,7 @@ public class LottoWinResultView {
 		System.out.println();
 	}
 
-	private void printProfitMargin(LottoWinResults lottoWinResults) {
+	private void printProfitMargin(LottoWinPrizes lottoWinResults) {
 		System.out.println();
 
 		ProfitMargin profitMargin = lottoWinResults.getProfitMargin(lottoPrice);
