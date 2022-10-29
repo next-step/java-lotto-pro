@@ -25,6 +25,6 @@ class LottoPaperTest {
 
         LottoPaper lottoPaper = new LottoPaper(lottos);
 
-        assertThat(lottoPaper).isEqualTo(new LottoPaper(lottos));
+        assertThat(lottoPaper.getLottos().size()).isEqualTo(1);
     }
 }
