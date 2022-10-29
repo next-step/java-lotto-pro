@@ -15,16 +15,17 @@ public class LottoNumber {
     }
 
     public LottoNumber(String number) {
-        validateString(number);
-        int convertNumber = Integer.parseInt(number);
-        validate(convertNumber);
-        this.number = convertNumber;
+        this.number = validateString(number);
+        ;
     }
 
-    private void validateString(String number) {
+    private int validateString(String number) {
         if (!number.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException(ErrorStatus.INVALID_LOTTO_NUMBER.getMessage());
         }
+        int convertNumber = Integer.parseInt(number);
+        validate(convertNumber);
+        return convertNumber;
     }
 
     private void validate(int number) {
