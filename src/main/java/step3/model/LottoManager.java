@@ -3,12 +3,21 @@ package step3.model;
 import step3.view.InputView;
 
 public class LottoManager {
-    private LottoGenerator lottoGenerator;
+    private static LottoGenerator lottoGenerator = new LottoGenerator();
 
     public static void purchaseLotto() {
-        InputView.inputPurchasePrice(new LottoGenerator());
+
+        Lottos lottos = generateLottos();
 
 
+
+
+    }
+
+    private static Lottos generateLottos() {
+        InputView.inputPurchasePrice(lottoGenerator);
+        Lottos lottos = lottoGenerator.generateLottos();
+        return lottos;
     }
 
 }
