@@ -18,3 +18,7 @@ ex.) "//;\n1:2,3,6;4" => 16
 * 문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw한다.
 ex.) "aaa" => RuntimeException, "-1:9" => RuntimeException, "//;\n1.2.3" => RuntimeException, ":" => RuntimeException,
 ":,:" => RuntimeException
+
+## 로또
+* 로또 구입 금액을 입력하면 구입금액에 해당하는 로또를 발급해야 한다.
+* 로또 1장의 가격은 1000원이다.
