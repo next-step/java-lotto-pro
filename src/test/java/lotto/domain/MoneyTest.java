@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import common.constant.ErrorCode;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -30,5 +31,11 @@ public class MoneyTest {
         Lottos lottos = new Lottos(new Money(inputMoney));
         Money totalPrice = lottos.findTotalPrice();
         assertThat(totalPrice.findProfitsRatio(new Money(totalPrize))).isEqualTo(profit);
+    }
+
+    @Test
+    void 인자로_넘긴_돈보다_주어진_돈이_작을_경우_true_반환() {
+        Money money = new Money(5000);
+        assertThat(money.isLessThan(new Money(6000))).isTrue();
     }
 }
