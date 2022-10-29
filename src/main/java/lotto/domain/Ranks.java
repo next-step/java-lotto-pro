@@ -4,12 +4,13 @@ import java.util.*;
 
 public class Ranks {
 
-    private static final List<Rank> ranks = Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.MISS);
+    private static final List<Rank> ranks =
+            Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH, Rank.MISS);
     private final Map<Rank, Integer> countsOfRanks;
 
     public Ranks() {
-        countsOfRanks = new TreeMap<>(Comparator.comparingInt(Rank::getCountOfMatch));
-        for(Rank rank : ranks) {
+        countsOfRanks = new TreeMap<>(Comparator.comparingInt(Rank::getRankingNumber).reversed());
+        for (Rank rank : ranks) {
             countsOfRanks.put(rank, 0);
         }
     }

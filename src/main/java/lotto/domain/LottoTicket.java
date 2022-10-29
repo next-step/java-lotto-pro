@@ -9,15 +9,12 @@ public class LottoTicket {
         this.lottos = lottos;
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
-
-    public int getCount() {
+    public int getLottoCount() {
         return lottos.size();
     }
 
-    public Ranks check(final Ranks ranks, final WinningLotto winninglotto) {
+    public Ranks check(final WinningLotto winninglotto) {
+        final Ranks ranks = new Ranks();
         for(Lotto lotto : lottos) {
             ranks.add(lotto.compareTo(winninglotto));
         }

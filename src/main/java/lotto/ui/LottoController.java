@@ -21,8 +21,7 @@ public class LottoController {
     }
 
     private WinningLotto inputWinningNumber() {
-        List<Integer> numbers = InputView.inputWinningNumber();
-        return new WinningLotto(numbers);
+        return new WinningLotto(InputView.inputWinningNumber(), InputView.inputBonusNumber());
     }
 
     private LottoTicket createLotto(final RandomLottoGenerator lottoGenerator, final int quantity) {

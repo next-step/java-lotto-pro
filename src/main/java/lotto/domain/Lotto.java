@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -23,10 +21,26 @@ public class Lotto {
         }
     }
 
-    public Rank compareTo(Lotto other) {
+    public Rank compareTo(WinningLotto winningLotto) {
+
         Set<LottoNumber> copy = new HashSet<>(lottoNumbers);
-        copy.retainAll(other.lottoNumbers);
-        return Rank.valueOf(copy.size());
+
+        int matchBonusBallCount = matchBonusBallCount(winningLotto, copy);
+        int matchBallCount = matchBallCount(winningLotto, copy);
+
+        return Rank.valueOf(new MatchCount(matchBallCount, matchBonusBallCount));
+    }
+
+    private int matchBallCount(final WinningLotto winningLotto, final Set<LottoNumber> lottoNumbers) {
+        lottoNumbers.retainAll(winningLotto.getLottoNumbers());
+        return lottoNumbers.size();
+    }
+
+    private int matchBonusBallCount(final WinningLotto winningLotto, final Set<LottoNumber> copy) {
+        if(copy.contains(winningLotto.getBonusBall())) {
+            return 1;
+        }
+        return 0;
     }
 
     public Set<LottoNumber> getLottoNumbers() {

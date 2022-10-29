@@ -13,7 +13,7 @@ public class MatchCount implements Comparable<MatchCount> {
         this.matchBonusBallCount = matchBonusBallCount;
     }
 
-    public Integer getCount() {
+    public Integer getMatchBallCount() {
         return matchBallCount;
     }
 

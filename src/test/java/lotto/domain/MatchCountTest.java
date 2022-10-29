@@ -11,7 +11,7 @@ public class MatchCountTest {
     @Test
     @DisplayName("로또숫자 일치 개수 생성 작업이 정상적으로 동작한다.")
     public void constructor() {
-        assertThat(new MatchCount(6, 1).getCount()).isEqualTo(6);
+        assertThat(new MatchCount(6, 1).getMatchBallCount()).isEqualTo(6);
     }
 
     @Test

@@ -17,7 +17,7 @@ public class LottoTicketTest {
         Lotto secondLotto = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12));
 
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(firstLotto, secondLotto));
-        assertThat(lottoTicket.getLottos()).hasSize(2);
+        assertThat(lottoTicket.getLottoCount()).isEqualTo(2);
     }
 
     @Test
@@ -27,7 +27,7 @@ public class LottoTicketTest {
         Lotto secondLotto = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12));
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(firstLotto, secondLotto));
 
-        Ranks ranks = lottoTicket.check(new Ranks(), new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Ranks ranks = lottoTicket.check(new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7));
 
         assertAll(
                 () -> assertThat(ranks.getCountsOfRanks()).containsEntry(Rank.FIRST, 1),
