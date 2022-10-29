@@ -39,6 +39,22 @@ public class LottoTicketsBucket {
         return lottoSameNumberCount;
     }
 
+    public int sameThreeNumbersCount() {
+        return lottoSameNumberCount[3];
+    }
+
+    public int sameFourNumbersCount() {
+        return lottoSameNumberCount[4];
+    }
+
+    public int sameFiveNumbersCount() {
+        return lottoSameNumberCount[5];
+    }
+
+    public int sameSixNumbersCount() {
+        return lottoSameNumberCount[6];
+    }
+
     public int sumProfit() {
         return lottoSameNumberCount[3] * LottoConstant.PROFIT_THREE_DIGIT_MATCHES +
                 lottoSameNumberCount[4] * LottoConstant.PROFIT_FOUR_DIGIT_MATCHES +
