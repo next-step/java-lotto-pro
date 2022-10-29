@@ -1,5 +1,11 @@
 package lotto;
 
+import static lotto.view.LottoWinPrize.FIVE_MATCHES;
+import static lotto.view.LottoWinPrize.FOUR_MATCHES;
+import static lotto.view.LottoWinPrize.ONE_MATCHES;
+import static lotto.view.LottoWinPrize.SIX_MATCHES;
+import static lotto.view.LottoWinPrize.THREE_MATCHES;
+import static lotto.view.LottoWinPrize.TWO_MATCHES;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -12,6 +18,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.domain.LottoTicket;
+import lotto.view.LottoWinPrize;
 
 class LottoTicketTest {
 
@@ -31,20 +38,20 @@ class LottoTicketTest {
 
 	@ParameterizedTest
 	@MethodSource("두개의_로또_티켓_입력")
-	void 두개의_로또_티켓을_비교하여_일치하는_숫자_갯수를_알_수_있다(LottoTicket 로또티켓, LottoTicket 비교_로또티켓, int 예상_동일_번호_갯수) {
-		int 동일_번호_갯수 = 로또티켓.match(비교_로또티켓);
-		assertThat(동일_번호_갯수).isEqualTo(예상_동일_번호_갯수);
+	void 두개의_로또_티켓을_비교하여_일치하는_숫자_갯수를_알_수_있다(LottoTicket 로또티켓, LottoTicket 비교_로또티켓, LottoWinPrize 예상_당첨_결과) {
+		LottoWinPrize 당첨_결과 = 로또티켓.match(비교_로또티켓);
+		assertThat(당첨_결과).isEqualTo(예상_당첨_결과);
 	}
 
 	private static Stream<Arguments> 두개의_로또_티켓_입력() {
 		return Stream.of(
-			Arguments.of(LottoTicket.of(6, 5, 4, 3, 2, 7), LottoTicket.of(6, 5, 4, 3, 2, 1), 5),
-			Arguments.of(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoTicket.of(1, 7, 8, 9, 10, 11), 1),
-			Arguments.of(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoTicket.of(1, 2, 7, 8, 9, 10), 2),
-			Arguments.of(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoTicket.of(1, 2, 3, 7, 8, 9), 3),
-			Arguments.of(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoTicket.of(1, 2, 3, 4, 8, 9), 4),
-			Arguments.of(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoTicket.of(1, 2, 3, 4, 5, 9), 5),
-			Arguments.of(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoTicket.of(1, 2, 3, 4, 5, 6), 6)
+			Arguments.of(LottoTicket.of(6, 5, 4, 3, 2, 7), LottoTicket.of(6, 5, 4, 3, 2, 1), FIVE_MATCHES),
+			Arguments.of(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoTicket.of(1, 7, 8, 9, 10, 11), ONE_MATCHES),
+			Arguments.of(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoTicket.of(1, 2, 7, 8, 9, 10), TWO_MATCHES),
+			Arguments.of(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoTicket.of(1, 2, 3, 7, 8, 9), THREE_MATCHES),
+			Arguments.of(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoTicket.of(1, 2, 3, 4, 8, 9), FOUR_MATCHES),
+			Arguments.of(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoTicket.of(1, 2, 3, 4, 5, 9), FIVE_MATCHES),
+			Arguments.of(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoTicket.of(1, 2, 3, 4, 5, 6), SIX_MATCHES)
 		);
 	}
 

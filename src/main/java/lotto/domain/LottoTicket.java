@@ -10,6 +10,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import lotto.view.LottoWinPrize;
+
 public class LottoTicket {
 
 	public static final int NUMBER_COUNT = 6;
@@ -55,15 +57,15 @@ public class LottoTicket {
 		return count != NUMBER_COUNT;
 	}
 
-	public int match(LottoTicket other) {
+	public LottoWinPrize match(LottoTicket other) {
 		Set<LottoNumber> comparedLottoNumbers = new HashSet<>(other.lottoNumbers);
 
-		int equalNumberCount = 0;
+		int matchCount = 0;
 		for (LottoNumber lottoNumber : this.lottoNumbers) {
-			equalNumberCount += comparedLottoNumbers.contains(lottoNumber) ? 1 : 0;
+			matchCount += comparedLottoNumbers.contains(lottoNumber) ? 1 : 0;
 		}
 
-		return equalNumberCount;
+		return LottoWinPrize.matchCountOf(matchCount);
 	}
 
 	@Override
