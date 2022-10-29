@@ -2,7 +2,7 @@ package step3.model;
 
 import java.util.Objects;
 
-public class Number {
+public class Number implements Comparable<Number> {
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
 
@@ -37,5 +37,9 @@ public class Number {
 
     @Override public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override public int compareTo(Number o) {
+        return Integer.compare(this.number, o.number);
     }
 }
