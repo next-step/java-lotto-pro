@@ -1,6 +1,7 @@
 package study.step3;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class NumberSet {
@@ -13,6 +14,7 @@ public class NumberSet {
         if (numberSet.isEmpty()) {
             addNumbers();
         }
+        Collections.shuffle(numberSet);
         return numberSet;
     }
 
