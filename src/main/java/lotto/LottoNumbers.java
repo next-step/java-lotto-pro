@@ -16,7 +16,7 @@ public class LottoNumbers {
         prize.put(3, 0);
     }
 
-    public int countPurchase() {
+    public int purchaseCount() {
         return lottoNumbers.size();
     }
 

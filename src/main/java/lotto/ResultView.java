@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ResultView {
@@ -8,14 +7,10 @@ public class ResultView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    List<LottoNumber> resultPurchase(LottoNumberGenerator lottoNumberGenerator, int countPurchase) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < countPurchase; i++) {
-            List<Integer> sixNumbers = lottoNumberGenerator.generateSixNumbers();
-            System.out.println(sixNumbers);
-            lottoNumbers.add(new LottoNumber(sixNumbers));
+    void resultPurchase(List<LottoNumber> lottoNumbers) {
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            System.out.println(lottoNumber);
         }
-        return lottoNumbers;
     }
 
     void resultWinningStatistics(int payMoney, LottoNumbers lottoNumbers) {
