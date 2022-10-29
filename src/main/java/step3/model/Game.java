@@ -21,6 +21,7 @@ public class Game {
 
     public Game(int count) {
         this.lottoBuyCount = count;
+        checkLottoBuyCount();
         initLottoCandidateNumbers();
     }
 
@@ -30,12 +31,19 @@ public class Game {
         }
         this.money = convertNumber(money);
         this.lottoBuyCount = getLottoBuyCount(this.money);
+        checkLottoBuyCount();
         initLottoCandidateNumbers();
     }
 
     private void initLottoCandidateNumbers() {
         for (int i = 1; i < 46; i++) {
             this.lottoCandidateNumbers.add(new LottoNumber(i));
+        }
+    }
+
+    private void checkLottoBuyCount() {
+        if (this.lottoBuyCount < 0) {
+            throw new RuntimeException(ErrorMessageConstant.ZERO_LOTTO_COUNT);
         }
     }
 

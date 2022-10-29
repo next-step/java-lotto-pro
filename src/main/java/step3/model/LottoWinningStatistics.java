@@ -10,30 +10,40 @@ public class LottoWinningStatistics {
     private double totalProfit = 0;
 
     public LottoWinningStatistics(List<LottoResult> lottoResults, LottoResult winLottoResult) {
+        initLottoWinningStatistics();
         setLottoWinningStatistics(lottoResults, winLottoResult);
         setTotalProfit();
+    }
+
+    private void initLottoWinningStatistics() {
+        for (int i = 0; i < 7; i++) {
+            this.lottoWinningStatistics.put(i, 0);
+        }
     }
 
     private void setLottoWinningStatistics(List<LottoResult> lottoResults, LottoResult winLottoResult) {
         for (LottoResult lottoResult : lottoResults) {
             int matchedCount = lottoResult.getEqualCount(winLottoResult);
-            this.lottoWinningStatistics.put(
-                    matchedCount,
-                    lottoWinningStatistics.get(matchedCount) != null ? lottoWinningStatistics.get(matchedCount) + 1 : 1
-            );
+            setLottoWinningStatistic(matchedCount);
         }
     }
 
+    private void setLottoWinningStatistic(int matchedCount) {
+        this.lottoWinningStatistics.put(matchedCount, lottoWinningStatistics.get(matchedCount) + 1);
+    }
+
+    public Map<Integer, Integer> getLottoWinningStatistics() {
+        return lottoWinningStatistics;
+    }
+
     private void setTotalProfit() {
-        for (Integer matchCount : lottoWinningStatistics.keySet()) {
-            LottoReward lottoReward = LottoReward.getWinMoney(matchCount);
-            totalProfit += lottoReward.getMoney();
+        for (int i = 0; i < lottoWinningStatistics.size(); i++) {
+            LottoReward lottoReward = LottoReward.getLottoReward(i);
+            totalProfit += lottoReward.getTotMoney(lottoWinningStatistics.get(i));
         }
     }
 
     public double getTotalProfitPercent(int money) {
-        System.out.println("money : " + money);
-        System.out.println("totalProfit : " + totalProfit);
         return totalProfit / money;
     }
 
