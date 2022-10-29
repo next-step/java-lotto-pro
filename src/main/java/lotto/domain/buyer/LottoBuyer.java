@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class LottoBuyer {
 
-    private static final int DECIMAL_POINT = 2;
+    private static final int DECIMAL_POINT_POSITION = 2;
     private final Money money;
     private Lottos lottos;
 
@@ -42,7 +42,7 @@ public class LottoBuyer {
             BigDecimal reward = v.getKey().getPrizeMoney();
             return reward.multiply(BigDecimal.valueOf(v.getValue()));
         }).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
-        return rewardSum.divide(BigDecimal.valueOf(money.useMoney()), DECIMAL_POINT, BigDecimal.ROUND_FLOOR);
+        return rewardSum.divide(BigDecimal.valueOf(money.useMoney()), DECIMAL_POINT_POSITION, BigDecimal.ROUND_FLOOR);
     }
 
 }
