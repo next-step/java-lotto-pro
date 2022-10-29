@@ -36,7 +36,7 @@ public class LottoMachine {
     }
 
     public LottosNumberDto getLottoNumber() {
-        return new LottosNumberDto(lottos.getNumbersOfLottos());
+        return new LottosNumberDto(lottos);
     }
 
     private List<RankDto> getRanks(Map<Rank, Integer> rankOfLottos) {
