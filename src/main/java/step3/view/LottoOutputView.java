@@ -20,8 +20,6 @@ public class LottoOutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         printRankStats(statusDto);
-        List<RankDto> ranks = statusDto.getRanks();
-        ranks.forEach(rankDto -> System.out.printf("%d개 일치 (%d원)- %d개\n", rankDto.getMatchCount(), rankDto.getWinningPrice(), rankDto.getWinningCount()));
         double priceRatio = (Math.floor(statusDto.getPriceRatio() * 100) / 100.0);
         System.out.printf("총 수익률은 %.2f입니다.", priceRatio);
         printMinusStatus(priceRatio);
