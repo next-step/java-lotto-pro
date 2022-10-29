@@ -14,9 +14,7 @@ public class Lottos {
     }
 
     public int getSumOfPriceLottos() {
-        return lottos.stream()
-                .mapToInt(Lotto::getPrice)
-                .sum();
+        return lottos.size() * Lotto.getPrice();
     }
 
     public List<List<LottoNumber>> getNumbersOfLottos() {

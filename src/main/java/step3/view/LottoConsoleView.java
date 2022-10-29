@@ -21,5 +21,4 @@ public class LottoConsoleView {
         return SCANNER.nextInt();
     }
 
-
 }

@@ -14,11 +14,19 @@ public class LottoMachine {
     private final int purchasePrice;
     private final Lottos lottos;
     private static final String DUPLICATE_NUMBER_MESSAGE = "보너스번호는 유일한 번호만 허용합니다";
+    private static final String INVALID_PRICE_UNIT_MESSAGE = "금액은 1000원 단위로 입력해야합니다";
+    private static final String INVALID_MINIMUN_PRICE_MESSAGE = "금액은 최소 1000원이상 입력해야합니다";
 
     public LottoMachine(int purchasePrice) {
+        validatePurchasePrice(purchasePrice);
         this.purchasePrice = purchasePrice;
-        int size = purchasePrice / Lotto.PRICE;
+        int size = purchasePrice / Lotto.getPrice();
         this.lottos = new Lottos(LottoFactory.createLottos(size));
+    }
+
+    private void validatePurchasePrice(int purchasePrice) {
+        if (purchasePrice < Lotto.getPrice()) throw new IllegalArgumentException(INVALID_MINIMUN_PRICE_MESSAGE);
+        if (purchasePrice % Lotto.getPrice() != 0) throw new IllegalArgumentException(INVALID_PRICE_UNIT_MESSAGE);
     }
 
     public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers) {
@@ -37,7 +45,7 @@ public class LottoMachine {
     }
 
     public LottosNumberDto getLottoNumber() {
-        return new LottosNumberDto(lottos.getNumbersOfLottos());
+        return new LottosNumberDto(lottos);
     }
 
     private List<RankDto> getRanks(Map<Rank, Integer> rankOfLottos) {

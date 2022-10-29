@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final int PRICE = 1000;
-    public static final int NUMBER_SIZE = 6;
+    private static final int PRICE = 1000;
+    private static final int NUMBER_SIZE = 6;
     private static final String NUMBER_SIZE_MESSAGE = "번호는 6개만 허용합니다";
     private static final String DUPLICATE_NUMBER_MESSAGE = "중복없는 번호만 허용합니다";
     private final List<LottoNumber> numbers;
@@ -18,8 +18,12 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public int getPrice() {
+    public static int getPrice() {
         return PRICE;
+    }
+
+    public static int getNumberSize(){
+        return NUMBER_SIZE;
     }
 
     public List<LottoNumber> getNumbers() {

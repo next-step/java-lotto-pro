@@ -19,8 +19,7 @@ public class LottoController {
         LottosNumberDto lottosNumberDto = lottoMachine.getLottoNumber();
         LottoOutputView.printPurchasingLottos(lottosNumberDto);
 
-        String winningNumber = LottoConsoleView.inputWinningNumber();
-        List<LottoNumber> lottoNumbers = LottoInputParser.parseToLottoNumberArray(winningNumber);
+        List<LottoNumber> lottoNumbers = LottoInputParser.parseToLottoNumberArray(LottoConsoleView.inputWinningNumber());
         LottoNumber bonusNumber = LottoNumber.valueOf(LottoConsoleView.inputBonusNumber());
         LottoResultDto lottoResultDto = lottoMachine.getLottoResult(lottoNumbers, bonusNumber);
         LottoOutputView.printWinStats(lottoResultDto);
