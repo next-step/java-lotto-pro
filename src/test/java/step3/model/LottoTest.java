@@ -40,4 +40,18 @@ class LottoTest {
             new Lotto(numbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("숫자 6개가 아닌 경우 exception이 발생한다.")
+    void size_exception_test() {
+        assertThatThrownBy(() -> {
+            List<Integer> numbers = new ArrayList<>();
+            numbers.add(1);
+            numbers.add(12);
+            numbers.add(23);
+            numbers.add(34);
+            numbers.add(44);
+            new Lotto(numbers);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }
