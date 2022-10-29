@@ -55,4 +55,8 @@ public class Lotto {
 
         return matchCount;
     }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }
