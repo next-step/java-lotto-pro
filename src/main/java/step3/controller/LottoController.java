@@ -1,7 +1,6 @@
 package step3.controller;
 
 import java.util.List;
-import step3.utils.CriteriaProvider;
 import step3.domain.LottoStore;
 import step3.domain.Lottos;
 import step3.domain.Numbers;
@@ -16,13 +15,11 @@ public class LottoController {
     private final OutputView outputView;
 
     private final LottoStore lottoStore;
-    private final CriteriaProvider criteriaProvider;
 
-    public LottoController(InputView inputView, OutputView outputView, LottoStore lottoStore, CriteriaProvider criteriaProvider) {
+    public LottoController(InputView inputView, OutputView outputView, LottoStore lottoStore) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.lottoStore = lottoStore;
-        this.criteriaProvider = criteriaProvider;
     }
 
     public void start() {
@@ -30,7 +27,7 @@ public class LottoController {
         Lottos lottos = purchase(payment);
         Numbers winningNumbers = Numbers.generate(inputView.inputNumbers());
         List<Integer> matchCounts = lottos.getMatchCounts(winningNumbers);
-        Reward reward = Reward.generate(matchCounts, criteriaProvider);
+        Reward reward = Reward.generate(matchCounts);
         result(payment, reward);
     }
 
