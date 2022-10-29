@@ -54,4 +54,15 @@ public class StringAddCalculatorTest {
                 .isInstanceOf(RuntimeException.class);
     }
 
+    @Test
+    void splitAndSum_custom_구분자() {
+        int result = stringAddCalculator.splitAndSum("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    void splitAndSum_custom_구분자_mix() {
+        int result = stringAddCalculator.splitAndSum("//;\n1;2;3,4:5");
+        assertThat(result).isEqualTo(15);
+    }
 }
