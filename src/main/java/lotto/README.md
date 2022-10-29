@@ -22,8 +22,9 @@
     - 핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 구분한다.
     - UI 로직을 InputView, ResultView와 같은 클래스를 추가해 분리한다.
 - 자바 코드 컨벤션을 지키면서 프로그래밍한다.
-    - 참고문서: [https://google.github.io/styleguide/javaguide.html](https://google.github.io/styleguide/javaguide.html)
-      또는 [https://myeonguni.tistory.com/1596](https://myeonguni.tistory.com/1596)
+  -
+  참고문서: [https://google.github.io/styleguide/javaguide.html](https://google.github.io/styleguide/javaguide.html)
+  또는 [https://myeonguni.tistory.com/1596](https://myeonguni.tistory.com/1596)
 - else 예약어를 쓰지 않는다.
     - 힌트: if 조건절에서 값을 return하는 방식으로 구현하면 else를 사용하지 않아도 된다.
     - else를 쓰지 말라고 하니 switch/case로 구현하는 경우가 있는데 switch/case도 허용하지 않는다.
@@ -32,16 +33,18 @@
 
 - 기능을 구현하기 전에 README.md 파일에 구현할 기능 목록을 정리해 추가한다.
 - git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가한다.
-    - 참고문서: [AngularJS Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)
+  -
+  참고문서: [AngularJS Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)
 
 ## 기능 목록 TO-DO 리스트
 
 - [ ] 모델 구현
     - [ ] 카운터 (Counter) 모델
-      - [ ] 금액을 입력받고, 금액에 맞는 로또 수량 반환.
-    - [ ] 로또 번호 (LottoNumber) 모델
-        - [ ] 1~45 의 숫자를 생성해야한다.
-        - [ ] 1~45 의 숫자를 랜덤하게 생성하는 유틸리티 모델 생성.
+        - [ ] 금액을 입력받고, 금액에 맞는 로또 수량 반환.
+    - [ ] 로또 생성 유틸리티 (LottoGenerator)
+        - [ ] 1~45 의 범위에서 랜덤한 6 개의 숫자를 생성.
+    - [ ] 로또 (Lotto) 모델
+    - [ ] 여러 로또를 가지고 있는 (Lottos) 일급 컬랙션 객체 생성.
 
 - [ ] 뷰 구현
     - [ ] 입력 값 (InputView)에 대한 뷰
