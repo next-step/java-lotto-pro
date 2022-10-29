@@ -30,7 +30,7 @@ class WinningNumberEachTest {
         }
 
         @ParameterizedTest
-        @ValueSource(strings = {"a", "b", "c", "abc", "!", "`", "."})
+        @ValueSource(strings = {"a", "b", "c", "abc", "!", "`", ".", " "})
         @DisplayName("숫자가 아닌 문자열을 사용하면 WinningNumberEach 객체 생성 실패")
         void errorNonDigit(String token) {
             assertThrows(NumberFormatException.class, () -> new WinningNumberEach(token));

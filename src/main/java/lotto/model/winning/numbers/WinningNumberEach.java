@@ -9,9 +9,13 @@ public class WinningNumberEach {
     private final int value;
 
     public WinningNumberEach(String token) {
+        if (isNullOrEmpty(token)) {
+            throw new NumberFormatException("올바르지 않은 값을 개별 당첨 번호에 사용했습니다.");
+        }
+        final String trimmedToken = token.trim();
         int tokenValue;
         try {
-            tokenValue = Integer.parseInt(token);
+            tokenValue = Integer.parseInt(trimmedToken);
         } catch (Exception e) {
             throw new NumberFormatException("개별 당첨 번호는 반드시 숫자여야 합니다.");
         }
@@ -19,6 +23,10 @@ public class WinningNumberEach {
             throw new NumberFormatException("개별 당첨 번호는 1 이상 45 이하의 숫자 중에 하나여야 합니다.");
         }
         value = tokenValue;
+    }
+
+    private boolean isNullOrEmpty(String token) {
+        return token == null || token.isEmpty();
     }
 
     private boolean isValidLottoNumber(int tokenValue) {
