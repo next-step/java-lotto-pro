@@ -19,6 +19,13 @@ public class Money {
     }
 
     public int calLottoTicketCount(int lottoFee) {
+        validate(lottoFee);
         return won / lottoFee;
+    }
+
+    private void validate(int lottoFee) {
+        if(won < lottoFee){
+            throw new IllegalArgumentException("로또를 구매할 수 없습니다");
+        }
     }
 }

@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.WinningBonus;
+import lotto.domain.Rank;
 
 
 public interface LottoView {
@@ -13,7 +13,7 @@ public interface LottoView {
 
     void showMessageStatistics();
 
-    void showStatistics(WinningBonus bonus, int count);
+    void showStatistics(Rank bonus, int count);
 
     void showYield(double calcYield);
 }

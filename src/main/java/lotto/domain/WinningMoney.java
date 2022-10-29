@@ -1,37 +1,43 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static lotto.domain.WinningBonus.*;
-
 public class WinningMoney {
-    private final List<Integer> matchCountPerLotto;
+    private final List<Rank> ranks;
 
-    public WinningMoney(List<Integer> matchCountPerLotto) {
-        this.matchCountPerLotto = Collections.unmodifiableList(matchCountPerLotto);
+    public WinningMoney(List<Rank> ranks) {
+        this.ranks = ranks;
     }
 
-    public int count(WinningBonus bonus) {
-        return (int) this.matchCountPerLotto.stream()
-                .filter(c -> c.equals(bonus.getMatchCount()))
+    public int count(Rank rankToCount) {
+        return (int) this.ranks.stream()
+                .filter(rank -> rank.equals(rankToCount))
                 .count();
     }
 
     public double calcYield(Money money) {
-        List<WinningBonus> bonusTable = Arrays.stream(values()).collect(Collectors.toList());
-        Integer totalBonus = this.matchCountPerLotto.stream()
-                .map(c -> calcBonusFromTable(bonusTable, c)).
-                reduce(Integer::sum).get();
-
-        return money.divide(totalBonus);
+        Optional<Integer> totalWinningAmountOptional = this.ranks.stream()
+                .map(Rank::getWinningAmount)
+                .reduce(Integer::sum);
+        
+        return totalWinningAmountOptional.map(money::divide).orElse(0D);
     }
 
-    private Integer calcBonusFromTable(List<WinningBonus> bonuses, Integer c) {
-        Optional<WinningBonus> bonus = bonuses.stream().filter(b -> b.same(c)).findFirst();
-        return bonus.map(WinningBonus::getBonus).orElse(0);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WinningMoney that = (WinningMoney) o;
+        List<Rank> sortedRank = ranks.stream().sorted().collect(Collectors.toList());
+        List<Rank> sortedThatRank = that.ranks.stream().sorted().collect(Collectors.toList());
+        return sortedRank.equals(sortedThatRank);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ranks);
     }
 }

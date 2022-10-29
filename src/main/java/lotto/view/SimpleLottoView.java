@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.WinningBonus;
+import lotto.domain.Rank;
 
 
 import static lotto.view.LottoMessageFormats.*;
@@ -41,8 +41,8 @@ public class SimpleLottoView implements LottoView {
     }
 
     @Override
-    public void showStatistics(WinningBonus bonus, int count) {
-        this.output.print(String.format(MESSAGE_MATCH_INFORMATION,bonus.getMatchCount(),bonus.getBonusString(),count));
+    public void showStatistics(Rank bonus, int count) {
+        this.output.print(String.format(MESSAGE_MATCH_INFORMATION,bonus.getMatchCount(),bonus.getWinningAmountString(),count));
     }
 
     @Override

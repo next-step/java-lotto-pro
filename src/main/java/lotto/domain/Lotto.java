@@ -27,11 +27,11 @@ public class Lotto {
         return String.format("[%s]", joinedLottoNumbers);
     }
 
-    public int compareMatchCount(Lotto winningLotto) {
-        long count = numbers.stream()
+    public Rank getRankBy(Lotto winningLotto) {
+        long matchCount = numbers.stream()
                 .filter(winningLotto::hasSameNumber)
                 .count();
-        return (int) count;
+        return Rank.findRank((int) matchCount);
     }
 
     private boolean hasSameNumber(LottoNumber lottoNumber) {

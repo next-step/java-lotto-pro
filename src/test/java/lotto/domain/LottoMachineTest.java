@@ -13,7 +13,7 @@ class LottoMachineTest {
     @DisplayName("각각 다른 숫자 6개를 가진 lotto를 하나 생성할 수 있음")
     void test1() {
         LottoMachine machine = new LottoMachine();
-        Lotto lotto = machine.issue();
+        Lotto lotto = machine.getNewLotto();
 
         assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
     }
@@ -22,7 +22,7 @@ class LottoMachineTest {
     @DisplayName("machine은 입력된 갯수만큼 lotto를 생성함")
     void test2() {
         LottoMachine machine = new LottoMachine();
-        List<Lotto> lottoTickets = machine.auto(7);
+        List<Lotto> lottoTickets = machine.getNewMultiLottoList(7);
 
         assertThat(lottoTickets.size()).isEqualTo(7);
     }

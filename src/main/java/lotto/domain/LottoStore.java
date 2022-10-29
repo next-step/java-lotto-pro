@@ -11,7 +11,7 @@ public class LottoStore {
 
     public LottoBundle buyLotto(Money money) {
         int lottoTicketCount = money.calLottoTicketCount(LOTTO_FEE);
-        List<Lotto> autoLottoList = machine.auto(lottoTicketCount);
+        List<Lotto> autoLottoList = machine.getNewMultiLottoList(lottoTicketCount);
         return new LottoBundle(autoLottoList);
     }
 }

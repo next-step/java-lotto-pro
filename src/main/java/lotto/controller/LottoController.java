@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.view.LottoView;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class LottoController {
@@ -45,9 +46,13 @@ public class LottoController {
 
     private void showResult(Money paidMoney, WinningMoney winningMoney) {
         view.showMessageStatistics();
-        for (WinningBonus bonus: WinningBonus.values()) {
-            view.showStatistics(bonus,winningMoney.count(bonus));
-        }
+        showEachRankResult(winningMoney);
         view.showYield(winningMoney.calcYield(paidMoney));
+    }
+
+    private void showEachRankResult(WinningMoney winningMoney) {
+        Arrays.stream(Rank.values())
+                .filter(rank -> !rank.equals(Rank.FAIL))
+                .forEach(rank -> view.showStatistics(rank, winningMoney.count(rank)));
     }
 }

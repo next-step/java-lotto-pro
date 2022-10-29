@@ -16,10 +16,11 @@ public class LottoBundle {
     }
 
     public WinningMoney countWinning(Lotto winningLotto) {
-        List<Integer> matchCounts = lottoTickets.stream()
-                .map(lotto -> lotto.compareMatchCount(winningLotto))
+        List<Rank> ranks = lottoTickets.stream()
+                .map(lotto -> lotto.getRankBy(winningLotto))
+                .filter(rank -> rank != Rank.FAIL)
                 .collect(Collectors.toList());
-        return new WinningMoney(matchCounts);
+        return new WinningMoney(ranks);
     }
 
     @Override

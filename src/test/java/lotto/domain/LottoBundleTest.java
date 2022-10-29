@@ -1,20 +1,20 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import static lotto.domain.WinningBonus.*;
+import static lotto.domain.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoBundleTest {
 
-    private final List<Lotto> lottos;
+    private final List<Lotto> lottoList;
 
     public LottoBundleTest() {
-        lottos = Arrays.asList(
+        lottoList = Arrays.asList(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 45)),
                 new Lotto(Arrays.asList(1, 2, 3, 4, 44, 45)),
@@ -25,22 +25,20 @@ class LottoBundleTest {
     }
 
     @Test
-    void test1() {
-        LottoBundle lottoBundle = new LottoBundle(lottos);
+    void countWinning() {
+        LottoBundle lottoBundle = new LottoBundle(lottoList);
 
-        assertThat(lottoBundle.toString()).matches("\\[[0-9,]+]");
+        WinningMoney winningMoney = lottoBundle.countWinning(new Lotto(Arrays.asList(10, 11, 12, 13, 14, 15)));
+
+        assertThat(winningMoney).isEqualTo(new WinningMoney(Collections.EMPTY_LIST));
     }
 
     @Test
-    @DisplayName("정답 번호를 넘기면 등수별 갯수를 가지고 있는 winningMoney 를 반환함")
-    void test2() {
-        LottoBundle lottoBundle = new LottoBundle(lottos);
+    void countWinning2() {
+        LottoBundle lottoBundle = new LottoBundle(lottoList);
 
-        WinningMoney winningMoney = lottoBundle.countWinning(new Lotto(Arrays.asList(1,2,3,4,5,6)));
+        WinningMoney winningMoney = lottoBundle.countWinning(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-        assertThat(winningMoney.count(THREE)).isEqualTo(1);
-        assertThat(winningMoney.count(FOUR)).isEqualTo(1);
-        assertThat(winningMoney.count(FIVE)).isEqualTo(1);
-        assertThat(winningMoney.count(SIX)).isEqualTo(1);
+        assertThat(winningMoney).isEqualTo(new WinningMoney(Arrays.asList(FIRST,SECOND,THIRD,FOURTH)));
     }
 }
