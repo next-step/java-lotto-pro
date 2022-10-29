@@ -29,7 +29,9 @@ public class LottoMachine {
     }
 
     public static LottoTickets buyLotto(Money money) {
-        return new LottoTickets(getQuantity(money.amount()));
+        int amount = getQuantity(money.amount());
+        OutputView.printReceipt(amount);
+        return new LottoTickets(amount);
     }
 
     public static int getQuantity(int money) {
