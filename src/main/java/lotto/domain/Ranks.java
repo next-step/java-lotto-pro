@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Ranks {
@@ -18,9 +20,19 @@ public class Ranks {
 				.map(Rank::of)
 				.collect(Collectors.toList()));
 	}
+	private Map<Rank, Long> initResultMap() {
+		Map<Rank, Long> resultRankMap = new LinkedHashMap<>();
+		Arrays.stream(Rank.values())
+			.filter(r -> !r.equals(Rank.LOSE))
+			.sorted(Comparator.comparingInt(Rank::getMatchCount))
+			.forEach(r -> resultRankMap.put(r, 0L));
+		return resultRankMap;
+	}
+
 
 	public Map<Rank, Long> groupBy() {
-		return ranks.stream()
-			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		Map<Rank, Long> resultRankMap = initResultMap();
+		ranks.forEach(rank -> resultRankMap.computeIfPresent(rank, (key, value) -> ++value));
+		return resultRankMap;
 	}
 }
