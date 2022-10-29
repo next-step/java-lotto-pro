@@ -12,11 +12,16 @@ public class LottoNumber {
     public int countHit(List<Integer> winningNumbers) {
         int count = 0;
         for (int winningNumber : winningNumbers) {
-            if (sixNumbers.contains(winningNumber)) {
-                count++;
-            }
+            count += isContain(winningNumber);
         }
         return count;
+    }
+
+    private int isContain(int winningNumber) {
+        if (sixNumbers.contains(winningNumber)) {
+            return 1;
+        }
+        return 0;
     }
 
     @Override
