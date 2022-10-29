@@ -27,7 +27,7 @@ public class SetTest {
     @DisplayName("Set의 크기를 확인한다.")
     @Test
     void size() {
-        assertThat(numbers.size()).isEqualTo(3);
+        assertThat(numbers).hasSize(3);
     }
 
     @DisplayName("Set의 값을 확인한다. - ParameterizedTest를 중복 코드를 제거한다.")
