@@ -14,11 +14,11 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(Money money) {
+    public Lottos(Money money, LottoNumberGenerator lottoNumberGenerator) {
         List<Lotto> lottos = new ArrayList<>();
         int maxLottoCount = money.maxLottoCount();
         for(int i = 0; i < maxLottoCount; i++) {
-            lottos.add(Lotto.generateLotto(new RandomLottoNumberGenerator()));
+            lottos.add(Lotto.generateLotto(lottoNumberGenerator));
         }
         this.lottos = lottos;
     }

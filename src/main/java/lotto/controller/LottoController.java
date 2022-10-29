@@ -12,6 +12,7 @@ import common.utils.LongUtils;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.RandomLottoNumberGenerator;
 import lotto.domain.ReadLineLottoNumberGenerator;
 
 public class LottoController {
@@ -38,7 +39,7 @@ public class LottoController {
 
     private Lottos createLottos(Money money) {
         printPurchasingLottoCount(money.maxLottoCount());
-        Lottos lottos = new Lottos(money);
+        Lottos lottos = new Lottos(money, new RandomLottoNumberGenerator());
         printPurchasingLottos(lottos.unmodifiedLottos());
         return lottos;
     }
