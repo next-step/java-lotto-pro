@@ -53,6 +53,14 @@ public class Money {
 		return Money.wons(amount.add(other.amount));
 	}
 
+	public BigDecimal divideBy(Money other) {
+		return amount.divide(other.amount, FRACTION_SCALE, RoundingMode.DOWN);
+	}
+
+	public Money multiply(int count) {
+		return Money.wons(amount.multiply(BigDecimal.valueOf(count)));
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -73,13 +81,5 @@ public class Money {
 	@Override
 	public String toString() {
 		return DECIMAL_FORMAT.format(amount);
-	}
-
-	public BigDecimal divideBy(Money other) {
-		return amount.divide(other.amount, FRACTION_SCALE, RoundingMode.DOWN);
-	}
-
-	public Money multiply(int count) {
-		return Money.wons(amount.multiply(BigDecimal.valueOf(count)));
 	}
 }

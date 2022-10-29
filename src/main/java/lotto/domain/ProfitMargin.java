@@ -22,6 +22,10 @@ public class ProfitMargin {
 		return valueOf(BigDecimal.valueOf(profitMargin));
 	}
 
+	public boolean isLoss() {
+		return profitMargin.compareTo(BigDecimal.ONE) < 0;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -42,9 +46,5 @@ public class ProfitMargin {
 	@Override
 	public String toString() {
 		return profitMargin.toString();
-	}
-
-	public boolean isLoss() {
-		return profitMargin.compareTo(BigDecimal.ONE) < 0;
 	}
 }
