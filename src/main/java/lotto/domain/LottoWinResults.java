@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 import lotto.view.LottoWinPrize;
@@ -13,15 +15,20 @@ public class LottoWinResults {
 	private LottoWinResults() {
 	}
 
-	public static LottoWinResults computeWinResult(LottoMatchCounts lottoMatchCounts) {
+	public static LottoWinResults computeWinResult(List<Integer> lottoMatchCounts) {
 		LottoWinResults lottoWinResults = new LottoWinResults();
 
 		for (LottoWinPrize winPrize : LottoWinPrize.values()) {
-			int matchCount = lottoMatchCounts.getMatchCount(winPrize.matchCount);
+			int matchCount = getMatchCountOfPrize(lottoMatchCounts, winPrize.matchCount);
 			lottoWinResults.add(winPrize, matchCount);
 		}
 
 		return lottoWinResults;
+	}
+
+	private static int getMatchCountOfPrize(List<Integer> matchCounts, int matchCount) {
+		return (int)matchCounts.stream()
+			.filter(count -> count == matchCount).count();
 	}
 
 	public ProfitMargin getProfitMargin(Money lottoPrice) {
@@ -53,5 +60,22 @@ public class LottoWinResults {
 			.stream()
 			.mapToInt(Integer::intValue)
 			.sum();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		LottoWinResults that = (LottoWinResults)o;
+		return winPrizesCounts.equals(that.winPrizesCounts);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(winPrizesCounts);
 	}
 }

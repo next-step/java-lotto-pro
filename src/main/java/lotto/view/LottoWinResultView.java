@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.LottoMatchCounts;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoWinResults;
@@ -20,14 +19,11 @@ public class LottoWinResultView {
 	}
 
 	public void printWinResult(LottoTickets purchaseLottoTickets, LottoTicket lastWeekWinLottoTicket) {
-		LottoMatchCounts lottoMatchCounts = purchaseLottoTickets.match(lastWeekWinLottoTicket);
-
 		System.out.println(WIN_RESULT_OUTPUT);
 
-		LottoWinResults lottoWinResults = LottoWinResults.computeWinResult(lottoMatchCounts);
+		LottoWinResults lottoWinResults = purchaseLottoTickets.match(lastWeekWinLottoTicket);
 
 		printMatchCount(lottoWinResults);
-
 		printProfitMargin(lottoWinResults);
 	}
 
