@@ -1,13 +1,12 @@
 package lotto.model.winning.numbers;
 
+import lotto.constant.numbers.LottoConstant;
 import lotto.constant.utils.StringUtils;
 
 /**
  * 사용자가 입력한 당첨 번호 리스트의 개별 숫자를 저장하는 객체
  */
 public class WinningNumberEach {
-    private static final int LOTTO_MINIMUM_NUMBER = 1;
-    private static final int LOTTO_MAXIMUM_NUMBER = 45;
     private final int value;
 
     public WinningNumberEach(String token) {
@@ -28,6 +27,6 @@ public class WinningNumberEach {
     }
 
     private boolean isValidLottoNumber(int tokenValue) {
-        return LOTTO_MINIMUM_NUMBER <= tokenValue && tokenValue <= LOTTO_MAXIMUM_NUMBER;
+        return LottoConstant.LOTTO_MINIMUM_NUMBER <= tokenValue && tokenValue <= LottoConstant.LOTTO_MAXIMUM_NUMBER;
     }
 }

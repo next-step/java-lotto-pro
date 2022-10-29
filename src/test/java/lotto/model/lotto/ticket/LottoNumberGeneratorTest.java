@@ -1,5 +1,6 @@
 package lotto.model.lotto.ticket;
 
+import lotto.constant.numbers.LottoConstant;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -19,8 +20,8 @@ class LottoNumberGeneratorTest {
     void generate1(List<Integer> numbersCandidate) {
         final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(numbersCandidate);
         final int randomNumber = lottoNumberGenerator.generate();
-        assertThat(randomNumber).isGreaterThanOrEqualTo(1);
-        assertThat(randomNumber).isLessThanOrEqualTo(45);
+        assertThat(randomNumber).isGreaterThanOrEqualTo(LottoConstant.LOTTO_MINIMUM_NUMBER);
+        assertThat(randomNumber).isLessThanOrEqualTo(LottoConstant.LOTTO_MAXIMUM_NUMBER);
     }
 
     private static Stream<Arguments> generateTestSources() {

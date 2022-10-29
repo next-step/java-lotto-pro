@@ -1,5 +1,6 @@
 package lotto.model.lotto.ticket;
 
+import lotto.constant.numbers.LottoConstant;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -10,8 +11,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTicketsBucketTest {
-    private static final int SIZE_OF_FULL_CANDIDATE_LIST = 45;
-
     static class LottoTicketsBucketForTest extends LottoTicketsBucket {
         LottoTicketsBucketForTest(int howManyTickets) {
             super(howManyTickets);
@@ -36,8 +35,8 @@ class LottoTicketsBucketTest {
     }
 
     private List<Integer> intsFromOneToFortyFive() {
-        final List<Integer> fullCandidateList = new ArrayList<>(SIZE_OF_FULL_CANDIDATE_LIST);
-        for (int i = 1; i <= SIZE_OF_FULL_CANDIDATE_LIST; ++i) {
+        final List<Integer> fullCandidateList = new ArrayList<>(LottoConstant.LOTTO_MAXIMUM_NUMBER);
+        for (int i = LottoConstant.LOTTO_MINIMUM_NUMBER; i <= LottoConstant.LOTTO_MAXIMUM_NUMBER; ++i) {
             fullCandidateList.add(i);
         }
         return fullCandidateList;

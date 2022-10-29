@@ -1,5 +1,6 @@
 package lotto.model.winning.numbers;
 
+import lotto.constant.numbers.LottoConstant;
 import lotto.constant.utils.StringUtils;
 
 import java.util.ArrayList;
@@ -9,7 +10,6 @@ import java.util.List;
  * 당첨 번호 6 개를 저장하는 객체이다.
  */
 public class WinningNumbers {
-    private static final String DELIMITER_REGEX = ",";
     private final List<WinningNumberEach> numbers;
 
     public WinningNumbers(String input) {
@@ -29,7 +29,7 @@ public class WinningNumbers {
     }
 
     private String[] splitByComma(String input) {
-        return input.split(DELIMITER_REGEX);
+        return input.split(LottoConstant.LOTTO_NUMBERS_STRING_DELIMITER_REGEX);
     }
 
     private List<WinningNumberEach> convertStringToWinningNumberEach(String[] tokens) {
