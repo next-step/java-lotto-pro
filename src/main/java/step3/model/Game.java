@@ -34,7 +34,7 @@ public class Game {
 
 
     private void checkLottoBuyCount() {
-        if (this.lottoBuyCount < 0) {
+        if (this.lottoBuyCount <= 0) {
             throw new RuntimeException(ErrorMessageConstant.ZERO_LOTTO_COUNT);
         }
     }

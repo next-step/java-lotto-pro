@@ -26,7 +26,7 @@ public class GameTest {
 
     @DisplayName("입력된_금액에_맞추어_로또_구매_개수_조회")
     @ParameterizedTest
-    @CsvSource(value = {"1000:1", "10000:10", "0:0"}, delimiter = ':')
+    @CsvSource(value = {"1000:1", "10000:10"}, delimiter = ':')
     void getLottoCount_pass_01(String money, int count) {
         Game game = new Game(money);
         assertThat(game.getLottoBuyCount()).isEqualTo(count);
@@ -49,6 +49,13 @@ public class GameTest {
                 .isInstanceOf(NumberFormatException.class);
     }
 
+    @DisplayName("구입금액이_부족할_경우_에러_반환")
+    @ParameterizedTest
+    @ValueSource(strings = {"0", "100"})
+    void getLottoCount_fail_03(String money) {
+        assertThatThrownBy(() -> new Game(money))
+                .isInstanceOf(RuntimeException.class);
+    }
 
     @DisplayName("로또_게임_결과는_게임_수와_동일")
     @ParameterizedTest
