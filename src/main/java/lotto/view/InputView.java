@@ -14,16 +14,16 @@ public class InputView {
     private InputView() {
     }
 
-    public static int inputPurchaseAmount() {
-        System.out.println(LottoMessage.INPUT_PURCHASE_AMOUNT);
-        String purchaseAmount = SCANNER.nextLine();
+    public static int inputPurchasePrice() {
+        System.out.println(LottoMessage.INPUT_PURCHASE_PRICE);
+        String purchasePrice = SCANNER.nextLine();
 
-        if (LottoInputValidator.validateNonNegativeNumber(purchaseAmount)) {
-            return Integer.parseInt(purchaseAmount);
+        if (LottoInputValidator.validatePurchasePrice(purchasePrice)) {
+            return Integer.parseInt(purchasePrice);
         }
 
-        System.out.printf((LottoMessage.INVALID_PURCHASE_AMOUNT) + "%n", purchaseAmount);
-        return inputPurchaseAmount();
+        System.out.printf((LottoMessage.INVALID_PURCHASE_PRICE) + "%n", purchasePrice);
+        return inputPurchasePrice();
     }
 
     public static List<Integer> inputWinningNumbers() {
