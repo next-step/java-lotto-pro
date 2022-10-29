@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
@@ -42,6 +43,18 @@ class LottoTest {
         Lotto lotto = Lotto.from(numbers);
 
         int result = lotto.matches(input);
+
+        Assertions.assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "1:true", "7:false"}, delimiter = ':')
+    @DisplayName("로또번호(로또 1장) 중에서 보너스 번호와 일치하는게 있으면 true, 없으면 false를 반환한다.")
+    void lottoNumbersMatches2(int input, boolean expected) {
+        Lotto lotto = Lotto.from(numbers);
+        LottoNumber bonusNumber = LottoNumber.from(input);
+
+        boolean result = lotto.hasBonusNumber(bonusNumber);
 
         Assertions.assertThat(result).isEqualTo(expected);
     }

@@ -35,6 +35,10 @@ public class Lotto {
         return (int) lottoNumbers.stream().filter(winningNumbers::contains).count();
     }
 
+    public boolean hasBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
     @Override
     public String toString() {
         Collections.sort(lottoNumbers);
