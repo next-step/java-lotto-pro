@@ -23,6 +23,13 @@ public class Lottos {
     }
 
 
+    public int getPurchasedCount() {
+        return purchasedCount;
+    }
+
+    public List<Lotto> getLottos(){
+        return lottos;
+    }
 
 
 }

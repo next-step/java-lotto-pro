@@ -10,17 +10,8 @@ public class LottoGenerator {
     }
 
     public Lottos generateLottos() {
-        // 로또 총 수량
         lottos.setPurchasedCount(purchasePrice);
-        generateLotto();
-
-
-
-        return lottos;
-    }
-
-    private void generateLotto() {
         lottos.setLottos();
-
+        return lottos;
     }
 }
