@@ -10,7 +10,7 @@ public class InputView {
 
     int inputPay() {
         System.out.println("구입금액을 입력해 주세요.");
-        return sc.nextInt();
+        return Validate.validatePay(sc.nextLine());
     }
 
     List<Integer> inputWinningNumberLastWeek() {
