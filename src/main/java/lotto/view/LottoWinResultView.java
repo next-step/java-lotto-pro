@@ -53,7 +53,7 @@ public class LottoWinResultView {
 	}
 
 	private void printIfLoss(ProfitMargin profitMargin) {
-		if (profitMargin.isProfitDecimal()) {
+		if (profitMargin.isLoss()) {
 			System.out.println(LOSS_RESULT_OUTPUT);
 		}
 	}

@@ -55,6 +55,18 @@ public class LottoTicket {
 		return count != NUMBER_COUNT;
 	}
 
+	public int match(LottoTicket other) {
+
+		Set<LottoNumber> comparedLottoNumbers = new HashSet<>(other.lottoNumbers);
+
+		int equalNumberCount = 0;
+		for (LottoNumber lottoNumber : this.lottoNumbers) {
+			equalNumberCount += comparedLottoNumbers.contains(lottoNumber) ? 1 : 0;
+		}
+
+		return equalNumberCount;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -77,18 +89,6 @@ public class LottoTicket {
 		return lottoNumbers.stream()
 			.map(LottoNumber::toString)
 			.collect(joining(", ", "[", "]"));
-	}
-
-	public int match(LottoTicket other) {
-
-		Set<LottoNumber> comparedLottoNumbers = new HashSet<>(other.lottoNumbers);
-
-		int equalNumberCount = 0;
-		for (LottoNumber lottoNumber : this.lottoNumbers) {
-			equalNumberCount += comparedLottoNumbers.contains(lottoNumber) ? 1 : 0;
-		}
-
-		return equalNumberCount;
 	}
 
 }

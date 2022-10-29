@@ -12,7 +12,11 @@ public class FixedLottoTicketGenerator implements LottoTicketGenerator {
 	private final List<Integer> numbers;
 
 	public FixedLottoTicketGenerator(int... numbers) {
-		this.numbers = Arrays.stream(numbers).boxed().collect(Collectors.toList());
+		this(Arrays.stream(numbers).boxed().collect(Collectors.toList()));
+	}
+
+	public FixedLottoTicketGenerator(List<Integer> numbers) {
+		this.numbers = numbers;
 	}
 
 	@Override

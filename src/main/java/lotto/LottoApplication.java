@@ -23,13 +23,10 @@ public class LottoApplication {
 			new LottoVendor(LOTTO_PRICE, new AutoLottoTicketGenerator()));
 
 		LastWeekWinLottoTicketView lastWeekWinLottoTicketView = new LastWeekWinLottoTicketView(scanner);
-
 		LottoWinResultView lottoWinResultView = new LottoWinResultView(LOTTO_PRICE);
 
 		LottoTickets purchaseLottoTickets = lottoPurchaseView.purchaseLotto();
-
 		LottoTicket lastWeekWinLottoTicket = lastWeekWinLottoTicketView.getLastWeekWinLotto();
-
 		lottoWinResultView.printWinResult(purchaseLottoTickets, lastWeekWinLottoTicket);
 	}
 }
