@@ -3,18 +3,20 @@ package lotto;
 import java.util.List;
 import java.util.Objects;
 
+import money.Money;
 import utils.CollectionUtils;
+import view.LottoWinPrize;
 
-public class LottoMatchResult {
+public class LottoMatchCounts {
 
 	private final List<Integer> equalNumbersCount;
 
-	private LottoMatchResult(List<Integer> equalNumbersCount) {
+	private LottoMatchCounts(List<Integer> equalNumbersCount) {
 		this.equalNumbersCount = equalNumbersCount;
 	}
 
-	public static LottoMatchResult of(List<Integer> equalNumbersCount) {
-		return new LottoMatchResult(equalNumbersCount);
+	public static LottoMatchCounts of(List<Integer> equalNumbersCount) {
+		return new LottoMatchCounts(equalNumbersCount);
 	}
 
 	@Override
@@ -25,7 +27,7 @@ public class LottoMatchResult {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		LottoMatchResult that = (LottoMatchResult)o;
+		LottoMatchCounts that = (LottoMatchCounts)o;
 		return CollectionUtils.isEqualInAnyOrder(equalNumbersCount, that.equalNumbersCount);
 	}
 
@@ -37,5 +39,11 @@ public class LottoMatchResult {
 	public int getMatchCount(int matchCount) {
 		return (int)equalNumbersCount.stream()
 			.filter(count -> count == matchCount).count();
+	}
+
+	public Money getTotalProfits() {
+		return equalNumbersCount.stream()
+			.map(LottoWinPrize::getPrize)
+			.reduce(Money.ZERO, Money::add);
 	}
 }

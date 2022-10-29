@@ -52,8 +52,8 @@ public class LottoTickets {
 			.collect(Collectors.joining("\n"));
 	}
 
-	public LottoMatchResult match(LottoTicket comparedTicket) {
-		return LottoMatchResult.of(
+	public LottoMatchCounts match(LottoTicket comparedTicket) {
+		return LottoMatchCounts.of(
 			lottoTicketList.stream()
 				.map(lottoTicket -> lottoTicket.match(comparedTicket))
 				.collect(Collectors.toList()));

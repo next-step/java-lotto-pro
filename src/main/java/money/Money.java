@@ -1,6 +1,7 @@
 package money;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
@@ -9,6 +10,7 @@ public class Money {
 	private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#,##0");
 
 	public static final Money ZERO = new Money(BigDecimal.ZERO);
+	private static final int FRACTION_SCALE = 2;
 
 	private final BigDecimal amount;
 
@@ -43,6 +45,14 @@ public class Money {
 		return Money.wons(subtractedAmount);
 	}
 
+	public boolean isLessThan(Money other) {
+		return amount.compareTo(other.amount) < 0;
+	}
+
+	public Money add(Money other) {
+		return Money.wons(amount.add(other.amount));
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -65,7 +75,11 @@ public class Money {
 		return DECIMAL_FORMAT.format(amount);
 	}
 
-	public boolean isLessThan(Money other) {
-		return amount.compareTo(other.amount) < 0;
+	public BigDecimal divideBy(Money other) {
+		return amount.divide(other.amount, FRACTION_SCALE, RoundingMode.DOWN);
+	}
+
+	public Money multiply(int count) {
+		return Money.wons(amount.multiply(BigDecimal.valueOf(count)));
 	}
 }
