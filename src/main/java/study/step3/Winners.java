@@ -2,7 +2,6 @@ package study.step3;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Winners {
     private List<Winner> winnerList;
@@ -16,9 +15,19 @@ public class Winners {
     }
 
     public int nThPrizeSize(int nTh) {
-        return winnerList.stream()
-                .filter(winner -> winner.getCorrectNumber() == nTh)
-                .collect(Collectors.toList())
-                .size();
+        return (int) winnerList.stream()
+                .filter(winner -> winner.getCorrectNumber() == nTh).count();
+    }
+
+    public double earningRate(int inputMoney) {
+        return totalReward() / (double) inputMoney;
+    }
+
+    private int totalReward() {
+        int result = 0;
+        for (Prize prize : Prize.values()) {
+            result += nThPrizeSize(prize.getWinNumber()) * prize.getReward();
+        }
+        return result;
     }
 }

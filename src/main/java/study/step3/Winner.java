@@ -1,7 +1,7 @@
 package study.step3;
 
 public class Winner {
-    private int correctNumber;
+    private final int correctNumber;
 
     public Winner(int correctNumber) {
         this.correctNumber = correctNumber;
