@@ -12,6 +12,7 @@ public class OutputView {
     private static final String OUT_MESSAGE_DIVIDER_LINE = "----------";
     private static final String OUT_MESSAGE_LOTTO_RESULT = "%d개 일치(%d)- %d개\n";
     private static final String OUT_MESSAGE_PROFIT_RATIO = "총 수익률은 %.2f 입니다.";
+    private static final int MIN_WINNING_NUM = 3;
 
     public static void printLottos(Lotto lotto){
         System.out.println(lotto);
@@ -24,7 +25,7 @@ public class OutputView {
     public static void printLottoResult(LottoResult lottoResult){
         System.out.println(OUT_MESSAGE_RESULT_STATISTICS);
         System.out.println(OUT_MESSAGE_DIVIDER_LINE);
-        for(int i=3; i< PRIZE_MONEY.length; i++){
+        for(int i=MIN_WINNING_NUM; i< PRIZE_MONEY.length; i++){
             System.out.printf(OUT_MESSAGE_LOTTO_RESULT, i, PRIZE_MONEY[i], lottoResult.getLottoResult(i));
         }
         System.out.printf(OUT_MESSAGE_PROFIT_RATIO, lottoResult.calculateProfitRatio());
