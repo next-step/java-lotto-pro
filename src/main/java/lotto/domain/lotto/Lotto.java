@@ -1,7 +1,10 @@
 package lotto.domain.lotto;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import lotto.constant.LottoConstant;
+import lotto.message.ErrorMessages;
 
 public class Lotto {
     private static final int MATCH = 1;
@@ -13,7 +16,14 @@ public class Lotto {
     }
 
     public static Lotto from(List<LottoNumber> lottoNumbers) {
+        validateNonDuplicatedSixNumbers(lottoNumbers);
         return new Lotto(lottoNumbers);
+    }
+
+    private static void validateNonDuplicatedSixNumbers(List<LottoNumber> lottoNumbers) {
+        if (new HashSet<>(lottoNumbers).size() != LottoConstant.LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException(String.format(ErrorMessages.INVALID_LOTTO_NUMBERS, lottoNumbers));
+        }
     }
 
     public int matches(List<LottoNumber> winningNumbers) {
