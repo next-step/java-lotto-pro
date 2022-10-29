@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static step3.model.Lotto.NUMBER_SIZE;
-
 public class LottoFactory {
 
     private static final String NONE_POSITIVE_MESSAGE = "로또 개수는 한개 이상만 허용됩니다";
@@ -21,11 +19,12 @@ public class LottoFactory {
     }
 
     private static Lotto createLotto() {
+
         List<LottoNumber> lottoNumbers = LottoNumber.getLottoNumbers();
         Collections.shuffle(lottoNumbers);
         List<LottoNumber> randomLottoNumbers = lottoNumbers
                 .stream()
-                .limit(NUMBER_SIZE)
+                .limit(Lotto.getNumberSize())
                 .collect(Collectors.toList());
         return new Lotto(randomLottoNumbers);
     }

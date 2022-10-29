@@ -16,7 +16,7 @@ public class LottoMachine {
 
     public LottoMachine(int purchasePrice) {
         this.purchasePrice = purchasePrice;
-        int size = purchasePrice / Lotto.PRICE;
+        int size = purchasePrice / Lotto.getPrice();
         this.lottos = new Lottos(LottoFactory.createLottos(size));
     }
 
