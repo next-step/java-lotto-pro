@@ -11,11 +11,12 @@ import org.junit.jupiter.api.Test;
 public class RewardTest {
 
     private static final int TOTAL_WINNING_COUNT = 10;
-    private static final int MATCH_COUNT = 3;
+    private static final int COUNT_OF_MATCH = 3;
     private static final long MONEY_PER_MATCH_COUNT = 5000L;
     private static final Money payment = Money.generate(1000000L);
 
-    private final List<Integer> matchCounts = Stream.iterate(MATCH_COUNT, matchCount -> matchCount)
+    private final List<Rank> ranks = Stream.iterate(COUNT_OF_MATCH, countOfMatch -> countOfMatch)
+            .map(Rank::valueOf)
             .limit(TOTAL_WINNING_COUNT)
             .collect(Collectors.toList());
 
@@ -27,6 +28,6 @@ public class RewardTest {
     }
 
     private Reward generateTestReward() {
-        return Reward.generate(matchCounts);
+        return Reward.generate(ranks);
     }
 }

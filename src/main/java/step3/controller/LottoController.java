@@ -5,6 +5,7 @@ import step3.domain.LottoStore;
 import step3.domain.Lottos;
 import step3.domain.Numbers;
 import step3.domain.Money;
+import step3.domain.Rank;
 import step3.domain.Reward;
 import step3.io.InputView;
 import step3.io.OutputView;
@@ -26,8 +27,8 @@ public class LottoController {
         Money payment = payment();
         Lottos lottos = purchase(payment);
         Numbers winningNumbers = Numbers.generate(inputView.inputNumbers());
-        List<Integer> matchCounts = lottos.getMatchCounts(winningNumbers);
-        Reward reward = Reward.generate(matchCounts);
+        List<Rank> ranks = lottos.getRanks(winningNumbers);
+        Reward reward = Reward.generate(ranks);
         result(payment, reward);
     }
 

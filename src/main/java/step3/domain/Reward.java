@@ -15,13 +15,13 @@ public class Reward {
         throw new RuntimeException("Cannot use default constructor.");
     }
 
-    private Reward(List<Integer> matchCounts) {
+    private Reward(List<Rank> ranks) {
         init();
-        input(matchCounts);
+        input(ranks);
     }
 
-    public static Reward generate(List<Integer> matchCounts) {
-        return new Reward(matchCounts);
+    public static Reward generate(List<Rank> ranks) {
+        return new Reward(ranks);
     }
 
     private void init() {
@@ -31,12 +31,11 @@ public class Reward {
                 .forEach(rank -> reward.put(rank, 0));
     }
 
-    private void input(List<Integer> matchCounts) {
-        matchCounts.forEach(this::input);
+    private void input(List<Rank> ranks) {
+        ranks.forEach(this::input);
     }
 
-    private void input(int matchCount) {
-        Rank rank = Rank.valueOf(matchCount);
+    private void input(Rank rank) {
         if (reward.containsKey(rank)) {
             reward.put(rank, reward.get(rank) + 1);
         }

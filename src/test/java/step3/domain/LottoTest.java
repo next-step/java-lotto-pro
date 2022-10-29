@@ -36,7 +36,7 @@ public class LottoTest {
             Numbers numbers = Numbers.generate(Arrays.asList(1, 2, 3));
             Numbers random = NumbersGenerator.random();
             Lotto lotto = Lotto.generate(random);
-            lotto.getMatchCount(numbers);
+            lotto.getCountOfMatch(numbers);
         })
                 .isInstanceOf(IndexOutOfBoundsException.class)
                 .hasMessageContaining("Incomparable subject. please check lottoNumbers size.");

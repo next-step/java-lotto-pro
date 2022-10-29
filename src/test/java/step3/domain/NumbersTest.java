@@ -17,7 +17,7 @@ public class NumbersTest {
 
     private final Numbers winning = Numbers.generate(Arrays.asList(1,2,3,4,5,6));
 
-    @ParameterizedTest(name = "{displayName} - select: {0}, matchCount: [{1}]")
+    @ParameterizedTest(name = "{displayName} - select: {0}, countOfMatch: [{1}]")
     @MethodSource("numberProvider")
     @DisplayName("일치하는 번호 개수 확인")
     public void testMatch(List<Integer> selectNumbers, int expected) {

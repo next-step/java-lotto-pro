@@ -17,7 +17,7 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    public int getMatchCount(Numbers numbers) {
+    public int getCountOfMatch(Numbers numbers) {
         validateNumbersSize(numbers);
         return this.numbers.match(numbers);
     }

@@ -17,9 +17,11 @@ public class Lottos {
         return new Lottos(lottoList);
     }
 
-    public List<Integer> getMatchCounts(Numbers numbers) {
+    public List<Rank> getRanks(Numbers numbers) {
         return lottoList.stream()
-                .map(lotto -> lotto.getMatchCount(numbers))
+                .map(lotto -> lotto.getCountOfMatch(numbers))
+                .map(Rank::valueOf)
+                .filter(rank -> !rank.equals(Rank.MISS))
                 .collect(Collectors.toList());
     }
 
