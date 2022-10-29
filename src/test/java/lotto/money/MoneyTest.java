@@ -21,9 +21,26 @@ public class MoneyTest {
     }
 
     @Test
+    void 음수_금액_입력_예외_테스트(){
+        assertThatThrownBy(() -> new Money(-1))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     void 문자입력_숫자_포멧_예외_테스트(){
         assertThatThrownBy(() -> new Money("1000ㅁㄴ"))
                 .isInstanceOf(NumberFormatException.class);
+    }
+
+    @Test
+    void 문자입력_음수_예외_테스트(){
+        assertThatThrownBy(() -> new Money("-100"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+    @Test
+    void 숫자입력_음수_예외_테스트(){
+        assertThatThrownBy(() -> new Money(-100))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
 }
