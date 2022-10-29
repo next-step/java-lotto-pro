@@ -9,7 +9,7 @@ public class StringAddCalculator {
     private static final String DEFAULT_SEPARATOR = "[,:]";
     private static final String CUSTOM_SEPARATOR = "//(.)\n(.*)";
     private static final int EMPTY_RESULT = 0;
-    private static final String NEGATIVE_NUMBER_ERROR = "[ERROR] 음수 이거나 숫자 이외의 값은 처리할 수 없습니다.";
+    private static final String NEGATIVE_NUMBER_ERROR = "[ERROR] 음수 이거나 숫자 이외의 값은 처리할 수 없습니다. input : ";
 
     public static int splitAndSum(String text) {
         if (validateText(text)) {
@@ -30,33 +30,25 @@ public class StringAddCalculator {
         return text.split(DEFAULT_SEPARATOR);
     }
 
-    private static int sum(String text){
+    private static int sum(String text) {
         return Arrays.stream(splitWithCustomText(text))
             .mapToInt(StringAddCalculator::parseInt)
             .sum();
     }
 
-    private static void validateNegativeNumber(int number){
+    private static void validateNegativeNumber(int number) {
         if (number < 0) {
-            throw new IllegalArgumentException(NEGATIVE_NUMBER_ERROR);
+            throw new RuntimeException(NEGATIVE_NUMBER_ERROR + number);
         }
     }
 
-    private static int parseInt(String number){
+    private static int parseInt(String number) {
         int parseInt = Integer.parseInt(number);
         validateNegativeNumber(parseInt);
         return parseInt;
     }
 
     private static boolean validateText(String text) {
-        return isNull(text) || isEmpty(text);
-    }
-
-    private static boolean isEmpty(String text) {
-        return text.isEmpty();
-    }
-
-    private static boolean isNull(String text) {
-        return text == null;
+        return text == null || text.isEmpty();
     }
 }
