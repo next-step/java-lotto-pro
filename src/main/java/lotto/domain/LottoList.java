@@ -30,10 +30,8 @@ public class LottoList {
 
     public LottoResult getResult(WinningLotto winningLotto) {
         LottoResult result = new LottoResult();
-
-        for(Lotto lotto : lottoList) {
-            result.add(Rank.valueOf(lotto.getCorrectCount(winningLotto)));
-        }
+        lottoList.forEach(lotto ->
+                result.add(Rank.valueOf(lotto.getCorrectCount(winningLotto))));
 
         return result;
     }
