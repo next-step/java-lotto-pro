@@ -15,7 +15,7 @@ public class LottoNumberGenerator {
 
     public List<Integer> generateSixNumbers() {
         Collections.shuffle(numbers);
-        List<Integer> sixNumbers = numbers.subList(0, 6);
+        List<Integer> sixNumbers = new ArrayList<>(numbers.subList(0, 6));
         Collections.sort(sixNumbers);
         return sixNumbers;
     }
