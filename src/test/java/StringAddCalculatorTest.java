@@ -53,4 +53,12 @@ public class StringAddCalculatorTest {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("문자열 계산기에 숫자 이외의 값을 전달하는 경우 RuntimeException 예외를 throw 한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2:a", "b", "3:c"})
+    public void splitAndSum_not_number(String text) {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum(text))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
