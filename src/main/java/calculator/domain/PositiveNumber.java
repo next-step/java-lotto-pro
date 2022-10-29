@@ -1,6 +1,7 @@
 package calculator.domain;
 
-import calculator.constant.ErrorCode;
+import common.constant.ErrorCode;
+import common.utils.IntegerUtils;
 
 /**
  * StringAddCalculator에서 덧셈 시 사용할 숫자값 Wrapping 클래스
@@ -10,17 +11,9 @@ public class PositiveNumber {
     private final int positiveNumber;
 
     public PositiveNumber(String textNumber) {
-        int number = parseNumber(textNumber);
+        int number = IntegerUtils.parseInt(textNumber);
         validatePositiveNumber(number);
         this.positiveNumber = number;
-    }
-
-    private int parseNumber(String textNumber) {
-        try {
-            return Integer.parseInt(textNumber);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException(ErrorCode.정수값이_아님.getErrorMessage());
-        }
     }
 
     private void validatePositiveNumber(int number) {

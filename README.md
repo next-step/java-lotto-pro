@@ -71,5 +71,84 @@
 4. [x] "1,2"
 5. [x] "1,2:3"
 6. [x] "//;\n1;2;3"
-8. [x] "-1,2:3"
-9. [x] "가,2:3"
+7. [x] "-1,2:3"
+8. [x] "가,2:3"
+
+## 3단계 - 로또(자동)
+### 기능 목록
+* [x] 로또 구입 금액 입력
+  * [x] 1000원 이상 입력해야 로또 구매가 가능하므로, 이보다 작은 수 입력 시, 에러 발생 후 재시도하도록 구현
+* [x] 입력 값에 따른 발급 가능한 최대 로또 개수 반환
+  * 입력 값 / 1000
+  * [x] 돈과 관련된 기능을 나타낼 객체 생성
+    * 입력값에 따른 최대 로또 개수
+    * 로또 구입에 사용한 비용과 수입금에 따른 수익률 확인
+* [x] 로또 자동 발급
+  * [x] 1~45 사이의 서로 다른 6개의 숫자 랜덤하게 반환
+    * `Collections.shuffle()` 메소드 활용
+  * [x] 로또 번호들은 오름차순으로 정렬 -> 오름차순으로 출력하기 위함
+    * `Collections.sort()` 메소드 활용
+    * `List<LottoNumber>`를 sort하기 위해 `compareTo()` 메소드 overriding
+* [x] 당첨 번호 입력
+  * [x] 당첨 번호 입력 시, 중복된 값 validation 필요
+    * 관련 지정된 요구사항이 없으므로, 임의로 try ~ catch 통해 다시 입력 받도록 구현
+* [x] 구매한 로또 번호와 당첨 번호 간 일치 개수 확인
+  ```java
+  3개 일치 (5000원)
+  4개 일치 (50000원)
+  5개 일치 (1500000원)
+  6개 일치 (2000000000원)
+  ```
+* 당첨 개수에 따른 수익금 확인
+  * ENUM으로 복권 일치 개수와 그에 따른 수익금 매핑
+  ```java   
+  public enum LottoPrize {
+    NO_PRIZE(0, 0, "0~2개 일치 (0원)"),
+    FOURTH(3, 5000, "3개 일치 (5000원)"),
+    THIRD(4, 50000, "4개 일치 (50000원)"),
+    SECOND(5, 1500000, "5개 일치 (1500000원)"),
+    FIRST(6, 2000000000, "6개 일치 (2000000000원)")
+    ;
+  
+    private final int matchCount;
+    private final int lottoPrizeMoney;
+    private final String lottoPrizeMessage;
+  
+    LottoPrize(int matchCount, int lottoPrizeMoney, String lottoPrizeMessage) {
+      this.matchCount = matchCount;
+      this.lottoPrizeMoney = lottoPrizeMoney;
+      this.lottoPrizeMessage = lottoPrizeMessage;
+    }
+
+    public static LottoPrize findLottoPrize(int matchCount) {
+        return Arrays.stream(LottoPrize.values()).filter(prize -> prize.getMatchCount() == matchCount)
+                .findFirst()
+                .orElse(NO_PRIZE);
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+      
+    public int getLottoPrizeMoney() {
+      return lottoPrizeMoney;
+    }
+  }
+  ```
+* [x] 수익금과 로또를 사는데 들인 비용(구입금액) 비교
+  * 구입 금액 대비 수익금 비율 확인(예: 5000/14000 = 0.357... = 0.35) -> 소숫점 셋째자리 버림
+
+### 테스트 케이스
+1. 로또의 숫자 1개 생성 테스트(1로 생성하면 1이 들어가야 하고, 45로 생성하면 45가 들어가야 한다)
+2. 로또의 각 숫자는 1 ~ 45 사이의 숫자여야 한다.
+3. 로또는 6개의 서로 다른 숫자로 이루어진다.
+4. 입력된 돈을 1000으로 나눈 몫을 로또 구매 가능 개수로 반환한다.
+5. 입력된 돈이 1000보다 작을 경우 에러 발생한다.
+6. 당첨 번호와 구매한 로또 번호 비교 후 일치한 개수 반환한다.
+7. 주어진 돈으로 구매한 로또 비용을 반환한다.
+8. 당첨금과 로또 구매 비용간 비율을 반환한다.
+9. 로또 각 숫자간 크기 비교 테스트한다.
+   * compareTo() 메소드를 override한 부분 테스트
+10. 로또 수행 결과 당첨금 합을 테스트한다.
+11. 돈 금액 비교 테스트한다.
+    * 인자로 넘긴 돈보다 주어진 돈이 작으면 true 반환 테스트
