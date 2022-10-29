@@ -4,7 +4,9 @@ import static java.util.stream.Collectors.*;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 import lotto.domain.LottoNumber;
@@ -18,14 +20,14 @@ public class LottoUtil {
     private LottoUtil() {
     }
 
-    public static List<Integer> generate() {
+    public static Set<Integer> generate() {
         List<Integer> numbers = IntStream.rangeClosed(BEGIN_NUMBER, END_NUMBER)
             .boxed()
             .collect(toList());
         Collections.shuffle(numbers);
         List<Integer> lottoNumbers = numbers.subList(0, LOTTO_NUMBERS_COUNT);
         Collections.sort(lottoNumbers);
-        return lottoNumbers;
+        return new HashSet<>(lottoNumbers);
     }
 
     public static LottoNumber toLottoNumber(String numberString) {
@@ -35,7 +37,7 @@ public class LottoUtil {
         List<Integer> numbers = Arrays.stream(numberString.split(DELIMITER))
             .map(s -> Integer.parseInt(s.trim()))
             .collect(toList());
-        return new LottoNumber(numbers);
+        return new LottoNumber(new HashSet<>(numbers));
     }
 
     private static boolean hasNotText(String text) {

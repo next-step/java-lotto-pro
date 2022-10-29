@@ -28,7 +28,7 @@ public class Lotto {
     public LottoResult getResult(LottoNumber winningLotto) {
         LottoResult result = new LottoResult();
         for (LottoNumber lottoNumber : purchaseLottoList) {
-            result.putPrize(lottoNumber.calculateWinPrize(winningLotto));
+            result.putPrize(lottoNumber.calculatePrize(winningLotto));
         }
         return result;
     }
