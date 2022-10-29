@@ -2,16 +2,18 @@ package lotto.domain.buyer;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.Lottos;
 import lotto.domain.money.Money;
 import lotto.domain.seller.LottoSeller;
-import lotto.dto.LottoBill;
-import lotto.dto.StatisticResult;
+import lotto.prize.Prize;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,19 +27,16 @@ public class LottoBuyerTest {
     void buy_lotto(Money money, int expectLottoCount) {
         LottoSeller lottoSeller = new LottoSeller();
         LottoBuyer lottoBuyer = new LottoBuyer(money);
-        LottoBill lottoBill = lottoBuyer.buyLotto(lottoSeller);
-        assertThat(lottoBill.getLottoPiece()).isEqualTo(expectLottoCount);
+        Lottos lottos = lottoBuyer.buyLotto(lottoSeller);
+        assertThat(lottos.getLottoCount()).isEqualTo(expectLottoCount);
     }
 
     @ParameterizedTest
     @MethodSource("calculateStatisticSample")
-    @DisplayName("구매한 로또와 당첨 로또번호를 비교하여 통계 계산")
-    void calculate_statistic(Money money, int lottoCount, List<Lotto> lottos, double expect, Lotto winnerLotto) {
-        LottoBuyer lottoBuyer = new LottoBuyer(money);
-        lottoBuyer.initInfo(new LottoBill(lottoCount, lottos));
-
-        StatisticResult result = lottoBuyer.calculateYieldStatistic(winnerLotto);
-        assertThat(result.getYield().doubleValue()).isEqualTo(expect);
+    @DisplayName("로또에 대한 상금 정보와 자신의 돈을 통해 수익률 계산")
+    void calculate_yield(Map<Prize, Integer> prizes, double expect, int lottoCount) {
+        LottoBuyer lottoBuyer = new LottoBuyer(new Money(1000));
+        assertThat(lottoBuyer.calculateYield(prizes, lottoCount)).isEqualTo(BigDecimal.valueOf(expect));
     }
 
     private static Stream<Arguments> buyLotto() {
@@ -55,12 +54,12 @@ public class LottoBuyerTest {
                 .limit(13)
                 .collect(Collectors.toList());
         lottos.add(lotto);
-
+        Lottos buyLottos = new Lottos(lottos);
         Lotto winnerLotto = new Lotto(Stream.of(3, 4, 10, 6, 7, 8).map(LottoNumber::new).collect(Collectors.toList()));
+        Map<Prize, Integer> prizes = buyLottos.getPrizeOfLotto(winnerLotto);
         return Stream.of(
-                Arguments.of(new Money(14000), 14, lottos, 0.35, winnerLotto)
+                Arguments.of(prizes, 0.35, 14)
         );
-
     }
 
 }
