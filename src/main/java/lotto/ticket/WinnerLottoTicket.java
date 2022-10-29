@@ -9,10 +9,10 @@ public class WinnerLottoTicket {
 
     public WinnerLottoTicket(LottoTicket lotto, int bonusNo) {
         this.lotto = lotto;
-        if(this.lotto.contains(bonusNo)){
+        this.bonusNo = bonusNo;
+        if(matchBonus(lotto)){
             throw new IllegalArgumentException(MessageConstant.ERROR_VALID_NOT_WINNER_NUMBER_SELECT);
         }
-        this.bonusNo = bonusNo;
     }
 
     public LottoTicket getLotto(){
