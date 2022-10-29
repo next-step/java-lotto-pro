@@ -7,6 +7,7 @@ import lotto.constant.numbers.LottoConstant;
  */
 public class MoneyToBuy {
     protected int money;
+    private double profitRatio;
 
     public MoneyToBuy(String input) {
         int inputMoney;

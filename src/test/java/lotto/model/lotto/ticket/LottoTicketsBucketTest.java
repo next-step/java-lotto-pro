@@ -7,11 +7,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -134,6 +137,47 @@ class LottoTicketsBucketTest {
                     () -> assertThat(countAll[4]).isEqualTo(1),
                     () -> assertThat(countAll[5]).isEqualTo(1),
                     () -> assertThat(countAll[6]).isEqualTo(1)
+            );
+        }
+    }
+
+    @DisplayName("sumProfit 메서드 테스트")
+    static class SumProfit {
+        @ParameterizedTest
+        @MethodSource(value = "sumProfitSources")
+        @DisplayName("당첨금 수익 총 합 구하기")
+        void success(int[] sameCount, int sumResult) {
+            final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucket(sameCount);
+            final int sum = lottoTicketsBucket.sumProfit();
+            assertThat(sum).isEqualTo(sumResult);
+        }
+
+        private static Stream<Arguments> sumProfitSources() {
+            return Stream.of(
+                    Arguments.of(
+                            new int[]{0, 0, 0, 0, 0, 0, 0},
+                            0
+                    ),
+                    Arguments.of(
+                            new int[]{0, 0, 0, 0, 0, 0, 1},
+                            LottoConstant.PROFIT_SIX_DIGIT_MATCHES * 1
+                    ),
+                    Arguments.of(
+                            new int[]{0, 0, 0, 0, 0, 0, 5},
+                            LottoConstant.PROFIT_SIX_DIGIT_MATCHES * 5
+                    ),
+                    Arguments.of(
+                            new int[]{0, 0, 0, 1, 1, 1, 0},
+                            LottoConstant.PROFIT_THREE_DIGIT_MATCHES * 1 + LottoConstant.PROFIT_FOUR_DIGIT_MATCHES * 1 + LottoConstant.PROFIT_FIVE_DIGIT_MATCHES * 1
+                    ),
+                    Arguments.of(
+                            new int[]{0, 0, 0, 3, 0, 2, 0},
+                            LottoConstant.PROFIT_THREE_DIGIT_MATCHES * 3 + LottoConstant.PROFIT_FIVE_DIGIT_MATCHES * 2
+                    ),
+                    Arguments.of(
+                            new int[]{0, 0, 0, 1, 2, 4, 0},
+                            LottoConstant.PROFIT_THREE_DIGIT_MATCHES * 1 + LottoConstant.PROFIT_FOUR_DIGIT_MATCHES * 2 + LottoConstant.PROFIT_FIVE_DIGIT_MATCHES * 4
+                    )
             );
         }
     }

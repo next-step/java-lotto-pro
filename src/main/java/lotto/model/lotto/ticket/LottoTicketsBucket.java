@@ -1,5 +1,6 @@
 package lotto.model.lotto.ticket;
 
+import lotto.constant.numbers.LottoConstant;
 import lotto.model.winning.numbers.WinningNumbers;
 
 import java.util.ArrayList;
@@ -21,6 +22,11 @@ public class LottoTicketsBucket {
         this.lottoTickets = lottoTickets;
     }
 
+    public LottoTicketsBucket(int[] lottoSameNumberCount) {
+        this.lottoSameNumberCount = lottoSameNumberCount;
+        lottoTickets = new ArrayList<>();
+    }
+
     public void addLottoTicket(LottoTicket lottoTicket) {
         lottoTickets.add(lottoTicket);
     }
@@ -31,5 +37,12 @@ public class LottoTicketsBucket {
             ++lottoSameNumberCount[count];
         }
         return lottoSameNumberCount;
+    }
+
+    public int sumProfit() {
+        return lottoSameNumberCount[3] * LottoConstant.PROFIT_THREE_DIGIT_MATCHES +
+                lottoSameNumberCount[4] * LottoConstant.PROFIT_FOUR_DIGIT_MATCHES +
+                lottoSameNumberCount[5] * LottoConstant.PROFIT_FIVE_DIGIT_MATCHES +
+                lottoSameNumberCount[6] * LottoConstant.PROFIT_SIX_DIGIT_MATCHES;
     }
 }
