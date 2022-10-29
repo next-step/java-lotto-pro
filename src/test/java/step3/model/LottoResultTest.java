@@ -35,6 +35,16 @@ public class LottoResultTest {
         );
     }
 
+    @DisplayName("LottoResult_간_같은_값_크기를_반환한다.")
+    @Test
+    void LottoResult_pass_03() {
+        String[] inputNumberTexts = new String[]{"1", "2", "3", "4", "5", "6"};
+        String[] inputOtherNumberTexts = new String[]{"4", "5", "6", "7", "8", "9"};
+        LottoResult lottoResult = new LottoResult(inputNumberTexts);
+        LottoResult otherLottoResult = new LottoResult(inputOtherNumberTexts);
+        assertThat(lottoResult.getEqualCount(otherLottoResult)).isEqualTo(3);
+    }
+
     @DisplayName("LottoResult_중복값_들어오면_에러를_반환한다.")
     @Test
     void LottoResult_fail_01() {

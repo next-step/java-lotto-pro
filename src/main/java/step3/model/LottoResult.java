@@ -38,6 +38,12 @@ public class LottoResult {
         }
     }
 
+    public int getEqualCount(LottoResult o) {
+        Set<LottoNumber> checkNumbers = lottoNumbers;
+        checkNumbers.retainAll(o.lottoNumbers);
+        return checkNumbers.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,5 +55,10 @@ public class LottoResult {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }

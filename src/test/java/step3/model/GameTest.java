@@ -53,9 +53,9 @@ public class GameTest {
     @DisplayName("로또_게임_결과는_게임_수와_동일")
     @ParameterizedTest
     @ValueSource(strings = {"1", "10"})
-    public void getLottoResult_pass_01(int count) {
+    public void getLottoResults_pass_01(int count) {
         Game game = new Game(count);
-        List<LottoResult> result = game.getLottoResult();
+        List<LottoResult> result = game.getLottoResults();
 
         assertThat(result.size()).isEqualTo(count);
     }
