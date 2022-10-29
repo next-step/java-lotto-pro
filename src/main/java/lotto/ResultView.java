@@ -3,15 +3,15 @@ package lotto;
 import java.util.List;
 
 public class ResultView {
-    void ResultPay(int count) {
+    void resultPay(int count) {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    void ResultPurchase(List<Integer> numbers) {
+    void resultPurchase(List<Integer> numbers) {
         System.out.println(numbers);
     }
 
-    void ResultWinningStatistics(int payMoney, LottoNumbers lottoNumbers) {
+    void resultWinningStatistics(int payMoney, LottoNumbers lottoNumbers) {
         int fourth = lottoNumbers.countFourth();
         int third = lottoNumbers.countThird();
         int second = lottoNumbers.countSecond();
