@@ -22,26 +22,6 @@
 - [x] String의 charAt() 메소드를 활용해 특정 위치의 문자를 가져올 때 위치 값을 벗어나면 StringIndexOutOfBoundsException이 발생하는 부분에 대한 학습 테스트를 구현한다.
 - [x] JUnit의 @DisplayName을 활용해 테스트 메소드의 의도를 드러낸다.
 
-## Set Collection에 대한 학습 테스트
-다음과 같은 Set 데이터가 주어졌을 때 요구사항을 만족해야 한다.
-
-```java
-public class SetTest {
-    private Set<Integer> numbers;
-
-    @BeforeEach
-    void setUp() {
-        numbers = new HashSet<>();
-        numbers.add(1);
-        numbers.add(1);
-        numbers.add(2);
-        numbers.add(3);
-    }
-    
-    // Test Case 구현
-}
-```
-
 ### 요구사항 1
 - [x] Set의 size() 메소드를 활용해 Set의 크기를 확인하는 학습테스트를 구현한다.
 
@@ -49,21 +29,6 @@ public class SetTest {
 - [x] Set의 contains() 메소드를 활용해 1, 2, 3의 값이 존재하는지를 확인하는 학습테스트를 구현하려한다.
 - [x] 구현하고 보니 다음과 같이 중복 코드가 계속해서 발생한다.
 - [x] JUnit의 ParameterizedTest를 활용해 중복 코드를 제거해 본다.
-```java
-    @Test
-    void contains() {
-        assertThat(numbers.contains(1)).isTrue();
-        assertThat(numbers.contains(2)).isTrue();
-        assertThat(numbers.contains(3)).isTrue();
-    }
-```
-
-### 요구사항 3
-- [x] 입력 값에 따라 결과 값이 다른 경우에 대한 테스트도 가능하도록 구현한다.
-- 요구사항 2는 contains 메소드 결과 값이 true인 경우만 테스트 가능하다.
-- 예를 들어 1, 2, 3 값은 contains 메소드 실행결과 true, 4, 5 값을 넣으면 false 가 반환되는 테스트를 하나의 Test Case로 구현한다.
-
-Introduction to AssertJ 문서 참고해 assertj의 다양한 활용법 익힌다.
 
 # 2단계 - 문자열 덧셈 계산기
 ### 문자열 덧셈 계산기를 통한 TDD/리팩토링 실습
@@ -76,10 +41,20 @@ Introduction to AssertJ 문서 참고해 assertj의 다양한 활용법 익힌�
 - [x] 구분자를 쉼표와 콜론을 혼용하여 입력할 경우 숫자를 분리하여 더한다.
 - [x] 기본 구분자(쉼표, 콜론)외에 커스텀 구분자를 지정할 수 있다. 커스텀 구분자는 문자열 앞부분의 “//”와 “\n” 사이에 위치하는 문자를 커스텀 구분자로 사용한다.
 - [x] 문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw한다.
-### 프로그래밍 요구사항
-- indent(들여쓰기) depth를 2단계에서 1단계로 줄여라.
-- depth의 경우 if문을 사용하는 경우 1단계의 depth가 증가한다. if문 안에 while문을 사용한다면 depth가 2단계가 된다.
-- 메소드의 크기가 최대 10라인을 넘지 않도록 구현한다.
-- method가 한 가지 일만 하도록 최대한 작게 만들어라.
-- else를 사용하지 마라.
 
+# 3단계 - 로또(자동)
+### 기능 요구사항
+- [x] 로또 판매기(LottoVendor) 는 구입 금액(Money)을 입력받아 구입 금액 만큼의 로또 숫자를 발급해준다.
+- [x] 금액(Money) 객체는 금액이 같으면 서로 같은 객체이다.
+- [x] 금액 객체는 0보다 작을 수 없다.
+- [x] 금액 객체는 서로 뺄 수 있다.
+- [x] 로또 번호는 1보다 크거나 같으며 45보다 작거나 같다.
+- [x] 로또 티켓(LottoTicket)은 중복되지 않는 로또 번호 6개를 갖는다.
+- [x] 자동 로또 번호 생성기는 중복되지 않는 로또 번호 6개를 생성한다.
+- [x] InputView 는 사용자에게 구입금액을 입력받아 로또 판매기를 실행한다.
+- [x] 구입금액이 나누어 떨어지지 않는 경우는 구매되지 않는다.
+- [x] 지난주 당첨번호를 입력받아 출력한다.
+- [x] 두 로또 티켓을 비교하여 일치하는 번호의 갯수를 알 수 있다.
+- [x] 여러 장의 로또 티켓과 한 장의 로또 티켓을 비교하여 일치 갯수를 알 수 있다.
+- [x] 구입한 로또 티켓과 당첨 번호를 비교하여 당첨 통계를 알 수 있다.
+- [x] 로또를 구입한 가격과 당첨금을 통해 총 수익률을 계산할 수 있다.
