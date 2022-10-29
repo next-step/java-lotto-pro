@@ -1,7 +1,7 @@
 package step3.domain.input;
 
-import step3.domain.Amount;
-import step3.domain.PurchasingAmount;
+import step3.domain.amount.Amount;
+import step3.domain.amount.PurchasingAmount;
 
 import static step3.type.ErrorMessageType.INPUT_ONLY_ALLOW_NUMBER;
 

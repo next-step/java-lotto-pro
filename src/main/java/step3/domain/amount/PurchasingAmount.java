@@ -1,4 +1,4 @@
-package step3.domain;
+package step3.domain.amount;
 
 public class PurchasingAmount {
 
