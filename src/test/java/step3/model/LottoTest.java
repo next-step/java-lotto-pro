@@ -35,9 +35,9 @@ class LottoTest {
             numbers.add(12);
             numbers.add(23);
             numbers.add(34);
-            numbers.add(43);
+            numbers.add(44);
             numbers.add(44);
             new Lotto(numbers);
-        }).isInstanceOf(IndexOutOfBoundsException.class);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
