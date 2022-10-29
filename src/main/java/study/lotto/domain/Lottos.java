@@ -11,8 +11,8 @@ public class Lottos {
         stats = new WinStats(lottos.size());
     }
 
-    public WinStats drawLots(WinningNumbers winningNumbers) {
-        return winningNumbers.drawLots(this.lottos, stats);
+    public WinStats drawLots(WinningLotto winningLotto) {
+        return winningLotto.drawLots(this.lottos, stats);
     }
 
     @Override

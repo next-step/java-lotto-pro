@@ -5,6 +5,7 @@ import study.util.NumberUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -19,7 +20,6 @@ public class Store {
     private static final int LOTTO_END_IDX = 6;
 
     private static final List<Integer> rangeOfLottoNumbers = getRangeOfLottoNumbers();
-
     private static List<Integer> getRangeOfLottoNumbers() {
         return IntStream.rangeClosed(LOTTO_MIN_NUM, LOTTO_MAX_NUM)
                 .boxed()
@@ -34,8 +34,10 @@ public class Store {
         return allNumbers;
     }
 
-    private static List<Integer> buy() {
+    private static Set<LottoNumber> buy() {
         Collections.shuffle(rangeOfLottoNumbers);
-        return new ArrayList<>(rangeOfLottoNumbers.subList(LOTTO_STAT_IDX, LOTTO_END_IDX));
+        return rangeOfLottoNumbers.subList(LOTTO_STAT_IDX, LOTTO_END_IDX).stream()
+                .map((num) -> LottoNumber.of(num))
+                .collect(Collectors.toSet());
     }
 }

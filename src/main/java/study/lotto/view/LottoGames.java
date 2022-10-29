@@ -27,7 +27,7 @@ public class LottoGames {
         output.printMessage(lottos.toString());
     }
 
-    private WinningNumbers inputWinningNumbers() {
+    private WinningLotto inputWinningNumbers() {
         output.printMessage("\n지난 주 당첨 번호를 입력해 주세요.");
         return input.inputWinningNumbers();
     }

@@ -1,7 +1,7 @@
 package study.lotto.view;
 
 import study.lotto.domain.Order;
-import study.lotto.domain.WinningNumbers;
+import study.lotto.domain.WinningLotto;
 
 import java.util.Scanner;
 
@@ -13,7 +13,7 @@ public class LottoInput {
         return new Order(scanner.nextLine());
     }
 
-    public WinningNumbers inputWinningNumbers() {
-        return new WinningNumbers(scanner.nextLine());
+    public WinningLotto inputWinningNumbers() {
+        return new WinningLotto(scanner.nextLine());
     }
 }

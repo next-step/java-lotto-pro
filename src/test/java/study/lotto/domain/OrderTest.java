@@ -37,4 +37,13 @@ class OrderTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] The given string contains characters that cannot be converted to numbers.");
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "100", "500", "800" })
+    void 로또_가격보다_작은_금액이_입력되면_IllegalArgumentException_발생(String totalAmount) {
+        assertThatThrownBy(() -> {
+            new Order(totalAmount);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] You must purchase at least one lotto.");
+    }
 }

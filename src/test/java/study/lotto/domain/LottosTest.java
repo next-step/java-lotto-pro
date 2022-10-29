@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DisplayName("각 로또의 추첨 결과를 검증하는 테스트")
 class LottosTest {
 
-    private final WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6");
+    private final WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
 
     @Test
     void drawLots_추첨_테스트() {
@@ -22,7 +22,7 @@ class LottosTest {
                 new Lotto(Arrays.asList(1, 2, 5, 6, 18, 19)));
         Lottos lottos = new Lottos(allNumbersFromStore);
 
-        WinStats stats = lottos.drawLots(winningNumbers);
+        WinStats stats = lottos.drawLots(winningLotto);
         Map<LottoStatus, Long> printData = stats.getPrintDataWithCountsByLottoStatus();
 
         assertAll(
