@@ -1,10 +1,12 @@
 package lotto.controller;
 
-import lotto.generator.LottoGenerator;
-import lotto.domain.lotto.LottoNumbers;
+import java.util.List;
+import java.util.stream.Collectors;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.money.Money;
 import lotto.domain.statistic.LottoStatistic;
+import lotto.generator.LottoGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -20,7 +22,11 @@ public class LottoController {
 
         ResultView.printPurchaseResult(lottos);
 
-        LottoNumbers winningNumbers = LottoNumbers.fromBy(InputView.inputWinningNumbers());
+        List<LottoNumber> winningNumbers =
+                InputView.inputWinningNumbers()
+                        .stream()
+                        .map(LottoNumber::from)
+                        .collect(Collectors.toList());
 
         ResultView.printResult(LottoStatistic.of(lottos, winningNumbers));
     }

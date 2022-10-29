@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 import lotto.domain.TestLottoNumberGeneratorStrategy;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -32,11 +32,10 @@ class WinTest {
     @ParameterizedTest
     @MethodSource(value = "winningNumbersWithMatchCount")
     @DisplayName("로또번호(로또 1장)와 입력된 당첨번호를 전체 비교하여 일치하는 번호의 갯수를 확인한다.")
-    void lottoNumbersMatches2(List<LottoNumber> input, int expected) {
-        LottoNumbers lottoNumbers = LottoNumbers.from(numbers);
-        LottoNumbers winningNumbers = LottoNumbers.from(input);
+    void lottoNumbersMatches1(List<LottoNumber> input, int expected) {
+        Lotto lotto = Lotto.from(numbers);
 
-        int result = lottoNumbers.matches(winningNumbers);
+        int result = lotto.matches(input);
 
         Assertions.assertThat(result).isEqualTo(expected);
     }
