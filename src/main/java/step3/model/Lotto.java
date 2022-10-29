@@ -65,13 +65,6 @@ public class Lotto {
         return sameCount;
     }
 
-    private int containNumber(LottoNumber number) {
-        if (this.numbers.contains(number)) {
-            return 1;
-        }
-        return 0;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
