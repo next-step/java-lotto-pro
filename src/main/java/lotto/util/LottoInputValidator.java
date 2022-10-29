@@ -34,7 +34,7 @@ public class LottoInputValidator {
     }
 
     private static boolean validateNumbersInRanges(String[] numbers) {
-        return Stream.of(numbers).allMatch(number -> number.matches(LOTTO_NUMBER_REGEX));
+        return Stream.of(numbers).allMatch(number -> number.trim().matches(LOTTO_NUMBER_REGEX));
     }
 
     private static boolean validateNonDuplicatedNumbers(String[] numbers) {
