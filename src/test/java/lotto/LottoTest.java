@@ -1,6 +1,7 @@
 package lotto;
 
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
@@ -14,87 +15,47 @@ public class LottoTest {
 
     @ParameterizedTest(name = "로또는_6개의_정렬된_로또_번호를_가지고_있어야_한다")
     @MethodSource("possibleLottoNumbersFixture")
-    void 로또는_6개의_정렬된_로또_번호를_가지고_있어야_한다(List<LottoNumber> possibleLottoNumbersFixture) {
-        Lotto lotto = Lotto.valueOf(possibleLottoNumbersFixture);
+    void 로또는_6개의_정렬된_로또_번호를_가지고_있어야_한다(LottoNumberGenerateStrategy given, LottoNumberGenerateStrategy expected) {
+        Lotto lotto = Lotto.valueOf(given);
 
-        List<LottoNumber> expectedLottoNumbers = Arrays.asList(
-            LottoNumber.valueOf(9),
-            LottoNumber.valueOf(18),
-            LottoNumber.valueOf(27),
-            LottoNumber.valueOf(36),
-            LottoNumber.valueOf(45),
-            LottoNumber.valueOf(1)
-        );
-
-        assertThat(lotto).isEqualTo(Lotto.valueOf(expectedLottoNumbers));
+        assertThat(lotto).isEqualTo(Lotto.valueOf(expected));
     }
 
-    static Stream<List<LottoNumber>> possibleLottoNumbersFixture() {
-        return Stream.of(
-            Arrays.asList(
-                LottoNumber.valueOf(9),
-                LottoNumber.valueOf(18),
-                LottoNumber.valueOf(27),
-                LottoNumber.valueOf(36),
-                LottoNumber.valueOf(45),
-                LottoNumber.valueOf(1)
-            )
-        );
+    static Stream<Arguments> possibleLottoNumbersFixture() {
+        return Stream.of(Arguments.of(
+                new ManualLottoNumberGenerateStrategy(Arrays.asList(9, 18, 27, 36, 45, 1)),
+                new ManualLottoNumberGenerateStrategy(Arrays.asList(9, 18, 27, 36, 45, 1))
+            ));
     }
 
     @ParameterizedTest(name = "초기화시에_로또번호가_6개가_아니면_에러처리")
     @MethodSource("impossibleLottoNumbersFixture")
-    void 초기화시에_로또번호가_6개가_아니면_에러처리(List<LottoNumber> impossibleLottoNumbersFixture) {
-        assertThatThrownBy(() -> Lotto.valueOf(impossibleLottoNumbersFixture))
+    void 초기화시에_로또번호가_6개가_아니면_에러처리(LottoNumberGenerateStrategy given) {
+        assertThatThrownBy(() -> Lotto.valueOf(given))
             .isInstanceOf(RuntimeException.class);
     }
 
-    static Stream<List<LottoNumber>> impossibleLottoNumbersFixture() {
+    static Stream<LottoNumberGenerateStrategy> impossibleLottoNumbersFixture() {
         return Stream.of(
-            Arrays.asList(
-                LottoNumber.valueOf(9),
-                LottoNumber.valueOf(18),
-                LottoNumber.valueOf(27),
-                LottoNumber.valueOf(36),
-                LottoNumber.valueOf(45)
-            ),
-            Arrays.asList(
-                LottoNumber.valueOf(9),
-                LottoNumber.valueOf(18),
-                LottoNumber.valueOf(27),
-                LottoNumber.valueOf(36),
-                LottoNumber.valueOf(45),
-                LottoNumber.valueOf(1),
-                LottoNumber.valueOf(2)
-            )
+            new ManualLottoNumberGenerateStrategy(Arrays.asList(9, 18, 27)),
+            new ManualLottoNumberGenerateStrategy(Arrays.asList(9, 18, 27, 36)),
+            new ManualLottoNumberGenerateStrategy(Arrays.asList(9, 18, 27, 36, 45))
         );
     }
 
     @ParameterizedTest(name = "초기화시에_로또번호가_중복된_숫자이면_에러처리")
     @MethodSource("duplicatedLottoNumbersFixture")
-    void 초기화시에_로또번호가_중복된_숫자이면_에러처리(List<LottoNumber> duplicatedLottoNumbersFixture) {
-        assertThatThrownBy(() -> Lotto.valueOf(duplicatedLottoNumbersFixture))
+    void 초기화시에_로또번호가_중복된_숫자이면_에러처리(LottoNumberGenerateStrategy given) {
+        assertThatThrownBy(() -> Lotto.valueOf(given))
             .isInstanceOf(RuntimeException.class);
     }
 
-    static Stream<List<LottoNumber>> duplicatedLottoNumbersFixture() {
+    static Stream<LottoNumberGenerateStrategy> duplicatedLottoNumbersFixture() {
         return Stream.of(
-            Arrays.asList(
-                LottoNumber.valueOf(9),
-                LottoNumber.valueOf(18),
-                LottoNumber.valueOf(27),
-                LottoNumber.valueOf(36),
-                LottoNumber.valueOf(45),
-                LottoNumber.valueOf(45)
-            ),
-            Arrays.asList(
-                LottoNumber.valueOf(9),
-                LottoNumber.valueOf(18),
-                LottoNumber.valueOf(27),
-                LottoNumber.valueOf(36),
-                LottoNumber.valueOf(45),
-                LottoNumber.valueOf(27)
-            )
+                new ManualLottoNumberGenerateStrategy(Arrays.asList(9, 18, 27, 36, 45, 45)),
+                new ManualLottoNumberGenerateStrategy(Arrays.asList(9, 18, 27, 36, 18, 45)),
+                new ManualLottoNumberGenerateStrategy(Arrays.asList(9, 20, 27, 36, 45, 20)),
+                new ManualLottoNumberGenerateStrategy(Arrays.asList(1, 18, 27, 1, 45, 45))
         );
     }
 }

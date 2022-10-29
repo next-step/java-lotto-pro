@@ -1,9 +1,6 @@
 package lotto;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Lotto {
 
@@ -39,7 +36,11 @@ public class Lotto {
         }
     }
 
-    public static Lotto valueOf(List<LottoNumber> lottoNumbers) {
+    public static Lotto valueOf(LottoNumberGenerateStrategy strategy) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
+            lottoNumbers.add(strategy.generate());
+        }
         validateDuplication(lottoNumbers);
         return new Lotto(lottoNumbers);
     }
