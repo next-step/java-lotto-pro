@@ -20,13 +20,17 @@ public class LottoController {
         Money paidMoney = getPaidMoney();
         LottoBundle lottoBundle = lottoStore.buyLotto(paidMoney);
         showLottoBundle(lottoBundle);
-        List<Integer> winningNumbers = getWinningNumbers();
-        showResult(paidMoney, lottoBundle, winningNumbers);
+        WinningMoney winningMoney = lottoBundle.countWinning(getWinningLotto());
+        showResult(paidMoney, winningMoney);
+    }
+
+    private Lotto getWinningLotto() {
+        return new Lotto(getWinningNumbers());
     }
 
     private void showLottoBundle(LottoBundle lottoBundle) {
         view.showLottoCount(lottoBundle.size());
-        view.showLotto(lottoBundle.printAll());
+        view.showLotto(lottoBundle.toString());
     }
 
     private Money getPaidMoney() {
@@ -39,8 +43,7 @@ public class LottoController {
         return input.getWinningLottoNumbers();
     }
 
-    private void showResult(Money paidMoney, LottoBundle lottoBundle, List<Integer> winningNumbers) {
-        WinningMoney winningMoney = lottoBundle.countWinning(winningNumbers);
+    private void showResult(Money paidMoney, WinningMoney winningMoney) {
         view.showMessageStatistics();
         for (WinningBonus bonus: WinningBonus.values()) {
             view.showStatistics(bonus,winningMoney.count(bonus));

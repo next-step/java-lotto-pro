@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
     @Test
@@ -14,7 +13,7 @@ class LottoTest {
     void test1() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        int count = lotto.check(Arrays.asList(1, 2, 3, 10, 11, 12));
+        int count = lotto.compareMatchCount(new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12)));
 
         assertThat(count).isEqualTo(3);
     }

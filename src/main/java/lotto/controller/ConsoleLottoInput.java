@@ -26,11 +26,15 @@ public class ConsoleLottoInput implements LottoUserInput {
     @Override
     public List<Integer> getWinningLottoNumbers() {
         String[] userInputNumberStringArray = getInput().split(",");
-        List<Integer> winningLottoNumbers = Arrays.stream(userInputNumberStringArray)
-                .map(this::getPositiveIntegerInner)
-                .collect(Collectors.toList());
+        List<Integer> winningLottoNumbers = mapToPositiveIntegers(userInputNumberStringArray);
         validateIsSixNumbers(winningLottoNumbers);
         return winningLottoNumbers;
+    }
+
+    private List<Integer> mapToPositiveIntegers(String[] userInputNumberStringArray) {
+        return Arrays.stream(userInputNumberStringArray)
+                .map(this::getPositiveIntegerInner)
+                .collect(Collectors.toList());
     }
 
     private void validateIsSixNumbers(List<Integer> winningLottoNumbers) {

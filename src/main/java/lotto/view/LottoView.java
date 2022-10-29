@@ -2,13 +2,12 @@ package lotto.view;
 
 import lotto.domain.WinningBonus;
 
-import java.util.List;
 
 public interface LottoView {
     void showMessageRequestPurchaseMoney();
     void showLottoCount(int size);
 
-    void showLotto(List<String> printAll);
+    void showLotto(String lottoString);
 
     void showMessageRequestWinningNumbers();
 

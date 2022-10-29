@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.WinningBonus;
 
-import java.util.List;
 
 import static lotto.view.LottoMessageFormats.*;
 
@@ -25,9 +24,9 @@ public class SimpleLottoView implements LottoView {
     }
 
     @Override
-    public void showLotto(List<String> printAll) {
-        printAll.forEach(this.output::print);
-        this.output.print("");
+    public void showLotto(String lottoString) {
+        output.print(lottoString);
+        output.print("");
     }
 
     @Override

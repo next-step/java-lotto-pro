@@ -28,9 +28,7 @@ class LottoBundleTest {
     void test1() {
         LottoBundle lottoBundle = new LottoBundle(lottos);
 
-        List<String> lottoPrints = lottoBundle.printAll();
-
-        assertThat(lottoPrints.get(0)).matches("\\[[0-9,]+]");
+        assertThat(lottoBundle.toString()).matches("\\[[0-9,]+]");
     }
 
     @Test
@@ -38,7 +36,7 @@ class LottoBundleTest {
     void test2() {
         LottoBundle lottoBundle = new LottoBundle(lottos);
 
-        WinningMoney winningMoney = lottoBundle.countWinning(Arrays.asList(1,2,3,4,5,6));
+        WinningMoney winningMoney = lottoBundle.countWinning(new Lotto(Arrays.asList(1,2,3,4,5,6)));
 
         assertThat(winningMoney.count(THREE)).isEqualTo(1);
         assertThat(winningMoney.count(FOUR)).isEqualTo(1);

@@ -8,31 +8,33 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
-        List<Integer> integers = Collections.unmodifiableList(numbers);
-        this.numbers = integers.stream()
+        this.numbers = numbers.stream()
                 .map(LottoNumber::of)
+                .sorted()
                 .collect(Collectors.toList());
-
-        Collections.sort(this.numbers);
     }
 
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(this.numbers);
     }
 
-    public String print(){
-        return String.format("[%s]",convertToStringNumbers());
-    }
-
-    private String convertToStringNumbers() {
-        return this.numbers.stream()
+    @Override
+    public String toString() {
+        String joinedLottoNumbers = numbers.stream()
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(","));
+
+        return String.format("[%s]", joinedLottoNumbers);
     }
 
-    public int check(List<Integer> winningNumbers) {
-        return (int)winningNumbers.stream()
-                .map(w -> numbers.contains(LottoNumber.of(w)))
-                .filter(r -> r.equals(true)).count();
+    public int compareMatchCount(Lotto winningLotto) {
+        long count = numbers.stream()
+                .filter(winningLotto::hasSameNumber)
+                .count();
+        return (int) count;
+    }
+
+    private boolean hasSameNumber(LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
     }
 }
