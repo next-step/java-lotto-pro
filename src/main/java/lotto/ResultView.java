@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ResultView {
@@ -7,8 +8,14 @@ public class ResultView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    void resultPurchase(List<Integer> numbers) {
-        System.out.println(numbers);
+    List<LottoNumber> resultPurchase(LottoNumberGenerator lottoNumberGenerator, int countPurchase) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int i = 0; i < countPurchase; i++) {
+            List<Integer> sixNumbers = lottoNumberGenerator.generateSixNumbers();
+            System.out.println(sixNumbers);
+            lottoNumbers.add(new LottoNumber(sixNumbers));
+        }
+        return lottoNumbers;
     }
 
     void resultWinningStatistics(int payMoney, LottoNumbers lottoNumbers) {
@@ -25,6 +32,6 @@ public class ResultView {
         System.out.println("6개 일치 (2000000000원)- " + lottoNumbers.countFirst() + "개");
         System.out.println(
                 "총 수익률은 " + (5000 * fourth + 50000 * third + 1500000 * second + 2000000000 * first) / payMoney
-                        + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+                        + "입니다.");
     }
 }
