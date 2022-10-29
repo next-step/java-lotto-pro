@@ -16,8 +16,8 @@ public class NumbersGenerator {
         List<Integer> numbers = generateNumbers();
         Collections.shuffle(numbers);
         List<Integer> subNumbers = numbers.subList(0, MAX_SELECT_NUMBER);
-        Collections.sort(numbers);
-        return Numbers.generate(numbers);
+        Collections.sort(subNumbers);
+        return Numbers.generate(subNumbers);
     }
 
     private static List<Integer> generateNumbers() {
