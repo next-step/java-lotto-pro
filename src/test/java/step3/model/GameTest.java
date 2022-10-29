@@ -15,12 +15,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class GameTest {
 
-    List<Integer> candidateLottoNumbers = new ArrayList<>();
+    List<LottoNumber> candidateLottoNumbers = new ArrayList<>();
 
     @BeforeEach
     void before() {
         for (int i = 1; i < 46; i++) {
-            candidateLottoNumbers.add(i);
+            candidateLottoNumbers.add(new LottoNumber(i));
         }
     }
 
@@ -55,7 +55,7 @@ public class GameTest {
     @ValueSource(strings = {"1", "10"})
     public void getLottoResult_pass_01(int count) {
         Game game = new Game(count);
-        List<List<Integer>> result = game.getLottoResult();
+        List<List<LottoNumber>> result = game.getLottoResult();
 
         assertThat(result.size()).isEqualTo(count);
     }
@@ -65,9 +65,9 @@ public class GameTest {
     @ValueSource(strings = {"1000", "2000"})
     public void getLottoResult_pass_02(String money) {
         Game game = new Game(money);
-        List<List<Integer>> result = game.getLottoResult();
+        List<List<LottoNumber>> result = game.getLottoResult();
 
-        for (List<Integer> lotto : result) {
+        for (List<LottoNumber> lotto : result) {
             assertThat(candidateLottoNumbers).containsAll(lotto);
         }
     }
@@ -77,24 +77,12 @@ public class GameTest {
     @ValueSource(strings = {"1000", "2000"})
     public void getLottoResult_pass_03(String money) {
         Game game = new Game(money);
-        List<List<Integer>> result = game.getLottoResult();
+        List<List<LottoNumber>> result = game.getLottoResult();
 
-        for (List<Integer> lotto : result) {
-            List<Integer> beforeData = new ArrayList<>(lotto);
+        for (List<LottoNumber> lotto : result) {
+            List<LottoNumber> beforeData = new ArrayList<>(lotto);
             Collections.sort(lotto);
             assertThat(lotto).isEqualTo(beforeData);
-        }
-    }
-
-    @DisplayName("로또_게임_결과값은_0미만_46이상은_없어야_한다")
-    @ParameterizedTest
-    @ValueSource(strings = {"1000", "2000"})
-    public void getLottoResult_fail_01(String money) {
-        Game game = new Game(money);
-        List<List<Integer>> result = game.getLottoResult();
-
-        for (List<Integer> lotto : result) {
-            assertThat(lotto).doesNotContain(0, 46);
         }
     }
 
@@ -104,7 +92,10 @@ public class GameTest {
     public void setWinLottoNumbers_pass_01(String winLottoNumbers) {
         Game game = new Game();
         game.setWinLottoNumbers(winLottoNumbers);
-        assertThat(game.getWinLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(game.getWinLottoNumbers()).containsExactly(
+                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
+        );
     }
 
     @DisplayName("로또_게임_지난_당첨_결과값_사이즈는_6")
@@ -131,6 +122,6 @@ public class GameTest {
     public void setWinLottoNumbers_fail_02(String winLottoNumbers) {
         Game game = new Game();
         assertThatThrownBy(() -> game.setWinLottoNumbers(winLottoNumbers))
-                .isInstanceOf(NumberFormatException.class);
+                .isInstanceOf(RuntimeException.class);
     }
 }

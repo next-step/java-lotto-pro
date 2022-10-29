@@ -10,9 +10,9 @@ class Game {
     private static final int LOTTO_ONE_GAME_MONEY = 1000;
     private static final int LOTTO_LENGTH = 6;
     private static final String DELIMITER = ",";
-    private final List<Integer> lottoCandidateNumbers = new ArrayList<>();
-    private final List<List<Integer>> lottoResult = new ArrayList<>();
-    private final List<Integer> winLottoNumbers = new ArrayList<>();
+    private final List<LottoNumber> lottoCandidateNumbers = new ArrayList<>();
+    private final List<List<LottoNumber>> lottoResult = new ArrayList<>();
+    private final List<LottoNumber> winLottoNumbers = new ArrayList<>();
     private int lottoBuyCount;
 
     public Game() {
@@ -36,7 +36,7 @@ class Game {
 
     private void initLottoCandidateNumbers() {
         for (int i = 1; i < 46; i++) {
-            this.lottoCandidateNumbers.add(i);
+            this.lottoCandidateNumbers.add(new LottoNumber(i));
         }
     }
 
@@ -61,23 +61,23 @@ class Game {
         return lottoBuyCount;
     }
 
-    public List<List<Integer>> getLottoResult() {
+    public List<List<LottoNumber>> getLottoResult() {
         for (int i = 0; i < lottoBuyCount; i++) {
             Collections.shuffle(this.lottoCandidateNumbers);
-            this.lottoResult.add(this.lottoCandidateNumbers.subList(0, 6));
+            this.lottoResult.add(new ArrayList<>(this.lottoCandidateNumbers.subList(0, 6)));
             Collections.sort(this.lottoResult.get(i));
         }
         return this.lottoResult;
     }
 
-    public List<Integer> getWinLottoNumbers() {
+    public List<LottoNumber> getWinLottoNumbers() {
         return this.winLottoNumbers;
     }
 
     public void setWinLottoNumbers(String numbersStr) {
         String[] splitNumbers = numbersStr.split(DELIMITER);
         for (String numberStr : splitNumbers) {
-            this.winLottoNumbers.add(convertNumber(numberStr.trim()));
+            this.winLottoNumbers.add(new LottoNumber(numberStr.trim()));
         }
         if (this.winLottoNumbers.size() != LOTTO_LENGTH) {
             throw new RuntimeException(ErrorMessageConstant.NOT_LOTTO_SIZE);
