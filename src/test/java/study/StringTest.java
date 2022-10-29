@@ -12,9 +12,8 @@ public class StringTest {
     @DisplayName("1,2을 ,로 split 했을 때 1과 2로 분리되는지 테스트")
     void split1() {
         String[] result = "1,2".split(",");
-        assertThat(result).contains("1", "2");
-        assertThat(result).hasSize(2);
-        assertThat(result).containsExactly("1", "2");
+        assertThat(result).hasSize(2)
+            .containsExactly("1", "2");
     }
 
     @Test
