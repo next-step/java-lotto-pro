@@ -9,4 +9,5 @@ public class Message {
     public static final String ERROR_PREFIX = "[ERROR] ";
     public static final String NOT_VALID_NULL = ERROR_PREFIX + "빈 값은 입력할 수 없습니다.";
     public static final String ERROR_IS_NUMBERIC = ERROR_PREFIX + "숫자만 입력 가능합니다.";
+    public static final String UNDER_MIN_PRICE = ERROR_PREFIX + "금액이 부족합니다.";
 }

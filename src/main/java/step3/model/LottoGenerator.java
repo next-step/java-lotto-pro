@@ -2,37 +2,50 @@ package step3.model;
 
 import static step3.constant.Message.ERROR_IS_NUMBERIC;
 import static step3.constant.Message.NOT_VALID_NULL;
+import static step3.constant.Message.UNDER_MIN_PRICE;
+import static step3.constant.Constant.EACH_LOTTO_PRICE;
 
 public class LottoGenerator {
     private int purchasePrice;
     private Lottos lottos = new Lottos();
 
     public void setPurchasePrice(String price) {
-        checkEmpty(price);
-
-        try {
-            this.purchasePrice = Integer.parseInt(price);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ERROR_IS_NUMBERIC);
-        }
+        this.purchasePrice = validatePrice(price);
     }
 
 
     public Lottos generateLottos() {
-        if(validatePrice()) {
-            lottos.setPurchasedCount(purchasePrice);
-        }
+        lottos.setPurchasedCount(purchasePrice);
 
         lottos.setLottos();
         return lottos;
     }
-    private boolean validatePrice() {
-        boolean valid = false;
-        return valid;
+    private int validatePrice(String price) {
+        checkEmpty(price);
+        int integerPrice = stringToNumber(price);
+        checkPriceMinLimit(integerPrice);
+
+        return integerPrice;
     }
     private void checkEmpty(String price) {
         if(price == null || price.isEmpty()) {
             throw new IllegalArgumentException(NOT_VALID_NULL);
+        }
+    }
+
+    private int stringToNumber(String price) {
+        int afterPrice;
+        try {
+            afterPrice = Integer.parseInt(price);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ERROR_IS_NUMBERIC);
+        }
+        return afterPrice;
+    }
+
+    private void checkPriceMinLimit(int price) {
+        if(price < EACH_LOTTO_PRICE) {
+            throw new IllegalArgumentException(UNDER_MIN_PRICE);
         }
     }
 

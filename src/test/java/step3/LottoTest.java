@@ -14,6 +14,6 @@ public class LottoTest {
     @Test
     @DisplayName("1~45의 랜덤한 6자리 숫자 생성")
     void 랜덤_숫자_테스트() {
-        List<LottoNumber> lottoNumbers =  lotto.generateRandomNumbers();
+        lotto.generateRandomNumbers();
     }
 }
