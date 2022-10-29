@@ -18,6 +18,12 @@ class LottoNumbersTest {
     }
 
     @Test
+    void 동등성_비교() {
+        String lottoNumberAsString = "1, 2, 3, 4, 5, 6";
+        assertThat(new LottoNumbers(lottoNumberAsString)).isEqualTo(new LottoNumbers(lottoNumberAsString));
+    }
+
+    @Test
     void LottoNumber_Set_의_크기가_6이_아닌경우_생성불가() {
         Set<LottoNumber> lottoNumberSet = Stream.of(1, 2, 3, 4, 5, 5)
                 .map(LottoNumber::new)
