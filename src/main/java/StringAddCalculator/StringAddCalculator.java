@@ -6,7 +6,7 @@ public class StringAddCalculator {
 		if (input == null || input.isEmpty()) {
 			return 0;
 		}
-		String[] splitInput = splitInput(input,",");
+		String[] splitInput = splitInput(input,",|:");
 		return calculatorInput(splitInput);
 	}
 
