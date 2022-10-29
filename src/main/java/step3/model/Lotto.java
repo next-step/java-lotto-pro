@@ -10,14 +10,13 @@ import static step3.constant.Constant.ZERO;
 import static step3.constant.Constant.LOTTO_NUMBER_LENGTH;
 public class Lotto {
     private List<LottoNumber> lottoNumbers;
-    private List<LottoNumber> rangeNumbers;
 
-    public void setLottoNumbers() {
+    public void generateLotto() {
         lottoNumbers = generateRandomNumbers();
     }
 
     public List<LottoNumber> generateRandomNumbers() {
-        rangeNumbers = setRangeNumbers();
+        List<LottoNumber>  rangeNumbers = setRangeNumbers();
         Collections.shuffle(rangeNumbers);
 
         this.lottoNumbers = rangeNumbers.subList(ZERO, LOTTO_NUMBER_LENGTH);
@@ -36,7 +35,6 @@ public class Lotto {
     public String toString() {
         return "Lotto{" +
                 "lottoNumbers=" + lottoNumbers +
-                ", rangeNumbers=" + rangeNumbers +
                 '}';
     }
 }
