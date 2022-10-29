@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTicketTest {
 
-    class LottoTicketForTest extends LottoTicket {
+    static class LottoTicketForTest extends LottoTicket {
         Set<Integer> numberMadeSet() {
             return new HashSet<>(numbers);
         }

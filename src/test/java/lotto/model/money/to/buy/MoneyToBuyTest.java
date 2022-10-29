@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MoneyToBuyTest {
 
-    class MoneyToBuyForTest extends MoneyToBuy {
+    static class MoneyToBuyForTest extends MoneyToBuy {
         public MoneyToBuyForTest(String input) {
             super(input);
         }
