@@ -41,7 +41,7 @@ public class LottoController {
     }
 
     private Lottos purchase(Money payment) {
-        Lottos lottos = lottoStore.purchase(payment);
+        Lottos lottos = lottoStore.sell(payment);
         outputView.printLottoNumbers(lottos);
         return lottos;
     }
