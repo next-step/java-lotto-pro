@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.assertj.core.util.Lists;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -15,12 +14,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import utils.Randoms;
 
 class LottoTicketTest {
-
-	@Test
-	void 로또_티켓은_중복되지_않는_로또_번호_6개를_갖는다() {
-		List<Integer> 로또_번호_입력 = generateUniqueNumbers();
-		LottoTicket.of(로또_번호_입력);
-	}
 
 	@ParameterizedTest
 	@MethodSource("중복된_로또번호_생성")
