@@ -1,13 +1,13 @@
 package step3.model;
 
 import step3.constant.ErrorMessageConstant;
+import step3.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
     private static final int LOTTO_ONE_GAME_MONEY = 1000;
-    private static final String DELIMITER = "\\s*,\\s*";
     private final List<LottoResult> lottoResults = new ArrayList<>();
     private LottoResult winLottoNumbers;
     private int lottoBuyCount;
@@ -76,8 +76,7 @@ public class Game {
     }
 
     public void setWinLottoNumbers(String numbersStr) {
-        String[] splitNumbers = numbersStr.split(DELIMITER);
-        winLottoNumbers = new LottoResult(splitNumbers);
+        winLottoNumbers = new LottoResult(StringUtil.parseLottoText(numbersStr));
     }
 
     public LottoWinningStatistics getLottoWinningStatistics() {
