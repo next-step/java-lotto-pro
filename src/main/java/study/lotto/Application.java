@@ -1,10 +1,10 @@
 package study.lotto;
 
-import study.lotto.view.Console;
+import study.lotto.view.LottoGames;
 
 public class Application {
     public static void main(String[] args) {
-        Console console = new Console();
-        console.startConsole();
+        LottoGames lottoGames = new LottoGames();
+        lottoGames.start();
     }
 }

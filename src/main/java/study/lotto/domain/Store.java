@@ -26,10 +26,10 @@ public class Store {
                 .collect(Collectors.toList());
     }
 
-    public static List<List<Integer>> buy(int quantity) {
-        List<List<Integer>> allNumbers = new ArrayList<>();
+    public static List<Lotto> buy(int quantity) {
+        List<Lotto> allNumbers = new ArrayList<>();
         IntStream.range(NumberUtil.INIT_ZERO, quantity).forEach((i) -> {
-            allNumbers.add(buy());
+            allNumbers.add(new Lotto(buy()));
         });
         return allNumbers;
     }

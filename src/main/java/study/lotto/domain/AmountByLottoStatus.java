@@ -31,7 +31,15 @@ public class AmountByLottoStatus {
                 .sum();
     }
 
-    public long countByLottoStatus(LottoStatus status) {
+    public Map<LottoStatus, Long> countsByLottoStatus() {
+        Map<LottoStatus, Long> countsByLottoStatus = new HashMap<>();
+        amountByLottoStatus.keySet().forEach((status) -> {
+            countsByLottoStatus.put(status, countByLottoStatus(status));
+        });
+        return countsByLottoStatus;
+    }
+
+    private long countByLottoStatus(LottoStatus status) {
         return status.countByLottoStatus(amountByLottoStatus.get(status));
     }
 }

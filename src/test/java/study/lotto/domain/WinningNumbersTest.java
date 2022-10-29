@@ -1,11 +1,22 @@
 package study.lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@DisplayName("지난 주 당첨 번호 클래스 테스트")
 class WinningNumbersTest {
+
+    private final WinningNumbers tempWinningNumbers = new WinningNumbers("1,2,3,4,5,6");
 
     @ParameterizedTest
     @ValueSource(strings = { "1,2,3", "1,2", "1", "1,2,3,4", "1,2,3,4,5" })
@@ -33,4 +44,29 @@ class WinningNumbersTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    void drawLots_결과_검증() {
+        List<Lotto> allNumbersFromStore = Arrays.asList(
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 33)),
+                new Lotto(Arrays.asList(1, 2, 18, 27, 39, 45)));
+        WinStats stats = tempWinningNumbers.drawLots(allNumbersFromStore, new WinStats(2));
+        Map<LottoStatus, Long> printData = stats.getPrintDataWithCountsByLottoStatus();
+
+        assertAll(
+                () -> assertEquals(1L, printData.get(LottoStatus.SECOND_PLACE)),
+                () -> assertEquals("750.00", stats.getPrintDataWithProfitRate())
+        );
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = { 7, 8, 9, 23, 36, 41 })
+    void matchNumber_winningNumbers에_포함되지_않은_숫자(int num) {
+        assertEquals(0, tempWinningNumbers.matchNumber(num));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = { 1, 2, 3, 4, 5, 6 })
+    void matchNumber_winningNumbers에_포함된_숫자(int num) {
+        assertEquals(1, tempWinningNumbers.matchNumber(num));
+    }
 }

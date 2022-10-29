@@ -1,22 +1,14 @@
 package study.lotto.domain;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    private final List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
     private final WinStats stats;
 
-    public Lottos(List<List<Integer>> allNumbersFromStore) {
-        addLottos(allNumbersFromStore);
+    public Lottos(List<Lotto> allNumbersFromStore) {
+        lottos = allNumbersFromStore;
         stats = new WinStats(lottos.size());
-    }
-
-    private void addLottos(List<List<Integer>> allNumbersFromStore) {
-        allNumbersFromStore.forEach((numbers) -> {
-            lottos.add(new Lotto(numbers));
-        });
     }
 
     public WinStats drawLots(WinningNumbers winningNumbers) {
@@ -27,7 +19,7 @@ public class Lottos {
     public String toString() {
         StringBuffer buffer = new StringBuffer();
         lottos.forEach((lotto) -> {
-            buffer.append(lotto.toString() + "\n");
+            buffer.append(lotto.toString()).append("\n");
         });
         return buffer.toString();
     }

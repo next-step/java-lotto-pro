@@ -1,5 +1,8 @@
 package study.lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class WinStats {
 
     private final ProfitRate profitRate;
@@ -18,15 +21,11 @@ public class WinStats {
         profitRate.calculate(amountByLottoStatus.sumTotalAmount());
     }
 
-    @Override
-    public String toString() {
-        StringBuffer sb = new StringBuffer("\n당첨 통계");
-        sb.append("\n---------");
-        sb.append("\n3개 일치 (5000원) - " + amountByLottoStatus.countByLottoStatus(LottoStatus.FOURTH_PLACE));
-        sb.append("\n4개 일치 (50000원) - " + amountByLottoStatus.countByLottoStatus(LottoStatus.THIRD_PLACE));
-        sb.append("\n5개 일치 (1500000원) - " + amountByLottoStatus.countByLottoStatus(LottoStatus.SECOND_PLACE));
-        sb.append("\n6개 일치 (2000000000원) - " + amountByLottoStatus.countByLottoStatus(LottoStatus.FIRST_PLACE));
-        sb.append("\n총 수익률은 " + profitRate.toString() + "입니다.");
-        return sb.toString();
+    public Map<LottoStatus, Long> getPrintDataWithCountsByLottoStatus() {
+        return amountByLottoStatus.countsByLottoStatus();
+    }
+
+    public String getPrintDataWithProfitRate() {
+        return profitRate.toString();
     }
 }

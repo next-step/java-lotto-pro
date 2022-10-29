@@ -1,12 +1,14 @@
 package study.lotto.domain;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("로또의 당첨 상태를 테스트")
 class LottoStatusTest {
 
     @ParameterizedTest
