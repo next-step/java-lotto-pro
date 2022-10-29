@@ -1,21 +1,16 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.util.InputValidator;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class InputView {
 
     private static final String ASK_MESSAGE_PAY_AMOUNT = "구입금액을 입력해 주세요.";
-    private static final String ASK_MESSAGE_LAST_WINNER_NUMBERS = "\n지난 주 당첨 번호를 입력해 주세요.";
-    private static final String WINNER_NUMBERS_DELIMITER = ",";
+    private static final String ASK_MESSAGE_LAST_WINNING_NUMBERS = "\n지난 주 당첨 번호를 입력해 주세요.";
+    private static final String WINNING_NUMBERS_DELIMITER = ",";
     private static final String WHITE_SPACE = " ";
     private static final String EMPTY_STRING = "";
 
@@ -27,22 +22,22 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
-    public static List<Integer> inputLottoWinnerNumbers(){
+    public static List<Integer> inputLottoWinningNumbers(){
         Scanner sc = new Scanner(System.in);
-        System.out.println(ASK_MESSAGE_LAST_WINNER_NUMBERS);
+        System.out.println(ASK_MESSAGE_LAST_WINNING_NUMBERS);
 
         String input = sc.nextLine().replaceAll(WHITE_SPACE, EMPTY_STRING);
-        String[] stringWinnerNumbers = input.split(WINNER_NUMBERS_DELIMITER);
-        InputValidator.validateLottoNumberCount(stringWinnerNumbers.length);
+        String[] stringWinningNumbers = input.split(WINNING_NUMBERS_DELIMITER);
+        InputValidator.validateLottoNumberCount(stringWinningNumbers.length);
 
-        List<Integer> winnerNumbers = new ArrayList<>();
-        for(String stringFormatNumber : stringWinnerNumbers){
+        List<Integer> winningNumbers = new ArrayList<>();
+        for(String stringFormatNumber : stringWinningNumbers){
             InputValidator.validateNumberFormat(stringFormatNumber);
             int number = Integer.parseInt(stringFormatNumber);
             InputValidator.validateLottoNumber(number);
-            winnerNumbers.add(number);
+            winningNumbers.add(number);
         }
 
-        return winnerNumbers;
+        return winningNumbers;
     }
 }

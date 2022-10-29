@@ -1,6 +1,9 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class Lotto {
 
@@ -18,9 +21,9 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int countCollectNumber(List<Integer> winningNumbers) {
+    public int countCollectNumber(Lotto winningNumbers) {
         int result = 0;
-        for(int winningNumber : winningNumbers){
+        for(int winningNumber : winningNumbers.lottoNumbers){
             if(lottoNumbers.contains(winningNumber)){
                 result++;
             }

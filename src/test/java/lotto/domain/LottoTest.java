@@ -30,12 +30,12 @@ public class LottoTest {
     @DisplayName("적중 로또번호 갯수 테스트")
     public void countCollectNumber(){
         List<Integer> lottoNumbers = Arrays.stream(new int[]{1,2,3,4,5,6}).boxed().collect(Collectors.toList());
-        List<Integer> winnerNumbers = Arrays.stream(new int[]{1,2,3,4,5,6}).boxed().collect(Collectors.toList());
-        int collectNumberCount = new Lotto(lottoNumbers).countCollectNumber(winnerNumbers);
+        List<Integer> winningNumbers = Arrays.stream(new int[]{1,2,3,4,5,6}).boxed().collect(Collectors.toList());
+        int collectNumberCount = new Lotto(lottoNumbers).countCollectNumber(new Lotto(winningNumbers));
         assertThat(collectNumberCount).isEqualTo(6);
 
-        List<Integer> winnerNumbers2 = Arrays.stream(new int[]{1,2,3,11,22,33}).boxed().collect(Collectors.toList());
-        int collectNumberCount2 = new Lotto(lottoNumbers).countCollectNumber(winnerNumbers2);
+        List<Integer> winningNumbers2 = Arrays.stream(new int[]{1,2,3,11,22,33}).boxed().collect(Collectors.toList());
+        int collectNumberCount2 = new Lotto(lottoNumbers).countCollectNumber(new Lotto(winningNumbers2));
         assertThat(collectNumberCount2).isEqualTo(3);
     }
 }
