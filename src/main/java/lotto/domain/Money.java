@@ -7,6 +7,8 @@ import common.constant.ErrorCode;
 
 public class Money {
 
+    private static final double FLOOR_LOCATION = 100;
+
     private final int money;
 
     public Money(int money) {
@@ -24,9 +26,15 @@ public class Money {
         return money / LOTTO_PRICE;
     }
 
-    public double findProfitsRatio(Money money) {
-        double profit = (double) money.money / this.money;
-        return Math.floor(profit * 100) / 100;
+
+    /**
+     * 수익율 계산 메소드
+     * @param profitMoney
+     * @return 수익금 / 총 금액 -> 소숫점 둘째자리까지 반환
+     */
+    public double findProfitsRatio(Money profitMoney) {
+        double profit = (double) profitMoney.money / this.money;
+        return Math.floor(profit * FLOOR_LOCATION) / FLOOR_LOCATION;
     }
 
     @Override

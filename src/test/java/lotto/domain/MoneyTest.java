@@ -25,7 +25,7 @@ public class MoneyTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"5000:3000:1.66", "5000:8500:0.62", "50000:154320:0.32"}, delimiter = ':')
+    @CsvSource(value = {"5000:3000:1.66", "5000:8500:0.62", "50000:154320:0.32", "30000:193430:0.15"}, delimiter = ':')
     void 당첨금과_로또_구매_비용_간_비율은_소숫점_셋째자리_버림_반환(int totalPrize, int inputMoney, double profit) {
         Lottos lottos = new Lottos(new Money(inputMoney));
         Money totalPrice = lottos.findTotalPrice();
