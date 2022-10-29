@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 public class LottoStoreTest {
 
     @Test
-    @DisplayName("로또 구입")
-    public void testPurchase() {
+    @DisplayName("가진 금액만큼 로또 구입")
+    public void testSell() {
         LottoStore store = new LottoStore();
         Money payment = Money.generate(1000);
-        Lottos lottos = store.purchase(payment);
+        Lottos lottos = store.sell(payment);
         assertThat(lottos).isNotNull();
     }
 }
