@@ -12,13 +12,10 @@ public class StringAddCalculator {
     private static String delimiter;
     private static String exceptDelimiterString;
 
-    public StringAddCalculator() {
-        this.sum = 0;
-        this.delimiter = basicSplitRegex;
-        this.exceptDelimiterString = "";
-    }
-
     public static int splitAndSum(String target) {
+        sum = 0;
+        delimiter = basicSplitRegex;
+
         if (isNullOrEmpty(target)) {
             return sum;
         }
