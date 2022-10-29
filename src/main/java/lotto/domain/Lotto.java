@@ -11,18 +11,21 @@ public class Lotto {
 
 	private final Set<LottoNumber> lottoNumbers;
 
-	public Lotto(LottoNumberStrategy lottoNumberStrategy) {
-		List<Integer> pickNumbers = lottoNumberStrategy.pickNumbers();
-		validatePickNumbersSize(pickNumbers.size());
-		this.lottoNumbers = pickNumbers.stream()
-			.map(LottoNumber::new)
-			.collect(Collectors.toSet());
+	public Lotto(List<Integer> numbers) {
+		validatePickNumbersSize(numbers.size());
+		this.lottoNumbers = generateLottoNumbers(numbers);
 	}
 
 	private void validatePickNumbersSize(int size) {
 		if (size != LOTTO_NUMBER_SIZE) {
 			throw new IllegalArgumentException("로또 번호 갯수가 6개이여야 합니다.");
 		}
+	}
+
+	private Set<LottoNumber> generateLottoNumbers(List<Integer> numbers) {
+		return numbers.stream()
+			.map(LottoNumber::new)
+			.collect(Collectors.toSet());
 	}
 
 	@Override

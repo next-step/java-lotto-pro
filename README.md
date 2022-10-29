@@ -34,7 +34,7 @@
 - 로또 번호 (LottoNumber)
   - [X] 1~45 번호 범위 제한
 - 지난 주 당첨 번호 (WinNumbers)
-  - [ ] 입력받은 6자리 숫자 리스트로 지난 주 당첨 번호 객체 생성
+  - [X] 입력받은 6자리 숫자 리스트로 지난 주 당첨 번호 객체 생성
 - 당첨 통계 (WinStatistics)
   - [ ] 로또 컬랙션(Lottos), 지난 주 당첨 번호(WinNumbers) 객체를 입력 받아 당첨 통계 객체 생성
   - [ ] 각 3,4,5개 일치 결과 반환 (MatchResult)
@@ -43,4 +43,6 @@
   - [X] begin~last 범위 n자리 난수 생성
 - 로또 랜덤 번호 선택 전략 (RandomLottoNumberStrategy)
   - [X] 난수 생성기로부터 번호를 생성 받아 전달
+- 문자열 쉼표 분리기 (InputSplitter)
+  - [X] 분리할 문자열과 구분자를 받아서 분리 결과 반환
 

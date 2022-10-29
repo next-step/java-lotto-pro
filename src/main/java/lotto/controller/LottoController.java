@@ -1,5 +1,8 @@
 package lotto.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import lotto.domain.Lottos;
 import lotto.domain.WinNumbers;
 import lotto.domain.WinStatistics;
@@ -21,8 +24,8 @@ public class LottoController {
 		Lottos lottos = new Lottos(inputPurchaseAmount);
 		resultView.lottosResult(lottos);
 
-		String inputWinNumbers = inputView.prevWinNumbers();
-		WinNumbers winNumbers = new WinNumbers(inputWinNumbers);
+		String input = inputView.prevWinNumbers();
+		WinNumbers winNumbers = new WinNumbers(input);
 
 		WinStatistics winStatistics = new WinStatistics(lottos, winNumbers);
 		resultView.winStatisticsResult(winStatistics);
