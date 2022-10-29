@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class MatchCount implements Comparable<MatchCount> {
+
+    private static final int NUMBERS_WITH_BONUS = 5;
     private final int matchBallCount;
     private final int matchBonusBallCount;
 
@@ -26,7 +28,7 @@ public class MatchCount implements Comparable<MatchCount> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final MatchCount that = (MatchCount) o;
-        if (matchBallCount == 5) {
+        if (matchBallCount == NUMBERS_WITH_BONUS) {
             return Objects.equals(matchBallCount, that.matchBallCount)
                     && Objects.equals(matchBonusBallCount, that.matchBonusBallCount);
         }
