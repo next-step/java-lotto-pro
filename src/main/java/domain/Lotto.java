@@ -29,4 +29,9 @@ public class Lotto {
         }
         return LottoWinning.of(numberMatchSize);
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }

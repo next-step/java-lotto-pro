@@ -3,16 +3,16 @@ package domain;
 import java.util.Arrays;
 
 public enum LottoWinning {
-    FIRST_PRIZE(NumberMatchRange.of(6, 6), 2000000000f),
-    SECOND_PRIZE(NumberMatchRange.of(5, 5), 1500000f),
-    THIRD_PRIZE(NumberMatchRange.of(4, 4), 50000f),
-    FOURTH_PRIZE(NumberMatchRange.of(3, 3), 5000f),
-    NONE(NumberMatchRange.of(0, 2), 0f);
+    FIRST_PRIZE(NumberMatchRange.of(6, 6), 2000000000),
+    SECOND_PRIZE(NumberMatchRange.of(5, 5), 1500000),
+    THIRD_PRIZE(NumberMatchRange.of(4, 4), 50000),
+    FOURTH_PRIZE(NumberMatchRange.of(3, 3), 5000),
+    NONE(NumberMatchRange.of(0, 2), 0);
 
     private final NumberMatchRange numberMatchRange;
-    private final float prize;
+    private final int prize;
 
-    LottoWinning(NumberMatchRange numberMatchRange, float prize) {
+    LottoWinning(NumberMatchRange numberMatchRange, int prize) {
         this.numberMatchRange = numberMatchRange;
         this.prize = prize;
     }
@@ -24,8 +24,12 @@ public enum LottoWinning {
             .orElse(NONE);
     }
 
-    public float getPrize() {
+    public int getPrize() {
         return prize;
+    }
+
+    public int getMaxNumberMatched() {
+        return numberMatchRange.getMaxNumberMatched();
     }
 
     static class NumberMatchRange {
@@ -43,6 +47,10 @@ public enum LottoWinning {
         private NumberMatchRange(int start, int end) {
             this.start = start;
             this.end = end;
+        }
+
+        public int getMaxNumberMatched() {
+            return end;
         }
     }
 }

@@ -1,11 +1,5 @@
 package domain;
 
-import static domain.LottoWinning.FIRST_PRIZE;
-import static domain.LottoWinning.FOURTH_PRIZE;
-import static domain.LottoWinning.NONE;
-import static domain.LottoWinning.SECOND_PRIZE;
-import static domain.LottoWinning.THIRD_PRIZE;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -15,11 +9,7 @@ public class LottoPurchaser {
     private final List<Lotto> lottos;
     private final List<Integer> winningNumber;
     private final Map<LottoWinning, Integer> winningResult = new HashMap<LottoWinning, Integer>() {{
-        put(FIRST_PRIZE, 0);
-        put(SECOND_PRIZE, 0);
-        put(THIRD_PRIZE, 0);
-        put(FOURTH_PRIZE, 0);
-        put(NONE, 0);
+        Arrays.stream(LottoWinning.values()).forEach(lottoWinning -> put(lottoWinning, 0));
     }};
 
     public static LottoPurchaser of(List<Lotto> lottos, List<Integer> winningNumbers) {
@@ -36,14 +26,14 @@ public class LottoPurchaser {
         return winningResult.get(lottoWinning);
     }
 
-    public float earningRate() {
+    public float getEarningRate() {
         return getTotalPrize() / getSpentMoney();
     }
 
-    private float getTotalPrize() {
+    private int getTotalPrize() {
         return Arrays.stream(LottoWinning.values())
             .map(l -> winningResult.get(l) * l.getPrize())
-            .reduce(0f, Float::sum);
+            .reduce(0, Integer::sum);
     }
 
     private float getSpentMoney() {

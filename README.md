@@ -9,7 +9,7 @@
     - [x] 로또 묶음 중 3/4/5/6개 번호가 일치했는지 계산한다.
     - [x] 수익률을 계산한다.
 - view
-  - [ ] 입력을 받는 view 구현 (InputView)
-  - [ ] 결과를 출력하는 view 구현 (ResultView)
+  - [x] 입력을 받는 view 구현 (InputView)
+  - [x] 결과를 출력하는 view 구현 (ResultView)
 - controller
   - [ ] view와 domain을 연결 (LottoController)

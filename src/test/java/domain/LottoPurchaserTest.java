@@ -28,6 +28,6 @@ class LottoPurchaserTest {
         assertThat(lottoPurchaser.findWinning(THIRD_PRIZE)).isEqualTo(1);
         assertThat(lottoPurchaser.findWinning(FOURTH_PRIZE)).isEqualTo(1);
         assertThat(lottoPurchaser.findWinning(NONE)).isEqualTo(1);
-        assertThat(lottoPurchaser.earningRate()).isEqualTo(400311.0f);
+        assertThat(lottoPurchaser.getEarningRate()).isEqualTo(400311.0f);
     }
 }
