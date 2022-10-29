@@ -9,9 +9,7 @@ public class Number {
     private final int value;
 
     public Number(int value) {
-        if (value < MINIMUM_NUMBER) {
-            throw new RuntimeException("음수는 입력할 수 없습니다.");
-        }
+        validation(value);
         this.value = value;
     }
 
@@ -51,5 +49,11 @@ public class Number {
     @Override
     public String toString() {
         return String.valueOf(value);
+    }
+
+    private void validation(int value) {
+        if (value < MINIMUM_NUMBER) {
+            throw new RuntimeException("음수는 입력할 수 없습니다.");
+        }
     }
 }
