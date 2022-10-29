@@ -7,14 +7,14 @@ import java.util.Objects;
 public class Lotto {
     private static final int LOTTO_NUMBER_SIZE = 6;
 
-    private List<Integer> numbers;
+    private List<Number> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(List<Number> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }
 
-    private void validate(List<Integer> numbers) {
+    private void validate(List<Number> numbers) {
         if (new HashSet<>(numbers).size() < LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("중복된 숫자가 존재합니다.");
         }
