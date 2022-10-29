@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.money.Money;
-import lotto.domain.statistic.LottoStatistic;
 import lotto.generator.LottoGenerator;
 import lotto.generator.LottoNumberGenerator;
 import lotto.generator.LottoNumberGeneratorStrategy;
@@ -30,6 +29,6 @@ public class LottoController {
                         .map(LottoNumber::from)
                         .collect(Collectors.toList());
 
-        ResultView.printResult(LottoStatistic.of(lottos, winningNumbers));
+        ResultView.printResult(lottos, winningNumbers);
     }
 }

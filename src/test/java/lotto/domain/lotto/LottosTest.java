@@ -1,21 +1,17 @@
-package lotto.domain.statistic;
+package lotto.domain.lotto;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 import lotto.domain.TestLottoNumberGenerator;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.Lottos;
 import lotto.domain.win.WinRanking;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class LottoStatisticTest {
+class LottosTest {
 
     private final List<LottoNumber> winningNumbers =
             TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 4, 5, 6)).generate();
@@ -33,22 +29,9 @@ class LottoStatisticTest {
     @MethodSource(value = "winningCount")
     @DisplayName("당첨된 로또 갯수 확인")
     void winningLottoCount(WinRanking input, int expected) {
-        LottoStatistic lottoStatistic = LottoStatistic.of(getTestLottos(), winningNumbers);
-        LottoStatisticResults lottoStatisticResults = lottoStatistic.results();
-
-        int result = lottoStatisticResults.winningCount(input);
+        int result = getTestLottos().winningCount(winningNumbers, input.getMatchCount());
 
         Assertions.assertThat(result).isEqualTo(expected);
-    }
-
-    @Test
-    @DisplayName("수익률 확인")
-    void profit() {
-        LottoStatistic lottoStatistic = LottoStatistic.of(getTestLottos(), winningNumbers);
-
-        double result = lottoStatistic.profit();
-
-        Assertions.assertThat(result).isEqualTo(21.0);
     }
 
     private Lottos getTestLottos() {

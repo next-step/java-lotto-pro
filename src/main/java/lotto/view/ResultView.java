@@ -1,12 +1,12 @@
 package lotto.view;
 
+import java.util.List;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
-import lotto.message.LottoMessage;
-import lotto.domain.money.Money;
-import lotto.domain.statistic.LottoStatistic;
-import lotto.domain.statistic.LottoStatisticResults;
+import lotto.domain.profit.Profit;
 import lotto.domain.win.WinRanking;
+import lotto.message.LottoMessage;
 
 public class ResultView {
     private ResultView() {
@@ -25,24 +25,24 @@ public class ResultView {
         newLine();
     }
 
-    public static void printResult(LottoStatistic lottoStatistic) {
+    public static void printResult(Lottos lottos, List<LottoNumber> winningNumbers) {
         newLine();
         System.out.println(LottoMessage.WINNING_STATISTIC);
         System.out.println(LottoMessage.DIVIDER_LINE);
-        printStatisticResults(lottoStatistic.results());
-        printProfit(lottoStatistic);
+        printStatisticResults(lottos, winningNumbers);
+        printProfit(Profit.of(lottos, winningNumbers));
     }
 
-    private static void printStatisticResults(LottoStatisticResults results) {
+    private static void printStatisticResults(Lottos lottos, List<LottoNumber> winningNumbers) {
         for (WinRanking ranking : WinRanking.values()) {
             System.out.printf((LottoMessage.WINNING_STATISTIC_RESULT) + "%n", ranking.getMatchCount(),
-                    ranking.getWinningMoney(), results.winningCount(ranking));
+                    ranking.getWinningMoney(), lottos.winningCount(winningNumbers, ranking.getMatchCount()));
         }
     }
 
-    private static void printProfit(LottoStatistic lottoStatistic) {
-        System.out.printf(LottoMessage.PROFIT, lottoStatistic.profit());
-        if (lottoStatistic.isLossProfit()) {
+    private static void printProfit(Profit profit) {
+        System.out.printf(LottoMessage.PROFIT, profit.profit());
+        if (profit.isLossProfit()) {
             System.out.println(LottoMessage.LOSS);
         }
     }

@@ -18,7 +18,7 @@ public class Lottos {
         return this.values.size();
     }
 
-    public int matches(List<LottoNumber> winningNumbers, int expectedMatchCount) {
+    public int winningCount(List<LottoNumber> winningNumbers, int expectedMatchCount) {
         int matchCount = 0;
         for (Lotto lotto : values) {
             matchCount = getMatchCount(lotto, winningNumbers, expectedMatchCount, matchCount);
