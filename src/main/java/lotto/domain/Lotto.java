@@ -38,6 +38,10 @@ public class Lotto {
 		return Objects.equals(lottoNumbers, lotto.lottoNumbers);
 	}
 
+	public boolean contains(LottoNumber lottoNumber) {
+		return this.lottoNumbers.contains(lottoNumber);
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoNumbers);
@@ -50,4 +54,5 @@ public class Lotto {
 			.map(Object::toString)
 			.collect(Collectors.joining(", ", "[", "]"));
 	}
+
 }

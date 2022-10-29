@@ -26,6 +26,12 @@ public class WinNumbers {
 			.collect(Collectors.toList());
 	}
 
+	public int countMatches(Lotto lotto) {
+		return (int)winNumbers.stream()
+			.filter(lotto::contains)
+			.count();
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -40,4 +46,5 @@ public class WinNumbers {
 	public int hashCode() {
 		return Objects.hash(winNumbers);
 	}
+
 }

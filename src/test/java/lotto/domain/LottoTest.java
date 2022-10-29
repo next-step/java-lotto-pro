@@ -23,4 +23,10 @@ class LottoTest {
 		assertThat(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)).toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
 		assertThat(new Lotto(Arrays.asList(6, 5, 4, 3, 2, 1)).toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
 	}
+
+	@Test
+	void 로또_번호_포함_여부() {
+		assertThat(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)).contains(new LottoNumber(1))).isTrue();
+		assertThat(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)).contains(new LottoNumber(7))).isFalse();
+	}
 }
