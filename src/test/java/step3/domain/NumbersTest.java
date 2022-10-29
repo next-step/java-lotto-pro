@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -37,16 +36,5 @@ public class NumbersTest {
                 Arguments.of(Arrays.asList(2,3,4,5,6,7), 5),
                 Arguments.of(Arrays.asList(1,2,3,4,5,6), 6)
         );
-    }
-
-    @Test
-    @DisplayName("번호 비교시 대상 개수가 다른 경우 Exception 발생")
-    public void testMatchError() {
-        assertThatThrownBy(() -> {
-            Numbers select = Numbers.generate(Arrays.asList(1,2,3,4,5,6,7));
-            winning.match(select);
-        })
-                .isInstanceOf(IndexOutOfBoundsException.class)
-                .hasMessageContaining("Incomparable subject. please check lottoNumbers size.");
     }
 }

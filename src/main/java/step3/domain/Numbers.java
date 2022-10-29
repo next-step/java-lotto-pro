@@ -15,23 +15,24 @@ public class Numbers {
         this.numbers = numbers;
     }
 
+    public static Numbers generate(List<Integer> numbers) {
+        return new Numbers(numbers);
+    }
+
+    public int match(Numbers selectNumbers) {
+        return (int) numbers.stream()
+                .filter(selectNumbers.numbers::contains)
+                .count();
+    }
+
     public boolean isDuplicated() {
         int size = numbers.size();
         long distinct = numbers.stream().distinct().count();
         return size != distinct;
     }
 
-    public static Numbers generate(List<Integer> numbers) {
-        return new Numbers(numbers);
-    }
-
-    public int match(Numbers selectNumbers) {
-        if (numbers.size() != selectNumbers.numbers.size()) {
-            throw new IndexOutOfBoundsException("Incomparable subject. please check lottoNumbers size.");
-        }
-        return (int) numbers.stream()
-                .filter(selectNumbers.numbers::contains)
-                .count();
+    public boolean isEqualSize(Numbers numbers) {
+        return this.numbers.size() == numbers.numbers.size();
     }
 
     @Override
