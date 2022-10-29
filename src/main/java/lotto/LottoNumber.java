@@ -1,6 +1,8 @@
 package lotto;
 
+import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class LottoNumber {
 
@@ -14,7 +16,8 @@ public class LottoNumber {
 
 	public static LottoNumber of(int number) {
 		verifyNumberInRange(number);
-		return new LottoNumber(number);
+
+		return CachedLottoNumber.fetch(number);
 	}
 
 	private static void verifyNumberInRange(int number) {
@@ -51,5 +54,13 @@ public class LottoNumber {
 	@Override
 	public String toString() {
 		return String.valueOf(number);
+	}
+
+	private static class CachedLottoNumber {
+		private static final Map<Integer, LottoNumber> CACHE = new ConcurrentHashMap<>(LottoNumber.MAX_NUMBER);
+
+		private static LottoNumber fetch(int number) {
+			return CACHE.computeIfAbsent(number, LottoNumber::new);
+		}
 	}
 }
