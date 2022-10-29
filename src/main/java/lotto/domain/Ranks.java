@@ -13,8 +13,10 @@ public class Ranks {
 		this.ranks = ranks;
 	}
 
-	public static Ranks of(List<Rank> ranks) {
-		return new Ranks(ranks);
+	public static Ranks of(List<Integer> matchCounts) {
+		return new Ranks(matchCounts.stream()
+				.map(Rank::of)
+				.collect(Collectors.toList()));
 	}
 
 	public Map<Rank, Long> groupBy() {
