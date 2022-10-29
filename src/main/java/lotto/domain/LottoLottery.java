@@ -3,9 +3,10 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.view.OutputView;
 
 public class LottoLottery {
+    private static final String NEWLINE_DELIMITER = "\n";
+
     private final List<LottoNumbers> lottoLottery;
 
     private LottoLottery(List<LottoNumbers> lottoLottery) {
@@ -31,6 +32,6 @@ public class LottoLottery {
         for (LottoNumbers lottoNumbers : this.lottoLottery) {
             historys.add(lottoNumbers.history());
         }
-        return String.join(OutputView.NEWLINE_DELIMITER, historys);
+        return String.join(NEWLINE_DELIMITER, historys);
     }
 }

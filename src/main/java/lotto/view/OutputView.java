@@ -4,10 +4,6 @@ import java.util.Map;
 import lotto.domain.WinningRank;
 
 public class OutputView {
-    public static final String NEWLINE_DELIMITER = "\n";
-    public static final String PRINT_LOTTO_NUMBERS_FORMAT = "[%s]";
-    public static final String PRINT_LOTTO_NUMBERS_DELIMITER = ", ";
-    public static final String PRINT_QUANTITY_FORMAT = "%d개를 구매했습니다.";
     private static final String PRINT_STATISTICS_FORMAT = "%d개 일치 (%d원)- %d개";
     private static final String PRINT_FORMAT_RATIO = "총 수익률은 %.2f입니다.";
     public static final String OUTPUT_ERROR_MESSAGE_PREFIX = "[ERROR] ";

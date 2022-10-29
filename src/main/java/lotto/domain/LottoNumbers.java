@@ -8,6 +8,8 @@ import lotto.view.OutputView;
 
 public class LottoNumbers {
     public static final int LOTTO_LOTTERY_NUMBER_SIZE = 6;
+    private static final String PRINT_LOTTO_NUMBERS_FORMAT = "[%s]";
+    private static final String PRINT_LOTTO_NUMBERS_DELIMITER = ", ";
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -39,8 +41,8 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
         String numberFormat = numberList.stream()
                 .map(String::valueOf)
-                .collect(Collectors.joining(OutputView.PRINT_LOTTO_NUMBERS_DELIMITER));
-        return String.format(OutputView.PRINT_LOTTO_NUMBERS_FORMAT, numberFormat) ;
+                .collect(Collectors.joining(PRINT_LOTTO_NUMBERS_DELIMITER));
+        return String.format(PRINT_LOTTO_NUMBERS_FORMAT, numberFormat) ;
     }
 
     @Override
