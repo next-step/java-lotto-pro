@@ -44,7 +44,8 @@ public class ProfitMargin {
 		return profitMargin.toString();
 	}
 
-	public boolean isLoss() {
-		return profitMargin.compareTo(BigDecimal.ONE) < 0;
+	public boolean isProfitDecimal() {
+		return profitMargin.compareTo(BigDecimal.ONE) < 0 &&
+			profitMargin.compareTo(BigDecimal.ZERO) > 0;
 	}
 }

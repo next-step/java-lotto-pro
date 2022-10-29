@@ -80,12 +80,11 @@ public class LottoTicket {
 	}
 
 	public int match(LottoTicket other) {
-		List<LottoNumber> lottoNumberList = this.lottoNumbers;
 
 		Set<LottoNumber> comparedLottoNumbers = new HashSet<>(other.lottoNumbers);
 
 		int equalNumberCount = 0;
-		for (LottoNumber lottoNumber : lottoNumberList) {
+		for (LottoNumber lottoNumber : this.lottoNumbers) {
 			equalNumberCount += comparedLottoNumbers.contains(lottoNumber) ? 1 : 0;
 		}
 

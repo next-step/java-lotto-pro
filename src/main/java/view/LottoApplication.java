@@ -27,6 +27,6 @@ public class LottoApplication {
 
 		LottoTicket lastWeekWinLottoTicket = lastWeekWinLottoTicketView.getLastWeekWinLotto();
 
-		lottoWinResultView.getResult(purchaseLottoTickets, lastWeekWinLottoTicket);
+		lottoWinResultView.printWinResult(purchaseLottoTickets, lastWeekWinLottoTicket);
 	}
 }

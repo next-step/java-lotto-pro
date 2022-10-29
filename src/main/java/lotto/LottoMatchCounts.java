@@ -3,9 +3,7 @@ package lotto;
 import java.util.List;
 import java.util.Objects;
 
-import money.Money;
 import utils.CollectionUtils;
-import view.LottoWinPrize;
 
 public class LottoMatchCounts {
 
@@ -41,9 +39,7 @@ public class LottoMatchCounts {
 			.filter(count -> count == matchCount).count();
 	}
 
-	public Money getTotalProfits() {
-		return matchCounts.stream()
-			.map(LottoWinPrize::getPrize)
-			.reduce(Money.ZERO, Money::add);
+	public int getLottoPurchaseCount() {
+		return matchCounts.size();
 	}
 }
