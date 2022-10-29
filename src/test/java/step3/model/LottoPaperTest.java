@@ -1,10 +1,7 @@
-package step3;
+package step3.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.model.Lotto;
-import step3.model.LottoPaper;
-import step3.model.Number;
 
 import java.util.ArrayList;
 import java.util.List;
