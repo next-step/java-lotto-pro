@@ -41,7 +41,7 @@ public class LottoMachine {
         List<Integer> luckyNumbers = new ArrayList<>();
 
         for (String number : luckyNumberText.split(",")) {
-            luckyNumbers.add(Integer.parseInt(number));
+            luckyNumbers.add(Integer.parseInt(number.trim()));
         }
 
         checkLuckyNumbers(luckyNumbers);
@@ -75,7 +75,7 @@ public class LottoMachine {
 
     private int getMatchedCount(List<Integer> luckyNumbers, List<Integer> lotto, int matchedCount) {
         for (int luckyNumber : luckyNumbers) {
-            matchedCount += getMatchedCount(lotto, luckyNumber, matchedCount);
+            matchedCount = getMatchedCount(lotto, luckyNumber, matchedCount);
         }
 
         return matchedCount;
@@ -120,7 +120,7 @@ public class LottoMachine {
     }
 
     public double showRate(int money, List<LottoResult> lottoResults) {
-        double totalMoney = 0.0;
+        double totalMoney = 0.00;
         for (LottoResult lottoResult : lottoResults) {
             totalMoney += lottoResult.getTotalMoney();
         }

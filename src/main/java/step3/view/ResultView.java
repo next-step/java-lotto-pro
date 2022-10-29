@@ -16,7 +16,7 @@ public class ResultView {
             int score = lottoResult.getScore();
             int money = lottoResult.getMoney();
             int scoreMatchedCount = lottoResult.getScoreMatchedCount();
-            String result = String.format(RESULT_FORMAT, scoreMatchedCount, money, scoreMatchedCount);
+            String result = String.format(RESULT_FORMAT, score, money, scoreMatchedCount);
             System.out.println(result);
         }
     }
