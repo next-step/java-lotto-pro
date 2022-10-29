@@ -2,14 +2,15 @@ package step3.view;
 
 import step3.domain.Grades;
 import step3.domain.Lotto;
-import step3.domain.LottoQuantity;
+import step3.domain.LottoQuantities;
 import step3.domain.Lottos;
 import step3.domain.enums.Grade;
 
 public class ResultView {
 
-    public static void printLottoQuantityMessage(LottoQuantity lottoQuantity) {
-        System.out.printf("%d개를 구매했습니다.\n", lottoQuantity.getQuantity());
+    public static void printLottoQuantityMessage(LottoQuantities quantities) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", quantities.getManualLottoQuantity(),
+                quantities.getAutoLottoQuantity());
     }
 
     public static void printLottosNumberMessage(Lottos lottos) {

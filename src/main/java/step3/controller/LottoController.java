@@ -9,6 +9,7 @@ import step3.domain.GradeCalculator;
 import step3.domain.Grades;
 import step3.domain.Lotto;
 import step3.domain.LottoGenerator;
+import step3.domain.LottoQuantities;
 import step3.domain.LottoQuantity;
 import step3.domain.LottoWinning;
 import step3.domain.Lottos;
@@ -37,10 +38,12 @@ public class LottoController {
     }
 
     private Lottos getLottos(Integer amount) {
-        LottoQuantity quantity = LottoQuantity.of(amount);
-        ResultView.printLottoQuantityMessage(quantity);
+        InputView.printRequestManualLottoCount();
+        int quantity = scanner.nextInt();
+        LottoQuantities lottoQuantities = LottoQuantities.of(amount, quantity);
+        ResultView.printLottoQuantityMessage(lottoQuantities);
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < quantity.getQuantity(); i++) {
+        for (int i = 0; i < lottoQuantities.getAutoLottoQuantity(); i++) {
             lottoList.add(LottoGenerator.generate());
         }
         Lottos lottos = new Lottos(lottoList);
