@@ -43,7 +43,7 @@ public class Amount {
     }
 
     private void validatePositive(final String amount) {
-        if (Pattern.matches("^[0-9]*$", amount)) {
+        if (!Pattern.matches("^[0-9]*$", amount)) {
             throw new IllegalArgumentException(ONLY_POSITIVE_MESSAGE);
         }
     }
@@ -56,5 +56,9 @@ public class Amount {
         }
 
         return buyLottoCount;
+    }
+
+    public int getBuyAmount() {
+        return this.amount / MIN_AMOUNT * MIN_AMOUNT;
     }
 }
