@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
     @Test
@@ -23,5 +24,20 @@ public class LottoTest {
         Lotto lotto = new Lotto(numbers);
 
         assertThat(lotto).isEqualTo(new Lotto(numbers));
+    }
+
+    @Test
+    @DisplayName("중복된 숫자가 있을 경우 exception이 발생한다.")
+    void duplicate_exception_test() {
+        assertThatThrownBy(() -> {
+            List<Number> numbers = new ArrayList<>();
+            numbers.add(new Number(1));
+            numbers.add(new Number(12));
+            numbers.add(new Number(23));
+            numbers.add(new Number(34));
+            numbers.add(new Number(44));
+            numbers.add(new Number(44));
+            new Lotto(numbers);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
