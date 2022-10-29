@@ -24,6 +24,10 @@ public class WinningNumbers {
         numbers = convertStringToWinningNumberEach(tokens);
     }
 
+    public WinningNumbers(List<WinningNumberEach> numbers) {
+        this.numbers = numbers;
+    }
+
     private boolean isCommaPrefixOrPostfix(String input) {
         return input.charAt(0) == ',' || input.charAt(input.length() - 1) == ',';
     }
@@ -38,5 +42,13 @@ public class WinningNumbers {
             numbers.add(new WinningNumberEach(token));
         }
         return numbers;
+    }
+
+    public List<Integer> primitiveNumbers() {
+        List<Integer> intWinningNumbers = new ArrayList<>(numbers.size());
+        for (WinningNumberEach winningNumberEach : numbers) {
+            intWinningNumbers.add(winningNumberEach.primitive());
+        }
+        return intWinningNumbers;
     }
 }

@@ -26,7 +26,15 @@ public class WinningNumberEach {
         value = tokenValue;
     }
 
+    public WinningNumberEach(int value) {
+        this.value = value;
+    }
+
     private boolean isValidLottoNumber(int tokenValue) {
         return LottoConstant.LOTTO_MINIMUM_NUMBER <= tokenValue && tokenValue <= LottoConstant.LOTTO_MAXIMUM_NUMBER;
+    }
+
+    public int primitive() {
+        return value;
     }
 }
