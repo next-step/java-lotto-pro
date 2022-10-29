@@ -9,13 +9,11 @@ import lotto.domain.winningnumber.WinningNumber;
 public class Lotto {
 
     private LottoNumbers lottoNumbers;
-    private Purchase purchase;
     private WinningNumber winningNumber;
     private DefaultLottoResult lottoResult;
 
-    public Lotto(String purchase, String winningNumber) {
-        this.purchase = new Purchase(purchase);
-        this.lottoNumbers = new LottoNumbers(this.purchase);
+    public Lotto(LottoNumbers lottoNumbers, String winningNumber) {
+        this.lottoNumbers = lottoNumbers;
         this.winningNumber = new WinningNumber(winningNumber);
         this.lottoResult = new DefaultLottoResult();
     }
@@ -27,7 +25,7 @@ public class Lotto {
         return lottoResult;
     }
 
-    public String makeProfitMargin() {
+    public String makeProfitMargin(Purchase purchase) {
         return purchase.makeProfitMargin(lottoResult.totalProfit());
     }
 }
