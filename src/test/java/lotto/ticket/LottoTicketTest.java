@@ -31,7 +31,7 @@ public class LottoTicketTest {
     }
 
     @Test
-    void match(){
+    void 두_개의_로또가_일치하는지_테스트(){
         LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,6");
         LottoTicket winnerLottoTicket = new LottoTicket("1,2,3,4,5,6");
         int matchCount = lottoTicket.match(winnerLottoTicket);
@@ -39,7 +39,7 @@ public class LottoTicketTest {
     }
 
     @Test
-    void 로또_6개_일치(){
+    void 구매한_로또_한개와_당첨번호_6개_모두_일치하면_일치한_갯수_6을_반환한다(){
         LottoTicket userLotto = new LottoTicket("1,2,3,4,5,6");
         WinnerLottoTicket winnerLotto = new WinnerLottoTicket(
                 new LottoTicket("1,2,3,4,5,6"),
@@ -49,7 +49,7 @@ public class LottoTicketTest {
     }
 
     @Test
-    void 로또_5개_일치(){
+    void 구매한_로또_한개와_당첨번호_5개_치하면_일치한_갯수_5를_반환한다(){
         LottoTicket userLotto = new LottoTicket("1,2,3,4,5,45");
         WinnerLottoTicket winnerLotto = new WinnerLottoTicket(
                 new LottoTicket("1,2,3,4,5,7"),
@@ -59,7 +59,7 @@ public class LottoTicketTest {
     }
 
     @Test
-    void 로또_4개_일치(){
+    void 구매한_로또_한개와_당첨번호_4개가_일치하면_일치한_갯수_4를_반환한다(){
         LottoTicket userLotto = new LottoTicket("1,2,3,4,5,6");
         WinnerLottoTicket winnerLotto = new WinnerLottoTicket(
                 new LottoTicket("1,2,3,4,10,11"),
@@ -69,7 +69,7 @@ public class LottoTicketTest {
     }
 
     @Test
-    void 로또_3개_일치(){
+    void 구매한_로또_한개와_당첨번호_3개가_일치하면_일치한_갯수_3을_반환한다(){
         LottoTicket userLotto = new LottoTicket("1,2,3,4,5,6");
         WinnerLottoTicket winnerLotto = new WinnerLottoTicket(
                 new LottoTicket("1,2,3,10,11,12"),
