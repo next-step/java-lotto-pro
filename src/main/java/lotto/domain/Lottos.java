@@ -5,6 +5,7 @@ import static lotto.domain.LottoResults.ADD_COUNT_AMOUNT;
 import static lotto.domain.LottoResults.DEFALUT_COUNT;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class Lottos {
     }
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+        this.lottos = Collections.unmodifiableList(lottos);
     }
 
     public Money findTotalPrice() {
@@ -37,5 +38,9 @@ public class Lottos {
             lottoResults.put(lottoPrize, lottoResults.getOrDefault(lottoPrize, DEFALUT_COUNT) + ADD_COUNT_AMOUNT);
         }
         return new LottoResults(lottoResults);
+    }
+
+    public List<Lotto> unmodifiedLottos() {
+        return Collections.unmodifiableList(this.lottos);
     }
 }
