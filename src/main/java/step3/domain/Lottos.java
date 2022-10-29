@@ -16,7 +16,7 @@ public class Lottos {
     }
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public List<Lotto> generateLottos(int count) {
