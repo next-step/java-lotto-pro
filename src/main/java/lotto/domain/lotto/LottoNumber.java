@@ -16,7 +16,6 @@ public class LottoNumber {
 
     public LottoNumber(String number) {
         this.number = validateString(number);
-        ;
     }
 
     private int validateString(String number) {

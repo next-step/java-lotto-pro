@@ -5,6 +5,7 @@ import lotto.prize.Prize;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -22,5 +23,16 @@ public class Lottos {
                 .sorted()
                 .forEach(v -> prizes.merge(Prize.matchCounts.get(v), 1, Integer::sum));
         return prizes;
+    }
+
+    public int getLottoCount() {
+        return this.lottos.size();
+    }
+
+    @Override
+    public String toString() {
+        return this.lottos.stream()
+                .map(Lotto::toString)
+                .collect(Collectors.joining("\n"));
     }
 }

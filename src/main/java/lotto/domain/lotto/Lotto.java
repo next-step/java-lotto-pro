@@ -49,6 +49,6 @@ public class Lotto {
     public String toString() {
         return this.lottoNumbers.stream()
                 .map(LottoNumber::toString)
-                .collect(Collectors.joining(",","[","]"));
+                .collect(Collectors.joining(",", "[", "]"));
     }
 }
