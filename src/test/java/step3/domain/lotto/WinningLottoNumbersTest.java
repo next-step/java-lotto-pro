@@ -17,8 +17,4 @@ class WinningLottoNumbersTest {
                 .isThrownBy(() -> new WinningLottoNumbers(input))
                 .withMessageContaining(INPUT_ONLY_ALLOW_NUMBER.getMessage());
     }
-
-
-
-
 }
