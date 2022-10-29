@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 public class LottoShop {
     public LottoPaper buyLotto(Money money, List<LottoGenerator> lottoGenerators) {
-
-        for (int i = 0; i < money.countOfLottoPurchases() - lottoGenerators.size(); i++) {
+        int customLottoCount = lottoGenerators.size();
+        for (int i = 0; i < money.countOfLottoPurchases() - customLottoCount; i++) {
             lottoGenerators.add(new LottoAutoGenerator());
         }
 
