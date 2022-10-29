@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SetTest {
     private Set<Integer> numbers;
@@ -28,14 +27,14 @@ public class SetTest {
     @Test
     @DisplayName("Set collection 크기 테스트")
     void sizeTest() {
-        assertThat(numbers.size()).isEqualTo(3);
+        assertThat(numbers).hasSize(3);
     }
 
     @ParameterizedTest
     @DisplayName("Set 포함된 값 테스트")
     @ValueSource(ints = {1, 2, 3})
     void containTest(int input) {
-        assertTrue(numbers.contains(input));
+        assertThat(numbers).contains(input);
     }
 
     @ParameterizedTest
