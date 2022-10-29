@@ -31,4 +31,4 @@
 - [x] “//”와 “\n” 문자 사이에 커스텀 구분자를 지정할 수 있다.
   - [x] “//;\n1;2;3” => 6
 - [ ] 문자열 계산기에 숫자 이외의 값을 전달하는 경우 RuntimeException 예외를 throw 한다.
-- [ ] 문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외를 throw 한다.
+- [x] 문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외를 throw 한다.

@@ -10,7 +10,7 @@ public class StringAddCalculator {
     private static final Pattern regex = Pattern.compile("//(.)\n(.*)");
 
     public static int splitAndSum(String text) {
-        if (Objects.isNull(text) || text.isEmpty()) {
+        if (validateText(text)) {
             return 0;
         }
         Delimiters delimiters = new Delimiters(defaultDelimiters);
@@ -21,11 +21,24 @@ public class StringAddCalculator {
         return sum(extractText(text), delimiters.join());
     }
 
+    private static boolean validateText(String text) {
+        return Objects.isNull(text) || text.isEmpty();
+    }
+
     private static int sum(String text, String delimiters) {
+        validateNegativeNumber(text, delimiters);
         return Arrays
                 .stream(text.split(delimiters))
                 .mapToInt(Integer::parseInt)
                 .sum();
+    }
+
+    private static void validateNegativeNumber(String text, String delimiters) {
+        Arrays.stream(text.split(delimiters))
+                .filter(number -> Integer.parseInt(number) < 0)
+                .forEach(number -> {
+                    throw new IllegalArgumentException();
+                });
     }
 
     private static boolean existCustomDelimiter(String text) {

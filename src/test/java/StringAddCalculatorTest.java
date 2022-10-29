@@ -5,6 +5,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("문자열 덧셈 계산기")
 public class StringAddCalculatorTest {
@@ -44,5 +45,12 @@ public class StringAddCalculatorTest {
     public void splitAndSum_custom_구분자() {
         int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
+    }
+
+    @DisplayName("음수를 전달할 경우 RuntimeException 예외가 발생해야 한다.")
+    @Test
+    public void splitAndSum_negative() {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
