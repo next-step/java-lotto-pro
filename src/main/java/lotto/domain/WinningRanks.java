@@ -25,12 +25,20 @@ public class WinningRanks {
                 .sum();
     }
 
-    public Map<WinningRank, Long> statistics() {
+    public String statistics() {
         Map<WinningRank, Long> statisticsMap = new LinkedHashMap<>();
         for (WinningRank winningRank : WinningRank.values()) {
             statisticsMap.put(winningRank, countSameWiningRank(winningRank));
         }
-        return statisticsMap;
+        return getStatisticsMessage(statisticsMap);
+    }
+
+    public String getStatisticsMessage(Map<WinningRank, Long> statisticsMap) {
+        StringBuilder sb = new StringBuilder();
+        statisticsMap.forEach((winningRank, winningCount) ->
+                sb.append(WinningRank.getStatisticsMessage(winningRank, winningCount))
+        );
+        return sb.toString();
     }
 
     private Long countSameWiningRank(WinningRank winningRank) {

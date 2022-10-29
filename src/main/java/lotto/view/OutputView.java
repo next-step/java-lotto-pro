@@ -1,10 +1,6 @@
 package lotto.view;
 
-import java.util.Map;
-import lotto.domain.WinningRank;
-
 public class OutputView {
-    private static final String PRINT_STATISTICS_FORMAT = "%d개 일치 (%d원)- %d개";
     private static final String PRINT_FORMAT_RATIO = "총 수익률은 %.2f입니다.";
     public static final String OUTPUT_ERROR_MESSAGE_PREFIX = "[ERROR] ";
     public static final String OUTPUT_MESSAGE_WINNING_STATISTICS = "당첨 통계";
@@ -28,22 +24,19 @@ public class OutputView {
         System.out.println();
     }
 
+    public static void print(String message) {
+        System.out.print(message);
+    }
+
     public static void error(String message) {
         println(OUTPUT_ERROR_MESSAGE_PREFIX + message);
     }
 
-    public static void printStatistics(Map<WinningRank, Long> statisticsMap) {
+    public static void printStatistics(String statistics) {
         printNewLine();
         println(OUTPUT_MESSAGE_WINNING_STATISTICS);
         println(OUTPUT_MESSAGE_HYPHEN);
-        statisticsMap.forEach((winningRank, winningCount) -> {
-            if (winningRank.isDisplay()) {
-                println(String.format(PRINT_STATISTICS_FORMAT,
-                                        winningRank.getMatchCount(),
-                                        winningRank.getWinningMoney(),
-                                        winningCount));
-            }
-        });
+        print(statistics);
     }
 
     public static void printEarningRatio(double earningRatio) {

@@ -9,6 +9,9 @@ public enum WinningRank {
     MATCH_FIVE(5, 1_500_000, true),
     MATCH_SIX(6, 2_000_000_000, true);
 
+    private static final String PRINT_STATISTICS_FORMAT = "%d개 일치 (%d원)- %d개\n";
+    private static final String BLANK_STRING = "";
+
     private final int matchCount;
     private final int winningMoney;
     private final boolean isDisplay;
@@ -36,5 +39,15 @@ public enum WinningRank {
                 .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
                 .orElse(MISS_MATCH);
+    }
+
+    public static String getStatisticsMessage(WinningRank winningRank, Long winningCount) {
+        if (winningRank.isDisplay()) {
+            return String.format(PRINT_STATISTICS_FORMAT,
+                    winningRank.getMatchCount(),
+                    winningRank.getWinningMoney(),
+                    winningCount);
+        }
+        return BLANK_STRING;
     }
 }
