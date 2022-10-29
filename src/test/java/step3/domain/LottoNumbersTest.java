@@ -56,7 +56,7 @@ class LottoNumbersTest {
     }
 
     @Test
-    void 다른_LottoNumbers_와_비교해_숫자가_일치하는_개수_찾을_수_있다() {
+    void 다른_LottoNumbers_와_비교해_숫자가_일치하는_개수를_찾을_수_있다() {
         LottoNumbers myPickedNumbers = new LottoNumbers("1, 2, 3, 4, 5, 6");
         LottoNumbers winningNumbers = new LottoNumbers("1, 2, 3, 4, 5, 7");
         assertThat(myPickedNumbers.compareTo(winningNumbers)).isEqualTo(5);
