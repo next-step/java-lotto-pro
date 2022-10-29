@@ -27,11 +27,19 @@ public enum LottoPrize {
                 .orElse(NO_PRIZE);
     }
 
+    public static boolean isNoPrize(LottoPrize lottoPrize) {
+        return LottoPrize.NO_PRIZE.equals(lottoPrize);
+    }
+
     public int getMatchCount() {
         return matchCount;
     }
 
     public int getLottoPrizeMoney() {
         return lottoPrizeMoney;
+    }
+
+    public String getLottoPrizeMessage() {
+        return lottoPrizeMessage;
     }
 }
