@@ -26,6 +26,6 @@ class LottoTicketTest {
     void constructor() {
         final LottoTicketForTest lottoTicketForTest = new LottoTicketForTest();
         Set<Integer> numberSet = lottoTicketForTest.numberMadeSet();
-        assertThat(numberSet.size()).isEqualTo(lottoTicketForTest.numbers.size());
+        assertThat(numberSet.size()).isEqualTo(lottoTicketForTest.numbers().size());
     }
 }
