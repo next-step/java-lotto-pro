@@ -9,10 +9,10 @@ import view.LottoWinPrize;
 
 public class LottoMatchCounts {
 
-	private final List<Integer> equalNumbersCount;
+	private final List<Integer> matchCounts;
 
-	private LottoMatchCounts(List<Integer> equalNumbersCount) {
-		this.equalNumbersCount = equalNumbersCount;
+	private LottoMatchCounts(List<Integer> matchCounts) {
+		this.matchCounts = matchCounts;
 	}
 
 	public static LottoMatchCounts of(List<Integer> equalNumbersCount) {
@@ -28,21 +28,21 @@ public class LottoMatchCounts {
 			return false;
 		}
 		LottoMatchCounts that = (LottoMatchCounts)o;
-		return CollectionUtils.isEqualInAnyOrder(equalNumbersCount, that.equalNumbersCount);
+		return CollectionUtils.isEqualInAnyOrder(matchCounts, that.matchCounts);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(equalNumbersCount);
+		return Objects.hash(matchCounts);
 	}
 
 	public int getMatchCount(int matchCount) {
-		return (int)equalNumbersCount.stream()
+		return (int)matchCounts.stream()
 			.filter(count -> count == matchCount).count();
 	}
 
 	public Money getTotalProfits() {
-		return equalNumbersCount.stream()
+		return matchCounts.stream()
 			.map(LottoWinPrize::getPrize)
 			.reduce(Money.ZERO, Money::add);
 	}
