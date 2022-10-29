@@ -8,36 +8,36 @@ import org.junit.jupiter.api.Test;
 
 public class StringTest {
 	@Test
-	@DisplayName("\"1,2\"À» ,·Î split ÇßÀ» ¶§, 1°ú 2·Î ºÐ¸® Å×½ºÆ®")
+	@DisplayName("\"1,2\"ì„ ,ë¡œ split í–ˆì„ ë•Œ, 1ê³¼ 2ë¡œ ë¶„ë¦¬ í…ŒìŠ¤íŠ¸")
 	void split() {
 		String[] result = "1,2".split(",");
 		assertThat(result).containsExactly("1","2");
 	}
-	
+
 	@Test
-	@DisplayName("\"1\"À» ,·Î split ÇßÀ» ¶§, 1¸¸ Æ÷ÇÔÇÏ´Â ¹è¿­ ¹ÝÈ¯ Å×½ºÆ®")
+	@DisplayName("\"1\"ì„ ,ë¡œ split í–ˆì„ ë•Œ, 1ë§Œ í¬í•¨í•˜ëŠ” ë°°ì—´ ë°˜í™˜ í…ŒìŠ¤íŠ¸")
 	void splitOne() {
 		String[] result = "1".split(",");
 		assertThat(result).containsExactly("1");
 	}
-	
+
 	@Test
-	@DisplayName("\"(1,2)\"¸¦ substring() È°¿ëÇÏ¿© ()À» Á¦°ÅÇÏ°í, \"1,2\" ¹ÝÈ¯ Å×½ºÆ®")
+	@DisplayName("\"(1,2)\"ë¥¼ substring() í™œìš©í•˜ì—¬ ()ì„ ì œê±°í•˜ê³ , \"1,2\" ë°˜í™˜ í…ŒìŠ¤íŠ¸")
 	void removeBracket() {
 		String result = "(1,2)".substring(1,4);
 		assertThat(result).isEqualTo("1,2");
 	}
-	
+
 	@Test
-	@DisplayName("\"a,b,c\"¸¦  charAt() È°¿ëÇÏ¿© Æ¯Á¤ À§Ä¡ÀÇ ¹®ÀÚ ¹ÝÈ¯ Å×½ºÆ®")
+	@DisplayName("\"a,b,c\"ë¥¼ charAt() í™œìš©í•˜ì—¬ íŠ¹ì • ìœ„ì¹˜ì˜ ë¬¸ìž ë°˜í™˜ í…ŒìŠ¤íŠ¸")
 	void searchCharAt() {
 		assertThat("abc".charAt(0)).isEqualTo('a');
 		assertThat("abc".charAt(1)).isEqualTo('b');
 		assertThat("abc".charAt(2)).isEqualTo('c');
 	}
-	
+
 	@Test
-	@DisplayName("\"a,b,c\"¸¦  charAt() È°¿ë ½Ã, À§Ä¡ °ª ¹þ¾î³ª¸é StringIndexOutOfBoundsException ¹ß»ý Å×½ºÆ®")
+	@DisplayName("\"a,b,c\"ë¥¼ charAt() í™œìš© ì‹œ, ìœ„ì¹˜ ê°’ ë²—ì–´ë‚˜ë©´ StringIndexOutOfBoundsException ë°œìƒ í…ŒìŠ¤íŠ¸")
 	void wrongLocation() {
 		assertThatExceptionOfType(IndexOutOfBoundsException.class)
 		.isThrownBy(() -> {
