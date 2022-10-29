@@ -10,13 +10,13 @@ public class InputView {
 
     private Scanner scanner;
 
-    public InputView(Scanner scanner) {
-        this.scanner = scanner;
+    public InputView() {
+        this.scanner = new Scanner(System.in);
     }
 
     public int readyBuyingLotto() {
         System.out.println("구입금액을 입력해 주세요.");
-        return  this.scanner.nextInt();
+        return this.scanner.nextInt();
     }
 
     public void printBoughtLottoCount(int count) {
@@ -25,7 +25,7 @@ public class InputView {
 
     public String readyLuckyLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return this.scanner.next();
+        return this.scanner.next() + this.scanner.nextLine();
     }
 
     public void printLottos(List<List<Integer>> lottos) {
