@@ -13,13 +13,13 @@ public class Number {
             validNegative(parseNumber);
             this.number = parseNumber;
         } catch (NumberFormatException e) {
-            throw new RuntimeException(ERROR_MESSAGE_ONLY_NUMBER);
+            throw new IllegalArgumentException(ERROR_MESSAGE_ONLY_NUMBER);
         }
     }
 
     private static void validNegative(int number) {
         if (number < ZERO) {
-            throw new RuntimeException(ERROR_MESSAGE_NEGATIVE);
+            throw new IllegalArgumentException(ERROR_MESSAGE_NEGATIVE);
         }
     }
 }

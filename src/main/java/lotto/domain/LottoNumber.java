@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Objects;
+import lotto.view.OutputView;
 
 public class LottoNumber {
     public static final int MINIMUM_LOTTO_NUMBER = 1;
@@ -15,7 +16,7 @@ public class LottoNumber {
 
     private static void validLottoNumber(int number) {
         if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이의 숫자입니다.");
+            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_LOTTO_NUMBER_1_TO_45);
         }
     }
 

@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public class WinningNumbers {
-    private LottoNumbers winningNumbers;
+    private final LottoNumbers winningNumbers;
 
     private WinningNumbers(LottoNumbers winningNumbers) {
         this.winningNumbers = winningNumbers;

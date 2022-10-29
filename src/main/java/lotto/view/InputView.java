@@ -12,13 +12,13 @@ public class InputView {
     }
 
     public static String inputPurchaseAmount() {
-        System.out.println(INPUT_MESSAGE_PURCHASE_AMOUNT);
+        OutputView.println(INPUT_MESSAGE_PURCHASE_AMOUNT);
         return scanner.nextLine();
     }
 
     public static String inputLastWeeksWinningNumber() {
-        System.out.println();
-        System.out.println(INPUT_MESSAGE_LAST_WEEKS_WINNING_NUMBER);
+        OutputView.printNewLine();
+        OutputView.println(INPUT_MESSAGE_LAST_WEEKS_WINNING_NUMBER);
         return scanner.nextLine();
     }
 }

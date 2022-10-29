@@ -16,7 +16,10 @@ public class OutputView {
     public static final String ERROR_MESSAGE_MINIMUM_PURCHASE_AMOUNT = "최소 구매 금액은 1000원 입니다.";
     public static final String ERROR_MESSAGE_AMOUNT_UNIT_OF_1000 = "1000 단위로 입력해주세요.";
     public static final String ERROR_MESSAGE_INPUT_AMOUNT_ONLY_NUMBER = "숫자를 입력해주세요.";
+    public static final String ERROR_MESSAGE_LOTTO_NUMBER_1_TO_45 = "로또 번호는 1 ~ 45 사이의 숫자입니다.";
     public static final String ERROR_MESSAGE_LOTTO_NUMBERS_SIZE_IS_6 = "로또 번호는 6개 입니다.";
+    public static final String ERROR_MESSAGE_INPUT_MANUAL_LOTTO_NUMBER = "잘못된 입력입니다. 숫자와 ,를 사용해 입력해주세요.";
+    public static final String ERROR_MESSAGE_INPUT_MANUAL_NUMBER_DUPLICATE = "중복 된 숫자가 있습니다.";
 
     private OutputView() {
     }
@@ -25,17 +28,21 @@ public class OutputView {
         System.out.println(message);
     }
 
+    public static void printNewLine() {
+        System.out.println();
+    }
+
     public static void error(String message) {
-        System.out.println(OUTPUT_ERROR_MESSAGE_PREFIX + message);
+        println(OUTPUT_ERROR_MESSAGE_PREFIX + message);
     }
 
     public static void printStatistics(Map<WinningRank, Long> statisticsMap) {
-        System.out.println();
-        System.out.println(OUTPUT_MESSAGE_WINNING_STATISTICS);
-        System.out.println(OUTPUT_MESSAGE_HYPHEN);
+        printNewLine();
+        println(OUTPUT_MESSAGE_WINNING_STATISTICS);
+        println(OUTPUT_MESSAGE_HYPHEN);
         statisticsMap.forEach((winningRank, winningCount) -> {
             if (winningRank.isDisplay()) {
-                System.out.println(String.format(PRINT_STATISTICS_FORMAT,
+                println(String.format(PRINT_STATISTICS_FORMAT,
                                         winningRank.getMatchCount(),
                                         winningRank.getWinningMoney(),
                                         winningCount));
