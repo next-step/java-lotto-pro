@@ -35,4 +35,10 @@ public class LottoTest {
         Lotto inputLotto = Lotto.generateLotto(new ReadLineLottoNumberGenerator("1, 3, 4, 5, 35, 45"));
         assertThat(inputLotto.findLottoPrize(prizeLotto)).isEqualTo(LottoPrize.THIRD);
     }
+
+    @Test
+    void 로또_출력_테스트() {
+        Lotto lotto = Lotto.generateLotto(new ReadLineLottoNumberGenerator("1, 2, 3, 4, 5, 6"));
+        assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
 }

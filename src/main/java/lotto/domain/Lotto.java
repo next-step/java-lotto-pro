@@ -56,4 +56,9 @@ public class Lotto {
         }
         return NOT_MATCH_LOTTO_NUMBER;
     }
+
+    @Override
+    public String toString() {
+        return this.lottoNumbers.toString();
+    }
 }
