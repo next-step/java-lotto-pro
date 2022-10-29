@@ -22,4 +22,8 @@ public class MoneyToBuy {
     private boolean isNegative(int input) {
         return input < 0;
     }
+
+    public int numberOfAffordableLottoTickets() {
+        return money / 1000;
+    }
 }
