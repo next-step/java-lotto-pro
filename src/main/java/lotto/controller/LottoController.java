@@ -3,9 +3,7 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.view.LottoView;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoController {
     private final LottoView view;
@@ -20,35 +18,33 @@ public class LottoController {
 
     public void start() {
         Money paidMoney = getPaidMoney();
-        LottoBundle lottoBundle = buyLotto(paidMoney);
+        LottoBundle lottoBundle = lottoStore.buyLotto(paidMoney);
+        showLottoBundle(lottoBundle);
         List<Integer> winningNumbers = getWinningNumbers();
         showResult(paidMoney, lottoBundle, winningNumbers);
     }
 
-    private Money getPaidMoney() {
-        this.view.showMessageRequestPurchaseMoney();
-        return Money.of(Integer.parseInt(this.input.getInput()));
+    private void showLottoBundle(LottoBundle lottoBundle) {
+        view.showLottoCount(lottoBundle.size());
+        view.showLotto(lottoBundle.printAll());
     }
 
-    private LottoBundle buyLotto(Money paidMoney) {
-        LottoBundle lottoBundle = this.lottoStore.buyLotto(paidMoney);
-        this.view.showLottoCount(lottoBundle.size());
-        this.view.showLotto(lottoBundle.printAll());
-        return lottoBundle;
+    private Money getPaidMoney() {
+        view.showMessageRequestPurchaseMoney();
+        return Money.of((input.getPositiveInteger()));
     }
 
     private List<Integer> getWinningNumbers() {
-        this.view.showMessageRequestWinningNumbers();
-        String input2 = this.input.getInput();
-        return Arrays.stream(input2.split(",")).map(Integer::valueOf).collect(Collectors.toList());
+        view.showMessageRequestWinningNumbers();
+        return input.getWinningLottoNumbers();
     }
 
     private void showResult(Money paidMoney, LottoBundle lottoBundle, List<Integer> winningNumbers) {
         WinningMoney winningMoney = lottoBundle.countWinning(winningNumbers);
-        this.view.showMessageStatistics();
+        view.showMessageStatistics();
         for (WinningBonus bonus: WinningBonus.values()) {
-            this.view.showStatistics(bonus,winningMoney.count(bonus));
+            view.showStatistics(bonus,winningMoney.count(bonus));
         }
-        this.view.showYield(winningMoney.calcYield(paidMoney));
+        view.showYield(winningMoney.calcYield(paidMoney));
     }
 }
