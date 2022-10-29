@@ -1,5 +1,7 @@
 package lotto.model.winning.numbers;
 
+import lotto.constant.utils.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class WinningNumbers {
     private final List<WinningNumberEach> numbers;
 
     public WinningNumbers(String input) {
-        if (isNullOrEmpty(input)) {
+        if (StringUtils.isNullOrEmpty(input)) {
             throw new IllegalArgumentException("올바르지 않은 값을 당첨 번호로 입력했습니다.");
         }
         final String trimmedInput = input.trim();
@@ -20,10 +22,6 @@ public class WinningNumbers {
         }
         final String[] tokens = splitByComma(trimmedInput);
         numbers = convertStringToWinningNumberEach(tokens);
-    }
-
-    private boolean isNullOrEmpty(String token) {
-        return token == null || token.isEmpty();
     }
 
     private boolean isCommaPrefixOrPostfix(String input) {
