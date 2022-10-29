@@ -10,7 +10,7 @@ public class WinningNumberTypeValidator implements WinningNumberValidator {
     @Override
     public void validate(Set<String> winningNumbers) {
         for (String winningNumber : winningNumbers) {
-            isNotNumberThenThrow(winningNumber);
+            isNotNumberThenThrow(winningNumber.trim());
         }
     }
 

@@ -10,7 +10,7 @@ public class RangeValidator implements WinningNumberValidator {
     @Override
     public void validate(Set<String> winningNumbers) {
         for (String winningNumber : winningNumbers) {
-            isOverRangeThenThrow(winningNumber);
+            isOverRangeThenThrow(winningNumber.trim());
         }
     }
 

@@ -9,7 +9,7 @@ public class LottoNumber {
 
     private static final String RESULT_OPEN = "[";
     private static final String RESULT_CLOSE = "]";
-    private static final String RESULT_SEPARATOR = " ,";
+    private static final String RESULT_SEPARATOR = ", ";
     private static final int RESULT_START_INDEX = 0;
     private static final int RESULT_END_INDEX = (-2);
     private static final int CREATE_START_INDEX = 0;
