@@ -13,7 +13,7 @@ public class LottoGenerator {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    public static LottoGenerator of(LottoNumberGenerator lottoNumberGenerator) {
+    public static LottoGenerator from(LottoNumberGenerator lottoNumberGenerator) {
         return new LottoGenerator(lottoNumberGenerator);
     }
 
