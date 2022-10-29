@@ -18,6 +18,11 @@ public class Number implements Comparable<Number> {
             throw new IllegalArgumentException("숫자의 범위는 1~45 사이어야 합니다.");
         }
     }
+    
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
 
     @Override
     public boolean equals(Object o) {
