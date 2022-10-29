@@ -1,10 +1,10 @@
-package view;
+package lotto.view;
 
-import lotto.LottoMatchCounts;
-import lotto.LottoTicket;
-import lotto.LottoTickets;
-import lotto.LottoWinResults;
-import lotto.ProfitMargin;
+import lotto.domain.LottoMatchCounts;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
+import lotto.domain.LottoWinResults;
+import lotto.domain.ProfitMargin;
 import money.Money;
 
 public class LottoWinResultView {

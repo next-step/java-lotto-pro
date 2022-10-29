@@ -11,6 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import lotto.domain.LottoTicket;
 import utils.Randoms;
 
 class LottoTicketTest {
@@ -57,6 +58,8 @@ class LottoTicketTest {
 
 	private static Stream<Arguments> 갯수가_무효한_로또번호_생성() {
 		return Stream.of(
+			Arguments.of(Lists.newArrayList()),
+			Arguments.of(Lists.newArrayList(1)),
 			Arguments.of(Lists.newArrayList(1, 2, 3, 4, 5, 6, 7)),
 			Arguments.of(Lists.newArrayList(45, 44, 43, 42, 41, 40, 39))
 		);

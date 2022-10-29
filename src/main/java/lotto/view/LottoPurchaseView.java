@@ -1,10 +1,10 @@
-package view;
+package lotto.view;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-import lotto.LottoTickets;
-import lotto.LottoVendor;
+import lotto.domain.LottoTickets;
+import lotto.domain.LottoVendor;
 import money.Money;
 
 public class LottoPurchaseView {

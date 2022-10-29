@@ -1,11 +1,14 @@
-package view;
+package lotto;
 
 import java.util.Scanner;
 
-import lotto.AutoLottoTicketGenerator;
-import lotto.LottoTicket;
-import lotto.LottoTickets;
-import lotto.LottoVendor;
+import lotto.domain.AutoLottoTicketGenerator;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
+import lotto.domain.LottoVendor;
+import lotto.view.LastWeekWinLottoTicketView;
+import lotto.view.LottoPurchaseView;
+import lotto.view.LottoWinResultView;
 import money.Money;
 
 public class LottoApplication {

@@ -1,10 +1,10 @@
-package view;
+package lotto.view;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import lotto.LottoTicket;
+import lotto.domain.LottoTicket;
 import utils.SplitStrings;
 import utils.StringSplitter;
 

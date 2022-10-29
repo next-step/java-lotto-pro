@@ -12,6 +12,10 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketGenerator;
+import lotto.domain.LottoTickets;
+import lotto.domain.LottoVendor;
 import money.Money;
 
 class LottoVendorTest {

@@ -1,10 +1,10 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import lotto.view.LottoWinPrize;
 import money.Money;
-import view.LottoWinPrize;
 
 public class LottoWinResults {
 

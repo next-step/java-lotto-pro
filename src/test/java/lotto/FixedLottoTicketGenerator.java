@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketGenerator;
+
 public class FixedLottoTicketGenerator implements LottoTicketGenerator {
 
 	private final List<Integer> numbers;
