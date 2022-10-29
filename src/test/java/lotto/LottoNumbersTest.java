@@ -15,8 +15,10 @@ public class LottoNumbersTest {
     static void 초기화() {
         LottoNumber fakeGeneratedLottoNumber1 = new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         LottoNumber fakeGeneratedLottoNumber2 = new LottoNumber(new ArrayList<>(Arrays.asList(7, 8, 9, 10, 11, 12)));
+        LottoNumber fakeGeneratedLottoNumber3 = new LottoNumber(new ArrayList<>(Arrays.asList(1, 3, 5, 7, 31, 35)));
         inputLottoNumbers.add(fakeGeneratedLottoNumber1);
         inputLottoNumbers.add(fakeGeneratedLottoNumber2);
+        inputLottoNumbers.add(fakeGeneratedLottoNumber3);
     }
 
     @Test
@@ -28,7 +30,7 @@ public class LottoNumbersTest {
     @Test
     void 로또_당첨_1등_확인() {
         LottoNumbers lottoNumbers = new LottoNumbers(inputLottoNumbers);
-        List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 3, 5, 7, 31, 35));
         lottoNumbers.countPrize(winningNumbers);
         assertThat(lottoNumbers.countFirst()).isEqualTo(1);
     }
