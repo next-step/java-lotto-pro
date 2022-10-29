@@ -1,4 +1,4 @@
-package study;
+package step1;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Java6Assertions.assertThat;
