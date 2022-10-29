@@ -40,7 +40,7 @@ public class Money {
 	public Money subtract(Money other) {
 		BigDecimal subtractedAmount = amount.subtract(other.amount);
 		if (isNegative(subtractedAmount)) {
-			return ZERO;
+			throw new IllegalArgumentException("더 작은 금액을 뺄 수 없습니다.");
 		}
 		return Money.wons(subtractedAmount);
 	}

@@ -46,6 +46,13 @@ class MoneyTest {
 		assertThat(금액.multiply(곱셈수)).isEqualTo(곱셈_결과);
 	}
 
+	@ParameterizedTest
+	@MethodSource("뺄셈_금액_예외_입력")
+	void 더_작은_금액을_큰_금액으로_뺄_수_없다(Money 금액, Money 뺄셈_금액) {
+		assertThatThrownBy(() -> 금액.subtract(뺄셈_금액))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
+
 	private static Stream<Arguments> 동일_금액_입력() {
 		return Stream.of(
 			Arguments.of(Money.ZERO, Money.wons(0)),
@@ -58,7 +65,7 @@ class MoneyTest {
 		return Stream.of(
 			Arguments.of(Money.ZERO, Money.ZERO, Money.ZERO),
 			Arguments.of(Money.wons(200), Money.wons(100), Money.wons(100)),
-			Arguments.of(Money.wons(100), Money.wons(200), Money.ZERO)
+			Arguments.of(Money.wons(200), Money.wons(200), Money.ZERO)
 		);
 	}
 
@@ -79,6 +86,13 @@ class MoneyTest {
 			Arguments.of(Money.ZERO, 100, Money.wons(0)),
 			Arguments.of(Money.wons(100), 1, Money.wons(100)),
 			Arguments.of(Money.wons(1000), 3, Money.wons(3000))
+		);
+	}
+
+	private static Stream<Arguments> 뺄셈_금액_예외_입력() {
+		return Stream.of(
+			Arguments.of(Money.ZERO, Money.wons(100)),
+			Arguments.of(Money.wons(100), Money.wons(1000))
 		);
 	}
 }
