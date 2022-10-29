@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoGame;
 import lotto.view.InputView;
 
 public class LottoMain {
