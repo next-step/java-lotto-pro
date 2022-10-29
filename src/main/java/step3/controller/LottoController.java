@@ -10,6 +10,7 @@ import step3.domain.Grades;
 import step3.domain.Lotto;
 import step3.domain.LottoGenerator;
 import step3.domain.LottoQuantity;
+import step3.domain.LottoWinning;
 import step3.domain.Lottos;
 import step3.domain.ProfitRateCalculator;
 import step3.view.InputView;
@@ -22,9 +23,8 @@ public class LottoController {
     public void doLotto() {
         Integer amount = getAmount();
         Lottos lottos = getLottos(amount);
-        List<Integer> winNumbers = getWinNumbers();
-        Lotto winLotto = Lotto.of(winNumbers);
-        Grades grades = GradeCalculator.getGrades(lottos, winLotto);
+        LottoWinning lottoWinning = getLottoWinning();
+        Grades grades = GradeCalculator.getGrades(lottos, lottoWinning);
         Float profitRate = ProfitRateCalculator.getProfitRate(grades, amount);
         ResultView.printTotalGrades(grades);
         ResultView.printProfitRate(profitRate);
@@ -48,12 +48,20 @@ public class LottoController {
         return lottos;
     }
 
-    private List<Integer> getWinNumbers() {
+    private LottoWinning getLottoWinning() {
         InputView.printRequestWinNumbersMessage();
         String winNumbers = scanner.nextLine();
+        List<Integer> winningNumbers = getStringToNumbers(winNumbers);
+        InputView.printRequestBonusNumberMessage();
+        String bonusNumber = scanner.nextLine();
+        return LottoWinning.of(Lotto.of(winningNumbers), Integer.parseInt(bonusNumber));
+    }
+
+    private List<Integer> getStringToNumbers(String winNumbers) {
         String trimmedNumbers = winNumbers.replace(" ", "");
         String[] numbers = trimmedNumbers.split(",");
-        return Arrays.stream(numbers).map(Integer::parseInt)
+        return Arrays.stream(numbers)
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 }

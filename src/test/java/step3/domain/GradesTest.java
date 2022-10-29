@@ -27,7 +27,7 @@ class GradesTest {
     void return_zero_when_not_increase_grade_count() {
         // given
         Grade givenGrade = Grade.FIRST;
-        Grade otherGrade = Grade.DRAW;
+        Grade otherGrade = Grade.MISS;
         Grades grades = new Grades();
 
         // when

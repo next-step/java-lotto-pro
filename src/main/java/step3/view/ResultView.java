@@ -22,15 +22,22 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (Grade grade : Grade.values()) {
-            printGradeIfNotDraw(grades, grade);
+            printGradeIfNotMiss(grades, grade);
         }
     }
 
-    private static void printGradeIfNotDraw(Grades grades, Grade grade) {
-        if (grade != Grade.DRAW) {
-            System.out.printf("%d개 일치 (%d원) - %d개\n", grade.getCount(), grade.getAmount(),
-                    grades.getGradeCount(grade));
+    private static void printGradeIfNotMiss(Grades grades, Grade grade) {
+        if (grade != Grade.MISS) {
+            System.out.print(getMessgeByGrade(grade));
+            System.out.printf(" - %d개\n", grades.getGradeCount(grade));
         }
+    }
+
+    private static String getMessgeByGrade(Grade grade) {
+        if (Grade.SECOND.equals(grade)) {
+            return String.format("%d개 일치, 보너스 볼 일치(%d원)", grade.getCount(), grade.getAmount());
+        }
+        return String.format("%d개 일치 (%d원)", grade.getCount(), grade.getAmount());
     }
 
     public static void printProfitRate(Float profitRate) {
