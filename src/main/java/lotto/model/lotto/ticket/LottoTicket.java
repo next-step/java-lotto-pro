@@ -17,4 +17,9 @@ public class LottoTicket {
             numbers.add(generatedRandomNumber);
         }
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }
