@@ -7,6 +7,7 @@ import java.util.List;
 
 public class LottoGame {
 
+    public static final int LOTTO_PRICE = 1000;
     private final int payAmount;
     List<Lotto> lottos = new ArrayList<>();
     private LottoResult lottoResult;
@@ -24,7 +25,7 @@ public class LottoGame {
     }
 
     public int calculateLottoAmount(){
-        return payAmount/1000;
+        return payAmount/LOTTO_PRICE;
     }
 
     public void findWinner(List<Integer> winnerNumbers){

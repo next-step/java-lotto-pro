@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 
+import static lotto.domain.LottoResult.MIN_WINNING_NUM;
 import static lotto.domain.LottoResult.PRIZE_MONEY;
 
 public class OutputView {
@@ -12,7 +13,6 @@ public class OutputView {
     private static final String OUT_MESSAGE_DIVIDER_LINE = "----------";
     private static final String OUT_MESSAGE_LOTTO_RESULT = "%d개 일치(%d)- %d개\n";
     private static final String OUT_MESSAGE_PROFIT_RATIO = "총 수익률은 %.2f 입니다.";
-    private static final int MIN_WINNING_NUM = 3;
 
     public static void printLottos(Lotto lotto){
         System.out.println(lotto);
