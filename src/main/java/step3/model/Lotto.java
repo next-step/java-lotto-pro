@@ -1,4 +1,4 @@
-package step3;
+package step3.model;
 
 import java.util.HashSet;
 import java.util.List;
