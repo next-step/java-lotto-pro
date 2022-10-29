@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
         if(lottoNumbers.size() != 6) {
@@ -15,14 +15,20 @@ public class LottoNumbers {
         if(new HashSet<>(lottoNumbers).size() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 번호가 중복됩니다.");
         }
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = lottoNumbers.stream()
+                        .map(LottoNumber::from)
+                        .collect(Collectors.toList());
         Collections.sort(lottoNumbers);
     }
 
-    public long getCorrectCount(List<Integer> numbers) {
-        return lottoNumbers.stream()
+    public int getCorrectCount(LottoNumbers numbers) {
+        return (int) this.lottoNumbers.stream()
                 .filter(numbers::contains)
                 .count();
+    }
+
+    private boolean contains(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 
     @Override

@@ -18,7 +18,7 @@ class LottoNumbersTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7", "1"})
     @DisplayName("6개의 숫자가 아닌 경우 IllegalArgumentException 예외 발생")
-    void 로또_번호_6개_아님(String input) throws Exception {
+    void 로또_번호_6개_아님(String input) {
         List<Integer> numbers = Arrays.stream(input.split(","))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
@@ -29,7 +29,7 @@ class LottoNumbersTest {
 
     @Test
     @DisplayName("중복되는 숫자가 있는 경우 IllegalArgumentException 예외 발생")
-    void 로또_번호_중복() throws Exception {
+    void 로또_번호_중복() {
         List<Integer> numbers = Arrays.asList(1, 1, 1, 1, 1, 1);
 
         assertThatThrownBy(() -> new LottoNumbers(numbers))
@@ -44,6 +44,6 @@ class LottoNumbersTest {
         List<Integer> numbers = Arrays.stream(input.split(","))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        assertThat(winLotto.getCorrectCount(numbers)).isEqualTo(expected);
+        assertThat(winLotto.getCorrectCount(new LottoNumbers(numbers))).isEqualTo(expected);
     }
 }

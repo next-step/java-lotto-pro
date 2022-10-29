@@ -1,8 +1,9 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumberGenerator {
     private LottoNumberGenerator() {
@@ -13,9 +14,7 @@ public class LottoNumberGenerator {
     }
 
     private static List<Integer> pickNumbers(List<Integer> numbers) {
-        List<Integer> pickNumbers = numbers.subList(0, 6);
-
-        return pickNumbers;
+        return numbers.subList(0, 6);
     }
 
     private static List<Integer> shuffleAllNumbers() {
@@ -26,12 +25,8 @@ public class LottoNumberGenerator {
     }
 
     private static List<Integer> allNumbers() {
-        List<Integer> numbers = new ArrayList<>();
-
-        for(int i=1; i<=45; i++) {
-            numbers.add(i);
-        }
-
-        return numbers;
+        return IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX)
+                .boxed()
+                .collect(Collectors.toList());
     }
 }

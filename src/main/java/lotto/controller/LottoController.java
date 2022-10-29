@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoList;
 import lotto.domain.Money;
+import lotto.domain.WinningLotto;
 import lotto.view.View;
 
 public class LottoController {
@@ -18,5 +19,6 @@ public class LottoController {
         view.printLottoCount(money.getBuyableLottoCount());
         lottos.buyLottos(money.getBuyableLottoCount());
         view.print(lottos.toString());
+        view.printResult(lottos.getResult(new WinningLotto(view.insertWinningLotto())));
     }
 }

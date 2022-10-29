@@ -28,11 +28,13 @@ public class LottoList {
                 .collect(Collectors.joining("\n"));
     }
 
-    /*public long getAllPrize() {
-        return lottoList.stream().map(Lotto::getPrize).mapToInt(Integer::intValue).sum();
-    }
+    public LottoResult getResult(WinningLotto winningLotto) {
+        LottoResult result = new LottoResult();
 
-    public double getReturnRate() {
-        return (double)getAllPrize() / lottoList.size() * Money.LOTTO_PRICE;
-    }*/
+        for(Lotto lotto : lottoList) {
+            result.add(Rank.valueOf(lotto.getCorrectCount(winningLotto)));
+        }
+
+        return result;
+    }
 }
