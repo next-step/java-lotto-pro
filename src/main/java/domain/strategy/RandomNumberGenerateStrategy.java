@@ -11,11 +11,11 @@ public class RandomNumberGenerateStrategy implements NumberGenerateStrategy {
     }
 
     @Override
-    public List<Integer> generate(List<Integer> integers, int size) {
+    public List<Integer> generate(List<Integer> numberPool, int size) {
         List<Integer> numbers = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            Collections.shuffle(integers);
-            numbers.add(integers.get(0));
+            Collections.shuffle(numberPool);
+            numbers.add(numberPool.get(0));
         }
         return numbers;
     }
