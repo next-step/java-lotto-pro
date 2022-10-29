@@ -18,4 +18,11 @@ public class LottoNumber {
         }
         return count;
     }
+
+    @Override
+    public String toString() {
+        return "LottoNumber{" +
+                "sixNumbers=" + sixNumbers +
+                '}';
+    }
 }
