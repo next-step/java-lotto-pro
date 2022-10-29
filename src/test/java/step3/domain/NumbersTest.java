@@ -40,16 +40,6 @@ public class NumbersTest {
     }
 
     @Test
-    @DisplayName("중복 번호 선택시 Exception 발생")
-    public void testValidateError() {
-        assertThatThrownBy(() -> {
-            Numbers.generate(Arrays.asList(1,1,1,1,1,1));
-        })
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("Duplicate numbers cannot input.");
-    }
-
-    @Test
     @DisplayName("번호 비교시 대상 개수가 다른 경우 Exception 발생")
     public void testMatchError() {
         assertThatThrownBy(() -> {

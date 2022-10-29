@@ -12,16 +12,13 @@ public class Numbers {
     }
 
     private Numbers(List<Integer> numbers) {
-        validate(numbers);
         this.numbers = numbers;
     }
 
-    private void validate(List<Integer> numbers) {
+    public boolean isDuplicated() {
         int size = numbers.size();
-        long count = numbers.stream().distinct().count();
-        if (size != count) {
-            throw new IllegalArgumentException("Duplicate numbers cannot input.");
-        }
+        long distinct = numbers.stream().distinct().count();
+        return size != distinct;
     }
 
     public static Numbers generate(List<Integer> numbers) {
