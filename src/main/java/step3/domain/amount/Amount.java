@@ -13,6 +13,10 @@ public class Amount {
         this.amount = amount;
     }
 
+    public int getLottoPurchasesCount(int lottoPrice) {
+        return amount / lottoPrice;
+    }
+
     private void validateNegative(int amount) {
         if (isNegative(amount)) {
             throw new IllegalArgumentException(INPUT_NOT_ALLOW_NEGATIVE_NUMBER.getMessage());
