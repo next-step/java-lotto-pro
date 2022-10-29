@@ -1,9 +1,9 @@
-package step3.domain;
+package step3.utils;
 
 import java.util.Map;
 import step3.enums.Award;
 
-public class LottoService {
+public class Utils {
 
     private final static int LOTTO_PRICE = 1000;
 
