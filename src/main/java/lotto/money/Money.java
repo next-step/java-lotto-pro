@@ -3,7 +3,7 @@ package lotto.money;
 import lotto.system.MessageConstant;
 
 public class Money {
-    int amount = 0;
+    private int amount = 0;
 
     public Money(int amount){
         this.amount = amount;
