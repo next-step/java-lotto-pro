@@ -7,7 +7,7 @@ import step3.domain.Money;
 public class OutputView {
 
     public void printPurchaseCount(Money payment, Money pricePerLotto) {
-        System.out.println(payment.getPurchaseCount(pricePerLotto) + "개를 구매했습니다.");
+        System.out.println(payment.divide(pricePerLotto) + "개를 구매했습니다.");
     }
 
     public void printLottoNumbers(Lottos lottos) {

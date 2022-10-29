@@ -1,24 +1,11 @@
 package step3.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class PaymentTest {
-
-    @Test
-    @DisplayName("로또 구입시 금액 부족 Exception 발생")
-    public void testValidate() {
-        Money pricePerLotto = Money.generate(1000L);
-        Money payment = Money.generate(100L);
-        assertThatThrownBy(() -> {
-            payment.validate(pricePerLotto);
-        })
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("You don't have enough money.");
-    }
 
     @Test
     @DisplayName("수익률 조회")

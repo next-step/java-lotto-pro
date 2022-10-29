@@ -14,14 +14,8 @@ public class Money {
         return new Money(money);
     }
 
-    public void validate(Money pricePerLotto) {
-        if (getPurchaseCount(pricePerLotto) == 0) {
-            throw new IllegalArgumentException("You don't have enough money.");
-        }
-    }
-
-    public int getPurchaseCount(Money pricePerLotto) {
-        return (int) (money / pricePerLotto.money);
+    public int divide(Money divisor) {
+        return (int) (money / divisor.money);
     }
 
     public String rate(long price) {
