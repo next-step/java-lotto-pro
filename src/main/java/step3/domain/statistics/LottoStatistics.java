@@ -9,9 +9,20 @@ import java.util.Map;
 
 public class LottoStatistics {
 
-    private final Map<WinningLottoType, Integer> lottoResult = new HashMap<>();
+    private Lottos lottos;
+    private Map<WinningLottoType, Integer> lottoResult = new HashMap<>();
+
+    public LottoStatistics(Map<WinningLottoType, Integer> lottoResult) {
+        this.lottoResult = lottoResult;
+    }
+
+    public LottoStatistics(Lottos lottos, Map<WinningLottoType, Integer> lottoResult) {
+        this.lottos = lottos;
+        this.lottoResult = lottoResult;
+    }
 
     public LottoStatistics(Lottos lottos, WinningLottoNumbers winningLottoNumbers) {
+        this.lottos = lottos;
         lottos.getLottos()
                 .forEach(lotto -> {
                     WinningLottoType type = lotto.getWinningLottoType(winningLottoNumbers);
@@ -19,13 +30,13 @@ public class LottoStatistics {
                 });
     }
 
-    public static double totalProfit(Lottos lottos, Map<WinningLottoType, Integer> lottoResult) {
-        int totalWinningAmount = getTotalWinningAmount(lottoResult);
+    public double getTotalProfit() {
+        int totalWinningAmount = getTotalWinningAmount();
         int totalLottoPrice = getTotalLottoPrice(lottos);
         return Math.floor((double) totalWinningAmount / totalLottoPrice * 100) / 100.0;
     }
 
-    public static int getTotalWinningAmount(Map<WinningLottoType, Integer> lottoResult) {
+    public int getTotalWinningAmount() {
         int totalWinningAmount = 0;
         for (WinningLottoType winningLottoType : lottoResult.keySet()) {
             Integer count = lottoResult.get(winningLottoType);
@@ -38,5 +49,16 @@ public class LottoStatistics {
         return lottos.getLottos().stream()
                 .mapToInt(Lotto::getPrice)
                 .sum();
+    }
+
+    public Map<WinningLottoType, Integer> getLottoResult() {
+        return lottoResult;
+    }
+
+    @Override
+    public String toString() {
+        return "LottoStatistics{" +
+                "lottoResult=" + lottoResult +
+                '}';
     }
 }

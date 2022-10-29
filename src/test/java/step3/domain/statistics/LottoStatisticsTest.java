@@ -20,7 +20,8 @@ class LottoStatisticsTest {
         lottoResult.put(WinningLottoType.FOURTH, 2);
         lottoResult.put(WinningLottoType.NOTHING, 3);
 
-        int totalWinningAmount = LottoStatistics.getTotalWinningAmount(lottoResult);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottoResult);
+        int totalWinningAmount = lottoStatistics.getTotalWinningAmount();
         assertThat(totalWinningAmount).isEqualTo(60000);
     }
 
@@ -29,8 +30,10 @@ class LottoStatisticsTest {
     void getTotalProfit() {
         Map<WinningLottoType, Integer> lottoResult = new HashMap<>();
         lottoResult.put(WinningLottoType.FOURTH, 1);
+
         Lottos lottos = new Lottos(new Amount(14000));
-        double totalProfit = LottoStatistics.totalProfit(lottos, lottoResult);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos, lottoResult);
+        double totalProfit = lottoStatistics.getTotalProfit();
         assertThat(totalProfit).isEqualTo(0.35);
     }
 }
