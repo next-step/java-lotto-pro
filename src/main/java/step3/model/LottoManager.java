@@ -6,20 +6,19 @@ import step3.view.OutputView;
 public class LottoManager {
     private static LottoGenerator lottoGenerator = new LottoGenerator();
 
-    public static void purchaseLotto() {
 
-        Lottos lottos = generateLottos();
+    public static void purchaseLotto() {
+        generateLottos();
 
 
 
 
     }
 
-    private static Lottos generateLottos() {
+    private static void generateLottos() {
         InputView.inputPurchasePrice(lottoGenerator);
-        Lottos lottos = lottoGenerator.generateLottos();
-        OutputView.outputPurchasedLotto(lottos);
-        return lottos;
+        lottoGenerator.generateLottos();
+        OutputView.outputPurchasedLotto(lottoGenerator.getLottos());
     }
 
 }

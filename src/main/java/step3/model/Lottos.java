@@ -10,7 +10,7 @@ public class Lottos {
     public int purchasedCount;
 
 
-    public void setLottos() {
+    public void addLottos() {
         for(int i = 0; i < purchasedCount; i++) {
             Lotto lotto = new Lotto();
             lotto.generateLotto();

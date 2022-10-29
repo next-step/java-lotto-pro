@@ -1,9 +1,7 @@
 package step3.model;
 
-import static step3.constant.Message.ERROR_IS_NUMBERIC;
-import static step3.constant.Message.NOT_VALID_NULL;
-import static step3.constant.Message.UNDER_MIN_PRICE;
 import static step3.constant.Constant.EACH_LOTTO_PRICE;
+import static step3.constant.Message.*;
 
 public class LottoGenerator {
     private int purchasePrice;
@@ -13,13 +11,17 @@ public class LottoGenerator {
         this.purchasePrice = validatePrice(price);
     }
 
+    public Lottos getLottos() {
+        return lottos;
+    }
+
 
     public Lottos generateLottos() {
         lottos.setPurchasedCount(purchasePrice);
-
-        lottos.setLottos();
+        lottos.addLottos();
         return lottos;
     }
+
     private int validatePrice(String price) {
         checkEmpty(price);
         int integerPrice = stringToNumber(price);
@@ -27,8 +29,9 @@ public class LottoGenerator {
 
         return integerPrice;
     }
+
     private void checkEmpty(String price) {
-        if(price == null || price.isEmpty()) {
+        if (price == null || price.isEmpty()) {
             throw new IllegalArgumentException(NOT_VALID_NULL);
         }
     }
@@ -44,7 +47,7 @@ public class LottoGenerator {
     }
 
     private void checkPriceMinLimit(int price) {
-        if(price < EACH_LOTTO_PRICE) {
+        if (price < EACH_LOTTO_PRICE) {
             throw new IllegalArgumentException(UNDER_MIN_PRICE);
         }
     }
