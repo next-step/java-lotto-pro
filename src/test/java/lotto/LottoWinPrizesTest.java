@@ -1,10 +1,10 @@
 package lotto;
 
-import static lotto.view.LottoWinPrize.FIVE_MATCHES;
-import static lotto.view.LottoWinPrize.FOUR_MATCHES;
-import static lotto.view.LottoWinPrize.SIX_MATCHES;
-import static lotto.view.LottoWinPrize.THREE_MATCHES;
-import static lotto.view.LottoWinPrize.ZERO_MATCHES;
+import static lotto.view.LottoWinPrize.FIFTH;
+import static lotto.view.LottoWinPrize.FIRST;
+import static lotto.view.LottoWinPrize.FOURTH;
+import static lotto.view.LottoWinPrize.MISS_EIGHTH;
+import static lotto.view.LottoWinPrize.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
@@ -39,16 +39,16 @@ class LottoWinPrizesTest {
 	private static Stream<Arguments> 로또_상금_순위_갯수_입력() {
 		return Stream.of(
 			Arguments.of(
-				LottoWinPrizes.of(THREE_MATCHES),
-				THREE_MATCHES,
+				LottoWinPrizes.of(FIFTH),
+				FIFTH,
 				1),
 			Arguments.of(
-				LottoWinPrizes.of(THREE_MATCHES, THREE_MATCHES, THREE_MATCHES),
-				THREE_MATCHES,
+				LottoWinPrizes.of(FIFTH, FIFTH, FIFTH),
+				FIFTH,
 				3),
 			Arguments.of(
-				LottoWinPrizes.of(THREE_MATCHES, FOUR_MATCHES, FIVE_MATCHES, SIX_MATCHES),
-				LottoWinPrize.SIX_MATCHES,
+				LottoWinPrizes.of(FIFTH, FOURTH, THIRD, FIRST),
+				LottoWinPrize.FIRST,
 				1)
 		);
 	}
@@ -56,13 +56,13 @@ class LottoWinPrizesTest {
 	private static Stream<Arguments> 로또_일치_갯수의_예상_수익률_입력() {
 		return Stream.of(
 			Arguments.of(
-				LottoWinPrizes.of(ZERO_MATCHES, ZERO_MATCHES, THREE_MATCHES),
+				LottoWinPrizes.of(MISS_EIGHTH, MISS_EIGHTH, FIFTH),
 				ProfitMargin.valueOf(1.66)),
 			Arguments.of(
-				LottoWinPrizes.of(ZERO_MATCHES, THREE_MATCHES, THREE_MATCHES),
+				LottoWinPrizes.of(MISS_EIGHTH, FIFTH, FIFTH),
 				ProfitMargin.valueOf(3.33)),
 			Arguments.of(
-				LottoWinPrizes.of(SIX_MATCHES),
+				LottoWinPrizes.of(FIRST),
 				ProfitMargin.valueOf(2_000_000))
 		);
 	}

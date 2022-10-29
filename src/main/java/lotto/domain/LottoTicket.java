@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static java.lang.String.format;
 import static java.util.stream.Collectors.joining;
+import static lotto.view.LottoWinPrize.SECOND;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -57,7 +58,7 @@ public class LottoTicket {
 		return count != NUMBER_COUNT;
 	}
 
-	public LottoWinPrize match(LottoTicket other) {
+	public LottoWinPrize match(LottoTicket other, LottoNumber bonusBall) {
 		Set<LottoNumber> comparedLottoNumbers = new HashSet<>(other.lottoNumbers);
 
 		int matchCount = 0;
@@ -65,7 +66,19 @@ public class LottoTicket {
 			matchCount += comparedLottoNumbers.contains(lottoNumber) ? 1 : 0;
 		}
 
+		if (isSecondPrize(matchCount, bonusBall)) {
+			return SECOND;
+		}
+
 		return LottoWinPrize.matchCountOf(matchCount);
+	}
+
+	private boolean isSecondPrize(int matchCount, LottoNumber bonusBall) {
+		if (matchCount != SECOND.matchCount) {
+			return false;
+		}
+
+		return lottoNumbers.stream().anyMatch(number -> number.equals(bonusBall));
 	}
 
 	@Override

@@ -29,10 +29,10 @@ public class LottoTickets {
 		return lottoTicketList.size();
 	}
 
-	public LottoWinPrizes match(LottoTicket comparedTicket) {
+	public LottoWinPrizes match(LottoTicket comparedTicket, LottoNumber bonusNumber) {
 		return LottoWinPrizes.of(
 			lottoTicketList.stream()
-				.map(lottoTicket -> lottoTicket.match(comparedTicket))
+				.map(lottoTicket -> lottoTicket.match(comparedTicket, bonusNumber))
 				.collect(Collectors.toList()));
 	}
 

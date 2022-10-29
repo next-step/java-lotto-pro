@@ -36,7 +36,7 @@ public class LottoWinPrizes {
 	}
 
 	public int getWinPrizeCount(LottoWinPrize lottoWinPrize) {
-		return winPrizesCounts.get(lottoWinPrize);
+		return winPrizesCounts.getOrDefault(lottoWinPrize, 0);
 	}
 
 	private void increment(LottoWinPrize winPrize) {

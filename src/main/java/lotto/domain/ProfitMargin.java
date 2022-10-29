@@ -8,10 +8,10 @@ public class ProfitMargin {
 
 	private static final int SCALE = 2;
 
-	private final BigDecimal profitMargin;
+	private final BigDecimal margin;
 
 	private ProfitMargin(BigDecimal profitMargin) {
-		this.profitMargin = profitMargin.setScale(SCALE, RoundingMode.DOWN);
+		this.margin = profitMargin.setScale(SCALE, RoundingMode.DOWN);
 	}
 
 	public static ProfitMargin valueOf(BigDecimal profitMargin) {
@@ -23,7 +23,7 @@ public class ProfitMargin {
 	}
 
 	public boolean isLoss() {
-		return profitMargin.compareTo(BigDecimal.ONE) < 0;
+		return margin.compareTo(BigDecimal.ONE) < 0;
 	}
 
 	@Override
@@ -35,16 +35,16 @@ public class ProfitMargin {
 			return false;
 		}
 		ProfitMargin that = (ProfitMargin)o;
-		return profitMargin.equals(that.profitMargin);
+		return margin.equals(that.margin);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(profitMargin);
+		return Objects.hash(margin);
 	}
 
 	@Override
 	public String toString() {
-		return profitMargin.toString();
+		return margin.toString();
 	}
 }
