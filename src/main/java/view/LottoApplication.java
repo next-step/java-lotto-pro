@@ -2,7 +2,7 @@ package view;
 
 import java.util.Scanner;
 
-import lotto.AutoLottoNumberGenerator;
+import lotto.AutoLottoTicketGenerator;
 import lotto.LottoTicket;
 import lotto.LottoTickets;
 import lotto.LottoVendor;
@@ -17,7 +17,7 @@ public class LottoApplication {
 
 		LottoPurchaseView lottoPurchaseView = new LottoPurchaseView(
 			scanner,
-			new LottoVendor(LOTTO_PRICE, new AutoLottoNumberGenerator()));
+			new LottoVendor(LOTTO_PRICE, new AutoLottoTicketGenerator()));
 
 		LastWeekWinLottoTicketView lastWeekWinLottoTicketView = new LastWeekWinLottoTicketView(scanner);
 

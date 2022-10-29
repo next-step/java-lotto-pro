@@ -16,6 +16,10 @@ public class Randoms {
 		return numbers.subList(0, count);
 	}
 
+	public static List<Integer> generateUniqueNumbersRangeClosed(int startInclusive, int endInclusive, int count) {
+		return generateUniqueNumbers(startInclusive, endInclusive + 1, count);
+	}
+
 	private static void verifyIsValidInput(int startInclusive, int endExclusive, int count) {
 		if (isCountInvalid(startInclusive, endExclusive, count)) {
 			throw new IllegalArgumentException("생성 갯수는 범위보다 커야 합니다");

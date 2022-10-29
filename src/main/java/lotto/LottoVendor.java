@@ -5,11 +5,11 @@ import money.Money;
 public class LottoVendor {
 
 	private final Money lottoPrice;
-	private final LottoNumberGenerator lottoNumberGenerator;
+	private final LottoTicketGenerator lottoTicketGenerator;
 
-	public LottoVendor(Money lottoPrice, LottoNumberGenerator lottoNumberGenerator) {
+	public LottoVendor(Money lottoPrice, LottoTicketGenerator lottoTicketGenerator) {
 		this.lottoPrice = lottoPrice;
-		this.lottoNumberGenerator = lottoNumberGenerator;
+		this.lottoTicketGenerator = lottoTicketGenerator;
 	}
 
 	public LottoTickets purchase(Money amount) {
@@ -20,7 +20,7 @@ public class LottoVendor {
 		if (isLessThanLottoPrice(budget)) {
 			return lottoTickets;
 		}
-		lottoTickets.add(lottoNumberGenerator.generate());
+		lottoTickets.add(lottoTicketGenerator.generate());
 		return purchase(budget.subtract(lottoPrice), lottoTickets);
 	}
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import utils.Randoms;
 
-public class AutoLottoNumberGenerator implements LottoNumberGenerator {
+public class AutoLottoTicketGenerator implements LottoTicketGenerator {
 
 	@Override
 	public LottoTicket generate() {
@@ -12,7 +12,7 @@ public class AutoLottoNumberGenerator implements LottoNumberGenerator {
 	}
 
 	private List<Integer> generateUniqueNumbers() {
-		return Randoms.generateUniqueNumbers(
+		return Randoms.generateUniqueNumbersRangeClosed(
 			LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER, LottoTicket.NUMBER_COUNT);
 	}
 }

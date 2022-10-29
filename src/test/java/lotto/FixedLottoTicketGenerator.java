@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FixedLottoNumberGenerator implements LottoNumberGenerator {
+public class FixedLottoTicketGenerator implements LottoTicketGenerator {
 
 	private final List<Integer> numbers;
 
-	public FixedLottoNumberGenerator(int... numbers) {
+	public FixedLottoTicketGenerator(int... numbers) {
 		this.numbers = Arrays.stream(numbers).boxed().collect(Collectors.toList());
 	}
 

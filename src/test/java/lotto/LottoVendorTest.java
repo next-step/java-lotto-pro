@@ -20,7 +20,7 @@ class LottoVendorTest {
 
 	Money 로또_가격 = Money.wons(1000);
 
-	LottoNumberGenerator 고정_로또_번호_생성기 = new FixedLottoNumberGenerator(FIXED_NUMBERS);
+	LottoTicketGenerator 고정_로또_번호_생성기 = new FixedLottoTicketGenerator(FIXED_NUMBERS);
 
 	LottoVendor 로또판매기;
 
