@@ -1,5 +1,7 @@
 package step3.domain.lotto;
 
+import step3.domain.statistics.WinningLottoType;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +24,17 @@ public class LottoNumbers {
     public LottoNumbers(final List<LottoNumber> lottoNumbers) {
         validateLottoSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public WinningLottoType getWinningLottoType(WinningLottoNumbers winningLottoNumbers) {
+        int matchCount = match(winningLottoNumbers);
+        return WinningLottoType.findByMatchCount(matchCount);
+    }
+
+    private int match(WinningLottoNumbers winningLottoNumbers) {
+        return (int) winningLottoNumbers.getLottoNumbers().stream()
+                .filter(this.lottoNumbers::contains)
+                .count();
     }
 
     private void validateLottoSize(final List<LottoNumber> lottoNumbers) {

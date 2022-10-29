@@ -1,5 +1,7 @@
 package step3.domain.lotto;
 
+import step3.domain.statistics.WinningLottoType;
+
 public class Lotto {
 
     public static final int DEFAULT_LOTTO_PRICE = 1000;
@@ -10,6 +12,10 @@ public class Lotto {
     public Lotto(final LottoNumbers lottoNumbers) {
         this.price = DEFAULT_LOTTO_PRICE;
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public WinningLottoType getWinningLottoType(WinningLottoNumbers winningLottoNumbers) {
+        return this.lottoNumbers.getWinningLottoType(winningLottoNumbers);
     }
 
     public int getPrice() {
