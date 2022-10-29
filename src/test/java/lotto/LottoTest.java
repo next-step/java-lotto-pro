@@ -69,4 +69,32 @@ public class LottoTest {
             )
         );
     }
+
+    @ParameterizedTest(name = "초기화시에_로또번호가_중복된_숫자이면_에러처리")
+    @MethodSource("duplicatedLottoNumbersFixture")
+    void 초기화시에_로또번호가_중복된_숫자이면_에러처리(List<LottoNumber> duplicatedLottoNumbersFixture) {
+        assertThatThrownBy(() -> Lotto.valueOf(duplicatedLottoNumbersFixture))
+            .isInstanceOf(RuntimeException.class);
+    }
+
+    static Stream<List<LottoNumber>> duplicatedLottoNumbersFixture() {
+        return Stream.of(
+            Arrays.asList(
+                LottoNumber.valueOf(9),
+                LottoNumber.valueOf(18),
+                LottoNumber.valueOf(27),
+                LottoNumber.valueOf(36),
+                LottoNumber.valueOf(45),
+                LottoNumber.valueOf(45)
+            ),
+            Arrays.asList(
+                LottoNumber.valueOf(9),
+                LottoNumber.valueOf(18),
+                LottoNumber.valueOf(27),
+                LottoNumber.valueOf(36),
+                LottoNumber.valueOf(45),
+                LottoNumber.valueOf(27)
+            )
+        );
+    }
 }
