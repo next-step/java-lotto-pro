@@ -8,13 +8,13 @@ import java.util.List;
  */
 public class LottoTicketsBucket {
     private static final int SIZE_OF_FULL_CANDIDATE_LIST = 45;
-    private final List<LottoTicket> lottoTickets;
+    protected final List<LottoTicket> lottoTickets;
 
     public LottoTicketsBucket(int howManyTickets) {
         lottoTickets = new ArrayList<>(howManyTickets);
-        final List<Integer> candidates = intsFromOneToFortyFive();
-        final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(candidates);
         for (int i = 0; i < howManyTickets; ++i) {
+            final List<Integer> candidates = intsFromOneToFortyFive();
+            final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(candidates);
             lottoTickets.add(new LottoTicket(lottoNumberGenerator));
         }
     }
