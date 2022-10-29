@@ -30,10 +30,10 @@ class LottoMachineTest {
         lottos.add(Arrays.asList(1,12,15,17,18,20));
 
         lottoResults = new ArrayList<>();
-        lottoResults.add(new LottoResult(3, 1, 1000));
-        lottoResults.add(new LottoResult(4, 0, 2000));
-        lottoResults.add(new LottoResult(5, 0, 3000));
-        lottoResults.add(new LottoResult(6, 0, 4000));
+        lottoResults.add(new LottoResult(3, 1, 5000));
+        lottoResults.add(new LottoResult(4, 0, 6000));
+        lottoResults.add(new LottoResult(5, 0, 7000));
+        lottoResults.add(new LottoResult(6, 0, 8000));
     }
 
     @ParameterizedTest
@@ -80,5 +80,12 @@ class LottoMachineTest {
     void givenExceedNumbers_whenReceiveLuckLotto_thenThrow() {
         assertThatThrownBy(() -> lottoMachine.getResultComparedToLuckyNumbers("86, 1, 3, 5, 6, 8", lottos))
                 .isInstanceOf(RuntimeException.class);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"5000,1.0", "14000,0.35", "20000,0.25"})
+    @DisplayName("사용한 금액과 결과로 수익률을 확인할때 실수값 리턴")
+    void givenMoneyAndResults_whenShowRate_thenDoubleNumber(int money, double expectedRate) {
+        assertThat(lottoMachine.showRate(money, lottoResults)).isEqualTo(expectedRate);
     }
 }

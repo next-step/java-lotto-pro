@@ -118,4 +118,13 @@ public class LottoMachine {
 
         return uniqueNumbers.size() != luckyNumbers.size();
     }
+
+    public double showRate(int money, List<LottoResult> lottoResults) {
+        double totalMoney = 0.0;
+        for (LottoResult lottoResult : lottoResults) {
+            totalMoney += lottoResult.getTotalMoney();
+        }
+
+        return Math.floor((totalMoney / money * TWO_POINT_POSITION)) / TWO_POINT_POSITION;
+    }
 }

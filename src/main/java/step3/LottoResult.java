@@ -12,6 +12,10 @@ public class LottoResult {
         this.money = money;
     }
 
+    public int getTotalMoney() {
+        return this.scoreMatchedCount * this.money;
+    }
+
     public int getScore() {
         return score;
     }
