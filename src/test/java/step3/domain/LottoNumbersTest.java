@@ -62,4 +62,10 @@ class LottoNumbersTest {
         assertThat(myPickedNumbers.compareTo(winningNumbers)).isEqualTo(5);
     }
 
+    @Test
+    void toString_호출시_로또_번호_목록을_출력한다() {
+        LottoNumbers lottoNumbers = new LottoNumbers("1, 2, 3, 4, 5, 6");
+        String expectedPrintResult = "[1, 2, 3, 4, 5, 6]";
+        assertThat(lottoNumbers.toString()).isEqualTo(expectedPrintResult);
+    }
 }
