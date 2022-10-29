@@ -16,6 +16,6 @@ public class LottoNumberGenerator {
     public int generate() {
         final Random random = new Random();
         final int randomIndex = random.nextInt(lottoNumberCandidates.size());
-        return lottoNumberCandidates.get(randomIndex);
+        return lottoNumberCandidates.remove(randomIndex);
     }
 }

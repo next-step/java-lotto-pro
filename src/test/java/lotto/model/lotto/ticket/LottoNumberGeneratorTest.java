@@ -21,7 +21,6 @@ class LottoNumberGeneratorTest {
         final int randomNumber = lottoNumberGenerator.generate();
         assertThat(randomNumber).isGreaterThanOrEqualTo(1);
         assertThat(randomNumber).isLessThanOrEqualTo(45);
-        assertThat(numbersCandidate).contains(randomNumber);
     }
 
     private static Stream<Arguments> generateTestSources() {
