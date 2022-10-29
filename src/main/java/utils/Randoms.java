@@ -7,6 +7,9 @@ import java.util.stream.IntStream;
 
 public class Randoms {
 
+	private Randoms() {
+	}
+
 	public static List<Integer> generateUniqueNumbers(int startInclusive, int endExclusive, int count) {
 		verifyIsValidInput(startInclusive, endExclusive, count);
 

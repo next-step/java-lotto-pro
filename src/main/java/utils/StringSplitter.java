@@ -3,6 +3,10 @@ package utils;
 import java.util.Objects;
 
 public class StringSplitter {
+
+	private StringSplitter() {
+	}
+
 	public static SplitStrings split(String text) {
 		if (isTextNullOrEmpty(text)) {
 			return SplitStrings.EMPTY;

@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 public class CollectionUtils {
 
+	private CollectionUtils() {
+	}
+
 	public static <T> boolean isEqualInAnyOrder(Collection<T> col1, Collection<T> col2) {
 		if (isNotEqualSize(col1, col2)) {
 			return false;

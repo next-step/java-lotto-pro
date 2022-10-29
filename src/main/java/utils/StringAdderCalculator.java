@@ -4,6 +4,9 @@ import static java.lang.String.format;
 
 public class StringAdderCalculator {
 
+	private StringAdderCalculator() {
+	}
+
 	public static int sum(String text) {
 		SplitStrings splitNumbers = StringSplitter.split(text);
 
