@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@DisplayName("로또 단일 숫자 테스트")
 class LottoNumberTest {
 
     @DisplayName("로또 예외 확인")

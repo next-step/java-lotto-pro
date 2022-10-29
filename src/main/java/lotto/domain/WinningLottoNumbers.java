@@ -19,7 +19,6 @@ public class WinningLottoNumbers {
         return this.lottoNumbers;
     }
 
-
     public WinningLottoNumbers(String lottoNumbers) {
         validNullOrEmpty(lottoNumbers);
         checkLottoPattern(lottoNumbers);

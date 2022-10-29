@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,10 +16,6 @@ public class LottoNumbers {
         checkSizeLottoNumber(lottoNumbers);
         checkDuplicatedLottoNumber(lottoNumbers);
         this.lottoNumbers = lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toList());
-    }
-
-    public int size() {
-        return this.lottoNumbers.size();
     }
 
     private void checkSizeLottoNumber(List<Integer> lottoNumbers) {
@@ -41,4 +38,17 @@ public class LottoNumbers {
                 .collect(Collectors.joining(", ", "[", "]"));
     }
 
+    public List<Integer> match(LottoNumbers lottoNumbers) {
+        List<Integer> duplicates = new ArrayList<>(numbers());
+        duplicates.retainAll(lottoNumbers.numbers());
+        return duplicates;
+    }
+
+    public List<Integer> numbers() {
+        return this.lottoNumbers
+                .stream()
+                .map(LottoNumber::toString)
+                .map(Integer::valueOf)
+                .collect(Collectors.toList());
+    }
 }

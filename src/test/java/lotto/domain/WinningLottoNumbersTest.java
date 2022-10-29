@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+@DisplayName("로또 우승 번호 테스트")
 class WinningLottoNumbersTest {
 
     @DisplayName("문자로 입력한 로또 번호 예외 확인")
