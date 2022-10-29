@@ -68,7 +68,7 @@ public class OutputView {
     }
 
     public static void outputYield(double yield) {
-        System.out.println(String.format(TOTAL_YIELD_MESSAGE, yield));
+        System.out.print(String.format(TOTAL_YIELD_MESSAGE, yield));
         if (yield < LOSS_STANDARD) {
             System.out.print(LOSS_MESSAGE);
         }
