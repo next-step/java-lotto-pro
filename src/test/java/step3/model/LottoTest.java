@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
     @Test
@@ -24,5 +24,20 @@ class LottoTest {
         Lotto lotto = new Lotto(numbers);
 
         assertThat(lotto).isEqualTo(new Lotto(numbers));
+    }
+
+    @Test
+    @DisplayName("중복된 숫자가 있을 경우 exception이 발생한다.")
+    void duplicate_exception_test() {
+        assertThatThrownBy(() -> {
+            List<Integer> numbers = new ArrayList<>();
+            numbers.add(1);
+            numbers.add(12);
+            numbers.add(23);
+            numbers.add(34);
+            numbers.add(43);
+            numbers.add(44);
+            new Lotto(numbers);
+        }).isInstanceOf(IndexOutOfBoundsException.class);
     }
 }
