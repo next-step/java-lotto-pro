@@ -1,5 +1,6 @@
 package step3.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,7 +28,7 @@ public class Lotto {
     }
 
     public List<LottoNumber> getNumbers() {
-        return numbers.stream().collect(Collectors.toList());
+        return new ArrayList<>(numbers);
     }
 
     private void validateNumbers(List<LottoNumber> numbers) {
@@ -37,6 +38,7 @@ public class Lotto {
     }
 
     public Rank getRank(List<LottoNumber> winningNumbers) {
+        validateNumbers(winningNumbers);
         int count = (int) numbers
                 .stream()
                 .filter(winningNumbers::contains)
