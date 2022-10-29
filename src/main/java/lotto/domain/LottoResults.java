@@ -20,4 +20,8 @@ public class LottoResults {
         }
         return new Money(totalProfits);
     }
+
+    public int findLottoResultCount(LottoPrize lottoPrize) {
+        return lottoResults.getOrDefault(lottoPrize, DEFALUT_COUNT);
+    }
 }
