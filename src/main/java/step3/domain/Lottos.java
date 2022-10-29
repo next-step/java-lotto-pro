@@ -23,6 +23,7 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public String toString() {
         return lottoList.stream()
                 .map(Object::toString)
