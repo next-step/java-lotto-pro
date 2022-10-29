@@ -8,6 +8,7 @@ public class StringAddCalculator {
         int result = 0;
         if(text == null || text.isEmpty()) return 0;
         String[] numbers = text.split(",|:");
+        if(numbers.length == 0) throw new RuntimeException();
         for(String number : numbers) {
             result += StringAddCalculatorUtil.toInt(number);;
         }
