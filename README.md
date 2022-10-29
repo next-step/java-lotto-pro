@@ -12,4 +12,4 @@
   - [x] 입력을 받는 view 구현 (InputView)
   - [x] 결과를 출력하는 view 구현 (ResultView)
 - controller
-  - [ ] view와 domain을 연결 (LottoController)
+  - [x] view와 domain을 연결 (LottoController)
