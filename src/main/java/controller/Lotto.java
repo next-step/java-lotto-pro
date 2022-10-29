@@ -1,8 +1,6 @@
 package controller;
 
-import model.LottoLotteryTickets;
-import model.LottoNumberGenerator;
-import model.LottoPurchaseAmount;
+import model.*;
 import view.InputReader;
 import view.OutputWriter;
 
@@ -12,6 +10,11 @@ public class Lotto {
         OutputWriter.answerLottoQuantity(lottoPurchaseAmount.getQuantityPerAmountLotto());
 
         LottoLotteryTickets lottoLotteryTickets = new LottoLotteryTickets(lottoPurchaseAmount.getQuantityPerAmountLotto(), new LottoNumberGenerator());
-        OutputWriter.answerLottoLotteryTickets(lottoLotteryTickets.toString());
+        OutputWriter.answer(lottoLotteryTickets.toString());
+
+        WinningNumbers winningNumbers = new WinningNumbers(InputReader.inquireLastWeekWinningNumber());
+        Result result = lottoLotteryTickets.match(winningNumbers);
+
+        OutputWriter.answer(result.toString());
     }
 }

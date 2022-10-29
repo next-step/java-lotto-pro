@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,7 +20,7 @@ class LottoNumberGeneratorTest {
         Number lottoNumber = new LottoNumber();
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
 
-        List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate(lottoNumber);
+        Set<LottoNumber> lottoNumbers = lottoNumberGenerator.generate(lottoNumber);
 
         assertThat(lottoNumbers.size()).isEqualTo(6);
     }

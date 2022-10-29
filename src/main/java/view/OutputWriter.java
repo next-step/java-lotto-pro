@@ -7,7 +7,7 @@ public class OutputWriter {
         System.out.println(String.format(PRINT_QUANTITY_FORMAT, quantity));
     }
 
-    public static void answerLottoLotteryTickets(String message) {
+    public static void answer(String message) {
         System.out.println(message);
     }
 }
