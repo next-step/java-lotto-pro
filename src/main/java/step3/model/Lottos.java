@@ -10,7 +10,9 @@ public class Lottos {
     public void generate(int generatorCount) {
         lottos = new ArrayList<>();
         for (int i = 0; i < generatorCount; i++) {
-            lottos.add(new Lotto());
+            Lotto lotto = new Lotto();
+            lotto.generateRandomNumber();
+            lottos.add(lotto);
         }
     }
 

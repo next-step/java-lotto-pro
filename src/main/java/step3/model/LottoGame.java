@@ -1,6 +1,5 @@
 package step3.model;
 
-import step3.constant.WinningPrice;
 import step3.veiw.InputView;
 import step3.veiw.OutputView;
 
@@ -9,7 +8,6 @@ public class LottoGame {
     private static LottoGenerator lottoGenerator = new LottoGenerator();
 
     public void startGame() {
-        WinningPrice.initWinningPrice();
         Lottos lottos = generateLotto();
         statisticsLotto(lottos);
     }
@@ -17,6 +15,7 @@ public class LottoGame {
     private void statisticsLotto(Lottos lottos) {
         String inputNumber = InputView.inputLastWeekLottoNumber();
         Lotto lastWeekLotto = new Lotto(inputNumber);
+        lastWeekLotto.convertNumberArrayByInputNumber();
         LottoResult lottoResult = calculatorLottoGame(lottos, lastWeekLotto);
         OutputView.outputResultLottoGame(lottoGenerator, lottoResult);
     }

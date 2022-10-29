@@ -1,27 +1,34 @@
 package step3.model;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 import static step3.constant.ErrorMessage.TOTAL_6_COUNT_LOTTO_INPUT;
 
 public class Lotto {
 
-    private final static int ZERO = 0;
     private final static int LOTTO_SIZE = 6;
     private final static int LOTTO_START = 1;
     private final static int LOTTO_END = 45;
 
     private List<LottoNumber> numbers;
+    private String inputNumber;
 
-    public Lotto() {
+    public Lotto() {}
+
+    public Lotto(String inputNumber) {
+        this.inputNumber = inputNumber;
+    }
+
+    public void generateRandomNumber() {
         List<LottoNumber> allNumbers = settingLottoRangeNumber();
         Collections.shuffle(allNumbers);
 
-        this.numbers = allNumbers.subList(ZERO, LOTTO_SIZE);
+        this.numbers = allNumbers.subList(0, LOTTO_SIZE);
         Collections.sort(this.numbers);
     }
 
-    public Lotto(String inputNumber) {
+    public void convertNumberArrayByInputNumber() {
         numbers = new ArrayList<>();
 
         List<String> numberArray = convertNumberArray(inputNumber);
@@ -42,9 +49,9 @@ public class Lotto {
 
     private List<LottoNumber> settingLottoRangeNumber() {
         List<LottoNumber> allNumbers = new ArrayList<>();
-        for (int i = LOTTO_START; i <= LOTTO_END; i++) {
+        IntStream.range(LOTTO_START, LOTTO_END).forEach(i -> {
             allNumbers.add(new LottoNumber(i));
-        }
+        });
         return allNumbers;
     }
 
@@ -53,10 +60,8 @@ public class Lotto {
     }
 
     public int sameNumberCount(Lotto lotto) {
-        int sameCount = ZERO;
-        for (int i = ZERO; i < lotto.numbers.size(); i++) {
-            sameCount += containNumber(lotto.numbers.get(i));
-        }
+        int sameCount = (int) lotto.numbers.stream()
+                .filter(number -> this.numbers.contains(number)).count();
         return sameCount;
     }
 

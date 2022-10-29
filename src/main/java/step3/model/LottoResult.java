@@ -1,10 +1,10 @@
 package step3.model;
 
+import step3.constant.WinningPrice;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
-import static step3.constant.WinningPrice.price;
 
 public class LottoResult {
 
@@ -24,24 +24,24 @@ public class LottoResult {
     }
 
     public String createSameCountMessage(int sameNumber) {
-        return new StringBuilder(String.valueOf(sameNumber))
-                .append("개 일치 ")
-                .append("(")
-                .append(winningPrice(sameNumber))
-                .append("원")
-                .append(")- ")
-                .append(Optional.ofNullable(sameCounts.get(sameNumber)).orElse(0))
-                .append("개").toString();
+        return sameNumber +
+                "개 일치 " +
+                "(" +
+                winningPrice(sameNumber) +
+                "원" +
+                ")- " +
+                Optional.ofNullable(sameCounts.get(sameNumber)).orElse(0) +
+                "개";
     }
 
     private int winningPrice(int sameNumber) {
-        return price.get(sameNumber);
+        return WinningPrice.get(sameNumber);
     }
 
     public int sumWinningPrice() {
         int winningPrice = 0;
         for (Integer sameCount : sameCounts.keySet()) {
-            winningPrice += Optional.ofNullable(price.get(sameCount)).orElse(0) * sameCounts.get(sameCount);
+            winningPrice += Optional.ofNullable(WinningPrice.get(sameCount)).orElse(0) * sameCounts.get(sameCount);
         }
         return winningPrice;
     }

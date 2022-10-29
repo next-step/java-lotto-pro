@@ -1,17 +1,26 @@
 package step3.constant;
 
-import java.util.HashMap;
-import java.util.Map;
+public enum WinningPrice {
 
-public class WinningPrice {
+    GUESS_THREE(3, 5000),
+    GUESS_FOUR(4, 50000),
+    GUESS_FIVE(5, 1500000),
+    GUESS_SIX(6, 2000000000);
 
-    public static final Map<Integer, Integer> price = new HashMap<>();
+    private int count;
+    private int price;
 
-    public static void initWinningPrice() {
-        price.put(3, 5000);
-        price.put(4, 50000);
-        price.put(5, 1500000);
-        price.put(6, 2000000000);
+    WinningPrice(int count, int price) {
+        this.count = count;
+        this.price = price;
     }
 
+    public static int get(int sameNumber) {
+        for (WinningPrice winningPrice2 : WinningPrice.values()) {
+            if (winningPrice2.count == sameNumber) {
+                return winningPrice2.price;
+            }
+        }
+        return 0;
+    }
 }
