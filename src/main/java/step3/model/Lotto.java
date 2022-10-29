@@ -1,10 +1,13 @@
 package step3.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static step3.constant.Constant.MIN_LOTTO_NUMBER;
 import static step3.constant.Constant.MAX_LOTTO_NUMBER;
+import static step3.constant.Constant.ZERO;
+import static step3.constant.Constant.LOTTO_NUMBER_LENGTH;
 public class Lotto {
     private List<LottoNumber> lottoNumbers;
     private List<LottoNumber> rangeNumbers;
@@ -13,11 +16,11 @@ public class Lotto {
         lottoNumbers = generateRandomNumbers();
     }
 
-    private List<LottoNumber> generateRandomNumbers() {
+    public List<LottoNumber> generateRandomNumbers() {
         rangeNumbers = setRangeNumbers();
+        Collections.shuffle(rangeNumbers);
 
-
-
+        this.lottoNumbers = rangeNumbers.subList(ZERO, LOTTO_NUMBER_LENGTH);
         return lottoNumbers;
     }
 
@@ -27,5 +30,13 @@ public class Lotto {
             numbers.add(new LottoNumber(i));
         }
         return numbers;
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "lottoNumbers=" + lottoNumbers +
+                ", rangeNumbers=" + rangeNumbers +
+                '}';
     }
 }
