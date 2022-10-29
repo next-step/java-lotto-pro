@@ -8,5 +8,6 @@ public class LottoApplication {
         Lottos lottos = new Lottos();
         List<Lotto> lottoList = lottos.makeLottos(money);
         ResultView.printLottos(lottoList);
+        String winningNumbers = InputView.inputWinningNumbers();
     }
 }
