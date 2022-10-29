@@ -1,10 +1,11 @@
 package lotto.model.money.to.buy;
 
+import lotto.constant.numbers.LottoConstant;
+
 /**
  * 로또 구매를 위해 입력한 금액을 저장하는 객체
  */
 public class MoneyToBuy {
-    private static final int PRICE_OF_LOTTO_TICKET = 1000;
     protected int money;
 
     public MoneyToBuy(String input) {
@@ -17,7 +18,7 @@ public class MoneyToBuy {
         if (isNegative(inputMoney)) {
             throw new NumberFormatException("구입 금액은 음수가 될 수 없습니다.");
         }
-        money = inputMoney / PRICE_OF_LOTTO_TICKET * PRICE_OF_LOTTO_TICKET;
+        money = inputMoney / LottoConstant.PRICE_OF_SINGLE_LOTTO_TICKET * LottoConstant.PRICE_OF_SINGLE_LOTTO_TICKET;
     }
 
     private boolean isNegative(int input) {
@@ -25,6 +26,6 @@ public class MoneyToBuy {
     }
 
     public int numberOfAffordableLottoTickets() {
-        return money / PRICE_OF_LOTTO_TICKET;
+        return money / LottoConstant.PRICE_OF_SINGLE_LOTTO_TICKET;
     }
 }
