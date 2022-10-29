@@ -56,7 +56,6 @@ public class LottoTicket {
 	}
 
 	public int match(LottoTicket other) {
-
 		Set<LottoNumber> comparedLottoNumbers = new HashSet<>(other.lottoNumbers);
 
 		int equalNumberCount = 0;
