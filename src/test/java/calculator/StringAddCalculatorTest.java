@@ -53,10 +53,11 @@ class StringAddCalculatorTest {
         Assertions.assertThat(result).isEqualTo(6);
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3", "//@\n1@2@3", "//%\n1%2%3"})
     @DisplayName("커스텀 구분자(//와 \n 사이에 위치하는 문자)를 가지는 문자열을 전달하는 경우 구분자를 기준으로 분리한 각 숫자의 합을 반환한다.")
-    void splitAndSumByCustomDelimiter() {
-        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
+    void splitAndSumByCustomDelimiter(String input) {
+        int result = StringAddCalculator.splitAndSum(input);
 
         Assertions.assertThat(result).isEqualTo(6);
     }
