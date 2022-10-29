@@ -34,7 +34,8 @@ public class Lottos {
     public LottoResults createLottoResults(Lotto winningLotto) {
         Map<LottoPrize, Integer> lottoResults = new HashMap<>();
         for(Lotto lotto: lottos) {
-            LottoPrize lottoPrize = lotto.findLottoPrize(winningLotto);
+            int matchCount = lotto.findLottoMatchCount(winningLotto);
+            LottoPrize lottoPrize = LottoPrize.findLottoPrize(matchCount);
             lottoResults.put(lottoPrize, lottoResults.getOrDefault(lottoPrize, DEFALUT_COUNT) + ADD_COUNT_AMOUNT);
         }
         return LottoResults.createLottoResults(lottoResults);

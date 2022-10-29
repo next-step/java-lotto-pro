@@ -42,12 +42,12 @@ public class Lotto {
         }
     }
 
-    public LottoPrize findLottoPrize(Lotto winningLotto) {
+    public int findLottoMatchCount(Lotto winningLotto) {
         int matchCount = 0;
         for(LottoNumber lottoNumber: this.lottoNumbers) {
             matchCount += findMatchLottoNumber(winningLotto, lottoNumber);
         }
-        return LottoPrize.findLottoPrize(matchCount);
+        return matchCount;
     }
 
     private int findMatchLottoNumber(Lotto winningLotto, LottoNumber lottoNumber) {

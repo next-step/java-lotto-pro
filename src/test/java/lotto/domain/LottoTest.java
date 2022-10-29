@@ -26,14 +26,14 @@ public class LottoTest {
     void 구매한_로또와_당첨_번호간_3개_일치_테스트() {
         Lotto prizeLotto = Lotto.generateLotto(new ReadLineLottoNumberGenerator("1, 2, 3, 4, 5, 6"));
         Lotto inputLotto = Lotto.generateLotto(new ReadLineLottoNumberGenerator("1, 3, 4, 24, 35, 45"));
-        assertThat(inputLotto.findLottoPrize(prizeLotto)).isEqualTo(LottoPrize.FOURTH);
+        assertThat(inputLotto.findLottoMatchCount(prizeLotto)).isEqualTo(3);
     }
 
     @Test
     void 구매한_로또와_당첨_번호간_4개_일치_테스트() {
         Lotto prizeLotto = Lotto.generateLotto(new ReadLineLottoNumberGenerator("1, 2, 3, 4, 5, 6"));
         Lotto inputLotto = Lotto.generateLotto(new ReadLineLottoNumberGenerator("1, 3, 4, 5, 35, 45"));
-        assertThat(inputLotto.findLottoPrize(prizeLotto)).isEqualTo(LottoPrize.THIRD);
+        assertThat(inputLotto.findLottoMatchCount(prizeLotto)).isEqualTo(4);
     }
 
     @Test
