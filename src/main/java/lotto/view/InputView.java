@@ -1,8 +1,14 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
+import lotto.util.InputValidator;
+
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -16,15 +22,27 @@ public class InputView {
     public static int inputPayAmount(){
         Scanner sc = new Scanner(System.in);
         System.out.println(ASK_MESSAGE_PAY_AMOUNT);
-        return sc.nextInt();
+        String input = sc.next();
+        InputValidator.validateNumberFormat(input);
+        return Integer.parseInt(input);
     }
 
     public static List<Integer> inputLottoWinnerNumbers(){
         Scanner sc = new Scanner(System.in);
         System.out.println(ASK_MESSAGE_LAST_WINNER_NUMBERS);
-        String input = sc.nextLine();
-        input = input.replaceAll(WHITE_SPACE, EMPTY_STRING);
-        String[] winnerNumbers = input.split(WINNER_NUMBERS_DELIMITER);
-        return Arrays.stream(winnerNumbers).map(Integer::parseInt).collect(Collectors.toList());
+
+        String input = sc.nextLine().replaceAll(WHITE_SPACE, EMPTY_STRING);
+        String[] stringWinnerNumbers = input.split(WINNER_NUMBERS_DELIMITER);
+        InputValidator.validateLottoNumberCount(stringWinnerNumbers.length);
+
+        List<Integer> winnerNumbers = new ArrayList<>();
+        for(String stringFormatNumber : stringWinnerNumbers){
+            InputValidator.validateNumberFormat(stringFormatNumber);
+            int number = Integer.parseInt(stringFormatNumber);
+            InputValidator.validateLottoNumber(number);
+            winnerNumbers.add(number);
+        }
+
+        return winnerNumbers;
     }
 }
