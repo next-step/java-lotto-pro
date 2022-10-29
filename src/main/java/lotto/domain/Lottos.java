@@ -37,7 +37,7 @@ public class Lottos {
             LottoPrize lottoPrize = lotto.findLottoPrize(winningLotto);
             lottoResults.put(lottoPrize, lottoResults.getOrDefault(lottoPrize, DEFALUT_COUNT) + ADD_COUNT_AMOUNT);
         }
-        return new LottoResults(lottoResults);
+        return LottoResults.createLottoResults(lottoResults);
     }
 
     public List<Lotto> unmodifiedLottos() {

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.Map;
 
 public class LottoResults {
@@ -9,8 +10,12 @@ public class LottoResults {
 
     private final Map<LottoPrize, Integer> lottoResults;
 
-    public LottoResults(Map<LottoPrize, Integer> lottoResults) {
+    private LottoResults(Map<LottoPrize, Integer> lottoResults) {
         this.lottoResults = lottoResults;
+    }
+
+    public static LottoResults createLottoResults(Map<LottoPrize, Integer> lottoResults) {
+        return new LottoResults(Collections.unmodifiableMap(lottoResults));
     }
 
     public Money findProfits() {
