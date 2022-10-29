@@ -4,10 +4,13 @@ public class Counter {
 
   private static final int LOTTO_PRICE = 1000;
 
-  public static int buyLotto(int input) {
-    int lottoCount = input / LOTTO_PRICE;
+  public static int calculateLottoAmount(String input) {
+    int purchasePrice = Integer.parseInt(input);
 
-    return lottoCount;
+    int lottoAmount = purchasePrice / LOTTO_PRICE;
+
+    return lottoAmount;
+
   }
 
 }
