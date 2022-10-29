@@ -18,9 +18,8 @@ public class LottoManager {
 
     public void start() {
         int amount = InputView.inputMoney();
-        Money money = new Money(amount);
 
-        LottoBuyer lottoBuyer = new LottoBuyer(money);
+        LottoBuyer lottoBuyer = new LottoBuyer(new Money(amount));
         LottoBill lottoBill = lottoBuyer.buyLotto(new LottoSeller());
 
         OutputView.printLottoCount(lottoBill.getLottoPiece());
