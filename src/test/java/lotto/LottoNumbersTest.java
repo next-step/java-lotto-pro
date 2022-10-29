@@ -23,8 +23,7 @@ public class LottoNumbersTest {
 
     @Test
     void 로또_번호_저장() {
-        LottoNumbers lottoNumbers = new LottoNumbers(inputLottoNumbers);
-        assertThat(lottoNumbers.countPurchase()).isEqualTo(2);
+        assertThat(new LottoNumbers(inputLottoNumbers).purchaseCount()).isEqualTo(3);
     }
 
     @Test
