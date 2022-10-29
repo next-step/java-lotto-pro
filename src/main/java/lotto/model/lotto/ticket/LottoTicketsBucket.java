@@ -13,8 +13,7 @@ public class LottoTicketsBucket {
         this.lottoTickets = new ArrayList<>(howManyTickets);
     }
 
-    public int addLottoTicket(LottoTicket lottoTicket) {
+    public void addLottoTicket(LottoTicket lottoTicket) {
         lottoTickets.add(lottoTicket);
-        return lottoTickets.size();
     }
 }
