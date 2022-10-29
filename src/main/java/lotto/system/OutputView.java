@@ -7,23 +7,23 @@ import lotto.machine.Result;
 public class OutputView {
 
     public static void printInputMoney() {
-        System.out.println("구매 금액을 입력해 주세요.");
+        println("구매 금액을 입력해 주세요.");
     }
 
     public static void printReceipt(int quantity) {
-        System.out.println(quantity + "개를 구매했습니다.");
+        println(quantity + "개를 구매했습니다.");
     }
 
     public static void printInputWinnerNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
     public static void printNotValidLottoNumbers() {
-        System.out.println("유효하지 않은 로또 번호입니다.");
+        println("유효하지 않은 로또 번호입니다.");
     }
 
     public static void printInputBonusNumber() {
-        System.out.println("보너스 번호를 입력하세요");
+        println("보너스 번호를 입력하세요");
     }
 
     public static void printLotto(ArrayList<Integer> numbers){
