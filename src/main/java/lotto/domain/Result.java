@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Result {
 
@@ -25,5 +26,11 @@ public class Result {
 		return rankResult.entrySet().stream()
 			.mapToLong(entry -> entry.getKey().getPrize() * entry.getValue())
 			.sum();
+	}
+
+	public String toString() {
+		return rankResult.entrySet().stream()
+			.map(entry -> entry.getKey().getMatchCount() + "개 일치 (" + entry.getKey().getPrize() + "원) - " + entry.getValue() + "개")
+			.collect(Collectors.joining(System.lineSeparator()));
 	}
 }

@@ -1,11 +1,10 @@
 package lotto.controller;
 
-import java.util.List;
-
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicketMachine;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
+import lotto.domain.Result;
 import lotto.domain.WinningLottoTicket;
 import lotto.domain.strategy.RandomGenerateStrategy;
 import lotto.view.InputView;
@@ -27,15 +26,28 @@ public class LottoGameController {
 
     public void play() {
         Money money = inputView.readMoney();
-        LottoTicketMachine lottoTicketMachine = new LottoTicketMachine(new RandomGenerateStrategy());
-        LottoTickets lottoTickets = lottoTicketMachine.buyLottoTickets(money);
-        resultView.printLottoTickets(lottoTickets);
-        LottoNumbers lottoNumbers = inputView.readWinningNumbers();
-        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(lottoNumbers);
-        System.out.println("winningLottoTicket = " + winningLottoTicket);
-        List<Integer> match = lottoTickets.match(winningLottoTicket);
-        System.out.println("match = " + match);
+        LottoTickets lottoTickets = purchasedTickets(money);
+        WinningLottoTicket winningLottoTicket = winningTicket();
+        Result result = Result.from(lottoTickets, winningLottoTicket);
+        resultView.printResult(result);
+        Money totalPrize = Money.of(result.totalPrize());
+        resultView.printProfitRate(totalPrize.profitRate(money));
+    }
 
+    private LottoTickets purchasedTickets(Money money) {
+        LottoTickets lottoTickets = getLottoTickets(money);
+        resultView.printLottoTickets(lottoTickets);
+        return lottoTickets;
+    }
+
+    private WinningLottoTicket winningTicket() {
+        LottoNumbers lottoNumbers = inputView.readWinningNumbers();
+        return WinningLottoTicket.of(lottoNumbers);
+    }
+
+    private LottoTickets getLottoTickets(Money money) {
+        LottoTicketMachine lottoTicketMachine = new LottoTicketMachine(new RandomGenerateStrategy());
+        return lottoTicketMachine.buyLottoTickets(money);
     }
 
 }
