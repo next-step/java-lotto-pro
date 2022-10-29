@@ -19,9 +19,9 @@ public enum LottoReward {
         this.money = money;
     }
 
-    public static LottoReward getWinMoney(int matchNum) {
+    public static LottoReward getLottoReward(int sameNum) {
         return Arrays.stream(values())
-                .filter(lottoReward -> lottoReward.getMatchNum() == matchNum)
+                .filter(lottoReward -> lottoReward.getMatchNum() == sameNum)
                 .findFirst()
                 .orElse(ZERO);
     }
@@ -32,5 +32,9 @@ public enum LottoReward {
 
     public int getMoney() {
         return money;
+    }
+
+    public double getTotMoney(int count) {
+        return count * this.money;
     }
 }
