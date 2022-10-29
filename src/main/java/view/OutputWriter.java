@@ -6,4 +6,8 @@ public class OutputWriter {
     public static void answerLottoQuantity(int quantity) {
         System.out.println(String.format(PRINT_QUANTITY_FORMAT, quantity));
     }
+
+    public static void answerLottoLotteryTickets(String message) {
+        System.out.println(message);
+    }
 }
