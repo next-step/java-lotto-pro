@@ -2,17 +2,15 @@ package step3.model;
 
 import step3.constant.ErrorMessageConstant;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoResult {
     private static final int LOTTO_NUMBER_SIZE = 6;
-    Set<LottoNumber> lottoNumbers;
+    List<LottoNumber> lottoNumbers;
 
     public LottoResult(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = new HashSet<>(lottoNumbers);
+        this.lottoNumbers = lottoNumbers.stream().distinct().collect(Collectors.toList());
         checkLottoOutOfSize();
     }
 
@@ -24,11 +22,13 @@ public class LottoResult {
         checkLottoOutOfSize();
     }
 
-    private HashSet<LottoNumber> getLottoNumbersFromTexts(String[] lottoNumbers) {
-        HashSet<LottoNumber> result = new HashSet<>();
+    private List<LottoNumber> getLottoNumbersFromTexts(String[] lottoNumbers) {
+        HashSet<LottoNumber> lottoSet = new HashSet<>();
         for (String numberText : lottoNumbers) {
-            result.add(new LottoNumber(numberText));
+            lottoSet.add(new LottoNumber(numberText));
         }
+        List<LottoNumber> result = new ArrayList<>(lottoSet);
+        Collections.sort(result);
         return result;
     }
 
@@ -39,7 +39,7 @@ public class LottoResult {
     }
 
     public int getEqualCount(LottoResult o) {
-        Set<LottoNumber> checkNumbers = lottoNumbers;
+        List<LottoNumber> checkNumbers = lottoNumbers;
         checkNumbers.retainAll(o.lottoNumbers);
         return checkNumbers.size();
     }
