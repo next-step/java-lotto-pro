@@ -12,7 +12,7 @@ class LottoNumberTest {
 	@ValueSource(ints = {1, 2, 3, 44, 45})
 	void 로또_번호는_1보다_크거나_같으며_45보다_작거나_같다(int 로또_번호_입력) {
 		LottoNumber 로또_번호 = LottoNumber.of(로또_번호_입력);
-		assertThat(로또_번호.isEqualTo(로또_번호_입력));
+		assertThat(로또_번호).isEqualTo(LottoNumber.of(로또_번호_입력));
 	}
 
 	@ParameterizedTest

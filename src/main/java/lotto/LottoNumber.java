@@ -42,10 +42,6 @@ public class LottoNumber {
 		return number == that.number;
 	}
 
-	public boolean isEqualTo(int number) {
-		return this.number == number;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(number);

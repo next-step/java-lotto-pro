@@ -32,14 +32,14 @@ class LottoVendorTest {
 	@ParameterizedTest
 	@MethodSource("로또_구입_금액_입력")
 	void 로또판매기는_구입금액을_입력받아_구입금액_만큼의_로또숫자를_발급한다(Money 구입금액, LottoTickets 예상_로또티켓) {
-		LottoTickets 로또티켓 = 로또판매기.purchase(구입금액);
+		LottoTickets 로또티켓 = 로또판매기.quickPick(구입금액);
 		assertThat(로또티켓).isEqualTo(예상_로또티켓);
 	}
 
 	@ParameterizedTest
 	@CsvSource({"0,0", "999,0", "1000,1", "1100,1", "1999,1", "2000,2"})
 	void 로또판매기는_구입금액이_나누어떨어지지_않는_경우_구매되지_않는다(int 구입금액, int 구입갯수) {
-		LottoTickets 로또티켓 = 로또판매기.purchase(Money.wons(구입금액));
+		LottoTickets 로또티켓 = 로또판매기.quickPick(Money.wons(구입금액));
 		assertThat(로또티켓.getCount()).isEqualTo(구입갯수);
 	}
 

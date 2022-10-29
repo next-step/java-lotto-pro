@@ -12,16 +12,16 @@ public class LottoVendor {
 		this.lottoTicketGenerator = lottoTicketGenerator;
 	}
 
-	public LottoTickets purchase(Money amount) {
-		return purchase(amount, LottoTickets.create());
+	public LottoTickets quickPick(Money amount) {
+		return quickPick(amount, LottoTickets.create());
 	}
 
-	private LottoTickets purchase(Money budget, LottoTickets lottoTickets) {
+	private LottoTickets quickPick(Money budget, LottoTickets lottoTickets) {
 		if (isLessThanLottoPrice(budget)) {
 			return lottoTickets;
 		}
 		lottoTickets.add(lottoTicketGenerator.generate());
-		return purchase(budget.subtract(lottoPrice), lottoTickets);
+		return quickPick(budget.subtract(lottoPrice), lottoTickets);
 	}
 
 	private boolean isLessThanLottoPrice(Money budget) {

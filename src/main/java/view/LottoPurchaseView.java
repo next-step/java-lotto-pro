@@ -23,7 +23,7 @@ public class LottoPurchaseView {
 	public LottoTickets purchaseLotto() {
 		System.out.println(PURCHASE_PROMPT_OUTPUT);
 
-		LottoTickets lottoTickets = lottoVendor.purchase(inputMoneyToPurchase());
+		LottoTickets lottoTickets = lottoVendor.quickPick(inputMoneyToPurchase());
 
 		System.out.printf(PURCHASE_RESULT_OUTPUT, lottoTickets.getCount());
 		System.out.println(lottoTickets);
