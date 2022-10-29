@@ -10,9 +10,9 @@ public class Money {
     private static final double FLOOR_LOCATION = 100;
     private static final int MIN_MONEY = 0;
 
-    private final int money;
+    private final long money;
 
-    private Money(int money) {
+    private Money(long money) {
         validateMinPrice(money);
         this.money = money;
     }
@@ -22,7 +22,7 @@ public class Money {
      * @param money 금액
      * @return new Money
      */
-    public static Money createMoney(int money) {
+    public static Money createMoney(long money) {
         return new Money(money);
     }
 
@@ -32,25 +32,25 @@ public class Money {
      * @param money 로또 구매 시 사용할 금액
      * @return new Money
      */
-    public static Money createLottoMoney(int money) {
+    public static Money createLottoMoney(long money) {
         validateMinLottoPrice(money);
         return new Money(money);
     }
 
-    private void validateMinPrice(int money) {
+    private void validateMinPrice(long money) {
         if(money < MIN_MONEY) {
             throw new IllegalArgumentException(ErrorCode.돈은_양수여야_함.getErrorMessage());
         }
     }
 
-    private static void validateMinLottoPrice(int money) {
+    private static void validateMinLottoPrice(long money) {
         if (money < LOTTO_PRICE) {
             throw new IllegalArgumentException(ErrorCode.로또를_구매하기_위해서는_1000원_이상_필요.getErrorMessage());
         }
     }
 
     public int maxLottoCount() {
-        return money / LOTTO_PRICE;
+        return (int) money / LOTTO_PRICE;
     }
 
     /**

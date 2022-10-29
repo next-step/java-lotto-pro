@@ -16,7 +16,7 @@ public class LottoResultsTest {
                 Lotto.generateLotto(new ReadLineLottoNumberGenerator("4,8,10,23,32,45"))));
         Lotto winningLotto = Lotto.generateLotto(new ReadLineLottoNumberGenerator("1,2,3,4,8,10"));
         LottoResults lottoResults = lottos.createLottoResults(winningLotto);
-        assertThat(lottoResults.findProfits()).isEqualTo(Money.createMoney(60000));
+        assertThat(lottoResults.findProfits()).isEqualTo(Money.createMoney(60000L));
     }
 
     @Test

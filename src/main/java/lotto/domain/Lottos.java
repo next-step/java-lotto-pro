@@ -28,7 +28,7 @@ public class Lottos {
     }
 
     public Money findTotalPrice() {
-        return Money.createMoney(lottos.size() * LOTTO_PRICE);
+        return Money.createMoney((long) lottos.size() * LOTTO_PRICE);
     }
 
     public LottoResults createLottoResults(Lotto winningLotto) {

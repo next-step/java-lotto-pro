@@ -8,7 +8,7 @@ import static lotto.view.ResultView.printLottoResults;
 import static lotto.view.ResultView.printPurchasingLottoCount;
 import static lotto.view.ResultView.printPurchasingLottos;
 
-import common.utils.IntegerUtils;
+import common.utils.LongUtils;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
@@ -29,7 +29,7 @@ public class LottoController {
         printPurchasingLottoDirection();
         try {
             String readMoney = readLine();
-            return Money.createLottoMoney(IntegerUtils.parseInt(readMoney));
+            return Money.createLottoMoney(LongUtils.parseLong(readMoney));
         } catch (IllegalArgumentException e) {
             printExceptionErrorMessage(e);
             return getMoney();
