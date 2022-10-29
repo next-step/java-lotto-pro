@@ -56,7 +56,6 @@ class LottoTicketTest {
         private final WinningNumbers winningNumbers;
 
         SameNumbersCount() {
-            // arrange
             final List<WinningNumberEach> numberEachList = new ArrayList<>(Arrays.asList(
                     new WinningNumberEach(1),
                     new WinningNumberEach(2),

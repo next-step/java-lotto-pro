@@ -1,6 +1,8 @@
 package lotto.model.lotto.ticket;
 
 import lotto.constant.numbers.LottoConstant;
+import lotto.model.winning.numbers.WinningNumberEach;
+import lotto.model.winning.numbers.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -12,11 +14,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoTicketsBucketTest {
     static class LottoTicketsBucketForTest extends LottoTicketsBucket {
-        LottoTicketsBucketForTest(int howManyTickets) {
+        public LottoTicketsBucketForTest(int howManyTickets) {
             super(howManyTickets);
+        }
+
+        public LottoTicketsBucketForTest(List<LottoTicket> lottoTickets) {
+            super(lottoTickets);
         }
 
         int bucketSize() {
@@ -63,6 +70,71 @@ class LottoTicketsBucketTest {
                 lottoTicketsBucketForTest.addLottoTicket(new LottoTicket(lottoNumberGenerator));
             }
             assertThat(lottoTicketsBucketForTest.bucketSize()).isEqualTo(numberOfLottoTickets);
+        }
+    }
+
+    @Nested
+    @DisplayName("sameNumberCountOfAllLottoTickets 메서드 테스트")
+    class SameNumberCountOfAllLottoTickets {
+
+        private final WinningNumbers winningNumbers;
+
+        SameNumberCountOfAllLottoTickets() {
+            final List<WinningNumberEach> numberEachList = new ArrayList<>(Arrays.asList(
+                    new WinningNumberEach(1),
+                    new WinningNumberEach(2),
+                    new WinningNumberEach(3),
+                    new WinningNumberEach(4),
+                    new WinningNumberEach(5),
+                    new WinningNumberEach(6)
+            ));
+            winningNumbers = new WinningNumbers(numberEachList);
+        }
+
+        @Test
+        @DisplayName("6개 일치 6명")
+        void countSixSameEqualsSix() {
+            final List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(
+                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)))
+            ));
+            final LottoTicketsBucketForTest lottoTicketsBucketForTest = new LottoTicketsBucketForTest(lottoTickets);
+            final int[] countAll = lottoTicketsBucketForTest.sameNumberCountOfAllLottoTickets(winningNumbers);
+            assertAll(
+                    () -> assertThat(countAll[0]).isEqualTo(0),
+                    () -> assertThat(countAll[1]).isEqualTo(0),
+                    () -> assertThat(countAll[2]).isEqualTo(0),
+                    () -> assertThat(countAll[3]).isEqualTo(0),
+                    () -> assertThat(countAll[4]).isEqualTo(0),
+                    () -> assertThat(countAll[5]).isEqualTo(0),
+                    () -> assertThat(countAll[6]).isEqualTo(6)
+            );
+        }
+
+        @Test
+        @DisplayName("3개 일치, 4개 일치, 5개 일치, 6개 일치 각각 1명 씩")
+        void countThreeOneCountFourOneCountFiveOneCountSixOne() {
+            final List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(
+                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 16))),
+                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 25, 16))),
+                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 44, 25, 16)))
+            ));
+            final LottoTicketsBucketForTest lottoTicketsBucketForTest = new LottoTicketsBucketForTest(lottoTickets);
+            final int[] countAll = lottoTicketsBucketForTest.sameNumberCountOfAllLottoTickets(winningNumbers);
+            assertAll(
+                    () -> assertThat(countAll[0]).isEqualTo(0),
+                    () -> assertThat(countAll[1]).isEqualTo(0),
+                    () -> assertThat(countAll[2]).isEqualTo(0),
+                    () -> assertThat(countAll[3]).isEqualTo(1),
+                    () -> assertThat(countAll[4]).isEqualTo(1),
+                    () -> assertThat(countAll[5]).isEqualTo(1),
+                    () -> assertThat(countAll[6]).isEqualTo(1)
+            );
         }
     }
 }
