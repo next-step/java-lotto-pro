@@ -24,7 +24,7 @@ public class Lottos {
     }
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = Collections.unmodifiableList(lottos);
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public Money findTotalPrice() {
