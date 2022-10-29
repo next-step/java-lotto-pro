@@ -8,7 +8,7 @@ public class LottosTest {
 
     @Test
     void 로또들의_총_구입_금액_반환() {
-        Lottos lottos = new Lottos(new Money(5500));
-        assertThat(lottos.findTotalPrice()).isEqualTo(new Money(5000));
+        Lottos lottos = new Lottos(Money.createLottoMoney(5500));
+        assertThat(lottos.findTotalPrice()).isEqualTo(Money.createLottoMoney(5000));
     }
 }

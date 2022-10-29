@@ -29,7 +29,7 @@ public class LottoController {
         printPurchasingLottoDirection();
         try {
             String readMoney = readLine();
-            return new Money(IntegerUtils.parseInt(readMoney));
+            return Money.createLottoMoney(IntegerUtils.parseInt(readMoney));
         } catch (IllegalArgumentException e) {
             printExceptionErrorMessage(e);
             return getMoney();

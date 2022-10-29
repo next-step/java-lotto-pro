@@ -23,7 +23,7 @@ public class LottoResults {
         for(Map.Entry<LottoPrize, Integer> lottoResult: lottoResults.entrySet()) {
             totalProfits += lottoResult.getKey().getLottoPrizeMoney() * lottoResult.getValue();
         }
-        return new Money(totalProfits);
+        return Money.createMoney(totalProfits);
     }
 
     public int findLottoResultCount(LottoPrize lottoPrize) {
