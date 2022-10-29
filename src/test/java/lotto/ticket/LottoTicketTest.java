@@ -19,7 +19,7 @@ public class LottoTicketTest {
     @Test
     void 중복없는_로또번호_6자리_생성(){
         LottoTicket lottoTicket = new LottoTicket();
-        int size = lottoTicket.getNumbers().size();
+        int size = lottoTicket.size();
         assertThat(size).isEqualTo(SLOT_SIZE);
     }
 
@@ -27,7 +27,7 @@ public class LottoTicketTest {
     void 입력_값을_통한_로또번호_6자리_생성(){
         String input = "1,2,3,4,5,6";
         LottoTicket lottoTicket = new LottoTicket(input);
-        assertThat(lottoTicket.getNumbers().size()).isEqualTo(6);
+        assertThat(lottoTicket.size()).isEqualTo(6);
     }
 
     @Test

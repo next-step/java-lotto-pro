@@ -41,8 +41,8 @@ public class LottoTicket {
         return numbersSet;
     }
 
-    public ArrayList<Integer> getNumbers(){
-        return numbers;
+    public int size(){
+        return numbers.size();
     }
 
     public void printLotto(){
