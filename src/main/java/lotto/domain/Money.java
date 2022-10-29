@@ -14,11 +14,11 @@ public class Money {
         return new Money(won);
     }
 
-    public int getValue() {
-        return won;
-    }
-
     public double divide(Integer total) {
         return Math.floor(total /(double)this.won * 100)/100;
+    }
+
+    public int calLottoTicketCount(int lottoFee) {
+        return won / lottoFee;
     }
 }

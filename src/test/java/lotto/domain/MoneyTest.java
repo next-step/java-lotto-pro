@@ -13,4 +13,12 @@ class MoneyTest {
     void test1() {
         assertThatThrownBy(() -> Money.of(-1)).isInstanceOf(RuntimeException.class);
     }
+
+    @Test
+    @DisplayName("살수 있는 로또의 갯수를 반환함")
+    void calLottoTicketCount() {
+        int count = Money.of(10000).calLottoTicketCount(1000);
+
+        assertThat(count).isEqualTo(10);
+    }
 }
