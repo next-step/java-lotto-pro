@@ -8,6 +8,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class StringToIntegerConvertorTest {
@@ -25,5 +26,13 @@ class StringToIntegerConvertorTest {
     void convertStringToNumbers(String[] input, List<Integer> expected) {
         List<Integer> results = StringToIntegerConvertor.convertNumbers(input);
         Assertions.assertThat(results).containsExactlyElementsOf(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:1", "10:10", "45:45"}, delimiter = ':')
+    @DisplayName("String 타입의 숫자를 int 타입으로 변환되는지 확인")
+    void convertStringToNumber(String input, int expected) {
+        int result = StringToIntegerConvertor.convertNumber(input);
+        Assertions.assertThat(result).isEqualTo(expected);
     }
 }

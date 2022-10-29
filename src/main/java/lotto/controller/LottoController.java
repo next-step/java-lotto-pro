@@ -29,6 +29,8 @@ public class LottoController {
                         .map(LottoNumber::from)
                         .collect(Collectors.toList());
 
-        ResultView.printResult(lottos, winningNumbers);
+        LottoNumber bonusNumber = LottoNumber.from(InputView.inputBonusNumber(winningNumbers));
+
+        ResultView.printResult(lottos, winningNumbers, bonusNumber);
     }
 }

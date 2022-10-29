@@ -1,6 +1,8 @@
 package lotto.view;
 
 import java.util.List;
+import java.util.Map;
+import lotto.constant.LottoConstant;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
@@ -25,19 +27,32 @@ public class ResultView {
         newLine();
     }
 
-    public static void printResult(Lottos lottos, List<LottoNumber> winningNumbers) {
+    public static void printResult(Lottos lottos, List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         newLine();
         System.out.println(LottoMessage.WINNING_STATISTIC);
         System.out.println(LottoMessage.DIVIDER_LINE);
-        printStatisticResults(lottos, winningNumbers);
-        printProfit(Profit.of(lottos, winningNumbers));
+        printWinResults(lottos, winningNumbers, bonusNumber);
+        printProfit(Profit.of(lottos, winningNumbers, bonusNumber));
     }
 
-    private static void printStatisticResults(Lottos lottos, List<LottoNumber> winningNumbers) {
-        for (WinRanking ranking : WinRanking.values()) {
-            System.out.printf((LottoMessage.WINNING_STATISTIC_RESULT) + "%n", ranking.getMatchCount(),
-                    ranking.getWinningMoney(), lottos.winningCount(winningNumbers, ranking.getMatchCount()));
+    private static void printWinResults(Lottos lottos, List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+        Map<WinRanking, Integer> winningCountByWinRanking = lottos.winResults(winningNumbers, bonusNumber);
+        for (WinRanking winRanking : WinRanking.winnableRankings()) {
+            System.out.printf(
+                    (LottoMessage.WINNING_STATISTIC_RESULT) + "%n",
+                    winRanking.getMatchCount(),
+                    addBonusNumberMatchingMessageOrEmpty(winRanking),
+                    winRanking.getWinningMoney(),
+                    winningCountByWinRanking.getOrDefault(winRanking, LottoConstant.EMPTY_WINNING_COUNT)
+            );
         }
+    }
+
+    private static String addBonusNumberMatchingMessageOrEmpty(WinRanking winRanking) {
+        if (winRanking.isSecond()) {
+            return LottoMessage.BONUS_NUMBER_MATCHING;
+        }
+        return LottoMessage.EMPTY_SPACE;
     }
 
     private static void printProfit(Profit profit) {

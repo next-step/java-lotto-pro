@@ -19,10 +19,6 @@ public class Profit {
         this.bonusNumber = bonusNumber;
     }
 
-    public static Profit of(Lottos lottos, List<LottoNumber> winningNumbers) {
-        return new Profit(lottos, winningNumbers, null);
-    }
-
     public static Profit of(Lottos lottos, List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         return new Profit(lottos, winningNumbers, bonusNumber);
     }

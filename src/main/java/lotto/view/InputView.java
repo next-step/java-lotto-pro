@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.List;
 import java.util.Scanner;
 import lotto.constant.LottoConstant;
+import lotto.domain.lotto.LottoNumber;
 import lotto.message.LottoMessage;
 import lotto.util.LottoInputValidator;
 import lotto.util.StringToIntegerConvertor;
@@ -36,5 +37,17 @@ public class InputView {
 
         System.out.printf((LottoMessage.INVALID_WINNING_NUMBERS) + "%n", input);
         return inputWinningNumbers();
+    }
+
+    public static int inputBonusNumber(List<LottoNumber> winningNumbers) {
+        System.out.println(LottoMessage.INPUT_BONUS_NUMBER);
+        String input = SCANNER.nextLine();
+
+        if (LottoInputValidator.validateBonusNumber(input, winningNumbers)) {
+            return StringToIntegerConvertor.convertNumber(input);
+        }
+
+        System.out.printf((LottoMessage.INVALID_BONUS_NUMBER) + "%n", input);
+        return inputBonusNumber(winningNumbers);
     }
 }

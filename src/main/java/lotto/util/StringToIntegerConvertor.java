@@ -10,8 +10,12 @@ public class StringToIntegerConvertor {
     public static List<Integer> convertNumbers(String[] values) {
         List<Integer> results = new ArrayList<>();
         for (String str : values) {
-            results.add(Integer.parseInt(str.trim()));
+            results.add(convertNumber(str));
         }
         return results;
+    }
+
+    public static int convertNumber(String value) {
+        return Integer.parseInt(value.trim());
     }
 }

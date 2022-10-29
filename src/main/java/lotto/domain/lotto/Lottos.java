@@ -22,21 +22,6 @@ public class Lottos {
         return this.values.size();
     }
 
-    public int winningCount(List<LottoNumber> winningNumbers, int expectedMatchCount) {
-        int matchCount = 0;
-        for (Lotto lotto : values) {
-            matchCount = getMatchCount(lotto, winningNumbers, expectedMatchCount, matchCount);
-        }
-        return matchCount;
-    }
-
-    private int getMatchCount(Lotto lotto, List<LottoNumber> winningNumbers, int expectedMatchCount, int matchCount) {
-        if (lotto.matches(winningNumbers) == expectedMatchCount) {
-            matchCount++;
-        }
-        return matchCount;
-    }
-
     public Map<WinRanking, Integer> winResults(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         Map<WinRanking, Integer> winningCountByWinRanking = new EnumMap<>(WinRanking.class);
 

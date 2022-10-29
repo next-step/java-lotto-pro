@@ -2,6 +2,8 @@ package lotto.domain.win;
 
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum WinRanking {
     MISS(0, 0),
@@ -31,11 +33,21 @@ public enum WinRanking {
                 .orElse(MISS);
     }
 
+    public static List<WinRanking> winnableRankings() {
+        return Arrays.stream(WinRanking.values())
+                .filter(winRanking -> winRanking != MISS)
+                .collect(Collectors.toList());
+    }
+
     public int getMatchCount() {
         return matchCount;
     }
 
     public int getWinningMoney() {
         return winningMoney;
+    }
+
+    public boolean isSecond() {
+        return this == SECOND;
     }
 }
