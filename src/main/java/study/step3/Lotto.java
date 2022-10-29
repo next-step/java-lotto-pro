@@ -25,20 +25,24 @@ public class Lotto {
         return numbers;
     }
 
-    public int compare(List<Integer> winNumbers) {
-        int result = 0;
-        for (Integer number : numbers) {
-            result += compareNumber(winNumbers, number);
-        }
-        return result;
-    }
-
-    private static int compareNumber(List<Integer> winNumbers, Integer number) {
-        return winNumbers.contains(number) ? 1 : 0;
+    private static int compareNumber(Lotto winLotto, Integer number) {
+        return winLotto.getNumbers().contains(number) ? 1 : 0;
     }
 
     @Override
     public String toString() {
         return numbers.toString();
+    }
+
+    public int compare(Lotto winLotto) {
+        int result = 0;
+        for (Integer number : numbers) {
+            result += compareNumber(winLotto, number);
+        }
+        return result;
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }

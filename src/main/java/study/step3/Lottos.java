@@ -6,10 +6,14 @@ import java.util.List;
 public class Lottos {
     public static final int PRICE_PER_LOTTO = 1000;
 
-    private final List<Lotto> lottos;
+    private List<Lotto> lottos;
 
     public Lottos() {
         lottos = new ArrayList<>();
+    }
+
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public List<Lotto> makeLottos(int inputMoney) {
@@ -24,5 +28,14 @@ public class Lottos {
 
     private int count(int inputMoney) {
         return inputMoney / PRICE_PER_LOTTO;
+    }
+
+    public Winners findWinners(Lotto winLotto) {
+        Winners winners = new Winners();
+        for (Lotto lotto : lottos) {
+            int correctNumber = lotto.compare(winLotto);
+            winners.add(new Winner(correctNumber));
+        }
+        return winners;
     }
 }

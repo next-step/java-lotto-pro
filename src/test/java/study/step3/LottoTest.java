@@ -19,7 +19,7 @@ public class LottoTest {
     @Test
     void 당첨_번호와_일치하는_갯수_구하기() {
         // given
-        List<Integer> winNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto winNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto = new Lotto(Arrays.asList(1, 3, 4, 5, 6, 8));
 
         // when
