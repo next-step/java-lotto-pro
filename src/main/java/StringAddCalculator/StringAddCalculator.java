@@ -25,9 +25,25 @@ public class StringAddCalculator {
 	private static int calculatorInput(String[] splitInput) {
 		int result = 0;
 		for (String str : splitInput) {
-			result += Integer.parseInt(str);
+			result += checkPositiveNum(str);
 		}
 		return result;
+	}
+
+	private static int checkPositiveNum(String str) {
+		int num = checkNum(str);
+		if(num < 0) {
+			throw new IllegalArgumentException("[Error] 입력 값이 양수가 아닙니다.");
+		}
+		return num;
+	}
+
+	private static int checkNum(String str) {
+		try {
+			return Integer.parseInt(str);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("[Error] 입력 값이 숫자가 아닙니다.");
+		}
 	}
 
 }
