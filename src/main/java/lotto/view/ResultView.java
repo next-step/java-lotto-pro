@@ -14,7 +14,7 @@ public class ResultView {
     private static final String LOTTO_RESULTS_DIRECTION = "당첨 통계";
     private static final String NEW_LINE = "";
     private static final String DIVISION_LINE = "---------";
-    private static final String LOTTO_RESULT = "%s- %d개\n";
+    private static final String LOTTO_RESULT = "%d개 일치 (%d원)- %d개\n";
     private static final String LOTTO_RESULT_PROFITS = "총 수익률은 %.2f입니다.";
     private static final String LOTTO_LOSS_PROFITS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
@@ -46,7 +46,7 @@ public class ResultView {
 
     private static void printLottoResult(LottoPrize lottoPrize, int lottoResultCount) {
         if(!isNoPrize(lottoPrize)) {
-            System.out.printf(LOTTO_RESULT, lottoPrize.getLottoPrizeMessage(), lottoResultCount);
+            System.out.printf(LOTTO_RESULT, lottoPrize.getMatchCount(), lottoPrize.getLottoPrizeMoney(), lottoResultCount);
         }
     }
 
