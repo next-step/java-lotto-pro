@@ -21,7 +21,8 @@ public class LottoInputValidator {
     public static boolean validateWinningNumbers(String strNumbers) {
         String[] splitNumbers = strNumbers.split(LottoConstant.COMMA_DELIMITER_REGEX);
         return validateNumbersInRanges(splitNumbers) &&
-                validateNonDuplicatedSixNumbers(splitNumbers);
+                validateNonDuplicatedNumbers(splitNumbers) &&
+                validateSixNumbers(splitNumbers);
     }
 
     private static boolean validateGreaterOrEqualThanPriceOfOneLotto(String number) {
@@ -36,7 +37,11 @@ public class LottoInputValidator {
         return Stream.of(numbers).allMatch(number -> number.matches(LOTTO_NUMBER_REGEX));
     }
 
-    private static boolean validateNonDuplicatedSixNumbers(String[] numbers) {
-        return new HashSet<>(Arrays.asList(numbers)).size() == LottoConstant.LOTTO_NUMBER_COUNT;
+    private static boolean validateNonDuplicatedNumbers(String[] numbers) {
+        return new HashSet<>(Arrays.asList(numbers)).size() == numbers.length;
+    }
+
+    private static boolean validateSixNumbers(String[] numbers) {
+        return numbers.length == LottoConstant.LOTTO_NUMBER_COUNT;
     }
 }

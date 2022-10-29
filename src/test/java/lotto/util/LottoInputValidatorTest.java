@@ -36,7 +36,7 @@ class LottoInputValidatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,1,4,5", "1,2,3,4,5"})
+    @ValueSource(strings = {"1,2,3,1,4,5", "1,2,3,4,5", "1,2,3,4,5,5,6"})
     @DisplayName("당첨번호가 6개의 중복되지 않은 숫자가 아니면 false를 반환한다.")
     void validateWinningNumbers2(String input) {
         Assertions.assertThat(LottoInputValidator.validateWinningNumbers(input)).isFalse();

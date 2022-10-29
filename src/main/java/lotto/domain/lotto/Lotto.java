@@ -16,13 +16,20 @@ public class Lotto {
     }
 
     public static Lotto from(List<LottoNumber> lottoNumbers) {
-        validateNonDuplicatedSixNumbers(lottoNumbers);
+        validateNonDuplicatedNumbers(lottoNumbers);
+        validateSixNumbers(lottoNumbers);
         return new Lotto(lottoNumbers);
     }
 
-    private static void validateNonDuplicatedSixNumbers(List<LottoNumber> lottoNumbers) {
-        if (new HashSet<>(lottoNumbers).size() != LottoConstant.LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(String.format(ErrorMessages.INVALID_LOTTO_NUMBERS, lottoNumbers));
+    private static void validateNonDuplicatedNumbers(List<LottoNumber> lottoNumbers) {
+        if (new HashSet<>(lottoNumbers).size() != lottoNumbers.size()) {
+            throw new IllegalArgumentException(String.format(ErrorMessages.DUPLICATED_LOTTO_NUMBERS, lottoNumbers));
+        }
+    }
+
+    private static void validateSixNumbers(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LottoConstant.LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException(String.format(ErrorMessages.INVALID_LOTTO_NUMBERS_COUNT, lottoNumbers));
         }
     }
 
