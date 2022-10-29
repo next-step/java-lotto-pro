@@ -1,6 +1,7 @@
 package lotto.model.lotto.ticket;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -12,7 +13,8 @@ public class LottoTicket {
 
     public LottoTicket() {
         this.numbers = new ArrayList<>(COUNT_OF_NUMBERS_IN_SINGLE_LOTTO_TICKET);
-        final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        List<Integer> candidates = new ArrayList<>(Arrays.asList(1, 2, 3));
+        final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(candidates);
         for (int i = 0; i < COUNT_OF_NUMBERS_IN_SINGLE_LOTTO_TICKET; ++i) {
             numbers.add(lottoNumberGenerator.generate());
         }
