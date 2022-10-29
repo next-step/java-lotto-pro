@@ -2,7 +2,7 @@ package lotto.model;
 
 public class Counter {
 
-  private static final int LOTTO_PRICE = 1000;
+  public static final int LOTTO_PRICE = 1000;
 
   public static LottoList buyLotto(String input) {
     int lottoAmount = calculateLottoAmount(input);
