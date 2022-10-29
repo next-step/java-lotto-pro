@@ -10,11 +10,11 @@ import lotto.domain.Money;
 
 public class ResultView {
 
-    private static final String PURCHASING_LOTTO_COUNT = "%d개를 구매했습니다.\n";
+    private static final String PURCHASING_LOTTO_COUNT = "%d개를 구매했습니다." + System.lineSeparator();
     private static final String LOTTO_RESULTS_DIRECTION = "당첨 통계";
     private static final String NEW_LINE = "";
     private static final String DIVISION_LINE = "---------";
-    private static final String LOTTO_RESULT = "%d개 일치 (%d원)- %d개\n";
+    private static final String LOTTO_RESULT = "%d개 일치 (%d원)- %d개" + System.lineSeparator();
     private static final String LOTTO_RESULT_PROFITS = "총 수익률은 %.2f입니다.";
     private static final String LOTTO_LOSS_PROFITS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
