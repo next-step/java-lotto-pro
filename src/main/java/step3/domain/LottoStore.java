@@ -2,7 +2,7 @@ package step3.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import step3.utils.LottoNumbersGenerator;
+import step3.utils.NumbersGenerator;
 
 public class LottoStore {
 
@@ -12,7 +12,7 @@ public class LottoStore {
         payment.validate(pricePerLotto);
         List<Lotto> lottoList = new ArrayList<>();
         for (int count = 0; count < payment.getPurchaseCount(pricePerLotto); count++) {
-            Numbers random = LottoNumbersGenerator.random();
+            Numbers random = NumbersGenerator.random();
             lottoList.add(Lotto.generate(random));
         }
         return Lottos.generate(lottoList);

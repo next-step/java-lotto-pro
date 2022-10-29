@@ -6,12 +6,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step3.domain.Numbers;
 
-public class LottoNumbersGeneratorTest {
+public class NumbersGeneratorTest {
 
     @Test
     @DisplayName("랜덤 번호 생성")
     public void testRandom() {
-        Numbers lottoNumbers = LottoNumbersGenerator.random();
+        Numbers lottoNumbers = NumbersGenerator.random();
         assertThat(lottoNumbers).isNotNull();
     }
 }
