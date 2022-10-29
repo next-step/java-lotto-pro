@@ -4,14 +4,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
-    private static String patternRegex = "//(.)\n(.*)";
-    private static String delimiterExceptionRegex = "[!@#$%^&*(),.?\":{}|<>]";
-    private static String basicSplitRegex = ",|:";
-    private static int sum;
-    private static String delimiter = "";
+    private static final String patternRegex = "//(.)\n(.*)";
+    private static final String delimiterExceptionRegex = "[!@#$%^&*(),.?\":{}|<>]";
+    private static final String basicSplitRegex = ",|:";
+    private static final String negativeExceptionMessage = "negative number included Exception";
+    private static int sum = 0;
+    private static String delimiter = basicSplitRegex;
 
     public static int splitAndSum(String target) {
-        init();
         if (isNullOrEmpty(target)) {
             return sum;
         }
@@ -51,13 +51,8 @@ public class StringAddCalculator {
 
     private static void isUnderZeroNumber(String number) {
         if (Integer.parseInt(number) < 0) {
-            throw new RuntimeException("negative Exception");
+            throw new RuntimeException(negativeExceptionMessage);
         }
-    }
-
-    private static void init() {
-        sum = 0;
-        delimiter = basicSplitRegex;
     }
 
     private static boolean isFind(String regex, String target) {
