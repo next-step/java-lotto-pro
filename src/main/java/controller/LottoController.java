@@ -2,18 +2,19 @@ package controller;
 
 import domain.Lotto;
 import domain.LottoMachine;
-import domain.LottoPurchaser;
+import domain.LottoResult;
 import java.util.List;
 import view.InputView;
+import view.ResultView;
 
 public class LottoController {
     public void purchase() {
-        int money = InputView.askInputMoney();
+        int money = InputView.inputMoney();
         List<Lotto> lottos = LottoMachine.issueLottos(money);
-        InputView.printPurchasedLottos(lottos);
+        ResultView.printLottos(lottos);
 
-        List<Integer> winningNumber = InputView.askInputWinningNumber();
-        LottoPurchaser lottoPurchaser = LottoPurchaser.of(lottos, winningNumber);
-        InputView.printLottoResult(lottoPurchaser);
+        List<Integer> winningNumbers = InputView.inputWinningNumbers();
+        LottoResult lottoResult = LottoResult.of(lottos, winningNumbers);
+        ResultView.printLottoResult(lottoResult);
     }
 }

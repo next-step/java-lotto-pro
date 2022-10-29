@@ -5,20 +5,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LottoPurchaser {
+public class LottoResult {
     private final List<Lotto> lottos;
-    private final List<Integer> winningNumber;
+    private final List<Integer> winningNumbers;
     private final Map<LottoWinning, Integer> winningResult = new HashMap<LottoWinning, Integer>() {{
         Arrays.stream(LottoWinning.values()).forEach(lottoWinning -> put(lottoWinning, 0));
     }};
 
-    public static LottoPurchaser of(List<Lotto> lottos, List<Integer> winningNumbers) {
-        return new LottoPurchaser(lottos, winningNumbers);
+    public static LottoResult of(List<Lotto> lottos, List<Integer> winningNumbers) {
+        return new LottoResult(lottos, winningNumbers);
     }
 
-    private LottoPurchaser(List<Lotto> lottos, List<Integer> winningNumber) {
+    private LottoResult(List<Lotto> lottos, List<Integer> winningNumbers) {
         this.lottos = lottos;
-        this.winningNumber = winningNumber;
+        this.winningNumbers = winningNumbers;
         updateWinningResult();
     }
 
@@ -42,7 +42,7 @@ public class LottoPurchaser {
 
     private void updateWinningResult() {
         for (Lotto lotto : lottos) {
-            LottoWinning lottoWinning = lotto.findWinning(winningNumber);
+            LottoWinning lottoWinning = lotto.findWinning(winningNumbers);
             winningResult.put(lottoWinning, winningResult.get(lottoWinning) + 1);
         }
     }

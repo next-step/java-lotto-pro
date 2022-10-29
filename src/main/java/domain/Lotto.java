@@ -19,13 +19,13 @@ public class Lotto {
         this.numbers = numberGenerateStrategy.generate(TOTAL_NUMBER_POOL, NUMBER_SIZE);
     }
 
-    public LottoWinning findWinning(List<Integer> winningNumber) {
+    public LottoWinning findWinning(List<Integer> winningNumbers) {
         Collections.sort(numbers);
-        Collections.sort(winningNumber);
+        Collections.sort(winningNumbers);
 
         int numberMatchSize = 0;
         for (int i = 0; i < numbers.size(); i++) {
-            numberMatchSize += numbers.get(i).equals(winningNumber.get(i)) ? 1 : 0;
+            numberMatchSize += numbers.get(i).equals(winningNumbers.get(i)) ? 1 : 0;
         }
         return LottoWinning.of(numberMatchSize);
     }
