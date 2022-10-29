@@ -33,6 +33,14 @@ class PositiveIntTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    @DisplayName("숫자여야 한다.")
+    @Test
+    void 정수_유효성() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> PositiveInt.parse("a"))
+                .withMessageStartingWith("정수여야 합니다.");
+    }
+
     @DisplayName("ZERO는 0이다.")
     @Test
     void ZERO는_0이다() {
