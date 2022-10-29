@@ -20,7 +20,7 @@ public class WinningNumbers {
         if (isCommaPrefixOrPostfix(trimmedInput)) {
             throw new IllegalArgumentException("쉽표가 맨 앞 또는 맨 뒤에 올 수 없습니다.");
         }
-        final String[] tokens = splitByComma(trimmedInput);
+        final String[] tokens = splitBLottoDelimiter(trimmedInput);
         numbers = convertStringToWinningNumberEach(tokens);
     }
 
@@ -28,7 +28,7 @@ public class WinningNumbers {
         return input.charAt(0) == ',' || input.charAt(input.length() - 1) == ',';
     }
 
-    private String[] splitByComma(String input) {
+    private String[] splitBLottoDelimiter(String input) {
         return input.split(LottoConstant.LOTTO_NUMBERS_STRING_DELIMITER_REGEX);
     }
 
