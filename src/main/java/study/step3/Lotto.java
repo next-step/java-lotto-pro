@@ -8,7 +8,7 @@ public class Lotto {
     public static final int SUB_LIST_START_INDEX = 0;
     public static final int SUB_LIST_END_INDEX = 6;
 
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     public Lotto() {
         numbers = new ArrayList<>();
@@ -35,5 +35,10 @@ public class Lotto {
 
     private static int compareNumber(List<Integer> winNumbers, Integer number) {
         return winNumbers.contains(number) ? 1 : 0;
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }
