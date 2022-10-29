@@ -10,13 +10,4 @@ public class LottoQuantity {
     public int getQuantity() {
         return quantity;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof LottoQuantity) {
-            LottoQuantity lottoquantity = (LottoQuantity) obj;
-            return quantity == lottoquantity.getQuantity();
-        }
-        return false;
-    }
 }
