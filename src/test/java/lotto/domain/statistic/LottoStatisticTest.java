@@ -3,7 +3,7 @@ package lotto.domain.statistic;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.domain.TestLottoNumberGeneratorStrategy;
+import lotto.domain.TestLottoNumberGenerator;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
@@ -18,7 +18,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 class LottoStatisticTest {
 
     private final List<LottoNumber> winningNumbers =
-            TestLottoNumberGeneratorStrategy.from(Arrays.asList(1, 2, 3, 4, 5, 6)).generate();
+            TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 4, 5, 6)).generate();
 
     private static Stream<Arguments> winningCount() {
         return Stream.of(
@@ -52,13 +52,11 @@ class LottoStatisticTest {
     }
 
     private Lottos getTestLottos() {
-        Lotto lotto1 = Lotto
-                .from(TestLottoNumberGeneratorStrategy.from(Arrays.asList(8, 21, 23, 41, 42, 43)).generate());
-        Lotto lotto2 = Lotto
-                .from(TestLottoNumberGeneratorStrategy.from(Arrays.asList(7, 11, 16, 35, 36, 44)).generate());
-        Lotto lotto3 = Lotto.from(TestLottoNumberGeneratorStrategy.from(Arrays.asList(1, 2, 3, 4, 30, 7)).generate());
-        Lotto lotto4 = Lotto.from(TestLottoNumberGeneratorStrategy.from(Arrays.asList(1, 15, 3, 4, 6, 8)).generate());
-        Lotto lotto5 = Lotto.from(TestLottoNumberGeneratorStrategy.from(Arrays.asList(1, 2, 3, 7, 8, 9)).generate());
+        Lotto lotto1 = Lotto.from(TestLottoNumberGenerator.from(Arrays.asList(8, 21, 23, 41, 42, 43)).generate());
+        Lotto lotto2 = Lotto.from(TestLottoNumberGenerator.from(Arrays.asList(7, 11, 16, 35, 36, 44)).generate());
+        Lotto lotto3 = Lotto.from(TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 4, 30, 7)).generate());
+        Lotto lotto4 = Lotto.from(TestLottoNumberGenerator.from(Arrays.asList(1, 15, 3, 4, 6, 8)).generate());
+        Lotto lotto5 = Lotto.from(TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 7, 8, 9)).generate());
 
         return Lottos.from(Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5));
     }

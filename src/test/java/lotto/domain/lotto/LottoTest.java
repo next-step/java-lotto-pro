@@ -3,7 +3,7 @@ package lotto.domain.lotto;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.domain.TestLottoNumberGeneratorStrategy;
+import lotto.domain.TestLottoNumberGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,24 +14,24 @@ import org.junit.jupiter.params.provider.MethodSource;
 class LottoTest {
 
     private final List<LottoNumber> numbers =
-            TestLottoNumberGeneratorStrategy.from(Arrays.asList(1, 2, 3, 4, 5, 6)).generate();
+            TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 4, 5, 6)).generate();
 
     private static Stream<Arguments> winningNumbersWithMatchCount() {
         return Stream.of(
-                Arguments.of(TestLottoNumberGeneratorStrategy.from(Arrays.asList(1, 2, 3, 4, 5, 6)).generate(), 6),
-                Arguments.of(TestLottoNumberGeneratorStrategy.from(Arrays.asList(1, 2, 3, 4, 5, 7)).generate(), 5),
-                Arguments.of(TestLottoNumberGeneratorStrategy.from(Arrays.asList(1, 2, 3, 4, 7, 8)).generate(), 4),
-                Arguments.of(TestLottoNumberGeneratorStrategy.from(Arrays.asList(1, 2, 3, 7, 8, 9)).generate(), 3),
-                Arguments.of(TestLottoNumberGeneratorStrategy.from(Arrays.asList(1, 2, 7, 8, 9, 10)).generate(), 2),
-                Arguments.of(TestLottoNumberGeneratorStrategy.from(Arrays.asList(1, 7, 8, 9, 10, 11)).generate(), 1),
-                Arguments.of(TestLottoNumberGeneratorStrategy.from(Arrays.asList(7, 8, 9, 10, 11, 12)).generate(), 0)
+                Arguments.of(TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 4, 5, 6)).generate(), 6),
+                Arguments.of(TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 4, 5, 7)).generate(), 5),
+                Arguments.of(TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 4, 7, 8)).generate(), 4),
+                Arguments.of(TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 7, 8, 9)).generate(), 3),
+                Arguments.of(TestLottoNumberGenerator.from(Arrays.asList(1, 2, 7, 8, 9, 10)).generate(), 2),
+                Arguments.of(TestLottoNumberGenerator.from(Arrays.asList(1, 7, 8, 9, 10, 11)).generate(), 1),
+                Arguments.of(TestLottoNumberGenerator.from(Arrays.asList(7, 8, 9, 10, 11, 12)).generate(), 0)
         );
     }
 
     private static Stream<Arguments> lottoNumbers() {
         return Stream.of(
-                Arguments.of(TestLottoNumberGeneratorStrategy.from(Arrays.asList(1, 2, 3, 4, 5, 6, 7)).generate()),
-                Arguments.of(TestLottoNumberGeneratorStrategy.from(Arrays.asList(1, 2, 3, 4, 5)).generate())
+                Arguments.of(TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 4, 5, 6, 7)).generate()),
+                Arguments.of(TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 4, 5)).generate())
         );
     }
 
