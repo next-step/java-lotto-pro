@@ -18,7 +18,7 @@ public class LottoController {
     }
 
     public void start() {
-        Lottos lottos = lottoGenerator.generate(Money.from(InputView.inputPurchaseAmount()));
+        Lottos lottos = lottoGenerator.generate(Money.from(InputView.inputPurchasePrice()));
 
         ResultView.printPurchaseResult(lottos);
 

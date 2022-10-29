@@ -17,8 +17,8 @@ public class LottoGenerator {
         return new LottoGenerator(lottoNumberGenerator);
     }
 
-    public Lottos generate(Money purchaseAmount) {
-        int count = purchaseAmount.purchasableQuantity();
+    public Lottos generate(Money purchasePrice) {
+        int count = purchasePrice.purchasableQuantity();
         return generate(count);
     }
 
