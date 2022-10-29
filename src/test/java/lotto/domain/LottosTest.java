@@ -22,7 +22,6 @@ class LottosTest {
         lottos.buyRandomNumberLottos(count);
 
         assertThat(lottos.getLottosSize()).isEqualTo(count);
-        System.out.println(lottos);
     }
 
     @DisplayName("구매한 로또에 대한 결과를 확인할 수 있다.")
