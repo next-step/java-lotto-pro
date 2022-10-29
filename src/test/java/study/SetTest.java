@@ -12,6 +12,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("문자 셋 테스트")
 public class SetTest {
 
     private Set<Integer> numbers;
@@ -32,12 +33,14 @@ public class SetTest {
         assertThat(result).isEqualTo(3);
     }
 
+    @DisplayName("기존 셋 숫자 포함 여부 확인")
     @ParameterizedTest(name = "numbers 는 {0} 포함")
     @ValueSource(ints = {1, 2, 3})
     void set_contains(int input) {
         assertThat(numbers).contains(input);
     }
 
+    @DisplayName("기존 셋에 포함된 값이 없으면 false")
     @ParameterizedTest(name = "number 에 {0} contains() -> {1}")
     @CsvSource(value = {"0:false", "1:true", "2:true", "3:true", "4:false"}, delimiter = ':')
     void set_contains_true_false(int input, boolean expect) {

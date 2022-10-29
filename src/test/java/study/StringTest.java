@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@DisplayName("문자 테스트")
 public class StringTest {
 
     @DisplayName("\"1,2\"를 split 한 경우 \"1\"과 \"2\"로 분리")
