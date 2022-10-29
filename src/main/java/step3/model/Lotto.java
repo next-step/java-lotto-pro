@@ -28,6 +28,19 @@ public class Lotto {
         return numbers;
     }
 
+    public boolean contains(Number number) {
+        return numbers.contains(number);
+    }
+
+    public Award match(WinningLotto winningLotto) {
+        return Award.valueOf(Math.toIntExact(
+                numbers.stream()
+                    .filter(lottoNumber -> winningLotto.contains(lottoNumber))
+                    .count()),
+            winningLotto.checkBonusNumber(numbers)
+        );
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
