@@ -14,7 +14,7 @@ public class InputView {
     }
 
     List<Integer> inputWinningNumberLastWeek() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         StringTokenizer input = new StringTokenizer(sc.nextLine(), ", ");
         List<Integer> winningNumbers = new ArrayList<>();
         for (int i = 0; i < 6; i++) {

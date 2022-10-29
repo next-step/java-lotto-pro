@@ -16,7 +16,8 @@ public class ResultView {
         int third = lottoNumbers.countThird();
         int second = lottoNumbers.countSecond();
         int first = lottoNumbers.countFirst();
-        System.out.println("당첨 통계");
+
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
         System.out.println("3개 일치 (5000원)- " + lottoNumbers.countFourth() + "개");
         System.out.println("4개 일치 (50000원)- " + lottoNumbers.countThird() + "개");
