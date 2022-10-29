@@ -10,8 +10,9 @@ public class LottoPurchaseAmount  {
 
     public LottoPurchaseAmount(String inputAmount) {
         this.amount = parseAmount(inputAmount);
-        validThousands();
         validPositive();
+        validMinAmount();
+        validThousands();
     }
 
     private int parseAmount(String inputAmount) {
@@ -30,6 +31,12 @@ public class LottoPurchaseAmount  {
 
     private void validPositive() {
         if (this.amount <= 0) {
+            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_MINIMUM_PURCHASE_AMOUNT);
+        }
+    }
+
+    private void validMinAmount() {
+        if (this.amount < LOTTO_PRICE) {
             throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_MINIMUM_PURCHASE_AMOUNT);
         }
     }
