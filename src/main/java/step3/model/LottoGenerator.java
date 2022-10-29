@@ -23,27 +23,27 @@ public class LottoGenerator {
     }
 
     private int validatePrice(String price) {
-        checkEmpty(price);
-        int integerPrice = stringToNumber(price);
+        commonCheckEmpty(price);
+        int integerPrice = commonStringToNumber(price);
         checkPriceMinLimit(integerPrice);
 
         return integerPrice;
     }
 
-    private void checkEmpty(String price) {
-        if (price == null || price.isEmpty()) {
+    public static void commonCheckEmpty(String target) {
+        if (target == null || target.isEmpty()) {
             throw new IllegalArgumentException(NOT_VALID_NULL);
         }
     }
 
-    private int stringToNumber(String price) {
-        int afterPrice;
+    public static int commonStringToNumber(String target) {
+        int afterNumber;
         try {
-            afterPrice = Integer.parseInt(price);
+            afterNumber = Integer.parseInt(target);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_IS_NUMBERIC);
         }
-        return afterPrice;
+        return afterNumber;
     }
 
     private void checkPriceMinLimit(int price) {
