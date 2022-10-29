@@ -3,64 +3,79 @@ package step3;
 import java.util.*;
 
 public class LottoMachine {
-    private static final int DEFAULT_MINIMUM_NUMBER = 1;
-    private static final int DEFAULT_MAXIMUM_NUMBER = 45;
+    private static final int DEFAULT_TICKET_PRICE = 1000;
+    private static final int DEFAULT_MIN_NUMBER = 1;
+    private static final int DEFAULT_MAX_NUMBER = 45;
     private static final int DEFAULT_SCORE = 0;
+    private static final int DEFAULT_LOTTO_COUNT = 6;
+    private static final int TWO_POINT_POSITION = 100;
 
+    private LottoGenerator lottoGenerator;
     private final int lottoPrice;
-    private int lottoCount;
-    private List<List<Integer>> havingLottos;
-    private Map<Integer, Integer> lottoResult;
 
-    public LottoMachine(int lottoPrice) {
-        this.lottoPrice = lottoPrice;
-        this.havingLottos = new ArrayList<>();
+    public LottoMachine() {
+        this.lottoGenerator = new LottoGenerator();
+        this.lottoPrice = DEFAULT_TICKET_PRICE;
     }
 
-    public LottoMachine(int lottoPrice, int money) {
-        this.lottoPrice = lottoPrice;
-        this.havingLottos = new ArrayList<>();
-
-        receiveMoney(money);
-    }
-
-    public int receiveMoney(int money) {
+    public int getBoughtLottoCount(int money) {
         if (money < this.lottoPrice) {
             throw new RuntimeException(lottoPrice - money + "만큼 부족합니다.");
         }
 
-        this.lottoCount = money / lottoPrice + lottoCount;
-
-        return this.lottoCount;
+        return money / lottoPrice;
     }
 
-    public List<Integer> addLotto(List<Integer> lottoNumbers) {
-        Collections.sort(lottoNumbers);
-        this.havingLottos.add(lottoNumbers);
+    public List<List<Integer>> generateLotto(int count) {
+        List<List<Integer>> lottos = new ArrayList<>();
+        for (int lottoCount = 0 ; lottoCount < count ; lottoCount++) {
+            List<Integer> lotto = lottoGenerator.generate(DEFAULT_LOTTO_COUNT, DEFAULT_MIN_NUMBER, DEFAULT_MAX_NUMBER);
+            Collections.sort(lotto);
+            lottos.add(lotto);
+        }
 
-        return lottoNumbers;
+        return lottos;
     }
 
-    public void receiveLuckLotto(List<Integer> luckyNumbers) {
+    public List<LottoResult> getResultComparedToLuckyNumbers(String luckyNumberText, List<List<Integer>> lottos) {
+        List<Integer> luckyNumbers = new ArrayList<>();
+
+        for (String number : luckyNumberText.split(",")) {
+            luckyNumbers.add(Integer.parseInt(number));
+        }
+
         checkLuckyNumbers(luckyNumbers);
-
-        calculateLuckyResult(luckyNumbers);
+        return calculateLuckyResult(luckyNumbers, lottos);
     }
 
-    private void calculateLuckyResult(List<Integer> luckyNumbers) {
-        for (List<Integer> lotto : this.havingLottos) {
+    private List<LottoResult> calculateLuckyResult(List<Integer> luckyNumbers, List<List<Integer>> lottos) {
+        Map<Integer, Integer> lottoResult = new HashMap<>();
+        for (List<Integer> lotto : lottos) {
             int matchedCount = 0;
             matchedCount = getMatchedCount(luckyNumbers, lotto, matchedCount);
 
-            this.lottoResult = new HashMap<>();
-            int count = this.lottoResult.getOrDefault(matchedCount, DEFAULT_SCORE);
-            this.lottoResult.put(matchedCount, ++count);
+            int count = lottoResult.getOrDefault(matchedCount, DEFAULT_SCORE);
+            lottoResult.put(matchedCount, ++count);
         }
+
+        return generateLottoResults(lottoResult);
+    }
+
+    private List<LottoResult> generateLottoResults(Map<Integer, Integer> lottoResult) {
+        List<LottoResult> lottoResults = new ArrayList<>();
+        for (KoreaLottoScoreType scoreType : KoreaLottoScoreType.values()) {
+            int score = scoreType.getScore();
+            int scoreMatchedCount = lottoResult.getOrDefault(score, DEFAULT_SCORE);
+            int money = scoreType.getMoney();
+            lottoResults.add(new LottoResult(score, scoreMatchedCount, money));
+        }
+
+        return lottoResults;
     }
 
     private int getMatchedCount(List<Integer> luckyNumbers, List<Integer> lotto, int matchedCount) {
         for (int luckyNumber : luckyNumbers) {
-            matchedCount = getMatchedCount(lotto, luckyNumber, matchedCount);
+            matchedCount += getMatchedCount(lotto, luckyNumber, matchedCount);
         }
 
         return matchedCount;
@@ -93,7 +108,7 @@ public class LottoMachine {
     }
 
     private void isNotBetween(int number) {
-        if (number < DEFAULT_MINIMUM_NUMBER || number > DEFAULT_MAXIMUM_NUMBER) {
+        if (number < DEFAULT_MIN_NUMBER || number > DEFAULT_MAX_NUMBER) {
             throw new RuntimeException("초과된 숫자가 있습니다.");
         }
     }
@@ -102,9 +117,5 @@ public class LottoMachine {
         Set<Integer> uniqueNumbers = new HashSet<>(luckyNumbers);
 
         return uniqueNumbers.size() != luckyNumbers.size();
-    }
-
-    public int showCountByScore(int score) {
-        return this.lottoResult.getOrDefault(score, DEFAULT_SCORE);
     }
 }

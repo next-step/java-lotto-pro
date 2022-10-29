@@ -14,8 +14,9 @@ class LottoGeneratorTest {
     @CsvSource(value = {"6,1,45", "3,1,5"})
     @DisplayName("랜덤 숫자를 생성할경우 각각 고유한 숫자를 리턴")
     void whenGenerateNumbers_thenUniqueNumbers(int needNumberCount, int from, int to) {
-        List<Integer> numbers = LottoGenerator.createBetween(needNumberCount, from, to);
-        
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        List<Integer> numbers = lottoGenerator.generate(needNumberCount, from, to);
+
         assertThat(numbers).doesNotHaveDuplicates();
     }
 }
