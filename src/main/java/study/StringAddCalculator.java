@@ -6,13 +6,14 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-    public static final String DEFAULT_SEPARATOR = "[,:]";
-    public static final String CUSTOM_SEPARATOR = "//(.)\n(.*)";
-    public static final String NEGATIVE_NUMBER_ERROR = "[ERROR] 음수 이거나 숫자 이외의 값은 처리할 수 없습니다.";
+    private static final String DEFAULT_SEPARATOR = "[,:]";
+    private static final String CUSTOM_SEPARATOR = "//(.)\n(.*)";
+    private static final int EMPTY_RESULT = 0;
+    private static final String NEGATIVE_NUMBER_ERROR = "[ERROR] 음수 이거나 숫자 이외의 값은 처리할 수 없습니다.";
 
     public static int splitAndSum(String text) {
         if (validateText(text)) {
-            return 0;
+            return EMPTY_RESULT;
         }
         return sum(text);
     }
