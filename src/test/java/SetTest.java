@@ -34,7 +34,7 @@ public class SetTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     void contains(int input) {
-        assertThat(numbers.contains(input)).isTrue();
+        assertThat(numbers).contains(input);
     }
 
     @DisplayName("Set의 값을 확인한다. - 성공과 실패를 모두 검증하는 테스트를 구현한다.")
