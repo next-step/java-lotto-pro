@@ -8,11 +8,10 @@ import java.util.List;
 
 class Game {
     private static final int LOTTO_ONE_GAME_MONEY = 1000;
-    private static final int LOTTO_LENGTH = 6;
-    private static final String DELIMITER = ",";
+    private static final String DELIMITER = "\\s*,\\s*";
     private final List<LottoNumber> lottoCandidateNumbers = new ArrayList<>();
-    private final List<List<LottoNumber>> lottoResult = new ArrayList<>();
-    private final List<LottoNumber> winLottoNumbers = new ArrayList<>();
+    private final List<LottoResult> lottoResults = new ArrayList<>();
+    private LottoResult winLottoNumbers;
     private int lottoBuyCount;
 
     public Game() {
@@ -61,26 +60,20 @@ class Game {
         return lottoBuyCount;
     }
 
-    public List<List<LottoNumber>> getLottoResult() {
+    public List<LottoResult> getLottoResult() {
         for (int i = 0; i < lottoBuyCount; i++) {
             Collections.shuffle(this.lottoCandidateNumbers);
-            this.lottoResult.add(new ArrayList<>(this.lottoCandidateNumbers.subList(0, 6)));
-            Collections.sort(this.lottoResult.get(i));
+            this.lottoResults.add(new LottoResult(new ArrayList<>(this.lottoCandidateNumbers.subList(0, 6))));
         }
-        return this.lottoResult;
+        return this.lottoResults;
     }
 
-    public List<LottoNumber> getWinLottoNumbers() {
+    public LottoResult getWinLottoNumbers() {
         return this.winLottoNumbers;
     }
 
     public void setWinLottoNumbers(String numbersStr) {
         String[] splitNumbers = numbersStr.split(DELIMITER);
-        for (String numberStr : splitNumbers) {
-            this.winLottoNumbers.add(new LottoNumber(numberStr.trim()));
-        }
-        if (this.winLottoNumbers.size() != LOTTO_LENGTH) {
-            throw new RuntimeException(ErrorMessageConstant.NOT_LOTTO_SIZE);
-        }
+        winLottoNumbers = new LottoResult(splitNumbers);
     }
 }

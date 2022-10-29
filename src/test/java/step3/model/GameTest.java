@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -55,35 +55,9 @@ public class GameTest {
     @ValueSource(strings = {"1", "10"})
     public void getLottoResult_pass_01(int count) {
         Game game = new Game(count);
-        List<List<LottoNumber>> result = game.getLottoResult();
+        List<LottoResult> result = game.getLottoResult();
 
         assertThat(result.size()).isEqualTo(count);
-    }
-
-    @DisplayName("로또_게임_결과값은_1과_45_사이의_값")
-    @ParameterizedTest
-    @ValueSource(strings = {"1000", "2000"})
-    public void getLottoResult_pass_02(String money) {
-        Game game = new Game(money);
-        List<List<LottoNumber>> result = game.getLottoResult();
-
-        for (List<LottoNumber> lotto : result) {
-            assertThat(candidateLottoNumbers).containsAll(lotto);
-        }
-    }
-
-    @DisplayName("로또_게임_결과값은_숫자_기준으로_정렬되어야_한다")
-    @ParameterizedTest
-    @ValueSource(strings = {"1000", "2000"})
-    public void getLottoResult_pass_03(String money) {
-        Game game = new Game(money);
-        List<List<LottoNumber>> result = game.getLottoResult();
-
-        for (List<LottoNumber> lotto : result) {
-            List<LottoNumber> beforeData = new ArrayList<>(lotto);
-            Collections.sort(lotto);
-            assertThat(lotto).isEqualTo(beforeData);
-        }
     }
 
     @DisplayName("로또_게임_지난_당첨_결과값_정상_파싱_여부")
@@ -92,19 +66,13 @@ public class GameTest {
     public void setWinLottoNumbers_pass_01(String winLottoNumbers) {
         Game game = new Game();
         game.setWinLottoNumbers(winLottoNumbers);
-        assertThat(game.getWinLottoNumbers()).containsExactly(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
+        assertThat(game.getWinLottoNumbers()).isEqualTo(
+                new LottoResult(Arrays.asList(
+                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
+                )
+                )
         );
-    }
-
-    @DisplayName("로또_게임_지난_당첨_결과값_사이즈는_6")
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5,6", "1, 2, 3, 4, 5, 6"})
-    public void setWinLottoNumbers_pass_02(String winLottoNumbers) {
-        Game game = new Game();
-        game.setWinLottoNumbers(winLottoNumbers);
-        assertThat(game.getWinLottoNumbers().size()).isEqualTo(6);
     }
 
     @DisplayName("로또_게임_지난_당첨_결과값_사이즈_6_보다_작으면_에러")
