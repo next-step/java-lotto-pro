@@ -1,8 +1,10 @@
 package step3.io;
 
-import java.util.List;
+import java.util.Comparator;
 import step3.domain.Lottos;
 import step3.domain.Money;
+import step3.domain.Rank;
+import step3.domain.Reward;
 
 public class OutputView {
 
@@ -19,8 +21,21 @@ public class OutputView {
         System.out.println("---------");
     }
 
-    public void printStatistics(List<String> statistics) {
-        statistics.forEach(System.out::println);
+    public void printStatistics(Reward reward) {
+        reward.getKeySet()
+                .stream()
+                .sorted(Comparator.comparing(Rank::getCountOfMatch))
+                .filter(rank -> !rank.equals(Rank.MISS))
+                .forEach(rank -> printStatistic(reward, rank));
+    }
+
+    private void printStatistic(Reward reward, Rank rank) {
+        System.out.println(rank.getCountOfMatch()
+                + "개 일치 ("
+                + rank.getWinningMoney()
+                + "원)- "
+                + reward.getRankCount(rank)
+                + "개");
     }
 
     public void printWinningMoneyRate(String winningMoneyRate) {

@@ -23,8 +23,10 @@ public class RewardTest {
     @Test
     @DisplayName("당첨 결과 조회")
     public void testGetStatistics() {
-        List<String> statistics = generateTestReward().getStatistics();
-        assertThat(statistics.size()).isNotEqualTo(0);
+        Reward reward = generateTestReward();
+        Rank rank = Rank.valueOf(COUNT_OF_MATCH);
+        int rankCount = reward.getRankCount(rank);
+        assertThat(rankCount).isEqualTo(TOTAL_WINNING_COUNT);
     }
 
     private Reward generateTestReward() {

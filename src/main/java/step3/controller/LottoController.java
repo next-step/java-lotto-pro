@@ -46,7 +46,7 @@ public class LottoController {
 
     private void result(Money payment, Reward reward) {
         outputView.printResultHeader();
-        outputView.printStatistics(reward.getStatistics());
+        outputView.printStatistics(reward);
         outputView.printWinningMoneyRate(reward.getWinningMoneyRate(payment));
     }
 }

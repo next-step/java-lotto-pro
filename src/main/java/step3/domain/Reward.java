@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 public class Reward {
 
@@ -41,20 +41,12 @@ public class Reward {
         }
     }
 
-    public List<String> getStatistics() {
-        return reward.keySet()
-                .stream()
-                .map(this::generateStatistic)
-                .collect(Collectors.toList());
+    public Set<Rank> getKeySet() {
+        return reward.keySet();
     }
 
-    private String generateStatistic(Rank rank) {
-        return rank.getCountOfMatch()
-                + "개 일치 ("
-                + rank.getWinningMoney()
-                + "원)- "
-                + reward.get(rank)
-                + "개";
+    public int getRankCount(Rank rank) {
+        return reward.get(rank);
     }
 
     public String getWinningMoneyRate(Money payment) {
