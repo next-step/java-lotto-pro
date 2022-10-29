@@ -4,10 +4,12 @@ import java.util.Objects;
 
 public class Number {
 
+    private static final int MINIMUM_NUMBER = 0;
+
     private final int value;
 
     public Number(int value) {
-        if (value < 0) {
+        if (value < MINIMUM_NUMBER) {
             throw new RuntimeException("음수는 입력할 수 없습니다.");
         }
         this.value = value;
