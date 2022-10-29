@@ -51,7 +51,7 @@ class LottoPurchaseAmountTest {
     @DisplayName("수량 구하기")
     void lotto_quantity() {
         LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount("10000");
-        assertThat(lottoPurchaseAmount.getQuantity()).isEqualTo(10);
+        assertThat(lottoPurchaseAmount.calculateQuantity()).isEqualTo(10);
     }
     
     @Test

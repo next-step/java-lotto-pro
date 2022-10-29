@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class LottoQuantityTest {
+class LottoPurchaseQuantityTest {
     @Test
     @DisplayName("로또 갯수 생성")
     void lotto_quantity() {
         LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount("10000");
-        LottoQuantity lottoQuantity = LottoQuantity.of(lottoPurchaseAmount.getQuantity());
-        assertThat(lottoQuantity).isEqualTo(LottoQuantity.of(10));
+        LottoPurchaseQuantity lottoPurchaseQuantity = LottoPurchaseQuantity.of(lottoPurchaseAmount.calculateQuantity());
+        assertThat(lottoPurchaseQuantity).isEqualTo(LottoPurchaseQuantity.of(10));
     }
 
     @ParameterizedTest
@@ -21,7 +21,7 @@ class LottoQuantityTest {
     @DisplayName("구매 갯수 출력")
     void print_lotto_quantity(String input, int expect) {
         LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(input);
-        LottoQuantity lottoQuantity = LottoQuantity.of(lottoPurchaseAmount.getQuantity());
-        assertThat(lottoQuantity.getMessage()).isEqualTo(String.format(LottoQuantity.PRINT_QUANTITY_FORMAT, expect));
+        LottoPurchaseQuantity lottoPurchaseQuantity = LottoPurchaseQuantity.of(lottoPurchaseAmount.calculateQuantity());
+        assertThat(lottoPurchaseQuantity.getMessage()).isEqualTo(String.format(LottoPurchaseQuantity.PRINT_QUANTITY_FORMAT, expect));
     }
 }

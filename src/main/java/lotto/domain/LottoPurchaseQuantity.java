@@ -2,17 +2,17 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoQuantity {
+public class LottoPurchaseQuantity {
     public static final String PRINT_QUANTITY_FORMAT = "%d개를 구매했습니다.";
 
     private final int quantity;
 
-    private LottoQuantity(int quantity) {
+    private LottoPurchaseQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public static LottoQuantity of(int quantity) {
-        return new LottoQuantity(quantity);
+    public static LottoPurchaseQuantity of(int quantity) {
+        return new LottoPurchaseQuantity(quantity);
     }
 
     public String getMessage() {
@@ -31,7 +31,7 @@ public class LottoQuantity {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        LottoQuantity that = (LottoQuantity) o;
+        LottoPurchaseQuantity that = (LottoPurchaseQuantity) o;
         return quantity == that.quantity;
     }
 

@@ -13,9 +13,9 @@ public class LottoLottery {
         this.lottoLottery = lottoLottery;
     }
 
-    public static LottoLottery of(LottoQuantity lottoQuantity, LottoNumberGenerator lottoNumberGenerator) {
+    public static LottoLottery of(LottoPurchaseQuantity lottoPurchaseQuantity, LottoNumberGenerator lottoNumberGenerator) {
         List<LottoNumbers> lottoLottery = new ArrayList<>();
-        for (int i = 0; i < lottoQuantity.getQuantity(); i++) {
+        for (int i = 0; i < lottoPurchaseQuantity.getQuantity(); i++) {
             lottoLottery.add(LottoNumbers.of(lottoNumberGenerator));
         }
         return new LottoLottery(lottoLottery);

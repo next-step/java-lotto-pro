@@ -94,7 +94,7 @@
   - [x] 구입 금액은 숫자이다.
   - [x] 구입 금액은 1000단위여야 한다.
   - [x] 구입 금액은 양수만 입력 가능하다.
-#### LottoQuantity
+#### LottoPurchaseQuantity
 - [x] 구매 갯수를 출력한다.
 #### AutoNumberGenerator
 - [x] 로또 번호를 6개 생성한다.

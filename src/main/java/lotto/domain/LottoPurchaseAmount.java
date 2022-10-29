@@ -41,7 +41,7 @@ public class LottoPurchaseAmount  {
         }
     }
 
-    public int getQuantity() {
+    public int calculateQuantity() {
         return this.amount / LOTTO_PRICE;
     }
 
