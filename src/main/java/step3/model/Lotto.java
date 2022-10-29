@@ -24,6 +24,10 @@ public class Lotto {
         }
     }
 
+    public List<Number> getNumbers() {
+        return numbers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

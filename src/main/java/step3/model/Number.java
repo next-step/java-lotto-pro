@@ -2,7 +2,7 @@ package step3.model;
 
 import java.util.Objects;
 
-public class Number {
+public class Number implements Comparable<Number> {
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
 
@@ -18,8 +18,9 @@ public class Number {
             throw new IllegalArgumentException("숫자의 범위는 1~45 사이어야 합니다.");
         }
     }
-    
-    @Override public boolean equals(Object o) {
+
+    @Override
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
@@ -30,7 +31,13 @@ public class Number {
         return number == number1.number;
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public int compareTo(Number o) {
+        return Integer.compare(this.number, o.number);
     }
 }
