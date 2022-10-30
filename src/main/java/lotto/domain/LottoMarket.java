@@ -11,7 +11,7 @@ public class LottoMarket {
     }
 
     private static long getLottoAmount(Money money) {
-        return money.divide(TICKET_PRICE);
+        return (long) money.divide(TICKET_PRICE);
     }
 
     private static List<LottoTicket> make(LottoGenerator lottoGenerator, long amount) {

@@ -22,16 +22,16 @@ public class Money {
         return this.value;
     }
 
-    public long divide(Money money) {
-        return value / money.value;
+    public double divide(Money money) {
+        return (double) value / money.value;
     }
 
-    public void sum(long other) {
-        this.value += other;
+    public Money sum(Money other) {
+        return new Money(this.value + other.value);
     }
 
-    public long multiply(int count) {
-        return value * count;
+    public Money multiply(int count) {
+        return new Money(value * count);
     }
 
     @Override

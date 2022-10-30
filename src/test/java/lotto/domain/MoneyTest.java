@@ -25,14 +25,12 @@ public class MoneyTest {
     @Test
     void sum_test() {
         Money money = new Money(1_000L);
-        money.sum(1_000L);
-
-        assertThat(money.equals(new Money(2_000L))).isTrue();
+        assertThat(money.sum(new Money(1_000L))).isEqualTo(new Money(2_000L));
     }
 
     @DisplayName("돈을 곱할 수 있다")
     @Test
     void multiply_test() {
-        assertThat(new Money(1_000L).multiply(2)).isEqualTo(2_000L);
+        assertThat(new Money(1_000L).multiply(2)).isEqualTo(new Money(2_000L));
     }
 }

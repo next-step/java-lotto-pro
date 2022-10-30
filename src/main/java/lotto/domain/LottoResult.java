@@ -46,7 +46,7 @@ public class LottoResult {
         Money totalMoney = new Money(0L);
         for (Rank rank : Rank.values()) {
             int count = lottoResultCounts.get(rank);
-            totalMoney.sum(rank.getMoney().multiply(count));
+            totalMoney = totalMoney.sum(rank.getMoney().multiply(count));
         }
 
         return totalMoney;
