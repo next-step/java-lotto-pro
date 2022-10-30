@@ -25,6 +25,5 @@ class RankTest {
         assertThat(rank.getCountRank().get(RANK_TWO)).isZero();
         assertThat(rank.getCountRank().get(RANK_THREE)).isEqualTo(1);
         assertThat(rank.getCountRank().get(RANK_FOUR)).isZero();
-        assertThat(rank.getCountRank().get(RANK_FAIL)).isZero();
     }
 }

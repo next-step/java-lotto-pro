@@ -31,4 +31,8 @@ public enum LottoRankType {
     public int getCount() {
         return count;
     }
+
+    public boolean isSameRankType(LottoRankType rankType) {
+        return this == rankType;
+    }
 }

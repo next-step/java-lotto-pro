@@ -15,11 +15,11 @@ public class LottoGame {
     public void start() {
         int money = InputView.moneyInput();
         List<Integer> arrangeNumber = initArrangeNumber();
-        List<LottoNumber> buy = new Lotto(money, new RandomStrategy(arrangeNumber)).buy();
-        OutPutView.outPutLottoNumber(buy);
+        List<LottoNumber> buyLotto = new Lotto(money, new RandomStrategy(arrangeNumber)).buy();
+        OutPutView.outPutLottoNumber(buyLotto);
         List<Integer> winNumber = InputView.winNumberInput();
         Rank rank = new Rank();
-        rank.stats(buy, winNumber);
+        rank.stats(buyLotto, winNumber);
         double percent = new Revenue(rank.getCountRank()).getPercent(money);
 
         OutPutView.outPutResult(rank.getCountRank(), percent);

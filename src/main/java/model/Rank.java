@@ -19,11 +19,19 @@ public class Rank {
         for (LottoNumber lotto : buyLotto) {
             int winNumberCount = lotto.getWinNumberCount(winNumber);
             LottoRankType lottoRankType = LottoRankType.convertRank(winNumberCount);
-            for (LottoRankType rankType : countRank.keySet()) {
-                if (rankType == lottoRankType) {
-                    countRank.put(lottoRankType, countRank.get(rankType) + 1);
-                }
-            }
+            addCountRank(lottoRankType);
+        }
+    }
+
+    private void addCountRank(LottoRankType convertLottoRankType) {
+        for (LottoRankType rankType : countRank.keySet()) {
+            countUpIfSameRankType(rankType, convertLottoRankType);
+        }
+    }
+
+    private void countUpIfSameRankType(LottoRankType rankType, LottoRankType convertLottoRankType) {
+        if (rankType.isSameRankType(convertLottoRankType)) {
+            countRank.put(rankType, countRank.get(rankType) + 1);
         }
     }
 

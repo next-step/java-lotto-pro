@@ -9,7 +9,9 @@ import java.util.Map;
 public class OutPutView {
 
     public static void outPutLottoNumber(List<LottoNumber> buyLotto) {
-        System.out.println(buyLotto);
+        for (LottoNumber lotto : buyLotto) {
+            System.out.println(lotto);
+        }
     }
 
     public static void outPutResult(Map<LottoRankType, Integer> countRank, double percent) {
