@@ -14,7 +14,7 @@ class RankTest {
     @Test
     void 당첨번호_결과통계를_보여준다() {
         List<LottoNumber> buyLotto = Arrays.asList(
-                new LottoNumber(new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)))
+                new LottoNumber(new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)).shuffle())
         );
         List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 9, 10);
         Rank rank = new Rank();

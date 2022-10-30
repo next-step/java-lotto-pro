@@ -14,7 +14,7 @@ public class Lotto {
     private final List<LottoNumber> pickLottoNumber;
 
     public Lotto(int money, NumberStrategy strategy) {
-        pickLottoNumber = new ArrayList<>();
+        this.pickLottoNumber = new ArrayList<>();
         checkValidMoney(money);
         this.count = (money / LOTTO_PRICE);
         this.strategy = strategy;
@@ -22,8 +22,7 @@ public class Lotto {
 
     public List<LottoNumber> buy() {
         for (int i = 0; i < count; i++) {
-            LottoNumber lottoNumber = new LottoNumber(strategy);
-            pickLottoNumber.add(lottoNumber);
+            pickLottoNumber.add(new LottoNumber(strategy.shuffle()));
         }
 
         return pickLottoNumber;

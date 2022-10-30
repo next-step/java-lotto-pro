@@ -18,7 +18,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @MethodSource("sortNumberTest")
     void 로또번호는_오름차순이여야한다(List<Integer> input, List<Integer> expect) {
-        LottoNumber lottoNumber = new LottoNumber(new MockStrategy(input));
+        LottoNumber lottoNumber = new LottoNumber(new MockStrategy(input).shuffle());
 
         assertThat(lottoNumber.toString()).isEqualTo(expect.toString());
     }
@@ -33,7 +33,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @MethodSource("winNumberTest")
     void 당첨번호와_일치하는_로또번호의_갯수를_구한다(List<Integer> input, List<Integer> winNumber, int expect) {
-        LottoNumber lottoNumber = new LottoNumber(new MockStrategy(input));
+        LottoNumber lottoNumber = new LottoNumber(new MockStrategy(input).shuffle());
         int winNumberCount = lottoNumber.getWinNumberCount(winNumber);
         assertEquals(winNumberCount, expect);
     }
