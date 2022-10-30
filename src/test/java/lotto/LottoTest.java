@@ -42,6 +42,6 @@ public class LottoTest {
         myTickets.addTicket(new Ticket("7,8,9,10,11,12"));
         
         lotto = new Lotto(myTickets);
-        assertThat(lotto.getResultStr(winningTicket)).contains("총 수익률은 2.5입니다.");
+        assertThat(lotto.getResultStr(winningTicket)).contains("총 수익률은 2.50입니다.");
     } 
 }
