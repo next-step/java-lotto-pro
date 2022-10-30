@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.controller.dto.LottoWinResultsRequest;
@@ -24,6 +25,10 @@ public class LottoController {
 	public LottoController(Money lottoPrice, AutoLottoTicketsVendor autoLottoTicketsVendor) {
 		this.lottoPrice = lottoPrice;
 		this.autoLottoTicketsVendor = autoLottoTicketsVendor;
+	}
+
+	private LottoTickets buyManualLottoTickets(List<List<Integer>> manualLottoNumbers) {
+		return LottoTickets.ofList(manualLottoNumbers);
 	}
 
 	public PurchasedLottoTicketsResponse quickPick(Money inputMoneyToPurchase) {

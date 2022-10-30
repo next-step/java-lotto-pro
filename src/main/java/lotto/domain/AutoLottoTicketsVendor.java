@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AutoLottoTicketsVendor {
 
 	private final LottoTicketGenerator lottoTicketGenerator;
@@ -9,10 +12,11 @@ public class AutoLottoTicketsVendor {
 	}
 
 	public LottoTickets buyAutoLottoTickets(int buyingLottoTicketsCount) {
-		return buyAutoLottoTickets(buyingLottoTicketsCount, LottoTickets.create());
+		return LottoTickets.of(
+			buyAutoLottoTickets(buyingLottoTicketsCount, new ArrayList<>(buyingLottoTicketsCount)));
 	}
 
-	private LottoTickets buyAutoLottoTickets(int buyingLottoTicketsCount, LottoTickets lottoTickets) {
+	private List<LottoTicket> buyAutoLottoTickets(int buyingLottoTicketsCount, List<LottoTicket> lottoTickets) {
 		if (buyingLottoTicketsCount <= 0) {
 			return lottoTickets;
 		}
