@@ -17,7 +17,7 @@ class WinningResultTest {
 
         Lotto lotto = lottoGenerator.generateLotto();
         LottoPaper lottoPaper = new LottoPaper(Arrays.asList(lotto));
-        WinningResult winningResult = new WinningResult(lottoPaper, "1, 2, 3, 4, 5, 6");
+        WinningResult winningResult = new WinningResult(lottoPaper, "1, 2, 3, 4, 5, 6", 7);
 
         assertThat(winningResult.winningReport().awardResult().get(Award.FIRST)).isEqualTo(1);
         assertThat(winningResult.winningReport().rateOfReturn()).isNotNull();
