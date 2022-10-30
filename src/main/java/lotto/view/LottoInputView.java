@@ -6,7 +6,8 @@ import java.io.InputStreamReader;
 
 public class LottoInputView {
 
-    public String readUserInput(){
+    public String readUserInput(String userMessage){
+        System.out.println(userMessage);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String userInput = "";
         try {

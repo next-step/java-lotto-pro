@@ -4,7 +4,8 @@ import java.util.*;
 
 public class Lotteries {
 
-    private static final int lottoAmount = 1000;
+    public static final int LOTTO_AMOUNT = 1000;
+    public static final int LOTTO_MAX_BUY_AMOUNT = 2000000000;
 
     private List<Lotto> lotteries;
 
@@ -13,7 +14,7 @@ public class Lotteries {
     }
 
     public Lotteries(int buyAmount) {
-        int lottoCount = buyAmount/lottoAmount;
+        int lottoCount = buyAmount/LOTTO_AMOUNT ;
         this.lotteries = new ArrayList<>();
         while(lottoCount-->0) {
             lotteries.add(new Lotto());

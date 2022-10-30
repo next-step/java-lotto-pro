@@ -2,18 +2,17 @@ package lotto.controller;
 
 import lotto.domain.Lotteries;
 import lotto.service.LottoService;
-import lotto.view.BuyAmountInputView;
+import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
-import lotto.view.WinningNumberInputView;
 
 public class LottoController {
 
     LottoService lottoService = new LottoService();
+    LottoInputView lottoInputView = new LottoInputView();
     LottoResultView lottoResultView = new LottoResultView();
 
     public int readBuyAmount() {
-        BuyAmountInputView buyAmountReader = new BuyAmountInputView();
-        return Integer.parseInt(buyAmountReader.readBuyAmount());
+        return lottoService.readBuyAmount(lottoInputView.readUserInput("구입금액을 입력해 주세요."));
     }
 
     public Lotteries buyLotto(int buyAmount) {
@@ -23,8 +22,7 @@ public class LottoController {
     }
 
     public int[] readWinningNumbers() {
-        WinningNumberInputView winningNumberReader = new WinningNumberInputView();
-        return winningNumberReader.readWinningNumbers();
+        return lottoService.readWinningNumbers(lottoInputView.readUserInput("지난 주 당첨 번호를 입력해 주세요."));
     }
 
     public void lottoResult(Lotteries lotteries, int[] winningNumbers, int buyAmount) {

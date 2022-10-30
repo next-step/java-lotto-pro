@@ -7,10 +7,9 @@ import java.util.List;
 
 public class Lotto {
 
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
-
-    private int digit = 6;
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
+    public static final int digit = 6;
     private int[] winningNumbers = new int[digit];
 
     public Lotto() {
