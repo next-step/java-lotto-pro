@@ -1,30 +1,24 @@
 package lotto.domain;
 
-import money.Money;
-
 public class AutoLottoTicketsVendor {
 
-	private final Money lottoPrice;
 	private final LottoTicketGenerator lottoTicketGenerator;
 
-	public AutoLottoTicketsVendor(Money lottoPrice, LottoTicketGenerator lottoTicketGenerator) {
-		this.lottoPrice = lottoPrice;
+	public AutoLottoTicketsVendor(LottoTicketGenerator lottoTicketGenerator) {
 		this.lottoTicketGenerator = lottoTicketGenerator;
 	}
 
-	public LottoTickets buyAutoLottoTickets(Money amount) {
-		return buyAutoLottoTickets(amount, LottoTickets.create());
+	public LottoTickets buyAutoLottoTickets(int buyingLottoTicketsCount) {
+		return buyAutoLottoTickets(buyingLottoTicketsCount, LottoTickets.create());
 	}
 
-	private LottoTickets buyAutoLottoTickets(Money budget, LottoTickets lottoTickets) {
-		if (isLessThanLottoPrice(budget)) {
+	private LottoTickets buyAutoLottoTickets(int buyingLottoTicketsCount, LottoTickets lottoTickets) {
+		if (buyingLottoTicketsCount <= 0) {
 			return lottoTickets;
 		}
+
 		lottoTickets.add(lottoTicketGenerator.generate());
-		return buyAutoLottoTickets(budget.subtract(lottoPrice), lottoTickets);
+		return buyAutoLottoTickets(buyingLottoTicketsCount - 1, lottoTickets);
 	}
 
-	private boolean isLessThanLottoPrice(Money budget) {
-		return budget.isLessThan(lottoPrice);
-	}
 }

@@ -11,6 +11,6 @@ public class LottoControllerFactory {
 	public static LottoController createLottoController() {
 		return new LottoController(
 			LOTTO_PRICE,
-			new AutoLottoTicketsVendor(LOTTO_PRICE, new AutoLottoTicketGenerator()));
+			new AutoLottoTicketsVendor(new AutoLottoTicketGenerator()));
 	}
 }

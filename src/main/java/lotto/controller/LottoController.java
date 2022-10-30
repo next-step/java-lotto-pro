@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.math.BigDecimal;
 import java.util.stream.Collectors;
 
 import lotto.controller.dto.LottoWinResultsRequest;
@@ -26,7 +27,10 @@ public class LottoController {
 	}
 
 	public PurchasedLottoTicketsResponse quickPick(Money inputMoneyToPurchase) {
-		return PurchasedLottoTicketsResponse.of(autoLottoTicketsVendor.buyAutoLottoTickets(inputMoneyToPurchase));
+		int buyingAutoLottoTicketsCount = getBuyingAutoLottoTicketsCounts(inputMoneyToPurchase);
+
+		return PurchasedLottoTicketsResponse.of(
+			autoLottoTicketsVendor.buyAutoLottoTickets(buyingAutoLottoTicketsCount));
 	}
 
 	public WinningLottoTicketResponse getLottoTicket() {
@@ -46,5 +50,10 @@ public class LottoController {
 			request.getBonusLottoNumber());
 
 		return LottoWinResultsResponse.of(lottoWinPrizes, lottoPrice);
+	}
+
+	private int getBuyingAutoLottoTicketsCounts(Money buyingAutoLottoTicketsMoney) {
+		BigDecimal buyingAutoLottoTicketsCounts = buyingAutoLottoTicketsMoney.divideBy(lottoPrice);
+		return buyingAutoLottoTicketsCounts.intValue();
 	}
 }
