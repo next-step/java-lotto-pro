@@ -19,7 +19,7 @@ public class Lotto {
     }
 
     public List<Integer> makeLotto() {
-        numbers.addAll(NumberSet.shuffledNumberSet()
+        numbers.addAll(LottoNumberRange.shuffledNumbers()
                 .subList(SUB_LIST_START_INDEX, SUB_LIST_END_INDEX));
         Collections.sort(numbers);
         return numbers;
