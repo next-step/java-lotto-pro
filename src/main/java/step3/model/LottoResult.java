@@ -1,12 +1,12 @@
 package step3.model;
 
 import step3.constant.ErrorMessageConstant;
+import step3.constant.LottoConstant;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoResult {
-    private static final int LOTTO_NUMBER_SIZE = 6;
     List<LottoNumber> lottoNumbers;
 
     public LottoResult(List<LottoNumber> lottoNumbers) {
@@ -33,14 +33,14 @@ public class LottoResult {
     }
 
     private void checkLottoOutOfSize() {
-        if (this.lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
+        if (this.lottoNumbers.size() != LottoConstant.PICK_LOTTO_MAX_NUM) {
             throw new RuntimeException(ErrorMessageConstant.NOT_LOTTO_SIZE);
         }
     }
 
-    public int getEqualCount(LottoResult o) {
+    public int getEqualCount(LottoResult otherLottoResult) {
         List<LottoNumber> checkNumbers = lottoNumbers;
-        checkNumbers.retainAll(o.lottoNumbers);
+        checkNumbers.retainAll(otherLottoResult.lottoNumbers);
         return checkNumbers.size();
     }
 
