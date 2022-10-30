@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import static lotto.controller.LottoValidator.verifyBonusNumberIsNotInWinningLottoNumbers;
 import static lotto.controller.LottoValidator.verifyManualLottoTotalPriceIsLessThanBillingMoney;
 import static lotto.controller.LottoValidator.verifyMoneyIsEqualToOrGreaterThanPrice;
 
@@ -15,7 +16,6 @@ import lotto.domain.LottoWinPrizes;
 import money.Money;
 
 public class LottoControllerImpl implements LottoController {
-
 
 	private final AutoLottoTicketsVendor autoLottoTicketsVendor;
 	private final Money lottoPrice;
@@ -51,6 +51,8 @@ public class LottoControllerImpl implements LottoController {
 	public LottoWinResultsResponse getWinResults(BoughtLottoTicketsResponse boughtLottoTicketsResponse,
 												 List<Integer> winningLottoNumbers,
 												 int bonusNumber) {
+		verifyBonusNumberIsNotInWinningLottoNumbers(winningLottoNumbers, bonusNumber);
+
 		LottoTickets boughtLottoTickets = boughtLottoTicketsResponse.toLottoTickets();
 		LottoTicket winningLottoTicket = LottoTicket.of(winningLottoNumbers);
 
