@@ -84,6 +84,11 @@ public class LottoTicket {
 		return lottoNumbers.stream().anyMatch(number -> number.equals(bonusBall));
 	}
 
+	public List<Integer> getLottoNumbers() {
+		return lottoNumbers.stream()
+			.map(LottoNumber::getNumber).collect(Collectors.toList());
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -106,10 +111,5 @@ public class LottoTicket {
 		return lottoNumbers.stream()
 			.map(LottoNumber::toString)
 			.collect(joining(", ", "[", "]"));
-	}
-
-	public List<Integer> getLottoNumbers() {
-		return lottoNumbers.stream()
-			.map(LottoNumber::getNumber).collect(Collectors.toList());
 	}
 }
