@@ -22,11 +22,10 @@ public class LottoController {
             numberOfAffordableLottoLeft(lottoTicketsBucket);
         }
         final WinningNumbers winningNumbers = userInputWinningNumbers();
-        displayResultOfBoughtLotto(winningNumbers, lottoTicketsBucket, moneyToBuy);
+        displayLottoResult(winningNumbers, lottoTicketsBucket, moneyToBuy);
     }
 
     private MoneyToBuy userInputMoneyToBuy() {
-        DemandMoneyToBuyInputPrinter.print();
         final MoneyToBuy moneyToBuy = new MoneyToBuyAcceptor().accept();
         NumberOfLottoTicketsPrinters.print(moneyToBuy);
         return moneyToBuy;
@@ -50,12 +49,11 @@ public class LottoController {
 
     private WinningNumbers userInputWinningNumbers() {
         BlankLinePrinter.print();
-        DemandWinningNumbersInputPrinter.print();
         return new WinningNumbersAcceptor().accept();
     }
 
-    private void displayResultOfBoughtLotto(WinningNumbers winningNumbers, LottoTicketsBucket lottoTicketsBucket,
-                                            MoneyToBuy moneyToBuy) {
+    private void displayLottoResult(WinningNumbers winningNumbers, LottoTicketsBucket lottoTicketsBucket,
+                                    MoneyToBuy moneyToBuy) {
         BlankLinePrinter.print();
         LottoScoreTitlePrinter.print();
         lottoTicketsBucket.sameNumberCountOfAllLottoTickets(winningNumbers);
