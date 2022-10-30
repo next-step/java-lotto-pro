@@ -28,8 +28,9 @@ public class Lotto {
                 .count();
     }
 
-    public boolean contain(LottoNumber lottoNumber) {
-        return this.lottoNumbers.contains(lottoNumber);
+    public boolean hasBonusNumber(WinnerLotto winnerLotto) {
+        return this.lottoNumbers.stream()
+                .anyMatch(winnerLotto::matchBonusNumber);
     }
 
     @Override
