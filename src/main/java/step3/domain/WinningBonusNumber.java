@@ -1,19 +1,19 @@
 package step3.domain;
 
+import step3.ValidationUtils;
+
 import java.util.List;
 import java.util.Objects;
 
-import static java.lang.Integer.parseInt;
-
 public class WinningBonusNumber {
     private final WinningNumber winningNumber;
-    private final Integer bonusNumber;
+    private final int bonusNumber;
     
     public WinningBonusNumber(WinningNumber winningNumber, String bonusNumber) {
         this.winningNumber = winningNumber;
-        this.bonusNumber = parseInt(bonusNumber);
+        this.bonusNumber = ValidationUtils.parseInt(bonusNumber);
     }
-    
+
     public List<Integer> getWinningNumber() {
         return winningNumber.getWinningNumbers();
     }
