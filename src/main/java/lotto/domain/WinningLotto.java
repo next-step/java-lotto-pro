@@ -10,7 +10,7 @@ public class WinningLotto {
 	private final Lotto winLotto;
 
 	public WinningLotto(List<Integer> winNumbers) {
-		this.winLotto = new Lotto(winNumbers);
+		this.winLotto = Lotto.inputNumber(winNumbers);
 	}
 
 	public WinningLotto(String input) {

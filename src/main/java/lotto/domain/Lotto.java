@@ -7,25 +7,19 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 	public static final int PRICE = 1000;
-	public static final int LOTTO_NUMBER_SIZE = 6;
 
 	private final Set<LottoNumber> lottoNumbers;
 
-	public Lotto(List<Integer> numbers) {
-		validatePickNumbersSize(numbers.size());
-		this.lottoNumbers = generateLottoNumbers(numbers);
+	private Lotto(LottoNumberStrategy lottoNumberStrategy) {
+		this.lottoNumbers = lottoNumberStrategy.pickNumbers();
 	}
 
-	private void validatePickNumbersSize(int size) {
-		if (size != LOTTO_NUMBER_SIZE) {
-			throw new IllegalArgumentException("로또 번호 갯수가 6개이여야 합니다.");
-		}
+	public static Lotto inputNumber(List<Integer> numbers) {
+		return new Lotto(new InputLottoNumberStrategy(numbers));
 	}
 
-	private Set<LottoNumber> generateLottoNumbers(List<Integer> numbers) {
-		return numbers.stream()
-			.map(LottoNumber::new)
-			.collect(Collectors.toSet());
+	public static Lotto random() {
+		return new Lotto(new RandomLottoNumberStrategy());
 	}
 
 	public int countMatchLottoNumber(Lotto other) {

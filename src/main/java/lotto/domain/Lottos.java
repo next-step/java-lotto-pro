@@ -10,7 +10,7 @@ public class Lottos {
 	public Lottos(int purchaseAmount) {
 		int quantity = purchaseAmount / Lotto.PRICE;
 		this.lottos = IntStream.range(0, quantity)
-			.mapToObj(i -> new Lotto(new RandomLottoNumberStrategy().pickNumbers()))
+			.mapToObj(i -> Lotto.random())
 			.collect(Collectors.toList());
 	}
 

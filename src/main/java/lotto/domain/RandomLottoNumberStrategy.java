@@ -1,16 +1,21 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Set;
 
 import lotto.util.RandomNumbersGenerator;
 
 public class RandomLottoNumberStrategy implements LottoNumberStrategy {
+	public static final int RANDOM_RANGE_START = 1;
+	public static final int RANDOM_RANGE_END = 45;
+	public static final int NUMBER_SIZE = 6;
+
 	@Override
-	public List<Integer> pickNumbers() {
-		return RandomNumbersGenerator.generate(
-			LottoNumber.MIN_RANGE,
-			LottoNumber.MAX_RANGE,
-			Lotto.LOTTO_NUMBER_SIZE
-		);
+	public Set<LottoNumber> pickNumbers() {
+		return convert(pickRandomNumbers());
+	}
+
+	private List<Integer> pickRandomNumbers() {
+		return RandomNumbersGenerator.generate(RANDOM_RANGE_START, RANDOM_RANGE_END, NUMBER_SIZE);
 	}
 }
