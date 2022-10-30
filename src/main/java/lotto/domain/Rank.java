@@ -11,7 +11,7 @@ public enum Rank {
     NO_MATCH(0, 0);
 
     private int matchCount;
-    private int money;
+    private long money;
 
     Rank(int matchCount, int money) {
         this.matchCount = matchCount;
@@ -26,6 +26,10 @@ public enum Rank {
                 .filter(rank -> rank.isMatchCount(matchCount))
                 .findAny()
                 .orElseThrow(IllegalArgumentException::new);
+    }
+
+    public Money money() {
+        return new Money(this.money);
     }
 
     private boolean isMatchCount(int matchCount) {

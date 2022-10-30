@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Money implements Comparable<Money> {
@@ -22,12 +23,22 @@ public class Money implements Comparable<Money> {
         }
     }
 
-    public boolean greaterEqualThan(Money target) {
-        return this.compareTo(target) >= 0;
+    public boolean greaterEqualThan(Money money) {
+        return this.compareTo(money) >= 0;
     }
 
-    public int quotient(Money target) {
-        return (int) (this.won / target.won);
+    public int quotient(Money money) {
+        return (int) (this.won / money.won);
+    }
+
+    public Money sum(Money money) {
+        return new Money(this.won + money.won);
+    }
+
+    public double divide(Money money) {
+        BigDecimal source = new BigDecimal(this.won);
+        BigDecimal target = new BigDecimal(money.won);
+        return source.divide(target, 2, BigDecimal.ROUND_DOWN).doubleValue();
     }
 
     @Override
@@ -52,5 +63,12 @@ public class Money implements Comparable<Money> {
             return 0;
         }
         return -1;
+    }
+
+    @Override
+    public String toString() {
+        return "Money{" +
+                "won=" + won +
+                '}';
     }
 }

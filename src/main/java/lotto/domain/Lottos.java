@@ -16,6 +16,10 @@ public class Lottos {
         return this.lottos.stream();
     }
 
+    public int size() {
+        return lottos.size();
+    }
+
     @Override
     public boolean equals(Object o) {
 

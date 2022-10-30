@@ -40,4 +40,20 @@ public class MoneyTest {
         assertThat(source.quotient(target)).isEqualTo(2);
     }
 
+    @Test
+    @DisplayName("화폐 더하기")
+    void sum() {
+        Money source = new Money(2000);
+        Money target = new Money(1000);
+        assertThat(source.sum(target)).isEqualTo(new Money(3000));
+    }
+
+    @Test
+    @DisplayName("화폐 나누기 몫(소수점 포함)")
+    void divide() {
+        Money source = new Money(5000);
+        Money target = new Money(14000);
+        assertThat(source.divide(target)).isEqualTo(0.35);
+    }
+
 }
