@@ -1,14 +1,8 @@
 package lotto.model.money.to.buy;
 
-import lotto.constant.numbers.LottoConstant;
-import lotto.model.lotto.ticket.LottoTicketsBucket;
-
-import java.text.DecimalFormat;
-
 public class MoneyToBuy {
-    private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
-    protected int money;
-    private double profitRatio;
+    private static final int PRICE_OF_SINGLE_LOTTO_TICKET = 1000;
+    protected final int money;
 
     public MoneyToBuy(String input) {
         int inputMoney;
@@ -20,23 +14,22 @@ public class MoneyToBuy {
         if (isNegative(inputMoney)) {
             throw new NumberFormatException("구입 금액은 음수가 될 수 없습니다.");
         }
-        money = inputMoney / LottoConstant.PRICE_OF_SINGLE_LOTTO_TICKET * LottoConstant.PRICE_OF_SINGLE_LOTTO_TICKET;
-    }
-
-    public MoneyToBuy(int money) {
-        this.money = money;
+        if (!divisibleWithoutRemainder(inputMoney)) {
+            throw new NumberFormatException("구입 금액은 로또 한 장 가격 단위로 입력해주세요. (로또 한 장 가격: 1000 원)");
+        }
+        money = inputMoney;
     }
 
     private boolean isNegative(int input) {
         return input < 0;
     }
 
-    public int affordableLottoTicketNumber() {
-        return money / LottoConstant.PRICE_OF_SINGLE_LOTTO_TICKET;
+    private boolean divisibleWithoutRemainder(int inputMoney) {
+        int moneyRemainderDiscarded = inputMoney / PRICE_OF_SINGLE_LOTTO_TICKET * PRICE_OF_SINGLE_LOTTO_TICKET;
+        return inputMoney == moneyRemainderDiscarded;
     }
 
-    public String profitRatio(LottoTicketsBucket lottoTicketsBucket) {
-//        profitRatio = (double) lottoTicketsBucket.sumProfit() / money;
-        return decimalFormat.format(profitRatio);
+    public int affordableTicketCount() {
+        return money / PRICE_OF_SINGLE_LOTTO_TICKET;
     }
 }

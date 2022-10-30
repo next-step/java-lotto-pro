@@ -13,14 +13,14 @@ import java.util.List;
 
 public class LottoController {
     public void run() {
-        final MoneyToBuy moneyToBuy = userInputMoneyToBuy();
-        int numberOfAffordableLotto = moneyToBuy.affordableLottoTicketNumber();
-        final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucket(numberOfAffordableLotto);
-        while (0 < numberOfAffordableLotto--) {
-            numberOfAffordableLottoLeft(lottoTicketsBucket);
-        }
-        final WinningNumbers winningNumbers = userInputWinningNumbers();
-        displayLottoResult(winningNumbers, lottoTicketsBucket, moneyToBuy);
+//        final MoneyToBuy moneyToBuy = userInputMoneyToBuy();
+//        int numberOfAffordableLotto = moneyToBuy.affordableLottoTicketNumber();
+//        final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucket(numberOfAffordableLotto);
+//        while (0 < numberOfAffordableLotto--) {
+//            numberOfAffordableLottoLeft(lottoTicketsBucket);
+//        }
+//        final WinningNumbers winningNumbers = userInputWinningNumbers();
+//        displayLottoResult(winningNumbers, lottoTicketsBucket, moneyToBuy);
     }
 
     private MoneyToBuy userInputMoneyToBuy() {
@@ -55,7 +55,7 @@ public class LottoController {
         LottoScoreTitlePrinter.print();
 //        lottoTicketsBucket.sameNumberCountOfAllLottoTickets(winningNumbers);
         LottoWinningStatisticsPrinter.print(lottoTicketsBucket);
-        final String profitRatioString = moneyToBuy.profitRatio(lottoTicketsBucket);
-        ProfitRatioPrinter.print(profitRatioString);
+//        final String profitRatioString = moneyToBuy.profitRatio(lottoTicketsBucket);
+//        ProfitRatioPrinter.print(profitRatioString);
     }
 }
