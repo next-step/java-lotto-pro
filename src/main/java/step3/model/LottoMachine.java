@@ -13,20 +13,14 @@ public class LottoMachine {
 
     private final int purchasePrice;
     private final Lottos lottos;
+    private final LottoMoney lottoMoney;
     private static final int LOTTO_PRICE = 1000;
-    private static final String INVALID_PRICE_UNIT_MESSAGE = "금액은 1000원 단위로 입력해야합니다";
-    private static final String INVALID_MINIMUN_PRICE_MESSAGE = "금액은 최소 1000원이상 입력해야합니다";
 
     public LottoMachine(int purchasePrice) {
-        validatePurchasePrice(purchasePrice);
+        this.lottoMoney = new LottoMoney(purchasePrice);
         this.purchasePrice = purchasePrice;
         int size = purchasePrice / LOTTO_PRICE;
         this.lottos = new Lottos(LottoFactory.createLottos(size), LOTTO_PRICE);
-    }
-
-    private void validatePurchasePrice(int purchasePrice) {
-        if (purchasePrice < LOTTO_PRICE) throw new IllegalArgumentException(INVALID_MINIMUN_PRICE_MESSAGE);
-        if (purchasePrice % LOTTO_PRICE != 0) throw new IllegalArgumentException(INVALID_PRICE_UNIT_MESSAGE);
     }
 
     public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers) {
