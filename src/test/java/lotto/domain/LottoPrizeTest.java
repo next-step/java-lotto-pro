@@ -31,6 +31,16 @@ public class LottoPrizeTest {
     }
 
     @Test
+    void isSecondPrize의_매개변수가_SECOND_이면_isSecondPrize는_진실() {
+        assertThat(LottoPrize.isSecondPrize(LottoPrize.SECOND)).isTrue();
+    }
+
+    @Test
+    void isSecondPrize의_매개변수가_SECOND이_아니면_isSecondPrize는_거짓() {
+        assertThat(LottoPrize.isSecondPrize(LottoPrize.THIRD)).isFalse();
+    }
+
+    @Test
     void 로또_번호가_5개_동일하고_보너스볼이_같으면_2등() {
         assertThat(LottoPrize.findLottoPrize(5, true)).isEqualTo(LottoPrize.SECOND);
     }

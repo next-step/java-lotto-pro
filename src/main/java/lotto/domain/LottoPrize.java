@@ -41,6 +41,10 @@ public enum LottoPrize {
         return LottoPrize.SECOND.matchCount == matchCount && isMatchBonusLottoNumber;
     }
 
+    public static boolean isSecondPrize(LottoPrize lottoPrize) {
+        return LottoPrize.SECOND.equals(lottoPrize);
+    }
+
     public static boolean isNoPrize(LottoPrize lottoPrize) {
         return LottoPrize.NO_PRIZE.equals(lottoPrize);
     }
