@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -65,8 +67,10 @@ public class Amount {
         for (LottoRank lottoRank: LottoRank.reverse()) {
             totalAmount += lottoRank.getWinningMoney() * rankInfo.get(lottoRank);
         }
+        BigDecimal totalAmountBigDecimal = new BigDecimal(totalAmount);
+        BigDecimal buyAmountBigDecimal = new BigDecimal(buyAmount.getBuyAmount());
 
-        return Math.round((double) totalAmount / buyAmount.getBuyAmount() * 100) / 100.0;
+        return totalAmountBigDecimal.divide(buyAmountBigDecimal, 2, RoundingMode.HALF_UP).doubleValue();
     }
 
     public int getBuyAmount() {
