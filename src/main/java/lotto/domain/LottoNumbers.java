@@ -17,6 +17,7 @@ public class LottoNumbers {
     }
 
     private LottoNumbers(List<LottoNumber> lottoNumbers) {
+        validateDuplicatedLottoNumber(lottoNumbers);
         validateLottoSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
@@ -50,6 +51,12 @@ public class LottoNumbers {
         }
     }
 
+    private void validateDuplicatedLottoNumber(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != new HashSet<>(lottoNumbers).size()) {
+            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+        }
+    }
+
     public int match(LottoNumbers target) {
         return (int) lottoNumbers.stream().filter(target::contains).count();
     }
@@ -58,6 +65,17 @@ public class LottoNumbers {
         return lottoNumbers.contains(lottoNumber);
     }
 
+    public void print() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            stringBuilder.append(lottoNumber.toInt());
+            stringBuilder.append(", ");
+        }
+        stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
+        stringBuilder.append("]");
+        System.out.println(stringBuilder);
+    }
 
     @Override
     public boolean equals(Object o) {

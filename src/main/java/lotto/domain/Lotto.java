@@ -23,6 +23,10 @@ public class Lotto {
         return lottoNumbers.match(target.lottoNumbers);
     }
 
+    public void print() {
+        lottoNumbers.print();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,6 +39,4 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
-
-
 }

@@ -35,10 +35,14 @@ public class LottoNumber {
 
     private static int parseInt(String number) {
         try {
-            return Integer.parseInt(number);
+            return Integer.parseInt(number.trim());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
         }
+    }
+
+    public int toInt(){
+        return this.number;
     }
 
     @Override

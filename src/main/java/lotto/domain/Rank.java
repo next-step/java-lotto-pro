@@ -36,4 +36,9 @@ public enum Rank {
         return this.matchCount == matchCount;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%d개 일치 (%d원)", matchCount, money);
+    }
+
 }
