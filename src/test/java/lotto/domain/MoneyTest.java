@@ -1,0 +1,26 @@
+package lotto.domain;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+public class MoneyTest {
+
+    @Test
+    @DisplayName("화폐 생성")
+    void create() {
+        assertThat(new Money(10000)).isEqualTo(new Money("10000"));
+    }
+
+    @Test
+    @DisplayName("입력받은 화폐가 숫자인지 검증")
+    void parseLong() {
+        assertThatThrownBy(() -> {
+            new Money("천 원");
+        }).isInstanceOf(IllegalArgumentException.class);
+
+    }
+
+}
