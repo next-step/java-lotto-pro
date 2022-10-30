@@ -11,20 +11,18 @@ import java.util.stream.Collectors;
 
 public class LottoMachine {
 
-    private final int purchasePrice;
     private final Lottos lottos;
     private final LottoMoney lottoMoney;
 
     public LottoMachine(int purchasePrice) {
         this.lottoMoney = new LottoMoney(purchasePrice);
-        this.purchasePrice = purchasePrice;
         this.lottos = new Lottos(LottoFactory.createLottos(lottoMoney));
     }
 
     public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers) {
         Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(winningNumbers);
         List<RankDto> rankDtos = getRanks(rankOfLottos);
-        double getPriceRatio = getPriceRatio(rankOfLottos, purchasePrice);
+        double getPriceRatio = getPriceRatio(rankOfLottos);
         return new LottoResultDto(rankDtos, getPriceRatio);
     }
 
@@ -38,10 +36,10 @@ public class LottoMachine {
                 .collect(Collectors.toList());
     }
 
-    private double getPriceRatio(Map<Rank, Integer> rankOfLottos, int purchasePrice) {
+    private double getPriceRatio(Map<Rank, Integer> rankOfLottos) {
         int sumOfRankPrice = Arrays.stream(Rank.values())
                 .mapToInt(rank -> rank.getWinningPrice() * rankOfLottos.getOrDefault(rank, 0))
                 .sum();
-        return sumOfRankPrice / (double) purchasePrice;
+        return lottoMoney.getPriceRatio(sumOfRankPrice);
     }
 }

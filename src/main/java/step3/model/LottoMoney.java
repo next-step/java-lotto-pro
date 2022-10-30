@@ -21,7 +21,11 @@ public class LottoMoney {
         return size * LOTTO_PRICE;
     }
 
-    public int getCountOfPurchasePrice(){
+    public int getCountOfPurchasePrice() {
         return purchasePrice / LOTTO_PRICE;
+    }
+
+    public double getPriceRatio(int price) {
+        return price / (double) purchasePrice;
     }
 }
