@@ -56,6 +56,10 @@ public class Lotto {
         return matchCount;
     }
 
+    public boolean matchBounsNumber(final LottoNumber bounsNumber) {
+        return this.lottoNumbers.contains(bounsNumber);
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }

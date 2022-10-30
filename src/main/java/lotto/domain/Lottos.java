@@ -34,7 +34,7 @@ public class Lottos {
         }
     }
 
-    public Map<LottoRank, Integer> lottoRanksInfo(final Lotto winningLotto) {
+    public Map<LottoRank, Integer> lottoRanksInfo(final WinningLotto winningLotto) {
         Map<LottoRank, Integer> rankInfo = generateRankInfo();
 
         for (LottoRank lottoRank: lottoRanks(winningLotto)) {
@@ -44,13 +44,12 @@ public class Lottos {
         return rankInfo;
     }
 
-    private List<LottoRank> lottoRanks(final Lotto winningLotto) {
+    private List<LottoRank> lottoRanks(final WinningLotto winningLotto) {
         List<LottoRank> lottoRanks = new ArrayList<>();
-
         for (Lotto lotto: lottos) {
-            lottoRanks.add(LottoRank.valueOf(lotto.matchLottoNumber(winningLotto)));
+            int countMatch = lotto.matchLottoNumber(winningLotto.getWinningLotto());
+            lottoRanks.add(LottoRank.valueOf(countMatch, lotto.matchBounsNumber(winningLotto.getBonusBall())));
         }
-
         return lottoRanks.stream()
             .filter(lottoRank -> !LottoRank.isNone(lottoRank))
             .collect(Collectors.toList());
