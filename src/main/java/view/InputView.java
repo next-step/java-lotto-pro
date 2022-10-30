@@ -1,5 +1,7 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -11,8 +13,13 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static String[] winNumberInput() {
+    public static List<Integer> winNumberInput() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String message = scanner.next();
-        return message.split(",");
+        List<Integer> winNumberList = new ArrayList<>();
+        for (String number : message.split(",")) {
+            winNumberList.add(Integer.valueOf(number));
+        }
+        return winNumberList;
     }
 }

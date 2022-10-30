@@ -2,6 +2,7 @@ package controller;
 
 import model.Lotto;
 import model.LottoNumber;
+import model.Rank;
 import model.strategy.RandomStrategy;
 import view.InputView;
 import view.OutPutView;
@@ -17,7 +18,8 @@ public class LottoGame {
         List<Integer> arrangeNumber = initArrangeNumber();
         List<LottoNumber> buy = new Lotto(money, new RandomStrategy(arrangeNumber)).buy();
         OutPutView.outPutLottoNumber(buy);
-        String[] winNumber = InputView.winNumberInput();
+        List<Integer> winNumber = InputView.winNumberInput();
+        new Rank().stats(buy, winNumber);
     }
 
 

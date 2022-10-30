@@ -19,4 +19,21 @@ public class LottoNumber {
     public String toString() {
         return "" + number + "";
     }
+
+    public int getWinNumberCount(List<Integer> winNumber) {
+        int winNumberCount = 0;
+        for (Integer targetNumber : number) {
+            winNumberCount = addCountIfContain(winNumber, targetNumber, winNumberCount);
+        }
+
+        return winNumberCount;
+    }
+
+    private int addCountIfContain(List<Integer> winNumber, Integer targetNumber, int winNumberCount) {
+        if (winNumber.contains(targetNumber)) {
+            winNumberCount += 1;
+        }
+
+        return winNumberCount;
+    }
 }
