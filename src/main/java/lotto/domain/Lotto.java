@@ -28,6 +28,12 @@ public class Lotto {
 			.collect(Collectors.toSet());
 	}
 
+	public int countMatchLottoNumber(Lotto other) {
+		return (int)lottoNumbers.stream()
+			.filter(other::contains)
+			.count();
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

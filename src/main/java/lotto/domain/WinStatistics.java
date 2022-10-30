@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.List;
 
 public class WinStatistics {
-	public WinStatistics(Lottos lottos, WinNumbers winNumbers) {
+	public WinStatistics(Lottos lottos, WinningLotto winningLotto) {
 
 	}
 

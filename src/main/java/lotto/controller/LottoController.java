@@ -1,12 +1,8 @@
 package lotto.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import lotto.domain.Lottos;
-import lotto.domain.WinNumbers;
+import lotto.domain.WinningLotto;
 import lotto.domain.WinStatistics;
-import lotto.util.InputSplitter;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -25,9 +21,9 @@ public class LottoController {
 		resultView.lottosResult(lottos);
 
 		String input = inputView.prevWinNumbers();
-		WinNumbers winNumbers = new WinNumbers(input);
+		WinningLotto winningLotto = new WinningLotto(input);
 
-		WinStatistics winStatistics = new WinStatistics(lottos, winNumbers);
+		WinStatistics winStatistics = new WinStatistics(lottos, winningLotto);
 		resultView.winStatisticsResult(winStatistics);
 	}
 }

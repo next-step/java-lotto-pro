@@ -6,9 +6,9 @@ public class LottoResult {
 	private final Lotto lotto;
 	private final int matchCount;
 
-	public LottoResult(Lotto lotto, WinNumbers winNumbers) {
+	public LottoResult(Lotto lotto, WinningLotto winningLotto) {
 		this.lotto = lotto;
-		this.matchCount = winNumbers.countMatches(lotto);
+		this.matchCount = winningLotto.matchCount(lotto);
 	}
 
 	public boolean hasMatchCount(int matchCount) {

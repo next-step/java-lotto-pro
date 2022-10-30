@@ -29,4 +29,16 @@ class LottoTest {
 		assertThat(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)).contains(new LottoNumber(1))).isTrue();
 		assertThat(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)).contains(new LottoNumber(7))).isFalse();
 	}
+
+	@Test
+	void 로또_일치_갯수_확인() {
+		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+		assertThat(lotto.countMatchLottoNumber(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)))).isEqualTo(6);
+		assertThat(lotto.countMatchLottoNumber(new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)))).isEqualTo(5);
+		assertThat(lotto.countMatchLottoNumber(new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8)))).isEqualTo(4);
+		assertThat(lotto.countMatchLottoNumber(new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)))).isEqualTo(3);
+		assertThat(lotto.countMatchLottoNumber(new Lotto(Arrays.asList(5, 6, 7, 8, 9, 10)))).isEqualTo(2);
+		assertThat(lotto.countMatchLottoNumber(new Lotto(Arrays.asList(6, 7, 8, 9, 10, 11)))).isEqualTo(1);
+		assertThat(lotto.countMatchLottoNumber(new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)))).isEqualTo(0);
+	}
 }
