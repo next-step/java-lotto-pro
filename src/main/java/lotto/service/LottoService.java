@@ -8,7 +8,7 @@ import lotto.domain.Amount;
 import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
-import lotto.util.LottoNumberGenerator;
+import lotto.domain.LottoNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
