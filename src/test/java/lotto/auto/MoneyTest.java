@@ -18,7 +18,7 @@ public class MoneyTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"100a", "10a0", "0dsaqwe"})
+    @ValueSource(strings = {"", "10a0", "0dsaqwe"})
     public void 금액_문자열_예외_확인(String input) {
         assertThatThrownBy(() -> new Money().changeStringToInt(input))
                 .isInstanceOf(IllegalArgumentException.class);
