@@ -6,32 +6,39 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
-    MISS(0, 0);
+    FIRST(1, new MatchCount(6, 0), 2_000_000_000),
+    SECOND(2, new MatchCount(5, 1), 30_000_000),
+    THIRD(3, new MatchCount(5, 0), 1_500_000),
+    FOURTH(4, new MatchCount(4, 0), 50_000),
+    FIFTH(5, new MatchCount(3, 0), 5_000),
+    MISS(6, new MatchCount(0, 0), 0);
 
-    private static final Map<Integer, Rank> countOfMatchToRank = Stream.of(values())
-            .collect(Collectors.toMap(Rank::getCountOfMatch, Function.identity()));
+    private static final Map<MatchCount, Rank> matchCountToRank = Stream.of(values())
+            .collect(Collectors.toMap(Rank::getMatchCount, Function.identity()));
 
-    private final int countOfMatch;
+    private final int rankingNumber;
     private final int winningMoney;
+    private final MatchCount matchCount;
 
-    Rank(int countOfMatch, int winningMoney) {
-        this.countOfMatch = countOfMatch;
+    Rank(int rankingNumber, MatchCount matchCount, int winningMoney) {
+        this.rankingNumber = rankingNumber;
+        this.matchCount = matchCount;
         this.winningMoney = winningMoney;
     }
 
-    public int getCountOfMatch() {
-        return countOfMatch;
+    public MatchCount getMatchCount() {
+        return matchCount;
+    }
+
+    public int getRankingNumber() {
+        return rankingNumber;
     }
 
     public int getWinningMoney() {
         return winningMoney;
     }
 
-    public static Rank valueOf(int countOfMatch) {
-        return countOfMatchToRank.getOrDefault(countOfMatch, Rank.MISS);
+    public static Rank valueOf(MatchCount matchCount) {
+        return matchCountToRank.getOrDefault(matchCount, Rank.MISS);
     }
 }

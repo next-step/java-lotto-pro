@@ -44,4 +44,9 @@ public class InputView {
     private static int getQuantity(final String purchaseAmount) {
         return Integer.parseInt(purchaseAmount) / LOTTO_PRICE;
     }
+
+    public static int inputBonusNumber() {
+        String input = InputView.input(ConsoleMessage.INPUT_BONUS_NUMBER);
+        return Integer.parseInt(input);
+    }
 }

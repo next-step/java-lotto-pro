@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class LottoGeneratorImpl implements LottoGenerator {
+public class RandomLottoGenerator implements LottoGenerator {
 
     public static final int LOTTO_NUMBER_COUNT = 6;
     public static final List<Integer> availableNumbers =
