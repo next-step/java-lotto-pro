@@ -14,16 +14,18 @@ public class LottoController {
     }
 
     public void createLottoNumbers() {
-        boolean isComplete = false;
-        while (!isComplete) {
-            isComplete = readPurchase();
+        Runnable readPurchase = () -> {
+            service.savePurchase(view.readPurchase());
+            service.saveLottoNumbers();
+            view.printLottoNumbers(service.findLottoNumbers());
+        };
+        while (isNotComplete(readPurchase)) {
         }
     }
 
     public void createLotto() {
-        boolean isComplete = false;
-        while (!isComplete) {
-            isComplete = readWinningNumber();
+        Runnable readWinningNumber = () -> service.saveLottoGame(view.readWinningNumber());
+        while (isNotComplete(readWinningNumber)) {
         }
     }
 
@@ -32,26 +34,13 @@ public class LottoController {
         view.printProfitMargin(service.makeProfitMargin());
     }
 
-    private boolean readPurchase() {
+    private boolean isNotComplete(Runnable runnable) {
         try {
-            service.savePurchase(view.readPurchase());
-            service.saveLottoNumbers();
-            view.printLottoNumbers(service.findLottoNumbers());
-            return true;
+            runnable.run();
+            return false;
         } catch (IllegalArgumentException ex) {
             view.printErrorMessage(ex.getMessage());
         }
-        return false;
-    }
-
-    private boolean readWinningNumber() {
-        try {
-            String readWinningNumber = view.readWinningNumber();
-            service.saveLotto(readWinningNumber);
-            return true;
-        } catch (IllegalArgumentException ex) {
-            view.printErrorMessage(ex.getMessage());
-        }
-        return false;
+        return true;
     }
 }
