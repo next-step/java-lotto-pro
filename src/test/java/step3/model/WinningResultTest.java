@@ -22,4 +22,18 @@ class WinningResultTest {
         assertThat(winningResult.winningReport().awardResult().get(Award.FIRST)).isEqualTo(1);
         assertThat(winningResult.winningReport().rateOfReturn()).isNotNull();
     }
+
+    @Test
+    @DisplayName("구매한 티켓의 2등이다.")
+    void check_winning_results_second_test() {
+        List<Number> lottoNumbers = Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6));
+        LottoGenerator lottoGenerator = () -> new Lotto(lottoNumbers);
+
+        Lotto lotto = lottoGenerator.generateLotto();
+        LottoPaper lottoPaper = new LottoPaper(Arrays.asList(lotto));
+        WinningResult winningResult = new WinningResult(lottoPaper, "1, 2, 3, 4, 5, 7", 6);
+
+        assertThat(winningResult.winningReport().awardResult().get(Award.SECOND)).isEqualTo(1);
+        assertThat(winningResult.winningReport().rateOfReturn()).isNotNull();
+    }
 }
