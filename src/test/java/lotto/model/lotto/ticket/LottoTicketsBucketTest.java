@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTicketsBucketTest {
@@ -33,6 +34,23 @@ class LottoTicketsBucketTest {
         @DisplayName("LottoTicketsBucket 클래스 생성자 실행 결과, 생성자에 야규먼트로 전달한 개수 만큼 로또 티켓을 만든다")
         void errorInvalidNumberOfTickets(int numberOfTickets) {
             assertThrows(IllegalStateException.class, () -> new LottoTicketsBucket(numberOfTickets));
+        }
+    }
+
+    @Nested
+    @DisplayName("addLottoTicket 메서드 테스트")
+    class AddLottoTicket {
+        @ParameterizedTest
+        @ValueSource(ints = {0, 1, 2, 13, 597, 2000})
+        @DisplayName("지정한 개수만큼 addLottoTicket 호출하면 lottoTickets 멤버 변수의 size 가 지정한 개수가 되어야 한다.")
+        void success(int numberOfTickets) {
+            final LottoTicketsBucketForTest lottoTicketsBucket = new LottoTicketsBucketForTest(numberOfTickets);
+            int numberCount = numberOfTickets;
+            while (0 < numberCount) {
+                lottoTicketsBucket.addLottoTicket(new LottoTicket());
+                numberCount = numberCount - 1;
+            }
+            assertThat(lottoTicketsBucket.bucketSize()).isEqualTo(numberOfTickets);
         }
     }
 }
