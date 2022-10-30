@@ -5,7 +5,7 @@ import exception.LottoNumberRangeException;
 import java.util.Objects;
 
 public class LottoNumber implements Number {
-    private final int MINIMUM_RANGE_NUMBER = 1;
+    private static final int MINIMUM_RANGE_NUMBER = 1;
     private static final int MAXIMUM_RANGE_NUMBER = 45;
 
     private static final String LOTTO_NUMBER_RAGNE_ERROR_MESSSAGE = "지정된 로또 숫자범위를 벗어났습니다.";
