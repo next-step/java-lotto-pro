@@ -1,8 +1,15 @@
 package model;
 
+import enums.Match;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+
+import static model.Result.RESULT_ADD_VALUE;
+import static model.Result.RESULT_DEFAULT_VALUE;
 
 public class LottoLotteryTickets {
 
@@ -21,13 +28,14 @@ public class LottoLotteryTickets {
     }
 
     public Result matchResult(LottoNumbers winningLottoNumbers) {
-        Result result = new Result();
+        Map<Match, Integer> lottoResults = new HashMap<>();
 
         for (LottoNumbers lottoNumbers : lottoLotteryTickets) {
-            result.addResultPerTicket(lottoNumbers.match(winningLottoNumbers));
+            Match match = Match.findMatch(lottoNumbers.match(winningLottoNumbers));
+            lottoResults.put(match, lottoResults.getOrDefault(match, RESULT_DEFAULT_VALUE) + RESULT_ADD_VALUE );
         }
 
-        return result;
+        return new Result(lottoResults);
     }
 
     @Override
