@@ -15,6 +15,10 @@ public class InputView {
     private InputView() {
     }
 
+    private static String input() {
+        return SCANNER.nextLine();
+    }
+
     private static String input(ConsoleMessage message) {
         ResultView.printMessage(message.getMessage());
         return SCANNER.nextLine();
@@ -24,6 +28,11 @@ public class InputView {
         String input = InputView.input(ConsoleMessage.INPUT_WINNING_NUMBER);
         return mapToWinningNumber(input);
     }
+
+    public static List<Integer> inputManualLottoNumber() {
+        return mapToWinningNumber(InputView.input());
+    }
+
 
     private static List<Integer> mapToWinningNumber(final String input) {
         String[] splitNumbers = split(input);
