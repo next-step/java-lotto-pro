@@ -7,8 +7,6 @@ public class Lottos {
 
     private List<Lotto> lottoList;
 
-    private Lottos() { }
-
     private Lottos(List<Lotto> lottoList) {
         this.lottoList = lottoList;
     }

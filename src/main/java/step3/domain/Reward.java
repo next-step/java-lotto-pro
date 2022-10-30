@@ -11,10 +11,6 @@ public class Reward {
 
     private final Map<Rank, Integer> reward = new LinkedHashMap<>();
 
-    private Reward() {
-        throw new RuntimeException("Cannot use default constructor.");
-    }
-
     private Reward(List<Rank> ranks) {
         init();
         input(ranks);

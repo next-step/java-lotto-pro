@@ -4,10 +4,6 @@ public class Lotto {
 
     private final Numbers numbers;
 
-    private Lotto() {
-        throw new RuntimeException("Cannot use default constructor.");
-    }
-
     private Lotto(Numbers numbers) {
         validateInputNumbers(numbers);
         this.numbers = numbers;

@@ -7,10 +7,6 @@ public class Numbers {
 
     private final List<Integer> numbers;
 
-    private Numbers() {
-        throw new RuntimeException("Cannot use default constructor.");
-    }
-
     private Numbers(List<Integer> numbers) {
         this.numbers = numbers;
     }
