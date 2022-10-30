@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import lotto.constant.LottoConstant;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoCount;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.profit.Profit;
 import lotto.domain.win.WinRanking;
@@ -13,8 +14,8 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printPurchaseResult(List<Lotto> lottos) {
-        System.out.printf(LottoMessage.PURCHASE_RESULT, lottos.size());
+    public static void printPurchaseResult(List<Lotto> lottos, LottoCount lottoCount) {
+        System.out.printf(LottoMessage.PURCHASE_RESULT, lottoCount.getManual(), lottoCount.getAuto());
         newLine();
         printLottos(lottos);
     }

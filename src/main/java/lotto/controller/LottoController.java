@@ -21,7 +21,7 @@ public class LottoController {
         LottoCount lottoCount = getLottoCount();
         List<Lotto> lottos = generateLottos(lottoCount);
 
-        ResultView.printPurchaseResult(lottos);
+        ResultView.printPurchaseResult(lottos, lottoCount);
         ResultView.printResult(lottos, InputView.inputWinningLotto());
     }
 
