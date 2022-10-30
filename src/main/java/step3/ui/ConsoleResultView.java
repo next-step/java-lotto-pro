@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class ResultView {
+public class ConsoleResultView {
     private static final String RESULT_COUNT = "%d개를 구매했습니다.%n";
     private static final String RESULT_LOTTO = "[%s]%n";
     private static final String RESULT_STAT_TITLE = "당첨 통계";

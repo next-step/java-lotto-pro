@@ -1,11 +1,11 @@
 package step3;
 
-import step3.ui.InputView;
-import step3.ui.ResultView;
+import step3.ui.ConsoleInputView;
+import step3.ui.ConsoleResultView;
 
 public class Application {
     public static void main(String[] args) {
-        LottoController lottoController = new LottoController(new InputView(), new ResultView());
+        LottoController lottoController = new LottoController(new ConsoleInputView(), new ConsoleResultView());
         lottoController.start();
     }
 }

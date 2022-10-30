@@ -4,14 +4,14 @@ import step3.domain.LotteryTicket;
 import step3.domain.Payment;
 import step3.domain.Statistics;
 import step3.domain.WinningNumber;
-import step3.ui.InputView;
-import step3.ui.ResultView;
+import step3.ui.ConsoleInputView;
+import step3.ui.ConsoleResultView;
 
 public class LottoController {
-    private final InputView inputView;
-    private final ResultView resultView;
+    private final ConsoleInputView inputView;
+    private final ConsoleResultView resultView;
     
-    public LottoController(InputView inputView, ResultView resultView){
+    public LottoController(ConsoleInputView inputView, ConsoleResultView resultView){
         this.inputView = inputView;
         this.resultView = resultView;
     }
