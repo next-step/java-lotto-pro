@@ -4,7 +4,7 @@ public class WinningLottoNumber {
     private final LottoNumbers winningLottoNumbers;
     private final LottoNumber bonusNumber;
 
-    public WinningLottoNumber(String receiveWinningNumber, int receiveBonusNumber) {
+    public WinningLottoNumber(final String receiveWinningNumber, final int receiveBonusNumber) {
         this.winningLottoNumbers = new LottoNumbers(receiveWinningNumber);
         this.bonusNumber = new LottoNumber(receiveBonusNumber);
         validateBonusNumberIncludedInWinningNumbers();
@@ -16,7 +16,7 @@ public class WinningLottoNumber {
         }
     }
 
-    public Rewards check(Lottos lottos) {
+    public Rewards check(final Lottos lottos) {
         return lottos.check(winningLottoNumbers, bonusNumber);
     }
 }
