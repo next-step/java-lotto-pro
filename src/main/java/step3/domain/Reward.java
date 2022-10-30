@@ -52,8 +52,7 @@ public class Reward {
     private long getWinningMoney() {
         return reward.keySet()
                 .stream()
-                .map(this::getWinningMoney)
-                .mapToLong(money -> money)
+                .mapToLong(this::getWinningMoney)
                 .sum();
     }
 
