@@ -22,7 +22,7 @@ public class UniqueNumbers {
                 .count();
     }
 
-    public void validateDuplicated(List<Integer> numbers) {
+    private void validateDuplicated(List<Integer> numbers) {
         int size = numbers.size();
         long distinct = numbers.stream().distinct().count();
         if (size != distinct) {
