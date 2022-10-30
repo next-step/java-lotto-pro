@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    public static final int PRICE_PER_LOTTO = 1000;
+    protected static final int PRICE_PER_LOTTO = 1000;
 
     private List<Lotto> lottos;
 

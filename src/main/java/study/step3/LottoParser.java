@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoParser {
-    public static final String SPLIT_DELIMITER = ",";
-    public static final String SPACE_DELIMITER = " ";
-    public static final String REPLACEMENT = "";
+    private static final String SPLIT_DELIMITER = ",";
+    private static final String SPACE_DELIMITER = " ";
+    private static final String REPLACEMENT = "";
 
     public static List<Integer> stringToListInteger(String lottoNumbers) {
         List<Integer> numbers = new ArrayList<>();

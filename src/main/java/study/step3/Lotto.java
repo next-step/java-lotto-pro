@@ -6,8 +6,8 @@ import study.step3.exception.LottoNumberListSizeException;
 import java.util.*;
 
 public class Lotto {
-    public static final int SUB_LIST_START_INDEX = 0;
-    public static final int SUB_LIST_END_INDEX = 6;
+    private static final int SUB_LIST_START_INDEX = 0;
+    private static final int SUB_LIST_END_INDEX = 6;
 
     private List<Integer> numbers;
 
