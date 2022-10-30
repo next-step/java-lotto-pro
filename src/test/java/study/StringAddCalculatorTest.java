@@ -11,10 +11,10 @@ public class StringAddCalculatorTest {
     @DisplayName("null 또는 빈문자 테스트")
     public void splitAndSum_Null_Test() {
         int result = StringAddCalculator.splitAndSum(null);
-        assertThat(result).isEqualTo(0);
+        assertThat(result).isZero();
 
         result = StringAddCalculator.splitAndSum("");
-        assertThat(result).isEqualTo(0);
+        assertThat(result).isZero();
     }
 
     @Test
@@ -40,7 +40,7 @@ public class StringAddCalculatorTest {
 
     @Test
     @DisplayName("커스텀 구분자 테스트")
-    public void splitAndSum_custom_Delimㅑter_Test() throws Exception {
+    public void splitAndSum_custom_Delimiter_Test() throws Exception {
         int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
     }
