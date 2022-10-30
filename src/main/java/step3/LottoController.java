@@ -1,9 +1,6 @@
 package step3;
 
-import step3.domain.LotteryTicket;
-import step3.domain.Payment;
-import step3.domain.Statistics;
-import step3.domain.WinningNumber;
+import step3.domain.*;
 import step3.ui.ConsoleInputView;
 import step3.ui.ConsoleResultView;
 
@@ -23,9 +20,9 @@ public class LottoController {
         resultView.resultLotteryTicket(lotteryTicket);
     
         WinningNumber winningNumber = new WinningNumber(inputView.inputWinningNumber());
-        inputView.inputBonusNumber();
+        WinningBonusNumber winningBonusNumber = new WinningBonusNumber(winningNumber, inputView.inputBonusNumber());
         
-        Statistics statistics = new Statistics(lotteryTicket, winningNumber);
+        Statistics statistics = new Statistics(lotteryTicket, winningBonusNumber);
         resultView.resultStatistics(statistics, payment);
     }
     
