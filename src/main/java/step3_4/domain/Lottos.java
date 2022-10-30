@@ -15,12 +15,17 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public List<Rank> getRanks(UniqueNumbers numbers) {
+    public List<Rank> getRanks(UniqueNumbers winningNumbers, int bonusNumber) {
         return lottos.stream()
-                .map(lotto -> lotto.getCountOfMatch(numbers))
-                .map(Rank::valueOf)
+                .map(lotto -> getRank(lotto, winningNumbers, bonusNumber))
                 .filter(rank -> !rank.equals(Rank.MISS))
                 .collect(Collectors.toList());
+    }
+
+    private Rank getRank(Lotto lotto, UniqueNumbers winningNumbers, int bonusNumber) {
+        int countOfMatch = lotto.getCountOfMatch(winningNumbers);
+        boolean isBonusMatch = lotto.isBonusMatch(bonusNumber);
+        return Rank.valueOf(countOfMatch, isBonusMatch);
     }
 
     @Override

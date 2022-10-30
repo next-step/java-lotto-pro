@@ -30,4 +30,25 @@ public class LottoTest {
                 .isInstanceOf(IndexOutOfBoundsException.class)
                 .hasMessageContaining("Incomparable subject. please check lottoNumbers size.");
     }
+
+
+    @Test
+    @DisplayName("일치하는 번호 개수 확인")
+    public void testGetCountOfMatch() {
+        UniqueNumbers winner = UniqueNumbers.generate(Arrays.asList(1,2,3,4,5,6));
+        UniqueNumbers select = UniqueNumbers.generate(Arrays.asList(4,5,6,7,8,9));
+        Lotto lotto = Lotto.generate(select);
+        int countOfMatch = lotto.getCountOfMatch(winner);
+        assertThat(countOfMatch).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("보너스 번호 포함 확인")
+    public void testIsBonusMatch() {
+        int bonusNumber = 3;
+        UniqueNumbers select = UniqueNumbers.generate(Arrays.asList(1,2,3,4,5,6));
+        Lotto lotto = Lotto.generate(select);
+        assertThat(lotto.isBonusMatch(6)).isTrue();
+        assertThat(lotto.isBonusMatch(7)).isFalse();
+    }
 }

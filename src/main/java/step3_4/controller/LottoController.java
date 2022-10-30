@@ -27,7 +27,8 @@ public class LottoController {
         Money payment = payment();
         Lottos lottos = purchase(payment);
         UniqueNumbers winningNumbers = UniqueNumbers.generate(inputView.inputNumbers());
-        List<Rank> ranks = lottos.getRanks(winningNumbers);
+        int bonusNumber = inputView.inputBonusNumber();
+        List<Rank> ranks = lottos.getRanks(winningNumbers, bonusNumber);
         Reward reward = Reward.generate(ranks);
         result(payment, reward);
     }
