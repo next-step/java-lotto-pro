@@ -4,21 +4,20 @@ import java.util.Objects;
 
 public class LottoResult {
 	private final Lotto lotto;
-	private final int matchCount;
+	private final MatchCount matchCount;
 
-	private LottoResult(Lotto lotto, int matchCount) {
+	private LottoResult(Lotto lotto, MatchCount matchCount) {
 		this.lotto = lotto;
 		this.matchCount = matchCount;
 	}
 
-	public static LottoResult from(Lotto lotto, int matchCount) {
+	public static LottoResult from(Lotto lotto, MatchCount matchCount) {
 		return new LottoResult(lotto, matchCount);
 	}
 
-	public boolean hasMatchCount(int matchCount) {
-		return this.matchCount == matchCount;
+	public boolean hasMatchCount(MatchCount matchCount) {
+		return this.matchCount.equals(matchCount);
 	}
-
 
 	@Override
 	public boolean equals(Object o) {
@@ -27,7 +26,7 @@ public class LottoResult {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		LottoResult that = (LottoResult)o;
-		return matchCount == that.matchCount && Objects.equals(lotto, that.lotto);
+		return Objects.equals(lotto, that.lotto) && Objects.equals(matchCount, that.matchCount);
 	}
 
 	@Override

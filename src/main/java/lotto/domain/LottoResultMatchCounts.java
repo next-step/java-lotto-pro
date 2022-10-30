@@ -2,14 +2,14 @@ package lotto.domain;
 
 public class LottoResultMatchCounts {
 	private final LottoResults lottoResults;
-	private final int matchCount;
+	private final MatchCount matchCount;
 
-	private LottoResultMatchCounts(LottoResults lottoResults, int matchCount) {
+	private LottoResultMatchCounts(LottoResults lottoResults, MatchCount matchCount) {
 		this.lottoResults = lottoResults;
 		this.matchCount = matchCount;
 	}
 
-	public static LottoResultMatchCounts from(LottoResults lottoResults, int matchCount) {
+	public static LottoResultMatchCounts from(LottoResults lottoResults, MatchCount matchCount) {
 		return new LottoResultMatchCounts(lottoResults, matchCount);
 	}
 

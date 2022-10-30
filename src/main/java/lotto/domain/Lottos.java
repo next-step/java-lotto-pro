@@ -30,7 +30,7 @@ public class Lottos {
 	public LottoResults toLottoResults(Lotto winLotto) {
 		return LottoResults.from(
 			this.lottos.stream()
-				.map(lotto -> LottoResult.from(lotto, lotto.countMatchLottoNumber(winLotto)))
+				.map(lotto -> LottoResult.from(lotto, lotto.countMatchCount(winLotto)))
 				.collect(Collectors.toList())
 		);
 	}

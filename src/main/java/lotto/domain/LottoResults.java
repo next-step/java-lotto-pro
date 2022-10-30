@@ -15,14 +15,14 @@ public class LottoResults {
 		return new LottoResults(lottoResults);
 	}
 
-	public LottoResultMatchCounts toLottoResultMatchCounts(int matchCount) {
+	public LottoResultMatchCounts toLottoResultMatchCounts(MatchCount matchCount) {
 		return LottoResultMatchCounts.from(
 			filterByMatchCount(matchCount),
 			matchCount
 		);
 	}
 
-	private LottoResults filterByMatchCount(int matchCount) {
+	private LottoResults filterByMatchCount(MatchCount matchCount) {
 		return new LottoResults(
 			this.lottoResults.stream()
 				.filter(lottoResult -> lottoResult.hasMatchCount(matchCount))

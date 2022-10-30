@@ -38,14 +38,14 @@ public class WinningLotto {
 		return Objects.hash(winLotto);
 	}
 
-	public String getResultMessage(Lottos lottos, int matchCount) {
+	public String getResultMessage(Lottos lottos, MatchCount matchCount) {
 		LottoResults lottoResults = lottos.toLottoResults(winLotto);
 
 		LottoResultMatchCounts lottoResultMatchCounts = lottoResults.toLottoResultMatchCounts(matchCount);
 		long price = lottoResultMatchCounts.getPrice();
 		int matchQuantity = lottoResultMatchCounts.getQuantity();
 
-		return String.format("%d개 일치 (%d원)- %d", matchCount, price, matchQuantity);
+		return String.format("%d개 일치 (%d원)- %d", matchCount.getInt(), price, matchQuantity);
 	}
 
 	public String getYieldMessage(Lottos lottos) {

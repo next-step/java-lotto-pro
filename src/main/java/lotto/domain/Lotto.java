@@ -20,10 +20,12 @@ public class Lotto {
 		return new Lotto(new RandomLottoNumberStrategy());
 	}
 
-	public int countMatchLottoNumber(Lotto other) {
-		return (int)lottoNumbers.stream()
-			.filter(other::contains)
-			.count();
+	public MatchCount countMatchCount(Lotto other) {
+		return MatchCount.from(
+			(int)lottoNumbers.stream()
+				.filter(other::contains)
+				.count()
+		);
 	}
 
 	public boolean contains(LottoNumber lottoNumber) {

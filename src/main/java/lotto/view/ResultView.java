@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.MatchCount;
 import lotto.domain.WinningLotto;
 
 public class ResultView {
@@ -17,7 +18,7 @@ public class ResultView {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 		for (int i = 3 ; i<= 6; i++) {
-			System.out.println(winningLotto.getResultMessage(lottos, i));
+			System.out.println(winningLotto.getResultMessage(lottos, MatchCount.from(i)));
 		}
 		System.out.println(winningLotto.getYieldMessage(lottos));}
 }
