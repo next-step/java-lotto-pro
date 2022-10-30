@@ -1,18 +1,15 @@
 package model;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static model.LottoRankType.*;
 
 public class Rank {
-    private static final List<LottoRankType> rank = Arrays.asList(RANK_ONE, RANK_TWO, RANK_THREE, RANK_FOUR, RANK_FAIL);
+    private static final List<LottoRankType> rank = Arrays.asList(RANK_ONE, RANK_TWO, RANK_THREE, RANK_FOUR);
     private final Map<LottoRankType, Integer> countRank;
 
     public Rank() {
-        this.countRank = new HashMap<>();
+        this.countRank = new TreeMap<>();
         for (LottoRankType lottoRankType : rank) {
             countRank.put(lottoRankType, 0);
         }
