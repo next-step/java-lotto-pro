@@ -21,14 +21,6 @@ public enum LottoRank {
         this.bonus = bonus;
     }
 
-    // TODO: 기존 코드(추후 삭제)
-    public static LottoRank findLottoRank(int matchNumberCount) {
-        return Arrays.stream(LottoRank.values())
-                .filter(item -> item.matchCount == matchNumberCount)
-                .findFirst()
-                .orElse(LottoRank.NONE);
-    }
-
     public static LottoRank findLottoRank(int matchNumberCount, boolean bonus) {
         return Arrays.stream(LottoRank.values())
                 .filter(item -> matchLottoRank(item, matchNumberCount, bonus))
