@@ -41,8 +41,9 @@ public class WinningLotto {
 	public String getResultMessage(Lottos lottos, int matchCount) {
 		LottoResults lottoResults = lottos.toLottoResults(winLotto);
 
-		long price = lottoResults.getPrice();
-		int matchQuantity = lottoResults.filterByMatchCount(matchCount).getQuantity();
+		LottoResultMatchCounts lottoResultMatchCounts = lottoResults.toLottoResultMatchCounts(matchCount);
+		long price = lottoResultMatchCounts.getPrice();
+		int matchQuantity = lottoResultMatchCounts.getQuantity();
 
 		return String.format("%d개 일치 (%d원)- %d", matchCount, price, matchQuantity);
 	}

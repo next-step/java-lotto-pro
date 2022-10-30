@@ -17,7 +17,7 @@ class LottoResultTest {
 	}
 
 	@Test
-	void hasMatchCount() {
+	void 일치_갯수_체크() {
 		Lotto lotto = Lotto.inputNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
 		int matchCount = 3;
 

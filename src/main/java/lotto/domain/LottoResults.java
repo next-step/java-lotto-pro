@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoResults {
@@ -14,7 +15,14 @@ public class LottoResults {
 		return new LottoResults(lottoResults);
 	}
 
-	public LottoResults filterByMatchCount(int matchCount) {
+	public LottoResultMatchCounts toLottoResultMatchCounts(int matchCount) {
+		return LottoResultMatchCounts.from(
+			filterByMatchCount(matchCount),
+			matchCount
+		);
+	}
+
+	private LottoResults filterByMatchCount(int matchCount) {
 		return new LottoResults(
 			this.lottoResults.stream()
 				.filter(lottoResult -> lottoResult.hasMatchCount(matchCount))
@@ -26,11 +34,22 @@ public class LottoResults {
 		return this.lottoResults.size();
 	}
 
-	public long getPrice() {
+	public float winningPrice() {
 		return 0;
 	}
 
-	public float winningPrice() {
-		return 0;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		LottoResults that = (LottoResults)o;
+		return Objects.equals(lottoResults, that.lottoResults);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottoResults);
 	}
 }
