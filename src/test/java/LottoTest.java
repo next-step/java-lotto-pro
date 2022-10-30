@@ -1,11 +1,15 @@
 import model.Lotto;
 import model.LottoNumber;
 import model.strategy.MockStrategy;
+import model.strategy.RandomStrategy;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static common.Constants.END_LOTTO_NUMBER;
+import static common.Constants.START_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -25,5 +29,21 @@ class LottoTest {
             new Lotto(money, new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))).buy();
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("1000원 이상의 금액을 입력해주세요.");
+    }
+
+    @Test
+    void 로또숫자의범위는_1에서_45여야한다() {
+        int money = 10000;
+        List<Integer> arrangeNumber = new ArrayList<>();
+        for (int i = START_LOTTO_NUMBER; i <= END_LOTTO_NUMBER; i++) {
+            arrangeNumber.add(i);
+        }
+
+        List<LottoNumber> buyLotto = new Lotto(money, new RandomStrategy(arrangeNumber)).buy();
+
+        for (LottoNumber lotto : buyLotto) {
+            boolean result = lotto.getNumber().stream().allMatch(v -> v > 0 && v < 46);
+            assertThat(result).isTrue();
+        }
     }
 }

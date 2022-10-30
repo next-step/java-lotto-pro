@@ -38,4 +38,8 @@ public class LottoNumber {
 
         return winNumberCount;
     }
+
+    public List<Integer> getNumber() {
+        return number;
+    }
 }
