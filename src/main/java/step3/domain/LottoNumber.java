@@ -1,32 +1,21 @@
-package step2;
+package step3.domain;
 
 import java.util.Objects;
 
-public class Number {
+public class LottoNumber {
 
-    private static final int MINIMUM_NUMBER = 0;
+    private static final int MINIMUM_NUMBER = 1;
+    private static final int MAXIMUM_NUMBER = 45;
 
     private final int value;
 
-    public Number(int value) {
+    public LottoNumber(int value) {
         validation(value);
         this.value = value;
     }
 
-    public static Number ZERO() {
-        return new Number(0);
-    }
-
-    public Number plus(Number number) {
-        return new Number(this.value + number.value);
-    }
-
-    public int value() {
+    public int get() {
         return value;
-    }
-
-    public static Number sum(Number a, Number b) {
-        return a.plus(b);
     }
 
     @Override
@@ -37,8 +26,8 @@ public class Number {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Number number = (Number) o;
-        return value == number.value;
+        LottoNumber that = (LottoNumber) o;
+        return value == that.value;
     }
 
     @Override
@@ -52,8 +41,8 @@ public class Number {
     }
 
     private void validation(int value) {
-        if (value < MINIMUM_NUMBER) {
-            throw new RuntimeException("음수는 입력할 수 없습니다.");
+        if (value < MINIMUM_NUMBER || value > MAXIMUM_NUMBER) {
+            throw new IllegalArgumentException(String.format("로또 번호는 1 ~ 45 사이 숫자여야 합니다. (lottoNumber: %s)", value));
         }
     }
 }
