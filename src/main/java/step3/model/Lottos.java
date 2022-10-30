@@ -9,9 +9,9 @@ public class Lottos {
 
     private final List<Lotto> lottos;
     private final LottoMoney lottoMoney;
-    public Lottos(List<Lotto> lottos, int lottoPrice) {
+    public Lottos(List<Lotto> lottos, LottoMoney lottoMoney) {
         this.lottos = lottos;
-        this.lottoMoney = new LottoMoney(lottoPrice);
+        this.lottoMoney = lottoMoney;
     }
 
     public int getSumOfPriceLottos() {

@@ -30,7 +30,7 @@ public class LottosTest {
     @DisplayName("로또를 추가하면 구매가격의 총합은 구매개수 * 1000")
     void test_that_it_returns_sum_of_price(int count) {
         //given
-        Lottos lottos = new Lottos(LottoFactory.createLottos(count),1000);
+        Lottos lottos = new Lottos(LottoFactory.createLottos(count),new LottoMoney(1000));
 
         //then
         assertThat(lottos.getSumOfPriceLottos()).isEqualTo(count * 1000);
@@ -45,7 +45,7 @@ public class LottosTest {
         lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
         lottoNumbers.add(new Lotto(getLottoNumbers(1, 11, 33, 2, 35, 3)));
-        Lottos lottos = new Lottos(lottoNumbers,1000);
+        Lottos lottos = new Lottos(lottoNumbers,new LottoMoney(1000));
 
         //when
         Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 43, 44, 45));
@@ -62,7 +62,7 @@ public class LottosTest {
         lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 15, 1)));
         lottoNumbers.add(new Lotto(getLottoNumbers(1, 11, 33, 2, 15, 3)));
-        Lottos lottos = new Lottos(lottoNumbers,1000);
+        Lottos lottos = new Lottos(lottoNumbers,new LottoMoney(1000));
 
         //when
         Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 43, 15, 45));
@@ -79,7 +79,7 @@ public class LottosTest {
         lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
         lottoNumbers.add(new Lotto(getLottoNumbers(1, 11, 33, 2, 35, 3)));
-        Lottos lottos = new Lottos(lottoNumbers,1000);
+        Lottos lottos = new Lottos(lottoNumbers,new LottoMoney(1000));
 
         //when
         Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 43, 44, 45));
@@ -96,7 +96,7 @@ public class LottosTest {
         lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         lottoNumbers.add(new Lotto(getLottoNumbers(2, 15, 3, 14, 1, 16)));
         lottoNumbers.add(new Lotto(getLottoNumbers(1, 16, 15, 2, 14, 3)));
-        Lottos lottos = new Lottos(lottoNumbers,1000);
+        Lottos lottos = new Lottos(lottoNumbers,new LottoMoney(1000));
 
         //when
         Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 14, 15, 16));

@@ -20,7 +20,7 @@ public class LottoMachine {
         this.lottoMoney = new LottoMoney(purchasePrice);
         this.purchasePrice = purchasePrice;
         int size = purchasePrice / LOTTO_PRICE;
-        this.lottos = new Lottos(LottoFactory.createLottos(size), LOTTO_PRICE);
+        this.lottos = new Lottos(LottoFactory.createLottos(size),lottoMoney);
     }
 
     public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers) {
