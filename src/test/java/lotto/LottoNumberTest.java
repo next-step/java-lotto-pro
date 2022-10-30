@@ -18,4 +18,10 @@ public class LottoNumberTest {
         assertThat(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)))
                 .countHit(new ArrayList<>(Arrays.asList(1, 2, 3, 10, 20, 40)))).isEqualTo(3);
     }
+
+    @Test
+    void 로또_번호_출력() {
+        assertThat(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))).toString()).isEqualTo(
+                "[1, 2, 3, 4, 5, 6]");
+    }
 }
