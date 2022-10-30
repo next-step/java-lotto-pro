@@ -15,7 +15,7 @@ public class LottoResult {
         }
     }
 
-    public void putPrize(Prize prize) {
+    public void addCount(Prize prize) {
         result.put(prize, result.get(prize) + 1);
     }
 

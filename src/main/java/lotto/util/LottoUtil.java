@@ -16,16 +16,16 @@ public class LottoUtil {
     public static final String DELIMITER = ",";
     public static final int BEGIN_NUMBER = 1;
     public static final int END_NUMBER = 45;
+    public static final List<Integer> INIT_NUMBERS = IntStream.rangeClosed(BEGIN_NUMBER, END_NUMBER)
+        .boxed()
+        .collect(toList());
 
     private LottoUtil() {
     }
 
     public static Set<LottoNumber> generate() {
-        List<Integer> intNumbers = IntStream.rangeClosed(BEGIN_NUMBER, END_NUMBER)
-            .boxed()
-            .collect(toList());
-        Collections.shuffle(intNumbers);
-        List<Integer> subNumbers = intNumbers.subList(0, LOTTO_NUMBERS_COUNT);
+        Collections.shuffle(INIT_NUMBERS);
+        List<Integer> subNumbers = INIT_NUMBERS.subList(0, LOTTO_NUMBERS_COUNT);
         Collections.sort(subNumbers);
         return subNumbers.stream()
             .map(LottoNumber::new)
