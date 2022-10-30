@@ -2,6 +2,8 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,9 +29,17 @@ class LottoNumbersTest {
     @Test
     @DisplayName("중복된 숫자가 입력 될 경우 예외 발생")
     void duplicate_input_number_throw_exception() {
-        assertThatThrownBy(() -> LottoNumbers.of(new ManualNumberGenerator("1,1,3,4,5,6")))
+        assertThatThrownBy(() -> LottoNumbers.of(new ManualNumberGenerator("1, 1, 3, 4, 5, 6")))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("중복 된 숫자가 있습니다.");
+    }
+
+    @Test
+    @DisplayName("중복된 숫자가 있는지 확인")
+    void check_duplicate_number_lotto_numbers() {
+        LottoNumbers lottoNumbers = LottoNumbers.of(new ManualNumberGenerator("1, 2, 3, 4, 5, 6"));
+        assertTrue(lottoNumbers.isContainNumber(new LottoNumber(1)));
+        assertFalse(lottoNumbers.isContainNumber(new LottoNumber(8)));
     }
 
     @Test

@@ -23,7 +23,7 @@ public class LottoPurchaseAmount  {
     private void validFirstChar(String inputAmount) {
         char firstChar = inputAmount.charAt(FIRST_CHAR_INDEX);
         if (isValidFirstChar(firstChar)) {
-            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_INPUT_AMOUNT_ONLY_NUMBER);
+            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_INPUT_ONLY_NUMBER);
         }
     }
 
@@ -39,7 +39,7 @@ public class LottoPurchaseAmount  {
 
     private static void isDigit(String inputAmount, int i) {
         if (!Character.isDigit(inputAmount.charAt(i))) {
-            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_INPUT_AMOUNT_ONLY_NUMBER);
+            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_INPUT_ONLY_NUMBER);
         }
     }
 
