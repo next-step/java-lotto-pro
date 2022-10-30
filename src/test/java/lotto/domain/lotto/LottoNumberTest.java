@@ -4,6 +4,7 @@ import lotto.status.ErrorStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,6 +31,13 @@ public class LottoNumberTest {
     @ValueSource(strings = {"sdf", "k"})
     @DisplayName("숫자문자열이 아닌 문자열을 로또 번호로 생성시 IllegalArgumentException")
     void create_lotto_number_string_argument_exception(String number) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(number)).withMessage(ErrorStatus.INVALID_LOTTO_NUMBER.getMessage());
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("숫자문자열이 null 이거나 empty인 경우 생성시 IllegalArgumentException")
+    void create_lotto_number_string_null_or_empty_argument_exception(String number) {
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(number)).withMessage(ErrorStatus.INVALID_LOTTO_NUMBER.getMessage());
     }
 }

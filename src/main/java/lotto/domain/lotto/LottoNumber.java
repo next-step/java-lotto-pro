@@ -19,6 +19,9 @@ public class LottoNumber {
     }
 
     private int validateString(String number) {
+        if (number == null || number.isEmpty()) {
+            throw new IllegalArgumentException(ErrorStatus.INVALID_LOTTO_NUMBER.getMessage());
+        }
         if (!number.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException(ErrorStatus.INVALID_LOTTO_NUMBER.getMessage());
         }
