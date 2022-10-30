@@ -5,8 +5,8 @@ import exception.LottoNumberRangeException;
 import java.util.Objects;
 
 public class LottoNumber implements Number {
-    private static final int MINIMUM_RANGE_NUMBER = 1;
-    private static final int MAXIMUM_RANGE_NUMBER = 45;
+    public static final int MINIMUM_RANGE_NUMBER = 1;
+    public static final int MAXIMUM_RANGE_NUMBER = 45;
 
     private static final String LOTTO_NUMBER_RAGNE_ERROR_MESSSAGE = "지정된 로또 숫자범위를 벗어났습니다.";
 
@@ -16,15 +16,11 @@ public class LottoNumber implements Number {
     }
 
     public LottoNumber(int number) {
-        if (!isRightNumber(number)) {
+        if (isNotRightNumber(number)) {
             throw new LottoNumberRangeException(LOTTO_NUMBER_RAGNE_ERROR_MESSSAGE);
         }
 
         this.number = number;
-    }
-
-    public int getValue() {
-        return this.number;
     }
 
     @Override
@@ -52,7 +48,7 @@ public class LottoNumber implements Number {
         return Objects.hash(number);
     }
 
-    private boolean isRightNumber(int number) {
-        return MINIMUM_RANGE_NUMBER <= number && number <= MAXIMUM_RANGE_NUMBER;
+    private boolean isNotRightNumber(int number) {
+        return MINIMUM_RANGE_NUMBER > number || number > MAXIMUM_RANGE_NUMBER;
     }
 }
