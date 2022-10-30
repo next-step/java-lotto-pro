@@ -6,25 +6,25 @@ import java.util.Objects;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
-    private final List<Integer> LottoNumbers;
+    private final List<LottoNumber> LottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         isValidLottoNumbers(lottoNumbers);
         LottoNumbers = lottoNumbers;
     }
 
-    private void isValidLottoNumbers(List<Integer> lottoNumbers){
+    private void isValidLottoNumbers(List<LottoNumber> lottoNumbers){
         isValidDuplicateLottoNumbers(lottoNumbers);
         isValidSizeNotEqualsLottoNumber(lottoNumbers);
     }
 
-    private void isValidDuplicateLottoNumbers(List<Integer> lottoNumbers){
+    private void isValidDuplicateLottoNumbers(List<LottoNumber> lottoNumbers){
         if(new HashSet<>(lottoNumbers).size() != lottoNumbers.size()){
             throw new IllegalArgumentException("로또번호는 중복 발행 불가능 합니다");
         }
     }
 
-    private void isValidSizeNotEqualsLottoNumber(List<Integer> lottoNumbers){
+    private void isValidSizeNotEqualsLottoNumber(List<LottoNumber> lottoNumbers){
         if(lottoNumbers.size() != LOTTO_SIZE){
             throw new IllegalArgumentException("로또번호는 6개 입력 되어야 합니다.");
         }
