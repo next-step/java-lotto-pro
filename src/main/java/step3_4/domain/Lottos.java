@@ -16,6 +16,7 @@ public class Lottos {
     }
 
     public List<Rank> getRanks(UniqueNumbers winningNumbers, int bonusNumber) {
+        validateDuplicated(winningNumbers, bonusNumber);
         return lottos.stream()
                 .map(lotto -> getRank(lotto, winningNumbers, bonusNumber))
                 .filter(rank -> !rank.equals(Rank.MISS))
@@ -26,6 +27,12 @@ public class Lottos {
         int countOfMatch = lotto.getCountOfMatch(winningNumbers);
         boolean isBonusMatch = lotto.isBonusMatch(bonusNumber);
         return Rank.valueOf(countOfMatch, isBonusMatch);
+    }
+
+    private static void validateDuplicated(UniqueNumbers winningNumbers, int bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("Duplicate Unique numbers and Bonus number.");
+        }
     }
 
     @Override
