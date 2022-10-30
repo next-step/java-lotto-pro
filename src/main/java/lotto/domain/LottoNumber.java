@@ -22,7 +22,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber of(String number) {
-        return lottoNumbers.get(parseInt(number));
+        return LottoNumber.of(parseInt(number));
     }
 
     public static LottoNumber of(int number) {
