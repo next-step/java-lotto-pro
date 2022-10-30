@@ -1,23 +1,23 @@
 package lotto;
 
-import static lotto.Constant.BOUGHT_SOME;
-import static lotto.Constant.DIVIDING_LINE;
 import static lotto.Constant.EA;
-import static lotto.Constant.HIT_FIVE;
-import static lotto.Constant.HIT_FOUR;
-import static lotto.Constant.HIT_SIX;
-import static lotto.Constant.HIT_THREE;
 import static lotto.Constant.PRIZE_OF_FIRST;
 import static lotto.Constant.PRIZE_OF_FOURTH;
 import static lotto.Constant.PRIZE_OF_SECOND;
 import static lotto.Constant.PRIZE_OF_THIRD;
-import static lotto.Constant.WINNING_STATISTICS;
+import static lotto.Constant.RESULT_BOUGHT_SOME;
+import static lotto.Constant.RESULT_DIVIDING_LINE;
+import static lotto.Constant.RESULT_HIT_FIVE;
+import static lotto.Constant.RESULT_HIT_FOUR;
+import static lotto.Constant.RESULT_HIT_SIX;
+import static lotto.Constant.RESULT_HIT_THREE;
+import static lotto.Constant.RESULT_WINNING_STATISTICS;
 
 import java.util.List;
 
 class ResultView {
     void printResultPay(int purchaseCount) {
-        System.out.println(purchaseCount + BOUGHT_SOME);
+        System.out.println(purchaseCount + RESULT_BOUGHT_SOME);
     }
 
     void printResultPurchase(List<LottoNumber> lottoNumbers) {
@@ -32,12 +32,12 @@ class ResultView {
     }
 
     private void printWinningCount(Prize prize) {
-        System.out.println("\n" + WINNING_STATISTICS);
-        System.out.println(DIVIDING_LINE);
-        System.out.println(HIT_THREE + prize.getCountOfFourth() + EA);
-        System.out.println(HIT_FOUR + prize.getCountOfThird() + EA);
-        System.out.println(HIT_FIVE + prize.getCountOfSecond() + EA);
-        System.out.println(HIT_SIX + prize.getCountOfFirst() + EA);
+        System.out.println("\n" + RESULT_WINNING_STATISTICS);
+        System.out.println(RESULT_DIVIDING_LINE);
+        System.out.println(RESULT_HIT_THREE + prize.getCountOfFourth() + EA);
+        System.out.println(RESULT_HIT_FOUR + prize.getCountOfThird() + EA);
+        System.out.println(RESULT_HIT_FIVE + prize.getCountOfSecond() + EA);
+        System.out.println(RESULT_HIT_SIX + prize.getCountOfFirst() + EA);
     }
 
     private void printResultTotalEarningsRate(int totalEarningsRate) {

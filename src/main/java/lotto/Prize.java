@@ -1,5 +1,11 @@
 package lotto;
 
+import static lotto.Constant.HIT_FIVE;
+import static lotto.Constant.HIT_FOUR;
+import static lotto.Constant.HIT_SIX;
+import static lotto.Constant.HIT_THREE;
+import static lotto.Constant.ZERO;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,46 +16,53 @@ class Prize {
 
     public Prize(List<Integer> winningNumbers) {
         this.winningNumbers = winningNumbers;
-        prize.put(6, 0);
-        prize.put(5, 0);
-        prize.put(4, 0);
-        prize.put(3, 0);
+        initialize();
+    }
+
+    private void initialize() {
+        prize.put(HIT_SIX, ZERO);
+        prize.put(HIT_FIVE, ZERO);
+        prize.put(HIT_FOUR, ZERO);
+        prize.put(HIT_THREE, ZERO);
     }
 
     public void countPrize(List<LottoNumber> lottoNumbers) {
         for (LottoNumber lottoNumber : lottoNumbers) {
-            int hit = lottoNumber.countHit(winningNumbers);
-            if (hit == 3) {
-                prize.put(hit, prize.get(3) + 1);
-                continue;
-            }
-            if (hit == 4) {
-                prize.put(hit, prize.get(4) + 1);
-                continue;
-            }
-            if (hit == 5) {
-                prize.put(hit, prize.get(5) + 1);
-                continue;
-            }
-            if (hit == 6) {
-                prize.put(hit, prize.get(6) + 1);
-            }
+            inputCountPrize(lottoNumber.countHit(winningNumbers));
+        }
+    }
+
+    private void inputCountPrize(int hit) {
+        if (hit == HIT_THREE) {
+            prize.put(hit, prize.get(HIT_THREE) + 1);
+            return;
+        }
+        if (hit == HIT_FOUR) {
+            prize.put(hit, prize.get(HIT_FOUR) + 1);
+            return;
+        }
+        if (hit == HIT_FIVE) {
+            prize.put(hit, prize.get(HIT_FIVE) + 1);
+            return;
+        }
+        if (hit == HIT_SIX) {
+            prize.put(hit, prize.get(HIT_SIX) + 1);
         }
     }
 
     public int getCountOfFirst() {
-        return prize.get(6);
+        return prize.get(HIT_SIX);
     }
 
     public int getCountOfSecond() {
-        return prize.get(5);
+        return prize.get(HIT_FIVE);
     }
 
     public int getCountOfThird() {
-        return prize.get(4);
+        return prize.get(HIT_FOUR);
     }
 
     public int getCountOfFourth() {
-        return prize.get(3);
+        return prize.get(HIT_THREE);
     }
 }
