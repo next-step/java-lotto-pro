@@ -13,19 +13,13 @@ public class LottoResultTest {
     Lotto win;
     @BeforeEach
     void beforeEach(){
-        win = Lotto.create(Arrays.asList(
-                new LottoNumber(5),new LottoNumber(15),new LottoNumber(25),
-                new LottoNumber(35),new LottoNumber(45),new LottoNumber(30)
-        ));
+        win = Lotto.create(Arrays.asList(5,15,25,35,45,30));
     }
 
     @Test
     @DisplayName("3개 당첨 결과 저장하고 조회하기")
     void _3개_당첨_결과_저장_조회(){
-        Lotto buy = Lotto.create(Arrays.asList(
-                new LottoNumber(1),new LottoNumber(10),new LottoNumber(15),
-                new LottoNumber(20),new LottoNumber(25),new LottoNumber(30)
-        ));
+        Lotto buy = Lotto.create(Arrays.asList(1,10,15,20,25,30));
 
         LottoResult result = new LottoResult();
         result.addLottoResult(win.containNumberCount(buy), buy);
@@ -36,10 +30,7 @@ public class LottoResultTest {
     @Test
     @DisplayName("4개 당첨 결과 저장하고 조회하기")
     void _4개_당첨_결과_저장_조회(){
-        Lotto buy = Lotto.create(Arrays.asList(
-                new LottoNumber(5),new LottoNumber(10),new LottoNumber(15),
-                new LottoNumber(20),new LottoNumber(25),new LottoNumber(30)
-        ));
+        Lotto buy = Lotto.create(Arrays.asList(5,10,15,20,25,30));
 
         LottoResult result = new LottoResult();
         result.addLottoResult(win.containNumberCount(buy), buy);
@@ -50,10 +41,7 @@ public class LottoResultTest {
     @Test
     @DisplayName("5개 당첨 결과 저장하고 조회하기")
     void _5개_당첨_결과_저장_조회(){
-        Lotto buy = Lotto.create(Arrays.asList(
-                new LottoNumber(5),new LottoNumber(45),new LottoNumber(15),
-                new LottoNumber(20),new LottoNumber(25),new LottoNumber(30)
-        ));
+        Lotto buy = Lotto.create(Arrays.asList(5,45,15,20,25,30));
 
         LottoResult result = new LottoResult();
         result.addLottoResult(win.containNumberCount(buy), buy);
@@ -64,10 +52,7 @@ public class LottoResultTest {
     @Test
     @DisplayName("6개 당첨 결과 저장하고 조회하기")
     void _6개_당첨_결과_저장_조회(){
-        Lotto buy = Lotto.create(Arrays.asList(
-                new LottoNumber(35),new LottoNumber(45),new LottoNumber(30),
-                new LottoNumber(5),new LottoNumber(15),new LottoNumber(25)
-        ));
+        Lotto buy = Lotto.create(Arrays.asList(35,45,30,5,15,25));
 
         LottoResult result = new LottoResult();
         result.addLottoResult(win.containNumberCount(buy), buy);
@@ -78,20 +63,9 @@ public class LottoResultTest {
     @Test
     @DisplayName("0,1,2 개 당첨 결과는 저장하지 않는다.")
     void _0개_당첨_결과_미저장(){
-        Lotto buy0 = Lotto.create(Arrays.asList(
-                new LottoNumber(34),new LottoNumber(44),new LottoNumber(29),
-                new LottoNumber(4),new LottoNumber(14),new LottoNumber(24)
-        ));
-
-        Lotto buy1 = Lotto.create(Arrays.asList(
-                new LottoNumber(34),new LottoNumber(45),new LottoNumber(29),
-                new LottoNumber(4),new LottoNumber(14),new LottoNumber(24)
-        ));
-
-        Lotto buy2 = Lotto.create(Arrays.asList(
-                new LottoNumber(34),new LottoNumber(45),new LottoNumber(29),
-                new LottoNumber(4),new LottoNumber(15),new LottoNumber(24)
-        ));
+        Lotto buy0 = Lotto.create(Arrays.asList(34,44,29,4,14,24));
+        Lotto buy1 = Lotto.create(Arrays.asList(34,45,29,4,14,24));
+        Lotto buy2 = Lotto.create(Arrays.asList(34,45,29,4,15,24));
 
         LottoResult result = new LottoResult();
         result.addLottoResult(win.containNumberCount(buy0), buy0);
