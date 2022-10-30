@@ -23,10 +23,6 @@ public class WinningLotto {
 			.collect(Collectors.toList());
 	}
 
-	public int matchCount(Lotto lotto) {
-		return winLotto.countMatchLottoNumber(lotto);
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

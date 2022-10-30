@@ -2,8 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.MatchResult;
-import lotto.domain.WinningStatistics;
+import lotto.domain.WinningLotto;
 
 public class ResultView {
 	public void lottosResult(Lottos lottos) {
@@ -14,12 +13,12 @@ public class ResultView {
 		System.out.print("\n");
 	}
 
-	public void winStatisticsResult(WinningStatistics winningStatistics, Lottos lottos) {
+	public void winStatisticsResult(Lottos lottos, WinningLotto winningLotto) {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
-		for (MatchResult matchResult : winningStatistics.getMatchResults(lottos)) {
-			System.out.println(matchResult.toString());
-		}
-		System.out.printf("총 수익률은 %.2f입니다.%n", winningStatistics.getYield());
+		// for (MatchResult matchResult : winningStatistics.getMatchResults(lottos)) {
+		// 	System.out.println(matchResult.toString());
+		// }
+		// System.out.printf("총 수익률은 %.2f입니다.%n", winningStatistics.getYield());
 	}
 }
