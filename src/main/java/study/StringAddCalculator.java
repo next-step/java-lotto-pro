@@ -4,11 +4,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    private static final String DELIMITER = ",|:";
+    private static final int NUM_1 = 1;
+    private static final int NUM_2 = 1;
+    private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
 
+    private static Matcher matcher;
     private static String[] numbers;
     public static int splitAndSum(String text) {
+        matcher = CUSTOM_PATTERN.matcher(text);
 
-        if(text == null || text.isEmpty()) return 0;
+        if(text == null || text.isEmpty()){
+            return 0;
+        }
 
         numbers=splitText(text);
 
@@ -16,14 +24,13 @@ public class StringAddCalculator {
     }
 
     private static String[] splitText(String text) {
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(text);
 
         if (matcher.find()) {
-            String customToken = matcher.group(1);
-            return matcher.group(2).split(customToken);
+            String customToken = matcher.group(NUM_1);
+            return matcher.group(NUM_2).split(customToken);
         }
 
-        return text.split(",|:");
+        return text.split(DELIMITER);
     }
 
     private static int sumNumbers() {
@@ -42,7 +49,7 @@ public class StringAddCalculator {
 
     private static void validateNumber(int intValue) {
         if (intValue < 0) {
-            throw new RuntimeException("양수값만 입력해주세요!!");
+            throw new IllegalArgumentException("양수값만 입력해주세요!!");
         }
     }
 
