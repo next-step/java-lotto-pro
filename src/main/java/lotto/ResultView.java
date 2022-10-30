@@ -16,17 +16,17 @@ import static lotto.Constant.WINNING_STATISTICS;
 import java.util.List;
 
 public class ResultView {
-    void resultPay(int purchaseCount) {
+    void printResultPay(int purchaseCount) {
         System.out.println(purchaseCount + BOUGHT_SOME);
     }
 
-    void resultPurchase(List<LottoNumber> lottoNumbers) {
+    void printResultPurchase(List<LottoNumber> lottoNumbers) {
         for (LottoNumber lottoNumber : lottoNumbers) {
             System.out.println(lottoNumber);
         }
     }
 
-    void resultWinningStatistics(int payMoney, Prize prize) {
+    void printResultWinningStatistics(int payMoney, Prize prize) {
         printWinningCount(prize);
         printResultTotalEarningsRate(calculateTotalEarningsRate(payMoney, calculateTotalEarnings(prize)));
     }

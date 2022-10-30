@@ -11,14 +11,14 @@ public class LottoGameMain {
         LottoGame lottoGame = new LottoGame(payMoney, new AutoLottoNumberGenerator());
 
         int purchaseCount = lottoGame.getPurchaseCount();
-        resultView.resultPay(purchaseCount);
+        resultView.printResultPay(purchaseCount);
 
         List<LottoNumber> lottoNumbers = lottoGame.purchaseLotto(purchaseCount);
-        resultView.resultPurchase(lottoNumbers);
+        resultView.printResultPurchase(lottoNumbers);
 
         Prize prize = new Prize(inputView.inputWinningNumberLastWeek());
         prize.countPrize(lottoNumbers);
 
-        resultView.resultWinningStatistics(payMoney, prize);
+        resultView.printResultWinningStatistics(payMoney, prize);
     }
 }
