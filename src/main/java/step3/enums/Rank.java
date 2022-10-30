@@ -5,13 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Rank {
-    BASE(0, 0, 1000),
+    BASE(0, 0, 0),
     FIFTH(5, 3, 5000),
     FOURTH(4, 4, 50000),
     THIRD(3, 5, 1500000),
-    SECOND(2, 2, 30000000),
+    SECOND(2, 5, 30000000),
     FIRST(1, 6, 2000000000);
 
+    private static int MONEY = 1000;
 
     private final int rank;
     private final int count;
@@ -37,7 +38,7 @@ public enum Rank {
         rank.put(Rank.FIFTH.getCount(), 0);
         rank.put(Rank.FOURTH.getCount(), 0);
         rank.put(Rank.THIRD.getCount(), 0);
-        rank.put(Rank.THIRD.getCount() + Rank.SECOND.getCount(), 0);
+        rank.put(Rank.SECOND.getCount() + 2, 0);
         rank.put(Rank.FIRST.getCount(), 0);
 
         return rank;
@@ -53,17 +54,21 @@ public enum Rank {
     }
 
     public static int calculateLottoCount(int money) {
-        return money / Rank.BASE.amount;
+        return money / MONEY;
     }
 
-    public static double statistic(Map<Integer, Integer> statistics) {
+    public static double statistic(Map<Integer, Integer> statistics, int money) {
 
         double sum = statistics.get(Rank.FIFTH.getCount()) * Rank.FIFTH.amount;
         sum += statistics.get(Rank.FOURTH.getCount()) * Rank.FOURTH.amount;
         sum += statistics.get(Rank.THIRD.getCount()) * Rank.THIRD.amount;
-        sum += statistics.get(Rank.THIRD.getCount() + Rank.SECOND.getCount()) * Rank.SECOND.amount;
+        sum += statistics.get((Rank.SECOND.getCount()) + 2) * Rank.SECOND.amount;
         sum += statistics.get(Rank.FIRST.getCount()) * Rank.FIRST.amount;
-        return Math.floor(sum / Rank.BASE.amount * 100) / 100;
+
+        System.out.println(sum);
+        System.out.println(MONEY);
+        System.out.println(Math.floor(sum / money * 100) / 100);
+        return Math.floor(sum / money * 100) / 100;
     }
 
 }

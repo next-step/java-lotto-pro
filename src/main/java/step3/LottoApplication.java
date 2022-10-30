@@ -14,11 +14,11 @@ import step3.views.Output;
 
 public class LottoApplication {
     public static void main(String[] args) {
-
         Input input = new Input();
         Output output = new Output();
 
         output.purchase();
+        int money = input.inputNumber();
         int purchasingNumber = Rank.calculateLottoCount(input.inputNumber());
         Lottos lottos = initLottos(purchasingNumber);
 
@@ -30,7 +30,7 @@ public class LottoApplication {
         int bonusball = input.inputNumber();
 
         Map<Integer, Integer> statistics = result(lottos, inputNumbersWithComma, bonusball);
-        double returnOnInvestmentRate = Rank.statistic(statistics);
+        double returnOnInvestmentRate = Rank.statistic(statistics, money);
         output.statistic(statistics, returnOnInvestmentRate);
     }
 
