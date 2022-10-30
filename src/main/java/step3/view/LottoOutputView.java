@@ -26,13 +26,20 @@ public class LottoOutputView {
     }
 
     private static void printRankStats(LottoResultDto statusDto) {
-        statusDto.getRanks().forEach(rankDto -> {
-            if (rankDto.isRankTwo()) {
-                System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개\n", rankDto.getMatchCount(), rankDto.getWinningPrice(), rankDto.getWinningCount());
-                return;
-            }
-            System.out.printf("%d개 일치 (%d원)- %d개\n", rankDto.getMatchCount(), rankDto.getWinningPrice(), rankDto.getWinningCount());
-        });
+        statusDto.getRanks()
+                .stream()
+                .sorted((o1, o2) -> {
+                    if (o1.getMatchCount() == o2.getMatchCount()) return o1.isRankTwo() ? 1 : -1;
+                    return o1.getMatchCount() - o2.getMatchCount();
+                })
+                .filter(RankDto::isWin)
+                .forEach(rankDto -> {
+                    if (rankDto.isRankTwo()) {
+                        System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개\n", rankDto.getMatchCount(), rankDto.getWinningPrice(), rankDto.getWinningCount());
+                        return;
+                    }
+                    System.out.printf("%d개 일치 (%d원)- %d개\n", rankDto.getMatchCount(), rankDto.getWinningPrice(), rankDto.getWinningCount());
+                });
     }
 
     public static void printMinusStatus(double priceRatio) {

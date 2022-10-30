@@ -1,9 +1,7 @@
 package step3.model.dto;
 
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoResultDto {
     private final List<RankDto> ranks;
@@ -15,10 +13,7 @@ public class LottoResultDto {
     }
 
     public List<RankDto> getRanks() {
-        return ranks.stream()
-                .sorted(Comparator.comparingInt(RankDto::getMatchCount))
-                .filter(RankDto::isWin)
-                .collect(Collectors.toList());
+        return ranks;
     }
 
     public double getPriceRatio() {
