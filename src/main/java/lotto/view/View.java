@@ -30,6 +30,11 @@ public class View {
         return InputView.inputLotto();
     }
 
+    public LottoNumber insertBonusBall() {
+        OutputView.print("보너스 볼을 입력해 주세요.");
+        return InputView.inputBonusBall();
+    }
+
     public void printResult(LottoResult result) {
         OutputView.print("당첨 통계");
         OutputView.print("---------");

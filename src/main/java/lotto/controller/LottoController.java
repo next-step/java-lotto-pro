@@ -19,6 +19,6 @@ public class LottoController {
         view.printLottoCount(money.getBuyableLottoCount());
         lottos.buyLottos(money.getBuyableLottoCount());
         view.print(lottos.toString());
-        view.printResult(lottos.getResult(new WinningLotto(view.insertWinningLotto())));
+        view.printResult(lottos.getResult(new WinningLotto(view.insertWinningLotto(), view.insertBonusBall())));
     }
 }
