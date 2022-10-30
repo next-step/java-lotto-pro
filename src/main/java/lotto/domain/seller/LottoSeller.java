@@ -11,8 +11,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoSeller {
+    private static final int LOTTO_PRICE = 1000;
     public List<Lotto> sellAutoLotto(Money money) {
-        int lottoCount = money.possibleBuyLottoCount(LottoConstant.LOTTO_PRICE);
+        int lottoCount = money.possibleBuyLottoCount(LOTTO_PRICE);
         return Stream.generate(LottoNumberGenerator::generate)
                 .limit(lottoCount)
                 .map(Lotto::new)
