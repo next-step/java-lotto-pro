@@ -1,13 +1,11 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.domain.LottoNumber;
 
-public class LottoNumberGenerator {
+public class LottoNumberGenerator implements Generator {
 
     private static final int LOTTO_NUMBER_COUNT = 6;
 
@@ -19,7 +17,7 @@ public class LottoNumberGenerator {
             .collect(Collectors.toList());
     }
 
-    public static List<Integer> generate() {
+    public List<Integer> generate() {
         Collections.shuffle(fullLottoNumbers);
         List<Integer> lottoNumbers = fullLottoNumbers.subList(0, LOTTO_NUMBER_COUNT);
         Collections.sort(lottoNumbers);

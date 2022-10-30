@@ -11,17 +11,16 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 public class LottosTest {
+
+    private final Generator lottoNumberGenerator = new LottoNumberGenerator();
+
     private Lottos lottos;
 
     @BeforeEach
     void setUp() {
         lottos = Lottos.from(Arrays.asList(
-            Lotto.from(LottoNumberGenerator.generate()),
-            Lotto.from(LottoNumberGenerator.generate()),
-            Lotto.from(LottoNumberGenerator.generate()),
-            Lotto.from(LottoNumberGenerator.generate()),
-            Lotto.from(LottoNumberGenerator.generate()),
-            Lotto.from(LottoNumberGenerator.generate())
+            Lotto.from(lottoNumberGenerator.generate()),
+            Lotto.from(lottoNumberGenerator.generate())
         ));
     }
 
@@ -29,6 +28,8 @@ public class LottosTest {
     @ParameterizedTest
     @NullAndEmptySource
     void validateNotNullOrEmpty(List<Lotto> input) {
+
+
         assertThatThrownBy(() -> Lottos.from(input))
             .isInstanceOf(IllegalArgumentException.class);
     }
@@ -36,6 +37,11 @@ public class LottosTest {
     @DisplayName("생성된 로또의 사이즈를 반환하는지 확인")
     @Test
     void size() {
-        assertThat(lottos.size()).isEqualTo(6);
+        Lottos matchLottos = Lottos.from(Arrays.asList(
+            Lotto.from(lottoNumberGenerator.generate()),
+            Lotto.from(lottoNumberGenerator.generate())
+        ));
+
+        assertThat(lottos.size()).isEqualTo(matchLottos.size());
     }
 }
