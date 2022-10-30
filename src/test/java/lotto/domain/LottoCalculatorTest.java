@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoCalculatorTest {
 
     @Test
-    @DisplayName("로또 구매 최소비용 이상인지 확인")
+    @DisplayName("500원은 로또 구매 최소비용이 안된다.")
     void validateMoney() {
         assertThatThrownBy(() -> {
             LottoCalculator.availableToPurchaseCount(new Money(500));
@@ -19,13 +19,13 @@ public class LottoCalculatorTest {
     }
 
     @Test
-    @DisplayName("로또 구매 가능 개수 계산")
+    @DisplayName("5000원으로 구매 가능한 로또 개수는 5개이다")
     void availableToPurchaseCount() {
         assertThat(LottoCalculator.availableToPurchaseCount(new Money(5000))).isEqualTo(5);
     }
 
     @Test
-    @DisplayName("당첨 개수 확인")
+    @DisplayName("1등 당첨 개수는 2개이다")
     void winning() {
         WinningLotto winningLotto = new WinningLotto(new Lotto("1,2,3,4,5,6"));
         Lottos lottos = new Lottos(Arrays.asList(
@@ -36,7 +36,7 @@ public class LottoCalculatorTest {
     }
 
     @Test
-    @DisplayName("당첨 금액 확인")
+    @DisplayName("번호 3개를 맞춘 로또 2장 당첨 금액은 10000원이다")
     void winningTotalMoney() {
         WinningLotto winningLotto = new WinningLotto(new Lotto("1,2,3,4,5,6"));
         Lottos lottos = new Lottos(Arrays.asList(
@@ -48,7 +48,7 @@ public class LottoCalculatorTest {
     }
 
     @Test
-    @DisplayName("수익률 계산")
+    @DisplayName("1000원짜리 로또 5장으로 5000원에 당첨 됬다면 당첨수익률은 1.0이다")
     void rateOfReturn() {
         WinningLotto winningLotto = new WinningLotto(new Lotto("1,2,3,4,5,6"));
         Lottos lottos = new Lottos(Arrays.asList(

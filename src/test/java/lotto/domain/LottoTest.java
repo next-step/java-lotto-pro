@@ -23,13 +23,13 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 번호를 문자열로 입력받아 생성")
+    @DisplayName("로또번호를 문자열로 입력받아 생성")
     void create_문자열로_입력() {
         assertThat(new Lotto("1,2,3,4,5,6")).isNotNull();
     }
 
     @Test
-    @DisplayName("로또 번호를 번호 리스트를 입력받아 생성")
+    @DisplayName("로또번호를 숫자리스트를 입력받아 생성")
     void create_숫자로_입력() {
         assertThat(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))).isEqualTo(new Lotto("1,2,3,4,5,6"));
     }
@@ -37,7 +37,7 @@ public class LottoTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3", "1,3,3,4,4,4", ",", "1:2,3,4,5,600"})
-    @DisplayName("잘못된 로또 번호 문자열 입력받아 생성 오류 테스트")
+    @DisplayName("잘못된 로또번호를 문자열로 입력받아 생성하면 오류가 발생한다.")
     void create_문자열_에러(String numbers) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             new Lotto(numbers);
@@ -46,7 +46,7 @@ public class LottoTest {
 
     @ParameterizedTest
     @MethodSource("generateNumbers")
-    @DisplayName("잘못된 로또 번호들을 입력받아 생성 오류 테스트")
+    @DisplayName("잘못된 로또번호들을 숫자리스트로 입력받아 생성하면 오류가 발생한다.")
     void create_번호리스트_에러(List<Integer> numbers) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             new Lotto(numbers);
@@ -62,10 +62,16 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("매치 카운트 확인")
-    void match() {
+    @DisplayName("두개의 같은 로또의 매치 카운터는 6이다")
+    void match_6() {
         Lotto source = new Lotto("1,2,3,4,5,6");
         assertThat(source.match(new Lotto("1,2,3,4,5,6"))).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("완전히 서로 다른 번호를 가진 로또의 매치 카운터는 0이다")
+    void match_0() {
+        Lotto source = new Lotto("1,2,3,4,5,6");
         assertThat(source.match(new Lotto("7,8,9,10,11,12"))).isEqualTo(0);
     }
 

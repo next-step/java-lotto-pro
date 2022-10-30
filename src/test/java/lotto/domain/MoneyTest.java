@@ -10,13 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MoneyTest {
 
     @Test
-    @DisplayName("화폐 생성")
+    @DisplayName("1000원 짜리 화폐 생성")
     void create() {
         assertThat(new Money(10000)).isEqualTo(new Money("10000"));
     }
 
     @Test
-    @DisplayName("입력받은 화폐가 숫자인지 검증")
+    @DisplayName("화폐의 생성자는 텍스트가 올 수 없다")
     void parseLong() {
         assertThatThrownBy(() -> {
             new Money("천 원");
@@ -25,7 +25,7 @@ public class MoneyTest {
     }
 
     @Test
-    @DisplayName("화폐를 비교해서 크거나 같은지 확인")
+    @DisplayName("2000원짜리 화폐는 1000원짜리 화폐보다 크거나 같다")
     void greaterEqualThan() {
         Money source = new Money(2000);
         Money target = new Money(1000);
@@ -33,7 +33,7 @@ public class MoneyTest {
     }
 
     @Test
-    @DisplayName("화폐 나누기 몫")
+    @DisplayName("2000원짜리 화폐 나누기 1000원짜리 화폐는 몫이 2이다")
     void quotient() {
         Money source = new Money(2000);
         Money target = new Money(1000);
@@ -41,7 +41,7 @@ public class MoneyTest {
     }
 
     @Test
-    @DisplayName("화폐 더하기")
+    @DisplayName("2000원짜리 화폐 더하기 1000원짜리 화폐는 3000원이다.")
     void sum() {
         Money source = new Money(2000);
         Money target = new Money(1000);
@@ -49,7 +49,7 @@ public class MoneyTest {
     }
 
     @Test
-    @DisplayName("화폐 나누기 몫(소수점 포함)")
+    @DisplayName("14000원짜리 화폐 나누기(소수점 포함) 5000원짜리 화폐를 나누면 0.35이다")
     void divide() {
         Money source = new Money(5000);
         Money target = new Money(14000);

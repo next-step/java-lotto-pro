@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottoNumberTest {
 
     @Test
-    @DisplayName("로또 번호 생성")
+    @DisplayName("단일 로또번호 생성")
     void create() {
         LottoNumber lottoNumber = LottoNumber.of(1);
         assertThat(LottoNumber.of("1")).isEqualTo(lottoNumber);
@@ -19,7 +19,7 @@ public class LottoNumberTest {
 
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
-    @DisplayName("정상 범위 로또 번호인지 확인")
+    @DisplayName("0, 46은 정상 범위의 단일 로또번호가 아니다.")
     void outOfRange(int number) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             LottoNumber.of(number);

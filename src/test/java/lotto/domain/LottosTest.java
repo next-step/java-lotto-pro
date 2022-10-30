@@ -9,7 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
 
-
     @Test
     @DisplayName("로또 콜렉션 생성")
     void create() {
