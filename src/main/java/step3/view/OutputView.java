@@ -25,7 +25,7 @@ public class OutputView {
     }
 
     private static void printLottoResult(LottoCalculator calculator) {
-        for(int i = MIN_WINNER_NUMBER; i <= MAX_WINNER_NUMBER; i++) {
+        for (int i = MIN_WINNER_NUMBER; i <= MAX_WINNER_NUMBER; i++) {
             System.out.println(calculator.createResultMessage(i));
         }
     }
@@ -33,8 +33,9 @@ public class OutputView {
     private static void printPurchasedCount(Lottos lottos) {
         System.out.printf(PURCHASED_LOTTO_TOTAL_COUNT_OUTPUT_MESSAGE, lottos.getPurchasedCount());
     }
+
     private static void printGeneratedLotto(Lottos lottos) {
-        for(Lotto lotto : lottos.getLottos()) {
+        for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.getNumbers());
         }
     }

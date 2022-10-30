@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import static step3.constant.Constant.*;
 import static step3.constant.WinnerRule.rules;
+
 public class LottoResult {
 
     private HashMap<Integer, Integer> result = new HashMap<>();
@@ -13,7 +14,7 @@ public class LottoResult {
     private double profitRate;
 
     public void addResult(int sameCount) {
-        if(isNotExistsCount(sameCount)) {
+        if (isNotExistsCount(sameCount)) {
             result.put(sameCount, 0);
         }
         int count = result.get(sameCount);
@@ -27,14 +28,14 @@ public class LottoResult {
         return profitRate;
     }
 
-    private void calculateProfit() {
-        profitRate = Math.floor(Double.valueOf(totalWinnerPrice) / totalPurchasedPrice * ONE_HUNDRED) / ONE_HUNDRED;
-    }
-
     private void sumWinnerPrice() {
         for (Integer winnerKey : result.keySet()) {
             totalWinnerPrice += Optional.ofNullable(rules.get(winnerKey)).orElse(0) * result.get(winnerKey);
         }
+    }
+
+    private void calculateProfit() {
+        profitRate = Math.floor(Double.valueOf(totalWinnerPrice) / totalPurchasedPrice * ONE_HUNDRED) / ONE_HUNDRED;
     }
 
     public boolean isNotExistsCount(int sameCount) {

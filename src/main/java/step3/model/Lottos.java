@@ -11,7 +11,7 @@ public class Lottos {
 
 
     public void addLottos() {
-        for(int i = 0; i < purchasedCount; i++) {
+        for (int i = 0; i < purchasedCount; i++) {
             Lotto lotto = new Lotto();
             lottos.add(lotto);
         }
@@ -21,12 +21,11 @@ public class Lottos {
         this.purchasedCount = price / EACH_LOTTO_PRICE;
     }
 
-
     public int getPurchasedCount() {
         return purchasedCount;
     }
 
-    public List<Lotto> getLottos(){
+    public List<Lotto> getLottos() {
         return lottos;
     }
 
