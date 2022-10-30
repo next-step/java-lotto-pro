@@ -16,16 +16,12 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<Lotto> makeLottos(int inputMoney) {
-        int num = count(inputMoney);
+    public List<Lotto> makeLottos(Money inputMoney) {
+        int num = inputMoney.dividedBy(PRICE_PER_LOTTO);
         for (int i = 0; i < num; i++) {
             lottos.add(new Lotto());
         }
         return lottos;
-    }
-
-    private int count(int inputMoney) {
-        return inputMoney / PRICE_PER_LOTTO;
     }
 
     public Winners findWinners(Lotto winLotto) {

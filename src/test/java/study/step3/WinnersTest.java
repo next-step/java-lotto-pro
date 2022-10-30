@@ -37,10 +37,10 @@ public class WinnersTest {
         Lottos lottos = new Lottos(lottoList);
 
         Winners winners = lottos.findWinners(winLotto);
-        int inputMoney = lottoList.size() * Lottos.PRICE_PER_LOTTO;
+        Money inputMoney = new Money(String.valueOf(lottoList.size() * Lottos.PRICE_PER_LOTTO));
         double earningRate = winners.earningRate(inputMoney);
 
         // 총 상금 예상 금액 1555000
-        assertThat(earningRate).isEqualTo((double) 1555000 / inputMoney);
+        assertThat(earningRate).isEqualTo(inputMoney.divide(1555000));
     }
 }

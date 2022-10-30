@@ -9,11 +9,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottosTest {
     @Test
     void 구입_금액대로_로또를_발급() {
-        int inputMoney = 14000;
+        Money inputMoney = new Money("14000");
         Lottos lottos = new Lottos();
 
         List<Lotto> lottoList = lottos.makeLottos(inputMoney);
 
-        assertThat(lottoList).hasSize(inputMoney / Lottos.PRICE_PER_LOTTO);
+        assertThat(lottoList).hasSize(inputMoney.dividedBy(Lottos.PRICE_PER_LOTTO));
     }
 }
