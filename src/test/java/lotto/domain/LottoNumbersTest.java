@@ -29,34 +29,34 @@ class LottoNumbersTest {
 
     @ParameterizedTest
     @MethodSource("로또번호_및_당첨번호")
-    void 당첨번호와_일치하는_개수_구하기(Set<LottoNumber> lottoNumbers, Set<LottoNumber> winningNumbers, Prize prize) {
+    void 당첨번호와_일치하는_개수_구하기(Set<LottoNumber> lottoNumbers, Set<LottoNumber> winningNumbers, Rank rank) {
         assertThat(new LottoNumbers(lottoNumbers).calculatePrize(new LottoNumbers(winningNumbers)))
-            .isEqualTo(prize);
+            .isEqualTo(rank);
     }
 
     private static Stream<Arguments> 로또번호_및_당첨번호() {
         return Stream.of(
             Arguments.of(//0개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {7, 8, 9, 10, 11, 12}),
-                Prize.NOTHING),
+                Rank.MISS),
             Arguments.of(//1개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 7, 8, 9, 10, 11}),
-                Prize.NOTHING),
+                Rank.MISS),
             Arguments.of(//2개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 2, 7, 8, 9, 10}),
-                Prize.NOTHING),
+                Rank.MISS),
             Arguments.of(//3개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 2, 3, 7, 8, 9}),
-                Prize.FOURTH),
+                Rank.FIFTH),
             Arguments.of(//4개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 2, 3, 4, 7, 8}),
-                Prize.THIRD),
+                Rank.FOURTH),
             Arguments.of(//5개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 7}),
-                Prize.SECOND),
+                Rank.THIRD),
             Arguments.of(//6개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}),
-                Prize.FIRST)
+                Rank.FIRST)
         );
     }
 

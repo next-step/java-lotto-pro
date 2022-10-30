@@ -13,14 +13,14 @@ public class LottoNumbers {
         this.numbers = numbers;
     }
 
-    public Prize calculatePrize(LottoNumbers winningLotto) {
+    public Rank calculatePrize(LottoNumbers winningLotto) {
         int winCount = 0;
         for (LottoNumber number : this.numbers) {
             if (winningLotto.contains(number)) {
                 winCount++;
             }
         }
-        return Prize.of(winCount);
+        return Rank.valueOf(winCount, false);
     }
 
     private void validate(Set<LottoNumber> numbers) {

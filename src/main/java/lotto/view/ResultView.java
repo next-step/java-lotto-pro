@@ -1,6 +1,6 @@
 package lotto.view;
 
-import static lotto.domain.Prize.*;
+import static lotto.domain.Rank.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
-import lotto.domain.Prize;
+import lotto.domain.Rank;
 
 public class ResultView {
 
@@ -24,12 +24,12 @@ public class ResultView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        List<Prize> prizes = Arrays.stream(values())
-            .filter(prize -> prize != NOTHING)
-            .sorted(Comparator.comparingInt(Prize::getMatchCount))
+        List<Rank> ranks = Arrays.stream(values())
+            .filter(prize -> prize != MISS)
+            .sorted(Comparator.comparingInt(Rank::getCountOfMatch))
             .collect(Collectors.toList());
-        for (Prize prize : prizes) {
-            System.out.println(String.format("%s- %d개", prize, lotto.getCount(prize)));
+        for (Rank rank : ranks) {
+            System.out.println(String.format("%s- %d개", rank, lotto.getCount(rank)));
         }
         System.out.println(String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", lotto.calculateRateOfReturn()));
     }

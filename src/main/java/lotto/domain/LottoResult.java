@@ -6,26 +6,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    private final Map<Prize, Integer> result;
+    private final Map<Rank, Integer> result;
 
     public LottoResult() {
         result = new HashMap<>();
-        for (Prize prize : Prize.values()) {
-            result.put(prize, 0);
+        for (Rank rank : Rank.values()) {
+            result.put(rank, 0);
         }
     }
 
-    public void addCount(Prize prize) {
-        result.put(prize, result.get(prize) + 1);
+    public void addCount(Rank rank) {
+        result.put(rank, result.get(rank) + 1);
     }
 
     public Integer matches(int count) {
-        Prize prize = Prize.of(count);
-        return result.get(prize);
+        Rank rank = Rank.valueOf(count, false);
+        return result.get(rank);
     }
 
-    public Integer getCount(Prize prize) {
-        return result.get(prize);
+    public Integer getCount(Rank rank) {
+        return result.get(rank);
     }
 
     public float calculateRateOfReturn() {
@@ -41,8 +41,8 @@ public class LottoResult {
 
     private int sumOfPrizeMoney() {
         int money = 0;
-        for (Prize prize : result.keySet()) {
-            money += prize.getSumOfMoney(result.get(prize));
+        for (Rank rank : result.keySet()) {
+            money += rank.getSumOfMoney(result.get(rank));
         }
         return money;
     }
