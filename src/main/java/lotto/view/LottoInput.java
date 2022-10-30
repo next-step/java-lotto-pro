@@ -10,15 +10,14 @@ public class LottoInput {
     private LottoInput() {
     }
 
-    public static Money inputMoney() {
+    public static int inputMoneyAndAvailableToPurchaseCount() {
         try {
             String input = InputConsole.inputMoneyForPurchaseLotto();
             Money money = new Money(input);
-            LottoCalculator.availableToPurchaseCount(money);
-            return money;
+            return LottoCalculator.availableToPurchaseCount(money);
         } catch (IllegalArgumentException e) {
             OutputConsole.out(e.getMessage());
-            return inputMoney();
+            return inputMoneyAndAvailableToPurchaseCount();
         }
     }
 
