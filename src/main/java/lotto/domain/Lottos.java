@@ -53,7 +53,7 @@ public class Lottos {
         }
 
         return lottoRanks.stream()
-            .filter(lottoRank -> !Objects.isNull(lottoRank))
+            .filter(lottoRank -> !LottoRank.isNone(lottoRank))
             .collect(Collectors.toList());
     }
 
