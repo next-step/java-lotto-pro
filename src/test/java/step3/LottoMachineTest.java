@@ -1,6 +1,7 @@
 package step3;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoMachineTest {
 
@@ -33,7 +35,7 @@ public class LottoMachineTest {
         //given
         LottoMoney lottoMoney = new LottoMoney(price);
         Lottos lottos = new Lottos(LottoFactory.createLottos(lottoMoney));
-        LottoMachine lottoMachine = new LottoMachine(lottoMoney,lottos);
+        LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
 
         //when
         LottosNumberDto lottosNumberDto = lottoMachine.getLottoNumber();
@@ -53,7 +55,7 @@ public class LottoMachineTest {
         }
         LottoMoney lottoMoney = new LottoMoney(14000);
         Lottos lottos = new Lottos(lottoList);
-        LottoMachine lottoMachine = new LottoMachine(lottoMoney,lottos);
+        LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{11, 22, 23, 24, 25, 26})
                 .boxed()
                 .map(LottoNumber::valueOf)
@@ -67,6 +69,50 @@ public class LottoMachineTest {
     }
 
     @ParameterizedTest
+    @ValueSource(ints = {1, 3, 4, 5, 6})
+    @DisplayName("중복된 번호가 있는경우 예외발생")
+    void test_that_throws_exceptino_if_number_has_duplicated(int count) {
+        //given
+        List<Lotto> lottoList = new ArrayList();
+        lottoList.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
+
+        LottoMoney lottoMoney = new LottoMoney(14000);
+        Lottos lottos = new Lottos(lottoList);
+        LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
+        List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, count, 3, 4, 5, 6})
+                .boxed()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
+
+        //when,then
+        assertThatThrownBy(() -> lottoMachine.getLottoResult(winningNumbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("고유한 번호만 허용합니다");
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
+    @DisplayName("보너스볼 중복된 번호가 있는경우 예외발생")
+    void test_that_throws_exceptino_if_bonusnumber_has_duplicated(int count) {
+        //given
+        List<Lotto> lottoList = new ArrayList();
+        lottoList.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
+
+        LottoMoney lottoMoney = new LottoMoney(14000);
+        Lottos lottos = new Lottos(lottoList);
+        LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
+        List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
+                .boxed()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
+
+        //when,then
+        assertThatThrownBy(() -> lottoMachine.getLottoResult(winningNumbers, LottoNumber.valueOf(count)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("고유한 번호만 허용합니다");
+    }
+
+    @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5})
     @DisplayName("5등 당첨된 경우 수익률은  ( 5등상금 * 당첨된 로또개수)/구입금액")
     void test_that_it_returns_winning_rate_if_winning_number_match_at5(int count) {
@@ -77,7 +123,7 @@ public class LottoMachineTest {
         }
         LottoMoney lottoMoney = new LottoMoney(14000);
         Lottos lottos = new Lottos(lottoList);
-        LottoMachine lottoMachine = new LottoMachine(lottoMoney,lottos);
+        LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
@@ -101,7 +147,7 @@ public class LottoMachineTest {
         }
         LottoMoney lottoMoney = new LottoMoney(14000);
         Lottos lottos = new Lottos(lottoList);
-        LottoMachine lottoMachine = new LottoMachine(lottoMoney,lottos);
+        LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 5, 6})
                 .boxed()
                 .map(LottoNumber::valueOf)
@@ -126,7 +172,7 @@ public class LottoMachineTest {
         }
         LottoMoney lottoMoney = new LottoMoney(14000);
         Lottos lottos = new Lottos(lottoList);
-        LottoMachine lottoMachine = new LottoMachine(lottoMoney,lottos);
+        LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 15, 6})
                 .boxed()
                 .map(LottoNumber::valueOf)
@@ -152,7 +198,7 @@ public class LottoMachineTest {
         }
         LottoMoney lottoMoney = new LottoMoney(14000);
         Lottos lottos = new Lottos(lottoList);
-        LottoMachine lottoMachine = new LottoMachine(lottoMoney,lottos);
+        LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 15, 16})
                 .boxed()
                 .map(LottoNumber::valueOf)

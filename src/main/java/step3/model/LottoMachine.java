@@ -14,23 +14,27 @@ public class LottoMachine {
 
     private final Lottos lottos;
     private final LottoMoney lottoMoney;
-    private static final String DUPLICATE_NUMBER_MESSAGE = "보너스번호는 유일한 번호만 허용합니다";
+    private static final String DUPLICATE_NUMBER_MESSAGE = "고유한 번호만 허용합니다";
 
-    public LottoMachine(LottoMoney lottoMoney,Lottos lottos) {
+    public LottoMachine(LottoMoney lottoMoney, Lottos lottos) {
         this.lottoMoney = lottoMoney;
         this.lottos = lottos;
     }
 
     public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers) {
+        validateLottoNumbers(winningNumbers);
         Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(winningNumbers);
-        List<RankDto> rankDtos = getRanks(rankOfLottos);
-        double getPriceRatio = getPriceRatio(rankOfLottos);
-        return new LottoResultDto(rankDtos, getPriceRatio);
+        return getLottoResultDto(rankOfLottos);
     }
 
     public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        validateLottoNumbers(winningNumbers, bonusNumber);
+        validateLottoNumbers(winningNumbers);
+        validateBonusNumbers(winningNumbers, bonusNumber);
         Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(winningNumbers, bonusNumber);
+        return getLottoResultDto(rankOfLottos);
+    }
+
+    private LottoResultDto getLottoResultDto(Map<Rank, Integer> rankOfLottos) {
         List<RankDto> rankDtos = getRanks(rankOfLottos);
         double getPriceRatio = getPriceRatio(rankOfLottos);
         return new LottoResultDto(rankDtos, getPriceRatio);
@@ -46,11 +50,13 @@ public class LottoMachine {
                 .collect(Collectors.toList());
     }
 
-    private void validateLottoNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        if (winningNumbers.contains(bonusNumber)) {
+    private void validateLottoNumbers(List<LottoNumber> winningNumbers) {
+        if (new HashSet(winningNumbers).size() != winningNumbers.size())
             throw new IllegalArgumentException(DUPLICATE_NUMBER_MESSAGE);
-        }
+    }
 
+    private void validateBonusNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) throw new IllegalArgumentException(DUPLICATE_NUMBER_MESSAGE);
     }
 
     private double getPriceRatio(Map<Rank, Integer> rankOfLottos) {
