@@ -4,40 +4,35 @@ import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.NullSource;
 
-class LottoTest {
+class LottoNumbersTest {
     @ParameterizedTest
-    @ValueSource(ints = {3000, 5000, 13200})
-    void 돈을_입력받고_구한갯수만큼_로또를구매한다(int money) {
-        assertThat(new Lotto(money).getPurchaseLottoList()).hasSize(new LottoMoney(money).count());
+    @NullSource
+    @MethodSource("로또번호")
+    void 로또번호_생성하기(Set<LottoNumber> numbers) {
+        assertThatThrownBy(() -> new LottoNumbers(numbers))
+            .isInstanceOf(IllegalStateException.class);
     }
 
-    @Test
-    void 보너스번호가_당첨번호와_같으면_예외를_던진다() {
-        Lotto lotto = new Lotto(
-            Collections.singletonList(new LottoNumbers(toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}))));
-        assertThatThrownBy(() -> lotto.computeResult(new LottoNumbers(toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6})),
-            new LottoNumber(1)))
-            .isInstanceOf(IllegalArgumentException.class);
+    private static Stream<Arguments> 로또번호() {
+        return Stream.of(
+            Arguments.of(toLottoNumberSet(new int[] {1, 1, 2, 3, 4, 5})),
+            Arguments.of(toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6, 7})));
     }
 
     @ParameterizedTest
     @MethodSource("로또번호_및_당첨번호")
-    void 당첨번호를_입력받아_당첨결과를_얻는다(Set<LottoNumber> lottoNumbers, Set<LottoNumber> winningNumbers, Rank rank,
+    void 당첨번호와_일치하는_개수_구하기(Set<LottoNumber> lottoNumbers, Set<LottoNumber> winningNumbers, Rank rank,
         LottoNumber bonusNumber) {
-        Lotto lotto = new Lotto(Collections.singletonList(new LottoNumbers(lottoNumbers)));
-        LottoResult result = lotto.computeResult(new LottoNumbers(winningNumbers),
-            bonusNumber);
-        assertThat(result.getCount(rank)).isEqualTo(1);
+        assertThat(new LottoNumbers(lottoNumbers).calculateRank(new LottoNumbers(winningNumbers), bonusNumber))
+            .isEqualTo(rank);
     }
 
     public static Stream<Arguments> 로또번호_및_당첨번호() {
@@ -72,5 +67,4 @@ class LottoTest {
     private static Set<LottoNumber> toLottoNumberSet(int[] ints) {
         return Arrays.stream(ints).boxed().map(LottoNumber::new).collect(toSet());
     }
-
 }
