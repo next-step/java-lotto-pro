@@ -1,8 +1,13 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.LottoGame;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoTickets;
+import lotto.domain.WinningLottoNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
 
 public class LottoController {
 
@@ -18,8 +23,8 @@ public class LottoController {
 
         ResultView.lottoPurchase(lottoTickets.ticketCount(), lottoTickets.toString());
 
-        LottoNumbers winningLottoNumbers = new LottoNumbers(
-                new WinningLottoNumbers(InputView.getLastWeekWinningNumber()).getLottoNumbers());
+        List<Integer> winningLottoNumberList = new WinningLottoNumbers(InputView.getLastWeekWinningNumber()).getLottoNumbers();
+        LottoNumbers winningLottoNumbers = new LottoNumbers(winningLottoNumberList);
 
         lottoGame.makeLottoResult(winningLottoNumbers, lottoTickets);
 
