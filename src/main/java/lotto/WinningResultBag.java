@@ -10,7 +10,7 @@ public class WinningResultBag {
     public static final int MATCH_FOUR_REWARD = 50000;
     public static final int MATCH_FIVE_REWARD = 1500000;
     public static final int MATCH_SIX_REWARD = 2000000000;
-    List<WinningResult> results;
+    private final List<WinningResult> results;
 
     public WinningResultBag(List<WinningResult> results) {
         this.results = results;
