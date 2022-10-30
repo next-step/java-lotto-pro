@@ -2,11 +2,7 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import lotto.model.Lotto;
-import lotto.model.LottoNumber;
 
 class LottoTest {
 
@@ -32,7 +28,7 @@ class LottoTest {
 	@Test
 	void 로또의_번호와_승리번호의_일치_갯수_확인() {
 		Lotto lotto = new Lotto(LottoNumber.of(6, 5, 4, 3, 2, 1));
-		Assertions.assertThat(lotto.match(new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 7)))).isEqualTo(5);
+		assertThat(lotto.match(new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 7)))).isEqualTo(5);
 	}
 
 }
