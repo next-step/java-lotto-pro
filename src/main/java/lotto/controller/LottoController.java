@@ -34,9 +34,9 @@ public class LottoController {
     private void numberOfAffordableLottoLeft(LottoTicketsBucket lottoTicketsBucket) {
         final List<Integer> candidates = intsFromOneToFortyFive();
         final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(candidates);
-        final LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator);
-        LottoTicketPrinter.print(lottoTicket);
-        lottoTicketsBucket.addLottoTicket(lottoTicket);
+//        final LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator);
+//        LottoTicketPrinter.print(lottoTicket);
+//        lottoTicketsBucket.addLottoTicket(lottoTicket);
     }
 
     private List<Integer> intsFromOneToFortyFive() {

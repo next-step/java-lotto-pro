@@ -1,48 +1,40 @@
 package lotto.model.lotto.ticket;
 
-import lotto.constant.numbers.LottoConstant;
-import lotto.model.winning.numbers.WinningNumbers;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
-    protected final List<Integer> numbers;
+    protected static final int NUMBER_COUNT_IN_SINGLE_LOTTO_TICKET = 6;
+    private static final int LOTTO_MINIMUM_NUMBER = 1;
+    private static final int LOTTO_MAXIMUM_NUMBER = 45;
+    protected final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(LottoNumberGenerator lottoNumberGenerator) {
-        numbers = new ArrayList<>(LottoConstant.COUNT_OF_NUMBERS_IN_SINGLE_LOTTO_TICKET);
-        for (int i = 0; i < LottoConstant.COUNT_OF_NUMBERS_IN_SINGLE_LOTTO_TICKET; ++i) {
-            final int generatedRandomNumber = lottoNumberGenerator.generate();
-            numbers.add(generatedRandomNumber);
+    public LottoTicket() {
+        this.lottoNumbers = generateLottoNumbers();
+    }
+
+    private List<LottoNumber> generateLottoNumbers() {
+        final List<Integer> candidates = intsFromOneToFortyFive();
+        Collections.shuffle(candidates);
+        final List<Integer> numbers = candidates.subList(0, NUMBER_COUNT_IN_SINGLE_LOTTO_TICKET);
+        Collections.sort(numbers);
+        return toLottoNumbers(numbers);
+    }
+
+    private List<Integer> intsFromOneToFortyFive() {
+        final List<Integer> fullCandidateList = new ArrayList<>(LOTTO_MAXIMUM_NUMBER);
+        for (int i = LOTTO_MINIMUM_NUMBER; i <= LOTTO_MAXIMUM_NUMBER; ++i) {
+            fullCandidateList.add(i);
         }
+        return fullCandidateList;
     }
 
-    public LottoTicket(List<Integer> numbers) {
-        this.numbers = numbers;
-    }
-
-    public int sameNumbersCount(WinningNumbers winningNumbers) {
-        List<Integer> intWinningNumbers = winningNumbers.primitiveNumbers();
-        int count = 0;
-        for (int current : numbers) {
-            count = incrementCountIfWinningNumbersContainCurrentNumber(intWinningNumbers, current, count);
+    private List<LottoNumber> toLottoNumbers(List<Integer> numbers) {
+        final List<LottoNumber> lottoNumbersData = new ArrayList<>(numbers.size());
+        for (int number : numbers) {
+            lottoNumbersData.add(new LottoNumber(number));
         }
-        return count;
-    }
-
-    private int incrementCountIfWinningNumbersContainCurrentNumber(List<Integer> intWinningNumbers, int current,
-                                                                   int count) {
-        if (intWinningNumbers.contains(current)) {
-            return count + 1;
-        }
-        return count;
-    }
-
-    @Override
-    public String toString() {
-        final List<Integer> numbersToString = new ArrayList<>(numbers);
-        Collections.sort(numbersToString);
-        return numbersToString.toString();
+        return lottoNumbersData;
     }
 }

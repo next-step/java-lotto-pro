@@ -45,7 +45,7 @@ class LottoTicketsBucketTest {
             for (int i = 0; i < numberOfTickets; ++i) {
                 final List<Integer> candidates = intsFromOneToFortyFive();
                 final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(candidates);
-                lottoTicketsBucketForTest.addLottoTicket(new LottoTicket(lottoNumberGenerator));
+//                lottoTicketsBucketForTest.addLottoTicket(new LottoTicket(lottoNumberGenerator));
             }
             assertThat(lottoTicketsBucketForTest.bucketSize()).isEqualTo(numberOfTickets);
         }
@@ -70,7 +70,7 @@ class LottoTicketsBucketTest {
             for (int i = 0; i < numberOfLottoTickets; ++i) {
                 final List<Integer> candidates = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
                 final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(candidates);
-                lottoTicketsBucketForTest.addLottoTicket(new LottoTicket(lottoNumberGenerator));
+//                lottoTicketsBucketForTest.addLottoTicket(new LottoTicket(lottoNumberGenerator));
             }
             assertThat(lottoTicketsBucketForTest.bucketSize()).isEqualTo(numberOfLottoTickets);
         }
@@ -98,12 +98,12 @@ class LottoTicketsBucketTest {
         @DisplayName("6개 일치 6명")
         void countSixSameEqualsSix() {
             final List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(
-                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
-                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
-                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
-                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
-                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
-                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)))
+//                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+//                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+//                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+//                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+//                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+//                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)))
             ));
             final LottoTicketsBucketForTest lottoTicketsBucketForTest = new LottoTicketsBucketForTest(lottoTickets);
             final int[] countAll = lottoTicketsBucketForTest.sameNumberCountOfAllLottoTickets(winningNumbers);
@@ -122,10 +122,10 @@ class LottoTicketsBucketTest {
         @DisplayName("3개 일치, 4개 일치, 5개 일치, 6개 일치 각각 1명 씩")
         void countThreeOneCountFourOneCountFiveOneCountSixOne() {
             final List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(
-                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
-                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 16))),
-                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 25, 16))),
-                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 44, 25, 16)))
+//                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+//                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 16))),
+//                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 25, 16))),
+//                    new LottoTicket(new ArrayList<>(Arrays.asList(1, 2, 3, 44, 25, 16)))
             ));
             final LottoTicketsBucketForTest lottoTicketsBucketForTest = new LottoTicketsBucketForTest(lottoTickets);
             final int[] countAll = lottoTicketsBucketForTest.sameNumberCountOfAllLottoTickets(winningNumbers);

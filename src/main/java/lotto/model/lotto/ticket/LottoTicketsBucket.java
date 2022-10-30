@@ -30,8 +30,8 @@ public class LottoTicketsBucket {
 
     public int[] sameNumberCountOfAllLottoTickets(WinningNumbers winningNumbers) {
         for (LottoTicket lottoTicket : lottoTickets) {
-            final int count = lottoTicket.sameNumbersCount(winningNumbers);
-            ++lottoSameNumberCount[count];
+//            final int count = lottoTicket.sameNumbersCount(winningNumbers);
+//            ++lottoSameNumberCount[count];
         }
         return lottoSameNumberCount;
     }
