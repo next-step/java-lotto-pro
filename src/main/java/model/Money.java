@@ -1,10 +1,10 @@
 package model;
 
-import static common.Constants.LOTTO_PRICE;
-
 public class Money {
 
     private final int money;
+
+    private static final int LOTTO_PRICE = 1000;
 
     public Money(int inputMoney) {
         if (inputMoney < LOTTO_PRICE) {

@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static common.Constants.ADD_WIN_NUMBER_COUNT;
-
 public class LottoNumber {
 
     private final List<Integer> number;
+    private static final int ADD_WIN_NUMBER_COUNT = 1;
 
     public LottoNumber(List<Integer> number) {
         Collections.sort(number);

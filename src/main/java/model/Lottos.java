@@ -4,8 +4,6 @@ import model.strategy.NumberStrategy;
 
 import java.util.List;
 
-import static common.Constants.ADD_WIN_NUMBER_COUNT;
-
 public class Lottos {
 
     private final List<LottoNumber> lotto;

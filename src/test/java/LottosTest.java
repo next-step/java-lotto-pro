@@ -1,5 +1,5 @@
-import model.Lottos;
 import model.LottoNumber;
+import model.Lottos;
 import model.Money;
 import model.strategy.MockStrategy;
 import model.strategy.RandomStrategy;
@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static common.Constants.END_LOTTO_NUMBER;
-import static common.Constants.START_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -36,7 +34,8 @@ class LottosTest {
     void 로또숫자의범위는_1에서_45여야한다() {
         int money = 10000;
         List<Integer> arrangeNumber = new ArrayList<>();
-        for (int i = START_LOTTO_NUMBER; i <= END_LOTTO_NUMBER; i++) {
+
+        for (int i = 0; i <= 45; i++) {
             arrangeNumber.add(i);
         }
 

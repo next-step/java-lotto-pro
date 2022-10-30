@@ -2,10 +2,10 @@ package model;
 
 import java.util.Map;
 
-import static common.Constants.ADD_WIN_MONEY_STANDARD;
-import static common.Constants.ZERO_WIN_MONEY;
-
 public class Revenue {
+
+    private static final int ZERO_WIN_MONEY = 0;
+    private static final int ADD_WIN_MONEY_STANDARD = 0;
 
     private int winMoney = 0;
 

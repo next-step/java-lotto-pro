@@ -6,9 +6,9 @@ import model.LottoRankType;
 import java.util.List;
 import java.util.Map;
 
-import static common.Constants.STANDARD_RESULT_PERCENT;
-
 public class OutPutView {
+
+    private static final double STANDARD_RESULT_PERCENT = 0.0;
 
     public static void outPutLottoNumber(List<LottoNumber> buyLotto) {
         for (LottoNumber lotto : buyLotto) {

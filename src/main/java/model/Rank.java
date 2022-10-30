@@ -5,12 +5,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static common.Constants.ADD_LOTTO_COUNT;
 import static model.LottoRankType.*;
 
 public class Rank {
 
     private final Map<LottoRankType, Integer> countRank;
+
+    private final static int ADD_LOTTO_COUNT = 1;
 
     public Rank() {
         this.countRank = new TreeMap<>();

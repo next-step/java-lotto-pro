@@ -3,12 +3,12 @@ package model.strategy;
 import java.util.Collections;
 import java.util.List;
 
-import static common.Constants.END_ARRANGE_NUMBER;
-import static common.Constants.START_ARRANGE_NUMBER;
-
 public class RandomStrategy implements NumberStrategy {
 
     List<Integer> arrangeLottoNumber;
+
+    private static final int START_ARRANGE_NUMBER = 0;
+    private static final int END_ARRANGE_NUMBER = 6;
 
 
     public RandomStrategy(List<Integer> arrangeNumber) {

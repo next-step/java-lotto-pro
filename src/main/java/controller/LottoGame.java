@@ -11,10 +11,10 @@ import view.OutPutView;
 import java.util.ArrayList;
 import java.util.List;
 
-import static common.Constants.END_LOTTO_NUMBER;
-import static common.Constants.START_LOTTO_NUMBER;
-
 public class LottoGame {
+
+    private static final int START_LOTTO_NUMBER = 1;
+    private static final int END_LOTTO_NUMBER = 45;
 
     public void start() {
         int money = InputView.moneyInput();
