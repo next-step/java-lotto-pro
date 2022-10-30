@@ -16,9 +16,9 @@ public class LottoGameMain {
         List<LottoNumber> lottoNumbers = lottoGame.purchaseLotto(purchaseCount);
         resultView.resultPurchase(lottoNumbers);
 
-        LottoNumbers purchasedLottoNumber = new LottoNumbers(lottoNumbers);
-        purchasedLottoNumber.countPrize(inputView.inputWinningNumberLastWeek());
+        Prize prize = new Prize(inputView.inputWinningNumberLastWeek());
+        prize.countPrize(lottoNumbers);
 
-        resultView.resultWinningStatistics(payMoney, purchasedLottoNumber);
+        resultView.resultWinningStatistics(payMoney, prize);
     }
 }
