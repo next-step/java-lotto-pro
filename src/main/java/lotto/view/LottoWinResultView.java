@@ -1,16 +1,15 @@
 package lotto.view;
 
 import lotto.controller.LottoController;
+import lotto.controller.dto.BoughtLottoTicketsResponse;
 import lotto.controller.dto.LottoWinResultResponse;
 import lotto.controller.dto.LottoWinResultsRequest;
 import lotto.controller.dto.LottoWinResultsResponse;
-import lotto.controller.dto.PurchasedLottoTicketsResponse;
 import lotto.controller.dto.WinningLottoTicketResponse;
 import lotto.domain.ProfitMargin;
 import utils.InputHandler;
 
 public class LottoWinResultView {
-
 	private static final String WIN_RESULT_OUTPUT = "당첨 통계 \n--------- \n";
 	private static final String BONUS_NUMBER_PROMPT = "보너스 볼을 입력해 주세요.";
 	private static final String PROFIT_RESULT_OUTPUT = "총 수익률은 %s입니다.";
@@ -22,18 +21,18 @@ public class LottoWinResultView {
 		this.lottoController = lottoController;
 	}
 
-	public void printWinResult(PurchasedLottoTicketsResponse purchasedLottoTickets,
+	public void printWinResult(BoughtLottoTicketsResponse boughtLottoTickets,
 							   WinningLottoTicketResponse winningLottoTicketResponse) {
 		LottoWinResultsResponse lottoWinResultsResponse = lottoController.getWinResults(
-			getWinResultRequest(purchasedLottoTickets, winningLottoTicketResponse));
+			getWinResultRequest(boughtLottoTickets, winningLottoTicketResponse));
 
 		printMatchCount(lottoWinResultsResponse);
 		printProfitMargin(lottoWinResultsResponse);
 	}
 
-	private LottoWinResultsRequest getWinResultRequest(PurchasedLottoTicketsResponse purchasedLottoTickets,
+	private LottoWinResultsRequest getWinResultRequest(BoughtLottoTicketsResponse boughtLottoTickets,
 													   WinningLottoTicketResponse winningLottoTicketResponse) {
-		return new LottoWinResultsRequest(purchasedLottoTickets, winningLottoTicketResponse, inputBonusNumber());
+		return new LottoWinResultsRequest(boughtLottoTickets, winningLottoTicketResponse, inputBonusNumber());
 	}
 
 	private int inputBonusNumber() {

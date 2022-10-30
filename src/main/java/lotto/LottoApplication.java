@@ -2,10 +2,10 @@ package lotto;
 
 import lotto.controller.LottoController;
 import lotto.controller.LottoControllerFactory;
-import lotto.controller.dto.PurchasedLottoTicketsResponse;
+import lotto.controller.dto.BoughtLottoTicketsResponse;
 import lotto.controller.dto.WinningLottoTicketResponse;
 import lotto.view.LastWeekWinLottoTicketView;
-import lotto.view.LottoPurchaseView;
+import lotto.view.LottoBuyingView;
 import lotto.view.LottoWinResultView;
 
 public class LottoApplication {
@@ -13,14 +13,14 @@ public class LottoApplication {
 	private static final LottoController lottoController = LottoControllerFactory.createLottoController();
 
 	public static void main(String[] args) {
-		LottoPurchaseView lottoPurchaseView = createLottoPurchaseView();
+		LottoBuyingView lottoBuyingView = createLottoBuyingView();
 		LastWeekWinLottoTicketView lastWeekWinLottoTicketView = createLastWeekWinLottoTicketView();
 		LottoWinResultView lottoWinResultView = createLottoWinResultView();
 
-		PurchasedLottoTicketsResponse purchaseLottoTickets = lottoPurchaseView.purchaseLotto();
+		BoughtLottoTicketsResponse boughtLottoTickets = lottoBuyingView.buyLottoTickets();
 		WinningLottoTicketResponse lastWeekWinLottoTicket = lastWeekWinLottoTicketView.getLastWeekWinLotto();
 
-		lottoWinResultView.printWinResult(purchaseLottoTickets, lastWeekWinLottoTicket);
+		lottoWinResultView.printWinResult(boughtLottoTickets, lastWeekWinLottoTicket);
 	}
 
 	private static LottoWinResultView createLottoWinResultView() {
@@ -31,7 +31,7 @@ public class LottoApplication {
 		return new LastWeekWinLottoTicketView(lottoController);
 	}
 
-	private static LottoPurchaseView createLottoPurchaseView() {
-		return new LottoPurchaseView(lottoController);
+	private static LottoBuyingView createLottoBuyingView() {
+		return new LottoBuyingView(lottoController);
 	}
 }

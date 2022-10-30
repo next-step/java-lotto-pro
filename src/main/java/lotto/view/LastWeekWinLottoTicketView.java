@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.controller.LottoController;
 import lotto.controller.dto.WinningLottoTicketResponse;
+import utils.InputHandler;
 
 public class LastWeekWinLottoTicketView {
 
@@ -14,7 +15,7 @@ public class LastWeekWinLottoTicketView {
 
 	public WinningLottoTicketResponse getLastWeekWinLotto() {
 		System.out.println(INPUT_PROMPT_OUTPUT);
-		WinningLottoTicketResponse lastWeekWinLottoTicket = lottoController.getLottoTicket();
+		WinningLottoTicketResponse lastWeekWinLottoTicket = lottoController.getWinningLottoTicket(InputHandler.input());
 
 		System.out.println(lastWeekWinLottoTicket);
 		System.out.println();

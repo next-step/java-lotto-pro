@@ -5,20 +5,19 @@ import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
 public class LottoWinResultsRequest {
-	private final PurchasedLottoTicketsResponse purchasePurchasedLottoTicketsResponse;
+	private final BoughtLottoTicketsResponse boughtLottoTicketsResponse;
 	private final WinningLottoTicketResponse winningLottoTicketResponse;
 	private final int bonusNumber;
 
-	public LottoWinResultsRequest(PurchasedLottoTicketsResponse purchasePurchasedLottoTicketsResponse,
+	public LottoWinResultsRequest(BoughtLottoTicketsResponse boughtLottoTicketsResponse,
 								  WinningLottoTicketResponse winningLottoTicketResponse, int bonusNumber) {
-
-		this.purchasePurchasedLottoTicketsResponse = purchasePurchasedLottoTicketsResponse;
+		this.boughtLottoTicketsResponse = boughtLottoTicketsResponse;
 		this.winningLottoTicketResponse = winningLottoTicketResponse;
 		this.bonusNumber = bonusNumber;
 	}
 
-	public LottoTickets getPurchasedLottoTickets() {
-		return purchasePurchasedLottoTicketsResponse.toLottoTickets();
+	public LottoTickets getBoughtLottoTickets() {
+		return boughtLottoTicketsResponse.toLottoTickets();
 	}
 
 	public LottoTicket getWinningLottoTicket() {

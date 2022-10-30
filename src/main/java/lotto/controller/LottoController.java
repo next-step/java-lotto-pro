@@ -4,16 +4,15 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lotto.controller.dto.BoughtLottoTicketsResponse;
 import lotto.controller.dto.LottoWinResultsRequest;
 import lotto.controller.dto.LottoWinResultsResponse;
-import lotto.controller.dto.PurchasedLottoTicketsResponse;
 import lotto.controller.dto.WinningLottoTicketResponse;
 import lotto.domain.AutoLottoTicketsVendor;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoWinPrizes;
 import money.Money;
-import utils.InputHandler;
 import utils.SplitStrings;
 import utils.StringSplitter;
 
@@ -27,20 +26,23 @@ public class LottoController {
 		this.autoLottoTicketsVendor = autoLottoTicketsVendor;
 	}
 
-	private LottoTickets buyManualLottoTickets(List<List<Integer>> manualLottoNumbers) {
-		return LottoTickets.ofList(manualLottoNumbers);
+	public BoughtLottoTicketsResponse buyLottoTickets(int buyingLottoTicketsAmount,
+													  List<List<Integer>> manualLottoNumbers) {
+		return buyLottoTickets(Money.wons(buyingLottoTicketsAmount), manualLottoNumbers);
 	}
 
-	public PurchasedLottoTicketsResponse quickPick(Money inputMoneyToPurchase) {
-		int buyingAutoLottoTicketsCount = getBuyingAutoLottoTicketsCounts(inputMoneyToPurchase);
+	public BoughtLottoTicketsResponse buyLottoTickets(Money buyingLottoTicketsAmount,
+													  List<List<Integer>> manualLottoNumbers) {
+		int buyingAutoLottoTicketsCount = getBuyingAutoLottoTicketsCounts(buyingLottoTicketsAmount, manualLottoNumbers);
 
-		return PurchasedLottoTicketsResponse.of(
-			autoLottoTicketsVendor.buyAutoLottoTickets(buyingAutoLottoTicketsCount));
+		LottoTickets manualLottoTickets = createManualLottoTickets(manualLottoNumbers);
+		LottoTickets autoLottoTickets = buyAutoLottoTickets(buyingAutoLottoTicketsCount);
+
+		return BoughtLottoTicketsResponse.of(manualLottoTickets, autoLottoTickets);
 	}
 
-	public WinningLottoTicketResponse getLottoTicket() {
-		String input = InputHandler.input();
-		SplitStrings splitStrings = StringSplitter.split(input);
+	public WinningLottoTicketResponse getWinningLottoTicket(String winningLottoTicket) {
+		SplitStrings splitStrings = StringSplitter.split(winningLottoTicket);
 
 		return WinningLottoTicketResponse.of(
 			splitStrings.stream()
@@ -49,12 +51,29 @@ public class LottoController {
 	}
 
 	public LottoWinResultsResponse getWinResults(LottoWinResultsRequest request) {
-		LottoTickets purchaseLottoTickets = request.getPurchasedLottoTickets();
+		LottoTickets boughtLottoTickets = request.getBoughtLottoTickets();
 		LottoTicket winningLottoTicket = request.getWinningLottoTicket();
-		LottoWinPrizes lottoWinPrizes = purchaseLottoTickets.match(winningLottoTicket,
+		LottoWinPrizes lottoWinPrizes = boughtLottoTickets.match(winningLottoTicket,
 			request.getBonusLottoNumber());
 
 		return LottoWinResultsResponse.of(lottoWinPrizes, lottoPrice);
+	}
+
+	private LottoTickets createManualLottoTickets(List<List<Integer>> manualLottoNumbers) {
+		return LottoTickets.ofList(manualLottoNumbers);
+	}
+
+	private LottoTickets buyAutoLottoTickets(int buyingAutoLottoTicketsCount) {
+		return autoLottoTicketsVendor.buyAutoLottoTickets(buyingAutoLottoTicketsCount);
+	}
+
+	private int getBuyingAutoLottoTicketsCounts(Money buyingLottoTicketsAmount,
+												List<List<Integer>> manualLottoNumbers) {
+		int manualLottoCounts = manualLottoNumbers.size();
+		Money buyingManualLottoTicketsAmount = lottoPrice.multiply(manualLottoCounts);
+		Money buyingAutoLottoTicketsMoney = buyingLottoTicketsAmount.subtract(buyingManualLottoTicketsAmount);
+
+		return getBuyingAutoLottoTicketsCounts(buyingAutoLottoTicketsMoney);
 	}
 
 	private int getBuyingAutoLottoTicketsCounts(Money buyingAutoLottoTicketsMoney) {

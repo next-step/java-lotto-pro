@@ -33,22 +33,22 @@ public class LottoWinPrizes {
 
 	public ProfitMargin getProfitMargin(Money lottoPrice) {
 		Money totalPrizesMoney = getTotalPrizesMoney();
-		return ProfitMargin.valueOf(totalPrizesMoney.divideBy(getTotalPurchaseAmount(lottoPrice)));
+		return ProfitMargin.valueOf(totalPrizesMoney.divideBy(getTotalBoughtAmount(lottoPrice)));
 	}
 
 	public int getWinPrizeCount(LottoWinPrize lottoWinPrize) {
 		return winPrizesCounts.getOrDefault(lottoWinPrize, 0);
 	}
 
-	private int getLottoPurchaseCounts() {
+	private int getBoughtLottoTicketsCounts() {
 		return winPrizesCounts.values()
 			.stream()
 			.mapToInt(Integer::intValue)
 			.sum();
 	}
 
-	private Money getTotalPurchaseAmount(Money purchaseAmount) {
-		return purchaseAmount.multiply(getLottoPurchaseCounts());
+	private Money getTotalBoughtAmount(Money boughtAmount) {
+		return boughtAmount.multiply(getBoughtLottoTicketsCounts());
 	}
 
 	private Money getTotalPrizesMoney() {
