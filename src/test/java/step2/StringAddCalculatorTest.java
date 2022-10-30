@@ -22,7 +22,7 @@ public class StringAddCalculatorTest {
 
     @DisplayName("입력 값이 하나의 숫자인 경우 반환하는지 확인")
     @Test
-    public void splitAndSum_number(String input) throws Exception {
+    public void splitAndSum_number() throws Exception {
         int result = StringAddCalculator.splitAndSum("1");
 
         assertThat(result).isEqualTo(1);

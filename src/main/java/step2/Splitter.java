@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class Calculation {
+public class Splitter {
 
     private static final String SEPARATOR = ",|:";
 
