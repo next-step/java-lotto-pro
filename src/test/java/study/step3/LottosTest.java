@@ -11,7 +11,9 @@ public class LottosTest {
     void 구입_금액대로_로또를_발급() {
         int inputMoney = 14000;
         Lottos lottos = new Lottos();
+
         List<Lotto> lottoList = lottos.makeLottos(inputMoney);
+
         assertThat(lottoList).hasSize(inputMoney / Lottos.PRICE_PER_LOTTO);
     }
 }
