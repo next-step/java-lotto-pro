@@ -3,7 +3,6 @@ package step3;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mockStatic;
 
@@ -56,9 +55,9 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        mock.when(() -> LottoFactory.createLottos(anyInt()))
+        mock.when(() -> LottoFactory.createLottos(any()))
                 .thenReturn(lottos);
-        LottoMachine lottoMachine = new LottoMachine(price);
+        LottoMachine lottoMachine = new LottoMachine(new LottoMoney(price));
 
         //when
         LottosNumberDto lottosNumberDto = lottoMachine.getLottoNumber();
@@ -77,9 +76,9 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        mock.when(() -> LottoFactory.createLottos(anyInt()))
+        mock.when(() -> LottoFactory.createLottos(any()))
                 .thenReturn(lottos);
-        LottoMachine lottoMachine = new LottoMachine(14000);
+        LottoMachine lottoMachine = new LottoMachine(new LottoMoney(14000));
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{11, 22, 23, 24, 25, 26})
                 .boxed()
                 .map(LottoNumber::valueOf)
@@ -103,9 +102,9 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        mock.when(() -> LottoFactory.createLottos(anyInt()))
+        mock.when(() -> LottoFactory.createLottos(any()))
                 .thenReturn(lottos);
-        LottoMachine lottoMachine = new LottoMachine(14000);
+        LottoMachine lottoMachine = new LottoMachine(new LottoMoney(14000));
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
@@ -128,9 +127,9 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        mock.when(() -> LottoFactory.createLottos(anyInt()))
+        mock.when(() -> LottoFactory.createLottos(any()))
                 .thenReturn(lottos);
-        LottoMachine lottoMachine = new LottoMachine(14000);
+        LottoMachine lottoMachine = new LottoMachine(new LottoMoney(14000));
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 5, 6})
                 .boxed()
                 .map(LottoNumber::valueOf)
@@ -154,9 +153,9 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        mock.when(() -> LottoFactory.createLottos(anyInt()))
+        mock.when(() -> LottoFactory.createLottos(any()))
                 .thenReturn(lottos);
-        LottoMachine lottoMachine = new LottoMachine(14000);
+        LottoMachine lottoMachine = new LottoMachine(new LottoMoney(14000));
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 15, 6})
                 .boxed()
                 .map(LottoNumber::valueOf)
@@ -170,41 +169,6 @@ public class LottoMachineTest {
 
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 4, 5})
-    @DisplayName("2등 당첨된 경우 수익률은  ( 2등상금 * 당첨된 로또개수)/구입금액")
-    void test_that_it_returns_winning_rate_if_winning_number_match_at2(int count) {
-        //given
-        mock.reset();
-        List<Lotto> lottos = new ArrayList();
-        for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
-        }
-        mock.when(() -> LottoFactory.createLottos(anyInt()))
-                .thenReturn(lottos);
-
-        //when
-        LottoMachine lottoMachine = new LottoMachine(14000);
-        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(getLottoNumbers(1, 2, 3, 14, 15, 6), LottoNumber.valueOf(16));
-
-        //then
-        assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.TWO.getWinningPrice() * count) / (double) 14000);
-
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 14, 15,6})
-    @DisplayName("보너스 번호가 다른번호와 중복될 경우 예외발생")
-    void test_that_it_throw_exception_if_bonus_number_duplicate_with_winningnumber(int count) {
-        //given
-        LottoMachine lottoService = new LottoMachine(14000);
-
-        //when,then
-        assertThatThrownBy(() -> lottoService.getLottoResult(getLottoNumbers(1, 2, 3, 14, 15, 6), LottoNumber.valueOf(count)))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("보너스번호는 유일한 번호만 허용합니다");
-
-    }
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5})
@@ -216,9 +180,9 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        mock.when(() -> LottoFactory.createLottos(anyInt()))
+        mock.when(() -> LottoFactory.createLottos(any()))
                 .thenReturn(lottos);
-        LottoMachine lottoMachine = new LottoMachine(14000);
+        LottoMachine lottoMachine = new LottoMachine(new LottoMoney(14000));
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 15, 16})
                 .boxed()
                 .map(LottoNumber::valueOf)

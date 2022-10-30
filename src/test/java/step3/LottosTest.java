@@ -25,18 +25,6 @@ public class LottosTest {
         return lottoNumbers;
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 4, 5})
-    @DisplayName("로또를 추가하면 구매가격의 총합은 구매개수 * 1000")
-    void test_that_it_returns_sum_of_price(int count) {
-        //given
-        Lottos lottos = new Lottos(LottoFactory.createLottos(count));
-
-        //then
-        assertThat(lottos.getSumOfPriceLottos()).isEqualTo(count * 1000);
-
-    }
-
     @Test
     @DisplayName("5등이 당첨될 경우 당첨됫 횟수를 조회")
     void test_that_it_returns_count_of_winning_if_5rd() {

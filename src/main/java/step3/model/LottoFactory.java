@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 public class LottoFactory {
 
-    public static List<Lotto> createLottos(int size) {
+    public static List<Lotto> createLottos(LottoMoney lottoMoney) {
         List<Lotto> lottos = new ArrayList();
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < lottoMoney.getCountOfPurchasePrice(); i++) {
             lottos.add(createLotto());
         }
         return lottos;

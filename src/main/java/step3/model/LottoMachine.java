@@ -11,28 +11,19 @@ import java.util.stream.Collectors;
 
 public class LottoMachine {
 
-    private final int purchasePrice;
     private final Lottos lottos;
+    private final LottoMoney lottoMoney;
     private static final String DUPLICATE_NUMBER_MESSAGE = "보너스번호는 유일한 번호만 허용합니다";
-    private static final String INVALID_PRICE_UNIT_MESSAGE = "금액은 1000원 단위로 입력해야합니다";
-    private static final String INVALID_MINIMUN_PRICE_MESSAGE = "금액은 최소 1000원이상 입력해야합니다";
 
-    public LottoMachine(int purchasePrice) {
-        validatePurchasePrice(purchasePrice);
-        this.purchasePrice = purchasePrice;
-        int size = purchasePrice / Lotto.getPrice();
-        this.lottos = new Lottos(LottoFactory.createLottos(size));
-    }
-
-    private void validatePurchasePrice(int purchasePrice) {
-        if (purchasePrice < Lotto.getPrice()) throw new IllegalArgumentException(INVALID_MINIMUN_PRICE_MESSAGE);
-        if (purchasePrice % Lotto.getPrice() != 0) throw new IllegalArgumentException(INVALID_PRICE_UNIT_MESSAGE);
+    public LottoMachine(LottoMoney lottoMoney) {
+        this.lottoMoney = lottoMoney;
+        this.lottos = new Lottos(LottoFactory.createLottos(lottoMoney));
     }
 
     public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers) {
         Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(winningNumbers);
         List<RankDto> rankDtos = getRanks(rankOfLottos);
-        double getPriceRatio = getPriceRatio(rankOfLottos, purchasePrice);
+        double getPriceRatio = getPriceRatio(rankOfLottos);
         return new LottoResultDto(rankDtos, getPriceRatio);
     }
 
@@ -40,7 +31,7 @@ public class LottoMachine {
         validateLottoNumbers(winningNumbers, bonusNumber);
         Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(winningNumbers, bonusNumber);
         List<RankDto> rankDtos = getRanks(rankOfLottos);
-        double getPriceRatio = getPriceRatio(rankOfLottos, purchasePrice);
+        double getPriceRatio = getPriceRatio(rankOfLottos);
         return new LottoResultDto(rankDtos, getPriceRatio);
     }
 
@@ -61,10 +52,10 @@ public class LottoMachine {
 
     }
 
-    private double getPriceRatio(Map<Rank, Integer> rankOfLottos, int purchasePrice) {
+    private double getPriceRatio(Map<Rank, Integer> rankOfLottos) {
         int sumOfRankPrice = Arrays.stream(Rank.values())
                 .mapToInt(rank -> rank.getWinningPrice() * rankOfLottos.getOrDefault(rank, 0))
                 .sum();
-        return sumOfRankPrice / (double) purchasePrice;
+        return lottoMoney.getPriceRatio(sumOfRankPrice);
     }
 }

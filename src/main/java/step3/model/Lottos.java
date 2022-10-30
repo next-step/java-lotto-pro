@@ -13,10 +13,6 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public int getSumOfPriceLottos() {
-        return lottos.size() * Lotto.getPrice();
-    }
-
     public List<List<LottoNumber>> getNumbersOfLottos() {
         return lottos.stream()
                 .map(Lotto::getNumbers)
