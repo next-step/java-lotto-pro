@@ -10,13 +10,13 @@ public class ResultView {
     private static final String LOTTO_PURCHASE = "%d개를 구매했습니다.";
     private static final String WINNING_STATISTICS = "당첨 통계";
     private static final String DASH = "---------";
-    private static final String REWARD_MATCH_LOTTO = "%d개%s 일치 (%d원) - %d개";
+    private static final String REWARD_MATCH_LOTTO = "%d개 일치%s(%d원) - %d개";
     private static final String BONUS_MATCH = ", 보너스 볼 일치";
     private static final String TOTAL_PROFIT_PERCENT = "총 수익률은 %.02f입니다.";
     private static final String TOTAL_PROFIT_RESULT = "(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
     private static final String PROFIT = "이익";
     private static final String LOSS = "손해";
-    private static final String EMPTY = "";
+    private static final String SPACE = " ";
 
 
     private ResultView() {
@@ -48,7 +48,7 @@ public class ResultView {
         if (LottoRank.SECOND == lottoRank) {
             return BONUS_MATCH;
         }
-        return EMPTY;
+        return SPACE;
     }
 
     public static void StatisticsPercent(double statisticsPercent) {
