@@ -44,7 +44,7 @@ public enum Rank {
     }
 
     public static Rank rank(int matchCount, boolean isBonusMatch) {
-        if (matchCount == FIFTH.getCount() && isBonusMatch) {
+        if (matchCount == THIRD.getCount() && isBonusMatch) {
             return SECOND;
         }
         return Arrays.stream(values()).filter(award -> award.count == matchCount)
