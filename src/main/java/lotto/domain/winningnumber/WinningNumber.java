@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.Set;
 import lotto.domain.winningnumber.role.CommaSplitter;
 import lotto.domain.winningnumber.role.WinningNumberRole;
-import lotto.domain.winningnumber.validation.DefaultWinningNumberValidator;
 
 public class WinningNumber {
 
@@ -12,7 +11,6 @@ public class WinningNumber {
     private Set<Integer> winningNumber;
 
     public WinningNumber(String winningNumber) {
-        new DefaultWinningNumberValidator().validate(winningNumber);
         this.winningNumber = createWinningNumber(winningNumber, new CommaSplitter());
     }
 

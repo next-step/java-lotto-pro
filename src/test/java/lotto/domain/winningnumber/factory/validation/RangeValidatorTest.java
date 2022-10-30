@@ -1,6 +1,6 @@
-package lotto.domain.winningnumber.validation;
+package lotto.domain.winningnumber.factory.validation;
 
-import static lotto.domain.winningnumber.validation.WinningNumberValidator.ERROR_WINNING_NUMBER_TYPE_MESSAGE;
+import static lotto.domain.winningnumber.factory.validation.WinningNumberValidator.ERROR_RANGE_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class WinningNumberTypeValidatorTest {
+class RangeValidatorTest {
 
-    WinningNumberValidator validator = new WinningNumberTypeValidator();
+    WinningNumberValidator validator = new RangeValidator();
     Set<String> winningNumbers = new HashSet<>();
 
     @BeforeEach
@@ -27,17 +27,18 @@ class WinningNumberTypeValidatorTest {
     }
 
     @ParameterizedTest
-    @DisplayName("당첨번호에 숫자가 아닌 값이 있으면 EX 발생")
-    @ValueSource(strings = {"a", "@", "ㄱ"})
-    void number_type_ex(String ex) {
+    @DisplayName("1~45 사이 값이 아니면 EX 발생")
+    @ValueSource(strings = {"46", "0", "-1"})
+    void range_ex(String ex) {
         winningNumbers.add(ex);
         assertThatIllegalArgumentException().isThrownBy(() -> validator.validate(winningNumbers))
-                .withMessageContaining(ERROR_WINNING_NUMBER_TYPE_MESSAGE);
+                .withMessageContaining(ERROR_RANGE_MESSAGE);
     }
 
     @Test
-    @DisplayName("당첨번호에 숫자만 있으면 통과")
-    void number_type_success() {
+    @DisplayName("1~45 사이 값이면 통과")
+    void range_success() {
         assertThatNoException().isThrownBy(() -> validator.validate(winningNumbers));
+
     }
 }

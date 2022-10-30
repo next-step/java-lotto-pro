@@ -1,6 +1,6 @@
-package lotto.domain.winningnumber.validation;
+package lotto.domain.winningnumber.factory.validation;
 
-import static lotto.domain.winningnumber.validation.WinningNumberValidator.ERROR_COUNT_MESSAGE;
+import static lotto.domain.winningnumber.factory.validation.WinningNumberValidator.ERROR_WINNING_NUMBER_TYPE_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
@@ -9,10 +9,12 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-class CountValidatorTest {
+class WinningNumberTypeValidatorTest {
 
-    WinningNumberValidator validator = new CountValidator();
+    WinningNumberValidator validator = new WinningNumberTypeValidator();
     Set<String> winningNumbers = new HashSet<>();
 
     @BeforeEach
@@ -24,17 +26,18 @@ class CountValidatorTest {
         winningNumbers.add("5");
     }
 
-    @Test
-    @DisplayName("당첨번호의 갯수가 6개가 아니면 EX 발생")
-    void count_ex() {
+    @ParameterizedTest
+    @DisplayName("당첨번호에 숫자가 아닌 값이 있으면 EX 발생")
+    @ValueSource(strings = {"a", "@", "ㄱ"})
+    void number_type_ex(String ex) {
+        winningNumbers.add(ex);
         assertThatIllegalArgumentException().isThrownBy(() -> validator.validate(winningNumbers))
-                .withMessageContaining(ERROR_COUNT_MESSAGE);
+                .withMessageContaining(ERROR_WINNING_NUMBER_TYPE_MESSAGE);
     }
 
     @Test
-    @DisplayName("당첨번호의 갯수가 6개면 통과")
-    void count_success() {
-        winningNumbers.add("6");
+    @DisplayName("당첨번호에 숫자만 있으면 통과")
+    void number_type_success() {
         assertThatNoException().isThrownBy(() -> validator.validate(winningNumbers));
     }
 }

@@ -23,13 +23,13 @@ public class LottoController {
         }
     }
 
-    public void createLotto() {
+    public void createLottoNumberMatcher() {
         Runnable readWinningNumber = () -> lottoGame.createLottoNumberMatcher(view.readWinningNumber());
         while (isNotComplete(readWinningNumber)) {
         }
     }
 
-    public void startLotto() {
+    public void startLottoGame() {
         view.printResult(lottoGame.result());
         view.printProfitMargin(lottoGame.makeProfitMargin());
     }

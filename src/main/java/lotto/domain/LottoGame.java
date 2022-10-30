@@ -6,6 +6,8 @@ import lotto.domain.lottonumber.purchase.factory.PurchaseFactory;
 import lotto.domain.lottonumber.purchase.factory.PurchaseFactoryImpl;
 import lotto.domain.matcher.LottoNumberMatcher;
 import lotto.domain.result.DefaultLottoResult;
+import lotto.domain.winningnumber.factory.WinningNumberFactory;
+import lotto.domain.winningnumber.factory.WinningNumberFactoryImpl;
 
 public class LottoGame {
 
@@ -27,7 +29,8 @@ public class LottoGame {
     }
 
     public void createLottoNumberMatcher(String readWinningNumber) {
-        lottoNumberMatcher = new LottoNumberMatcher(lottoNumbers, readWinningNumber);
+        WinningNumberFactory winningNumberFactory = new WinningNumberFactoryImpl(readWinningNumber);
+        lottoNumberMatcher = new LottoNumberMatcher(lottoNumbers, winningNumberFactory.createWinningNumber());
     }
 
     public DefaultLottoResult result() {

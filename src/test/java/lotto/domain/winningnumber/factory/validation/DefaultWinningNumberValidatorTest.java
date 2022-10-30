@@ -1,4 +1,4 @@
-package lotto.domain.winningnumber.validation;
+package lotto.domain.winningnumber.factory.validation;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 

@@ -11,9 +11,9 @@ public class LottoNumberMatcher {
     private WinningNumber winningNumber;
     private DefaultLottoResult lottoResult;
 
-    public LottoNumberMatcher(LottoNumbers lottoNumbers, String winningNumber) {
+    public LottoNumberMatcher(LottoNumbers lottoNumbers, WinningNumber winningNumber) {
         this.lottoNumbers = lottoNumbers;
-        this.winningNumber = new WinningNumber(winningNumber);
+        this.winningNumber = winningNumber;
         this.lottoResult = new DefaultLottoResult();
     }
 
