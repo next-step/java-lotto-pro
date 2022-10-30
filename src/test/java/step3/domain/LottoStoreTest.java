@@ -1,4 +1,4 @@
-package step3_4.domain;
+package step3.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

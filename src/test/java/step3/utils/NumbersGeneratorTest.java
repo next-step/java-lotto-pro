@@ -1,10 +1,10 @@
-package step3_4.utils;
+package step3.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3_4.domain.UniqueNumbers;
+import step3.domain.UniqueNumbers;
 
 public class NumbersGeneratorTest {
 

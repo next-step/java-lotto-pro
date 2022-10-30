@@ -1,4 +1,4 @@
-package step3_4.domain;
+package step3.domain;
 
 public class Lotto {
 

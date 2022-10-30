@@ -1,9 +1,9 @@
-package step3_4;
+package step3;
 
-import step3_4.controller.LottoController;
-import step3_4.domain.LottoStore;
-import step3_4.io.InputView;
-import step3_4.io.OutputView;
+import step3.controller.LottoController;
+import step3.domain.LottoStore;
+import step3.io.InputView;
+import step3.io.OutputView;
 
 public class Application {
 

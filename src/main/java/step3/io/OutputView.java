@@ -1,10 +1,10 @@
-package step3_4.io;
+package step3.io;
 
 import java.util.Comparator;
-import step3_4.domain.Lottos;
-import step3_4.domain.Money;
-import step3_4.domain.Rank;
-import step3_4.domain.Reward;
+import step3.domain.Lottos;
+import step3.domain.Money;
+import step3.domain.Rank;
+import step3.domain.Reward;
 
 public class OutputView {
 
