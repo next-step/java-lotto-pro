@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.constant.numbers.LottoConstant;
 import lotto.controller.acceptor.MoneyToBuyAcceptor;
 import lotto.controller.acceptor.WinningNumbersAcceptor;
 import lotto.model.lotto.ticket.LottoTicketsBucket;
@@ -12,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
+    private static final int LOTTO_MINIMUM_NUMBER = 1;
+    private static final int LOTTO_MAXIMUM_NUMBER = 45;
+
     public void run() {
 //        final MoneyToBuy moneyToBuy = userInputMoneyToBuy();
 //        int numberOfAffordableLotto = moneyToBuy.affordableLottoTicketNumber();
@@ -37,8 +39,8 @@ public class LottoController {
     }
 
     private List<Integer> intsFromOneToFortyFive() {
-        final List<Integer> fullCandidateList = new ArrayList<>(LottoConstant.LOTTO_MAXIMUM_NUMBER);
-        for (int i = LottoConstant.LOTTO_MINIMUM_NUMBER; i <= LottoConstant.LOTTO_MAXIMUM_NUMBER; ++i) {
+        final List<Integer> fullCandidateList = new ArrayList<>(LOTTO_MAXIMUM_NUMBER);
+        for (int i = LOTTO_MINIMUM_NUMBER; i <= LOTTO_MAXIMUM_NUMBER; ++i) {
             fullCandidateList.add(i);
         }
         return fullCandidateList;
