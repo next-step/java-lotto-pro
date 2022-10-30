@@ -11,10 +11,6 @@ public class Reward {
 
     private final Map<Rank, Integer> reward = new LinkedHashMap<>();
 
-    private Reward() {
-        throw new RuntimeException("Cannot use default constructor.");
-    }
-
     private Reward(List<Rank> ranks) {
         init();
         input(ranks);
@@ -56,8 +52,7 @@ public class Reward {
     private long getWinningMoney() {
         return reward.keySet()
                 .stream()
-                .map(this::getWinningMoney)
-                .mapToLong(money -> money)
+                .mapToLong(this::getWinningMoney)
                 .sum();
     }
 

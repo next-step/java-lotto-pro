@@ -24,8 +24,7 @@ public class LottoStoreTest {
         Money payment = Money.generate(0);
         assertThatThrownBy(() -> {
             Lottos lottos = store.sell(payment);
-        })
-                .isInstanceOf(IllegalArgumentException.class)
+        }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("You don't have enough money.");
     }
 }

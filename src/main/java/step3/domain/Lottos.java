@@ -5,29 +5,39 @@ import java.util.stream.Collectors;
 
 public class Lottos {
 
-    private List<Lotto> lottoList;
+    private List<Lotto> lottos;
 
-    private Lottos() { }
-
-    private Lottos(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+    private Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    public static Lottos generate(List<Lotto> lottoList) {
-        return new Lottos(lottoList);
+    public static Lottos generate(List<Lotto> lottos) {
+        return new Lottos(lottos);
     }
 
-    public List<Rank> getRanks(Numbers numbers) {
-        return lottoList.stream()
-                .map(lotto -> lotto.getCountOfMatch(numbers))
-                .map(Rank::valueOf)
+    public List<Rank> getRanks(UniqueNumbers winningNumbers, int bonusNumber) {
+        validateDuplicated(winningNumbers, bonusNumber);
+        return lottos.stream()
+                .map(lotto -> getRank(lotto, winningNumbers, bonusNumber))
                 .filter(rank -> !rank.equals(Rank.MISS))
                 .collect(Collectors.toList());
     }
 
+    private Rank getRank(Lotto lotto, UniqueNumbers winningNumbers, int bonusNumber) {
+        int countOfMatch = lotto.getCountOfMatch(winningNumbers);
+        boolean isBonusMatch = lotto.isBonusMatch(bonusNumber);
+        return Rank.valueOf(countOfMatch, isBonusMatch);
+    }
+
+    private static void validateDuplicated(UniqueNumbers winningNumbers, int bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("Duplicate Unique numbers and Bonus number.");
+        }
+    }
+
     @Override
     public String toString() {
-        return lottoList.stream()
+        return lottos.stream()
                 .map(Object::toString)
                 .collect(Collectors.joining("\n"));
     }

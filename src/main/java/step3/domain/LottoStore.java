@@ -11,8 +11,9 @@ public class LottoStore {
     public Lottos sell(Money payment) {
         validate(payment);
         List<Lotto> lottoList = new ArrayList<>();
-        for (int count = 0; count < payment.divide(pricePerLotto); count++) {
-            Numbers random = NumbersGenerator.random();
+        int divide = payment.divide(pricePerLotto);
+        for (int count = 0; count < divide; count++) {
+            UniqueNumbers random = NumbersGenerator.random();
             lottoList.add(Lotto.generate(random));
         }
         return Lottos.generate(lottoList);
