@@ -14,29 +14,27 @@ public class InputView {
     private static final String WHITE_SPACE = " ";
     private static final String EMPTY_STRING = "";
 
-    public static int inputPayAmount(){
-        Scanner sc = new Scanner(System.in);
+    public static int inputPayAmount() {
         System.out.println(ASK_MESSAGE_PAY_AMOUNT);
-        String input = sc.next();
+        String input = new Scanner(System.in).next();
         InputValidator.validateNumberFormat(input);
         return Integer.parseInt(input);
     }
 
-    public static List<Integer> inputLottoWinningNumbers(){
-        Scanner sc = new Scanner(System.in);
+    public static List<Integer> inputLottoWinningNumbers() {
         System.out.println(ASK_MESSAGE_LAST_WINNING_NUMBERS);
-
-        String input = sc.nextLine().replaceAll(WHITE_SPACE, EMPTY_STRING);
+        String input = new Scanner(System.in).nextLine().replaceAll(WHITE_SPACE, EMPTY_STRING);
         String[] stringWinningNumbers = input.split(WINNING_NUMBERS_DELIMITER);
         InputValidator.validateLottoNumberCount(stringWinningNumbers.length);
 
         List<Integer> winningNumbers = new ArrayList<>();
-        for(String stringFormatNumber : stringWinningNumbers){
+        for (String stringFormatNumber : stringWinningNumbers) {
             InputValidator.validateNumberFormat(stringFormatNumber);
             int number = Integer.parseInt(stringFormatNumber);
-            InputValidator.validateLottoNumber(number);
+            InputValidator.validateLottoNumberRange(number);
             winningNumbers.add(number);
         }
+        InputValidator.validateDuplicateLottoNumber(winningNumbers);
 
         return winningNumbers;
     }
