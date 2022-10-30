@@ -12,7 +12,7 @@ public class RandomNumbersGenerator {
 		validateRange(first, last);
 		validateSize(first, last, size);
 
-		List<Integer> list = IntStream.range(first, last + 1).boxed().collect(Collectors.toList());
+		List<Integer> list = IntStream.rangeClosed(first, last).boxed().collect(Collectors.toList());
 		Collections.shuffle(list);
 		return list.subList(0, size);
 	}
