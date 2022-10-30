@@ -1,22 +1,23 @@
 package step3.model;
 
-import step2.ErrorMessageConstant;
+import step3.constant.ErrorMessageConstant;
+import step3.constant.LottoConstant;
 
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final int MIN_NUM = 1;
-    private static final int MAX_NUM = 45;
-    int number;
+
+    private final int number;
 
     public LottoNumber(String text) {
-        this.number = convertNumber(text);
-        checkOutOfSize();
+        int lottoNumber = convertNumber(text);
+        checkOutOfSize(lottoNumber);
+        this.number = lottoNumber;
     }
 
     public LottoNumber(int number) {
+        checkOutOfSize(number);
         this.number = number;
-        checkOutOfSize();
     }
 
     private int convertNumber(String text) {
@@ -24,14 +25,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
         try {
             result = Integer.parseInt(text);
         } catch (NumberFormatException e) {
-            throw new RuntimeException(ErrorMessageConstant.NOT_NUMBER);
+            throw new NumberFormatException(ErrorMessageConstant.NOT_NUMBER);
         }
         return result;
     }
 
-    private void checkOutOfSize() {
-        if (this.number < MIN_NUM || this.number > MAX_NUM) {
-            throw new RuntimeException(ErrorMessageConstant.NEGATIVE_NUMBER);
+    private void checkOutOfSize(int number) {
+        if (number < LottoConstant.LOTTO_MIN_NUM || number > LottoConstant.LOTTO_MAX_NUM) {
+            throw new RuntimeException(ErrorMessageConstant.OUT_OF_SIZE_NUMBER);
         }
     }
 
