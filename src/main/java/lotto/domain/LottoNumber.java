@@ -29,6 +29,19 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return lottoNumberCache.get(lottoNumber);
     }
 
+    /**
+     * 주어진 Lotto 내 속한 lottoNumber를 꺼내고자 할 경우 exception 발생
+     * @param lottoNumber 꺼내고자 하는 lottoNumber
+     * @param lotto lottoNumber가 속했는지 확인할 로또
+     * @return 캐싱된 lottoNumber
+     */
+    public static LottoNumber fromIfNotIn(int lottoNumber, Lotto lotto) {
+        if(lotto.isMatchLottoNumber(LottoNumber.from(lottoNumber))) {
+            throw new IllegalArgumentException(ErrorCode.보너스_볼은_당첨_로또의_각_숫자와_중복_불가.getErrorMessage());
+        }
+        return lottoNumberCache.get(lottoNumber);
+    }
+
     private static void validateLottoNumber(int lottoNumber) {
         if(!isInLottoNumberRange(lottoNumber)) {
             throw new IllegalArgumentException(ErrorCode.로또의_각_숫자는_1이상_45이하.getErrorMessage());

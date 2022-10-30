@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import common.constant.ErrorCode;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -40,5 +41,19 @@ public class LottoNumberTest {
     @CsvSource(value = {"4:7", "30:40", "1:10"}, delimiter = ':')
     void 로또_번호_비교_시_비교주체가_비교대상보다_더_작으면_음수_리턴(int subjectNumber, int compareNumber) {
         assertThat(LottoNumber.from(subjectNumber).compareTo(LottoNumber.from(compareNumber))).isLessThan(0);
+    }
+
+    @Test
+    void 당첨로또에_있는_로또번호를_꺼내려_하면_에러_발생() {
+        Lotto winningLotto = Lotto.generateLotto(new ReadLineLottoNumberGenerator("1, 2, 3, 4, 5, 6"));
+        assertThatThrownBy(() -> LottoNumber.fromIfNotIn(3, winningLotto))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorCode.보너스_볼은_당첨_로또의_각_숫자와_중복_불가.getErrorMessage());
+    }
+
+    @Test
+    void 당첨로또에_없는_로또번호를_꺼내려_하면_정상적으로_반환() {
+        Lotto winningLotto = Lotto.generateLotto(new ReadLineLottoNumberGenerator("1, 2, 3, 4, 5, 6"));
+        assertThat(LottoNumber.fromIfNotIn(10, winningLotto)).isEqualTo(LottoNumber.from(10));
     }
 }
