@@ -21,7 +21,7 @@ public class LottoApplication {
         ResultView.announceTotalLottoNumbers(lottoPaper);
 
         // 지난주 당첨 번호 입력
-        WinningResult winningResult = new WinningResult(lottoPaper, InputView.inputWinningNumbersLastWeek());
+        WinningResult winningResult = new WinningResult(lottoPaper, InputView.inputWinningNumbersLastWeek(), InputView.inputBonusNumber());
 
         // 결과 출력
         ResultView.resultStart();
