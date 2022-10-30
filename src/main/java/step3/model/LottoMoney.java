@@ -20,4 +20,8 @@ public class LottoMoney {
     public int getSumOfPriceLottos(int size) {
         return size * LOTTO_PRICE;
     }
+
+    public int getCountOfPurchasePrice(){
+        return purchasePrice / LOTTO_PRICE;
+    }
 }

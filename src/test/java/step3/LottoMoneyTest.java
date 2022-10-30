@@ -42,6 +42,18 @@ public class LottoMoneyTest {
         assertThat(lottoMoney.getSumOfPriceLottos(count)).isEqualTo(money);
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"1000:1", "6000:6", "5000:5", "12000:12"}, delimiter = ':')
+    @DisplayName("구입가격을 입력하면 구입가격대비 구매개수를 반환")
+    void test_that_returns_number_of_purchases_compared_purchase(int money, int count) {
+        //given,when
+        LottoMoney lottoMoney = new LottoMoney(money);
+
+        //then
+        assertThat(lottoMoney.getCountOfPurchasePrice()).isEqualTo(count);
+    }
+
+
 
 
 }
