@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
+import lotto.view.OutputView;
 
 public class Amount {
 
@@ -9,7 +11,7 @@ public class Amount {
 
     private static final int MIN_BUY_LOTTO_COUNT = 1;
 
-    private final static String NOT_ALLOW_NULL_OR_EMPTY_MESSAGE = "금액은 Null 또는 Empty 값이 불가능합니다.";
+    private static final  String NOT_ALLOW_NULL_OR_EMPTY_MESSAGE = "금액은 Null 또는 Empty 값이 불가능합니다.";
 
     private final static String ONLY_NUMBER_MESSAGE = "금액은 숫자만 입력 가능합니다.";
 
@@ -56,6 +58,15 @@ public class Amount {
         }
 
         return buyLottoCount;
+    }
+
+    public static double calculateLottoYield(Amount buyAmount, Map<LottoRank, Integer> rankInfo) {
+        int totalAmount = 0;
+        for (LottoRank lottoRank: LottoRank.reverse()) {
+            totalAmount += lottoRank.getWinningMoney() * rankInfo.get(lottoRank);
+        }
+
+        return Math.round((double) totalAmount / buyAmount.getBuyAmount() * 100) / 100.0;
     }
 
     public int getBuyAmount() {

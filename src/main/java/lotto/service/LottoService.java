@@ -37,12 +37,7 @@ public class LottoService {
     }
 
     public void calculateLottoYield(Amount buyAmount, Map<LottoRank, Integer> rankInfo) {
-        int totalAmount = 0;
-        for (LottoRank lottoRank: LottoRank.reverse()) {
-            totalAmount += lottoRank.getWinningMoney() * rankInfo.get(lottoRank);
-        }
-
-        OutputView.outputYield(Math.round((double) totalAmount / buyAmount.getBuyAmount() * 100) / 100.0);
+        OutputView.outputYield(Amount.calculateLottoYield(buyAmount, rankInfo));
     }
 
     private Lottos createLottos(int amount) {

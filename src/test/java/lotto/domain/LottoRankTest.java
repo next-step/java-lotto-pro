@@ -39,7 +39,7 @@ class LottoRankTest {
 
         Collections.reverse(reverseLottoRanks);
 
-        for (int i = 0; i < lottoRanks.length; i++) {
+        for (int i = 0; i < lottoRanks.length - 1; i++) {
             assertThat(lottoRanks[i]).isSameAs(reverseLottoRanks.get(i));
         }
     }
