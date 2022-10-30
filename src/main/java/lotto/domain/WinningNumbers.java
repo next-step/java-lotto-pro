@@ -15,14 +15,18 @@ public class WinningNumbers {
     public static WinningNumbers of(String input, int inputBonus) {
         LottoNumbers lottoNumbers = LottoNumbers.of(new ManualNumberGenerator(input));
         LottoNumber bonusNumber = new LottoNumber(inputBonus);
-        if (lottoNumbers.isContainNumber(bonusNumber)) {
-            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_BONUS_NUMBER_NOT_DUPLICATE_LOTTO_NUMBER);
-        }
+        validDuplicateBonusNumber(lottoNumbers, bonusNumber);
         return new WinningNumbers(lottoNumbers, bonusNumber);
     }
 
+    private static void validDuplicateBonusNumber(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
+        if (lottoNumbers.isContainNumber(bonusNumber)) {
+            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_BONUS_NUMBER_NOT_DUPLICATE_LOTTO_NUMBER);
+        }
+    }
+
     public WinningRank checkWinningRank(LottoNumbers lottoNumbers) {
-        return WinningRank.valueOf(lottoNumbers.containCount(winningNumbers));
+        return WinningRank.match(lottoNumbers.containCount(winningNumbers), lottoNumbers.isContainNumber(bonusBall));
     }
 
     @Override
