@@ -23,6 +23,8 @@ public class LottoController {
         resultView.resultLotteryTicket(lotteryTicket);
     
         WinningNumber winningNumber = new WinningNumber(inputView.inputWinningNumber());
+        inputView.inputBonusNumber();
+        
         Statistics statistics = new Statistics(lotteryTicket, winningNumber);
         resultView.resultStatistics(statistics, payment);
     }
