@@ -2,6 +2,8 @@ package model;
 
 import exception.LottoNumberRangeException;
 
+import java.util.Objects;
+
 public class LottoNumber implements Number {
     private final int MINIMUM_RANGE_NUMBER = 1;
     private static final int MAXIMUM_RANGE_NUMBER = 45;
@@ -43,6 +45,11 @@ public class LottoNumber implements Number {
     @Override
     public String toString() {
         return String.valueOf(number);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 
     private boolean isRightNumber(int number) {

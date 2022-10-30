@@ -2,15 +2,19 @@ package model;
 
 import exception.LottoNumbersSizeException;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private final int LOTTO_LOTTERY_TICKET_NUMBER_SIZE = 6;
-    private final String TO_STRING_JOIN_DELIMETER = ", ";
+    private static final int LOTTO_LOTTERY_TICKET_NUMBER_SIZE = 6;
+    private static final int MATCH_COUNT_NUMBER = 1;
+    private static final int NO_MATCH_COUNT_NUMBER = 0;
 
-    private final String LOTTO_NUMBERS_SIZE_ERROR_MESSSAGE = "로또 티켓은 " + LOTTO_LOTTERY_TICKET_NUMBER_SIZE + "자리 숫자로 이루어져야 합니다.";
+    private static final String TO_STRING_JOIN_DELIMETER = ", ";
+    private static final String LOTTO_NUMBERS_SPLIT_DELIMETER = ",";
+
+    private static final String LOTTO_NUMBERS_SIZE_ERROR_MESSSAGE = "로또 티켓은 중복없는 " + LOTTO_LOTTERY_TICKET_NUMBER_SIZE + "자리 숫자로 이루어져야 합니다.";
 
     private Set<LottoNumber> lottoNumbers;
 
@@ -20,8 +24,12 @@ public class LottoNumbers {
         validCheck();
     }
 
-    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public LottoNumbers(String lottoNumbers) {
+        this.lottoNumbers = Arrays.stream(lottoNumbers.split(LOTTO_NUMBERS_SPLIT_DELIMETER))
+                .map( (lottoNumber) -> Integer.parseInt( lottoNumber.trim() ) )
+                .distinct()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
 
         validCheck();
     }
@@ -36,27 +44,22 @@ public class LottoNumbers {
         return lottoNumbers.size() == LOTTO_LOTTERY_TICKET_NUMBER_SIZE;
     }
 
-    public int getLottoLotteryTicketNumberSize() {
-        return LOTTO_LOTTERY_TICKET_NUMBER_SIZE;
-    }
-
-    public int match(LottoNumbers compareLottoNumbers) {
+    public int match(LottoNumbers winningLottoNumber) {
         int count = 0;
-        for (LottoNumber lottoNumber : this.lottoNumbers) {
-            if (compareLottoNumbers.contain(lottoNumber)) {
-                count++;
-            }
+
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            count += countIfContainLottoNumber(winningLottoNumber, lottoNumber);
         }
 
         return count;
     }
 
-    public boolean contain(LottoNumber targetlottoNumber) {
-        for (LottoNumber lottoNumber : this.lottoNumbers) {
-            if (lottoNumber.equals(targetlottoNumber)) return true;
+    private int countIfContainLottoNumber(LottoNumbers winningLottoNumbers, LottoNumber lottoNumber) {
+        if (winningLottoNumbers.lottoNumbers.contains(lottoNumber)) {
+            return MATCH_COUNT_NUMBER;
         }
 
-        return false;
+        return NO_MATCH_COUNT_NUMBER;
     }
 
     @Override

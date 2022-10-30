@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,11 +20,11 @@ public class LottoLotteryTickets {
         return this.lottoLotteryTickets.size();
     }
 
-    public Result match(WinningNumbers winningNumbers) {
+    public Result matchResult(LottoNumbers winningLottoNumbers) {
         Result result = new Result();
 
         for (LottoNumbers lottoNumbers : lottoLotteryTickets) {
-            result.addResultPerTicket(winningNumbers.match(lottoNumbers));
+            result.addResultPerTicket(lottoNumbers.match(winningLottoNumbers));
         }
 
         return result;

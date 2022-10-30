@@ -7,14 +7,14 @@ import view.OutputWriter;
 public class Lotto {
     public void run() {
         LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(InputReader.inquirePurchaseAmount());
-        OutputWriter.answerLottoQuantity(lottoPurchaseAmount.getQuantityPerAmountLotto());
+        OutputWriter.printLottoQuantity(lottoPurchaseAmount.getQuantityPerAmountLotto());
 
         LottoLotteryTickets lottoLotteryTickets = new LottoLotteryTickets(lottoPurchaseAmount.getQuantityPerAmountLotto(), new LottoNumberGenerator());
-        OutputWriter.answer(lottoLotteryTickets.toString());
+        OutputWriter.print(lottoLotteryTickets.toString());
 
-        WinningNumbers winningNumbers = new WinningNumbers(InputReader.inquireLastWeekWinningNumber());
-        Result result = lottoLotteryTickets.match(winningNumbers);
+        LottoNumbers winningNumbers = new LottoNumbers(InputReader.inquireLastWeekWinningNumber());
+        Result result = lottoLotteryTickets.matchResult(winningNumbers);
 
-        OutputWriter.answer(result.toString());
+        OutputWriter.print(result.toString());
     }
 }
