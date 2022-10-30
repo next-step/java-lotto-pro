@@ -14,17 +14,23 @@ public class WinningLottoNumbers {
     private static final Pattern LOTTO_COMMA_PATTERN
             = Pattern.compile("^(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+$");
 
-    private List<Integer> lottoNumbers;
-
-    public List<Integer> getLottoNumbers() {
-        return this.lottoNumbers;
-    }
+    private LottoNumbers lottoNumbers;
+    private LottoNumber bonusNumber;
 
     public WinningLottoNumbers(String lottoNumbers) {
         validNullOrEmpty(lottoNumbers);
         checkLottoPattern(lottoNumbers);
-        this.lottoNumbers = convertToInt(lottoNumbers);
     }
+
+    public WinningLottoNumbers(String lottoNumbers, LottoNumber bonusNumber) {
+        validNullOrEmpty(lottoNumbers);
+        checkLottoPattern(lottoNumbers);
+        List<Integer> lottoNumberList = convertToIntegerList(lottoNumbers);
+        checkDuplicatedBonusNumber(lottoNumberList, bonusNumber.getNumber());
+        this.lottoNumbers = new LottoNumbers(lottoNumberList);
+        this.bonusNumber = bonusNumber;
+    }
+
 
     private void validNullOrEmpty(String lottoNumbers) {
         if (StringUtils.isNullOrEmpty(lottoNumbers)) {
@@ -39,10 +45,24 @@ public class WinningLottoNumbers {
         }
     }
 
-    private List<Integer> convertToInt(String lottoNumbers) {
+    private void checkDuplicatedBonusNumber(List<Integer> lottoNumbers, int bonusNumber) {
+        if (lottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("당첨된 로또 번호와 보너스 번호는 일치할 수 없습니다.");
+        }
+    }
+
+    private List<Integer> convertToIntegerList(String lottoNumbers) {
         return Arrays.stream(lottoNumbers.replaceAll("\\s","").split(DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    public LottoNumbers getLottoNumbers() {
+        return lottoNumbers;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 
 }

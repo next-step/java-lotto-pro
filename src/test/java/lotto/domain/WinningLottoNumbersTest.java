@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -24,5 +25,13 @@ class WinningLottoNumbersTest {
     void create_input_lotto(String input) {
         assertThat(new WinningLottoNumbers(input)).isNotNull();
     }
+
+    @DisplayName("로또 번호와 보너스 번호가 일치한 경우 오류")
+    @Test
+    void error_when_lotto_number_and_bonus_number_match() {
+        assertThatThrownBy(() -> new WinningLottoNumbers("1,2,3,4,5,6", new LottoNumber(5)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 
 }

@@ -13,7 +13,7 @@ import java.util.Arrays;
 class LottoTicketsTest {
 
     private LottoTickets lottoTickets;
-    private LottoNumbers winningLottoNumbers;
+    private WinningLottoNumbers winningLottoNumbers;
 
     @BeforeEach
     void init() {
@@ -26,7 +26,7 @@ class LottoTicketsTest {
                         new LottoTicket(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 8)))
                 )
         ));
-        winningLottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winningLottoNumbers = new WinningLottoNumbers("1,2,3,4,5,6", new LottoNumber(10));
     }
 
     @DisplayName("고정된 당첨금과 로또번호로 당첨 사실을 알 수 있다.")
@@ -35,7 +35,7 @@ class LottoTicketsTest {
         LottoResult lottoResult = new LottoResult();
         lottoTickets.matchLottoResult(winningLottoNumbers, lottoResult);
         Assertions.assertThat(lottoResult.getLottoResultMap().get(LottoRank.FIRST)).isEqualTo(4);
-        Assertions.assertThat(lottoResult.getLottoResultMap().get(LottoRank.SECOND)).isEqualTo(1);
+        Assertions.assertThat(lottoResult.getLottoResultMap().get(LottoRank.THIRD)).isEqualTo(1);
     }
 
 }

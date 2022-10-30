@@ -4,29 +4,40 @@ import java.util.Arrays;
 
 public enum LottoRank {
 
-    NONE(0, 0),
-    FOURTH(3, 5_000),
-    THIRD(4, 50_000),
-    SECOND(5, 1_500_000),
-    FIRST(6, 2_000_000_000);
+    NONE(0, 0, false),
+    FIFTH(3, 5_000, false),
+    FOURTH(4, 50_000, false),
+    THIRD(5, 1_500_000, false),
+    SECOND(5, 30_000_000, true),
+    FIRST(6, 2_000_000_000, false);
 
-    private final int matchNumberCount;
+    private final int matchCount;
     private final int reward;
+    private final boolean bonus;
 
-    LottoRank(int matchNumberCount, int reward) {
-        this.matchNumberCount = matchNumberCount;
+    LottoRank(int matchCount, int reward, boolean bonus) {
+        this.matchCount = matchCount;
         this.reward = reward;
+        this.bonus = bonus;
     }
 
-    public static LottoRank findLottoRank(int matchNumberCount) {
+    public static LottoRank findLottoRank(int matchNumberCount, boolean bonus) {
         return Arrays.stream(LottoRank.values())
-                .filter(item -> item.matchNumberCount == matchNumberCount)
+                .filter(item -> matchLottoRank(item, matchNumberCount, bonus))
                 .findFirst()
                 .orElse(LottoRank.NONE);
     }
 
-    public int getMatchNumberCount() {
-        return matchNumberCount;
+    private static boolean matchLottoRank(LottoRank lottoRank, int matchCount, boolean bonus) {
+        return lottoRank.matchCount == matchCount && lottoRank.bonus == isBonus(matchCount, bonus);
+    }
+
+    private static boolean isBonus(int matchNumberCount, boolean bonus) {
+        return LottoRank.SECOND.matchCount == matchNumberCount && bonus;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 
     public int getReward() {

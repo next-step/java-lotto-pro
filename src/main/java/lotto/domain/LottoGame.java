@@ -3,15 +3,13 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.common.ConstValue.LOTTO_PRICE;
+
 public class LottoGame {
 
-    private final LottoGenerator lottoGenerator;
     private final LottoResult lottoResult;
-    public static final int LOTTO_PRICE = 1000;
-
 
     public LottoGame() {
-        this.lottoGenerator = new LottoGenerator();
         this.lottoResult = new LottoResult();
     }
 
@@ -19,6 +17,7 @@ public class LottoGame {
         validLottoPrice(purchasePrice);
         int ticketCount = purchasePrice / LOTTO_PRICE;
 
+        LottoGenerator lottoGenerator = new LottoGenerator();
         List<LottoTicket> lottoTicketList = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
             lottoTicketList.add(new LottoTicket(lottoGenerator.generateLottoNumber()));
@@ -32,7 +31,7 @@ public class LottoGame {
         }
     }
 
-    public void makeLottoResult(LottoNumbers winningLottoNumber, LottoTickets lottoTickets) {
+    public void makeLottoResult(WinningLottoNumbers winningLottoNumber, LottoTickets lottoTickets) {
         lottoTickets.matchLottoResult(winningLottoNumber, lottoResult);
     }
 

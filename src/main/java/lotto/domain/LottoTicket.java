@@ -10,8 +10,11 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoRank compareLotto(LottoNumbers winningLottoNumber) {
-        return LottoRank.findLottoRank(this.lottoNumbers.match(winningLottoNumber).size());
+    public LottoRank compareLotto(WinningLottoNumbers winningLottoNumber) {
+        return LottoRank.findLottoRank(
+                lottoNumbers.match(winningLottoNumber.getLottoNumbers()).size(),
+                lottoNumbers.isBonusMatch(winningLottoNumber.getBonusNumber())
+        );
     }
 
     @Override
