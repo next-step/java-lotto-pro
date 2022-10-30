@@ -33,8 +33,8 @@ public class Lottos {
     public Winners findWinners(Lotto winLotto) {
         Winners winners = new Winners();
         for (Lotto lotto : lottos) {
-            int correctNumber = lotto.compare(winLotto);
-            winners.add(new Winner(correctNumber));
+            int countOfMatch = lotto.countMatchingNumbers(winLotto);
+            winners.add(new Winner(countOfMatch));
         }
         return winners;
     }

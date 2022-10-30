@@ -34,15 +34,11 @@ public class Lotto {
         return numbers.toString();
     }
 
-    public int compare(Lotto winLotto) {
+    public int countMatchingNumbers(Lotto winLotto) {
         int result = 0;
         for (Integer number : numbers) {
             result += winLotto.containsNumber(number);
         }
         return result;
-    }
-
-    public List<Integer> getNumbers() {
-        return numbers;
     }
 }

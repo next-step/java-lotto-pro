@@ -23,9 +23,9 @@ public class LottoTest {
         Lotto lotto = new Lotto(Arrays.asList(1, 3, 4, 5, 6, 8));
 
         // when
-        int matchingNumber = lotto.compare(winNumbers);
+        int countOfMatch = lotto.countMatchingNumbers(winNumbers);
 
         // then
-        assertThat(matchingNumber).isEqualTo(5);
+        assertThat(countOfMatch).isEqualTo(5);
     }
 }
