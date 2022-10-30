@@ -46,12 +46,23 @@ public class MoneyTest {
 
     @ParameterizedTest
     @DisplayName("금액이 로또 가격으로 딱 나누어 떨어지지 않았을때 로또 개수 반환")
-    @MethodSource("useMoneyInfo")
+    @MethodSource("returnLottPiece")
     void return_use_money(int amount, int price, int expect) {
         Money money = new Money(amount);
-        money.possibleBuyLottoCount(price);
-        assertThat(money.possibleBuyLottoCount(price)).isEqualTo(expect);
+        int lottoCount = money.possibleBuyLottoCount(price);
+        assertThat(lottoCount).isEqualTo(expect);
     }
+
+    @ParameterizedTest
+    @DisplayName("투자 금액 반환")
+    @MethodSource("investmentTestCase")
+    void return_investment(int amount, int price, int expect) {
+        Money money = new Money(amount);
+        money.possibleBuyLottoCount(price);
+        assertThat(money.getInvestment()).isEqualTo(expect);
+    }
+
+
 
 
     private static Stream<Arguments> amountAndLottoPrice() {
@@ -68,7 +79,14 @@ public class MoneyTest {
         );
     }
 
-    private static Stream<Arguments> useMoneyInfo() {
+    private static Stream<Arguments> investmentTestCase() {
+        return Stream.of(
+                Arguments.of(1000, 300, 900),
+                Arguments.of(1000, 400, 800)
+        );
+    }
+
+    private static Stream<Arguments> returnLottPiece() {
         return Stream.of(
                 Arguments.of(1000, 300, 3),
                 Arguments.of(1000, 400, 2)
