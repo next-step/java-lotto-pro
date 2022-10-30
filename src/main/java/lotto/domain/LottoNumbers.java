@@ -31,21 +31,10 @@ public class LottoNumbers {
         }
     }
 
-    @Override
-    public String toString() {
-        return this.lottoNumbers.stream()
-                .map(LottoNumber::toString)
-                .collect(Collectors.joining(", ", "[", "]"));
-    }
-
     public List<Integer> match(LottoNumbers lottoNumbers) {
         List<Integer> duplicates = new ArrayList<>(numbers());
         duplicates.retainAll(lottoNumbers.numbers());
         return duplicates;
-    }
-
-    public boolean isBonusMatch(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
     }
 
     public List<Integer> numbers() {
@@ -55,4 +44,16 @@ public class LottoNumbers {
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
     }
+
+    public boolean isBonusMatch(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
+    @Override
+    public String toString() {
+        return this.lottoNumbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(", ", "[", "]"));
+    }
+
 }

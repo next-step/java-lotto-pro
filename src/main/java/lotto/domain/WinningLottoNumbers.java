@@ -64,4 +64,5 @@ public class WinningLottoNumbers {
     public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
+
 }

@@ -32,4 +32,5 @@ public class LottoResult {
     public LinkedHashMap<LottoRank, Integer> getLottoResultMap() {
         return lottoResultMap;
     }
+
 }
