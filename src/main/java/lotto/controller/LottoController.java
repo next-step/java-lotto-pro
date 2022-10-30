@@ -6,9 +6,9 @@ import lotto.controller.dto.LottoWinResultsRequest;
 import lotto.controller.dto.LottoWinResultsResponse;
 import lotto.controller.dto.PurchasedLottoTicketsResponse;
 import lotto.controller.dto.WinningLottoTicketResponse;
+import lotto.domain.AutoLottoTicketsVendor;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
-import lotto.domain.LottoVendor;
 import lotto.domain.LottoWinPrizes;
 import money.Money;
 import utils.InputHandler;
@@ -17,16 +17,16 @@ import utils.StringSplitter;
 
 public class LottoController {
 
-	private final LottoVendor lottoVendor;
+	private final AutoLottoTicketsVendor autoLottoTicketsVendor;
 	private final Money lottoPrice;
 
-	public LottoController(Money lottoPrice, LottoVendor lottoVendor) {
+	public LottoController(Money lottoPrice, AutoLottoTicketsVendor autoLottoTicketsVendor) {
 		this.lottoPrice = lottoPrice;
-		this.lottoVendor = lottoVendor;
+		this.autoLottoTicketsVendor = autoLottoTicketsVendor;
 	}
 
 	public PurchasedLottoTicketsResponse quickPick(Money inputMoneyToPurchase) {
-		return PurchasedLottoTicketsResponse.of(lottoVendor.quickPick(inputMoneyToPurchase));
+		return PurchasedLottoTicketsResponse.of(autoLottoTicketsVendor.buyAutoLottoTickets(inputMoneyToPurchase));
 	}
 
 	public WinningLottoTicketResponse getLottoTicket() {

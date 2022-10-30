@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.AutoLottoTicketGenerator;
-import lotto.domain.LottoVendor;
+import lotto.domain.AutoLottoTicketsVendor;
 import money.Money;
 
 public class LottoControllerFactory {
@@ -11,6 +11,6 @@ public class LottoControllerFactory {
 	public static LottoController createLottoController() {
 		return new LottoController(
 			LOTTO_PRICE,
-			new LottoVendor(LOTTO_PRICE, new AutoLottoTicketGenerator()));
+			new AutoLottoTicketsVendor(LOTTO_PRICE, new AutoLottoTicketGenerator()));
 	}
 }
