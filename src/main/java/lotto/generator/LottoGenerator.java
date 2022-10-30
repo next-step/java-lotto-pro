@@ -30,4 +30,15 @@ public class LottoGenerator {
 
         return lottos;
     }
+
+    public List<Lotto> generate(int count, List<Lotto> initialLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        for (int i = 0; i < count; i++) {
+            lottos.add(Lotto.from(lottoNumberGenerator.generate()));
+        }
+
+        initialLottos.addAll(lottos);
+        return initialLottos;
+    }
 }
