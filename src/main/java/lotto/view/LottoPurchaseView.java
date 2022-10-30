@@ -1,29 +1,25 @@
 package lotto.view;
 
-import java.math.BigDecimal;
-import java.util.Scanner;
-
-import lotto.domain.LottoTickets;
-import lotto.domain.LottoVendor;
+import lotto.controller.LottoController;
+import lotto.controller.dto.PurchasedLottoTicketsResponse;
 import money.Money;
+import utils.InputHandler;
 
 public class LottoPurchaseView {
 
 	private static final String PURCHASE_PROMPT_OUTPUT = "구입금액을 입력해 주세요.";
 	private static final String PURCHASE_RESULT_OUTPUT = "%s개를 구매했습니다.\n";
 
-	private final Scanner scanner;
-	private final LottoVendor lottoVendor;
+	private final LottoController lottoController;
 
-	public LottoPurchaseView(Scanner scanner, LottoVendor lottoVendor) {
-		this.scanner = scanner;
-		this.lottoVendor = lottoVendor;
+	public LottoPurchaseView(LottoController lottoController) {
+		this.lottoController = lottoController;
 	}
 
-	public LottoTickets purchaseLotto() {
+	public PurchasedLottoTicketsResponse purchaseLotto() {
 		System.out.println(PURCHASE_PROMPT_OUTPUT);
 
-		LottoTickets lottoTickets = lottoVendor.quickPick(inputMoneyToPurchase());
+		PurchasedLottoTicketsResponse lottoTickets = lottoController.quickPick(inputMoneyToPurchase());
 
 		System.out.printf(PURCHASE_RESULT_OUTPUT, lottoTickets.getCount());
 		System.out.println(lottoTickets);
@@ -32,10 +28,6 @@ public class LottoPurchaseView {
 	}
 
 	private Money inputMoneyToPurchase() {
-		return Money.wons(toBigDecimal(scanner.next()));
-	}
-
-	private BigDecimal toBigDecimal(String input) {
-		return new BigDecimal(input);
+		return Money.wons(InputHandler.inputInteger());
 	}
 }

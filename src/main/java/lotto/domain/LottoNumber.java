@@ -8,6 +8,9 @@ public class LottoNumber {
 
 	public static final int MIN_NUMBER = 1;
 	public static final int MAX_NUMBER = 45;
+
+	public static final LottoNumber MAX = LottoNumber.of(MAX_NUMBER);
+
 	private final int number;
 
 	private LottoNumber(int number) {
@@ -28,6 +31,10 @@ public class LottoNumber {
 
 	private static boolean isNumberInRange(int number) {
 		return MIN_NUMBER > number || MAX_NUMBER < number;
+	}
+
+	public int getNumber() {
+		return number;
 	}
 
 	@Override

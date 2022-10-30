@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static java.lang.String.format;
 import static java.util.stream.Collectors.joining;
+import static lotto.domain.LottoWinPrize.SECOND;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -55,6 +56,34 @@ public class LottoTicket {
 		return count != NUMBER_COUNT;
 	}
 
+	public LottoWinPrize match(LottoTicket other, LottoNumber bonusBall) {
+		int matchCount = getMatchCount(other);
+
+		if (isSecondPrize(matchCount, bonusBall)) {
+			return SECOND;
+		}
+
+		return LottoWinPrize.matchCountOf(matchCount);
+	}
+
+	private int getMatchCount(LottoTicket other) {
+		Set<LottoNumber> comparedLottoNumbers = new HashSet<>(other.lottoNumbers);
+
+		int matchCount = 0;
+		for (LottoNumber lottoNumber : this.lottoNumbers) {
+			matchCount += comparedLottoNumbers.contains(lottoNumber) ? 1 : 0;
+		}
+		return matchCount;
+	}
+
+	private boolean isSecondPrize(int matchCount, LottoNumber bonusBall) {
+		if (matchCount != SECOND.matchCount) {
+			return false;
+		}
+
+		return lottoNumbers.stream().anyMatch(number -> number.equals(bonusBall));
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -79,16 +108,8 @@ public class LottoTicket {
 			.collect(joining(", ", "[", "]"));
 	}
 
-	public int match(LottoTicket other) {
-
-		Set<LottoNumber> comparedLottoNumbers = new HashSet<>(other.lottoNumbers);
-
-		int equalNumberCount = 0;
-		for (LottoNumber lottoNumber : this.lottoNumbers) {
-			equalNumberCount += comparedLottoNumbers.contains(lottoNumber) ? 1 : 0;
-		}
-
-		return equalNumberCount;
+	public List<Integer> getLottoNumbers() {
+		return lottoNumbers.stream()
+			.map(LottoNumber::getNumber).collect(Collectors.toList());
 	}
-
 }

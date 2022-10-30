@@ -29,6 +29,19 @@ public class LottoTickets {
 		return lottoTicketList.size();
 	}
 
+	public LottoWinPrizes match(LottoTicket comparedTicket, LottoNumber bonusNumber) {
+		return LottoWinPrizes.of(
+			lottoTicketList.stream()
+				.map(lottoTicket -> lottoTicket.match(comparedTicket, bonusNumber))
+				.collect(Collectors.toList()));
+	}
+
+	public List<List<Integer>> getLottoNumbersList() {
+		return lottoTicketList.stream()
+			.map(LottoTicket::getLottoNumbers)
+			.collect(Collectors.toList());
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -50,12 +63,5 @@ public class LottoTickets {
 	public String toString() {
 		return lottoTicketList.stream().map(LottoTicket::toString)
 			.collect(Collectors.joining("\n"));
-	}
-
-	public LottoMatchCounts match(LottoTicket comparedTicket) {
-		return LottoMatchCounts.of(
-			lottoTicketList.stream()
-				.map(lottoTicket -> lottoTicket.match(comparedTicket))
-				.collect(Collectors.toList()));
 	}
 }
