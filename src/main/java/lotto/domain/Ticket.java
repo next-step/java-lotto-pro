@@ -15,9 +15,6 @@ import lotto.util.StringUtil;
 public class Ticket {
     public List<Integer> lottoNumbers = new ArrayList<>();
 
-    private static final int SIX = 6;
-    private static final int ZERO = 0;
-
     public Ticket() {
         generateTicket();
     }
@@ -27,15 +24,24 @@ public class Ticket {
     }
 
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        IntStream.rangeClosed(Constants.TICKET_MIN_IDX, Constants.TICKET_MAX_IDX).forEach(i -> {
-            sb.append(String.valueOf(this.lottoNumbers.get(i)));
-            sb.append(Constants.COMMA);
-            sb.append(Constants.BLANK);
-        });
-
-        return removeLastComma(sb.toString());
+        return String.format(Constants.STR_LOTTO_NUM_LIST, lottoNumbers.toArray());
+    }
+    
+    public int compareTicket(Ticket cmpTicket) {
+        int cnt = 0;
+        
+        for(int i : cmpTicket.lottoNumbers) {
+            cnt += countCorrectNumber(i);
+        }
+        
+        return cnt;
+    }
+    
+    private int countCorrectNumber(int num) {
+        if(this.lottoNumbers.contains(num)) {
+            return 1;
+        }
+        return 0;
     }
 
     private void generateTicket() {
@@ -45,17 +51,12 @@ public class Ticket {
                 .collect(Collectors.toList());
         
         Collections.shuffle(candidateNumbers);
-        
+
         IntStream.rangeClosed(Constants.TICKET_MIN_IDX, Constants.TICKET_MAX_IDX).forEach(i -> {
             this.lottoNumbers.add(candidateNumbers.get(i));
         });
         
         Collections.sort(this.lottoNumbers);
-    }
-
-    private String removeLastComma(String str) {
-        int lastCommaIndex = str.lastIndexOf(Constants.COMMA);
-        return str.substring(ZERO, lastCommaIndex);
     }
 
     private void validateWinningTicketStr(String winningTicketStr) {
@@ -65,13 +66,13 @@ public class Ticket {
         
         String[] winningTicketStrArray = winningTicketStr.split(Constants.COMMA);
         
-        if(winningTicketStrArray.length != SIX) {
+        if(winningTicketStrArray.length != Constants.SIX) {
             throw new IllegalArgumentException(Constants.ERR_SIX_NUMBERS);
         }
         
-        IntStream.rangeClosed(Constants.TICKET_MIN_IDX, Constants.TICKET_MAX_IDX).forEach(i -> {
-            validateWinningTicketNum(winningTicketStrArray[i].trim());
-        });
+        for(String s : winningTicketStrArray) {
+            validateWinningTicketNum(s.trim());
+        }
         
         Set<Integer> tmpLottoSet = new HashSet<>(this.lottoNumbers);
         
