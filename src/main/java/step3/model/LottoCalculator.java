@@ -1,5 +1,7 @@
 package step3.model;
 
+import java.util.List;
+
 import static step3.constant.Constant.COMMA;
 import static step3.constant.Constant.SPACE;
 import static step3.constant.Constant.LOTTO_NUMBER_LENGTH;
@@ -7,11 +9,20 @@ import static step3.constant.Message.UNVALID_LOTTO_NUMBER_LENGTH;
 
 public class LottoCalculator {
     private static Lotto lastWeekWinner = new Lotto();
+    private static List<Lotto> purchasedLottos;
 
     public void setLastWeekLottoNumbers(String beforeNumbers) {
         String[] afterNumbers = validateLastWeekWinner(beforeNumbers);
-
         lastWeekWinner.setLastWeekWinner(afterNumbers);
+    }
+
+    public void calculateWinnerStatistics(Lottos lottos) {
+        purchasedLottos = lottos.getLottos();
+
+        for(Lotto lotto : purchasedLottos) {
+            
+
+        }
     }
 
     private String[] validateLastWeekWinner(String beforeNumbers) {
@@ -36,6 +47,7 @@ public class LottoCalculator {
             LottoGenerator.commonStringToNumber(afterNumbers[i]);
         }
     }
+
 
 
 }
