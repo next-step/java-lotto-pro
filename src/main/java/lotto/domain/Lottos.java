@@ -29,13 +29,6 @@ public class Lottos {
         return lottos.size();
     }
 
-    public void print() {
-        for (Lotto lotto : lottos) {
-            lotto.print();
-        }
-        System.out.println();
-    }
-
     @Override
     public boolean equals(Object o) {
 

@@ -13,7 +13,7 @@ public class LottoController {
         LottoOutput.printLottoCount(lottoCount);
 
         Lottos lottos = Lottos.autoGenerateSizeOf(lottoCount);
-        lottos.print();
+        LottoOutput.printLottos(lottos);
 
         WinningLotto winningLotto = LottoInput.inputWinningLotto();
         LottoOutput.printStatistics(winningLotto, lottos);

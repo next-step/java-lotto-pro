@@ -19,12 +19,12 @@ public class Lotto {
         this.lottoNumbers = LottoNumbers.generate(numbers);
     }
 
-    public int match(Lotto target) {
-        return lottoNumbers.match(target.lottoNumbers);
+    public List<LottoNumber> getLottoNumbers() {
+        return this.lottoNumbers.getLottoNumbers();
     }
 
-    public void print() {
-        lottoNumbers.print();
+    public int match(Lotto target) {
+        return lottoNumbers.match(target.lottoNumbers);
     }
 
     @Override

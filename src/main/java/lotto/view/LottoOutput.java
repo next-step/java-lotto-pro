@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoCalculator;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,6 +34,25 @@ public class LottoOutput {
 
     private static void printRateOfReturn(WinningLotto winningLotto, Lottos lottos) {
         OutputConsole.rateOfReturn(LottoCalculator.rateOfReturn(winningLotto, lottos));
+    }
+
+    public static void printLottos(Lottos lottos) {
+        lottos.getLottos()
+                .stream()
+                .forEach(LottoOutput::printLotto);
+        System.out.println();
+    }
+
+    private static void printLotto(Lotto lotto) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
+            stringBuilder.append(lottoNumber.toInt());
+            stringBuilder.append(", ");
+        }
+        stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
+        stringBuilder.append("]");
+        System.out.println(stringBuilder);
     }
 
 }

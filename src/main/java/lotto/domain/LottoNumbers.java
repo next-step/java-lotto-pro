@@ -72,16 +72,8 @@ public class LottoNumbers {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public void print() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            stringBuilder.append(lottoNumber.toInt());
-            stringBuilder.append(", ");
-        }
-        stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
-        stringBuilder.append("]");
-        System.out.println(stringBuilder);
+    public List<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     @Override
