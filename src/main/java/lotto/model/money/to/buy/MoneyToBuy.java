@@ -3,6 +3,7 @@ package lotto.model.money.to.buy;
 public class MoneyToBuy {
     private static final int PRICE_OF_SINGLE_LOTTO_TICKET = 1000;
     protected final int money;
+    private int boughtLottoCount;
 
     public MoneyToBuy(String input) {
         int inputMoney;
@@ -31,5 +32,13 @@ public class MoneyToBuy {
 
     public int affordableTicketCount() {
         return money / PRICE_OF_SINGLE_LOTTO_TICKET;
+    }
+
+    public boolean canBuyMoreLotto() {
+        return boughtLottoCount < affordableTicketCount();
+    }
+
+    public void buyOneLotto() {
+        ++boughtLottoCount;
     }
 }

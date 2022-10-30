@@ -2,10 +2,15 @@ package lotto.model.money.to.buy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -49,6 +54,23 @@ class MoneyToBuyTest {
         void moneyZero(int value) {
             final String input = String.valueOf(value);
             assertThrows(NumberFormatException.class, () -> new MoneyToBuy(input));
+        }
+    }
+
+    @Nested
+    @DisplayName("구매 금액을 가지고 가능한 만큼 로또 구매하기")
+    class CanBuyMoreLottoAndBuyOneLotto {
+        @ParameterizedTest
+        @CsvSource(value = {"0,0", "1000,1", "5000,5"}, delimiter = ',')
+        @DisplayName("canBuyMoreLotto 메서드, buyOneLotto 메서드 테스트 성공")
+        void success(String input, int countResult) {
+            final MoneyToBuy moneyToBuy = new MoneyToBuy(input);
+            int count = 0;
+            while (moneyToBuy.canBuyMoreLotto()) {
+                moneyToBuy.buyOneLotto();
+                ++count;
+            }
+            assertThat(count).isEqualTo(countResult);
         }
     }
 }
