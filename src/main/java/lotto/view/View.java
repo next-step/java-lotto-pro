@@ -35,7 +35,7 @@ public class View {
         OutputView.print("---------");
         Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.NONE)
-                .forEach(rank -> print(String.format(MSG_RESULT, rank.getCount(), rank.getPrize(), result.getRankCount(rank))));
+                .forEach(rank -> print(String.format(MSG_RESULT, rank.getMatchCount(), rank.getPrize(), result.getRankCount(rank))));
         print(String.format(MSG_RETURN_RATE, result.getReturnRate()));
     }
 }
