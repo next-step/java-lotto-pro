@@ -1,23 +1,22 @@
 package lotto.domain;
 
 public class NumberMatchWinningLottoStrategy implements WinningLottoStrategy {
-	private final WinningLotto winningLotto;
-	private final int matchCount;
-	private final long matchPrice;
+	private final WinningCheckStrategy winningCheckStrategy;
+	private final ResultMessageStrategy resultMessageStrategy;
 
-	public NumberMatchWinningLottoStrategy(WinningLotto winningLotto, int matchCount, int matchPrice) {
-		this.winningLotto = winningLotto;
-		this.matchCount = matchCount;
-		this.matchPrice = matchPrice;
+	public NumberMatchWinningLottoStrategy(WinningCheckStrategy winningCheckStrategy,
+		ResultMessageStrategy resultMessageStrategy) {
+		this.winningCheckStrategy = winningCheckStrategy;
+		this.resultMessageStrategy = resultMessageStrategy;
 	}
 
 	@Override
 	public boolean isWinning(Lotto lotto) {
-		return winningLotto.matchCount(lotto) == matchCount;
+		return winningCheckStrategy.winningCheck(lotto);
 	}
 
 	@Override
 	public String matchResultMessage(Lottos lottos) {
-		return String.format("%d개 일치 (%d원)- %d개", matchCount, matchPrice, lottos.winningQuantity(this));
+		return resultMessageStrategy.resultMessage(lottos.winningQuantity(this));
 	}
 }

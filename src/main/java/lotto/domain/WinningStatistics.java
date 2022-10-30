@@ -3,16 +3,31 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class WinningStatistics {
 	private final List<WinningLottoStrategy> winningLottoStrategies = new ArrayList<>();
 
 	public WinningStatistics(WinningLotto winningLotto) {
-		winningLottoStrategies.add(new NumberMatchWinningLottoStrategy(winningLotto, 3, 5000));
-		winningLottoStrategies.add(new NumberMatchWinningLottoStrategy(winningLotto, 4, 50000));
-		winningLottoStrategies.add(new NumberMatchWinningLottoStrategy(winningLotto, 5, 1500000));
-		winningLottoStrategies.add(new NumberMatchWinningLottoStrategy(winningLotto, 6, 2000000000));
+		winningLottoStrategies.add(
+			new NumberMatchWinningLottoStrategy(
+				new NumberMatchWinningCheckStrategy(winningLotto, 3),
+				new NumberMatchResultMessageStrategy(3, 5000)
+			));
+		winningLottoStrategies.add(
+			new NumberMatchWinningLottoStrategy(
+				new NumberMatchWinningCheckStrategy(winningLotto, 4),
+				new NumberMatchResultMessageStrategy(4, 50000)
+			));
+		winningLottoStrategies.add(
+			new NumberMatchWinningLottoStrategy(
+				new NumberMatchWinningCheckStrategy(winningLotto, 5),
+				new NumberMatchResultMessageStrategy(5, 1500000)
+			));
+		winningLottoStrategies.add(
+			new NumberMatchWinningLottoStrategy(
+				new NumberMatchWinningCheckStrategy(winningLotto, 6),
+				new NumberMatchResultMessageStrategy(6, 2000000000)
+			));
 	}
 
 	public List<MatchResult> getMatchResults(Lottos lottos) {
