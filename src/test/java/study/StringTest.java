@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
+@DisplayName("String 객체 테스트")
 class StringTest {
     @Test
     @DisplayName("두 개의 숫자가 포함된 문자열 split 테스트")

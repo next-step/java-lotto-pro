@@ -16,13 +16,15 @@ public class AmountByLottoStatus {
 
     private void initTotalAmountMap() {
         Arrays.stream(LottoStatus.values())
-                .forEach((status) -> {
-                    amountByLottoStatus.put(status, NumberUtil.INIT_ZERO_LONG);
-                });
+            .forEach((status) -> {
+                amountByLottoStatus.put(status, NumberUtil.INIT_ZERO_LONG);
+            });
     }
 
     public void accumulate(LottoStatus status) {
-        amountByLottoStatus.replace(status, status.accumlateByLottoStatus(amountByLottoStatus.get(status)));
+        amountByLottoStatus.replace(status,
+                status.accumlateByLottoStatus(amountByLottoStatus.get(status))
+        );
     }
 
     public long sumTotalAmount() {
@@ -33,9 +35,11 @@ public class AmountByLottoStatus {
 
     public Map<LottoStatus, Long> countsByLottoStatus() {
         Map<LottoStatus, Long> countsByLottoStatus = new HashMap<>();
+
         amountByLottoStatus.keySet().forEach((status) -> {
             countsByLottoStatus.put(status, countByLottoStatus(status));
         });
+
         return countsByLottoStatus;
     }
 

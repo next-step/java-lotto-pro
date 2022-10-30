@@ -14,9 +14,11 @@ public class Order {
 
     private int checkTotalAmount(String totalAmount) {
         int totalAmountConverted = NumberUtil.convertToPositiveIntNotContainsZero(totalAmount);
+
         if(totalAmountConverted >= Store.LOTTO_PRICE) {
             return totalAmountConverted;
         }
+
         throw new IllegalArgumentException("[ERROR] You must purchase at least one lotto.");
     }
 

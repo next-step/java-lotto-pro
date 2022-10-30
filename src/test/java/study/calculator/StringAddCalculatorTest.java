@@ -1,10 +1,12 @@
 package study.calculator;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@DisplayName("문자열 타입의 숫자를 구분자로 자르고 연산하는 클래스 테스트")
 class StringAddCalculatorTest {
     @Test
     void splitAndSum_null_또는_빈문자() {

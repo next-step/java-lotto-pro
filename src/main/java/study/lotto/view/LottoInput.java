@@ -16,4 +16,8 @@ public class LottoInput {
     public WinningLotto inputWinningNumbers() {
         return new WinningLotto(scanner.nextLine());
     }
+
+    public void inputBonusBall(WinningLotto winningLotto) {
+        winningLotto.addBonusBall(scanner.nextInt());
+    }
 }

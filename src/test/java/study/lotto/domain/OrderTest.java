@@ -35,7 +35,8 @@ class OrderTest {
         assertThatThrownBy(() -> {
             new Order(totalAmount);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] The given string contains characters that cannot be converted to numbers.");
+                .hasMessage("[ERROR] The given string contains characters " +
+                        "that cannot be converted to numbers.");
     }
 
     @ParameterizedTest

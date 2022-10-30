@@ -23,11 +23,12 @@ class LottosTest {
         Lottos lottos = new Lottos(allNumbersFromStore);
 
         WinStats stats = lottos.drawLots(winningLotto);
-        Map<LottoStatus, Long> printData = stats.getPrintDataWithCountsByLottoStatus();
+        Map<LottoStatus, Long> printData =
+                stats.getPrintDataWithCountsByLottoStatus();
 
         assertAll(
+                () -> assertEquals(1L, printData.get(LottoStatus.FIFTH_PLACE)),
                 () -> assertEquals(1L, printData.get(LottoStatus.FOURTH_PLACE)),
-                () -> assertEquals(1L, printData.get(LottoStatus.THIRD_PLACE)),
                 () -> assertEquals("27.50", stats.getPrintDataWithProfitRate())
         );
     }

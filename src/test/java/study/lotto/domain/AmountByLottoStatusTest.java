@@ -23,19 +23,19 @@ class AmountByLottoStatusTest {
 
     @Test
     void 전체_당첨_누적_금액() {
-        assertEquals(1505000, amountByLottoStatus.sumTotalAmount());
+        assertEquals(30050000, amountByLottoStatus.sumTotalAmount());
     }
 
     @Test
     void LottoStatus별_당첨_개수() {
-        Map<LottoStatus, Long> countsByLottoStatus = amountByLottoStatus.countsByLottoStatus();
+        Map<LottoStatus, Long> countsByLottoStatus =
+                amountByLottoStatus.countsByLottoStatus();
         assertAll(
+                () -> assertEquals(0L, countsByLottoStatus.get(LottoStatus.FIFTH_PLACE)),
                 () -> assertEquals(1L, countsByLottoStatus.get(LottoStatus.FOURTH_PLACE)),
                 () -> assertEquals(0L, countsByLottoStatus.get(LottoStatus.THIRD_PLACE)),
                 () -> assertEquals(1L, countsByLottoStatus.get(LottoStatus.SECOND_PLACE)),
                 () -> assertEquals(0L, countsByLottoStatus.get(LottoStatus.FIRST_PLACE))
         );
     }
-
-
 }

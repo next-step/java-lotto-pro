@@ -3,6 +3,7 @@ package study.lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
@@ -33,7 +34,8 @@ class WinningLottoTest {
         assertThatThrownBy(() -> {
             new WinningLotto(winningNumbers);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] The given string contains characters that cannot be converted to numbers.");
+                .hasMessage("[ERROR] The given string contains characters " +
+                        "that cannot be converted to numbers.");
     }
 
     @ParameterizedTest
@@ -46,15 +48,17 @@ class WinningLottoTest {
 
     @Test
     void drawLots_결과_검증() {
+        tempWinningLotto.addBonusBall(7);
+
         List<Lotto> allNumbersFromStore = Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 33)),
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
                 new Lotto(Arrays.asList(1, 2, 18, 27, 39, 45)));
         WinStats stats = tempWinningLotto.drawLots(allNumbersFromStore, new WinStats(2));
         Map<LottoStatus, Long> printData = stats.getPrintDataWithCountsByLottoStatus();
 
         assertAll(
                 () -> assertEquals(1L, printData.get(LottoStatus.SECOND_PLACE)),
-                () -> assertEquals("750.00", stats.getPrintDataWithProfitRate())
+                () -> assertEquals("15000.00", stats.getPrintDataWithProfitRate())
         );
     }
 
@@ -68,5 +72,24 @@ class WinningLottoTest {
     @ValueSource(ints = { 1, 2, 3, 4, 5, 6 })
     void matchNumber_winningNumbers에_포함된_숫자(int num) {
         assertEquals(1, tempWinningLotto.matchNumber(LottoNumber.of(num)));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = { 1, 2, 3, 4, 5, 6 })
+    void addBonusBall_winningNumbers에_포함된_숫자가_보너스볼로_입력되는_경우(int num) {
+        assertThatThrownBy(() -> {
+            tempWinningLotto.addBonusBall(num);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] Bonus ball number must not be contained " +
+                        "in the winning numbers.");
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = { "7:false", "11:true", "9:false", "23:true", "45:true" }, delimiter = ':')
+    void isMatchBonusBall_Lotto가_가지고_있는_숫자_중_bonusBall의_포함_여부(int bonusBall, boolean expected) {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 11, 23, 45));
+        tempWinningLotto.addBonusBall(bonusBall);
+
+        assertEquals(expected, tempWinningLotto.isMatchBonusBall(lotto));
     }
 }

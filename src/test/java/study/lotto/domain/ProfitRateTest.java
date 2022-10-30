@@ -19,7 +19,8 @@ class ProfitRateTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = { "5000:0.36", "10000:0.71", "1510000:107.86", "2000000000:142857.14" }, delimiter = ':')
+    @CsvSource(value = { "5000:0.36", "10000:0.71", "1510000:107.86", "2000000000:142857.14" },
+            delimiter = ':')
     void 수익률_계산_수량_고정(int totalAmount, String expected) {
         ProfitRate profitRate = new ProfitRate(14);
         profitRate.calculate(totalAmount);

@@ -16,10 +16,12 @@ public class StringAddCalculator {
 
     private static int sum(String[] strings) {
         int sum = NumberUtil.INIT_ZERO;
+
         for(String str : strings) {
             int num = NumberUtil.convertToPositiveInt(str);
             sum += num;
         }
+
         return sum;
     }
 

@@ -16,6 +16,7 @@ class StoreTest {
     @ValueSource(ints = { 1, 5, 10, 20, 50 })
     void 입력된_숫자만큼_로또를_구매하는_기능_테스트(int quantity) {
         List<Lotto> lottos = Store.buy(quantity);
+
         assertThat(lottos).hasSize(quantity);
     }
 }

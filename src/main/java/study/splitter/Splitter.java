@@ -15,6 +15,7 @@ public class Splitter {
         if(useCustomDelimiter(str)) {
             return splitCustom(str);
         }
+
         return str.split(DEFAULT_DELIMITER);
     }
 
@@ -24,10 +25,13 @@ public class Splitter {
 
     private static String[] splitCustom(String str) {
         Matcher m = CUSTOM_DELIMITER_PATTERN.matcher(str);
+
         if(m.find()) {
             String customDelimiter = m.group(CUSTOM_DELIMITER_GROUP);
             return m.group(CUSTOM_DELIMITER_NUMBERS_GROUP).split(customDelimiter);
         }
-        throw new IllegalArgumentException("[ERROR] The given string cannot be matched with a custom pattern.");
+
+        throw new IllegalArgumentException(
+                "[ERROR] The given string cannot be matched with a custom pattern.");
     }
 }
