@@ -5,10 +5,12 @@ import lotto.controller.LottoControllerFactory;
 import lotto.controller.dto.BoughtLottoTicketsResponse;
 import lotto.view.LottoBuyingView;
 import lotto.view.LottoWinResultView;
+import utils.InputHandler;
 
 public class LottoApplication {
 
 	private static final LottoController lottoController = LottoControllerFactory.createLottoController();
+	private static final InputHandler inputHandler = InputHandler.createSystemIn();
 
 	public static void main(String[] args) {
 		LottoBuyingView lottoBuyingView = createLottoBuyingView();
@@ -20,10 +22,10 @@ public class LottoApplication {
 	}
 
 	private static LottoWinResultView createLottoWinResultView() {
-		return new LottoWinResultView(lottoController);
+		return new LottoWinResultView(lottoController, inputHandler);
 	}
 
 	private static LottoBuyingView createLottoBuyingView() {
-		return new LottoBuyingView(lottoController);
+		return new LottoBuyingView(lottoController, inputHandler);
 	}
 }

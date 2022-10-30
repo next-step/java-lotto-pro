@@ -18,9 +18,11 @@ public class LottoWinResultView {
 	private static final String LOSS_RESULT_OUTPUT = " (기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
 	private final LottoController lottoController;
+	private final InputHandler inputHandler;
 
-	public LottoWinResultView(LottoController lottoController) {
+	public LottoWinResultView(LottoController lottoController, InputHandler inputHandler) {
 		this.lottoController = lottoController;
+		this.inputHandler = inputHandler;
 	}
 
 	public void printWinResult(BoughtLottoTicketsResponse boughtLottoTickets) {
@@ -41,11 +43,11 @@ public class LottoWinResultView {
 	}
 
 	private List<Integer> inputWinningLottoNumber() {
-		return InputHandler.inputPositiveIntegerList(INPUT_PROMPT_OUTPUT);
+		return inputHandler.inputPositiveIntegerList(INPUT_PROMPT_OUTPUT);
 	}
 
 	private int inputBonusNumber() {
-		return InputHandler.inputPositiveInteger(BONUS_NUMBER_PROMPT);
+		return inputHandler.inputPositiveInteger(BONUS_NUMBER_PROMPT);
 	}
 
 	private void printMatchCount(LottoWinResultsResponse lottoWinResultsResponse) {

@@ -9,41 +9,51 @@ public class InputHandler {
 
 	private static final String NUMBER_INPUT_ERROR_MESSAGE = "숫자만 입력할 수 있습니다.";
 	private static final String NUMBER_LIST_INPUT_ERROR_MESSAGE = "콤마로 구분된 숫자를 입력해야 합니다.";
-	private static final Scanner scanner = new Scanner(System.in);
-	public static final int ZERO = 0;
 	public static final String POSITIVE_NUMBER_ERROR_MESSAGE = "음수는 입력할 수 없습니다.";
 
-	public static int inputPositiveInteger(String prompt) {
+	public static final int ZERO = 0;
+
+	private final Scanner scanner;
+
+	public InputHandler(Scanner scanner) {
+		this.scanner = scanner;
+	}
+
+	public static InputHandler createSystemIn() {
+		return new InputHandler(new Scanner(System.in));
+	}
+
+	public int inputPositiveInteger(String prompt) {
 		return ExceptionHandler.callWithHandlingException(
 			prompt,
 			() -> parsePositiveInteger(input()));
 	}
 
-	public static List<Integer> inputPositiveIntegerList(String prompt) {
+	public List<Integer> inputPositiveIntegerList(String prompt) {
 		return ExceptionHandler.callWithHandlingException(prompt, NUMBER_LIST_INPUT_ERROR_MESSAGE, () -> {
 			SplitStrings splitStrings = StringSplitter.split(input());
 
 			return splitStrings.stream()
 				.map(String::trim)
-				.map(InputHandler::parsePositiveInteger)
+				.map(this::parsePositiveInteger)
 				.collect(Collectors.toList());
 		});
 	}
 
-	public static List<List<Integer>> inputPositiveIntegerListMany(String prompt,
-																   int buyingManualLottoCount) {
+	public List<List<Integer>> inputPositiveIntegerListMany(String prompt,
+															int buyingManualLottoCount) {
 		return ExceptionHandler.callWithHandlingException(prompt, NUMBER_LIST_INPUT_ERROR_MESSAGE, () ->
 			inputMany(buyingManualLottoCount).stream()
 				.map(StringSplitter::split)
 				.map(splitStrings -> splitStrings.stream()
 					.map(String::trim)
-					.map(InputHandler::parsePositiveInteger)
+					.map(this::parsePositiveInteger)
 					.collect(Collectors.toList()))
 				.collect(Collectors.toList())
 		);
 	}
 
-	private static int parsePositiveInteger(String input) {
+	private int parsePositiveInteger(String input) {
 		int intNumber = parseInteger(input);
 		if (intNumber < ZERO) {
 			throw new IllegalArgumentException(POSITIVE_NUMBER_ERROR_MESSAGE);
@@ -51,7 +61,7 @@ public class InputHandler {
 		return intNumber;
 	}
 
-	private static int parseInteger(String input) {
+	private int parseInteger(String input) {
 		try {
 			return Integer.parseInt(input);
 		} catch (NumberFormatException e) {
@@ -59,15 +69,15 @@ public class InputHandler {
 		}
 	}
 
-	private static List<String> inputMany(int count) {
+	private List<String> inputMany(int count) {
 		return inputMany(count, new ArrayList<>(count));
 	}
 
-	private static String input() {
+	private String input() {
 		return scanner.nextLine();
 	}
 
-	private static List<String> inputMany(int count, List<String> inputs) {
+	private List<String> inputMany(int count, List<String> inputs) {
 		if (count == 0) {
 			return inputs;
 		}

@@ -14,9 +14,11 @@ public class LottoBuyingView {
 	private static final String BUYING_MANUAL_LOTTO_PROMPT = "수동으로 구매할 번호를 입력해 주세요.";
 
 	private final LottoController lottoController;
+	private final InputHandler inputHandler;
 
-	public LottoBuyingView(LottoController lottoController) {
+	public LottoBuyingView(LottoController lottoController, InputHandler inputHandler) {
 		this.lottoController = lottoController;
+		this.inputHandler = inputHandler;
 	}
 
 	public BoughtLottoTicketsResponse buyLottoTickets() {
@@ -44,12 +46,12 @@ public class LottoBuyingView {
 	}
 
 	private int getMoneyToBuyLottoTickets() {
-		return InputHandler.inputPositiveInteger(BUYING_MONEY_PROMPT);
+		return inputHandler.inputPositiveInteger(BUYING_MONEY_PROMPT);
 	}
 
 	private List<List<Integer>> getManualLottoTickets() {
-		int buyingManualLottoCount = InputHandler.inputPositiveInteger(BUYING_MANUAL_LOTTO_COUNT);
+		int buyingManualLottoCount = inputHandler.inputPositiveInteger(BUYING_MANUAL_LOTTO_COUNT);
 
-		return InputHandler.inputPositiveIntegerListMany(BUYING_MANUAL_LOTTO_PROMPT, buyingManualLottoCount);
+		return inputHandler.inputPositiveIntegerListMany(BUYING_MANUAL_LOTTO_PROMPT, buyingManualLottoCount);
 	}
 }
