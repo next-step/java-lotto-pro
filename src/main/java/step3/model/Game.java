@@ -1,13 +1,14 @@
 package step3.model;
 
 import step3.constant.ErrorMessageConstant;
+import step3.constant.LottoConstant;
 import step3.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    private static final int LOTTO_ONE_GAME_MONEY = 1000;
+
     private final List<LottoResult> lottoResults = new ArrayList<>();
     private LottoResult winLottoNumbers;
     private int lottoBuyCount;
@@ -32,10 +33,9 @@ public class Game {
         checkLottoBuyCount();
     }
 
-
     private void checkLottoBuyCount() {
         if (this.lottoBuyCount <= 0) {
-            throw new RuntimeException(ErrorMessageConstant.ZERO_LOTTO_COUNT);
+            throw new RuntimeException(ErrorMessageConstant.ZERO_LOTTO_BUY_COUNT);
         }
     }
 
@@ -44,7 +44,7 @@ public class Game {
     }
 
     private int getLottoBuyCount(int money) {
-        return money / LOTTO_ONE_GAME_MONEY;
+        return money / LottoConstant.LOTTO_ONE_GAME_MONEY;
     }
 
     private int convertNumber(String text) {
