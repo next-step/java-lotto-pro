@@ -22,11 +22,13 @@ class LottoRankTest {
         }
     }
 
-    @DisplayName("로또 랭크 당첨되지 않은 경우 Null이 반환되는지 확인")
+    @DisplayName("로또 랭크 당첨되지 않은 경우 None이 반환되는지 확인")
     @ParameterizedTest()
     @ValueSource(ints = {2, 7})
     public void valueOf_null(int countOfMatch) throws Exception {
-        assertThat(LottoRank.valueOf(countOfMatch)).isNull();
+        LottoRank lottoRank = LottoRank.valueOf(countOfMatch);
+
+        assertThat(LottoRank.isNone(lottoRank)).isTrue();
     }
 
     @DisplayName("로또 랭크가 반환되지는 확인")
