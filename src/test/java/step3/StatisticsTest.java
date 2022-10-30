@@ -36,9 +36,9 @@ public class StatisticsTest {
     @DisplayName("각 순위별 당첨 개수 확인")
     public void Statistics_count_by_rank() {
         Map<Rank, Integer> countByRank = new HashMap<>();
-        countByRank.put(Rank.FORTH,0);
-        countByRank.put(Rank.THIRD,2);
-        countByRank.put(Rank.SECOND,1);
+        countByRank.put(Rank.FIFTH,0);
+        countByRank.put(Rank.FORTH,2);
+        countByRank.put(Rank.THIRD,1);
         countByRank.put(Rank.FIRST,0);
     
         assertThat(statistics.countByRank()).isEqualTo(countByRank);
@@ -47,7 +47,7 @@ public class StatisticsTest {
     @Test
     @DisplayName("총 당첨금 확인")
     public void Statistics_total_prize() {
-        assertThat(statistics.totalPrize()).isEqualTo(Rank.SECOND.getPrize() + Rank.THIRD.getPrize() * 2);
+        assertThat(statistics.totalPrize()).isEqualTo(Rank.THIRD.getPrize() + Rank.FORTH.getPrize() * 2);
     }
 
 }

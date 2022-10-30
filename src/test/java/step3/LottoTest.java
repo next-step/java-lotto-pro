@@ -56,8 +56,8 @@ public class LottoTest {
     void lotto_match_prize() {
         Lotto lotto = new Lotto(lottoNumbers);
         int count = lotto.compareMath(winningNumber);
-        assertThat(Rank.getRank(count)).isEqualTo(Rank.SECOND);
-        assertThat(Rank.getPrize(count)).isEqualTo(Rank.SECOND.getPrize());
+        assertThat(Rank.getRank(count)).isEqualTo(Rank.THIRD);
+        assertThat(Rank.getPrize(count)).isEqualTo(Rank.THIRD.getPrize());
     }
     
 }

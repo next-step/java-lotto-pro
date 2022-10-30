@@ -5,9 +5,10 @@ import java.util.Map;
 
 public enum Rank {
     NONE(0, 0),
-    FORTH(3, 5000),
-    THIRD(4, 50000),
-    SECOND(5, 1500000),
+    FIFTH(3, 5000),
+    FORTH(4, 50000),
+    THIRD(5, 1500000),
+    //SECOND(5, 30000000),
     FIRST(6, 2000000000);
     
     private final int count;
@@ -25,7 +26,7 @@ public enum Rank {
     }
     
     public static Rank getRank(int matchCount) {
-        if(matchCount < Rank.FORTH.count) {
+        if(matchCount < Rank.FIFTH.count) {
             return Rank.NONE;
         }
         return rankByCount.get(matchCount);
@@ -45,6 +46,6 @@ public enum Rank {
     }
     
     public boolean isNone() {
-        return this.count < Rank.FORTH.count;
+        return this.count < Rank.FIFTH.count;
     }
 }
