@@ -39,7 +39,7 @@ public class LottoWinningStatistics {
     private void setTotalProfit() {
         for (int i = 0; i < lottoWinningStatistics.size(); i++) {
             LottoReward lottoReward = LottoReward.getLottoReward(i);
-            totalProfit.plus(new Money(lottoReward.getTotMoney(lottoWinningStatistics.get(i))));
+            totalProfit.plus(new Money(lottoReward.getProfitTotalMoney(lottoWinningStatistics.get(i))));
         }
     }
 

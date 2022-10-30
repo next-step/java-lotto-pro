@@ -34,7 +34,7 @@ public enum LottoReward {
         return money;
     }
 
-    public double getTotMoney(int count) {
+    public double getProfitTotalMoney(int count) {
         return count * this.money;
     }
 }

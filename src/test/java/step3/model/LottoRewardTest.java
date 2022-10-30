@@ -19,7 +19,7 @@ public class LottoRewardTest {
     @ParameterizedTest
     @CsvSource(value = {"0:0:ZERO", "1:1:ONE", "2:1:TWO", "3:1:THREE", "4:1:FOUR", "5:1:FIVE", "6:1:SIX"}, delimiter = ':')
     void LottoReward_pass_02(int count, int matchCount, String name) {
-        assertThat(LottoReward.getLottoReward(count).getTotMoney(matchCount))
+        assertThat(LottoReward.getLottoReward(count).getProfitTotalMoney(matchCount))
                 .isEqualTo(LottoReward.valueOf(name).getMoney() * matchCount);
     }
 }

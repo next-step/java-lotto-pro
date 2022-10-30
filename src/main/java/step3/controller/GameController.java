@@ -8,8 +8,10 @@ public class GameController {
     public void startGame() {
         Game game = new Game(InputView.inputLottoBuyMoney());
         OutputView.printLottoBuyCount(game.getLottoBuyCount());
-        OutputView.printBuyLottoResult(game);
+        game.startLottoGame();
+        OutputView.printBuyLottoResult(game.getLottoResults());
         game.setWinLottoResult(InputView.inputWinnerLottoResult());
-        OutputView.printLottoStatistics(game);
+        game.startLottoWinningStatistics();
+        OutputView.printLottoStatistics(game.getLottoWinningStatistics().getLottoWinningStatistics(), game.getProfitPercent());
     }
 }

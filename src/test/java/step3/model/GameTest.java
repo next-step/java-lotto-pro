@@ -37,6 +37,7 @@ public class GameTest {
     @ValueSource(strings = {"1", "10"})
     public void getLottoResults_pass_01(int count) {
         Game game = new Game(count);
+        game.startLottoGame();
         List<LottoResult> result = game.getLottoResults();
 
         assertThat(result.size()).isEqualTo(count);
