@@ -29,6 +29,7 @@ class LottosTest {
 
     @Test
     void 로또_목록_출력() {
-        assertThat(lottos.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]\n[2, 4, 5, 7, 9, 11]");
+        String expectedString = "[1, 2, 3, 4, 5, 6]\n[1, 2, 3, 4, 5, 15]\n[2, 4, 5, 7, 9, 11]";
+        assertThat(lottos.toString()).isEqualTo(expectedString);
     }
 }
