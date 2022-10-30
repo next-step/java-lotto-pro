@@ -1,31 +1,12 @@
 package study.step3;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    protected static final int PRICE_PER_LOTTO = 1000;
-
-    private List<Lotto> lottos;
-
-    public Lottos() {
-        lottos = new ArrayList<>();
-    }
+    private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
-    }
-
-    public List<Lotto> makeLottos(int inputMoney) {
-        int num = count(inputMoney);
-        for (int i = 0; i < num; i++) {
-            lottos.add(new Lotto());
-        }
-        return lottos;
-    }
-
-    private int count(int inputMoney) {
-        return inputMoney / PRICE_PER_LOTTO;
     }
 
     public Winners findWinners(Lotto winLotto) {
@@ -39,5 +20,19 @@ public class Lottos {
 
     public Winners findWinners(String winLottoNumbers) {
         return findWinners(new Lotto(LottoParser.stringToListInteger(winLottoNumbers)));
+    }
+
+    public int size() {
+        return lottos.size();
+    }
+
+    public void printAll() {
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto);
+        }
+    }
+
+    public boolean hasEqualSize(int expected) {
+        return lottos.size() == expected;
     }
 }

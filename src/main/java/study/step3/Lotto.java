@@ -5,16 +5,11 @@ import study.step3.exception.LottoNumberListSizeException;
 
 import java.util.*;
 
+import static study.step3.constants.CommonConstants.SUB_LIST_END_INDEX;
+import static study.step3.constants.CommonConstants.SUB_LIST_START_INDEX;
+
 public class Lotto {
-    private static final int SUB_LIST_START_INDEX = 0;
-    private static final int SUB_LIST_END_INDEX = 6;
-
     private List<Integer> numbers;
-
-    public Lotto() {
-        numbers = makeLotto();
-        validateLottoNumbers();
-    }
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
@@ -39,13 +34,6 @@ public class Lotto {
         if (numbers.size() != expectedLottoNumberListSize) {
             throw new LottoNumberListSizeException(String.format("로또는 %d개의 숫자로 이루어져야 합니다.", expectedLottoNumberListSize));
         }
-    }
-
-    private List<Integer> makeLotto() {
-        numbers = new ArrayList<>(LottoNumberRange.shuffledNumbers()
-                .subList(SUB_LIST_START_INDEX, SUB_LIST_END_INDEX));
-        Collections.sort(numbers);
-        return numbers;
     }
 
     private int containsNumber(Integer number) {

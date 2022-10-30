@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.*;
 public class LottoTest {
     @Test
     void 로또_만들기() {
-        assertThatNoException().isThrownBy(Lotto::new);
+        assertThatNoException().isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @Test

@@ -1,14 +1,11 @@
 package study.step3;
 
-import java.util.List;
-
 public class LottoApplication {
     public static void main(String[] args) {
-        int money = InputView.inputMoney();
+        Money money = new Money(InputView.inputMoney());
 
-        Lottos lottos = new Lottos();
-        List<Lotto> lottoList = lottos.makeLottos(money);
-        ResultView.printLottos(lottoList);
+        Lottos lottos = LottoMaker.makeLottos(money);
+        ResultView.printLottos(lottos);
 
         String winLottoNumbers = InputView.inputWinningNumbers();
 

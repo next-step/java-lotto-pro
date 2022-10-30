@@ -19,8 +19,8 @@ public class Winners {
                 .filter(winner -> winner.getCorrectNumber() == nTh).count();
     }
 
-    public double earningRate(int inputMoney) {
-        return totalReward() / (double) inputMoney;
+    public double earningRate(Money inputMoney) {
+        return inputMoney.divide(totalReward());
     }
 
     private int totalReward() {
