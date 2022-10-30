@@ -27,6 +27,6 @@ class LottoNumberTest {
     @ValueSource(ints = { 46, -1, 0, 100 })
     void amount_valid_check_test(int number) {
         assertThatThrownBy(() -> new LottoNumber(number))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(RuntimeException.class);
     }
 }

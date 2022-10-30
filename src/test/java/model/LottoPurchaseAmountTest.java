@@ -27,7 +27,7 @@ class LottoPurchaseAmountTest {
     @ValueSource(strings = { "1001", "1500", "1600" })
     void amount_valid_check_test(String amount) {
         assertThatThrownBy(() -> new LottoPurchaseAmount(amount))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(RuntimeException.class);
     }
 
     @ParameterizedTest(name = "{index} {displayName} message={0}")
@@ -35,7 +35,7 @@ class LottoPurchaseAmountTest {
     @ValueSource(strings = { "-100", "ㅇㄴㅁㅇㅁㄴ", "aba@" })
     void isNumber_test(String amount) {
         assertThatThrownBy(() -> new LottoPurchaseAmount(amount))
-                .isInstanceOf(NumberFormatException.class);
+                .isInstanceOf(RuntimeException.class);
     }
 
     @Test
