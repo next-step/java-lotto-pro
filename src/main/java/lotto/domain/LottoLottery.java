@@ -28,10 +28,10 @@ public class LottoLottery {
     }
 
     public String lotteryHistory() {
-        List<String> historys = new ArrayList<>();
+        List<String> histories = new ArrayList<>();
         for (LottoNumbers lottoNumbers : this.lottoLottery) {
-            historys.add(lottoNumbers.history());
+            histories.add(lottoNumbers.history());
         }
-        return String.join(NEWLINE_DELIMITER, historys);
+        return String.join(NEWLINE_DELIMITER, histories);
     }
 }

@@ -36,7 +36,7 @@ public class WinningRanks {
     public String getStatisticsMessage(Map<WinningRank, Long> statisticsMap) {
         StringBuilder sb = new StringBuilder();
         statisticsMap.forEach((winningRank, winningCount) ->
-                sb.append(WinningRank.getStatisticsMessage(winningRank, winningCount))
+                sb.append(winningRank.getStatisticsMessage(winningCount))
         );
         return sb.toString();
     }

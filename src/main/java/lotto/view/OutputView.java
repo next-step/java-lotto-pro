@@ -1,7 +1,8 @@
 package lotto.view;
 
 public class OutputView {
-    private static final String PRINT_FORMAT_RATIO = "총 수익률은 %.2f입니다.";
+    private static final String PRINT_FORMAT_EARNING_RATIO = "총 수익률은 %.2f입니다.";
+    private static final String PRINT_FORMAT_LOSS_RATE = PRINT_FORMAT_EARNING_RATIO + "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     public static final String OUTPUT_ERROR_MESSAGE_PREFIX = "[ERROR] ";
     public static final String OUTPUT_MESSAGE_WINNING_STATISTICS = "당첨 통계";
     public static final String OUTPUT_MESSAGE_HYPHEN = "---------";
@@ -40,6 +41,11 @@ public class OutputView {
     }
 
     public static void printEarningRatio(double earningRatio) {
-        System.out.printf(PRINT_FORMAT_RATIO, earningRatio);
+        String rateFormat = isLossRate(earningRatio) ? PRINT_FORMAT_LOSS_RATE : PRINT_FORMAT_EARNING_RATIO;
+        System.out.printf(rateFormat, earningRatio);
+    }
+
+    private static boolean isLossRate(double earningRatio) {
+        return earningRatio < 1;
     }
 }

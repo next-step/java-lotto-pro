@@ -41,11 +41,11 @@ public enum WinningRank {
                 .orElse(MISS_MATCH);
     }
 
-    public static String getStatisticsMessage(WinningRank winningRank, Long winningCount) {
-        if (winningRank.isDisplay()) {
+    public String getStatisticsMessage(Long winningCount) {
+        if (this.isDisplay()) {
             return String.format(PRINT_STATISTICS_FORMAT,
-                    winningRank.getMatchCount(),
-                    winningRank.getWinningMoney(),
+                    this.getMatchCount(),
+                    this.getWinningMoney(),
                     winningCount);
         }
         return BLANK_STRING;
