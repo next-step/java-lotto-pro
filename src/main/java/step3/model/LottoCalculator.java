@@ -21,10 +21,13 @@ public class LottoCalculator {
     public void calculateWinnerStatistics(Lottos lottos) {
         WinnerRule.setWinnerRules();
         purchasedLottos = lottos.getLottos();
-
         for(Lotto lotto : purchasedLottos) {
             lottoResult.addResult(compareWinnerRules(lotto));
         }
+    }
+
+    public double calculateProfitRate() {
+        return lottoResult.calculateProfitRate(purchasedLottos.size());
     }
 
     private int compareWinnerRules(Lotto lotto) {

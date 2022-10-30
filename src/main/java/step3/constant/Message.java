@@ -6,7 +6,7 @@ public class Message {
     public static final String PURCHASED_LOTTO_TOTAL_COUNT_OUTPUT_MESSAGE = "%d개를 구매했습니다.\n";
     public static final String WINNER_STATISTICS = "\n당첨 통계";
     public static final String SPLIT_LINE = "---------";
-    public static final String PROFIT_RATE_RESULT = "총 수익률은 %2f입니다.";
+    public static final String PROFIT_RATE_RESULT = "총 수익률은 %.2f입니다.";
 
     public static final String ERROR_PREFIX = "[ERROR] ";
     public static final String NOT_VALID_NULL = ERROR_PREFIX + "빈 값은 입력할 수 없습니다.";

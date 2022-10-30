@@ -16,6 +16,12 @@ public class OutputView {
     public static void outputStatisticsResult(LottoCalculator calculator) {
         printStatisticsNotice();
         printLottoResult(calculator);
+        printLottoProfitRate(calculator);
+    }
+
+    private static void printLottoProfitRate(LottoCalculator calculator) {
+        System.out.printf(PROFIT_RATE_RESULT, calculator.calculateProfitRate());
+
     }
 
     private static void printLottoResult(LottoCalculator calculator) {
