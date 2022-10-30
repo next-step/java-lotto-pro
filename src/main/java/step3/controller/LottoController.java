@@ -21,10 +21,10 @@ public class LottoController {
 
         Lotto winingLotto = new Lotto(new LottoNumbers(InputView.inputWinningNumber()));
 
-        Result figures = new Result(purchasedLottos, winingLotto);
-        OutputView.showFigures(figures);
+        Result results = new Result(purchasedLottos, winingLotto);
+        OutputView.showResults(results);
 
-        Rate rate = new Rate(money, figures.getTotalWinning());
+        Rate rate = new Rate(money, results.getTotalWinning());
         OutputView.showProfitRate(rate);
     }
 
