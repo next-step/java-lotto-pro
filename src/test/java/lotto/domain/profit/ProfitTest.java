@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 import lotto.domain.TestLottoNumberGenerator;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.Lottos;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,7 +40,7 @@ class ProfitTest {
 
         double result = profit.profit();
 
-        Assertions.assertThat(result).isEqualTo(0);
+        Assertions.assertThat(result).isZero();
     }
 
     @Test
@@ -132,7 +131,7 @@ class ProfitTest {
         Assertions.assertThat(profit.isLossProfit()).isEqualTo(expected);
     }
 
-    private Lottos getTestLottos() {
+    private List<Lotto> getTestLottos() {
         Lotto lotto1 = Lotto.from(TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 4, 5, 6)).generate());
         Lotto lotto2 = Lotto.from(TestLottoNumberGenerator.from(Arrays.asList(11, 12, 13, 14, 15, 16)).generate());
         Lotto lotto3 = Lotto.from(TestLottoNumberGenerator.from(Arrays.asList(7, 21, 22, 23, 24, 25)).generate());
@@ -140,6 +139,6 @@ class ProfitTest {
         Lotto lotto5 = Lotto.from(TestLottoNumberGenerator.from(Arrays.asList(40, 41, 42, 43, 44, 45)).generate());
         Lotto lotto6 = Lotto.from(TestLottoNumberGenerator.from(Arrays.asList(1, 3, 5, 7, 9, 11)).generate());
 
-        return Lottos.from(Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5, lotto6));
+        return Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5, lotto6);
     }
 }

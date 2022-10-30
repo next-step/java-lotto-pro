@@ -4,22 +4,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import lotto.constant.LottoConstant;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.WinningLottos;
 import lotto.domain.win.WinRanking;
 
 public class Profit {
-    private final Lottos lottos;
+    private final List<Lotto> lottos;
     private final List<LottoNumber> winningNumbers;
     private final LottoNumber bonusNumber;
 
-    private Profit(Lottos lottos, List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    private Profit(List<Lotto> lottos, List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         this.lottos = lottos;
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    public static Profit of(Lottos lottos, List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    public static Profit of(List<Lotto> lottos, List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         return new Profit(lottos, winningNumbers, bonusNumber);
     }
 
@@ -34,7 +35,8 @@ public class Profit {
     }
 
     private double calculateWinningAmount() {
-        Map<WinRanking, Integer> winningCountByWinRanking = lottos.winResults(winningNumbers, bonusNumber);
+        Map<WinRanking, Integer> winningCountByWinRanking =
+                WinningLottos.of(winningNumbers, bonusNumber).winResults(lottos);
         return Arrays.stream(WinRanking.values())
                 .map(ranking -> winningAmount(
                         winningCountByWinRanking.getOrDefault(ranking, LottoConstant.EMPTY_WINNING_COUNT), ranking))

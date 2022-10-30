@@ -5,7 +5,7 @@ import java.util.Map;
 import lotto.constant.LottoConstant;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.WinningLottos;
 import lotto.domain.profit.Profit;
 import lotto.domain.win.WinRanking;
 import lotto.message.LottoMessage;
@@ -14,20 +14,20 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printPurchaseResult(Lottos lottos) {
+    public static void printPurchaseResult(List<Lotto> lottos) {
         System.out.printf(LottoMessage.PURCHASE_RESULT, lottos.size());
         newLine();
         printLottos(lottos);
     }
 
-    private static void printLottos(Lottos lottos) {
-        for (Lotto lotto : lottos.getLottos()) {
+    private static void printLottos(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
             System.out.println(lotto);
         }
         newLine();
     }
 
-    public static void printResult(Lottos lottos, List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    public static void printResult(List<Lotto> lottos, List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         newLine();
         System.out.println(LottoMessage.WINNING_STATISTIC);
         System.out.println(LottoMessage.DIVIDER_LINE);
@@ -35,8 +35,9 @@ public class ResultView {
         printProfit(Profit.of(lottos, winningNumbers, bonusNumber));
     }
 
-    private static void printWinResults(Lottos lottos, List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        Map<WinRanking, Integer> winningCountByWinRanking = lottos.winResults(winningNumbers, bonusNumber);
+    private static void printWinResults(List<Lotto> lottos, List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+        Map<WinRanking, Integer> winningCountByWinRanking =
+                WinningLottos.of(winningNumbers, bonusNumber).winResults(lottos);
         for (WinRanking winRanking : WinRanking.winnableRankings()) {
             System.out.printf(
                     (LottoMessage.WINNING_STATISTIC_RESULT) + "%n",

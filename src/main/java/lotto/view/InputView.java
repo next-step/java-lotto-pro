@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import lotto.constant.LottoConstant;
 import lotto.domain.lotto.LottoNumber;
+import lotto.message.ErrorMessages;
 import lotto.message.LottoMessage;
 import lotto.util.LottoInputValidator;
 import lotto.util.StringToIntegerConvertor;
@@ -23,7 +24,7 @@ public class InputView {
             return Integer.parseInt(purchasePrice);
         }
 
-        System.out.printf((LottoMessage.INVALID_PURCHASE_PRICE) + "%n", purchasePrice);
+        System.out.printf((ErrorMessages.INVALID_PURCHASE_PRICE) + "%n", purchasePrice);
         return inputPurchasePrice();
     }
 
@@ -35,7 +36,7 @@ public class InputView {
             return StringToIntegerConvertor.convertNumbers(input.split(LottoConstant.COMMA_DELIMITER_REGEX));
         }
 
-        System.out.printf((LottoMessage.INVALID_WINNING_NUMBERS) + "%n", input);
+        System.out.printf((ErrorMessages.INVALID_WINNING_NUMBERS) + "%n", input);
         return inputWinningNumbers();
     }
 
@@ -47,7 +48,7 @@ public class InputView {
             return StringToIntegerConvertor.convertNumber(input);
         }
 
-        System.out.printf((LottoMessage.INVALID_BONUS_NUMBER) + "%n", input);
+        System.out.printf((ErrorMessages.INVALID_BONUS_NUMBER) + "%n", input);
         return inputBonusNumber(winningNumbers);
     }
 }
