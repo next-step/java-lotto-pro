@@ -33,7 +33,7 @@ public class LottosTest {
         lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
         lottoNumbers.add(new Lotto(getLottoNumbers(1, 11, 33, 2, 35, 3)));
-        Lottos lottos = new Lottos(lottoNumbers,new LottoMoney(1000));
+        Lottos lottos = new Lottos(lottoNumbers);
 
         //when
         Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 43, 44, 45));
@@ -50,7 +50,7 @@ public class LottosTest {
         lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 15, 1)));
         lottoNumbers.add(new Lotto(getLottoNumbers(1, 11, 33, 2, 15, 3)));
-        Lottos lottos = new Lottos(lottoNumbers,new LottoMoney(1000));
+        Lottos lottos = new Lottos(lottoNumbers);
 
         //when
         Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 43, 15, 45));
@@ -67,7 +67,7 @@ public class LottosTest {
         lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
         lottoNumbers.add(new Lotto(getLottoNumbers(1, 11, 33, 2, 35, 3)));
-        Lottos lottos = new Lottos(lottoNumbers,new LottoMoney(1000));
+        Lottos lottos = new Lottos(lottoNumbers);
 
         //when
         Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 43, 44, 45));
@@ -84,7 +84,7 @@ public class LottosTest {
         lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         lottoNumbers.add(new Lotto(getLottoNumbers(2, 15, 3, 14, 1, 16)));
         lottoNumbers.add(new Lotto(getLottoNumbers(1, 16, 15, 2, 14, 3)));
-        Lottos lottos = new Lottos(lottoNumbers,new LottoMoney(1000));
+        Lottos lottos = new Lottos(lottoNumbers);
 
         //when
         Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 14, 15, 16));

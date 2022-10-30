@@ -18,7 +18,7 @@ public class LottoMachine {
     public LottoMachine(int purchasePrice) {
         this.lottoMoney = new LottoMoney(purchasePrice);
         this.purchasePrice = purchasePrice;
-        this.lottos = new Lottos(LottoFactory.createLottos(lottoMoney),lottoMoney);
+        this.lottos = new Lottos(LottoFactory.createLottos(lottoMoney));
     }
 
     public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers) {
