@@ -34,15 +34,12 @@ public class LottoBuyingView {
 	}
 
 	private int getMoneyToBuyLottoTickets() {
-		System.out.println(BUYING_MONEY_PROMPT);
-		return InputHandler.inputInteger();
+		return InputHandler.inputInteger(BUYING_MONEY_PROMPT);
 	}
 
 	private List<List<Integer>> getManualLottoTickets() {
-		System.out.println(BUYING_MANUAL_LOTTO_COUNT);
-		int buyingManualLottoCount = InputHandler.inputInteger();
+		int buyingManualLottoCount = InputHandler.inputInteger(BUYING_MANUAL_LOTTO_COUNT);
 
-		System.out.println(BUYING_MANUAL_LOTTO_PROMPT);
-		return InputHandler.inputIntegerListMany(buyingManualLottoCount);
+		return InputHandler.inputIntegerListMany(BUYING_MANUAL_LOTTO_PROMPT, buyingManualLottoCount);
 	}
 }

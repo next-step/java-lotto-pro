@@ -22,17 +22,16 @@ public class LottoWinResultView {
 	}
 
 	public void printWinResult(BoughtLottoTicketsResponse boughtLottoTickets,
-							   List<Integer> winningLottoTicketResponse) {
+							   List<Integer> winningLottoNumbers) {
 		LottoWinResultsResponse lottoWinResultsResponse = lottoController.getWinResults(
-			boughtLottoTickets, winningLottoTicketResponse, inputBonusNumber());
+			boughtLottoTickets, winningLottoNumbers, inputBonusNumber());
 
 		printMatchCount(lottoWinResultsResponse);
 		printProfitMargin(lottoWinResultsResponse);
 	}
 
 	private int inputBonusNumber() {
-		System.out.println(BONUS_NUMBER_PROMPT);
-		return InputHandler.inputInteger();
+		return InputHandler.inputInteger(BONUS_NUMBER_PROMPT);
 	}
 
 	private void printMatchCount(LottoWinResultsResponse lottoWinResultsResponse) {
