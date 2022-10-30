@@ -1,16 +1,16 @@
 package lotto.controller;
 
-import lotto.domain.LottoList;
+import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 import lotto.view.View;
 
 public class LottoController {
-    private final LottoList lottos;
+    private final Lottos lottos;
     private final View view;
 
     public LottoController() {
-        this.lottos = new LottoList();
+        this.lottos = new Lottos();
         this.view = new View();
     }
 

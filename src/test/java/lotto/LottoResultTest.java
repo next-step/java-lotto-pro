@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Money;
 import lotto.domain.Rank;
@@ -41,6 +42,6 @@ class LottoResultTest {
         }
 
         assertThat(lottoResult.getReturnRate())
-                .isEqualTo((double) lottoResult.getAllPrize() / (lottoCount * Money.LOTTO_PRICE));
+                .isEqualTo((double) lottoResult.getAllPrize() / (lottoCount * Lotto.LOTTO_PRICE));
     }
 }

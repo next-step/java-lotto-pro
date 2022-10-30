@@ -1,26 +1,15 @@
 package lotto.domain;
 
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN = 1;
     public static final int MAX = 45;
-    public static final Map<Integer, LottoNumber> lottoNumberMap = IntStream.rangeClosed(MIN, MAX)
-            .boxed()
-            .collect(Collectors.toMap(Function.identity(), LottoNumber::new));
-
     private final int number;
 
-    private LottoNumber(int number) {
-        this.number = number;
-    }
-
-    public static LottoNumber from(int number) {
+    public LottoNumber(int number) {
         validate(number);
-        return lottoNumberMap.get(number);
+        this.number = number;
     }
 
     private static void validate(int number) {
@@ -37,5 +26,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public String toString() {
         return Integer.toString(number);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || this.getClass() != o.getClass()) return false;
+        LottoNumber number1 = (LottoNumber) o;
+        return this.number == number1.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }

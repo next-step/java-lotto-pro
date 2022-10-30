@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
@@ -24,7 +25,7 @@ public class View {
         print(String.format(MSG_LOTTO_COUNT, count));
     }
 
-    public List<Integer> insertWinningLotto() {
+    public List<LottoNumber> insertWinningLotto() {
         OutputView.print("지난 주 당첨 번호를 입력해 주세요.");
         return InputView.inputLotto();
     }
