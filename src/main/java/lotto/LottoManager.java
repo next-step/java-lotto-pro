@@ -1,9 +1,9 @@
 package lotto;
 
 import lotto.domain.buyer.LottoBuyer;
-import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.WinnerLotto;
 import lotto.domain.money.Money;
 import lotto.domain.seller.LottoSeller;
 import lotto.prize.Prize;
@@ -27,19 +27,18 @@ public class LottoManager {
         OutputView.printLottoCount(lottos.getLottoCount());
         OutputView.printLottos(lottos.toString());
 
-        String[] numbers = InputView.inputWinLottoNumber();
-        Lotto winLotto = createWinnerLotto(numbers);
+        WinnerLotto winnerLotto = new WinnerLotto(createWinnerLotto(InputView.inputWinLottoNumber()),
+                new LottoNumber(InputView.inputBonusNumber()));
 
-        Map<Prize, Integer> prizes = lottos.getPrizeOfLotto(winLotto);
-        BigDecimal bigDecimal = lottoBuyer.calculateYield(prizes, lottos.getLottoCount());
+        Map<Prize, Integer> prizes = lottos.getPrizeOfLotto(winnerLotto);
+        BigDecimal bigDecimal = lottoBuyer.calculateYield(prizes);
         OutputView.printStatistic(prizes, bigDecimal);
     }
 
-    private Lotto createWinnerLotto(String[] lottoNumber) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumber)
+    private List<LottoNumber> createWinnerLotto(String[] lottoNumber) {
+        return Arrays.stream(lottoNumber)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
-        return new Lotto(lottoNumbers);
 
     }
 
