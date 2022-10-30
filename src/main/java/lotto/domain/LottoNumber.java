@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.ui.ConsoleMessage.ERROR_VALID_LOTTO_NUMBER;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int LOTTO_MIN_NUMBER = 1;
@@ -13,7 +15,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void validate(final int number) {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
-            throw new IllegalArgumentException(String.format("%d는 1~45 범위에 벗어난 숫자입니다.", number));
+            throw new IllegalArgumentException(String.format(ERROR_VALID_LOTTO_NUMBER.getMessage(), number));
         }
     }
 

@@ -1,7 +1,11 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import static lotto.ui.ConsoleMessage.ERROR_VALID_LOTTO_NUMBERS;
 
 public class Lotto {
     public static final int LOTTO_PRICE = 1000;
@@ -17,7 +21,7 @@ public class Lotto {
 
     private void validate(final Set<Integer> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException("로또 숫자는 6개가 필요 합니다.");
+            throw new IllegalArgumentException(ERROR_VALID_LOTTO_NUMBERS.getMessage());
         }
     }
 

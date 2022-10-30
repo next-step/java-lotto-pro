@@ -9,6 +9,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static lotto.domain.Lotto.LOTTO_PRICE;
+import static lotto.ui.ConsoleMessage.*;
 
 public class InputView {
 
@@ -28,7 +29,7 @@ public class InputView {
     }
 
     public static List<Integer> inputWinningNumber() {
-        String input = InputView.input(ConsoleMessage.INPUT_WINNING_NUMBER);
+        String input = InputView.input(INPUT_WINNING_NUMBER);
         return mapToWinningNumber(input);
     }
 
@@ -48,7 +49,7 @@ public class InputView {
     }
 
     public static int inputPurchaseAmount() {
-        String inputAmount = InputView.input(ConsoleMessage.INPUT_PURCHASE_AMOUNT);
+        String inputAmount = InputView.input(INPUT_PURCHASE_AMOUNT);
         return validNumberFormat(Integer::parseInt, inputAmount);
     }
 
@@ -56,12 +57,12 @@ public class InputView {
         try {
             return parseInt.apply(number);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(String.format("'%s'는 숫자로 변환할 수 없습니다.", number));
+            throw new IllegalArgumentException(String.format(ERROR_VALID_NUMBER_FORMAT.getMessage(), number));
         }
     }
 
     public static int inputBonusNumber() {
-        return validNumberFormat(Integer::parseInt, InputView.input(ConsoleMessage.INPUT_BONUS_NUMBER));
+        return validNumberFormat(Integer::parseInt, InputView.input(INPUT_BONUS_NUMBER));
     }
 
     public static Quantity inputQuantity(final int purchaseAmount) {
@@ -76,12 +77,12 @@ public class InputView {
 
     private static int inputManualQuantity(final int purchaseAmount) {
         int quantity = validNumberFormat(
-                Integer::parseInt, InputView.input(ConsoleMessage.INPUT_PURCHASE_MANUAL_LOTTO_COUNT)
+                Integer::parseInt, InputView.input(INPUT_PURCHASE_MANUAL_LOTTO_COUNT)
         );
 
         if (purchaseAmount < LOTTO_PRICE * quantity) {
             throw new IllegalArgumentException(
-                    String.format("%d의 금액으로 %d개 로또를 구매할 수 없습니다.", purchaseAmount, quantity)
+                    String.format(ERROR_VALID_LOTTO_PRICE.getMessage(), purchaseAmount, quantity)
             );
         }
 
