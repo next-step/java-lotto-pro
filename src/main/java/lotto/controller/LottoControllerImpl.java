@@ -1,6 +1,7 @@
 package lotto.controller;
 
-import static java.lang.String.format;
+import static lotto.controller.LottoValidator.verifyManualLottoTotalPriceIsLessThanBillingMoney;
+import static lotto.controller.LottoValidator.verifyMoneyIsEqualToOrGreaterThanPrice;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -15,7 +16,6 @@ import money.Money;
 
 public class LottoControllerImpl implements LottoController {
 
-	public static final String LOTTO_PRICE_ERROR_MESSAGE = "로또 금액은 %s 보다 작을 수 없습니다.";
 
 	private final AutoLottoTicketsVendor autoLottoTicketsVendor;
 	private final Money lottoPrice;
@@ -28,23 +28,22 @@ public class LottoControllerImpl implements LottoController {
 	public BoughtLottoTicketsResponse buyLottoTickets(int buyingLottoTicketsMoney,
 													  List<List<Integer>> manualLottoNumbers) {
 		Money lottoTicketsMoney = Money.wons(buyingLottoTicketsMoney);
-		verifyMoneyIsEqualToOrGreaterThanPrice(lottoTicketsMoney);
+		verifyLottoInput(manualLottoNumbers, lottoTicketsMoney);
 
 		return buyLottoTickets(lottoTicketsMoney, manualLottoNumbers);
 	}
 
-	private void verifyMoneyIsEqualToOrGreaterThanPrice(Money lottoTicketsMoney) {
-		if (lottoTicketsMoney.isLessThan(lottoPrice)) {
-			throw new IllegalArgumentException(format(LOTTO_PRICE_ERROR_MESSAGE, lottoPrice));
-		}
+	private void verifyLottoInput(List<List<Integer>> manualLottoNumbers, Money lottoTicketsMoney) {
+		verifyMoneyIsEqualToOrGreaterThanPrice(lottoPrice, lottoTicketsMoney);
+		verifyManualLottoTotalPriceIsLessThanBillingMoney(lottoTicketsMoney, lottoPrice, manualLottoNumbers.size());
 	}
 
 	public BoughtLottoTicketsResponse buyLottoTickets(Money buyingLottoTicketsAmount,
 													  List<List<Integer>> manualLottoNumbers) {
 		int buyingAutoLottoTicketsCount = getBuyingAutoLottoTicketsCounts(buyingLottoTicketsAmount, manualLottoNumbers);
 
-		LottoTickets manualLottoTickets = createManualLottoTickets(manualLottoNumbers);
-		LottoTickets autoLottoTickets = buyAutoLottoTickets(buyingAutoLottoTicketsCount);
+		LottoTickets manualLottoTickets = LottoTickets.ofList(manualLottoNumbers);
+		LottoTickets autoLottoTickets = autoLottoTicketsVendor.buyAutoLottoTickets(buyingAutoLottoTicketsCount);
 
 		return BoughtLottoTicketsResponse.of(manualLottoTickets, autoLottoTickets);
 	}
@@ -58,14 +57,6 @@ public class LottoControllerImpl implements LottoController {
 		LottoWinPrizes lottoWinPrizes = boughtLottoTickets.match(winningLottoTicket, bonusNumber);
 
 		return LottoWinResultsResponse.of(lottoWinPrizes, lottoPrice);
-	}
-
-	private LottoTickets createManualLottoTickets(List<List<Integer>> manualLottoNumbers) {
-		return LottoTickets.ofList(manualLottoNumbers);
-	}
-
-	private LottoTickets buyAutoLottoTickets(int buyingAutoLottoTicketsCount) {
-		return autoLottoTicketsVendor.buyAutoLottoTickets(buyingAutoLottoTicketsCount);
 	}
 
 	private int getBuyingAutoLottoTicketsCounts(Money buyingLottoTicketsAmount,

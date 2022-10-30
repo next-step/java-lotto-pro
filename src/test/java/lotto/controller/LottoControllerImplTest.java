@@ -29,4 +29,12 @@ class LottoControllerImplTest {
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
+	@Test
+	void 지불한_금액이_수동으로_구매할_로또_가격보다_적을_경우_예외를_던진다() {
+		List<List<Integer>> 수동_로또번호 = asList(고정_로또_번호, 고정_로또_번호);
+
+		assertThatThrownBy(() -> lottoController.buyLottoTickets(로또_가격, 수동_로또번호))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
+
 }
