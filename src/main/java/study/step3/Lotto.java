@@ -25,7 +25,7 @@ public class Lotto {
         return numbers;
     }
 
-    private static int compareNumber(Lotto winLotto, Integer number) {
+    private static int containsNumber(Lotto winLotto, Integer number) {
         return winLotto.getNumbers().contains(number) ? 1 : 0;
     }
 
@@ -37,7 +37,7 @@ public class Lotto {
     public int compare(Lotto winLotto) {
         int result = 0;
         for (Integer number : numbers) {
-            result += compareNumber(winLotto, number);
+            result += containsNumber(winLotto, number);
         }
         return result;
     }
