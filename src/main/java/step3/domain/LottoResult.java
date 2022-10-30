@@ -13,6 +13,9 @@ public class LottoResult {
     public LottoResult(){
         result = new HashMap<>();
     }
+    public LottoResult(HashMap<Integer, List<Lotto>> result){
+        this.result = result;
+    }
     public void addLottoResult(int containNumberCount, Lotto buy) {
         if(isValidateMinContainCount(containNumberCount)){
             return;
