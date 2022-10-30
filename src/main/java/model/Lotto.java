@@ -3,6 +3,7 @@ package model;
 import model.strategy.NumberStrategy;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Lotto {
@@ -21,10 +22,12 @@ public class Lotto {
     public List<LottoNumber> buy() {
         for (int i = 0; i < count; i++) {
             LottoNumber lottoNumber = new LottoNumber(strategy);
-
             pickLottoNumber.add(lottoNumber);
         }
 
+        for (LottoNumber lottoNumber : pickLottoNumber) {
+            System.out.println(lottoNumber);
+        }
         return pickLottoNumber;
     }
 
