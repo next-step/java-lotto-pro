@@ -1,6 +1,5 @@
 package split;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -30,18 +29,23 @@ public class StringAddCalculator {
 
     private static int sum(String text, String delimiters) {
         validateNegativeNumber(text, delimiters);
-        return Arrays
-                .stream(text.split(delimiters))
-                .mapToInt(Integer::parseInt)
-                .sum();
+        int sum = 0;
+        for (String splitText : text.split(delimiters)) {
+            sum += Integer.parseInt(splitText);
+        }
+        return sum;
     }
 
     private static void validateNegativeNumber(String text, String delimiters) {
-        Arrays.stream(text.split(delimiters))
-                .filter(number -> Integer.parseInt(number) < 0)
-                .forEach(number -> {
-                    throw new IllegalArgumentException();
-                });
+        for (String number : text.split(delimiters)) {
+            validateNegativeNumber(number);
+        }
+    }
+
+    private static void validateNegativeNumber(String number) {
+        if (Integer.parseInt(number) < 0) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private static boolean existCustomDelimiter(String text) {
