@@ -13,6 +13,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@DisplayName("로또_프로그램_클래스")
 public class GameTest {
 
     List<LottoNumber> candidateLottoNumbers = new ArrayList<>();

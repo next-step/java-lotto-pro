@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
+@DisplayName("로또_숫자_원시값_WRAPPING_클래스")
 public class LottoNumberTest {
     @DisplayName("Number_정상_입력")
     @ParameterizedTest

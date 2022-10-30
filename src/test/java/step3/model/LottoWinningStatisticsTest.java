@@ -9,6 +9,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
+@DisplayName("로또_당첨_통계_클래스")
 public class LottoWinningStatisticsTest {
     @DisplayName("로또_통계_정상")
     @Test

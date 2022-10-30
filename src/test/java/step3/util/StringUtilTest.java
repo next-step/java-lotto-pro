@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("문자열_관련_유틸_클래스")
 public class StringUtilTest {
 
     @DisplayName("parseLottoText_쉼표구분자_파싱_성공")

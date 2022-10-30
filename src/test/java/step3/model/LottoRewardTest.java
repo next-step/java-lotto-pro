@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("로또_당첨_결과_저장_클래스")
 public class LottoRewardTest {
     @DisplayName("LottoReward_생성_성공")
     @ParameterizedTest

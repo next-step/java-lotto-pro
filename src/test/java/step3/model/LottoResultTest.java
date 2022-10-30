@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.*;
 
+@DisplayName("로또_결과값_저장_클래스")
 public class LottoResultTest {
     @DisplayName("LottoResult_정상_입력")
     @Test
