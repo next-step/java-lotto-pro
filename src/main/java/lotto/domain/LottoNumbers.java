@@ -44,6 +44,10 @@ public class LottoNumbers {
         return duplicates;
     }
 
+    public boolean isBonusMatch(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
     public List<Integer> numbers() {
         return this.lottoNumbers
                 .stream()

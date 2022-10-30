@@ -60,4 +60,8 @@ public class WinningLottoNumbers {
     public LottoNumbers getLottoNumbers() {
         return lottoNumbers;
     }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
 }

@@ -23,7 +23,7 @@ public class LottoTickets {
 
     public void matchLottoResult(WinningLottoNumbers winningLottoNumber, LottoResult lottoResult) {
         for (LottoTicket lottoTicket : lottoTicketList) {
-            lottoResult.increaseRankCount(lottoTicket.compareLotto(winningLottoNumber.getLottoNumbers()));
+            lottoResult.increaseRankCount(lottoTicket.compareLotto(winningLottoNumber));
         }
     }
 
