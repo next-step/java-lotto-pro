@@ -13,16 +13,16 @@
 
 ## 로또 요구사항
 
-* 로또 구현(한줄짜리)
-* 로또 종이 구현(구매한 수만큼 담을..)
-    * 숫자 validation
-    * 중복 validation
-* 로또 번호 자동 생성
-    * Shuffle 사용
-* 로또 샵 구현
-    * 구매를 하면 로또 종이를 준다.
-* 금액
-    * validation
-* 지난 주 당첨 번호 등록
-* 로또 당첨 여부 구현
-* InputView, ResultView 구현
+* [x] 로또 구현(한줄짜리)
+* [x] 로또 종이 구현(구매한 수만큼 담을..)
+  * 숫자 validation
+  * 중복 validation
+* [x] 로또 번호 자동 생성
+  * Shuffle 사용
+* [x] 로또 샵 구현
+  * 구매를 하면 로또 종이를 준다.
+* [x] 금액
+  * validation
+* [x] 지난 주 당첨 번호 등록
+* [x] 로또 당첨 여부 구현
+* [x] InputView, ResultView 구현

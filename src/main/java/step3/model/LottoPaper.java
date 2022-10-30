@@ -1,5 +1,6 @@
 package step3.model;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,10 +10,6 @@ public class LottoPaper {
 
     public LottoPaper(List<Lotto> lottos) {
         this.lottos = lottos;
-    }
-
-    public List<Lotto> getLottos() {
-        return lottos;
     }
 
     public WinningReport checkWinning(WinningLotto winningLotto) {
@@ -25,5 +22,9 @@ public class LottoPaper {
         }
         return new WinningReport(resultMap,
             Math.floor(((double) totalWinningAmount / ((double) lottos.size() * 1000)) * 100) / 100);
+    }
+
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 }
