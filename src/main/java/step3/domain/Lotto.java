@@ -18,6 +18,17 @@ public class Lotto {
         this.numbers = new ArrayList<>(numbers);
     }
 
+    public Rank matche(Lotto lotto) {
+        return Rank.valueOf((int) numbers.stream()
+            .map(lotto::contains)
+            .filter(Boolean::booleanValue)
+            .count());
+    }
+
+    public List<LottoNumber> numbers() {
+        return numbers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -47,5 +58,9 @@ public class Lotto {
         if (deduplicatedCount != numbers.size()) {
             throw new IllegalArgumentException(String.format("로또 번호는 중복될 수 없습니다. (lottoNumbers: %s)", numbers));
         }
+    }
+
+    private boolean contains(LottoNumber number) {
+        return numbers.contains(number);
     }
 }
