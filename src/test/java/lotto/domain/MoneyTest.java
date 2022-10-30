@@ -32,4 +32,12 @@ public class MoneyTest {
         assertTrue(source.greaterEqualThan(target));
     }
 
+    @Test
+    @DisplayName("화폐 나누기 몫")
+    void quotient() {
+        Money source = new Money(2000);
+        Money target = new Money(1000);
+        assertThat(source.quotient(target)).isEqualTo(2);
+    }
+
 }

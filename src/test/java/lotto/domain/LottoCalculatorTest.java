@@ -23,4 +23,10 @@ public class LottoCalculatorTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    @DisplayName("로또 구매 가능 갯수 계산")
+    void availableToPurchaseCount() {
+        assertThat(new LottoCalculator(new Money(5000)).availableToPurchaseCount()).isEqualTo(5);
+    }
+
 }

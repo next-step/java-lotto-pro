@@ -26,6 +26,10 @@ public class Money implements Comparable<Money> {
         return this.compareTo(target) >= 0;
     }
 
+    public int quotient(Money target) {
+        return (int) (this.won / target.won);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
