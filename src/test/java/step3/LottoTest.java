@@ -8,6 +8,8 @@ import step3.model.Lottos;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class LottoTest {
     private Lotto lotto = new Lotto();
 
@@ -15,5 +17,12 @@ public class LottoTest {
     @DisplayName("1~45의 랜덤한 6자리 숫자 생성")
     void 랜덤_숫자_테스트() {
         lotto.generateRandomNumbers();
+        validateRangeRandomNumbers();
+    }
+
+    private void validateRangeRandomNumbers() {
+        for (LottoNumber lottoNumber : lotto.getNumbers()) {
+            assertThat(lottoNumber.getNumber()).isBetween(1, 45);
+        }
     }
 }
