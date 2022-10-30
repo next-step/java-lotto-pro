@@ -10,21 +10,25 @@ public enum LottoRankType {
     RANK_FOUR(3, 5_000),
     RANK_FAIL(0, 0);
 
-    private final int sameCount;
+    private final int count;
     private final int winMoney;
 
     LottoRankType(int sameCount, int winMoney) {
-        this.sameCount = sameCount;
+        this.count = sameCount;
         this.winMoney = winMoney;
     }
 
     public static LottoRankType convertRank(int winNumberCount) {
         Optional<LottoRankType> result = Arrays.stream(LottoRankType.values())
-                .filter(s -> s.sameCount == winNumberCount).findFirst();
+                .filter(s -> s.count == winNumberCount).findFirst();
         return result.orElse(RANK_FAIL);
     }
 
     public int getWinMoney() {
         return winMoney;
+    }
+
+    public int getCount() {
+        return count;
     }
 }

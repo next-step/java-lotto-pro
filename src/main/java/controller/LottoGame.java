@@ -21,6 +21,8 @@ public class LottoGame {
         Rank rank = new Rank();
         rank.stats(buy, winNumber);
         double percent = new Revenue(rank.getCountRank()).getPercent(money);
+
+        OutPutView.outPutResult(rank.getCountRank(), percent);
     }
 
 
