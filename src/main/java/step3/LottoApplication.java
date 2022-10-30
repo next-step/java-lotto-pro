@@ -20,7 +20,7 @@ public class LottoApplication {
         LottoPaper lottoPaper = new LottoShop().buyLotto(money);
         ResultView.announceTotalLottoNumbers(lottoPaper);
 
-        // 지난주 당첨 번호 입력
+        // 지난주 당첨 번호, 보너스 번호 입력
         WinningResult winningResult = new WinningResult(lottoPaper, InputView.inputWinningNumbersLastWeek(), InputView.inputBonusNumber());
 
         // 결과 출력
