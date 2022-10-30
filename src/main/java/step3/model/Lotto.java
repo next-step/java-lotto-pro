@@ -36,7 +36,7 @@ public class Lotto {
         return Award.valueOf(Math.toIntExact(
             numbers.stream()
                 .filter(lottoNumber -> winningLotto.contains(lottoNumber))
-                .count())
+                .count()), winningLotto.checkBonusNumber(numbers)
         );
     }
 
