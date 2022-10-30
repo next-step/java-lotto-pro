@@ -2,11 +2,11 @@ package lotto.strategy;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 
 class LottoRandomCreateStrategyTest {
 
-	@RepeatedTest(10)
+	@Test
 	void 로또_생성() {
 		LottoRandomCreateStrategy lottoRandomCreateStrategy = new LottoRandomCreateStrategy();
 		assertDoesNotThrow(lottoRandomCreateStrategy::create);
