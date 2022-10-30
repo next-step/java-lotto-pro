@@ -5,7 +5,6 @@ public class Lotto {
 
     private final int count;
     private final NumberStrategy strategy;
-    private List<Integer> arrangeLottoNumber;
     private final List<LottoNumber> pickLottoNumber;
 
     public Lotto(int money, NumberStrategy strategy) {
@@ -17,7 +16,6 @@ public class Lotto {
 
     public List<LottoNumber> buy() {
         for (int i = 0; i < count; i++) {
-            initArrangeNumber();
             LottoNumber lottoNumber = new LottoNumber(strategy);
 
             pickLottoNumber.add(lottoNumber);
@@ -25,15 +23,6 @@ public class Lotto {
 
         return pickLottoNumber;
     }
-
-
-    private void initArrangeNumber() {
-        arrangeLottoNumber = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            arrangeLottoNumber.add(i);
-        }
-    }
-
 
     private void checkValidMoney(int money) {
         if (money < 1000) {
