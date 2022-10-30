@@ -1,17 +1,12 @@
 package lotto.domain;
 
-import lotto.enums.LottoRank;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 @DisplayName("로또 결과 테스트")
 class LottoResultTest {
@@ -32,7 +27,7 @@ class LottoResultTest {
                         new LottoTicket(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)))
                 )
         ));
-        lottoTickets.matchLottoResult(winningLottoNumbers, lottoResult);
+        lottoTickets.lottoWinningConfirm(winningLottoNumbers, lottoResult);
         Assertions.assertThat(lottoResult.lottoProfitPercent(lottoTickets.ticketListPrice())).isEqualTo(2000000.0);
     }
 

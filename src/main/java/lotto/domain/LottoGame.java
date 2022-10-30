@@ -32,7 +32,7 @@ public class LottoGame {
     }
 
     public void makeLottoResult(WinningLottoNumbers winningLottoNumber, LottoTickets lottoTickets) {
-        lottoTickets.matchLottoResult(winningLottoNumber, lottoResult);
+        lottoTickets.lottoWinningConfirm(winningLottoNumber, lottoResult);
     }
 
     public double statisticsPercent(int purchasePrice) {

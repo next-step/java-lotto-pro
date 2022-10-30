@@ -29,11 +29,11 @@ public enum LottoRank {
     }
 
     private static boolean matchLottoRank(LottoRank lottoRank, int matchCount, boolean bonus) {
-        return lottoRank.matchCount == matchCount && lottoRank.bonus == isBonus(matchCount, bonus);
+        return (lottoRank.matchCount == matchCount) && (lottoRank.bonus == isBonus(matchCount, bonus));
     }
 
     private static boolean isBonus(int matchNumberCount, boolean bonus) {
-        return LottoRank.SECOND.matchCount == matchNumberCount && bonus;
+        return (LottoRank.SECOND.matchCount == matchNumberCount) && bonus;
     }
 
     public int getMatchCount() {

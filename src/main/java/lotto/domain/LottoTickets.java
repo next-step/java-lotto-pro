@@ -21,10 +21,11 @@ public class LottoTickets {
         return this.lottoTicketList.size() * LOTTO_PRICE;
     }
 
-    public void matchLottoResult(WinningLottoNumbers winningLottoNumber, LottoResult lottoResult) {
-        for (LottoTicket lottoTicket : lottoTicketList) {
-            lottoResult.increaseRankCount(lottoTicket.compareLotto(winningLottoNumber));
-        }
+    public void lottoWinningConfirm(WinningLottoNumbers winningLottoNumber, LottoResult lottoResult) {
+        lottoTicketList.stream().forEach(lottoTicket -> {
+            lottoTicket.lottoWinningConfirm(winningLottoNumber);
+            lottoResult.increaseRankCount(lottoTicket.getLottoRankResult());
+        });
     }
 
     @Override

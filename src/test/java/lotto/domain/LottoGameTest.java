@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -20,9 +21,10 @@ class LottoGameTest {
     }
 
     @DisplayName("로또 구입 실패")
-    @Test
-    void lotto_buy_failure() {
-        assertThatThrownBy(() -> lottoGame.buy(999))
+    @ParameterizedTest(name = "{0}원으로는 로또를 구매할 수 없다.")
+    @ValueSource(ints = {100, -23, 1001, 10500})
+    void lotto_buy_failure(int input) {
+        assertThatThrownBy(() -> lottoGame.buy(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

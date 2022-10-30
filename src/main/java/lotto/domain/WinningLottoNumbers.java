@@ -17,11 +17,6 @@ public class WinningLottoNumbers {
     private LottoNumbers lottoNumbers;
     private LottoNumber bonusNumber;
 
-    public WinningLottoNumbers(String lottoNumbers) {
-        validNullOrEmpty(lottoNumbers);
-        checkLottoPattern(lottoNumbers);
-    }
-
     public WinningLottoNumbers(String lottoNumbers, LottoNumber bonusNumber) {
         validNullOrEmpty(lottoNumbers);
         checkLottoPattern(lottoNumbers);

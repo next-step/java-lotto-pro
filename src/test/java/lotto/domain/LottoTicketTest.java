@@ -32,17 +32,18 @@ public class LottoTicketTest {
     }
 
     @DisplayName("로또 당첨 여부를 확인 할 수 있다.")
-    @ParameterizedTest(name = "#{index} - {0}는 당첨 번호 1,2,3,4,5,6 보너스(7)과 {2}개가 일치한다.")
+    @ParameterizedTest(name = "#{index} - {0}는 당첨 번호 1,2,3,4,5,6 보너스(7)와 {2}개가 일치한다.")
     @MethodSource("lotto_tickets")
     void number_match(List<Integer> input, LottoRank lottoRank, String matchCount) {
         LottoTicket lottoTicket = new LottoTicket(new LottoNumbers(input));
-        assertThat(lottoTicket.compareLotto(winningLottoNumbers)).isEqualTo(lottoRank);
+        lottoTicket.lottoWinningConfirm(winningLottoNumbers);
+        assertThat(lottoTicket.getLottoRankResult()).isEqualTo(lottoRank);
     }
 
     private static Stream<Arguments> lotto_tickets() {
         return Stream.of(
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoRank.FIRST, "6"),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 7), LottoRank.SECOND, "보너스번호와 5개 "),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 7), LottoRank.SECOND, "보너스번호와 5"),
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 8), LottoRank.THIRD, "5"),
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 7, 8), LottoRank.FOURTH, "4"),
                 Arguments.of(Arrays.asList(1, 2, 3, 7, 8, 9), LottoRank.FIFTH, "3"),
