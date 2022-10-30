@@ -19,7 +19,7 @@ public class LottoInputValidator {
                 validateGreaterOrEqualThanPriceOfOneLotto(number);
     }
 
-    public static boolean validateWinningNumbers(String strNumbers) {
+    public static boolean validateLottoNumbers(String strNumbers) {
         String[] splitNumbers = strNumbers.split(LottoConstant.COMMA_DELIMITER_REGEX);
         return validateNumbersInRanges(splitNumbers) &&
                 validateNonDuplicatedNumbers(splitNumbers) &&
@@ -29,6 +29,10 @@ public class LottoInputValidator {
     public static boolean validateBonusNumber(String bonusNumber, List<Integer> winningNumbers) {
         return bonusNumber.matches(LOTTO_NUMBER_REGEX) &&
                 !winningNumbers.contains(Integer.parseInt(bonusNumber));
+    }
+
+    public static boolean validateManualLottoCount(int total, String input) {
+        return validateNonNegativeNumber(input) && total >= Integer.parseInt(input);
     }
 
     private static boolean validateGreaterOrEqualThanPriceOfOneLotto(String number) {

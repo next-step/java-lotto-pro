@@ -12,6 +12,8 @@ public class LottoMessage {
     public static final String EMPTY_SPACE = " ";
     public static final String PROFIT = "총 수익률은 %.2f입니다.";
     public static final String LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    public static final String INPUT_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String INPUT_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
 
     private LottoMessage() {
     }

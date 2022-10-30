@@ -21,7 +21,7 @@ public class LottoGenerator {
         return generate(count);
     }
 
-    private List<Lotto> generate(int count) {
+    public List<Lotto> generate(int count) {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {

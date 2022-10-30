@@ -2,7 +2,8 @@ package lotto.util;
 
 import static lotto.util.LottoInputValidator.validateBonusNumber;
 import static lotto.util.LottoInputValidator.validatePurchasePrice;
-import static lotto.util.LottoInputValidator.validateWinningNumbers;
+import static lotto.util.LottoInputValidator.validateLottoNumbers;
+import static lotto.util.LottoInputValidator.validateManualLottoCount;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
@@ -39,21 +40,21 @@ class LottoInputValidatorTest {
     @ValueSource(strings = {"-1", "0", "46", "abc", "1,2,3,4,5,-1"})
     @DisplayName("당첨번호가 1 ~ 45 사이의 값이 아니면 false를 반환한다.")
     void validateWinningNumbers1(String input) {
-        assertThat(validateWinningNumbers(input)).isFalse();
+        assertThat(validateLottoNumbers(input)).isFalse();
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,1,4,5", "1,2,3,4,5", "1,2,3,4,5,5,6"})
     @DisplayName("당첨번호가 6개의 중복되지 않은 숫자가 아니면 false를 반환한다.")
     void validateWinningNumbers2(String input) {
-        assertThat(validateWinningNumbers(input)).isFalse();
+        assertThat(validateLottoNumbers(input)).isFalse();
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5,6", "1,12,21,33,44,45"})
     @DisplayName("당첨번호가 1 ~ 45 숫자 이내의 중복되지 않는 6개 숫자이면 true를 반환한다.")
     void validateWinningNumbers3(String input) {
-        assertThat(validateWinningNumbers(input)).isTrue();
+        assertThat(validateLottoNumbers(input)).isTrue();
     }
 
     @ParameterizedTest
@@ -73,5 +74,12 @@ class LottoInputValidatorTest {
     void validateBonusNumber2(String input, boolean expected) {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         assertThat(validateBonusNumber(input, winningNumbers)).isEqualTo(expected);
+    }
+
+    @ParameterizedTest(name = "{index} | {displayName} | 전체 : 10, 수동 : {0}, 결과 : {1}")
+    @CsvSource(value = {"0:true", "1:true", "5:true", "10:true", "11:false"}, delimiter = ':')
+    @DisplayName("수동으로 구입할 로또 수가 전체 구입할 수 이하이면 true, 초과면 false를 반환한다.")
+    void validateManualLottoCounts(String input, boolean expected) {
+        assertThat(validateManualLottoCount(10, input)).isEqualTo(expected);
     }
 }

@@ -35,6 +35,10 @@ public class LottoCount {
         return total - manual;
     }
 
+    public int getManual() {
+        return this.manual;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
