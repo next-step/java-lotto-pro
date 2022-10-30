@@ -6,6 +6,7 @@ import java.util.List;
 
 import static step3.constant.Constant.*;
 public class Lotto {
+
     private List<LottoNumber> lottoNumbers;
 
     public Lotto() {

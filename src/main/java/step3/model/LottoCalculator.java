@@ -10,9 +10,17 @@ import static step3.constant.Message.SMAE_LOTTO_NUMBER;
 import static step3.constant.Message.UNVALID_LOTTO_NUMBER_LENGTH;
 import static step3.constant.WinnerRule.rules;
 public class LottoCalculator {
-    private static List<LottoNumber> lastWeekWinner = new ArrayList<>();
+    private static List<LottoNumber> lastWeekWinner;
     private static List<Lotto> purchasedLottos;
-    private static LottoResult lottoResult = new LottoResult();
+    private static LottoResult lottoResult;
+
+    public LottoCalculator() {
+        this.lastWeekWinner = new ArrayList<>();
+        this.lottoResult = new LottoResult();
+    }
+    public LottoCalculator(List<LottoNumber> lastWeekWinner) {
+        this.lastWeekWinner = lastWeekWinner;
+    }
 
     public void setLastWeekLottoNumbers(String beforeNumbers) {
         String[] afterNumbers = validateLastWeekWinner(beforeNumbers);

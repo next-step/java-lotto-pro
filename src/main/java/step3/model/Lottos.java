@@ -6,9 +6,16 @@ import java.util.List;
 import static step3.constant.Constant.EACH_LOTTO_PRICE;
 
 public class Lottos {
-    public List<Lotto> lottos = new ArrayList<>();
+    public List<Lotto> lottos;
     public int purchasedCount;
 
+    public Lottos() {
+        this.lottos = new ArrayList<>();
+    }
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+        this.purchasedCount = lottos.size();
+    }
 
     public void addLottos() {
         for (int i = 0; i < purchasedCount; i++) {
