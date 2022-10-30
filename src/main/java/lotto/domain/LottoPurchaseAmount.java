@@ -5,21 +5,49 @@ import lotto.view.OutputView;
 
 public class LottoPurchaseAmount  {
     public static final int LOTTO_PRICE = 1000;
+    private static final int FIRST_CHAR_INDEX = 0;
+    private static final int SECOND_CHAR_INDEX = 1;
+    private static final char NEGATIVE_CHAR = '-';
 
     private final int amount;
 
     public LottoPurchaseAmount(String inputAmount) {
+        validFirstChar(inputAmount);
+        validString(inputAmount);
         this.amount = parseAmount(inputAmount);
         validPositive();
         validMinAmount();
         validThousands();
     }
 
+    private void validFirstChar(String inputAmount) {
+        char firstChar = inputAmount.charAt(FIRST_CHAR_INDEX);
+        if (isValidFirstChar(firstChar)) {
+            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_INPUT_AMOUNT_ONLY_NUMBER);
+        }
+    }
+
+    private static boolean isValidFirstChar(char firstChar) {
+        return !(firstChar == NEGATIVE_CHAR || Character.isDigit(firstChar));
+    }
+
+    private void validString(String inputAmount) {
+        for (int i = SECOND_CHAR_INDEX; i < inputAmount.length(); i++) {
+            isDigit(inputAmount, i);
+        }
+    }
+
+    private static void isDigit(String inputAmount, int i) {
+        if (!Character.isDigit(inputAmount.charAt(i))) {
+            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_INPUT_AMOUNT_ONLY_NUMBER);
+        }
+    }
+
     private int parseAmount(String inputAmount) {
         try {
             return Integer.parseInt(inputAmount);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException(OutputView.ERROR_MESSAGE_INPUT_AMOUNT_ONLY_NUMBER);
+            throw new NumberFormatException(OutputView.ERROR_MESSAGE_INPUT_AMOUNT_EXCESS);
         }
     }
 
