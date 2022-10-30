@@ -8,7 +8,7 @@ public class LottoGameMain {
 
     public static void main(String[] args) {
         int payMoney = inputView.inputPay();
-        LottoGame lottoGame = new LottoGame(payMoney, new LottoNumberGenerator());
+        LottoGame lottoGame = new LottoGame(payMoney, new AutoLottoNumberGenerator());
 
         int purchaseCount = lottoGame.purchaseCount();
         resultView.resultPay(purchaseCount);

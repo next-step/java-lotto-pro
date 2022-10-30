@@ -1,22 +1,10 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class LottoNumberGenerator {
-    private final List<Integer> numbers = new ArrayList<>();
+public interface LottoNumberGenerator {
+    int START_NUMBER = 1;
+    int END_NUMBER = 45;
 
-    LottoNumberGenerator() {
-        for (int i = 1; i <= 45; i++) {
-            numbers.add(i);
-        }
-    }
-
-    List<Integer> generateSixNumbers() {
-        Collections.shuffle(numbers);
-        List<Integer> sixNumbers = new ArrayList<>(numbers.subList(0, 6));
-        Collections.sort(sixNumbers);
-        return sixNumbers;
-    }
+    List<Integer> generateSixNumbers();
 }
