@@ -12,7 +12,8 @@ public enum Message {
     MATCH_FIVE_BONUS(Award.FIVE.getCount() + "개 일치, 보너스 볼 일치(" + Award.BONUS.getAmount() + "원)- "),
     MATCH_SIX(Award.SIX.getCount() + "개 일치 (" + Award.SIX.getAmount() + "원)- "),
     STATISTICS_RESULT("총 수익률은 "),
-    BONUS("보너스 볼을 입력해 주세요.");;
+    BONUS("보너스 볼을 입력해 주세요."),
+    MENUAL("수동으로 구매할 번호를 입력해 주세요.");
 
     private String message;
 
@@ -30,6 +31,10 @@ public enum Message {
 
     public String resultMatchNumber(int value) {
         return this.message + value + "개";
+    }
+
+    public String resultMatchNumber(int manual, int auto) {
+        return "수동으로" + manual + "장, 자동으로 " + auto + "개를 구매했습니다.";
     }
 
 }

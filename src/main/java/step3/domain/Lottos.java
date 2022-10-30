@@ -1,11 +1,8 @@
 package step3.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import step3.enums.Award;
 
 public class Lottos {
@@ -27,15 +24,14 @@ public class Lottos {
         return lottos;
     }
 
-    public void matchWinningNumbers(String numbersWithComma, int bonusball) {
-        List<Integer> winningNumbers = this.gainWinnerNumbers(numbersWithComma);
+    public void matchWinningNumbers(WinningLotto winningLotto) {
         lottos.forEach(lotto -> {
-            lotto.match(winningNumbers, bonusball);
+            lotto.match(winningLotto);
         });
     }
 
     public Map<Integer, Integer> calculateWinningBallsEachLotto() {
-        Map<Integer, Integer> statistics = initStatistics();
+        Map<Integer, Integer> statistics = Award.initRank();
         lottos.forEach(lotto -> {
             if (isBonus(lotto)) {
                 statistics.computeIfPresent(Award.FIVE.getCount() + Award.BONUS.getCount(), (k, v) -> v + 1);
@@ -46,26 +42,15 @@ public class Lottos {
         return statistics;
     }
 
+    public void unionLottos(List<Lotto> manual, List<Lotto> auto) {
+        ArrayList<Lotto> merge = new ArrayList<>();
+        merge.addAll(manual);
+        merge.addAll(auto);
+        this.lottos = merge;
+    }
+
     private boolean isBonus(Lotto lotto) {
         return lotto.getMatchCount() == Award.FIVE.getCount() && lotto.hasBonusNumber();
     }
 
-    private Map<Integer, Integer> initStatistics() {
-        Map<Integer, Integer> statistics = new HashMap<>();
-
-        statistics.put(Award.THREE.getCount(), 0);
-        statistics.put(Award.FOUR.getCount(), 0);
-        statistics.put(Award.FIVE.getCount(), 0);
-        statistics.put(Award.FIVE.getCount() + Award.BONUS.getCount(), 0);
-        statistics.put(Award.SIX.getCount(), 0);
-
-        return statistics;
-    }
-
-    private List<Integer> gainWinnerNumbers(String numbersWithComma) {
-        return Arrays.asList(numbersWithComma.split(","))
-                .stream()
-                .mapToInt(Integer::parseInt).boxed()
-                .collect(Collectors.toList());
-    }
 }

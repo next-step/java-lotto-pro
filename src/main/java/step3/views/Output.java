@@ -23,7 +23,7 @@ public class Output {
     public void generateLottos(int count, List<Lotto> lottos) {
         System.out.println(count + Message.COUNT.getMessage());
         lottos.forEach(lotto -> {
-            System.out.println(lotto.getLottoNumbers());
+            System.out.println(lotto.gainAutoNumbers());
         });
     }
 
