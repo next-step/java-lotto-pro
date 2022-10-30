@@ -36,16 +36,13 @@
 - 당첨 로또 (WinningLotto)
   - [X] 입력받은 6자리 숫자 리스트로 당첨 로또 객체 생성
   - [X] 로또(Lotto)를 입력 받아 일치한 갯수 반환
-- 당첨 통계 (WinningStatistics)
-  - [ ] 로또 컬랙션(Lottos), 지난 주 당첨 번호(WinNumbers) 객체를 입력 받아 당첨 통계 객체 생성
-  - [ ] 각 3,4,5,6개 일치 결과 반환
-  - [ ] 총 수익률 결과 반환
-- 로또 당첨 전략(WinningLottoStrategy)
-  - [X] 로또 번호 일치 갯수로 당첨 여부 체크(NumberMatchWinningLottoStrategy) 
+- 일치 갯수 (MatchCount)
+  - [X] 0~6 일치 갯수 범위 제한
 - 난수 생성기 (RandomNumbersGenerator)
   - [X] begin~last 범위 n자리 난수 생성
-- 로또 랜덤 번호 선택 전략 (RandomLottoNumberStrategy)
-  - [X] 난수 생성기로부터 번호를 생성 받아 전달
+- 로또 랜덤 번호 선택 전략 
+  - [X] 난수 생성기로부터 번호를 생성 받아 전달(RandomLottoNumberStrategy)
+  - [X] 직접 입력 받아서 선택 (InputLottoNumberStrategy)
 - 문자열 쉼표 분리기 (InputSplitter)
   - [X] 분리할 문자열과 구분자를 받아서 분리 결과 반환
 
