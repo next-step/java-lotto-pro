@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.utils.StringUtils;
+import lotto.domain.LottoMoney;
 
 import java.util.Scanner;
 
@@ -24,6 +24,16 @@ public class InputView {
             throw new IllegalArgumentException("입력한 값이 올바르지 않아 로또 구매에 실패했습니다.");
         }
         return purchasePrice;
+    }
+
+    public static LottoMoney getLottoPurchasePrice1() {
+        System.out.println(ENTER_PURCHASE_AMOUNT);
+        try {
+            return new LottoMoney(SCANNER.nextLine());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getLottoPurchasePrice1();
+        }
     }
 
     public static String getLastWeekWinningNumber() {

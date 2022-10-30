@@ -16,6 +16,8 @@ public class LottoController {
     }
 
     public void startLotto() {
+//        LottoMoney lottoMoney = InputView.getLottoPurchasePric1();
+
         int purchasePrice = InputView.getLottoPurchasePrice();
         LottoTickets lottoTickets = lottoGame.buy(purchasePrice);
 
