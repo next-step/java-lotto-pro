@@ -17,4 +17,6 @@ class Constant {
     public static final int PRIZE_OF_THIRD = 50000;
     public static final int PRIZE_OF_SECOND = 1500000;
     public static final int PRIZE_OF_FIRST = 2000000000;
+    public static int LOTTO_START_NUMBER = 1;
+    public static int LOTTO_END_NUMBER = 45;
 }

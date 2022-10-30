@@ -1,26 +1,29 @@
 package lotto;
 
+import static lotto.Constant.LOTTO_END_NUMBER;
+import static lotto.Constant.LOTTO_START_NUMBER;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 class AutoLottoNumberGenerator implements LottoNumberGenerator {
-    List<Integer> NUMBERS = new ArrayList<>();
+    List<Integer> lottoNumbers = new ArrayList<>();
 
     AutoLottoNumberGenerator() {
         initialize();
     }
 
     private void initialize() {
-        for (int number = START_NUMBER; number <= END_NUMBER; number++) {
-            NUMBERS.add(number);
+        for (int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
+            lottoNumbers.add(number);
         }
     }
 
     @Override
     public List<Integer> generateSixNumbers() {
-        Collections.shuffle(NUMBERS);
-        List<Integer> sixNumbers = new ArrayList<>(NUMBERS.subList(0, 6));
+        Collections.shuffle(lottoNumbers);
+        List<Integer> sixNumbers = new ArrayList<>(lottoNumbers.subList(0, 6));
         Collections.sort(sixNumbers);
         return sixNumbers;
     }
