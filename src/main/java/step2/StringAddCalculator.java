@@ -40,11 +40,11 @@ public final class StringAddCalculator {
 
     private static int sum(String[] numbers) {
         return Arrays.stream(numbers)
-                .mapToInt(StringAddCalculator::toInt)
+                .mapToInt(StringAddCalculator::convertPositiveNumber)
                 .sum();
     }
 
-    private static int toInt(String value) {
+    private static int convertPositiveNumber(String value) {
         int number = fromString(value);
 
         if (number < ZERO) {
