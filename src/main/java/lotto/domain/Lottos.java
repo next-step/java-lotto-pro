@@ -10,8 +10,6 @@ public class Lottos {
 
     private static final String LOTTOS_NULL_OR_EMPTY_OR_ZERO_MESSAGE = "로또 목록은 Null, 빈 값, 0은 불가 합니다.";
 
-    private static final int ONE = 1;
-
     private static final int LOTTO_AMOUNT = 1000;
 
     private final List<Lotto> lottos;
@@ -59,9 +57,9 @@ public class Lottos {
 
     private int lottoRanksCount(final Map<LottoRank, Integer> rankInfo, final LottoRank lottoRank) {
         if (rankInfo.containsKey(lottoRank)) {
-            return rankInfo.get(lottoRank) + ONE;
+            return rankInfo.get(lottoRank) + LottoNumber.LOTTO_MIN_NUMBER;
         }
-        return ONE;
+        return LottoNumber.LOTTO_MIN_NUMBER;
     }
 
     public int size() {

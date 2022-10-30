@@ -4,11 +4,11 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    private final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MIN_NUMBER = 1;
 
-    private final int LOTTO_MAX_NUMBER = 45;
+    public static final int LOTTO_MAX_NUMBER = 45;
 
-    private final String LOTTO_OUT_RANGE_MESSAGE = "로또 번호는 1이상 45이하의 숫자만 가능합니다.";
+    private static final String LOTTO_OUT_RANGE_MESSAGE = "로또 번호는 1이상 45이하의 숫자만 가능합니다.";
 
     private final int lottoNumber;
 
