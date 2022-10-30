@@ -21,9 +21,9 @@ public enum LottoRank {
         this.bonus = bonus;
     }
 
-    public static LottoRank findLottoRank(int matchNumberCount, boolean bonus) {
+    public static LottoRank findLottoRank(int matchCount, boolean bonus) {
         return Arrays.stream(LottoRank.values())
-                .filter(item -> matchLottoRank(item, matchNumberCount, bonus))
+                .filter(item -> matchLottoRank(item, matchCount, bonus))
                 .findFirst()
                 .orElse(LottoRank.NONE);
     }
@@ -32,8 +32,8 @@ public enum LottoRank {
         return (lottoRank.matchCount == matchCount) && (lottoRank.bonus == isBonus(matchCount, bonus));
     }
 
-    private static boolean isBonus(int matchNumberCount, boolean bonus) {
-        return (LottoRank.SECOND.matchCount == matchNumberCount) && bonus;
+    private static boolean isBonus(int matchCount, boolean bonus) {
+        return (LottoRank.SECOND.matchCount == matchCount) && bonus;
     }
 
     public int getMatchCount() {

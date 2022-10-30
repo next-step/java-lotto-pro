@@ -12,10 +12,10 @@ public class LottoTicket {
     }
 
     public void lottoWinningConfirm(WinningLottoNumbers winningLottoNumber) {
-        lottoRankResult = LottoRank.findLottoRank(getMatchNumberCount(winningLottoNumber), isBonusMatch(winningLottoNumber));
+        lottoRankResult = LottoRank.findLottoRank(getMatchCount(winningLottoNumber), isBonusMatch(winningLottoNumber));
     }
 
-    private int getMatchNumberCount(WinningLottoNumbers winningLottoNumber) {
+    private int getMatchCount(WinningLottoNumbers winningLottoNumber) {
         return lottoNumbers.match(winningLottoNumber.getLottoNumbers()).size();
     }
 
