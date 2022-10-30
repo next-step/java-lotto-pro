@@ -3,7 +3,6 @@ package step3;
 import step3.controller.LottoController;
 import step3.model.machine.ShuffleTicketGenerator;
 import step3.model.machine.TicketGenerator;
-import step3.model.machine.TicketMachine;
 
 public class LottoApplication {
 

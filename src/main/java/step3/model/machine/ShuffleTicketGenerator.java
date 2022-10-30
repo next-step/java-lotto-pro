@@ -5,7 +5,6 @@ import static java.util.stream.Collectors.toList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
-import step3.model.lotto.Ticket;
 import step3.model.value.Rule;
 
 public class ShuffleTicketGenerator implements TicketGenerator {

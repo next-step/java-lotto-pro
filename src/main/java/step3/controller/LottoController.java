@@ -18,14 +18,15 @@ public class LottoController {
         this.ticketMachine = new TicketMachine(ticketGenerator);
     }
 
-    public void start(){
+    public void start() {
         Money money = getMoneyInput();
         int ticketCount = money.availableTicketCount(Rule.TICKET_PRICE);
         Tickets tickets = ticketMachine.issueTickets(ticketCount);
         Lotto lotto = getLottoInput();
         Results results = tickets.getResults(lotto);
         results.printResults();
-        results.evaluateResult(ticketCount, results.getWinningPrize());
+        double result = results.evaluateResult(ticketCount, results.getWinningPrize());
+        OutputView.printStatisticResult(result);
     }
 
     private Lotto getLottoInput() {

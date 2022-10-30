@@ -7,7 +7,6 @@ import step3.model.machine.Result;
 import step3.model.value.Rule;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class TicketTest {
     private Lotto lotto;

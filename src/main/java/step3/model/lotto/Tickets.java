@@ -1,23 +1,24 @@
 package step3.model.lotto;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import step3.model.machine.Result;
 import step3.model.machine.Results;
 import step3.view.OutputView;
 
 public class Tickets {
+
     private final List<Ticket> tickets;
-    public Tickets(List<Ticket> tickets){
+
+    public Tickets(List<Ticket> tickets) {
         this.tickets = tickets;
         printTickets();
     }
-    private void printTickets(){
+
+    private void printTickets() {
         tickets.stream().forEach(ticket -> OutputView.printTicket(ticket));
     }
-    public Results getResults(Lotto lotto){
+
+    public Results getResults(Lotto lotto) {
         Results results = new Results();
         tickets.stream().forEach(ticket -> results.recordResult(ticket.getResult(lotto)));
         return results;

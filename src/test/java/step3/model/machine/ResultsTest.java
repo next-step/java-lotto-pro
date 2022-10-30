@@ -1,16 +1,9 @@
 package step3.model.machine;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import step3.model.lotto.Lotto;
-import step3.model.lotto.Ticket;
-
 class ResultsTest {
     private Results results;
 
@@ -38,5 +31,10 @@ class ResultsTest {
     @Test
     void 맞추지_못한사람은_상금이_없다() {
         assertThat(Result.NO_PRIZE.getTotalPrize(100)).isEqualTo(0);
+    }
+
+    @Test
+    void 수익률_계산기_테스트() {
+        assertThat(results.evaluateResult(10, 10000)).isEqualTo(1);
     }
 }
