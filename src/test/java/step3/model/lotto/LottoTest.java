@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 class LottoTest {
@@ -48,6 +49,13 @@ class LottoTest {
     void 잘못된_입력_LottoNumberInvalid(String input) {
         assertThatThrownBy(() -> new Lotto(input))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "2:true", "3:true", "7:false", "8:false"}, delimiter = ':')
+    void 로또_번호_포함_테스트(int number, boolean result) {
+        Lotto lotto = new Lotto("1,2,3,4,5,6");
+        assertThat(lotto.isMatched(new LottoNumber(number))).isEqualTo(result);
     }
 
 
