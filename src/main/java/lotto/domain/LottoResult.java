@@ -30,7 +30,7 @@ public class LottoResult {
 
     public float calculateRateOfReturn() {
         int sumOfCost = PRICE * sumOfCount();
-        return (float)sumOfPrizeMoney() / sumOfCost;
+        return (float)sumOfMoney() / sumOfCost;
     }
 
     private int sumOfCount() {
@@ -39,7 +39,7 @@ public class LottoResult {
             .sum();
     }
 
-    private int sumOfPrizeMoney() {
+    private int sumOfMoney() {
         int money = 0;
         for (Rank rank : result.keySet()) {
             money += rank.getSumOfMoney(result.get(rank));

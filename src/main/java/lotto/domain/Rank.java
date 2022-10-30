@@ -10,6 +10,7 @@ public enum Rank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
+    public static final int NEEDS_DISTINGUISH_COUNT = 5;
     private final int countOfMatch;
     private final int winningMoney;
 
@@ -31,14 +32,27 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        if (countOfMatch == NEEDS_DISTINGUISH_COUNT) {
+            return computeBonusRank(matchBonus);
+        }
         return Arrays.stream(Rank.values())
-            .filter(winPrize -> winPrize.countOfMatch == countOfMatch)
+            .filter(rank -> rank.countOfMatch == countOfMatch)
             .findFirst()
             .orElse(Rank.MISS);
     }
 
+    private static Rank computeBonusRank(boolean matchBonus) {
+        if (matchBonus) {
+            return SECOND;
+        }
+        return THIRD;
+    }
+
     @Override
     public String toString() {
+        if (this == SECOND) {
+            return String.format("%d개 일치, 보너스 볼 일치(%d원)", countOfMatch, winningMoney);
+        }
         return String.format("%d개 일치 (%d원)", countOfMatch, winningMoney);
     }
 }

@@ -25,8 +25,8 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         List<Rank> ranks = Arrays.stream(values())
-            .filter(prize -> prize != MISS)
-            .sorted(Comparator.comparingInt(Rank::getCountOfMatch))
+            .filter(rank -> rank != MISS)
+            .sorted(Comparator.comparingInt(Rank::getWinningMoney))
             .collect(Collectors.toList());
         for (Rank rank : ranks) {
             System.out.println(String.format("%s- %d개", rank, lotto.getCount(rank)));

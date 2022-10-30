@@ -13,14 +13,22 @@ public class LottoNumbers {
         this.numbers = numbers;
     }
 
-    public Rank calculatePrize(LottoNumbers winningLotto) {
+    public Rank calculateRank(LottoNumbers winningLotto, LottoNumber bonusNumber) {
         int winCount = 0;
+        boolean matchBonus = false;
         for (LottoNumber number : this.numbers) {
             if (winningLotto.contains(number)) {
                 winCount++;
             }
+            if (number.equals(bonusNumber)) {
+                matchBonus = true;
+            }
         }
-        return Rank.valueOf(winCount, false);
+        return Rank.valueOf(winCount, matchBonus);
+    }
+
+    public boolean contains(LottoNumber number) {
+        return this.numbers.contains(number);
     }
 
     private void validate(Set<LottoNumber> numbers) {
@@ -30,10 +38,6 @@ public class LottoNumbers {
         if (numbers.size() != LOTTO_NUMBERS_COUNT) {
             throw new IllegalStateException("로또번호는 6개의 숫자여야합니다.");
         }
-    }
-
-    private boolean contains(LottoNumber number) {
-        return this.numbers.contains(number);
     }
 
     @Override

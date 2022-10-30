@@ -25,11 +25,18 @@ public class Lotto {
         return Collections.unmodifiableList(purchaseLottoList);
     }
 
-    public LottoResult computeResult(LottoNumbers winningLotto) {
+    public LottoResult computeResult(LottoNumbers winningLotto, LottoNumber bonusNumber) {
+        validateBonus(winningLotto, bonusNumber);
         LottoResult result = new LottoResult();
         for (LottoNumbers lottoNumbers : purchaseLottoList) {
-            result.addCount(lottoNumbers.calculatePrize(winningLotto));
+            result.addCount(lottoNumbers.calculateRank(winningLotto, bonusNumber));
         }
         return result;
+    }
+
+    private void validateBonus(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
+        if (lottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스번호는 당첨번호와 달라야합니다.");
+        }
     }
 }

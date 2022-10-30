@@ -29,34 +29,38 @@ class LottoNumbersTest {
 
     @ParameterizedTest
     @MethodSource("로또번호_및_당첨번호")
-    void 당첨번호와_일치하는_개수_구하기(Set<LottoNumber> lottoNumbers, Set<LottoNumber> winningNumbers, Rank rank) {
-        assertThat(new LottoNumbers(lottoNumbers).calculatePrize(new LottoNumbers(winningNumbers)))
+    void 당첨번호와_일치하는_개수_구하기(Set<LottoNumber> lottoNumbers, Set<LottoNumber> winningNumbers, Rank rank,
+        LottoNumber bonusNumber) {
+        assertThat(new LottoNumbers(lottoNumbers).calculateRank(new LottoNumbers(winningNumbers), bonusNumber))
             .isEqualTo(rank);
     }
 
-    private static Stream<Arguments> 로또번호_및_당첨번호() {
+    public static Stream<Arguments> 로또번호_및_당첨번호() {
         return Stream.of(
             Arguments.of(//0개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {7, 8, 9, 10, 11, 12}),
-                Rank.MISS),
+                Rank.MISS, new LottoNumber(45)),
             Arguments.of(//1개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 7, 8, 9, 10, 11}),
-                Rank.MISS),
+                Rank.MISS, new LottoNumber(45)),
             Arguments.of(//2개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 2, 7, 8, 9, 10}),
-                Rank.MISS),
+                Rank.MISS, new LottoNumber(45)),
             Arguments.of(//3개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 2, 3, 7, 8, 9}),
-                Rank.FIFTH),
+                Rank.FIFTH, new LottoNumber(45)),
             Arguments.of(//4개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 2, 3, 4, 7, 8}),
-                Rank.FOURTH),
-            Arguments.of(//5개일치
+                Rank.FOURTH, new LottoNumber(45)),
+            Arguments.of(//5개일치 3등
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 7}),
-                Rank.THIRD),
+                Rank.THIRD, new LottoNumber(45)),
+            Arguments.of(//5개일치 2등
+                toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 7}),
+                Rank.SECOND, new LottoNumber(6)),
             Arguments.of(//6개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}),
-                Rank.FIRST)
+                Rank.FIRST, new LottoNumber(45))
         );
     }
 

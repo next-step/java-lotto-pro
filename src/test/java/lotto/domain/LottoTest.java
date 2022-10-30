@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,37 +21,51 @@ class LottoTest {
         assertThat(new Lotto(money).getPurchaseLottoList()).hasSize(new LottoMoney(money).count());
     }
 
+    @Test
+    void 보너스번호가_당첨번호와_같으면_예외를_던진다() {
+        Lotto lotto = new Lotto(
+            Collections.singletonList(new LottoNumbers(toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}))));
+        assertThatThrownBy(() -> lotto.computeResult(new LottoNumbers(toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6})),
+            new LottoNumber(1)))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @ParameterizedTest
     @MethodSource("로또번호_및_당첨번호")
-    void 당첨번호를_입력받아_당첨결과를_얻는다(Set<LottoNumber> lottoNumbers, Set<LottoNumber> winningNumbers, Rank rank) {
+    void 당첨번호를_입력받아_당첨결과를_얻는다(Set<LottoNumber> lottoNumbers, Set<LottoNumber> winningNumbers, Rank rank,
+        LottoNumber bonusNumber) {
         Lotto lotto = new Lotto(Collections.singletonList(new LottoNumbers(lottoNumbers)));
-        LottoResult result = lotto.computeResult(new LottoNumbers(winningNumbers));
+        LottoResult result = lotto.computeResult(new LottoNumbers(winningNumbers),
+            bonusNumber);
         assertThat(result.getCount(rank)).isEqualTo(1);
     }
 
-    private static Stream<Arguments> 로또번호_및_당첨번호() {
+    public static Stream<Arguments> 로또번호_및_당첨번호() {
         return Stream.of(
             Arguments.of(//0개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {7, 8, 9, 10, 11, 12}),
-                Rank.MISS),
+                Rank.MISS, new LottoNumber(45)),
             Arguments.of(//1개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 7, 8, 9, 10, 11}),
-                Rank.MISS),
+                Rank.MISS, new LottoNumber(45)),
             Arguments.of(//2개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 2, 7, 8, 9, 10}),
-                Rank.MISS),
+                Rank.MISS, new LottoNumber(45)),
             Arguments.of(//3개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 2, 3, 7, 8, 9}),
-                Rank.FIFTH),
+                Rank.FIFTH, new LottoNumber(45)),
             Arguments.of(//4개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 2, 3, 4, 7, 8}),
-                Rank.FOURTH),
-            Arguments.of(//5개일치
+                Rank.FOURTH, new LottoNumber(45)),
+            Arguments.of(//5개일치 3등
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 7}),
-                Rank.THIRD),
+                Rank.THIRD, new LottoNumber(45)),
+            Arguments.of(//5개일치 2등
+                toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 7}),
+                Rank.SECOND, new LottoNumber(6)),
             Arguments.of(//6개일치
                 toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}), toLottoNumberSet(new int[] {1, 2, 3, 4, 5, 6}),
-                Rank.FIRST)
+                Rank.FIRST, new LottoNumber(45))
         );
     }
 

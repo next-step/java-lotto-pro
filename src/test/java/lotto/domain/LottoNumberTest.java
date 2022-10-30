@@ -10,4 +10,9 @@ class LottoNumberTest {
         assertThatThrownBy(() -> new LottoNumber(0)).isInstanceOf(IllegalStateException.class);
         assertThatThrownBy(() -> new LottoNumber(46)).isInstanceOf(IllegalStateException.class);
     }
+
+    @Test
+    void 로또번호_같은지_확인하기() {
+        assertThat(new LottoNumber(3)).isEqualTo(new LottoNumber(3));
+    }
 }

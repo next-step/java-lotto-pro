@@ -37,4 +37,5 @@ public class LottoNumber {
     public int hashCode() {
         return number;
     }
+
 }
