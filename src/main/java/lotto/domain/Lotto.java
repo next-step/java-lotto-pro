@@ -1,45 +1,37 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import lotto.util.LottoNumberGenerator;
+
 import java.util.List;
 
 public class Lotto {
 
-    private final List<Integer> lottoNumbers;
-    public static final int MIN_LOTTO_NUMBER = 1;
-    public static final int MAX_LOTTO_NUMBER = 45;
-    private static final int SUBLIST_START_IDX = 0;
-    private static final int SUBLIST_END_IDX = 6;
+    private static final int COLLECT_ADD_NUMBER = 1;
+    private static final int NOT_COLLECT_ADD_NUMBER = 0;
 
-    public Lotto(){
-        lottoNumbers = generateUniqueLottoNumbers();
+    private final List<Integer> lottoNumbers;
+
+    public Lotto() {
+        lottoNumbers = LottoNumberGenerator.generateLottoNumbers();
     }
 
-    public Lotto(List<Integer> lottoNumbers){
+    public Lotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
     public int countCollectNumber(Lotto winningNumbers) {
-        int result = 0;
-        for(int winningNumber : winningNumbers.lottoNumbers){
-            if(lottoNumbers.contains(winningNumber)){
-                result++;
-            }
+        int collectCount = 0;
+        for (int winningNumber : winningNumbers.lottoNumbers) {
+            collectCount += containNumbers(winningNumber);
         }
-        return result;
+        return collectCount;
     }
 
-    public List<Integer> generateUniqueLottoNumbers(){
-        List<Integer> lottoRange = new ArrayList<>();
-        for(int i=MIN_LOTTO_NUMBER; i<=MAX_LOTTO_NUMBER; i++){
-            lottoRange.add(i);
+    private int containNumbers(int winningNumber){
+        if(lottoNumbers.contains(winningNumber)){
+            return COLLECT_ADD_NUMBER;
         }
-        Collections.shuffle(lottoRange);
-        List<Integer> lottoNumbers = lottoRange.subList(SUBLIST_START_IDX, SUBLIST_END_IDX);
-        lottoNumbers.sort(Comparator.comparingInt(i -> i));
-        return lottoNumbers;
+        return NOT_COLLECT_ADD_NUMBER;
     }
 
     @Override
