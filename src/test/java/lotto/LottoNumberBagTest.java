@@ -2,12 +2,18 @@ package lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.junit.jupiter.params.ParameterizedTest.DEFAULT_DISPLAY_NAME;
 
 @DisplayName("로또 번호 목록 테스트")
 class LottoNumberBagTest {
@@ -25,5 +31,23 @@ class LottoNumberBagTest {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         int correctCount = lottoNumberBag.correctCount(winningNumbers);
         assertThat(correctCount).isEqualTo(3);
+    }
+
+    @ParameterizedTest(name = "생성 예외 테스트 - " + DEFAULT_DISPLAY_NAME)
+    @MethodSource("provideExceptionValues")
+    void validRange_bag_IllegalArgumentException(List<Integer> lottoNumbers) {
+        assertThatIllegalArgumentException().isThrownBy(() ->
+                new LottoNumberBag(lottoNumbers));
+    }
+
+    static Stream<Arguments> provideExceptionValues() {
+        return Stream.of(
+                /* 로또 숫자 갯수 불일치 */
+                Arguments.of(Arrays.asList(1, 2, 3, 10, 20, 30, 7)),
+                /* 중복 된 로또 숫자 */
+                Arguments.of(Arrays.asList(1, 1, 3, 10, 20, 30)),
+                /* 로또 숫자 범위를 벗어난 숫자 */
+                Arguments.of(Arrays.asList(1, 1, 3, 10, 20, 99))
+        );
     }
 }
