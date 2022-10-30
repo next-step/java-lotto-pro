@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class LottoWinningStatistics {
     private final Map<Integer, Integer> lottoWinningStatistics = new HashMap<>();
-    private double totalProfit = 0;
+    private final Money totalProfit = new Money(0);
 
     public LottoWinningStatistics(List<LottoResult> lottoResults, LottoResult winLottoResult) {
         initLottoWinningStatistics();
@@ -39,12 +39,12 @@ public class LottoWinningStatistics {
     private void setTotalProfit() {
         for (int i = 0; i < lottoWinningStatistics.size(); i++) {
             LottoReward lottoReward = LottoReward.getLottoReward(i);
-            totalProfit += lottoReward.getTotMoney(lottoWinningStatistics.get(i));
+            totalProfit.plus(new Money(lottoReward.getTotMoney(lottoWinningStatistics.get(i))));
         }
     }
 
-    public double getTotalProfitPercent(int money) {
-        return totalProfit / money;
+    public double getTotalProfitPercent(Money money) {
+        return totalProfit.getPercent(money);
     }
 
     @Override

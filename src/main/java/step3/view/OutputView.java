@@ -2,11 +2,12 @@ package step3.view;
 
 import step3.constant.OutputMessage;
 import step3.model.Game;
+import step3.model.LottoBuyCount;
 import step3.model.LottoReward;
 
 
 public class OutputView {
-    public static void printLottoBuyCount(int count) {
+    public static void printLottoBuyCount(LottoBuyCount count) {
         System.out.printf(OutputMessage.OUTPUT_LOTTO_BUY_COUNT, count);
     }
 

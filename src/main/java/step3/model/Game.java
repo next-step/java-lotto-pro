@@ -1,7 +1,5 @@
 package step3.model;
 
-import step3.constant.ErrorMessageConstant;
-import step3.constant.LottoConstant;
 import step3.util.StringUtil;
 
 import java.util.ArrayList;
@@ -11,8 +9,8 @@ public class Game {
 
     private List<LottoResult> lottoResults = new ArrayList<>();
     private LottoResult winLottoResult;
-    private int lottoBuyCount;
-    private int money;
+    private LottoBuyCount lottoBuyCount;
+    private Money money;
     private final LottoGenerator lottoGenerator = new LottoGenerator();
 
     public Game() {
@@ -20,54 +18,28 @@ public class Game {
     }
 
     public Game(int count) {
-        this.lottoBuyCount = count;
-        checkLottoBuyCount();
+        this.lottoBuyCount = new LottoBuyCount(count);
     }
 
     public Game(String money) {
-        if (money == null || money.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessageConstant.EMPTY_TEXT);
-        }
-        this.money = convertNumber(money);
-        this.lottoBuyCount = getLottoBuyCount(this.money);
-        checkLottoBuyCount();
+        this.money = new Money(money);
+        this.lottoBuyCount = new LottoBuyCount(this.money);
     }
 
-    private void checkLottoBuyCount() {
-        if (this.lottoBuyCount <= 0) {
-            throw new RuntimeException(ErrorMessageConstant.ZERO_LOTTO_BUY_COUNT);
-        }
-    }
-
-    public int getMoney() {
+    public Money getMoney() {
         return money;
     }
 
-    private int getLottoBuyCount(int money) {
-        return money / LottoConstant.LOTTO_ONE_GAME_MONEY;
-    }
-
-    private int convertNumber(String text) {
-        int result;
-        try {
-            result = Integer.parseInt(text);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException(ErrorMessageConstant.NOT_NUMBER);
-        }
-        if (result < 0) {
-            throw new NumberFormatException(ErrorMessageConstant.NEGATIVE_NUMBER);
-        }
-        return result;
-    }
-
-    public int getLottoBuyCount() {
+    public LottoBuyCount getLottoBuyCount() {
         return lottoBuyCount;
     }
 
     public List<LottoResult> getLottoResults() {
         List<LottoResult> result = new ArrayList<>();
-        for (int i = 0; i < lottoBuyCount; i++) {
+        LottoBuyCount index = new LottoBuyCount(0);
+        while (!index.equals(this.lottoBuyCount)) {
             result.add(lottoGenerator.createLottoResult());
+            index.plus();
         }
         this.lottoResults = result;
         return this.lottoResults;

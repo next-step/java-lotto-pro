@@ -28,6 +28,6 @@ public class LottoWinningStatisticsTest {
         lottoResults.add(new LottoResult(new String[]{"1", "2", "3", "4", "5", "6"}));
         LottoResult winLottoResult = new LottoResult(new String[]{"1", "2", "3", "4", "5", "6"});
         LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(lottoResults, winLottoResult);
-        assertThat(lottoWinningStatistics.getTotalProfitPercent(1000)).isEqualTo((double) LottoReward.SIX.getMoney() / 1000);
+        assertThat(lottoWinningStatistics.getTotalProfitPercent(new Money(1000))).isEqualTo((double) LottoReward.SIX.getMoney() / 1000);
     }
 }

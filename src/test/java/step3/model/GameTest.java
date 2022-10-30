@@ -3,7 +3,6 @@ package step3.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
@@ -23,31 +22,6 @@ public class GameTest {
         for (int i = 1; i < 46; i++) {
             candidateLottoNumbers.add(new LottoNumber(i));
         }
-    }
-
-    @DisplayName("입력된_금액에_맞추어_로또_구매_개수_조회")
-    @ParameterizedTest
-    @CsvSource(value = {"1000:1", "10000:10"}, delimiter = ':')
-    void getLottoCount_pass_01(String money, int count) {
-        Game game = new Game(money);
-        assertThat(game.getLottoBuyCount()).isEqualTo(count);
-
-    }
-
-    @DisplayName("입력된_값이_숫자가_아니면_에러반환")
-    @ParameterizedTest
-    @ValueSource(strings = {",:1", "1:0", "a10e"})
-    public void getLottoCount_fail_01(String money) {
-        assertThatThrownBy(() -> new Game(money))
-                .isInstanceOf(NumberFormatException.class);
-    }
-
-    @DisplayName("숫자로_입력된_값이_음수면_에러반환")
-    @ParameterizedTest
-    @ValueSource(strings = {"-1", "-100"})
-    public void getLottoCount_fail_02(String money) {
-        assertThatThrownBy(() -> new Game(money))
-                .isInstanceOf(NumberFormatException.class);
     }
 
     @DisplayName("구입금액이_부족할_경우_에러_반환")
