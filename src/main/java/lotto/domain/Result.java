@@ -29,13 +29,13 @@ public class Result {
         sb.append(Constants.STR_RESULT_SEPARATOR);
 
         IntStream.rangeClosed(Constants.ZERO, Constants.THREE).forEach(i -> {
-            String formattedString = String.format(Constants.STR_RESULT_PRIZES,
-                    (i + Constants.THREE), Constants.INT_RESULT_PRIZES[i], this.prizes[i]);
+            int correctCount = i + Constants.THREE;
+            String formattedString = String.format(Constants.STR_RESULT_PRIZES, correctCount, Constants.INT_RESULT_PRIZES[i], this.prizes[i]);
             sb.append(formattedString);
         });
 
         sb.append(String.format(Constants.STR_RESULT_RETURN_RATE, returnRateStr));
-        if(returnRate < 1) {
+        if (returnRate < 1) {
             sb.append(Constants.STR_RESULT_RETURN_RATE_UNDER_1);
         }
 
