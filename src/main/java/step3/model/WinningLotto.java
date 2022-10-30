@@ -1,5 +1,7 @@
 package step3.model;
 
+import java.util.List;
+
 public class WinningLotto {
     private final Lotto winningNumbers;
     private final Number bonusNumber;
@@ -11,5 +13,9 @@ public class WinningLotto {
 
     public boolean contains(Number lottoNumber) {
         return winningNumbers.contains(lottoNumber);
+    }
+
+    public boolean checkBonusNumber(List<Number> lottoNumbers) {
+        return lottoNumbers.contains(bonusNumber);
     }
 }
