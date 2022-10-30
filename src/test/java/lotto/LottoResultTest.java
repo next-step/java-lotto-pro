@@ -18,7 +18,7 @@ class LottoResultTest {
     private final int RANK_SIZE = Rank.values().length;
 
     @RepeatedTest(10)
-    @DisplayName("당첨금 계산")
+    @DisplayName("랜덤하게 발생한 당첨 로또에 대한 당첨금 계산")
     void 당첨금_계산() {
         Collections.shuffle(LOTTO_LIST);
         Rank random1 = LOTTO_LIST.get(0);
@@ -31,7 +31,7 @@ class LottoResultTest {
     }
 
     @RepeatedTest(10)
-    @DisplayName("수익률 계산")
+    @DisplayName("랜덤하게 발생한 10개의 로또에 대한 수익률 계산")
     void 수익률_계산() {
         int lottoCount = (int) (Math.random() * 10 + 1);
         Collections.shuffle(LOTTO_LIST);

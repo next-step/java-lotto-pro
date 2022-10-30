@@ -26,6 +26,7 @@ class MoneyTest {
 
     @ParameterizedTest
     @CsvSource(value = {"1000:1", "5000:5", "100000:100"}, delimiter = ':')
+    @DisplayName("투입 금액에 대한 구매 가능 로또 수 반환")
     void 구매_가능한_로또수(int money, int expected) {
         assertThat(new Money(money).getBuyableLottoCount()).isEqualTo(expected);
     }
