@@ -1,6 +1,5 @@
-package lotto.domain.enums;
+package lotto.domain;
 
-import lotto.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,11 +13,11 @@ public class RankTest {
         assertThat(Rank.isBiggerThanMinimum(3)).isTrue();
     }
 
-    @DisplayName("랭크를 역순으로 구할 수 있다")
+    @DisplayName("일치하는 숫자로 Rank를 알 수 있다")
     @Test
-    void reverse_rank_test() {
-        Rank reverseFirstRank = Rank.reverseValues()[0];
-        assertThat(reverseFirstRank).isEqualTo(Rank.FOURTH);
+    void rank_get_test() {
+        int count = Rank.FIRST.getMatchCount();
+        assertThat(Rank.get(count)).isEqualTo(Rank.FIRST);
     }
 
     @DisplayName("각 랭크의 일치하는 숫자를 알 수 있다")
@@ -32,13 +31,4 @@ public class RankTest {
     void price_test() {
         assertThat(Rank.FIRST.getMoney()).isEqualTo(new Money(2_000_000_000L));
     }
-
-//    @DisplayName("전체 랭크에 따른 수입을 계산할 수 있다")
-//    @Test
-//    void calculate_price_test() {
-//        StatisticDto dto = StatisticDto.create();
-//        dto.add(Rank.FIRST.getMatchCount());
-//
-//        assertThat(Rank.calculatePrice(dto)).isEqualTo(Rank.FIRST.getMoney());
-//    }
 }

@@ -1,10 +1,6 @@
-package lotto.domain.enums;
+package lotto.domain;
 
-import lotto.domain.Money;
-
-import java.util.ArrayDeque;
 import java.util.Arrays;
-import java.util.Deque;
 
 public enum Rank {
     FIRST(6, new Money(2_000_000_000L)),
@@ -23,25 +19,6 @@ public enum Rank {
     public static boolean isBiggerThanMinimum(int count) {
         return count >= FOURTH.matchCount;
     }
-
-    public static Rank[] reverseValues() {
-        Deque<Rank> deque = new ArrayDeque<>();
-        for (Rank rank : Rank.values()) {
-            deque.addFirst(rank);
-        }
-
-        return deque.toArray(new Rank[deque.size()]);
-    }
-
-//    public static Money calculatePrice(StatisticDto dto) {
-//        Money totalMoney = new Money(0L);
-//        for (Rank rank : Rank.values()) {
-//            int count = dto.getCount(rank.matchCount);
-//            totalMoney.sum(rank.getMoney().multiply(count));
-//        }
-//
-//        return totalMoney;
-//    }
 
     public static Rank get(int matchCount) {
         return Arrays.stream(Rank.values())

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.enums.Rank;
 import lotto.fixture.LottoTicketFixture;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,14 +22,16 @@ public class LottoResultTest {
         assertThat(statistics.get(Rank.FIRST)).isEqualTo(1);
     }
 
-    @DisplayName("로또 협회는 수익률을 구할 수 있다")
+    @DisplayName("수익률을 구할 수 있다")
     @Test
     void return_rate_test() {
         LottoTicket winningTicket = new ManualLottoGenerator(Arrays.asList(1, 2, 3, 4, 5, 6)).create();
-        LottoResult committee = new LottoResult(winningTicket);
+        LottoTicket myTicket = new ManualLottoGenerator(Arrays.asList(1, 2, 3, 4, 5, 6)).create();
+        LottoResult result = new LottoResult(winningTicket);
+        result.statistics(Arrays.asList(myTicket));
         Money spendingMoney = new Money(1_000L);
-        Money totalReturnMoney = new Money(10_000L);
 
-        assertThat(committee.returnRate(totalReturnMoney, spendingMoney)).isEqualTo(10.00);
+        double expect = (double) Rank.FIRST.getMoneyValue() / spendingMoney.value();
+        assertThat(result.returnRate(spendingMoney)).isEqualTo(expect);
     }
 }

@@ -28,7 +28,7 @@ public class LottoController {
         );
 
         OutputView.printStatistics(lottoResult.statistics(tickets));
-//        OutputView.printReturnRate(lottoResult.returnRate(Rank.calculatePrice(dto), money));
+        OutputView.printReturnRate(lottoResult.returnRate(money));
     }
 
     private List<Integer> createWinningNumbers() {

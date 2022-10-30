@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.enums.Rank;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,13 +34,21 @@ public class LottoResult {
         }
     }
 
-
-
     private int countOfMatch(LottoTicket ticket) {
         return winningTicket.containCount(ticket);
     }
 
-    public double returnRate(Money totalReturnMoney, Money money) {
-        return totalReturnMoney.divide(money);
+    public double returnRate(Money money) {
+        return calculatePrice().divide(money);
+    }
+
+    private Money calculatePrice() {
+        Money totalMoney = new Money(0L);
+        for (Rank rank : Rank.values()) {
+            int count = lottoResultCounts.get(rank);
+            totalMoney.sum(rank.getMoney().multiply(count));
+        }
+
+        return totalMoney;
     }
 }
