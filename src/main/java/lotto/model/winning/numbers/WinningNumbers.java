@@ -1,13 +1,15 @@
 package lotto.model.winning.numbers;
 
-import lotto.constant.numbers.LottoConstant;
 import lotto.constant.utils.StringUtils;
+import lotto.model.lotto.ticket.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class WinningNumbers {
-    private final List<WinningNumberEach> numbers;
+    private static final int NUMBER_COUNT_IN_WINNING_NUMBERS = 6;
+    private static final String LOTTO_NUMBERS_STRING_DELIMITER_REGEX = ",";
+    private final List<LottoNumber> lottoNumbers;
 
     public WinningNumbers(String input) {
         if (StringUtils.isNullOrEmpty(input)) {
@@ -18,11 +20,10 @@ public class WinningNumbers {
             throw new IllegalArgumentException("쉽표가 맨 앞 또는 맨 뒤에 올 수 없습니다.");
         }
         final String[] tokens = splitBLottoDelimiter(trimmedInput);
-        numbers = convertStringToWinningNumberEach(tokens);
-    }
-
-    public WinningNumbers(List<WinningNumberEach> numbers) {
-        this.numbers = numbers;
+        if (numberMissingInWinningNumbersInput(tokens)) {
+            throw new IllegalArgumentException("당첨 번호는 반드시 6 개를 입력해야 합니다.");
+        }
+        lottoNumbers = toLottoNumbers(tokens);
     }
 
     private boolean isCommaPrefixOrPostfix(String input) {
@@ -30,22 +31,19 @@ public class WinningNumbers {
     }
 
     private String[] splitBLottoDelimiter(String input) {
-        return input.split(LottoConstant.LOTTO_NUMBERS_STRING_DELIMITER_REGEX);
+        return input.split(LOTTO_NUMBERS_STRING_DELIMITER_REGEX);
     }
 
-    private List<WinningNumberEach> convertStringToWinningNumberEach(String[] tokens) {
-        List<WinningNumberEach> numbers = new ArrayList<>(tokens.length);
+    private boolean numberMissingInWinningNumbersInput(String[] tokens) {
+        return tokens.length != NUMBER_COUNT_IN_WINNING_NUMBERS;
+    }
+
+    private List<LottoNumber> toLottoNumbers(String[] tokens) {
+        final List<LottoNumber> lottoNumbersData = new ArrayList<>(tokens.length);
         for (String token : tokens) {
-            numbers.add(new WinningNumberEach(token));
+            final LottoNumber lottoNumber = new LottoNumber(token);
+            lottoNumbersData.add(lottoNumber);
         }
-        return numbers;
-    }
-
-    public List<Integer> primitiveNumbers() {
-        List<Integer> intWinningNumbers = new ArrayList<>(numbers.size());
-        for (WinningNumberEach winningNumberEach : numbers) {
-            intWinningNumbers.add(winningNumberEach.primitive());
-        }
-        return intWinningNumbers;
+        return lottoNumbersData;
     }
 }
