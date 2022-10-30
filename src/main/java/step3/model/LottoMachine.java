@@ -21,7 +21,7 @@ public class LottoMachine {
         validatePurchasePrice(purchasePrice);
         this.purchasePrice = purchasePrice;
         int size = purchasePrice / LOTTO_PRICE;
-        this.lottos = new Lottos(LottoFactory.createLottos(size),LOTTO_PRICE);
+        this.lottos = new Lottos(LottoFactory.createLottos(size), LOTTO_PRICE);
     }
 
     private void validatePurchasePrice(int purchasePrice) {
