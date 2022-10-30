@@ -25,8 +25,8 @@ public class WinningLottoNumbers {
     public WinningLottoNumbers(String lottoNumbers, LottoNumber bonusNumber) {
         validNullOrEmpty(lottoNumbers);
         checkLottoPattern(lottoNumbers);
-        List<Integer> lottoNumberList = convertToInt(lottoNumbers);
-        checkDuplicatedBonusNumber(lottoNumberList, bonusNumber);
+        List<Integer> lottoNumberList = convertToIntegerList(lottoNumbers);
+        checkDuplicatedBonusNumber(lottoNumberList, bonusNumber.getNumber());
         this.lottoNumbers = new LottoNumbers(lottoNumberList);
         this.bonusNumber = bonusNumber;
     }
@@ -45,13 +45,13 @@ public class WinningLottoNumbers {
         }
     }
 
-    private void checkDuplicatedBonusNumber(List<Integer> lottoNumbers, LottoNumber bonusNumber) {
-        if (lottoNumbers.contains(bonusNumber.getNumber())) {
+    private void checkDuplicatedBonusNumber(List<Integer> lottoNumbers, int bonusNumber) {
+        if (lottoNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("당첨된 로또 번호와 보너스 번호는 일치할 수 없습니다.");
         }
     }
 
-    private List<Integer> convertToInt(String lottoNumbers) {
+    private List<Integer> convertToIntegerList(String lottoNumbers) {
         return Arrays.stream(lottoNumbers.replaceAll("\\s","").split(DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
