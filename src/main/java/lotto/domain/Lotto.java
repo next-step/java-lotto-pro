@@ -36,8 +36,8 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
-    private int matchBonusBallCount(final WinningLotto winningLotto, final Set<LottoNumber> copy) {
-        if(copy.contains(winningLotto.getBonusBall())) {
+    private int matchBonusBallCount(final WinningLotto winningLotto, final Set<LottoNumber> lottoNumbers) {
+        if(lottoNumbers.contains(winningLotto.getBonusBall())) {
             return 1;
         }
         return 0;
