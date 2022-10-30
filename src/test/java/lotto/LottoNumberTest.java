@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
-public class LottoNumberTest {
+class LottoNumberTest {
     @Test
     void 로또_번호_확인() {
         assertThat(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)))

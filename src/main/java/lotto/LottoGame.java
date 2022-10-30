@@ -3,7 +3,7 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoGame {
+class LottoGame {
     private final int LOTTO_PRICE = 1000;
     private final LottoNumberGenerator lottoNumberGenerator;
     private final int money;

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Prize {
+class Prize {
     private final Map<Integer, Integer> prize = new HashMap<>();
     private final List<Integer> winningNumbers;
 

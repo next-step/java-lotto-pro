@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 
-public class ValidateTest {
+class ValidateTest {
     @Test
     void InputView_inputPay_문자열_입력() {
         assertThatThrownBy(() -> Validate.validatePay("abc"))

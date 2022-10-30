@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AutoLottoNumberGenerator implements LottoNumberGenerator {
+class AutoLottoNumberGenerator implements LottoNumberGenerator {
     List<Integer> NUMBERS = new ArrayList<>();
 
     AutoLottoNumberGenerator() {

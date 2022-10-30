@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.List;
 
-public class LottoGameMain {
+class LottoGameMain {
     private static final InputView inputView = new InputView();
     private static final ResultView resultView = new ResultView();
 

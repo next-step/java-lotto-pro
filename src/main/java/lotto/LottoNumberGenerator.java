@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.List;
 
-public interface LottoNumberGenerator {
+interface LottoNumberGenerator {
     int START_NUMBER = 1;
     int END_NUMBER = 45;
 

@@ -15,7 +15,7 @@ import static lotto.Constant.WINNING_STATISTICS;
 
 import java.util.List;
 
-public class ResultView {
+class ResultView {
     void printResultPay(int purchaseCount) {
         System.out.println(purchaseCount + BOUGHT_SOME);
     }

@@ -1,6 +1,6 @@
 package lotto;
 
-public class Constant {
+class Constant {
     public static final String REGEX_ONLY_NUMBER = "^[0-9]*$";
     public static final String INPUT_PAY_MONEY = "구입금액을 입력해 주세요.";
     public static final String INPUT_WINNING_NUMBER_LAST_WEEK = "지난 주 당첨 번호를 입력해 주세요.";
