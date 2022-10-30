@@ -1,56 +1,25 @@
 package step3.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import step3.enums.Rank;
 
 public class Lotto {
 
-    private List<Integer> range;
+    private final LottoNumber lottoNumber;
 
-    private List<Integer> lottoNumbers;
-
-    private int matchCount;
-
-    public Lotto() {
-        this.range = new ArrayList<>();
-        initLotto();
-        shuffle(range);
-        this.lottoNumbers = range.subList(0, 6);
+    public Lotto(LottoNumber lottoNumber) {
+        this.lottoNumber = lottoNumber;
     }
 
-    public Lotto(List<Integer> manualLottoNumbers) {
-        this.lottoNumbers = manualLottoNumbers;
+    public LottoNumber getLottoNumber() {
+        return lottoNumber;
     }
 
-    public List<Integer> gainAutoNumbers() {
-        return lottoNumbers;
-    }
-
-    public void match(List<Integer> winningNumbers) {
-        Collections.sort(winningNumbers);
-        Collections.sort(lottoNumbers);
-        lottoNumbers.retainAll(winningNumbers);
-        this.matchCount = lottoNumbers.size();
-    }
-
-    public int getMatchCount() {
-        return matchCount;
-    }
-
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
-    }
-
-    private List<Integer> initLotto() {
-        for (int i = 1; i <= 45; i++) {
-            range.add(i);
-        }
-        return range;
-    }
-
-    private void shuffle(List<Integer> initLottoNumbers) {
-        Collections.shuffle(initLottoNumbers);
+    public Rank match(WinningLotto winningLotto) {
+        List<Integer> copy = new ArrayList<>(lottoNumber.getLottoNumber());
+        copy.retainAll(winningLotto.getWinningNumber().getLottoNumber());
+        return Rank.rank(copy.size(), lottoNumber.hasBonusNumber(winningLotto.getBonusNumber()));
     }
 
 }

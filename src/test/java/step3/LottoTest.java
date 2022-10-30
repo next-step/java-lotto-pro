@@ -1,33 +1,60 @@
 package step3;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step3.domain.Lotto;
+import step3.domain.LottoNumber;
+import step3.domain.WinningLotto;
+import step3.enums.Rank;
 
 public class LottoTest {
 
-    Lotto lotto = new Lotto();
+    private Lotto lotto;
 
-    @Test
-    void 자동번호_받기_테스트() {
-
-        Assertions.assertEquals(6, lotto.gainAutoNumbers().size());
+    @BeforeEach
+    void given() {
+        LottoNumber lottoNumber = new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lotto = new Lotto(lottoNumber);
     }
 
     @Test
-    @DisplayName("자동 로또 번호와 당첨 번호 비교 로직이지만, 자동 로또번호 자신과 비교하면 무조건 6이 나옴")
-    void 당첨번호_비교() {
-        lotto.match(lotto.gainAutoNumbers());
-        Assertions.assertEquals(6, lotto.getMatchCount());
-    }
-
-    @Test
-    @DisplayName("자동 로또 번호와 당첨 번호 비교 로직이지만, 자동 로또번호 자신과 비교하면 무조건 6이 나옴")
+    @DisplayName("로또 숫자는 1-45 사이의 숫자를 갖는다")
     void 로또_숫자_범위() {
-        lotto.gainAutoNumbers().forEach(ball -> {
+        lotto.getLottoNumber().getLottoNumber().forEach(ball -> {
             Assertions.assertTrue(0 < ball && ball <= 45);
         });
+    }
+
+    @Test
+    @DisplayName("로또 6자리 숫자를 자동으로 생성한다.")
+    void 로또_자동번호_6자리() {
+        Assertions.assertEquals(6, lotto.getLottoNumber().getLottoNumber().size());
+    }
+
+
+    @Test
+    @DisplayName("5개 볼과 보너스 볼이 맞으면 2등이다.")
+    void 매칭번호_5개_보너스_1개() {
+        Rank rank = lotto.match(new WinningLotto("1, 2, 3, 4, 5, 7", 6));
+        Assertions.assertEquals(Rank.SECOND, rank);
+    }
+
+    @Test
+    @DisplayName("5개 볼이 맞고 보너스 볼이 맞지 않으면 3등이다.")
+    void 매칭번호_5개_보너스_0개() {
+        Rank rank = lotto.match(new WinningLotto("1, 2, 3, 4, 5, 7", 8));
+        Assertions.assertEquals(Rank.THIRD, rank);
+    }
+
+    @Test
+    @DisplayName("4개 볼이 맞으면 4등이다.")
+    void 매칭번호_4개_보너스_0개() {
+        Rank rank = lotto.match(new WinningLotto("1, 2, 3, 4, 7, 8", 6));
+        Assertions.assertEquals(Rank.FOURTH, rank);
     }
 
 }
