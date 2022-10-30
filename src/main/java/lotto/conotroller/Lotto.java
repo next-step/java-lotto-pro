@@ -1,5 +1,6 @@
 package lotto.conotroller;
 
+import lotto.domain.AutoNumberGenerator;
 import lotto.domain.LottoLottery;
 import lotto.domain.LottoPurchaseAmount;
 import lotto.domain.LottoPurchaseQuantity;
@@ -14,7 +15,7 @@ public class Lotto {
         LottoPurchaseQuantity lottoPurchaseQuantity = LottoPurchaseQuantity.of(lottoPurchaseAmount.calculateQuantity());
         OutputView.println(lottoPurchaseQuantity.getMessage());
 
-        LottoLottery lottoLottery = lottoPurchaseAmount.toLottoLottery();
+        LottoLottery lottoLottery = lottoPurchaseAmount.toLottoLottery(new AutoNumberGenerator());
         OutputView.println(lottoLottery.lotteryHistory());
 
         WinningNumbers winningNumbers = WinningNumbers.of(InputView.inputLastWeeksWinningNumber());

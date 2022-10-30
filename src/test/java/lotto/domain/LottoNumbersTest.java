@@ -3,41 +3,23 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class LottoNumbersTest {
     @Test
     @DisplayName("로또 번호는 6개")
     void lotto_size_is_six() {
-        LottoNumbers lottoNumbers = LottoNumbers.of(new MockNumberGenerator(
-                new HashSet<>(Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(6)
-                ))
-        ));
-
+        LottoNumbers lottoNumbers = LottoNumbers.of(new ManualNumberGenerator("1, 2, 3, 4, 5, 6"));
         assertThat(lottoNumbers).isInstanceOf(LottoNumbers.class);
     }
 
     @Test
     @DisplayName("로또 숫자가 6개가 아닐 경우 예외 발생")
     void lotto_numbers_is_not_six_throw_exception() {
-        assertThatThrownBy(() -> LottoNumbers.of(new MockNumberGenerator(
-                new HashSet<>(Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5)
-                ))
-        )))
+        assertThatThrownBy(() -> LottoNumbers.of(new ManualNumberGenerator("1, 2, 3, 4, 5")))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 6개 입니다.");
     }
@@ -55,5 +37,21 @@ class LottoNumbersTest {
     void lotto_lottery_print_format() {
         LottoNumbers lottoNumbers = LottoNumbers.of(new ManualNumberGenerator("6,2,3,4,5,1"));
         assertThat(lottoNumbers.history()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "1, 2, 3, 4, 5, 6/1, 2, 3, 4, 5, 6/6",
+            "1, 2, 3, 4, 5, 6/1, 2, 3, 4, 5, 7/5",
+            "1, 2, 3, 4, 5, 6/1, 2, 3, 4, 7, 8/4",
+            "1, 2, 3, 4, 5, 6/1, 2, 3, 7, 8, 9/3",
+            "1, 2, 3, 4, 5, 6/1, 2, 7, 8, 9, 10/2",
+            "1, 2, 3, 4, 5, 6/1, 7, 8, 9, 10, 11/1",
+            "1, 2, 3, 4, 5, 6/7, 8, 9, 10, 11, 12/0",
+    }, delimiter = '/')
+    @DisplayName("로또 번호 일치 개수 반환")
+    void lotto_number_match(String originNumbers, String compareNumbers, int expect) {
+        LottoNumbers lottoNumbers = LottoNumbers.of(new ManualNumberGenerator(originNumbers));
+        assertThat(lottoNumbers.containCount(LottoNumbers.of(new ManualNumberGenerator(compareNumbers)))).isEqualTo(expect);
     }
 }

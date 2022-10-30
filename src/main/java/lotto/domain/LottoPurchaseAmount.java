@@ -45,8 +45,8 @@ public class LottoPurchaseAmount  {
         return this.amount / LOTTO_PRICE;
     }
 
-    public LottoLottery toLottoLottery() {
-        return LottoLottery.of(LottoPurchaseQuantity.of(calculateQuantity()), new AutoNumberGenerator());
+    public LottoLottery toLottoLottery(LottoNumberGenerator lottoNumberGenerator) {
+        return LottoLottery.of(LottoPurchaseQuantity.of(calculateQuantity()), lottoNumberGenerator);
     }
 
     public double calculateEarningRatio(long earningAmount) {
