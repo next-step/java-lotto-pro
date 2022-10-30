@@ -16,4 +16,8 @@ public class LottoMoney {
         if (purchasePrice < LOTTO_PRICE) throw new IllegalArgumentException(INVALID_MINIMUN_PRICE_MESSAGE);
         if (purchasePrice % LOTTO_PRICE != 0) throw new IllegalArgumentException(INVALID_PRICE_UNIT_MESSAGE);
     }
+
+    public int getSumOfPriceLottos(int size) {
+        return size * LOTTO_PRICE;
+    }
 }
