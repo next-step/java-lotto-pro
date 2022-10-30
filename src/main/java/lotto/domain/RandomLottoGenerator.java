@@ -1,7 +1,4 @@
-package lotto.util;
-
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +18,7 @@ public class RandomLottoGenerator implements LottoGenerator {
         List<Integer> randomNumbers = sort(toSubList(shuffle(numbers)));
 
         return LottoTicket.create(randomNumbers.stream()
-                .map(i -> LottoNumber.get(i))
+                .map(LottoNumber::get)
                 .collect(Collectors.toList())
         );
     }
