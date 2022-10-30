@@ -34,4 +34,9 @@ public class LottoNumber {
     private boolean lessThanOneOrGreaterThanFortyFive(int tokenValue) {
         return tokenValue < LOTTO_MINIMUM_NUMBER || LOTTO_MAXIMUM_NUMBER < tokenValue;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
 }
