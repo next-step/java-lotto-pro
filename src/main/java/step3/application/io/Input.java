@@ -2,12 +2,13 @@ package step3.application.io;
 
 import static java.util.stream.Collectors.toList;
 
+import java.io.Closeable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import step3.domain.LottoNumber;
 
-public class Input {
+public class Input implements Closeable {
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -25,5 +26,10 @@ public class Input {
             .map(Integer::parseInt)
             .map(LottoNumber::new)
             .collect(toList());
+    }
+
+    @Override
+    public void close() {
+        scanner.close();
     }
 }

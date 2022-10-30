@@ -8,7 +8,7 @@ import step3.domain.LottoMachine;
 import step3.domain.Lottos;
 import step3.domain.Statistics;
 
-public class LottoSystem {
+public class LottoSystem implements AutoCloseable {
 
     private final Input input;
     private final Output output;
@@ -40,5 +40,10 @@ public class LottoSystem {
         Statistics statistics = lottos.contains(winningLotto);
 
         output.result(statistics);
+    }
+
+    @Override
+    public void close() {
+        input.close();
     }
 }
