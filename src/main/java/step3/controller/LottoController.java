@@ -1,11 +1,10 @@
 package step3.controller;
 
-import step3.model.LottoMoney;
-import step3.parser.LottoInputParser;
 import step3.model.LottoMachine;
 import step3.model.LottoNumber;
 import step3.model.dto.LottoResultDto;
 import step3.model.dto.LottosNumberDto;
+import step3.parser.LottoInputParser;
 import step3.view.LottoConsoleView;
 import step3.view.LottoOutputView;
 

@@ -36,7 +36,7 @@ public class LottoNumber {
 
     }
 
-    public static List<LottoNumber> getLottoNumbers(){
+    public static List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(LOTTO_NUMBERS);
     }
 
