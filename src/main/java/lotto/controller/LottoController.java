@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
-import lotto.domain.WinStatistics;
+import lotto.domain.WinningStatistics;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -23,8 +23,8 @@ public class LottoController {
 		String input = inputView.prevWinNumbers();
 		WinningLotto winningLotto = new WinningLotto(input);
 
-		WinStatistics winStatistics = new WinStatistics(lottos, winningLotto);
-		resultView.winStatisticsResult(winStatistics);
+		WinningStatistics winningStatistics = new WinningStatistics(winningLotto);
+		resultView.winStatisticsResult(winningStatistics, lottos);
 	}
 }
 

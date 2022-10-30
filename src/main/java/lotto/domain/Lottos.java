@@ -33,4 +33,10 @@ public class Lottos {
 	public List<Lotto> getLottos() {
 		return this.lottos;
 	}
+
+	public int winningQuantity(NumberMatchWinningLottoStrategy numberMatchWinningLottoStrategy) {
+		return (int)this.lottos.stream()
+			.filter(numberMatchWinningLottoStrategy::isWinning)
+			.count();
+	}
 }
