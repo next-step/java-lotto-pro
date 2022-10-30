@@ -5,13 +5,13 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import step3.message.ErrorMessage;
 
 public class LottoNumbers {
     private static final Pattern PATTERN_OF_SPLIT_DELIMITER = Pattern.compile(",");
     private static final Pattern PATTERN_OF_WHITE_SPACE = Pattern.compile("\\s");
     private static final String EMPTY_STRING = "";
     private static final int NUMBER_MAX_SIZE = 6;
+    private static final String LOTTO_NUMBER_CAN_NOT_DUPLICATE = "로또 번호는 중복되지 않은 숫자 6자리로 이루어져야 합니다.";
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(final Set<LottoNumber> numbers) {
@@ -29,7 +29,7 @@ public class LottoNumbers {
 
     private void validateNumberSize() {
         if (this.lottoNumbers.size() < NUMBER_MAX_SIZE) {
-            throw new IllegalArgumentException(ErrorMessage.ERR_LOTTO_NUMBER_CAN_NOT_DUPLICATE.message);
+            throw new IllegalArgumentException(LOTTO_NUMBER_CAN_NOT_DUPLICATE);
         }
     }
 
