@@ -13,7 +13,7 @@ public class LottoGame {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    public int purchaseCount() {
+    public int getPurchaseCount() {
         return money / LOTTO_PRICE;
     }
 

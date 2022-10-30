@@ -10,7 +10,7 @@ public class LottoGameMain {
         int payMoney = inputView.inputPay();
         LottoGame lottoGame = new LottoGame(payMoney, new AutoLottoNumberGenerator());
 
-        int purchaseCount = lottoGame.purchaseCount();
+        int purchaseCount = lottoGame.getPurchaseCount();
         resultView.resultPay(purchaseCount);
 
         List<LottoNumber> lottoNumbers = lottoGame.purchaseLotto(purchaseCount);
