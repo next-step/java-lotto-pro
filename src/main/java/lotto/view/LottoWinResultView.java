@@ -7,9 +7,11 @@ import lotto.controller.dto.BoughtLottoTicketsResponse;
 import lotto.controller.dto.LottoWinResultResponse;
 import lotto.controller.dto.LottoWinResultsResponse;
 import lotto.domain.ProfitMargin;
+import utils.ExceptionHandler;
 import utils.InputHandler;
 
 public class LottoWinResultView {
+	private static final String INPUT_PROMPT_OUTPUT = "지난 주 당첨 번호를 입력해 주세요.";
 	private static final String WIN_RESULT_OUTPUT = "당첨 통계 \n--------- \n";
 	private static final String BONUS_NUMBER_PROMPT = "보너스 볼을 입력해 주세요.";
 	private static final String PROFIT_RESULT_OUTPUT = "총 수익률은 %s입니다.";
@@ -21,13 +23,25 @@ public class LottoWinResultView {
 		this.lottoController = lottoController;
 	}
 
-	public void printWinResult(BoughtLottoTicketsResponse boughtLottoTickets,
-							   List<Integer> winningLottoNumbers) {
-		LottoWinResultsResponse lottoWinResultsResponse = lottoController.getWinResults(
-			boughtLottoTickets, winningLottoNumbers, inputBonusNumber());
+	public void printWinResult(BoughtLottoTicketsResponse boughtLottoTickets) {
+
+		LottoWinResultsResponse lottoWinResultsResponse = getLottoWinResults(boughtLottoTickets);
 
 		printMatchCount(lottoWinResultsResponse);
 		printProfitMargin(lottoWinResultsResponse);
+	}
+
+	private LottoWinResultsResponse getLottoWinResults(BoughtLottoTicketsResponse boughtLottoTickets) {
+		return ExceptionHandler.callWithHandlingException(() -> {
+			List<Integer> winningLottoNumbers = inputWinningLottoNumber();
+
+			return lottoController.getWinResults(
+				boughtLottoTickets, winningLottoNumbers, inputBonusNumber());
+		});
+	}
+
+	private List<Integer> inputWinningLottoNumber() {
+		return InputHandler.inputIntegerList(INPUT_PROMPT_OUTPUT);
 	}
 
 	private int inputBonusNumber() {

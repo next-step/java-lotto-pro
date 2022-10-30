@@ -1,11 +1,8 @@
 package lotto;
 
-import java.util.List;
-
 import lotto.controller.LottoController;
 import lotto.controller.LottoControllerFactory;
 import lotto.controller.dto.BoughtLottoTicketsResponse;
-import lotto.view.LastWeekWinLottoTicketView;
 import lotto.view.LottoBuyingView;
 import lotto.view.LottoWinResultView;
 
@@ -15,21 +12,15 @@ public class LottoApplication {
 
 	public static void main(String[] args) {
 		LottoBuyingView lottoBuyingView = createLottoBuyingView();
-		LastWeekWinLottoTicketView lastWeekWinLottoTicketView = createLastWeekWinLottoTicketView();
 		LottoWinResultView lottoWinResultView = createLottoWinResultView();
 
 		BoughtLottoTicketsResponse boughtLottoTickets = lottoBuyingView.buyLottoTickets();
-		List<Integer> lastWeekWinLottoTicket = lastWeekWinLottoTicketView.getLastWeekWinLotto();
 
-		lottoWinResultView.printWinResult(boughtLottoTickets, lastWeekWinLottoTicket);
+		lottoWinResultView.printWinResult(boughtLottoTickets);
 	}
 
 	private static LottoWinResultView createLottoWinResultView() {
 		return new LottoWinResultView(lottoController);
-	}
-
-	private static LastWeekWinLottoTicketView createLastWeekWinLottoTicketView() {
-		return new LastWeekWinLottoTicketView();
 	}
 
 	private static LottoBuyingView createLottoBuyingView() {

@@ -8,7 +8,7 @@ public class ExceptionHandler {
 		return callWithHandlingException("", "", supplier);
 	}
 
-	private static <T> T callWithHandlingException(String prompt, String exceptionMessage, Supplier<T> supplier) {
+	public static <T> T callWithHandlingException(String prompt, String exceptionMessage, Supplier<T> supplier) {
 		try {
 			printPrompt(prompt);
 			return supplier.get();
