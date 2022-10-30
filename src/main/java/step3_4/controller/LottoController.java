@@ -1,14 +1,14 @@
-package step3.controller;
+package step3_4.controller;
 
 import java.util.List;
-import step3.domain.LottoStore;
-import step3.domain.Lottos;
-import step3.domain.UniqueNumbers;
-import step3.domain.Money;
-import step3.domain.Rank;
-import step3.domain.Reward;
-import step3.io.InputView;
-import step3.io.OutputView;
+import step3_4.domain.LottoStore;
+import step3_4.domain.Lottos;
+import step3_4.domain.UniqueNumbers;
+import step3_4.domain.Money;
+import step3_4.domain.Rank;
+import step3_4.domain.Reward;
+import step3_4.io.InputView;
+import step3_4.io.OutputView;
 
 public class LottoController {
 

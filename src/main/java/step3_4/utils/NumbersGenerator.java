@@ -1,10 +1,10 @@
-package step3.utils;
+package step3_4.utils;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import step3.domain.UniqueNumbers;
+import step3_4.domain.UniqueNumbers;
 
 public class NumbersGenerator {
 

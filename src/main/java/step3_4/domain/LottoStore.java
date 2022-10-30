@@ -1,8 +1,8 @@
-package step3.domain;
+package step3_4.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import step3.utils.NumbersGenerator;
+import step3_4.utils.NumbersGenerator;
 
 public class LottoStore {
 

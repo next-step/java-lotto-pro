@@ -1,4 +1,4 @@
-package step3.domain;
+package step3_4.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
