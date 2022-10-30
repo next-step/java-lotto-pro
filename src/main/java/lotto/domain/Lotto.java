@@ -57,6 +57,10 @@ public class Lotto {
         return NOT_MATCH_LOTTO_NUMBER;
     }
 
+    public boolean isMatchLottoNumber(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
     @Override
     public String toString() {
         return this.lottoNumbers.toString();
