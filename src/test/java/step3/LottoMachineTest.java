@@ -62,7 +62,7 @@ public class LottoMachineTest {
                 .collect(Collectors.toList());
 
         //when
-        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(winningNumbers);
+        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(new Lotto(winningNumbers));
 
         //then
         assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.MISS.getWinningPrice() * count) / (double) 14000);
@@ -85,7 +85,7 @@ public class LottoMachineTest {
                 .collect(Collectors.toList());
 
         //when,then
-        assertThatThrownBy(() -> lottoMachine.getLottoResult(winningNumbers))
+        assertThatThrownBy(() -> lottoMachine.getLottoResult(new Lotto(winningNumbers)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("고유한 번호만 허용합니다");
     }
@@ -107,7 +107,7 @@ public class LottoMachineTest {
                 .collect(Collectors.toList());
 
         //when,then
-        assertThatThrownBy(() -> lottoMachine.getLottoResult(winningNumbers, LottoNumber.valueOf(count)))
+        assertThatThrownBy(() -> lottoMachine.getLottoResult(new Lotto(winningNumbers), LottoNumber.valueOf(count)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("고유한 번호만 허용합니다");
     }
@@ -129,7 +129,7 @@ public class LottoMachineTest {
                 .collect(Collectors.toList());
 
         //when
-        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(winningNumbers);
+        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(new Lotto(winningNumbers));
 
         //then
         assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.FIFTH.getWinningPrice() * count) / (double) 14000);
@@ -154,7 +154,7 @@ public class LottoMachineTest {
                 .collect(Collectors.toList());
 
         //when
-        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(winningNumbers);
+        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(new Lotto(winningNumbers));
 
         //then
         assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.FOURTH.getWinningPrice() * count) / (double) 14000);
@@ -179,7 +179,7 @@ public class LottoMachineTest {
                 .collect(Collectors.toList());
 
         //when
-        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(winningNumbers);
+        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(new Lotto(winningNumbers));
 
         //then
         assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.THIRD.getWinningPrice() * count) / (double) 14000);
@@ -205,7 +205,7 @@ public class LottoMachineTest {
                 .collect(Collectors.toList());
 
         //when
-        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(winningNumbers);
+        LottoResultDto lottoResultDto = lottoMachine.getLottoResult(new Lotto(winningNumbers));
 
         //then
         assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.FIRST.getWinningPrice() * count) / (double) 14000);

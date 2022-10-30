@@ -21,16 +21,14 @@ public class LottoMachine {
         this.lottos = lottos;
     }
 
-    public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers) {
-        validateLottoNumbers(winningNumbers);
-        Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(winningNumbers);
+    public LottoResultDto getLottoResult(Lotto lotto) {
+        Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(lotto.getNumbers());
         return getLottoResultDto(rankOfLottos);
     }
 
-    public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        validateLottoNumbers(winningNumbers);
-        validateBonusNumbers(winningNumbers, bonusNumber);
-        Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(winningNumbers, bonusNumber);
+    public LottoResultDto getLottoResult(Lotto lotto, LottoNumber bonusNumber) {
+        validateBonusNumbers(lotto.getNumbers(), bonusNumber);
+        Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(lotto.getNumbers(), bonusNumber);
         return getLottoResultDto(rankOfLottos);
     }
 
