@@ -44,7 +44,6 @@ class LottoTicketsBucketTest {
             final LottoTicketsBucketForTest lottoTicketsBucketForTest = new LottoTicketsBucketForTest(numberOfTickets);
             for (int i = 0; i < numberOfTickets; ++i) {
                 final List<Integer> candidates = intsFromOneToFortyFive();
-                final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(candidates);
 //                lottoTicketsBucketForTest.addLottoTicket(new LottoTicket(lottoNumberGenerator));
             }
             assertThat(lottoTicketsBucketForTest.bucketSize()).isEqualTo(numberOfTickets);
@@ -69,7 +68,6 @@ class LottoTicketsBucketTest {
             final LottoTicketsBucketForTest lottoTicketsBucketForTest = new LottoTicketsBucketForTest(0);
             for (int i = 0; i < numberOfLottoTickets; ++i) {
                 final List<Integer> candidates = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
-                final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(candidates);
 //                lottoTicketsBucketForTest.addLottoTicket(new LottoTicket(lottoNumberGenerator));
             }
             assertThat(lottoTicketsBucketForTest.bucketSize()).isEqualTo(numberOfLottoTickets);

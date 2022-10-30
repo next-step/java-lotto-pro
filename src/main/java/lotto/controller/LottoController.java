@@ -3,7 +3,6 @@ package lotto.controller;
 import lotto.constant.numbers.LottoConstant;
 import lotto.controller.acceptor.MoneyToBuyAcceptor;
 import lotto.controller.acceptor.WinningNumbersAcceptor;
-import lotto.model.lotto.ticket.LottoNumberGenerator;
 import lotto.model.lotto.ticket.LottoTicketsBucket;
 import lotto.model.money.to.buy.MoneyToBuy;
 import lotto.model.winning.numbers.WinningNumbers;
@@ -32,7 +31,6 @@ public class LottoController {
 
     private void numberOfAffordableLottoLeft(LottoTicketsBucket lottoTicketsBucket) {
         final List<Integer> candidates = intsFromOneToFortyFive();
-        final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(candidates);
 //        final LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator);
 //        LottoTicketPrinter.print(lottoTicket);
 //        lottoTicketsBucket.addLottoTicket(lottoTicket);
