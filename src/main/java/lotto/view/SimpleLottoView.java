@@ -41,8 +41,12 @@ public class SimpleLottoView implements LottoView {
     }
 
     @Override
-    public void showStatistics(Rank bonus, int count) {
-        output.print(String.format(MESSAGE_MATCH_INFORMATION,bonus.getMatchCount(),bonus.getWinningAmountString(),count));
+    public void showStatistics(Rank rank, int count) {
+        if(rank.equals(Rank.SECOND_WITH_BONUS)){
+            output.print(String.format(MESSAGE_MATCH_INFORMATION_WITH_BONUS,rank.getMatchCount(),rank.getWinningAmountString(),count));
+            return;
+        }
+        output.print(String.format(MESSAGE_MATCH_INFORMATION,rank.getMatchCount(),rank.getWinningAmountString(),count));
     }
 
     @Override

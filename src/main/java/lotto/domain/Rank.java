@@ -40,7 +40,6 @@ public enum Rank {
         Optional<Rank> rankOptional = Arrays.stream(Rank.values())
                 .filter(rank -> rank.sameMatchCount(matchCount))
                 .findFirst();
-
         if (!rankOptional.isPresent()) {
             return FAIL;
         }
