@@ -3,14 +3,15 @@ package step3.controller;
 import step3.domain.amount.Amount;
 import step3.domain.input.Input;
 import step3.domain.input.InputAmount;
+import step3.domain.input.InputBonusLottoNumber;
 import step3.domain.input.InputWinningLottoNumbers;
+import step3.domain.lotto.BonusLottoNumber;
 import step3.domain.lotto.Lottos;
 import step3.domain.lotto.WinningLottoNumbers;
 import step3.domain.statistics.LottoStatistics;
 
 import static step3.domain.input.Input.scanner;
-import static step3.view.InputView.printInputAmount;
-import static step3.view.InputView.printInputWinningLottoNumber;
+import static step3.view.InputView.*;
 import static step3.view.ResultView.*;
 
 public class LottoController {
@@ -21,17 +22,27 @@ public class LottoController {
 
         printLottoSize(lottos.getLottos());
         printLotto(lottos);
-        printInputWinningLottoNumber();
 
-        LottoStatistics lottoStatistics = getLottoStatistics(lottos);
+        printInputWinningLottoNumber();
+        WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbers();
+
+        printInputBonusLottoNumber();
+        BonusLottoNumber bonusLottoNumber = getBonusLottoNumber();
+
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos, winningLottoNumbers, bonusLottoNumber);
+
         printResult(lottoStatistics.getLottoResult());
         printTotalProfit(lottoStatistics.getTotalProfit());
     }
 
-    private LottoStatistics getLottoStatistics(Lottos lottos) {
+    private static BonusLottoNumber getBonusLottoNumber() {
+        Input<BonusLottoNumber> inputBonusLottoNumber = new InputBonusLottoNumber();
+        return inputBonusLottoNumber.create(scanner.nextLine());
+    }
+
+    private static WinningLottoNumbers getWinningLottoNumbers() {
         Input<WinningLottoNumbers> inputWinningLottoNumbers = new InputWinningLottoNumbers();
-        WinningLottoNumbers winningLottoNumbers = inputWinningLottoNumbers.create(scanner.nextLine());
-        return new LottoStatistics(lottos, winningLottoNumbers);
+        return inputWinningLottoNumbers.create(scanner.nextLine());
     }
 
     private Lottos getLottos() {

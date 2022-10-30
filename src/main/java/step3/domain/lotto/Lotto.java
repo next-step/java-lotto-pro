@@ -14,8 +14,12 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Rank getRank(WinningLottoNumbers winningLottoNumbers) {
-        return this.lottoNumbers.getRank(winningLottoNumbers);
+    public Rank getRank(WinningLottoNumbers winningLottoNumbers, BonusLottoNumber bonusLottoNumber) {
+        return this.lottoNumbers.getRank(winningLottoNumbers, bonusLottoNumber);
+    }
+
+    public boolean isMatchBonus(BonusLottoNumber bonusLottoNumber) {
+        return this.lottoNumbers.isContains(bonusLottoNumber);
     }
 
     public int getPrice() {

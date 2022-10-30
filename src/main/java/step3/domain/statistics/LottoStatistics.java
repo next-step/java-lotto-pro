@@ -1,5 +1,6 @@
 package step3.domain.statistics;
 
+import step3.domain.lotto.BonusLottoNumber;
 import step3.domain.lotto.Lotto;
 import step3.domain.lotto.Lottos;
 import step3.domain.lotto.WinningLottoNumbers;
@@ -21,13 +22,9 @@ public class LottoStatistics {
         this.lottoResult = lottoResult;
     }
 
-    public LottoStatistics(Lottos lottos, WinningLottoNumbers winningLottoNumbers) {
+    public LottoStatistics(Lottos lottos, WinningLottoNumbers winningLottoNumbers, BonusLottoNumber bonusLottoNumber) {
         this.lottos = lottos;
-        lottos.getLottos()
-                .forEach(lotto -> {
-                    Rank type = lotto.getRank(winningLottoNumbers);
-                    lottoResult.put(type, lottoResult.getOrDefault(type, 0) + 1);
-                });
+        lottoResult(lottos, winningLottoNumbers, bonusLottoNumber);
     }
 
     public double getTotalProfit() {
@@ -45,7 +42,7 @@ public class LottoStatistics {
         return totalWinningAmount;
     }
 
-    public static int getTotalLottoPrice(Lottos lottos) {
+    public int getTotalLottoPrice(Lottos lottos) {
         return lottos.getLottos().stream()
                 .mapToInt(Lotto::getPrice)
                 .sum();
@@ -53,6 +50,14 @@ public class LottoStatistics {
 
     public Map<Rank, Integer> getLottoResult() {
         return lottoResult;
+    }
+
+    private void lottoResult(Lottos lottos, WinningLottoNumbers winningLottoNumbers, BonusLottoNumber bonusLottoNumber) {
+        lottos.getLottos()
+                .forEach(lotto -> {
+                    Rank type = lotto.getRank(winningLottoNumbers, bonusLottoNumber);
+                    lottoResult.put(type, lottoResult.getOrDefault(type, 0) + 1);
+                });
     }
 
     @Override

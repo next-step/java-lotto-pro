@@ -26,12 +26,15 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Rank getRank(WinningLottoNumbers winningLottoNumbers) {
-        int matchCount = match(winningLottoNumbers);
-        return Rank.valueOf(matchCount, true);
+    public Rank getRank(WinningLottoNumbers winningLottoNumbers, BonusLottoNumber bonusLottoNumber) {
+        return Rank.valueOf(getMatchCount(winningLottoNumbers), isContains(bonusLottoNumber));
     }
 
-    private int match(WinningLottoNumbers winningLottoNumbers) {
+    public boolean isContains(BonusLottoNumber bonusLottoNumber) {
+        return this.lottoNumbers.contains(bonusLottoNumber.value());
+    }
+
+    private int getMatchCount(WinningLottoNumbers winningLottoNumbers) {
         return (int) winningLottoNumbers.getLottoNumbers().stream()
                 .filter(this.lottoNumbers::contains)
                 .count();

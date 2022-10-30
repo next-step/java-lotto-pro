@@ -28,9 +28,10 @@ public class ResultView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("------------");
+        printWinningResult(FIFTH, lottoResult);
         printWinningResult(FOURTH, lottoResult);
         printWinningResult(THIRD, lottoResult);
-        printWinningResult(SECOND, lottoResult);
+        printWinningResultWithBonus(SECOND, lottoResult);
         printWinningResult(FIRST, lottoResult);
     }
 
@@ -48,9 +49,16 @@ public class ResultView {
         return sb;
     }
 
-    private static void printWinningResult(Rank rank,
-                                           Map<Rank, Integer> lottoResult) {
+    private static void printWinningResult(Rank rank, Map<Rank, Integer> lottoResult) {
         System.out.printf("%d개 일치 (%d원)- %d개%n",
+                rank.getMatchCount(),
+                rank.getWinningAmount(),
+                lottoResult.getOrDefault(rank, 0)
+        );
+    }
+
+    private static void printWinningResultWithBonus(Rank rank, Map<Rank, Integer> lottoResult) {
+        System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개%n",
                 rank.getMatchCount(),
                 rank.getWinningAmount(),
                 lottoResult.getOrDefault(rank, 0)
