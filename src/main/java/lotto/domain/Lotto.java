@@ -6,8 +6,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-	public static final int PRICE = 1000;
-
 	private final Set<LottoNumber> lottoNumbers;
 
 	private Lotto(LottoNumberStrategy lottoNumberStrategy) {
@@ -47,8 +45,7 @@ public class Lotto {
 		return Objects.hash(lottoNumbers);
 	}
 
-	@Override
-	public String toString() {
+	public String getResultMessage() {
 		return lottoNumbers.stream()
 			.sorted()
 			.map(Object::toString)

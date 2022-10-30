@@ -15,8 +15,8 @@ class LottoTest {
 
 	@Test
 	void 로또_번호_문자열_반환() {
-		assertThat(Lotto.inputNumber(Arrays.asList(1, 2, 3, 4, 5, 6)).toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
-		assertThat(Lotto.inputNumber(Arrays.asList(6, 5, 4, 3, 2, 1)).toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+		assertThat(Lotto.inputNumber(Arrays.asList(1, 2, 3, 4, 5, 6)).getResultMessage()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+		assertThat(Lotto.inputNumber(Arrays.asList(6, 5, 4, 3, 2, 1)).getResultMessage()).isEqualTo("[1, 2, 3, 4, 5, 6]");
 	}
 
 	@Test

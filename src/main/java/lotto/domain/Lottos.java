@@ -1,29 +1,21 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.Objects;
 
 public class Lottos {
 	private final List<Lotto> lottos;
 
-	public Lottos(int purchaseAmount) {
-		int quantity = purchaseAmount / Lotto.PRICE;
-		this.lottos = IntStream.range(0, quantity)
-			.mapToObj(i -> Lotto.random())
-			.collect(Collectors.toList());
+	private Lottos(LottoPurchaseStrategy lottoPurchaseStrategy) {
+		this.lottos = lottoPurchaseStrategy.purchase();
 	}
 
-	public Lottos(String purchaseAmount) {
-		this(parseInt(purchaseAmount));
+	public static Lottos from(LottoPurchaseStrategy lottoPurchaseStrategy) {
+		return new Lottos(lottoPurchaseStrategy);
 	}
 
-	private static int parseInt(String purchaseAmount) {
-		try {
-			return Integer.parseInt(purchaseAmount);
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("숫자만 입력 가능합니다.");
-		}
+	public static Lottos purchase(String purchaseAmount) {
+		return new Lottos(new DefaultPurchaseStrategy(purchaseAmount));
 	}
 
 	public long getQuantity() {
@@ -32,5 +24,20 @@ public class Lottos {
 
 	public List<Lotto> getLottos() {
 		return this.lottos;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Lottos lottos1 = (Lottos)o;
+		return Objects.equals(getLottos(), lottos1.getLottos());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getLottos());
 	}
 }

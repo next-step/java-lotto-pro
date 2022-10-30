@@ -16,7 +16,7 @@ public class LottoController {
 
 	public void run() {
 		String inputPurchaseAmount = inputView.purchaseAmount();
-		Lottos lottos = new Lottos(inputPurchaseAmount);
+		Lottos lottos = Lottos.purchase(inputPurchaseAmount);
 		resultView.lottosResult(lottos);
 
 		String input = inputView.prevWinNumbers();
