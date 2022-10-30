@@ -10,10 +10,11 @@ public class StringAddCalculator {
 
     private static final List<String> defaultDelimiters = List.of(",", ":");
     private static final Pattern regex = Pattern.compile("//(.)\n(.*)");
+    public static final int DEFAULT_VALUE = 0;
 
     public static int splitAndSum(String text) {
         if (validateText(text)) {
-            return 0;
+            return DEFAULT_VALUE;
         }
         Delimiters delimiters = new Delimiters(defaultDelimiters);
         if (!existCustomDelimiter(text)) {
