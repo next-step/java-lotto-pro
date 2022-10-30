@@ -39,6 +39,7 @@ public class StatisticsTest {
         countByRank.put(Rank.FIFTH,0);
         countByRank.put(Rank.FORTH,2);
         countByRank.put(Rank.THIRD,1);
+        countByRank.put(Rank.SECOND,0);
         countByRank.put(Rank.FIRST,0);
     
         assertThat(statistics.countByRank()).isEqualTo(countByRank);

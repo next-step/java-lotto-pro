@@ -13,7 +13,7 @@ public class RankTest {
     @Test
     @DisplayName("로또 매칭 개수에 따라 몇등 당첨인지가 결정됨")
     void rank_match_count() {
-        assertThat(Rank.getRank(3)).isEqualTo(Rank.FIFTH);
+        assertThat(Rank.valueOf(3,false)).isEqualTo(Rank.FIFTH);
         assertThat(Rank.FORTH.getCount()).isEqualTo(4);
     }
     
@@ -21,7 +21,7 @@ public class RankTest {
     @CsvSource(value = {"0:NONE","2:NONE","3:FIFTH","6:FIRST"}, delimiter = ':')
     @DisplayName("변수와 예상값 입력하여 검증")
     void rank_match_count_multi(Integer input, Rank expected) {
-        assertThat(Rank.getRank(input)).isEqualTo(expected);
+        assertThat(Rank.valueOf(input,false)).isEqualTo(expected);
     }
     
     @Test
@@ -34,7 +34,7 @@ public class RankTest {
     @CsvSource(value = {"0:0","5:1500000","6:2000000000"}, delimiter = ':')
     @DisplayName("로또 매칭 개수에 따른 당첨금 검증")
     void rank_match_count_multi(int input, long expected) {
-        assertThat(Rank.getRank(input).getPrize()).isEqualTo(expected);
+        assertThat(Rank.valueOf(input, false).getPrize()).isEqualTo(expected);
     }
     
     @Test
@@ -43,12 +43,12 @@ public class RankTest {
         assertThat(Rank.NONE.isNone()).isEqualTo(true);
     }
     
-//    @Test
-//    @DisplayName("순위에 보너스번호 개념 추가")
-//    void rank_match_bonus() {
-//        assertThat(Rank.getRank(5, true)).isEqualTo(Rank.SECOND);
-//        assertThat(Rank.SECOND.getCount()).isEqualTo(5);
-//        assertThat(Rank.SECOND.isBonus()).isEqualTo(true);
-//    }
+    @Test
+    @DisplayName("순위에 보너스번호 개념 추가")
+    void rank_match_bonus() {
+        assertThat(Rank.valueOf(5, true)).isEqualTo(Rank.SECOND);
+        assertThat(Rank.SECOND.getCount()).isEqualTo(5);
+        //assertThat(Rank.SECOND.isBonus()).isEqualTo(true);
+    }
     
 }

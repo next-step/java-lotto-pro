@@ -34,7 +34,7 @@ public class Statistics {
         statisticsInit();
         for (Lotto lotto: this.lotteryTicket.getLotteryTicket()) {
             int matchCount = lotto.compareMath(this.winningNumber);
-            mapMerge(Rank.getRank(matchCount));
+            mapMerge(Rank.valueOf(matchCount, false));
         }
         return this.countByRank;
     }
