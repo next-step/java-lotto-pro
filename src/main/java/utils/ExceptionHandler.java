@@ -8,6 +8,10 @@ public class ExceptionHandler {
 		return callWithHandlingException("", "", supplier);
 	}
 
+	public static <T> T callWithHandlingException(String prompt, Supplier<T> supplier) {
+		return callWithHandlingException(prompt, "", supplier);
+	}
+
 	public static <T> T callWithHandlingException(String prompt, String exceptionMessage, Supplier<T> supplier) {
 		try {
 			printPrompt(prompt);

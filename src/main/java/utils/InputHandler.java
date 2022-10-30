@@ -10,36 +10,53 @@ public class InputHandler {
 	private static final String NUMBER_INPUT_ERROR_MESSAGE = "숫자만 입력할 수 있습니다.";
 	private static final String NUMBER_LIST_INPUT_ERROR_MESSAGE = "콤마로 구분된 숫자를 입력해야 합니다.";
 	private static final Scanner scanner = new Scanner(System.in);
+	public static final int ZERO = 0;
+	public static final String POSITIVE_NUMBER_ERROR_MESSAGE = "음수는 입력할 수 없습니다.";
 
-	public static int inputInteger(String prompt) {
+	public static int inputPositiveInteger(String prompt) {
 		return ExceptionHandler.callWithHandlingException(
 			prompt,
-			NUMBER_INPUT_ERROR_MESSAGE,
-			() -> Integer.parseInt(input()));
+			() -> parsePositiveInteger(input()));
 	}
 
-	public static List<Integer> inputIntegerList(String prompt) {
+	public static List<Integer> inputPositiveIntegerList(String prompt) {
 		return ExceptionHandler.callWithHandlingException(prompt, NUMBER_LIST_INPUT_ERROR_MESSAGE, () -> {
 			SplitStrings splitStrings = StringSplitter.split(input());
 
 			return splitStrings.stream()
 				.map(String::trim)
-				.map(Integer::valueOf)
+				.map(InputHandler::parsePositiveInteger)
 				.collect(Collectors.toList());
 		});
 	}
 
-	public static List<List<Integer>> inputIntegerListMany(String prompt,
-														   int buyingManualLottoCount) {
+	public static List<List<Integer>> inputPositiveIntegerListMany(String prompt,
+																   int buyingManualLottoCount) {
 		return ExceptionHandler.callWithHandlingException(prompt, NUMBER_LIST_INPUT_ERROR_MESSAGE, () ->
 			inputMany(buyingManualLottoCount).stream()
 				.map(StringSplitter::split)
 				.map(splitStrings -> splitStrings.stream()
 					.map(String::trim)
-					.map(Integer::valueOf)
+					.map(InputHandler::parsePositiveInteger)
 					.collect(Collectors.toList()))
 				.collect(Collectors.toList())
 		);
+	}
+
+	private static int parsePositiveInteger(String input) {
+		int intNumber = parseInteger(input);
+		if (intNumber < ZERO) {
+			throw new IllegalArgumentException(POSITIVE_NUMBER_ERROR_MESSAGE);
+		}
+		return intNumber;
+	}
+
+	private static int parseInteger(String input) {
+		try {
+			return Integer.parseInt(input);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException(NUMBER_INPUT_ERROR_MESSAGE);
+		}
 	}
 
 	private static List<String> inputMany(int count) {

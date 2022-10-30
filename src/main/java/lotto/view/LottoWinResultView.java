@@ -41,11 +41,11 @@ public class LottoWinResultView {
 	}
 
 	private List<Integer> inputWinningLottoNumber() {
-		return InputHandler.inputIntegerList(INPUT_PROMPT_OUTPUT);
+		return InputHandler.inputPositiveIntegerList(INPUT_PROMPT_OUTPUT);
 	}
 
 	private int inputBonusNumber() {
-		return InputHandler.inputInteger(BONUS_NUMBER_PROMPT);
+		return InputHandler.inputPositiveInteger(BONUS_NUMBER_PROMPT);
 	}
 
 	private void printMatchCount(LottoWinResultsResponse lottoWinResultsResponse) {

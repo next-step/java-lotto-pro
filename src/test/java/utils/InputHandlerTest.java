@@ -25,9 +25,16 @@ class InputHandlerTest {
 	@Test
 	void 잘못된_입력_후_정상값_입력() {
 		command("Not a number", "1");
-		int inputResult = InputHandler.inputInteger("TEST PROMPT");
+		int inputResult = InputHandler.inputPositiveInteger("TEST PROMPT");
 
 		assertThat(inputResult).isEqualTo(1);
+	}
+
+	@Test
+	void 음수_입력시_오류() {
+		command("-1", "2");
+		int inputResult = InputHandler.inputPositiveInteger("TEST PROMPT");
+		assertThat(inputResult).isEqualTo(2);
 	}
 
 	private void command(String... commands) {
