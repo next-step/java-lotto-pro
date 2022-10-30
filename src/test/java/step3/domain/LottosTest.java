@@ -12,15 +12,18 @@ class LottosTest {
     @BeforeEach
     void setUp() {
         Lotto first = new Lotto(new LottoNumbers("1, 2, 3, 4, 5, 6"));
-        Lotto second = new Lotto(new LottoNumbers("2, 4, 5, 7, 9, 11"));
-        lottos = new Lottos(Arrays.asList(first, second));
+        Lotto second = new Lotto(new LottoNumbers("1, 2, 3, 4, 5, 15"));
+        Lotto fifth = new Lotto(new LottoNumbers("2, 4, 5, 7, 9, 11"));
+        lottos = new Lottos(Arrays.asList(first, second, fifth));
     }
 
     @Test
     void 구매한_로또의_당첨_결과를_확인한다() {
         LottoNumbers winningNumbers = new LottoNumbers("1, 2, 3, 4, 5, 6");
-        Rewards checkResult = lottos.check(winningNumbers);
+        LottoNumber bonusNumber = new LottoNumber(15);
+        Rewards checkResult = lottos.check(winningNumbers, bonusNumber);
         assertThat(checkResult.count(Rank.FIRST)).isEqualTo(1);
+        assertThat(checkResult.count(Rank.SECOND)).isEqualTo(1);
         assertThat(checkResult.count(Rank.FIFTH)).isEqualTo(1);
     }
 
