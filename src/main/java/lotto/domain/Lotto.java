@@ -27,14 +27,18 @@ public class Lotto {
         return String.format("[%s]", joinedLottoNumbers);
     }
 
-    public Rank getRankBy(Lotto winningLotto) {
+    public Rank getRankBy(WinningLotto winningLotto) {
         long matchCount = numbers.stream()
                 .filter(winningLotto::hasSameNumber)
                 .count();
-        return Rank.findRank((int) matchCount);
+
+        boolean hasBonusNumber = numbers.stream()
+                .filter(winningLotto::hasBonus)
+                .count() == 1;
+        return Rank.findRank((int) matchCount, hasBonusNumber);
     }
 
-    private boolean hasSameNumber(LottoNumber lottoNumber) {
+    public boolean hasSameNumber(LottoNumber lottoNumber) {
         return this.numbers.contains(lottoNumber);
     }
 }

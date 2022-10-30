@@ -25,8 +25,8 @@ public class LottoController {
         showResult(paidMoney, winningMoney);
     }
 
-    private Lotto getWinningLotto() {
-        return new Lotto(getWinningNumbers());
+    private WinningLotto getWinningLotto() {
+        return new WinningLotto(getWinningNumbers());
     }
 
     private void showLottoBundle(LottoBundle lottoBundle) {
