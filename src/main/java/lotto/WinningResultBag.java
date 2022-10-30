@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.List;
 
-import static lotto.LottoIssuer.LOTTO_PRICE;
+import static lotto.LottoBag.LOTTO_PRICE;
 
 public class WinningResultBag {
 
