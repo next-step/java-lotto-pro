@@ -13,7 +13,7 @@ public class LottoStore {
         List<Lotto> lottoList = new ArrayList<>();
         int divide = payment.divide(pricePerLotto);
         for (int count = 0; count < divide; count++) {
-            Numbers random = NumbersGenerator.random();
+            UniqueNumbers random = NumbersGenerator.random();
             lottoList.add(Lotto.generate(random));
         }
         return Lottos.generate(lottoList);

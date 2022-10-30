@@ -15,7 +15,7 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public List<Rank> getRanks(Numbers numbers) {
+    public List<Rank> getRanks(UniqueNumbers numbers) {
         return lottos.stream()
                 .map(lotto -> lotto.getCountOfMatch(numbers))
                 .map(Rank::valueOf)
