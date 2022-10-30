@@ -49,6 +49,8 @@ class LottoRankTest {
         assertThat(lottoRank).isEqualTo(LottoRank.SECOND);
         lottoRank = LottoRank.findLottoRank(5, false);
         assertThat(lottoRank).isEqualTo(LottoRank.THIRD);
+        lottoRank = LottoRank.findLottoRank(6, false);
+        assertThat(lottoRank).isEqualTo(LottoRank.FIRST);
     }
 
 }

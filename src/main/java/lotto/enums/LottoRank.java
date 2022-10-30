@@ -11,12 +11,12 @@ public enum LottoRank {
     SECOND(5, 30_000_000, true),
     FIRST(6, 2_000_000_000, false);
 
-    private final int matchNumberCount;
+    private final int matchCount;
     private final int reward;
     private final boolean bonus;
 
-    LottoRank(int matchNumberCount, int reward, boolean bonus) {
-        this.matchNumberCount = matchNumberCount;
+    LottoRank(int matchCount, int reward, boolean bonus) {
+        this.matchCount = matchCount;
         this.reward = reward;
         this.bonus = bonus;
     }
@@ -24,7 +24,7 @@ public enum LottoRank {
     // TODO: 기존 코드(추후 삭제)
     public static LottoRank findLottoRank(int matchNumberCount) {
         return Arrays.stream(LottoRank.values())
-                .filter(item -> item.matchNumberCount == matchNumberCount)
+                .filter(item -> item.matchCount == matchNumberCount)
                 .findFirst()
                 .orElse(LottoRank.NONE);
     }
@@ -36,19 +36,16 @@ public enum LottoRank {
                 .orElse(LottoRank.NONE);
     }
 
-    private static boolean matchLottoRank(LottoRank lottoRank, int matchNumberCount, boolean bonus) {
-        // TODO: 기존 로또 번호 일치 여부 확인
-        if (lottoRank.matchNumberCount == matchNumberCount) {
-            // TODO: 보너스 번호 일치 여부 확인
-            if (lottoRank.bonus == (LottoRank.SECOND.matchNumberCount == matchNumberCount && bonus)) {
-                return true;
-            }
-        }
-        return false;
+    private static boolean matchLottoRank(LottoRank lottoRank, int matchCount, boolean bonus) {
+        return lottoRank.matchCount == matchCount && lottoRank.bonus == isBonus(matchCount, bonus);
     }
 
-    public int getMatchNumberCount() {
-        return matchNumberCount;
+    private static boolean isBonus(int matchNumberCount, boolean bonus) {
+        return LottoRank.SECOND.matchCount == matchNumberCount && bonus;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 
     public int getReward() {

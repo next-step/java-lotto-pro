@@ -38,7 +38,7 @@ public class ResultView {
     private static void statisticsResult(LottoRank lottoRanking, HashMap<LottoRank, Integer> winningStatistic) {
         if (!lottoRanking.equals(LottoRank.NONE)) {
             System.out.println(String.format(REWARD_MATCH_LOTTO,
-                    lottoRanking.getMatchNumberCount(), lottoRanking.getReward(), winningStatistic.get(lottoRanking)));
+                    lottoRanking.getMatchCount(), lottoRanking.getReward(), winningStatistic.get(lottoRanking)));
         }
     }
 
