@@ -3,41 +3,29 @@ package step3.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import step3.enums.Award;
+import step3.enums.Rank;
 
 public class Lottos {
 
     private List<Lotto> lottos;
 
-    public Lottos() {
-    }
-
     public Lottos(List<Lotto> lottos) {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public List<Lotto> generateLottos(int count) {
-        lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto());
-        }
+    public List<Lotto> getLottos() {
         return lottos;
     }
 
-    public void matchWinningNumbers(WinningLotto winningLotto) {
+    public Map<Integer, Integer> calculateWinningBallsEachLotto(WinningLotto winningLotto) {
+        Map<Integer, Integer> statistics = Rank.initRank();
         lottos.forEach(lotto -> {
-            lotto.match(winningLotto);
-        });
-    }
-
-    public Map<Integer, Integer> calculateWinningBallsEachLotto() {
-        Map<Integer, Integer> statistics = Award.initRank();
-        lottos.forEach(lotto -> {
-            if (isBonus(lotto)) {
-                statistics.computeIfPresent(Award.FIVE.getCount() + Award.BONUS.getCount(), (k, v) -> v + 1);
+            Rank rank = lotto.match(winningLotto);
+            if (rank == Rank.SECOND) {
+                statistics.computeIfPresent(Rank.THIRD.getCount() + Rank.SECOND.getCount(), (k, v) -> v + 1);
                 return;
             }
-            statistics.computeIfPresent(lotto.getMatchCount(), (k, v) -> v + 1);
+            statistics.computeIfPresent(rank.getCount(), (k, v) -> v + 1);
         });
         return statistics;
     }
@@ -49,8 +37,10 @@ public class Lottos {
         this.lottos = merge;
     }
 
-    private boolean isBonus(Lotto lotto) {
-        return lotto.getMatchCount() == Award.FIVE.getCount() && lotto.hasBonusNumber();
+    @Override
+    public String toString() {
+        return "Lottos{" +
+                "lottos=" + lottos +
+                '}';
     }
-
 }

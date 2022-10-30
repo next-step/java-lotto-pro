@@ -12,10 +12,8 @@ public class WinningLotto {
     int bonusNumber;
 
     public WinningLotto(String numbersWithComma, int bonusNumber) {
-
         this.winningNumber = new LottoNumber(gainWinnerNumbers(numbersWithComma));
         this.bonusNumber = bonusNumber;
-
     }
 
     public int getBonusNumber() {
@@ -35,7 +33,7 @@ public class WinningLotto {
     }
 
     private List<Integer> split(String numbersWithComma) {
-        return Arrays.asList(numbersWithComma.split(","))
+        return Arrays.asList(numbersWithComma.replace(" ", "").split(","))
                 .stream()
                 .mapToInt(Integer::parseInt).boxed()
                 .collect(Collectors.toList());

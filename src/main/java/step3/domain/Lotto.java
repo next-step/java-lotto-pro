@@ -2,38 +2,24 @@ package step3.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import step3.enums.Rule;
+import step3.enums.Rank;
 
 public class Lotto {
 
-    private LottoNumber lottoNumber;
+    private final LottoNumber lottoNumber;
 
-    private int matchCount;
-
-    private boolean hasBonusNumber;
-
-    public Lotto() {
+    public Lotto(LottoNumber lottoNumber) {
+        this.lottoNumber = lottoNumber;
     }
 
-    public List<Integer> gainAutoNumbers() {
-        Range range = new Range(Rule.TOTAL_START_NUMBER.getRange(), Rule.TOTAL_END_NUMBER.getRange());
-        lottoNumber = new LottoNumber();
-        return lottoNumber.gainSixAutoLottoNumbers(range);
+    public LottoNumber getLottoNumber() {
+        return lottoNumber;
     }
 
-    public void match(WinningLotto winningLotto) {
-        this.hasBonusNumber = lottoNumber.hasBonusNumber(winningLotto.getBonusNumber());
+    public Rank match(WinningLotto winningLotto) {
         List<Integer> copy = new ArrayList<>(lottoNumber.getLottoNumber());
         copy.retainAll(winningLotto.getWinningNumber().getLottoNumber());
-        this.matchCount = copy.size();
-    }
-
-    public int getMatchCount() {
-        return matchCount;
-    }
-
-    public boolean hasBonusNumber() {
-        return hasBonusNumber;
+        return Rank.rank(copy.size(), lottoNumber.hasBonusNumber(winningLotto.getBonusNumber()));
     }
 
 }
