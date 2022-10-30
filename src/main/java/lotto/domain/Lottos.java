@@ -31,11 +31,12 @@ public class Lottos {
         return Money.createMoney((long) lottos.size() * LOTTO_PRICE);
     }
 
-    public LottoResults createLottoResults(Lotto winningLotto) {
+    public LottoResults createLottoResults(Lotto winningLotto, LottoNumber bonusLottoNumber) {
         Map<LottoPrize, Integer> lottoResults = new HashMap<>();
         for(Lotto lotto: lottos) {
             int matchCount = lotto.findLottoMatchCount(winningLotto);
-            LottoPrize lottoPrize = LottoPrize.findLottoPrize(matchCount);
+            boolean isMatchBonusLottoNumber = lotto.isMatchLottoNumber(bonusLottoNumber);
+            LottoPrize lottoPrize = LottoPrize.findLottoPrize(matchCount, isMatchBonusLottoNumber);
             lottoResults.put(lottoPrize, lottoResults.getOrDefault(lottoPrize, DEFALUT_COUNT) + ADD_COUNT_AMOUNT);
         }
         return LottoResults.createLottoResults(lottoResults);

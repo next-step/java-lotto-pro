@@ -41,4 +41,16 @@ public class LottoTest {
         Lotto lotto = Lotto.generateLotto(new ReadLineLottoNumberGenerator("1, 2, 3, 4, 5, 6"));
         assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
+
+    @Test
+    void 로또_번호들_중_주어진_번호_있으면_true_반환() {
+        Lotto lotto = Lotto.generateLotto(new ReadLineLottoNumberGenerator("1, 2, 3, 4, 5, 6"));
+        assertThat(lotto.isMatchLottoNumber(LottoNumber.from(3))).isTrue();
+    }
+
+    @Test
+    void 로또_번호들_중_주어진_번호_없으면_false_반환() {
+        Lotto lotto = Lotto.generateLotto(new ReadLineLottoNumberGenerator("1, 2, 3, 4, 5, 6"));
+        assertThat(lotto.isMatchLottoNumber(LottoNumber.from(10))).isFalse();
+    }
 }
