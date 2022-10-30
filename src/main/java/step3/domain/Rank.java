@@ -1,6 +1,7 @@
 package step3.domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 public enum Rank {
@@ -23,6 +24,18 @@ public enum Rank {
             .filter(r -> r.count == count)
             .findAny();
         return rank.orElse(NOTHING);
+    }
+
+    public int matchedCount() {
+        return count;
+    }
+
+    public int winnings() {
+        return winnings;
+    }
+
+    public static List<Rank> valuesTheLowestOrder() {
+        return Arrays.asList(FOURTH, THIRD, SECOND, FIRST);
     }
 
 }

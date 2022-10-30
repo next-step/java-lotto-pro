@@ -13,8 +13,9 @@ public class InputView {
         return sc.nextInt();
     }
 
-    public String inputWinningNumber() {
+    public static String inputWinningNumber() {
         System.out.println(LAST_WINNING_NUMBER);
+        sc.nextLine();
         return sc.nextLine();
     }
 
