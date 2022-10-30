@@ -1,7 +1,6 @@
 package lotto.domain.enums;
 
 import lotto.domain.Money;
-import lotto.domain.dto.StatisticDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -34,12 +33,12 @@ public class RankTest {
         assertThat(Rank.FIRST.getMoney()).isEqualTo(new Money(2_000_000_000L));
     }
 
-    @DisplayName("전체 랭크에 따른 수입을 계산할 수 있다")
-    @Test
-    void calculate_price_test() {
-        StatisticDto dto = StatisticDto.create();
-        dto.add(Rank.FIRST.getMatchCount());
-
-        assertThat(Rank.calculatePrice(dto)).isEqualTo(Rank.FIRST.getMoney());
-    }
+//    @DisplayName("전체 랭크에 따른 수입을 계산할 수 있다")
+//    @Test
+//    void calculate_price_test() {
+//        StatisticDto dto = StatisticDto.create();
+//        dto.add(Rank.FIRST.getMatchCount());
+//
+//        assertThat(Rank.calculatePrice(dto)).isEqualTo(Rank.FIRST.getMoney());
+//    }
 }

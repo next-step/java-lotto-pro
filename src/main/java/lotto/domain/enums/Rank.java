@@ -1,9 +1,9 @@
 package lotto.domain.enums;
 
 import lotto.domain.Money;
-import lotto.domain.dto.StatisticDto;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
 
 public enum Rank {
@@ -33,14 +33,21 @@ public enum Rank {
         return deque.toArray(new Rank[deque.size()]);
     }
 
-    public static Money calculatePrice(StatisticDto dto) {
-        Money totalMoney = new Money(0L);
-        for (Rank rank : Rank.values()) {
-            int count = dto.getCount(rank.matchCount);
-            totalMoney.sum(rank.getMoney().multiply(count));
-        }
+//    public static Money calculatePrice(StatisticDto dto) {
+//        Money totalMoney = new Money(0L);
+//        for (Rank rank : Rank.values()) {
+//            int count = dto.getCount(rank.matchCount);
+//            totalMoney.sum(rank.getMoney().multiply(count));
+//        }
+//
+//        return totalMoney;
+//    }
 
-        return totalMoney;
+    public static Rank get(int matchCount) {
+        return Arrays.stream(Rank.values())
+                .filter(s -> s.getMatchCount() == matchCount)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("일치하는 랭크가 없습니다."));
     }
 
     public Money getMoney() {
