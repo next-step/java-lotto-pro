@@ -38,10 +38,22 @@ public class LottoTest {
     @Test
     @DisplayName("사용자_입력값과_로또_비교하여_수익률_출력")
     public void lotto_get_return_rate() {
-        myTickets.addTicket(new Ticket("1,2,3,7,8,9"));
-        myTickets.addTicket(new Ticket("7,8,9,10,11,12"));
+        myTickets.addTicket(new Ticket("8, 21, 23, 41, 42, 43"));
+        myTickets.addTicket(new Ticket("3, 5, 11, 16, 32, 38"));
+        myTickets.addTicket(new Ticket("7, 11, 16, 35, 36, 44"));
+        myTickets.addTicket(new Ticket("1, 8, 11, 31, 41, 42"));
+        myTickets.addTicket(new Ticket("13, 14, 16, 38, 42, 45"));
+        myTickets.addTicket(new Ticket("7, 11, 30, 40, 42, 43"));
+        myTickets.addTicket(new Ticket("2, 13, 22, 32, 38, 45"));
+        myTickets.addTicket(new Ticket("23, 25, 33, 36, 39, 41"));
+        myTickets.addTicket(new Ticket("1, 3, 5, 14, 22, 45"));
+        myTickets.addTicket(new Ticket("5, 9, 38, 41, 43, 44"));
+        myTickets.addTicket(new Ticket("2, 8, 9, 18, 19, 21"));
+        myTickets.addTicket(new Ticket("13, 14, 18, 21, 23, 35"));
+        myTickets.addTicket(new Ticket("17, 21, 29, 37, 42, 45"));
+        myTickets.addTicket(new Ticket("3, 8, 27, 30, 35, 44"));
         
         lotto = new Lotto(myTickets);
-        assertThat(lotto.getResultStr(winningTicketStr)).contains("총 수익률은 2.50입니다.");
+        assertThat(lotto.getResultStr(winningTicketStr)).contains("총 수익률은 0.35입니다.");
     } 
 }
