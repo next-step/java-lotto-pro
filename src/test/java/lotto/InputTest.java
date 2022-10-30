@@ -24,4 +24,10 @@ public class InputTest {
     public void input_validate_emtpy() {
         assertThatThrownBy(() -> new Input("")).hasMessage(Constants.ERR_NULL_VALUE);
     }
+    
+    @Test
+    @DisplayName("구입금액_검증_1000미만")
+    public void input_validate_under_thousand() {
+        assertThatThrownBy(() -> new Input("999")).hasMessage(Constants.ERR_MORE_THAN_1000);
+    }    
 }
