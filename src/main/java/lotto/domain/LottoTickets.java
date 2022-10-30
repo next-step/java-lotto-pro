@@ -36,6 +36,12 @@ public class LottoTickets {
 				.collect(Collectors.toList()));
 	}
 
+	public List<List<Integer>> getLottoNumbersList() {
+		return lottoTicketList.stream()
+			.map(LottoTicket::getLottoNumbers)
+			.collect(Collectors.toList());
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

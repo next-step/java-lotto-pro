@@ -1,8 +1,8 @@
 package lotto;
 
-import static lotto.view.LottoWinPrize.FIRST;
-import static lotto.view.LottoWinPrize.MISS_EIGHTH;
-import static lotto.view.LottoWinPrize.MISS_SEVENTH;
+import static lotto.domain.LottoWinPrize.FIRST;
+import static lotto.domain.LottoWinPrize.MISS_EIGHTH;
+import static lotto.domain.LottoWinPrize.MISS_SEVENTH;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 import java.util.stream.Stream;

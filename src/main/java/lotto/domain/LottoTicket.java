@@ -2,7 +2,7 @@ package lotto.domain;
 
 import static java.lang.String.format;
 import static java.util.stream.Collectors.joining;
-import static lotto.view.LottoWinPrize.SECOND;
+import static lotto.domain.LottoWinPrize.SECOND;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import lotto.view.LottoWinPrize;
 
 public class LottoTicket {
 
@@ -59,18 +57,23 @@ public class LottoTicket {
 	}
 
 	public LottoWinPrize match(LottoTicket other, LottoNumber bonusBall) {
-		Set<LottoNumber> comparedLottoNumbers = new HashSet<>(other.lottoNumbers);
-
-		int matchCount = 0;
-		for (LottoNumber lottoNumber : this.lottoNumbers) {
-			matchCount += comparedLottoNumbers.contains(lottoNumber) ? 1 : 0;
-		}
+		int matchCount = getMatchCount(other);
 
 		if (isSecondPrize(matchCount, bonusBall)) {
 			return SECOND;
 		}
 
 		return LottoWinPrize.matchCountOf(matchCount);
+	}
+
+	private int getMatchCount(LottoTicket other) {
+		Set<LottoNumber> comparedLottoNumbers = new HashSet<>(other.lottoNumbers);
+
+		int matchCount = 0;
+		for (LottoNumber lottoNumber : this.lottoNumbers) {
+			matchCount += comparedLottoNumbers.contains(lottoNumber) ? 1 : 0;
+		}
+		return matchCount;
 	}
 
 	private boolean isSecondPrize(int matchCount, LottoNumber bonusBall) {
@@ -105,4 +108,8 @@ public class LottoTicket {
 			.collect(joining(", ", "[", "]"));
 	}
 
+	public List<Integer> getLottoNumbers() {
+		return lottoNumbers.stream()
+			.map(LottoNumber::getNumber).collect(Collectors.toList());
+	}
 }

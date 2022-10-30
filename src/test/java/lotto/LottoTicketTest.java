@@ -1,12 +1,12 @@
 package lotto;
 
-import static lotto.view.LottoWinPrize.FIFTH;
-import static lotto.view.LottoWinPrize.FIRST;
-import static lotto.view.LottoWinPrize.FOURTH;
-import static lotto.view.LottoWinPrize.MISS_SEVENTH;
-import static lotto.view.LottoWinPrize.MISS_SIXTH;
-import static lotto.view.LottoWinPrize.SECOND;
-import static lotto.view.LottoWinPrize.THIRD;
+import static lotto.domain.LottoWinPrize.FIFTH;
+import static lotto.domain.LottoWinPrize.FIRST;
+import static lotto.domain.LottoWinPrize.FOURTH;
+import static lotto.domain.LottoWinPrize.MISS_SEVENTH;
+import static lotto.domain.LottoWinPrize.MISS_SIXTH;
+import static lotto.domain.LottoWinPrize.SECOND;
+import static lotto.domain.LottoWinPrize.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -20,7 +20,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.view.LottoWinPrize;
+import lotto.domain.LottoWinPrize;
 
 class LottoTicketTest {
 

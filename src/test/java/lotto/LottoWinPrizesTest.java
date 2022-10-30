@@ -1,10 +1,10 @@
 package lotto;
 
-import static lotto.view.LottoWinPrize.FIFTH;
-import static lotto.view.LottoWinPrize.FIRST;
-import static lotto.view.LottoWinPrize.FOURTH;
-import static lotto.view.LottoWinPrize.MISS_EIGHTH;
-import static lotto.view.LottoWinPrize.THIRD;
+import static lotto.domain.LottoWinPrize.FIFTH;
+import static lotto.domain.LottoWinPrize.FIRST;
+import static lotto.domain.LottoWinPrize.FOURTH;
+import static lotto.domain.LottoWinPrize.MISS_EIGHTH;
+import static lotto.domain.LottoWinPrize.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
@@ -13,9 +13,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import lotto.domain.LottoWinPrize;
 import lotto.domain.LottoWinPrizes;
 import lotto.domain.ProfitMargin;
-import lotto.view.LottoWinPrize;
 import money.Money;
 
 class LottoWinPrizesTest {

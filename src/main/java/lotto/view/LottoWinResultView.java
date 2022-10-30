@@ -1,11 +1,12 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
-import lotto.domain.LottoWinPrizes;
+import lotto.controller.LottoController;
+import lotto.controller.dto.LottoWinResultResponse;
+import lotto.controller.dto.LottoWinResultsRequest;
+import lotto.controller.dto.LottoWinResultsResponse;
+import lotto.controller.dto.PurchasedLottoTicketsResponse;
+import lotto.controller.dto.WinningLottoTicketResponse;
 import lotto.domain.ProfitMargin;
-import money.Money;
 import utils.InputHandler;
 
 public class LottoWinResultView {
@@ -15,52 +16,56 @@ public class LottoWinResultView {
 	private static final String PROFIT_RESULT_OUTPUT = "총 수익률은 %s입니다.";
 	private static final String LOSS_RESULT_OUTPUT = " (기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-	private final Money lottoPrice;
+	private final LottoController lottoController;
 
-	public LottoWinResultView(Money lottoPrice) {
-		this.lottoPrice = lottoPrice;
+	public LottoWinResultView(LottoController lottoController) {
+		this.lottoController = lottoController;
 	}
 
-	public void printWinResult(LottoTickets purchaseLottoTickets, LottoTicket lastWeekWinLottoTicket) {
-		LottoNumber bonusNumber = inputBonusNumber();
+	public void printWinResult(PurchasedLottoTicketsResponse purchasedLottoTickets,
+							   WinningLottoTicketResponse winningLottoTicketResponse) {
+		LottoWinResultsResponse lottoWinResultsResponse = lottoController.getWinResults(
+			getWinResultRequest(purchasedLottoTickets, winningLottoTicketResponse));
 
-		LottoWinPrizes lottoWinPrizes = purchaseLottoTickets.match(lastWeekWinLottoTicket, bonusNumber);
-
-		printMatchCount(lottoWinPrizes);
-		printProfitMargin(lottoWinPrizes);
+		printMatchCount(lottoWinResultsResponse);
+		printProfitMargin(lottoWinResultsResponse);
 	}
 
-	private LottoNumber inputBonusNumber() {
+	private LottoWinResultsRequest getWinResultRequest(PurchasedLottoTicketsResponse purchasedLottoTickets,
+													   WinningLottoTicketResponse winningLottoTicketResponse) {
+		return new LottoWinResultsRequest(purchasedLottoTickets, winningLottoTicketResponse, inputBonusNumber());
+	}
+
+	private int inputBonusNumber() {
 		System.out.println(BONUS_NUMBER_PROMPT);
-		return LottoNumber.of(InputHandler.inputInteger());
+		return InputHandler.inputInteger();
 	}
 
-	private void printMatchCount(LottoWinPrizes lottoWinResults) {
+	private void printMatchCount(LottoWinResultsResponse lottoWinResultsResponse) {
 		System.out.println(WIN_RESULT_OUTPUT);
-		printMatchCount(LottoWinPrize.FIFTH, lottoWinResults.getWinPrizeCount(LottoWinPrize.FIFTH));
-		printMatchCount(LottoWinPrize.FOURTH, lottoWinResults.getWinPrizeCount(LottoWinPrize.FOURTH));
-		printMatchCount(LottoWinPrize.THIRD, lottoWinResults.getWinPrizeCount(LottoWinPrize.THIRD));
-		printMatchCount(LottoWinPrize.SECOND, lottoWinResults.getWinPrizeCount(LottoWinPrize.SECOND));
-		printMatchCount(LottoWinPrize.FIRST, lottoWinResults.getWinPrizeCount(LottoWinPrize.FIRST));
+		lottoWinResultsResponse.forEach(this::printMatchCount);
 	}
 
-	private void printMatchCount(LottoWinPrize winPrize, int winPrizeCount) {
-		System.out.printf("%s개 일치%s (%s원) - %s개", winPrize.matchCount, printIfBonusBall(winPrize), winPrize.prize,
-			winPrizeCount);
+	private void printMatchCount(LottoWinResultResponse lottoWinResultResponse) {
+		System.out.printf("%s개 일치%s (%s원) - %s개",
+			lottoWinResultResponse.getMatchCount(),
+			getBonusBallDescription(lottoWinResultResponse),
+			lottoWinResultResponse.getWinningMoney(),
+			lottoWinResultResponse.getNumberOfMatch());
 		System.out.println();
 	}
 
-	private String printIfBonusBall(LottoWinPrize winPrize) {
-		return winPrize == LottoWinPrize.SECOND ? ", 보너스 볼 일치" : "";
+	private String getBonusBallDescription(LottoWinResultResponse lottoWinResultResponse) {
+		return lottoWinResultResponse.hasBonusBall() ? ", 보너스 볼 일치" : "";
 	}
 
-	private void printProfitMargin(LottoWinPrizes lottoWinResults) {
+	private void printProfitMargin(LottoWinResultsResponse lottoWinResultsResponse) {
 		System.out.println();
 
-		ProfitMargin profitMargin = lottoWinResults.getProfitMargin(lottoPrice);
+		ProfitMargin profitMargin = lottoWinResultsResponse.getProfitMargin();
 		System.out.printf(PROFIT_RESULT_OUTPUT, profitMargin);
 
-		printIfLoss(profitMargin);
+		printIfLoss(lottoWinResultsResponse.getProfitMargin());
 	}
 
 	private void printIfLoss(ProfitMargin profitMargin) {

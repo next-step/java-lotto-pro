@@ -33,6 +33,10 @@ public class LottoNumber {
 		return MIN_NUMBER > number || MAX_NUMBER < number;
 	}
 
+	public int getNumber() {
+		return number;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

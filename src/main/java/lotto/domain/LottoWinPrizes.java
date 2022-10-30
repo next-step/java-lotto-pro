@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.toMap;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -7,15 +10,14 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-import lotto.view.LottoWinPrize;
 import money.Money;
 
 public class LottoWinPrizes {
 
 	private final Map<LottoWinPrize, Integer> winPrizesCounts;
 
-	private LottoWinPrizes() {
-		this.winPrizesCounts = new ConcurrentHashMap<>();
+	private LottoWinPrizes(Map<LottoWinPrize, Integer> winPrizesCounts) {
+		this.winPrizesCounts = winPrizesCounts;
 	}
 
 	public static LottoWinPrizes of(LottoWinPrize... lottoWinPrizes) {
@@ -23,11 +25,10 @@ public class LottoWinPrizes {
 	}
 
 	public static LottoWinPrizes of(List<LottoWinPrize> lottoWinPrizeList) {
-		LottoWinPrizes lottoWinPrizes = new LottoWinPrizes();
+		Map<LottoWinPrize, Integer> collect = lottoWinPrizeList.stream()
+			.collect(toMap(identity(), lottoWinPrize -> 1, Integer::sum, ConcurrentHashMap::new));
 
-		lottoWinPrizeList.forEach(lottoWinPrizes::increment);
-
-		return lottoWinPrizes;
+		return new LottoWinPrizes(collect);
 	}
 
 	public ProfitMargin getProfitMargin(Money lottoPrice) {
@@ -37,10 +38,6 @@ public class LottoWinPrizes {
 
 	public int getWinPrizeCount(LottoWinPrize lottoWinPrize) {
 		return winPrizesCounts.getOrDefault(lottoWinPrize, 0);
-	}
-
-	private void increment(LottoWinPrize winPrize) {
-		winPrizesCounts.merge(winPrize, 1, Integer::sum);
 	}
 
 	private int getLottoPurchaseCounts() {
