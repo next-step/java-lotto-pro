@@ -12,7 +12,6 @@ public enum LottoRank {
     SECOND(5, 1_500_000),
     THIRD(4, 50_000),
     FOURTH(3, 5_000),
-
     NONE(0, 0);
 
     private final int countMatch;
@@ -40,16 +39,6 @@ public enum LottoRank {
 
     public static List<LottoRank> reverse() {
         return Arrays.asList(FOURTH, THIRD, SECOND, FIRST);
-    }
-
-    public static Map<LottoRank, Integer> generateRankInfo() {
-        Map<LottoRank, Integer> rankInfo = new HashMap<>();
-
-        for (LottoRank lottoRank: LottoRank.reverse()) {
-            rankInfo.put(lottoRank, 0);
-        }
-
-        return rankInfo;
     }
 
     public static boolean isNone(LottoRank lottoRank) {

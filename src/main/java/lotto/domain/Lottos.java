@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -34,7 +35,7 @@ public class Lottos {
     }
 
     public Map<LottoRank, Integer> lottoRanksInfo(final Lotto winningLotto) {
-        Map<LottoRank, Integer> rankInfo = LottoRank.generateRankInfo();
+        Map<LottoRank, Integer> rankInfo = generateRankInfo();
 
         for (LottoRank lottoRank: lottoRanks(winningLotto)) {
             rankInfo.put(lottoRank, lottoRanksCount(rankInfo, lottoRank));
@@ -60,6 +61,16 @@ public class Lottos {
             return rankInfo.get(lottoRank) + LottoNumber.LOTTO_MIN_NUMBER;
         }
         return LottoNumber.LOTTO_MIN_NUMBER;
+    }
+
+    private Map<LottoRank, Integer> generateRankInfo() {
+        Map<LottoRank, Integer> rankInfo = new HashMap<>();
+
+        for (LottoRank lottoRank: LottoRank.reverse()) {
+            rankInfo.put(lottoRank, 0);
+        }
+
+        return rankInfo;
     }
 
     public int size() {
