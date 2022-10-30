@@ -39,7 +39,7 @@ public class LottoStatistics {
                 .collect(Collectors.groupingBy(identity(), Collectors.counting()));
     }
 
-    public long findLottoLankCount(LottoRank lottoRank) {
+    public long findLottoRankCount(LottoRank lottoRank) {
         Long count = rankCountCache.get(lottoRank);
         if(count == null) {
             return 0L;
