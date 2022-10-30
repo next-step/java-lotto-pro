@@ -7,28 +7,28 @@ import java.util.List;
 import lotto.util.LottoUtil;
 
 public class Lotto {
-    private final List<LottoNumber> purchaseLottoList;
+    private final List<LottoNumbers> purchaseLottoList;
 
-    public Lotto(String purchaseMoney) {
-        Money money = new Money(purchaseMoney);
+    public Lotto(Integer money) {
+        LottoMoney lottoMoney = new LottoMoney(money);
         this.purchaseLottoList = new ArrayList<>();
-        for (int i = 0; i < money.count(); i++) {
-            purchaseLottoList.add(new LottoNumber(LottoUtil.generate()));
+        for (int i = 0; i < lottoMoney.count(); i++) {
+            purchaseLottoList.add(new LottoNumbers(LottoUtil.generate()));
         }
     }
 
-    public Lotto(List<LottoNumber> purchaseLottoList) {
+    public Lotto(List<LottoNumbers> purchaseLottoList) {
         this.purchaseLottoList = purchaseLottoList;
     }
 
-    public List<LottoNumber> getPurchaseLottoList() {
+    public List<LottoNumbers> getPurchaseLottoList() {
         return Collections.unmodifiableList(purchaseLottoList);
     }
 
-    public LottoResult getResult(LottoNumber winningLotto) {
+    public LottoResult computeResult(LottoNumbers winningLotto) {
         LottoResult result = new LottoResult();
-        for (LottoNumber lottoNumber : purchaseLottoList) {
-            result.putPrize(lottoNumber.calculatePrize(winningLotto));
+        for (LottoNumbers lottoNumbers : purchaseLottoList) {
+            result.putPrize(lottoNumbers.calculatePrize(winningLotto));
         }
         return result;
     }

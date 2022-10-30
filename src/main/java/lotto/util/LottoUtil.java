@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 
 public class LottoUtil {
     public static final int LOTTO_NUMBERS_COUNT = 6;
@@ -30,14 +30,14 @@ public class LottoUtil {
         return new HashSet<>(lottoNumbers);
     }
 
-    public static LottoNumber toLottoNumber(String numberString) {
+    public static LottoNumbers toLottoNumber(String numberString) {
         if (hasNotText(numberString)) {
             throw new IllegalStateException("당첨번호 입력을 확인해주세요. ','로 구분된 서로다른 6개 숫자여야합니다.");
         }
         List<Integer> numbers = Arrays.stream(numberString.split(DELIMITER))
             .map(s -> Integer.parseInt(s.trim()))
             .collect(toList());
-        return new LottoNumber(new HashSet<>(numbers));
+        return new LottoNumbers(new HashSet<>(numbers));
     }
 
     private static boolean hasNotText(String text) {

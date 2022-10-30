@@ -15,16 +15,16 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
     @ParameterizedTest
-    @ValueSource(strings = {"3000", "5000", "13200"})
-    void 돈을_입력받고_구한갯수만큼_로또를구매한다(String money) {
-        assertThat(new Lotto(money).getPurchaseLottoList()).hasSize(new Money(money).count());
+    @ValueSource(ints = {3000, 5000, 13200})
+    void 돈을_입력받고_구한갯수만큼_로또를구매한다(int money) {
+        assertThat(new Lotto(money).getPurchaseLottoList()).hasSize(new LottoMoney(money).count());
     }
 
     @ParameterizedTest
     @MethodSource("로또번호_및_당첨번호")
     void 당첨번호를_입력받아_당첨결과를_얻는다(Set<Integer> lottoNumbers, Set<Integer> winningNumbers, Prize prize) {
-        Lotto lotto = new Lotto(Collections.singletonList(new LottoNumber(lottoNumbers)));
-        LottoResult result = lotto.getResult(new LottoNumber(winningNumbers));
+        Lotto lotto = new Lotto(Collections.singletonList(new LottoNumbers(lottoNumbers)));
+        LottoResult result = lotto.computeResult(new LottoNumbers(winningNumbers));
         assertThat(result.getCount(prize)).isEqualTo(1);
     }
 

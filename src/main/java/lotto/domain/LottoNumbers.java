@@ -6,15 +6,15 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoNumber {
+public class LottoNumbers {
     private final Set<Integer> numbers;
 
-    public LottoNumber(Set<Integer> numbers) {
+    public LottoNumbers(Set<Integer> numbers) {
         validate(numbers);
         this.numbers = new HashSet<>(numbers);
     }
 
-    public Prize calculatePrize(LottoNumber winningLotto) {
+    public Prize calculatePrize(LottoNumbers winningLotto) {
         int winCount = 0;
         for (Integer number : this.numbers) {
             if (winningLotto.contains(number)) {
@@ -59,7 +59,7 @@ public class LottoNumber {
         if (o == null || getClass() != o.getClass())
             return false;
 
-        LottoNumber that = (LottoNumber)o;
+        LottoNumbers that = (LottoNumbers)o;
 
         return numbers != null ? numbers.equals(that.numbers) : that.numbers == null;
     }

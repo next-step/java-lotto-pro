@@ -12,12 +12,12 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 
-class LottoNumberTest {
+class LottoNumbersTest {
     @ParameterizedTest
     @NullSource
     @MethodSource("로또번호")
     void 로또번호_생성하기(Set<Integer> numbers) {
-        assertThatThrownBy(() -> new LottoNumber(numbers))
+        assertThatThrownBy(() -> new LottoNumbers(numbers))
             .isInstanceOf(IllegalStateException.class);
     }
 
@@ -32,7 +32,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @MethodSource("로또번호_및_당첨번호")
     void 당첨번호와_일치하는_개수_구하기(Set<Integer> lottoNumbers, Set<Integer> winningNumbers, Prize prize) {
-        assertThat(new LottoNumber(lottoNumbers).calculatePrize(new LottoNumber(winningNumbers)))
+        assertThat(new LottoNumbers(lottoNumbers).calculatePrize(new LottoNumbers(winningNumbers)))
             .isEqualTo(prize);
     }
 

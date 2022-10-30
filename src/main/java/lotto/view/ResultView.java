@@ -7,15 +7,15 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
 import lotto.domain.Prize;
 
 public class ResultView {
 
-    public static void printPurchaseNumbers(List<LottoNumber> purchaseLottoList) {
-        for (LottoNumber lottoNumber : purchaseLottoList) {
-            System.out.println(lottoNumber);
+    public static void printPurchaseNumbers(List<LottoNumbers> purchaseLottoList) {
+        for (LottoNumbers lottoNumbers : purchaseLottoList) {
+            System.out.println(lottoNumbers);
         }
         System.out.println();
     }

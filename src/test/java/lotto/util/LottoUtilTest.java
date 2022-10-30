@@ -8,7 +8,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 
 class LottoUtilTest {
     @Test
@@ -23,9 +23,9 @@ class LottoUtilTest {
     @Test
     void 당첨번호를_규칙대로_파싱후_객체를_반환한다() {
         assertThat(LottoUtil.toLottoNumber("1,2,3,4,5,6")).isEqualTo(
-            new LottoNumber(new HashSet<>(asList(1, 2, 3, 4, 5, 6))));
+            new LottoNumbers(new HashSet<>(asList(1, 2, 3, 4, 5, 6))));
         assertThat(LottoUtil.toLottoNumber("1 , 2 , 3 , 4 , 5 , 6")).isEqualTo(
-            new LottoNumber(new HashSet<>(asList(1, 2, 3, 4, 5, 6))));
+            new LottoNumbers(new HashSet<>(asList(1, 2, 3, 4, 5, 6))));
         assertThatThrownBy(() -> LottoUtil.toLottoNumber("1 , 2 , 3 , 4 , 5 , 6, 7"))
             .isInstanceOf(IllegalStateException.class);
         assertThatThrownBy(() -> LottoUtil.toLottoNumber("1 , 2 , 3 , 4 , 5 , 5"))
