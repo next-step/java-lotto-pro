@@ -3,7 +3,7 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import calculator.domain.Input;
+import lotto.domain.Input;
 import lotto.util.Constants;
 
 public class InputTest {
@@ -14,20 +14,14 @@ public class InputTest {
     }
     
     @Test
-    @DisplayName("구입금액_검증_음수")
-    public void input_validate_negative() {
-        assertThatThrownBy(() -> new Input("-14000")).hasMessage(Constants.ERR_NEGATIVE_VALUE);
-    }
-    
-    @Test
     @DisplayName("구입금액_검증_null")
     public void input_validate_null() {
-        assertThatThrownBy(() -> new Input(null)).hasMessage(Constants.ERR_VALUE_NOT_VALID);
+        assertThatThrownBy(() -> new Input(null)).hasMessage(Constants.ERR_NULL_VALUE);
     }
     
     @Test
     @DisplayName("구입금액_검증_빈값")
     public void input_validate_emtpy() {
-        assertThatThrownBy(() -> new Input("")).hasMessage(Constants.ERR_VALUE_NOT_VALID);
+        assertThatThrownBy(() -> new Input("")).hasMessage(Constants.ERR_NULL_VALUE);
     }
 }
