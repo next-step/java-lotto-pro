@@ -1,7 +1,7 @@
 package step3.view;
 
 import java.util.stream.Collectors;
-import step3.domain.Figures;
+import step3.domain.Result;
 import step3.domain.Lotto;
 import step3.domain.Lottos;
 import step3.domain.Rank;
@@ -39,7 +39,7 @@ public class OutputView {
         System.out.format(PROFIT_RATE, rate.printRate());
     }
 
-    public static void showFigures(Figures figures) {
+    public static void showFigures(Result figures) {
         StringBuilder result = new StringBuilder();
         String figuresTitle = "당첨 통계\n---------\n";
         result.append(figuresTitle);
