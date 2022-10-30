@@ -4,5 +4,5 @@ import java.util.Set;
 
 public interface WinningNumberRole {
 
-    Set<Integer> execute(String winningNumber);
+    Set<Integer> createWinningNumber(String winningNumber);
 }

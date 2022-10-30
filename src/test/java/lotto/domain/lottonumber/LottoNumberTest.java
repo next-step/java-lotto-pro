@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import lotto.domain.lottonumber.factory.LottoNumberFactory;
+import lotto.domain.lottonumber.factory.LottoNumberFactoryImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,10 +15,12 @@ class LottoNumberTest {
 
     LottoNumber lottoNumber;
     Iterator<Integer> iterator;
+    LottoNumberFactory lottoNumberFactory;
 
     @BeforeEach
     void beforeEach() {
-        lottoNumber = new LottoNumber();
+        lottoNumberFactory = new LottoNumberFactoryImpl();
+        lottoNumber = lottoNumberFactory.createLottoNumber();
         iterator = lottoNumber.createIterator();
     }
 

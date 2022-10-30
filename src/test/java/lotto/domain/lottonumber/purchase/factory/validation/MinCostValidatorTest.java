@@ -1,6 +1,5 @@
-package lotto.domain.lottonumber.purchase.validation;
+package lotto.domain.lottonumber.purchase.factory.validation;
 
-import static lotto.domain.lottonumber.purchase.validation.PurchaseValidator.ERROR_MIN_COST_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
@@ -18,6 +17,6 @@ class MinCostValidatorTest {
     void minCost(String success, String ex) {
         assertThatNoException().isThrownBy(() -> validator.validate(success));
         assertThatIllegalArgumentException().isThrownBy(() -> validator.validate(ex))
-                .withMessageContaining(ERROR_MIN_COST_MESSAGE);
+                .withMessageContaining("[ERROR]");
     }
 }

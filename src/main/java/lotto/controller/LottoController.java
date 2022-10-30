@@ -1,37 +1,37 @@
 package lotto.controller;
 
-import lotto.domain.service.LottoService;
+import lotto.domain.LottoGame;
 import lotto.view.LottoView;
 
 public class LottoController {
 
-    private final LottoService service;
+    private final LottoGame lottoGame;
     private final LottoView view;
 
-    public LottoController(LottoService service, LottoView view) {
-        this.service = service;
+    public LottoController(LottoGame lottoGame, LottoView view) {
+        this.lottoGame = lottoGame;
         this.view = view;
     }
 
     public void createLottoNumbers() {
         Runnable readPurchase = () -> {
-            service.savePurchase(view.readPurchase());
-            service.saveLottoNumbers();
-            view.printLottoNumbers(service.findLottoNumbers());
+            lottoGame.createPurchase(view.readPurchase());
+            lottoGame.createLottoNumbers();
+            view.printLottoNumbers(lottoGame.getLottoNumbers());
         };
         while (isNotComplete(readPurchase)) {
         }
     }
 
     public void createLotto() {
-        Runnable readWinningNumber = () -> service.saveLottoGame(view.readWinningNumber());
+        Runnable readWinningNumber = () -> lottoGame.createLottoNumberMatcher(view.readWinningNumber());
         while (isNotComplete(readWinningNumber)) {
         }
     }
 
     public void startLotto() {
-        view.printResult(service.result());
-        view.printProfitMargin(service.makeProfitMargin());
+        view.printResult(lottoGame.result());
+        view.printProfitMargin(lottoGame.makeProfitMargin());
     }
 
     private boolean isNotComplete(Runnable runnable) {

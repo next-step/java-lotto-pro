@@ -14,13 +14,13 @@ class CommaSplitterTest {
     @DisplayName("당첨번호는 중복 된 값을 못가짐")
     @CsvSource(value = "1, 2, 3, 4, 5, 5:5", delimiter = ':')
     void duplicate(String winningNumber, int expected) {
-        assertThat(role.execute(winningNumber)).hasSize(expected);
+        assertThat(role.createWinningNumber(winningNumber)).hasSize(expected);
     }
 
     @ParameterizedTest
     @DisplayName("공백이 있어도 쉼표로 split 하여 생성가능")
     @CsvSource(value = "1, 2, 3, 4, 5, 6:6", delimiter = ':')
     void split(String winningNumber, int expected) {
-        assertThat(role.execute(winningNumber)).hasSize(expected);
+        assertThat(role.createWinningNumber(winningNumber)).hasSize(expected);
     }
 }

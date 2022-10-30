@@ -1,4 +1,4 @@
-package lotto.domain.lottonumber.purchase.validation;
+package lotto.domain.lottonumber.purchase.factory.validation;
 
 import java.util.Arrays;
 import java.util.List;

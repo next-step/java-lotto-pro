@@ -1,6 +1,5 @@
-package lotto.domain.lottonumber.purchase.validation;
+package lotto.domain.lottonumber.purchase.factory.validation;
 
-import static lotto.domain.lottonumber.purchase.validation.PurchaseValidator.ERROR_NUMBER_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
@@ -16,6 +15,6 @@ class NumberValidatorTest {
     void 숫자면_통과_아니면_EX(String success, String ex) {
         assertThatNoException().isThrownBy(() -> validator.validate(success));
         assertThatIllegalArgumentException().isThrownBy(() -> validator.validate(ex))
-                .withMessageContaining(ERROR_NUMBER_MESSAGE);
+                .withMessageContaining("[ERROR]");
     }
 }

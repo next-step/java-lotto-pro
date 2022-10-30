@@ -2,7 +2,6 @@ package lotto.domain.lottonumber.purchase;
 
 import lotto.domain.lottonumber.purchase.role.LottoNumberCountMaker;
 import lotto.domain.lottonumber.purchase.role.PurchaseRole;
-import lotto.domain.lottonumber.purchase.validation.DefaultPurchaseValidator;
 
 public class Purchase {
 
@@ -15,13 +14,12 @@ public class Purchase {
     private PurchaseRole role;
 
     public Purchase(String purchase) {
-        new DefaultPurchaseValidator().validate(purchase);
         this.purchase = purchase;
         this.role = new LottoNumberCountMaker();
     }
 
     public int makeLottoNumberCount() {
-        return role.execute(purchase);
+        return role.makeLottoNumberCount(purchase);
     }
 
     public String makeProfitMargin(int totalProfit) {

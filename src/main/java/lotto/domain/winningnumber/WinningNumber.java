@@ -25,7 +25,7 @@ public class WinningNumber {
     }
 
     private Set<Integer> createWinningNumber(String winningNumber, WinningNumberRole role) {
-        return role.execute(winningNumber);
+        return role.createWinningNumber(winningNumber);
     }
 
     private int isContainsWinningNumberThenAddMatchNumber(Iterator<Integer> lottoNumberIterator, int matchNumber) {

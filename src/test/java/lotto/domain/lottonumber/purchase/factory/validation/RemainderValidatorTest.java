@@ -1,6 +1,5 @@
-package lotto.domain.lottonumber.purchase.validation;
+package lotto.domain.lottonumber.purchase.factory.validation;
 
-import static lotto.domain.lottonumber.purchase.validation.PurchaseValidator.ERROR_REMAINDER_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
@@ -18,6 +17,6 @@ class RemainderValidatorTest {
     void remain(String success, String ex) {
         assertThatNoException().isThrownBy(() -> validator.validate(success));
         assertThatIllegalArgumentException().isThrownBy(() -> validator.validate(ex))
-                .withMessageContaining(ERROR_REMAINDER_MESSAGE);
+                .withMessageContaining("[ERROR]");
     }
 }
