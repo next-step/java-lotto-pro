@@ -1,6 +1,5 @@
 package step3.domain;
 
-import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
 import java.util.ArrayList;
