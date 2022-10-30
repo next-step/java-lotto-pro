@@ -26,7 +26,7 @@ class LottosTest {
         int money = 10000;
         List<Integer> arrangeNumber = new ArrayList<>();
 
-        for (int i = 0; i <= 45; i++) {
+        for (int i = 1; i <= 45; i++) {
             arrangeNumber.add(i);
         }
 
