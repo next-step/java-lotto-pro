@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Money {
 
     private static final int MIN_AMOUNT = 0;
-    private final int amount;
+    private int amount;
     private int investment;
 
     public Money(int amount) {
@@ -30,6 +30,7 @@ public class Money {
             throw new RuntimeException(ErrorStatus.CAN_NOT_PURCHASE_LOTTO.getMessage());
         }
         int count = Math.floorDiv(amount, price);
+        amount -= count * price;
         investment = count * price;
         return count;
     }
