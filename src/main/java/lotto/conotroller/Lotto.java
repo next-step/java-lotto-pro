@@ -19,7 +19,7 @@ public class Lotto {
         OutputView.println(lottoLottery.lotteryHistory());
 
         WinningNumbers winningNumbers = WinningNumbers.of(InputView.inputLastWeeksWinningNumber(), InputView.inputBonusNumber());
-        WinningRanks winningRanks = lottoLottery.checkWinningRank(winningNumbers);
+        WinningRanks winningRanks = lottoLottery.matchWinningRank(winningNumbers);
         OutputView.printStatistics(winningRanks.statistics());
         OutputView.printEarningRatio(winningRanks.calculateEarningRatio(lottoPurchaseAmount));
     }

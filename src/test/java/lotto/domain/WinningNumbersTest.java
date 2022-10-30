@@ -27,6 +27,6 @@ class WinningNumbersTest {
     void check_winning_rank() {
         WinningNumbers winningNumbers = WinningNumbers.of("1, 2, 3, 4, 5, 6", 7);
         LottoNumbers lottoNumbers = LottoNumbers.of(new ManualNumberGenerator("1, 2, 3, 4, 5, 7"));
-        assertThat(winningNumbers.checkWinningRank(lottoNumbers)).isEqualTo(WinningRank.SECOND);
+        assertThat(winningNumbers.matchWinningRank(lottoNumbers)).isEqualTo(WinningRank.SECOND);
     }
 }

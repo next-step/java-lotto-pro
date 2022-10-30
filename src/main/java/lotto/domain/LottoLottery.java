@@ -22,9 +22,9 @@ public class LottoLottery {
         return new LottoLottery(lottoLottery);
     }
 
-    public WinningRanks checkWinningRank(WinningNumbers winningNumbers) {
+    public WinningRanks matchWinningRank(WinningNumbers winningNumbers) {
         return WinningRanks.of(this.lottoLottery.stream()
-                .map(winningNumbers::checkWinningRank)
+                .map(winningNumbers::matchWinningRank)
                 .collect(Collectors.toList()));
     }
 

@@ -25,7 +25,7 @@ public class WinningNumbers {
         }
     }
 
-    public WinningRank checkWinningRank(LottoNumbers lottoNumbers) {
+    public WinningRank matchWinningRank(LottoNumbers lottoNumbers) {
         return WinningRank.match(lottoNumbers.containCount(winningNumbers), lottoNumbers.isContainNumber(bonusBall));
     }
 
