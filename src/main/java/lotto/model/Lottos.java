@@ -10,10 +10,9 @@ public class Lottos {
 		this.lottos = lottos;
 	}
 
-	public Ranks match(final Lotto winnerLotto) {
+	public Ranks match(final Winner winner) {
 		return lottos.stream()
-			.mapToInt(lotto -> lotto.match(winnerLotto))
-			.mapToObj(Rank::from)
+			.map(winner::match)
 			.collect(Collectors.collectingAndThen(Collectors.toList(), Ranks::new));
 	}
 

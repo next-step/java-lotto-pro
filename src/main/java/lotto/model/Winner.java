@@ -15,4 +15,8 @@ public class Winner {
 			throw new IllegalArgumentException("보너스 번호는 승리 번호에 포함될 수 없다.");
 		}
 	}
+
+	public Rank match(final Lotto playerLotto) {
+		return Rank.match(lotto.match(playerLotto), playerLotto.matchBonus(bonusNumber));
+	}
 }
