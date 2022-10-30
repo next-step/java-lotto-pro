@@ -1,6 +1,7 @@
 package step3.domain;
 
 public class WinningLottoNumber {
+    private static final String BONUS_NUMBER_CAN_NOT_INCLUDED_IN_WINNING_NUMBERS = "당첨번호와 보너스 번호는 중복될 수 없습니다.";
     private final LottoNumbers winningLottoNumbers;
     private final LottoNumber bonusNumber;
 
@@ -12,7 +13,7 @@ public class WinningLottoNumber {
 
     private void validateBonusNumberIncludedInWinningNumbers() {
         if (this.winningLottoNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("당첨번호와 보너스 번호는 중복될 수 없습니다.");
+            throw new IllegalArgumentException(BONUS_NUMBER_CAN_NOT_INCLUDED_IN_WINNING_NUMBERS);
         }
     }
 
