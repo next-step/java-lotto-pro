@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Game {
 
-    private final List<LottoResult> lottoResults = new ArrayList<>();
+    private List<LottoResult> lottoResults = new ArrayList<>();
     private LottoResult winLottoResult;
     private int lottoBuyCount;
     private int money;
@@ -65,9 +65,11 @@ public class Game {
     }
 
     public List<LottoResult> getLottoResults() {
+        List<LottoResult> result = new ArrayList<>();
         for (int i = 0; i < lottoBuyCount; i++) {
-            this.lottoResults.add(lottoGenerator.createLottoResult());
+            result.add(lottoGenerator.createLottoResult());
         }
+        this.lottoResults = result;
         return this.lottoResults;
     }
 
