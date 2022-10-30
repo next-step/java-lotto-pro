@@ -14,8 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
 
-
-
     List<LottoNumber> getLottoNumbers(int... numbers) {
 
         List<LottoNumber> lottoNumbers = new ArrayList();

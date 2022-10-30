@@ -1,8 +1,6 @@
 package step3.controller;
 
-import step3.model.LottoMachine;
-import step3.model.LottoMoney;
-import step3.model.LottoNumber;
+import step3.model.*;
 import step3.model.dto.LottoResultDto;
 import step3.model.dto.LottosNumberDto;
 import step3.parser.LottoInputParser;
@@ -15,8 +13,9 @@ public class LottoController {
 
     public void start() {
         int price = LottoConsoleView.inputPurchasingAmount();
+        LottoMoney lottoMoney = new LottoMoney(price);
 
-        LottoMachine lottoMachine = new LottoMachine(new LottoMoney(price));
+        LottoMachine lottoMachine = new LottoMachine(lottoMoney,new Lottos(LottoFactory.createLottos(lottoMoney)));
         LottosNumberDto lottosNumberDto = lottoMachine.getLottoNumber();
         LottoOutputView.printPurchasingLottos(lottosNumberDto);
 

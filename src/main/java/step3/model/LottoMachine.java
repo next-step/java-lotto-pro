@@ -5,6 +5,7 @@ import step3.model.dto.LottosNumberDto;
 import step3.model.dto.RankDto;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -15,9 +16,9 @@ public class LottoMachine {
     private final LottoMoney lottoMoney;
     private static final String DUPLICATE_NUMBER_MESSAGE = "보너스번호는 유일한 번호만 허용합니다";
 
-    public LottoMachine(LottoMoney lottoMoney) {
+    public LottoMachine(LottoMoney lottoMoney,Lottos lottos) {
         this.lottoMoney = lottoMoney;
-        this.lottos = new Lottos(LottoFactory.createLottos(lottoMoney));
+        this.lottos = lottos;
     }
 
     public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers) {
