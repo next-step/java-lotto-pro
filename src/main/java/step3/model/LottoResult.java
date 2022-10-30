@@ -3,15 +3,18 @@ package step3.model;
 import step3.constant.ErrorMessageConstant;
 import step3.constant.LottoConstant;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoResult {
     List<LottoNumber> lottoNumbers;
 
     public LottoResult(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers.stream().distinct().collect(Collectors.toList());
-        checkLottoOutOfSize();
+        checkLottoOutOfSize((int) lottoNumbers.stream().distinct().count());
+        this.lottoNumbers = lottoNumbers.stream().distinct().sorted().collect(Collectors.toList());
     }
 
     public LottoResult(String[] lottoNumbersText) {
@@ -19,7 +22,6 @@ public class LottoResult {
             throw new RuntimeException(ErrorMessageConstant.EMPTY_TEXT);
         }
         this.lottoNumbers = getLottoNumbersFromTexts(lottoNumbersText);
-        checkLottoOutOfSize();
     }
 
     private List<LottoNumber> getLottoNumbersFromTexts(String[] lottoNumbers) {
@@ -27,13 +29,12 @@ public class LottoResult {
         for (String numberText : lottoNumbers) {
             lottoSet.add(new LottoNumber(numberText));
         }
-        List<LottoNumber> result = new ArrayList<>(lottoSet);
-        Collections.sort(result);
-        return result;
+        checkLottoOutOfSize(lottoSet.size());
+        return new ArrayList<>(lottoSet).stream().sorted().collect(Collectors.toList());
     }
 
-    private void checkLottoOutOfSize() {
-        if (this.lottoNumbers.size() != LottoConstant.PICK_LOTTO_MAX_NUM) {
+    private void checkLottoOutOfSize(int lottoNumbersSize) {
+        if (lottoNumbersSize != LottoConstant.PICK_LOTTO_MAX_NUM) {
             throw new RuntimeException(ErrorMessageConstant.NOT_LOTTO_SIZE);
         }
     }
