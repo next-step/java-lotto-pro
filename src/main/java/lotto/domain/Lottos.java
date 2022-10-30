@@ -1,9 +1,9 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -21,8 +21,8 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public Stream<Lotto> stream() {
-        return this.lottos.stream();
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 
     public int size() {
