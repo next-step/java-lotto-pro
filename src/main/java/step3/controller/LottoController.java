@@ -9,7 +9,7 @@ import step3.domain.GradeCalculator;
 import step3.domain.Grades;
 import step3.domain.Lotto;
 import step3.domain.LottoGenerator;
-import step3.domain.LottoQuantity;
+import step3.domain.LottoQuantities;
 import step3.domain.LottoWinning;
 import step3.domain.Lottos;
 import step3.domain.ProfitRateCalculator;
@@ -37,15 +37,26 @@ public class LottoController {
     }
 
     private Lottos getLottos(Integer amount) {
-        LottoQuantity quantity = LottoQuantity.of(amount);
-        ResultView.printLottoQuantityMessage(quantity);
-        List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < quantity.getQuantity(); i++) {
-            lottoList.add(LottoGenerator.generate());
-        }
-        Lottos lottos = new Lottos(lottoList);
+        InputView.printRequestManualLottoCount();
+        String quantity = scanner.nextLine();
+        LottoQuantities lottoQuantities = LottoQuantities.of(amount, Integer.parseInt(quantity));
+        InputView.printRequestManualLottoNumbers();
+        Lottos lottos = getLottosByQuantity(lottoQuantities);
+        ResultView.printLottoQuantityMessage(lottoQuantities);
         ResultView.printLottosNumberMessage(lottos);
         return lottos;
+    }
+
+    private Lottos getLottosByQuantity(LottoQuantities lottoQuantities) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < lottoQuantities.getManualLottoQuantity(); i++) {
+            String numbers = scanner.nextLine();
+            lottos.add(Lotto.of(getStringToNumbers(numbers)));
+        }
+        for (int i = 0; i < lottoQuantities.getAutoLottoQuantity(); i++) {
+            lottos.add(LottoGenerator.generate());
+        }
+        return new Lottos(lottos);
     }
 
     private LottoWinning getLottoWinning() {

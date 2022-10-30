@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoGenerator {
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
 
     public static Lotto generate() {
         List<Integer> generatedNumbers = getAllShuffleNumber();
@@ -26,7 +28,7 @@ public class LottoGenerator {
 
     private static List<Integer> getAllLottoNumbers() {
         List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             numbers.add(i);
         }
         return numbers;
