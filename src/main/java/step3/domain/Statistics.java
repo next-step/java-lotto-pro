@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Statistics {
 
+    private static final int DECIMAL_PLACES = 2;
+
     private final List<Rank> ranks;
 
     public Statistics(Collection<Rank> ranks) {
@@ -14,13 +16,11 @@ public class Statistics {
     }
 
     public int count(Rank rank) {
-        return (int) ranks.stream()
-            .filter(rank::equals)
-            .count();
+        return (int) ranks.stream().filter(rank::equals).count();
     }
 
     public BigDecimal totalReward() {
-        if(ranks.isEmpty()) {
+        if (ranks.isEmpty()) {
             return BigDecimal.ZERO;
         }
 
@@ -28,6 +28,6 @@ public class Statistics {
         int buyMoney = ranks.size() * 1_000;
 
         return BigDecimal.valueOf(totalReward)
-            .divide(BigDecimal.valueOf(buyMoney), 2, BigDecimal.ROUND_DOWN);
+            .divide(BigDecimal.valueOf(buyMoney), DECIMAL_PLACES, BigDecimal.ROUND_DOWN);
     }
 }
