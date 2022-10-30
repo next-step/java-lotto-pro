@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoIssuer {
-
-    public static final int LOTTO_PRICE = 1000;
+    public static final Money LOTTO_PRICE = new Money(1000);
 
     public static List<Lotto> issue(Money money) {
         List<Lotto> lottoList = new ArrayList<>();

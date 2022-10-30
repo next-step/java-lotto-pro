@@ -25,6 +25,6 @@ public class WinningResultBag {
                 + MATCH_FOUR_REWARD * countByWinningResult(WinningResult.MATCH_FOUR)
                 + MATCH_FIVE_REWARD * countByWinningResult(WinningResult.MATCH_FIVE)
                 + MATCH_SIX_REWARD * countByWinningResult(WinningResult.MATCH_SIX);
-        return reward / ((double) LOTTO_PRICE * results.size());
+        return reward / ((double) LOTTO_PRICE.getAmount() * results.size());
     }
 }

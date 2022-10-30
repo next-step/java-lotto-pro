@@ -22,11 +22,21 @@ public class Money {
         }
     }
 
+    public void minus(Money minusMoney) {
+        if (amount >= minusMoney.amount) {
+            amount -= minusMoney.amount;
+        }
+    }
+
     public int getAmount() {
         return amount;
     }
 
     public boolean isEqualsOrGreater(int operandAmount) {
         return amount >= operandAmount;
+    }
+
+    public boolean isEqualsOrGreater(Money operandMoney) {
+        return amount >= operandMoney.amount;
     }
 }
