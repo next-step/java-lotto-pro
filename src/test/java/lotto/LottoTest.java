@@ -12,7 +12,7 @@ import lotto.domain.TicketList;
 public class LottoTest {    
     Lotto lotto;
     TicketList myTickets = new TicketList();
-    Ticket winningTicket = new Ticket("1,2,3,4,5,6");
+    String winningTicketStr = "1,2,3,4,5,6";
     
     @Test
     @DisplayName("구입금액에_따른_발급로또_개수_확인")
@@ -32,7 +32,7 @@ public class LottoTest {
         myTickets.addTicket(new Ticket(param));
         
         lotto = new Lotto(myTickets);
-        assertThat(lotto.getResultStr(winningTicket)).contains(expected);
+        assertThat(lotto.getResultStr(winningTicketStr)).contains(expected);
     }  
     
     @Test
@@ -42,6 +42,6 @@ public class LottoTest {
         myTickets.addTicket(new Ticket("7,8,9,10,11,12"));
         
         lotto = new Lotto(myTickets);
-        assertThat(lotto.getResultStr(winningTicket)).contains("총 수익률은 2.50입니다.");
+        assertThat(lotto.getResultStr(winningTicketStr)).contains("총 수익률은 2.50입니다.");
     } 
 }
