@@ -15,14 +15,20 @@ public class StatisticsGenerator {
         return lottoTicket.check(winninglotto);
     }
 
-    private static Double calculateYields(final Ranks ranks, final int countOfLotto) {
+    private static Yields calculateYields(final Ranks ranks, final int countOfLotto) {
         double totalWinnerAmount = 0;
         Map<Rank, Integer> countsOfRanks = ranks.getCountsOfRanks();
+
         for(Map.Entry<Rank, Integer> rankToCount : countsOfRanks.entrySet()) {
             Rank rank = rankToCount.getKey();
             totalWinnerAmount += rank.getWinningMoney() * rankToCount.getValue();
         }
+
         double investmentAmount = countOfLotto * LOTTO_PRICE;
-        return totalWinnerAmount / investmentAmount;
+        if(totalWinnerAmount == 0 && investmentAmount == 0) {
+            return new Yields(0);
+        }
+
+        return new Yields(totalWinnerAmount / investmentAmount);
     }
 }

@@ -27,7 +27,7 @@ public class ResultView {
         for (Map.Entry<Rank, Integer> countOfRanks : statisticsResult.getCountsOfRanks().entrySet()) {
             printCountOfRanks(countOfRanks);
         }
-        ResultView.printMessage(ConsoleMessage.OUTPUT_YIELDS.getMessage(), statisticsResult.getYields());
+        ResultView.printMessage(ConsoleMessage.OUTPUT_YIELDS.getMessage(), statisticsResult.getYields().getValue());
     }
 
     private static void printCountOfRanks(final Map.Entry<Rank, Integer> rankToCount) {
