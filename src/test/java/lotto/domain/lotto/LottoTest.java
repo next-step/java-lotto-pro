@@ -32,9 +32,9 @@ public class LottoTest {
     }
 
     @ParameterizedTest
-    @DisplayName("winnerLotto와 자기 자신을 비교하여 winnerLotto")
+    @DisplayName("당첨 로또와 자기가 구매한 로또번호들과 비교하여 일치하는 개수 반환")
     @MethodSource("lottoCompareWinnerLotto")
-    void match_lotto_number_compare_winn_lotto(Lotto lotto, Lotto winnerLotto, int expect) {
+    void match_lotto_number_compare_winn_lotto(Lotto lotto, WinnerLotto winnerLotto, int expect) {
         assertThat(lotto.matchCount(winnerLotto)).isEqualTo(expect);
     }
 
@@ -55,8 +55,9 @@ public class LottoTest {
     private static Stream<Arguments> lottoCompareWinnerLotto() {
         List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(Collectors.toList());
         List<LottoNumber> winnerLottoNumbers = Stream.of(1, 20, 3, 5, 4, 7).map(LottoNumber::new).collect(Collectors.toList());
+        LottoNumber bonus = new LottoNumber(45);
         return Stream.of(
-                Arguments.of(new Lotto(lottoNumbers), new Lotto(winnerLottoNumbers), 4)
+                Arguments.of(new Lotto(lottoNumbers), new WinnerLotto(winnerLottoNumbers, bonus), 4)
         );
     }
 }

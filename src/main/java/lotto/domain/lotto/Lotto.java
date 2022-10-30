@@ -22,9 +22,9 @@ public class Lotto {
         }
     }
 
-    public int matchCount(Lotto winnerLotto) {
+    public int matchCount(WinnerLotto winnerLotto) {
         return (int) this.lottoNumbers.stream()
-                .filter(winnerLotto::contain)
+                .filter(winnerLotto::containLottoNumber)
                 .count();
     }
 
