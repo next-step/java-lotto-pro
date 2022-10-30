@@ -1,15 +1,18 @@
 package step3.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int CONTAIN_VALUE = 1;
     public static final int NOT_CONTAIN_VALUE = 0;
     private List<LottoNumber> numbers;
     private Lotto(){}
-    public static Lotto create(List<LottoNumber> numbers) {
+    public static Lotto create(List<Integer> numbers) {
         Lotto lotto = new Lotto();
-        lotto.numbers = numbers;
+        lotto.numbers = numbers.stream()
+                .map(number -> new LottoNumber(number))
+                .collect(Collectors.toList());
 
         return lotto;
     }

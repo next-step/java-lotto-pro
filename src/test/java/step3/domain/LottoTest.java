@@ -17,10 +17,7 @@ public class LottoTest {
     @CsvSource(value = {"1:true", "10:true", "30:true", "45:false", "2:false"}, delimiterString = ":")
     @DisplayName("6개의 번호에 특정 번호가 있는지 확인한다.")
     void 로또_번호_비교_테스트(int number, boolean result){
-        Lotto lotto = Lotto.create(Arrays.asList(
-                new LottoNumber(1),new LottoNumber(10),new LottoNumber(15),
-                new LottoNumber(20),new LottoNumber(25),new LottoNumber(30)
-        ));
+        Lotto lotto = Lotto.create(Arrays.asList(1,10,15,20,25,30));
 
         assertThat(lotto.isContain(new LottoNumber(number))).isEqualTo(result);
     }
@@ -28,15 +25,8 @@ public class LottoTest {
     @Test
     @DisplayName("당첨 번호와 구매 번호가 몇개 맞았는지 확인한다.")
     void 당첨_구매_비교(){
-        Lotto win = Lotto.create(Arrays.asList(
-                new LottoNumber(5),new LottoNumber(15),new LottoNumber(25),
-                new LottoNumber(35),new LottoNumber(45),new LottoNumber(30)
-        ));
-
-        Lotto buy = Lotto.create(Arrays.asList(
-                new LottoNumber(1),new LottoNumber(10),new LottoNumber(15),
-                new LottoNumber(20),new LottoNumber(25),new LottoNumber(30)
-        ));
+        Lotto win = Lotto.create(Arrays.asList(5,15,25,35,45,30));
+        Lotto buy = Lotto.create(Arrays.asList(1,10,15,20,25,30));
 
         assertAll(
                 () -> assertThat(win.containNumberCount(buy)).isEqualTo(3),
