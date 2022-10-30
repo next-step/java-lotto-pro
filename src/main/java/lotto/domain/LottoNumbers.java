@@ -2,21 +2,20 @@ package lotto.domain;
 
 import static lotto.util.LottoUtil.*;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private final Set<Integer> numbers;
+    private final Set<LottoNumber> numbers;
 
-    public LottoNumbers(Set<Integer> numbers) {
+    public LottoNumbers(Set<LottoNumber> numbers) {
         validate(numbers);
-        this.numbers = new HashSet<>(numbers);
+        this.numbers = numbers;
     }
 
     public Prize calculatePrize(LottoNumbers winningLotto) {
         int winCount = 0;
-        for (Integer number : this.numbers) {
+        for (LottoNumber number : this.numbers) {
             if (winningLotto.contains(number)) {
                 winCount++;
             }
@@ -24,25 +23,16 @@ public class LottoNumbers {
         return Prize.of(winCount);
     }
 
-    private void validate(Set<Integer> numbers) {
+    private void validate(Set<LottoNumber> numbers) {
         if (numbers == null) {
             throw new IllegalStateException();
         }
         if (numbers.size() != LOTTO_NUMBERS_COUNT) {
             throw new IllegalStateException("로또번호는 6개의 숫자여야합니다.");
         }
-        for (Integer number : numbers) {
-            validateRange(number);
-        }
     }
 
-    private void validateRange(Integer number) {
-        if (number > END_NUMBER || number < BEGIN_NUMBER) {
-            throw new IllegalStateException("유효한 숫자 범위가 아닙니다.");
-        }
-    }
-
-    private boolean contains(Integer number) {
+    private boolean contains(LottoNumber number) {
         return this.numbers.contains(number);
     }
 

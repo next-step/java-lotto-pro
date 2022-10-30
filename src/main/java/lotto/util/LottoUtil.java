@@ -4,11 +4,11 @@ import static java.util.stream.Collectors.*;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 
 public class LottoUtil {
@@ -20,24 +20,27 @@ public class LottoUtil {
     private LottoUtil() {
     }
 
-    public static Set<Integer> generate() {
-        List<Integer> numbers = IntStream.rangeClosed(BEGIN_NUMBER, END_NUMBER)
+    public static Set<LottoNumber> generate() {
+        List<Integer> intNumbers = IntStream.rangeClosed(BEGIN_NUMBER, END_NUMBER)
             .boxed()
             .collect(toList());
-        Collections.shuffle(numbers);
-        List<Integer> lottoNumbers = numbers.subList(0, LOTTO_NUMBERS_COUNT);
-        Collections.sort(lottoNumbers);
-        return new HashSet<>(lottoNumbers);
+        Collections.shuffle(intNumbers);
+        List<Integer> subNumbers = intNumbers.subList(0, LOTTO_NUMBERS_COUNT);
+        Collections.sort(subNumbers);
+        return subNumbers.stream()
+            .map(LottoNumber::new)
+            .collect(toSet());
     }
 
     public static LottoNumbers toLottoNumber(String numberString) {
         if (hasNotText(numberString)) {
             throw new IllegalStateException("당첨번호 입력을 확인해주세요. ','로 구분된 서로다른 6개 숫자여야합니다.");
         }
-        List<Integer> numbers = Arrays.stream(numberString.split(DELIMITER))
+        Set<LottoNumber> numbers = Arrays.stream(numberString.split(DELIMITER))
             .map(s -> Integer.parseInt(s.trim()))
-            .collect(toList());
-        return new LottoNumbers(new HashSet<>(numbers));
+            .map(LottoNumber::new)
+            .collect(toSet());
+        return new LottoNumbers(numbers);
     }
 
     private static boolean hasNotText(String text) {
