@@ -24,18 +24,28 @@ public class OutputView {
     public void printStatistics(Reward reward) {
         reward.getKeySet()
                 .stream()
-                .sorted(Comparator.comparing(Rank::getCountOfMatch))
+                .sorted(Comparator.comparing(Rank::getCountOfMatch)
+                        .thenComparing(Rank::getWinningMoney))
                 .filter(rank -> !rank.equals(Rank.MISS))
                 .forEach(rank -> printStatistic(reward, rank));
     }
 
     private void printStatistic(Reward reward, Rank rank) {
         System.out.println(rank.getCountOfMatch()
-                + "개 일치 ("
+                + "개 일치"
+                + generateBonusMatchMessage(rank)
+                + "("
                 + rank.getWinningMoney()
                 + "원)- "
                 + reward.getRankCount(rank)
                 + "개");
+    }
+
+    private String generateBonusMatchMessage(Rank rank) {
+        if (rank.isMatchBonus()) {
+            return ", 보너스 볼 일치";
+        }
+        return " ";
     }
 
     public void printWinningMoneyRate(Money payment, Reward reward) {

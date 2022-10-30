@@ -49,4 +49,8 @@ public enum Rank {
         return this.countOfMatch == countOfMatch
                 && this.matchBonus == matchBonus;
     }
+
+    public boolean isMatchBonus() {
+        return matchBonus;
+    }
 }
