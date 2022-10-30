@@ -1,5 +1,7 @@
 package study.step3.domain.lottonumber;
 
+import study.step3.message.LottoNumberMessage;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -60,7 +62,6 @@ public class LottoNumbers {
 
     @Override
     public String toString() {
-        String summary = lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.joining(", "));
-        return "[" + summary + "]";
+        return lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.joining(", "));
     }
 }

@@ -3,6 +3,7 @@ package study.step3.domain.lottonumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.step3.domain.utils.LottoNumbersGenerator;
+import study.step3.message.LottoNumberMessage;
 
 import java.util.Arrays;
 import java.util.List;
