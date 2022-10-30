@@ -50,6 +50,15 @@ public class LottoNumbers {
         }
     }
 
+    public int match(LottoNumbers target) {
+        return (int) lottoNumbers.stream().filter(target::contains).count();
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

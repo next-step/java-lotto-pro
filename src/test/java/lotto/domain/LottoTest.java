@@ -58,7 +58,15 @@ public class LottoTest {
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 4)),
                 Arguments.of(Arrays.asList(500)),
                 Arguments.of(Arrays.asList(1, 1, 1, 1, 1, 1))
-                );
+        );
+    }
+
+    @Test
+    @DisplayName("매치 카운트 확인")
+    void match() {
+        Lotto source = new Lotto("1,2,3,4,5,6");
+        assertThat(source.match(new Lotto("1,2,3,4,5,6"))).isEqualTo(6);
+        assertThat(source.match(new Lotto("7,8,9,10,11,12"))).isEqualTo(0);
     }
 
 }

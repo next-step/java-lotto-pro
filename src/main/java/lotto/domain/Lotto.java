@@ -19,6 +19,10 @@ public class Lotto {
         this.lottoNumbers = LottoNumbers.generate(numbers);
     }
 
+    public int match(Lotto target) {
+        return lottoNumbers.match(target.lottoNumbers);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -31,4 +35,6 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
+
 }

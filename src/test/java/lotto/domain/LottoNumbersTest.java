@@ -28,4 +28,12 @@ public class LottoNumbersTest {
         assertThat(LottoNumbers.generate(Arrays.asList(1,2,3,4,5,6))).isEqualTo(LottoNumbers.generate("1,2,3,4,5,6"));
     }
 
+    @Test
+    @DisplayName("매치 카운트 확인")
+    void match(){
+        LottoNumbers source = LottoNumbers.generate(Arrays.asList(1,2,3,4,5,6));
+        LottoNumbers target = LottoNumbers.generate(Arrays.asList(1,2,3,4,5,6));
+        assertThat(source.match(target)).isEqualTo(6);
+    }
+
 }
