@@ -1,7 +1,5 @@
 package model;
 
-import model.strategy.NumberStrategy;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,7 +8,7 @@ import static common.Constants.ADD_WIN_NUMBER_COUNT;
 
 public class LottoNumber {
 
-    List<Integer> number;
+    private final List<Integer> number;
 
     public LottoNumber(List<Integer> number) {
         Collections.sort(number);

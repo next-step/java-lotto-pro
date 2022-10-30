@@ -5,22 +5,19 @@ import model.strategy.NumberStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lotto {
+public class Seller {
 
     private final List<LottoNumber> lotto;
 
-    public Lotto(int count, NumberStrategy strategy) {
-        lotto = new ArrayList<>();
+    public Seller() {
+        this.lotto = new ArrayList<>();
+    }
+
+    public List<LottoNumber> buy(int count, NumberStrategy strategy) {
         for (int i = 0; i < count; i++) {
             lotto.add(new LottoNumber(strategy.shuffle()));
         }
-    }
 
-    public List<LottoNumber> getLotto() {
         return lotto;
-    }
-
-    public void test() {
-
     }
 }

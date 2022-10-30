@@ -13,13 +13,13 @@ class RankTest {
 
     @Test
     void 당첨번호_결과통계를_보여준다() {
-        List<LottoNumber> buyLotto = Arrays.asList(
-                new LottoNumber(new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)).shuffle())
-        );
+        Money money = new Money(1000);
+        Lottos lottos = new Lottos(money, new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
+
         List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 9, 10);
         Rank rank = new Rank();
 
-        rank.stats(buyLotto, winNumber);
+        rank.stats(lottos, winNumber);
 
         assertThat(rank.getCountRank().get(RANK_ONE)).isZero();
         assertThat(rank.getCountRank().get(RANK_TWO)).isZero();

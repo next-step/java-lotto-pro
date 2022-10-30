@@ -1,5 +1,6 @@
-import model.Lotto;
+import model.Lottos;
 import model.LottoNumber;
+import model.Money;
 import model.strategy.MockStrategy;
 import model.strategy.RandomStrategy;
 import org.junit.jupiter.api.Test;
@@ -13,20 +14,20 @@ import static common.Constants.START_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoTest {
+class LottosTest {
 
     @Test
     void 입력한_금액만큼_로또를구매한다() {
         int money = 10000;
-        List<LottoNumber> buyLotto = new Lotto(money, new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))).buy();
-        assertThat(buyLotto).hasSize(10);
+        Lottos lottos = new Lottos(new Money(money), new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        assertThat(lottos.getLotto()).hasSize(10);
     }
 
     @Test
     void 천원이하의_금액을_입력하면_오류를_리턴한다() {
         int money = 100;
         assertThatThrownBy(() -> {
-            new Lotto(money, new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))).buy();
+            new Lottos(new Money(money), new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("1000원 이상의 금액을 입력해주세요.");
     }
@@ -39,9 +40,9 @@ class LottoTest {
             arrangeNumber.add(i);
         }
 
-        List<LottoNumber> buyLotto = new Lotto(money, new RandomStrategy(arrangeNumber)).buy();
+        Lottos lottos = new Lottos(new Money(money), new RandomStrategy(arrangeNumber));
 
-        for (LottoNumber lotto : buyLotto) {
+        for (LottoNumber lotto : lottos.getLotto()) {
             boolean result = lotto.getNumber().stream().allMatch(v -> v > 0 && v < 46);
             assertThat(result).isTrue();
         }
