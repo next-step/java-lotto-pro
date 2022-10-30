@@ -17,4 +17,11 @@ public class LottosTest {
         assertThat(lottos).isEqualTo(new Lottos(Arrays.asList(new Lotto(LottoNumbers.generate("1,2,3,4,5,6")))));
     }
 
+    @Test
+    @DisplayName("숫자 5를 입력받아 5개의 로또를 가진 로또 콜렉션 생성")
+    void create_input_size_5() {
+        Lottos lottos = Lottos.autoGenerateSizeOf(5);
+        assertThat(lottos.size()).isEqualTo(5);
+    }
+
 }

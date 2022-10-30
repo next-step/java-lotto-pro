@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -12,6 +13,14 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public static Lottos autoGenerateSizeOf(int size) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            lottos.add(new Lotto(LottoNumbers.generate()));
+        }
+        return new Lottos(lottos);
+    }
+
     public Stream<Lotto> stream() {
         return this.lottos.stream();
     }
@@ -20,7 +29,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public void print(){
+    public void print() {
         for (Lotto lotto : lottos) {
             lotto.print();
         }
