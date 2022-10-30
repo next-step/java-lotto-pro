@@ -3,7 +3,7 @@ package lotto.ticket;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.machine.Result;
-import lotto.system.OutputView;
+import lotto.money.Money;
 
 public class LottoTickets {
     List<LottoTicket> lottoTickets = new ArrayList<>();
@@ -11,30 +11,23 @@ public class LottoTickets {
     public LottoTickets(int quantity) {
         for (int i = 0; i < quantity; i++) {
             lottoTickets.add(new LottoTicket());
+            lottoTickets.get(i).printLotto();
         }
-        printReceipt();
-        System.out.println(lottoTickets);
     }
 
     public int getQuantity() {
         return lottoTickets.size();
     }
 
-    public Result match(LottoTicket winningLottoTicket) {
+    public Result match(WinnerLottoTicket winnerLottoTicket, Money money) {
         Result result = new Result();
         for (LottoTicket ticket : lottoTickets){
-            result.addCount(ticket.match(winningLottoTicket));
+            result.addCount(
+                    ticket.match(winnerLottoTicket.getLotto()),
+                    winnerLottoTicket.matchBonus(ticket));
         }
+        result.setMoney(money.amount());
         return result;
-    }
-
-    private void printReceipt() {
-        OutputView.printReceipt(lottoTickets.size());
-    }
-
-    @Override
-    public String toString() {
-        return lottoTickets.toString();
     }
 
 }

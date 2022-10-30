@@ -1,44 +1,44 @@
 package lotto.machine;
 
+import lotto.money.Money;
 import lotto.system.InputView;
+import lotto.system.MessageConstant;
 import lotto.system.OutputView;
 import lotto.ticket.LottoTicket;
 import lotto.ticket.LottoTickets;
+import lotto.ticket.WinnerLottoTicket;
 
 public class LottoMachine {
-    private static int LOTTO_AMOUNT = 1000;
+    private static int LOTTO_AMOUNT = 1_000;
 
     public static void gameStart(){
-
         OutputView.printInputMoney();
-        String money = InputView.inputMoney();
+        Money money = new Money(InputView.inputText());
+        LottoTickets buyLottoTickets = buyLotto(money);
 
-        LottoTickets buyLottoTickets = buyLotto(Integer.parseInt(money));
+        OutputView.printInputWinnerNumbers();
+        String winnerNumbers = InputView.inputText();
 
-        OutputView.printInputWinningNumbers();
-        String winningNumbers = InputView.inputWinningNumbers();
-        LottoTicket winningLottoTicket  = new LottoTicket(winningNumbers);
+        OutputView.printInputBonusNumber();
+        String bonusNumber = InputView.inputText();
+        WinnerLottoTicket winnerLottoTicket2 = new WinnerLottoTicket(
+                new LottoTicket(winnerNumbers),
+                Integer.parseInt(bonusNumber));
 
-        Result result = buyLottoTickets.match(winningLottoTicket);
-        result.setMoney(Integer.parseInt(money));
-        printResult(result);
-        int v = (int) (Integer.parseInt(money) / result.yieldRate());
-
+        OutputView.printResult(buyLottoTickets.match(winnerLottoTicket2, money));
     }
 
-    public static LottoTickets buyLotto(int money) {
-        return new LottoTickets(getQuantity(money));
+    public static LottoTickets buyLotto(Money money) {
+        int amount = getQuantity(money.amount());
+        OutputView.printReceipt(amount);
+        return new LottoTickets(amount);
     }
 
     public static int getQuantity(int money) {
         if(money < LOTTO_AMOUNT){
-            throw new IllegalArgumentException("금액이 부족합니다.");
+            throw new IllegalArgumentException(MessageConstant.ERROR_VALID_MORE_MONEY);
         }
         return money / LOTTO_AMOUNT;
-    }
-
-    public static void printResult(Result result) {
-        OutputView.printResult(result);
     }
 
 }
