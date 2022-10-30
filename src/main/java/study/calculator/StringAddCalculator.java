@@ -8,18 +8,16 @@ public class StringAddCalculator {
 
     public static int splitAndSum(String str) {
         if(StringUtil.isEmpty(str)) {
-            return NumberUtil.ZERO;
+            return NumberUtil.INIT_ZERO;
         }
-        if(StringUtil.isNotSplit(str)) {
-            return NumberUtil.ONE;
-        }
+
         return sum(Splitter.split(str));
     }
 
     private static int sum(String[] strings) {
-        int sum = NumberUtil.ZERO;
+        int sum = NumberUtil.INIT_ZERO;
         for(String str : strings) {
-            int num = NumberUtil.convertStrToInt(str);
+            int num = NumberUtil.convertToPositiveInt(str);
             sum += num;
         }
         return sum;

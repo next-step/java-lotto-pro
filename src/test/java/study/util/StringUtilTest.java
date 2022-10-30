@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class StringUtilTest {
+class StringUtilTest {
 
     @ParameterizedTest
     @NullAndEmptySource
@@ -21,15 +21,4 @@ public class StringUtilTest {
         assertFalse(StringUtil.isEmpty(str));
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"", "1", "2", "3"})
-    void isNotSplit_문자열의_크기가_1이하이면_true(String str) {
-        assertTrue(StringUtil.isNotSplit(str));
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2", "2,3", "1,2,3"})
-    void isNotSplit_문자열의_크기가_1초과이면_false(String str) {
-        assertFalse(StringUtil.isNotSplit(str));
-    }
 }
