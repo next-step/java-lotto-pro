@@ -10,7 +10,7 @@ import java.util.List;
 public class Game {
 
     private final List<LottoResult> lottoResults = new ArrayList<>();
-    private LottoResult winLottoNumbers;
+    private LottoResult winLottoResult;
     private int lottoBuyCount;
     private int money;
     private final LottoGenerator lottoGenerator = new LottoGenerator();
@@ -71,15 +71,15 @@ public class Game {
         return this.lottoResults;
     }
 
-    public LottoResult getWinLottoNumbers() {
-        return this.winLottoNumbers;
+    public LottoResult getWinLottoResult() {
+        return this.winLottoResult;
     }
 
-    public void setWinLottoNumbers(String numbersStr) {
-        winLottoNumbers = new LottoResult(StringUtil.parseLottoText(numbersStr));
+    public void setWinLottoResult(String numbersStr) {
+        winLottoResult = new LottoResult(StringUtil.parseLottoText(numbersStr));
     }
 
     public LottoWinningStatistics getLottoWinningStatistics() {
-        return new LottoWinningStatistics(this.lottoResults, this.winLottoNumbers);
+        return new LottoWinningStatistics(this.lottoResults, this.winLottoResult);
     }
 }

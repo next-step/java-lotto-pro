@@ -9,7 +9,7 @@ public class GameController {
         Game game = new Game(InputView.inputLottoBuyMoney());
         OutputView.printLottoBuyCount(game.getLottoBuyCount());
         OutputView.printBuyLottoResult(game);
-        game.setWinLottoNumbers(InputView.inputWinnerLottoResult());
+        game.setWinLottoResult(InputView.inputWinnerLottoResult());
         OutputView.printLottoStatistics(game);
     }
 }

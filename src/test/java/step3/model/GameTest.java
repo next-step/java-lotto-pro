@@ -71,10 +71,10 @@ public class GameTest {
     @DisplayName("로또_게임_지난_당첨_결과값_정상_파싱_여부")
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5,6", "1, 2, 3, 4, 5, 6"})
-    public void setWinLottoNumbers_pass_01(String winLottoNumbers) {
+    public void setWinLottoResult_pass_01(String winLottoNumbers) {
         Game game = new Game();
-        game.setWinLottoNumbers(winLottoNumbers);
-        assertThat(game.getWinLottoNumbers()).isEqualTo(
+        game.setWinLottoResult(winLottoNumbers);
+        assertThat(game.getWinLottoResult()).isEqualTo(
                 new LottoResult(Arrays.asList(
                         new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                         new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
@@ -88,7 +88,7 @@ public class GameTest {
     @ValueSource(strings = {"1,2,3,4,5", "1", ""})
     public void setWinLottoNumbers_fail_01(String winLottoNumbers) {
         Game game = new Game();
-        assertThatThrownBy(() -> game.setWinLottoNumbers(winLottoNumbers))
+        assertThatThrownBy(() -> game.setWinLottoResult(winLottoNumbers))
                 .isInstanceOf(RuntimeException.class);
     }
 
@@ -97,7 +97,7 @@ public class GameTest {
     @ValueSource(strings = {"1,2,3,4,5,a", "1a,2, 3, 4, 5, 6"})
     public void setWinLottoNumbers_fail_02(String winLottoNumbers) {
         Game game = new Game();
-        assertThatThrownBy(() -> game.setWinLottoNumbers(winLottoNumbers))
+        assertThatThrownBy(() -> game.setWinLottoResult(winLottoNumbers))
                 .isInstanceOf(RuntimeException.class);
     }
 }
