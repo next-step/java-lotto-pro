@@ -2,6 +2,7 @@ package split;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class Delimiters {
@@ -13,7 +14,7 @@ public class Delimiters {
     }
 
     public void add(String customDelimiter) {
-        if (customDelimiter != null && !customDelimiter.equals("")) {
+        if (!Objects.isNull(customDelimiter) && !customDelimiter.isEmpty()) {
             this.delimiters.add(customDelimiter);
         }
     }
