@@ -157,7 +157,7 @@
 * 추가 번호 추첨
   * 추가 번호 입력 시, 기존에 입력한 로또 당첨 번호에 속하지 않아야 함
 * 구매한 로또 번호와 당첨 번호 간 일치 개수 확인 시, 추가 번호도 확인
-  * Lotto의 findLottoPrize() 메소드 변경
+  * [x] Lottos의 createLottoResults() 메소드 변경
   * 5개 당첨일 때에만 보너스볼 당첨 여부 확인 추가
   ```java
   public enum LottoPrize {
