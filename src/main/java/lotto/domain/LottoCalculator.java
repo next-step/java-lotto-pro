@@ -1,37 +1,21 @@
 package lotto.domain;
 
-import java.util.Objects;
-
 public class LottoCalculator {
 
-    private final Money LOTTO_PRICE = new Money(1000);
-    private final Money money;
+    private final static Money LOTTO_PRICE = new Money(1000);
 
-    public LottoCalculator(Money money) {
-        validateMoney(money);
-        this.money = money;
+    private LottoCalculator() {
     }
 
-    public void validateMoney(Money money) {
+    public static int availableToPurchaseCount(Money money) {
         if (!money.greaterEqualThan(LOTTO_PRICE)) {
             throw new IllegalArgumentException("로또를 구매하기에는 돈이 부족합니다.");
         }
-    }
-
-    public int availableToPurchaseCount() {
         return money.quotient(LOTTO_PRICE);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof LottoCalculator)) return false;
-        LottoCalculator that = (LottoCalculator) o;
-        return Objects.equals(LOTTO_PRICE, that.LOTTO_PRICE) && Objects.equals(money, that.money);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(LOTTO_PRICE, money);
+    public static int winningCount(WinningLotto winningLotto, Lottos lottos, Rank rank) {
+        return (int) lottos.stream().filter(lotto -> winningLotto.match(lotto) == rank).count();
     }
 }
