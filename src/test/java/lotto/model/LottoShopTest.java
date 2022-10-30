@@ -9,7 +9,7 @@ import lotto.strategy.LottoRandomCreateStrategy;
 class LottoShopTest {
 
 	@Test
-	void 제공한_금액만큼_로또를_제공한다(){
+	void 제공한_금액만큼_로또를_제공한다() {
 		LottoShop lottoShop = new LottoShop(new LottoRandomCreateStrategy());
 		Lottos lottos = lottoShop.buy(new Money(14000));
 
