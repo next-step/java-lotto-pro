@@ -9,13 +9,10 @@ public class Lottos {
 
     private final List<Lotto> lottos;
     private final LottoMoney lottoMoney;
+
     public Lottos(List<Lotto> lottos, LottoMoney lottoMoney) {
         this.lottos = lottos;
         this.lottoMoney = lottoMoney;
-    }
-
-    public int getSumOfPriceLottos() {
-        return lottoMoney.getSumOfPriceLottos(lottos.size());
     }
 
     public List<List<LottoNumber>> getNumbersOfLottos() {

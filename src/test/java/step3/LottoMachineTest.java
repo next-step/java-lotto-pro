@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mockStatic;
 
 public class LottoMachineTest {
@@ -54,7 +54,7 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        mock.when(() -> LottoFactory.createLottos(anyInt()))
+        mock.when(() -> LottoFactory.createLottos(any()))
                 .thenReturn(lottos);
         LottoMachine lottoMachine = new LottoMachine(price);
 
@@ -75,7 +75,7 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        mock.when(() -> LottoFactory.createLottos(anyInt()))
+        mock.when(() -> LottoFactory.createLottos(any()))
                 .thenReturn(lottos);
         LottoMachine lottoMachine = new LottoMachine(14000);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{11, 22, 23, 24, 25, 26})
@@ -101,7 +101,7 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        mock.when(() -> LottoFactory.createLottos(anyInt()))
+        mock.when(() -> LottoFactory.createLottos(any()))
                 .thenReturn(lottos);
         LottoMachine lottoMachine = new LottoMachine(14000);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed()
@@ -126,7 +126,7 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        mock.when(() -> LottoFactory.createLottos(anyInt()))
+        mock.when(() -> LottoFactory.createLottos(any()))
                 .thenReturn(lottos);
         LottoMachine lottoMachine = new LottoMachine(14000);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 5, 6})
@@ -152,7 +152,7 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        mock.when(() -> LottoFactory.createLottos(anyInt()))
+        mock.when(() -> LottoFactory.createLottos(any()))
                 .thenReturn(lottos);
         LottoMachine lottoMachine = new LottoMachine(14000);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 15, 6})
@@ -179,7 +179,7 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        mock.when(() -> LottoFactory.createLottos(anyInt()))
+        mock.when(() -> LottoFactory.createLottos(any()))
                 .thenReturn(lottos);
         LottoMachine lottoMachine = new LottoMachine(14000);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 15, 16})

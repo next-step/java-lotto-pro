@@ -14,13 +14,11 @@ public class LottoMachine {
     private final int purchasePrice;
     private final Lottos lottos;
     private final LottoMoney lottoMoney;
-    private static final int LOTTO_PRICE = 1000;
 
     public LottoMachine(int purchasePrice) {
         this.lottoMoney = new LottoMoney(purchasePrice);
         this.purchasePrice = purchasePrice;
-        int size = purchasePrice / LOTTO_PRICE;
-        this.lottos = new Lottos(LottoFactory.createLottos(size),lottoMoney);
+        this.lottos = new Lottos(LottoFactory.createLottos(lottoMoney),lottoMoney);
     }
 
     public LottoResultDto getLottoResult(List<LottoNumber> winningNumbers) {
