@@ -23,6 +23,7 @@ public class LottoManager {
         InputView.inputLastWeekLottoNumbers(calculator);
         calculator.calculateWinnerStatistics(lottoGenerator.getLottos());
         OutputView.outputStatisticsResult(calculator);
+
     }
 
 }

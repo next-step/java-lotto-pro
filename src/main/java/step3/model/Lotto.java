@@ -4,19 +4,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static step3.constant.Constant.MIN_LOTTO_NUMBER;
-import static step3.constant.Constant.MAX_LOTTO_NUMBER;
-import static step3.constant.Constant.ZERO;
-import static step3.constant.Constant.LOTTO_NUMBER_LENGTH;
-import static step3.constant.Constant.COMMA;
+import static step3.constant.Constant.*;
 public class Lotto {
     private List<LottoNumber> lottoNumbers;
 
+    public Lotto() {
+        lottoNumbers = generateRandomNumbers();
+    }
+
+    public Lotto(String[] numbers) {
+        List<LottoNumber> list = new ArrayList<>();
+        for(String str : numbers) {
+            list.add(new LottoNumber(LottoGenerator.commonStringToNumber(str)));
+        }
+        this.lottoNumbers = list;
+    }
+
     public List<LottoNumber> getNumbers() {
         return lottoNumbers;
-    }
-    public void generateLotto() {
-        lottoNumbers = generateRandomNumbers();
     }
 
     public List<LottoNumber> generateRandomNumbers() {
@@ -25,11 +30,6 @@ public class Lotto {
 
         this.lottoNumbers = rangeNumbers.subList(ZERO, LOTTO_NUMBER_LENGTH);
         return lottoNumbers;
-    }
-
-    public void setLastWeekWinner(String[] afterNumbers) {
-        this.lottoNumbers = createLottoNumberList(ZERO, afterNumbers.length);
-
     }
 
     private List<LottoNumber> createLottoNumberList(int startValue, int length) {

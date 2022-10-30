@@ -13,7 +13,6 @@ public class Lottos {
     public void addLottos() {
         for(int i = 0; i < purchasedCount; i++) {
             Lotto lotto = new Lotto();
-            lotto.generateLotto();
             lottos.add(lotto);
         }
     }
