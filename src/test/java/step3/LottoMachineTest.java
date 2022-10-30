@@ -56,7 +56,7 @@ public class LottoMachineTest {
         }
         mock.when(() -> LottoFactory.createLottos(any()))
                 .thenReturn(lottos);
-        LottoMachine lottoMachine = new LottoMachine(price);
+        LottoMachine lottoMachine = new LottoMachine(new LottoMoney(price));
 
         //when
         LottosNumberDto lottosNumberDto = lottoMachine.getLottoNumber();
@@ -77,7 +77,7 @@ public class LottoMachineTest {
         }
         mock.when(() -> LottoFactory.createLottos(any()))
                 .thenReturn(lottos);
-        LottoMachine lottoMachine = new LottoMachine(14000);
+        LottoMachine lottoMachine = new LottoMachine(new LottoMoney(14000));
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{11, 22, 23, 24, 25, 26})
                 .boxed()
                 .map(LottoNumber::valueOf)
@@ -103,7 +103,7 @@ public class LottoMachineTest {
         }
         mock.when(() -> LottoFactory.createLottos(any()))
                 .thenReturn(lottos);
-        LottoMachine lottoMachine = new LottoMachine(14000);
+        LottoMachine lottoMachine = new LottoMachine(new LottoMoney(14000));
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
@@ -128,7 +128,7 @@ public class LottoMachineTest {
         }
         mock.when(() -> LottoFactory.createLottos(any()))
                 .thenReturn(lottos);
-        LottoMachine lottoMachine = new LottoMachine(14000);
+        LottoMachine lottoMachine = new LottoMachine(new LottoMoney(14000));
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 5, 6})
                 .boxed()
                 .map(LottoNumber::valueOf)
@@ -154,7 +154,7 @@ public class LottoMachineTest {
         }
         mock.when(() -> LottoFactory.createLottos(any()))
                 .thenReturn(lottos);
-        LottoMachine lottoMachine = new LottoMachine(14000);
+        LottoMachine lottoMachine = new LottoMachine(new LottoMoney(14000));
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 15, 6})
                 .boxed()
                 .map(LottoNumber::valueOf)
@@ -181,7 +181,7 @@ public class LottoMachineTest {
         }
         mock.when(() -> LottoFactory.createLottos(any()))
                 .thenReturn(lottos);
-        LottoMachine lottoMachine = new LottoMachine(14000);
+        LottoMachine lottoMachine = new LottoMachine(new LottoMoney(14000));
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 15, 16})
                 .boxed()
                 .map(LottoNumber::valueOf)

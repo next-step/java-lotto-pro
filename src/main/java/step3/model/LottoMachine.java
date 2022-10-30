@@ -14,8 +14,8 @@ public class LottoMachine {
     private final Lottos lottos;
     private final LottoMoney lottoMoney;
 
-    public LottoMachine(int purchasePrice) {
-        this.lottoMoney = new LottoMoney(purchasePrice);
+    public LottoMachine(LottoMoney lottoMoney) {
+        this.lottoMoney = lottoMoney;
         this.lottos = new Lottos(LottoFactory.createLottos(lottoMoney));
     }
 
