@@ -10,9 +10,9 @@ public class LottoWinningStatisticsPrinter {
     private static final String UNIT_OF_INTEGER_COUNT = "개";
 
     public static void print(LottoTicketsBucket lottoTicketsBucket) {
-        System.out.println(THREE_DIGITS_MATCH_MESSAGE + lottoTicketsBucket.sameThreeNumbersCount() + UNIT_OF_INTEGER_COUNT);
-        System.out.println(FOUR_DIGITS_MATCH_MESSAGE + lottoTicketsBucket.sameFourNumbersCount() + UNIT_OF_INTEGER_COUNT);
-        System.out.println(FIVE_DIGITS_MATCH_MESSAGE + lottoTicketsBucket.sameFiveNumbersCount() + UNIT_OF_INTEGER_COUNT);
-        System.out.println(SIX_DIGITS_MATCH_MESSAGE + lottoTicketsBucket.sameSixNumbersCount() + UNIT_OF_INTEGER_COUNT);
+//        System.out.println(THREE_DIGITS_MATCH_MESSAGE + lottoTicketsBucket.sameThreeNumbersCount() + UNIT_OF_INTEGER_COUNT);
+//        System.out.println(FOUR_DIGITS_MATCH_MESSAGE + lottoTicketsBucket.sameFourNumbersCount() + UNIT_OF_INTEGER_COUNT);
+//        System.out.println(FIVE_DIGITS_MATCH_MESSAGE + lottoTicketsBucket.sameFiveNumbersCount() + UNIT_OF_INTEGER_COUNT);
+//        System.out.println(SIX_DIGITS_MATCH_MESSAGE + lottoTicketsBucket.sameSixNumbersCount() + UNIT_OF_INTEGER_COUNT);
     }
 }

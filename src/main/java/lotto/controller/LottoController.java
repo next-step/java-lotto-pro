@@ -53,7 +53,7 @@ public class LottoController {
                                     MoneyToBuy moneyToBuy) {
         BlankLinePrinter.print();
         LottoScoreTitlePrinter.print();
-        lottoTicketsBucket.sameNumberCountOfAllLottoTickets(winningNumbers);
+//        lottoTicketsBucket.sameNumberCountOfAllLottoTickets(winningNumbers);
         LottoWinningStatisticsPrinter.print(lottoTicketsBucket);
         final String profitRatioString = moneyToBuy.profitRatio(lottoTicketsBucket);
         ProfitRatioPrinter.print(profitRatioString);

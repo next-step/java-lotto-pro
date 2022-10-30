@@ -36,7 +36,7 @@ public class MoneyToBuy {
     }
 
     public String profitRatio(LottoTicketsBucket lottoTicketsBucket) {
-        profitRatio = (double) lottoTicketsBucket.sumProfit() / money;
+//        profitRatio = (double) lottoTicketsBucket.sumProfit() / money;
         return decimalFormat.format(profitRatio);
     }
 }

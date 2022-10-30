@@ -1,10 +1,7 @@
 package lotto.model.money.to.buy;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
-import lotto.model.lotto.ticket.LottoTicketsBucket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -81,35 +78,35 @@ class MoneyToBuyTest {
         }
     }
 
-    @Nested
-    @DisplayName("profitRatio 메서드 테스트")
-    class ProfitRatio {
-        @Test
-        void successA() {
-            final MoneyToBuy moneyToBuy = new MoneyToBuy(20000);
-            final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucket(new int[]{0, 0, 0, 4, 0, 0, 0});
-            assertThat(moneyToBuy.profitRatio(lottoTicketsBucket)).isEqualTo("1.00");
-        }
-
-        @Test
-        void successB() {
-            final MoneyToBuy moneyToBuy = new MoneyToBuy(350000);
-            final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucket(new int[]{0, 0, 0, 0, 1, 2, 0});
-            assertThat(moneyToBuy.profitRatio(lottoTicketsBucket)).isEqualTo("1.00");
-        }
-
-        @Test
-        void successC() {
-            final MoneyToBuy moneyToBuy = new MoneyToBuy(14000);
-            final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucket(new int[]{0, 0, 0, 1, 0, 0, 0});
-            assertThat(moneyToBuy.profitRatio(lottoTicketsBucket)).isEqualTo("0.36");
-        }
-
-        @Test
-        void successD() {
-            final MoneyToBuy moneyToBuy = new MoneyToBuy(720000);
-            final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucket(new int[]{0, 0, 0, 8, 2, 4, 0});
-            assertThat(moneyToBuy.profitRatio(lottoTicketsBucket)).isEqualTo("1.03");
-        }
-    }
+//    @Nested
+//    @DisplayName("profitRatio 메서드 테스트")
+//    class ProfitRatio {
+//        @Test
+//        void successA() {
+//            final MoneyToBuy moneyToBuy = new MoneyToBuy(20000);
+//            final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucket(new int[]{0, 0, 0, 4, 0, 0, 0});
+//            assertThat(moneyToBuy.profitRatio(lottoTicketsBucket)).isEqualTo("1.00");
+//        }
+//
+//        @Test
+//        void successB() {
+//            final MoneyToBuy moneyToBuy = new MoneyToBuy(350000);
+//            final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucket(new int[]{0, 0, 0, 0, 1, 2, 0});
+//            assertThat(moneyToBuy.profitRatio(lottoTicketsBucket)).isEqualTo("1.00");
+//        }
+//
+//        @Test
+//        void successC() {
+//            final MoneyToBuy moneyToBuy = new MoneyToBuy(14000);
+//            final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucket(new int[]{0, 0, 0, 1, 0, 0, 0});
+//            assertThat(moneyToBuy.profitRatio(lottoTicketsBucket)).isEqualTo("0.36");
+//        }
+//
+//        @Test
+//        void successD() {
+//            final MoneyToBuy moneyToBuy = new MoneyToBuy(720000);
+//            final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucket(new int[]{0, 0, 0, 8, 2, 4, 0});
+//            assertThat(moneyToBuy.profitRatio(lottoTicketsBucket)).isEqualTo("1.03");
+//        }
+//    }
 }
