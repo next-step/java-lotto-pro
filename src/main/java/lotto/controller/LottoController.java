@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import static lotto.view.InputView.printBonusLottoDirection;
 import static lotto.view.InputView.printPurchasingLottoDirection;
 import static lotto.view.InputView.printWinningLottoDirection;
 import static lotto.view.InputView.readLine;
@@ -8,6 +9,7 @@ import static lotto.view.ResultView.printLottoResults;
 import static lotto.view.ResultView.printPurchasingLottoCount;
 import static lotto.view.ResultView.printPurchasingLottos;
 
+import common.utils.IntegerUtils;
 import common.utils.LongUtils;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
@@ -24,7 +26,8 @@ public class LottoController {
     public void process() {
         Lottos lottos = createLottos(getMoney());
         Lotto winningLotto = getWinningLotto();
-        getLottoResults(lottos, winningLotto);
+        LottoNumber bonusLottoNumber = getBonusLottoNumber(winningLotto);
+        getLottoResults(lottos, winningLotto, bonusLottoNumber);
     }
 
     private Money getMoney() {
@@ -55,8 +58,15 @@ public class LottoController {
         }
     }
 
-    private void getLottoResults(Lottos lottos, Lotto winningLotto) {
-        //printLottoResults(lottos.createLottoResults(winningLotto), lottos.findTotalPrice());
+    private LottoNumber getBonusLottoNumber(Lotto winningLotto) {
+        printBonusLottoDirection();
+        try {
+            String readLottoNumber = readLine();
+            return LottoNumber.fromIfNotIn(IntegerUtils.parseInt(readLottoNumber), winningLotto);
+        } catch (IllegalArgumentException e) {
+            printExceptionErrorMessage(e);
+            return getBonusLottoNumber(winningLotto);
+        }
     }
 
     private void getLottoResults(Lottos lottos, Lotto winningLotto, LottoNumber bonusLottoNumber) {
