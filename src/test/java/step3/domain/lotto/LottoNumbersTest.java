@@ -43,13 +43,13 @@ class LottoNumbersTest {
                         new LottoNumber(6)
                 )
         );
-        assertThat(lottoNumbers.getLottoNumbers()).hasSize(DEFAULT_LOTTO_SIZE);
+        assertThat(lottoNumbers.value()).hasSize(DEFAULT_LOTTO_SIZE);
     }
 
     @Test
     @DisplayName("6자리 랜덤 로또 번호를 생성한다.")
     void createRandomLottoNumbers() {
         LottoNumbers lottoNumbers = new LottoNumbers();
-        assertThat(lottoNumbers.getLottoNumbers()).hasSize(DEFAULT_LOTTO_SIZE);
+        assertThat(lottoNumbers.value()).hasSize(DEFAULT_LOTTO_SIZE);
     }
 }

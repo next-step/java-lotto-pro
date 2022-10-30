@@ -41,7 +41,7 @@ public class ResultView {
     private static StringBuilder getStringBuilder(LottoNumbers lottoNumbers) {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        for (LottoNumber lottoNumber : lottoNumbers.getLottoNumbers()) {
+        for (LottoNumber lottoNumber : lottoNumbers.value()) {
             sb.append(lottoNumber.getLottoNumber()).append(", ");
         }
         sb.append("]");

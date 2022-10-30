@@ -57,8 +57,8 @@ public class LottoNumbers {
         return integers.subList(0, DEFAULT_LOTTO_SIZE);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public List<LottoNumber> value() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     @Override
