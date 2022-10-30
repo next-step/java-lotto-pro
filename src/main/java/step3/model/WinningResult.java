@@ -9,8 +9,8 @@ public class WinningResult {
     private final WinningLotto winningLotto;
     private final WinningReport winningReport;
 
-    public WinningResult(LottoPaper lottoPaper, String winningNumberString) {
-        this.winningLotto = new WinningLotto(initWinningNumber(winningNumberString));
+    public WinningResult(LottoPaper lottoPaper, String winningNumberString, int bonusNumber) {
+        this.winningLotto = new WinningLotto(initWinningNumber(winningNumberString), new Number(bonusNumber));
         this.winningReport = lottoPaper.checkWinning(winningLotto);
     }
 

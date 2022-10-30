@@ -1,5 +1,6 @@
 package step3.model;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -25,7 +26,7 @@ public class Lotto {
     }
 
     public List<Number> getNumbers() {
-        return numbers;
+        return Collections.unmodifiableList(numbers);
     }
 
     public boolean contains(Number number) {
@@ -36,7 +37,7 @@ public class Lotto {
         return Award.valueOf(Math.toIntExact(
             numbers.stream()
                 .filter(lottoNumber -> winningLotto.contains(lottoNumber))
-                .count())
+                .count()), winningLotto.checkBonusNumber(numbers)
         );
     }
 
