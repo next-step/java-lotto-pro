@@ -4,8 +4,7 @@ import java.util.*;
 
 public class Ranks {
 
-    private static final List<Rank> ranks =
-            Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH, Rank.MISS);
+    private static final List<Rank> ranks = Arrays.asList(Rank.values());
     private final Map<Rank, Integer> countsOfRanks;
 
     public Ranks() {
