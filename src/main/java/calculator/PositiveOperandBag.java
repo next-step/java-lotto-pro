@@ -1,19 +1,16 @@
 package calculator;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class PositiveOperandBag {
-    private List<PositiveOperand> operands;
 
-    public PositiveOperandBag(List<String> operandWords) {
-        this.operands = operandWords.stream()
-                .map(PositiveOperand::new)
-                .collect(Collectors.toList());
+    private PositiveOperandBag() {
+        throw new IllegalStateException("유틸 클래스 입니다");
     }
 
-    public int sum() {
-        return operands.stream()
+    public static int sum(List<String> operandWords) {
+        return operandWords.stream()
+                .map(PositiveOperand::new)
                 .mapToInt(PositiveOperand::getOperand)
                 .sum();
     }
