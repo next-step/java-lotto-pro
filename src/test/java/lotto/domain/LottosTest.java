@@ -12,20 +12,17 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 public class LottosTest {
-
-    private LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-
     private Lottos lottos;
 
     @BeforeEach
     void setUp() {
         lottos = Lottos.from(Arrays.asList(
-            Lotto.from(lottoNumberGenerator.generate()),
-            Lotto.from(lottoNumberGenerator.generate()),
-            Lotto.from(lottoNumberGenerator.generate()),
-            Lotto.from(lottoNumberGenerator.generate()),
-            Lotto.from(lottoNumberGenerator.generate()),
-            Lotto.from(lottoNumberGenerator.generate())
+            Lotto.from(LottoNumberGenerator.generate()),
+            Lotto.from(LottoNumberGenerator.generate()),
+            Lotto.from(LottoNumberGenerator.generate()),
+            Lotto.from(LottoNumberGenerator.generate()),
+            Lotto.from(LottoNumberGenerator.generate()),
+            Lotto.from(LottoNumberGenerator.generate())
         ));
     }
 

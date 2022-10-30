@@ -14,15 +14,15 @@ public class LottoNumberGenerator {
 
     private static final int LOTTO_NUMBER_COUNT = 6;
 
-    private final List<Integer> fullLottoNumbers;
+    private static final List<Integer> fullLottoNumbers;
 
-    public LottoNumberGenerator() {
-        this.fullLottoNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+    static {
+        fullLottoNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
             .boxed()
             .collect(Collectors.toList());
     }
 
-    public List<Integer> generate() {
+    public static List<Integer> generate() {
         Collections.shuffle(fullLottoNumbers);
         List<Integer> lottoNumbers = fullLottoNumbers.subList(0, LOTTO_NUMBER_COUNT);
         Collections.sort(lottoNumbers);

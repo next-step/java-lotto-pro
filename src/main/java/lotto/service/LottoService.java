@@ -13,10 +13,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoService {
-
-    private final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-
-
+    
     public Amount buyLottoAuto() {
         Amount buyAmount = new Amount(InputView.inputAmount());
         OutputView.outputBuyLottosCount(buyAmount.buyLottoCount());
@@ -49,7 +46,7 @@ public class LottoService {
     }
 
     private Lottos createLottos(int amount) {
-        List<Lotto> lottos = Stream.generate(lottoNumberGenerator::generate)
+        List<Lotto> lottos = Stream.generate(LottoNumberGenerator::generate)
             .map(Lotto::from)
             .limit(amount)
             .collect(Collectors.toList());
