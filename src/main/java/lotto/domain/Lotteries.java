@@ -27,4 +27,13 @@ public class Lotteries {
         }
         return lottoMatchNumberMap;
     }
+
+    @Override
+    public String toString() {
+        String result = lotteries.size() + "개를 구매했습니다.\n";
+        for(Lotto lotto : lotteries) {
+            result += (lotto + "\n");
+        }
+        return result;
+    }
 }

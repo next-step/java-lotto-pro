@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class Lotto {
         for(int i=0; i< winningNumbers.length; i++) {
             winningNumbers[i] = numbers.get(i);
         }
+        Arrays.sort(winningNumbers);
     }
 
     public Lotto(int[] winningNumbers) {
@@ -40,5 +42,14 @@ public class Lotto {
             if(isMatch(number)) matchNumber++;
         }
         return matchNumber;
+    }
+
+    @Override
+    public String toString() {
+        String result = "[";
+        for(int i=0; i<digit; i++) {
+            result += winningNumbers[i]+",";
+        }
+        return result.substring(0,result.length()-1) + "]";
     }
 }

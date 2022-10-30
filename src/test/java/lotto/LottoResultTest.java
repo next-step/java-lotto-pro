@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
-import lotto.domain.LottoMatchNumberMap;
 import lotto.domain.LottoResult;
 import org.junit.jupiter.api.Test;
 
