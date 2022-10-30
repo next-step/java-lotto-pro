@@ -4,6 +4,7 @@ import java.util.List;
 
 import lotto.controller.LottoController;
 import lotto.controller.dto.BoughtLottoTicketsResponse;
+import utils.ExceptionHandler;
 import utils.InputHandler;
 
 public class LottoBuyingView {
@@ -19,18 +20,27 @@ public class LottoBuyingView {
 	}
 
 	public BoughtLottoTicketsResponse buyLottoTickets() {
-		int buyingLottoTicketsAmount = getMoneyToBuyLottoTickets();
+		BoughtLottoTicketsResponse boughtLottoTickets = ExceptionHandler.callWithHandlingException(
+			this::buyLottoTicketsWithHandlingException);
+
+		printBuyingResult(boughtLottoTickets);
+
+		return boughtLottoTickets;
+	}
+
+	private BoughtLottoTicketsResponse buyLottoTicketsWithHandlingException() {
+		int buyingLottoTicketsMoney = getMoneyToBuyLottoTickets();
 
 		List<List<Integer>> manualLottoTickets = getManualLottoTickets();
 
-		BoughtLottoTicketsResponse boughtLottoTickets = lottoController.buyLottoTickets(buyingLottoTicketsAmount,
-			manualLottoTickets);
+		return lottoController.buyLottoTickets(buyingLottoTicketsMoney, manualLottoTickets);
+	}
 
-		System.out.printf(BUYING_RESULT_OUTPUT, boughtLottoTickets.getManualBoughtCount(),
+	private void printBuyingResult(BoughtLottoTicketsResponse boughtLottoTickets) {
+		System.out.printf(BUYING_RESULT_OUTPUT,
+			boughtLottoTickets.getManualBoughtCount(),
 			boughtLottoTickets.getAutoBoughtCount());
 		System.out.println(boughtLottoTickets);
-
-		return boughtLottoTickets;
 	}
 
 	private int getMoneyToBuyLottoTickets() {

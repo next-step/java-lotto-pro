@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import static java.lang.String.format;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -13,6 +15,8 @@ import money.Money;
 
 public class LottoControllerImpl implements LottoController {
 
+	public static final String LOTTO_PRICE_ERROR_MESSAGE = "로또 금액은 %s 보다 작을 수 없습니다.";
+
 	private final AutoLottoTicketsVendor autoLottoTicketsVendor;
 	private final Money lottoPrice;
 
@@ -21,9 +25,18 @@ public class LottoControllerImpl implements LottoController {
 		this.autoLottoTicketsVendor = autoLottoTicketsVendor;
 	}
 
-	public BoughtLottoTicketsResponse buyLottoTickets(int buyingLottoTicketsAmount,
+	public BoughtLottoTicketsResponse buyLottoTickets(int buyingLottoTicketsMoney,
 													  List<List<Integer>> manualLottoNumbers) {
-		return buyLottoTickets(Money.wons(buyingLottoTicketsAmount), manualLottoNumbers);
+		Money lottoTicketsMoney = Money.wons(buyingLottoTicketsMoney);
+		verifyMoneyIsEqualToOrGreaterThanPrice(lottoTicketsMoney);
+
+		return buyLottoTickets(lottoTicketsMoney, manualLottoNumbers);
+	}
+
+	private void verifyMoneyIsEqualToOrGreaterThanPrice(Money lottoTicketsMoney) {
+		if (lottoTicketsMoney.isLessThan(lottoPrice)) {
+			throw new IllegalArgumentException(format(LOTTO_PRICE_ERROR_MESSAGE, lottoPrice));
+		}
 	}
 
 	public BoughtLottoTicketsResponse buyLottoTickets(Money buyingLottoTicketsAmount,
