@@ -6,9 +6,6 @@ import lotto.model.winning.numbers.WinningNumbers;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 자동 생성한 6 개의 로또 번호 한 줄을 저장하고 관리하는 객체이다.
- */
 public class LottoTicket {
     protected final List<Integer> numbers;
 

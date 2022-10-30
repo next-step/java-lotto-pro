@@ -5,9 +5,6 @@ import lotto.model.lotto.ticket.LottoTicketsBucket;
 
 import java.text.DecimalFormat;
 
-/**
- * 로또 구매를 위해 입력한 금액을 저장하는 객체
- */
 public class MoneyToBuy {
     private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
     protected int money;

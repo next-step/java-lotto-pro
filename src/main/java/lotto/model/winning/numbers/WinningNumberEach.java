@@ -3,9 +3,6 @@ package lotto.model.winning.numbers;
 import lotto.constant.numbers.LottoConstant;
 import lotto.constant.utils.StringUtils;
 
-/**
- * 사용자가 입력한 당첨 번호 리스트의 개별 숫자를 저장하는 객체
- */
 public class WinningNumberEach {
     private final int value;
 

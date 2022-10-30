@@ -2,9 +2,6 @@ package lotto.view;
 
 import lotto.model.lotto.ticket.LottoTicketsBucket;
 
-/**
- * 3 개, 4 개, 5 개, 6 개 일치하는 개수를 한 줄 씩 출력한다.
- */
 public class LottoWinningStatisticsPrinter {
     private static final String THREE_DIGITS_MATCH_MESSAGE = "3개 일치 (5000원)- ";
     private static final String FOUR_DIGITS_MATCH_MESSAGE = "4개 일치 (50000원)- ";

@@ -6,9 +6,6 @@ import lotto.constant.utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 당첨 번호 6 개를 저장하는 객체이다.
- */
 public class WinningNumbers {
     private final List<WinningNumberEach> numbers;
 
