@@ -20,10 +20,10 @@ public class Money {
 		return this.money / price.money;
 	}
 
-	public float ratio(final Money prize) {
+	public float ratio(final Money income) {
 		BigDecimal money = BigDecimal.valueOf(this.money);
-		BigDecimal prizeMoney = BigDecimal.valueOf(prize.money);
-		return prizeMoney.divide(money, MathContext.DECIMAL32)
+		BigDecimal incomeMoney = BigDecimal.valueOf(income.money);
+		return incomeMoney.divide(money, MathContext.DECIMAL32)
 			.setScale(2, BigDecimal.ROUND_DOWN)
 			.floatValue();
 	}
