@@ -33,6 +33,14 @@ public class Result {
         return stringBuffer.toString();
     }
 
+    public int findTotalProfits() {
+        int totalProfits = 0;
+        for(Map.Entry<Match, Integer> lottoResult: lottoResults.entrySet()) {
+            totalProfits += lottoResult.getKey().getAmount() * lottoResult.getValue();
+        }
+        return totalProfits;
+    }
+
     private void resultSetting(StringBuffer stringBuffer) {
         for(Match match: Match.values()) {
             int lottoResultCount = countLottoResult(match);
@@ -42,7 +50,7 @@ public class Result {
         }
     }
 
-    private int countLottoResult(Match match) {
+    public int countLottoResult(Match match) {
         return lottoResults.getOrDefault(match, RESULT_DEFAULT_VALUE);
     }
 }
