@@ -20,7 +20,6 @@ public class LottoApplication {
         LottoMachine lottoMachine = new LottoMachine();
         LottoStore lottoStore = new LottoStore(lottoMachine);
 
-
         LottoController lottoController = new LottoController(view,input,lottoStore);
         lottoController.start();
     }

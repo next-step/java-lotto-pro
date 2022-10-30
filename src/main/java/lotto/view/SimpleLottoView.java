@@ -15,12 +15,12 @@ public class SimpleLottoView implements LottoView {
 
     @Override
     public void showMessageRequestPurchaseMoney() {
-        this.output.print(MESSAGE_REQUEST_PURCHASE_MONEY);
+        output.print(MESSAGE_REQUEST_PURCHASE_MONEY);
     }
 
     @Override
     public void showLottoCount(int count) {
-        this.output.print(String.format(MESSAGE_LOTTO_COUNT,count));
+        output.print(String.format(MESSAGE_LOTTO_COUNT,count));
     }
 
     @Override
@@ -31,22 +31,27 @@ public class SimpleLottoView implements LottoView {
 
     @Override
     public void showMessageRequestWinningNumbers() {
-        this.output.print(MESSAGE_REQUEST_WINNING_NUMBERS);
+        output.print(MESSAGE_REQUEST_WINNING_NUMBERS);
     }
 
     @Override
     public void showMessageStatistics() {
-        this.output.print("");
-        this.output.print(MESSAGE_HEADER_STATISTICS);
+        output.print("");
+        output.print(MESSAGE_HEADER_STATISTICS);
     }
 
     @Override
     public void showStatistics(Rank bonus, int count) {
-        this.output.print(String.format(MESSAGE_MATCH_INFORMATION,bonus.getMatchCount(),bonus.getWinningAmountString(),count));
+        output.print(String.format(MESSAGE_MATCH_INFORMATION,bonus.getMatchCount(),bonus.getWinningAmountString(),count));
     }
 
     @Override
     public void showYield(double calcYield) {
-        this.output.print(String.format(MESSAGE_YIELD,calcYield) );
+        output.print(String.format(MESSAGE_YIELD,calcYield) );
+    }
+
+    @Override
+    public void showMessageRequestBonusNumber() {
+        output.print(MESSAGE_REQUEST_BONUS_NUMBER);
     }
 }

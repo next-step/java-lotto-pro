@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningLottoTest {
     @Test
@@ -39,5 +40,12 @@ class WinningLottoTest {
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertThat(winningLotto.hasBonus(LottoNumber.of(bonusTry))).isFalse();
+    }
+
+    @Test
+    @DisplayName("보너스 번호가 당첨 번호에 이미 포함되어 있다면 exception이 발생함")
+    void test3() {
+        assertThatThrownBy(() -> new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), LottoNumber.of(6)))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
