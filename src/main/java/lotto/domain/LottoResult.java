@@ -39,10 +39,10 @@ public class LottoResult {
     }
 
     public double returnRate(Money money) {
-        return calculatePrice().divide(money);
+        return calculateTotalPrice().divide(money);
     }
 
-    private Money calculatePrice() {
+    private Money calculateTotalPrice() {
         Money totalMoney = new Money(0L);
         for (Rank rank : Rank.values()) {
             int count = lottoResultCounts.get(rank);
