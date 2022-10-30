@@ -1,5 +1,6 @@
 package calculator;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -8,6 +9,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.ParameterizedTest.DEFAULT_DISPLAY_NAME;
 
+@DisplayName("구분자 테스트")
 class SeparatorTest {
 
     @ParameterizedTest(name = "기본 구분자 separate 메서드 테스트 성공 - " + DEFAULT_DISPLAY_NAME)

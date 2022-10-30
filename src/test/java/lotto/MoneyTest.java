@@ -9,9 +9,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.junit.jupiter.params.ParameterizedTest.DEFAULT_DISPLAY_NAME;
 
+@DisplayName("금액 클래스 테스트")
 class MoneyTest {
 
-    @DisplayName("Money 생성 성공")
+    @DisplayName("생성 성공")
     @Test
     void create_new_throwNoException() {
         //given:

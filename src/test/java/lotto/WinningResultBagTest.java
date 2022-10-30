@@ -17,11 +17,12 @@ import static lotto.WinningResultBag.MATCH_THREE_REWARD;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.ParameterizedTest.DEFAULT_DISPLAY_NAME;
 
+@DisplayName("당첨 결과 목록 테스트")
 class WinningResultBagTest {
 
     private static final int LOTTO_PRICE = 1000;
 
-    @ParameterizedTest(name = "당첨 결과 목록 제공 " + DEFAULT_DISPLAY_NAME)
+    @ParameterizedTest(name = "목록 제공 " + DEFAULT_DISPLAY_NAME)
     @CsvSource(value = { "MATCH_THREE:1", "MATCH_FOUR:1", "MATCH_FIVE:1" }, delimiter = ':')
     void countByWinningResult_results_success(WinningResult winningResult, int matchCount) {
         //given:

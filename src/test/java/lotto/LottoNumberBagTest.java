@@ -9,9 +9,10 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
+@DisplayName("로또 번호 목록 테스트")
 class LottoNumberBagTest {
 
-    @DisplayName("로또 넘버 목록을 담는 일급 컬렉션 생성 성공")
+    @DisplayName("생성 성공")
     @Test
     void create_bag_success() {
         assertThatNoException().isThrownBy(LottoNumberBag::new);

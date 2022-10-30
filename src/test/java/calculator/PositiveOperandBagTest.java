@@ -8,9 +8,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("양의 정수인 피연산자 목록 테스트")
 class PositiveOperandBagTest {
 
-    @DisplayName("PositiveOperandBag sum 메서드 테스트")
+    @DisplayName("sum 메서드 테스트")
     @Test
     void sum_operandWords_success() {
         //given:

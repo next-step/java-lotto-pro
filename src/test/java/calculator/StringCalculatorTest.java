@@ -6,11 +6,12 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("문자열 계산기 테스트")
 class StringCalculatorTest {
 
     private static final int NOT_CALCULATED = 0;
 
-    @DisplayName("문자열 계산기 입력 테스트 - 정상")
+    @DisplayName("입력 테스트 - 정상")
     @Test
     void calculate() {
         //given:
@@ -21,7 +22,7 @@ class StringCalculatorTest {
         assertThat(result).isEqualTo(6);
     }
 
-    @DisplayName("문자열 계산기 입력 테스트 - 빈 문자와 null")
+    @DisplayName("입력 테스트 - 빈 문자와 null")
     @NullAndEmptySource
     void calculateNullAndEmpty(String input) {
         //when:

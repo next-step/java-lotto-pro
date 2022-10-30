@@ -9,15 +9,16 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
+@DisplayName("로또 테스트")
 class LottoTest {
 
-    @DisplayName("로또 생성 성공")
+    @DisplayName("생성 성공")
     @Test
     void create_lotto_success() {
         assertThatNoException().isThrownBy(Lotto::new);
     }
 
-    @DisplayName("로또 당첨 여부 제공 테스트")
+    @DisplayName("당첨 여부 제공 테스트")
     @Test
     void winningResult_lotto_success() {
         //given:

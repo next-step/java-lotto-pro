@@ -13,6 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.junit.jupiter.params.ParameterizedTest.DEFAULT_DISPLAY_NAME;
 
+@DisplayName("로또 발급기 테스트")
 class LottoIssuerTest {
 
     @ParameterizedTest(name = "로또 발급 성공 " + DEFAULT_DISPLAY_NAME)
