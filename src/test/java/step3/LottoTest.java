@@ -27,21 +27,6 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("가격조회하면 1000을 반환")
-    void test_that_it_returns_1000() {
-        //given
-        List<LottoNumber> numbers = IntStream.range(1, 7).boxed()
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
-        //when
-        Lotto lotto = new Lotto(numbers);
-
-        //then
-        assertThat(lotto.getPrice()).isEqualTo(1000);
-    }
-
-
-    @Test
     @DisplayName("번호조회하면 번호를 반환")
     void test_that_it_returns_numbers() {
         //given
@@ -114,7 +99,7 @@ public class LottoTest {
 
         //when
         Lotto lotto = new Lotto(numbers);
-        Rank rank = lotto.getRank(getLottoNumbers(1,2,3,11,12,13));
+        Rank rank = lotto.getRank(getLottoNumbers(1, 2, 3, 11, 12, 13));
 
         //then
         assertThat(rank).isEqualTo(Rank.FIFTH);
@@ -129,7 +114,7 @@ public class LottoTest {
                 .collect(Collectors.toList());
         //when
         Lotto lotto = new Lotto(numbers);
-        Rank rank = lotto.getRank(getLottoNumbers(1,2,3,4,12,13));
+        Rank rank = lotto.getRank(getLottoNumbers(1, 2, 3, 4, 12, 13));
 
         //then
         assertThat(rank).isEqualTo(Rank.FOURTH);
@@ -145,8 +130,7 @@ public class LottoTest {
 
         //when
         Lotto lotto = new Lotto(numbers);
-        List<Integer> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 13}).boxed().collect(Collectors.toList());
-        Rank rank = lotto.getRank(getLottoNumbers(1,2,3,4,5,13));
+        Rank rank = lotto.getRank(getLottoNumbers(1, 2, 3, 4, 5, 13));
 
         //then
         assertThat(rank).isEqualTo(Rank.THIRD);
@@ -162,7 +146,7 @@ public class LottoTest {
 
         //when
         Lotto lotto = new Lotto(numbers);
-        Rank rank = lotto.getRank(getLottoNumbers(1,2,3,4,5,6));
+        Rank rank = lotto.getRank(getLottoNumbers(1, 2, 3, 4, 5, 6));
 
         //then
         assertThat(rank).isEqualTo(Rank.FIRST);
@@ -185,7 +169,6 @@ public class LottoTest {
         //then
         assertThat(rank).isEqualTo(Rank.MISS);
     }
-
 
 
 }
