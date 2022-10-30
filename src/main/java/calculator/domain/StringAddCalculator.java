@@ -4,6 +4,7 @@ import calculator.domain.target.Target;
 
 public class StringAddCalculator {
 
+    private static final int DEFAULT_RESULT = 0;
     private Target target;
 
     public StringAddCalculator(Target target) {
@@ -11,7 +12,7 @@ public class StringAddCalculator {
     }
 
     public int calculate() {
-        int result = 0;
+        int result = DEFAULT_RESULT;
         for (int target : target.target()) {
             result += target;
         }

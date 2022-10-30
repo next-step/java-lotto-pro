@@ -2,25 +2,23 @@ package calculator.domain;
 
 import static calculator.domain.target.validation.CalculatorValidator.ERROR_NUMBER_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import calculator.domain.target.Target;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class StringAddCalculatorTest {
 
     StringAddCalculator calculator;
 
-    @Test
-    void null_empty() {
-        calculator = new StringAddCalculator(new Target(null));
-        assertThat(calculator.calculate()).isEqualTo(0);
-
-        calculator = new StringAddCalculator(new Target(""));
+    @ParameterizedTest
+    @NullAndEmptySource
+    void null_empty(String data) {
+        calculator = new StringAddCalculator(new Target(data));
         assertThat(calculator.calculate()).isEqualTo(0);
     }
 
@@ -56,7 +54,7 @@ class StringAddCalculatorTest {
     @ValueSource(strings = {"a", "-", "%"})
     void 숫자_아니면_EX(String data) {
         calculator = new StringAddCalculator(new Target(data));
-        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> calculator.calculate())
+        assertThatIllegalArgumentException().isThrownBy(() -> calculator.calculate())
                 .withMessageContaining(ERROR_NUMBER_MESSAGE);
     }
 
@@ -64,7 +62,7 @@ class StringAddCalculatorTest {
     @ValueSource(strings = {"-1", "-2", "-3"})
     void 음수라면_EX(String data) {
         calculator = new StringAddCalculator(new Target(data));
-        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> calculator.calculate())
+        assertThatIllegalArgumentException().isThrownBy(() -> calculator.calculate())
                 .withMessageContaining(ERROR_NUMBER_MESSAGE);
     }
 

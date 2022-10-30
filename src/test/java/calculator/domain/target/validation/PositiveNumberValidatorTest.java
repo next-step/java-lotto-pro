@@ -1,7 +1,7 @@
 package calculator.domain.target.validation;
 
 import static calculator.domain.target.validation.CalculatorValidator.ERROR_NUMBER_MESSAGE;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import org.junit.jupiter.api.DisplayName;
@@ -15,14 +15,14 @@ class PositiveNumberValidatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"a", "-", "%"})
     void 숫자_아니면_EX(String target) {
-        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> validator.validate(target))
+        assertThatIllegalArgumentException().isThrownBy(() -> validator.validate(target))
                 .withMessageContaining(ERROR_NUMBER_MESSAGE);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"-1", "-2", "-3"})
     void 음수라면_EX(String target) {
-        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> validator.validate(target))
+        assertThatIllegalArgumentException().isThrownBy(() -> validator.validate(target))
                 .withMessageContaining(ERROR_NUMBER_MESSAGE);
     }
 
