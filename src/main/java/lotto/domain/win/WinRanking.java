@@ -4,14 +4,15 @@ package lotto.domain.win;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.message.ErrorMessages;
 
 public enum WinRanking {
     MISS(0, 0),
-    FIFTH(3, 5000),
-    FOURTH(4, 50000),
-    THIRD(5, 1500000),
-    SECOND(5, 30000000),
-    FIRST(6, 2000000000),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000),
     ;
 
     private final int matchCount;
@@ -22,15 +23,30 @@ public enum WinRanking {
         this.winningMoney = winningMoney;
     }
 
-    public static WinRanking of(int matchCount, boolean bonusNumber) {
-        if (matchCount == SECOND.getMatchCount() && bonusNumber) {
+    public static WinRanking of(int matchCount, boolean hasBonusNumber) {
+        if (isMissRanking(matchCount)) {
+            return MISS;
+        }
+
+        if (isSecondRanking(matchCount, hasBonusNumber)) {
             return SECOND;
         }
+
         return Arrays.stream(WinRanking.values())
                 .filter(winRanking -> winRanking != SECOND)
                 .filter(winRanking -> winRanking.getMatchCount() == matchCount)
                 .findAny()
-                .orElse(MISS);
+                .orElseThrow(() -> new IllegalArgumentException(
+                        String.format(ErrorMessages.INVALID_MATCH_COUNT, matchCount))
+                );
+    }
+
+    private static boolean isMissRanking(int matchCount) {
+        return MISS.getMatchCount() <= matchCount && matchCount < FIFTH.getMatchCount();
+    }
+
+    private static boolean isSecondRanking(int matchCount, boolean bonusNumber) {
+        return matchCount == SECOND.getMatchCount() && bonusNumber;
     }
 
     public static List<WinRanking> winnableRankings() {
