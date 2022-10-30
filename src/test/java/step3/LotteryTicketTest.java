@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step3.domain.LotteryTicket;
 import step3.domain.Lotto;
-import step3.domain.Payment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +21,7 @@ public class LotteryTicketTest {
         Lotto lotto3rd = new Lotto(lottoNumbers3rd);
         Lotto lotto2nd = new Lotto(lottoNumbers2nd);
         
-        lotteryTicket = new LotteryTicket(new Payment(2000));
+        lotteryTicket = new LotteryTicket(2000);
         lotteryTicket.add(lotto3rd);
         lotteryTicket.add(lotto2nd);
     }

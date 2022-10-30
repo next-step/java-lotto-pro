@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import step3.domain.Lotto;
 import step3.domain.Rank;
 import step3.domain.WinningBonusNumber;
-import step3.domain.WinningNumber;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,8 +19,7 @@ public class LottoTest {
     @BeforeAll
     static void beforeAll() {
         lottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber("2, 3, 4, 5, 6, 7");
-        winningBonusNumber = new WinningBonusNumber(winningNumber,"1");
+        winningBonusNumber = new WinningBonusNumber("2, 3, 4, 5, 6, 7","1");
     }
     
     @Test

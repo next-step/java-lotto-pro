@@ -16,8 +16,7 @@ public class StatisticsTest {
     private static Statistics statistics;
     @BeforeAll
     static void beforeAll() {
-        WinningNumber winningNumbers = new WinningNumber("3, 4, 5, 6, 7,8");
-        WinningBonusNumber winningBonusNumber = new WinningBonusNumber(winningNumbers, "9");
+        WinningBonusNumber winningBonusNumber = new WinningBonusNumber("3, 4, 5, 6, 7,8", "9");
         ArrayList<Integer> lottoNumbers4 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         ArrayList<Integer> lottoNumbers3 = new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7));
         ArrayList<Integer> lottoNumbers2 = new ArrayList<>(Arrays.asList(4, 5, 6, 7, 8, 9));
@@ -27,7 +26,7 @@ public class StatisticsTest {
         Lotto lotto3rd = new Lotto(lottoNumbers3);
         Lotto lotto2nd = new Lotto(lottoNumbers2);
     
-        LotteryTicket lotteryTicket = new LotteryTicket(new Payment(3000));
+        LotteryTicket lotteryTicket = new LotteryTicket(3000);
         lotteryTicket.add(lotto4th_1);
         lotteryTicket.add(lotto4th_2);
         lotteryTicket.add(lotto3rd);
@@ -52,7 +51,8 @@ public class StatisticsTest {
     @Test
     @DisplayName("총 당첨금 확인")
     public void Statistics_total_prize() {
-        assertThat(statistics.totalPrize()).isEqualTo(Rank.SECOND.getPrize() + Rank.THIRD.getPrize() + Rank.FORTH.getPrize() * 2);
+        assertThat(statistics.totalPrize())
+                .isEqualTo(Rank.SECOND.getPrize() + Rank.THIRD.getPrize() + Rank.FORTH.getPrize() * 2);
     }
 
 }

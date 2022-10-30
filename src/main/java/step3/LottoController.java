@@ -13,17 +13,15 @@ public class LottoController {
         this.resultView = resultView;
     }
     public void start() {
-        Payment payment = new Payment(inputView.inputPayment());
-        LotteryTicket lotteryTicket = new LotteryTicket(payment);
+        LotteryTicket lotteryTicket = new LotteryTicket(inputView.inputPayment());
         lottoFactory(lotteryTicket);
         
         resultView.resultLotteryTicket(lotteryTicket);
-    
-        WinningNumber winningNumber = new WinningNumber(inputView.inputWinningNumber());
-        WinningBonusNumber winningBonusNumber = new WinningBonusNumber(winningNumber, inputView.inputBonusNumber());
+       
+        WinningBonusNumber winningBonusNumber = new WinningBonusNumber(inputView.inputWinningNumber(), inputView.inputBonusNumber());
         
         Statistics statistics = new Statistics(lotteryTicket, winningBonusNumber);
-        resultView.resultStatistics(statistics, payment);
+        resultView.resultStatistics(statistics, lotteryTicket.getPayment());
     }
     
     private static void lottoFactory(LotteryTicket lotteryTicket){

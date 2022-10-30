@@ -9,8 +9,8 @@ public class WinningBonusNumber {
     private final WinningNumber winningNumber;
     private final int bonusNumber;
     
-    public WinningBonusNumber(WinningNumber winningNumber, String bonusNumber) {
-        this.winningNumber = winningNumber;
+    public WinningBonusNumber(String winningNumbers, String bonusNumber) {
+        this.winningNumber = new WinningNumber(winningNumbers);
         this.bonusNumber = ValidationUtils.parseInt(bonusNumber);
     }
 

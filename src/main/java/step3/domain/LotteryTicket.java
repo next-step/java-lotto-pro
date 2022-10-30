@@ -7,8 +7,8 @@ public class LotteryTicket {
     private final List<Lotto> lotteryTicket = new ArrayList<>();
     private final Payment payment;
     
-    public LotteryTicket(Payment payment) {
-        this.payment = payment;
+    public LotteryTicket(int payment) {
+        this.payment = new Payment(payment);
     }
     
     public List<Lotto> getLotteryTicket() {
