@@ -54,8 +54,11 @@ public class BoughtLottoTicketsResponse {
 
 	@Override
 	public String toString() {
-		return manualLottoNumbers.stream()
-			.map(this::numbersToString)
+		return Stream.concat(
+			manualLottoNumbers.stream()
+				.map(this::numbersToString),
+			autoLottoNumbers.stream()
+				.map(this::numbersToString))
 			.collect(joining("\n"));
 	}
 }

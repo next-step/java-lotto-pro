@@ -22,6 +22,10 @@ public class LottoTickets {
 			.collect(Collectors.toList()));
 	}
 
+	public LottoWinPrizes match(LottoTicket comparedTicket, int bonusNumber) {
+		return match(comparedTicket, LottoNumber.of(bonusNumber));
+	}
+
 	public LottoWinPrizes match(LottoTicket comparedTicket, LottoNumber bonusNumber) {
 		return LottoWinPrizes.of(
 			lottoTicketList.stream()

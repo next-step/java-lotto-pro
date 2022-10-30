@@ -43,6 +43,6 @@ public class LottoBuyingView {
 		int buyingManualLottoCount = InputHandler.inputInteger();
 
 		System.out.println(BUYING_MANUAL_LOTTO_PROMPT);
-		return InputHandler.inputIntegerList(buyingManualLottoCount);
+		return InputHandler.inputIntegerListMany(buyingManualLottoCount);
 	}
 }

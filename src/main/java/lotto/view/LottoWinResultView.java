@@ -1,11 +1,11 @@
 package lotto.view;
 
+import java.util.List;
+
 import lotto.controller.LottoController;
 import lotto.controller.dto.BoughtLottoTicketsResponse;
 import lotto.controller.dto.LottoWinResultResponse;
-import lotto.controller.dto.LottoWinResultsRequest;
 import lotto.controller.dto.LottoWinResultsResponse;
-import lotto.controller.dto.WinningLottoTicketResponse;
 import lotto.domain.ProfitMargin;
 import utils.InputHandler;
 
@@ -22,17 +22,12 @@ public class LottoWinResultView {
 	}
 
 	public void printWinResult(BoughtLottoTicketsResponse boughtLottoTickets,
-							   WinningLottoTicketResponse winningLottoTicketResponse) {
+							   List<Integer> winningLottoTicketResponse) {
 		LottoWinResultsResponse lottoWinResultsResponse = lottoController.getWinResults(
-			getWinResultRequest(boughtLottoTickets, winningLottoTicketResponse));
+			boughtLottoTickets, winningLottoTicketResponse, inputBonusNumber());
 
 		printMatchCount(lottoWinResultsResponse);
 		printProfitMargin(lottoWinResultsResponse);
-	}
-
-	private LottoWinResultsRequest getWinResultRequest(BoughtLottoTicketsResponse boughtLottoTickets,
-													   WinningLottoTicketResponse winningLottoTicketResponse) {
-		return new LottoWinResultsRequest(boughtLottoTickets, winningLottoTicketResponse, inputBonusNumber());
 	}
 
 	private int inputBonusNumber() {

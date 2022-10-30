@@ -21,7 +21,16 @@ public class InputHandler {
 		return inputMany(count, new ArrayList<>(count));
 	}
 
-	public static List<List<Integer>> inputIntegerList(int buyingManualLottoCount) {
+	public static List<Integer> inputIntegerList() {
+		SplitStrings splitStrings = StringSplitter.split(input());
+
+		return splitStrings.stream()
+			.map(String::trim)
+			.map(Integer::valueOf)
+			.collect(Collectors.toList());
+	}
+
+	public static List<List<Integer>> inputIntegerListMany(int buyingManualLottoCount) {
 
 		return inputMany(buyingManualLottoCount).stream()
 			.map(StringSplitter::split)
@@ -39,4 +48,5 @@ public class InputHandler {
 		inputs.add(input());
 		return inputMany(count - 1, inputs);
 	}
+
 }

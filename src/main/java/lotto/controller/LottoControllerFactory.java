@@ -9,7 +9,7 @@ public class LottoControllerFactory {
 	private static final Money LOTTO_PRICE = Money.wons(1000);
 
 	public static LottoController createLottoController() {
-		return new LottoController(
+		return new LottoControllerImpl(
 			LOTTO_PRICE,
 			new AutoLottoTicketsVendor(new AutoLottoTicketGenerator()));
 	}
