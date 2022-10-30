@@ -1,6 +1,7 @@
 package lotto.view;
 
 import static lotto.domain.LottoPrize.isNoPrize;
+import static lotto.domain.LottoPrize.isSecondPrize;
 
 import java.util.List;
 import lotto.domain.Lotto;
@@ -15,6 +16,7 @@ public class ResultView {
     private static final String NEW_LINE = "";
     private static final String DIVISION_LINE = "---------";
     private static final String LOTTO_RESULT = "%d개 일치 (%d원)- %d개" + System.lineSeparator();
+    private static final String LOTTO_RESULT_WITH_BONUS = "%d개 일치, 보너스 볼 일치(%d원)- %d개" + System.lineSeparator();
     private static final String LOTTO_RESULT_PROFITS = "총 수익률은 %.2f입니다.";
     private static final String LOTTO_LOSS_PROFITS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
@@ -45,8 +47,12 @@ public class ResultView {
     }
 
     private static void printLottoResult(LottoPrize lottoPrize, int lottoResultCount) {
+        String lottoResult = LOTTO_RESULT;
+        if(isSecondPrize(lottoPrize)) {
+            lottoResult = LOTTO_RESULT_WITH_BONUS;
+        }
         if(!isNoPrize(lottoPrize)) {
-            System.out.printf(LOTTO_RESULT, lottoPrize.getMatchCount(), lottoPrize.getLottoPrizeMoney(), lottoResultCount);
+            System.out.printf(lottoResult, lottoPrize.getMatchCount(), lottoPrize.getLottoPrizeMoney(), lottoResultCount);
         }
     }
 
