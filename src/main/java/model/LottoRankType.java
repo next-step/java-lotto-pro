@@ -23,4 +23,8 @@ public enum LottoRankType {
                 .filter(s -> s.sameCount == winNumberCount).findFirst();
         return result.orElse(RANK_FAIL);
     }
+
+    public int getWinMoney() {
+        return winMoney;
+    }
 }

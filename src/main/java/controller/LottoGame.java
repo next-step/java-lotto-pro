@@ -1,14 +1,13 @@
 package controller;
 
-import model.Lotto;
-import model.LottoNumber;
-import model.Rank;
+import model.*;
 import model.strategy.RandomStrategy;
 import view.InputView;
 import view.OutPutView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LottoGame {
 
@@ -19,7 +18,9 @@ public class LottoGame {
         List<LottoNumber> buy = new Lotto(money, new RandomStrategy(arrangeNumber)).buy();
         OutPutView.outPutLottoNumber(buy);
         List<Integer> winNumber = InputView.winNumberInput();
-        new Rank().stats(buy, winNumber);
+        Rank rank = new Rank();
+        rank.stats(buy, winNumber);
+        double percent = new Revenue(rank.getCountRank()).getPercent(money);
     }
 
 

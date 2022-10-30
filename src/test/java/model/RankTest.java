@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static model.LottoRankType.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,12 +17,14 @@ class RankTest {
                 new LottoNumber(new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)))
         );
         List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 9, 10);
-        Map<LottoRankType, Integer> countRank = new Rank().stats(buyLotto, winNumber);
+        Rank rank = new Rank();
 
-        assertThat(countRank.get(RANK_ONE)).isZero();
-        assertThat(countRank.get(RANK_TWO)).isZero();
-        assertThat(countRank.get(RANK_THREE)).isEqualTo(1);
-        assertThat(countRank.get(RANK_FOUR)).isZero();
-        assertThat(countRank.get(RANK_FAIL)).isZero();
+        rank.stats(buyLotto, winNumber);
+
+        assertThat(rank.getCountRank().get(RANK_ONE)).isZero();
+        assertThat(rank.getCountRank().get(RANK_TWO)).isZero();
+        assertThat(rank.getCountRank().get(RANK_THREE)).isEqualTo(1);
+        assertThat(rank.getCountRank().get(RANK_FOUR)).isZero();
+        assertThat(rank.getCountRank().get(RANK_FAIL)).isZero();
     }
 }

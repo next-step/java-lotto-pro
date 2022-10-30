@@ -18,7 +18,7 @@ public class Rank {
         }
     }
 
-    public Map<LottoRankType, Integer> stats(List<LottoNumber> buyLotto, List<Integer> winNumber) {
+    public void stats(List<LottoNumber> buyLotto, List<Integer> winNumber) {
         for (LottoNumber lotto : buyLotto) {
             int winNumberCount = lotto.getWinNumberCount(winNumber);
             LottoRankType lottoRankType = LottoRankType.convertRank(winNumberCount);
@@ -28,7 +28,9 @@ public class Rank {
                 }
             }
         }
+    }
 
+    public Map<LottoRankType, Integer> getCountRank() {
         return countRank;
     }
 }
