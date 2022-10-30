@@ -31,7 +31,7 @@ public class LottoGame {
         }
     }
 
-    public void makeLottoResult(LottoNumbers winningLottoNumber, LottoTickets lottoTickets) {
+    public void makeLottoResult(WinningLottoNumbers winningLottoNumber, LottoTickets lottoTickets) {
         lottoTickets.matchLottoResult(winningLottoNumber, lottoResult);
     }
 

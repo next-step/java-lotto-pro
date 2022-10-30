@@ -21,9 +21,9 @@ public class LottoTickets {
         return this.lottoTicketList.size() * LOTTO_PRICE;
     }
 
-    public void matchLottoResult(LottoNumbers winningLottoNumber, LottoResult lottoResult) {
+    public void matchLottoResult(WinningLottoNumbers winningLottoNumber, LottoResult lottoResult) {
         for (LottoTicket lottoTicket : lottoTicketList) {
-            lottoResult.increaseRankCount(lottoTicket.compareLotto(winningLottoNumber));
+            lottoResult.increaseRankCount(lottoTicket.compareLotto(winningLottoNumber.getLottoNumbers()));
         }
     }
 

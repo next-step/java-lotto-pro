@@ -12,7 +12,7 @@ import java.util.Arrays;
 class LottoResultTest {
 
     private LottoTickets lottoTickets;
-    private LottoNumbers winningLottoNumbers;
+    private WinningLottoNumbers winningLottoNumbers;
 
     @BeforeEach
     void init() {
@@ -21,7 +21,7 @@ class LottoResultTest {
                         new LottoTicket(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)))
                 )
         ));
-        winningLottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winningLottoNumbers = new WinningLottoNumbers("1,2,3,4,5,6", new LottoNumber(10));
     }
 
     @DisplayName("당첨자의 이익률을 알 수 있다.")

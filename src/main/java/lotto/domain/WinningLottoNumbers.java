@@ -14,27 +14,23 @@ public class WinningLottoNumbers {
     private static final Pattern LOTTO_COMMA_PATTERN
             = Pattern.compile("^(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+$");
 
-    private final List<Integer> lottoNumbers;
+    private LottoNumbers lottoNumbers;
     private LottoNumber bonusNumber;
 
-    public List<Integer> getLottoNumbers() {
-        return this.lottoNumbers;
-    }
-
-    // TODO: 기존 코드(추후 삭제)
     public WinningLottoNumbers(String lottoNumbers) {
         validNullOrEmpty(lottoNumbers);
         checkLottoPattern(lottoNumbers);
-        this.lottoNumbers = convertToInt(lottoNumbers);
     }
 
     public WinningLottoNumbers(String lottoNumbers, LottoNumber bonusNumber) {
-        // TODO: 보너스 번호 관련 유효성 처리
         validNullOrEmpty(lottoNumbers);
         checkLottoPattern(lottoNumbers);
-        this.lottoNumbers = convertToInt(lottoNumbers);
+        List<Integer> lottoNumberList = convertToInt(lottoNumbers);
+        checkDuplicatedBonusNumber(lottoNumberList, bonusNumber);
+        this.lottoNumbers = new LottoNumbers(lottoNumberList);
         this.bonusNumber = bonusNumber;
     }
+
 
     private void validNullOrEmpty(String lottoNumbers) {
         if (StringUtils.isNullOrEmpty(lottoNumbers)) {
@@ -49,10 +45,19 @@ public class WinningLottoNumbers {
         }
     }
 
+    private void checkDuplicatedBonusNumber(List<Integer> lottoNumbers, LottoNumber bonusNumber) {
+        if (lottoNumbers.contains(bonusNumber.getNumber())) {
+            throw new IllegalArgumentException("당첨된 로또 번호와 보너스 번호는 일치할 수 없습니다.");
+        }
+    }
+
     private List<Integer> convertToInt(String lottoNumbers) {
         return Arrays.stream(lottoNumbers.replaceAll("\\s","").split(DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
+    public LottoNumbers getLottoNumbers() {
+        return lottoNumbers;
+    }
 }
