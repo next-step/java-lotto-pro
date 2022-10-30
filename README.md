@@ -72,4 +72,13 @@
 - [x] 수익률을 계산한다.
     - [x] 수익률은 구매금액 대비 당첨금액의 비율로 정해지며, 소수점 둘째 자리까지 포함한다.
 - [x] 수익률을 출력한다.
- 
+
+#### 리뷰 사항 반영
+- [x] Step3 1차 리뷰 사항 반영
+    - [x] 예외 처리 - RuntimeException을 상속 받도록 변경
+    - [x] lottoNumbers.contains() 을 사용하도록 변경 ( 직접 정의 X )
+    - [x] static 키워드 첨부
+    - [x] 생성기가 필요한 로또 숫자 미리 생성
+    - [x] static 키워드 첨부
+    - [x] threeCount와 같은 요소 제거 및 ENUM key로 활용
+    - [x] 대중적인 prefix인 print로 출력 메소드명 변경
