@@ -80,6 +80,6 @@ public class LottoResultTest {
     void LottoResult_fail_03() {
         String[] inputNumberTexts = new String[]{};
         assertThatThrownBy(() -> new LottoResult(inputNumberTexts))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

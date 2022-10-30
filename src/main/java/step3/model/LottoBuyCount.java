@@ -2,6 +2,7 @@ package step3.model;
 
 import step3.constant.ErrorMessageConstant;
 import step3.constant.LottoConstant;
+import step3.exception.LottoFormatException;
 
 import java.util.Objects;
 
@@ -12,14 +13,14 @@ public class LottoBuyCount {
     public LottoBuyCount(Money money) {
         Money oneGameMoney = new Money(LottoConstant.LOTTO_ONE_GAME_MONEY);
         if (money.isLessThan(oneGameMoney)) {
-            throw new RuntimeException(ErrorMessageConstant.ZERO_LOTTO_BUY_COUNT);
+            throw new LottoFormatException(ErrorMessageConstant.ZERO_LOTTO_BUY_COUNT);
         }
         this.lottoBuyCount = money.divide(oneGameMoney);
     }
 
     public LottoBuyCount(int count) {
         if (count < 0) {
-            throw new RuntimeException(ErrorMessageConstant.NEGATIVE_NUMBER);
+            throw new LottoFormatException(ErrorMessageConstant.NEGATIVE_NUMBER);
         }
         this.lottoBuyCount = count;
     }

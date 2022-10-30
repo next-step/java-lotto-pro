@@ -2,6 +2,7 @@ package step3.model;
 
 import step3.constant.ErrorMessageConstant;
 import step3.constant.LottoConstant;
+import step3.exception.LottoFormatException;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,7 +20,7 @@ public class LottoResult {
 
     public LottoResult(String[] lottoNumbersText) {
         if (lottoNumbersText == null || lottoNumbersText.length == 0) {
-            throw new RuntimeException(ErrorMessageConstant.EMPTY_TEXT);
+            throw new IllegalArgumentException(ErrorMessageConstant.EMPTY_TEXT);
         }
         this.lottoNumbers = getLottoNumbersFromTexts(lottoNumbersText);
     }
@@ -35,7 +36,7 @@ public class LottoResult {
 
     private void checkLottoOutOfSize(int lottoNumbersSize) {
         if (lottoNumbersSize != LottoConstant.PICK_LOTTO_MAX_NUM) {
-            throw new RuntimeException(ErrorMessageConstant.NOT_LOTTO_SIZE);
+            throw new LottoFormatException(ErrorMessageConstant.NOT_LOTTO_SIZE);
         }
     }
 

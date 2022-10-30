@@ -1,6 +1,7 @@
 package step3.model;
 
 import step3.constant.ErrorMessageConstant;
+import step3.exception.LottoFormatException;
 
 import java.util.Objects;
 
@@ -24,14 +25,14 @@ public class Money implements Comparable<Money> {
         try {
             result = Integer.parseInt(text);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException(ErrorMessageConstant.NOT_NUMBER);
+            throw new LottoFormatException(ErrorMessageConstant.NOT_NUMBER);
         }
         return result;
     }
 
     private void checkOutOfSize(double number) {
         if (number < 0) {
-            throw new RuntimeException(ErrorMessageConstant.NEGATIVE_NUMBER);
+            throw new LottoFormatException(ErrorMessageConstant.NEGATIVE_NUMBER);
         }
     }
 

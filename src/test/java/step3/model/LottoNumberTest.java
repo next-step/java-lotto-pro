@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import step3.exception.LottoFormatException;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -21,7 +22,7 @@ public class LottoNumberTest {
     @ValueSource(strings = {",", "a", "a1", ""})
     void Number_fail_01(String text) {
         assertThatThrownBy(() -> new LottoNumber(text))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(LottoFormatException.class);
     }
 
     @DisplayName("Number_숫자_1_45_범위_밖이면_에러")
@@ -29,7 +30,7 @@ public class LottoNumberTest {
     @ValueSource(strings = {"-1", "0", "46"})
     void Number_fail_02(String text) {
         assertThatThrownBy(() -> new LottoNumber(text))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(LottoFormatException.class);
     }
 
 

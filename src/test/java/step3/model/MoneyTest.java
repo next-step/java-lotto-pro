@@ -5,10 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import step3.exception.LottoFormatException;
 
 import static org.assertj.core.api.Assertions.*;
 
-@DisplayName("로또_구입_금액_WRAPPING_클래스")
+@DisplayName("금액_WRAPPING_클래스")
 public class MoneyTest {
     @DisplayName("Money_정상_입력")
     @ParameterizedTest
@@ -22,7 +23,7 @@ public class MoneyTest {
     @ValueSource(strings = {",", "a", "a1", ""})
     void Money_fail_01(String text) {
         assertThatThrownBy(() -> new Money(text))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(LottoFormatException.class);
     }
 
     @DisplayName("Money_숫자_음수면_에러")
@@ -30,7 +31,7 @@ public class MoneyTest {
     @ValueSource(strings = {"-1", "-10000"})
     void Money_fail_02(String text) {
         assertThatThrownBy(() -> new Money(text))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(LottoFormatException.class);
     }
 
     @DisplayName("Money_숫자_equal_test")
