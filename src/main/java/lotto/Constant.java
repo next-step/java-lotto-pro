@@ -25,4 +25,9 @@ class Constant {
     public static final int LOTTO_START_NUMBER = 1;
     public static final int LOTTO_END_NUMBER = 45;
     public static final String DELIMITER = ", ";
+    public static final String ERROR_ONLY_NUMBER = "숫자만 입력할 수 있습니다.";
+    public static final String ERROR_NUMBER_RANGE = "숫자는 1 ~ 45까지 입력할 수 있습니다.";
+    public static final String ERROR_LOTTO_COST = "로또 복권 1장의 구입 가격 " + LOTTO_PRICE + "원 입니다.";
+    public static final String RESULT_TOTAL_EARNINGS_RATE_1 = "총 수익률은 ";
+    public static final String RESULT_TOTAL_EARNINGS_RATE_2 = "입니다.";
 }

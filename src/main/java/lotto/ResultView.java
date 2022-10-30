@@ -11,6 +11,8 @@ import static lotto.Constant.RESULT_HIT_FIVE;
 import static lotto.Constant.RESULT_HIT_FOUR;
 import static lotto.Constant.RESULT_HIT_SIX;
 import static lotto.Constant.RESULT_HIT_THREE;
+import static lotto.Constant.RESULT_TOTAL_EARNINGS_RATE_1;
+import static lotto.Constant.RESULT_TOTAL_EARNINGS_RATE_2;
 import static lotto.Constant.RESULT_WINNING_STATISTICS;
 
 import java.util.List;
@@ -41,7 +43,7 @@ class ResultView {
     }
 
     private void printResultTotalEarningsRate(int totalEarningsRate) {
-        System.out.println("총 수익률은 " + totalEarningsRate + "입니다.");
+        System.out.println(RESULT_TOTAL_EARNINGS_RATE_1 + totalEarningsRate + RESULT_TOTAL_EARNINGS_RATE_2);
     }
 
     private int calculateTotalEarningsRate(int payMoney, int totalEarnings) {
