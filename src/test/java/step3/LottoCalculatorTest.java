@@ -12,6 +12,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static step3.constant.Constant.*;
 
 public class LottoCalculatorTest {
     private LottoCalculator lottoCalculator = new LottoCalculator();
@@ -46,7 +47,7 @@ public class LottoCalculatorTest {
             "3-8-27-30-35-44" +
             ":0.35"}, delimiter = ':')
     void 수익률_테스트(String input, String expected) {
-        String[] inputArr = input.split(":")[0].split(",");
+        String[] inputArr = input.split(COLON)[0].split(COMMA);
         Lottos lottos = new Lottos(createTestLottos(inputArr));
 
         lottoCalculator.calculateWinnerStatistics(lottos);
@@ -58,7 +59,7 @@ public class LottoCalculatorTest {
     @ParameterizedTest
     @CsvSource(value = {"1-2-3-4-5-6:2000000.0", "1-2-3-4-9-10,1-2-3-10-11-23:27.5"}, delimiter = ':')
     void 수익률_이득_테스트(String input, String expected) {
-        String[] inputArr = input.split(":")[0].split(",");
+        String[] inputArr = input.split(COLON)[0].split(COMMA);
         Lottos lottos = new Lottos(createTestLottos(inputArr));
 
         lottoCalculator.calculateWinnerStatistics(lottos);
@@ -75,13 +76,13 @@ public class LottoCalculatorTest {
     }
 
     private List<Lotto> makeTestLottos(List<Lotto> lottos, String lottoNumbers) {
-        lottos.add(new Lotto(lottoNumbers.split("-")));
+        lottos.add(new Lotto(lottoNumbers.split(BAR)));
         return lottos;
     }
 
     private List<LottoNumber> testLastWeek() {
         List<LottoNumber> result = new ArrayList<>();
-        for (int i = 1; i <= 6; i++) {
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_WINNER_NUMBER; i++) {
             result.add(new LottoNumber(i));
         }
         return result;
