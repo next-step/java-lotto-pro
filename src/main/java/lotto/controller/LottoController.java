@@ -10,6 +10,7 @@ import static lotto.view.ResultView.printPurchasingLottos;
 
 import common.utils.LongUtils;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RandomLottoNumberGenerator;
@@ -55,6 +56,10 @@ public class LottoController {
     }
 
     private void getLottoResults(Lottos lottos, Lotto winningLotto) {
-        printLottoResults(lottos.createLottoResults(winningLotto), lottos.findTotalPrice());
+        //printLottoResults(lottos.createLottoResults(winningLotto), lottos.findTotalPrice());
+    }
+
+    private void getLottoResults(Lottos lottos, Lotto winningLotto, LottoNumber bonusLottoNumber) {
+        printLottoResults(lottos.createLottoResults(winningLotto, bonusLottoNumber), lottos.findTotalPrice());
     }
 }
