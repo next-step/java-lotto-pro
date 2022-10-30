@@ -35,8 +35,9 @@ public class LottoResult {
                     + lottoMatchNumberMap.getMatchLottoNumber(matchNumber) + "개\n");
         }
         double profitRatio = getWinningPrice()/buyAmount;
-        if(profitRatio >= 1)
+        if(profitRatio >= 1) {
             return result + "총 수익률은 " + profitRatio + "입니다.";
+        }
         return result + "총 수익률은 " + profitRatio + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     }
 }

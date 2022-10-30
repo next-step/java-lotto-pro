@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class LottoReader {
+public class LottoInputView {
 
     public String readUserInput(){
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -12,7 +12,6 @@ public class LottoReader {
         try {
             userInput = br.readLine();
         } catch (IOException e) {
-            e.printStackTrace();
         }
         return userInput;
     }

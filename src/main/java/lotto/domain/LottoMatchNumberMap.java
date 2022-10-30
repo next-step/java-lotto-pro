@@ -13,7 +13,9 @@ public class LottoMatchNumberMap {
     public int getMatchLottoNumber(int matchNumber) {
         int matchLottoNumber = 0;
         for(Lotto lotto : lottoMatchNumberMap.keySet()) {
-            if(lottoMatchNumberMap.get(lotto) == matchNumber) matchLottoNumber++;
+            if(lottoMatchNumberMap.get(lotto) == matchNumber) {
+                matchLottoNumber++;
+            }
         }
         return matchLottoNumber;
     }

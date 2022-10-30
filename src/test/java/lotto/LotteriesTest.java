@@ -15,7 +15,7 @@ public class LotteriesTest {
     int[] winningNumbers = new int[] {1,2,3,4,5,6};
 
     @Test
-    void 여섯개_매치_테스트() {
+    void getMatchNumber_여섯개_매치_테스트() {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(new Lotto(new int[]{1,2,3,4,5,6}));
         Lotteries lotteries = new Lotteries(lottoList);
@@ -28,7 +28,7 @@ public class LotteriesTest {
     }
 
     @Test
-    void 한개_매치_테스트() {
+    void getMatchNumber_한개_매치_테스트() {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(new Lotto(new int[]{1,12,13,14,15,16}));
         Lotteries lotteries = new Lotteries(lottoList);
@@ -41,7 +41,7 @@ public class LotteriesTest {
     }
 
     @Test
-    void 매치_없음_테스트() {
+    void getMatchNumber_매치_없음_테스트() {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(new Lotto(new int[]{11,12,13,14,15,16}));
         Lotteries lotteries = new Lotteries(lottoList);

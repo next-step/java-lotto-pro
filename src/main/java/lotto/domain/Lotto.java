@@ -31,7 +31,9 @@ public class Lotto {
 
     public boolean isMatch(int number) {
         for(int i=0; i<winningNumbers.length; i++) {
-            if(winningNumbers[i] == number) return true;
+            if(winningNumbers[i] == number) {
+                return true;
+            }
         }
         return false;
     }
@@ -39,7 +41,9 @@ public class Lotto {
     public int getMatchNumber(int[] numbers) {
         int matchNumber = 0;
         for(int number : numbers) {
-            if(isMatch(number)) matchNumber++;
+            if(isMatch(number)) {
+                matchNumber++;
+            }
         }
         return matchNumber;
     }

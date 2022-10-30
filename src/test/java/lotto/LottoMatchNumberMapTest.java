@@ -15,7 +15,7 @@ public class LottoMatchNumberMapTest {
     int[] winningNumbers = new int[] {1,2,3,4,5,6};
 
     @Test
-    void 로또_넘버_매치_테스트() {
+    void getMatchLottoNumber_로또_넘버_매치_테스트() {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(new Lotto(new int[]{1,2,3,14,15,16}));
         lottoList.add(new Lotto(new int[]{1,2,3,24,25,26}));
@@ -26,7 +26,7 @@ public class LottoMatchNumberMapTest {
     }
 
     @Test
-    void 로또_넘버_적은숫자_중복매치_불가능_테스트() {
+    void getMatchLottoNumber_로또_넘버_적은숫자_중복매치_불가능_테스트() {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(new Lotto(new int[]{1,2,3,14,15,16}));
         lottoList.add(new Lotto(new int[]{1,2,3,24,25,26}));
@@ -37,7 +37,7 @@ public class LottoMatchNumberMapTest {
     }
 
     @Test
-    void 로또_넘버_전부맞을경우_테스트() {
+    void getMatchLottoNumber_로또_넘버_전부맞을경우_테스트() {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(new Lotto(new int[]{1,2,3,4,5,6}));
         lottoList.add(new Lotto(new int[]{1,2,3,24,25,26}));

@@ -2,31 +2,32 @@ package lotto.controller;
 
 import lotto.domain.Lotteries;
 import lotto.service.LottoService;
-import lotto.view.BuyAmountReader;
-import lotto.view.WinningNumberReader;
+import lotto.view.BuyAmountInputView;
+import lotto.view.LottoResultView;
+import lotto.view.WinningNumberInputView;
 
 public class LottoController {
 
     LottoService lottoService = new LottoService();
+    LottoResultView lottoResultView = new LottoResultView();
 
     public int readBuyAmount() {
-        BuyAmountReader buyAmountReader = new BuyAmountReader();
+        BuyAmountInputView buyAmountReader = new BuyAmountInputView();
         return Integer.parseInt(buyAmountReader.readBuyAmount());
     }
 
     public Lotteries buyLotto(int buyAmount) {
         Lotteries lotteries = lottoService.buyLotto(buyAmount);
-        System.out.println(lotteries);
+        lottoResultView.write(lotteries);
         return lotteries;
     }
 
     public int[] readWinningNumbers() {
-        WinningNumberReader winningNumberReader = new WinningNumberReader();
+        WinningNumberInputView winningNumberReader = new WinningNumberInputView();
         return winningNumberReader.readWinningNumbers();
     }
 
     public void lottoResult(Lotteries lotteries, int[] winningNumbers, int buyAmount) {
-        System.out.println("당첨 통계\n---------");
-        System.out.println(lottoService.lottoResult(lotteries,winningNumbers,buyAmount));
+        lottoResultView.write("당첨 통계\n---------\n" + lottoService.lottoResult(lotteries,winningNumbers,buyAmount));
     }
 }
