@@ -12,7 +12,7 @@ class InputView {
 
     int inputPay() {
         printInputPay();
-        return Validate.validatePay(scanner.nextLine());
+        return Validate.validatePay(Validate.validateInput(scanner.nextLine()));
     }
 
     private void printInputPay() {

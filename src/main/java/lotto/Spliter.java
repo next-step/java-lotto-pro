@@ -9,7 +9,7 @@ class Spliter {
         StringTokenizer token = new StringTokenizer(input, ", ");
         List<Integer> winningNumbers = new ArrayList<>();
         while (token.hasMoreTokens()) {
-            winningNumbers.add(Integer.parseInt(token.nextToken()));
+            winningNumbers.add(Validate.validateNumberRange(Validate.validateInput(token.nextToken())));
         }
         return winningNumbers;
     }
