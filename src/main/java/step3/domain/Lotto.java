@@ -13,6 +13,10 @@ public class Lotto {
         return this.lottoNumbers.compareTo(winningNumbers);
     }
 
+    public boolean containsNumber(final LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

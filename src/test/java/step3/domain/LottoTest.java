@@ -24,4 +24,11 @@ class LottoTest {
         LottoNumbers winningNumbers = new LottoNumbers("1, 2, 3, 4, 5, 7");
         assertThat(lotto.compareNumbers(winningNumbers)).isEqualTo(5);
     }
+
+    @Test
+    void 보유한_로또번호가_특정_로또번호를_포함하고_있는지_확인() {
+        Lotto lotto = new Lotto(new LottoNumbers("1, 2, 3, 4, 5, 6"));
+        LottoNumber bonusNumber = new LottoNumber(6);
+        assertThat(lotto.containsNumber(bonusNumber)).isTrue();
+    }
 }
