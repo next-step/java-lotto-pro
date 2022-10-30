@@ -34,7 +34,7 @@ public class AmountTest {
     @DisplayName("입력된 금액으로 구매한 로또 개수가 1개 이하인 경우 에러가 발생되는지 확인")
     @Test
     void buyLottoCount() {
-        assertThatThrownBy(() -> new Amount("900"))
+        assertThatThrownBy(() -> new Amount("900").buyLottoCount())
             .isInstanceOf(IllegalArgumentException.class);
     }
 }

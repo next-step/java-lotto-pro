@@ -13,7 +13,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoService {
-    
+
     public Amount buyLottoAuto() {
         Amount buyAmount = new Amount(InputView.inputAmount());
         OutputView.outputBuyLottosCount(buyAmount.buyLottoCount());
@@ -51,6 +51,6 @@ public class LottoService {
             .limit(amount)
             .collect(Collectors.toList());
 
-        return new Lottos(lottos);
+        return Lottos.from(lottos);
     }
 }

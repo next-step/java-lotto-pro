@@ -12,16 +12,16 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = { 1, 45 })
     void numberAllowRange(int number) {
-        LottoNumber lottoNumber = new LottoNumber(number);
+        LottoNumber lottoNumber = LottoNumber.from(number);
 
-        assertThat(lottoNumber.equals(new LottoNumber(number))).isTrue();
+        assertThat(lottoNumber.equals(LottoNumber.from(number))).isTrue();
     }
 
     @DisplayName("1과 45 밖의 값이 입력되면 에러가 발생되는지 확인")
     @ParameterizedTest
     @ValueSource(ints = { 0, 46 })
     void numberNotAllowRange(int number) {
-        assertThatThrownBy(() -> new LottoNumber(number))
+        assertThatThrownBy(() -> LottoNumber.from(number))
             .isInstanceOf(IllegalArgumentException.class);
     }
 }

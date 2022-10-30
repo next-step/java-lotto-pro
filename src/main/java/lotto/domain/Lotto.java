@@ -16,14 +16,14 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(final List<LottoNumber> lottoNumbers) {
+    private Lotto(final List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
     public static Lotto from(final List<Integer> numbers) {
         return new Lotto(numbers.stream()
-            .map(number -> new LottoNumber(number))
+            .map(number -> LottoNumber.from(number))
             .collect(Collectors.toList()));
     }
 

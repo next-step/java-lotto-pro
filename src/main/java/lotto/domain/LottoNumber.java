@@ -12,9 +12,13 @@ public class LottoNumber {
 
     private final int lottoNumber;
 
-    public LottoNumber(final int number) {
+    private LottoNumber(final int number) {
         validate(number);
         this.lottoNumber = number;
+    }
+
+    public static LottoNumber from(final int number) {
+        return new LottoNumber(number);
     }
 
     private void validate(final int number) {
