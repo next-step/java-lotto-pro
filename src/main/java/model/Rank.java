@@ -12,14 +12,14 @@ public class Rank {
     private final Map<LottoRankType, Integer> countRank;
 
     private final static int ADD_LOTTO_COUNT = 1;
+    private final static int INIT_MAP_COUNT = 0;
 
     public Rank() {
+        List<LottoRankType> rank = Arrays.asList(RANK_ONE, RANK_TWO, RANK_THREE, RANK_FOUR);
         this.countRank = new TreeMap<>();
 
-        List<LottoRankType> rank = Arrays.asList(RANK_ONE, RANK_TWO, RANK_THREE, RANK_FOUR);
-
         for (LottoRankType lottoRankType : rank) {
-            countRank.put(lottoRankType, 0);
+            countRank.put(lottoRankType, INIT_MAP_COUNT);
         }
     }
 

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-class LottoTest {
+class LottosTest {
 
     @Test
     void 로또번호를_입력갯수만큼_생성한다() {
