@@ -24,7 +24,10 @@ public class LottoNumbers {
 
     public static LottoNumbers generate() {
         Collections.shuffle(GENERATE_LOTTO_NUMBERS);
-        return new LottoNumbers(GENERATE_LOTTO_NUMBERS.stream().limit(LOTTO_SIZE).collect(Collectors.toList()));
+        List<LottoNumber> numbers = GENERATE_LOTTO_NUMBERS.stream()
+                .limit(LOTTO_SIZE)
+                .collect(Collectors.toList());
+        return new LottoNumbers(numbers);
     }
 
     public static LottoNumbers generate(String numbers) {
@@ -42,7 +45,9 @@ public class LottoNumbers {
     }
 
     private static List<LottoNumber> from(List<Integer> numbers) {
-        return numbers.stream().map(LottoNumber::of).collect(Collectors.toList());
+        return numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
     }
 
     private void validateLottoSize(List<LottoNumber> lottoNumbers) {
@@ -58,7 +63,9 @@ public class LottoNumbers {
     }
 
     public int match(LottoNumbers target) {
-        return (int) lottoNumbers.stream().filter(target::contains).count();
+        return (int) lottoNumbers.stream()
+                .filter(target::contains)
+                .count();
     }
 
     private boolean contains(LottoNumber lottoNumber) {

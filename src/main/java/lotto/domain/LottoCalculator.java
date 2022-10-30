@@ -17,7 +17,9 @@ public class LottoCalculator {
 
 
     public static int winningCount(WinningLotto winningLotto, Lottos lottos, Rank rank) {
-        return (int) lottos.stream().filter(lotto -> winningLotto.match(lotto) == rank).count();
+        return (int) lottos.stream()
+                .filter(lotto -> winningLotto.match(lotto) == rank)
+                .count();
     }
 
     public static double rateOfReturn(WinningLotto winningLotto, Lottos lottos) {
