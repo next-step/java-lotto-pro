@@ -11,7 +11,6 @@ public enum LottoResult {
     private static final String RESULT_MONEY_TEXT = "원)- ";
     private static final String RESULT_TOTAL_COUNT_TEXT = "개";
     private static final int DEFAULT_PROFIT = 0;
-    private static final int START_TOTAL_COUNT = 0;
     private static final int CLEAR_TOTAL_COUNT = 0;
     private int matchCount;
     private int money;
@@ -30,7 +29,7 @@ public enum LottoResult {
 
     public int profit() {
         int profit = DEFAULT_PROFIT;
-        for (int i = START_TOTAL_COUNT; i < totalCount; i++) {
+        for (int i = 0; i < totalCount; i++) {
             profit += money;
         }
         totalCount = CLEAR_TOTAL_COUNT;
