@@ -13,4 +13,8 @@ public class Lotto {
     public long match(LottoNumbers winningNumbers) {
         return this.lottoNumbers.match(winningNumbers);
     }
+
+    public String reportLottoNumbers() {
+        return this.lottoNumbers.toString();
+    }
 }

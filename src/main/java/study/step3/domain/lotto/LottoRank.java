@@ -14,6 +14,7 @@ public enum LottoRank {
         this.matchCount = matchCount;
         this.winnings = winnings;
     }
+
     public static LottoRank ofMatchCount(Long matchCount) {
         LottoRank findRank = LottoRank.NONE;
         for (LottoRank rank : values()) {
@@ -24,7 +25,7 @@ public enum LottoRank {
     }
 
     private static LottoRank findLottoLank(LottoRank findRank, LottoRank rank, Long matchCount) {
-        if(!findRank.isNone()) {
+        if(findRank.isWinnings()) {
             return findRank;
         }
 
@@ -38,8 +39,12 @@ public enum LottoRank {
         return rank;
     }
 
-    private boolean isNone() {
+    public boolean isNone() {
         return NONE.equals(this);
+    }
+
+    public boolean isWinnings() {
+        return !isNone();
     }
 
     public static LottoRank minimumLottoRank() {
