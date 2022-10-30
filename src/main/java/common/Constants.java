@@ -10,4 +10,6 @@ public class Constants {
     public static double STANDARD_RESULT_PERCENT = 0.0;
     public static int START_ARRANGE_NUMBER = 0;
     public static int END_ARRANGE_NUMBER = 6;
+    public static int START_LOTTO_NUMBER = 1;
+    public static int END_LOTTO_NUMBER = 45;
 }

@@ -1,16 +1,20 @@
 package controller;
 
-import model.*;
+import model.Lotto;
+import model.LottoNumber;
+import model.Rank;
+import model.Revenue;
 import model.strategy.RandomStrategy;
 import view.InputView;
 import view.OutPutView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
+import static common.Constants.END_LOTTO_NUMBER;
+import static common.Constants.START_LOTTO_NUMBER;
 
 public class LottoGame {
-
 
     public void start() {
         int money = InputView.moneyInput();
@@ -27,8 +31,8 @@ public class LottoGame {
 
 
     private List<Integer> initArrangeNumber() {
-        List<Integer>arrangeNumber = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        List<Integer> arrangeNumber = new ArrayList<>();
+        for (int i = START_LOTTO_NUMBER; i <= END_LOTTO_NUMBER; i++) {
             arrangeNumber.add(i);
         }
 
