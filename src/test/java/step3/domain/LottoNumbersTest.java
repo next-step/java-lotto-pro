@@ -74,4 +74,11 @@ class LottoNumbersTest {
         String expectedPrintResult = "[1, 2, 3, 4, 5, 6]";
         assertThat(lottoNumbers.toString()).isEqualTo(expectedPrintResult);
     }
+
+    @Test
+    void 로또_번호의_포함_여부를_확인할_수_있다() {
+        LottoNumbers lottoNumbers = new LottoNumbers("1, 2, 3, 4, 5, 6");
+        LottoNumber bonusNumber = new LottoNumber(6);
+        assertThat(lottoNumbers.contains(bonusNumber)).isTrue();
+    }
 }
