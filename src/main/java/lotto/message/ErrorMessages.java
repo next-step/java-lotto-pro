@@ -9,6 +9,8 @@ public class ErrorMessages {
     public static final String INVALID_WINNING_NUMBERS = "%s(은)는 유효하지 않은 당첨번호입니다.";
     public static final String INVALID_BONUS_NUMBER = "%s(은)는 유효하지 않은 보너스 번호입니다.";
     public static final String DUPLICATED_BONUS_NUMBER = "%s(은)는 당첨번호와 중복된 숫자입니다.";
+    public static final String INVALID_PURCHASABLE_QUANTITY = "로또 구매 수량은 음수일 수 없습니다.";
+    public static final String INVALID_MANUAL_PURCHASABLE_QUANTITY = "수동으로 구매할 수 있는 수량은 0 ~ %d 사이 입니다.";
 
     private ErrorMessages() {
     }
