@@ -1,10 +1,23 @@
 package lotto;
 
+import static lotto.Constant.BOUGHT_SOME;
+import static lotto.Constant.DIVIDING_LINE;
+import static lotto.Constant.EA;
+import static lotto.Constant.HIT_FIVE;
+import static lotto.Constant.HIT_FOUR;
+import static lotto.Constant.HIT_SIX;
+import static lotto.Constant.HIT_THREE;
+import static lotto.Constant.PRIZE_OF_FIRST;
+import static lotto.Constant.PRIZE_OF_FOURTH;
+import static lotto.Constant.PRIZE_OF_SECOND;
+import static lotto.Constant.PRIZE_OF_THIRD;
+import static lotto.Constant.WINNING_STATISTICS;
+
 import java.util.List;
 
 public class ResultView {
     void resultPay(int purchaseCount) {
-        System.out.println(purchaseCount + "개를 구매했습니다.");
+        System.out.println(purchaseCount + BOUGHT_SOME);
     }
 
     void resultPurchase(List<LottoNumber> lottoNumbers) {
@@ -14,19 +27,31 @@ public class ResultView {
     }
 
     void resultWinningStatistics(int payMoney, Prize prize) {
-        int fourth = prize.getCountOfFourth();
-        int third = prize.getCountOfThird();
-        int second = prize.getCountOfSecond();
-        int first = prize.getCountOfFirst();
+        printWinningCount(prize);
+        printResultTotalEarningsRate(calculateTotalEarningsRate(payMoney, calculateTotalEarnings(prize)));
+    }
 
-        System.out.println("\n당첨 통계");
-        System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + fourth + "개");
-        System.out.println("4개 일치 (50000원)- " + third + "개");
-        System.out.println("5개 일치 (1500000원)- " + second + "개");
-        System.out.println("6개 일치 (2000000000원)- " + first + "개");
-        System.out.println(
-                "총 수익률은 " + (5000 * fourth + 50000 * third + 1500000 * second + 2000000000 * first) / payMoney
-                        + "입니다.");
+    private void printWinningCount(Prize prize) {
+        System.out.println("\n" + WINNING_STATISTICS);
+        System.out.println(DIVIDING_LINE);
+        System.out.println(HIT_THREE + prize.getCountOfFourth() + EA);
+        System.out.println(HIT_FOUR + prize.getCountOfThird() + EA);
+        System.out.println(HIT_FIVE + prize.getCountOfSecond() + EA);
+        System.out.println(HIT_SIX + prize.getCountOfFirst() + EA);
+    }
+
+    private void printResultTotalEarningsRate(int totalEarningsRate) {
+        System.out.println("총 수익률은 " + totalEarningsRate + "입니다.");
+    }
+
+    private int calculateTotalEarningsRate(int payMoney, int totalEarnings) {
+        return totalEarnings / payMoney;
+    }
+
+    private int calculateTotalEarnings(Prize prize) {
+        return PRIZE_OF_FOURTH * prize.getCountOfFourth()
+                + PRIZE_OF_THIRD * prize.getCountOfThird()
+                + PRIZE_OF_SECOND * prize.getCountOfSecond()
+                + PRIZE_OF_FIRST * prize.getCountOfFirst();
     }
 }

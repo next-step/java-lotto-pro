@@ -1,5 +1,8 @@
 package lotto;
 
+import static lotto.Constant.INPUT_PAY_MONEY;
+import static lotto.Constant.INPUT_WINNING_NUMBER_LAST_WEEK;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,12 +12,12 @@ public class InputView {
     private final Scanner sc = new Scanner(System.in);
 
     int inputPay() {
-        System.out.println("구입금액을 입력해 주세요.");
+        System.out.println(INPUT_PAY_MONEY);
         return Validate.validatePay(sc.nextLine());
     }
 
     List<Integer> inputWinningNumberLastWeek() {
-        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println("\n" + INPUT_WINNING_NUMBER_LAST_WEEK);
         StringTokenizer input = new StringTokenizer(sc.nextLine(), ", ");
         List<Integer> winningNumbers = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
