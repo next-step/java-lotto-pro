@@ -1,9 +1,10 @@
 package lotto.model.lotto.ticket;
 
-import lotto.constant.numbers.LottoConstant;
 import lotto.constant.utils.StringUtils;
 
 public class LottoNumber {
+    private static final int LOTTO_MINIMUM_NUMBER = 1;
+    private static final int LOTTO_MAXIMUM_NUMBER = 45;
     private final int value;
 
     public LottoNumber(String token) {
@@ -17,17 +18,20 @@ public class LottoNumber {
         } catch (Exception e) {
             throw new NumberFormatException("개별 당첨 번호는 반드시 숫자여야 합니다.");
         }
-        if (!isValidLottoNumber(tokenValue)) {
+        if (lessThanOneOrGreaterThanFortyFive(tokenValue)) {
             throw new NumberFormatException("개별 당첨 번호는 1 이상 45 이하의 숫자 중에 하나여야 합니다.");
         }
         this.value = tokenValue;
     }
 
     public LottoNumber(int value) {
+        if (lessThanOneOrGreaterThanFortyFive(value)) {
+            throw new NumberFormatException("개별 당첨 번호는 1 이상 45 이하의 숫자 중에 하나여야 합니다.");
+        }
         this.value = value;
     }
 
-    private boolean isValidLottoNumber(int tokenValue) {
-        return LottoConstant.LOTTO_MINIMUM_NUMBER <= tokenValue && tokenValue <= LottoConstant.LOTTO_MAXIMUM_NUMBER;
+    private boolean lessThanOneOrGreaterThanFortyFive(int tokenValue) {
+        return tokenValue < LOTTO_MINIMUM_NUMBER || LOTTO_MAXIMUM_NUMBER < tokenValue;
     }
 }
