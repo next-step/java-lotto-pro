@@ -1,3 +1,8 @@
+/*
+ * Spliter.java
+ * v0.1
+ * 2022.10.30
+ */
 package lotto;
 
 import static lotto.Constant.DELIMITER;

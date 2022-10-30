@@ -1,3 +1,8 @@
+/*
+ * Validate.java
+ * v0.1
+ * 2022.10.30
+ */
 package lotto;
 
 import static lotto.Constant.ERROR_LOTTO_COST;

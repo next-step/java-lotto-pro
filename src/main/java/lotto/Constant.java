@@ -1,3 +1,8 @@
+/*
+ * Constant.java
+ * v0.1
+ * 2022.10.30
+ */
 package lotto;
 
 class Constant {
