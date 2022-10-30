@@ -6,9 +6,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.domain.Amount;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 import lotto.domain.LottoNumberGenerator;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -32,11 +34,11 @@ public class LottoService {
         return lottos;
     }
 
-    public Lotto winningLotto() {
-        return InputView.inputWinningNumbers();
+    public WinningLotto winningLotto() {
+        return WinningLotto.from(InputView.inputWinningNumbers(), InputView.inputBounsBall());
     }
 
-    public Map<LottoRank, Integer> checkWinnginLotto(Lottos lottos, Lotto winningLotto) {
+    public Map<LottoRank, Integer> checkWinnginLotto(Lottos lottos, WinningLotto winningLotto) {
         Map<LottoRank, Integer> rankInfo = lottos.lottoRanksInfo(winningLotto);
         OutputView.outputLottoRank(rankInfo);
         return rankInfo;
