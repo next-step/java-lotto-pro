@@ -6,6 +6,7 @@ import calculator.domain.target.splitter.CustomSplitter;
 import calculator.domain.target.validation.CalculatorValidator;
 import calculator.domain.target.validation.PositiveNumberValidator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,9 +29,7 @@ public class Target {
     private List<Integer> isNotNullAndNotEmptyThenSplit() {
         String[] splits = splitter.split(target);
         List<Integer> result = new ArrayList<>();
-        for (String split : splits) {
-            result.add(isValidatedThenParseInt(split));
-        }
+        Arrays.stream(splits).forEach(split -> result.add(isValidatedThenParseInt(split)));
         return result;
     }
 
