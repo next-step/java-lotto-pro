@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    public static final Integer LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(final List<Integer> numbers) {
@@ -45,5 +45,10 @@ public class Lotto {
 
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }

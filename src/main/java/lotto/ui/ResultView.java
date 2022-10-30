@@ -1,9 +1,8 @@
 package lotto.ui;
 
-import lotto.domain.MatchCount;
-import lotto.domain.Rank;
-import lotto.domain.StatisticsResult;
+import lotto.domain.*;
 
+import java.util.List;
 import java.util.Map;
 
 public class ResultView {
@@ -53,5 +52,21 @@ public class ResultView {
 
     public static void printWinningStatistics() {
         printMessage(ConsoleMessage.OUTPUT_WINNING_RESULT_TITLE.getMessage());
+    }
+
+    public static void printPurchasedLottos(final List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            printMessage(lotto.toString());
+        }
+    }
+
+    public static void printQuantity(final Quantity quantity) {
+        String message = String.format(
+                ConsoleMessage.OUTPUT_PURCHASE_COMPLETE.getMessage(),
+                quantity.getCount(PurchaseType.MANUAL),
+                quantity.getCount(PurchaseType.AUTO)
+        );
+
+        ResultView.printMessage(message);
     }
 }
