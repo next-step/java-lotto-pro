@@ -18,7 +18,7 @@ class LottoRankTest {
         LottoRank[] lottoRanks = LottoRank.values();
 
         for (LottoRank lottoRank : lottoRanks) {
-            assertThat(LottoRank.valueOf(lottoRank.getCountMatch())).isEqualTo(lottoRank);
+            assertThat(LottoRank.valueOf(lottoRank.getCountMatch(), lottoRank.isMatchBonus())).isEqualTo(lottoRank);
         }
     }
 
@@ -26,7 +26,7 @@ class LottoRankTest {
     @ParameterizedTest()
     @ValueSource(ints = {2, 7})
     public void valueOf_null(int countOfMatch) throws Exception {
-        LottoRank lottoRank = LottoRank.valueOf(countOfMatch);
+        LottoRank lottoRank = LottoRank.valueOf(countOfMatch, false);
 
         assertThat(LottoRank.isNone(lottoRank)).isTrue();
     }
