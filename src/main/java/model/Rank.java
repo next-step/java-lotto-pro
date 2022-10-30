@@ -2,6 +2,7 @@ package model;
 
 import java.util.*;
 
+import static common.Constants.ADD_LOTTO_COUNT;
 import static model.LottoRankType.*;
 
 public class Rank {
@@ -31,7 +32,7 @@ public class Rank {
 
     private void countUpIfSameRankType(LottoRankType rankType, LottoRankType convertLottoRankType) {
         if (rankType.isSameRankType(convertLottoRankType)) {
-            countRank.put(rankType, countRank.get(rankType) + 1);
+            countRank.put(rankType, countRank.get(rankType) + ADD_LOTTO_COUNT);
         }
     }
 

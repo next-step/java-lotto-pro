@@ -2,6 +2,9 @@ package model;
 
 import java.util.Map;
 
+import static common.Constants.ADD_WIN_MONEY_STANDARD;
+import static common.Constants.ZERO_WIN_MONEY;
+
 public class Revenue {
 
     private int winMoney = 0;
@@ -13,11 +16,11 @@ public class Revenue {
     }
 
     public int addWinMoneyIfValuePercent(Map.Entry<LottoRankType, Integer> entry) {
-        if (entry.getValue() > 0) {
+        if (entry.getValue() > ADD_WIN_MONEY_STANDARD) {
             return entry.getKey().getWinMoney();
         }
 
-        return 0;
+        return ZERO_WIN_MONEY;
     }
 
     public double getPercent(int inputMoney) {

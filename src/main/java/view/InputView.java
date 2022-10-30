@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static common.Constants.SPLIT_WORD;
+
 public class InputView {
 
     public static final Scanner scanner = new Scanner(System.in);
@@ -17,7 +19,7 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String message = scanner.next();
         List<Integer> winNumberList = new ArrayList<>();
-        for (String number : message.split(",")) {
+        for (String number : message.split(SPLIT_WORD)) {
             winNumberList.add(Integer.valueOf(number));
         }
         return winNumberList;

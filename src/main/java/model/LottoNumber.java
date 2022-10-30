@@ -5,6 +5,8 @@ import model.strategy.NumberStrategy;
 import java.util.Collections;
 import java.util.List;
 
+import static common.Constants.ADD_WIN_NUMBER_COUNT;
+
 public class LottoNumber {
 
     List<Integer> number;
@@ -31,7 +33,7 @@ public class LottoNumber {
 
     private int addCountIfContain(List<Integer> winNumber, Integer targetNumber, int winNumberCount) {
         if (winNumber.contains(targetNumber)) {
-            winNumberCount += 1;
+            winNumberCount += ADD_WIN_NUMBER_COUNT;
         }
 
         return winNumberCount;

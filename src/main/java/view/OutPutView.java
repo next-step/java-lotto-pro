@@ -6,6 +6,8 @@ import model.LottoRankType;
 import java.util.List;
 import java.util.Map;
 
+import static common.Constants.STANDARD_RESULT_PERCENT;
+
 public class OutPutView {
 
     public static void outPutLottoNumber(List<LottoNumber> buyLotto) {
@@ -23,7 +25,7 @@ public class OutPutView {
     }
 
     private static String convertResultWord(double percent) {
-        if (percent <= 0.0) {
+        if (percent <= STANDARD_RESULT_PERCENT) {
             return "손해";
         }
 

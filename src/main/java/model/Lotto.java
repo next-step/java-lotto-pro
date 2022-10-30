@@ -5,6 +5,8 @@ import model.strategy.NumberStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
+import static common.Constants.LOTTO_PRICE;
+
 public class Lotto {
 
     private final int count;
@@ -14,7 +16,7 @@ public class Lotto {
     public Lotto(int money, NumberStrategy strategy) {
         pickLottoNumber = new ArrayList<>();
         checkValidMoney(money);
-        this.count = (money / 1000);
+        this.count = (money / LOTTO_PRICE);
         this.strategy = strategy;
     }
 
@@ -28,7 +30,7 @@ public class Lotto {
     }
 
     private void checkValidMoney(int money) {
-        if (money < 1000) {
+        if (money < LOTTO_PRICE) {
             throw new IllegalArgumentException("1000원 이상의 금액을 입력해주세요.");
         }
     }
