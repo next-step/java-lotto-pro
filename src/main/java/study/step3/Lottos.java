@@ -19,9 +19,7 @@ public class Lottos {
     public List<Lotto> makeLottos(int inputMoney) {
         int num = count(inputMoney);
         for (int i = 0; i < num; i++) {
-            Lotto lotto = new Lotto();
-            lotto.makeLotto();
-            lottos.add(lotto);
+            lottos.add(new Lotto());
         }
         return lottos;
     }
