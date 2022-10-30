@@ -23,6 +23,8 @@ public class OutputView {
 
     private static final String RANK_MONEY_COUNT_MESSAGE = "%d개 일치 (%d원) %d개";
 
+    private static final String RANK_MONEY_COUNT_BONUS_MESSAGE = "%d개 일치, 보너스볼 일치(%d원) %d개";
+
     private static final String TOTAL_YIELD_MESSAGE = "총 수익률은 %.2f입니다.";
 
     private static final String LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
@@ -62,9 +64,18 @@ public class OutputView {
     public static void outputLottoRank(final Map<LottoRank, Integer> rankInfo) {
         System.out.println(LOTTO_STATISTICS);
         for (LottoRank lottoRank: LottoRank.reverse()) {
-            System.out.println(String.format(RANK_MONEY_COUNT_MESSAGE,
-                lottoRank.getCountMatch(), lottoRank.getWinningMoney(), rankInfo.get(lottoRank)));
+            lottoRankMoneyAndCount(rankInfo, lottoRank);
         }
+    }
+
+    private static void lottoRankMoneyAndCount(final Map<LottoRank, Integer> rankInfo, LottoRank lottoRank) {
+        if (lottoRank.isMatchBonus()) {
+            System.out.println(String.format(RANK_MONEY_COUNT_BONUS_MESSAGE,
+                lottoRank.getCountMatch(), lottoRank.getWinningMoney(), rankInfo.get(lottoRank)));
+            return;
+        }
+        System.out.println(String.format(RANK_MONEY_COUNT_MESSAGE,
+            lottoRank.getCountMatch(), lottoRank.getWinningMoney(), rankInfo.get(lottoRank)));
     }
 
     public static void outputYield(double yield) {
