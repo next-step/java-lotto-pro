@@ -15,7 +15,6 @@ public class LottoGenerator {
         return lottos;
     }
 
-
     public Lottos generateLottos() {
         lottos.setPurchasedCount(purchasePrice);
         lottos.addLottos();
@@ -50,6 +49,10 @@ public class LottoGenerator {
         if (price < EACH_LOTTO_PRICE) {
             throw new IllegalArgumentException(UNDER_MIN_PRICE);
         }
+    }
+
+    public int getPurchasedCount() {
+        return lottos.getPurchasedCount();
     }
 
 }

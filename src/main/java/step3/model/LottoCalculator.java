@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static step3.constant.Constant.*;
+import static step3.constant.Message.SMAE_LOTTO_NUMBER;
 import static step3.constant.Message.UNVALID_LOTTO_NUMBER_LENGTH;
 import static step3.constant.WinnerRule.rules;
 public class LottoCalculator {
@@ -42,15 +43,29 @@ public class LottoCalculator {
         return lastWeekWinner.contains(lottoNumber) ? ONE : ZERO;
     }
 
-    private String[] validateLastWeekWinner(String beforeNumbers) {
+    public String[] validateLastWeekWinner(String beforeNumbers) {
         LottoGenerator.commonCheckEmpty(beforeNumbers);
         beforeNumbers = beforeNumbers.replaceAll(SPACE, "");
         String[] afterNumbers = beforeNumbers.split(COMMA);
         validateLength(afterNumbers);
-        // todo 중복 숫자 확인
         validateNumberType(afterNumbers);
+        validateSameNumber(afterNumbers);
 
         return afterNumbers;
+    }
+
+    private void validateSameNumber(String[] afterNumbers) {
+        List<String> tempList = new ArrayList<>();
+        for(String str : afterNumbers) {
+            isStringContain(tempList, str);
+            tempList.add(str);
+        }
+    }
+
+    private void isStringContain(List<String> list, String str) {
+        if(list.contains(str)) {
+            throw new IllegalArgumentException(SMAE_LOTTO_NUMBER);
+        }
     }
 
     private void validateLength(String[] afterNumbers) {
