@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class Lottos {
 
-    private static final String LOTTOS_NULL_OR_EMPTY_MESSAGE = "";
+    private static final String LOTTOS_NULL_OR_EMPTY_OR_ZERO_MESSAGE = "로또 목록은 Null, 빈 값, 0은 불가 합니다.";
 
     private static final int ONE = 1;
 
@@ -31,7 +31,7 @@ public class Lottos {
 
     private void validateNotNullOrEmpty(final List<Lotto> lottos) {
         if (Objects.isNull(lottos) || lottos.isEmpty() || lottos.size() == 0) {
-            throw new IllegalArgumentException(LOTTOS_NULL_OR_EMPTY_MESSAGE);
+            throw new IllegalArgumentException(LOTTOS_NULL_OR_EMPTY_OR_ZERO_MESSAGE);
         }
     }
 
