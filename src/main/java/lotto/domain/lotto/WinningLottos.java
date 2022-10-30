@@ -3,8 +3,10 @@ package lotto.domain.lotto;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lotto.constant.LottoConstant;
 import lotto.domain.win.WinRanking;
+import lotto.message.ErrorMessages;
 
 public class WinningLottos {
     private final List<LottoNumber> winningNumbers;
@@ -16,7 +18,25 @@ public class WinningLottos {
     }
 
     public static WinningLottos of(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+        validateBonusNumberNotInWinningNumbers(winningNumbers, bonusNumber);
         return new WinningLottos(winningNumbers, bonusNumber);
+    }
+
+    public static WinningLottos of(List<Integer> winningNumbers, int inputBonusNumber) {
+        return of(toWinningNumbers(winningNumbers), LottoNumber.from(inputBonusNumber));
+    }
+
+    private static List<LottoNumber> toWinningNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toList());
+    }
+
+    private static void validateBonusNumberNotInWinningNumbers(List<LottoNumber> winningNumbers,
+                                                               LottoNumber bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(String.format(ErrorMessages.DUPLICATED_BONUS_NUMBER, bonusNumber));
+        }
     }
 
     public Map<WinRanking, Integer> winResults(List<Lotto> lottos) {

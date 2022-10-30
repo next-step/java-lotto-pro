@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Stream;
 import lotto.constant.LottoConstant;
-import lotto.domain.lotto.LottoNumber;
 
 public class LottoInputValidator {
 
@@ -27,9 +26,9 @@ public class LottoInputValidator {
                 validateSixNumbers(splitNumbers);
     }
 
-    public static boolean validateBonusNumber(String bonusNumber, List<LottoNumber> winningNumbers) {
+    public static boolean validateBonusNumber(String bonusNumber, List<Integer> winningNumbers) {
         return bonusNumber.matches(LOTTO_NUMBER_REGEX) &&
-                !winningNumbers.contains(LottoNumber.from(Integer.parseInt(bonusNumber)));
+                !winningNumbers.contains(Integer.parseInt(bonusNumber));
     }
 
     private static boolean validateGreaterOrEqualThanPriceOfOneLotto(String number) {

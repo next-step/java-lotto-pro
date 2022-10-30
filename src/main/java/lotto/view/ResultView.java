@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import lotto.constant.LottoConstant;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.WinningLottos;
 import lotto.domain.profit.Profit;
 import lotto.domain.win.WinRanking;
@@ -27,17 +26,16 @@ public class ResultView {
         newLine();
     }
 
-    public static void printResult(List<Lotto> lottos, List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    public static void printResult(List<Lotto> lottos, WinningLottos winningLottos) {
         newLine();
         System.out.println(LottoMessage.WINNING_STATISTIC);
         System.out.println(LottoMessage.DIVIDER_LINE);
-        printWinResults(lottos, winningNumbers, bonusNumber);
-        printProfit(Profit.of(lottos, winningNumbers, bonusNumber));
+        printWinResults(lottos, winningLottos);
+        printProfit(Profit.of(lottos, winningLottos));
     }
 
-    private static void printWinResults(List<Lotto> lottos, List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        Map<WinRanking, Integer> winningCountByWinRanking =
-                WinningLottos.of(winningNumbers, bonusNumber).winResults(lottos);
+    private static void printWinResults(List<Lotto> lottos, WinningLottos winningLottos) {
+        Map<WinRanking, Integer> winningCountByWinRanking = winningLottos.winResults(lottos);
         for (WinRanking winRanking : WinRanking.winnableRankings()) {
             System.out.printf(
                     (LottoMessage.WINNING_STATISTIC_RESULT) + "%n",

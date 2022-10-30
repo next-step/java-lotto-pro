@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.List;
 import java.util.Scanner;
 import lotto.constant.LottoConstant;
-import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.WinningLottos;
 import lotto.message.ErrorMessages;
 import lotto.message.LottoMessage;
 import lotto.util.LottoInputValidator;
@@ -28,7 +28,12 @@ public class InputView {
         return inputPurchasePrice();
     }
 
-    public static List<Integer> inputWinningNumbers() {
+    public static WinningLottos inputWinningLottos() {
+        List<Integer> winningNumbers = inputWinningNumbers();
+        return WinningLottos.of(winningNumbers, inputBonusNumber(winningNumbers));
+    }
+
+    private static List<Integer> inputWinningNumbers() {
         System.out.println(LottoMessage.INPUT_WINNING_NUMBERS);
         String input = SCANNER.nextLine();
 
@@ -40,7 +45,7 @@ public class InputView {
         return inputWinningNumbers();
     }
 
-    public static int inputBonusNumber(List<LottoNumber> winningNumbers) {
+    private static int inputBonusNumber(List<Integer> winningNumbers) {
         System.out.println(LottoMessage.INPUT_BONUS_NUMBER);
         String input = SCANNER.nextLine();
 

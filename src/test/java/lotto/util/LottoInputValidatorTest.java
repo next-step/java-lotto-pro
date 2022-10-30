@@ -7,8 +7,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.domain.TestLottoNumberGenerator;
-import lotto.domain.lotto.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -65,7 +63,7 @@ class LottoInputValidatorTest {
     )
     @DisplayName("보너스 번호가 1 ~ 45 사이에 포함되면 true, 포함안되면 false를 반환한다.")
     void validateBonusNumber1(String input, boolean expected) {
-        List<LottoNumber> winningNumbers = TestLottoNumberGenerator.from(Arrays.asList(3, 6, 9, 12, 15, 18)).generate();
+        List<Integer> winningNumbers = Arrays.asList(3, 6, 9, 12, 15, 18);
         assertThat(validateBonusNumber(input, winningNumbers)).isEqualTo(expected);
     }
 
@@ -73,7 +71,7 @@ class LottoInputValidatorTest {
     @CsvSource(value = {"1:false", "7:true"}, delimiter = ':')
     @DisplayName("보너스 번호가 당첨번호에 포함되면 false, 포함안되면 true을 반환한다.")
     void validateBonusNumber2(String input, boolean expected) {
-        List<LottoNumber> winningNumbers = TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 4, 5, 6)).generate();
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         assertThat(validateBonusNumber(input, winningNumbers)).isEqualTo(expected);
     }
 }

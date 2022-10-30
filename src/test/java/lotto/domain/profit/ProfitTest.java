@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 import lotto.domain.TestLottoNumberGenerator;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.WinningLottos;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,7 +37,8 @@ class ProfitTest {
     @MethodSource(value = "winningNumbersForZero")
     @DisplayName("수익률 0 확인 - 0개 일치/1개 일치/2개 일치")
     void profit1(List<LottoNumber> winningNumbers) {
-        Profit profit = Profit.of(getTestLottos(), winningNumbers, bonusNumber);
+        WinningLottos winningLottos = WinningLottos.of(winningNumbers, bonusNumber);
+        Profit profit = Profit.of(getTestLottos(), winningLottos);
 
         double result = profit.profit();
 
@@ -47,7 +49,8 @@ class ProfitTest {
     @DisplayName("수익률 확인 - 로또 1장이 3개 일치")
     void profit2() {
         List<LottoNumber> winningNumbers = TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 17, 18, 19)).generate();
-        Profit profit = Profit.of(getTestLottos(), winningNumbers, bonusNumber);
+        WinningLottos winningLottos = WinningLottos.of(winningNumbers, bonusNumber);
+        Profit profit = Profit.of(getTestLottos(), winningLottos);
 
         double result = profit.profit();
 
@@ -58,7 +61,8 @@ class ProfitTest {
     @DisplayName("수익률 확인 - 로또 2장이 3개 일치")
     void profit3() {
         List<LottoNumber> winningNumbers = TestLottoNumberGenerator.from(Arrays.asList(1, 3, 5, 17, 18, 19)).generate();
-        Profit profit = Profit.of(getTestLottos(), winningNumbers, bonusNumber);
+        WinningLottos winningLottos = WinningLottos.of(winningNumbers, bonusNumber);
+        Profit profit = Profit.of(getTestLottos(), winningLottos);
 
         double result = profit.profit();
 
@@ -69,7 +73,8 @@ class ProfitTest {
     @DisplayName("수익률 확인 - 로또 1장이 4개 일치")
     void profit5() {
         List<LottoNumber> winningNumbers = TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 4, 18, 19)).generate();
-        Profit profit = Profit.of(getTestLottos(), winningNumbers, bonusNumber);
+        WinningLottos winningLottos = WinningLottos.of(winningNumbers, bonusNumber);
+        Profit profit = Profit.of(getTestLottos(), winningLottos);
 
         double result = profit.profit();
 
@@ -81,7 +86,8 @@ class ProfitTest {
     void profit6() {
         List<LottoNumber> winningNumbers =
                 TestLottoNumberGenerator.from(Arrays.asList(11, 12, 13, 14, 15, 18)).generate();
-        Profit profit = Profit.of(getTestLottos(), winningNumbers, bonusNumber);
+        WinningLottos winningLottos = WinningLottos.of(winningNumbers, bonusNumber);
+        Profit profit = Profit.of(getTestLottos(), winningLottos);
 
         double result = profit.profit();
 
@@ -93,7 +99,8 @@ class ProfitTest {
     void profit7() {
         List<LottoNumber> winningNumbers =
                 TestLottoNumberGenerator.from(Arrays.asList(21, 22, 23, 24, 25, 28)).generate();
-        Profit profit = Profit.of(getTestLottos(), winningNumbers, bonusNumber);
+        WinningLottos winningLottos = WinningLottos.of(winningNumbers, bonusNumber);
+        Profit profit = Profit.of(getTestLottos(), winningLottos);
 
         double result = profit.profit();
 
@@ -105,7 +112,8 @@ class ProfitTest {
     void profit8() {
         List<LottoNumber> winningNumbers =
                 TestLottoNumberGenerator.from(Arrays.asList(11, 12, 13, 14, 15, 16)).generate();
-        Profit profit = Profit.of(getTestLottos(), winningNumbers, bonusNumber);
+        WinningLottos winningLottos = WinningLottos.of(winningNumbers, bonusNumber);
+        Profit profit = Profit.of(getTestLottos(), winningLottos);
 
         double result = profit.profit();
 
@@ -116,7 +124,8 @@ class ProfitTest {
     @DisplayName("수익률 확인 - 로또 2장 당첨 (3개 일치, 5개 일치)")
     void profit9() {
         List<LottoNumber> winningNumbers = TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 4, 5, 12)).generate();
-        Profit profit = Profit.of(getTestLottos(), winningNumbers, bonusNumber);
+        WinningLottos winningLottos = WinningLottos.of(winningNumbers, bonusNumber);
+        Profit profit = Profit.of(getTestLottos(), winningLottos);
 
         double result = profit.profit();
 
@@ -127,7 +136,8 @@ class ProfitTest {
     @MethodSource("winningNumbersForLossProfit")
     @DisplayName("수익률이 1보다 작으면 true/ 1보다 크면 false를 반환한다.")
     void lossProfit(List<LottoNumber> winningNumbers, boolean expected) {
-        Profit profit = Profit.of(getTestLottos(), winningNumbers, bonusNumber);
+        WinningLottos winningLottos = WinningLottos.of(winningNumbers, bonusNumber);
+        Profit profit = Profit.of(getTestLottos(), winningLottos);
         Assertions.assertThat(profit.isLossProfit()).isEqualTo(expected);
     }
 
