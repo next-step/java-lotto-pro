@@ -1,6 +1,6 @@
-package util;
+package string_add_calculator.util;
 
-import domain.Numbers;
+import string_add_calculator.domain.Numbers;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
