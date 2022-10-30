@@ -37,4 +37,19 @@ public class WinningLotto {
 	public int hashCode() {
 		return Objects.hash(winLotto);
 	}
+
+	public String getResultMessage(Lottos lottos, int matchCount) {
+		LottoResults lottoResults = lottos.toLottoResults(winLotto);
+
+		long price = lottoResults.getPrice();
+		int matchQuantity = lottoResults.filterByMatchCount(matchCount).getQuantity();
+
+		return String.format("%d개 일치 (%d원)- %d", matchCount, price, matchQuantity);
+	}
+
+	public String getYieldMessage(Lottos lottos) {
+		LottoResults lottoResults = lottos.toLottoResults(winLotto);
+
+		return String.format("총 수익률은 %.2f입니다.%n", lottoResults.winningPrice());
+	}
 }

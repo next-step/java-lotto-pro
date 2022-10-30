@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lottos {
 	private final List<Lotto> lottos;
@@ -24,6 +25,14 @@ public class Lottos {
 
 	public List<Lotto> getLottos() {
 		return this.lottos;
+	}
+
+	public LottoResults toLottoResults(Lotto winLotto) {
+		return LottoResults.from(
+			this.lottos.stream()
+				.map(lotto -> LottoResult.from(lotto, lotto.countMatchLottoNumber(winLotto)))
+				.collect(Collectors.toList())
+		);
 	}
 
 	@Override

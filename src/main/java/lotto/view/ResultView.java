@@ -16,9 +16,8 @@ public class ResultView {
 	public void winStatisticsResult(Lottos lottos, WinningLotto winningLotto) {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
-		// for (MatchResult matchResult : winningStatistics.getMatchResults(lottos)) {
-		// 	System.out.println(matchResult.toString());
-		// }
-		// System.out.printf("총 수익률은 %.2f입니다.%n", winningStatistics.getYield());
-	}
+		for (int i = 3 ; i<= 6; i++) {
+			System.out.println(winningLotto.getResultMessage(lottos, i));
+		}
+		System.out.println(winningLotto.getYieldMessage(lottos));}
 }
