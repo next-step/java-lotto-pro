@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class Delimiters {
 
-    Set<String> delimiters = new HashSet<>();
+    private Set<String> delimiters = new HashSet<>();
 
     public Delimiters(List<String> defaultDelimiters) {
         delimiters.addAll(defaultDelimiters);
