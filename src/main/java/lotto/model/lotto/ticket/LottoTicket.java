@@ -4,6 +4,7 @@ import lotto.constant.numbers.LottoConstant;
 import lotto.model.winning.numbers.WinningNumbers;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
@@ -40,6 +41,8 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        return numbers.toString();
+        final List<Integer> numbersToString = new ArrayList<>(numbers);
+        Collections.sort(numbersToString);
+        return numbersToString.toString();
     }
 }
