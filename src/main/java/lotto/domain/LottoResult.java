@@ -34,6 +34,6 @@ public class LottoResult {
                 .mapToInt(Integer::intValue)
                 .sum();
 
-        return (double)getAllPrize() / (allLottoCount * Money.LOTTO_PRICE);
+        return (double)getAllPrize() / (allLottoCount * Lotto.LOTTO_PRICE);
     }
 }

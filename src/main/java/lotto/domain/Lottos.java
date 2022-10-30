@@ -4,16 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoList {
+public class Lottos {
     private final List<Lotto> lottoList;
 
-    public LottoList() {
+    public Lottos() {
         this.lottoList = new ArrayList<>();
     }
 
     public void buyLottos(int count) {
         for(int i=0; i<count; i++) {
-            lottoList.add(new Lotto(LottoNumberGenerator.generate()));
+            lottoList.add(new Lotto(LottoNumberGenerator.generate()
+                    .stream()
+                    .map(LottoNumber::new)
+                    .collect(Collectors.toList())));
         }
     }
 
@@ -31,7 +34,7 @@ public class LottoList {
     public LottoResult getResult(WinningLotto winningLotto) {
         LottoResult result = new LottoResult();
         lottoList.forEach(lotto ->
-                result.add(Rank.valueOf(lotto.getCorrectCount(winningLotto))));
+                result.add(Rank.valueOf(winningLotto.getCorrectCount(lotto))));
 
         return result;
     }
