@@ -1,3 +1,5 @@
+package model.strategy;
+
 import java.util.List;
 
 public class MockStrategy implements NumberStrategy{

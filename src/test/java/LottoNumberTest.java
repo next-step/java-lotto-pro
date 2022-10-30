@@ -1,3 +1,5 @@
+import model.LottoNumber;
+import model.strategy.MockStrategy;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;

@@ -1,6 +1,9 @@
+package model;
+
+import model.strategy.NumberStrategy;
+
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class LottoNumber {
 

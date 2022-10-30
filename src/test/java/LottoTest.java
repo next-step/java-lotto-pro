@@ -1,3 +1,6 @@
+import model.Lotto;
+import model.LottoNumber;
+import model.strategy.MockStrategy;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

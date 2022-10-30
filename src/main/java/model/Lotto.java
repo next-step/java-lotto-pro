@@ -1,3 +1,7 @@
+package model;
+
+import model.strategy.NumberStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 
