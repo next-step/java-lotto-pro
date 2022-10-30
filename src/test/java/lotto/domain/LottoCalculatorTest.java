@@ -19,13 +19,13 @@ public class LottoCalculatorTest {
     }
 
     @Test
-    @DisplayName("로또 구매 가능 갯수 계산")
+    @DisplayName("로또 구매 가능 개수 계산")
     void availableToPurchaseCount() {
         assertThat(LottoCalculator.availableToPurchaseCount(new Money(5000))).isEqualTo(5);
     }
 
     @Test
-    @DisplayName("당첨 갯수 확인")
+    @DisplayName("당첨 개수 확인")
     void winning() {
         WinningLotto winningLotto = new WinningLotto(new Lotto("1,2,3,4,5,6"));
         Lottos lottos = new Lottos(Arrays.asList(
