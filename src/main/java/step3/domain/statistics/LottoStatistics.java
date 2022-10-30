@@ -10,13 +10,13 @@ import java.util.Map;
 public class LottoStatistics {
 
     private Lottos lottos;
-    private Map<WinningLottoType, Integer> lottoResult = new HashMap<>();
+    private Map<Rank, Integer> lottoResult = new HashMap<>();
 
-    public LottoStatistics(Map<WinningLottoType, Integer> lottoResult) {
+    public LottoStatistics(Map<Rank, Integer> lottoResult) {
         this.lottoResult = lottoResult;
     }
 
-    public LottoStatistics(Lottos lottos, Map<WinningLottoType, Integer> lottoResult) {
+    public LottoStatistics(Lottos lottos, Map<Rank, Integer> lottoResult) {
         this.lottos = lottos;
         this.lottoResult = lottoResult;
     }
@@ -25,7 +25,7 @@ public class LottoStatistics {
         this.lottos = lottos;
         lottos.getLottos()
                 .forEach(lotto -> {
-                    WinningLottoType type = lotto.getWinningLottoType(winningLottoNumbers);
+                    Rank type = lotto.getRank(winningLottoNumbers);
                     lottoResult.put(type, lottoResult.getOrDefault(type, 0) + 1);
                 });
     }
@@ -38,7 +38,7 @@ public class LottoStatistics {
 
     public int getTotalWinningAmount() {
         int totalWinningAmount = 0;
-        for (WinningLottoType winningLottoType : lottoResult.keySet()) {
+        for (Rank winningLottoType : lottoResult.keySet()) {
             Integer count = lottoResult.get(winningLottoType);
             totalWinningAmount += winningLottoType.getWinningAmount() * count;
         }
@@ -51,7 +51,7 @@ public class LottoStatistics {
                 .sum();
     }
 
-    public Map<WinningLottoType, Integer> getLottoResult() {
+    public Map<Rank, Integer> getLottoResult() {
         return lottoResult;
     }
 

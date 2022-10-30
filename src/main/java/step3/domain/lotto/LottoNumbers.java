@@ -1,6 +1,6 @@
 package step3.domain.lotto;
 
-import step3.domain.statistics.WinningLottoType;
+import step3.domain.statistics.Rank;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,9 +26,9 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public WinningLottoType getWinningLottoType(WinningLottoNumbers winningLottoNumbers) {
+    public Rank getRank(WinningLottoNumbers winningLottoNumbers) {
         int matchCount = match(winningLottoNumbers);
-        return WinningLottoType.findByMatchCount(matchCount);
+        return Rank.valueOf(matchCount, true);
     }
 
     private int match(WinningLottoNumbers winningLottoNumbers) {

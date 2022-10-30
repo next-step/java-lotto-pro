@@ -15,10 +15,10 @@ class LottoStatisticsTest {
     @Test
     @DisplayName("총 당첨 금액을 리턴한다.")
     void getTotalWinningAmount() {
-        Map<WinningLottoType, Integer> lottoResult = new HashMap<>();
-        lottoResult.put(WinningLottoType.THIRD, 1);
-        lottoResult.put(WinningLottoType.FOURTH, 2);
-        lottoResult.put(WinningLottoType.NOTHING, 3);
+        Map<Rank, Integer> lottoResult = new HashMap<>();
+        lottoResult.put(Rank.FOURTH, 1);
+        lottoResult.put(Rank.FIFTH, 2);
+        lottoResult.put(Rank.MISS, 3);
 
         LottoStatistics lottoStatistics = new LottoStatistics(lottoResult);
         int totalWinningAmount = lottoStatistics.getTotalWinningAmount();
@@ -28,8 +28,8 @@ class LottoStatisticsTest {
     @Test
     @DisplayName("총 수익률을 리턴한다.")
     void getTotalProfit() {
-        Map<WinningLottoType, Integer> lottoResult = new HashMap<>();
-        lottoResult.put(WinningLottoType.FOURTH, 1);
+        Map<Rank, Integer> lottoResult = new HashMap<>();
+        lottoResult.put(Rank.FIFTH, 1);
 
         Lottos lottos = new Lottos(new Amount(14000));
         LottoStatistics lottoStatistics = new LottoStatistics(lottos, lottoResult);

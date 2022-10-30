@@ -8,15 +8,12 @@ import step3.domain.lotto.Lottos;
 import step3.domain.lotto.WinningLottoNumbers;
 import step3.domain.statistics.LottoStatistics;
 
-import java.util.Scanner;
-
+import static step3.domain.input.Input.scanner;
 import static step3.view.InputView.printInputAmount;
 import static step3.view.InputView.printInputWinningLottoNumber;
 import static step3.view.ResultView.*;
 
 public class LottoController {
-
-    private static final Scanner scanner = new Scanner(System.in);
 
     public void run() {
         printInputAmount();

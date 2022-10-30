@@ -4,12 +4,12 @@ import step3.domain.lotto.Lotto;
 import step3.domain.lotto.LottoNumber;
 import step3.domain.lotto.LottoNumbers;
 import step3.domain.lotto.Lottos;
-import step3.domain.statistics.WinningLottoType;
+import step3.domain.statistics.Rank;
 
 import java.util.List;
 import java.util.Map;
 
-import static step3.domain.statistics.WinningLottoType.*;
+import static step3.domain.statistics.Rank.*;
 
 public class ResultView {
 
@@ -24,7 +24,7 @@ public class ResultView {
         }
     }
 
-    public static void printResult(Map<WinningLottoType, Integer> lottoResult) {
+    public static void printResult(Map<Rank, Integer> lottoResult) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("------------");
@@ -48,12 +48,12 @@ public class ResultView {
         return sb;
     }
 
-    private static void printWinningResult(WinningLottoType winningLottoType,
-                                           Map<WinningLottoType, Integer> lottoResult) {
+    private static void printWinningResult(Rank rank,
+                                           Map<Rank, Integer> lottoResult) {
         System.out.printf("%d개 일치 (%d원)- %d개%n",
-                winningLottoType.getMatchCount(),
-                winningLottoType.getWinningAmount(),
-                lottoResult.getOrDefault(winningLottoType, 0)
+                rank.getMatchCount(),
+                rank.getWinningAmount(),
+                lottoResult.getOrDefault(rank, 0)
         );
     }
 }

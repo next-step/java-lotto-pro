@@ -1,8 +1,11 @@
 package step3.domain.input;
 
+import java.util.Scanner;
+
 import static step3.type.ErrorMessageType.INPUT_NOT_ALLOW_BLANK;
 
 public interface Input<T> {
+    Scanner scanner = new Scanner(System.in);
 
     T create(String input);
 
