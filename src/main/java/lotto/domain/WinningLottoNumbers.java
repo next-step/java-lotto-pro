@@ -14,16 +14,26 @@ public class WinningLottoNumbers {
     private static final Pattern LOTTO_COMMA_PATTERN
             = Pattern.compile("^(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+$");
 
-    private List<Integer> lottoNumbers;
+    private final List<Integer> lottoNumbers;
+    private LottoNumber bonusNumber;
 
     public List<Integer> getLottoNumbers() {
         return this.lottoNumbers;
     }
 
+    // TODO: 기존 코드(추후 삭제)
     public WinningLottoNumbers(String lottoNumbers) {
         validNullOrEmpty(lottoNumbers);
         checkLottoPattern(lottoNumbers);
         this.lottoNumbers = convertToInt(lottoNumbers);
+    }
+
+    public WinningLottoNumbers(String lottoNumbers, LottoNumber bonusNumber) {
+        // TODO: 보너스 번호 관련 유효성 처리
+        validNullOrEmpty(lottoNumbers);
+        checkLottoPattern(lottoNumbers);
+        this.lottoNumbers = convertToInt(lottoNumbers);
+        this.bonusNumber = bonusNumber;
     }
 
     private void validNullOrEmpty(String lottoNumbers) {

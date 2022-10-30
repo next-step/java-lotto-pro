@@ -11,6 +11,7 @@ public class LottoTicket {
     }
 
     public LottoRank compareLotto(LottoNumbers winningLottoNumber) {
+        // TODO: 해당 부분 변경
         return LottoRank.findLottoRank(this.lottoNumbers.match(winningLottoNumber).size());
     }
 

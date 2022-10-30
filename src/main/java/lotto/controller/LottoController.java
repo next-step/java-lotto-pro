@@ -24,6 +24,8 @@ public class LottoController {
         ResultView.lottoPurchase(lottoTickets.ticketCount(), lottoTickets.toString());
 
         List<Integer> winningLottoNumberList = new WinningLottoNumbers(InputView.getLastWeekWinningNumber()).getLottoNumbers();
+        int bonusNumber = InputView.getBonusNumber();
+//        System.out.println(bonusNumber);
         LottoNumbers winningLottoNumbers = new LottoNumbers(winningLottoNumberList);
 
         lottoGame.makeLottoResult(winningLottoNumbers, lottoTickets);

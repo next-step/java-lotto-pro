@@ -34,9 +34,9 @@ public class LottoTicketTest {
     private static Stream<Arguments> lotto_tickets() {
         return Stream.of(
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoRank.FIRST, 6),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 7), new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoRank.SECOND, 5),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 7, 8), new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoRank.THIRD, 4),
-                Arguments.of(Arrays.asList(1, 2, 3, 7, 8, 9), new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoRank.FOURTH, 3),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 7), new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoRank.THIRD, 5),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 7, 8), new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoRank.FOURTH, 4),
+                Arguments.of(Arrays.asList(1, 2, 3, 7, 8, 9), new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoRank.FIFTH, 3),
                 Arguments.of(Arrays.asList(1, 2, 7, 8, 9, 10), new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoRank.NONE, 2)
         );
     }

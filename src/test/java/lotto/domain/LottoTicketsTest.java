@@ -35,7 +35,7 @@ class LottoTicketsTest {
         LottoResult lottoResult = new LottoResult();
         lottoTickets.matchLottoResult(winningLottoNumbers, lottoResult);
         Assertions.assertThat(lottoResult.getLottoResultMap().get(LottoRank.FIRST)).isEqualTo(4);
-        Assertions.assertThat(lottoResult.getLottoResultMap().get(LottoRank.SECOND)).isEqualTo(1);
+        Assertions.assertThat(lottoResult.getLottoResultMap().get(LottoRank.THIRD)).isEqualTo(1);
     }
 
 }
