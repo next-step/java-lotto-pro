@@ -1,7 +1,5 @@
 package lotto.model.lotto.ticket;
 
-import lotto2.model.ticket.LottoTicket;
-
 import java.util.ArrayList;
 import java.util.List;
 
