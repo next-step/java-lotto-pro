@@ -9,6 +9,7 @@ import lotto.domain.TestLottoNumberGenerator;
 import lotto.domain.win.WinRanking;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -28,6 +29,14 @@ class WinningLottosTest {
                 Arguments.of(WinRanking.FIFTH, 0),
                 Arguments.of(WinRanking.MISS, 2)
         );
+    }
+
+    @Test
+    @DisplayName("당첨번호에 보너스 번호가 포함되면 IllegalArgumentException을 던진다.")
+    void winningLottoException() {
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Assertions.assertThatThrownBy(() -> WinningLottos.of(winningNumbers, 1))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
