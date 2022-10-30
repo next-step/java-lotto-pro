@@ -8,15 +8,14 @@ import java.util.stream.Collectors;
 public class Lottos {
 
     private final List<Lotto> lottos;
-    private final int lottoPrice;
-
+    private final LottoMoney lottoMoney;
     public Lottos(List<Lotto> lottos, int lottoPrice) {
         this.lottos = lottos;
-        this.lottoPrice = lottoPrice;
+        this.lottoMoney = new LottoMoney(lottoPrice);
     }
 
     public int getSumOfPriceLottos() {
-        return lottos.size() * lottoPrice;
+        return lottoMoney.getSumOfPriceLottos(lottos.size());
     }
 
     public List<List<LottoNumber>> getNumbersOfLottos() {
