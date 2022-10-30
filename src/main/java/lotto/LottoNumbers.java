@@ -41,19 +41,19 @@ public class LottoNumbers {
         }
     }
 
-    public int countFirst() {
+    public int getCountOfFirst() {
         return prize.get(6);
     }
 
-    public int countSecond() {
+    public int geetCountOfSecond() {
         return prize.get(5);
     }
 
-    public int countThird() {
+    public int getCountOfThird() {
         return prize.get(4);
     }
 
-    public int countFourth() {
+    public int getCountOfFourth() {
         return prize.get(3);
     }
 }

@@ -14,17 +14,17 @@ public class ResultView {
     }
 
     void resultWinningStatistics(int payMoney, LottoNumbers lottoNumbers) {
-        int fourth = lottoNumbers.countFourth();
-        int third = lottoNumbers.countThird();
-        int second = lottoNumbers.countSecond();
-        int first = lottoNumbers.countFirst();
+        int fourth = lottoNumbers.getCountOfFourth();
+        int third = lottoNumbers.getCountOfThird();
+        int second = lottoNumbers.geetCountOfSecond();
+        int first = lottoNumbers.getCountOfFirst();
 
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + lottoNumbers.countFourth() + "개");
-        System.out.println("4개 일치 (50000원)- " + lottoNumbers.countThird() + "개");
-        System.out.println("5개 일치 (1500000원)- " + lottoNumbers.countSecond() + "개");
-        System.out.println("6개 일치 (2000000000원)- " + lottoNumbers.countFirst() + "개");
+        System.out.println("3개 일치 (5000원)- " + lottoNumbers.getCountOfFourth() + "개");
+        System.out.println("4개 일치 (50000원)- " + lottoNumbers.getCountOfThird() + "개");
+        System.out.println("5개 일치 (1500000원)- " + lottoNumbers.geetCountOfSecond() + "개");
+        System.out.println("6개 일치 (2000000000원)- " + lottoNumbers.getCountOfFirst() + "개");
         System.out.println(
                 "총 수익률은 " + (5000 * fourth + 50000 * third + 1500000 * second + 2000000000 * first) / payMoney
                         + "입니다.");

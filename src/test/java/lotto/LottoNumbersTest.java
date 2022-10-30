@@ -31,7 +31,7 @@ public class LottoNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers(inputLottoNumbers);
         List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 3, 5, 7, 31, 35));
         lottoNumbers.countPrize(winningNumbers);
-        assertThat(lottoNumbers.countFirst()).isEqualTo(1);
+        assertThat(lottoNumbers.getCountOfFirst()).isEqualTo(1);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class LottoNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers(inputLottoNumbers);
         List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 45));
         lottoNumbers.countPrize(winningNumbers);
-        assertThat(lottoNumbers.countSecond()).isEqualTo(1);
+        assertThat(lottoNumbers.geetCountOfSecond()).isEqualTo(1);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class LottoNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers(inputLottoNumbers);
         List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 44, 45));
         lottoNumbers.countPrize(winningNumbers);
-        assertThat(lottoNumbers.countThird()).isEqualTo(1);
+        assertThat(lottoNumbers.getCountOfThird()).isEqualTo(1);
     }
 
     @Test
@@ -55,6 +55,6 @@ public class LottoNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers(inputLottoNumbers);
         List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 43, 44, 45));
         lottoNumbers.countPrize(winningNumbers);
-        assertThat(lottoNumbers.countFourth()).isEqualTo(1);
+        assertThat(lottoNumbers.getCountOfFourth()).isEqualTo(1);
     }
 }
