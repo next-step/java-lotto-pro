@@ -31,7 +31,7 @@ public class MoneyToBuy {
         return input < 0;
     }
 
-    public int numberOfAffordableLottoTickets() {
+    public int affordableLottoTicketNumber() {
         return money / LottoConstant.PRICE_OF_SINGLE_LOTTO_TICKET;
     }
 

@@ -2,14 +2,17 @@ package lotto.controller.acceptor;
 
 import lotto.model.money.to.buy.MoneyToBuy;
 import lotto.view.DemandMoneyToBuyInputPrinter;
+import lotto.view.NumberOfLottoTicketsPrinters;
 
 import java.util.Scanner;
 
 public class MoneyToBuyAcceptor {
     public MoneyToBuy accept() {
         DemandMoneyToBuyInputPrinter.print();
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        return new MoneyToBuy(input);
+        final Scanner scanner = new Scanner(System.in);
+        final String input = scanner.nextLine();
+        final MoneyToBuy moneyToBuy = new MoneyToBuy(input);
+        NumberOfLottoTicketsPrinters.print(moneyToBuy);
+        return moneyToBuy;
     }
 }

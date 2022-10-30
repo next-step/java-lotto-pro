@@ -4,7 +4,6 @@ import lotto.constant.numbers.LottoConstant;
 import lotto.controller.acceptor.MoneyToBuyAcceptor;
 import lotto.controller.acceptor.WinningNumbersAcceptor;
 import lotto.model.lotto.ticket.LottoNumberGenerator;
-import lotto.model.lotto.ticket.LottoTicket;
 import lotto.model.lotto.ticket.LottoTicketsBucket;
 import lotto.model.money.to.buy.MoneyToBuy;
 import lotto.model.winning.numbers.WinningNumbers;
@@ -16,7 +15,7 @@ import java.util.List;
 public class LottoController {
     public void run() {
         final MoneyToBuy moneyToBuy = userInputMoneyToBuy();
-        int numberOfAffordableLotto = moneyToBuy.numberOfAffordableLottoTickets();
+        int numberOfAffordableLotto = moneyToBuy.affordableLottoTicketNumber();
         final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucket(numberOfAffordableLotto);
         while (0 < numberOfAffordableLotto--) {
             numberOfAffordableLottoLeft(lottoTicketsBucket);
