@@ -1,6 +1,5 @@
 package lotto.domain.winningnumber.factory.validation;
 
-import static lotto.domain.winningnumber.factory.validation.WinningNumberValidator.ERROR_RANGE_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
@@ -32,7 +31,7 @@ class RangeValidatorTest {
     void range_ex(String ex) {
         winningNumbers.add(ex);
         assertThatIllegalArgumentException().isThrownBy(() -> validator.validate(winningNumbers))
-                .withMessageContaining(ERROR_RANGE_MESSAGE);
+                .withMessageContaining("[ERROR]");
     }
 
     @Test
