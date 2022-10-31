@@ -1,9 +1,6 @@
 package model;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 import static model.LottoRankType.*;
 
@@ -16,8 +13,7 @@ public class Rank {
 
     public Rank() {
         List<LottoRankType> rank = Arrays.asList(RANK_FIVE, RANK_FOUR, RANK_THREE, RANK_TWO, RANK_ONE);
-        this.countRank = new TreeMap<>();
-
+        this.countRank = new LinkedHashMap<>();
         rank.forEach(lottoRankType -> countRank.put(lottoRankType, INIT_MAP_COUNT));
     }
 
