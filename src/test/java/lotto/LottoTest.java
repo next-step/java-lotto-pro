@@ -7,18 +7,18 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import lotto.domain.Lotto;
 import lotto.domain.Ticket;
-import lotto.domain.TicketList;
+import lotto.domain.Tickets;
 
 public class LottoTest {    
     Lotto lotto;
-    TicketList myTickets = new TicketList();
+    Tickets myTickets = new Tickets();
     String winningTicketStr = "1,2,3,4,5,6";
     
     @Test
     @DisplayName("구입금액에_따른_발급로또_개수_확인")
     public void lotto_issue_count() {
         lotto = new Lotto("14000");
-        assertThat(lotto.ticketList.size()).isEqualTo(14);
+        assertThat(lotto.tickets.size()).isEqualTo(14);
     }
 
     @ParameterizedTest

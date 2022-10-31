@@ -7,39 +7,39 @@ public class Lotto {
     private static final String STR_BUY_LOTTO = "%d개를 구매했습니다.\n";
     private static final int TICKET_VALUE = 1000;
     
-    public TicketList ticketList;
+    public Tickets tickets;
 
     public Lotto(String moneyStr) {
         buyLotto(new Money(moneyStr));
     }
 
-    public Lotto(TicketList myTickets) {
-        this.ticketList = myTickets;
+    public Lotto(Tickets myTickets) {
+        this.tickets = myTickets;
     }
 
-    public String getTicketListSizeStr() {
-        return String.format(STR_BUY_LOTTO, this.ticketList.size());
+    public String getTicketsSizeStr() {
+        return String.format(STR_BUY_LOTTO, this.tickets.size());
     }
 
     public String getLottoListStr() {
-        return this.ticketList.toString();
+        return this.tickets.toString();
     }
 
     public String getResultStr(String winningTicketStr) {
         Result result = new Result();
 
-        this.ticketList.countTicketResult(result, new Ticket(winningTicketStr));
+        this.tickets.countTicketResult(result, new Ticket(winningTicketStr));
 
-        int usedMoney = this.ticketList.size() * TICKET_VALUE;
+        int usedMoney = this.tickets.size() * TICKET_VALUE;
         return result.toString(usedMoney);
     }
 
     private void buyLotto(Money money) {
         int buyCount = money.amount / TICKET_VALUE;
-        ticketList = new TicketList();
+        tickets = new Tickets();
 
         IntStream.range(Constants.ZERO, buyCount).forEach(i -> {
-            ticketList.addTicket(new Ticket());
+            tickets.addTicket(new Ticket());
         });
     }
 }

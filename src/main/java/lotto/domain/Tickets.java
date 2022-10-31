@@ -4,25 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.util.Constants;
 
-public class TicketList {
-    private final List<Ticket> ticketList;
+public class Tickets {
+    private final List<Ticket> tickets;
 
-    public TicketList() {
-        ticketList = new ArrayList<>();
+    public Tickets() {
+        tickets = new ArrayList<>();
     }
 
     public void addTicket(Ticket t) {
-        this.ticketList.add(t);
+        this.tickets.add(t);
     }
 
     public int size() {
-        return this.ticketList.size();
+        return this.tickets.size();
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        for (Ticket t : ticketList) {
+        for (Ticket t : tickets) {
             sb.append(t.toString());
         }
 
@@ -30,7 +30,7 @@ public class TicketList {
     }
 
     public Result countTicketResult(Result result, Ticket winningTicket) {
-        for (Ticket t : this.ticketList) {
+        for (Ticket t : this.tickets) {
             result.setResult(t.compareTicket(winningTicket));
         }
 
