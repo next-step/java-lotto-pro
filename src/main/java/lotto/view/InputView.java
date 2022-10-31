@@ -24,17 +24,12 @@ public class InputView {
     public static List<Integer> inputLottoWinningNumbers() {
         System.out.println(ASK_MESSAGE_LAST_WINNING_NUMBERS);
         String input = new Scanner(System.in).nextLine().replaceAll(WHITE_SPACE, EMPTY_STRING);
-        String[] stringWinningNumbers = input.split(WINNING_NUMBERS_DELIMITER);
-        InputValidator.validateLottoNumberCount(stringWinningNumbers.length);
 
         List<Integer> winningNumbers = new ArrayList<>();
-        for (String stringFormatNumber : stringWinningNumbers) {
+        for (String stringFormatNumber : input.split(WINNING_NUMBERS_DELIMITER)) {
             InputValidator.validateNumberFormat(stringFormatNumber);
-            int number = Integer.parseInt(stringFormatNumber);
-            InputValidator.validateLottoNumberRange(number);
-            winningNumbers.add(number);
+            winningNumbers.add(Integer.parseInt(stringFormatNumber));
         }
-        InputValidator.validateDuplicateLottoNumber(winningNumbers);
 
         return winningNumbers;
     }
