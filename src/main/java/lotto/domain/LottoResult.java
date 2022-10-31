@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +8,7 @@ public class LottoResult {
     private static final int DEFAULT_VALUE = 0;
     private static final int INCREASE_VALUE = 1;
 
-    private final Map<Rank, Integer> lottoResultCounts = new HashMap<>();
+    private final Map<Rank, Integer> lottoResultCounts = new LinkedHashMap<>();
     private final LottoTicket winningTicket;
 
     public LottoResult(LottoTicket ticket) {
@@ -17,7 +17,7 @@ public class LottoResult {
     }
 
     private void initialize() {
-        for (Rank rank : Rank.values()) {
+        for (Rank rank : Rank.reverseValues()) {
             lottoResultCounts.put(rank, DEFAULT_VALUE);
         }
     }

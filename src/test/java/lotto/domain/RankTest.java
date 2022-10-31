@@ -14,6 +14,13 @@ public class RankTest {
         assertThat(Rank.isBiggerThanMinimum(3)).isTrue();
     }
 
+    @DisplayName("랭크를 역순으로 구할 수 있다")
+    @Test
+    void reverse_rank_test() {
+        Rank reverseFirstRank = Rank.reverseValues()[0];
+        assertThat(reverseFirstRank).isEqualTo(Rank.FOURTH);
+    }
+
     @DisplayName("일치하는 숫자로 Rank를 알 수 있다")
     @Test
     void rank_get_test() {
