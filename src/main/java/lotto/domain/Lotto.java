@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int LOTTO_NUMBERS_SIZE = 6;
+    public static final int LOTTO_NUMBERS_SIZE = 6;
     private final Set<LottoNumber> numbers;
 
     public Lotto(Integer... numbers) {
