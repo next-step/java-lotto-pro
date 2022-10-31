@@ -30,9 +30,9 @@ public class Lottos {
         return output.toString();
     }
 
-    public LottoRankCountCache matchAll(LottoNumbers winningNumbers) {
+    public LottoRankCountCache matchAll(Lotto winningLotto) {
         List<Long> matchCounts = this.lottos.stream()
-                .map(lotto -> lotto.match(winningNumbers))
+                .map(lotto -> lotto.match(winningLotto))
                 .collect(collectingAndThen(toList(), Collections::unmodifiableList));
         return LottoRankCountCache.of(matchCounts);
     }
