@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class LottoTicketTest {
-    private final int SLOT_SIZE = 6;
     Random random = null;
 
     @BeforeEach
@@ -20,7 +19,7 @@ public class LottoTicketTest {
     void 중복없는_로또번호_6자리_생성(){
         LottoTicket lottoTicket = new LottoTicket();
         int size = lottoTicket.size();
-        assertThat(size).isEqualTo(SLOT_SIZE);
+        assertThat(size).isEqualTo(lottoTicket.SLOT_SIZE);
     }
 
     @Test

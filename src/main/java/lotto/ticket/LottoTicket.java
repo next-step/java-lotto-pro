@@ -12,8 +12,8 @@ import lotto.system.OutputView;
 public class LottoTicket {
     private final int MIN_NUMBER = 1;
     private final int MAX_NUMBER = 45;
-    private final int SLOT_SIZE = 6;
     private ArrayList<Integer> numbers = new ArrayList<>();
+    public final int SLOT_SIZE = 6;
 
     public LottoTicket(){
         numbers = new ArrayList<>(generateNumbers(new Random()));
