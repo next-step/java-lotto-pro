@@ -24,4 +24,10 @@ public class MoneyTest {
 		Money money = new Money(14000L);
 		assertThat(money.ratio(new Money(5000L))).isEqualTo(0.35f);
 	}
+
+	@Test
+	void 특정_금액_차감_계산() {
+		Money money = new Money(14000L);
+		assertThat(money.minus(new Money(5000L))).isEqualTo(new Money(9000L));
+	}
 }
