@@ -65,4 +65,5 @@ public class LottoTest {
                 .hasMessage("로또번호는 6개 입력 되어야 합니다.");
     }
 
+
 }

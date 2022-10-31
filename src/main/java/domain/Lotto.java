@@ -1,16 +1,17 @@
 package domain;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
-    private final List<LottoNumber> LottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         isValidLottoNumbers(lottoNumbers);
-        LottoNumbers = lottoNumbers;
+        this.lottoNumbers = lottoNumbers;
     }
 
     private void isValidLottoNumbers(List<LottoNumber> lottoNumbers){
@@ -30,23 +31,27 @@ public class Lotto {
         }
     }
 
+    public List<LottoNumber> getLottoNumbers(){
+        return lottoNumbers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(LottoNumbers, lotto.LottoNumbers);
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(LottoNumbers);
+        return Objects.hash(lottoNumbers);
     }
 
     @Override
     public String toString() {
         return "Lotto{" +
-                "LottoNumbers=" + LottoNumbers +
+                "lottoNumbers=" + lottoNumbers +
                 '}';
     }
 }
