@@ -22,14 +22,15 @@ public class Lotto {
         }
     }
 
-    public int matchCount(Lotto winnerLotto) {
+    public int matchCount(WinnerLotto winnerLotto) {
         return (int) this.lottoNumbers.stream()
-                .filter(winnerLotto::contain)
+                .filter(winnerLotto::containLottoNumber)
                 .count();
     }
 
-    public boolean contain(LottoNumber lottoNumber) {
-        return this.lottoNumbers.contains(lottoNumber);
+    public boolean hasBonusNumber(WinnerLotto winnerLotto) {
+        return this.lottoNumbers.stream()
+                .anyMatch(winnerLotto::matchBonusNumber);
     }
 
     @Override

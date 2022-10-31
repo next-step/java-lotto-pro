@@ -15,13 +15,13 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Map<Prize, Integer> getPrizeOfLotto(Lotto winnerLotto) {
+    public Map<Prize, Integer> getPrizeOfLotto(WinnerLotto winnerLotto) {
         Map<Prize, Integer> prizes = new EnumMap<Prize, Integer>(Prize.class);
-        this.lottos.stream()
-                .map(v -> v.matchCount(winnerLotto))
-                .filter(Prize.matchCounts::containsKey)
-                .sorted()
-                .forEach(v -> prizes.merge(Prize.matchCounts.get(v), 1, Integer::sum));
+        for (Lotto lotto : lottos) {
+            int count = lotto.matchCount(winnerLotto);
+            boolean hasBonusBall = lotto.hasBonusNumber(winnerLotto);
+            prizes.merge(Prize.prizeOf(count, hasBonusBall), 1, Integer::sum);
+        }
         return prizes;
     }
 
