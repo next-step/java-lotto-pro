@@ -29,22 +29,25 @@ public class LottoResult {
   }
 
   private void calculateLottoResult() {
-
     for (Lotto lotto : lottoList.getLottoList()) {
-      int matchingCount = lotto.getMatchingCount(winningLotto.getLotto());
-
-      RankCode rankCode = RankCode.getRankCode(matchingCount);
-
-      if (resultMap.containsKey(rankCode)) {
-        int value = resultMap.get(rankCode);
-
-        value++;
-
-        resultMap.put(rankCode, value);
-      }
-
-      resultMap.put(rankCode, 1);
+      calculateLottoMatch(lotto);
     }
+  }
+
+  private void calculateLottoMatch(Lotto lotto) {
+    int matchingCount = lotto.getMatchingCount(winningLotto.getLotto());
+
+    RankCode rankCode = RankCode.getRankCode(matchingCount);
+
+    if (resultMap.containsKey(rankCode)) {
+      int value = resultMap.get(rankCode);
+
+      value++;
+
+      resultMap.put(rankCode, value);
+    }
+
+    resultMap.put(rankCode, 1);
   }
 
   public List<String> convertResultMapToString() {
