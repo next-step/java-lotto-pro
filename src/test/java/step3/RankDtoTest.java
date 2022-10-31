@@ -17,7 +17,7 @@ public class RankDtoTest {
     void test_that_it_returns_true_when_match_number_greater_than_3(int matchCount) {
 
         //given,when
-        RankDto rankDto = new RankDto(Rank.valueOf(matchCount), 1);
+        RankDto rankDto = new RankDto(Rank.valueOf((countParam, bonusParam) -> countParam == matchCount && bonusParam), 1);
 
         //then
         assertThat(rankDto.isWin()).isTrue();
@@ -25,11 +25,11 @@ public class RankDtoTest {
 
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2})
-    @DisplayName("맞춘번호가 3개 미만경우 true를 반환")
+    @DisplayName("맞춘번호가 3개 미만경우 false를 반환")
     void test_that_it_returns_true_when_match_number_less_than_3(int matchCount) {
 
         //given,when
-        RankDto rankDto = new RankDto(Rank.valueOf(matchCount), 1);
+        RankDto rankDto = new RankDto(Rank.valueOf((countParam, bonusParam) -> countParam == matchCount && bonusParam), 1);
 
         //then
         assertThat(rankDto.isWin()).isFalse();

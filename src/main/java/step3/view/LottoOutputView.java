@@ -2,43 +2,13 @@ package step3.view;
 
 import step3.model.dto.LottoResultDto;
 import step3.model.dto.LottosNumberDto;
+import step3.model.dto.RankDto;
 
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-public class LottoConsoleView {
-
-    private static final Scanner SCANNER = new Scanner(System.in);
-
-    public static int inputPurchasingAmount() {
-        System.out.println("구입금액을 입력해 주세요.");
-        return SCANNER.nextInt();
-    }
-
-    public static String inputWinningNumber() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return SCANNER.next();
-    }
-
-    public static int inputBonusNumber() {
-        System.out.println("보너스 볼을 입력해 주세요.");
-        return SCANNER.nextInt();
-    }
-
-    public static List<String> inputPurchaseManual() {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        int count = SCANNER.nextInt();
-        if (count > 0) {
-            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-            return IntStream.rangeClosed(1, count)
-                    .mapToObj(operand -> SCANNER.next())
-                    .collect(Collectors.toList());
-        }
-        return Collections.EMPTY_LIST;
-    }
+public class LottoOutputView {
 
     public static void printPurchasingLottos(LottosNumberDto lottosNumberDto) {
         List<List<Integer>> lottoTickets = lottosNumberDto.getLottosNumber();
@@ -57,8 +27,8 @@ public class LottoConsoleView {
         printMinusStatus(priceRatio);
     }
 
-    private static void printRankStats(LottoResultDto statusDto) {
-        statusDto.getRanks().forEach(rankDto -> {
+    private static void printRankStats(LottoResultDto resultDto) {
+        getSortedRank(resultDto).forEach(rankDto -> {
             if (rankDto.isRankTwo()) {
                 System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개\n", rankDto.getMatchCount(), rankDto.getWinningPrice(), rankDto.getWinningCount());
                 return;
@@ -73,4 +43,11 @@ public class LottoConsoleView {
         }
     }
 
+    public static List<RankDto> getSortedRank(LottoResultDto resultDto) {
+        return resultDto.getRanks()
+                .stream()
+                .filter(RankDto::isWin)
+                .sorted(Comparator.comparingInt(RankDto::getWinningPrice))
+                .collect(Collectors.toList());
+    }
 }

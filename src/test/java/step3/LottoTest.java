@@ -7,7 +7,6 @@ import step3.model.LottoNumber;
 import step3.model.Rank;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -27,21 +26,6 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("가격조회하면 1000을 반환")
-    void test_that_it_returns_1000() {
-        //given
-        List<LottoNumber> numbers = IntStream.range(1, 7).boxed()
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
-        //when
-        Lotto lotto = new Lotto(numbers,true);
-
-        //then
-        assertThat(lotto.getPrice()).isEqualTo(1000);
-    }
-
-
-    @Test
     @DisplayName("번호조회하면 번호를 반환")
     void test_that_it_returns_numbers() {
         //given
@@ -49,7 +33,7 @@ public class LottoTest {
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
         //when
-        Lotto lotto = new Lotto(lottoNumbers,true);
+        Lotto lotto = new Lotto(lottoNumbers);
         List<LottoNumber> numbers = lotto.getNumbers();
 
         //then;
@@ -70,7 +54,7 @@ public class LottoTest {
                 .collect(Collectors.toList());
 
         //when,then
-        assertThatThrownBy(() -> new Lotto(numbers,true))
+        assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("번호는 6개만 허용합니다");
     }
@@ -85,7 +69,7 @@ public class LottoTest {
         numbers.add(LottoNumber.valueOf(6));
 
         //when,then
-        assertThatThrownBy(() -> new Lotto(numbers,true))
+        assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("중복없는 번호만 허용합니다");
     }
@@ -113,8 +97,8 @@ public class LottoTest {
                 .collect(Collectors.toList());
 
         //when
-        Lotto lotto = new Lotto(numbers,true);
-        Rank rank = lotto.getRank(getLottoNumbers(1,2,3,11,12,13));
+        Lotto lotto = new Lotto(numbers);
+        Rank rank = lotto.getRank(new Lotto(getLottoNumbers(1, 2, 3, 11, 12, 13)));
 
         //then
         assertThat(rank).isEqualTo(Rank.FIFTH);
@@ -128,27 +112,11 @@ public class LottoTest {
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
         //when
-        Lotto lotto = new Lotto(numbers,true);
-        Rank rank = lotto.getRank(getLottoNumbers(1,2,3,4,12,13));
+        Lotto lotto = new Lotto(numbers);
+        Rank rank = lotto.getRank(new Lotto(getLottoNumbers(1, 2, 3, 4, 12, 13)));
 
         //then
         assertThat(rank).isEqualTo(Rank.FOURTH);
-    }
-
-    @Test
-    @DisplayName("당첨번호가 5개 일치하면 하고 보너스번호 일치하면 2등 조회")
-    void test_that_it_returns_2th_if_5_winning_numbers_and_bonus_match() {
-        //given
-        List<LottoNumber> numbers = IntStream.rangeClosed(1, 6).boxed()
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
-
-        //when
-        Lotto lotto = new Lotto(numbers,true);
-        Rank rank = lotto.getRank(getLottoNumbers(1,2,3,4,5,13),LottoNumber.valueOf(6));
-
-        //then
-        assertThat(rank).isEqualTo(Rank.TWO);
     }
 
     @Test
@@ -160,8 +128,8 @@ public class LottoTest {
                 .collect(Collectors.toList());
 
         //when
-        Lotto lotto = new Lotto(numbers,true);
-        Rank rank = lotto.getRank(getLottoNumbers(1,2,3,4,5,13));
+        Lotto lotto = new Lotto(numbers);
+        Rank rank = lotto.getRank(new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 13)));
 
         //then
         assertThat(rank).isEqualTo(Rank.THIRD);
@@ -176,8 +144,8 @@ public class LottoTest {
                 .collect(Collectors.toList());
 
         //when
-        Lotto lotto = new Lotto(numbers,true);
-        Rank rank = lotto.getRank(getLottoNumbers(1,2,3,4,5,6));
+        Lotto lotto = new Lotto(numbers);
+        Rank rank = lotto.getRank(new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 6)));
 
         //then
         assertThat(rank).isEqualTo(Rank.FIRST);
@@ -194,13 +162,12 @@ public class LottoTest {
 
 
         //when
-        Lotto lotto = new Lotto(numbers,true);
-        Rank rank = lotto.getRank(getLottoNumbers(1, 2, 13, 14, 15, 16));
+        Lotto lotto = new Lotto(numbers);
+        Rank rank = lotto.getRank(new Lotto(getLottoNumbers(1, 2, 13, 14, 15, 16)));
 
         //then
         assertThat(rank).isEqualTo(Rank.MISS);
     }
-
 
 
 }

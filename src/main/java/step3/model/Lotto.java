@@ -1,31 +1,29 @@
 package step3.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.function.BiFunction;
 
 public class Lotto {
 
-    public static final int PRICE = 1000;
-    public static final int NUMBER_SIZE = 6;
+    private static final int NUMBER_SIZE = 6;
     private static final String NUMBER_SIZE_MESSAGE = "번호는 6개만 허용합니다";
     private static final String DUPLICATE_NUMBER_MESSAGE = "중복없는 번호만 허용합니다";
     private final List<LottoNumber> numbers;
-    private final boolean isAuto;
 
-    public Lotto(List<LottoNumber> numbers,boolean isAuto) {
+    public Lotto(List<LottoNumber> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers;
-        this.isAuto = isAuto;
     }
 
-    public int getPrice() {
-        return PRICE;
+    public static int getNumberSize() {
+        return NUMBER_SIZE;
     }
 
     public List<LottoNumber> getNumbers() {
-        return numbers.stream().collect(Collectors.toList());
+        return new ArrayList<>(numbers);
     }
 
     private void validateNumbers(List<LottoNumber> numbers) {
@@ -34,24 +32,27 @@ public class Lotto {
         if (distinctNumbers.size() != NUMBER_SIZE) throw new IllegalArgumentException(NUMBER_SIZE_MESSAGE);
     }
 
-    public Rank getRank(List<LottoNumber> winningNumbers) {
-        int count = (int) numbers
+    public Rank getRank(Lotto winningLotto) {
+        int matchCount = (int) numbers
                 .stream()
-                .filter(winningNumbers::contains)
+                .filter(winningLotto::contains)
                 .count();
-        return Rank.valueOf(count);
+        return Rank.valueOf((countParam, bonusParam) -> countParam == matchCount && bonusParam);
     }
 
-    public Rank getRank(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        int count = (int) numbers
+    public Rank getRank(WinningLotto winningLotto) {
+        int matchCount = (int) numbers
                 .stream()
-                .filter(winningNumbers::contains)
+                .filter(winningLotto::contains)
                 .count();
-        boolean isBonus = numbers.contains(bonusNumber);
-        return Rank.valueOf(count, isBonus);
+        boolean isBonus = winningLotto.isMatchBonusNumber(numbers);
+        return Rank.valueOf((countParam, bonusParam) -> countParam == matchCount && bonusParam ,isBonus);
     }
 
-    public boolean isAuto() {
-        return isAuto;
+    public boolean contains(LottoNumber number) {
+        return numbers.stream()
+                .filter(lottoNumber -> lottoNumber.equals(number))
+                .count() > 0;
     }
+
 }

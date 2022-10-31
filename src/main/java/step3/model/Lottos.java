@@ -13,30 +13,25 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public int getSumOfPriceLottos() {
+    public List<List<LottoNumber>> getNumbersOfLottos() {
         return lottos.stream()
-                .mapToInt(Lotto::getPrice)
-                .sum();
-    }
-
-    public List<Lotto> getNumbersOfLottos() {
-        return lottos.stream()
+                .map(Lotto::getNumbers)
                 .collect(Collectors.toList());
     }
 
-    public Map<Rank, Integer> getRankOfLottos(List<LottoNumber> winningNumbers) {
+    public Map<Rank, Integer> getRankOfLottos(Lotto winningLotto) {
         HashMap<Rank, Integer> result = new HashMap<>();
         lottos.forEach(lotto -> {
-            Rank rank = lotto.getRank(winningNumbers);
+            Rank rank = lotto.getRank(winningLotto);
             result.put(rank, result.getOrDefault(rank, 0) + 1);
         });
         return result;
     }
 
-    public Map<Rank, Integer> getRankOfLottos(List<LottoNumber> winningNumbers,LottoNumber bonusNumber) {
+    public Map<Rank, Integer> getRankOfLottos(WinningLotto winningLotto) {
         HashMap<Rank, Integer> result = new HashMap<>();
         lottos.forEach(lotto -> {
-            Rank rank = lotto.getRank(winningNumbers,bonusNumber);
+            Rank rank = lotto.getRank(winningLotto);
             result.put(rank, result.getOrDefault(rank, 0) + 1);
         });
         return result;
