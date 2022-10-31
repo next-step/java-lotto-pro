@@ -16,7 +16,10 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> numbers) { lottoNumbers = numbers; }
 
-    public Lotto(int number) { bonusNumber = new LottoNumber(number); }
+    public Lotto(List<LottoNumber> numbers, int number) {
+        lottoNumbers = numbers;
+        bonusNumber = new LottoNumber(number);
+    }
 
     public Lotto(String[] numbers) {
         List<LottoNumber> list = new ArrayList<>();

@@ -24,13 +24,17 @@ public class LottoCalculator {
         this.lastWeekWinner = lastWeekWinner;
     }
 
+    public Lotto getLastWeekWinner() {
+        return lastWeekWinner;
+    }
+
     public void setLastWeekLottoNumbers(String beforeNumbers) {
         String[] afterNumbers = validateLastWeekWinner(beforeNumbers);
         lastWeekWinner = new Lotto(afterNumbers);
     }
 
     public void setLastWeekBonusNumber(String bonusNumber) {
-        lastWeekWinner = new Lotto(Integer.parseInt(bonusNumber));
+        lastWeekWinner = new Lotto(lastWeekWinner.getNumbers(), Integer.parseInt(bonusNumber));
     }
 
     public void calculateWinnerStatistics(Lottos lottos) {
@@ -48,12 +52,12 @@ public class LottoCalculator {
     private int compareWinnerRules(Lotto lotto) {
         int sameCount = ZERO;
         for(LottoNumber lottoNumber : lotto.getNumbers()) {
-            sameCount += isContain(lottoNumber);
+            sameCount += isContainNumber(lottoNumber);
         }
         return sameCount;
     }
 
-    private int isContain(LottoNumber lottoNumber) {
+    private int isContainNumber(LottoNumber lottoNumber) {
         return lastWeekWinner.isContain(lottoNumber) ? ONE : ZERO;
     }
 
