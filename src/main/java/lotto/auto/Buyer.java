@@ -15,10 +15,13 @@ public class Buyer {
     }
 
     public void buyLotto() {
+        int cnt = 0;
         while (amount.getMoney() > 0) {
             lotto.add(new Lotto(DEFAULT_PRICE));
             this.amount.substractMoney(DEFAULT_PRICE);
+            cnt++;
         }
+        System.out.println(cnt + "개를 구매했습니다.");
     }
 
     public int getAmount() {
