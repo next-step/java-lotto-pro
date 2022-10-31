@@ -6,10 +6,6 @@
 package lotto;
 
 import static lotto.Constant.EA;
-import static lotto.Constant.PRIZE_OF_FIRST;
-import static lotto.Constant.PRIZE_OF_FOURTH;
-import static lotto.Constant.PRIZE_OF_SECOND;
-import static lotto.Constant.PRIZE_OF_THIRD;
 import static lotto.Constant.RESULT_BOUGHT_SOME;
 import static lotto.Constant.RESULT_DIVIDING_LINE;
 import static lotto.Constant.RESULT_HIT_FIVE;
@@ -33,18 +29,18 @@ public class ResultView {
         }
     }
 
-    void printResultWinningStatistics(int payMoney, Prize prize) {
-        printWinningCount(prize);
-        printResultTotalEarningsRate(calculateTotalEarningsRate(payMoney, calculateTotalEarnings(prize)));
+    void printResultWinningStatistics(int payMoney, Statistic statistic) {
+        printWinningCount(statistic);
+        printResultTotalEarningsRate(calculateTotalEarningsRate(payMoney, calculateTotalEarnings(statistic)));
     }
 
-    private void printWinningCount(Prize prize) {
+    private void printWinningCount(Statistic statistic) {
         System.out.println("\n" + RESULT_WINNING_STATISTICS);
         System.out.println(RESULT_DIVIDING_LINE);
-        System.out.println(RESULT_HIT_THREE + prize.getCountOfFourth() + EA);
-        System.out.println(RESULT_HIT_FOUR + prize.getCountOfThird() + EA);
-        System.out.println(RESULT_HIT_FIVE + prize.getCountOfSecond() + EA);
-        System.out.println(RESULT_HIT_SIX + prize.getCountOfFirst() + EA);
+        System.out.println(RESULT_HIT_THREE + statistic.getCountOfFourth() + EA);
+        System.out.println(RESULT_HIT_FOUR + statistic.getCountOfThird() + EA);
+        System.out.println(RESULT_HIT_FIVE + statistic.getCountOfSecond() + EA);
+        System.out.println(RESULT_HIT_SIX + statistic.getCountOfFirst() + EA);
     }
 
     private void printResultTotalEarningsRate(int totalEarningsRate) {
@@ -55,10 +51,10 @@ public class ResultView {
         return totalEarnings / payMoney;
     }
 
-    private int calculateTotalEarnings(Prize prize) {
-        return PRIZE_OF_FOURTH * prize.getCountOfFourth()
-                + PRIZE_OF_THIRD * prize.getCountOfThird()
-                + PRIZE_OF_SECOND * prize.getCountOfSecond()
-                + PRIZE_OF_FIRST * prize.getCountOfFirst();
+    private int calculateTotalEarnings(Statistic statistic) {
+        return Prize.FOURTH.getPrize() * statistic.getCountOfFourth()
+                + Prize.THIRD.getPrize() * statistic.getCountOfThird()
+                + Prize.SECOND.getPrize() * statistic.getCountOfSecond()
+                + Prize.FIRST.getPrize() * statistic.getCountOfFirst();
     }
 }

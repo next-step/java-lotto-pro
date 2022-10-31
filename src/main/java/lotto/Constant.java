@@ -18,14 +18,6 @@ public class Constant {
     public static final String RESULT_HIT_FOUR = "4개 일치 (50000원)- ";
     public static final String RESULT_HIT_FIVE = "5개 일치 (1500000원)- ";
     public static final String RESULT_HIT_SIX = "6개 일치 (2000000000원)- ";
-    public static final int PRIZE_OF_FOURTH = 5000;
-    public static final int PRIZE_OF_THIRD = 50000;
-    public static final int PRIZE_OF_SECOND = 1500000;
-    public static final int PRIZE_OF_FIRST = 2000000000;
-    public static final int HIT_THREE = 3;
-    public static final int HIT_FOUR = 4;
-    public static final int HIT_FIVE = 5;
-    public static final int HIT_SIX = 6;
     public static final int ZERO = 0;
     public static final int LOTTO_START_NUMBER = 1;
     public static final int LOTTO_END_NUMBER = 45;

@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class PrizeTest {
+public class StatisticTest {
     private final List<LottoNumber> fakePurchaseLottoNumbers = new ArrayList<>();
 
     @BeforeEach
@@ -25,29 +25,29 @@ public class PrizeTest {
 
     @Test
     void 여섯개_맞춘_개수_가져오기() {
-        Prize prize = new Prize(new WinningNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
-        prize.countPrize(fakePurchaseLottoNumbers);
-        assertThat(prize.getCountOfFirst()).isEqualTo(1);
+        Statistic statistic = new Statistic(new WinningNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        statistic.countPrize(fakePurchaseLottoNumbers);
+        assertThat(statistic.getCountOfFirst()).isEqualTo(1);
     }
 
     @Test
     void 다섯개_맞춘_개수_가져오기() {
-        Prize prize = new Prize(new WinningNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
-        prize.countPrize(fakePurchaseLottoNumbers);
-        assertThat(prize.getCountOfSecond()).isEqualTo(1);
+        Statistic statistic = new Statistic(new WinningNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        statistic.countPrize(fakePurchaseLottoNumbers);
+        assertThat(statistic.getCountOfSecond()).isEqualTo(1);
     }
 
     @Test
     void 네개_맞춘_개수_가져오기() {
-        Prize prize = new Prize(new WinningNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
-        prize.countPrize(fakePurchaseLottoNumbers);
-        assertThat(prize.getCountOfThird()).isEqualTo(1);
+        Statistic statistic = new Statistic(new WinningNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        statistic.countPrize(fakePurchaseLottoNumbers);
+        assertThat(statistic.getCountOfThird()).isEqualTo(1);
     }
 
     @Test
     void 세개_맞춘_개수_가져오기() {
-        Prize prize = new Prize(new WinningNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
-        prize.countPrize(fakePurchaseLottoNumbers);
-        assertThat(prize.getCountOfFourth()).isEqualTo(1);
+        Statistic statistic = new Statistic(new WinningNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        statistic.countPrize(fakePurchaseLottoNumbers);
+        assertThat(statistic.getCountOfFourth()).isEqualTo(1);
     }
 }
