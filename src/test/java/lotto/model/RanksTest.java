@@ -22,6 +22,30 @@ public class RanksTest {
 	}
 
 	@Test
+	void 수익률을_구한다() {
+		Ranks ranks = new Ranks(
+			Arrays.asList(
+				Rank.FIFTH,
+				Rank.MISS,
+				Rank.MISS,
+				Rank.MISS,
+				Rank.MISS,
+				Rank.MISS,
+				Rank.MISS,
+				Rank.MISS,
+				Rank.MISS,
+				Rank.MISS,
+				Rank.MISS,
+				Rank.MISS,
+				Rank.MISS,
+				Rank.MISS
+			)
+		);
+
+		assertThat(ranks.getIncomeRatio()).isEqualTo(0.35f);
+	}
+
+	@Test
 	void 각_순위의_갯수를_구한다() {
 		Ranks ranks = new Ranks(
 			Arrays.asList(

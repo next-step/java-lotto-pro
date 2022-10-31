@@ -20,6 +20,10 @@ public class Money {
 		return this.money / Lotto.LOTTO_PRICE.money;
 	}
 
+	public Money multiply(final int amount){
+		return new Money(this.money * amount);
+	}
+
 	public float ratio(final Money income) {
 		BigDecimal money = BigDecimal.valueOf(this.money);
 		BigDecimal incomeMoney = BigDecimal.valueOf(income.money);

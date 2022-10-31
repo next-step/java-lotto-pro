@@ -22,4 +22,10 @@ public class Ranks {
 			.filter(rank -> rank == searchRank)
 			.count();
 	}
+
+	public float getIncomeRatio() {
+		return Lotto.LOTTO_PRICE
+			.multiply(ranks.size())
+			.ratio(getTotalPrize());
+	}
 }

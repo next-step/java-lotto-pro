@@ -24,6 +24,6 @@ public class LottoController {
 		LottoNumber bonusNumber = Input.inputBonusNumber();
 		Ranks ranks = lottos.match(new Winner(winnerLotto, bonusNumber));
 
-		Output.printResult(ranks, payment);
+		Output.printResult(ranks);
 	}
 }

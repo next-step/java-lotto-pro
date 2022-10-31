@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.model.Lottos;
-import lotto.model.Money;
 import lotto.model.Rank;
 import lotto.model.Ranks;
 
@@ -16,8 +15,8 @@ public class Output {
 		System.out.println(lottos);
 	}
 
-	public static void printResult(final Ranks ranks, final Money payment) {
-		float ratio = payment.ratio(ranks.getTotalPrize());
+	public static void printResult(final Ranks ranks) {
+		float ratio = ranks.getIncomeRatio();
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 		System.out.printf("3개 일치 (5000원)- %d개\n", ranks.count(Rank.FIFTH));
