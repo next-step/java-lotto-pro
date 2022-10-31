@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.WinningResult;
 
 import java.util.Map;
+import java.util.Optional;
 
 import static lotto.WinningResult.WIN_FIRST;
 import static lotto.WinningResult.WIN_FOURTH;
@@ -21,13 +22,15 @@ public class ResultView {
         stringBuilder.append("당첨 통계").append(NEW_LINE)
                 .append("---------").append(NEW_LINE)
                 .append("3개 일치 (").append(WIN_FOURTH.getWinningPrice()).append("원)- ")
-                .append(winningResultMap.get(WIN_FOURTH)).append("개").append(NEW_LINE)
+                .append(Optional.ofNullable(winningResultMap.get(WIN_FOURTH)).orElse(0L)).append("개").append(NEW_LINE)
                 .append("4개 일치 (").append(WIN_THIRD.getWinningPrice()).append("원)- ")
-                .append(winningResultMap.get(WIN_THIRD)).append("개").append(NEW_LINE)
+                .append(Optional.ofNullable(winningResultMap.get(WIN_THIRD)).orElse(0L)).append("개").append(NEW_LINE)
                 .append("5개 일치 (").append(WIN_SECOND.getWinningPrice()).append("원)- ")
-                .append(winningResultMap.get(WinningResult.WIN_SECOND)).append("개").append(NEW_LINE)
+                .append(Optional.ofNullable(winningResultMap.get(WinningResult.WIN_SECOND)).orElse(0L)).append("개")
+                .append(NEW_LINE)
                 .append("6개 일치 (").append(WIN_FIRST.getWinningPrice()).append("원)- ")
-                .append(winningResultMap.get(WinningResult.WIN_FIRST)).append("개").append(NEW_LINE);
+                .append(Optional.ofNullable(winningResultMap.get(WinningResult.WIN_FIRST)).orElse(0L)).append("개")
+                .append(NEW_LINE);
         System.out.println(stringBuilder);
     }
 
