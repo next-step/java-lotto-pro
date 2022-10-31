@@ -43,10 +43,6 @@ public enum Rank {
         return Rank.THIRD;
     }
 
-    public Money money() {
-        return new Money(this.money);
-    }
-
     public int getMatchCount() {
         return matchCount;
     }

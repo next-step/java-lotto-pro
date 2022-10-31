@@ -15,7 +15,6 @@ public class LottoCalculator {
         return money.quotient(LOTTO_MONEY);
     }
 
-
     public static int winningCount(WinningLotto winningLotto, Lottos lottos, Rank rank) {
         return (int) lottos.getLottos()
                 .stream()
@@ -29,9 +28,9 @@ public class LottoCalculator {
     }
 
     public static Money winningTotalMoney(WinningLotto winningLotto, Lottos lottos) {
-        return lottos.getLottos()
+        return new Money(lottos.getLottos()
                 .stream()
-                .map(lotto -> winningLotto.match(lotto).money())
-                .reduce(new Money(0), Money::sum);
+                .mapToLong(lotto -> winningLotto.match(lotto).getMoney())
+                .sum());
     }
 }
