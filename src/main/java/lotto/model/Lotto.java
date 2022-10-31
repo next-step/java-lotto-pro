@@ -10,9 +10,15 @@ public class Lotto {
 	private final static int SIZE_OF_LOTTO = 6;
 
 	private final Set<LottoNumber> numbers;
+	private final LottoType type;
 
 	public Lotto(final Collection<LottoNumber> numbers) {
+		this(numbers, LottoType.AUTO);
+	}
+
+	public Lotto(final Collection<LottoNumber> numbers, final LottoType type){
 		this.numbers = new TreeSet<>(numbers);
+		this.type = type;
 		validate();
 	}
 
@@ -36,21 +42,23 @@ public class Lotto {
 		return numbers.contains(number);
 	}
 
+	public LottoType getType(){
+		return type;
+	}
+
 	@Override
 	public boolean equals(final Object o) {
-		if (this == o) {
+		if (this == o)
 			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
+		if (o == null || getClass() != o.getClass())
 			return false;
-		}
 		final Lotto lotto = (Lotto)o;
-		return Objects.equals(numbers, lotto.numbers);
+		return Objects.equals(numbers, lotto.numbers) && type == lotto.type;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(numbers);
+		return Objects.hash(numbers, type);
 	}
 
 	@Override
