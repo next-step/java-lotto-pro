@@ -31,6 +31,4 @@ class LottoResultTest {
         Assertions.assertThat(lottoResult.lottoProfitPercent(lottoTickets.ticketListPrice())).isEqualTo(2000000.0);
     }
 
-
-
 }

@@ -41,7 +41,6 @@ public class LottoMoney {
         }
     }
 
-
     public int getValidLottoPurchaseCount(String lottoPurchaseCount) {
         int count = convertToInt(lottoPurchaseCount);
         validPositiveLottoTicketCount(count);

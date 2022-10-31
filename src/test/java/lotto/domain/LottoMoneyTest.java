@@ -5,11 +5,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@DisplayName("로또 금액 테스트")
 class LottoMoneyTest {
 
     @DisplayName("로또 구매 실패 확인")
@@ -34,5 +33,6 @@ class LottoMoneyTest {
     void check_the_number_of_lottery_purchases(String input, int expect) {
         assertThat(new LottoMoney(input).getTicketCount()).isEqualTo(expect);
     }
+
 }
 

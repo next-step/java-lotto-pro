@@ -18,7 +18,6 @@ public class ResultView {
     private static final String LOSS = "손해";
     private static final String SPACE = " ";
 
-
     private ResultView() {
 
     }
@@ -30,6 +29,7 @@ public class ResultView {
     }
 
     public static void winningResult(LottoResult lottoResult) {
+        System.out.println();
         System.out.println(WINNING_STATISTICS);
         System.out.println(DASH);
         HashMap<LottoRank, Integer> lottoResultMap = lottoResult.getLottoResultMap();

@@ -14,11 +14,11 @@ public class LottoTickets {
     }
 
     public int ticketCount() {
-        return this.lottoTicketList.size();
+        return lottoTicketList.size();
     }
 
     public int ticketListPrice() {
-        return this.lottoTicketList.size() * LOTTO_PRICE;
+        return lottoTicketList.size() * LOTTO_PRICE;
     }
 
     public void lottoWinningConfirm(WinningLottoNumbers winningLottoNumber, LottoResult lottoResult) {
@@ -26,6 +26,10 @@ public class LottoTickets {
             lottoTicket.lottoWinningConfirm(winningLottoNumber);
             lottoResult.increaseRankCount(lottoTicket.getLottoRankResult());
         });
+    }
+
+    public int autoTicketCount(int customTicketCount) {
+        return lottoTicketList.size() - customTicketCount;
     }
 
     @Override

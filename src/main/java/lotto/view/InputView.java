@@ -1,8 +1,6 @@
 package lotto.view;
 
-import lotto.domain.CustomLottoGenerator;
-import lotto.domain.LottoGenerator;
-import lotto.domain.LottoMoney;
+import lotto.domain.*;
 
 import java.util.Scanner;
 
@@ -14,8 +12,8 @@ public class InputView {
     private static final String ENTER_CUSTOM_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String ENTER_CUSTOM_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String REMAIN_CUSTOM_LOTTO_COUNT = "[남은 수동 로또 입력 회수(%d/%d)]";
-    private static final Scanner SCANNER = new Scanner(System.in);
     private static final String ERROR_PREFIX = "[ERROR] %s";
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     private InputView() {
 
@@ -76,7 +74,6 @@ public class InputView {
         System.out.println(ENTER_CUSTOM_LOTTO_NUMBER);
     }
 
-
     public static LottoGenerator getCustomLottoNumbers(int count, int total) {
         try {
             LottoGenerator lottoGeneratorList = new CustomLottoGenerator(SCANNER.nextLine());
@@ -86,4 +83,16 @@ public class InputView {
             return getCustomLottoNumbers(count, total);
         }
     }
+
+    public static WinningLottoNumbers getWinningNumbers() {
+        try {
+            String winningNumber = InputView.getLastWeekWinningNumber();
+            LottoNumber bonusNumber = new LottoNumber(InputView.getBonusNumber());
+            return new WinningLottoNumbers(winningNumber, bonusNumber);
+        } catch (Exception e) {
+            System.out.println(String.format(ERROR_PREFIX, e.getMessage()));
+            return getWinningNumbers();
+        }
+    }
+
 }

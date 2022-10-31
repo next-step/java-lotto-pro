@@ -2,9 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
-import static lotto.common.ConstValue.LOTTO_PRICE;
 
 public class LottoGame {
 

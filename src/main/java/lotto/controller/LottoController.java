@@ -42,16 +42,11 @@ public class LottoController {
         return lottoGeneratorList;
     }
 
-    private void buyLotto(LottoMoney lottoMoney, int customLottoTicketCount, List<LottoGenerator> lottoGeneratorList) {
+    private void buyLotto(LottoMoney lottoMoney, int customTicketCount, List<LottoGenerator> lottoGeneratorList) {
         LottoTickets lottoTickets = lottoGame.buy(lottoMoney, lottoGeneratorList);
-
-        ResultView.lottoPurchase(customLottoTicketCount, lottoTickets.ticketCount() - customLottoTicketCount, lottoTickets.toString());
-
-        String winningNumber = InputView.getLastWeekWinningNumber();
-        LottoNumber bonusNumber = new LottoNumber(InputView.getBonusNumber());
-        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningNumber, bonusNumber);
-
-        lottoGame.makeLottoResult(winningLottoNumbers, lottoTickets);
+        ResultView.lottoPurchase(customTicketCount, lottoTickets.autoTicketCount(customTicketCount), lottoTickets.toString());
+        WinningLottoNumbers winningNumbers = InputView.getWinningNumbers();
+        lottoGame.makeLottoResult(winningNumbers, lottoTickets);
     }
 
 }
