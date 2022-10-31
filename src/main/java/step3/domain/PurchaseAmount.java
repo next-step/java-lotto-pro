@@ -10,6 +10,10 @@ public class PurchaseAmount {
         this.purchaseAmount = purchaseAmount;
     }
 
+    public int getLottoTicketCount() {
+        return purchaseAmount / LOTTO_TICKET_PRICE;
+    }
+
     private void validatePurchaseAmount(int purchaseAmount) {
         if (purchaseAmount < LOTTO_TICKET_PRICE) {
             throw new IllegalArgumentException(EXCEPTION_MESSAGE_FOR_MINIMUM_PURCHASE_AMOUNT);
