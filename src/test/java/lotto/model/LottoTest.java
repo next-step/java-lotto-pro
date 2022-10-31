@@ -41,7 +41,7 @@ class LottoTest {
 	}
 
 	@Test
-	void 로또에서_타입을_가짐(){
+	void 로또에서_타입을_가짐() {
 		Lotto lotto = new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 6), LottoType.AUTO);
 		assertThat(lotto)
 			.isNotEqualTo(new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 6), LottoType.MANUAL))
@@ -49,7 +49,7 @@ class LottoTest {
 	}
 
 	@Test
-	void 로또의_타입_확인(){
+	void 로또의_타입_확인() {
 		Lotto lotto = new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 6), LottoType.AUTO);
 		assertThat(lotto.isTypeOf(LottoType.AUTO)).isTrue();
 	}

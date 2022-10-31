@@ -20,11 +20,11 @@ public class Money {
 		return this.money / Lotto.LOTTO_PRICE.money;
 	}
 
-	public Money minus(final Money otherMoney){
+	public Money minus(final Money otherMoney) {
 		return new Money(this.money - otherMoney.money);
 	}
 
-	public Money multiply(final int amount){
+	public Money multiply(final int amount) {
 		return new Money(this.money * amount);
 	}
 
