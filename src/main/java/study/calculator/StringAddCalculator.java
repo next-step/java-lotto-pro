@@ -6,6 +6,8 @@ import study.util.StringUtil;
 
 public class StringAddCalculator {
 
+    private StringAddCalculator() {}
+
     public static int splitAndSum(String str) {
         if(StringUtil.isEmpty(str)) {
             return NumberUtil.INIT_ZERO;

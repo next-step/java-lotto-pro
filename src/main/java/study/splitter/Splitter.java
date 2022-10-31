@@ -11,6 +11,8 @@ public class Splitter {
     private static final int CUSTOM_DELIMITER_GROUP = 1;
     private static final int CUSTOM_DELIMITER_NUMBERS_GROUP = 2;
 
+    private Splitter() {}
+
     public static String[] split(String str) {
         if(useCustomDelimiter(str)) {
             return splitCustom(str);
