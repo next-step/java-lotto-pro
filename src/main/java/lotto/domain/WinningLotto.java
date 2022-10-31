@@ -5,10 +5,14 @@ public class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonusLottoNumber;
 
-    public WinningLotto(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+    private WinningLotto(Lotto winningLotto, LottoNumber bonusLottoNumber) {
         validateDuplicatedLottoNumber(winningLotto, bonusLottoNumber);
         this.winningLotto = winningLotto;
         this.bonusLottoNumber = bonusLottoNumber;
+    }
+
+    public static WinningLotto of(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+        return new WinningLotto(winningLotto, bonusLottoNumber);
     }
 
     public Rank match(Lotto lotto) {

@@ -22,7 +22,7 @@ public class LottoInput {
         try {
             Lotto lotto = inputLotto();
             LottoNumber bonusLottoNumber = inputBonusLottoNumber();
-            return new WinningLotto(lotto, bonusLottoNumber);
+            return WinningLotto.of(lotto, bonusLottoNumber);
         } catch (IllegalArgumentException e) {
             OutputConsole.out(e.getMessage());
             return inputWinningLotto();
