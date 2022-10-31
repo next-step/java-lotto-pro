@@ -22,4 +22,12 @@ class DelimitersTest {
         delimiters.add(";");
         assertThat(delimiters.getDelimiters()).containsExactly(":", ";", ",");
     }
+
+    @DisplayName("중복된 구분자를 추가하지 않는다.")
+    @Test
+    void duplicate() {
+        Delimiters delimiters = new Delimiters();
+        delimiters.add(":");
+        assertThat(delimiters.getDelimiters()).containsExactly(":", ",");
+    }
 }
