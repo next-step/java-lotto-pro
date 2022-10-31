@@ -1,6 +1,8 @@
 package step3.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoWinningMoney {
@@ -13,22 +15,27 @@ public class LottoWinningMoney {
     public static final int FIVE_MONEY = 1500000;
     public static final int SIX_MONEY = 2000000000;
     private Map<Integer, Integer> winningMoneyTable;
-    public LottoWinningMoney(){
+    public LottoWinningMoney() {
         winningMoneyTable = new HashMap<>();
         winningMoneyTable.put(THREE, THREE_MONEY);
         winningMoneyTable.put(FOUR, FOUR_MONEY);
         winningMoneyTable.put(FIVE, FIVE_MONEY);
         winningMoneyTable.put(SIX, SIX_MONEY);
     }
-    public int calculateWinningMoney(LottoResult result) {
+
+    public int calculateWinningMoney(Map<Integer, List<Lotto>> result) {
         int money = 0;
         for (Integer containCount : winningMoneyTable.keySet()) {
-            money += result.getResultCount(containCount) * getWinningMoney(containCount);
+            money += result.getOrDefault(containCount, new ArrayList<>()).size() * getWinningMoney(containCount);
         }
         return money;
     }
 
     public int getWinningMoney(int containCount){
         return winningMoneyTable.get(containCount);
+    }
+
+    public Map<Integer, Integer> getWinningMoneyTable() {
+        return winningMoneyTable;
     }
 }

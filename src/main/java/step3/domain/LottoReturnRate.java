@@ -9,7 +9,7 @@ public class LottoReturnRate {
     public LottoReturnRate(double returnRate){
         this.returnRate = returnRate;
     }
-    public void calculateReturnRate(int winningMoney, int payment) {
+    public LottoReturnRate(int winningMoney, int payment) {
         validatePayment(payment);
         returnRate = winningMoney / (double)payment ;
     }

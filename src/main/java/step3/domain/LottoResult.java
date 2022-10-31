@@ -9,12 +9,15 @@ public class LottoResult {
     public static final int MIN_CONTAIN_COUNT = 3;
     public static final int ZERO = 0;
     private Map<Integer, List<Lotto>> result;
+    private LottoWinningMoney lottoWinningMoney;
 
     public LottoResult(){
         result = new HashMap<>();
+        lottoWinningMoney = new LottoWinningMoney();
     }
     public LottoResult(HashMap<Integer, List<Lotto>> result){
         this.result = result;
+        lottoWinningMoney = new LottoWinningMoney();
     }
     public void addLottoResult(int containNumberCount, Lotto buy) {
         if(isValidateMinContainCount(containNumberCount)){
@@ -40,5 +43,13 @@ public class LottoResult {
 
     private boolean isResultNull(int containNumberCount){
         return result.get(containNumberCount)==null;
+    }
+
+    public int calculateWinningMoney() {
+        return lottoWinningMoney.calculateWinningMoney(result);
+    }
+
+    public Map<Integer, Integer> getWinningMoneyTable() {
+        return lottoWinningMoney.getWinningMoneyTable();
     }
 }
