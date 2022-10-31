@@ -5,8 +5,8 @@ import step3.model.LottoGenerator;
 
 import java.util.Scanner;
 
-import static step3.constant.Message.LAST_LOTTO_NUMBERS_INPUT_MESSAGE;
-import static step3.constant.Message.TOTAL_LOTTO_PRICE_INPUT_MESSAGE;
+import static step3.constant.Message.*;
+
 public class InputView {
     private final static Scanner scanner = new Scanner(System.in);
     public static void inputPurchasePrice(LottoGenerator lottoGenerator) {
@@ -17,5 +17,10 @@ public class InputView {
     public static void inputLastWeekLottoNumbers(LottoCalculator calculator) {
         System.out.println(LAST_LOTTO_NUMBERS_INPUT_MESSAGE);
         calculator.setLastWeekLottoNumbers(scanner.nextLine());
+    }
+
+    public static void inputLastWeekBonusNumber(LottoCalculator calculator) {
+        System.out.println(LAST_BONUS_NUMBER_INPUT_MESSAGE);
+        calculator.setLastWeekBonusNumber(scanner.nextLine());
     }
 }

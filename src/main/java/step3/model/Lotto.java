@@ -6,12 +6,17 @@ import java.util.List;
 
 import static step3.constant.Constant.*;
 public class Lotto {
-
     private List<LottoNumber> lottoNumbers;
+
+    private LottoNumber bonusNumber;
 
     public Lotto() {
         lottoNumbers = generateRandomNumbers();
     }
+
+    public Lotto(List<LottoNumber> numbers) { lottoNumbers = numbers; }
+
+    public Lotto(int number) { bonusNumber = new LottoNumber(number); }
 
     public Lotto(String[] numbers) {
         List<LottoNumber> list = new ArrayList<>();
@@ -39,5 +44,9 @@ public class Lotto {
             numbers.add(new LottoNumber(i));
         }
         return numbers;
+    }
+
+    public boolean isContain(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 }

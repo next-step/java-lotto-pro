@@ -10,23 +10,27 @@ import static step3.constant.Message.SMAE_LOTTO_NUMBER;
 import static step3.constant.Message.UNVALID_LOTTO_NUMBER_LENGTH;
 import static step3.constant.WinnerRule.rules;
 public class LottoCalculator {
-    private static List<LottoNumber> lastWeekWinner;
+
+    private static Lotto lastWeekWinner;
     private static List<Lotto> purchasedLottos;
     private static LottoResult lottoResult;
 
-    private static LottoNumber bonusNumber;
 
     public LottoCalculator() {
-        this.lastWeekWinner = new ArrayList<>();
+        this.lastWeekWinner = new Lotto();
         this.lottoResult = new LottoResult();
     }
-    public LottoCalculator(List<LottoNumber> lastWeekWinner) {
+    public LottoCalculator(Lotto lastWeekWinner) {
         this.lastWeekWinner = lastWeekWinner;
     }
 
     public void setLastWeekLottoNumbers(String beforeNumbers) {
         String[] afterNumbers = validateLastWeekWinner(beforeNumbers);
-        lastWeekWinner = new Lotto(afterNumbers).getNumbers();
+        lastWeekWinner = new Lotto(afterNumbers);
+    }
+
+    public void setLastWeekBonusNumber(String bonusNumber) {
+        lastWeekWinner = new Lotto(Integer.parseInt(bonusNumber));
     }
 
     public void calculateWinnerStatistics(Lottos lottos) {
@@ -50,7 +54,7 @@ public class LottoCalculator {
     }
 
     private int isContain(LottoNumber lottoNumber) {
-        return lastWeekWinner.contains(lottoNumber) ? ONE : ZERO;
+        return lastWeekWinner.isContain(lottoNumber) ? ONE : ZERO;
     }
 
     public String[] validateLastWeekWinner(String beforeNumbers) {
@@ -99,4 +103,6 @@ public class LottoCalculator {
                 .append(lottoResult.getResultValue(winnerCount))
                 .append("개").toString();
     }
+
+
 }

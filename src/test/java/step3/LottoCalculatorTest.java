@@ -19,7 +19,7 @@ public class LottoCalculatorTest {
 
     @BeforeEach
     void setUp() {
-        lottoCalculator = new LottoCalculator(testLastWeek());
+        lottoCalculator = new LottoCalculator(new Lotto(testLastWeek()));
     }
 
     @Test
