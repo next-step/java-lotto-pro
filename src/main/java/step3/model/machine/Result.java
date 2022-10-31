@@ -35,4 +35,8 @@ public enum Result {
         return matchResults.getOrDefault(match, NO_PRIZE);
     }
 
+    @Override
+    public String toString() {
+        return String.format("%d개 일치 (%d원)- ", match, prize);
+    }
 }

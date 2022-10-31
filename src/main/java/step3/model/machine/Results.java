@@ -1,9 +1,8 @@
 package step3.model.machine;
 
 import java.util.LinkedHashMap;
-import java.util.Objects;
-import step3.model.value.Rule;
-import step3.view.OutputView;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Results {
 
@@ -16,47 +15,25 @@ public class Results {
         }
     }
 
-    public void recordResult(Result result) {
-        lottoResultMap.put(result, lottoResultMap.get(result) + 1);
-    }
+    public void recordResult(List<Integer> matchCounts) {
+        matchCounts.stream().map(Result::getMatchResult).forEach(
+               result ->  lottoResultMap.put(result, lottoResultMap.get(result)+1)
+        );
 
-    public Double evaluateResult(int ticketCount, long winningPrize) {
-        if (ticketCount == 0) {
-            return 0.0;
-        }
-        long totalPrice = ticketCount * Rule.TICKET_PRICE;
-        return (double) winningPrize / totalPrice;
     }
-
     private long getTotalPrize(Result result) {
-        return result.getTotalPrize(lottoResultMap.get(result));
+        int winningCount = lottoResultMap.get(result);
+        return result.getTotalPrize(winningCount);
     }
-
     public long getWinningPrize() {
-        return lottoResultMap.keySet().stream().mapToLong(result -> getTotalPrize(result)).sum();
-    }
-
-    public void printResults() {
-        lottoResultMap.keySet().stream()
-                .filter(result -> result.isRewarded())
-                .forEach(result -> OutputView.printResult(
-                        result.toString(), Integer.toString(lottoResultMap.get(result))));
+        return lottoResultMap.keySet().stream().mapToLong(this::getTotalPrize).sum();
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Results)) {
-            return false;
-        }
-        Results results = (Results) o;
-        return Objects.equals(lottoResultMap, results.lottoResultMap);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoResultMap);
+    public String toString() {
+        return String.join("", lottoResultMap.keySet().stream()
+                .filter(Result::isRewarded)
+                .map(result -> result.toString()+lottoResultMap.get(result)+"개"+"\n")
+                .collect(Collectors.toList()));
     }
 }
