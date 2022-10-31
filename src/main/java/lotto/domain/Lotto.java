@@ -38,7 +38,7 @@ public class Lotto {
         int buyCount = money.amount / TICKET_VALUE;
         tickets = new Tickets();
 
-        IntStream.range(Constants.ZERO, buyCount).forEach(i -> {
+        IntStream.rangeClosed(1, buyCount).forEach(i -> {
             tickets.addTicket(new Ticket());
         });
     }
