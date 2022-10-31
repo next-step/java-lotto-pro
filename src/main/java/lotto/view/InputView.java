@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.List;
 import java.util.Scanner;
 import lotto.constant.LottoConstant;
-import lotto.domain.lotto.WinningLottos;
+import lotto.domain.lotto.WinningLotto;
 import lotto.message.ErrorMessages;
 import lotto.message.LottoMessage;
 import lotto.util.LottoInputValidator;
@@ -28,9 +28,9 @@ public class InputView {
         return inputPurchasePrice();
     }
 
-    public static WinningLottos inputWinningLottos() {
+    public static WinningLotto inputWinningLottos() {
         List<Integer> winningNumbers = inputWinningNumbers();
-        return WinningLottos.of(winningNumbers, inputBonusNumber(winningNumbers));
+        return WinningLotto.of(winningNumbers, inputBonusNumber(winningNumbers));
     }
 
     private static List<Integer> inputWinningNumbers() {

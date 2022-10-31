@@ -8,21 +8,21 @@ import lotto.constant.LottoConstant;
 import lotto.domain.win.WinRanking;
 import lotto.message.ErrorMessages;
 
-public class WinningLottos {
+public class WinningLotto {
     private final List<LottoNumber> winningNumbers;
     private final LottoNumber bonusNumber;
 
-    private WinningLottos(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    private WinningLotto(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLottos of(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    public static WinningLotto of(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         validateBonusNumberNotInWinningNumbers(winningNumbers, bonusNumber);
-        return new WinningLottos(winningNumbers, bonusNumber);
+        return new WinningLotto(winningNumbers, bonusNumber);
     }
 
-    public static WinningLottos of(List<Integer> winningNumbers, int inputBonusNumber) {
+    public static WinningLotto of(List<Integer> winningNumbers, int inputBonusNumber) {
         return of(toWinningNumbers(winningNumbers), LottoNumber.from(inputBonusNumber));
     }
 

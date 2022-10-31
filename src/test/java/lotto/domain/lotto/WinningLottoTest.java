@@ -14,7 +14,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class WinningLottosTest {
+class WinningLottoTest {
 
     private final List<LottoNumber> winningNumbers =
             TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 4, 5, 6)).generate();
@@ -35,7 +35,7 @@ class WinningLottosTest {
     @DisplayName("당첨번호에 보너스 번호가 포함되면 IllegalArgumentException을 던진다.")
     void winningLottoException() {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Assertions.assertThatThrownBy(() -> WinningLottos.of(winningNumbers, 1))
+        Assertions.assertThatThrownBy(() -> WinningLotto.of(winningNumbers, 1))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -43,9 +43,9 @@ class WinningLottosTest {
     @MethodSource(value = "winningCount")
     @DisplayName("당첨등수 별 당첨된 로또 갯수 확인")
     void winResults(WinRanking input, int expected) {
-        WinningLottos winningLottos = WinningLottos.of(winningNumbers, bonusNumber);
+        WinningLotto winningLotto = WinningLotto.of(winningNumbers, bonusNumber);
 
-        Map<WinRanking, Integer> winningCountByWinRanking = winningLottos.winResults(getTestLottos());
+        Map<WinRanking, Integer> winningCountByWinRanking = winningLotto.winResults(getTestLottos());
 
         Assertions.assertThat(winningCountByWinRanking.getOrDefault(input, LottoConstant.EMPTY_WINNING_COUNT))
                 .isEqualTo(expected);
