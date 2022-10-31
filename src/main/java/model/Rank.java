@@ -15,28 +15,20 @@ public class Rank {
     private final static int INIT_MAP_COUNT = 0;
 
     public Rank() {
-        List<LottoRankType> rank = Arrays.asList(RANK_ONE, RANK_TWO, RANK_THREE, RANK_FOUR);
+        List<LottoRankType> rank = Arrays.asList(RANK_FIVE, RANK_FOUR, RANK_THREE, RANK_TWO, RANK_ONE);
         this.countRank = new TreeMap<>();
 
-        for (LottoRankType lottoRankType : rank) {
-            countRank.put(lottoRankType, INIT_MAP_COUNT);
-        }
+        rank.forEach(lottoRankType -> countRank.put(lottoRankType, INIT_MAP_COUNT));
     }
 
-    public void stats(Lottos lottos, List<Integer> winNumber) {
-        for (LottoNumber lotto : lottos.getLotto()) {
-            int winNumberCount = lotto.getWinNumberCount(winNumber);
-
-            LottoRankType lottoRankType = convertRank(winNumberCount);
-
-            addCountRank(lottoRankType);
-        }
+    public void stats(Lottos lottos, List<Integer> winNumber, int bonusNumber) {
+        List<LottoRankType> ranks = lottos.getLottoRank(winNumber, bonusNumber);
+        ranks.forEach(this::addCountRank);
     }
 
     private void addCountRank(LottoRankType convertLottoRankType) {
-        for (LottoRankType rankType : countRank.keySet()) {
-            countUpIfSameRankType(rankType, convertLottoRankType);
-        }
+        countRank.keySet()
+                .forEach(rankType -> countUpIfSameRankType(rankType, convertLottoRankType));
     }
 
     private void countUpIfSameRankType(LottoRankType rankType, LottoRankType convertLottoRankType) {
