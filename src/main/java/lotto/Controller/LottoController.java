@@ -15,6 +15,7 @@ public class LottoController {
         LottoOutPutView.writeBuyLottos(lottos);
         Lotto winLotto = readWinLotto(LottoInputView.readLottoWinNumber());
         LottoResult result = new LottoResult(lottos, winLotto);
+        LottoOutPutView.writeWinResult(result);
     }
 
     private static Lotto readWinLotto(String lottoWinNumber) {
