@@ -45,6 +45,8 @@ public class LottoResult {
       value++;
 
       resultMap.put(rankCode, value);
+
+      return;
     }
 
     resultMap.put(rankCode, 1);

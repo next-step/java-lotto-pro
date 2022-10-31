@@ -15,6 +15,7 @@ public class LottoResultTest {
     LottoList lottoList = new LottoList(
         Arrays.asList(
             Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+            Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
             Lotto.createManualLotto(Arrays.asList(3, 11, 15, 18, 22, 32)),
             Lotto.createManualLotto(Arrays.asList(4, 24, 32, 37, 42, 45))
         )
@@ -28,7 +29,7 @@ public class LottoResultTest {
     System.out.println(result.get(0));
 
     //then
-    assertThat(result.contains("5개 일치 (1500000원)- 1개")).isTrue();
+    assertThat(result.contains("5개 일치 (1500000원)- 2개")).isTrue();
   }
 
   @Test
