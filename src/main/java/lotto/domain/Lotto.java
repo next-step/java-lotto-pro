@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Lotto {
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private static final int LOTTO_NUMBERS_SIZE = 6;
 
     public Lotto(List<Integer> numbers) {
         validateLottoSize(numbers);
@@ -20,7 +21,7 @@ public class Lotto {
     }
 
     private void validateLottoSize(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
+        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(LottoMessage.ERROR_LOTTO_SIZE);
         }
     }

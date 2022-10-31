@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.constant.LottoMessage;
 
 public class Money {
+    private static final int LOTTO_PRICE = 1000;
     private final int price;
     public Money(int price) {
         this.price = validateMoney(price);
@@ -21,13 +22,13 @@ public class Money {
     }
 
     private void validateMinLottoMoney(int price) {
-        if(price < 1000) {
+        if(price < LOTTO_PRICE) {
             throw new IllegalArgumentException(LottoMessage.ERROR_MONEY_MIN_PRICE);
         }
     }
 
     public int lottoCount() {
-        return price / 1000;
+        return price / LOTTO_PRICE;
     }
 
     public int getPrice() {

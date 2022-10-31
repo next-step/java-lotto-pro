@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
+    private static final int LOTTO_PRICE = 1000;
     Map<RewardType, Integer> rewardMap = new HashMap<>();
     int totalReward;
     double totalProfit;
@@ -14,7 +15,7 @@ public class LottoResult {
     }
 
     private void calculateProfit(int lottoSize) {
-        totalProfit = totalReward / (lottoSize * 1000);
+        totalProfit = totalReward / (lottoSize * LOTTO_PRICE);
     }
 
     private void calculateTotalReward() {

@@ -5,10 +5,13 @@ import lotto.constant.LottoMessage;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+
+    private static final int LOTTO_NUMBER_MIN = 1;
+    private static final int LOTTO_NUMBER_MAX = 45;
     private final int lottoNumber;
 
     public LottoNumber(int num) {
-        if (num < 1 || num > 45) {
+        if (num < LOTTO_NUMBER_MIN || num > LOTTO_NUMBER_MAX) {
             throw new IllegalArgumentException(LottoMessage.ERROR_LOTTO_NUMBER_RANGE);
         }
         this.lottoNumber = num;
