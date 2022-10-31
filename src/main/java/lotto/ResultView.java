@@ -22,7 +22,7 @@ import static lotto.Constant.RESULT_WINNING_STATISTICS;
 
 import java.util.List;
 
-class ResultView {
+public class ResultView {
     void printResultPay(int purchaseCount) {
         System.out.println(purchaseCount + RESULT_BOUGHT_SOME);
     }

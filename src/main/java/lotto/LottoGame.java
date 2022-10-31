@@ -10,7 +10,7 @@ import static lotto.Constant.LOTTO_PRICE;
 import java.util.ArrayList;
 import java.util.List;
 
-class LottoGame {
+public class LottoGame {
     private final LottoNumberGenerator lottoNumberGenerator;
     private final int money;
 

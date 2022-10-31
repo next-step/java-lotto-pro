@@ -13,7 +13,7 @@ import static lotto.Constant.REGEX_ONLY_NUMBER;
 
 import java.util.regex.Pattern;
 
-class Validate {
+public class Validate {
     static int validatePay(int input) {
         if (input < LOTTO_PRICE) {
             throw new IllegalArgumentException(ERROR_LOTTO_COST);

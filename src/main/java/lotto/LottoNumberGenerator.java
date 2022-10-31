@@ -7,6 +7,6 @@ package lotto;
 
 import java.util.List;
 
-interface LottoNumberGenerator {
+public interface LottoNumberGenerator {
     List<Integer> generateSixNumbers();
 }

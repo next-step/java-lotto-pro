@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class Prize {
+public class Prize {
     private final Map<Integer, Integer> prize = new HashMap<>();
     private final List<Integer> winningNumbers;
 

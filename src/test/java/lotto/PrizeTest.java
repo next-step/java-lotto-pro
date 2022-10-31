@@ -10,7 +10,7 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class PrizeTest {
+public class PrizeTest {
     private final List<LottoNumber> fakePurchaseLottoNumbers = new ArrayList<>();
 
     @BeforeEach

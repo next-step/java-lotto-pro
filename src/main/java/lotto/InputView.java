@@ -11,7 +11,7 @@ import static lotto.Constant.INPUT_WINNING_NUMBER_LAST_WEEK;
 import java.util.List;
 import java.util.Scanner;
 
-class InputView {
+public class InputView {
     private final Scanner scanner = new Scanner(System.in);
     private final Spliter spliter = new Spliter();
 

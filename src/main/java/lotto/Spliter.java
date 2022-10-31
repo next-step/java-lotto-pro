@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-class Spliter {
+public class Spliter {
     public List<Integer> split(String input) {
         StringTokenizer token = new StringTokenizer(input, DELIMITER);
         List<Integer> winningNumbers = new ArrayList<>();

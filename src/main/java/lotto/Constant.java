@@ -5,7 +5,7 @@
  */
 package lotto;
 
-class Constant {
+public class Constant {
     public static final int LOTTO_PRICE = 1000;
     public static final String REGEX_ONLY_NUMBER = "^[0-9]*$";
     public static final String INPUT_PAY_MONEY = "구입금액을 입력해 주세요.";

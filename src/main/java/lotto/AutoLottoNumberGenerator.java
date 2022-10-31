@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-class AutoLottoNumberGenerator implements LottoNumberGenerator {
+public class AutoLottoNumberGenerator implements LottoNumberGenerator {
     List<Integer> lottoNumbers = new ArrayList<>();
 
     AutoLottoNumberGenerator() {
