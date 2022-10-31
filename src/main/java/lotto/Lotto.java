@@ -57,4 +57,15 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
+    @Override
+    public String toString() {
+        String[] toString = new String[lottoNumbers.size()];
+        for (int i = 0; i < toString.length; i++) {
+            toString[i] = lottoNumbers.get(i).toString();
+        }
+        return "[" +
+            String.join(",", toString) +
+            "]";
+    }
 }
