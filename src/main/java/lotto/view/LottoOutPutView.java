@@ -19,5 +19,8 @@ public class LottoOutPutView {
         System.out.printf(LottoMessage.OUTPUT_REWARD_RESULT,
                 result.getRewardMapCount(RewardType.FOURTH),result.getRewardMapCount(RewardType.THIRD),result.getRewardMapCount(RewardType.SECOND),result.getRewardMapCount(RewardType.FIRST));
         System.out.printf(LottoMessage.OUTPUT_PROFIT_RESULT, result.getTotalProfit());
+        if (result.getTotalProfit() < 1) {
+            System.out.println(LottoMessage.OUTPUT_PROFIT_UNDER);
+        }
     }
 }

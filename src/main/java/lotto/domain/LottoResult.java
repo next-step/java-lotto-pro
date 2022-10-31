@@ -15,7 +15,7 @@ public class LottoResult {
     }
 
     private void calculateProfit(int lottoSize) {
-        totalProfit = totalReward / (lottoSize * LOTTO_PRICE);
+        totalProfit = (double) totalReward / (lottoSize * LOTTO_PRICE);
     }
 
     private void calculateTotalReward() {
