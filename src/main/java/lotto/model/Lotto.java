@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Lotto {
+	public final static Money LOTTO_PRICE = new Money(1000L);
 	private final static int SIZE_OF_LOTTO = 6;
 
 	private final Set<LottoNumber> numbers;
@@ -27,7 +28,7 @@ public class Lotto {
 			.count();
 	}
 
-	public boolean matchBonus(final LottoNumber number){
+	public boolean matchBonus(final LottoNumber number) {
 		return numbers.contains(number);
 	}
 

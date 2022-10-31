@@ -16,8 +16,8 @@ public class Money {
 		this.money = money;
 	}
 
-	public long calculateQuantity(final Money price) {
-		return this.money / price.money;
+	public long calculateQuantity() {
+		return this.money / Lotto.LOTTO_PRICE.money;
 	}
 
 	public float ratio(final Money income) {
