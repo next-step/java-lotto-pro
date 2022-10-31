@@ -21,8 +21,8 @@ class LottosTest {
 			)
 		);
 
-		assertThat(lottos.size(LottoType.AUTO)).isEqualTo(4L);
-		assertThat(lottos.size(LottoType.MANUAL)).isEqualTo(2L);
+		assertThat(lottos.countByType(LottoType.AUTO)).isEqualTo(4L);
+		assertThat(lottos.countByType(LottoType.MANUAL)).isEqualTo(2L);
 	}
 
 }
