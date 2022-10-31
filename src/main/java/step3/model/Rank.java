@@ -1,6 +1,7 @@
 package step3.model;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
@@ -32,6 +33,14 @@ public enum Rank {
             return Rank.TWO;
         }
         return rank;
+    }
+
+    public static Rank valueOf(BiFunction<Integer, Boolean, Boolean> operation, boolean isBonus) {
+        Rank frank = Arrays.stream(values())
+                .filter(rank -> operation.apply(rank.matchCount, isBonus))
+                .findAny()
+                .orElse(MISS);
+        return frank;
     }
 
     public int getMatchCount() {

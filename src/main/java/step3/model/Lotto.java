@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BiFunction;
 
 public class Lotto {
 
@@ -31,28 +32,31 @@ public class Lotto {
         if (distinctNumbers.size() != NUMBER_SIZE) throw new IllegalArgumentException(NUMBER_SIZE_MESSAGE);
     }
 
-    public Rank getRank(List<LottoNumber> winningNumbers) {
-        validateNumbers(winningNumbers);
+    public Rank getRank(Lotto winningLotto) {
+
         int count = (int) numbers
                 .stream()
-                .filter(winningNumbers::contains)
+                .filter(winningLotto::contains)
                 .count();
         return Rank.valueOf(count);
     }
 
-    public Rank getRank(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    public Rank getRank(WinningLotto winningLotto) {
+
         int count = (int) numbers
                 .stream()
-                .filter(winningNumbers::contains)
+                .filter(winningLotto::contains)
                 .count();
-        boolean isBonus = numbers.contains(bonusNumber);
-        return Rank.valueOf(count, isBonus);
+        boolean isBonus = winningLotto.isMatchBonusNumber(numbers);
+
+        Rank getRank = Rank.valueOf((number, isBonubs) -> (number == count && isBonus), isBonus);
+        return getRank;
     }
 
     public boolean contains(LottoNumber number) {
-        return numbers.stream().filter(lottoNumber -> lottoNumber.equals(number))
+        return numbers.stream()
+                .filter(lottoNumber -> lottoNumber.equals(number))
                 .count() > 0;
-
     }
 
 }

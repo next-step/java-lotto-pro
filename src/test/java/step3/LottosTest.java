@@ -34,7 +34,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 43, 44, 45));
+        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(new Lotto(getLottoNumbers(1, 2, 3, 43, 44, 45)));
 
         //then
         assertThat(rankStats.get(Rank.FIFTH)).isEqualTo(3);
@@ -51,7 +51,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 43, 15, 45));
+        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(new Lotto(getLottoNumbers(1, 2, 3, 43, 15, 45)));
 
         //then
         assertThat(rankStats.get(Rank.FOURTH)).isEqualTo(3);
@@ -68,7 +68,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 43, 44, 45));
+        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(new Lotto(getLottoNumbers(1, 2, 3, 43, 44, 45)));
 
         //then
         assertThat(rankStats.get(Rank.FIFTH)).isEqualTo(3);
@@ -85,7 +85,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 14, 15, 45),LottoNumber.valueOf(16));
+        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(new WinningLotto(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 45)),LottoNumber.valueOf(16)));
 
         //then
         assertThat(rankStats.get(Rank.TWO)).isEqualTo(1);
@@ -102,7 +102,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 14, 15, 16));
+        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(new WinningLotto(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)),LottoNumber.valueOf(16)));
 
         //then
         assertThat(rankStats.get(Rank.FIRST)).isEqualTo(3);

@@ -107,7 +107,7 @@ public class LottoMachineTest {
                 .collect(Collectors.toList());
 
         //when,then
-        assertThatThrownBy(() -> lottoMachine.getLottoResult(new Lotto(winningNumbers), LottoNumber.valueOf(count)))
+        assertThatThrownBy(() -> lottoMachine.getLottoResult(new WinningLotto(new Lotto(winningNumbers), LottoNumber.valueOf(count))))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("고유한 번호만 허용합니다");
     }

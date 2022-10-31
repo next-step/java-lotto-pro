@@ -98,7 +98,7 @@ public class LottoTest {
 
         //when
         Lotto lotto = new Lotto(numbers);
-        Rank rank = lotto.getRank(getLottoNumbers(1, 2, 3, 11, 12, 13));
+        Rank rank = lotto.getRank(new Lotto(getLottoNumbers(1, 2, 3, 11, 12, 13)));
 
         //then
         assertThat(rank).isEqualTo(Rank.FIFTH);
@@ -113,7 +113,7 @@ public class LottoTest {
                 .collect(Collectors.toList());
         //when
         Lotto lotto = new Lotto(numbers);
-        Rank rank = lotto.getRank(getLottoNumbers(1, 2, 3, 4, 12, 13));
+        Rank rank = lotto.getRank(new Lotto(getLottoNumbers(1, 2, 3, 4, 12, 13)));
 
         //then
         assertThat(rank).isEqualTo(Rank.FOURTH);
@@ -129,7 +129,7 @@ public class LottoTest {
 
         //when
         Lotto lotto = new Lotto(numbers);
-        Rank rank = lotto.getRank(getLottoNumbers(1, 2, 3, 4, 5, 13));
+        Rank rank = lotto.getRank(new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 13)));
 
         //then
         assertThat(rank).isEqualTo(Rank.THIRD);
@@ -145,7 +145,7 @@ public class LottoTest {
 
         //when
         Lotto lotto = new Lotto(numbers);
-        Rank rank = lotto.getRank(getLottoNumbers(1, 2, 3, 4, 5, 6));
+        Rank rank = lotto.getRank(new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 6)));
 
         //then
         assertThat(rank).isEqualTo(Rank.FIRST);
@@ -163,7 +163,7 @@ public class LottoTest {
 
         //when
         Lotto lotto = new Lotto(numbers);
-        Rank rank = lotto.getRank(getLottoNumbers(1, 2, 13, 14, 15, 16));
+        Rank rank = lotto.getRank(new Lotto(getLottoNumbers(1, 2, 13, 14, 15, 16)));
 
         //then
         assertThat(rank).isEqualTo(Rank.MISS);

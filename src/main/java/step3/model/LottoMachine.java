@@ -22,12 +22,12 @@ public class LottoMachine {
     }
 
     public LottoResultDto getLottoResult(Lotto lotto) {
-        Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(lotto.getNumbers());
+        Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(lotto);
         return getLottoResultDto(rankOfLottos);
     }
 
     public LottoResultDto getLottoResult(WinningLotto winningLotto) {
-        Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(lotto.getNumbers(), bonusNumber);
+        Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(winningLotto);
         return getLottoResultDto(rankOfLottos);
     }
 
