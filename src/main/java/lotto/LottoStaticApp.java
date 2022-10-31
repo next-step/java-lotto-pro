@@ -45,7 +45,7 @@ public class LottoStaticApp implements App {
     }
 
     private void printLottoMatchStatistics(LottoMatchType lottoMatchType) {
-        if (lottoMatchType.dontPrint()) {
+        if (lottoMatchType.excludePrintAndMultiply()) {
             return;
         }
         Integer count = countMap.getOrDefault(lottoMatchType, 0);

@@ -16,6 +16,9 @@ public class PayAmount {
     }
 
     public double calculateProfitRate(int sumProfit) {
+        if (sumProfit < 1) {
+            return 0;
+        }
         return (double) sumProfit / this.payAmount;
     }
 }

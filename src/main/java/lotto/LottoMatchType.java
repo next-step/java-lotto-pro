@@ -28,7 +28,7 @@ public enum LottoMatchType {
         return this.matchCount == matchCount;
     }
 
-    public boolean dontPrint() {
+    public boolean excludePrintAndMultiply() {
         return this == OTHER;
     }
 
@@ -41,6 +41,9 @@ public enum LottoMatchType {
     }
 
     public int multiply(Integer count) {
+        if (excludePrintAndMultiply()) {
+            return 0;
+        }
         return this.winningAmount * count;
     }
 }
