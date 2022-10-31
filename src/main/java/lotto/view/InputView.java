@@ -9,6 +9,7 @@ public class InputView {
     private static final String ENTER_PURCHASE_AMOUNT = "구매금액을 입력해 주세요.";
     private static final String ENTER_LAST_WEEK_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String ENTER_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+    private static final String ENTER_CUSTOM_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final Scanner SCANNER = new Scanner(System.in);
 
     private InputView() {
@@ -34,6 +35,11 @@ public class InputView {
             System.out.println(e.getMessage());
             return getLottoPurchasePrice1();
         }
+    }
+
+    public static String getCustomLottoCount() {
+        System.out.println(ENTER_CUSTOM_LOTTO_COUNT);
+        return SCANNER.nextLine();
     }
 
     public static String getLastWeekWinningNumber() {

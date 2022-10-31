@@ -17,8 +17,10 @@ public class LottoGame {
         validLottoPrice(purchasePrice);
         int ticketCount = purchasePrice / LOTTO_PRICE;
 
-        LottoGenerator lottoGenerator = new LottoGenerator();
+        LottoGenerator lottoGenerator = new AutoLottoGenerator();
         List<LottoTicket> lottoTicketList = new ArrayList<>();
+
+
         for (int i = 0; i < ticketCount; i++) {
             lottoTicketList.add(new LottoTicket(lottoGenerator.generateLottoNumber()));
         }
