@@ -13,6 +13,7 @@ import common.utils.IntegerUtils;
 import common.utils.LongUtils;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResults;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RandomLottoNumberGenerator;
@@ -27,7 +28,7 @@ public class LottoController {
         Lottos lottos = createLottos(getMoney());
         Lotto winningLotto = getWinningLotto();
         LottoNumber bonusLottoNumber = getBonusLottoNumber(winningLotto);
-        getLottoResults(lottos, winningLotto, bonusLottoNumber);
+        getLottoResults(lottos.createLottoResults(winningLotto, bonusLottoNumber), lottos.findTotalPrice());
     }
 
     private Money getMoney() {
@@ -69,7 +70,7 @@ public class LottoController {
         }
     }
 
-    private void getLottoResults(Lottos lottos, Lotto winningLotto, LottoNumber bonusLottoNumber) {
-        printLottoResults(lottos.createLottoResults(winningLotto, bonusLottoNumber), lottos.findTotalPrice());
+    private void getLottoResults(LottoResults lottoResults, Money totalMoney) {
+        printLottoResults(lottoResults, totalMoney);
     }
 }
