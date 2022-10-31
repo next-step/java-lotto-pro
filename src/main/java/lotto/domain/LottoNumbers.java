@@ -34,6 +34,10 @@ public class LottoNumbers {
                 .count();
     }
 
+    public boolean isContainNumber(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
     public String history() {
         List<Integer> numberList = this.lottoNumbers.stream()
                 .map(LottoNumber::getNumber)

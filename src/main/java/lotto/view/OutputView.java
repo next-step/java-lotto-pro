@@ -8,11 +8,13 @@ public class OutputView {
     public static final String OUTPUT_MESSAGE_HYPHEN = "---------";
     public static final String ERROR_MESSAGE_MINIMUM_PURCHASE_AMOUNT = "최소 구매 금액은 1000원 입니다.";
     public static final String ERROR_MESSAGE_AMOUNT_UNIT_OF_1000 = "1000 단위로 입력해주세요.";
-    public static final String ERROR_MESSAGE_INPUT_AMOUNT_ONLY_NUMBER = "숫자를 입력해주세요.";
+    public static final String ERROR_MESSAGE_INPUT_ONLY_NUMBER = "숫자를 입력해주세요.";
+    public static final String ERROR_MESSAGE_INPUT_AMOUNT_EXCESS = "최대 구매 금액을 초과했습니다.";
     public static final String ERROR_MESSAGE_LOTTO_NUMBER_1_TO_45 = "로또 번호는 1 ~ 45 사이의 숫자입니다.";
     public static final String ERROR_MESSAGE_LOTTO_NUMBERS_SIZE_IS_6 = "로또 번호는 6개 입니다.";
     public static final String ERROR_MESSAGE_INPUT_MANUAL_LOTTO_NUMBER = "잘못된 입력입니다. 숫자와 ,를 사용해 입력해주세요.";
     public static final String ERROR_MESSAGE_INPUT_MANUAL_NUMBER_DUPLICATE = "중복 된 숫자가 있습니다.";
+    public static final String ERROR_MESSAGE_BONUS_NUMBER_NOT_DUPLICATE_LOTTO_NUMBER = "보너스 번호는 로또 번호와 중복될 수 없습니다.";
 
     private OutputView() {
     }

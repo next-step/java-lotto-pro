@@ -4,12 +4,14 @@ import java.util.Arrays;
 
 public enum WinningRank {
     MISS_MATCH(0, 0, false),
-    MATCH_THREE(3, 5_000, true),
-    MATCH_FOUR(4, 50_000, true),
-    MATCH_FIVE(5, 1_500_000, true),
-    MATCH_SIX(6, 2_000_000_000, true);
+    FIFTH(3, 5_000, true),
+    FOURTH(4, 50_000, true),
+    THIRD(5, 1_500_000, true),
+    SECOND(5, 30_000_000, true),
+    FIRST(6, 2_000_000_000, true);
 
     private static final String PRINT_STATISTICS_FORMAT = "%d개 일치 (%d원)- %d개\n";
+    private static final String PRINT_SECOND_STATISTICS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
     private static final String BLANK_STRING = "";
 
     private final int matchCount;
@@ -34,20 +36,32 @@ public enum WinningRank {
         return isDisplay;
     }
 
-    public static WinningRank valueOf(int matchCount) {
+    public static WinningRank match(int matchCount, boolean matchBonus) {
+        if (isSecondMatchCondition(matchCount, matchBonus)) {
+            return SECOND;
+        }
+
         return Arrays.stream(WinningRank.values())
                 .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
                 .orElse(MISS_MATCH);
     }
 
+    private static boolean isSecondMatchCondition(int matchCount, boolean matchBonus) {
+        return matchBonus && SECOND.matchCount == matchCount;
+    }
+
     public String getStatisticsMessage(Long winningCount) {
         if (this.isDisplay()) {
-            return String.format(PRINT_STATISTICS_FORMAT,
+            return String.format(getStatisticsFormat(),
                     this.getMatchCount(),
                     this.getWinningMoney(),
                     winningCount);
         }
         return BLANK_STRING;
+    }
+
+    private String getStatisticsFormat() {
+        return this == SECOND ? PRINT_SECOND_STATISTICS_FORMAT : PRINT_STATISTICS_FORMAT;
     }
 }

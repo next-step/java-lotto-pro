@@ -2,27 +2,28 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
+import java.util.Collections;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.api.Test;
 
 class WinningRanksTest {
-    @ParameterizedTest
-    @CsvSource(value = {
-            "1, 2, 3, 4, 5, 6/1, 2, 3, 4, 5, 6/2000000000",
-            "1, 2, 3, 4, 5, 6/1, 2, 3, 4, 5, 7/1500000",
-            "1, 2, 3, 4, 5, 6/1, 2, 3, 4, 7, 8/50000",
-            "1, 2, 3, 4, 5, 6/1, 2, 3, 7, 8, 9/5000",
-            "1, 2, 3, 4, 5, 6/1, 2, 7, 8, 9, 10/0",
-            "1, 2, 3, 4, 5, 6/1, 7, 8, 9, 10, 11/0",
-            "1, 2, 3, 4, 5, 6/7, 8, 9, 10, 11, 12/0",
-    }, delimiter = '/')
+    @Test
     @DisplayName("로또 수익률을 구한다")
-    void lotto_calculate_earning_rate(String originNumbers, String winningNumbers, int expect) {
-        LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount("1000");
-        LottoLottery lottoLottery = lottoPurchaseAmount.toLottoLottery(new ManualNumberGenerator(originNumbers));
-        WinningRanks winningRanks = lottoLottery.checkWinningRank(WinningNumbers.of(winningNumbers));
-        assertThat(winningRanks.calculateEarningRatio(lottoPurchaseAmount))
-                .isEqualTo(Math.floor((double) expect / 1000 * 100) / 100.0);
+    void lotto_calculate_earning_rate() {
+        WinningRanks winningRanks = WinningRanks.of(Arrays.asList(WinningRank.FIFTH, WinningRank.FOURTH));
+        assertThat(winningRanks.calculateEarningRatio(new LottoPurchaseAmount("100000")))
+                .isEqualTo(0.55);
+    }
+
+    @Test
+    @DisplayName("당첨 통계를 반환한다")
+    void statistics() {
+        WinningRanks winningRanks = WinningRanks.of(Collections.singletonList(WinningRank.SECOND));
+        assertThat(winningRanks.statistics()).isEqualTo("3개 일치 (5000원)- 0개\n"
+                + "4개 일치 (50000원)- 0개\n"
+                + "5개 일치 (1500000원)- 0개\n"
+                + "5개 일치, 보너스 볼 일치(30000000원)- 1개\n"
+                + "6개 일치 (2000000000원)- 0개\n");
     }
 }

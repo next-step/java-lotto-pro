@@ -18,8 +18,8 @@ public class Lotto {
         LottoLottery lottoLottery = lottoPurchaseAmount.toLottoLottery(new AutoNumberGenerator());
         OutputView.println(lottoLottery.lotteryHistory());
 
-        WinningNumbers winningNumbers = WinningNumbers.of(InputView.inputLastWeeksWinningNumber());
-        WinningRanks winningRanks = lottoLottery.checkWinningRank(winningNumbers);
+        WinningNumbers winningNumbers = WinningNumbers.of(InputView.inputLastWeeksWinningNumber(), InputView.inputBonusNumber());
+        WinningRanks winningRanks = lottoLottery.matchWinningRank(winningNumbers);
         OutputView.printStatistics(winningRanks.statistics());
         OutputView.printEarningRatio(winningRanks.calculateEarningRatio(lottoPurchaseAmount));
     }
