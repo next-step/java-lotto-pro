@@ -3,7 +3,6 @@ package step3.model.machine;
 import java.util.ArrayList;
 import java.util.List;
 import step3.model.lotto.Lotto;
-import step3.model.lotto.LottoList;
 import step3.model.value.Rule;
 
 

@@ -2,17 +2,11 @@ package step3.model.machine;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
-import step3.model.lotto.Lotto;
-import step3.model.lotto.LottoNumber;
 
 class LottoManualGeneratorTest {
     private static LottoManualGenerator lottoManualGenerator = new LottoManualGenerator();

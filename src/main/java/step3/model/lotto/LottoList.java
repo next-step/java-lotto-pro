@@ -1,10 +1,7 @@
 package step3.model.lotto;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
-import step3.model.machine.Results;
-import step3.view.OutputView;
 
 public class LottoList {
 

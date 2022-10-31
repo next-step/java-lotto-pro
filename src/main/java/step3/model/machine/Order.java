@@ -1,7 +1,5 @@
 package step3.model.machine;
 
-import step3.model.value.Rule;
-
 public class Order {
 
     private final int ticketCount;

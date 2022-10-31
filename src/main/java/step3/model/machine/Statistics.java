@@ -1,8 +1,6 @@
 package step3.model.machine;
 
 import step3.model.value.ErrMsg;
-import step3.model.value.Rule;
-
 public class Statistics {
     private final long totalPrice;
     private final long totalPrize;

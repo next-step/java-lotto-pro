@@ -1,7 +1,6 @@
 package step3.model.lotto;
 
 import java.util.Objects;
-import step3.model.util.InputValidation;
 import step3.model.value.ErrMsg;
 import step3.model.value.Rule;
 

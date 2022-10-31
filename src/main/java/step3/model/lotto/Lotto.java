@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import step3.model.machine.Result;
 
 public class Lotto{
     private List<LottoNumber> lotto;
