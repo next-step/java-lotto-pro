@@ -28,12 +28,12 @@ class MoneyTest {
         int amount = 1000;
         //when:
         Money money = new Money(amount);
-        money.minus(minusAmount);
+        Money resultMoney = money.minus(minusAmount);
         //then:
-        assertThat(money).isEqualTo(new Money(result));
+        assertThat(resultMoney).isEqualTo(new Money(result));
     }
 
-    @ParameterizedTest(name = "minus 메서드 테스트 " + DEFAULT_DISPLAY_NAME)
+    @ParameterizedTest(name = "isEqualsOrGreater 메서드 테스트 " + DEFAULT_DISPLAY_NAME)
     @CsvSource(value = { "500:true", "2000:false" }, delimiter = ':')
     void isEqualsOrGreater_amount_success(int operandAmount, boolean result) {
         //given:

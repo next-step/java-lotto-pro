@@ -13,7 +13,7 @@ public class LottoBag {
     public LottoBag(Money money, NumberGenerator numberGenerator) {
         lottoList = new ArrayList<>();
         while (money.isEqualsOrGreater(LOTTO_PRICE)) {
-            money.minus(LOTTO_PRICE);
+            money = money.minus(LOTTO_PRICE);
             lottoList.add(new Lotto(numberGenerator));
         }
     }

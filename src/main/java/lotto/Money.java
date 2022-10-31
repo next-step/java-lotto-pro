@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Money {
 
-    private int amount;
+    private final int amount;
 
     public Money(int amount) {
         this.amount = amount;
@@ -18,16 +18,18 @@ public class Money {
         }
     }
 
-    public void minus(int minusAmount) {
+    public Money minus(int minusAmount) {
         if (amount >= minusAmount) {
-            amount -= minusAmount;
+            return new Money(amount - minusAmount);
         }
+        return this;
     }
 
-    public void minus(Money minusMoney) {
+    public Money minus(Money minusMoney) {
         if (amount >= minusMoney.amount) {
-            amount -= minusMoney.amount;
+            return new Money(amount - minusMoney.amount);
         }
+        return this;
     }
 
     public int getAmount() {
