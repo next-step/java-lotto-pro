@@ -1,12 +1,10 @@
 package step3.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WinningLotto {
 
-    private static final String DUPLICATE_NUMBER_MESSAGE = "고유한 번호만 허용합니다";
-
+    private static final String DUPLICATE_BONUS_NUMBER_MESSAGE = "보너스번호는 고유한 번호만 허용합니다";
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
@@ -18,7 +16,7 @@ public class WinningLotto {
 
     private void validateBonusNumber(Lotto lotto,LottoNumber bonusNumber){
         if(lotto.contains(bonusNumber)) {
-            throw new IllegalArgumentException(DUPLICATE_NUMBER_MESSAGE);
+            throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER_MESSAGE);
         }
     }
 

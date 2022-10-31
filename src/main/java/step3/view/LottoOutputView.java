@@ -49,7 +49,5 @@ public class LottoOutputView {
                 .filter(rankDto -> rankDto.isWin())
                 .sorted(Comparator.comparingInt(RankDto::getWinningPrice))
                 .collect(Collectors.toList());
-
-
     }
 }

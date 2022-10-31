@@ -14,7 +14,6 @@ public class LottoMachine {
 
     private final Lottos lottos;
     private final LottoMoney lottoMoney;
-    private static final String DUPLICATE_NUMBER_MESSAGE = "고유한 번호만 허용합니다";
 
     public LottoMachine(LottoMoney lottoMoney, Lottos lottos) {
         this.lottoMoney = lottoMoney;
@@ -45,11 +44,6 @@ public class LottoMachine {
         return Arrays.stream(Rank.values())
                 .map(rank -> new RankDto(rank, rankOfLottos.getOrDefault(rank, 0)))
                 .collect(Collectors.toList());
-    }
-
-    private void validateLottoNumbers(List<LottoNumber> winningNumbers) {
-        if (new HashSet(winningNumbers).size() != winningNumbers.size())
-            throw new IllegalArgumentException(DUPLICATE_NUMBER_MESSAGE);
     }
 
     private double getPriceRatio(Map<Rank, Integer> rankOfLottos) {
