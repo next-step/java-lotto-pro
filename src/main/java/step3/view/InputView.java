@@ -1,8 +1,9 @@
 package step3.view;
 
-import java.util.List;
+import step3.model.Lotto;
+import step3.model.Lottos;
+
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -28,17 +29,16 @@ public class InputView {
         return this.scanner.next() + this.scanner.nextLine();
     }
 
-    public void printLottos(List<List<Integer>> lottos) {
-        for (List<Integer> lotto : lottos) {
-            showLotto(lotto);
+    public void printLottos(Lottos lottos) {
+        int totalCount = lottos.count();
+
+        for (int index = 0 ; index < totalCount ; index++) {
+            showLotto(lottos.getLottoByIndex(index));
         }
     }
 
-    private void showLotto(List<Integer> lottos) {
-        String status = String.format(LOTTO_NUMBER_STATUS, lottos.stream()
-                .map(Object::toString)
-                .collect(Collectors.joining(",")));
-
+    private void showLotto(Lotto lotto) {
+        String status = String.format(LOTTO_NUMBER_STATUS, lotto.toString());
         System.out.println(status);
     }
 }

@@ -54,7 +54,7 @@ class LottoResultsTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"3,1,5000!4,3,50000!5,0,100000:455000", "3,0,5000!4,0,50000!5,0,100000:0"}, delimiter = ':')
+    @CsvSource(value = {"3,1,5000!4,3,50000!5,0,100000:155000", "3,0,5000!4,0,50000!5,0,100000:0"}, delimiter = ':')
     @DisplayName("getTotalMoney 사용할때 맞춘 갯수와 머니를 곱셈하여 총 상금을 리턴")
     void givenData_whenGetTotalMoney_thenRate(String text, double expectedTotalMoney) {
         LottoResults simpleLottoResults = new LottoResults();
@@ -67,5 +67,14 @@ class LottoResultsTest {
         });
 
         assertThat(simpleLottoResults.getTotalMoney()).isEqualTo(expectedTotalMoney);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1000,5", "3000,1.66", "15000,0.33"})
+    @DisplayName("showRate 사용할때 사용한 금액을 인자로 받을경우 수익률 리턴")
+    void givenMoney_whenShowRate_thenRate(int money, double expectedRate) {
+        double rate = this.lottoResults.showRate(money);
+
+        assertThat(rate).isEqualTo(expectedRate);
     }
 }

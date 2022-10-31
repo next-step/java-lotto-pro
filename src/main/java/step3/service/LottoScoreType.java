@@ -1,6 +1,6 @@
-package step3;
+package step3.service;
 
-public enum KoreaLottoScoreType {
+public enum LottoScoreType {
     THREE(3, 5000),
     FOUR(4, 50000),
     FIVE(5, 1500000),
@@ -10,7 +10,7 @@ public enum KoreaLottoScoreType {
     private final int score;
     private final int money;
 
-    KoreaLottoScoreType(int score, int money) {
+    LottoScoreType(int score, int money) {
         this.score = score;
         this.money = money;
     }

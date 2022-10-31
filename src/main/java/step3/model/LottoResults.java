@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoResults {
+    private static final double TWO_POINT_POSITION = 100;
 
     private List<LottoResult> lottoResults;
 
@@ -34,9 +35,13 @@ public class LottoResults {
     public double getTotalMoney() {
         double totalMoney = 0.00;
         for (LottoResult lottoResult : this.lottoResults) {
-            totalMoney += lottoResult.getScoreMatchedCount() * lottoResult.getTotalMoney();
+            totalMoney += lottoResult.getTotalMoney();
         }
 
         return totalMoney;
+    }
+
+    public double showRate(int money) {
+        return Math.floor((getTotalMoney() / money * TWO_POINT_POSITION)) / TWO_POINT_POSITION;
     }
 }
