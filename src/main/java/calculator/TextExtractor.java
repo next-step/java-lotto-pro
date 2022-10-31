@@ -13,13 +13,14 @@ public class TextExtractor {
     private final String text;
 
     public TextExtractor(String text) {
+        if (Objects.isNull(text) || text.isEmpty()) {
+            this.text = DEFAULT_VALUE;
+            return;
+        }
         this.text = text;
     }
 
     public String extract() {
-        if (Objects.isNull(text) || text.isEmpty()) {
-            return DEFAULT_VALUE;
-        }
         Matcher m = regex.matcher(this.text);
         if (m.find()) {
             return m.group(TEXT_PART);
