@@ -25,11 +25,11 @@ public class MoneyTest {
 
     @ParameterizedTest
     @CsvSource(value = {"2000:1000:1000", "4000:2000:2000", "6000:3000:3000"}, delimiter = ':')
-    public void 금액_차감_기능_확인(String input, int substract, int Expected) {
+    public void 금액_차감_기능_확인(String input, String subtract, int Expected) {
         // given
         Money money = new Money(input);
         // when
-        money.substractMoney(substract);
+        money.substractMoney(subtract);
         // then
         assertThat(money.getMoney()).isEqualTo(Expected);
     }
