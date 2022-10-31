@@ -10,7 +10,7 @@ public class Lotto {
     private List<Integer> lotto;
 
     public Lotto(List<Integer> lotto) {
-        checkLuckyNumbers(lotto);
+        validateLuckyNumbers(lotto);
 
         this.lotto = generateLotto(lotto);
     }
@@ -26,20 +26,29 @@ public class Lotto {
         return lotto;
     }
 
-    private void checkLuckyNumbers(List<Integer> luckyNumbers) {
-        if (luckyNumbers == null) {
-            throw new RuntimeException("행운의번호가 널입니다.");
-        }
+    private void validateLuckyNumbers(List<Integer> luckyNumbers) {
+        validateNull(luckyNumbers);
+        validateSizeSixNumbers(luckyNumbers);
+        validateDuplicatedNumbers(luckyNumbers);
+        isExceedRange(luckyNumbers);
+    }
 
-        if (luckyNumbers.size() != 6) {
-            throw new RuntimeException("6자리 수만 입력받을수있습니다.");
-        }
-
+    private void validateDuplicatedNumbers(List<Integer> luckyNumbers) {
         if (isDuplicated(luckyNumbers)) {
             throw new RuntimeException("증복된 숫자가 있습니다.");
         }
+    }
 
-        isExceedRange(luckyNumbers);
+    private void validateSizeSixNumbers(List<Integer> luckyNumbers) {
+        if (luckyNumbers.size() != 6) {
+            throw new RuntimeException("6자리 수만 입력받을수있습니다.");
+        }
+    }
+
+    private void validateNull(List<Integer> luckyNumbers) {
+        if (luckyNumbers == null) {
+            throw new RuntimeException("행운의번호가 널입니다.");
+        }
     }
 
     private void isExceedRange(List<Integer> luckyNumbers) {

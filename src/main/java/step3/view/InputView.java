@@ -1,6 +1,5 @@
 package step3.view;
 
-import step3.model.Lotto;
 import step3.model.Lottos;
 
 import java.util.Scanner;
@@ -30,15 +29,9 @@ public class InputView {
     }
 
     public void printLottos(Lottos lottos) {
-        int totalCount = lottos.count();
-
-        for (int index = 0 ; index < totalCount ; index++) {
-            showLotto(lottos.getLottoByIndex(index));
-        }
-    }
-
-    private void showLotto(Lotto lotto) {
-        String status = String.format(LOTTO_NUMBER_STATUS, lotto.toString());
-        System.out.println(status);
+        lottos.print(lottoNumbers -> {
+            String status = String.format(LOTTO_NUMBER_STATUS, lottoNumbers);
+            System.out.println(status);
+        });
     }
 }

@@ -15,7 +15,7 @@ class LottoGeneratorTest {
     private LottoGenerator lottoGenerator;
 
     @BeforeEach
-    public void setUp() {
+    private void setUp() {
         this.lottoGenerator = new LottoGenerator();
     }
 

@@ -27,7 +27,7 @@ public class LottoGenerator {
 
     public Lottos generateByTimes(int needLottoCount) {
         Lottos lottos = new Lottos();
-        for (int number = 0 ; number < needLottoCount ; number++) {
+        for (int index = 0; index < needLottoCount; index++) {
             lottos.add(generate());
         }
 

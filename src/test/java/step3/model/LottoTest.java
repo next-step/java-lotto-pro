@@ -20,7 +20,7 @@ class LottoTest {
     private Lotto lotto;
 
     @BeforeEach
-    public void setUp() {
+    private void setUp() {
         this.lotto = new Lotto(Arrays.asList(1,10,20,32,42,45));
     }
 

@@ -1,7 +1,10 @@
 package step3.model;
 
+import step3.service.LottoScoreType;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class Lottos {
 
@@ -23,11 +26,20 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Lotto getLottoByIndex(int index) {
-        if (count() <= index) {
-            throw new RuntimeException("해당 인덱스에 로또가 존재하지않습니다.");
-        }
+    public void print(Consumer<String> consumer) {
+        this.lottos.forEach(lotto ->
+                consumer.accept(lotto.toString()));
+    }
 
-        return this.lottos.get(index);
+    public LottoResult calculate(Lotto winningLotto) {
+        LottoResult lottoResult = new LottoResult();
+        this.lottos.forEach(lotto -> calculate(winningLotto, lottoResult, lotto));
+
+        return lottoResult;
+    }
+
+    private void calculate(Lotto winningLotto, LottoResult lottoResult, Lotto lotto) {
+        int count = lotto.getMatchedCountComparedToLotto(winningLotto);
+        lottoResult.addByLottoScoreType(LottoScoreType.getByScore(count));
     }
 }

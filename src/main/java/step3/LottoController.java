@@ -1,6 +1,6 @@
 package step3;
 
-import step3.model.LottoResults;
+import step3.model.LottoResult;
 import step3.model.Lottos;
 import step3.service.LottoService;
 import step3.view.InputView;
@@ -19,15 +19,15 @@ public class LottoController {
         inputView.printLottos(lottos);
 
         String luckyNumberText = inputView.readyLuckyLotto();
-        LottoResults lottoResults = lottoService.getResultComparedToLuckyNumbers(luckyNumberText, lottos);
+        LottoResult lottoResults = lottoService.getResultComparedToLuckyNumbers(luckyNumberText, lottos);
 
         printResult(money, lottoResults);
     }
 
-    private void printResult( int money, LottoResults lottoResults) {
+    private void printResult( int money, LottoResult lottoResult) {
         ResultView resultView = new ResultView();
-        resultView.printLottoResult(lottoResults);
+        resultView.printLottoResult(lottoResult);
 
-        resultView.printRate(lottoResults.showRate(money));
+        resultView.printRate(lottoResult.getBenefitRate(money));
     }
 }
