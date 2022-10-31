@@ -39,7 +39,7 @@ class WinningLottoTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{index} | {displayName} | 당첨등수 = {0}, 당첨된 로또 갯수 = {1}")
     @MethodSource(value = "winningCount")
     @DisplayName("당첨등수 별 당첨된 로또 갯수 확인")
     void winResults(WinRanking input, int expected) {

@@ -36,7 +36,7 @@ class LottoTest {
         );
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{index} | {displayName} | 당첨번호 = {0}, 일치하는 번호 갯수 = {1}")
     @MethodSource(value = "winningNumbersWithMatchCount")
     @DisplayName("로또번호(로또 1장)와 입력된 당첨번호를 전체 비교하여 일치하는 번호의 갯수를 확인한다.")
     void lottoNumbersMatches1(List<LottoNumber> input, int expected) {
@@ -47,7 +47,7 @@ class LottoTest {
         Assertions.assertThat(result).isEqualTo(expected);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{index} | {displayName} | 보너스번호 = {0}, 일치여부 = {1}")
     @CsvSource(value = {"1:true", "1:true", "7:false"}, delimiter = ':')
     @DisplayName("로또번호(로또 1장) 중에서 보너스 번호와 일치하는게 있으면 true, 없으면 false를 반환한다.")
     void lottoNumbersMatches2(int input, boolean expected) {
@@ -73,7 +73,7 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{index} | {displayName} | 유효하지않은 로또번호 = {0}")
     @MethodSource(value = "lottoNumbers")
     @DisplayName("로또번호가 6개가 아니면 IllegalArgumentException을 던진다.")
     void lottoException2(List<LottoNumber> input) {

@@ -34,7 +34,7 @@ class ProfitTest {
         );
     }
 
-    @ParameterizedTest(name = "{displayName}|{index}")
+    @ParameterizedTest(name = "{index} | {displayName} | 당첨번호 = {0}")
     @MethodSource(value = "winningNumbersForZero")
     @DisplayName("수익률 0 확인 - 0개 일치/1개 일치/2개 일치")
     void profit1(List<LottoNumber> winningNumbers) {
@@ -133,7 +133,7 @@ class ProfitTest {
         Assertions.assertThat(result).isEqualTo(250.83);
     }
 
-    @ParameterizedTest(name = "{displayName}|{index}")
+    @ParameterizedTest(name = "{index} | {displayName} | 당첨번호 = {0}, 수익률이 1 보다 큰가? {1}")
     @MethodSource("winningNumbersForLossProfit")
     @DisplayName("수익률이 1보다 작으면 true/ 1보다 크면 false를 반환한다.")
     void lossProfit(List<LottoNumber> winningNumbers, boolean expected) {

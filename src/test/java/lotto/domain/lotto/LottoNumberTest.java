@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoNumberTest {
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{index} | {displayName} | input = {0}")
     @ValueSource(ints = {-1, 0, 46})
     @DisplayName("1 ~ 45 이외의 숫자가 들어오면 IllegalArgumentException을 던진다.")
     void lottoNumberException1(int input) {

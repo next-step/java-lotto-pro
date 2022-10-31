@@ -41,7 +41,7 @@ class WinRankingTest {
         Assertions.assertThat(WinRanking.of(3, true)).isEqualTo(WinRanking.FIFTH);
     }
 
-    @ParameterizedTest(name = "{displayName} | matchCount = {argumentsWithNames}")
+    @ParameterizedTest(name = "{index} | {displayName} | matchCount = {argumentsWithNames}")
     @ValueSource(ints = {0, 1, 2})
     @DisplayName("당첨 안됨")
     void noRanking(int input) {
@@ -49,7 +49,7 @@ class WinRankingTest {
         Assertions.assertThat(WinRanking.of(input, true)).isEqualTo(WinRanking.MISS);
     }
 
-    @ParameterizedTest(name = "{displayName} | matchCount = {argumentsWithNames}")
+    @ParameterizedTest(name = "{index} | {displayName} | matchCount = {argumentsWithNames}")
     @ValueSource(ints = {-1, 7})
     @DisplayName("0 ~ 6 이외의 값을 matchCount로 입력되면 IllegalArgumentException 예외를 던진다.")
     void rankException(int input) {
