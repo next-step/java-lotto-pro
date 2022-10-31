@@ -23,9 +23,10 @@ public class LottoGame {
 
         OutPutView.outPutLottoNumber(lottos.getLotto());
         List<Integer> winNumber = InputView.winNumberInput();
+        int bonusNumber = InputView.bonusNumberInput();
 
         Rank rank = new Rank();
-        rank.stats(lottos, winNumber);
+        rank.stats(lottos, winNumber, bonusNumber);
 
         double percent = new Revenue(rank.getCountRank()).getPercent(money);
 
