@@ -11,13 +11,15 @@ public class DestinyMatch {
 
     public void start() {
         InputView inputView = new InputView();
-        Buyer buyer = new Buyer(inputView.getInputString());
+        String inputMoney = inputView.getInputString();
+        Buyer buyer = new Buyer(inputMoney);
+        buyer.buyLotto();
 
         inputView.printLotto(buyer.getLotto());
-        LottoNumbers winningNumbers = new LottoNumbers(inputView.getInputString());
+        LottoNumbers winningNumbers = new LottoNumbers(inputView.getInputWinningNubers());
 
         ResultView resultView = new ResultView();
-        resultView.printResult(matchWinningNumbers(buyer.getLotto(), winningNumbers));
+        resultView.printResult(inputMoney, matchWinningNumbers(buyer.getLotto(), winningNumbers));
     }
 
     private Map<Integer, Integer> matchWinningNumbers(List<Lotto> lottoList, LottoNumbers winningNumbers) {
@@ -26,7 +28,7 @@ public class DestinyMatch {
             int cnt = countMatchNumber(lotto, winningNumbers);
             makeResult(result, cnt);
         }
-        return null;
+        return result;
     }
 
     private void makeResult(Map<Integer, Integer> result, int cnt) {
