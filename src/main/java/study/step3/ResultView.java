@@ -9,12 +9,17 @@ public class ResultView {
     public static void printLottoWinners(Winners winners) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (Prize prize : Prize.values()) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n"
-                    , prize.getWinNumber()
-                    , prize.getReward()
-                    , winners.nThPrizeSize(prize.getWinNumber()));
-        }
+        printMatchingResult(winners, Rank.FOURTH);
+        printMatchingResult(winners, Rank.THIRD);
+        printMatchingResult(winners, Rank.SECOND);
+        printMatchingResult(winners, Rank.FIRST);
+    }
+
+    private static void printMatchingResult(Winners winners, Rank rank) {
+        System.out.printf("%d개 일치 (%d원)- %d개\n"
+                , rank.getNumberOfMatching()
+                , rank.getReward()
+                , winners.numberOfRankers(rank));
     }
 
     public static void printEarningRate(Winners winners, Money money) {
