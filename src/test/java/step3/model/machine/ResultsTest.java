@@ -2,6 +2,7 @@ package step3.model.machine;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 class ResultsTest {
@@ -10,10 +11,7 @@ class ResultsTest {
     @BeforeEach
     void setup() {
         results = new Results();
-        results.recordResult(Result.SECOND_PRIZE);
-        results.recordResult(Result.THIRD_PRIZE);
-        results.recordResult(Result.THIRD_PRIZE);
-        results.recordResult(Result.FOURTH_PRIZE);
+        results.recordResult(Arrays.asList(5,4,4,3));
     }
 
     @Test
@@ -33,8 +31,4 @@ class ResultsTest {
         assertThat(Result.NO_PRIZE.getTotalPrize(100)).isEqualTo(0);
     }
 
-    @Test
-    void 수익률_계산기_테스트() {
-        assertThat(results.evaluateResult(10, 10000)).isEqualTo(1);
-    }
 }
