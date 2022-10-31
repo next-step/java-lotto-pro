@@ -1,10 +1,11 @@
 package step3.domain;
 
+import step3.enums.Rank;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import step3.enums.Rank;
 
 public class Lottos {
 
@@ -31,11 +32,11 @@ public class Lottos {
         return statistics;
     }
 
-    public void unionLottos(List<Lotto> manual, List<Lotto> auto) {
-        ArrayList<Lotto> merge = new ArrayList<>();
-        merge.addAll(manual);
-        merge.addAll(auto);
-        this.lottos = merge;
+    public Lottos unionLottos(Lottos additionalLottos) {
+        List<Lotto> merge = new ArrayList<>();
+        merge.addAll(additionalLottos.getLottos());
+        merge.addAll(this.lottos);
+        return new Lottos(merge);
     }
 
     @Override
