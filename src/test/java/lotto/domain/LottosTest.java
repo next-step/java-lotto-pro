@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class LottosTest {
@@ -26,6 +27,15 @@ public class LottosTest {
                 () -> assertThat(lottoResults.findLottoResultCount(LottoPrize.THIRD)).isEqualTo(1),
                 () -> assertThat(lottoResults.findLottoResultCount(LottoPrize.SECOND)).isZero()
         );
+    }
+
+    @Test
+    void 수동_로또_생성_개수_포함한_로또_개수_확인() {
+        List<Lotto> manualLottos = Arrays.asList(
+                Lotto.generateLotto(new ReadLineLottoNumberGenerator("1,2,3,4,5,6")),
+                Lotto.generateLotto(new ReadLineLottoNumberGenerator("4,8,10,23,32,45")));
+        Lottos lottos = new Lottos(5, new RandomLottoNumberGenerator(), manualLottos);
+        assertThat(lottos.unmodifiedLottos()).hasSize(7);
     }
 
     private Lottos createLottos() {

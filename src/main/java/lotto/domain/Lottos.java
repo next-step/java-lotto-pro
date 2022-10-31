@@ -23,6 +23,14 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public Lottos(int maxLottoCount, LottoNumberGenerator lottoNumberGenerator, List<Lotto> manualLottos) {
+        List<Lotto> lottos = new ArrayList<>(manualLottos); // TODO manualLottos null일 때 이슈 없는지 체크
+        for(int i = 0; i < maxLottoCount; i++) {
+            lottos.add(Lotto.generateLotto(lottoNumberGenerator));
+        }
+        this.lottos = lottos;
+    }
+
     public Lottos(List<Lotto> lottos) {
         this.lottos = new ArrayList<>(lottos);
     }
