@@ -4,12 +4,26 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import step3.model.Lotto;
 import step3.model.LottoMoney;
+import step3.model.LottoNumber;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class LottoMoneyTest {
+
+    List<LottoNumber> getLottoNumbers(int... numbers) {
+
+        List<LottoNumber> lottoNumbers = new ArrayList();
+        for (int number : numbers) {
+            lottoNumbers.add(LottoNumber.valueOf(number));
+        }
+        return lottoNumbers;
+    }
 
     @ParameterizedTest
     @ValueSource(ints = {-1,0,1,2,3,999})
@@ -52,6 +66,24 @@ public class LottoMoneyTest {
         //then
         assertThat(lottoMoney.getCountOfPurchasePrice()).isEqualTo(count);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1000:1", "6000:6", "5000:5", "12000:12"}, delimiter = ':')
+    @DisplayName("로또목록을 입력하면 남은돈을 반환")
+    void test_that_returns_remain_money_if_lottos_input(int money, int count) {
+        //given
+        List<Lotto> lottoNumbers = new ArrayList();
+        for(int i = 0; i < count; i++){
+            lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
+        }
+
+        //when
+        LottoMoney lottoMoney = new LottoMoney(money);
+
+        //then
+        assertThat(lottoMoney.getRemainMoney(lottoNumbers)).isEqualTo(0);
+    }
+
 
 
 
