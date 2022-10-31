@@ -10,6 +10,12 @@ public class Numbers {
     protected Numbers() {
     }
 
+    public Numbers(String[] splitText) {
+        for (String text : splitText) {
+            this.numbers.add(new Number(text));
+        }
+    }
+
     public List<Number> getNumbers() {
         return numbers;
     }
@@ -20,9 +26,5 @@ public class Numbers {
             sum += number.getNumber();
         }
         return sum;
-    }
-
-    public void add(Number number) {
-        this.numbers.add(number);
     }
 }
