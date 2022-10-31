@@ -14,6 +14,14 @@ class LottoTest {
 	}
 
 	@Test
+	void 같은_로또_번호_입력시_IllegalArgumentException() {
+		assertThatThrownBy(() -> Lotto.inputNumber(Arrays.asList(1,1,1,1,1,1)))
+			.isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> Lotto.inputNumber(Arrays.asList(1,2,3,4,5,1)))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
 	void 로또_번호_문자열_반환() {
 		assertThat(Lotto.inputNumber(Arrays.asList(1, 2, 3, 4, 5, 6)).getResultMessage()).isEqualTo(
 			"[1, 2, 3, 4, 5, 6]");

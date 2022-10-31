@@ -6,10 +6,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
+	private static final int LOTTO_NUMBERS_SIZE = 6;
 	private final Set<LottoNumber> lottoNumbers;
 
 	private Lotto(LottoNumberStrategy lottoNumberStrategy) {
-		this.lottoNumbers = lottoNumberStrategy.pickNumbers();
+		Set<LottoNumber> lottoNumbers = lottoNumberStrategy.pickNumbers();
+		validateDistinct(lottoNumbers);
+		this.lottoNumbers = lottoNumbers;
 	}
 
 	public static Lotto inputNumber(List<Integer> numbers) {
@@ -18,6 +21,12 @@ public class Lotto {
 
 	public static Lotto random() {
 		return new Lotto(new RandomLottoNumberStrategy());
+	}
+
+	private void validateDistinct(Set<LottoNumber> lottoNumbers) {
+		if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
+			throw new IllegalArgumentException("로또 번호는 6자리여야 합니다.");
+		}
 	}
 
 	public MatchCount countMatchCount(Lotto other) {
