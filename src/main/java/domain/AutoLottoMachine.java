@@ -5,9 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class AutoLottoMachine implements LottoMachine{
-
-
-    private static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<LottoNumber>();
+    private static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>();
     private static final int LOTTE_MIN_NUMBER = 1;
     private static final int LOTTE_MAX_NUMBER = 45 ;
 
@@ -21,17 +19,20 @@ public class AutoLottoMachine implements LottoMachine{
         }
 
     }
-
-    public void shuffleLottoNumber(List<LottoNumber> lottoNumbersList){
-        Collections.shuffle(lottoNumbersList);
-    }
     @Override
     public Lotto createLottoNumber() {
-
-        shuffleLottoNumber(LOTTO_NUMBERS);
-
-        return new Lotto(LOTTO_NUMBERS.subList(0,6));
+        Collections.shuffle(LOTTO_NUMBERS);
+        return new Lotto(new ArrayList<>(LOTTO_NUMBERS.subList(0,6)));
     }
 
+
+    @Override
+    public List<Lotto> purchaseLotte(int lottoTicketCount) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for(int i=0; i<lottoTicketCount; i++){
+            lottoList.add(createLottoNumber());
+        }
+        return lottoList;
+    }
 
 }
