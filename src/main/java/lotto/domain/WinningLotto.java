@@ -22,4 +22,8 @@ public class WinningLotto extends Lotto {
     public int getCorrectCount(Lotto lotto) {
         return this.numbers.getCorrectCount(lotto.numbers);
     }
+
+    public boolean hasBonusBall(Lotto lotto) {
+        return lotto.numbers.contains(bonusBall);
+    }
 }
