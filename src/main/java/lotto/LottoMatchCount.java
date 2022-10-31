@@ -1,7 +1,5 @@
 package lotto;
 
-import static lotto.LottoMatchType.*;
-
 public class LottoMatchCount {
 
     private static final int INIT_COUNT = 0;
@@ -22,10 +20,6 @@ public class LottoMatchCount {
     }
 
     public LottoMatchType getLottoMatchType() {
-        if (matchCount == 3) return THREE;
-        if (matchCount == 4) return FOUR;
-        if (matchCount == 5) return FIVE;
-        if (matchCount == 6) return SIX;
-        return OTHER;
+        return LottoMatchType.valueOf(matchCount);
     }
 }
