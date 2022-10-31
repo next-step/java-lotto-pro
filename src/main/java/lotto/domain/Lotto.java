@@ -7,28 +7,30 @@ import java.util.List;
 import lotto.util.LottoUtil;
 
 public class Lotto {
-    private final List<LottoNumbers> purchaseLottoList;
+    private final List<LottoNumbers> lottoNumbersList;
 
-    public Lotto(Integer money) {
+    public Lotto(Integer money, List<LottoNumbers> manualLottoList) {
         LottoMoney lottoMoney = new LottoMoney(money);
-        this.purchaseLottoList = new ArrayList<>();
-        for (int i = 0; i < lottoMoney.count(); i++) {
-            purchaseLottoList.add(new LottoNumbers(LottoUtil.generate()));
+        this.lottoNumbersList = new ArrayList<>();
+        int autoPurchaseCount = lottoMoney.count() - manualLottoList.size();
+        for (int i = 0; i < autoPurchaseCount; i++) {
+            lottoNumbersList.add(new LottoNumbers(LottoUtil.generate()));
         }
+        lottoNumbersList.addAll(manualLottoList);
     }
 
-    public Lotto(List<LottoNumbers> purchaseLottoList) {
-        this.purchaseLottoList = purchaseLottoList;
+    public Lotto(List<LottoNumbers> lottoNumbersList) {
+        this.lottoNumbersList = lottoNumbersList;
     }
 
-    public List<LottoNumbers> getPurchaseLottoList() {
-        return Collections.unmodifiableList(purchaseLottoList);
+    public List<LottoNumbers> getLottoNumbersList() {
+        return Collections.unmodifiableList(lottoNumbersList);
     }
 
     public LottoResult computeResult(LottoNumbers winningLotto, LottoNumber bonusNumber) {
         validateBonus(winningLotto, bonusNumber);
         LottoResult result = new LottoResult();
-        for (LottoNumbers lottoNumbers : purchaseLottoList) {
+        for (LottoNumbers lottoNumbers : lottoNumbersList) {
             result.addCount(lottoNumbers.calculateRank(winningLotto, bonusNumber));
         }
         return result;
