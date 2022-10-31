@@ -6,6 +6,7 @@ import java.util.List;
 public class WinningNumberWithBonus implements WinningNumber {
 
     private static final int DEFAULT_MATCH_NUMBER = 0;
+    private static final int BONUS_INDEX = (-1);
     private List<Integer> winningNumberWithBonus;
 
     public WinningNumberWithBonus(List<Integer> winningNumberWithBonus) {
@@ -23,7 +24,7 @@ public class WinningNumberWithBonus implements WinningNumber {
 
     @Override
     public boolean isMatchBonus(Iterator<Integer> lottoNumberIterator) {
-        Integer bonus = winningNumberWithBonus.get(winningNumberWithBonus.size() - 1);
+        Integer bonus = winningNumberWithBonus.get(winningNumberWithBonus.size() + BONUS_INDEX);
         boolean result = false;
         while (lottoNumberIterator.hasNext() && !result) {
             result = isContainsBonus(lottoNumberIterator, bonus, result);

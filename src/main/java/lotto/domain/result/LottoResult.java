@@ -16,6 +16,7 @@ public enum LottoResult {
     private static final String RESULT_TOTAL_COUNT_TEXT = "개";
     private static final int DEFAULT_PROFIT = 0;
     private static final int CLEAR_TOTAL_COUNT = 0;
+    private static final int NOT_BONUS_MATCH_COUNT = 5;
     private int matchCount;
     private int money;
     private boolean isBonus;
@@ -34,7 +35,7 @@ public enum LottoResult {
     }
 
     private void addTotalCount(MatchCount matchCount) {
-        if (this.matchCount != 5) {
+        if (this.matchCount != NOT_BONUS_MATCH_COUNT) {
             totalCount++;
         }
         if (this == FIVE && !matchCount.isMatchBonus()) {
