@@ -30,7 +30,7 @@ public class LottoManager {
                 new LottoNumber(InputView.inputBonusNumber()));
 
         Prizes prizes = lottos.getPrizeOfLotto(winnerLotto);
-        BigDecimal bigDecimal = lottoBuyer.calculateYield(prizes);
+        BigDecimal bigDecimal = lottoBuyer.calculateYield(prizes, lottos.getLottoCount());
         OutputView.printStatistic(prizes, bigDecimal);
     }
 

@@ -11,10 +11,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.EnumMap;
-import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,8 +31,8 @@ public class LottoBuyerTest {
     @ParameterizedTest
     @MethodSource("calculateStatisticSample")
     @DisplayName("로또에 대한 상금 정보와 자신의 돈을 통해 수익률 계산")
-    void calculate_yield(Prizes prizes, LottoBuyer lottoBuyer, double expect) {
-        assertThat(lottoBuyer.calculateYield(prizes)).isEqualTo(BigDecimal.valueOf(expect));
+    void calculate_yield(Prizes prizes, Lottos lottos, LottoBuyer lottoBuyer, double expect) {
+        assertThat(lottoBuyer.calculateYield(prizes, lottos.getLottoCount())).isEqualTo(BigDecimal.valueOf(expect));
     }
 
     private static Stream<Arguments> buyLotto() {
@@ -46,11 +43,10 @@ public class LottoBuyerTest {
     }
 
     private static Stream<Arguments> calculateStatisticSample() {
-        Map<Prize, Integer> prizes = new EnumMap<Prize, Integer>(Prize.class);
         LottoBuyer lottoBuyer = new LottoBuyer(new Money(14000));
-        lottoBuyer.buyLotto(new LottoSeller());
+        Lottos lottos = lottoBuyer.buyLotto(new LottoSeller());
         return Stream.of(
-                Arguments.of(new Prizes(Collections.singletonList(Prize.FIFTH)), lottoBuyer, 0.35)
+                Arguments.of(new Prizes(Collections.singletonList(Prize.FIFTH)), lottos, lottoBuyer, 0.35)
         );
     }
 
