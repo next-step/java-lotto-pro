@@ -27,4 +27,13 @@ public class Money {
     public int getMoney() {
         return money;
     }
+
+    public int substractMoney(int substract) {
+        if (this.money < substract) {
+            throw new IllegalArgumentException();
+        }
+        this.money = this.money - substract;
+
+        return this.money;
+    }
 }
