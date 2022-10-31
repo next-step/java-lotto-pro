@@ -5,23 +5,18 @@ import step3.ui.ConsoleInputView;
 import step3.ui.ConsoleResultView;
 
 public class LottoController {
-    private final ConsoleInputView inputView;
-    private final ConsoleResultView resultView;
-    
-    public LottoController(ConsoleInputView inputView, ConsoleResultView resultView){
-        this.inputView = inputView;
-        this.resultView = resultView;
+    public LottoController(){
     }
     public void start() {
-        LotteryTicket lotteryTicket = new LotteryTicket(inputView.inputPayment());
+        LotteryTicket lotteryTicket = new LotteryTicket(ConsoleInputView.inputPayment());
         lottoFactory(lotteryTicket);
-        
-        resultView.resultLotteryTicket(lotteryTicket);
+    
+        ConsoleResultView.resultLotteryTicket(lotteryTicket);
        
-        WinningBonusNumber winningBonusNumber = new WinningBonusNumber(inputView.inputWinningNumber(), inputView.inputBonusNumber());
+        WinningBonusNumber winningBonusNumber = new WinningBonusNumber(ConsoleInputView.inputWinningNumber(), ConsoleInputView.inputBonusNumber());
         
         Statistics statistics = new Statistics(lotteryTicket, winningBonusNumber);
-        resultView.resultStatistics(statistics, lotteryTicket.getPayment());
+        ConsoleResultView.resultStatistics(statistics, lotteryTicket.getPayment());
     }
     
     private static void lottoFactory(LotteryTicket lotteryTicket){

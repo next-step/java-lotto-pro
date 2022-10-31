@@ -6,23 +6,19 @@ public class ConsoleInputView {
     private static final String REQUEST_PAYMENT = "구입금액을 입력해 주세요.";
     private static final String REQUEST_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String REQUEST_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
-    private final Scanner sc;
+    private static final Scanner sc = new Scanner(System.in);
     
-    public ConsoleInputView() {
-        this.sc = new Scanner(System.in);
-    }
-    
-    public int inputPayment() {
+    public static int inputPayment() {
         System.out.println(REQUEST_PAYMENT);
         return sc.nextInt();
     }
     
-    public String inputWinningNumber() {
+    public static String inputWinningNumber() {
         System.out.println(REQUEST_WINNING_NUMBER);
         return sc.next();
     }
     
-    public String inputBonusNumber() {
+    public static String inputBonusNumber() {
         System.out.println(REQUEST_BONUS_NUMBER);
         return sc.next();
     }
