@@ -6,6 +6,7 @@ public class Money {
 
 	private static final String INVALID_INPUT_MONEY_MESSAGE = "로또 구입 금액은 1000원 이상이어야 합니다.";
 	private static final String INVALID_TICKET_PRICE_MESSAGE = "티켓 가격이 0원 일 수 없습니다.";
+	private static final String DIVEIDE_BY_ZERO_MESSAGE = "0으로 나눌 수 없습니다.";
 	protected static final int PRICE_PER_TICKET = 1000;
 
 	private final long value;
@@ -44,7 +45,10 @@ public class Money {
 		}
 	}
 
-	public double profitRate(Money money) {
+	public double divide(Money money) {
+		if (money.value == 0) {
+			throw new InvalidMoneyException(DIVEIDE_BY_ZERO_MESSAGE);
+		}
 		return (double)this.value / money.value;
 	}
 

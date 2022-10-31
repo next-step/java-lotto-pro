@@ -54,11 +54,20 @@ class MoneyTest {
 
 	@ParameterizedTest
 	@CsvSource(value = {"1000:0.1", "10000:1", "100000:10"}, delimiter = ':')
-	@DisplayName("수익률 반환")
+	@DisplayName("나누기 테스트")
 	void getProfitRateTest(long money, double expected) {
 		Money inputMoney = Money.from(money);
 		Money prizeMoney = Money.from(10000);
-		assertThat(inputMoney.profitRate(prizeMoney)).isEqualTo(expected);
+		assertThat(inputMoney.divide(prizeMoney)).isEqualTo(expected);
+	}
+
+	@Test
+	@DisplayName("0으로 나누기 시 ArithmeticException 발생")
+	void throwArithmeticExceptionTest() {
+		Money inputMoney = Money.from(1000L);
+		Money prizeMoney = Money.from(0);
+		assertThatThrownBy(() -> inputMoney.divide(prizeMoney))
+			.isInstanceOf(InvalidMoneyException.class);
 	}
 
 }

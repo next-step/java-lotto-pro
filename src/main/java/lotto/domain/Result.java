@@ -1,36 +1,44 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Result {
 
 	private final Map<Rank, Long> rankResult;
+	private final double profitRate;
 
-	private Result(Map<Rank, Long> rankResult) {
+	private Result(Map<Rank, Long> rankResult, double profitRate) {
 		this.rankResult = rankResult;
+		this.profitRate = profitRate;
 	}
 
-	public static Result from(Map<Rank, Long> rankResult) {
-		return new Result(rankResult);
+	public static Result of(Map<Rank, Long> rankResult, Money inputMoney) {
+		return new Result(rankResult, profitRate(rankResult, inputMoney));
 	}
 
-	public static Result af(LottoTickets purchasedTickets, WinningLottoTicket winningTicket) {
-		List<Integer> match = purchasedTickets.match(winningTicket);
-		Ranks ranks = Ranks.from(match);
-		return Result.from(ranks.groupBy());
+	public static Result of(LottoTickets purchasedTickets, WinningLottoTicket winningTicket, Money inputMoney) {
+		Ranks ranks = Ranks.from(purchasedTickets.match(winningTicket));
+		Map<Rank, Long> resultMap = ranks.groupBy();
+		double profitRate = profitRate(resultMap, inputMoney);
+		return new Result(resultMap, profitRate);
 	}
 
-	public long totalPrize() {
+	private static double profitRate(Map<Rank, Long> resultMap, Money inputMoney) {
+		long totalPrize = totalPrize(resultMap);
+		return Money.from(totalPrize).divide(inputMoney);
+	}
+
+	private static long totalPrize(Map<Rank, Long> rankResult) {
 		return rankResult.entrySet().stream()
 			.mapToLong(entry -> entry.getKey().getPrize() * entry.getValue())
 			.sum();
 	}
 
-	public String toString() {
-		return rankResult.entrySet().stream()
-			.map(entry -> entry.getKey().getMatchCount() + "개 일치 (" + entry.getKey().getPrize() + "원) - " + entry.getValue() + "개")
-			.collect(Collectors.joining(System.lineSeparator()));
+	public Map<Rank, Long> getRankResult() {
+		return rankResult;
+	}
+
+	public double getProfitRate() {
+		return Math.round(profitRate * 100) / 100.0;
 	}
 }

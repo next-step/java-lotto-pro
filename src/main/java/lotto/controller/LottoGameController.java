@@ -12,47 +12,46 @@ import lotto.view.ResultView;
 
 public class LottoGameController {
 
-    private final InputView inputView;
-    private final ResultView resultView;
+	private final InputView inputView;
+	private final ResultView resultView;
 
-    private LottoGameController(InputView inputView, ResultView resultView) {
-        this.inputView = inputView;
-        this.resultView = resultView;
-    }
+	private LottoGameController(InputView inputView, ResultView resultView) {
+		this.inputView = inputView;
+		this.resultView = resultView;
+	}
 
-    public LottoGameController() {
-        this(new InputView(), new ResultView());
-    }
+	public LottoGameController() {
+		this(new InputView(), new ResultView());
+	}
 
-    public void play() {
-        Money money = inputView.readMoney();
+	public void play() {
+		Money inputMoney = inputView.readMoney();
 
-        LottoTickets lottoTickets = purchasedTickets(money);
-        WinningLottoTicket winningLottoTicket = winningTicket();
+		LottoTickets lottoTickets = purchasedTickets(inputMoney);
+		WinningLottoTicket winningLottoTicket = winningTicket();
 
-        printResult(money, lottoTickets, winningLottoTicket);
-    }
+		Result result = Result.of(lottoTickets, winningLottoTicket, inputMoney);
+		printResult(result);
+	}
 
-    private void printResult(Money money, LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket) {
-        resultView.printResult(Result.af(lottoTickets, winningLottoTicket));
-        Money totalPrize = Money.from(Result.af(lottoTickets, winningLottoTicket).totalPrize());
-        resultView.printProfitRate(totalPrize.profitRate(money));
-    }
+	private void printResult(Result result) {
+		resultView.printResult(result);
+	}
 
-    private LottoTickets purchasedTickets(Money money) {
-        LottoTickets lottoTickets = purchasedLottoTickets(money);
-        resultView.printLottoTickets(lottoTickets);
-        return lottoTickets;
-    }
+	private LottoTickets purchasedTickets(Money money) {
+		LottoTickets lottoTickets = purchasedLottoTickets(money);
+		resultView.printLottoTickets(lottoTickets);
+		return lottoTickets;
+	}
 
-    private WinningLottoTicket winningTicket() {
-        LottoNumbers lottoNumbers = inputView.readWinningNumbers();
-        return WinningLottoTicket.from(lottoNumbers);
-    }
+	private WinningLottoTicket winningTicket() {
+		LottoNumbers lottoNumbers = inputView.readWinningNumbers();
+		return WinningLottoTicket.from(lottoNumbers);
+	}
 
-    private LottoTickets purchasedLottoTickets(Money money) {
-        LottoTicketMachine lottoTicketMachine = new LottoTicketMachine(new RandomGenerateStrategy());
-        return lottoTicketMachine.buyLottoTickets(money);
-    }
+	private LottoTickets purchasedLottoTickets(Money money) {
+		LottoTicketMachine lottoTicketMachine = new LottoTicketMachine(new RandomGenerateStrategy());
+		return lottoTicketMachine.buyLottoTickets(money);
+	}
 
 }

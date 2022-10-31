@@ -6,6 +6,7 @@ import lotto.domain.Result;
 public class ResultView {
 
 	private static final String NEXT_LINE = "\n";
+	private static final String PROFIT_RATIO_PRINT_FORMAT = "총 수익률은 %.2f 입니다. (기준이 1이기 때문에 결과적으로 %s 라는 의미임)";
 
 	public void printLottoTickets(LottoTickets lottoTickets) {
 		StringBuilder ticketStringBuilder = new StringBuilder();
@@ -23,14 +24,22 @@ public class ResultView {
 		StringBuilder resultBuilder = new StringBuilder();
 		resultBuilder.append("당첨 통계").append(NEXT_LINE);
 		resultBuilder.append("---------").append(NEXT_LINE);
-		resultBuilder.append(result);
+		appendResultPerRank(result, resultBuilder);
+		appendProfitRatio(result, resultBuilder);
 		System.out.println(resultBuilder);
 	}
 
-	public void printProfitRate(double profitRate) {
-		StringBuilder profitRateBuilder = new StringBuilder();
-		profitRateBuilder.append("총 수익률은 ").append(profitRate).append("입니다.");
-		profitRateBuilder.append(" (기준이 1이기 때문에 결과적으로 ").append(profitRate > 1 ? "이득" : "손해").append("라는 의미임)");
-		System.out.println(profitRateBuilder);
+	private static void appendResultPerRank(Result result, StringBuilder resultBuilder) {
+		result.getRankResult()
+			.forEach((key, value) -> resultBuilder.append(String.format("%d개 일치 (%d원) - %d개%n",
+				key.getMatchCount(),
+				key.getPrize(),
+				value)));
 	}
+
+	private static void appendProfitRatio(Result result, StringBuilder resultBuilder) {
+		double profitRate = result.getProfitRate();
+		resultBuilder.append(String.format(PROFIT_RATIO_PRINT_FORMAT, profitRate, profitRate > 1 ? "이득" : "손해"));
+	}
+
 }
