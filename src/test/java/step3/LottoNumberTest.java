@@ -43,4 +43,5 @@ public class LottoNumberTest {
         ;
         Assertions.assertEquals(0, result);
     }
+
 }

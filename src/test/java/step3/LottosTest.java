@@ -89,5 +89,4 @@ class LottosTest {
         Assertions.assertEquals(5, merged.getLottos().size());
     }
 
-
 }

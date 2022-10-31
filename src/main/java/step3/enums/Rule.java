@@ -16,4 +16,5 @@ public enum Rule {
     public int getRange() {
         return range;
     }
+
 }

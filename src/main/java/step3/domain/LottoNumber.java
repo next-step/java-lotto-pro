@@ -34,6 +34,7 @@ public class LottoNumber {
     public String toString() {
         return lottoNumber+"";
     }
+
 }
 
 

@@ -43,4 +43,5 @@ public class Lottos {
     public String toString() {
         return lottos.toString();
     }
+
 }
