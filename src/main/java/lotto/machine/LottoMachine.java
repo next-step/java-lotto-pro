@@ -14,7 +14,7 @@ public class LottoMachine {
 
     public static void gameStart(){
         Money money = getMoney();
-        LottoQuantity manualLottoQuantity = getLottoQuantity();
+        LottoQuantity manualLottoQuantity = getLottoQuantity(money);
         LottoTickets buyLottoTickets = getBuyLottoTickets(money, manualLottoQuantity);
         String winnerNumbers = getWinnerNumbers();
         WinnerLottoTicket winnerLottoTicket = getWinnerLottoTicket(winnerNumbers);
@@ -32,9 +32,11 @@ public class LottoMachine {
         return new Money(InputView.inputText());
     }
 
-    private static LottoQuantity getLottoQuantity() {
+    public static LottoQuantity getLottoQuantity(Money money) {
         OutputView.printInputManualLottoQuantity();
-        return new LottoQuantity(InputView.inputText());
+        int totalQuantity = getQuantity(money.amount());
+        String manualQuantity = InputView.inputText();
+        return new LottoQuantity(totalQuantity, manualQuantity);
     }
 
     private static LottoTickets getBuyLottoTickets(Money money, LottoQuantity manualLottoQuantity) {

@@ -6,4 +6,5 @@ public class MessageConstant {
     public static final String ERROR_VALID_MORE_MONEY = "금액이 부족합니다.";
     public static final String ERROR_VALID_SIX_NUMBER = "로또 번호는 6자리 숫자이어야 합니다.";
     public static final String ERROR_VALID_NOT_WINNER_NUMBER_SELECT = "당첨번호와 같은 번호를 선택 할 수 없습니다.";
+    public static final String ERROR_VALID_OUT_OF_RANGE_NUMBER = "전체 수량을 넘을 수 없습니다.";
 }

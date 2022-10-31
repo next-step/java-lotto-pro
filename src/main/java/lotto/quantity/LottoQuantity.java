@@ -11,10 +11,26 @@ public class LottoQuantity {
         } catch (NumberFormatException e) {
             throw new NumberFormatException(MessageConstant.ERROR_VALID_NOT_NUMBER);
         }
-        validationNegative(this.autoLottoQuantity);
+        validateNegative(this.autoLottoQuantity);
     }
 
-    private static void validationNegative(int amount) {
+    public LottoQuantity(int totalQuantity, String manualQuantity) {
+        try {
+            this.autoLottoQuantity = Integer.parseInt(manualQuantity);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException(MessageConstant.ERROR_VALID_NOT_NUMBER);
+        }
+        validateNegative(this.autoLottoQuantity);
+        validateRange(totalQuantity);
+    }
+
+    private void validateRange(int totalQuantity) {
+        if(autoLottoQuantity > totalQuantity){
+            throw new IllegalArgumentException(MessageConstant.ERROR_VALID_OUT_OF_RANGE_NUMBER);
+        }
+    }
+
+    private static void validateNegative(int amount) {
         if(amount < 0){
             throw new IllegalArgumentException(MessageConstant.ERROR_VALID_NOT_NEGATIVE_NUMBER);
         }
