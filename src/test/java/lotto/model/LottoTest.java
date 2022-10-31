@@ -37,7 +37,7 @@ class LottoTest {
 	@CsvSource(value = {"1,true", "2,false"})
 	void 로또_보너스_번호_포함_여부_확인(int number, boolean expected) {
 		Lotto lotto = new Lotto(LottoNumber.of(1, 3, 4, 5, 6, 7));
-		assertThat(lotto.matchBonus(new LottoNumber(number))).isEqualTo(expected);
+		assertThat(lotto.matchBonus(LottoNumber.of(number))).isEqualTo(expected);
 	}
 
 }

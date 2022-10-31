@@ -42,7 +42,7 @@ public class Input {
 			System.out.println("보너스 볼을 입력해 주세요.");
 			String bonusBall = nextLine();
 			System.out.println();
-			return new LottoNumber(Integer.parseInt(bonusBall));
+			return LottoNumber.of(bonusBall);
 		} catch (NumberFormatException e) {
 			return inputBonusNumber();
 		}
