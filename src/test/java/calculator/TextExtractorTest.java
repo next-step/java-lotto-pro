@@ -25,4 +25,12 @@ class TextExtractorTest {
         TextExtractor extractor = new TextExtractor(text);
         assertThat(extractor.extract()).isEqualTo("1;2;3");
     }
+
+    @DisplayName("커스텀 구분자를 포함할 경우 커스텀 구분자를 반환한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3"})
+    void delimiter(String text) {
+        TextExtractor extractor = new TextExtractor(text);
+        assertThat(extractor.delimiter()).isEqualTo(";");
+    }
 }
