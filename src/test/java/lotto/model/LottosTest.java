@@ -25,4 +25,19 @@ class LottosTest {
 		assertThat(lottos.countByType(LottoType.MANUAL)).isEqualTo(2L);
 	}
 
+	@Test
+	void 로또_구입_총비용_계산(){
+		Lottos lottos = new Lottos(
+			Arrays.asList(
+				new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 6)),
+				new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 6)),
+				new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 6)),
+				new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 6)),
+				new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 6), LottoType.MANUAL),
+				new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 6), LottoType.MANUAL)
+			)
+		);
+		assertThat(lottos.getTotalSpent()).isEqualTo(new Money(6000L));
+	}
+
 }

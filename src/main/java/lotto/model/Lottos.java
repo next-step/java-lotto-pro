@@ -22,6 +22,10 @@ public class Lottos {
 			.count();
 	}
 
+	public Money getTotalSpent(){
+		return Lotto.LOTTO_PRICE.multiply(lottos.size());
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
