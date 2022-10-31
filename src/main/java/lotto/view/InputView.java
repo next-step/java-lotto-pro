@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import lotto.constant.LottoConstant;
+import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.lotto.Lotto;
 import lotto.message.ErrorMessages;
@@ -47,7 +48,7 @@ public class InputView {
         return inputManualLottoCount(total);
     }
 
-    public static List<Lotto> inputManualLottos(int manual) {
+    public static Lottos inputManualLottos(int manual) {
         System.out.println(LottoMessage.INPUT_MANUAL_LOTTO_NUMBERS);
         List<Lotto> manualLottos = new ArrayList<>();
 
@@ -55,7 +56,7 @@ public class InputView {
             manualLottos.add(Lotto.fromBy(inputLottoNumbers()));
         }
 
-        return manualLottos;
+        return Lottos.from(manualLottos);
     }
 
     private static List<Integer> inputWinningNumbers() {

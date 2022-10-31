@@ -1,23 +1,22 @@
 package lotto.domain.profit;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import lotto.constant.LottoConstant;
-import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.win.WinRanking;
 
 public class Profit {
-    private final List<Lotto> lottos;
+    private final Lottos lottos;
     private final WinningLotto winningLotto;
 
-    private Profit(List<Lotto> lottos, WinningLotto winningLotto) {
+    private Profit(Lottos lottos, WinningLotto winningLotto) {
         this.lottos = lottos;
         this.winningLotto = winningLotto;
     }
 
-    public static Profit of(List<Lotto> lottos, WinningLotto winningLotto) {
+    public static Profit of(Lottos lottos, WinningLotto winningLotto) {
         return new Profit(lottos, winningLotto);
     }
 

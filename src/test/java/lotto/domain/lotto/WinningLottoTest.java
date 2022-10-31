@@ -51,7 +51,7 @@ class WinningLottoTest {
                 .isEqualTo(expected);
     }
 
-    private List<Lotto> getTestLottos() {
+    private Lottos getTestLottos() {
         Lotto lotto1 = Lotto.from(TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 4, 5, 6)).generate());
         Lotto lotto2 = Lotto.from(TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 4, 5, 7)).generate());
         Lotto lotto3 = Lotto.from(TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 4, 5, 8)).generate());
@@ -59,6 +59,6 @@ class WinningLottoTest {
         Lotto lotto5 = Lotto.from(TestLottoNumberGenerator.from(Arrays.asList(1, 2, 10, 7, 8, 9)).generate());
         Lotto lotto6 = Lotto.from(TestLottoNumberGenerator.from(Arrays.asList(1, 2, 10, 7, 8, 9)).generate());
 
-        return Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5, lotto6);
+        return Lottos.from(Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5, lotto6));
     }
 }

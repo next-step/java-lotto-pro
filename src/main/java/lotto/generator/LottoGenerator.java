@@ -3,7 +3,7 @@ package lotto.generator;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.money.Money;
+import lotto.domain.lotto.Lottos;
 
 public class LottoGenerator {
     private final LottoNumberGenerator lottoNumberGenerator;
@@ -16,29 +16,13 @@ public class LottoGenerator {
         return new LottoGenerator(lottoNumberGenerator);
     }
 
-    public List<Lotto> generate(Money purchasePrice) {
-        int count = purchasePrice.purchasableQuantity();
-        return generate(count);
-    }
-
-    public List<Lotto> generate(int count) {
+    public Lottos generate(int autoCount) {
         List<Lotto> lottos = new ArrayList<>();
 
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < autoCount; i++) {
             lottos.add(Lotto.from(lottoNumberGenerator.generate()));
         }
 
-        return lottos;
-    }
-
-    public List<Lotto> generate(int count, List<Lotto> initialLottos) {
-        List<Lotto> lottos = new ArrayList<>();
-
-        for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.from(lottoNumberGenerator.generate()));
-        }
-
-        initialLottos.addAll(lottos);
-        return initialLottos;
+        return Lottos.from(lottos);
     }
 }
