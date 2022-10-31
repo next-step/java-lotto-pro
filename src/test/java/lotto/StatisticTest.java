@@ -13,14 +13,10 @@ public class StatisticTest {
 
     @BeforeEach
     void init() {
-        LottoNumber fakeGeneratedLottoNumber1 = new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        LottoNumber fakeGeneratedLottoNumber2 = new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7)));
-        LottoNumber fakeGeneratedLottoNumber3 = new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 7, 8)));
-        LottoNumber fakeGeneratedLottoNumber4 = new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9)));
-        fakePurchaseLottoNumbers.add(fakeGeneratedLottoNumber1);
-        fakePurchaseLottoNumbers.add(fakeGeneratedLottoNumber2);
-        fakePurchaseLottoNumbers.add(fakeGeneratedLottoNumber3);
-        fakePurchaseLottoNumbers.add(fakeGeneratedLottoNumber4);
+        fakePurchaseLottoNumbers.add(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        fakePurchaseLottoNumbers.add(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7))));
+        fakePurchaseLottoNumbers.add(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 7, 8))));
+        fakePurchaseLottoNumbers.add(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9))));
     }
 
     @Test
@@ -49,5 +45,19 @@ public class StatisticTest {
         Statistic statistic = new Statistic(new WinningNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
         statistic.countPrize(fakePurchaseLottoNumbers);
         assertThat(statistic.getCountOfFourth()).isEqualTo(1);
+    }
+
+    @Test
+    void 상금의_총합_계산() {
+        Statistic statistic = new Statistic(new WinningNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        statistic.countPrize(fakePurchaseLottoNumbers);
+        assertThat(statistic.calculateTotalEarnings()).isEqualTo(2001555000.0);
+    }
+
+    @Test
+    void 수익률_계산() {
+        Statistic statistic = new Statistic(new WinningNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        statistic.countPrize(fakePurchaseLottoNumbers);
+        assertThat(statistic.calculateTotalEarningsRate(4000)).isEqualTo(500388.75);
     }
 }

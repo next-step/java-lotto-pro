@@ -34,21 +34,41 @@ public class Statistic {
     }
 
     private void inputCountPrize(int hit) {
-        if (hit == Prize.FOURTH.getHit()) {
-            prize.put(Prize.FOURTH.getHit(), prize.get(Prize.FOURTH.getHit()) + 1);
+        if (isHitThree(hit)) {
+            addCount(Prize.FOURTH.getHit());
             return;
         }
-        if (hit == Prize.THIRD.getHit()) {
-            prize.put(Prize.THIRD.getHit(), prize.get(Prize.THIRD.getHit()) + 1);
+        if (isHitFour(hit)) {
+            addCount(Prize.THIRD.getHit());
             return;
         }
-        if (hit == Prize.SECOND.getHit()) {
-            prize.put(Prize.SECOND.getHit(), prize.get(Prize.SECOND.getHit()) + 1);
+        if (isHitFive(hit)) {
+            addCount(Prize.SECOND.getHit());
             return;
         }
-        if (hit == Prize.FIRST.getHit()) {
-            prize.put(Prize.FIRST.getHit(), prize.get(Prize.FIRST.getHit()) + 1);
+        if (isHitSix(hit)) {
+            addCount(Prize.FIRST.getHit());
         }
+    }
+
+    private boolean isHitThree(int hit) {
+        return hit == Prize.FOURTH.getHit();
+    }
+
+    private boolean isHitFour(int hit) {
+        return hit == Prize.THIRD.getHit();
+    }
+
+    private boolean isHitFive(int hit) {
+        return hit == Prize.SECOND.getHit();
+    }
+
+    private boolean isHitSix(int hit) {
+        return hit == Prize.FIRST.getHit();
+    }
+
+    private void addCount(int hit) {
+        prize.put(hit, prize.get(hit) + 1);
     }
 
     public int getCountOfFirst() {
@@ -65,5 +85,16 @@ public class Statistic {
 
     public int getCountOfFourth() {
         return prize.get(Prize.FOURTH.getHit());
+    }
+
+    public double calculateTotalEarningsRate(int payMoney) {
+        return Math.floor((calculateTotalEarnings() / payMoney) * 100) / 100.0;
+    }
+
+    public double calculateTotalEarnings() {
+        return Prize.FOURTH.getPrize() * prize.get(Prize.FOURTH.getHit())
+                + Prize.THIRD.getPrize() * prize.get(Prize.THIRD.getHit())
+                + Prize.SECOND.getPrize() * prize.get(Prize.SECOND.getHit())
+                + Prize.FIRST.getPrize() * prize.get(Prize.FIRST.getHit());
     }
 }

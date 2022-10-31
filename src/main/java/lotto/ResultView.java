@@ -31,7 +31,7 @@ public class ResultView {
 
     void printResultWinningStatistics(int payMoney, Statistic statistic) {
         printWinningCount(statistic);
-        printResultTotalEarningsRate(calculateTotalEarningsRate(payMoney, calculateTotalEarnings(statistic)));
+        printResultTotalEarningsRate(statistic.calculateTotalEarningsRate(payMoney));
     }
 
     private void printWinningCount(Statistic statistic) {
@@ -43,18 +43,7 @@ public class ResultView {
         System.out.println(RESULT_HIT_SIX + statistic.getCountOfFirst() + EA);
     }
 
-    private void printResultTotalEarningsRate(int totalEarningsRate) {
+    private void printResultTotalEarningsRate(double totalEarningsRate) {
         System.out.println(RESULT_TOTAL_EARNINGS_RATE_1 + totalEarningsRate + RESULT_TOTAL_EARNINGS_RATE_2);
-    }
-
-    private int calculateTotalEarningsRate(int payMoney, int totalEarnings) {
-        return totalEarnings / payMoney;
-    }
-
-    private int calculateTotalEarnings(Statistic statistic) {
-        return Prize.FOURTH.getPrize() * statistic.getCountOfFourth()
-                + Prize.THIRD.getPrize() * statistic.getCountOfThird()
-                + Prize.SECOND.getPrize() * statistic.getCountOfSecond()
-                + Prize.FIRST.getPrize() * statistic.getCountOfFirst();
     }
 }
