@@ -38,6 +38,20 @@ public class Lotto {
         }
     }
 
+    public Matches match(Lotto winningNumbers) {
+        if (Objects.isNull(winningNumbers)) {
+            throw new IllegalArgumentException("당첨 번호는 null이 아니어야 합니다.");
+        }
+
+        return Matches.of(countMatchedNumber(winningNumbers));
+    }
+
+    private long countMatchedNumber(Lotto winningNumbers) {
+        return winningNumbers.numbers.stream()
+                .filter(this.numbers::contains)
+                .count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
