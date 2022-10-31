@@ -19,7 +19,7 @@ public class LottoResults {
     }
 
     public Money findProfits() {
-        int totalProfits = 0;
+        long totalProfits = 0;
         for(Map.Entry<LottoPrize, Integer> lottoResult: lottoResults.entrySet()) {
             totalProfits += lottoResult.getKey().getLottoPrizeMoney() * lottoResult.getValue();
         }

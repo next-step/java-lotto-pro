@@ -111,10 +111,10 @@
     ;
   
     private final int matchCount;
-    private final int lottoPrizeMoney;
+    private final long lottoPrizeMoney;
     private final String lottoPrizeMessage;
   
-    LottoPrize(int matchCount, int lottoPrizeMoney, String lottoPrizeMessage) {
+    LottoPrize(int matchCount, long lottoPrizeMoney, String lottoPrizeMessage) {
       this.matchCount = matchCount;
       this.lottoPrizeMoney = lottoPrizeMoney;
       this.lottoPrizeMessage = lottoPrizeMessage;
@@ -130,7 +130,7 @@
         return matchCount;
     }
       
-    public int getLottoPrizeMoney() {
+    public long getLottoPrizeMoney() {
       return lottoPrizeMoney;
     }
   }

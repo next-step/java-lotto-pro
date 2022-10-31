@@ -13,9 +13,9 @@ public enum LottoPrize {
     ;
 
     private final int matchCount;
-    private final int lottoPrizeMoney;
+    private final long lottoPrizeMoney;
 
-    LottoPrize(int matchCount, int lottoPrizeMoney) {
+    LottoPrize(int matchCount, long lottoPrizeMoney) {
         this.matchCount = matchCount;
         this.lottoPrizeMoney = lottoPrizeMoney;
     }
@@ -54,7 +54,7 @@ public enum LottoPrize {
         return matchCount;
     }
 
-    public int getLottoPrizeMoney() {
+    public long getLottoPrizeMoney() {
         return lottoPrizeMoney;
     }
 }
