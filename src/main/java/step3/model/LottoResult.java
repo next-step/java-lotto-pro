@@ -1,5 +1,7 @@
 package step3.model;
 
+import step3.constant.Rank;
+
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -8,17 +10,17 @@ import static step3.constant.WinnerRule.rules;
 
 public class LottoResult {
 
-    private HashMap<Integer, Integer> result = new HashMap<>();
+    private HashMap<Rank, Integer> result = new HashMap<>();
     private int totalPurchasedPrice;
     private int totalWinnerPrice = 0;
     private double profitRate;
 
-    public void addResult(int sameCount) {
+    public void addResult(int sameCount, boolean isBonus) {
         if (isNotExistsCount(sameCount)) {
-            result.put(sameCount, 0);
+            result.put(Rank.valueOf(sameCount, isBonus), 0);
         }
-        int count = result.get(sameCount);
-        result.put(sameCount, ++count);
+        int count = result.get(Rank.valueOf(sameCount, isBonus));
+        result.put(Rank.valueOf(sameCount, isBonus), ++count);
     }
 
     public double calculateProfitRate(int size) {
@@ -28,9 +30,15 @@ public class LottoResult {
         return profitRate;
     }
 
+//    private void sumWinnerPrice() {
+//        for (Integer winnerKey : result.keySet()) {
+//            totalWinnerPrice += Optional.ofNullable(rules.get(winnerKey)).orElse(0) * result.get(winnerKey);
+//        }
+//    }
+
     private void sumWinnerPrice() {
-        for (Integer winnerKey : result.keySet()) {
-            totalWinnerPrice += Optional.ofNullable(rules.get(winnerKey)).orElse(0) * result.get(winnerKey);
+        for (Rank rank : result.keySet()) {
+            totalWinnerPrice += Optional.ofNullable(result.get(rank)).orElse(0) * rank.getWinningMoney();
         }
     }
 
@@ -42,7 +50,11 @@ public class LottoResult {
         return result.get(sameCount) == null;
     }
 
-    public String getResultValue(int winnerKey) {
-        return Optional.ofNullable(result.get(winnerKey)).orElse(ZERO).toString();
+//    public String getResultValue(int winnerKey) {
+//        return Optional.ofNullable(result.get(winnerKey)).orElse(ZERO).toString();
+//    }
+
+    public String getResultValue(Rank rank) {
+        return Optional.ofNullable(result.get(rank)).orElse(ZERO).toString();
     }
 }

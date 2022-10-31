@@ -1,5 +1,6 @@
 package step3.model;
 
+import step3.constant.Rank;
 import step3.constant.WinnerRule;
 
 import java.util.List;
@@ -26,12 +27,23 @@ public class LottoCalculator {
         return lastWeekWinner;
     }
 
+//    public void calculateWinnerStatistics(Lottos lottos) {
+//        WinnerRule.setWinnerRules();
+//        purchasedLottos = lottos.getLottos();
+//        for(Lotto lotto : purchasedLottos) {
+//            lottoResult.addResult(compareWinnerRules(lotto));
+//        }
+//    }
+
     public void calculateWinnerStatistics(Lottos lottos) {
-        WinnerRule.setWinnerRules();
         purchasedLottos = lottos.getLottos();
         for(Lotto lotto : purchasedLottos) {
-            lottoResult.addResult(compareWinnerRules(lotto));
+            lottoResult.addResult(compareWinnerRules(lotto), isEqualToBonusNumber(lotto));
         }
+    }
+
+    private boolean isEqualToBonusNumber(Lotto lotto) {
+        return lotto.isContain(lastWeekWinner.getBonusNumber());
     }
 
     public double calculateProfitRate() {
@@ -50,12 +62,23 @@ public class LottoCalculator {
         return lastWeekWinner.isContain(lottoNumber) ? ONE : ZERO;
     }
 
-    public String createResultMessage(int winnerCount) {
-        return new StringBuilder(String.valueOf(winnerCount))
-                .append("개 일치 (")
-                .append(rules.get(winnerCount))
+//    public String createResultMessage(int winnerCount) {
+//        return new StringBuilder(String.valueOf(winnerCount))
+//                .append("개 일치 (")
+//                .append(rules.get(winnerCount))
+//                .append("원)- ")
+//                .append(lottoResult.getResultValue(winnerCount))
+//                .append("개").toString();
+//    }
+
+    public String createResultMessage(Rank rank) {
+        String second = rank == Rank.SECOND ? "개 일치, 보너스 볼 일치(" : "개 일치 (";
+
+        return new StringBuilder(String.valueOf(rank.getCountOfMatch()))
+                .append(second)
+                .append(rank.getWinningMoney())
                 .append("원)- ")
-                .append(lottoResult.getResultValue(winnerCount))
+                .append(lottoResult.getResultValue(rank))
                 .append("개").toString();
     }
 

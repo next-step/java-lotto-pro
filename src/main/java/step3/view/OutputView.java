@@ -1,8 +1,13 @@
 package step3.view;
 
+import step3.constant.Rank;
 import step3.model.Lotto;
 import step3.model.LottoCalculator;
 import step3.model.Lottos;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static step3.constant.Message.*;
 import static step3.constant.Constant.*;
@@ -25,9 +30,16 @@ public class OutputView {
     }
 
     private static void printLottoResult(LottoCalculator calculator) {
-        for (int i = MIN_WINNER_NUMBER; i <= MAX_WINNER_NUMBER; i++) {
-            System.out.println(calculator.createResultMessage(i));
+        List<Rank> ranks = Arrays.stream(Rank.rankValues()).filter(r -> r.getCountOfMatch() != 0)
+                .collect(Collectors.toList());
+
+        for(Rank rank : ranks) {
+            System.out.println(calculator.createResultMessage(rank));
         }
+
+//        for (int i = MIN_WINNER_NUMBER; i <= MAX_WINNER_NUMBER; i++) {
+//            System.out.println(calculator.createResultMessage(i));
+//        }
     }
 
     private static void printPurchasedCount(Lottos lottos) {

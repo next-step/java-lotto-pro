@@ -97,5 +97,9 @@ public class Lotto {
         }
     }
 
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
+
 
 }
