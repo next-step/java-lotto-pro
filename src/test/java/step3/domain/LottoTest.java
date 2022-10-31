@@ -34,4 +34,23 @@ public class LottoTest {
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("로또 동일성 테스트")
+    @Test
+    void 로또_equal_검증() {
+        List<LottoNumber> lottoNumbersCompare1= new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            lottoNumbersCompare1.add(new LottoNumber(i + 1));
+        }
+
+        List<LottoNumber> lottoNumbersCompare2 = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            lottoNumbersCompare2.add(new LottoNumber(i + 1));
+        }
+
+        Lotto lotto1 = new Lotto(lottoNumbersCompare1);
+        Lotto lotto2 = new Lotto(lottoNumbersCompare2);
+
+        assertThat(lotto1.equals(lotto2)).isTrue();
+    }
 }

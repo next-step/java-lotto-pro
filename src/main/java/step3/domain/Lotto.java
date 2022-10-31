@@ -1,6 +1,7 @@
 package step3.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
     public static final int LOTTO_NUMBERS_SIZE = 6;
@@ -16,5 +17,13 @@ public class Lotto {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(EXCEPTION_MESSAGE_INCONSISTENCY_LOTTO_NUMBERS_SIZE);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Lotto)) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 }
