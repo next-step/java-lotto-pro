@@ -22,6 +22,7 @@ import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RandomLottoNumberGenerator;
 import lotto.domain.ReadLineLottoNumberGenerator;
+import lotto.domain.WinningLotto;
 
 public class LottoController {
 
@@ -31,12 +32,9 @@ public class LottoController {
     }
 
     public void process() {
-        Lottos lottos = createLottos(getMoney());
-
-        Lotto winningLotto = getWinningLotto();
-        LottoNumber bonusLottoNumber = getBonusLottoNumber(winningLotto);
-
-        getLottoResults(lottos.createLottoResults(winningLotto, bonusLottoNumber), lottos.findTotalPrice());
+        Lottos purchaseLottos = createLottos(getMoney());
+        WinningLotto winningLotto = getWinningLotto();
+        getLottoResults(purchaseLottos.createLottoResults(winningLotto), purchaseLottos.findTotalPrice());
     }
 
     private Money getMoney() {
@@ -98,24 +96,30 @@ public class LottoController {
         return lottos;
     }
 
-    private Lotto getWinningLotto() {
+    private WinningLotto getWinningLotto() {
+        Lotto winningLotto = generateWinningLotto();
+        LottoNumber bonusLottoNumber = generateBonusLottoNumber(winningLotto);
+        return new WinningLotto(winningLotto, bonusLottoNumber);
+    }
+
+    private Lotto generateWinningLotto() {
         printWinningLottoDirection();
         try {
             return Lotto.generateLotto(new ReadLineLottoNumberGenerator(readLine()));
         } catch (IllegalArgumentException e) {
             printExceptionErrorMessage(e);
-            return getWinningLotto();
+            return generateWinningLotto();
         }
     }
 
-    private LottoNumber getBonusLottoNumber(Lotto winningLotto) {
+    private LottoNumber generateBonusLottoNumber(Lotto winningLotto) {
         printBonusLottoDirection();
         try {
             String readLottoNumber = readLine();
             return LottoNumber.fromIfNotIn(IntegerUtils.parseInt(readLottoNumber), winningLotto);
         } catch (IllegalArgumentException e) {
             printExceptionErrorMessage(e);
-            return getBonusLottoNumber(winningLotto);
+            return generateBonusLottoNumber(winningLotto);
         }
     }
 

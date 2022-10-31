@@ -45,11 +45,11 @@ public class Lottos {
         return Money.createMoney((long) lottos.size() * LOTTO_PRICE);
     }
 
-    public LottoResults createLottoResults(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+    public LottoResults createLottoResults(WinningLotto winningLotto) {
         Map<LottoPrize, Integer> lottoResults = new HashMap<>();
         for(Lotto lotto: lottos) {
-            int matchCount = lotto.findLottoMatchCount(winningLotto);
-            boolean isMatchBonusLottoNumber = lotto.isMatchLottoNumber(bonusLottoNumber);
+            int matchCount = winningLotto.findLottoMatchCount(lotto);
+            boolean isMatchBonusLottoNumber = winningLotto.isMatchBonusLottoNumber(lotto);
             LottoPrize lottoPrize = LottoPrize.findLottoPrize(matchCount, isMatchBonusLottoNumber);
             lottoResults.put(lottoPrize, lottoResults.getOrDefault(lottoPrize, DEFALUT_COUNT) + ADD_COUNT_AMOUNT);
         }

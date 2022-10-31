@@ -20,7 +20,7 @@ public class LottosTest {
         Lottos lottos = createLottos();
         Lotto winningLotto = Lotto.generateLotto(new ReadLineLottoNumberGenerator("1,2,3,4,5,8"));
         LottoNumber bonusLottoNumber = LottoNumber.from(32);
-        LottoResults lottoResults = lottos.createLottoResults(winningLotto, bonusLottoNumber);
+        LottoResults lottoResults = lottos.createLottoResults(new WinningLotto(winningLotto, bonusLottoNumber));
         assertAll(
                 () -> assertThat(lottoResults.findLottoResultCount(LottoPrize.NO_PRIZE)).isEqualTo(1),
                 () -> assertThat(lottoResults.findLottoResultCount(LottoPrize.FOURTH)).isEqualTo(1),
