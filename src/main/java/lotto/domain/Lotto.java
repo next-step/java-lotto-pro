@@ -40,4 +40,10 @@ public class Lotto {
         }
         return list;
     }
+
+    public int countMatchNumber(Lotto winLotto) {
+        return (int) lottoNumbers.stream()
+                .filter(winLotto.lottoNumbers::contains)
+                .count();
+    }
 }
