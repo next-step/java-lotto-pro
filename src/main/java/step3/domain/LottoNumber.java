@@ -1,6 +1,7 @@
 package step3.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoNumber {
@@ -12,7 +13,7 @@ public class LottoNumber {
     }
 
     public List<Integer> getLottoNumber() {
-        return lottoNumber;
+        return Collections.unmodifiableList(lottoNumber);
     }
 
     public boolean hasBonusNumber(int bonusNumber) {

@@ -1,6 +1,7 @@
 package step3.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import step3.enums.Rank;
@@ -14,7 +15,7 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 
     public Map<Integer, Integer> calculateWinningBallsEachLotto(WinningLotto winningLotto) {
