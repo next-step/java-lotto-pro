@@ -25,7 +25,7 @@ public enum LottoRank {
     }
 
     private static LottoRank findLottoLank(LottoRank findRank, LottoRank rank, Long matchCount) {
-        if(findRank.getWinningMoney()) {
+        if(findRank.isWinning()) {
             return findRank;
         }
 
@@ -43,7 +43,7 @@ public enum LottoRank {
         return NONE.equals(this);
     }
 
-    public boolean getWinningMoney() {
+    public boolean isWinning() {
         return !isNone();
     }
 

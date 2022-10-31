@@ -21,7 +21,7 @@ public class LottoStatisticsView {
 
     private static void appendCountOfAllRanks(LottoStatistics lottoStatistics, StringBuilder printer) {
         Arrays.stream(LottoRank.values())
-                .filter(LottoRank::getWinningMoney)
+                .filter(LottoRank::isWinning)
                 .sorted((o1, o2) -> (int) (o1.matchCount() - o2.matchCount()))
                 .forEach(rank -> appendCountOfRank(rank, lottoStatistics, printer));
     }
