@@ -38,8 +38,9 @@ public class LottoWinningStatistics {
 
     private void setTotalProfit() {
         for (int i = 0; i < lottoWinningStatistics.size(); i++) {
-            LottoReward lottoReward = LottoReward.getLottoReward(i);
-            totalProfit.plus(new Money(lottoReward.getProfitTotalMoney(lottoWinningStatistics.get(i))));
+            //TODO : matchBonus 구현할 것
+            Rank rank = Rank.valueOf(i, true);
+            totalProfit.plus(new Money(rank.getProfitTotalMoney(lottoWinningStatistics.get(i))));
         }
     }
 

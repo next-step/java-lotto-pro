@@ -3,7 +3,7 @@ package step4.view;
 import step4.constant.OutputMessage;
 import step4.model.LottoBuyCount;
 import step4.model.LottoResult;
-import step4.model.LottoReward;
+import step4.model.Rank;
 
 import java.util.List;
 import java.util.Map;
@@ -28,7 +28,8 @@ public class OutputView {
 
     private static void printLottoStatistic(int matchCount, int count) {
         if (matchCount > 2) {
-            System.out.printf(OutputMessage.OUTPUT_WINNERS_PROFIT_MESSAGE, matchCount, LottoReward.getLottoReward(matchCount).getMoney(), count);
+            //TODO : matchBonus 구현할 것
+            System.out.printf(OutputMessage.OUTPUT_WINNERS_PROFIT_MESSAGE, matchCount, Rank.valueOf(matchCount, true).getWinningMoney(), count);
         }
     }
 }
