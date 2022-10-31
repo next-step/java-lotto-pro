@@ -1,7 +1,5 @@
 package step3.veiw;
 
-import step3.model.LottoGenerator;
-
 import java.util.Scanner;
 
 import static step3.constant.GameMessage.*;
