@@ -19,7 +19,7 @@ public class RanksTest {
 			)
 		);
 
-		assertThat(ranks.getTotalPrize()).isEqualTo(new Money(1_510_000L));
+		assertThat(ranks.getTotalPrize()).isEqualTo(new Money(30_100_000L));
 	}
 
 	@Test

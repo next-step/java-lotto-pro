@@ -31,11 +31,20 @@ public class Input {
 		try {
 			System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 			String winnersNumber = nextLine();
-			System.out.println();
 			return new Lotto(LottoNumber.of(winnersNumber.split(SPLITER)));
 		} catch (IllegalArgumentException e) {
 			return inputWinnerLotto();
 		}
 	}
 
+	public static LottoNumber inputBonusNumber() {
+		try {
+			System.out.println("보너스 볼을 입력해 주세요.");
+			String bonusBall = nextLine();
+			System.out.println();
+			return new LottoNumber(Integer.parseInt(bonusBall));
+		} catch (NumberFormatException e) {
+			return inputBonusNumber();
+		}
+	}
 }
