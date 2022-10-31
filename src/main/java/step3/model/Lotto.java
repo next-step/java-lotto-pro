@@ -33,20 +33,20 @@ public class Lotto {
     }
 
     public Rank getRank(Lotto winningLotto) {
-        int count = (int) numbers
+        int matchCount = (int) numbers
                 .stream()
                 .filter(winningLotto::contains)
                 .count();
-        return Rank.valueOf(count);
+        return Rank.valueOf((countParam, bonusParam) -> countParam == matchCount && bonusParam);
     }
 
     public Rank getRank(WinningLotto winningLotto) {
-        int count = (int) numbers
+        int matchCount = (int) numbers
                 .stream()
                 .filter(winningLotto::contains)
                 .count();
         boolean isBonus = winningLotto.isMatchBonusNumber(numbers);
-        Rank getRank = Rank.valueOf((number, isBonubs) -> (number == count && isBonus), !isBonus);
+        Rank getRank = Rank.valueOf((countParam, bonusParam) -> countParam == matchCount && bonusParam ,isBonus);
         return getRank;
     }
 

@@ -19,28 +19,21 @@ public enum Rank {
         this.winningPrice = winningPrice;
     }
 
-    public static Rank valueOf(int matchCount) {
+    public static Rank valueOf(BiFunction<Integer,Boolean,Boolean> op) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.TWO)
-                .filter(rank -> rank.matchCount == matchCount)
+                .filter(rank -> op.apply(rank.matchCount,true))
                 .findFirst()
                 .orElse(MISS);
     }
 
-    public static Rank valueOf(int matchCount, boolean bonus) {
-        Rank rank = valueOf(matchCount);
-        if (rank == Rank.THIRD && bonus) {
+
+    public static Rank valueOf(BiFunction<Integer,Boolean,Boolean> op,boolean isBonus) {
+        Rank rank = valueOf(op);
+        if (rank == Rank.THIRD && isBonus) {
             return Rank.TWO;
         }
         return rank;
-    }
-
-    public static Rank valueOf(BiFunction<Integer, Boolean, Boolean> operation, boolean isBonus) {
-        Rank frank = Arrays.stream(values())
-                .filter(rank -> operation.apply(rank.matchCount, isBonus))
-                .findAny()
-                .orElse(MISS);
-        return frank;
     }
 
     public int getMatchCount() {
