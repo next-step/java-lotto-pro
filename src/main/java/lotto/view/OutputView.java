@@ -11,7 +11,7 @@ public class OutputView {
         System.out.println(str);
     }
 
-    public static void getWinningLottoNumOutput() {
+    public static void printWinningLottoNumOutput() {
         System.out.println(Constants.STR_WINNING_LOTTO_NUM);
     }
 }

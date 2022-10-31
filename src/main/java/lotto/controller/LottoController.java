@@ -11,7 +11,7 @@ public class LottoController {
         OutputView.printString(lotto.getTicketListSizeStr());
         
         OutputView.printString(lotto.getLottoListStr());
-        OutputView.getWinningLottoNumOutput();
+        OutputView.printWinningLottoNumOutput();
         
         String winningTicketStr = InputView.getWinningLottoNumInput();
         OutputView.printString(lotto.getResultStr(winningTicketStr));
