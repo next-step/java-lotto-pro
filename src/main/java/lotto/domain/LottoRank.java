@@ -1,10 +1,12 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public enum LottoRank {
 
@@ -48,7 +50,10 @@ public enum LottoRank {
     }
 
     public static List<LottoRank> reverse() {
-        return Arrays.asList(FIFTH, FOURTH, THIRD, SECOND, FIRST);
+        return Arrays.stream(LottoRank.values())
+            .filter(lottoRank -> lottoRank != NONE)
+            .sorted(Comparator.reverseOrder())
+            .collect(Collectors.toList());
     }
 
     public static boolean isNone(LottoRank lottoRank) {
