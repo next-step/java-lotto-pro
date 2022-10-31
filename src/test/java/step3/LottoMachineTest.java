@@ -34,7 +34,7 @@ public class LottoMachineTest {
     void test_that_throw_exception_when_number_is_outofrange(int price, int count) {
         //given
         LottoMoney lottoMoney = new LottoMoney(price);
-        Lottos lottos = new Lottos(LottoFactory.createLottos(lottoMoney));
+        Lottos lottos = new Lottos(LottoFactory.createLottosByAuto(lottoMoney));
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
 
         //when

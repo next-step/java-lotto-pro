@@ -1,6 +1,5 @@
 package step3.controller;
 
-import step2.StringParser;
 import step3.model.*;
 import step3.model.dto.LottoResultDto;
 import step3.model.dto.LottosNumberDto;
@@ -9,14 +8,17 @@ import step3.view.LottoConsoleView;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoController {
 
     public void start() {
-        int amount = LottoConsoleView.inputPurchasingAmount();
-        List<Lotto> lottos = LottoFactory.createLottoByManual(LottoConsoleView.inputPurchaseManual());
+        LottoMoney lottoMoney = new LottoMoney(LottoConsoleView.inputPurchasingAmount());
+        List<Lotto> manualLottos = LottoFactory.createLottosByManual(LottoConsoleView.inputPurchaseManual());
+        List<Lotto> autoLottos = LottoFactory.createLottosByAuto(new LottoMoney(lottoMoney.getRemainMoney(manualLottos)));
+        Lottos lottos = new Lottos(Stream.concat(manualLottos.stream(), autoLottos.stream()).collect(Collectors.toList()));
+        LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
 
-        LottoMachine lottoMachine = new LottoMachine(new LottoMoney(amount), new Lottos(lottos));
         LottosNumberDto lottoTicketDto = lottoMachine.getLottoNumber();
         LottoConsoleView.printPurchasingLottos(lottoTicketDto);
 

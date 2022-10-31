@@ -1,5 +1,7 @@
 package step3.model;
 
+import java.util.List;
+
 public class LottoMoney {
 
     private final int purchasePrice;
@@ -27,5 +29,9 @@ public class LottoMoney {
 
     public double getPriceRatio(int price) {
         return price / (double) purchasePrice;
+    }
+
+    public int getRemainMoney(List<Lotto> lottos) {
+        return purchasePrice - (lottos.size() * LOTTO_PRICE);
     }
 }

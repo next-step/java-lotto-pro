@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class LottoFactory {
 
-    public static List<Lotto> createLottos(LottoMoney lottoMoney) {
+    public static List<Lotto> createLottosByAuto(LottoMoney lottoMoney) {
         List<Lotto> lottos = new ArrayList();
         for (int i = 0; i < lottoMoney.getCountOfPurchasePrice(); i++) {
             lottos.add(createLotto());
@@ -28,7 +28,7 @@ public class LottoFactory {
     }
 
 
-    public static List<Lotto> createLottoByManual(List<String> lottoNumbers) {
+    public static List<Lotto> createLottosByManual(List<String> lottoNumbers) {
         return lottoNumbers.stream()
                 .map(StringParser::parseToIntegerArray)
                 .map(integers -> new Lotto(integers.stream().map(LottoNumber::valueOf).collect(Collectors.toList())))
