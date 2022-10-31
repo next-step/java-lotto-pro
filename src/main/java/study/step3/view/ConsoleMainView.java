@@ -4,6 +4,7 @@ import study.step3.controller.LottoController;
 import study.step3.controller.LottoMachineController;
 import study.step3.domain.lotto.Lottos;
 import study.step3.domain.lotto.PurchaseMoney;
+import study.step3.domain.lottonumber.LottoNumbers;
 import study.step3.domain.lottostatistics.LottoStatistics;
 
 public class ConsoleMainView {
@@ -17,11 +18,12 @@ public class ConsoleMainView {
     }
 
     public void render() {
-        PurchaseMoney purchaseMoney = lottoMachineController.inputPurchaseMoney();
+        PurchaseMoney purchaseMoney = LottoMachineView.inputPurchaseMoney();
         Lottos lottos = lottoMachineController.issueLottos(purchaseMoney);
         LottoView.printLottos(lottos);
 
-        LottoStatistics lottoStatistics = lottoController.match(purchaseMoney, lottos);
+        LottoNumbers winningNumbers = LottoView.inputWinningNumbers();
+        LottoStatistics lottoStatistics = lottoController.match(purchaseMoney, lottos, winningNumbers);
         LottoStatisticsView.printLottoStatistics(lottoStatistics);
     }
 }
