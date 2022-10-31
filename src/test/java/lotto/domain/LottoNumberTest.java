@@ -10,18 +10,18 @@ class LottoNumberTest {
 	@ParameterizedTest
 	@ValueSource(ints = {1, 20, 45})
 	void 객체_생성(final int number) {
-		assertThat(new LottoNumber(number)).isEqualTo(new LottoNumber(number));
+		assertThat(LottoNumber.from(number)).isEqualTo(LottoNumber.from(number));
 	}
 
 	@ParameterizedTest
 	@ValueSource(ints = {-5, -1, 46, 90})
 	void 로또_번호_범위_제한(final int number) {
-		assertThatThrownBy(() -> new LottoNumber(number))
+		assertThatThrownBy(() -> LottoNumber.from(number))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
 	void 로또_번호_반환() {
-		assertThat(new LottoNumber(1).toString()).isEqualTo("1");
+		assertThat(LottoNumber.from(1).toString()).isEqualTo("1");
 	}
 }

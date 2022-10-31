@@ -7,9 +7,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	public static final int MAX_RANGE = 45;
 	private final int lottoNumber;
 
-	public LottoNumber(final int lottoNumber) {
+	private LottoNumber(final int lottoNumber) {
 		validateLottoNumberRange(lottoNumber);
 		this.lottoNumber = lottoNumber;
+	}
+
+	public static LottoNumber from(int lottoNumber) {
+		return new LottoNumber(lottoNumber);
 	}
 
 	private void validateLottoNumberRange(final int lottoNumber) {

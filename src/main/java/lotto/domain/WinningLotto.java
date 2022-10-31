@@ -23,16 +23,8 @@ public class WinningLotto {
 			.collect(Collectors.toList());
 	}
 
-	public LottoResultMessage getResultMessage(Lottos lottos, MatchCount matchCount) {
-		LottoResults lottoResults = lottos.toLottoResults(winLotto);
-		LottoResults filteredLottoResults = lottoResults.filterByMatchCount(matchCount);
-		int matchQuantity = filteredLottoResults.quantity();
-		return new LottoResultMessage(matchCount, matchQuantity);
-	}
-
-	public YieldMessage getYieldMessage(Lottos lottos, Amount purchaseAmount) {
-		LottoResults lottoResults = lottos.toLottoResults(winLotto);
-		return new YieldMessage(lottoResults.yield(purchaseAmount));
+	public LottoResults getLottoResults(Lottos lottos) {
+		return lottos.toLottoResults(winLotto);
 	}
 
 	@Override

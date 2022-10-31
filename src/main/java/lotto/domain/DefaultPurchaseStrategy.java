@@ -15,12 +15,12 @@ public class DefaultPurchaseStrategy implements LottoPurchaseStrategy {
 
 	@Override
 	public List<Lotto> purchase() {
-		return LongStream.range(0, quantity())
+		return LongStream.range(0, purchaseCount())
 			.mapToObj(i -> Lotto.random())
 			.collect(Collectors.toList());
 	}
 
-	private long quantity() {
+	private long purchaseCount() {
 		return this.purchaseAmount.getLong() / DEFAULT_PURCHASE_LOTTO_PRICE;
 	}
 }

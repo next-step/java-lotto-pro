@@ -23,21 +23,17 @@ public class LottoResults {
 		);
 	}
 
-	public Amounts toWinningPrices() {
-		return Amounts.from(
+	public Amount totalWinningPrice() {
+		Amounts amounts = Amounts.from(
 			this.lottoResults.stream()
 				.map(LottoResult::winningPrice)
 				.collect(Collectors.toList())
 		);
-	}
-
-	public Amount totalWinningPrice() {
-		Amounts amounts = this.toWinningPrices();
 		return amounts.totalPrice();
 	}
 
-	public int quantity() {
-		return this.lottoResults.size();
+	public Quantity quantity() {
+		return Quantity.from(this.lottoResults.size());
 	}
 
 	public Yield yield(Amount purchaseAmount) {

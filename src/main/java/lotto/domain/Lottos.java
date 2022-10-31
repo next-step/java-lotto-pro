@@ -19,8 +19,8 @@ public class Lottos {
 		return new Lottos(new DefaultPurchaseStrategy(purchaseAmount));
 	}
 
-	public long getQuantity() {
-		return this.lottos.size();
+	public Quantity getQuantity() {
+		return Quantity.from(this.lottos.size());
 	}
 
 	public List<Lotto> getLottos() {

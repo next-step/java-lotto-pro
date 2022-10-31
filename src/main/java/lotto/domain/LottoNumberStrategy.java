@@ -9,7 +9,7 @@ public interface LottoNumberStrategy {
 
 	default Set<LottoNumber> convert(List<Integer> numbers) {
 		return numbers.stream()
-			.map(LottoNumber::new)
+			.map(LottoNumber::from)
 			.collect(Collectors.toSet());
 	}
 }
