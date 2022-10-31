@@ -8,6 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static step3.domain.Lotto.LOTTO_NUMBERS_SIZE;
 
 public class LottoTest {
 
@@ -15,7 +16,7 @@ public class LottoTest {
     @Test
     void 로또생성() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < LOTTO_NUMBERS_SIZE; i++) {
             lottoNumbers.add(new LottoNumber(i + 1));
         }
         Lotto lotto = new Lotto(lottoNumbers);
@@ -27,7 +28,7 @@ public class LottoTest {
     @Test
     void 로또생성_예외() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < LOTTO_NUMBERS_SIZE + 2; i++) {
             lottoNumbers.add(new LottoNumber(i + 1));
         }
 
@@ -38,7 +39,7 @@ public class LottoTest {
     @DisplayName("로또 동일성 테스트")
     @Test
     void 로또_equal_검증() {
-        List<LottoNumber> lottoNumbersCompare1= new ArrayList<>();
+        List<LottoNumber> lottoNumbersCompare1 = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             lottoNumbersCompare1.add(new LottoNumber(i + 1));
         }
