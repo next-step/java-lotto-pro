@@ -38,4 +38,7 @@ public class LottoMoney {
         }
     }
 
+    public int getMoney() {
+        return money;
+    }
 }
