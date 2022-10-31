@@ -16,7 +16,7 @@ public class LottoNumber {
 
     private void checkNumberRange(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
-            throw new IllegalArgumentException(ERROR_RANGE_NUMBER);
+            throw new IllegalArgumentException(ERROR_RANGE_NUMBER + number);
         }
     }
 
