@@ -1,27 +1,13 @@
 package study.step3.domain.lottostatistics;
 
-import study.step3.domain.lotto.Money;
-import study.step3.domain.lotto.PurchaseMoney;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 public class LottoRateOfReturn {
 
-    public static final int WINNING_DIVIDE_PURCHASE_MONEY_SCALE = 2;
-    public static final String REVENUE_RESULT = "수익";
-    public static final String LOSS_RESULT = "손해";
+    private static final String REVENUE_RESULT = "수익";
+    private static final String LOSS_RESULT = "손해";
     private final double rateOfReturn;
 
     public LottoRateOfReturn(double rateOfReturn) {
         this.rateOfReturn = rateOfReturn;
-    }
-
-    public static LottoRateOfReturn of(PurchaseMoney purchaseMoney, Money winningMoney) {
-        double rateOfReturn = BigDecimal.valueOf(winningMoney.money())
-                .divide(BigDecimal.valueOf(purchaseMoney.money()), WINNING_DIVIDE_PURCHASE_MONEY_SCALE, RoundingMode.DOWN)
-                .doubleValue();
-        return new LottoRateOfReturn(rateOfReturn);
     }
 
     public double rate() {

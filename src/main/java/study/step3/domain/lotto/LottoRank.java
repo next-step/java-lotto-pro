@@ -8,11 +8,11 @@ public enum LottoRank {
     NONE(0L, 0L);
 
     private final long matchCount;
-    private final long winnings;
+    private final long winningMoney;
 
-    LottoRank(long matchCount, long winnings) {
+    LottoRank(long matchCount, long winningMoney) {
         this.matchCount = matchCount;
-        this.winnings = winnings;
+        this.winningMoney = winningMoney;
     }
 
     public static LottoRank ofMatchCount(Long matchCount) {
@@ -25,7 +25,7 @@ public enum LottoRank {
     }
 
     private static LottoRank findLottoLank(LottoRank findRank, LottoRank rank, Long matchCount) {
-        if(findRank.isWinnings()) {
+        if(findRank.getWinningMoney()) {
             return findRank;
         }
 
@@ -43,7 +43,7 @@ public enum LottoRank {
         return NONE.equals(this);
     }
 
-    public boolean isWinnings() {
+    public boolean getWinningMoney() {
         return !isNone();
     }
 
@@ -55,9 +55,11 @@ public enum LottoRank {
         return this.matchCount;
     }
 
-    public long winnings() {
-        return this.winnings;
+    public Money winningMoney() {
+        return Money.of(this.winningMoney);
     }
 
-
+    public Money winningMoneyWithCount(long count) {
+        return Money.of(this.winningMoney * count);
+    }
 }

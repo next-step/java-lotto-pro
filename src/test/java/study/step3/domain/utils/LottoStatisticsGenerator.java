@@ -1,6 +1,7 @@
 package study.step3.domain.utils;
 
 import study.step3.domain.lotto.LottoRank;
+import study.step3.domain.lotto.PurchaseMoney;
 import study.step3.domain.lottostatistics.LottoStatistics;
 
 import java.util.List;
@@ -13,6 +14,6 @@ public class LottoStatisticsGenerator {
                 .map(i -> lottoRank.matchCount())
                 .boxed()
                 .collect(Collectors.toList());
-        return new LottoStatistics(purchaseMoney, matchCounts);
+        return new LottoStatistics(PurchaseMoney.of(purchaseMoney), matchCounts);
     }
 }

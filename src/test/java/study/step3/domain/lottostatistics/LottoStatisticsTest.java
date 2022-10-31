@@ -27,8 +27,8 @@ class LottoStatisticsTest {
     @DisplayName("당첨 순위에 해당되는 수익율을 계산한다")
     void calculate_rate_of_return_test(long rankCount, LottoRank lottoRank, double expectedRateOfReturn) {
         LottoStatistics lottoStatistics = LottoStatisticsGenerator.createLottoStatistics(rankCount, lottoRank, 14000L);
-        double rateOfReturn = lottoStatistics.calculateRateOfReturn();
-        assertThat(rateOfReturn).isEqualTo(expectedRateOfReturn);
+        LottoRateOfReturn rateOfReturn = lottoStatistics.calculateRateOfReturn();
+        assertThat(rateOfReturn).isEqualTo(new LottoRateOfReturn(expectedRateOfReturn));
     }
 
     private static Stream<Arguments> LottoRanksAndRateOfReturn() {

@@ -1,8 +1,6 @@
 package study.step3.controller;
 
-import study.step3.domain.lotto.LottoIssuanceStrategy;
-import study.step3.domain.lotto.LottoMachine;
-import study.step3.domain.lotto.Lottos;
+import study.step3.domain.lotto.*;
 import study.step3.message.LottoMachineMessage;
 import study.step3.view.InputView;
 import study.step3.view.ResultView;
@@ -19,18 +17,18 @@ public class LottoMachineController {
         this.lottoIssuanceStrategy = lottoIssuanceStrategy;
     }
 
-    public Lottos issueLottos(long purchaseMoney) {
+    public Lottos issueLottos(PurchaseMoney purchaseMoney) {
         LottoMachine lottoMachine = new LottoMachine(purchaseMoney, lottoIssuanceStrategy);
-        return lottoMachine.issue();
+        return lottoMachine.issueLottos();
     }
 
-    public long inputPurchaseMoney() {
+    public PurchaseMoney inputPurchaseMoney() {
         String purchaseMoney = null;
         while (!validatePurchaseMoney(purchaseMoney)) {
             ResultView.output(LottoMachineMessage.INPUT_PURCHASE_MONEY_MESSAGE.message());
             purchaseMoney = InputView.input();
         }
-        return Long.parseLong(purchaseMoney);
+        return PurchaseMoney.of(Long.parseLong(purchaseMoney));
     }
 
     private boolean validatePurchaseMoney(String purchaseMoney) {
