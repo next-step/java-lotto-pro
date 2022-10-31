@@ -1,5 +1,6 @@
 package lotto.auto;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -20,5 +21,16 @@ public class MoneyTest {
     public void 금액_문자열_예외_확인(String input) {
         assertThatThrownBy(() -> new Money().changeStringToInt(input))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"2000:1000:1000", "4000:2000:2000", "6000:3000:3000"}, delimiter = ':')
+    public void 금액_차감_기능_확인(String input, int substract, int Expected) {
+        // given
+        Money money = new Money(input);
+        // when
+        money.substractMoney(substract);
+        // then
+        assertThat(money.getMoney()).isEqualTo(Expected);
     }
 }
