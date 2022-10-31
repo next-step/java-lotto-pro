@@ -63,7 +63,7 @@ public class LottoResultTest {
         )
     );
 
-    WinningLotto winningLotto = new WinningLotto("6,10, 20 41, 43, 44");
+    WinningLotto winningLotto = new WinningLotto("6, 10, 20, 41, 43, 44");
 
     //when
     String result = new LottoResult(lottoList, winningLotto).convertYieldToString();
