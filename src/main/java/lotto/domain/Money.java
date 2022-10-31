@@ -53,6 +53,13 @@ public class Money {
         return (int) money / LOTTO_PRICE;
     }
 
+    public boolean isBuyableLottoCount(int lottoCount) {
+        if(lottoCount < 0) {
+            throw new IllegalArgumentException(ErrorCode.음의_정수가_입력되면_안됨.getErrorMessage());
+        }
+        return this.maxLottoCount() >= lottoCount;
+    }
+
     /**
      * 수익율 계산 메소드
      * @param profitMoney

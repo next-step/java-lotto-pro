@@ -38,4 +38,23 @@ public class MoneyTest {
         Money money = Money.createMoney(5000L);
         assertThat(money.isLessThan(Money.createMoney(6000L))).isTrue();
     }
+
+    @Test
+    void 주어진_돈_내에서_살_수_있는_로또_개수라면_true_반환() {
+        Money money = Money.createMoney(5000L);
+        assertThat(money.isBuyableLottoCount(5)).isTrue();
+    }
+
+    @Test
+    void 주어진_돈_내에서_살_수_있는_로또_개수가_아니면_false_반환() {
+        Money money = Money.createMoney(5000L);
+        assertThat(money.isBuyableLottoCount(6)).isFalse();
+    }
+
+    @Test
+    void 주어진_돈_내에서_살_수_있는_로또_개수가_음수라면_에러_발생() {
+        Money money = Money.createMoney(5000L);
+        assertThatThrownBy(() -> money.isBuyableLottoCount(-1)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorCode.음의_정수가_입력되면_안됨.getErrorMessage());
+    }
 }
