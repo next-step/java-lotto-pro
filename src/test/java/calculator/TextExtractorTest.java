@@ -13,7 +13,7 @@ class TextExtractorTest {
     @DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환한다.")
     @ParameterizedTest
     @NullAndEmptySource
-    void customDelimiter(String text) {
+    void nullAndEmpty(String text) {
         TextExtractor extractor = new TextExtractor(text);
         assertThat(extractor.extract()).isEqualTo("0");
     }

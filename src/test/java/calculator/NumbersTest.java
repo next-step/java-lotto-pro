@@ -15,7 +15,7 @@ class NumbersTest {
     @DisplayName("숫자 집합 생성")
     @ParameterizedTest
     @MethodSource("textArray")
-    void add(String[] textArray) {
+    void constructor(String[] textArray) {
         Numbers numbers = new Numbers(textArray);
         assertThat(numbers.getNumbers()).containsExactly(new Number(textArray[0]), new Number(textArray[1]), new Number(textArray[2]));
     }
