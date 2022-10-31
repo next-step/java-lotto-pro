@@ -50,6 +50,10 @@ public class OutputView {
 
     public void printWinningMoneyRate(Money payment, Reward reward) {
         String winningMoneyRate = reward.getWinningMoneyRate(payment);
-        System.out.println("총 수익률은 " + winningMoneyRate + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        String output = "총 수익률은 " + winningMoneyRate + "입니다.";
+        if (Float.parseFloat(winningMoneyRate) < 1) {
+            output += "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+        }
+        System.out.println(output);
     }
 }
