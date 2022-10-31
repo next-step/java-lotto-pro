@@ -29,12 +29,6 @@ public class Validate {
         }
     }
 
-    static void validateWinningNumberNull(String input) {
-        if (input.equals(NULL)) {
-            throw new IllegalArgumentException(ERROR_INPUT_EMPTY_WINNING_NUMBER);
-        }
-    }
-
     static void validatePay(String input) {
         if (Integer.parseInt(input) < LOTTO_PRICE) {
             throw new IllegalArgumentException(ERROR_LOTTO_COST);
@@ -50,16 +44,15 @@ public class Validate {
         }
     }
 
-    static void validateWinningNumberRange(String input) {
-        StringTokenizer token = new StringTokenizer(input, DELIMITER);
-        while (token.hasMoreTokens()) {
-            validateNumberRange(Integer.parseInt(token.nextToken()));
-        }
-    }
-
     static void validateNumberRange(int number) {
         if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
             throw new IllegalArgumentException(ERROR_NUMBER_RANGE);
+        }
+    }
+
+    static void validateWinningNumberNull(String input) {
+        if (input.equals(NULL)) {
+            throw new IllegalArgumentException(ERROR_INPUT_EMPTY_WINNING_NUMBER);
         }
     }
 
@@ -67,6 +60,13 @@ public class Validate {
         StringTokenizer token = new StringTokenizer(input, DELIMITER);
         while (token.hasMoreTokens()) {
             validateOnlyNumber(token.nextToken());
+        }
+    }
+
+    static void validateWinningNumberRange(String input) {
+        StringTokenizer token = new StringTokenizer(input, DELIMITER);
+        while (token.hasMoreTokens()) {
+            validateNumberRange(Integer.parseInt(token.nextToken()));
         }
     }
 
