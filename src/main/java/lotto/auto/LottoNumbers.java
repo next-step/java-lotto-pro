@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static lotto.auto.common.Constants.DELIMITER;
+import static lotto.auto.common.Constants.LOTTO_LENGTH;
 
 public class LottoNumbers {
     private final int BEGIN_INDEX = 0;
@@ -29,7 +30,13 @@ public class LottoNumbers {
     }
 
     private void stringToNumbersByToken(String inputStr) {
+        if (inputStr == null) {
+            throw new IllegalArgumentException();
+        }
         String[] str = inputStr.split(DELIMITER);
+        if (str.length != LOTTO_LENGTH) {
+            throw new IllegalArgumentException();
+        }
         for (String number : str) {
             this.lottoNumbers.add(new LottoAutoUtils().stringToNumber(number));
         }
