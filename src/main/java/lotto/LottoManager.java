@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.buyer.LottoBuyer;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinnerLotto;
@@ -26,7 +27,7 @@ public class LottoManager {
         OutputView.printLottoCount(lottos.getLottoCount());
         OutputView.printLottos(lottos.toString());
 
-        WinnerLotto winnerLotto = new WinnerLotto(createWinnerLotto(InputView.inputWinLottoNumber()),
+        Lotto winnerLotto = new WinnerLotto(createWinnerLotto(InputView.inputWinLottoNumber()),
                 new LottoNumber(InputView.inputBonusNumber()));
 
         Prizes prizes = lottos.getPrizeOfLotto(winnerLotto);
