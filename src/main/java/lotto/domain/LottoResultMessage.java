@@ -3,16 +3,18 @@ package lotto.domain;
 public class LottoResultMessage {
 	private final MatchCount matchCount;
 	private final int quantity;
-	private final Price winningPrice;
 
-	public LottoResultMessage(MatchCount matchCount, int quantity, Price winningPrice) {
+	public LottoResultMessage(MatchCount matchCount, int quantity) {
 		this.matchCount = matchCount;
 		this.quantity = quantity;
-		this.winningPrice = winningPrice;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("%d개 일치 (%d원)- %d", this.matchCount.getInt(), this.winningPrice.getLong(), this.quantity);
+		int matchCountInt = this.matchCount.getInt();
+		long winningPriceLong = this.matchCount.winningPrice().getLong();
+
+		return String.format("%d개 일치 (%d원)- %d", matchCountInt, winningPriceLong,
+			this.quantity);
 	}
 }

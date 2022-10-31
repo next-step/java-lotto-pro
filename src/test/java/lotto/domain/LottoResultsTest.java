@@ -12,7 +12,7 @@ class LottoResultsTest {
 		LottoResult.from(Lotto.random(), MatchCount.from(3)),
 		LottoResult.from(Lotto.random(), MatchCount.from(4)),
 		LottoResult.from(Lotto.random(), MatchCount.from(5))
-	);;
+	);
 
 	@Test
 	void 객체_생성() {
@@ -20,13 +20,14 @@ class LottoResultsTest {
 	}
 
 	@Test
-	void 일치_갯수별_로또_결과_컬랙션_생성() {
-		assertThat(LottoResults.from(lottoResults).toLottoResultMatchCounts(MatchCount.from(3))).isNotNull();
+	void 결과_갯수() {
+		assertThat(LottoResults.from(lottoResults).quantity()).isEqualTo(3);
 	}
 
 	@Test
-	void 결과_갯수() {
-		assertThat(LottoResults.from(lottoResults).quantity()).isEqualTo(3);
+	void 일치_갯수로_필터링() {
+		assertThat(LottoResults.from(lottoResults).filterByMatchCount(MatchCount.from(3))).isEqualTo(
+			LottoResults.from(Arrays.asList(lottoResults.get(0))));
 	}
 
 	@Test

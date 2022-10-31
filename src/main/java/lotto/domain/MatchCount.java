@@ -27,6 +27,10 @@ public class MatchCount {
 		}
 	}
 
+	public Price winningPrice() {
+		return new MatchCountWinningPriceStrategy(this).winningPrice();
+	}
+
 	public int getInt() {
 		return this.matchCount;
 	}
@@ -46,7 +50,4 @@ public class MatchCount {
 		return Objects.hash(matchCount);
 	}
 
-	public Price winningPrice() {
-		return new MatchCountWinningPriceStrategy(this).winningPrice();
-	}
 }

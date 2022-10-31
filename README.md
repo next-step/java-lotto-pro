@@ -40,9 +40,6 @@
   - [X] 0~6 일치 갯수 범위 제한
 - 난수 생성기 (RandomNumbersGenerator)
   - [X] begin~last 범위 n자리 난수 생성
-- 로또 랜덤 번호 선택 전략 
-  - [X] 난수 생성기로부터 번호를 생성 받아 전달(RandomLottoNumberStrategy)
-  - [X] 직접 입력 받아서 선택 (InputLottoNumberStrategy)
 - 문자열 쉼표 분리기 (InputSplitter)
   - [X] 분리할 문자열과 구분자를 받아서 분리 결과 반환
 - 로또 결과 메시지 (LottoResultMessage)

@@ -25,8 +25,9 @@ public class WinningLotto {
 
 	public LottoResultMessage getResultMessage(Lottos lottos, MatchCount matchCount) {
 		LottoResults lottoResults = lottos.toLottoResults(winLotto);
-		LottoResultMatchCounts lottoResultMatchCounts = lottoResults.toLottoResultMatchCounts(matchCount);
-		return lottoResultMatchCounts.LottoResultMessage();
+		LottoResults filteredLottoResults = lottoResults.filterByMatchCount(matchCount);
+		int matchQuantity = filteredLottoResults.quantity();
+		return new LottoResultMessage(matchCount, matchQuantity);
 	}
 
 	public YieldMessage getYieldMessage(Lottos lottos) {
