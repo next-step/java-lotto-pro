@@ -14,6 +14,8 @@ public class LottoCalculator {
     private static List<Lotto> purchasedLottos;
     private static LottoResult lottoResult;
 
+    private static LottoNumber bonusNumber;
+
     public LottoCalculator() {
         this.lastWeekWinner = new ArrayList<>();
         this.lottoResult = new LottoResult();
