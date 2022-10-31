@@ -40,8 +40,8 @@ public class LottoResults {
 		return this.lottoResults.size();
 	}
 
-	public float yield() {
-		return totalWinningPrice().div(quantity());
+	public Yield yield(Price purchaseAmount) {
+		return new DefaultYieldStrategy(totalWinningPrice(), purchaseAmount).yield();
 	}
 
 	@Override

@@ -6,31 +6,11 @@ import java.util.stream.LongStream;
 
 public class DefaultPurchaseStrategy implements LottoPurchaseStrategy {
 	private static final int DEFAULT_PURCHASE_LOTTO_PRICE = 1000;
-	private static final long MIN_PURCHASE_AMOUNT = 0L;
 
-	private final long purchaseAmount;
+	private final Price purchaseAmount;
 
-	public DefaultPurchaseStrategy(final long purchaseAmount) {
-		validatePurchaseAmount(purchaseAmount);
+	public DefaultPurchaseStrategy(final Price purchaseAmount) {
 		this.purchaseAmount = purchaseAmount;
-	}
-
-	public DefaultPurchaseStrategy(final String purchaseAmount) {
-		this(parseInt(purchaseAmount));
-	}
-
-	private static int parseInt(String purchaseAmount) {
-		try {
-			return Integer.parseInt(purchaseAmount);
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("숫자만 입력 가능합니다.");
-		}
-	}
-
-	private void validatePurchaseAmount(long purchaseAmount) {
-		if (purchaseAmount < MIN_PURCHASE_AMOUNT) {
-			throw new IllegalArgumentException("구입 금액은 음수일 수 없습니다.");
-		}
 	}
 
 	@Override
@@ -41,6 +21,6 @@ public class DefaultPurchaseStrategy implements LottoPurchaseStrategy {
 	}
 
 	private long quantity() {
-		return this.purchaseAmount / DEFAULT_PURCHASE_LOTTO_PRICE;
+		return this.purchaseAmount.getLong() / DEFAULT_PURCHASE_LOTTO_PRICE;
 	}
 }

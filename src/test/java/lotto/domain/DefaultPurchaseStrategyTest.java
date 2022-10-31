@@ -2,19 +2,14 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 class DefaultPurchaseStrategyTest {
 	@Test
-	void 숫자가_아닌_문자열_IllegalArgumentException() {
-		assertThatThrownBy(() -> new DefaultPurchaseStrategy("숫자아님").purchase())
-			.isInstanceOf(IllegalArgumentException.class);
+	void 로또_15000원어치_구매() {
+		List<Lotto> lottos = new DefaultPurchaseStrategy(Price.from(15000)).purchase();
+		assertThat(lottos).hasSize(15);
 	}
-
-	@Test
-	void 입력_금액_음수_IllegalArgumentException() {
-		assertThatThrownBy(() -> new DefaultPurchaseStrategy(-3000).purchase())
-			.isInstanceOf(IllegalArgumentException.class);
-	}
-
 }

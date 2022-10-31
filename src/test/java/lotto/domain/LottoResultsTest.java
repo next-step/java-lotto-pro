@@ -29,9 +29,4 @@ class LottoResultsTest {
 		assertThat(LottoResults.from(lottoResults).filterByMatchCount(MatchCount.from(3))).isEqualTo(
 			LottoResults.from(Arrays.asList(lottoResults.get(0))));
 	}
-
-	@Test
-	void 수익률() {
-		assertThat(LottoResults.from(lottoResults).yield()).isEqualTo(518333.33f);
-	}
 }

@@ -4,14 +4,14 @@ import java.util.Objects;
 
 public class YieldMessage {
 	public static final float BENEFIT_STANDARD = 1f;
-	private final float yield;
+	private final Yield yield;
 
-	public YieldMessage(float yield) {
+	public YieldMessage(Yield yield) {
 		this.yield = yield;
 	}
 
 	private String benefitMessage() {
-		if (yield > BENEFIT_STANDARD) {
+		if (yield.isGreaterThan(Yield.from(BENEFIT_STANDARD))) {
 			return "이득";
 		}
 		return "손해";
@@ -19,7 +19,7 @@ public class YieldMessage {
 
 	@Override
 	public String toString() {
-		return String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)", yield, benefitMessage());
+		return String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)", yield.getFloat(), benefitMessage());
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class YieldMessage {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		YieldMessage that = (YieldMessage)o;
-		return Float.compare(that.yield, yield) == 0;
+		return Objects.equals(yield, that.yield);
 	}
 
 	@Override
