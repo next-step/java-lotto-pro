@@ -58,4 +58,40 @@ public class LottoTest {
                 new ManualLottoNumberGenerateStrategy(Arrays.asList(1, 18, 27, 1, 45, 45))
         );
     }
+
+    @ParameterizedTest(name = "다른_로또와_몇개가_일치하는지_확인한다")
+    @MethodSource("lottoMatchTestFixture")
+    void 다른_로또와_몇개가_일치하는지_확인한다(Lotto lotto, Lotto other, LottoMatchType expectedMatchType) {
+        assertThat(lotto.match(other)).isSameAs(expectedMatchType);
+    }
+
+    static Stream<Arguments> lottoMatchTestFixture() {
+        return Stream.of(
+            Arguments.of(
+                Lotto.valueOf(new ManualLottoNumberGenerateStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                Lotto.valueOf(new ManualLottoNumberGenerateStrategy(Arrays.asList(1, 2, 3, 10, 11, 12))),
+                LottoMatchType.THREE
+            ),
+            Arguments.of(
+                Lotto.valueOf(new ManualLottoNumberGenerateStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                Lotto.valueOf(new ManualLottoNumberGenerateStrategy(Arrays.asList(1, 2, 3, 4, 11, 12))),
+                LottoMatchType.FOUR
+            ),
+            Arguments.of(
+                Lotto.valueOf(new ManualLottoNumberGenerateStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                Lotto.valueOf(new ManualLottoNumberGenerateStrategy(Arrays.asList(1, 2, 3, 4, 5, 12))),
+                LottoMatchType.FIVE
+            ),
+            Arguments.of(
+                Lotto.valueOf(new ManualLottoNumberGenerateStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                Lotto.valueOf(new ManualLottoNumberGenerateStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                LottoMatchType.SIX
+            ),
+            Arguments.of(
+                Lotto.valueOf(new ManualLottoNumberGenerateStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                Lotto.valueOf(new ManualLottoNumberGenerateStrategy(Arrays.asList(1, 2, 23, 10, 11, 12))),
+                LottoMatchType.OTHER
+            )
+        );
+    }
 }

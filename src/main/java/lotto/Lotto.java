@@ -45,6 +45,18 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
+    public LottoMatchType match(Lotto other) {
+        LottoMatchCount matchCount = new LottoMatchCount();
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            matchCount.addIfContains(other, lottoNumber);
+        }
+        return matchCount.getLottoMatchType();
+    }
+
+    public boolean contains(LottoNumber otherLottoNumber) {
+        return lottoNumbers.contains(otherLottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
