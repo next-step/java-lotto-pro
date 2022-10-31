@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static lotto.domain.LottoRank.FAIL;
+import static lotto.domain.LottoRank.FIFTH;
 import static lotto.domain.LottoRank.FIRST;
 import static lotto.domain.LottoRank.FOURTH;
 import static lotto.domain.LottoRank.SECOND;
@@ -8,6 +9,7 @@ import static lotto.domain.LottoRank.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 import org.assertj.core.data.Offset;
@@ -45,8 +47,8 @@ class LottoResultStatTest {
     private static Stream<Arguments> rank_testcase() {
 
         return Stream.of(
-                Arguments.of(Arrays.asList(), 0, FAIL),
-                Arguments.of(Arrays.asList(FIRST), 1, FIRST),
+                Arguments.of(Collections.emptyList(), 0, FAIL),
+                Arguments.of(Collections.singletonList(FIRST), 1, FIRST),
                 Arguments.of(Arrays.asList(SECOND, SECOND), 2, SECOND),
                 Arguments.of(Arrays.asList(THIRD, THIRD, THIRD), 3, THIRD),
                 Arguments.of(Arrays.asList(FOURTH, FOURTH, FOURTH, FOURTH), 4, FOURTH)
@@ -57,9 +59,9 @@ class LottoResultStatTest {
 
         return Stream.of(
                 Arguments.of(Arrays.asList(FAIL, FAIL), 0),
-                Arguments.of(Arrays.asList(FIRST), 2_000_000),
-                Arguments.of(Arrays.asList(FAIL, FAIL, SECOND), 500),
-                Arguments.of(Arrays.asList(FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FOURTH), 0.71)
+                Arguments.of(Collections.singletonList(FIRST), 2_000_000),
+                Arguments.of(Arrays.asList(FAIL, FAIL, THIRD), 500),
+                Arguments.of(Arrays.asList(FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FIFTH), 0.71)
         );
     }
 

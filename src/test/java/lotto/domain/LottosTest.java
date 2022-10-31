@@ -27,10 +27,10 @@ class LottosTest {
     @DisplayName("구매한 로또에 대한 결과를 확인할 수 있다.")
     @ParameterizedTest
     @MethodSource("result_testcase")
-    void lottos_result(List<Integer> numbers, List<Integer> winningNumbers, int expect) {
+    void lottos_result(List<Integer> numbers, List<Integer> winningNumbers, int bonusNumber, int expect) {
 
         Lottos lottos = new Lottos(() -> numbers);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         lottos.buyRandomNumberLottos(1);
         LottoResultStat lottoResultStat = lottos.checkResultStat(winningLotto);
@@ -41,8 +41,8 @@ class LottosTest {
     private static Stream<Arguments> result_testcase() {
 
         return Stream.of(
-                Arguments.of(Arrays.asList(6, 5, 4, 3, 2, 1), Arrays.asList(6, 5, 4, 3, 2, 1), 2000000),
-                Arguments.of(Arrays.asList(6, 5, 4, 3, 2, 1), Arrays.asList(7, 8, 9, 10, 11, 12), 0)
+                Arguments.of(Arrays.asList(6, 5, 4, 3, 2, 1), Arrays.asList(6, 5, 4, 3, 2, 1), 7, 2000000),
+                Arguments.of(Arrays.asList(6, 5, 4, 3, 2, 1), Arrays.asList(7, 8, 9, 10, 11, 12), 13, 0)
         );
     }
 }

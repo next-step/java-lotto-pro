@@ -16,7 +16,7 @@ public class Numbers {
         validNumbers();
     }
 
-    private boolean contains(Number number) {
+    public boolean contains(Number number) {
         return numbers.contains(number);
     }
 
