@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import org.junit.jupiter.api.DisplayName;
@@ -35,5 +36,31 @@ class MoneyTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Money(-1000))
                 .withMessageContaining("금액은 음수가 아니어야 합니다.");
+    }
+
+    @DisplayName("금액을 금액으로 나눌 수 있다.")
+    @ParameterizedTest(name = "{0} / {1} = {2} (몫만 반환)")
+    @CsvSource({
+            "10000, 1000, 10",
+            "0, 1000, 0",
+            "1500, 1000, 1"
+    })
+    void 나누기(final int oneValue, final int otherValue, final int expected) {
+        final Money something = new Money(oneValue);
+        final Money other = new Money(otherValue);
+
+        final int actual = something.divide(other);
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("0으로 나눌 수 없다.")
+    @Test
+    void 영으로_나누기() {
+        final Money something = new Money(1000);
+        final Money zero = new Money(0);
+
+        assertThatExceptionOfType(ArithmeticException.class)
+                .isThrownBy(() -> something.divide(zero));
     }
 }

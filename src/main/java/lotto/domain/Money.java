@@ -17,6 +17,10 @@ public class Money {
         return this.value == 0;
     }
 
+    public int divide(final Money other) {
+        return this.value / other.value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

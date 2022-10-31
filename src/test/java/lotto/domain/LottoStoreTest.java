@@ -1,10 +1,14 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class LottoStoreTest {
     @DisplayName("가격은 음수가 아니어야 함.")
@@ -34,5 +38,21 @@ class LottoStoreTest {
 
         assertThatNoException()
                 .isThrownBy(() -> new LottoStore(lottoUnitPrice));
+    }
+
+    @DisplayName("주어진 금액으로 살 수 있는 최대한의 로또를 구매할 수 있다.")
+    @ParameterizedTest
+    @CsvSource({
+            "10000, 10",
+            "0, 0",
+            "1500, 1"
+    })
+    void 로또_구매(final int givenMoney, final int expectedCount) {
+        final LottoStore store = new LottoStore(1000);
+        final Money money = new Money(givenMoney);
+
+        final List<Lotto> lottos = store.buyLottos(money);
+
+        assertThat(lottos).hasSize(expectedCount);
     }
 }
