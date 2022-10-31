@@ -40,7 +40,7 @@ public class Game {
         return this.lottoResults;
     }
 
-    public double getProfitPercent(LottoWinningStatistics lottoWinningStatistics) {
-        return lottoWinningStatistics.getTotalProfitPercent(buyMoney);
+    public Money getBuyMoney() {
+        return buyMoney;
     }
 }

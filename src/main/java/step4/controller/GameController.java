@@ -22,7 +22,8 @@ public class GameController {
         setWinLottoResult(InputView.inputWinnerLottoResult());
         setBonusNumber(InputView.inputLottoBonusNumber());
         setLottoWinningStatistics();
-        OutputView.printLottoStatistics(lottoWinningStatistics.getLottoWinningStatistics(), game.getProfitPercent(lottoWinningStatistics));
+        OutputView.printLottoStatistics(lottoWinningStatistics.getLottoWinningStatistics()
+                , lottoWinningStatistics.getTotalProfitPercent(game.getBuyMoney()));
     }
 
     private void setWinLottoResult(String inputLottoNumbers) {
