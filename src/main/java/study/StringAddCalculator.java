@@ -6,10 +6,10 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-    private static final String DEFAULT_SPLIT_REGEX = ",|:";
-    private static final String FIND_CUSTOM_DELIMITER_PATTERN_REGEX = "//(.)\n(.*)";
     private static final int BRANK_NUMBER = 0;
     private static final int VALIDATE_MINIMUM_NUMBER = 0;
+    private static final String DEFAULT_SPLIT_REGEX = ",|:";
+    private static final Pattern FIND_CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
 
     public static int splitAndSum(String text) {
         if (isBlank(text)) {
@@ -24,7 +24,7 @@ public class StringAddCalculator {
     }
 
     private static String[] split(String text) {
-        Matcher matcher = Pattern.compile(FIND_CUSTOM_DELIMITER_PATTERN_REGEX).matcher(text);
+        Matcher matcher = FIND_CUSTOM_DELIMITER_PATTERN.matcher(text);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
             return matcher.group(2).split(customDelimiter);
