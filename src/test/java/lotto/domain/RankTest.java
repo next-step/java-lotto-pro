@@ -14,26 +14,24 @@ public class RankTest {
         assertThat(Rank.isBiggerThanMinimum(3)).isTrue();
     }
 
-    @DisplayName("랭크를 역순으로 구할 수 있다")
-    @Test
-    void reverse_rank_test() {
-        Rank reverseFirstRank = Rank.reverseValues()[0];
-        assertThat(reverseFirstRank).isEqualTo(Rank.FOURTH);
-    }
-
     @DisplayName("일치하는 숫자로 Rank를 알 수 있다")
     @Test
     void rank_get_test() {
         int count = Rank.FIRST.getMatchCount();
-        assertThat(Rank.get(count)).isEqualTo(Rank.FIRST);
+        assertThat(Rank.get(count, false)).isEqualTo(Rank.FIRST);
     }
 
-    @DisplayName("최소값보다 작은 값이 들어올 경우 예외가 발생한다")
+    @DisplayName("티켓의 번호가 5개가 일치할 경우 순위는 3등이다")
     @Test
-    void rank_get_exception_test() {
-        assertThatThrownBy(() -> Rank.get(2))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("일치하는 랭크가 없습니다.");
+    void rank_get_match_five_test() {
+        assertThat(Rank.get(5, false)).isEqualTo(Rank.THIRD);
+    }
+
+    @DisplayName("보너스 볼이 일치하는 경우 순위는 2등이다")
+    @Test
+    void rank_get_bonus_test() {
+        int count = Rank.FOURTH.getMatchCount();
+        assertThat(Rank.get(count, true)).isEqualTo(Rank.SECOND);
     }
 
     @DisplayName("각 랭크의 일치하는 숫자를 알 수 있다")

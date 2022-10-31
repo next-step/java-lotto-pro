@@ -35,8 +35,16 @@ public class LottoResult {
     private void addLottoResultCounts(LottoTicket ticket) {
         int matchCount = countOfMatch(ticket);
         if (Rank.isBiggerThanMinimum(matchCount)) {
-            lottoResultCounts.merge(Rank.get(matchCount), INCREASE_VALUE, Integer::sum);
+            boolean isBonusMatch = checkBonusMatch(matchCount, ticket);
+            lottoResultCounts.merge(Rank.get(matchCount, isBonusMatch), INCREASE_VALUE, Integer::sum);
         }
+    }
+
+    private boolean checkBonusMatch(int matchCount, LottoTicket ticket) {
+        if (Rank.FOURTH.getMatchCount() == matchCount && ticket.contain(bonusNumber)) {
+            return true;
+        }
+        return false;
     }
 
     private int countOfMatch(LottoTicket ticket) {
