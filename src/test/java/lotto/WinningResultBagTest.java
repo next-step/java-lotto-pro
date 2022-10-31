@@ -8,12 +8,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.WinningResult.MATCH_FIVE;
-import static lotto.WinningResult.MATCH_FOUR;
-import static lotto.WinningResult.MATCH_THREE;
-import static lotto.WinningResultBag.MATCH_FIVE_REWARD;
-import static lotto.WinningResultBag.MATCH_FOUR_REWARD;
-import static lotto.WinningResultBag.MATCH_THREE_REWARD;
+import static lotto.WinningResult.WIN_FOURTH;
+import static lotto.WinningResult.WIN_SECOND;
+import static lotto.WinningResult.WIN_THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.ParameterizedTest.DEFAULT_DISPLAY_NAME;
 
@@ -23,10 +20,10 @@ class WinningResultBagTest {
     private static final int LOTTO_PRICE = 1000;
 
     @ParameterizedTest(name = "목록 제공 " + DEFAULT_DISPLAY_NAME)
-    @CsvSource(value = { "MATCH_THREE:1", "MATCH_FOUR:1", "MATCH_FIVE:1" }, delimiter = ':')
+    @CsvSource(value = { "WIN_FOURTH:1", "WIN_THIRD:1", "WIN_SECOND:1" }, delimiter = ':')
     void groupByWinningResult_results_success(WinningResult winningResult, long matchCount) {
         //given:
-        WinningResultBag resultBag = new WinningResultBag(Arrays.asList(MATCH_THREE, MATCH_FOUR, MATCH_FIVE));
+        WinningResultBag resultBag = new WinningResultBag(Arrays.asList(WIN_FOURTH, WIN_THIRD, WIN_SECOND));
         //when then:
         assertThat(resultBag.groupByWinningResult().get(winningResult)).isEqualTo(matchCount);
     }
@@ -35,9 +32,10 @@ class WinningResultBagTest {
     @Test
     void calculateProfitRate_results_success() {
         //given:
-        List<WinningResult> winningResultList = Arrays.asList(MATCH_THREE, MATCH_FOUR, MATCH_FIVE);
-        double result = (double) (MATCH_THREE_REWARD + MATCH_FOUR_REWARD + MATCH_FIVE_REWARD) /
-                (LOTTO_PRICE * winningResultList.size());
+        List<WinningResult> winningResultList = Arrays.asList(WIN_FOURTH, WIN_THIRD, WIN_SECOND);
+        double result =
+                (double) (WIN_FOURTH.getWinningPrice() + WIN_THIRD.getWinningPrice() + WIN_SECOND.getWinningPrice()) /
+                        (LOTTO_PRICE * winningResultList.size());
         //when:
         WinningResultBag resultBag = new WinningResultBag(winningResultList);
         //then:

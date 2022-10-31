@@ -25,6 +25,6 @@ class LottoTest {
         //when:
         LottoNumberBag winningNumbers = new LottoNumberBag(Arrays.asList(1, 2, 3, 10, 20, 30));
         //then:
-        assertThat(lotto.getResult(winningNumbers)).isEqualTo(WinningResult.MATCH_THREE);
+        assertThat(lotto.getResult(winningNumbers)).isEqualTo(WinningResult.WIN_FOURTH);
     }
 }

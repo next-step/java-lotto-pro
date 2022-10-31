@@ -4,10 +4,10 @@ import lotto.WinningResult;
 
 import java.util.Map;
 
-import static lotto.WinningResultBag.MATCH_FIVE_REWARD;
-import static lotto.WinningResultBag.MATCH_FOUR_REWARD;
-import static lotto.WinningResultBag.MATCH_SIX_REWARD;
-import static lotto.WinningResultBag.MATCH_THREE_REWARD;
+import static lotto.WinningResult.WIN_FIRST;
+import static lotto.WinningResult.WIN_FOURTH;
+import static lotto.WinningResult.WIN_SECOND;
+import static lotto.WinningResult.WIN_THIRD;
 
 public class ResultView {
     private static final String NEW_LINE = System.getProperty("line.separator");
@@ -20,14 +20,14 @@ public class ResultView {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("당첨 통계").append(NEW_LINE)
                 .append("---------").append(NEW_LINE)
-                .append("3개 일치 (").append(MATCH_THREE_REWARD).append("원)- ")
-                .append(winningResultMap.get(WinningResult.MATCH_THREE)).append("개").append(NEW_LINE)
-                .append("4개 일치 (").append(MATCH_FOUR_REWARD).append("원)- ")
-                .append(winningResultMap.get(WinningResult.MATCH_FOUR)).append("개").append(NEW_LINE)
-                .append("5개 일치 (").append(MATCH_FIVE_REWARD).append("원)- ")
-                .append(winningResultMap.get(WinningResult.MATCH_FIVE)).append("개").append(NEW_LINE)
-                .append("6개 일치 (").append(MATCH_SIX_REWARD).append("원)- ")
-                .append(winningResultMap.get(WinningResult.MATCH_SIX)).append("개").append(NEW_LINE);
+                .append("3개 일치 (").append(WIN_FOURTH.getWinningPrice()).append("원)- ")
+                .append(winningResultMap.get(WIN_FOURTH)).append("개").append(NEW_LINE)
+                .append("4개 일치 (").append(WIN_THIRD.getWinningPrice()).append("원)- ")
+                .append(winningResultMap.get(WIN_THIRD)).append("개").append(NEW_LINE)
+                .append("5개 일치 (").append(WIN_SECOND.getWinningPrice()).append("원)- ")
+                .append(winningResultMap.get(WinningResult.WIN_SECOND)).append("개").append(NEW_LINE)
+                .append("6개 일치 (").append(WIN_FIRST.getWinningPrice()).append("원)- ")
+                .append(winningResultMap.get(WinningResult.WIN_FIRST)).append("개").append(NEW_LINE);
         System.out.println(stringBuilder);
     }
 
