@@ -2,16 +2,17 @@ package study;
 
 public class StringAddCalculator {
 
-    private static final int NUM_0 = 0;
-    private static String[] numbers;
+    public static final int ZERO = 0;
+
     public static int splitAndSum(String text) {
-        if(Validator.isNull(text) || Validator.isEmpty(text)){
-            return NUM_0;
+        String[] tokens = Delimiters.split(text);
+
+        Numbers numbers = new Numbers();
+        for (String token : tokens) {
+            numbers.add(Number.validator(token));
         }
 
-        numbers= StringUtils.split(text);
-
-        return Calculator.sumNumbers(numbers);
+        return numbers.sumAllValue().toInt();
     }
 
 
