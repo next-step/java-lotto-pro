@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 public class OutputView {
+    private static final String EMPTY = "";
+
     private OutputView() {}
 
     public static void printGetMoney() {
@@ -36,9 +38,18 @@ public class OutputView {
         System.out.println("---------");
 
         for (Rank rank : statistics.keySet()) {
-            System.out.printf("%d개 일치 (%d원) - %d개\n",
-                    rank.getMatchCount(), rank.getMoneyValue(), statistics.get(rank));
+            System.out.printf("%d개 일치%s(%d원) - %d개\n",
+                    rank.getMatchCount(), bonusComment(rank), rank.getMoneyValue(), statistics.get(rank));
         }
+    }
+
+    private static String bonusComment(Rank rank) {
+        String result = EMPTY;
+        if (rank == Rank.SECOND) {
+            result += ", 보너스 볼 일치";
+        }
+
+        return result;
     }
 
     public static void printReturnRate(double returnRate) {

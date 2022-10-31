@@ -20,10 +20,6 @@ public enum Rank {
         this.money = money;
     }
 
-    public static boolean isBiggerThanMinimum(int count) {
-        return count >= FOURTH.matchCount;
-    }
-
     public static Rank[] reverseValues() {
         Deque<Rank> deque = new ArrayDeque<>();
         for (Rank rank : Rank.values()) {

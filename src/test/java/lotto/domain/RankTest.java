@@ -4,16 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class RankTest {
-    @DisplayName("랭크 최소값과 비교할 수 있다")
-    @Test
-    void isBiggerThanMinimum_test() {
-        assertThat(Rank.isBiggerThanMinimum(2)).isFalse();
-        assertThat(Rank.isBiggerThanMinimum(3)).isTrue();
-    }
-
     @DisplayName("일치하는 숫자로 Rank를 알 수 있다")
     @Test
     void rank_get_test() {
