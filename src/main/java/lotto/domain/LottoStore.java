@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoStore {
     private final Money lottoUnitPrice;
@@ -25,20 +23,14 @@ public class LottoStore {
         this.lottoUnitPrice = lottoUnitPrice;
     }
 
-    public List<Lotto> buyLottos(Money money) {
+    public List<Lotto> buyLottos(Money money, NumberPickStrategy pickStrategy) {
         if (money.isZero()) {
             return Collections.emptyList();
         }
 
         final int quantity = money.divide(this.lottoUnitPrice);
 
-        return generateLottos(quantity);
-    }
-
-    private List<Lotto> generateLottos(int quantity) {
-        return Stream.generate(this::generateLotto)
-                .limit(quantity)
-                .collect(Collectors.toList());
+        return pickStrategy.pickNumbers(quantity);
     }
 
     private Lotto generateLotto() {

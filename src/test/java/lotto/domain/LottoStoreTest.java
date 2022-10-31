@@ -51,7 +51,7 @@ class LottoStoreTest {
         final LottoStore store = new LottoStore(1000);
         final Money money = new Money(givenMoney);
 
-        final List<Lotto> lottos = store.buyLottos(money);
+        final List<Lotto> lottos = store.buyLottos(money, Fixture.pick123456());
 
         assertThat(lottos).hasSize(expectedCount);
     }
