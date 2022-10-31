@@ -12,13 +12,20 @@ class LottoNumberGeneratorTest {
 
     @DisplayName("생성 성공")
     @Test
-    void create_numbers_success() {
-        assertThat(LottoNumberGenerator.generate()).hasSize(LOTTO_NUMBER_SIZE);
+    void
+    create_numbers_success() {
+        //given:
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        //when, then:
+        assertThat(lottoNumberGenerator.generate()).hasSize(LOTTO_NUMBER_SIZE);
     }
 
     @DisplayName("중복 숫자 테스트")
     @Test
     void create_numbers_noDuplicates() {
-        assertThat(LottoNumberGenerator.generate()).doesNotHaveDuplicates();
+        //given:
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        //when, then:
+        assertThat(lottoNumberGenerator.generate()).doesNotHaveDuplicates();
     }
 }

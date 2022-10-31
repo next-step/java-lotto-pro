@@ -10,11 +10,11 @@ public class LottoBag {
 
     public static final Money LOTTO_PRICE = new Money(1000);
 
-    public LottoBag(Money money) {
+    public LottoBag(Money money, NumberGenerator numberGenerator) {
         lottoList = new ArrayList<>();
         while (money.isEqualsOrGreater(LOTTO_PRICE)) {
             money.minus(LOTTO_PRICE);
-            lottoList.add(new Lotto());
+            lottoList.add(new Lotto(numberGenerator));
         }
     }
 

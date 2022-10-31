@@ -10,8 +10,8 @@ public class LottoIssuer {
         throw new IllegalStateException("유틸 클래스 입니다");
     }
 
-    public static LottoBag issue(Money money) {
-        return new LottoBag(money);
+    public static LottoBag issue(Money money, NumberGenerator numberGenerator) {
+        return new LottoBag(money, numberGenerator);
     }
 
     public static void result(LottoBag lottoBag, List<Integer> winningNumbers) {

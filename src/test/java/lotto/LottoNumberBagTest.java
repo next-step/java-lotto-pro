@@ -21,7 +21,7 @@ class LottoNumberBagTest {
     @DisplayName("생성 성공")
     @Test
     void create_bag_success() {
-        assertThatNoException().isThrownBy(LottoNumberBag::new);
+        assertThatNoException().isThrownBy(() -> new LottoNumberBag(new LottoNumberGenerator()));
     }
 
     @DisplayName("당첨 번호 일치 카운트 제공")

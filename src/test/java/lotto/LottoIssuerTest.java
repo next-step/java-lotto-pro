@@ -19,7 +19,7 @@ class LottoIssuerTest {
     @CsvSource(value = { "10000:10", "10500:10", "500:0" }, delimiter = ':')
     void issue_lottoList_success(int money, int numberOfLotto) {
         //given:
-        LottoBag lottoBag = LottoIssuer.issue(new Money(money));
+        LottoBag lottoBag = LottoIssuer.issue(new Money(money), new LottoNumberGenerator());
         //when, then:
         assertThat(lottoBag.hasSize()).isEqualTo(numberOfLotto);
     }
@@ -27,7 +27,7 @@ class LottoIssuerTest {
     @DisplayName("로또 당첨 결과 성공")
     @Test
     void result_issuedLotto_success() {
-        LottoBag lottoList = new LottoBag(new Money(0));
+        LottoBag lottoList = new LottoBag(new Money(0), new LottoNumberGenerator());
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         assertThatNoException().isThrownBy(() -> LottoIssuer.result(lottoList, winningNumbers));
     }

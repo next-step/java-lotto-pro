@@ -6,8 +6,8 @@ public class Lotto {
 
     private final LottoNumberBag lottoNumberBag;
 
-    public Lotto() {
-        lottoNumberBag = new LottoNumberBag();
+    public Lotto(NumberGenerator numberGenerator) {
+        lottoNumberBag = new LottoNumberBag(numberGenerator);
     }
 
     public Lotto(LottoNumberBag lottoNumberBag) {

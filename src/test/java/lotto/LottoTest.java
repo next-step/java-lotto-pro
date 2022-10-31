@@ -15,7 +15,7 @@ class LottoTest {
     @DisplayName("생성 성공")
     @Test
     void create_lotto_success() {
-        assertThatNoException().isThrownBy(Lotto::new);
+        assertThatNoException().isThrownBy(() -> new Lotto(new LottoNumberGenerator()));
     }
 
     @DisplayName("당첨 여부 제공 테스트")

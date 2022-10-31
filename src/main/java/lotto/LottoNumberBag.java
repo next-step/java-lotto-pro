@@ -12,8 +12,8 @@ public class LottoNumberBag {
 
     private List<Integer> lottoNumbers;
 
-    public LottoNumberBag() {
-        this.lottoNumbers = LottoNumberGenerator.generate();
+    public LottoNumberBag(NumberGenerator numberGenerator) {
+        this.lottoNumbers = numberGenerator.generate();
         InputView.printNumbers(lottoNumbers);
     }
 
