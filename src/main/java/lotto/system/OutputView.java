@@ -1,7 +1,7 @@
 package lotto.system;
 
 import java.util.ArrayList;
-import lotto.match.Rank;
+import lotto.rank.Rank;
 import lotto.machine.Result;
 
 public class OutputView {

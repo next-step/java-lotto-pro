@@ -1,6 +1,6 @@
 package lotto.machine;
 
-import lotto.match.Rank;
+import lotto.rank.Rank;
 
 public class Result {
     private int firstCount = 0;
