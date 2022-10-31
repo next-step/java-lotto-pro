@@ -42,4 +42,7 @@ public class ResultView {
 		resultBuilder.append(String.format(PROFIT_RATIO_PRINT_FORMAT, profitRate, profitRate > 1 ? "이득" : "손해"));
 	}
 
+	public void printErrorMessage(String message) {
+		System.out.println(message);
+	}
 }

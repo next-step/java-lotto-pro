@@ -25,13 +25,17 @@ public class LottoGameController {
 	}
 
 	public void play() {
-		Money inputMoney = inputView.readMoney();
+		try {
+			Money inputMoney = inputView.readMoney();
 
-		LottoTickets lottoTickets = purchasedTickets(inputMoney);
-		WinningLottoTicket winningLottoTicket = winningTicket();
+			LottoTickets lottoTickets = purchasedTickets(inputMoney);
+			WinningLottoTicket winningLottoTicket = winningTicket();
 
-		Result result = Result.of(lottoTickets, winningLottoTicket, inputMoney);
-		printResult(result);
+			Result result = Result.of(lottoTickets, winningLottoTicket, inputMoney);
+			printResult(result);
+		} catch (RuntimeException e) {
+			resultView.printErrorMessage(e.getMessage());
+		}
 	}
 
 	private void printResult(Result result) {
