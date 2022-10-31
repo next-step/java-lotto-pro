@@ -26,14 +26,6 @@ public enum RankCode {
         .orElse(NOTHING);
   }
 
-  public static Map<RankCode, Integer> generateRankCodeMap() {
-    Map<RankCode, Integer> rankCodeMap = new HashMap<>();
-    for (RankCode rankCode : RankCode.values()) {
-      rankCodeMap.put(rankCode, NOTHING.containsCount);
-    }
-    return rankCodeMap;
-  }
-
   public static int getMoney(RankCode rankCode) {
     return RankCode.valueOf(rankCode.name()).money;
   }
