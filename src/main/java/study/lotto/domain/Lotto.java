@@ -1,5 +1,7 @@
 package study.lotto.domain;
 
+import study.lotto.domain.number.CacheLottoNumbers;
+import study.lotto.domain.number.LottoNumber;
 import study.util.NumberUtil;
 
 import java.util.*;
@@ -10,12 +12,12 @@ public class Lotto {
     private final Set<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbersFromStore) {
-        this.numbers = toSet(numbersFromStore);
+        this.numbers = createLottoNumbers(numbersFromStore);
     }
 
-    private Set<LottoNumber> toSet(List<Integer> numbersFromStore) {
+    private Set<LottoNumber> createLottoNumbers(List<Integer> numbersFromStore) {
         return numbersFromStore.stream()
-                .map(LottoNumber::of)
+                .map(CacheLottoNumbers::of)
                 .collect(Collectors.toSet());
     }
 
