@@ -25,7 +25,7 @@ public class ResultView {
 	public void winStatisticsResult(Lottos lottos, WinningLotto winningLotto, Amount purchaseAmount) {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
-		
+
 		LottoResults lottoResults = winningLotto.getLottoResults(lottos);
 		IntStream.rangeClosed(3, 6).forEach(i -> {
 			MatchCount matchCount = MatchCount.from(i);

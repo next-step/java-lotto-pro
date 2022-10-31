@@ -38,6 +38,15 @@
   - [X] 로또(Lotto)를 입력 받아 일치한 갯수 반환
 - 일치 갯수 (MatchCount)
   - [X] 0~6 일치 갯수 범위 제한
+  - [X] 당첨 상금 반환(WinningPriceStrategy)
+- 로또 결과 (LottoResult)
+  - [X] 일치 갯수 체크
+- 로또 결과 컬랙션 (LottoResults)
+  - [X] 일치 갯수로 필터링
+- 수익률 (Yield)
+  - [X] 0.0 이상 범위 제한
+- 일치 갯수 (Quantity)
+  - [X] 0이상 범위 제한
 - 난수 생성기 (RandomNumbersGenerator)
   - [X] begin~last 범위 n자리 난수 생성
 - 문자열 쉼표 분리기 (InputSplitter)
