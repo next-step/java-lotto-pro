@@ -5,7 +5,7 @@ import java.util.List;
 import lotto.util.Constants;
 
 public class TicketList {
-    List<Ticket> ticketList;
+    private final List<Ticket> ticketList;
 
     public TicketList() {
         ticketList = new ArrayList<>();

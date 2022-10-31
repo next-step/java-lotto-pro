@@ -28,6 +28,6 @@ public class InputTest {
     @Test
     @DisplayName("구입금액_검증_1000미만")
     public void input_validate_under_thousand() {
-        assertThatThrownBy(() -> new Input("999")).hasMessage(Constants.ERR_MORE_THAN_1000);
+        assertThatThrownBy(() -> new Input("999")).hasMessage("1000 이상의 숫자를 입력해 주세요.");
     }    
 }

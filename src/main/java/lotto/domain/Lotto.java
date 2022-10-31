@@ -4,6 +4,9 @@ import java.util.stream.IntStream;
 import lotto.util.Constants;
 
 public class Lotto {
+    private static final String STR_BUY_LOTTO = "%d개를 구매했습니다.\n";
+    private static final int TICKET_VALUE = 1000;
+    
     public TicketList ticketList;
 
     public Lotto(String input) {
@@ -15,7 +18,7 @@ public class Lotto {
     }
 
     public String getTicketListSizeStr() {
-        return String.format(Constants.STR_BUY_LOTTO, this.ticketList.size());
+        return String.format(STR_BUY_LOTTO, this.ticketList.size());
     }
 
     public String getLottoListStr() {
@@ -27,12 +30,12 @@ public class Lotto {
 
         this.ticketList.countTicketResult(result, new Ticket(winningTicketStr));
 
-        int usedMoney = this.ticketList.size() * Constants.TICKET_VALUE;
+        int usedMoney = this.ticketList.size() * TICKET_VALUE;
         return result.toString(usedMoney);
     }
 
     private void buyLotto(Input input) {
-        int buyCount = input.amount / Constants.TICKET_VALUE;
+        int buyCount = input.amount / TICKET_VALUE;
         ticketList = new TicketList();
 
         IntStream.range(Constants.ZERO, buyCount).forEach(i -> {

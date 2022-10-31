@@ -13,6 +13,17 @@ import lotto.util.RegexUtil;
 import lotto.util.StringUtil;
 
 public class Ticket {
+    private static final int SIX = 6;
+    private static final String COMMA = ",";
+    private static final String REGEX_1_TO_45_CHAR = "^.{1,45}$";
+    private static final String ERR_SIX_NUMBERS = "여섯 개의 숫자를 입력해 주세요.";
+    private static final String ERR_DUP_NUMBERS = "중복된 숫자는 허용되지 않습니다.";
+    private static final String STR_LOTTO_NUM_LIST = "[%d, %d, %d, %d, %d, %d]\n";
+    private static final int TICKET_MIN_IDX = 0;
+    private static final int TICKET_MAX_IDX = 5;
+    private static final int TICKET_MIN_LOTTO_NUM = 1;
+    private static final int TICKET_MAX_LOTTO_NUM = 45;
+    
     public List<Integer> lottoNumbers = new ArrayList<>();
 
     public Ticket() {
@@ -24,7 +35,7 @@ public class Ticket {
     }
 
     public String toString() {
-        return String.format(Constants.STR_LOTTO_NUM_LIST, lottoNumbers.toArray());
+        return String.format(STR_LOTTO_NUM_LIST, lottoNumbers.toArray());
     }
 
     public int compareTicket(Ticket cmpTicket) {
@@ -46,12 +57,12 @@ public class Ticket {
 
     private void generateTicket() {
         List<Integer> candidateNumbers = IntStream
-                .rangeClosed(Constants.TICKET_MIN_LOTTO_NUM, Constants.TICKET_MAX_LOTTO_NUM).boxed()
+                .rangeClosed(TICKET_MIN_LOTTO_NUM, TICKET_MAX_LOTTO_NUM).boxed()
                 .collect(Collectors.toList());
 
         Collections.shuffle(candidateNumbers);
 
-        IntStream.rangeClosed(Constants.TICKET_MIN_IDX, Constants.TICKET_MAX_IDX).forEach(i -> {
+        IntStream.rangeClosed(TICKET_MIN_IDX, TICKET_MAX_IDX).forEach(i -> {
             this.lottoNumbers.add(candidateNumbers.get(i));
         });
 
@@ -63,10 +74,10 @@ public class Ticket {
             throw new IllegalArgumentException(Constants.ERR_NULL_VALUE);
         }
 
-        String[] winningTicketStrArray = winningTicketStr.split(Constants.COMMA);
+        String[] winningTicketStrArray = winningTicketStr.split(COMMA);
 
-        if (winningTicketStrArray.length != Constants.SIX) {
-            throw new IllegalArgumentException(Constants.ERR_SIX_NUMBERS);
+        if (winningTicketStrArray.length != SIX) {
+            throw new IllegalArgumentException(ERR_SIX_NUMBERS);
         }
 
         for (String s : winningTicketStrArray) {
@@ -76,12 +87,12 @@ public class Ticket {
         Set<Integer> tmpLottoSet = new HashSet<>(this.lottoNumbers);
 
         if (tmpLottoSet.size() != this.lottoNumbers.size()) {
-            throw new IllegalArgumentException(Constants.ERR_DUP_NUMBERS);
+            throw new IllegalArgumentException(ERR_DUP_NUMBERS);
         }
     }
 
     private void validateWinningTicketNum(String numStr) {
-        if (!RegexUtil.match(Constants.REGEX_1_TO_45_CHAR, numStr)) {
+        if (!RegexUtil.match(REGEX_1_TO_45_CHAR, numStr)) {
             throw new IllegalArgumentException(Constants.ERR_VALUE_NOT_VALID);
         }
 

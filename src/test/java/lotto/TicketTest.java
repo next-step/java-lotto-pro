@@ -26,8 +26,8 @@ public class TicketTest {
         @Test
         @DisplayName("발급로또_번호_검증_범위")
         public void ticket_num_validate_one_to_fortyfive() {
-            IntStream.rangeClosed(Constants.TICKET_MIN_IDX, Constants.TICKET_MAX_IDX).forEach(i -> {
-                assertThat(ticket.lottoNumbers.get(i)).isBetween(Constants.TICKET_MIN_LOTTO_NUM, Constants.TICKET_MAX_LOTTO_NUM);
+            IntStream.rangeClosed(0, 5).forEach(i -> {
+                assertThat(ticket.lottoNumbers.get(i)).isBetween(1, 45);
             });
         }
 
@@ -46,7 +46,7 @@ public class TicketTest {
         @Test
         @DisplayName("당첨번호_검증_개수")
         public void winningTicket_validate_count() {
-            assertThatThrownBy(() -> new Ticket("1,2,3,4,5")).hasMessage(Constants.ERR_SIX_NUMBERS);
+            assertThatThrownBy(() -> new Ticket("1,2,3,4,5")).hasMessage("여섯 개의 숫자를 입력해 주세요.");
         }
         
         @Test
@@ -71,7 +71,7 @@ public class TicketTest {
         @Test
         @DisplayName("당첨번호_검증_중복")
         public void winningTicket_validate_duplicate() {
-            assertThatThrownBy(() -> new Ticket("1,2,3,4,5,5")).hasMessage(Constants.ERR_DUP_NUMBERS);
+            assertThatThrownBy(() -> new Ticket("1,2,3,4,5,5")).hasMessage("중복된 숫자는 허용되지 않습니다.");
         }  
     }
 }
