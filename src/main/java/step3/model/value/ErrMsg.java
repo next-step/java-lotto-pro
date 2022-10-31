@@ -1,6 +1,9 @@
 package step3.model.value;
 
 public class ErrMsg {
+
+
+
     private ErrMsg() {
         throw new AssertionError();
     }
@@ -11,4 +14,6 @@ public class ErrMsg {
     public static final String WRONG_LENGTH = "로또번호의 갯수가 맞지 않습니다.";
 
     public static final String DUPLICATED_INPUT = "중복된 숫자가 뽑혔습니다.";
+
+    public static final String WRONG_STATISTICS_INPUT = "최종상금 혹은 투입금은 음수가 될 수 없습니다.";
 }

@@ -2,22 +2,21 @@ package step3.model.lotto;
 
 import java.util.Objects;
 import step3.model.util.InputValidation;
+import step3.model.value.ErrMsg;
+import step3.model.value.Rule;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber>{
     private final int number;
-    public LottoNumber(final String input) {
-        this.number = validatedLottoNumber(input);
-    }
     public LottoNumber(final int input) {
+        validateIntRange(input);
         this.number = input;
     }
 
-    private int validatedLottoNumber(String input) {
-        InputValidation.validateEmpty(input);
-        InputValidation.validateNumber(input);
-        int number = Integer.parseInt(input);
-        InputValidation.validateIntRange(number);
-        return number;
+
+    private void validateIntRange(int number) {
+        if(number< Rule.MIN_LOTTO_NUM || number>Rule.MAX_LOTTO_NUM){
+            throw new IllegalArgumentException(ErrMsg.WRONG_RANGE);
+        }
     }
 
     @Override
@@ -40,5 +39,16 @@ public class LottoNumber {
     @Override
     public String toString() {
         return Integer.toString(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+       if(this.number>o.number){
+           return 1;
+       }
+       if(this.number<o.number){
+           return -1;
+       }
+       return 0;
     }
 }

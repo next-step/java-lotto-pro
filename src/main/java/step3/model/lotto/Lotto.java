@@ -1,32 +1,30 @@
 package step3.model.lotto;
 
-import java.util.Arrays;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import step3.model.util.InputValidation;
-import step3.model.value.Rule;
+import step3.model.machine.Result;
 
 public class Lotto{
     private List<LottoNumber> lotto;
-    public Lotto(String input) {
-        InputValidation.validateEmpty(input);
-        List<String> lottoNumbers = splitLottoNumbers(input);
-        this.lotto = createLotto(lottoNumbers);
+    public Lotto(List<Integer> lotto) {
+        this.lotto =createLotto(lotto);
     }
 
-    private List<LottoNumber> createLotto(List<String> lottoNumbers) {
-        InputValidation.validateLength(lottoNumbers);
-        InputValidation.validateDuplication(lottoNumbers);
-        return lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toList());
+    private List<LottoNumber> createLotto(List<Integer> lotto) {
+        return Collections.unmodifiableList(lotto.stream().map(LottoNumber::new).collect(Collectors.toList()));
     }
 
-    private List<String> splitLottoNumbers(String input) {
-        return Arrays.stream(input.split(Rule.DELIMITER))
-                .map(String::trim).distinct().collect(Collectors.toList());
-    }
     public boolean isMatched(LottoNumber lottoNumber) {
         return lotto.contains(lottoNumber);
+    }
+    public int getMatchCount(Lotto winningLotto){
+        return (int) lotto.stream().filter(winningLotto::isMatched).count();
+    }
+    public boolean isAllMatch(Lotto inputLotto){
+        return this.lotto.stream().allMatch(inputLotto::isMatched);
     }
 
     @Override
@@ -38,7 +36,9 @@ public class Lotto{
             return false;
         }
         Lotto that = (Lotto) o;
-        return Objects.equals(lotto, that.lotto);
+        Collections.sort(this.lotto);
+        Collections.sort(that.lotto);
+        return this.lotto.equals(that.lotto);
     }
 
     @Override
@@ -48,8 +48,6 @@ public class Lotto{
 
     @Override
     public String toString() {
-        return this.lotto.stream().map(
-                lottoNumber -> lottoNumber.toString()
-        ).collect(Collectors.toList()).toString();
+        return this.lotto.toString();
     }
 }

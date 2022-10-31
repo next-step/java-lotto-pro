@@ -1,13 +1,13 @@
 package step3;
 
 import step3.controller.LottoController;
-import step3.model.machine.ShuffleTicketGenerator;
-import step3.model.machine.TicketGenerator;
+import step3.model.machine.ShuffleLottoGenerator;
+import step3.model.machine.LottoAutoGenerator;
 
 public class LottoApplication {
 
     public static void main(String[] args) {
-        TicketGenerator ticketGenerator = new ShuffleTicketGenerator();
+        LottoAutoGenerator ticketGenerator = new ShuffleLottoGenerator();
         LottoController lottoController = new LottoController(ticketGenerator);
         lottoController.start();
     }
