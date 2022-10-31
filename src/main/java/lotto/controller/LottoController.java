@@ -19,27 +19,39 @@ public class LottoController {
 
         LottoMoney lottoMoney = InputView.getLottoPurchasePrice();
         int customLottoTicketCount = InputView.getCustomLottoCount(lottoMoney);
-        
+
+        List<LottoGenerator> lottoGeneratorList = getCustomLottoNumbers(customLottoTicketCount);
+        buyLotto(lottoMoney, customLottoTicketCount, lottoGeneratorList);
+
+        ResultView.winningResult(lottoGame.winningResult());
+        ResultView.StatisticsPercent(lottoGame.statisticsPercent(lottoMoney.getMoney()));
+    }
+
+    private static List<LottoGenerator> getCustomLottoNumbers(int customLottoTicketCount) {
         List<LottoGenerator> lottoGeneratorList = new ArrayList<>();
+
+        if (customLottoTicketCount == 0) {
+            return lottoGeneratorList;
+        }
+
+        InputView.customLottoNumberScript();
         for (int i = 0; i < customLottoTicketCount; i++) {
             lottoGeneratorList.add(InputView.getCustomLottoNumbers(i, customLottoTicketCount));
         }
 
-        // TODO: 구매 금액 입력 후 수동로또 구매 시 구매 금액을 초과한 경우
-        // TODO: 수동 로또 번호 추가 로직
-//        LottoTickets lottoTickets = lottoGame.buy(lottoMoney.getMoney());
+        return lottoGeneratorList;
+    }
+
+    private void buyLotto(LottoMoney lottoMoney, int customLottoTicketCount, List<LottoGenerator> lottoGeneratorList) {
         LottoTickets lottoTickets = lottoGame.buy(lottoMoney, lottoGeneratorList);
 
-        ResultView.lottoPurchase(lottoTickets.ticketCount(), lottoTickets.toString());
+        ResultView.lottoPurchase(customLottoTicketCount, lottoTickets.ticketCount() - customLottoTicketCount, lottoTickets.toString());
 
         String winningNumber = InputView.getLastWeekWinningNumber();
         LottoNumber bonusNumber = new LottoNumber(InputView.getBonusNumber());
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningNumber, bonusNumber);
 
         lottoGame.makeLottoResult(winningLottoNumbers, lottoTickets);
-
-        ResultView.winningResult(lottoGame.winningResult());
-        ResultView.StatisticsPercent(lottoGame.statisticsPercent(lottoMoney.getMoney()));
     }
 
 }

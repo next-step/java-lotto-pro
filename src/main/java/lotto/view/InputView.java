@@ -12,6 +12,7 @@ public class InputView {
     private static final String ENTER_LAST_WEEK_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String ENTER_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String ENTER_CUSTOM_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String ENTER_CUSTOM_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String REMAIN_CUSTOM_LOTTO_COUNT = "[남은 수동 로또 입력 회수(%d/%d)]";
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String ERROR_PREFIX = "[ERROR] %s";
@@ -35,22 +36,22 @@ public class InputView {
     }
 
     public static int getCustomLottoCount(LottoMoney lottoMoney) {
+        System.out.println();
         System.out.println(ENTER_CUSTOM_LOTTO_COUNT);
-        return extracted(lottoMoney);
+        return customPurchaseCount(lottoMoney);
     }
 
-    private static int extracted(LottoMoney lottoMoney) {
+    private static int customPurchaseCount(LottoMoney lottoMoney) {
         try {
-            int ticketCount = getNumber();
-            lottoMoney.validLottoPurchaseCount(ticketCount);
-            return ticketCount;
+            return lottoMoney.getValidLottoPurchaseCount(SCANNER.nextLine());
         } catch (Exception e) {
             System.out.println(String.format(ERROR_PREFIX, e.getMessage()));
-            return extracted(lottoMoney);
+            return customPurchaseCount(lottoMoney);
         }
     }
 
     public static String getLastWeekWinningNumber() {
+        System.out.println();
         System.out.println(ENTER_LAST_WEEK_WINNING_NUMBER);
         return SCANNER.nextLine();
     }
@@ -65,10 +66,16 @@ public class InputView {
         try {
             bonusNumber = Integer.parseInt(SCANNER.nextLine());
         } catch (Exception e) {
-            throw new IllegalArgumentException(String.format(ERROR_PREFIX, "숫자를 입력해주세요."));
+            throw new IllegalArgumentException("숫자를 입력해주세요.");
         }
         return bonusNumber;
     }
+
+    public static void customLottoNumberScript() {
+        System.out.println();
+        System.out.println(ENTER_CUSTOM_LOTTO_NUMBER);
+    }
+
 
     public static LottoGenerator getCustomLottoNumbers(int count, int total) {
         try {

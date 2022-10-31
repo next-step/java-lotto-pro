@@ -42,22 +42,31 @@ public class LottoMoney {
     }
 
 
-
-    public void validLottoPurchaseCount(int lottoTicketCount) {
-        validPositiveLottoTicketCount(lottoTicketCount);
-        compareLottoTicketCountToMoney(lottoTicketCount);
+    public int getValidLottoPurchaseCount(String lottoPurchaseCount) {
+        int count = convertToInt(lottoPurchaseCount);
+        validPositiveLottoTicketCount(count);
+        compareLottoTicketCountToMoney(count);
+        return count;
     }
 
-    private void compareLottoTicketCountToMoney(int lottoTicketCount) {
-        int ticketPrice = lottoTicketCount * LOTTO_PRICE;
-        if (money < ticketPrice) {
-            throw new IllegalArgumentException("구입하려는 로또 개수가 현재 가진 금액보다 많습니다.");
+    private int convertToInt(String lottoTicketCount) {
+        try {
+            return Integer.parseInt(lottoTicketCount);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("구매할 로또 수는 숫자만 입력 가능합니다.");
         }
     }
 
     private void validPositiveLottoTicketCount(int lottoTicketCount) {
         if (lottoTicketCount < ZERO) {
             throw new IllegalArgumentException("구입하려는 로또 개수는 0또는 양수만 가능합니다.");
+        }
+    }
+
+    private void compareLottoTicketCountToMoney(int lottoTicketCount) {
+        int ticketPrice = lottoTicketCount * LOTTO_PRICE;
+        if (money < ticketPrice) {
+            throw new IllegalArgumentException("구입하려는 로또 개수가 현재 가진 금액보다 많습니다.");
         }
     }
 

@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class ResultView {
 
-    private static final String LOTTO_PURCHASE = "%d개를 구매했습니다.";
+    private static final String LOTTO_PURCHASE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String WINNING_STATISTICS = "당첨 통계";
     private static final String DASH = "---------";
     private static final String REWARD_MATCH_LOTTO = "%d개 일치%s(%d원) - %d개";
@@ -23,8 +23,9 @@ public class ResultView {
 
     }
 
-    public static void lottoPurchase(int count, String purchaseLottoTickets) {
-        System.out.println(String.format(LOTTO_PURCHASE, count));
+    public static void lottoPurchase(int customLottoCount, int autoLottoCount, String purchaseLottoTickets) {
+        System.out.println();
+        System.out.println(String.format(LOTTO_PURCHASE, customLottoCount, autoLottoCount));
         System.out.println(purchaseLottoTickets);
     }
 
