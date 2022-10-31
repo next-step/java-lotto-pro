@@ -7,16 +7,20 @@ public class Lotto {
 
     private final LottoNumbers lottoNumbers;
 
-    public Lotto(LottoNumbers lottoNumbers) {
+    private Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto(String numbers) {
-        this.lottoNumbers = LottoNumbers.generate(numbers);
+    public static Lotto of(LottoNumbers lottoNumbers) {
+        return new Lotto(lottoNumbers);
     }
 
-    public Lotto(List<Integer> numbers) {
-        this.lottoNumbers = LottoNumbers.generate(numbers);
+    public static Lotto of(List<Integer> numbers) {
+        return new Lotto(LottoNumbers.generate(numbers));
+    }
+
+    public static Lotto of(String numbers) {
+        return new Lotto(LottoNumbers.generate(numbers));
     }
 
     public List<LottoNumber> getLottoNumbers() {

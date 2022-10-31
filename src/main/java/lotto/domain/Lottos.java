@@ -16,7 +16,7 @@ public class Lottos {
     public static Lottos autoGenerateSizeOf(int size) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            lottos.add(new Lotto(LottoNumbers.generate()));
+            lottos.add(Lotto.of(LottoNumbers.generate()));
         }
         return new Lottos(lottos);
     }

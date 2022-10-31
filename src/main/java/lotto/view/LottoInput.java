@@ -32,7 +32,7 @@ public class LottoInput {
     private static Lotto inputLotto() {
         try {
             String input = InputConsole.inputWinningLottoNumbers();
-            return new Lotto(input);
+            return Lotto.of(input);
         } catch (IllegalArgumentException e) {
             OutputConsole.out(e.getMessage());
             return inputLotto();
