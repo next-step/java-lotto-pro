@@ -64,15 +64,8 @@ public class LottoResult {
 
   private String stringBuilderAppend(Map.Entry<RankCode, Integer> rankEntry) {
     RankCode rankCode = rankEntry.getKey();
-    StringBuilder stringBuilder = new StringBuilder();
-    return stringBuilder
-        .append(rankCode.containsCount())
-        .append("개 일치 ")
-        .append("(")
-        .append(rankCode.getMoney())
-        .append("원)- ")
-        .append(rankEntry.getValue())
-        .append("개").toString();
+    return String.format("%d개 일치 (%d원)- %d개",
+        rankCode.containsCount(), rankCode.getMoney(), rankEntry.getValue());
   }
 
   private void validNothing(List<String> rankStringList, Map.Entry<RankCode, Integer> rankEntry) {
