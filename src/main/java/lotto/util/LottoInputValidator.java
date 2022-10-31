@@ -2,6 +2,7 @@ package lotto.util;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.stream.Stream;
 import lotto.constant.LottoConstant;
 
@@ -23,6 +24,11 @@ public class LottoInputValidator {
         return validateNumbersInRanges(splitNumbers) &&
                 validateNonDuplicatedNumbers(splitNumbers) &&
                 validateSixNumbers(splitNumbers);
+    }
+
+    public static boolean validateBonusNumber(String bonusNumber, List<Integer> winningNumbers) {
+        return bonusNumber.matches(LOTTO_NUMBER_REGEX) &&
+                !winningNumbers.contains(Integer.parseInt(bonusNumber));
     }
 
     private static boolean validateGreaterOrEqualThanPriceOfOneLotto(String number) {
