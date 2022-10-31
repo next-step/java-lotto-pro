@@ -59,5 +59,7 @@ public class LottoCalculator {
                 .append("개").toString();
     }
 
-
+    public void setLastWeekWinner(Lotto lotto) {
+        lastWeekWinner = lotto;
+    }
 }

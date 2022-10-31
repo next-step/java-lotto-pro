@@ -3,7 +3,6 @@ package step3.view;
 import step3.model.Lotto;
 import step3.model.LottoCalculator;
 import step3.model.LottoGenerator;
-import step3.model.LottoNumber;
 
 import java.util.Scanner;
 
@@ -16,11 +15,10 @@ public class InputView {
         lottoGenerator.setPurchasePrice(scanner.nextLine());
     }
 
-    public static void inputLastWeekLottoNumbers(Lotto lotto) {
+    public static void inputLastWeekLottoNumbers(LottoCalculator calculator) {
         System.out.println(LAST_LOTTO_NUMBERS_INPUT_MESSAGE);
-        String[] lastweekNumbers = lotto.validateLastWeekWinner(scanner.nextLine());
-
-        lotto = inputLastWeekBonusNumber(lastweekNumbers);
+        String[] lastWeekNumbers = new Lotto().validateLastWeekWinner(scanner.nextLine());
+        calculator.setLastWeekWinner(inputLastWeekBonusNumber(lastWeekNumbers));
     }
 
     public static Lotto inputLastWeekBonusNumber(String[] lastWeekLottos) {
