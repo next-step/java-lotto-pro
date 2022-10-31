@@ -19,7 +19,7 @@ public enum Rank {
 	}
 
 	public static Rank match(final int count, final boolean matchBonus) {
-		if(SECOND.count == count){
+		if (SECOND.count == count) {
 			return rankByBonus(matchBonus);
 		}
 
@@ -30,7 +30,7 @@ public enum Rank {
 	}
 
 	private static Rank rankByBonus(final boolean matchBonus) {
-		if(matchBonus){
+		if (matchBonus) {
 			return SECOND;
 		}
 		return THIRD;
@@ -39,6 +39,5 @@ public enum Rank {
 	public long prize() {
 		return prize;
 	}
-
 
 }
