@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import study.lotto.domain.number.CacheLottoNumbers;
+import study.lotto.domain.number.LottoNumber;
+import study.message.LottoExceptionCode;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +28,7 @@ class WinningLottoTest {
         assertThatThrownBy(() -> {
             new WinningLotto(winningNumbers);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] The numbers entered are invalid as lotto numbers.");
+                .hasMessage(LottoExceptionCode.NOT_MATCH_LOTTO_SIZE.getMessage());
     }
 
     @ParameterizedTest
@@ -34,8 +37,7 @@ class WinningLottoTest {
         assertThatThrownBy(() -> {
             new WinningLotto(winningNumbers);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] The given string contains characters " +
-                        "that cannot be converted to numbers.");
+                .hasMessage(LottoExceptionCode.INVALID_LOTTO_NUMBER.getMessage());
     }
 
     @ParameterizedTest
@@ -65,13 +67,13 @@ class WinningLottoTest {
     @ParameterizedTest
     @ValueSource(ints = { 7, 8, 9, 23, 36, 41 })
     void matchNumber_winningNumbers에_포함되지_않은_숫자(int num) {
-        assertEquals(0, tempWinningLotto.matchNumber(LottoNumber.of(num)));
+        assertEquals(0, tempWinningLotto.matchNumber(CacheLottoNumbers.of(num)));
     }
 
     @ParameterizedTest
     @ValueSource(ints = { 1, 2, 3, 4, 5, 6 })
     void matchNumber_winningNumbers에_포함된_숫자(int num) {
-        assertEquals(1, tempWinningLotto.matchNumber(LottoNumber.of(num)));
+        assertEquals(1, tempWinningLotto.matchNumber(CacheLottoNumbers.of(num)));
     }
 
     @ParameterizedTest
@@ -80,8 +82,7 @@ class WinningLottoTest {
         assertThatThrownBy(() -> {
             tempWinningLotto.addBonusBall(num);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] Bonus ball number must not be contained " +
-                        "in the winning numbers.");
+                .hasMessage(LottoExceptionCode.INVALID_BONUS_BALL.getMessage());
     }
 
     @ParameterizedTest
