@@ -14,4 +14,8 @@ public class PayAmount {
     public void pay(int lottoAmount) {
         this.payAmount -= lottoAmount;
     }
+
+    public double calculateProfitRate(int sumProfit) {
+        return (double) sumProfit / this.payAmount;
+    }
 }

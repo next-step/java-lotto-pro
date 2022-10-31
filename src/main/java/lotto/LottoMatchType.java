@@ -39,4 +39,8 @@ public enum LottoMatchType {
     public int getWinningAmount() {
         return this.winningAmount;
     }
+
+    public int multiply(Integer count) {
+        return this.winningAmount * count;
+    }
 }

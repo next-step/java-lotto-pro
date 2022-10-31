@@ -16,14 +16,13 @@ public class LottoApp implements App {
     private static final String BUY_LOTTO = "%d개를 구매했습니다.";
     private static final String WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
 
-    private App lottoStaticApp;
-
     public void run() throws IOException {
         LottoStore lottoStore = new LottoStore();
 
         print(WELCOME);
-        
-        List<Lotto> lottoList = lottoStore.pay(new PayAmount(scanPayAmount()));
+        PayAmount payAmount = new PayAmount(scanPayAmount());
+
+        List<Lotto> lottoList = lottoStore.pay(payAmount);
         print(String.format(BUY_LOTTO, lottoList.size()));
 
         for (Lotto lotto : lottoList) {
@@ -34,6 +33,14 @@ public class LottoApp implements App {
         
         print(WINNING_NUMBER);
         Lotto winLotto = Lotto.valueOf(new ManualLottoNumberGenerateStrategy(Arrays.asList(scanWinningNumbers())));
+
+        App lottoStaticApp = LottoStaticApp.builder()
+            .lottoList(lottoList)
+            .winLotto(winLotto)
+            .payAmount(payAmount)
+            .build();
+
+        lottoStaticApp.run();
     }
 
 
