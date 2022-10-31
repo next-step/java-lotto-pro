@@ -23,9 +23,19 @@ public class LottoController {
         }
     }
 
-    public void createLottoNumberMatcher() {
-        Runnable readWinningNumber = () -> lottoGame.createLottoNumberMatcher(view.readWinningNumber());
+    public void createWinningNumber() {
+        Runnable readWinningNumber = () -> lottoGame.createWinningNumber(view.readWinningNumber());
         while (isNotComplete(readWinningNumber)) {
+        }
+    }
+
+    public void createLottoNumberMatcher() {
+        lottoGame.createLottoNumberMatcher();
+    }
+
+    public void createLottoNumberMatcherWithBonus() {
+        Runnable readBonus = () -> lottoGame.createLottoNumberMatcherWithBonus(view.readBonus());
+        while (isNotComplete(readBonus)) {
         }
     }
 

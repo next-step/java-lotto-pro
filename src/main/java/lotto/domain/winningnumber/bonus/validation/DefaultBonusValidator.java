@@ -26,5 +26,6 @@ public class DefaultBonusValidator implements BonusValidator {
         if (defaultSize == winningNumber.size()) {
             throw new IllegalArgumentException(ERROR_BONUS_DUPLICATE_MESSAGE);
         }
+        winningNumber.remove(bonus);
     }
 }
