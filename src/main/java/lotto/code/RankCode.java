@@ -26,11 +26,11 @@ public enum RankCode {
         .orElse(NOTHING);
   }
 
-  public static int getMoney(RankCode rankCode) {
-    return RankCode.valueOf(rankCode.name()).money;
+  public int getMoney() {
+    return this.money;
   }
 
-  public static int containsCount(RankCode rankCode) {
-    return RankCode.valueOf(rankCode.name()).containsCount;
+  public int containsCount() {
+    return this.containsCount;
   }
 }

@@ -63,10 +63,10 @@ public class LottoResult {
     RankCode rankCode = rankEntry.getKey();
     StringBuilder stringBuilder = new StringBuilder();
     return stringBuilder
-        .append(RankCode.containsCount(rankCode))
+        .append(rankCode.containsCount())
         .append("개 일치 ")
         .append("(")
-        .append(RankCode.getMoney(rankCode))
+        .append(rankCode.getMoney())
         .append("원)- ")
         .append(rankEntry.getValue())
         .append("개").toString();
@@ -82,7 +82,7 @@ public class LottoResult {
     int prizeMoney = DEFAULT_VALUE;
 
     for (RankCode rankCode : resultMap.keySet()) {
-      int money = RankCode.getMoney(rankCode);
+      int money = rankCode.getMoney();
       int value = resultMap.get(rankCode);
 
       prizeMoney += money * value;
