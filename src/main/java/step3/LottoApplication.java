@@ -17,31 +17,49 @@ public class LottoApplication {
         output.purchase();
         int money = input.inputNumber();
         int purchasingNumber = Rank.calculateLottoCount(money);
-        Lottos lottos = initLottos(purchasingNumber);
-        output.generateLottos(purchasingNumber, lottos);
 
+        Lottos manualLottos = getManualLottos(output, input);
+        Lottos totalLottos = initLottos(manualLottos, purchasingNumber);
+        output.generateLottos(purchasingNumber, totalLottos);
+
+        WinningLotto winningLotto = gainWinnerLotto(output, input);
+        Map<Integer, Integer> statistics =  totalLottos.calculateWinningBallsEachLotto(winningLotto);
+        result(output, statistics, money);
+
+    }
+
+    static Lottos getManualLottos(Output output, Input input) {
+        output.manualCount();
+        int lottoCount = input.inputNumber();
+        output.manualNumber();
+        List<Lotto> manualLottoList = new ArrayList<>();
+        for (int i = 0; i < lottoCount; i++) {
+            manualLottoList.add(new Lotto(LottoNumbers.gainNumbers(input.inputString())));
+        }
+        return new Lottos(manualLottoList);
+    }
+
+    static Lottos initLottos(Lottos manualLottos, int purchasingNumber) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < purchasingNumber-manualLottos.getLottos().size(); i++) {
+            lottoList.add(new Lotto(LottoNumbers.getRandomSixNumbers()));
+        }
+        return new Lottos(lottoList).unionLottos(manualLottos);
+    }
+
+    static WinningLotto gainWinnerLotto(Output output, Input input) {
         output.winnerNumbers();
         String inputNumbersWithComma = input.inputString();
         output.bonusball();
         int bonusball = input.inputNumber();
 
-        Map<Integer, Integer> statistics = result(lottos, inputNumbersWithComma, bonusball);
+        return new WinningLotto(LottoNumbers.gainNumbers(inputNumbersWithComma), bonusball);
+    }
+
+    static void result (Output output, Map<Integer, Integer> statistics, int money) {
+
         double returnOnInvestmentRate = Rank.statistic(statistics, money);
         output.statistic(statistics, returnOnInvestmentRate);
-    }
-
-    static Lottos initLottos(int purchasingNumber) {
-        Range range = new Range(1, 45);
-        List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < purchasingNumber; i++) {
-            lottoList.add(new Lotto(new LottoNumbers(range.getRandomSixNumbers())));
-        }
-        return new Lottos(lottoList);
-    }
-
-    static Map<Integer, Integer> result(Lottos lottos, String inputNumbersWithComma, int bonusball) {
-        WinningLotto winningLotto = new WinningLotto(inputNumbersWithComma, bonusball);
-        return lottos.calculateWinningBallsEachLotto(winningLotto);
     }
 
 }
