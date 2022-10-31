@@ -37,6 +37,6 @@ public enum Result {
 
     @Override
     public String toString() {
-        return String.format("%d개 일치 (%d원)- ", match, prize);
+        return match+","+ prize;
     }
 }

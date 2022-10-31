@@ -29,11 +29,10 @@ public class Results {
         return lottoResultMap.keySet().stream().mapToLong(this::getTotalPrize).sum();
     }
 
-    @Override
-    public String toString() {
-        return String.join("", lottoResultMap.keySet().stream()
+    public List<String> createStringOutput(){
+        return lottoResultMap.keySet().stream()
                 .filter(Result::isRewarded)
-                .map(result -> result.toString()+lottoResultMap.get(result)+"개"+"\n")
-                .collect(Collectors.toList()));
+                .map(result -> result.toString()+","+lottoResultMap.get(result))
+                .collect(Collectors.toList());
     }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import step3.model.lotto.LottoList;
 import step3.model.machine.Order;
 import step3.model.machine.Results;
+import step3.model.value.Rule;
 
 public class OutputView {
 
@@ -26,7 +27,9 @@ public class OutputView {
     public static void printResults(Results results) {
         System.out.println("당첨 통계");
         System.out.println("___________");
-        System.out.println(results.toString());
+        results.createStringOutput().stream().map(s->s.split(Rule.DELIMITER)).forEach(
+                s -> System.out.println(String.format("%s개 일치 (%s원) - %s개",(Object[])s)
+        ));
     }
 
     public static void printOrder(Order order) {
