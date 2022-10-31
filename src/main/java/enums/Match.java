@@ -19,7 +19,9 @@ public enum Match {
     }
 
     public static Match findMatch(int matchCount) {
-        return Arrays.stream(Match.values()).filter(prize -> prize.getCount() == matchCount)
+
+
+        return Arrays.stream(Match.values()).filter(match -> match.getCount() == matchCount)
                 .findFirst()
                 .orElse(ZERO);
     }

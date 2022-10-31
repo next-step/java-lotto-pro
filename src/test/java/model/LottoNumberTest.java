@@ -29,4 +29,12 @@ class LottoNumberTest {
         assertThatThrownBy(() -> new LottoNumber(number))
                 .isInstanceOf(RuntimeException.class);
     }
+
+    @ParameterizedTest(name = "{index} {displayName} message={0}")
+    @ValueSource(strings = { "@!#@!#", "()&*", "~!@@", "(&%$%" })
+    @DisplayName("숫자가 아닌값에 에러를 반환하는 테스트(특수문자)")
+    void lotto_number_generate_speicial_character_test(String number) {
+        assertThatThrownBy(() -> new LottoNumber(number))
+                .isInstanceOf(RuntimeException.class);
+    }
 }
