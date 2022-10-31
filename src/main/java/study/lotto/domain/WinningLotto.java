@@ -1,7 +1,9 @@
 package study.lotto.domain;
 
+import study.lotto.domain.number.CacheLottoNumbers;
+import study.lotto.domain.number.LottoNumber;
+import study.message.LottoExceptionCode;
 import study.splitter.Splitter;
-import study.util.NumberUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,18 +31,13 @@ public class WinningLotto {
             return winningNumbersConverted;
         }
 
-        throw new IllegalArgumentException(
-                "[ERROR] The numbers entered are invalid as lotto numbers.");
+        throw new IllegalArgumentException(LottoExceptionCode.NOT_MATCH_LOTTO_SIZE.getMessage());
     }
 
-    private Set<LottoNumber> convertStringArrToSet(
-            String[] winningNumbersSplited) {
+    private Set<LottoNumber> convertStringArrToSet(String[] winningNumbersSplited) {
         return Arrays.stream(winningNumbersSplited)
-                .map((str) -> {
-                    return LottoNumber.of(
-                            NumberUtil.convertToPositiveIntNotContainsZero(str.trim())
-                    );
-                }).collect(Collectors.toSet());
+                .map((str) -> CacheLottoNumbers.of(str.trim()))
+                .collect(Collectors.toSet());
     }
 
     public int matchNumber(LottoNumber lottoNumber) {
@@ -57,15 +54,13 @@ public class WinningLotto {
     }
 
     public void addBonusBall(int bonusBall) {
-        LottoNumber bonusBallConverted = LottoNumber.of(bonusBall);
+        LottoNumber bonusBallConverted = CacheLottoNumbers.of(bonusBall);
 
-        if(!winningLotto.contains(bonusBallConverted)) {
-            this.bonusBall = bonusBallConverted;
-            return;
+        if(winningLotto.contains(bonusBallConverted)) {
+            throw new IllegalArgumentException(LottoExceptionCode.INVALID_BONUS_BALL.getMessage());
         }
 
-        throw new IllegalArgumentException(
-                "[ERROR] Bonus ball number must not be contained in the winning numbers.");
+        this.bonusBall = bonusBallConverted;
     }
 
     public boolean isMatchBonusBall(Lotto lotto) {
