@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class RanksTest {
@@ -33,10 +32,10 @@ public class RanksTest {
 			)
 		);
 
-		Assertions.assertThat(ranks.count(Rank.FIRST)).isEqualTo(1L);
-		Assertions.assertThat(ranks.count(Rank.SECOND)).isEqualTo(1L);
-		Assertions.assertThat(ranks.count(Rank.THIRD)).isEqualTo(1L);
-		Assertions.assertThat(ranks.count(Rank.FOURTH)).isEqualTo(1L);
+		assertThat(ranks.count(Rank.FIRST)).isEqualTo(1L);
+		assertThat(ranks.count(Rank.SECOND)).isEqualTo(1L);
+		assertThat(ranks.count(Rank.THIRD)).isEqualTo(1L);
+		assertThat(ranks.count(Rank.FOURTH)).isEqualTo(1L);
 	}
 
 }

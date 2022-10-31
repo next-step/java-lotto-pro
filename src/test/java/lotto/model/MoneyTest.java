@@ -2,10 +2,7 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import lotto.model.Money;
 
 public class MoneyTest {
 
@@ -25,6 +22,6 @@ public class MoneyTest {
 	@Test
 	void 특정_금액과의_비율_비교() {
 		Money money = new Money(14000L);
-		Assertions.assertThat(money.ratio(new Money(5000L))).isEqualTo(0.35f);
+		assertThat(money.ratio(new Money(5000L))).isEqualTo(0.35f);
 	}
 }
