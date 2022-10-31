@@ -30,6 +30,12 @@ class MoneyTest {
         assertThat(money.isZero()).isEqualTo(expectedZero);
     }
 
+    @DisplayName("ZERO는 0원이다.")
+    @Test
+    void static_ZERO() {
+        assertThat(Money.ZERO.isZero()).isTrue();
+    }
+
     @DisplayName("금액은 음수가 아니어야 한다.")
     @Test
     void 음수가_아니어야_함() {
@@ -62,5 +68,16 @@ class MoneyTest {
 
         assertThatExceptionOfType(ArithmeticException.class)
                 .isThrownBy(() -> something.divide(zero));
+    }
+
+    @DisplayName("금액을 곱할 수 있다.")
+    @Test
+    void 곱하기() {
+        final Money something = new Money(1000);
+        final Money expected = new Money(1_000_000);
+
+        final Money actual = something.multiply(1_000);
+
+        assertThat(actual).isEqualTo(expected);
     }
 }

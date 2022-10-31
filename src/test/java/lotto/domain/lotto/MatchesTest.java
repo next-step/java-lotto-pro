@@ -31,4 +31,20 @@ class MatchesTest {
 
         assertThat(actual).isEqualTo(expected);
     }
+
+    @ParameterizedTest(name = "{0}에 당첨되면 당첨금은 {1}원이다.")
+    @CsvSource({
+            "SIX, 2000000000",
+            "FIVE, 1500000",
+            "FOUR, 50000",
+            "THREE, 5000",
+            "BLANK, 0"
+    })
+    void 당첨금(final Matches match, final long expectedMoney) {
+        final Money expected = new Money(expectedMoney);
+
+        final Money actual = match.calculatePrize(1L);
+
+        assertThat(actual).isEqualTo(expected);
+    }
 }

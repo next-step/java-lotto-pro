@@ -3,10 +3,12 @@ package lotto.domain.lotto;
 import java.util.Objects;
 
 public class Money {
-    private final int value;
+    public static final Money ZERO = new Money(0);
 
-    public Money(int value) {
-        if (value < 0) {
+    private final long value;
+
+    public Money(long value) {
+        if (value < 0L) {
             throw new IllegalArgumentException("금액은 음수가 아니어야 합니다. value=[" + value + "]");
         }
 
@@ -18,7 +20,11 @@ public class Money {
     }
 
     public int divide(final Money other) {
-        return this.value / other.value;
+        return Math.toIntExact(this.value / other.value);
+    }
+
+    public Money multiply(long value) {
+        return new Money(this.value * value);
     }
 
     @Override
