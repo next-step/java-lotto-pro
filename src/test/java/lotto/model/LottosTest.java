@@ -15,11 +15,14 @@ class LottosTest {
 				new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 6)),
 				new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 6)),
 				new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 6)),
-				new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 6))
+				new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 6)),
+				new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 6), LottoType.MANUAL),
+				new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 6), LottoType.MANUAL)
 			)
 		);
 
-		assertThat(lottos.size()).isEqualTo(4);
+		assertThat(lottos.size(LottoType.AUTO)).isEqualTo(4L);
+		assertThat(lottos.size(LottoType.MANUAL)).isEqualTo(2L);
 	}
 
 }

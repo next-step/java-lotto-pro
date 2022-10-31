@@ -16,7 +16,7 @@ public class Lotto {
 		this(numbers, LottoType.AUTO);
 	}
 
-	public Lotto(final Collection<LottoNumber> numbers, final LottoType type){
+	public Lotto(final Collection<LottoNumber> numbers, final LottoType type) {
 		this.numbers = new TreeSet<>(numbers);
 		this.type = type;
 		validate();
@@ -42,8 +42,8 @@ public class Lotto {
 		return numbers.contains(number);
 	}
 
-	public LottoType getType(){
-		return type;
+	public boolean isTypeOf(final LottoType type) {
+		return this.type == type;
 	}
 
 	@Override

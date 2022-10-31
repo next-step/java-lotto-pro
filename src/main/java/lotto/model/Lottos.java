@@ -16,8 +16,10 @@ public class Lottos {
 			.collect(Collectors.collectingAndThen(Collectors.toList(), Ranks::new));
 	}
 
-	public int size() {
-		return lottos.size();
+	public long size(final LottoType type) {
+		return lottos.stream()
+			.filter(lotto -> lotto.isTypeOf(type))
+			.count();
 	}
 
 	@Override

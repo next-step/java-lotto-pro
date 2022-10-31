@@ -13,7 +13,7 @@ class LottoShopTest {
 		LottoShop lottoShop = new LottoShop(new LottoRandomCreateStrategy());
 		Lottos lottos = lottoShop.buy(new Money(14000));
 
-		assertThat(lottos.size()).isEqualTo(14);
+		assertThat(lottos.size(LottoType.AUTO)).isEqualTo(14);
 	}
 
 }

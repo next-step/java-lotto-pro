@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.model.LottoType;
 import lotto.model.Lottos;
 import lotto.model.Rank;
 import lotto.model.Ranks;
@@ -11,7 +12,7 @@ public class Output {
 	}
 
 	public static void printLottos(final Lottos lottos) {
-		System.out.printf("%d개를 구매했습니다\n", lottos.size());
+		System.out.printf("%d개를 구매했습니다\n", lottos.size(LottoType.AUTO));
 		System.out.println(lottos);
 	}
 
