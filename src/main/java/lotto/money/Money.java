@@ -6,20 +6,20 @@ public class Money {
     private int amount = 0;
 
     public Money(int amount){
-        validationNegative(amount);
+        valideNegative(amount);
         this.amount = amount;
     }
 
     public Money(String stringAmount){
         try {
             amount = Integer.parseInt(stringAmount);
-            validationNegative(amount);
+            valideNegative(amount);
         } catch (NumberFormatException e) {
             throw new NumberFormatException(MessageConstant.ERROR_VALID_NOT_NUMBER);
         }
     }
 
-    private static void validationNegative(int amount) {
+    private static void valideNegative(int amount) {
         if(amount < 0){
             throw new IllegalArgumentException(MessageConstant.ERROR_VALID_NOT_NEGATIVE_NUMBER);
         }

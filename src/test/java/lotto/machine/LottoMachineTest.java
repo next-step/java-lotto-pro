@@ -40,7 +40,7 @@ public class LottoMachineTest {
     }
 
     @Test
-    void 로또_1장을_구매한다(){
+    void 자동_로또_1장을_구매한다(){
         LottoTickets lottoTickets = lottoMachine.buyLotto(new Money(1_000));
         assertThat(lottoTickets.getQuantity()).isEqualTo(1);
     }

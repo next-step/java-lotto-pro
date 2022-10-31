@@ -1,29 +1,37 @@
 package lotto.system;
 
 import java.util.ArrayList;
-import lotto.match.Rank;
+import lotto.rank.Rank;
 import lotto.machine.Result;
 
 public class OutputView {
 
     public static void printInputMoney() {
-        println("구매 금액을 입력해 주세요.");
+        println("\n구매 금액을 입력해 주세요.");
     }
 
-    public static void printReceipt(int quantity) {
-        println(quantity + "개를 구매했습니다.");
+    public static void printInputManualLottoQuantity() {
+        println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static void printInputManualLottoNumbers() {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void printReceipt(int manualQuantity, int autoQuantity) {
+        println("\n수동으로 " + manualQuantity + "장, " + "자동으로 " + autoQuantity + "장을 구매했습니다.");
     }
 
     public static void printInputWinnerNumbers() {
-        println("지난 주 당첨 번호를 입력해 주세요.");
+        println("\n지난 주 당첨 번호를 입력해 주세요.");
     }
 
     public static void printNotValidLottoNumbers() {
-        println("유효하지 않은 로또 번호입니다.");
+        println("\n유효하지 않은 로또 번호입니다.");
     }
 
     public static void printInputBonusNumber() {
-        println("보너스 번호를 입력하세요");
+        println("\n보너스 번호를 입력하세요");
     }
 
     public static void printLotto(ArrayList<Integer> numbers){
