@@ -23,6 +23,18 @@ public class WinningLotto {
 			.collect(Collectors.toList());
 	}
 
+	public LottoResultMessage getResultMessage(Lottos lottos, MatchCount matchCount) {
+		LottoResults lottoResults = lottos.toLottoResults(winLotto);
+		LottoResultMatchCounts lottoResultMatchCounts = lottoResults.toLottoResultMatchCounts(matchCount);
+		return lottoResultMatchCounts.getResultMessage();
+	}
+
+	public String getYieldMessage(Lottos lottos) {
+		LottoResults lottoResults = lottos.toLottoResults(winLotto);
+
+		return String.format("총 수익률은 %.2f입니다.%n", lottoResults.winningPrice());
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -36,21 +48,5 @@ public class WinningLotto {
 	@Override
 	public int hashCode() {
 		return Objects.hash(winLotto);
-	}
-
-	public String getResultMessage(Lottos lottos, MatchCount matchCount) {
-		LottoResults lottoResults = lottos.toLottoResults(winLotto);
-
-		LottoResultMatchCounts lottoResultMatchCounts = lottoResults.toLottoResultMatchCounts(matchCount);
-		long price = lottoResultMatchCounts.getPrice();
-		int matchQuantity = lottoResultMatchCounts.getQuantity();
-
-		return String.format("%d개 일치 (%d원)- %d", matchCount.getInt(), price, matchQuantity);
-	}
-
-	public String getYieldMessage(Lottos lottos) {
-		LottoResults lottoResults = lottos.toLottoResults(winLotto);
-
-		return String.format("총 수익률은 %.2f입니다.%n", lottoResults.winningPrice());
 	}
 }

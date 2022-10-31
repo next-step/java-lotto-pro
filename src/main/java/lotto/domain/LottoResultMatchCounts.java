@@ -13,11 +13,8 @@ public class LottoResultMatchCounts {
 		return new LottoResultMatchCounts(lottoResults, matchCount);
 	}
 
-	public long getPrice() {
-		return 0;
-	}
-
-	public int getQuantity() {
-		return lottoResults.getQuantity();
+	public LottoResultMessage getResultMessage() {
+		int matchQuantity = this.lottoResults.getQuantity();
+		return new LottoResultMessage(this.matchCount, matchQuantity, WinningPrice.from(this.matchCount));
 	}
 }

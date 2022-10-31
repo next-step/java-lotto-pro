@@ -29,7 +29,5 @@ class LottoResultsTest {
 			)
 		);
 		assertThat(lottoResults.toLottoResultMatchCounts(MatchCount.from(3))).isNotNull();
-		assertThat(lottoResults.toLottoResultMatchCounts(MatchCount.from(3)).getQuantity()).isEqualTo(1);
 	}
-
 }
