@@ -42,7 +42,11 @@ public class LottoTicket {
     }
 
     public int size(){
-        return numbers.size();
+        return new ArrayList<>(numbers).size();
+    }
+
+    public ArrayList getValues() {
+        return new ArrayList<>(numbers);
     }
 
     public void printLotto(){

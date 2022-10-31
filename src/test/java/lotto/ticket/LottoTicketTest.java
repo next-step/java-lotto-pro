@@ -2,6 +2,7 @@ package lotto.ticket;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.HashSet;
 import java.util.Random;
 import lotto.match.Rank;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,8 +19,7 @@ public class LottoTicketTest {
     @Test
     void 중복없는_로또번호_6자리_생성(){
         LottoTicket lottoTicket = new LottoTicket();
-        int size = lottoTicket.size();
-        assertThat(size).isEqualTo(lottoTicket.SLOT_SIZE);
+        assertThat(new HashSet<>(lottoTicket.getValues()).size()).isEqualTo(lottoTicket.SLOT_SIZE);
     }
 
     @Test
