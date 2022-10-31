@@ -10,7 +10,7 @@ import java.util.List;
 public class LottoController {
 
     public static void start() {
-        Money money = new Money(Integer.parseInt(LottoInputView.readMoney()));
+        Money money = new Money(LottoUtils.stringToMoney(LottoInputView.readMoney()));
         Lottos lottos = LottoCreator.buyLottos(money.lottoCount());
         LottoOutPutView.writeBuyLottos(lottos);
         Lotto winLotto = readWinLotto(LottoInputView.readLottoWinNumber());
