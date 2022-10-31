@@ -23,8 +23,14 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    /**
+     * 자동/수동 포함한 로또 생성기
+     * @param maxLottoCount lottoNumberGenerator에 의해 생성할 로또 개수
+     * @param lottoNumberGenerator
+     * @param manualLottos 수동으로 기생성된 로또
+     */
     public Lottos(int maxLottoCount, LottoNumberGenerator lottoNumberGenerator, List<Lotto> manualLottos) {
-        List<Lotto> lottos = new ArrayList<>(manualLottos); // TODO manualLottos null일 때 이슈 없는지 체크
+        List<Lotto> lottos = new ArrayList<>(manualLottos);
         for(int i = 0; i < maxLottoCount; i++) {
             lottos.add(Lotto.generateLotto(lottoNumberGenerator));
         }
