@@ -1,31 +1,28 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Numbers {
 
-    private final String[] numbers;
+    private List<Number> numbers = new ArrayList<>();
 
-    public Numbers(String[] numbers) {
-        validateNegativeNumbers(numbers);
-        this.numbers = numbers;
+    protected Numbers() {
     }
 
-    private static void validateNegativeNumbers(String[] numbers) {
-        for (String number : numbers) {
-            validateNegativeNumber(number);
-        }
-    }
-
-    private static void validateNegativeNumber(String number) {
-        if (Integer.parseInt(number) < 0) {
-            throw new IllegalArgumentException();
-        }
+    public List<Number> getNumbers() {
+        return numbers;
     }
 
     public int sum() {
         int sum = 0;
-        for (String number : this.numbers) {
-            sum += Integer.parseInt(number);
+        for (Number number : this.numbers) {
+            sum += number.getNumber();
         }
         return sum;
+    }
+
+    public void add(Number number) {
+        this.numbers.add(number);
     }
 }
