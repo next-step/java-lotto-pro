@@ -21,7 +21,7 @@ public class LottoInput {
     public static WinningLotto inputWinningLotto() {
         try {
             Lotto lotto = inputLotto();
-            LottoNumber bonusLottoNumber = inputBonusLottoNumber(lotto);
+            LottoNumber bonusLottoNumber = inputBonusLottoNumber();
             return new WinningLotto(lotto, bonusLottoNumber);
         } catch (IllegalArgumentException e) {
             OutputConsole.out(e.getMessage());
@@ -39,13 +39,13 @@ public class LottoInput {
         }
     }
 
-    private static LottoNumber inputBonusLottoNumber(Lotto lotto) {
+    private static LottoNumber inputBonusLottoNumber() {
         try {
             String input = InputConsole.inputBonusLottoNumber();
             return LottoNumber.of(input);
         } catch (IllegalArgumentException e) {
             OutputConsole.out(e.getMessage());
-            return inputBonusLottoNumber(lotto);
+            return inputBonusLottoNumber();
         }
     }
 

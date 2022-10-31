@@ -12,7 +12,7 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto lotto) {
-        return Rank.of(winningLotto.match(lotto));
+        return Rank.of(winningLotto.match(lotto), lotto.match(bonusLottoNumber));
     }
 
     private void validateDuplicatedLottoNumber(Lotto winningLotto, LottoNumber bonusLottoNumber) {
