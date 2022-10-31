@@ -4,6 +4,7 @@ import study.step3.domain.lotto.Lottos;
 import study.step3.domain.lotto.PurchaseMoney;
 import study.step3.domain.lottonumber.LottoNumber;
 import study.step3.domain.lottonumber.LottoNumbers;
+import study.step3.domain.lottostatistics.LottoRankCountCache;
 import study.step3.domain.lottostatistics.LottoStatistics;
 import study.step3.message.LottoMessage;
 import study.step3.view.InputView;
@@ -21,8 +22,8 @@ public class LottoController {
 
     public LottoStatistics match(PurchaseMoney purchaseMoney, Lottos lottos) {
         String winningNumbers = inputWinningNumbers();
-        List<Long> matchCounts = lottos.matchAll(mapToLottoNumbers(winningNumbers));
-        return new LottoStatistics(purchaseMoney, matchCounts);
+        LottoRankCountCache lottoRankCountCache = lottos.matchAll(mapToLottoNumbers(winningNumbers));
+        return new LottoStatistics(purchaseMoney, lottoRankCountCache);
     }
 
     private String inputWinningNumbers() {

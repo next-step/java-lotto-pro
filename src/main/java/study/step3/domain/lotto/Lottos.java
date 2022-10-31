@@ -1,11 +1,15 @@
 package study.step3.domain.lotto;
 
 import study.step3.domain.lottonumber.LottoNumbers;
+import study.step3.domain.lottostatistics.LottoRankCountCache;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
@@ -29,9 +33,10 @@ public class Lottos {
         return output.toString();
     }
 
-    public List<Long> matchAll(LottoNumbers winningNumbers) {
-        return this.lottos.stream()
+    public LottoRankCountCache matchAll(LottoNumbers winningNumbers) {
+        List<Long> matchCounts = this.lottos.stream()
                 .map(lotto -> lotto.match(winningNumbers))
                 .collect(collectingAndThen(toList(), Collections::unmodifiableList));
+        return LottoRankCountCache.of(matchCounts);
     }
 }
