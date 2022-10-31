@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Lottos implements Iterable<Lotto>{
     List<Lotto> lottoList;
-    public Lottos(List<Lotto> lottos) {
-        this.lottoList = lottos;
+    public Lottos(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
     }
 
     public int size() {

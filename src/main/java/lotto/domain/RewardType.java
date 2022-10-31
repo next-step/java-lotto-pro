@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum RewardType {
     FIRST(6, 2000000000),
     SECOND(5,1500000),
@@ -21,18 +23,14 @@ public enum RewardType {
     }
 
     private static RewardType findRewardType(int matchCount) {
-        if (matchCount == 6)
-            return FIRST;
-        if (matchCount == 5)
-            return SECOND;
-        if (matchCount == 4)
-            return THIRD;
-        if (matchCount == 3)
-            return FOURTH;
-        return MISS;
+        return Arrays.stream(RewardType.values()).filter(r -> r.getCountOfMath() == matchCount).findAny().orElse(MISS);
     }
 
     public Integer getRewardPrice() {
         return rewardPrice;
+    }
+
+    public int getCountOfMath() {
+        return countOfMath;
     }
 }

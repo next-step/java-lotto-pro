@@ -14,11 +14,11 @@ public class LottoCreator {
     private static final List<Integer> baseLottoNumbers = IntStream.rangeClosed(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX).boxed().collect(Collectors.toList());
 
     public static Lottos buyLottos(int lottoCount) {
-        List<Lotto> lottos = new ArrayList<>();
+        List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(createLotto());
+            lottoList.add(createLotto());
         }
-        return new Lottos(lottos);
+        return new Lottos(lottoList);
     }
 
     private static Lotto createLotto() {
