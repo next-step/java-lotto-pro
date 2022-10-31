@@ -17,9 +17,9 @@ public class LottoMaker {
     }
 
     private static Lotto makeLotto() {
-        List<Integer> numbers = new ArrayList<>(LottoNumberRange.shuffledNumbers()
+        List<Integer> numbers = new ArrayList<>(LottoNumbersRule.shuffledNumbers()
                 .subList(SUB_LIST_START_INDEX, SUB_LIST_END_INDEX));
         Collections.sort(numbers);
-        return new Lotto(numbers);
+        return new Lotto(new Numbers(numbers));
     }
 }
