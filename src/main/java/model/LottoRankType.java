@@ -20,21 +20,21 @@ public enum LottoRankType {
         this.isBonusBall = isBonusBall;
     }
 
-    public static LottoRankType convertRank(int countOfContain, boolean isContainBonusNumber) {
+    public static LottoRankType convertRank(int countOfContain, boolean isMatchBonusNumber) {
         LottoRankType lottoRankType = Arrays.stream(LottoRankType.values())
                 .filter(rankType -> rankType.isSame(countOfContain))
                 .findFirst()
                 .orElse(RANK_FAIL);
 
-        return convertPossibleRankTwo(lottoRankType, isContainBonusNumber);
+        return convertRankTwoIfMatchBonusNumber(lottoRankType, isMatchBonusNumber);
     }
 
-    private static LottoRankType convertPossibleRankTwo(LottoRankType lottoRankType, boolean isContainBonusNumber) {
+    private static LottoRankType convertRankTwoIfMatchBonusNumber(LottoRankType lottoRankType, boolean isMatchBonusNumber) {
         if (!lottoRankType.isCountFive()) {
             return lottoRankType;
         }
 
-        if (isContainBonusNumber) {
+        if (isMatchBonusNumber) {
             return LottoRankType.RANK_TWO;
         }
 

@@ -40,7 +40,7 @@ public class LottoNumber {
                 .count();
     }
 
-    public boolean isContainBonusNumber(int bonusNumber) {
+    public boolean isMatchBonusNumber(int bonusNumber) {
         return this.number.contains(bonusNumber);
     }
 }

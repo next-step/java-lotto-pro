@@ -27,8 +27,8 @@ public class Lottos {
 
     private LottoRankType getRank(LottoNumber lottoNumber, List<Integer> winNumber, int bonusNumber) {
         int countOfContain = lottoNumber.getCountOfContain(winNumber);
-        boolean isContainBonusNumber = lottoNumber.isContainBonusNumber(bonusNumber);
+        boolean isMatchBonusNumber = lottoNumber.isMatchBonusNumber(bonusNumber);
 
-        return LottoRankType.convertRank(countOfContain, isContainBonusNumber);
+        return LottoRankType.convertRank(countOfContain, isMatchBonusNumber);
     }
 }
