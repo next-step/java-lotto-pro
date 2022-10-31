@@ -34,7 +34,8 @@ public class LottoLotteryTickets {
             int matchCount = winningLottoNumbers.matchExceptBonusBall(lottoNumbers);
             boolean isMatchBonusBall = lottoNumbers.containLottoNumber(winningLottoNumbers.getBonusBall());
             Match match = Match.findMatch(matchCount, isMatchBonusBall);
-            lottoResults.put(match, lottoResults.getOrDefault(match, RESULT_DEFAULT_VALUE) + RESULT_ADD_VALUE );
+            int matchAccumlatingCount = lottoResults.getOrDefault(match, RESULT_DEFAULT_VALUE) + RESULT_ADD_VALUE;
+            lottoResults.put(match, matchAccumlatingCount);
         }
 
         return new Result(lottoResults);
