@@ -10,7 +10,7 @@ public class LottoInput {
     public static int inputMoneyAndAvailableToPurchaseCount() {
         try {
             String input = InputConsole.inputMoneyForPurchaseLotto();
-            Money money = new Money(input);
+            Money money = Money.of(input);
             return LottoCalculator.availableToPurchaseCount(money);
         } catch (IllegalArgumentException e) {
             OutputConsole.out(e.getMessage());

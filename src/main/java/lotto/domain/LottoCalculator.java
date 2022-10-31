@@ -3,7 +3,7 @@ package lotto.domain;
 public class LottoCalculator {
 
     private final static long LOTTO_PRICE = 1000;
-    private final static Money LOTTO_MONEY = new Money(LOTTO_PRICE);
+    private final static Money LOTTO_MONEY = Money.of(LOTTO_PRICE);
 
     private LottoCalculator() {
     }
@@ -24,11 +24,11 @@ public class LottoCalculator {
 
     public static double rateOfReturn(WinningLotto winningLotto, Lottos lottos) {
         Money total = winningTotalMoney(winningLotto, lottos);
-        return total.divide(new Money(LOTTO_PRICE * lottos.size()));
+        return total.divide(Money.of(LOTTO_PRICE * lottos.size()));
     }
 
     public static Money winningTotalMoney(WinningLotto winningLotto, Lottos lottos) {
-        return new Money(lottos.getLottos()
+        return Money.of(lottos.getLottos()
                 .stream()
                 .mapToLong(lotto -> winningLotto.match(lotto).getMoney())
                 .sum());

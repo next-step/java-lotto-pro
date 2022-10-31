@@ -14,14 +14,14 @@ public class LottoCalculatorTest {
     @DisplayName("500원은 로또 구매 최소비용이 안된다.")
     void validateMoney() {
         assertThatThrownBy(() -> {
-            LottoCalculator.availableToPurchaseCount(new Money(500));
+            LottoCalculator.availableToPurchaseCount(Money.of(500));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("5000원으로 구매 가능한 로또 개수는 5개이다")
     void availableToPurchaseCount() {
-        assertThat(LottoCalculator.availableToPurchaseCount(new Money(5000))).isEqualTo(5);
+        assertThat(LottoCalculator.availableToPurchaseCount(Money.of(5000))).isEqualTo(5);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class LottoCalculatorTest {
                 Lotto.of(LottoNumbers.generate("1,2,3,7,8,9")),
                 Lotto.of(LottoNumbers.generate("1,2,10,11,12,13"))
         ));
-        assertThat(LottoCalculator.winningTotalMoney(winningLotto, lottos)).isEqualTo(new Money(10000));
+        assertThat(LottoCalculator.winningTotalMoney(winningLotto, lottos)).isEqualTo(Money.of(10000));
     }
 
     @Test
