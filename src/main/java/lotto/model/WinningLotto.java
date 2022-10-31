@@ -19,7 +19,7 @@ public class WinningLotto {
     List<Integer> nums = Arrays.stream(splitNumbers).mapToInt(Integer::parseInt)
         .boxed().collect(Collectors.toList());
 
-    return new Lotto(nums);
+    return Lotto.createManualLotto(nums);
   }
 
   public Lotto getLotto() {

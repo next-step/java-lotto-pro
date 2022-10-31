@@ -14,9 +14,9 @@ public class LottoResultTest {
     //given
     LottoList lottoList = new LottoList(
         Arrays.asList(
-            new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            new Lotto(Arrays.asList(3, 11, 15, 18, 22, 32)),
-            new Lotto(Arrays.asList(4, 24, 32, 37, 42, 45))
+            Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+            Lotto.createManualLotto(Arrays.asList(3, 11, 15, 18, 22, 32)),
+            Lotto.createManualLotto(Arrays.asList(4, 24, 32, 37, 42, 45))
         )
     );
 
@@ -36,9 +36,9 @@ public class LottoResultTest {
     //given
     LottoList lottoList = new LottoList(
         Arrays.asList(
-            new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            new Lotto(Arrays.asList(3, 11, 15, 18, 22, 32)),
-            new Lotto(Arrays.asList(4, 24, 32, 37, 42, 45))
+            Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+            Lotto.createManualLotto(Arrays.asList(3, 11, 15, 18, 22, 32)),
+            Lotto.createManualLotto(Arrays.asList(4, 24, 32, 37, 42, 45))
         )
     );
 
@@ -56,9 +56,9 @@ public class LottoResultTest {
     //given
     LottoList lottoList = new LottoList(
         Arrays.asList(
-            new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            new Lotto(Arrays.asList(3, 11, 15, 18, 22, 32)),
-            new Lotto(Arrays.asList(4, 24, 32, 37, 42, 45))
+            Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+            Lotto.createManualLotto(Arrays.asList(3, 11, 15, 18, 22, 32)),
+            Lotto.createManualLotto(Arrays.asList(4, 24, 32, 37, 42, 45))
         )
     );
 

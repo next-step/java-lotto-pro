@@ -12,10 +12,10 @@ import org.junit.jupiter.api.Test;
 public class LottoTest {
 
   @Test
-  @DisplayName("로또 디폴드 생성자로 생성시, 사이즈와 숫자 범위 확인")
+  @DisplayName("로또 자동생성시, 사이즈와 숫자 범위 확인")
   void generate_lotto_default() {
     //given //when
-    Lotto lotto = new Lotto();
+    Lotto lotto = Lotto.createAutoLotto();
 
     //then
     assertAll(
@@ -32,7 +32,7 @@ public class LottoTest {
     List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
     //when
-    Lotto lotto = new Lotto(numbers);
+    Lotto lotto = Lotto.createManualLotto(numbers);
 
     //then
     assertThat(lotto.getNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
@@ -42,8 +42,8 @@ public class LottoTest {
   @DisplayName("로또끼리 비교를 하여 동일한 값의 개수를 주는지 확인")
   void 로또_비교() {
     //given
-    Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-    Lotto targetLotto = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
+    Lotto lotto = Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    Lotto targetLotto = Lotto.createManualLotto(Arrays.asList(4, 5, 6, 7, 8, 9));
     //when
     int count = lotto.getMatchingCount(targetLotto);
     //then

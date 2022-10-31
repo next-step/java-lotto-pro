@@ -23,7 +23,7 @@ public class LottoList {
     List lottoList = new ArrayList<Lotto>();
 
     for (int i = 0; i < amount; i++) {
-      lottoList.add(new Lotto());
+      lottoList.add(Lotto.createAutoLotto());
     }
 
     return lottoList;

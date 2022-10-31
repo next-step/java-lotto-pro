@@ -7,12 +7,16 @@ public class Lotto {
 
   private final List<Integer> numbers;
 
-  public Lotto() {
-    numbers = LottoGenerator.generateLottoNumbers();
-  }
-
   public Lotto(List<Integer> numbers) {
     this.numbers = numbers;
+  }
+
+  public static Lotto createAutoLotto() {
+    return new Lotto(LottoGenerator.generateLottoNumbers());
+  }
+
+  public static Lotto createManualLotto(List<Integer> numbers) {
+    return new Lotto(numbers);
   }
 
   public List<Integer> getNumbers() {
