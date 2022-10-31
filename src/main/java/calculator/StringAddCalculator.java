@@ -9,9 +9,11 @@ import java.util.stream.Collectors;
 public class StringAddCalculator {
     private static final int DEFAULT_VALUE = 0;
     private static final int MINIMUM = 0;
-    private static final String DELIMITER = ",|:";
     private static final String SHOULD_POSITIVE_MESSAGE = "입력값은 양수여야 합니다";
+    private static final Pattern STANDARD_PATTERN = Pattern.compile(",|:");
     private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final int CUSTOM_DELIMITER_INDEX = 1;
+    private static final int CUSTOM_INPUT_INDEX = 2;
 
     public static int splitAndSum(String input) {
         if (isEmpty(input)) {
@@ -32,35 +34,40 @@ public class StringAddCalculator {
     private static String[] split(String input) {
         Matcher m = CUSTOM_PATTERN.matcher(input);
         if (m.find()) {
-            String customDelimiter = m.group(1);
-            return m.group(2).split(customDelimiter);
+            String customDelimiter = m.group(CUSTOM_DELIMITER_INDEX);
+            return m.group(CUSTOM_INPUT_INDEX).split(customDelimiter);
         }
 
-        return input.split(DELIMITER);
+        return STANDARD_PATTERN.split(input);
     }
 
     private static List<Integer> parse(String[] inputs) {
-        try {
-            return Arrays.stream(inputs)
-                    .map(StringAddCalculator::toPositive)
-                    .collect(Collectors.toList());
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        return Arrays.stream(inputs)
+                .map(StringAddCalculator::toPositive)
+                .collect(Collectors.toList());
     }
 
     private static int toPositive(String input) {
-        int value = Integer.parseInt(input);
+        int value = toInt(input);
 
-        if (value >= MINIMUM) {
-            return value;
+        if (value < MINIMUM) {
+            throw new RuntimeException(SHOULD_POSITIVE_MESSAGE);
         }
 
-        throw new IllegalArgumentException(SHOULD_POSITIVE_MESSAGE);
+        return value;
+    }
+
+    private static int toInt(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException(SHOULD_POSITIVE_MESSAGE, e);
+        }
     }
 
     private static int sum(List<Integer> numbers) {
         return numbers.stream()
-                .reduce(DEFAULT_VALUE, (a, b) -> a + b);
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }
