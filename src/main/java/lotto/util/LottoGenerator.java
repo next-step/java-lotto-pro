@@ -10,7 +10,7 @@ public class LottoGenerator {
   private static final int MIN_LOTTO_NUMBER = 1;
   private static final int MAX_LOTTO_NUMBER = 45;
   private static final int MIN_LOTTO_INDEX = 0;
-  private static final int MAX_LOTTO_INDEX = 6;
+  private static final int LOTTO_SIZE = 6;
 
   private LottoGenerator() {
     throw new AssertionError("Utility Class can't being instantiated");
@@ -24,7 +24,7 @@ public class LottoGenerator {
 
     Collections.shuffle(rangeNumbers);
 
-    List<Integer> lottoNumbers = rangeNumbers.subList(MIN_LOTTO_INDEX, MAX_LOTTO_INDEX);
+    List<Integer> lottoNumbers = rangeNumbers.subList(MIN_LOTTO_INDEX, LOTTO_SIZE);
 
     Collections.sort(lottoNumbers);
 
