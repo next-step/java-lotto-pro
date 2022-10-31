@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import lotto.constant.LottoConstant;
+import lotto.prize.Prize;
 import lotto.status.ErrorStatus;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private final List<LottoNumber> lottoNumbers;
+    protected final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
@@ -22,16 +23,17 @@ public class Lotto {
         }
     }
 
-    public int matchCount(WinnerLotto winnerLotto) {
-        return (int) this.lottoNumbers.stream()
-                .filter(winnerLotto::containLottoNumber)
+    public Prize matchPrize(Lotto lotto) {
+        int count = (int) this.lottoNumbers.stream()
+                .filter(lotto::containLottoNumber)
                 .count();
+        return Prize.prizeOf(count, false);
     }
 
-    public boolean hasBonusNumber(WinnerLotto winnerLotto) {
-        return this.lottoNumbers.stream()
-                .anyMatch(winnerLotto::matchBonusNumber);
+    protected boolean containLottoNumber(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
+
 
     @Override
     public boolean equals(Object o) {

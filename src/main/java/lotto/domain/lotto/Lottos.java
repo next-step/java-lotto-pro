@@ -15,10 +15,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Prizes getPrizeOfLotto(WinnerLotto winnerLotto) {
+    public Prizes getPrizeOfLotto(Lotto winnerLotto) {
         List<Prize> resultPrizes = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            Prize prize = Prize.prizeOf(lotto.matchCount(winnerLotto), lotto.hasBonusNumber(winnerLotto));
+            Prize prize = winnerLotto.matchPrize(lotto);
             resultPrizes.add(prize);
         }
         return new Prizes(resultPrizes);
