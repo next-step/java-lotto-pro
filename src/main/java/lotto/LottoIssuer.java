@@ -12,7 +12,7 @@ public class LottoIssuer {
         return new LottoBag(money, numberGenerator);
     }
 
-    public static WinningResultBag result(LottoBag lottoBag, List<Integer> winningNumbers) {
+    public static WinningResultBag result(LottoBag lottoBag, LottoNumberBag winningNumbers) {
         return new WinningResultBag(lottoBag.getResult(winningNumbers));
     }
 }

@@ -27,9 +27,12 @@ class LottoNumberBagTest {
     @DisplayName("당첨 번호 일치 카운트 제공")
     @Test
     void contains_number_success() {
+        //given:
         LottoNumberBag lottoNumberBag = new LottoNumberBag(Arrays.asList(1, 2, 3, 10, 20, 30));
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        LottoNumberBag winningNumbers = new LottoNumberBag(Arrays.asList(1, 2, 3, 4, 5, 6));
+        //when:
         int correctCount = lottoNumberBag.correctCount(winningNumbers);
+        //then:
         assertThat(correctCount).isEqualTo(3);
     }
 

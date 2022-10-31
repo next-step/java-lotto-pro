@@ -18,7 +18,7 @@ public class LottoBag {
         }
     }
 
-    public List<WinningResult> getResult(List<Integer> winningNumbers) {
+    public List<WinningResult> getResult(LottoNumberBag winningNumbers) {
         return lottoList.stream()
                 .map(lotto -> lotto.getResult(winningNumbers))
                 .collect(Collectors.toList());

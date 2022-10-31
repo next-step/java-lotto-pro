@@ -14,7 +14,7 @@ public class Lotto {
         this.lottoNumberBag = lottoNumberBag;
     }
 
-    public WinningResult getResult(List<Integer> winningNumbers) {
+    public WinningResult getResult(LottoNumberBag winningNumbers) {
         return WinningResult.getResultByMatchCount(lottoNumberBag.correctCount(winningNumbers));
     }
 
