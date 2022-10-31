@@ -9,8 +9,12 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos) {
+    private Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public static Lottos of(List<Lotto> lottos) {
+        return new Lottos(lottos);
     }
 
     public static Lottos autoGenerateSizeOf(int size) {

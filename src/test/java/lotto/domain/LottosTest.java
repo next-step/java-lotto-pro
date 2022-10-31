@@ -12,8 +12,8 @@ public class LottosTest {
     @Test
     @DisplayName("로또 콜렉션 생성")
     void create() {
-        Lottos lottos = new Lottos(Arrays.asList(Lotto.of(LottoNumbers.generate("1,2,3,4,5,6"))));
-        assertThat(lottos).isEqualTo(new Lottos(Arrays.asList(Lotto.of(LottoNumbers.generate("1,2,3,4,5,6")))));
+        Lottos lottos = Lottos.of(Arrays.asList(Lotto.of(LottoNumbers.generate("1,2,3,4,5,6"))));
+        assertThat(lottos).isEqualTo(Lottos.of(Arrays.asList(Lotto.of(LottoNumbers.generate("1,2,3,4,5,6")))));
     }
 
     @Test
