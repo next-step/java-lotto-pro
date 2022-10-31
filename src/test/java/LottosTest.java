@@ -1,4 +1,5 @@
 import model.LottoNumber;
+import model.LottoRankType;
 import model.Lottos;
 import model.Money;
 import model.strategy.MockStrategy;
@@ -9,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static model.LottoRankType.RANK_THREE;
+import static model.LottoRankType.RANK_TWO;
 import static org.assertj.core.api.Assertions.*;
 
 class LottosTest {
@@ -35,5 +38,41 @@ class LottosTest {
             boolean result = lotto.getNumber().stream().allMatch(v -> v > 0 && v < 46);
             assertThat(result).isTrue();
         }
+    }
+
+    @Test
+    void 로또의_순위리스트를_받는다() {
+        int money = 1000;
+        Lottos lottos = new Lottos(new Money(money), new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 9);
+        int bonusNumber = 40;
+
+        List<LottoRankType> result = lottos.getLottoRank(winNumber, bonusNumber);
+
+        assertThat(result.get(0)).isEqualTo(RANK_THREE);
+    }
+
+    @Test
+    void 숫자가5개와_보너스넘버까지_일치하면_2등으로_판별한다() {
+        int money = 1000;
+        Lottos lottos = new Lottos(new Money(money), new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 9);
+        int bonusNumber = 6;
+
+        List<LottoRankType> result = lottos.getLottoRank(winNumber, bonusNumber);
+
+        assertThat(result.get(0)).isEqualTo(RANK_TWO);
+    }
+
+    @Test
+    void 숫자가5개는_일치하지만_보너스넘버가_일치하지않으면_3등으로_판별한다() {
+        int money = 1000;
+        Lottos lottos = new Lottos(new Money(money), new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 9);
+        int bonusNumber = 45;
+
+        List<LottoRankType> result = lottos.getLottoRank(winNumber, bonusNumber);
+
+        assertThat(result.get(0)).isEqualTo(RANK_THREE);
     }
 }
