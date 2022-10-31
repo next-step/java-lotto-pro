@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoPurchaseAmountTest {
     @Test
@@ -32,14 +32,6 @@ class LottoPurchaseAmountTest {
                 .hasMessage("1000 단위로 입력해주세요.");
     }
     
-    @Test
-    @DisplayName("구입 금액은 숫자만 입력 가능")
-    void amount_only_number() {
-        assertThatThrownBy(() -> new LottoPurchaseAmount("df1"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("숫자를 입력해주세요.");
-    }
-
     @Test
     @DisplayName("구입 금액은 양수만 입력 가능")
     void amount_only_positive_number() {

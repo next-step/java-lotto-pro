@@ -12,7 +12,9 @@ class LottoLotteryTest {
     void create() {
         LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount("3000");
         LottoPurchaseQuantity lottoPurchaseQuantity = LottoPurchaseQuantity.of(lottoPurchaseAmount.calculateQuantity());
+
         LottoLottery lottoLottery = LottoLottery.of(lottoPurchaseQuantity, new AutoNumberGenerator());
+
         assertThat(lottoLottery).isInstanceOf(LottoLottery.class);
     }
 

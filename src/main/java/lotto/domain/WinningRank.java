@@ -53,11 +53,15 @@ public enum WinningRank {
 
     public String getStatisticsMessage(Long winningCount) {
         if (this.isDisplay()) {
-            return String.format(this == SECOND ? PRINT_SECOND_STATISTICS_FORMAT : PRINT_STATISTICS_FORMAT,
+            return String.format(getStatisticsFormat(),
                     this.getMatchCount(),
                     this.getWinningMoney(),
                     winningCount);
         }
         return BLANK_STRING;
+    }
+
+    private String getStatisticsFormat() {
+        return this == SECOND ? PRINT_SECOND_STATISTICS_FORMAT : PRINT_STATISTICS_FORMAT;
     }
 }
