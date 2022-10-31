@@ -12,8 +12,7 @@ public class Constant {
     public static final String INPUT_PAY_MONEY = "구입금액을 입력해 주세요.";
     public static final String INPUT_WINNING_NUMBER_LAST_WEEK = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String RESULT_BOUGHT_SOME = "개를 구매했습니다.";
-    public static final String RESULT_WINNING_STATISTICS = "당첨 통계";
-    public static final String RESULT_DIVIDING_LINE = "---------";
+    public static final String RESULT_WINNING_STATISTICS = "당첨 통계\n---------";
     public static final String EA = "개";
     public static final String RESULT_HIT_THREE = "3개 일치 (5000원)-";
     public static final String RESULT_HIT_FOUR = "4개 일치 (50000원)- ";

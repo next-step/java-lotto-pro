@@ -7,7 +7,6 @@ package lotto;
 
 import static lotto.Constant.EA;
 import static lotto.Constant.RESULT_BOUGHT_SOME;
-import static lotto.Constant.RESULT_DIVIDING_LINE;
 import static lotto.Constant.RESULT_HIT_FIVE;
 import static lotto.Constant.RESULT_HIT_FOUR;
 import static lotto.Constant.RESULT_HIT_SIX;
@@ -36,7 +35,6 @@ public class ResultView {
 
     private void printWinningCount(Statistic statistic) {
         System.out.println("\n" + RESULT_WINNING_STATISTICS);
-        System.out.println(RESULT_DIVIDING_LINE);
         System.out.println(RESULT_HIT_THREE + statistic.getCountOfFourth() + EA);
         System.out.println(RESULT_HIT_FOUR + statistic.getCountOfThird() + EA);
         System.out.println(RESULT_HIT_FIVE + statistic.getCountOfSecond() + EA);
