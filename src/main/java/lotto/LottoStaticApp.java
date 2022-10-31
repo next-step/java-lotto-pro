@@ -12,6 +12,7 @@ public class LottoStaticApp implements App {
     private static final String WELCOME = "당첨 통계\n---------";
     private static final String MATCH = "%d개 일치 (%d원)- %d개";
     private static final String PROFIT = "총 수익률은 %.2f입니다.";
+    private static final String PROFIT_EASTER_EGG = PROFIT + "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     private final HashMap<LottoMatchType, Integer> countMap = new HashMap<>();
 
@@ -59,7 +60,16 @@ public class LottoStaticApp implements App {
             Integer count = entry.getValue();
             sumProfit += lottoMatchType.multiply(count);
         }
-        print(String.format(PROFIT, payAmount.calculateProfitRate(sumProfit)));
+        double profitRate = payAmount.calculateProfitRate(sumProfit);
+        if (profitRate < 1) {
+            printEasterEggLottoProfitStatistics(profitRate);
+            return;
+        }
+        print(String.format(PROFIT, profitRate));
+    }
+
+    private void printEasterEggLottoProfitStatistics(double profitRate) {
+        print(String.format(PROFIT_EASTER_EGG, profitRate));
     }
 
     public static class Builder {
