@@ -1,5 +1,7 @@
 package lotto.auto;
 
+import java.util.List;
+
 public class Lotto {
     private Money price;
     private LottoNumbers lottoNumbers;
@@ -13,7 +15,12 @@ public class Lotto {
         return price.getMoney();
     }
 
-    public LottoNumbers getLottoNumbers() {
-        return lottoNumbers;
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers.getLottoNumbers();
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.getLottoNumbers().toString();
     }
 }
