@@ -11,12 +11,20 @@ public class Lotto {
 
     public Lotto(Integer money, List<LottoNumbers> manualLottoList) {
         LottoMoney lottoMoney = new LottoMoney(money);
+        int autoPurchaseCount = computeAutoPurchaseCount(lottoMoney.count(), manualLottoList.size());
         this.lottoNumbersList = new ArrayList<>();
-        int autoPurchaseCount = lottoMoney.count() - manualLottoList.size();
+        this.lottoNumbersList.addAll(manualLottoList);
         for (int i = 0; i < autoPurchaseCount; i++) {
-            lottoNumbersList.add(new LottoNumbers(LottoUtil.generate()));
+            this.lottoNumbersList.add(new LottoNumbers(LottoUtil.generate()));
         }
-        lottoNumbersList.addAll(manualLottoList);
+    }
+
+    private int computeAutoPurchaseCount(int lottoMoneyCount, int manualLottoCount) {
+        int autoPurchaseCount = lottoMoneyCount - manualLottoCount;
+        if (autoPurchaseCount < 0) {
+            throw new IllegalStateException("구입금액보다 수동구매 숫자가 더 많습니다.");
+        }
+        return autoPurchaseCount;
     }
 
     public Lotto(List<LottoNumbers> lottoNumbersList) {

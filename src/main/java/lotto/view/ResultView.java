@@ -13,8 +13,11 @@ import lotto.domain.Rank;
 
 public class ResultView {
 
-    public static void printPurchaseNumbers(List<LottoNumbers> purchaseLottoList) {
-        for (LottoNumbers lottoNumbers : purchaseLottoList) {
+    public static void printPurchaseNumbers(List<LottoNumbers> lottoNumbersList, Integer manualCount) {
+        System.out.println();
+        System.out.println(
+            String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualCount, lottoNumbersList.size() - manualCount));
+        for (LottoNumbers lottoNumbers : lottoNumbersList) {
             System.out.println(lottoNumbers);
         }
         System.out.println();
