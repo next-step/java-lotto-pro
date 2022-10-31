@@ -10,6 +10,10 @@ public class Lotto {
         this.numbers = new LottoNumbers(numbers);
     }
 
+    public boolean hasBonusBall(LottoNumber bonusBall) {
+        return numbers.contains(bonusBall);
+    }
+
     @Override
     public String toString() {
         return "[" + numbers + "]";
