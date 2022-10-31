@@ -15,14 +15,14 @@ class WinningLottoTest {
         Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber lottoNumber = LottoNumber.from(6);
 
-        assertThatThrownBy(() -> WinningLotto.from(lotto, lottoNumber))
+        assertThatThrownBy(() -> WinningLotto.of(lotto, lottoNumber))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("로또가 정상적으로 당첨되는지 확인")
     @Test
     void winningMatch() {
-        WinningLotto winningLotto = WinningLotto.from(
+        WinningLotto winningLotto = WinningLotto.of(
             Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.from(7));
         Lotto first = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto second = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 7));

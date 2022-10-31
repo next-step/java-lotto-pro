@@ -21,7 +21,7 @@ public class WinningLotto {
         this.bonusBall = bonusBall;
     }
 
-    public static WinningLotto from(final Lotto winningLotto, final LottoNumber bonusBall) {
+    public static WinningLotto of(final Lotto winningLotto, final LottoNumber bonusBall) {
         return new WinningLotto(winningLotto, bonusBall);
     }
 

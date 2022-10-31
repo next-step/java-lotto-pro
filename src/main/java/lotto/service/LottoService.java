@@ -35,7 +35,7 @@ public class LottoService {
     }
 
     public WinningLotto winningLotto() {
-        return WinningLotto.from(InputView.inputWinningNumbers(), InputView.inputBounsBall());
+        return WinningLotto.of(InputView.inputWinningNumbers(), InputView.inputBounsBall());
     }
 
     public Map<LottoRank, Integer> checkWinnginLotto(Lottos lottos, WinningLotto winningLotto) {
