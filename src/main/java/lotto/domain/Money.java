@@ -57,7 +57,10 @@ public class Money {
         if(lottoCount < 0) {
             throw new IllegalArgumentException(ErrorCode.음의_정수가_입력되면_안됨.getErrorMessage());
         }
-        return this.maxLottoCount() >= lottoCount;
+        if(maxLottoCount() < lottoCount) {
+            throw new IllegalArgumentException(ErrorCode.구매_가능한_로또_숫자_벗어남.getErrorMessage());
+        }
+        return true;
     }
 
     /**

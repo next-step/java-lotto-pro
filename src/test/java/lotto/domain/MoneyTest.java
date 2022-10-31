@@ -48,7 +48,8 @@ public class MoneyTest {
     @Test
     void 주어진_돈_내에서_살_수_있는_로또_개수가_아니면_false_반환() {
         Money money = Money.createMoney(5000L);
-        assertThat(money.isBuyableLottoCount(6)).isFalse();
+        assertThatThrownBy(() -> money.isBuyableLottoCount(6)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorCode.구매_가능한_로또_숫자_벗어남.getErrorMessage());
     }
 
     @Test
