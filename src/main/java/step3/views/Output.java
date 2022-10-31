@@ -19,6 +19,14 @@ public class Output {
         System.out.println(Message.BONUS.getMessage());
     }
 
+    public void manualCount() {
+        System.out.println(Message.MANUAL_COUNT.getMessage());
+    }
+
+    public void manualNumber() {
+        System.out.println(Message.MANUAL_NUMBER.getMessage());
+    }
+
     public void generateLottos(int count, Lottos lottos) {
         System.out.println(count + Message.COUNT.getMessage());
         lottos.getLottos().forEach(lotto -> {
