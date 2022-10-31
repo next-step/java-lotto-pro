@@ -4,7 +4,6 @@ import static step3.constant.ErrorMessage.ONLY_NUMBER_PURCHASE_PRICE_INPUT;
 
 public class LottoGenerator {
 
-
     public Lottos generateLottos(String price) {
         Lottos lottos = new Lottos();
         lottos.generate(getGeneratorCount(price));
@@ -26,12 +25,6 @@ public class LottoGenerator {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ONLY_NUMBER_PURCHASE_PRICE_INPUT);
         }
-    }
-
-    public String calculatorResult(int totalWinningPrice) {
-        /*double calculatorResult = Double.valueOf(totalWinningPrice) / Double.valueOf(purchasePrice);
-        return String.format("%.2f", calculatorResult);*/
-        return null;
     }
 
 }

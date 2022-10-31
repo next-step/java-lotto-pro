@@ -15,7 +15,7 @@ public class LottoGame {
         this.lottos = generateLotto();
         this.lastWeekLotto = generateLastWeekLotto();
         this.bonusNumber = generateBonusNumber();
-        statisticsLotto();
+        statisticsLotto(lottos.getSize());
     }
 
     private static Lottos generateLotto() {
@@ -35,14 +35,9 @@ public class LottoGame {
         return lottoNumber;
     }
 
-    private void statisticsLotto() {
-        LottoResult lottoResult = calculatorLottoGame(lottos, lastWeekLotto);
-        OutputView.outputResultLottoGame(lottoGenerator, lottoResult);
-    }
-
-    private LottoResult calculatorLottoGame(Lottos lottos, Lotto lastWeekLotto) {
-        LottoResult lottoResult = lottos.calculatorLotto(lastWeekLotto);
-        return lottoResult;
+    private void statisticsLotto(int lottoSize) {
+        LottoResult lottoResult = lottos.calculatorLotto(lastWeekLotto, bonusNumber);
+        OutputView.outputResultLottoGame(lottoSize, lottoResult);
     }
 
 }

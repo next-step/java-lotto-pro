@@ -59,10 +59,13 @@ public class Lotto {
         return numbers;
     }
 
-    public int sameNumberCount(Lotto lotto) {
-        int sameCount = (int) lotto.numbers.stream()
+    public int sameNumberCount(Lotto lastWeekLotto) {
+        return (int) lastWeekLotto.numbers.stream()
                 .filter(number -> this.numbers.contains(number)).count();
-        return sameCount;
+    }
+
+    public boolean containBonusNumber(LottoNumber bonusNumber) {
+        return this.numbers.contains(bonusNumber);
     }
 
     @Override

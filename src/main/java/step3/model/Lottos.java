@@ -24,10 +24,12 @@ public class Lottos {
         return lottos;
     }
 
-    public LottoResult calculatorLotto(Lotto lastWeekLotto) {
+    public LottoResult calculatorLotto(Lotto lastWeekLotto, LottoNumber bonusNumber) {
         LottoResult lottoResult = new LottoResult();
         for (Lotto lotto : lottos) {
-            lottoResult.addResult(lotto.sameNumberCount(lastWeekLotto));
+            int sameCount = lotto.sameNumberCount(lastWeekLotto);
+            boolean containBonus = lotto.containBonusNumber(bonusNumber);
+            lottoResult.addResult(sameCount, containBonus);
         }
         return lottoResult;
     }

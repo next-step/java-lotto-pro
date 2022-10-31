@@ -1,16 +1,13 @@
 package step3.veiw;
 
 import step3.model.Lotto;
-import step3.model.LottoGenerator;
 import step3.model.LottoResult;
 import step3.model.Lottos;
 
 import static step3.constant.GameMessage.*;
+import static step3.constant.Rank.*;
 
 public class OutputView {
-
-    private final static int MIN_SAME_COUNT = 3;
-    private final static int MAX_SAME_COUNT = 6;
 
     public static void outputResultGenerateLotto(Lottos lottos) {
         outputPurchaseCount(lottos);
@@ -30,22 +27,24 @@ public class OutputView {
 
     }
 
-    public static void outputResultLottoGame(LottoGenerator lottoGenerator, LottoResult lottoResult) {
+    public static void outputResultLottoGame(int lottoSize, LottoResult lottoResult) {
         System.out.println();
         System.out.println(RESULT_STATISTICS);
         System.out.println(DIVIDING_LINE);
         outputSameNumberCount(lottoResult);
-        outputResultLottoStatistics(lottoGenerator, lottoResult);
+        outputResultLottoStatistics(lottoSize, lottoResult);
     }
 
     private static void outputSameNumberCount(LottoResult lottoResult) {
-        for (int i = MIN_SAME_COUNT; i <= MAX_SAME_COUNT; i++) {
-            System.out.println(lottoResult.createSameCountMessage(i));
-        }
+        System.out.println(lottoResult.createSameCountMessage(FIFTH));
+        System.out.println(lottoResult.createSameCountMessage(FOURTH));
+        System.out.println(lottoResult.createSameCountMessage(THIRD));
+        System.out.println(lottoResult.createSameCountMessage(SECOND));
+        System.out.println(lottoResult.createSameCountMessage(FIRST));
     }
 
-    private static void outputResultLottoStatistics(LottoGenerator lottoGenerator, LottoResult lottoResult) {
-        System.out.println(lottoResult.createLottoStatisticsMessage(lottoGenerator));
+    private static void outputResultLottoStatistics(int lottoSize, LottoResult lottoResult) {
+        System.out.println(lottoResult.createLottoStatisticsMessage(lottoSize));
     }
 
 }
