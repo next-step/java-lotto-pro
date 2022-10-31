@@ -6,17 +6,17 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-class PricesTest {
-	Prices prices = Prices.from(
+class AmountsTest {
+	Amounts amounts = Amounts.from(
 		Arrays.asList(
-			Price.from(5000),
-			Price.from(5000),
-			Price.from(5000)
+			Amount.from(5000),
+			Amount.from(5000),
+			Amount.from(5000)
 		)
 	);
 
 	@Test
 	void 합계() {
-		assertThat(prices.totalPrice()).isEqualTo(Price.from(15000));
+		assertThat(amounts.totalPrice()).isEqualTo(Amount.from(15000));
 	}
 }

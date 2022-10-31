@@ -19,7 +19,7 @@ public class LottoResult {
 		return this.matchCount.equals(matchCount);
 	}
 
-	public Price winningPrice() {
+	public Amount winningPrice() {
 		return matchCount.winningPrice();
 	}
 

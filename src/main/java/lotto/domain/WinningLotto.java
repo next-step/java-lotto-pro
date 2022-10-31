@@ -30,7 +30,7 @@ public class WinningLotto {
 		return new LottoResultMessage(matchCount, matchQuantity);
 	}
 
-	public YieldMessage getYieldMessage(Lottos lottos, Price purchaseAmount) {
+	public YieldMessage getYieldMessage(Lottos lottos, Amount purchaseAmount) {
 		LottoResults lottoResults = lottos.toLottoResults(winLotto);
 		return new YieldMessage(lottoResults.yield(purchaseAmount));
 	}

@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.MatchCount;
-import lotto.domain.Price;
+import lotto.domain.Amount;
 import lotto.domain.WinningLotto;
 
 public class ResultView {
@@ -15,7 +15,7 @@ public class ResultView {
 		System.out.print("\n");
 	}
 
-	public void winStatisticsResult(Lottos lottos, WinningLotto winningLotto, Price purchaseAmount) {
+	public void winStatisticsResult(Lottos lottos, WinningLotto winningLotto, Amount purchaseAmount) {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 		for (int i = 3 ; i<= 6; i++) {

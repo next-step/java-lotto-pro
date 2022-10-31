@@ -7,9 +7,9 @@ import java.util.stream.LongStream;
 public class DefaultPurchaseStrategy implements LottoPurchaseStrategy {
 	private static final int DEFAULT_PURCHASE_LOTTO_PRICE = 1000;
 
-	private final Price purchaseAmount;
+	private final Amount purchaseAmount;
 
-	public DefaultPurchaseStrategy(final Price purchaseAmount) {
+	public DefaultPurchaseStrategy(final Amount purchaseAmount) {
 		this.purchaseAmount = purchaseAmount;
 	}
 

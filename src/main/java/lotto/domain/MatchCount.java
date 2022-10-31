@@ -27,7 +27,7 @@ public class MatchCount {
 		}
 	}
 
-	public Price winningPrice() {
+	public Amount winningPrice() {
 		return new MatchCountWinningPriceStrategy(this).winningPrice();
 	}
 

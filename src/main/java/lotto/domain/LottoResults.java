@@ -23,24 +23,24 @@ public class LottoResults {
 		);
 	}
 
-	public Prices toWinningPrices() {
-		return Prices.from(
+	public Amounts toWinningPrices() {
+		return Amounts.from(
 			this.lottoResults.stream()
 				.map(LottoResult::winningPrice)
 				.collect(Collectors.toList())
 		);
 	}
 
-	public Price totalWinningPrice() {
-		Prices prices = this.toWinningPrices();
-		return prices.totalPrice();
+	public Amount totalWinningPrice() {
+		Amounts amounts = this.toWinningPrices();
+		return amounts.totalPrice();
 	}
 
 	public int quantity() {
 		return this.lottoResults.size();
 	}
 
-	public Yield yield(Price purchaseAmount) {
+	public Yield yield(Amount purchaseAmount) {
 		return new DefaultYieldStrategy(totalWinningPrice(), purchaseAmount).yield();
 	}
 

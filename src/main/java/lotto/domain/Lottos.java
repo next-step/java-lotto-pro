@@ -15,7 +15,7 @@ public class Lottos {
 		return new Lottos(lottoPurchaseStrategy);
 	}
 
-	public static Lottos purchase(Price purchaseAmount) {
+	public static Lottos purchase(Amount purchaseAmount) {
 		return new Lottos(new DefaultPurchaseStrategy(purchaseAmount));
 	}
 
