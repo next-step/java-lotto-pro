@@ -16,6 +16,7 @@ import static step3.constant.Constant.*;
 
 public class LottoCalculatorTest {
     private LottoCalculator lottoCalculator = new LottoCalculator();
+    private Lotto lotto = lottoCalculator.getLastWeekWinner();
 
     @BeforeEach
     void setUp() {
@@ -25,7 +26,7 @@ public class LottoCalculatorTest {
     @Test
     @DisplayName("지난주 우승 번호 유효성 테스트")
     void 지난주_우승_번호_유효성_테스트() {
-        assertThatThrownBy(() -> lottoCalculator.validateLastWeekWinner("1,1,2,3,4,5"))
+        assertThatThrownBy(() -> lotto.validateLastWeekWinner("1,1,2,3,4,5"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

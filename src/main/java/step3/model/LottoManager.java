@@ -20,8 +20,7 @@ public class LottoManager {
     }
 
     private static void calculateStatistics() {
-        InputView.inputLastWeekLottoNumbers(calculator);
-        InputView.inputLastWeekBonusNumber(calculator);
+        InputView.inputLastWeekLottoNumbers(calculator.getLastWeekWinner());
 
         calculator.calculateWinnerStatistics(lottoGenerator.getLottos());
         OutputView.outputStatisticsResult(calculator);
