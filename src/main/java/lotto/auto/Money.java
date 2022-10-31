@@ -28,11 +28,11 @@ public class Money {
         return money;
     }
 
-    public int substractMoney(int substract) {
-        if (this.money < substract) {
+    public int substractMoney(String subtract) {
+        if (this.money < changeStringToInt(subtract)) {
             throw new IllegalArgumentException();
         }
-        this.money = this.money - substract;
+        this.money = this.money - changeStringToInt(subtract);
 
         return this.money;
     }
