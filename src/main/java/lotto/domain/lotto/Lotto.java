@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import static lotto.utils.Validations.requireNotNull;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -15,7 +17,7 @@ public class Lotto {
     }
 
     public Lotto(final List<Integer> numbers) {
-        requireNotNull(Objects.isNull(numbers));
+        requireNotNull(numbers, "null이 아니어야 합니다.");
 
         final Set<LottoNumber> distinctNumbers = numbers.stream()
                 .map(LottoNumber::new)
@@ -26,12 +28,6 @@ public class Lotto {
         this.numbers = distinctNumbers;
     }
 
-    private static void requireNotNull(boolean numbers) {
-        if (numbers) {
-            throw new IllegalArgumentException("null이 아니어야 합니다.");
-        }
-    }
-
     private static void requireDistinctSizeIsSix(Set<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("서로 다른 숫자 6개여야 합니다. numbers=" + numbers);
@@ -39,9 +35,7 @@ public class Lotto {
     }
 
     public Matches match(Lotto winningNumbers) {
-        if (Objects.isNull(winningNumbers)) {
-            throw new IllegalArgumentException("당첨 번호는 null이 아니어야 합니다.");
-        }
+        requireNotNull(winningNumbers, "당첨 번호는 null이 아니어야 합니다.");
 
         return Matches.of(countMatchedNumber(winningNumbers));
     }

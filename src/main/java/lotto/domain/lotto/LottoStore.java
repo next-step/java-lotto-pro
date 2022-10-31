@@ -1,8 +1,9 @@
 package lotto.domain.lotto;
 
+import static lotto.utils.Validations.requireNotNull;
+
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class LottoStore {
     private final Money lottoUnitPrice;
@@ -12,9 +13,7 @@ public class LottoStore {
     }
 
     public LottoStore(final Money lottoUnitPrice) {
-        if (Objects.isNull(lottoUnitPrice)) {
-            throw new IllegalArgumentException("금액은 null이 아니어야 합니다.");
-        }
+        requireNotNull(lottoUnitPrice, "금액은 null이 아니어야 합니다.");
 
         if (lottoUnitPrice.isZero()) {
             throw new IllegalArgumentException("가격은 0 이상이어야 합니다.");

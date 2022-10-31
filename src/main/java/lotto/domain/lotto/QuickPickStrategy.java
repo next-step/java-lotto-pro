@@ -1,7 +1,8 @@
 package lotto.domain.lotto;
 
+import static lotto.utils.Validations.requireNotNull;
+
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -9,9 +10,7 @@ public class QuickPickStrategy implements NumberPickStrategy {
     private final RandomNumberGenerator randomNumberGenerator;
 
     public QuickPickStrategy(RandomNumberGenerator randomNumberGenerator) {
-        if (Objects.isNull(randomNumberGenerator)) {
-            throw new IllegalArgumentException("숫자 생성기는 null이 아니어야 합니다.");
-        }
+        requireNotNull(randomNumberGenerator, "숫자 생성기는 null이 아니어야 합니다.");
         this.randomNumberGenerator = randomNumberGenerator;
     }
 

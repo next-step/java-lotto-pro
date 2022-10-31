@@ -3,6 +3,7 @@ package lotto.domain.statistics;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
+import static lotto.utils.Validations.requireNotNull;
 
 import java.util.List;
 import java.util.Map;
@@ -28,12 +29,6 @@ public class MatchingResult {
         return lottos.stream()
                 .map(lotto -> lotto.match(winningNumbers))
                 .collect(groupingBy(identity(), counting()));
-    }
-
-    private void requireNotNull(final Object object, final String errorMessage) {
-        if (Objects.isNull(object)) {
-            throw new IllegalArgumentException(errorMessage);
-        }
     }
 
     @Override
