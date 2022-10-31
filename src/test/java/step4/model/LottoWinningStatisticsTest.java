@@ -2,10 +2,6 @@ package step4.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.model.LottoResult;
-import step3.model.LottoReward;
-import step3.model.LottoWinningStatistics;
-import step3.model.Money;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +28,6 @@ public class LottoWinningStatisticsTest {
         lottoResults.add(new LottoResult(new String[]{"1", "2", "3", "4", "5", "6"}));
         LottoResult winLottoResult = new LottoResult(new String[]{"1", "2", "3", "4", "5", "6"});
         LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(lottoResults, winLottoResult);
-        assertThat(lottoWinningStatistics.getTotalProfitPercent(new Money(1000))).isEqualTo((double) LottoReward.SIX.getMoney() / 1000);
+        assertThat(lottoWinningStatistics.getTotalProfitPercent(new Money(1000))).isEqualTo((double) Rank.FIRST.getWinningMoney() / 1000);
     }
 }

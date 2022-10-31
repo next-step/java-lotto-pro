@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,38 +40,5 @@ public class GameTest {
         List<LottoResult> result = game.getLottoResults();
 
         assertThat(result.size()).isEqualTo(count);
-    }
-
-    @DisplayName("로또_게임_지난_당첨_결과값_정상_파싱_여부")
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5,6", "1, 2, 3, 4, 5, 6"})
-    public void setWinLottoResult_pass_01(String winLottoNumbers) {
-        Game game = new Game();
-        game.setWinLottoResult(winLottoNumbers);
-        assertThat(game.getWinLottoResult()).isEqualTo(
-                new LottoResult(Arrays.asList(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
-                )
-                )
-        );
-    }
-
-    @DisplayName("로또_게임_지난_당첨_결과값_사이즈_6_보다_작으면_에러")
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5", "1", ""})
-    public void setWinLottoNumbers_fail_01(String winLottoNumbers) {
-        Game game = new Game();
-        assertThatThrownBy(() -> game.setWinLottoResult(winLottoNumbers))
-                .isInstanceOf(RuntimeException.class);
-    }
-
-    @DisplayName("로또_게임_지난_당첨_결과값_파싱후_문자열이면_에러")
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5,a", "1a,2, 3, 4, 5, 6"})
-    public void setWinLottoNumbers_fail_02(String winLottoNumbers) {
-        Game game = new Game();
-        assertThatThrownBy(() -> game.setWinLottoResult(winLottoNumbers))
-                .isInstanceOf(RuntimeException.class);
     }
 }

@@ -1,18 +1,13 @@
 package step4.model;
 
-import step4.util.StringUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-
     private final LottoGenerator lottoGenerator = new LottoGenerator();
     private List<LottoResult> lottoResults = new ArrayList<>();
-    private LottoResult winLottoResult;
     private LottoBuyCount lottoBuyCount;
     private Money buyMoney;
-    private LottoWinningStatistics lottoWinningStatistics;
 
     public Game() {
 
@@ -45,23 +40,7 @@ public class Game {
         return this.lottoResults;
     }
 
-    public LottoResult getWinLottoResult() {
-        return this.winLottoResult;
-    }
-
-    public void setWinLottoResult(String numbersStr) {
-        winLottoResult = new LottoResult(StringUtil.parseLottoText(numbersStr));
-    }
-
-    public void startLottoWinningStatistics() {
-        lottoWinningStatistics = new LottoWinningStatistics(this.lottoResults, this.winLottoResult);
-    }
-
-    public LottoWinningStatistics getLottoWinningStatistics() {
-        return lottoWinningStatistics;
-    }
-
-    public double getProfitPercent() {
+    public double getProfitPercent(LottoWinningStatistics lottoWinningStatistics) {
         return lottoWinningStatistics.getTotalProfitPercent(buyMoney);
     }
 }

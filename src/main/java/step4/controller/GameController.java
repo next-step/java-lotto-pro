@@ -1,17 +1,39 @@
 package step4.controller;
 
 import step4.model.Game;
+import step4.model.LottoNumber;
+import step4.model.LottoResult;
+import step4.model.LottoWinningStatistics;
+import step4.util.StringUtil;
 import step4.view.InputView;
 import step4.view.OutputView;
 
 public class GameController {
+    LottoResult winLottoResult;
+    LottoNumber bonusLottoNumber;
+    Game game;
+    LottoWinningStatistics lottoWinningStatistics;
+
     public void startGame() {
-        Game game = new Game(InputView.inputLottoBuyMoney());
+        game = new Game(InputView.inputLottoBuyMoney());
         OutputView.printLottoBuyCount(game.getLottoBuyCount());
         game.startLottoGame();
         OutputView.printBuyLottoResult(game.getLottoResults());
-        game.setWinLottoResult(InputView.inputWinnerLottoResult());
-        game.startLottoWinningStatistics();
-        OutputView.printLottoStatistics(game.getLottoWinningStatistics().getLottoWinningStatistics(), game.getProfitPercent());
+        setWinLottoResult(InputView.inputWinnerLottoResult());
+        setBonusNumber(InputView.inputLottoBonusNumber());
+        setLottoWinningStatistics();
+        OutputView.printLottoStatistics(lottoWinningStatistics.getLottoWinningStatistics(), game.getProfitPercent(lottoWinningStatistics));
+    }
+
+    private void setWinLottoResult(String inputLottoNumbers) {
+        winLottoResult = new LottoResult(StringUtil.parseLottoText(inputLottoNumbers));
+    }
+
+    private void setBonusNumber(String inputLottoNumber) {
+        bonusLottoNumber = new LottoNumber(inputLottoNumber);
+    }
+
+    private void setLottoWinningStatistics() {
+        lottoWinningStatistics = new LottoWinningStatistics(game.getLottoResults(), this.winLottoResult);
     }
 }
