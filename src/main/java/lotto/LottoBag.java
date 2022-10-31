@@ -29,4 +29,10 @@ public class LottoBag {
         // 테스트를 위한 메서드 생성이 허용 되어야 한다면, 허용 기준이 무엇일까..?
         return lottoList.size();
     }
+
+    public List<List<Integer>> getLottoNumbers() {
+        return lottoList.stream()
+                .map(Lotto::getNumbers)
+                .collect(Collectors.toList());
+    }
 }

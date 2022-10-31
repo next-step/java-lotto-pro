@@ -1,7 +1,5 @@
 package lotto;
 
-import lotto.view.ResultView;
-
 import java.util.List;
 
 public class LottoIssuer {
@@ -14,8 +12,7 @@ public class LottoIssuer {
         return new LottoBag(money, numberGenerator);
     }
 
-    public static void result(LottoBag lottoBag, List<Integer> winningNumbers) {
-        WinningResultBag results = new WinningResultBag(lottoBag.getResult(winningNumbers));
-        ResultView.printResult(results);
+    public static WinningResultBag result(LottoBag lottoBag, List<Integer> winningNumbers) {
+        return new WinningResultBag(lottoBag.getResult(winningNumbers));
     }
 }

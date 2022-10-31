@@ -1,7 +1,5 @@
 package lotto;
 
-import lotto.view.InputView;
-
 import java.util.List;
 
 public class LottoNumberBag {
@@ -10,11 +8,10 @@ public class LottoNumberBag {
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
 
-    private List<Integer> lottoNumbers;
+    private final List<Integer> lottoNumbers;
 
     public LottoNumberBag(NumberGenerator numberGenerator) {
         this.lottoNumbers = numberGenerator.generate();
-        InputView.printNumbers(lottoNumbers);
     }
 
     public LottoNumberBag(List<Integer> numbers) {
@@ -56,5 +53,9 @@ public class LottoNumberBag {
         if (number < LOTTO_MIN_NUMBER || LOTTO_MAX_NUMBER < number) {
             throw new IllegalArgumentException("로또 숫자는 1 ~ 45 사이의 값이어야 합니다");
         }
+    }
+
+    public List<Integer> getNumbers() {
+        return lottoNumbers;
     }
 }

@@ -17,4 +17,8 @@ public class Lotto {
     public WinningResult getResult(List<Integer> winningNumbers) {
         return WinningResult.getResultByMatchCount(lottoNumberBag.correctCount(winningNumbers));
     }
+
+    public List<Integer> getNumbers() {
+        return lottoNumberBag.getNumbers();
+    }
 }

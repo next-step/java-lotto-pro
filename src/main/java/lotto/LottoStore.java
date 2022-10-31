@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.view.InputView;
+import lotto.view.ResultView;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -14,9 +17,11 @@ public class LottoStore {
         System.out.println("구매 금액을 입력해 주세요.");
         LottoBag lottoList = LottoIssuer.issue(
                 new Money(scanner.nextLine()), new LottoNumberGenerator());
+        InputView.printNumbers(lottoList);
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        LottoIssuer.result(lottoList, makeWinningNumbers(scanner.nextLine()));
+        WinningResultBag results = LottoIssuer.result(lottoList, makeWinningNumbers(scanner.nextLine()));
+        ResultView.printResult(results);
     }
 
     private List<Integer> makeWinningNumbers(String input) {
