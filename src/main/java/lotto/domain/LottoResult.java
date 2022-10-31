@@ -10,6 +10,7 @@ public class LottoResult {
 
     private final Map<Rank, Integer> lottoResultCounts = new LinkedHashMap<>();
     private final LottoTicket winningTicket;
+    private LottoNumber bonusNumber;
 
     public LottoResult(LottoTicket ticket) {
         initialize();
@@ -20,6 +21,10 @@ public class LottoResult {
         for (Rank rank : Rank.reverseValues()) {
             lottoResultCounts.put(rank, DEFAULT_VALUE);
         }
+    }
+
+    public void chooseBonusNumber(LottoNumber number) {
+        bonusNumber = number;
     }
 
     public Map<Rank, Integer> statistics(List<LottoTicket> tickets) {

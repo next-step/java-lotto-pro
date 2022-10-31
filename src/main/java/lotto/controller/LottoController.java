@@ -27,6 +27,8 @@ public class LottoController {
                 new ManualLottoGenerator(createWinningNumbers()).create()
         );
 
+        lottoResult.chooseBonusNumber(LottoNumber.get(InputView.getBonusNumber()));
+
         OutputView.printStatistics(lottoResult.statistics(tickets));
         OutputView.printReturnRate(lottoResult.returnRate(money));
     }

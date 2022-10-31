@@ -11,12 +11,7 @@ public class InputView {
 
     public static int getMoney() {
         OutputView.printGetMoney();
-
-        try {
-            return Integer.parseInt(read());
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE, e);
-        }
+        return parseInt(read());
     }
 
     public static String getWiningNumber() {
@@ -24,8 +19,21 @@ public class InputView {
         return read().replaceAll(WHITE_SPACE_REGEX_STRING, EMPTY);
     }
 
+    public static int getBonusNumber() {
+        OutputView.printBonusNumber();
+        return parseInt(read());
+    }
+
     private static String read() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
+    }
+
+    private static int parseInt(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE, e);
+        }
     }
 }
