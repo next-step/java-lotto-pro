@@ -6,11 +6,11 @@ public class MatchCount implements Comparable<MatchCount> {
 
     private static final int NUMBERS_WITH_BONUS = 5;
     private final int matchBallCount;
-    private final int matchBonusBallCount;
+    private final boolean isMatchBonusBall;
 
-    public MatchCount(final int matchBallCount, final int matchBonusBallCount) {
+    public MatchCount(final int matchBallCount, final boolean isMatchBonusBall) {
         this.matchBallCount = matchBallCount;
-        this.matchBonusBallCount = matchBonusBallCount;
+        this.isMatchBonusBall = isMatchBonusBall;
     }
 
     public int getMatchBallCount() {
@@ -19,8 +19,11 @@ public class MatchCount implements Comparable<MatchCount> {
 
     @Override
     public int compareTo(final MatchCount matchCount) {
-        return Integer.compare(this.matchBallCount + this.matchBonusBallCount,
-                matchCount.matchBallCount + matchCount.matchBonusBallCount);
+        int compare = Integer.compare(this.matchBallCount, matchCount.matchBallCount);
+        if(compare == 0) {
+            return Boolean.compare(this.isMatchBonusBall, matchCount.isMatchBonusBall);
+        }
+        return compare;
     }
 
     @Override
@@ -30,7 +33,7 @@ public class MatchCount implements Comparable<MatchCount> {
         final MatchCount that = (MatchCount) o;
         if (matchBallCount == NUMBERS_WITH_BONUS) {
             return Objects.equals(matchBallCount, that.matchBallCount)
-                    && Objects.equals(matchBonusBallCount, that.matchBonusBallCount);
+                    && Objects.equals(isMatchBonusBall, that.isMatchBonusBall);
         }
         return Objects.equals(matchBallCount, that.matchBallCount);
     }
