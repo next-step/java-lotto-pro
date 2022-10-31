@@ -119,6 +119,6 @@
   * 당첨 통계
     * [x] 등수별 당첨 금액, 당첨 개수 출력
 #### 피드백
-* [ ] reverse 등수가 추가될때마다 수정되는 방식보다 상금에 따라서 Sort 후 return
-* [ ] 단순 getter, 메세지를 전달해서 처리
-* [ ] static factory method 에서 인자가 2개면 관습적으로 보통 of를 사용
+* [x] reverse 등수가 추가될때마다 수정되는 방식보다 상금에 따라서 Sort 후 return
+* [x] 단순 getter, 메세지를 전달해서 처리
+* [x] static factory method 에서 인자가 2개면 관습적으로 보통 of를 사용
