@@ -14,7 +14,7 @@ public class Money {
         try {
             this.amount = Integer.parseInt(amount);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("금액은 숫자여야 합니다");
+            throw new NumberFormatException("금액은 숫자여야 합니다. 입력 값:" + amount);
         }
     }
 

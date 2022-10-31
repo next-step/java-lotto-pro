@@ -27,6 +27,7 @@ public class LottoNumberBag {
         this.lottoNumbers = Arrays.stream(lottoNumbers.split(WINNING_NUMBER_INPUT_SPLIT_DELIMETER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+        validNumbers(this.lottoNumbers);
     }
 
     public int correctCount(LottoNumberBag winningNumbers) {
