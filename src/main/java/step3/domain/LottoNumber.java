@@ -1,6 +1,6 @@
 package step3.domain;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable{
 
 
     public static final int MINIMUM_LOTTO_NUMBER = 1;
@@ -19,11 +19,20 @@ public class LottoNumber {
         }
     }
 
+    public int lottoNumber() {
+        return this.lottoNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof LottoNumber)) return false;
         LottoNumber that = (LottoNumber) o;
         return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int compareTo(Object lottoNumber) {
+        return this.lottoNumber - ((LottoNumber) lottoNumber).lottoNumber();
     }
 }
