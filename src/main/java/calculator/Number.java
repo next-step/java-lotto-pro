@@ -1,18 +1,28 @@
 package calculator;
 
-import java.util.regex.Pattern;
-
 public class Number {
 
-    private static final Pattern IS_ONLY_NUMBER = Pattern.compile("^[0-9]*?");
+    private final int number;
 
-    public Number(final String number) {
-        if (!isNumber(number)) {
-            throw new NumberFormatException("숫자만 입력가능합니다.");
-        }
+    public Number(final String stringNumber) {
+        int number = convertNumber(stringNumber);
+        validateNegativeNumber(number);
+        this.number = number;
     }
 
-    public boolean isNumber(final String number) {
-        return IS_ONLY_NUMBER.matcher(number).matches();
+    private int convertNumber(String stringNumber) {
+        int number = 0;
+        try {
+            number = Integer.parseInt(stringNumber);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("숫자만 입력 가능합니다.");
+        }
+        return number;
+    }
+
+    private static void validateNegativeNumber(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("양수만 입력 가능합니다.");
+        }
     }
 }
