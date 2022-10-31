@@ -1,58 +1,52 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import lotto.dto.LottoDto;
+
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final int LOTTO_MIN_NUMBER = 1;
-    public static final int LOTTO_MAX_NUMBER = 45;
-    public static final int digit = 6;
-    private int[] winningNumbers = new int[digit];
+    private static final int DIGIT = 6;
 
-    public Lotto() {
-        List<Integer> numbers = new ArrayList();
-        for(int i=LOTTO_MIN_NUMBER; i<=LOTTO_MAX_NUMBER; i++) {
-            numbers.add(i);
+    List<LottoNumber> lottoNumbers;
+
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        if(lottoNumbers.size() != Lotto.DIGIT) {
+            throw new IllegalArgumentException("로또번호로 " + Lotto.DIGIT + "자리 입력해주세요.");
         }
-        Collections.shuffle(numbers);
-        for(int i=0; i< winningNumbers.length; i++) {
-            winningNumbers[i] = numbers.get(i);
+        Set<LottoNumber> winningNumberSet = new HashSet<>(lottoNumbers);
+        if(winningNumberSet.size() != Lotto.DIGIT) {
+            throw new IllegalArgumentException("로또번호에 중복숫자는 없습니다.");
         }
-        Arrays.sort(winningNumbers);
+        Collections.sort(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto(int[] winningNumbers) {
-        this.winningNumbers = winningNumbers;
+    public static List<LottoNumber> getLottoDigitList(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.subList(0,6);
     }
 
-    public boolean isMatch(int number) {
-        for(int i=0; i<winningNumbers.length; i++) {
-            if(winningNumbers[i] == number) {
-                return true;
-            }
-        }
-        return false;
+    public boolean isMatch(LottoNumber inputLottoNumber) {
+        return lottoNumbers.stream().anyMatch((lottoNumber) -> lottoNumber.equals(inputLottoNumber));
     }
 
-    public int getMatchNumber(int[] numbers) {
-        int matchNumber = 0;
-        for(int number : numbers) {
-            if(isMatch(number)) {
-                matchNumber++;
-            }
-        }
-        return matchNumber;
+    public int getMatchNumber(Lotto lotto) {
+        return (int) lottoNumbers.stream().filter((lottoNumber) -> lotto.isMatch(lottoNumber)).count();
     }
 
-    @Override
-    public String toString() {
-        String result = "[";
-        for(int i=0; i<digit; i++) {
-            result += winningNumbers[i]+",";
-        }
-        return result.substring(0,result.length()-1) + "]";
+    public LottoDto getLottoDto() {
+        return new LottoDto(lottoNumbers.stream()
+                .map(lottoNumber -> lottoNumber.getLottoNumberDto().getLottoNumber())
+                .collect(Collectors.toList()));
+    }
+
+    public boolean isEqualNumberList(List<Integer> numbers) {
+        return numbers.stream().collect(Collectors.toSet()).size() == numbers.size()
+                && numbers.stream().filter(number -> isMatch(new LottoNumber(number.toString())))
+                .count() == lottoNumbers.size();
     }
 }
