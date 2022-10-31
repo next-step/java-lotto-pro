@@ -17,6 +17,10 @@ public class RankDto {
         return rank.getMatchCount() >= 3;
     }
 
+    public boolean isRankTwo(){
+        return rank == Rank.TWO;
+    }
+
     public int getMatchCount() {
         return rank.getMatchCount();
     }

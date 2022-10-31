@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.function.BiFunction;
 
 public class Lotto {
 
-    private static final int PRICE = 1000;
     private static final int NUMBER_SIZE = 6;
     private static final String NUMBER_SIZE_MESSAGE = "번호는 6개만 허용합니다";
     private static final String DUPLICATE_NUMBER_MESSAGE = "중복없는 번호만 허용합니다";
@@ -19,11 +18,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static int getPrice() {
-        return PRICE;
-    }
-
-    public static int getNumberSize(){
+    public static int getNumberSize() {
         return NUMBER_SIZE;
     }
 
@@ -37,13 +32,28 @@ public class Lotto {
         if (distinctNumbers.size() != NUMBER_SIZE) throw new IllegalArgumentException(NUMBER_SIZE_MESSAGE);
     }
 
-    public Rank getRank(List<LottoNumber> winningNumbers) {
-        validateNumbers(winningNumbers);
-        int count = (int) numbers
+    public Rank getRank(Lotto winningLotto) {
+        int matchCount = (int) numbers
                 .stream()
-                .filter(winningNumbers::contains)
+                .filter(winningLotto::contains)
                 .count();
-        return Rank.valueOf(count);
+        return Rank.valueOf((countParam, bonusParam) -> countParam == matchCount && bonusParam);
+    }
+
+    public Rank getRank(WinningLotto winningLotto) {
+        int matchCount = (int) numbers
+                .stream()
+                .filter(winningLotto::contains)
+                .count();
+        boolean isBonus = winningLotto.isMatchBonusNumber(numbers);
+        Rank getRank = Rank.valueOf((countParam, bonusParam) -> countParam == matchCount && bonusParam ,isBonus);
+        return getRank;
+    }
+
+    public boolean contains(LottoNumber number) {
+        return numbers.stream()
+                .filter(lottoNumber -> lottoNumber.equals(number))
+                .count() > 0;
     }
 
 }

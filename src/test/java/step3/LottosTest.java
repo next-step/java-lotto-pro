@@ -14,8 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
 
-
-
     List<LottoNumber> getLottoNumbers(int... numbers) {
 
         List<LottoNumber> lottoNumbers = new ArrayList();
@@ -23,18 +21,6 @@ public class LottosTest {
             lottoNumbers.add(LottoNumber.valueOf(number));
         }
         return lottoNumbers;
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 4, 5})
-    @DisplayName("로또를 추가하면 구매가격의 총합은 구매개수 * 1000")
-    void test_that_it_returns_sum_of_price(int count) {
-        //given
-        Lottos lottos = new Lottos(LottoFactory.createLottos(count));
-
-        //then
-        assertThat(lottos.getSumOfPriceLottos()).isEqualTo(count * 1000);
-
     }
 
     @Test
@@ -48,7 +34,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 43, 44, 45));
+        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(new Lotto(getLottoNumbers(1, 2, 3, 43, 44, 45)));
 
         //then
         assertThat(rankStats.get(Rank.FIFTH)).isEqualTo(3);
@@ -65,7 +51,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 43, 15, 45));
+        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(new Lotto(getLottoNumbers(1, 2, 3, 43, 15, 45)));
 
         //then
         assertThat(rankStats.get(Rank.FOURTH)).isEqualTo(3);
@@ -82,10 +68,27 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 43, 44, 45));
+        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(new Lotto(getLottoNumbers(1, 2, 3, 43, 44, 45)));
 
         //then
         assertThat(rankStats.get(Rank.FIFTH)).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("2등이 당첨될 경우 당첨됫 횟수를 조회")
+    void test_that_it_returns_count_of_winning_if_2rd() {
+        //given
+        List<Lotto> lottoNumbers = new ArrayList();
+        lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
+        lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
+        lottoNumbers.add(new Lotto(getLottoNumbers(1, 11, 33, 2, 35, 3)));
+        Lottos lottos = new Lottos(lottoNumbers);
+
+        //when
+        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(new WinningLotto(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 45)),LottoNumber.valueOf(16)));
+
+        //then
+        assertThat(rankStats.get(Rank.TWO)).isEqualTo(1);
     }
 
     @Test
@@ -99,7 +102,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(getLottoNumbers(1, 2, 3, 14, 15, 16));
+        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(new WinningLotto(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)),LottoNumber.valueOf(29)));
 
         //then
         assertThat(rankStats.get(Rank.FIRST)).isEqualTo(3);
