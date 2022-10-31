@@ -24,11 +24,11 @@ class WinningResultBagTest {
 
     @ParameterizedTest(name = "목록 제공 " + DEFAULT_DISPLAY_NAME)
     @CsvSource(value = { "MATCH_THREE:1", "MATCH_FOUR:1", "MATCH_FIVE:1" }, delimiter = ':')
-    void countByWinningResult_results_success(WinningResult winningResult, int matchCount) {
+    void groupByWinningResult_results_success(WinningResult winningResult, long matchCount) {
         //given:
         WinningResultBag resultBag = new WinningResultBag(Arrays.asList(MATCH_THREE, MATCH_FOUR, MATCH_FIVE));
         //when then:
-        assertThat(resultBag.countByWinningResult(winningResult)).isEqualTo(matchCount);
+        assertThat(resultBag.groupByWinningResult().get(winningResult)).isEqualTo(matchCount);
     }
 
     @DisplayName("수익률 제공")

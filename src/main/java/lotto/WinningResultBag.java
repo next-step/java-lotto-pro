@@ -1,7 +1,10 @@
 package lotto;
 
 import java.util.List;
+import java.util.Map;
 
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 import static lotto.LottoBag.LOTTO_PRICE;
 
 public class WinningResultBag {
@@ -16,15 +19,16 @@ public class WinningResultBag {
         this.results = results;
     }
 
-    public long countByWinningResult(WinningResult winningResult) {
-        return results.stream().filter(result -> result.equals(winningResult)).count();
+    public Map<WinningResult, Long> groupByWinningResult() {
+        return results.stream().collect(groupingBy(it -> it, counting()));
     }
 
     public double calculateProfitRate() {
-        long reward = MATCH_THREE_REWARD * countByWinningResult(WinningResult.MATCH_THREE)
-                + MATCH_FOUR_REWARD * countByWinningResult(WinningResult.MATCH_FOUR)
-                + MATCH_FIVE_REWARD * countByWinningResult(WinningResult.MATCH_FIVE)
-                + MATCH_SIX_REWARD * countByWinningResult(WinningResult.MATCH_SIX);
+        Map<WinningResult, Long> winningResultMap = groupByWinningResult();
+        long reward = MATCH_THREE_REWARD * winningResultMap.get(WinningResult.MATCH_THREE)
+                + MATCH_FOUR_REWARD * winningResultMap.get(WinningResult.MATCH_FOUR)
+                + MATCH_FIVE_REWARD * winningResultMap.get(WinningResult.MATCH_FIVE)
+                + MATCH_SIX_REWARD * winningResultMap.get(WinningResult.MATCH_SIX);
         return reward / ((double) LOTTO_PRICE.getAmount() * results.size());
     }
 }

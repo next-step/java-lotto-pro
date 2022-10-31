@@ -16,6 +16,7 @@ public class LottoStore {
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         WinningResultBag results = LottoIssuer.result(lottoList, new LottoNumberBag(scanner.nextLine()));
-        ResultView.printResult(results);
+        ResultView.printResult(results.groupByWinningResult());
+        ResultView.printProfitRate(results.calculateProfitRate());
     }
 }
