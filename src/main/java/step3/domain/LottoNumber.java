@@ -6,24 +6,22 @@ public class LottoNumber {
 
     static final int MIN_NUMBER = 1;
     static final int MAX_NUMBER = 45;
-
     public static final String ERROR_RANGE_NUMBER = "[ERROR] 로또 번호는 1~45의 숫자입니다. input : ";
-
     private final int number;
 
     public LottoNumber(int number) {
-        checkNumberRange();
+        checkNumberRange(number);
         this.number = number;
+    }
+
+    private void checkNumberRange(int number) {
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
+            throw new IllegalArgumentException(ERROR_RANGE_NUMBER);
+        }
     }
 
     public int getNumber() {
         return number;
-    }
-
-    private void checkNumberRange() {
-        if (!(this.number >= MIN_NUMBER && this.number <= MAX_NUMBER)) {
-            throw new IllegalArgumentException(ERROR_RANGE_NUMBER + this.number);
-        }
     }
 
     @Override

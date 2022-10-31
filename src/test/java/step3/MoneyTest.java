@@ -1,5 +1,6 @@
 package step3;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
@@ -14,5 +15,12 @@ public class MoneyTest {
         assertThatThrownBy(() -> new Money(-10))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining(Money.LESS_THAN_MIN_SIZE);
+    }
+
+    @Test
+    @DisplayName("양수를 입력하면 금액 객체가 생성된다.")
+    void amountCreateSuccess() {
+        Money money = new Money(1000);
+        assertThat(money).isEqualTo(new Money(1000));
     }
 }

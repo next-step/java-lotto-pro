@@ -4,14 +4,15 @@ import java.util.Objects;
 
 public class Lotto {
 
+    public static final int LOTTO_PRICE = 1000;
     private final LottoNumbers lottoNumbers;
+
     public Lotto(LottoNumbers numbers) {
         this.lottoNumbers = numbers;
     }
 
-    public Rank matches(Lotto from) {
-        int count = this.lottoNumbers.countSameLottoNumber(from.lottoNumbers);
-        return Rank.from(count);
+    public int compareNumbers(final LottoNumbers winningNumbers) {
+        return this.lottoNumbers.compareTo(winningNumbers);
     }
 
     public LottoNumbers getLottoNumbers() {

@@ -1,11 +1,10 @@
 package step3.view;
 
 import java.util.stream.Collectors;
-import step3.domain.Result;
 import step3.domain.Lotto;
 import step3.domain.Lottos;
 import step3.domain.Rank;
-import step3.domain.Rate;
+import step3.domain.Rewards;
 
 public class OutputView {
     public static final String PURCHASE_LOTTO_COUNT = "%d개를 구매했습니다.\n";
@@ -35,17 +34,17 @@ public class OutputView {
             .collect(Collectors.joining(printDelimiter)) +lastCharactor;
     }
 
-    public static void showProfitRate(Rate rate) {
-        System.out.format(PROFIT_RATE, rate.printRate());
+    public static void showProfitRate(Rewards rewards) {
+        System.out.format(PROFIT_RATE, rewards.calculateRateOfReturn());
     }
 
-    public static void showResults(Result results) {
+    public static void showResults(Rewards rewards) {
         StringBuilder result = new StringBuilder();
         String resultsTitle = "당첨 통계\n---------\n";
         result.append(resultsTitle);
 
         for (Rank rank : Rank.valuesTheLowestOrder()) {
-            result.append(String.format(RESULT_FORMAT, rank.matchedCount(), rank.winnings(), results.getCountBy(rank)));
+            result.append(String.format(RESULT_FORMAT, rank.matchedCount(), rank.winnings(), rewards.count(rank)));
         }
 
         System.out.println(result);

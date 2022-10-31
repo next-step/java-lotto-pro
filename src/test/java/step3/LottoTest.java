@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import step3.domain.Lotto;
 import step3.domain.LottoNumber;
 import step3.domain.LottoNumbers;
-import step3.domain.Rank;
 
 public class LottoTest {
 
@@ -21,8 +20,8 @@ public class LottoTest {
             new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5),
             new LottoNumber(6));
         Lotto lotto = new Lotto(new LottoNumbers(lottoNumberList));
-        Lotto winningLotto = new Lotto(new LottoNumbers(lottoNumberList));
-        assertThat(lotto.matches(winningLotto)).isEqualTo(Rank.FIRST);
+        LottoNumbers winningNumbers = new LottoNumbers("1, 2, 3, 4, 5, 7");
+        assertThat(lotto.compareNumbers(winningNumbers)).isEqualTo(5);
     }
 
 }

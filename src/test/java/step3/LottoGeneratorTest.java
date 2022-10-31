@@ -15,5 +15,4 @@ public class LottoGeneratorTest {
         Lottos lottos = LottoGenerator.createLottos(6);
         assertThat(lottos.getLottoList().size()).isEqualTo(6);
     }
-
 }

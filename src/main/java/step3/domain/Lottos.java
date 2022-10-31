@@ -2,6 +2,7 @@ package step3.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -15,4 +16,9 @@ public class Lottos {
         return lottoList;
     }
 
+    public Rewards check(final LottoNumbers winningNumbers) {
+        return this.lottoList.stream()
+            .map(lotto -> Rank.from(lotto.compareNumbers(winningNumbers)))
+            .collect(Collectors.collectingAndThen(Collectors.toList(), Rewards::new));
+    }
 }

@@ -1,12 +1,11 @@
 package step3.controller;
 
-import step3.domain.Result;
-import step3.domain.Lotto;
 import step3.domain.LottoGenerator;
 import step3.domain.LottoNumbers;
+import step3.domain.LottoShop;
 import step3.domain.Lottos;
 import step3.domain.Money;
-import step3.domain.Rate;
+import step3.domain.Rewards;
 import step3.view.InputView;
 import step3.view.OutputView;
 
@@ -15,17 +14,16 @@ public class LottoController {
     public void run() {
         Money money = new Money(InputView.inputPurchaseAmount());
 
-        Lottos purchasedLottos = LottoGenerator.createLottos(money.calculateQuantity());
-        OutputView.showPurchaseLottoCount(money.calculateQuantity());
+        Lottos purchasedLottos = LottoGenerator.createLottos(new LottoShop().buy(money));
+        OutputView.showPurchaseLottoCount(new LottoShop().buy(money));
         OutputView.showPurchasedLottos(purchasedLottos);
 
-        Lotto winingLotto = new Lotto(new LottoNumbers(InputView.inputWinningNumber()));
+        LottoNumbers winningNumbers = new LottoNumbers(InputView.inputWinningNumber());
 
-        Result results = new Result(purchasedLottos, winingLotto);
-        OutputView.showResults(results);
+        Rewards rewards = purchasedLottos.check(winningNumbers);
+        OutputView.showResults(rewards);
+        OutputView.showProfitRate(rewards);
 
-        Rate rate = new Rate(money, results.getTotalWinning());
-        OutputView.showProfitRate(rate);
     }
 
 }

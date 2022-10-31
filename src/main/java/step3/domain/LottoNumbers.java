@@ -49,9 +49,9 @@ public class LottoNumbers {
         }
     }
 
-    public int countSameLottoNumber(LottoNumbers numbers) {
-        return (int) this.lottoNumberSet
-            .stream()
-            .filter(lottoNumber -> numbers.getLottoNumberSet().contains(lottoNumber)).count();
+    public int compareTo(final LottoNumbers winningNumbers) {
+        return (int) this.lottoNumberSet.stream()
+            .filter(winningNumbers.lottoNumberSet::contains)
+            .count();
     }
 }
