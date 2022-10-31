@@ -1,10 +1,10 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.List;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -53,6 +53,6 @@ class LottoStoreTest {
 
         final List<Lotto> lottos = store.buyLottos(money, Fixture.pick123456());
 
-        assertThat(lottos).hasSize(expectedCount);
+        Assertions.assertThat(lottos).hasSize(expectedCount);
     }
 }
