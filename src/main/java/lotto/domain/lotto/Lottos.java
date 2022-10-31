@@ -1,10 +1,10 @@
 package lotto.domain.lotto;
 
 import lotto.prize.Prize;
+import lotto.prize.Prizes;
 
-import java.util.EnumMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -15,14 +15,13 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Map<Prize, Integer> getPrizeOfLotto(WinnerLotto winnerLotto) {
-        Map<Prize, Integer> prizes = new EnumMap<Prize, Integer>(Prize.class);
+    public Prizes getPrizeOfLotto(WinnerLotto winnerLotto) {
+        List<Prize> resultPrizes = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            int count = lotto.matchCount(winnerLotto);
-            boolean hasBonusBall = lotto.hasBonusNumber(winnerLotto);
-            prizes.merge(Prize.prizeOf(count, hasBonusBall), 1, Integer::sum);
+            Prize prize = Prize.prizeOf(lotto.matchCount(winnerLotto), lotto.hasBonusNumber(winnerLotto));
+            resultPrizes.add(prize);
         }
-        return prizes;
+        return new Prizes(resultPrizes);
     }
 
     public int getLottoCount() {
