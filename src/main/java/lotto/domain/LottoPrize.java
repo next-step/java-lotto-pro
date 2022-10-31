@@ -21,18 +21,25 @@ public enum LottoPrize {
     }
 
     public static LottoPrize findLottoPrize(int matchCount, boolean isMatchBonusLottoNumber) {
-        LottoPrize lottoPrize = Arrays.stream(LottoPrize.values()).filter(prize -> prize.getMatchCount() == matchCount)
-                .findFirst()
-                .orElse(NO_PRIZE);
+        if(isNoPrize(matchCount)) {
+            return LottoPrize.NO_PRIZE;
+        }
 
         if(isSecondPrize(matchCount, isMatchBonusLottoNumber)) {
             return LottoPrize.SECOND;
         }
-        return lottoPrize;
+
+        return Arrays.stream(LottoPrize.values()).filter(prize -> prize.getMatchCount() == matchCount)
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     private static boolean isSecondPrize(int matchCount, boolean isMatchBonusLottoNumber) {
         return LottoPrize.SECOND.matchCount == matchCount && isMatchBonusLottoNumber;
+    }
+
+    private static boolean isNoPrize(int matchCount) {
+        return matchCount >= NO_PRIZE.matchCount && matchCount < FIFTH.matchCount;
     }
 
     public static boolean isSecondPrize(LottoPrize lottoPrize) {

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import org.junit.jupiter.api.Test;
@@ -51,5 +52,26 @@ public class LottoPrizeTest {
                 () -> assertThat(LottoPrize.findLottoPrize(4, true)).isEqualTo(LottoPrize.FOURTH),
                 () -> assertThat(LottoPrize.findLottoPrize(4, false)).isEqualTo(LottoPrize.FOURTH)
         );
+    }
+
+    @Test
+    void 로또_번호가_0개에서_2개_동일하면_NO_PRIZE() {
+        assertAll(
+                () -> assertThat(LottoPrize.findLottoPrize(2, true)).isEqualTo(LottoPrize.NO_PRIZE),
+                () -> assertThat(LottoPrize.findLottoPrize(1, true)).isEqualTo(LottoPrize.NO_PRIZE),
+                () -> assertThat(LottoPrize.findLottoPrize(0, true)).isEqualTo(LottoPrize.NO_PRIZE)
+        );
+    }
+
+    @Test
+    void 로또_번호가_6개_초과로_동일하면_에러_발생() {
+        assertThatThrownBy(() -> LottoPrize.findLottoPrize(7, true)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> LottoPrize.findLottoPrize(7, false)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 로또_번호가_음수_개수만큼_동일하면_에러_발생() {
+        assertThatThrownBy(() -> LottoPrize.findLottoPrize(-1, true)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> LottoPrize.findLottoPrize(-1, false)).isInstanceOf(IllegalArgumentException.class);
     }
 }
