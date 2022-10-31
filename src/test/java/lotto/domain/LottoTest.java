@@ -15,7 +15,7 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto 정상 생성")
     public void Lotto_정상생성() {
-        List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 20, 10, 6, 34, 45));
+        List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 6, 10, 20, 34, 45));
         Lotto lotto = new Lotto(numbers);
         assertThat(lotto.lottoNumbers()).containsExactly(1, 6, 10, 20, 34, 45);
     }
@@ -45,5 +45,13 @@ public class LottoTest {
             List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 20, 10, 6, 34, 6));
             new Lotto(numbers);
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("Lotto 내 6개의 숫자는 오름차순으로 정렬되어 있다.")
+    public void Lotto_숫자_정렬() {
+        List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 20, 10, 6, 34, 45));
+        Lotto lotto = new Lotto(numbers);
+        assertThat(lotto.lottoNumbers()).containsExactly(1, 6, 10, 20, 34, 45);
     }
 }
