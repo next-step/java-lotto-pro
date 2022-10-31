@@ -15,9 +15,9 @@ public class Ranks {
 		this.ranks = ranks;
 	}
 
-	public static Ranks of(List<Integer> matchCounts) {
+	public static Ranks from(List<Integer> matchCounts) {
 		return new Ranks(matchCounts.stream()
-				.map(Rank::of)
+				.map(Rank::from)
 				.collect(Collectors.toList()));
 	}
 	private Map<Rank, Long> initResultMap() {

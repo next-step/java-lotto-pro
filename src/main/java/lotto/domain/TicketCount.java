@@ -10,7 +10,7 @@ public class TicketCount {
 		this.value = value;
 	}
 
-	public static TicketCount of(int value) {
+	public static TicketCount from(int value) {
 		return new TicketCount(value);
 	}
 

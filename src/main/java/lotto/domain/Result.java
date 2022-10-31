@@ -12,14 +12,14 @@ public class Result {
 		this.rankResult = rankResult;
 	}
 
-	public static Result of(Map<Rank, Long> rankResult) {
+	public static Result from(Map<Rank, Long> rankResult) {
 		return new Result(rankResult);
 	}
 
-	public static Result from(LottoTickets purchasedTickets, WinningLottoTicket winningTicket) {
+	public static Result af(LottoTickets purchasedTickets, WinningLottoTicket winningTicket) {
 		List<Integer> match = purchasedTickets.match(winningTicket);
-		Ranks ranks = Ranks.of(match);
-		return Result.of(ranks.groupBy());
+		Ranks ranks = Ranks.from(match);
+		return Result.from(ranks.groupBy());
 	}
 
 	public long totalPrize() {

@@ -6,8 +6,6 @@ import lotto.exception.InvalidLottoNumberException;
 
 public class LottoNumber {
 
-    private static final int MINIMUM_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
     private static final String INVALID_LOTTO_NUMBER_MESSAGE = "로또 번호는 1~45 사이의 숫자여야 합니다.";
     private final int value;
 
@@ -16,14 +14,18 @@ public class LottoNumber {
         this.value = value;
     }
 
-    public static LottoNumber of(int value) {
+    public static LottoNumber from(int value) {
         return new LottoNumber(value);
     }
 
     private void validate(int value) {
-        if (value < MINIMUM_LOTTO_NUMBER || value > MAX_LOTTO_NUMBER) {
+        if (invalidLottoNumber(value)) {
             throw new InvalidLottoNumberException(INVALID_LOTTO_NUMBER_MESSAGE);
         }
+    }
+
+    private static boolean invalidLottoNumber(int value) {
+        return value < LottoInfo.MIN_LOTTO_NUMBER.getValue() || value > LottoInfo.MAX_LOTTO_NUMBER.getValue();
     }
 
     @Override

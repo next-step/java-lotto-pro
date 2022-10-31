@@ -18,13 +18,13 @@ public class InputConverter {
 		try {
 			integer = Integer.parseInt(input);
 		} catch (NumberFormatException e) {
-			throw new InvalidUserInputException("숫자를 입력해주세요.");
+			throw new InvalidUserInputException("숫자를 입력해주세요 : " + input);
 		}
 		return integer;
 	}
 
 	public static Money toMoney(String input) {
-		return Money.of(toInt(input));
+		return Money.from(toInt(input));
 	}
 
 	public static LottoNumbers toLottoNumbers(String input) {
@@ -37,7 +37,7 @@ public class InputConverter {
 		return Arrays.stream(split)
 			.map(InputConverter::removeBlank)
 			.map(InputConverter::toInt)
-			.collect(Collectors.collectingAndThen(Collectors.toSet(), LottoNumbers::of));
+			.collect(Collectors.collectingAndThen(Collectors.toSet(), LottoNumbers::from));
 	}
 
 	private static String removeBlank(String input) {

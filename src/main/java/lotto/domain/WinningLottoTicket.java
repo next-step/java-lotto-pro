@@ -5,13 +5,13 @@ public class WinningLottoTicket extends LottoTicket {
 		super(lottoNumbers);
 	}
 
-	public static WinningLottoTicket of(LottoNumbers lottoNumbers) {
+	public static WinningLottoTicket from(LottoNumbers lottoNumbers) {
 		return new WinningLottoTicket(lottoNumbers);
 	}
 
 	public int matchCount(LottoTicket lottoTicket) {
 		LottoNumbers winningNumbers = super.lottonumbers();
-		return winningNumbers.compare(lottoTicket.lottonumbers());
+		return winningNumbers.winningConfirm(lottoTicket.lottonumbers());
 	}
 
 }

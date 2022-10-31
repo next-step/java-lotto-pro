@@ -6,20 +6,18 @@ import java.util.Set;
 import lotto.domain.strategy.GenerateStrategy;
 
 public class LottoTicket {
-	private static final String OPEN_BRACKET = "[";
-	private static final String CLOSE_BRACKET = "]";
 	private final LottoNumbers lottoNumbers;
 
 	LottoTicket(LottoNumbers lottoNumbers) {
 		this.lottoNumbers = lottoNumbers;
 	}
 
-	public static LottoTicket of(GenerateStrategy generator) {
+	public static LottoTicket from(GenerateStrategy generator) {
 		return new LottoTicket(generator.generate());
 	}
 
-	public static LottoTicket of(Set<Integer> lottoNumbers) {
-		return new LottoTicket(LottoNumbers.of(lottoNumbers));
+	public static LottoTicket from(Set<Integer> lottoNumbers) {
+		return new LottoTicket(LottoNumbers.from(lottoNumbers));
 	}
 
 	public LottoNumbers lottonumbers() {
@@ -28,7 +26,7 @@ public class LottoTicket {
 
 	@Override
 	public String toString() {
-		return OPEN_BRACKET + lottoNumbers.toString() + CLOSE_BRACKET;
+		return "[" + lottoNumbers.toString() + "]";
 	}
 	@Override
 	public boolean equals(Object o) {

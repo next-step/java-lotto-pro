@@ -11,22 +11,22 @@ class TicketCountTest {
 	@Test
 	@DisplayName("티켓 수 생성")
 	void createTicketCountTest() {
-		TicketCount ticketCount = TicketCount.of(10);
+		TicketCount ticketCount = TicketCount.from(10);
 		assertThat(ticketCount).isInstanceOf(TicketCount.class);
 	}
 
 	@Test
 	@DisplayName("티켓 수 생성 시 음수를 입력할 경우 IllegalArgumentException 발생")
 	void throwIllegalArgumentExceptionTest() {
-		assertThatThrownBy(() -> TicketCount.of(-1))
+		assertThatThrownBy(() -> TicketCount.from(-1))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
 	@DisplayName("같은 값을 갖는 티켓 수는 같은 객체")
 	void equalsTest() {
-		TicketCount ticketCount = TicketCount.of(10);
-		assertThat(ticketCount).isEqualTo(TicketCount.of(10));
+		TicketCount ticketCount = TicketCount.from(10);
+		assertThat(ticketCount).isEqualTo(TicketCount.from(10));
 	}
 
 }

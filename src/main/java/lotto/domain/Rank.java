@@ -17,7 +17,7 @@ public enum Rank {
 		this.prize = prize;
 	}
 
-	public static Rank of(int matchCount) {
+	public static Rank from(int matchCount) {
 		return Arrays.stream(values())
 			.filter(r -> r.matchCount == matchCount)
 			.findAny()

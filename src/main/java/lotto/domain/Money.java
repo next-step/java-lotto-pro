@@ -15,11 +15,11 @@ public class Money {
 		this.value = value;
 	}
 
-	public static Money of(int value) {
+	public static Money from(int value) {
 		return new Money(value);
 	}
 
-	public static Money of(long value) {
+	public static Money from(long value) {
 		return new Money( value);
 	}
 
@@ -38,7 +38,7 @@ public class Money {
 			throw new InvalidMoneyException(INVALID_INPUT_MONEY_MESSAGE);
 		}
 		try {
-			return TicketCount.of((int) (this.value / ticketPrice.getValue()));
+			return TicketCount.from((int) (this.value / ticketPrice.getValue()));
 		} catch (ArithmeticException e) {
 			throw new InvalidMoneyException(INVALID_TICKET_PRICE_MESSAGE);
 		}

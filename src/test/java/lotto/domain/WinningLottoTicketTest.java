@@ -17,8 +17,8 @@ class WinningLottoTicketTest {
 	@MethodSource("provideWinningLottoTicket")
 	@DisplayName("당첨 티켓과 구매 티켓의 일치하는 숫자의 개수 반환")
 	void getMatchCountTest(Set<Integer> lottoNumbers, int expected) {
-		WinningLottoTicket winningTicket = WinningLottoTicket.of(LottoNumbers.of(lottoNumbers));
-		LottoTicket purchaseTicket = LottoTicket.of(new TestGenerateStrategy());
+		WinningLottoTicket winningTicket = WinningLottoTicket.from(LottoNumbers.from(lottoNumbers));
+		LottoTicket purchaseTicket = LottoTicket.from(new TestGenerateStrategy());
 		int matchCount = winningTicket.matchCount(purchaseTicket);
 		assertThat(matchCount).isEqualTo(expected);
 	}

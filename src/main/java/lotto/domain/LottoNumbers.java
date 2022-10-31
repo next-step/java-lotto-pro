@@ -9,7 +9,6 @@ import lotto.exception.InvalidLottoNumberException;
 
 public class LottoNumbers {
 
-	public static final int LOTTO_NUMBER_COUNT = 6;
 	private static final String INVALID_LOTTO_NUMBERS_COUNT_MESSAGE = "로또 번호는 중복되지 않는 6개의 숫자여야 합니다.";
 	private static final String LOTTO_NUMBER_DELIMITER = ", ";
 	private final Set<LottoNumber> lottoNumbers;
@@ -20,19 +19,19 @@ public class LottoNumbers {
 	}
 
 	private void validate(Set<LottoNumber> lottoNumbers) {
-		if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+		if (lottoNumbers.size() != LottoInfo.MAX_LOTTO_NUMBER_SIZE.getValue()) {
 			throw new InvalidLottoNumberException(INVALID_LOTTO_NUMBERS_COUNT_MESSAGE);
 		}
 	}
 
-	public static LottoNumbers of(Set<Integer> lottoNumbers) {
+	public static LottoNumbers from(Set<Integer> lottoNumbers) {
 		Set<LottoNumber> lottoNumberSet = getLottoNumbers(lottoNumbers);
 		return new LottoNumbers(lottoNumberSet);
 	}
 
 	private static Set<LottoNumber> getLottoNumbers(Set<Integer> lottoNumbers) {
 		return lottoNumbers.stream()
-			.map(LottoNumber::of)
+			.map(LottoNumber::from)
 			.collect(Collectors.toSet());
 	}
 
@@ -59,7 +58,7 @@ public class LottoNumbers {
 		return Objects.hash(lottoNumbers);
 	}
 
-	public int compare(LottoNumbers purchaseLottoNumbers) {
+	public int winningConfirm(LottoNumbers purchaseLottoNumbers) {
 		return (int) this.lottoNumbers.stream()
 			.filter(purchaseLottoNumbers.lottoNumbers::contains)
 			.count();

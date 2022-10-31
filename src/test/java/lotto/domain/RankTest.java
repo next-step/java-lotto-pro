@@ -24,7 +24,7 @@ class RankTest {
 	@MethodSource("provideMatchCountAndRank")
 	@DisplayName("숫자 일치 개수에 따른 순위 반환")
 	void getRankByMatchNumberCount(int matchCount, Rank expectedRank) {
-		Rank rank = Rank.of(matchCount);
+		Rank rank = Rank.from(matchCount);
 		assertThat(rank).isEqualTo(expectedRank);
 	}
 

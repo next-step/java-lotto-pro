@@ -26,26 +26,31 @@ public class LottoGameController {
 
     public void play() {
         Money money = inputView.readMoney();
+
         LottoTickets lottoTickets = purchasedTickets(money);
         WinningLottoTicket winningLottoTicket = winningTicket();
-        Result result = Result.from(lottoTickets, winningLottoTicket);
-        resultView.printResult(result);
-        Money totalPrize = Money.of(result.totalPrize());
+
+        printResult(money, lottoTickets, winningLottoTicket);
+    }
+
+    private void printResult(Money money, LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket) {
+        resultView.printResult(Result.af(lottoTickets, winningLottoTicket));
+        Money totalPrize = Money.from(Result.af(lottoTickets, winningLottoTicket).totalPrize());
         resultView.printProfitRate(totalPrize.profitRate(money));
     }
 
     private LottoTickets purchasedTickets(Money money) {
-        LottoTickets lottoTickets = getLottoTickets(money);
+        LottoTickets lottoTickets = purchasedLottoTickets(money);
         resultView.printLottoTickets(lottoTickets);
         return lottoTickets;
     }
 
     private WinningLottoTicket winningTicket() {
         LottoNumbers lottoNumbers = inputView.readWinningNumbers();
-        return WinningLottoTicket.of(lottoNumbers);
+        return WinningLottoTicket.from(lottoNumbers);
     }
 
-    private LottoTickets getLottoTickets(Money money) {
+    private LottoTickets purchasedLottoTickets(Money money) {
         LottoTicketMachine lottoTicketMachine = new LottoTicketMachine(new RandomGenerateStrategy());
         return lottoTicketMachine.buyLottoTickets(money);
     }

@@ -15,7 +15,7 @@ class LottoNumberTest {
     @Test
     @DisplayName("숫자를 통해 로또 번호 생성")
     void createLottoNumberTest() {
-        LottoNumber lottoNumber = LottoNumber.of(1);
+        LottoNumber lottoNumber = LottoNumber.from(1);
         assertThat(lottoNumber).isInstanceOf(LottoNumber.class);
     }
 
@@ -23,7 +23,7 @@ class LottoNumberTest {
     @ValueSource(ints = {0, 46, 100})
     @DisplayName("로또 번호가 1~45 사이의 숫자가 아닐 시에 InvalidLottoNumberException 발생")
     void throwInvalidLottoNumberExceptionTest(int input) {
-        assertThatThrownBy(() -> LottoNumber.of(input))
+        assertThatThrownBy(() -> LottoNumber.from(input))
                 .isInstanceOf(InvalidLottoNumberException.class);
     }
 
@@ -31,7 +31,7 @@ class LottoNumberTest {
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     @DisplayName("같은 숫자의 로또 번호는 같은 객체")
     void lottoNumberEqualTest(int input) {
-        LottoNumber lottoNumber = LottoNumber.of(input);
-        assertThat(lottoNumber).isEqualTo(LottoNumber.of(input));
+        LottoNumber lottoNumber = LottoNumber.from(input);
+        assertThat(lottoNumber).isEqualTo(LottoNumber.from(input));
     }
 }

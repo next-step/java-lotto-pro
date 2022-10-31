@@ -17,8 +17,8 @@ class LottoTicketsTest {
 	@Test
 	@DisplayName("로또 티켓 collection 생성")
 	void createLottoTicketsTest() {
-		LottoTicket lottoTicket = LottoTicket.of(new TestGenerateStrategy());
-		LottoTickets lottoTickets = LottoTickets.of(List.of(lottoTicket));
+		LottoTicket lottoTicket = LottoTicket.from(new TestGenerateStrategy());
+		LottoTickets lottoTickets = LottoTickets.from(List.of(lottoTicket));
 		assertThat(lottoTickets).isInstanceOf(LottoTickets.class);
 	}
 
@@ -27,8 +27,8 @@ class LottoTicketsTest {
 	@DisplayName("로또 티켓 수 반환")
 	void getLottoTicketsSizeTest(int count) {
 		LottoTickets lottoTickets = IntStream.range(0, count)
-			.mapToObj(i -> LottoTicket.of(new TestGenerateStrategy()))
-			.collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::of));
+			.mapToObj(i -> LottoTicket.from(new TestGenerateStrategy()))
+			.collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::from));
 		assertThat(lottoTickets.size()).isEqualTo(count);
 	}
 
