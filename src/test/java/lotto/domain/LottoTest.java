@@ -75,4 +75,11 @@ public class LottoTest {
         assertThat(source.match(new Lotto("7,8,9,10,11,12"))).isEqualTo(0);
     }
 
+    @Test
+    @DisplayName("1,2,3,4,5,6 의 번호를 가진 로또와 로또 번호 1의 매치는 참이다 ")
+    void match_LottoNumber() {
+        Lotto source = new Lotto("1,2,3,4,5,6");
+        assertThat(source.match(LottoNumber.of(1))).isTrue();
+    }
+
 }

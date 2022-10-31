@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,6 +23,15 @@ public class WinningLottoTest {
     void create_문자열_에러(String numbers) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             new WinningLotto(new Lotto(numbers), LottoNumber.of("7"));
+        });
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6:1"}, delimiter = ':')
+    @DisplayName("로또 번호 6자리와 중복되는 보너스 번호를 가지고 당첨 로또를 생성하면 오류발생")
+    void create_문자열_에러(String numbers, String bonusNumber) {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new WinningLotto(new Lotto(numbers), LottoNumber.of(bonusNumber));
         });
     }
 

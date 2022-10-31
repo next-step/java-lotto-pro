@@ -27,6 +27,10 @@ public class Lotto {
         return lottoNumbers.match(target.lottoNumbers);
     }
 
+    public boolean match(LottoNumber lottoNumber) {
+        return lottoNumbers.match(lottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

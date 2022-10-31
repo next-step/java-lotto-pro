@@ -6,6 +6,7 @@ public class WinningLotto {
     private final LottoNumber bonusLottoNumber;
 
     public WinningLotto(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+        validateDuplicatedLottoNumber(winningLotto, bonusLottoNumber);
         this.winningLotto = winningLotto;
         this.bonusLottoNumber = bonusLottoNumber;
     }
@@ -14,5 +15,10 @@ public class WinningLotto {
         return Rank.of(winningLotto.match(lotto));
     }
 
+    private void validateDuplicatedLottoNumber(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+        if (winningLotto.match(bonusLottoNumber)) {
+            throw new IllegalArgumentException("중복된 번호는 보너스 번호로 입력할 수 없습니다.");
+        }
+    }
 
 }
