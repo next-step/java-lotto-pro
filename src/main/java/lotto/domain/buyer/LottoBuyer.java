@@ -4,11 +4,10 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.money.Money;
 import lotto.domain.seller.LottoSeller;
-import lotto.prize.Prize;
+import lotto.prize.Prizes;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 public class LottoBuyer {
 
@@ -24,11 +23,8 @@ public class LottoBuyer {
         return new Lottos(lottos);
     }
 
-    public BigDecimal calculateYield(Map<Prize, Integer> prizes) {
-        BigDecimal rewardSum = prizes.entrySet().stream().map(v -> {
-            BigDecimal reward = v.getKey().getPrizeMoney();
-            return reward.multiply(BigDecimal.valueOf(v.getValue()));
-        }).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
+    public BigDecimal calculateYield(Prizes prizes) {
+        BigDecimal rewardSum = prizes.sumReward();
         return rewardSum.divide(BigDecimal.valueOf(money.getInvestment()), DECIMAL_POINT_POSITION, BigDecimal.ROUND_FLOOR);
     }
 
