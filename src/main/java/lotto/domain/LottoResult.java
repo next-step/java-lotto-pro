@@ -19,6 +19,11 @@ public class LottoResult {
 		return this.matchCount.equals(matchCount);
 	}
 
+
+	public WinningPrice winningPrice() {
+		return WinningPrice.from(matchCount);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

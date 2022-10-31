@@ -30,12 +30,24 @@ public class LottoResults {
 		);
 	}
 
-	public int getQuantity() {
+	public WinningPrices toWinningPrices() {
+		return WinningPrices.from(
+		this.lottoResults.stream()
+			.map(LottoResult::winningPrice)
+			.collect(Collectors.toList())
+		);
+	}
+
+	public WinningPrice totalWinningPrice() {
+		return this.toWinningPrices().totalPrice();
+	}
+
+	public int quantity() {
 		return this.lottoResults.size();
 	}
 
-	public float winningPrice() {
-		return 0;
+	public float yield() {
+		return totalWinningPrice().div(quantity());
 	}
 
 	@Override

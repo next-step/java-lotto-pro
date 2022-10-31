@@ -29,10 +29,9 @@ public class WinningLotto {
 		return lottoResultMatchCounts.getResultMessage();
 	}
 
-	public String getYieldMessage(Lottos lottos) {
+	public YieldMessage getYieldMessage(Lottos lottos) {
 		LottoResults lottoResults = lottos.toLottoResults(winLotto);
-
-		return String.format("총 수익률은 %.2f입니다.%n", lottoResults.winningPrice());
+		return new YieldMessage(lottoResults.yield());
 	}
 
 	@Override

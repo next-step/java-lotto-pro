@@ -14,7 +14,7 @@ public class LottoResultMatchCounts {
 	}
 
 	public LottoResultMessage getResultMessage() {
-		int matchQuantity = this.lottoResults.getQuantity();
+		int matchQuantity = this.lottoResults.quantity();
 		return new LottoResultMessage(this.matchCount, matchQuantity, WinningPrice.from(this.matchCount));
 	}
 }

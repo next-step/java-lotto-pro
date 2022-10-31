@@ -26,6 +26,14 @@ public class WinningPrice {
 		return this.winningPrice;
 	}
 
+	public WinningPrice sum(WinningPrice other) {
+		return new WinningPrice(this.winningPrice + other.winningPrice);
+	}
+
+	public float div(int quantity) {
+		return (float)this.winningPrice / quantity;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
