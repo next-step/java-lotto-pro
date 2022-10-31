@@ -16,7 +16,7 @@ public class Spliter {
         StringTokenizer token = new StringTokenizer(input, DELIMITER);
         List<Integer> winningNumbers = new ArrayList<>();
         while (token.hasMoreTokens()) {
-            winningNumbers.add(Validate.validateNumberRange(Validate.validateInput(token.nextToken())));
+            winningNumbers.add(Integer.valueOf(token.nextToken()));
         }
         return winningNumbers;
     }
