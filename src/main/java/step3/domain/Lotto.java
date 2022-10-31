@@ -13,7 +13,7 @@ public class Lotto {
         return this.lottoNumbers.compareTo(winningNumbers);
     }
 
-    public boolean containsNumber(final LottoNumber lottoNumber) {
+    public boolean isBonusWin(final LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
