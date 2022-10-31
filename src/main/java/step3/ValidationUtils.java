@@ -11,7 +11,7 @@ public class ValidationUtils {
             validLottoNumber(parseNumber);
             return Integer.parseInt(input);
         }
-        catch (Exception e){
+        catch (IllegalArgumentException e){
             throw new IllegalArgumentException(LOTTO_RANGE_EXCEPTION);
         }
     }
