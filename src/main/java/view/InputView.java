@@ -23,4 +23,9 @@ public class InputView {
         }
         return winNumberList;
     }
+
+    public static int bonusNumberInput() {
+        System.out.println("보너스 볼을 입력해주세요.");
+        return Integer.parseInt(scanner.next());
+    }
 }
