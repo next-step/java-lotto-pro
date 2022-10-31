@@ -27,11 +27,13 @@ public class LottoLotteryTickets {
         return this.lottoLotteryTickets.size();
     }
 
-    public Result matchResult(LottoNumbers winningLottoNumbers) {
+    public Result matchResult(WinningLottoNumbers winningLottoNumbers) {
         Map<Match, Integer> lottoResults = new HashMap<>();
 
         for (LottoNumbers lottoNumbers : lottoLotteryTickets) {
-            Match match = Match.findMatch(lottoNumbers.match(winningLottoNumbers));
+            int matchCount = winningLottoNumbers.matchExceptBonusBall(lottoNumbers);
+            boolean isMatchBonusBall = lottoNumbers.containLottoNumber(winningLottoNumbers.getBonusBall());
+            Match match = Match.findMatch(matchCount, isMatchBonusBall);
             lottoResults.put(match, lottoResults.getOrDefault(match, RESULT_DEFAULT_VALUE) + RESULT_ADD_VALUE );
         }
 

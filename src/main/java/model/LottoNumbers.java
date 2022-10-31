@@ -16,10 +16,8 @@ public class LottoNumbers {
     private static final String LOTTO_NUMBERS_SPLIT_DELIMETER = ",";
 
     private static final String LOTTO_NUMBERS_SIZE_ERROR_MESSSAGE = "로또 티켓은 중복없는 " + LOTTO_LOTTERY_TICKET_NUMBER_SIZE + "자리 숫자로 이루어져야 합니다.";
-    private static final String LOTTO_NUMBERS_DUPLICATION_ERROR_MESSSAGE = "기존에 중복된 로또번호가 존재합니다.";
 
     private Set<LottoNumber> lottoNumbers;
-    private LottoNumber bonusBall;
 
     public LottoNumbers(LottoNumberGenerator lottoNumberGenerator) {
         this.lottoNumbers = lottoNumberGenerator.generate(new LottoNumber());
@@ -60,19 +58,6 @@ public class LottoNumbers {
 
         return count;
     }
-    public void addBonusBall(LottoNumber bonusBall) {
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            validDuplicationLottoNumber(lottoNumber, bonusBall);
-        }
-
-        this.bonusBall = bonusBall;
-    }
-
-    public void validDuplicationLottoNumber(LottoNumber lottoNumber, LottoNumber bonusBall) {
-        if (lottoNumber.equals(bonusBall)) {
-            throw new LottoNumberDuplicationException(LOTTO_NUMBERS_DUPLICATION_ERROR_MESSSAGE);
-        }
-    }
 
     private int countIfContainLottoNumber(LottoNumbers winningLottoNumbers, LottoNumber lottoNumber) {
         if (winningLottoNumbers.lottoNumbers.contains(lottoNumber)) {
@@ -82,19 +67,19 @@ public class LottoNumbers {
         return NO_MATCH_COUNT_NUMBER;
     }
 
-    public boolean equalsBonusBall(LottoNumber lottoNumber) {
-        if (lottoNumber.equals(bonusBall)) {
-            return true;
-        }
-
-        return false;
-    }
-
     @Override
     public String toString() {
         String lottonumbersToString = lottoNumbers.stream()
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(TO_STRING_JOIN_DELIMETER));
         return "[" + lottonumbersToString + "]";
+    }
+
+    public boolean containLottoNumber(LottoNumber lottoNumber) {
+        if (this.lottoNumbers.contains(lottoNumber)) {
+            return true;
+        }
+
+        return false;
     }
 }

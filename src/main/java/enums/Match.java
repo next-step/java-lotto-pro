@@ -2,6 +2,8 @@ package enums;
 
 import java.util.Arrays;
 
+import static model.WinningLottoNumbers.BONUS_BALL_ADD_DELIMETER;
+
 public enum Match {
     ZERO(0, 0),
     FIFTH(3, 5_000),
@@ -18,12 +20,26 @@ public enum Match {
         this.amount = amount;
     }
 
-    public static Match findMatch(int matchCount) {
-
+    public static Match findMatch(int matchCount, boolean isMatchBonusBall) {
+        if (isSecond(matchCount, isMatchBonusBall)) {
+            return Match.SECOND;
+        }
 
         return Arrays.stream(Match.values()).filter(match -> match.getCount() == matchCount)
                 .findFirst()
                 .orElse(ZERO);
+    }
+
+    private static boolean isSecond(int matchCount, boolean isMatchBonusBall) {
+        return matchCount + BONUS_BALL_ADD_DELIMETER == SECOND.matchCount && isMatchBonusBall;
+    }
+
+    public static boolean isSecond(Match match) {
+        return match.equals(Match.SECOND);
+    }
+
+    public static boolean isZero(Match match) {
+        return match.equals(Match.ZERO);
     }
 
     public int getCount() {

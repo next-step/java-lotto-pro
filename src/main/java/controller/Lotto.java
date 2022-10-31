@@ -11,11 +11,11 @@ public class Lotto {
 
         LottoLotteryTickets lottoLotteryTickets = new LottoLotteryTickets(lottoPurchaseAmount.getQuantityPerAmountLotto(), new LottoNumberGenerator());
         OutputWriter.print(lottoLotteryTickets.toString());
-        LottoNumbers winningNumbers = new LottoNumbers(InputReader.readLastWeekWinningNumber());
 
-        winningNumbers.addBonusBall(new LottoNumber(InputReader.readBonusBall()));
-        Result result = lottoLotteryTickets.matchResult(winningNumbers);
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(new LottoNumbers(InputReader.readLastWeekWinningNumber()));
+        winningLottoNumbers.addBonusBall(new LottoNumber(InputReader.readBonusBall()));
 
+        Result result = lottoLotteryTickets.matchResult(winningLottoNumbers);
         OutputWriter.printResults(result, lottoPurchaseAmount);
     }
 }
