@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoNumberRange {
+public class LottoNumbersRule {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
