@@ -38,9 +38,12 @@ public class LottoResult {
     }
 
     public int getEqualCount(LottoResult otherLottoResult) {
-        List<LottoNumber> checkNumbers = lottoNumbers;
-        checkNumbers.retainAll(otherLottoResult.lottoNumbers);
-        return checkNumbers.size();
+        return (int) this.lottoNumbers.stream().filter(otherLottoResult::isContains).count();
+    }
+
+
+    public boolean isContains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
     @Override
