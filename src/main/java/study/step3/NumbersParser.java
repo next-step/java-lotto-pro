@@ -3,7 +3,7 @@ package study.step3;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoParser {
+public class NumbersParser {
     private static final String SPLIT_DELIMITER = ",";
     private static final String SPACE_DELIMITER = " ";
     private static final String REPLACEMENT = "";
