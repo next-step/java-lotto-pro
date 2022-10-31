@@ -1,8 +1,12 @@
 package lotto.auto;
 
+import lotto.auto.common.LottoAutoUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static lotto.auto.common.Constants.DELIMITER;
 
 public class LottoNumbers {
     private final int BEGIN_INDEX = 0;
@@ -11,8 +15,25 @@ public class LottoNumbers {
     private List<Integer> lottoNumbers;
 
     public LottoNumbers() {
-        lottoNumbers = new ArrayList<>();
+        setUp();
         makeLottoNumbers();
+    }
+
+    public LottoNumbers(String inputStr) {
+        setUp();
+        stringToNumbersByToken(inputStr);
+    }
+
+    private void setUp() {
+        lottoNumbers = new ArrayList<>();
+    }
+
+    private void stringToNumbersByToken(String inputStr) {
+        String[] str = inputStr.split(DELIMITER);
+        for (String number : str) {
+            this.lottoNumbers.add(new LottoAutoUtils().stringToNumber(number));
+        }
+        Collections.sort(lottoNumbers);
     }
 
     private void makeLottoNumbers() {
@@ -21,6 +42,7 @@ public class LottoNumbers {
         }
         Collections.shuffle(lottoNumbers);
         lottoNumbers = lottoNumbers.subList(BEGIN_INDEX, BEGIN_INDEX + LOTTO_NUMBER_LIST_SIZE);
+        Collections.sort(lottoNumbers);
     }
 
     public List<Integer> getLottoNumbers() {
