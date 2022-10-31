@@ -2,6 +2,7 @@ package step3.model;
 
 import java.util.Objects;
 
+import static step3.constant.ErrorMessage.ONLY_NUMBER_BETWEEN_1_TO_45;
 import static step3.constant.ErrorMessage.ONLY_NUMBER_PAST_LOTTO_INPUT;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -17,6 +18,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
             this.number = Integer.parseInt(number);
         } catch (Exception e) {
             throw new IllegalArgumentException(ONLY_NUMBER_PAST_LOTTO_INPUT);
+        }
+        if (this.number < 1 || this.number > 45) {
+            throw new IllegalArgumentException(ONLY_NUMBER_BETWEEN_1_TO_45);
         }
     }
 

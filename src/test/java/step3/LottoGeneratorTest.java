@@ -25,10 +25,8 @@ public class LottoGeneratorTest {
         String onlyNumberPrice = "5000";
         String notOnlyNumberPrice = "5000원";
 
-        lottoGenerator.initPurchasePrice(onlyNumberPrice);
-        assertThat(lottoGenerator.getGeneratorCount()).isEqualTo(5);
-
-        assertThatThrownBy(() -> lottoGenerator.initPurchasePrice(notOnlyNumberPrice))
+        assertThat(lottoGenerator.getGeneratorCount(onlyNumberPrice)).isEqualTo(5);
+        assertThatThrownBy(() -> lottoGenerator.getGeneratorCount(notOnlyNumberPrice))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -36,21 +34,15 @@ public class LottoGeneratorTest {
     @DisplayName("입력받은 구매금액에서 1장에 1000원으로 계산된 구입 가능한 최대 로또 개수를 계산해야 한다" +
             "1000원 단위가 아니라면 최대 가능 개수를 계산하고, 1000원 이하의 금액이 들어오면 0개를 구매할 수 있다")
     void calculator_max_lotto_purchase_count() {
-        lottoGenerator.initPurchasePrice(count15);
-        assertThat(lottoGenerator.getGeneratorCount()).isEqualTo(15);
-
-        lottoGenerator.initPurchasePrice(count10);
-        assertThat(lottoGenerator.getGeneratorCount()).isEqualTo(10);
-
-        lottoGenerator.initPurchasePrice(below1000);
-        assertThat(lottoGenerator.getGeneratorCount()).isEqualTo(0);
+        assertThat(lottoGenerator.getGeneratorCount(count15)).isEqualTo(15);
+        assertThat(lottoGenerator.getGeneratorCount(count10)).isEqualTo(10);
+        assertThat(lottoGenerator.getGeneratorCount(below1000)).isEqualTo(0);
     }
 
     @Test
     @DisplayName("발급된 로또는 총 6개의 1~45사이의 랜덤한 숫자로 발급이 되어야한다.")
     void validation_generator_lotto_number() {
-        lottoGenerator.initPurchasePrice("3000");
-        List<Lotto> lottos = lottoGenerator.generateLottos().getLottos();
+        List<Lotto> lottos = lottoGenerator.generateLottos("3000").getLottos();
 
         for (Lotto lotto : lottos) {
             checkLottoSizeIs6(lotto);
@@ -71,14 +63,9 @@ public class LottoGeneratorTest {
     @Test
     @DisplayName("구입 가능한 개수만큼 로또가 발급되어야 한다")
     void generator_lotto_count() {
-        lottoGenerator.initPurchasePrice(count15);
-        assertThat(lottoGenerator.generateLottos().getSize()).isEqualTo(15);
-
-        lottoGenerator.initPurchasePrice(count10);
-        assertThat(lottoGenerator.generateLottos().getSize()).isEqualTo(10);
-
-        lottoGenerator.initPurchasePrice(below1000);
-        assertThat(lottoGenerator.generateLottos().getSize()).isEqualTo(0);
+        assertThat(lottoGenerator.generateLottos(count15).getSize()).isEqualTo(15);
+        assertThat(lottoGenerator.generateLottos(count10).getSize()).isEqualTo(10);
+        assertThat(lottoGenerator.generateLottos(below1000).getSize()).isEqualTo(0);
     }
 
 }

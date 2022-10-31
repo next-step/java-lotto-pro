@@ -5,6 +5,7 @@ public enum WinningPrice {
     GUESS_THREE(3, 5000),
     GUESS_FOUR(4, 50000),
     GUESS_FIVE(5, 1500000),
+    GUESS_FIVE_AND_BONUS(6, 30000000),
     GUESS_SIX(6, 2000000000);
 
     private int count;

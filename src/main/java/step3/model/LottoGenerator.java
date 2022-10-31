@@ -4,28 +4,34 @@ import static step3.constant.ErrorMessage.ONLY_NUMBER_PURCHASE_PRICE_INPUT;
 
 public class LottoGenerator {
 
-    private int purchasePrice;
 
-    public void initPurchasePrice(String purchasePrice) {
+    public Lottos generateLottos(String price) {
+        Lottos lottos = new Lottos();
+        lottos.generate(getGeneratorCount(price));
+        return lottos;
+    }
+
+    public Lotto generateLotto(String numbers) {
+        return new Lotto(numbers);
+    }
+
+    public LottoNumber generateLottoNumber(String number) {
+        return new LottoNumber(number);
+    }
+
+    public int getGeneratorCount(String price) {
         try {
-            this.purchasePrice = Integer.parseInt(purchasePrice);
+            int purchasePrice = Integer.parseInt(price);
+            return purchasePrice / 1000;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ONLY_NUMBER_PURCHASE_PRICE_INPUT);
         }
     }
 
-    public Lottos generateLottos() {
-        Lottos lottos = new Lottos();
-        lottos.generate(getGeneratorCount());
-        return lottos;
-    }
-
-    public int getGeneratorCount() {
-        return purchasePrice / 1000;
-    }
-
     public String calculatorResult(int totalWinningPrice) {
-        double calculatorResult = Double.valueOf(totalWinningPrice) / Double.valueOf(purchasePrice);
-        return String.format("%.2f", calculatorResult);
+        /*double calculatorResult = Double.valueOf(totalWinningPrice) / Double.valueOf(purchasePrice);
+        return String.format("%.2f", calculatorResult);*/
+        return null;
     }
+
 }
