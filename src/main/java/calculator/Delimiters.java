@@ -20,4 +20,8 @@ public class Delimiters {
     public String delimiter() {
         return String.join("|", this.delimiters);
     }
+
+    public void add(String delimiter) {
+        this.delimiters.add(delimiter);
+    }
 }

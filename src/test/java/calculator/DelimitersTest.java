@@ -14,4 +14,12 @@ class DelimitersTest {
         Delimiters delimiters = new Delimiters();
         assertThat(delimiters.getDelimiters()).containsExactly(":", ",");
     }
+
+    @DisplayName("구분자를 추가한다.")
+    @Test
+    void add() {
+        Delimiters delimiters = new Delimiters();
+        delimiters.add(";");
+        assertThat(delimiters.getDelimiters()).containsExactly(":", ";", ",");
+    }
 }
