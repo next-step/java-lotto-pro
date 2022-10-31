@@ -4,7 +4,9 @@ import step3.model.dto.LottoResultDto;
 import step3.model.dto.LottosNumberDto;
 import step3.model.dto.RankDto;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoOutputView {
 
@@ -25,26 +27,29 @@ public class LottoOutputView {
         printMinusStatus(priceRatio);
     }
 
-    private static void printRankStats(LottoResultDto statusDto) {
-        statusDto.getRanks()
-                .stream()
-                .sorted((o1, o2) -> {
-                    if (o1.getMatchCount() == o2.getMatchCount()) return o1.isRankTwo() ? 1 : -1;
-                    return o1.getMatchCount() - o2.getMatchCount();
-                })
-                .filter(RankDto::isWin)
-                .forEach(rankDto -> {
-                    if (rankDto.isRankTwo()) {
-                        System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개\n", rankDto.getMatchCount(), rankDto.getWinningPrice(), rankDto.getWinningCount());
-                        return;
-                    }
-                    System.out.printf("%d개 일치 (%d원)- %d개\n", rankDto.getMatchCount(), rankDto.getWinningPrice(), rankDto.getWinningCount());
-                });
+    private static void printRankStats(LottoResultDto resultDto) {
+        getSortedRank(resultDto).forEach(rankDto -> {
+            if (rankDto.isRankTwo()) {
+                System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개\n", rankDto.getMatchCount(), rankDto.getWinningPrice(), rankDto.getWinningCount());
+                return;
+            }
+            System.out.printf("%d개 일치 (%d원)- %d개\n", rankDto.getMatchCount(), rankDto.getWinningPrice(), rankDto.getWinningCount());
+        });
     }
 
     public static void printMinusStatus(double priceRatio) {
         if (priceRatio < 1.0) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
+    }
+
+    public static List<RankDto> getSortedRank(LottoResultDto resultDto) {
+        return resultDto.getRanks()
+                .stream()
+                .filter(rankDto -> rankDto.isWin())
+                .sorted(Comparator.comparingInt(RankDto::getWinningPrice))
+                .collect(Collectors.toList());
+
+
     }
 }

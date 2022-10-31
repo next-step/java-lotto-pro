@@ -33,7 +33,6 @@ public class Lotto {
     }
 
     public Rank getRank(Lotto winningLotto) {
-
         int count = (int) numbers
                 .stream()
                 .filter(winningLotto::contains)
@@ -42,14 +41,12 @@ public class Lotto {
     }
 
     public Rank getRank(WinningLotto winningLotto) {
-
         int count = (int) numbers
                 .stream()
                 .filter(winningLotto::contains)
                 .count();
         boolean isBonus = winningLotto.isMatchBonusNumber(numbers);
-
-        Rank getRank = Rank.valueOf((number, isBonubs) -> (number == count && isBonus), isBonus);
+        Rank getRank = Rank.valueOf((number, isBonubs) -> (number == count && isBonus), !isBonus);
         return getRank;
     }
 
