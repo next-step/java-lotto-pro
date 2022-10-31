@@ -17,11 +17,11 @@ import java.util.Map;
 
 public class Prize {
     private final Map<Integer, Integer> prize = new HashMap<>();
-    private final List<Integer> winningNumbers;
+    private final WinningNumber winningNumber;
 
-    public Prize(List<Integer> winningNumbers) {
-        this.winningNumbers = winningNumbers;
+    public Prize(WinningNumber winningNumber) {
         initialize();
+        this.winningNumber = winningNumber;
     }
 
     private void initialize() {
@@ -33,7 +33,7 @@ public class Prize {
 
     public void countPrize(List<LottoNumber> lottoNumbers) {
         for (LottoNumber lottoNumber : lottoNumbers) {
-            inputCountPrize(lottoNumber.countHit(winningNumbers));
+            inputCountPrize(winningNumber.countHit(lottoNumber));
         }
     }
 

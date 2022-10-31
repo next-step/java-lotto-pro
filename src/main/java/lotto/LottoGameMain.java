@@ -21,7 +21,7 @@ public class LottoGameMain {
         List<LottoNumber> lottoNumbers = lottoGame.purchaseLotto(purchaseCount);
         resultView.printResultPurchase(lottoNumbers);
 
-        Prize prize = new Prize(inputView.inputWinningNumberLastWeek());
+        Prize prize = new Prize(new WinningNumber(inputView.inputWinningNumberLastWeek()));
         prize.countPrize(lottoNumbers);
 
         resultView.printResultWinningStatistics(payMoney, prize);

@@ -14,10 +14,8 @@ public class LottoNumber {
         this.sixNumbers = sixNumbers;
     }
 
-    public int countHit(List<Integer> winningNumbers) {
-        return (int) winningNumbers.stream()
-                .filter(sixNumbers::contains)
-                .count();
+    public boolean contains(int number) {
+        return sixNumbers.contains(number);
     }
 
     @Override
