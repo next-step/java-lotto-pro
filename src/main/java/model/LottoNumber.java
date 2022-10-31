@@ -7,7 +7,6 @@ import java.util.List;
 public class LottoNumber {
 
     private final List<Integer> number;
-    private static final int ADD_WIN_NUMBER_COUNT = 1;
 
     public LottoNumber(List<Integer> number) {
         Collections.sort(number);

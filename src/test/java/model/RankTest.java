@@ -44,5 +44,4 @@ class RankTest {
         assertThat(rank.getCountRank().get(RANK_FOUR)).isZero();
         assertThat(rank.getCountRank().get(RANK_FIVE)).isZero();
     }
-
 }
