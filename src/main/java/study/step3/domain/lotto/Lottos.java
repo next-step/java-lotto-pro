@@ -3,8 +3,11 @@ package study.step3.domain.lotto;
 import study.step3.domain.lottonumber.LottoNumbers;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class Lottos {
 
@@ -29,6 +32,6 @@ public class Lottos {
     public List<Long> matchAll(LottoNumbers winningNumbers) {
         return this.lottos.stream()
                 .map(lotto -> lotto.match(winningNumbers))
-                .collect(Collectors.toList());
+                .collect(collectingAndThen(toList(), Collections::unmodifiableList));
     }
 }
