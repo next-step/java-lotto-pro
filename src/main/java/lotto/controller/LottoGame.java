@@ -31,7 +31,7 @@ public class LottoGame {
         }
     }
 
-    public void checkLottoNumbers(List<Integer> winningNumbers) {
+    public void start(List<Integer> winningNumbers) {
         LottoResult lottoResult = lottos.findWinner(new Lotto(winningNumbers));
         double profitRatio = ProfitCalculator.calculateProfit(lottoResult, lottos.getLottos().size());
         printLottoResult(lottoResult, profitRatio);
