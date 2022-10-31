@@ -2,6 +2,7 @@ package lotto.domain.result;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import lotto.domain.matcher.count.MatchCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -14,7 +15,7 @@ class LottoResultTest {
     void profit_six(int matchCount, int expected) {
         LottoResult matchThree = LottoResult.SIX;
         for (int i = 0; i < matchCount; i++) {
-            matchThree.calculateTotalCount(6);
+            matchThree.calculateTotalCount(new MatchCount(6, false));
         }
         assertThat(matchThree.profit()).isEqualTo(matchCount * expected);
     }
@@ -25,7 +26,7 @@ class LottoResultTest {
     void profit_five(int matchCount, int expected) {
         LottoResult matchThree = LottoResult.FIVE;
         for (int i = 0; i < matchCount; i++) {
-            matchThree.calculateTotalCount(5);
+            matchThree.calculateTotalCount(new MatchCount(5, false));
         }
         assertThat(matchThree.profit()).isEqualTo(matchCount * expected);
     }
@@ -36,7 +37,7 @@ class LottoResultTest {
     void profit_four(int matchCount, int expected) {
         LottoResult matchThree = LottoResult.FOUR;
         for (int i = 0; i < matchCount; i++) {
-            matchThree.calculateTotalCount(4);
+            matchThree.calculateTotalCount(new MatchCount(4, false));
         }
         assertThat(matchThree.profit()).isEqualTo(matchCount * expected);
     }
@@ -47,7 +48,7 @@ class LottoResultTest {
     void profit_three(int matchCount, int expected) {
         LottoResult matchThree = LottoResult.THREE;
         for (int i = 0; i < matchCount; i++) {
-            matchThree.calculateTotalCount(3);
+            matchThree.calculateTotalCount(new MatchCount(3, false));
         }
         assertThat(matchThree.profit()).isEqualTo(matchCount * expected);
     }

@@ -25,6 +25,11 @@ public class WinningNumberOnly implements WinningNumber {
     }
 
     @Override
+    public boolean isMatchBonus(Iterator<Integer> lottoNumberIterator) {
+        return false;
+    }
+
+    @Override
     public WinningNumber createWinningNumberWithBonus(String bonus) {
         return new WinningNumberWithBonusFactory(this.winningNumber).createWinningNumberWithBonus(bonus);
     }

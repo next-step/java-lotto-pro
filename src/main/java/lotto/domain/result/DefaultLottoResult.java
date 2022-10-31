@@ -2,6 +2,7 @@ package lotto.domain.result;
 
 import java.util.Arrays;
 import java.util.List;
+import lotto.domain.matcher.count.MatchCount;
 
 public class DefaultLottoResult {
 
@@ -10,10 +11,10 @@ public class DefaultLottoResult {
 
     public DefaultLottoResult() {
         this.lottoResults = Arrays
-                .asList(LottoResult.THREE, LottoResult.FOUR, LottoResult.FIVE, LottoResult.SIX);
+                .asList(LottoResult.THREE, LottoResult.FOUR, LottoResult.FIVE, LottoResult.FIVE_BONUS, LottoResult.SIX);
     }
 
-    public void calculateTotalCount(int matchCount) {
+    public void calculateTotalCount(MatchCount matchCount) {
         lottoResults.forEach(lottoResult -> lottoResult.calculateTotalCount(matchCount));
     }
 
