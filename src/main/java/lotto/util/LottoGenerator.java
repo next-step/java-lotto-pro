@@ -12,6 +12,10 @@ public class LottoGenerator {
   private static final int MIN_LOTTO_INDEX = 0;
   private static final int MAX_LOTTO_INDEX = 6;
 
+  private LottoGenerator() {
+    throw new AssertionError("Utility Class can't being instantiated");
+  }
+
 
   public static List<Integer> generateLottoNumbers() {
 
