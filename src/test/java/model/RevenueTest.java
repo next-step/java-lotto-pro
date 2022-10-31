@@ -17,6 +17,6 @@ class RevenueTest {
 
         double percent = new Revenue(stats).getPercent(price);
 
-        assertThat(percent).isEqualTo(50.0);
+        assertThat(percent).isEqualTo(1500.0);
     }
 }
