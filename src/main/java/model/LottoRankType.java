@@ -3,19 +3,21 @@ package model;
 import java.util.Arrays;
 
 public enum LottoRankType {
-    RANK_ONE(6, 2_000_000_000),
-    RANK_TWO(5, 30_000_000),
-    RANK_THREE(5, 1_500_000),
-    RANK_FOUR(4, 50_000),
-    RANK_FIVE(3, 5_000),
-    RANK_FAIL(0, 0);
+    RANK_ONE(6, 2_000_000_000, false),
+    RANK_TWO(5, 30_000_000, true),
+    RANK_THREE(5, 1_500_000, false),
+    RANK_FOUR(4, 50_000, false),
+    RANK_FIVE(3, 5_000, false),
+    RANK_FAIL(0, 0, false);
 
     private final int count;
     private final int winMoney;
+    private final boolean isBonusBall;
 
-    LottoRankType(int sameCount, int winMoney) {
+    LottoRankType(int sameCount, int winMoney, boolean isBonusBall) {
         this.count = sameCount;
         this.winMoney = winMoney;
+        this.isBonusBall = isBonusBall;
     }
 
     public static LottoRankType convertRank(int countOfContain, boolean isContainBonusNumber) {
@@ -61,5 +63,9 @@ public enum LottoRankType {
 
     public boolean isFail() {
         return this == RANK_FAIL;
+    }
+
+    public boolean isBonusBall() {
+        return isBonusBall;
     }
 }
