@@ -9,8 +9,8 @@ public class Lotto {
     
     public TicketList ticketList;
 
-    public Lotto(String input) {
-        buyLotto(new Input(input));
+    public Lotto(String moneyStr) {
+        buyLotto(new Money(moneyStr));
     }
 
     public Lotto(TicketList myTickets) {
@@ -34,8 +34,8 @@ public class Lotto {
         return result.toString(usedMoney);
     }
 
-    private void buyLotto(Input input) {
-        int buyCount = input.amount / TICKET_VALUE;
+    private void buyLotto(Money money) {
+        int buyCount = money.amount / TICKET_VALUE;
         ticketList = new TicketList();
 
         IntStream.range(Constants.ZERO, buyCount).forEach(i -> {

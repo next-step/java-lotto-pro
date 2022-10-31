@@ -5,13 +5,13 @@ import lotto.util.IntUtil;
 import lotto.util.RegexUtil;
 import lotto.util.StringUtil;
 
-public class Input {
+public class Money {
     private static final String ERR_MORE_THAN_1000 = "1000 이상의 숫자를 입력해 주세요.";
     private static final String REGEX_NUMBER = "^[0-9]+$";
     
     public final int amount;
 
-    public Input(String amount) {
+    public Money(String amount) {
         this.amount = validate(amount);
     }
 
