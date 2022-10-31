@@ -40,10 +40,9 @@ public class LottoResultsTest {
     }
 
     private Lottos createLottos() {
-        Lottos lottos = new Lottos(Arrays.asList(
+        return new Lottos(Arrays.asList(
                 Lotto.generateLotto(new ReadLineLottoNumberGenerator("1,2,3,4,5,6")),
                 Lotto.generateLotto(new ReadLineLottoNumberGenerator("1,3,4,5,6,7")),
                 Lotto.generateLotto(new ReadLineLottoNumberGenerator("4,8,10,23,32,45"))));
-        return lottos;
     }
 }
