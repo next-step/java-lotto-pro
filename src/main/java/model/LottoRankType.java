@@ -6,8 +6,8 @@ import java.util.Optional;
 public enum LottoRankType {
     RANK_ONE(6, 2_000_000_000),
     RANK_TWO(5, 30_000_000, true),
-    RANK_THREE(5, 1_500_000, true),
-    RANK_FOUR(4, 50_000, false),
+    RANK_THREE(5, 1_500_000, false),
+    RANK_FOUR(4, 50_000),
     RANK_FIVE(3, 5_000),
     RANK_FAIL(0, 0);
 
