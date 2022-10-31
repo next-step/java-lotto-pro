@@ -102,7 +102,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(new WinningLotto(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)),LottoNumber.valueOf(16)));
+        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(new WinningLotto(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)),LottoNumber.valueOf(29)));
 
         //then
         assertThat(rankStats.get(Rank.FIRST)).isEqualTo(3);

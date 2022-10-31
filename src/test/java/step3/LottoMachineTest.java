@@ -87,7 +87,7 @@ public class LottoMachineTest {
         //when,then
         assertThatThrownBy(() -> lottoMachine.getLottoResult(new Lotto(winningNumbers)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("고유한 번호만 허용합니다");
+                .hasMessageContaining("중복없는 번호만 허용합니다");
     }
 
     @ParameterizedTest
