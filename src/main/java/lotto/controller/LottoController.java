@@ -15,9 +15,13 @@ public class LottoController {
 
 	public static void main(String[] args) {
 		Money payment = Input.inputPayment();
-		LottoShop lottoShop = new LottoShop(new LottoRandomCreateStrategy());
-		Lottos lottos = lottoShop.buy(payment);
+		Lottos manualLottos = Input.inputManualLottos();
 
+		Money moneyAfterBuyLotto = payment.minus(manualLottos.getTotalSpent());
+		LottoShop lottoShop = new LottoShop(new LottoRandomCreateStrategy());
+		Lottos auttoLottos = lottoShop.buy(moneyAfterBuyLotto);
+
+		Lottos lottos = manualLottos.merge(auttoLottos);
 		Output.printLottos(lottos);
 
 		Lotto winnerLotto = Input.inputWinnerLotto();

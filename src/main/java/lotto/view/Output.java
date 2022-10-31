@@ -12,7 +12,10 @@ public class Output {
 	}
 
 	public static void printLottos(final Lottos lottos) {
-		System.out.printf("%d개를 구매했습니다\n", lottos.countByType(LottoType.AUTO));
+		System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",
+			lottos.countByType(LottoType.MANUAL),
+			lottos.countByType(LottoType.AUTO)
+		);
 		System.out.println(lottos);
 	}
 
