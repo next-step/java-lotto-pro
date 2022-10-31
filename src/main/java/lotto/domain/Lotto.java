@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.constant.LottoMessage;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,13 +21,13 @@ public class Lotto {
 
     private void validateLottoSize(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] Lotto는 6개의 숫자입니다.");
+            throw new IllegalArgumentException(LottoMessage.ERROR_LOTTO_SIZE);
         }
     }
 
     private void duplicateLottoNumbers(LottoNumber lottoNumber) {
         if (lottoNumbers.contains(lottoNumber)) {
-            throw new IllegalArgumentException("[ERROR] Lotto 내 숫자는 중복될 수 없습니다.");
+            throw new IllegalArgumentException(LottoMessage.ERROR_LOTTO_DUPLICATE_NUMBER);
         }
     }
 

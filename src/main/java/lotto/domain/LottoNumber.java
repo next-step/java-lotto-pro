@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.constant.LottoMessage;
+
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -7,7 +9,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public LottoNumber(int num) {
         if (num < 1 || num > 45) {
-            throw new IllegalArgumentException("[ERROR] LottoNumber는 1 이상 45 이하여야 합니다.");
+            throw new IllegalArgumentException(LottoMessage.ERROR_LOTTO_NUMBER_RANGE);
         }
         this.lottoNumber = num;
     }

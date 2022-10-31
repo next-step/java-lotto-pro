@@ -1,5 +1,7 @@
 package lotto.utils;
 
+import lotto.constant.LottoMessage;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class LottoUtils {
         try {
             return Integer.parseInt(str);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[Error] 올바른 숫자가 아닙니다.");
+            throw new IllegalArgumentException(LottoMessage.ERROR_WIN_LOTTO_NUM);
         }
     }
 }
