@@ -31,7 +31,7 @@ public class LottoResult {
   private void calculateLottoResult() {
 
     for (Lotto lotto : lottoList.getLottoList()) {
-      int matchingCount = lotto.countMatchingNumber(winningLotto.getLotto());
+      int matchingCount = lotto.getMatchingCount(winningLotto.getLotto());
 
       RankCode rankCode = RankCode.getRankCode(matchingCount);
 

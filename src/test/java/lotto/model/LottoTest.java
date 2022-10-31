@@ -45,7 +45,7 @@ public class LottoTest {
     Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
     Lotto targetLotto = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
     //when
-    int count = lotto.countMatchingNumber(targetLotto);
+    int count = lotto.getMatchingCount(targetLotto);
     //then
     assertThat(count).isEqualTo(3);
   }

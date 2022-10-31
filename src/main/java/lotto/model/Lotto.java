@@ -19,18 +19,21 @@ public class Lotto {
     return this.numbers;
   }
 
-  public int countMatchingNumber(Lotto targetLotto) {
+  public int getMatchingCount(Lotto targetLotto) {
     int count = 0;
 
     List<Integer> targetLottoNumber = targetLotto.getNumbers();
 
-    for (Integer i : targetLottoNumber) {
-      if (this.numbers.contains(i)) {
-        count++;
-      }
+    for (int number : targetLottoNumber) {
+      count = this.countContainNumber(number, count);
     }
 
     return count;
   }
+
+  private int countContainNumber(int number, int count) {
+    return this.numbers.contains(number) ? count+1 : count;
+  }
+
 
 }
