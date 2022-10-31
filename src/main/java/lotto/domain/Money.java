@@ -8,7 +8,7 @@ import common.constant.ErrorCode;
 public class Money {
 
     private static final double FLOOR_LOCATION = 100;
-    private static final int MIN_MONEY = 0;
+    private static final int ZERO = 0;
 
     private final long money;
 
@@ -38,7 +38,7 @@ public class Money {
     }
 
     private void validateMinPrice(long money) {
-        if(money < MIN_MONEY) {
+        if(money < ZERO) {
             throw new IllegalArgumentException(ErrorCode.돈은_양수여야_함.getErrorMessage());
         }
     }
@@ -54,7 +54,7 @@ public class Money {
     }
 
     public boolean isBuyableLottoCount(int lottoCount) {
-        if(lottoCount < 0) {
+        if(lottoCount < ZERO) {
             throw new IllegalArgumentException(ErrorCode.음의_정수가_입력되면_안됨.getErrorMessage());
         }
         if(maxLottoCount() < lottoCount) {
@@ -75,6 +75,17 @@ public class Money {
 
     public boolean isLessThan(Money otherMoney) {
         return this.money < otherMoney.money;
+    }
+
+    public int maxLottoCountExclude(int manualLottoCount) {
+        int count = maxLottoCount() - manualLottoCount;
+        if(count < ZERO) {
+            throw new IllegalArgumentException(ErrorCode.구매_가능한_로또_숫자_벗어남.getErrorMessage());
+        }
+        if(manualLottoCount < ZERO) {
+            throw new IllegalArgumentException(ErrorCode.음의_정수가_입력되면_안됨.getErrorMessage());
+        }
+        return count;
     }
 
     @Override

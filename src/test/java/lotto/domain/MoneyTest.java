@@ -41,21 +41,41 @@ public class MoneyTest {
 
     @Test
     void 주어진_돈_내에서_살_수_있는_로또_개수라면_true_반환() {
-        Money money = Money.createMoney(5000L);
+        Money money = Money.createLottoMoney(5000L);
         assertThat(money.isBuyableLottoCount(5)).isTrue();
     }
 
     @Test
     void 주어진_돈_내에서_살_수_있는_로또_개수가_아니면_false_반환() {
-        Money money = Money.createMoney(5000L);
+        Money money = Money.createLottoMoney(5000L);
         assertThatThrownBy(() -> money.isBuyableLottoCount(6)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorCode.구매_가능한_로또_숫자_벗어남.getErrorMessage());
     }
 
     @Test
     void 주어진_돈_내에서_살_수_있는_로또_개수가_음수라면_에러_발생() {
-        Money money = Money.createMoney(5000L);
+        Money money = Money.createLottoMoney(5000L);
         assertThatThrownBy(() -> money.isBuyableLottoCount(-1)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorCode.음의_정수가_입력되면_안됨.getErrorMessage());
+    }
+
+    @Test
+    void 주어진_돈_내에서_살_수_있는_로또_개수에서_수동_로또_뺸_개수_반환() {
+        Money money = Money.createLottoMoney(5000L);
+        assertThat(money.maxLottoCountExclude(3)).isEqualTo(2);
+    }
+
+    @Test
+    void 주어진_돈_내에서_살_수_있는_로또_개수가_음수이면_에러_발생() {
+        Money money = Money.createLottoMoney(5000L);
+        assertThatThrownBy(() -> money.maxLottoCountExclude(6)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorCode.구매_가능한_로또_숫자_벗어남.getErrorMessage());
+    }
+
+    @Test
+    void 주어진_돈_내에서_살_수_있는_로또_개수_구할때_인자로_넘긴_값이_음수면_에러_발생() {
+        Money money = Money.createLottoMoney(5000L);
+        assertThatThrownBy(() -> money.maxLottoCountExclude(-1)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorCode.음의_정수가_입력되면_안됨.getErrorMessage());
     }
 }
