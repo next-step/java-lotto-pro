@@ -32,10 +32,6 @@ public enum Rank {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public Money money() {
-        return new Money(this.money);
-    }
-
     private boolean isMatchCount(int matchCount) {
         return this.matchCount == matchCount;
     }
@@ -45,6 +41,18 @@ public enum Rank {
             return Rank.SECOND;
         }
         return Rank.THIRD;
+    }
+
+    public Money money() {
+        return new Money(this.money);
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public long getMoney() {
+        return money;
     }
 
     @Override

@@ -22,7 +22,11 @@ public class OutputConsole {
     }
 
     public static void winningCount(Rank rank, int count) {
-        System.out.println(String.format(rank.toString() + "- %d", count));
+        if (rank == Rank.SECOND) {
+            System.out.println(String.format("%d개 일치, 보너스 볼 일치 (%d원) - %d개", rank.getMatchCount(), rank.getMoney(), count));
+            return;
+        }
+        System.out.println(String.format("%d개 일치 (%d원)- %d개", rank.getMatchCount(), rank.getMoney(), count));
     }
 
     public static void rateOfReturn(double rate) {
