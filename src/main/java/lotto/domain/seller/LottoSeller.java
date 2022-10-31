@@ -1,6 +1,5 @@
 package lotto.domain.seller;
 
-import lotto.constant.LottoConstant;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.money.Money;
 import lotto.generate.LottoNumberGenerator;
@@ -11,7 +10,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoSeller {
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
+
     public List<Lotto> sellAutoLotto(Money money) {
         int lottoCount = money.possibleBuyLottoCount(LOTTO_PRICE);
         return Stream.generate(LottoNumberGenerator::generate)
