@@ -1,6 +1,9 @@
 package step3.model.value;
 
 public class ErrMsg {
+    private ErrMsg() {
+        throw new AssertionError();
+    }
     public static final String WRONG_RANGE = "1~45 사이의 숫자만 입력해주시기 바랍니다.";
     public static final String EMPTY_INPUT = "입력값이 비었습니다.";
     public static final String NOT_NUMBER = "숫자를 입력해주시기 바랍니다.";

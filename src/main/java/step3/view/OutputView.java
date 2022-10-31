@@ -1,28 +1,35 @@
 package step3.view;
 
-import step3.model.lotto.Ticket;
-import step3.model.lotto.Tickets;
-import step3.model.machine.Result;
+import java.util.List;
+import step3.model.lotto.LottoList;
+import step3.model.machine.Order;
+import step3.model.machine.Results;
 
 public class OutputView {
-    public static void printTicketCount(int count) {
-        System.out.println(count+"개를 구매했습니다.");
-    }
 
+    // 인스턴스화 방지
+    private OutputView() {
+        throw new AssertionError();
+    }
 
     public static void printStatisticResult(double statisticResult) {
         System.out.println(String.format("총 수익률은 %.2f입니다.",statisticResult));
     }
 
-    public static void printResult(String result, String count) {
-        System.out.println(result+count);
+    public static void printTickets(LottoList lottoList) {
+        List<String> lottoListString = lottoList.getLottoListString();
+        for(String lotto: lottoListString){
+            System.out.println(lotto);
+        }
     }
 
-    public static void printTicket(Ticket ticket) {
-        System.out.println(ticket.toString());
+    public static void printResults(Results results) {
+        System.out.println("당첨 통계");
+        System.out.println("___________");
+        System.out.println(results.toString());
     }
 
-    public static void printMoneyInput(String moneyInput) {
-        System.out.println(moneyInput);
+    public static void printOrder(Order order) {
+        System.out.println(order.toString());
     }
 }
