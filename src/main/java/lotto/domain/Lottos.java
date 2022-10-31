@@ -33,8 +33,7 @@ public class Lottos {
 
     public LottoResult getResult(WinningLotto winningLotto) {
         LottoResult result = new LottoResult();
-        lottoList.forEach(lotto ->
-                result.add(Rank.valueOf(winningLotto.getCorrectCount(lotto), winningLotto.hasBonusBall(lotto))));
+        lottoList.forEach(lotto -> result.add(winningLotto.getRank(lotto)));
 
         return result;
     }

@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RankTest {
+class RankTest {
     @Test
     @DisplayName("당첨 번호 6개가 일치하면 1등")
     void generate_1등() {

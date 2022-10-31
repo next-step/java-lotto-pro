@@ -19,11 +19,15 @@ public class WinningLotto extends Lotto {
         this.bonusBall = bonusBall;
     }
 
-    public int getCorrectCount(Lotto lotto) {
+    public Rank getRank(Lotto lotto) {
+        return Rank.valueOf(getCorrectCount(lotto), hasBonusBall(lotto));
+    }
+
+    private int getCorrectCount(Lotto lotto) {
         return this.numbers.getCorrectCount(lotto.numbers);
     }
 
-    public boolean hasBonusBall(Lotto lotto) {
+    private boolean hasBonusBall(Lotto lotto) {
         return lotto.numbers.contains(bonusBall);
     }
 }
