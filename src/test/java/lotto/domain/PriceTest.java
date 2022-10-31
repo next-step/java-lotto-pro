@@ -4,10 +4,10 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class WinningPriceTest {
+class PriceTest {
 	@Test
 	void 객체_생성() {
-		assertThat(WinningPrice.from(MatchCount.from(3))).isEqualTo(WinningPrice.from(MatchCount.from(3)));
+		assertThat(Price.from(5000L)).isEqualTo(Price.from(5000L));
 	}
 
 }

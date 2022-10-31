@@ -3,9 +3,9 @@ package lotto.domain;
 public class LottoResultMessage {
 	private final MatchCount matchCount;
 	private final int quantity;
-	private final WinningPrice winningPrice;
+	private final Price winningPrice;
 
-	public LottoResultMessage(MatchCount matchCount, int quantity, WinningPrice winningPrice) {
+	public LottoResultMessage(MatchCount matchCount, int quantity, Price winningPrice) {
 		this.matchCount = matchCount;
 		this.quantity = quantity;
 		this.winningPrice = winningPrice;

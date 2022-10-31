@@ -30,16 +30,17 @@ public class LottoResults {
 		);
 	}
 
-	public WinningPrices toWinningPrices() {
-		return WinningPrices.from(
-		this.lottoResults.stream()
-			.map(LottoResult::winningPrice)
-			.collect(Collectors.toList())
+	public Prices toWinningPrices() {
+		return Prices.from(
+			this.lottoResults.stream()
+				.map(LottoResult::winningPrice)
+				.collect(Collectors.toList())
 		);
 	}
 
-	public WinningPrice totalWinningPrice() {
-		return this.toWinningPrices().totalPrice();
+	public Price totalWinningPrice() {
+		Prices prices = this.toWinningPrices();
+		return prices.totalPrice();
 	}
 
 	public int quantity() {

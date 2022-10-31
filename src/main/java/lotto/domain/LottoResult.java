@@ -19,9 +19,8 @@ public class LottoResult {
 		return this.matchCount.equals(matchCount);
 	}
 
-
-	public WinningPrice winningPrice() {
-		return WinningPrice.from(matchCount);
+	public Price winningPrice() {
+		return matchCount.winningPrice();
 	}
 
 	@Override
