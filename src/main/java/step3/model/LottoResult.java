@@ -1,57 +1,48 @@
 package step3.model;
 
-import step3.constant.WinningPrice;
+import step3.constant.Rank;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class LottoResult {
 
-    Map<Integer, Integer> sameCounts = new HashMap<>();
+    private List<Rank> ranks = new ArrayList<>();
 
-    public void addResult(int sameNumberCount) {
-        if (!isPresentCount(sameNumberCount)) {
-            sameCounts.put(sameNumberCount, 0);
-        }
-        int count = sameCounts.get(sameNumberCount);
-        count++;
-        sameCounts.put(sameNumberCount, count);
+    public void addResult(int sameNumberCount, boolean containBonus) {
+        ranks.add(Rank.search(sameNumberCount, containBonus));
     }
 
-    private boolean isPresentCount(int sameNumberCount) {
-        return sameCounts.get(sameNumberCount) != null;
-    }
-
-    public String createSameCountMessage(int sameNumber) {
-        return sameNumber +
-                "개 일치 " +
+    public String createSameCountMessage(Rank rank) {
+        return rank.sameCountMessage() +
                 "(" +
-                winningPrice(sameNumber) +
+                rank.winningMoney() +
                 "원" +
                 ")- " +
-                Optional.ofNullable(sameCounts.get(sameNumber)).orElse(0) +
+                totalSameCount(rank) +
                 "개";
     }
 
-    private int winningPrice(int sameNumber) {
-        return WinningPrice.get(sameNumber);
+    private long totalSameCount(Rank compareRank) {
+        return ranks.stream()
+                .filter(rank -> rank == compareRank)
+                .count();
+    }
+
+    public String createLottoStatisticsMessage(int lottoSize) {
+        int totalWinningPrice = sumWinningPrice();
+        return new StringBuilder("총 수익률은 ")
+                .append(calculatorResult(totalWinningPrice, lottoSize))
+                .append("입니다.")
+                .toString();
     }
 
     public int sumWinningPrice() {
-        int winningPrice = 0;
-        for (Integer sameCount : sameCounts.keySet()) {
-            winningPrice += Optional.ofNullable(WinningPrice.get(sameCount)).orElse(0) * sameCounts.get(sameCount);
-        }
-        return winningPrice;
+        return ranks.stream().mapToInt(Rank::winningMoney).sum();
     }
 
-    public String createLottoStatisticsMessage(LottoGenerator lottoGenerator) {
-        int totalWinningPrice = sumWinningPrice();
-        return new StringBuilder("총 수익률은 ")
-                .append(lottoGenerator.calculatorResult(totalWinningPrice))
-                .append("입니다.")
-                .toString();
+    private String calculatorResult(int totalWinningPrice, int lottoSize) {
+        double calculatorResult = Double.valueOf(totalWinningPrice) / Double.valueOf(lottoSize * 1000);
+        return String.format("%.2f", calculatorResult);
     }
 
 }

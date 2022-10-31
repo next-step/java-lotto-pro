@@ -7,29 +7,37 @@ public class LottoGame {
 
     private static LottoGenerator lottoGenerator = new LottoGenerator();
 
-    public void startGame() {
-        Lottos lottos = generateLotto();
-        statisticsLotto(lottos);
-    }
+    private Lottos lottos;
+    private LottoNumber bonusNumber;
+    private Lotto lastWeekLotto;
 
-    private void statisticsLotto(Lottos lottos) {
-        String inputNumber = InputView.inputLastWeekLottoNumber();
-        Lotto lastWeekLotto = new Lotto(inputNumber);
-        lastWeekLotto.convertNumberArrayByInputNumber();
-        LottoResult lottoResult = calculatorLottoGame(lottos, lastWeekLotto);
-        OutputView.outputResultLottoGame(lottoGenerator, lottoResult);
+    public void startGame() {
+        this.lottos = generateLotto();
+        this.lastWeekLotto = generateLastWeekLotto();
+        this.bonusNumber = generateBonusNumber();
+        statisticsLotto(lottos.getSize());
     }
 
     private static Lottos generateLotto() {
-        InputView.inputPurchasePrice(lottoGenerator);
-        Lottos lottos = lottoGenerator.generateLottos();
+        Lottos lottos = lottoGenerator.generateLottos(InputView.inputPurchasePrice());
         OutputView.outputResultGenerateLotto(lottos);
         return lottos;
     }
 
-    private LottoResult calculatorLottoGame(Lottos lottos, Lotto lastWeekLotto) {
-        LottoResult lottoResult = lottos.calculatorLotto(lastWeekLotto);
-        return lottoResult;
+    private Lotto generateLastWeekLotto() {
+        Lotto lastWeekLotto = lottoGenerator.generateLotto(InputView.inputLastWeekLottoNumber());
+        lastWeekLotto.convertNumberArrayByInputNumber();
+        return lastWeekLotto;
+    }
+
+    private LottoNumber generateBonusNumber() {
+        LottoNumber lottoNumber = lottoGenerator.generateLottoNumber(InputView.inputBonusNumber());
+        return lottoNumber;
+    }
+
+    private void statisticsLotto(int lottoSize) {
+        LottoResult lottoResult = lottos.calculatorLotto(lastWeekLotto, bonusNumber);
+        OutputView.outputResultLottoGame(lottoSize, lottoResult);
     }
 
 }
