@@ -1,4 +1,4 @@
-package study.step3;
+package study.step3.models;
 
 import study.step3.constants.PatternConstants;
 import study.step3.exception.LottoInputMoneyTypeException;

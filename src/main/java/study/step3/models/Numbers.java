@@ -1,5 +1,6 @@
-package study.step3;
+package study.step3.models;
 
+import study.step3.helper.NumbersParser;
 import study.step3.exception.LottoConsistOfSameNumbersException;
 import study.step3.exception.LottoNumberListSizeException;
 

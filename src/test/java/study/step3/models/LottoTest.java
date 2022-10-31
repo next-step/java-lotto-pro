@@ -1,6 +1,9 @@
-package study.step3;
+package study.step3.models;
 
 import org.junit.jupiter.api.Test;
+import study.step3.Rank;
+import study.step3.models.Lotto;
+import study.step3.models.Numbers;
 
 import java.util.Arrays;
 

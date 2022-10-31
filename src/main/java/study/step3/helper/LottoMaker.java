@@ -1,4 +1,9 @@
-package study.step3;
+package study.step3.helper;
+
+import study.step3.models.Lotto;
+import study.step3.models.Lottos;
+import study.step3.models.Money;
+import study.step3.models.Numbers;
 
 import java.util.ArrayList;
 import java.util.Collections;

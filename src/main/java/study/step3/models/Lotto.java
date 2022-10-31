@@ -1,4 +1,6 @@
-package study.step3;
+package study.step3.models;
+
+import study.step3.Rank;
 
 public class Lotto {
     private final Numbers numbers;

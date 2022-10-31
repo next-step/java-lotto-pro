@@ -1,4 +1,4 @@
-package study.step3;
+package study.step3.helper;
 
 import java.util.ArrayList;
 import java.util.Collections;

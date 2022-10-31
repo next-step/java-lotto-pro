@@ -1,5 +1,10 @@
 package study.step3;
 
+import study.step3.helper.LottoMaker;
+import study.step3.models.*;
+import study.step3.views.InputView;
+import study.step3.views.ResultView;
+
 import java.util.List;
 
 public class LottoApplication {

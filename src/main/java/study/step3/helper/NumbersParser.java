@@ -1,4 +1,4 @@
-package study.step3;
+package study.step3.helper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +8,10 @@ public class NumbersParser {
     private static final String SPACE_DELIMITER = " ";
     private static final String REPLACEMENT = "";
 
-    public static List<Integer> stringToListInteger(String lottoNumbers) {
+    public static List<Integer> stringToListInteger(String inputNumbers) {
         List<Integer> numbers = new ArrayList<>();
-        String[] winLottoNumbersArray = lottoNumbers.replaceAll(SPACE_DELIMITER, REPLACEMENT).split(SPLIT_DELIMITER);
-        for (String winLottoNumber : winLottoNumbersArray) {
+        String[] stringArray = inputNumbers.replaceAll(SPACE_DELIMITER, REPLACEMENT).split(SPLIT_DELIMITER);
+        for (String winLottoNumber : stringArray) {
             numbers.add(Integer.parseInt(winLottoNumber));
         }
         return numbers;

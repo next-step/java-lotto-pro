@@ -1,6 +1,8 @@
-package study.step3;
+package study.step3.helper;
 
 import org.junit.jupiter.api.Test;
+import study.step3.models.Lottos;
+import study.step3.models.Money;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static study.step3.constants.CommonConstants.PRICE_PER_LOTTO;

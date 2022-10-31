@@ -1,4 +1,9 @@
-package study.step3;
+package study.step3.views;
+
+import study.step3.models.Lottos;
+import study.step3.models.Money;
+import study.step3.Rank;
+import study.step3.models.Winners;
 
 public class ResultView {
     public static void printLottos(Lottos lottos) {
