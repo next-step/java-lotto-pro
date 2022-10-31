@@ -20,7 +20,7 @@ public class CounterTest {
     //when
     Counter counter = new Counter(inputMoney);
     //then
-    assertThat(counter.getLottoList().getLottoList().size()).isEqualTo(14);
+    assertThat(counter.getLottoList().getLottoList()).hasSize(14);
   }
 
   @DisplayName("Counter 가 입력 받은 금액이 숫자가 아니거나, null 이거나, 1000원 이하 일 경우 예외 발생")
