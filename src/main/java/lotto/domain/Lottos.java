@@ -47,8 +47,7 @@ public class Lottos {
     private List<LottoRank> lottoRanks(final WinningLotto winningLotto) {
         List<LottoRank> lottoRanks = new ArrayList<>();
         for (Lotto lotto: lottos) {
-            int countMatch = lotto.matchLottoNumber(winningLotto.getWinningLotto());
-            lottoRanks.add(LottoRank.valueOf(countMatch, lotto.matchBounsNumber(winningLotto.getBonusBall())));
+            lottoRanks.add(winningLotto.winningMatch(lotto));
         }
         return lottoRanks.stream()
             .filter(lottoRank -> !LottoRank.isNone(lottoRank))
