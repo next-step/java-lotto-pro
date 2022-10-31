@@ -20,9 +20,9 @@ public class LottoApp implements App {
         LottoStore lottoStore = new LottoStore();
 
         print(WELCOME);
-        PayAmount payAmount = new PayAmount(scanPayAmount());
+        int payAmount = scanPayAmount();
 
-        List<Lotto> lottoList = lottoStore.pay(payAmount);
+        List<Lotto> lottoList = lottoStore.pay(new PayAmount(payAmount));
         print(String.format(BUY_LOTTO, lottoList.size()));
 
         for (Lotto lotto : lottoList) {
@@ -37,7 +37,7 @@ public class LottoApp implements App {
         App lottoStaticApp = LottoStaticApp.builder()
             .lottoList(lottoList)
             .winLotto(winLotto)
-            .payAmount(payAmount)
+            .payAmount(new PayAmount(payAmount))
             .build();
 
         lottoStaticApp.run();
