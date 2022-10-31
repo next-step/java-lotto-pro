@@ -40,7 +40,7 @@ public class Money implements Comparable<Money> {
         return this.money < otherMoney.money;
     }
 
-    public int divide(Money otherMoney) {
+    public int divideValue(Money otherMoney) {
         return (int) money / (int) otherMoney.money;
     }
 

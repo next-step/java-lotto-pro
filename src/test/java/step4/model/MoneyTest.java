@@ -55,7 +55,7 @@ public class MoneyTest {
     @Test
     void Money_divideValue_test_01() {
         Money money = new Money(1000);
-        assertThat(money.divide(new Money(1000))).isEqualTo(1);
+        assertThat(money.divideValue(new Money(1000))).isEqualTo(1);
     }
 
     @DisplayName("Money_퍼센트_반환_test")
