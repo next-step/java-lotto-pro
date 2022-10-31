@@ -7,7 +7,7 @@ public class OutputView {
         System.out.println(Constants.STR_START_LOTTO);
     }
 
-    public static void printStr(String str) {
+    public static void printString(String str) {
         System.out.println(str);
     }
 

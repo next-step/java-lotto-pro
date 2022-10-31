@@ -8,12 +8,12 @@ public class LottoController {
     public void playLotto() {
         OutputView.startLottoOutput();
         Lotto lotto = new Lotto(InputView.startLottoInput());
-        OutputView.printStr(lotto.getTicketListSizeStr());
+        OutputView.printString(lotto.getTicketListSizeStr());
         
-        OutputView.printStr(lotto.getLottoListStr());
+        OutputView.printString(lotto.getLottoListStr());
         OutputView.getWinningLottoNumOutput();
         
         String winningTicketStr = InputView.getWinningLottoNumInput();
-        OutputView.printStr(lotto.getResultStr(winningTicketStr));
+        OutputView.printString(lotto.getResultStr(winningTicketStr));
     }
 }
