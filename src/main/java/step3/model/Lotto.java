@@ -40,13 +40,19 @@ public class Lotto {
         return Rank.valueOf(count);
     }
 
-    public Rank getRank(List<LottoNumber> winningNumbers,LottoNumber bonusNumber) {
+    public Rank getRank(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         int count = (int) numbers
                 .stream()
                 .filter(winningNumbers::contains)
                 .count();
         boolean isBonus = numbers.contains(bonusNumber);
-        return Rank.valueOf(count,isBonus);
+        return Rank.valueOf(count, isBonus);
+    }
+
+    public boolean contains(LottoNumber number) {
+        return numbers.stream().filter(lottoNumber -> lottoNumber.equals(number))
+                .count() > 0;
+
     }
 
 }

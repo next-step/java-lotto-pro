@@ -26,8 +26,7 @@ public class LottoMachine {
         return getLottoResultDto(rankOfLottos);
     }
 
-    public LottoResultDto getLottoResult(Lotto lotto, LottoNumber bonusNumber) {
-        validateBonusNumbers(lotto.getNumbers(), bonusNumber);
+    public LottoResultDto getLottoResult(WinningLotto winningLotto) {
         Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(lotto.getNumbers(), bonusNumber);
         return getLottoResultDto(rankOfLottos);
     }
@@ -51,10 +50,6 @@ public class LottoMachine {
     private void validateLottoNumbers(List<LottoNumber> winningNumbers) {
         if (new HashSet(winningNumbers).size() != winningNumbers.size())
             throw new IllegalArgumentException(DUPLICATE_NUMBER_MESSAGE);
-    }
-
-    private void validateBonusNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        if (winningNumbers.contains(bonusNumber)) throw new IllegalArgumentException(DUPLICATE_NUMBER_MESSAGE);
     }
 
     private double getPriceRatio(Map<Rank, Integer> rankOfLottos) {
