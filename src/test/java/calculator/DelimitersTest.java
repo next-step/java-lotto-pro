@@ -30,4 +30,11 @@ class DelimitersTest {
         delimiters.add(":");
         assertThat(delimiters.getDelimiters()).containsExactly(":", ",");
     }
+
+    @DisplayName("모든 구분자들을 반환한다.")
+    @Test
+    void delimiter() {
+        Delimiters delimiters = new Delimiters();
+        assertThat(delimiters.delimiter()).isEqualTo(":|,");
+    }
 }
