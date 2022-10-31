@@ -26,8 +26,7 @@ public class LottoTest {
             UniqueNumbers random = NumbersGenerator.random();
             Lotto lotto = Lotto.generate(random);
             lotto.getCountOfMatch(numbers);
-        })
-                .isInstanceOf(IndexOutOfBoundsException.class)
+        }).isInstanceOf(IndexOutOfBoundsException.class)
                 .hasMessageContaining("Incomparable subject. please check lottoNumbers size.");
     }
 
