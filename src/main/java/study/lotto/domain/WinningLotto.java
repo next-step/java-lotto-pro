@@ -36,7 +36,7 @@ public class WinningLotto {
 
     private Set<LottoNumber> convertStringArrToSet(String[] winningNumbersSplited) {
         return Arrays.stream(winningNumbersSplited)
-                .map((str) -> CacheLottoNumbers.of(str.trim()))
+                .map((str) -> CacheLottoNumbers.ofString(str.trim()))
                 .collect(Collectors.toSet());
     }
 

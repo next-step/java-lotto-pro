@@ -20,7 +20,7 @@ public class CacheLottoNumbers {
                 .forEach((num) -> cacheLottoNumbers.put(num, new LottoNumber(num)));
     }
 
-    public static LottoNumber of(String number) {
+    public static LottoNumber ofString(String number) {
         try {
             return of(NumberUtil.convertToPositiveIntNotContainsZero(number));
         } catch (IllegalArgumentException iae) {
