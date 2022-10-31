@@ -1,8 +1,5 @@
 package step3.service;
 
-import static step3.view.ConsoleInputView.receiveBonusNumber;
-import static step3.view.ConsoleInputView.receiveWinningNumber;
-
 import step3.domain.LottoVendingMachine;
 import step3.domain.Lottos;
 import step3.domain.Money;
@@ -22,8 +19,12 @@ public class LottoService {
         Money paidByUser = new Money(ConsoleInputView.receivePurchaseAmount());
         Lottos lottos = lottoVendingMachine.buy(paidByUser);
         ConsoleOutputView.printLottos(lottos);
-        WinningLottoNumber winningLottoNumber = new WinningLottoNumber(receiveWinningNumber(), receiveBonusNumber());
+        WinningLottoNumber winningLottoNumber = receiveWiningLottoNumber();
         Rewards rewards = winningLottoNumber.check(lottos);
         ConsoleOutputView.printRewards(rewards);
+    }
+
+    private WinningLottoNumber receiveWiningLottoNumber() {
+        return new WinningLottoNumber(ConsoleInputView.receiveWinningNumber(), ConsoleInputView.receiveBonusNumber());
     }
 }
