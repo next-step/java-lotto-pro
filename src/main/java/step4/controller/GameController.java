@@ -34,6 +34,6 @@ public class GameController {
     }
 
     private void setLottoWinningStatistics() {
-        lottoWinningStatistics = new LottoWinningStatistics(game.getLottoResults(), this.winLottoResult);
+        lottoWinningStatistics = new LottoWinningStatistics(game.getLottoResults(), winLottoResult, bonusLottoNumber);
     }
 }

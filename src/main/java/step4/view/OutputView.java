@@ -18,7 +18,7 @@ public class OutputView {
         lottoResults.forEach(System.out::println);
     }
 
-    public static void printLottoStatistics(Map<Integer, Integer> lottoWinningStatistics, double lottoProfitPercent) {
+    public static void printLottoStatistics(Map<Rank, Integer> lottoWinningStatistics, double lottoProfitPercent) {
         System.out.println();
         System.out.println(OutputMessage.OUTPUT_GAME_RESULT);
         System.out.println(OutputMessage.OUTPUT_STATISTICS_LINE);
@@ -26,10 +26,15 @@ public class OutputView {
         System.out.printf(OutputMessage.OUTPUT_WINNERS_PROFIT_PERCENT, lottoProfitPercent);
     }
 
-    private static void printLottoStatistic(int matchCount, int count) {
-        if (matchCount > 2) {
-            //TODO : matchBonus 구현할 것
-            System.out.printf(OutputMessage.OUTPUT_WINNERS_PROFIT_MESSAGE, matchCount, Rank.valueOf(matchCount, true).getWinningMoney(), count);
+    private static void printLottoStatistic(Rank rank, int matchCount) {
+        if (rank == Rank.MISS) {
+            return;
         }
+        String printMessage = OutputMessage.OUTPUT_WINNERS_PROFIT_MESSAGE;
+        if (rank == Rank.SECOND) {
+            printMessage = OutputMessage.OUTPUT_WINNERS_PROFIT_SECOND_GRADE_MESSAGE;
+        }
+
+        System.out.printf(printMessage, rank.getCountOfMatch(), rank.getWinningMoney(), matchCount);
     }
 }

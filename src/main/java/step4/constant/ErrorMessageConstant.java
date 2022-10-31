@@ -8,4 +8,5 @@ public class ErrorMessageConstant {
             + LottoConstant.LOTTO_MIN_NUM + "~" + LottoConstant.LOTTO_MAX_NUM + ")";
     public final static String NOT_LOTTO_SIZE = "로또 숫가 개수는 서로 다른 수 " + LottoConstant.PICK_LOTTO_MAX_NUM + "+개이어야 합니다";
     public final static String ZERO_LOTTO_BUY_COUNT = "구매할 수 있는 로또의 개수가 0개 입니다.";
+    public final static String BONUS_NUMBER_IN_LOTTO_WIN_RESULT = "보너스 번호는 당첨 번호와 같으면 안됩니다.";
 }

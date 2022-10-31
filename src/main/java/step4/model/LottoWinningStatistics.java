@@ -1,46 +1,53 @@
 package step4.model;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import step3.exception.LottoFormatException;
+import step4.constant.ErrorMessageConstant;
+
+import java.util.*;
 
 public class LottoWinningStatistics {
-    private final Map<Integer, Integer> lottoWinningStatistics = new HashMap<>();
+    private final Map<Rank, Integer> lottoWinningStatistics = new LinkedHashMap<>();
     private final Money totalProfit = new Money(0);
 
-    public LottoWinningStatistics(List<LottoResult> lottoResults, LottoResult winLottoResult) {
+    public LottoWinningStatistics(List<LottoResult> lottoResults, LottoResult winLottoResult, LottoNumber bonusLottoNumber) {
+        validWinLottoResult(winLottoResult, bonusLottoNumber);
         initLottoWinningStatistics();
-        setLottoWinningStatistics(lottoResults, winLottoResult);
+        setLottoWinningStatistics(lottoResults, winLottoResult, bonusLottoNumber);
         setTotalProfit();
     }
 
-    private void initLottoWinningStatistics() {
-        for (int i = 0; i < 7; i++) {
-            this.lottoWinningStatistics.put(i, 0);
+    private void validWinLottoResult(LottoResult winLottoResult, LottoNumber bonusLottoNumber) {
+        if (winLottoResult.isContains(bonusLottoNumber)) {
+            throw new LottoFormatException(ErrorMessageConstant.BONUS_NUMBER_IN_LOTTO_WIN_RESULT);
         }
     }
 
-    private void setLottoWinningStatistics(List<LottoResult> lottoResults, LottoResult winLottoResult) {
+    private void initLottoWinningStatistics() {
+        List<Rank> ranks = Arrays.asList(Rank.values());
+        Collections.reverse(ranks);
+        for (Rank rank : ranks) {
+            this.lottoWinningStatistics.put(rank, 0);
+        }
+    }
+
+    private void setLottoWinningStatistics(List<LottoResult> lottoResults, LottoResult winLottoResult, LottoNumber bonusLottoNumber) {
         for (LottoResult lottoResult : lottoResults) {
             int matchedCount = lottoResult.getEqualCount(winLottoResult);
-            setLottoWinningStatistic(matchedCount);
+            setLottoWinningStatistic(Rank.valueOf(matchedCount, lottoResult.isContains(bonusLottoNumber)));
         }
     }
 
-    private void setLottoWinningStatistic(int matchedCount) {
-        this.lottoWinningStatistics.put(matchedCount, lottoWinningStatistics.get(matchedCount) + 1);
+    private void setLottoWinningStatistic(Rank rank) {
+        this.lottoWinningStatistics.put(rank, lottoWinningStatistics.get(rank) + 1);
     }
 
-    public Map<Integer, Integer> getLottoWinningStatistics() {
+    public Map<Rank, Integer> getLottoWinningStatistics() {
         return lottoWinningStatistics;
     }
 
     private void setTotalProfit() {
-        for (int i = 0; i < lottoWinningStatistics.size(); i++) {
-            //TODO : matchBonus 구현할 것
-            Rank rank = Rank.valueOf(i, true);
-            totalProfit.plus(new Money(rank.getProfitTotalMoney(lottoWinningStatistics.get(i))));
+        for (Rank rank : Rank.values()) {
+            totalProfit.plus(new Money(rank.getProfitTotalMoney(lottoWinningStatistics.get(rank))));
         }
     }
 
