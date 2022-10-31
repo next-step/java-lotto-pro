@@ -6,10 +6,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import step3.domain.Lotto;
-import step3.domain.LottoNumber;
-import step3.domain.Lottos;
-import step3.domain.WinningLotto;
+import step3.domain.*;
 import step3.enums.Rank;
 
 class LottosTest {
@@ -25,11 +22,40 @@ class LottosTest {
 
     @BeforeEach
     void init() {
-        lotto1 = new Lotto(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 12, 13, 14))));
-        lotto2 = new Lotto(new LottoNumber(new ArrayList<>(Arrays.asList(11, 22, 33, 7, 8, 9))));
-        lotto3 = new Lotto(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 10, 32, 44, 45))));
-        lotto4 = new Lotto(new LottoNumber(new ArrayList<>(Arrays.asList(43, 42, 31, 12, 14, 45))));
-        lotto5 = new Lotto(new LottoNumber(new ArrayList<>(Arrays.asList(21, 9, 3, 32, 4, 45))));
+        lotto1 = new Lotto(new LottoNumbers(Arrays.asList(new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(12),
+                new LottoNumber(13),
+               new LottoNumber(14))));
+
+        lotto2 = new Lotto(new LottoNumbers(Arrays.asList(new LottoNumber(11),
+                new LottoNumber(22),
+                new LottoNumber(33),
+                new LottoNumber(7),
+                new LottoNumber(8),
+                new LottoNumber(9))));
+
+        lotto3 = new Lotto(new LottoNumbers(Arrays.asList(new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(10),
+                new LottoNumber(32),
+                new LottoNumber(44),
+                new LottoNumber(45))));
+
+        lotto4 = new Lotto(new LottoNumbers(Arrays.asList(new LottoNumber(43),
+                new LottoNumber(42),
+                new LottoNumber(31),
+                new LottoNumber(12),
+                new LottoNumber(45),
+                new LottoNumber(14))));
+
+        lotto5 = new Lotto(new LottoNumbers(Arrays.asList(new LottoNumber(21),
+                new LottoNumber(9),
+                new LottoNumber(3),
+                new LottoNumber(32),
+                new LottoNumber(4),
+                new LottoNumber(45))));
 
         lottos = new Lottos(new ArrayList<>(Arrays.asList(lotto1, lotto2, lotto3)));
         winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", 8);

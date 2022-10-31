@@ -6,24 +6,21 @@ import java.util.List;
 
 public class LottoNumber {
 
-    private List<Integer> lottoNumber;
+    private int lottoNumber;
 
-    public LottoNumber(List<Integer> lottoNumber) {
-        this.lottoNumber = new ArrayList<>(lottoNumber);
+    public LottoNumber(int lottoNumber) {
+        this.lottoNumber = lottoNumber;
     }
 
-    public List<Integer> getLottoNumber() {
-        return Collections.unmodifiableList(lottoNumber);
-    }
-
-    public boolean hasBonusNumber(int bonusNumber) {
-        return lottoNumber.contains(bonusNumber);
+    public int getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override
     public String toString() {
-        return lottoNumber.toString();
+        return lottoNumber+"";
     }
 }
+
 
 

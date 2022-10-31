@@ -23,7 +23,7 @@ public class Lottos {
         lottos.forEach(lotto -> {
             Rank rank = lotto.match(winningLotto);
             if (rank == Rank.SECOND) {
-                statistics.computeIfPresent(Rank.THIRD.getCount() + Rank.SECOND.getCount(), (k, v) -> v + 1);
+                statistics.computeIfPresent(Rank.SECOND.getCount()+2, (k, v) -> v + 1);
                 return;
             }
             statistics.computeIfPresent(rank.getCount(), (k, v) -> v + 1);

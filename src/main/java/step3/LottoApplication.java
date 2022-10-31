@@ -3,11 +3,8 @@ package step3;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import step3.domain.Lotto;
-import step3.domain.LottoNumber;
-import step3.domain.Lottos;
-import step3.domain.Range;
-import step3.domain.WinningLotto;
+
+import step3.domain.*;
 import step3.enums.Rank;
 import step3.views.Input;
 import step3.views.Output;
@@ -19,13 +16,12 @@ public class LottoApplication {
 
         output.purchase();
         int money = input.inputNumber();
-        int purchasingNumber = Rank.calculateLottoCount(input.inputNumber());
+        int purchasingNumber = Rank.calculateLottoCount(money);
         Lottos lottos = initLottos(purchasingNumber);
-
         output.generateLottos(purchasingNumber, lottos);
+
         output.winnerNumbers();
         String inputNumbersWithComma = input.inputString();
-
         output.bonusball();
         int bonusball = input.inputNumber();
 
@@ -38,7 +34,7 @@ public class LottoApplication {
         Range range = new Range(1, 45);
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < purchasingNumber; i++) {
-            lottoList.add(new Lotto(new LottoNumber(range.getRandomSixNumbers())));
+            lottoList.add(new Lotto(new LottoNumbers(range.getRandomSixNumbers())));
         }
         return new Lottos(lottoList);
     }

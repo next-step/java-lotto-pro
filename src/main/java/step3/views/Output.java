@@ -22,7 +22,7 @@ public class Output {
     public void generateLottos(int count, Lottos lottos) {
         System.out.println(count + Message.COUNT.getMessage());
         lottos.getLottos().forEach(lotto -> {
-            System.out.println(lotto.getLottoNumber());
+            System.out.println(lotto.getLottoNumbers());
         });
     }
 
@@ -32,7 +32,7 @@ public class Output {
         System.out.println(Message.MATCH_FOUR.resultMatchNumber(statistics.get(Rank.FOURTH.getCount())));
         System.out.println(Message.MATCH_FIVE.resultMatchNumber(statistics.get(Rank.THIRD.getCount())));
         System.out.println(Message.MATCH_FIVE_BONUS
-                .resultMatchNumber(statistics.get(Rank.THIRD.getCount() + Rank.SECOND.getCount())));
+                .resultMatchNumber(statistics.get(Rank.SECOND.getCount() + 2)));
         System.out.println(Message.MATCH_SIX.resultMatchNumber(statistics.get(Rank.FIRST.getCount())));
         System.out.println(Message.STATISTICS_RESULT.resultStatistic(returnOnInvestmentRate));
     }
