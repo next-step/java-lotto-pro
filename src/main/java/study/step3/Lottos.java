@@ -9,17 +9,11 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Winners findWinners(Lotto winLotto) {
-        Winners winners = new Winners();
+    public List<Lotto> rankLottos(Numbers winLottoNumbers) {
         for (Lotto lotto : lottos) {
-            int countOfMatch = lotto.countMatchingNumbers(winLotto);
-            winners.add(new Winner(countOfMatch));
+            lotto.rank(winLottoNumbers);
         }
-        return winners;
-    }
-
-    public Winners findWinners(String winLottoNumbers) {
-        return findWinners(new Lotto(LottoParser.stringToListInteger(winLottoNumbers)));
+        return lottos;
     }
 
     public int size() {

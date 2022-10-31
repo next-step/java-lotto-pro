@@ -1,22 +1,18 @@
 package study.step3;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Winners {
-    private List<Winner> winnerList;
+    private final List<Lotto> winners;
 
-    public Winners() {
-        this.winnerList = new ArrayList<>();
+    public Winners(List<Lotto> winners) {
+        this.winners = winners;
     }
 
-    public void add(Winner winner) {
-        winnerList.add(winner);
-    }
-
-    public int nThPrizeSize(int nTh) {
-        return (int) winnerList.stream()
-                .filter(winner -> winner.getCorrectNumber() == nTh).count();
+    public int numberOfRankers(Rank rank) {
+        return (int) winners.stream()
+                .filter(winner -> winner.isSameRank(rank))
+                .count();
     }
 
     public double earningRate(Money inputMoney) {
@@ -24,10 +20,8 @@ public class Winners {
     }
 
     private int totalReward() {
-        int result = 0;
-        for (Prize prize : Prize.values()) {
-            result += nThPrizeSize(prize.getWinNumber()) * prize.getReward();
-        }
-        return result;
+        return winners.stream()
+                .mapToInt(Lotto::reward)
+                .sum();
     }
 }

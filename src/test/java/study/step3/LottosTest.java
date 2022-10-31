@@ -11,18 +11,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottosTest {
     @Test
     void 당첨_확인하기() {
-        Lotto winLotto = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
+        Numbers winLottoNumbers = new Numbers(Arrays.asList(4, 5, 6, 7, 8, 9));
         List<Lotto> lottoList = new ArrayList<>(
                 Arrays.asList(
-                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                        new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)),
-                        new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8))));
+                        new Lotto(new Numbers(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                        new Lotto(new Numbers(Arrays.asList(2, 3, 4, 5, 6, 7))),
+                        new Lotto(new Numbers(Arrays.asList(3, 4, 5, 6, 7, 8)))));
         Lottos lottos = new Lottos(lottoList);
+        List<Lotto> rankedLottoList = lottos.rankLottos(winLottoNumbers);
 
-        Winners winners = lottos.findWinners(winLotto);
+        Winners winners = new Winners(rankedLottoList);
 
-        assertThat(winners.nThPrizeSize(3)).isEqualTo(1);
-        assertThat(winners.nThPrizeSize(4)).isEqualTo(1);
-        assertThat(winners.nThPrizeSize(5)).isEqualTo(1);
+        assertThat(winners.numberOfRankers(Rank.FOURTH)).isEqualTo(1);
+        assertThat(winners.numberOfRankers(Rank.THIRD)).isEqualTo(1);
+        assertThat(winners.numberOfRankers(Rank.SECOND)).isEqualTo(1);
     }
 }
