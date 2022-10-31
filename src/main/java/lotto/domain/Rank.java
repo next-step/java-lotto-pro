@@ -44,6 +44,10 @@ public enum Rank {
                 .orElse(Rank.MISS);
     }
 
+    public static boolean canBonusRank(int matchCount) {
+        return Rank.FOURTH.getMatchCount() == matchCount;
+    }
+
     public Money getMoney() {
         return money;
     }

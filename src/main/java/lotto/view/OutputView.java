@@ -33,6 +33,10 @@ public class OutputView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
+    public static void printDuplicateNumber() {
+        System.out.println("이런!! 보너스 볼은 당첨 티켓에 존재합니다. 다른 번호를 골라주세요");
+    }
+
     public static void printStatistics(Map<Rank, Integer> statistics) {
         System.out.println("당첨 통계");
         System.out.println("---------");

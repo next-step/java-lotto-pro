@@ -10,7 +10,6 @@ public class LottoResult {
 
     private final Map<Rank, Integer> lottoResultCounts = new LinkedHashMap<>();
     private final LottoTicket winningTicket;
-    private LottoNumber bonusNumber;
 
     public LottoResult(LottoTicket ticket) {
         initialize();
@@ -23,32 +22,24 @@ public class LottoResult {
         }
     }
 
-    public void chooseBonusNumber(LottoNumber number) {
-        bonusNumber = number;
-    }
-
-    public Map<Rank, Integer> statistics(List<LottoTicket> tickets) {
-        tickets.forEach(this::addLottoResultCounts);
+    public Map<Rank, Integer> statistics(List<LottoTicket> tickets, LottoNumber bonusNumber) {
+        tickets.forEach(ticket -> addLottoResultCounts(ticket, bonusNumber));
         lottoResultCounts.entrySet().removeIf(entry -> entry.getKey() == Rank.MISS);
         return lottoResultCounts;
     }
 
-    private void addLottoResultCounts(LottoTicket ticket) {
-        int matchCount = countOfMatch(ticket);
-        boolean isBonusMatch = checkBonusMatch(matchCount, ticket);
+    private void addLottoResultCounts(LottoTicket ticket, LottoNumber bonusNumber) {
+        int matchCount = winningTicket.containCount(ticket);
+        boolean isBonusTicket = checkBonusTicket(matchCount, ticket, bonusNumber);
 
-        lottoResultCounts.merge(Rank.get(matchCount, isBonusMatch), INCREASE_VALUE, Integer::sum);
+        lottoResultCounts.merge(Rank.get(matchCount, isBonusTicket), INCREASE_VALUE, Integer::sum);
     }
 
-    private boolean checkBonusMatch(int matchCount, LottoTicket ticket) {
-        if (Rank.FOURTH.getMatchCount() == matchCount && ticket.contain(bonusNumber)) {
+    private boolean checkBonusTicket(int matchCount, LottoTicket ticket, LottoNumber bonusNumber) {
+        if (Rank.canBonusRank(matchCount) && ticket.contain(bonusNumber)) {
             return true;
         }
         return false;
-    }
-
-    private int countOfMatch(LottoTicket ticket) {
-        return winningTicket.containCount(ticket);
     }
 
     public double returnRate(Money money) {
