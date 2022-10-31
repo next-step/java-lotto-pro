@@ -4,30 +4,36 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    public static final int MIN_NUMBER = 1;
-    public static final int MAX_NUMBER = 45;
+    static final int MIN_NUMBER = 1;
+    static final int MAX_NUMBER = 45;
 
-    public static final String ERROR_RANGE_NUMBER = "[ERROR] 로또 번호는 1~45의 숫자입니다.";
+    public static final String ERROR_RANGE_NUMBER = "[ERROR] 로또 번호는 1~45의 숫자입니다. input : ";
 
     private final int number;
 
     public LottoNumber(int number) {
-        this.number = number;
         checkNumberRange();
+        this.number = number;
     }
+
     public int getNumber() {
         return number;
     }
 
     private void checkNumberRange() {
         if (!(this.number >= MIN_NUMBER && this.number <= MAX_NUMBER)) {
-            throw new IllegalArgumentException(ERROR_RANGE_NUMBER);
+            throw new IllegalArgumentException(ERROR_RANGE_NUMBER + this.number);
         }
     }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof LottoNumber)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof LottoNumber)) {
+            return false;
+        }
         LottoNumber that = (LottoNumber) o;
         return number == that.number;
     }

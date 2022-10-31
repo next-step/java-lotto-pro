@@ -20,18 +20,21 @@ public class LottoGenerator {
     private LottoGenerator() {
     }
 
-    public static Lotto createLotto() {
-        Collections.shuffle(LOTTO_ALL_NUMBERS);
-        List<LottoNumber> numberList = LOTTO_ALL_NUMBERS.subList(0, VALID_SIZE).stream()
-            .map(LottoNumber::new).collect(Collectors.toList());
-        return new Lotto(new LottoNumbers(numberList));
-    }
-
     public static Lottos createLottos(int count) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(createLotto());
         }
         return new Lottos(lottos);
+    }
+
+    public static Lotto createLotto() {
+        Collections.shuffle(LOTTO_ALL_NUMBERS);
+        List<LottoNumber> numberList = LOTTO_ALL_NUMBERS
+            .subList(0, VALID_SIZE)
+            .stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+        return new Lotto(new LottoNumbers(numberList));
     }
 }

@@ -34,7 +34,7 @@ public class LottoNumbers {
     }
 
     private void checkNumbersSize() {
-        if (!(lottoNumberSet.size() == VALID_SIZE)) {
+        if (lottoNumberSet.size() != VALID_SIZE) {
             throw new IllegalArgumentException(NOT_MATCHED_NUMBER_SIZE);
         }
     }
