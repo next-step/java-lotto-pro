@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,7 +10,7 @@ public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
     private LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
+        this.lottoTickets = new ArrayList<>(lottoTickets);
     }
 
     public static LottoTickets from(List<LottoTicket> lottoTickets) {
@@ -20,7 +22,7 @@ public class LottoTickets {
     }
 
     public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
+        return Collections.unmodifiableList(lottoTickets);
     }
 
     @Override
