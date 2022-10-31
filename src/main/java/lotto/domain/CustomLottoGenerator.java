@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class CustomLottoGenerator implements LottoGenerator {
 
-    private final List<Integer> customLottoNumbers;
+    private LottoNumbers customLottoNumbers;
 
     private static final String DELIMITER = ",";
     private static final Pattern LOTTO_COMMA_PATTERN
@@ -19,12 +19,12 @@ public class CustomLottoGenerator implements LottoGenerator {
     public CustomLottoGenerator(String lottoNumbers) {
         validNullOrEmpty(lottoNumbers);
         checkLottoPattern(lottoNumbers);
-        this.customLottoNumbers = convertToIntegerList(lottoNumbers);
+        this.customLottoNumbers = new LottoNumbers(convertToIntegerList(lottoNumbers));
     }
 
     @Override
     public LottoNumbers generateLottoNumber() {
-        return new LottoNumbers(customLottoNumbers);
+        return customLottoNumbers;
     }
 
     private void validNullOrEmpty(String lottoNumbers) {
@@ -41,7 +41,7 @@ public class CustomLottoGenerator implements LottoGenerator {
     }
 
     private List<Integer> convertToIntegerList(String lottoNumbers) {
-        return Arrays.stream(lottoNumbers.replaceAll("\\s","").split(DELIMITER))
+        return Arrays.stream(lottoNumbers.replaceAll("\\s", "").split(DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }

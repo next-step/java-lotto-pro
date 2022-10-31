@@ -18,16 +18,17 @@ public class LottoController {
     public void startLotto() {
 
         LottoMoney lottoMoney = InputView.getLottoPurchasePrice();
-
-//        int customLottoCount = Integer.parseInt(InputView.getCustomLottoCount());
-//        List<LottoGenerator> lottoGeneratorList = new ArrayList<>();
-//        for (int i = 0; i < customLottoCount; i++) {
-//            lottoGeneratorList.add(InputView.getCustomLottoNumbers(i, customLottoCount));
-//        }
+        int customLottoTicketCount = InputView.getCustomLottoCount(lottoMoney);
+        
+        List<LottoGenerator> lottoGeneratorList = new ArrayList<>();
+        for (int i = 0; i < customLottoTicketCount; i++) {
+            lottoGeneratorList.add(InputView.getCustomLottoNumbers(i, customLottoTicketCount));
+        }
 
         // TODO: 구매 금액 입력 후 수동로또 구매 시 구매 금액을 초과한 경우
         // TODO: 수동 로또 번호 추가 로직
-        LottoTickets lottoTickets = lottoGame.buy(lottoMoney.getMoney());
+//        LottoTickets lottoTickets = lottoGame.buy(lottoMoney.getMoney());
+        LottoTickets lottoTickets = lottoGame.buy(lottoMoney, lottoGeneratorList);
 
         ResultView.lottoPurchase(lottoTickets.ticketCount(), lottoTickets.toString());
 

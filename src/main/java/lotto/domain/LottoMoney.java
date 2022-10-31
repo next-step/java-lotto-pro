@@ -10,13 +10,16 @@ import static lotto.common.ConstValue.LOTTO_PRICE;
 public class LottoMoney {
 
     private final int money;
+    private final int ticketCount;
     private static final Pattern NUMBER_POSITIVE = Pattern.compile("^[0-9]+$");
+    private static final int ZERO = 0;
 
     public LottoMoney(String money) {
         validEmpty(money);
         validPositiveNumber(money);
         validLottoPrice(Integer.parseInt(money));
         this.money = Integer.parseInt(money);
+        this.ticketCount = this.money / LOTTO_PRICE;
     }
 
     private void validPositiveNumber(String money) {
@@ -38,7 +41,36 @@ public class LottoMoney {
         }
     }
 
+
+
+    public void validLottoPurchaseCount(int lottoTicketCount) {
+        validPositiveLottoTicketCount(lottoTicketCount);
+        compareLottoTicketCountToMoney(lottoTicketCount);
+    }
+
+    private void compareLottoTicketCountToMoney(int lottoTicketCount) {
+        int ticketPrice = lottoTicketCount * LOTTO_PRICE;
+        if (money < ticketPrice) {
+            throw new IllegalArgumentException("구입하려는 로또 개수가 현재 가진 금액보다 많습니다.");
+        }
+    }
+
+    private void validPositiveLottoTicketCount(int lottoTicketCount) {
+        if (lottoTicketCount < ZERO) {
+            throw new IllegalArgumentException("구입하려는 로또 개수는 0또는 양수만 가능합니다.");
+        }
+    }
+
     public int getMoney() {
         return money;
     }
+
+    public int getTicketCount() {
+        return ticketCount;
+    }
+
+    public int minusTicketCount(int count) {
+        return ticketCount - count;
+    }
+
 }

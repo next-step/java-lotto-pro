@@ -14,6 +14,7 @@ public class InputView {
     private static final String ENTER_CUSTOM_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String REMAIN_CUSTOM_LOTTO_COUNT = "[남은 수동 로또 입력 회수(%d/%d)]";
     private static final Scanner SCANNER = new Scanner(System.in);
+    private static final String ERROR_PREFIX = "[ERROR] %s";
 
     private InputView() {
 
@@ -28,14 +29,25 @@ public class InputView {
         try {
             return new LottoMoney(SCANNER.nextLine());
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            System.out.println(String.format(ERROR_PREFIX, e.getMessage()));
             return getLottoMoney();
         }
     }
 
-    public static String getCustomLottoCount() {
+    public static int getCustomLottoCount(LottoMoney lottoMoney) {
         System.out.println(ENTER_CUSTOM_LOTTO_COUNT);
-        return SCANNER.nextLine();
+        return extracted(lottoMoney);
+    }
+
+    private static int extracted(LottoMoney lottoMoney) {
+        try {
+            int ticketCount = getNumber();
+            lottoMoney.validLottoPurchaseCount(ticketCount);
+            return ticketCount;
+        } catch (Exception e) {
+            System.out.println(String.format(ERROR_PREFIX, e.getMessage()));
+            return extracted(lottoMoney);
+        }
     }
 
     public static String getLastWeekWinningNumber() {
@@ -45,11 +57,15 @@ public class InputView {
 
     public static int getBonusNumber() {
         System.out.println(ENTER_BONUS_NUMBER);
+        return getNumber();
+    }
+
+    private static int getNumber() {
         int bonusNumber;
         try {
             bonusNumber = Integer.parseInt(SCANNER.nextLine());
         } catch (Exception e) {
-            throw new IllegalArgumentException("보너스 번호는 숫자만 입력 가능합니다.");
+            throw new IllegalArgumentException(String.format(ERROR_PREFIX, "숫자를 입력해주세요."));
         }
         return bonusNumber;
     }
@@ -59,7 +75,7 @@ public class InputView {
             LottoGenerator lottoGeneratorList = new CustomLottoGenerator(SCANNER.nextLine());
             return lottoGeneratorList;
         } catch (Exception e) {
-            System.out.println(e.getMessage() + String.format(REMAIN_CUSTOM_LOTTO_COUNT, count, total));
+            System.out.println(String.format(ERROR_PREFIX, e.getMessage() + String.format(REMAIN_CUSTOM_LOTTO_COUNT, count, total)));
             return getCustomLottoNumbers(count, total);
         }
     }
