@@ -21,7 +21,7 @@ public enum Prize {
 
     public static Prize prizeOf(int matchCount, boolean isBonusMatch) {
         return Arrays.stream(Prize.values())
-                .filter(v -> v.matchCount == matchCount)
+                .filter(v -> v.matchesCount(matchCount))
                 .map(v -> {
                     if (Prize.THIRD.matchCount == matchCount) {
                         return Prize.checkThirdOrSecond(matchCount, isBonusMatch);
@@ -37,6 +37,10 @@ public enum Prize {
             return Prize.SECOND;
         }
         return Prize.THIRD;
+    }
+
+    private boolean matchesCount(int count) {
+        return this.getMatchCount() == count;
     }
 
     public int getMatchCount() {
