@@ -31,8 +31,4 @@ public class LottoStore {
 
         return pickStrategy.pickNumbers(quantity);
     }
-
-    private Lotto generateLotto() {
-        return new Lotto(1, 2, 3, 4, 5, 6);
-    }
 }
