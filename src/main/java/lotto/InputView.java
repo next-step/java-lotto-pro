@@ -18,7 +18,7 @@ public class InputView {
     int inputPay() {
         printInputPay();
         String input = scanner.nextLine();
-        Validate.validateNull(input);
+        Validate.validateCostNull(input);
         Validate.validateOnlyNumber(input);
         Validate.validatePay(input);
         return Integer.parseInt(input);
@@ -31,7 +31,7 @@ public class InputView {
     List<Integer> inputWinningNumberLastWeek() {
         printInputWinningNumberLastWeek();
         String input = scanner.nextLine();
-        Validate.validateNull(input);
+        Validate.validateWinningNumberNull(input);
         Validate.validateWinningNumber(input);
         Validate.validateWinningNumberCount(input);
         Validate.validateWinningNumberRange(input);

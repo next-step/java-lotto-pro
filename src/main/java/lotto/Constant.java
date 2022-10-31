@@ -26,7 +26,8 @@ public class Constant {
     public static final String ERROR_ONLY_NUMBER = "숫자만 입력할 수 있습니다.";
     public static final String ERROR_NUMBER_RANGE = "숫자는 1 ~ 45까지 입력할 수 있습니다.";
     public static final String ERROR_LOTTO_COST = "로또 복권 1장의 구입 가격 " + LOTTO_PRICE + "원 입니다.";
-    public static final String ERROR_INPUT_EMPTY = "로또 번호를 입력해주세요.";
+    public static final String ERROR_INPUT_EMPTY_COST = "금액을 입력해주세요.";
+    public static final String ERROR_INPUT_EMPTY_WINNING_NUMBER = "당첨 번호를 입력해주세요.";
     public static final String ERROR_INPUT_SIX_NUMBER = "로또 번호 6개를 입력해주세요.";
     public static final String RESULT_TOTAL_EARNINGS_RATE_1 = "총 수익률은 ";
     public static final String RESULT_TOTAL_EARNINGS_RATE_2 = "입니다.";

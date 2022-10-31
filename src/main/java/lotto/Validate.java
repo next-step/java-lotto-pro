@@ -6,7 +6,8 @@
 package lotto;
 
 import static lotto.Constant.DELIMITER;
-import static lotto.Constant.ERROR_INPUT_EMPTY;
+import static lotto.Constant.ERROR_INPUT_EMPTY_COST;
+import static lotto.Constant.ERROR_INPUT_EMPTY_WINNING_NUMBER;
 import static lotto.Constant.ERROR_INPUT_SIX_NUMBER;
 import static lotto.Constant.ERROR_LOTTO_COST;
 import static lotto.Constant.ERROR_NUMBER_RANGE;
@@ -22,9 +23,15 @@ import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 public class Validate {
-    static void validateNull(String input) {
+    static void validateCostNull(String input) {
         if (input.equals(NULL)) {
-            throw new IllegalArgumentException(ERROR_INPUT_EMPTY);
+            throw new IllegalArgumentException(ERROR_INPUT_EMPTY_COST);
+        }
+    }
+
+    static void validateWinningNumberNull(String input) {
+        if (input.equals(NULL)) {
+            throw new IllegalArgumentException(ERROR_INPUT_EMPTY_WINNING_NUMBER);
         }
     }
 

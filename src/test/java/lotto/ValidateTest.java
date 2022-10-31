@@ -13,7 +13,7 @@ public class ValidateTest {
 
     @Test
     void 공백_입력() {
-        assertThatThrownBy(() -> Validate.validateNull(""))
+        assertThatThrownBy(() -> Validate.validateCostNull(""))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
