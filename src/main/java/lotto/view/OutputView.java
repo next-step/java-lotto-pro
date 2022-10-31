@@ -1,11 +1,11 @@
 package lotto.view;
 
 import lotto.prize.Prize;
+import lotto.prize.Prizes;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -22,18 +22,18 @@ public class OutputView {
         System.out.println(text);
     }
 
-    public static void printStatistic(Map<Prize, Integer> prizes, BigDecimal yield) {
+    public static void printStatistic(Prizes prizes, BigDecimal yield) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.println(convertStatisticResult(prizes, yield));
     }
 
-    private static String convertStatisticResult(Map<Prize, Integer> prizes, BigDecimal yield) {
+    private static String convertStatisticResult(Prizes prizes, BigDecimal yield) {
         String statistic = Arrays.stream(Prize.values())
                 .sorted(Comparator.comparing(Prize::getPrizeMoney))
                 .filter(v -> v != Prize.MISS)
                 .map(v ->
-                        String.format(convertPrizeCountText(v), v.getMatchCount(), v.getPrizeMoney(), prizes.getOrDefault(v, 0)))
+                        String.format(convertPrizeCountText(v), v.getMatchCount(), v.getPrizeMoney(), prizes.countMatchPrize(v)))
                 .collect(Collectors.joining("\n"));
         String convertYield = String.format(YIELD_FORMAT, yield);
         return String.join("\n", statistic, convertYield);

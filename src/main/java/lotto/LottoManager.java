@@ -6,14 +6,13 @@ import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinnerLotto;
 import lotto.domain.money.Money;
 import lotto.domain.seller.LottoSeller;
-import lotto.prize.Prize;
+import lotto.prize.Prizes;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoManager {
@@ -30,7 +29,7 @@ public class LottoManager {
         WinnerLotto winnerLotto = new WinnerLotto(createWinnerLotto(InputView.inputWinLottoNumber()),
                 new LottoNumber(InputView.inputBonusNumber()));
 
-        Map<Prize, Integer> prizes = lottos.getPrizeOfLotto(winnerLotto);
+        Prizes prizes = lottos.getPrizeOfLotto(winnerLotto);
         BigDecimal bigDecimal = lottoBuyer.calculateYield(prizes);
         OutputView.printStatistic(prizes, bigDecimal);
     }
