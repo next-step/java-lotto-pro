@@ -38,7 +38,7 @@ public class Ticket {
         return String.format(STR_LOTTO_NUM_LIST, lottoNumbers.toArray());
     }
 
-    public int compareTicket(Ticket cmpTicket) {
+    public int getCorrectNumberCount(Ticket cmpTicket) {
         int cnt = 0;
 
         for (int i : cmpTicket.lottoNumbers) {

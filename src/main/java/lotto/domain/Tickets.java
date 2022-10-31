@@ -31,7 +31,7 @@ public class Tickets {
 
     public Result countTicketResult(Result result, Ticket winningTicket) {
         for (Ticket t : this.tickets) {
-            result.setResult(t.compareTicket(winningTicket));
+            result.setResult(t.getCorrectNumberCount(winningTicket));
         }
 
         return result;
