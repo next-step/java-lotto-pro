@@ -9,8 +9,9 @@ import org.junit.jupiter.api.Test;
 class RandomNumberGenerateStrategyTest {
     @Test
     void 랜덤_숫자_생성_테스트() {
-        List<Integer> numbers = RandomNumberGenerateStrategy.DEFAULT.generate(
-            Arrays.asList(1, 2, 3, 4, 5, 6), 6);
+        List<Integer> numberPool = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> numbers = RandomNumberGenerateStrategy.DEFAULT.generate(numberPool, 6);
         assertThat(numbers).hasSize(6);
+        assertThat(numbers).containsAll(numberPool);
     }
 }

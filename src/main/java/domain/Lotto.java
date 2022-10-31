@@ -1,7 +1,6 @@
 package domain;
 
 import domain.strategy.NumberGenerateStrategy;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -20,14 +19,9 @@ public class Lotto {
     }
 
     public LottoWinning findWinning(List<Integer> winningNumbers) {
-        Collections.sort(numbers);
-        Collections.sort(winningNumbers);
-
-        int numberMatchSize = 0;
-        for (int i = 0; i < numbers.size(); i++) {
-            numberMatchSize += numbers.get(i).equals(winningNumbers.get(i)) ? 1 : 0;
-        }
-        return LottoWinning.of(numberMatchSize);
+        return LottoWinning.of((int) numbers.stream()
+            .filter(winningNumbers::contains)
+            .count());
     }
 
     @Override
