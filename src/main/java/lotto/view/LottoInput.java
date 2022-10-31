@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoCalculator;
-import lotto.domain.Money;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 
 public class LottoInput {
 
@@ -23,12 +20,34 @@ public class LottoInput {
 
     public static WinningLotto inputWinningLotto() {
         try {
-            String input = InputConsole.inputWinningLottoNumbers();
-            return new WinningLotto(new Lotto(input));
+            Lotto lotto = inputLotto();
+            LottoNumber bonusLottoNumber = inputBonusLottoNumber(lotto);
+            return new WinningLotto(lotto);
         } catch (IllegalArgumentException e) {
             OutputConsole.out(e.getMessage());
             return inputWinningLotto();
         }
     }
+
+    private static Lotto inputLotto() {
+        try {
+            String input = InputConsole.inputWinningLottoNumbers();
+            return new Lotto(input);
+        } catch (IllegalArgumentException e) {
+            OutputConsole.out(e.getMessage());
+            return inputLotto();
+        }
+    }
+
+    private static LottoNumber inputBonusLottoNumber(Lotto lotto) {
+        try {
+            String input = InputConsole.inputBonusLottoNumber();
+            return LottoNumber.of(input);
+        } catch (IllegalArgumentException e) {
+            OutputConsole.out(e.getMessage());
+            return inputBonusLottoNumber(lotto);
+        }
+    }
+
 
 }
