@@ -12,12 +12,12 @@ public class LottoFactory {
     public static List<Lotto> createLottosByAuto(LottoMoney lottoMoney) {
         List<Lotto> lottos = new ArrayList();
         for (int i = 0; i < lottoMoney.getCountOfPurchasePrice(); i++) {
-            lottos.add(createLotto());
+            lottos.add(createLottoByAuto());
         }
         return lottos;
     }
 
-    private static Lotto createLotto() {
+    private static Lotto createLottoByAuto() {
         List<LottoNumber> lottoNumbers = LottoNumber.getLottoNumbers();
         Collections.shuffle(lottoNumbers);
         List<LottoNumber> randomLottoNumbers = lottoNumbers
@@ -26,7 +26,6 @@ public class LottoFactory {
                 .collect(Collectors.toList());
         return new Lotto(randomLottoNumbers);
     }
-
 
     public static List<Lotto> createLottosByManual(List<String> lottoNumbers) {
         return lottoNumbers.stream()
