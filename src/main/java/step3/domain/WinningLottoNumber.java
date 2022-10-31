@@ -17,7 +17,7 @@ public class WinningLottoNumber {
         }
     }
 
-    public Rewards check(final Lottos lottos) {
-        return lottos.check(winningLottoNumbers, bonusNumber);
+    public Rank check(final Lotto lotto) {
+        return Rank.of(lotto.compareNumbers(winningLottoNumbers), lotto.isBonusWin(bonusNumber));
     }
 }

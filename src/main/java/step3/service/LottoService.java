@@ -20,7 +20,7 @@ public class LottoService {
         Lottos lottos = lottoVendingMachine.buy(paidByUser);
         ConsoleOutputView.printLottos(lottos);
         WinningLottoNumber winningLottoNumber = receiveWiningLottoNumber();
-        Rewards rewards = winningLottoNumber.check(lottos);
+        Rewards rewards = lottos.check(winningLottoNumber);
         ConsoleOutputView.printRewards(rewards);
     }
 
