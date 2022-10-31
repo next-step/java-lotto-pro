@@ -1,6 +1,6 @@
 package lotto.auto;
 
-import java.math.BigInteger;
+import lotto.auto.common.LottoAutoUtils;
 
 public class Money {
     private final int DEFAULT_MONEY = 0;
@@ -11,17 +11,7 @@ public class Money {
     }
 
     public Money(String money) {
-        this.money = changeStringToInt(money);
-    }
-
-    public int changeStringToInt(String money) {
-        if (money == null) {
-            throw new IllegalArgumentException();
-        }
-        if (money.chars().allMatch(Character::isDigit)) {
-            return Integer.parseInt(money);
-        }
-        throw new IllegalArgumentException();
+        this.money = new LottoAutoUtils().stringToNumber(money);
     }
 
     public int getMoney() {
@@ -29,10 +19,11 @@ public class Money {
     }
 
     public int substractMoney(String subtract) {
-        if (this.money < changeStringToInt(subtract)) {
+        int subtractMoney = new LottoAutoUtils().stringToNumber(subtract);
+        if (this.money < subtractMoney) {
             throw new IllegalArgumentException();
         }
-        this.money = this.money - changeStringToInt(subtract);
+        this.money = this.money - subtractMoney;
 
         return this.money;
     }
