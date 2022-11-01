@@ -75,6 +75,8 @@
 * LottoNumber
   * 보너스볼 번호 변수
   * 보너스볼 번호 포함 여부 메소드
+* Statistic
+  * prize 변수 key값을 Integer 타입에서 Rank 타입으로 변경
 * Validate
   * 지난주 당첨 번호에 입력했던 번호 입력 불가
     * IllegalArgumentException
