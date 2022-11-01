@@ -35,13 +35,13 @@ public class LottosTest {
         List<Lotto> manualLottos = Arrays.asList(
                 Lotto.generateLotto(new ReadLineLottoNumberGenerator("1,2,3,4,5,6")),
                 Lotto.generateLotto(new ReadLineLottoNumberGenerator("4,8,10,23,32,45")));
-        Lottos lottos = new Lottos(5, new RandomLottoNumberGenerator(), manualLottos);
+        Lottos lottos = Lottos.mergeLottos(5, new RandomLottoNumberGenerator(), new Lottos(manualLottos));
         assertThat(lottos.unmodifiedLottos()).hasSize(7);
     }
 
     @Test
     void 수동_로또가_비었을_때_로또_생성_테스트() {
-        Lottos lottos = new Lottos(2, new ReadLineLottoNumberGenerator("1,2,3,4,5,6"), emptyList());
+        Lottos lottos = Lottos.mergeLottos(2, new ReadLineLottoNumberGenerator("1,2,3,4,5,6"), new Lottos(emptyList()));
         assertThat(lottos.unmodifiedLottos()).hasSize(2);
     }
 

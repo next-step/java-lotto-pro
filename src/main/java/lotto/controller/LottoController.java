@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import static java.util.Collections.emptyList;
 import static lotto.view.InputView.printBonusLottoDirection;
 import static lotto.view.InputView.printManualLottoDirection;
 import static lotto.view.InputView.printPurchasingLottoDirection;
@@ -50,12 +51,12 @@ public class LottoController {
 
     private Lottos createLottos(Money money) {
         int manualLottoCount = getManualLottoCount(money);
-        List<Lotto> manualLottos = createManualLottos(manualLottoCount);
+        Lottos manualLottos = createManualLottos(manualLottoCount);
 
         int autoLottoCount = money.maxLottoCountExclude(manualLottoCount);
         printPurchasingLottoCount(autoLottoCount, manualLottoCount);
 
-        Lottos lottos = new Lottos(autoLottoCount, new RandomLottoNumberGenerator(), manualLottos);
+        Lottos lottos = Lottos.mergeLottos(autoLottoCount, new RandomLottoNumberGenerator(), manualLottos);
         printPurchasingLottos(lottos.unmodifiedLottos());
 
         return lottos;
@@ -74,9 +75,9 @@ public class LottoController {
         }
     }
 
-    private List<Lotto> createManualLottos(int manualLottoCount) {
+    private Lottos createManualLottos(int manualLottoCount) {
         if(manualLottoCount == ZERO) {
-            return new ArrayList<>();
+            return new Lottos(emptyList());
         }
 
         printManualLottoDirection();
@@ -88,12 +89,12 @@ public class LottoController {
         }
     }
 
-    private List<Lotto> generateManualLottos(int manualLottoCount) {
+    private Lottos generateManualLottos(int manualLottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for(int count = 0; count < manualLottoCount; count++) {
             lottos.add(Lotto.generateLotto(new ReadLineLottoNumberGenerator(readLine())));
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 
     private WinningLotto getWinningLotto() {

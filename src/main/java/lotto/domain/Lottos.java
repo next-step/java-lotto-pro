@@ -23,22 +23,22 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = new ArrayList<>(lottos);
+    }
+
     /**
      * 자동/수동 포함한 로또 생성기
      * @param maxLottoCount lottoNumberGenerator에 의해 생성할 로또 개수
      * @param lottoNumberGenerator
      * @param manualLottos 수동으로 기생성된 로또
      */
-    public Lottos(int maxLottoCount, LottoNumberGenerator lottoNumberGenerator, List<Lotto> manualLottos) {
-        List<Lotto> lottos = new ArrayList<>(manualLottos);
+    public static Lottos mergeLottos(int maxLottoCount, LottoNumberGenerator lottoNumberGenerator, Lottos manualLottos) {
+        List<Lotto> lottos = new ArrayList<>(manualLottos.lottos);
         for(int i = 0; i < maxLottoCount; i++) {
             lottos.add(Lotto.generateLotto(lottoNumberGenerator));
         }
-        this.lottos = lottos;
-    }
-
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = new ArrayList<>(lottos);
+        return new Lottos(lottos);
     }
 
     public Money findTotalPrice() {
