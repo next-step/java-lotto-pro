@@ -1,6 +1,7 @@
 package step3.controller;
 
 import step3.domain.LottoGenerator;
+import step3.domain.LottoNumber;
 import step3.domain.LottoNumbers;
 import step3.domain.LottoUtil;
 import step3.domain.Lottos;
@@ -19,6 +20,7 @@ public class LottoController {
         OutputView.showPurchasedLottos(purchasedLottos);
 
         LottoNumbers winningNumbers = new LottoNumbers(InputView.inputWinningNumber());
+        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
 
         Rewards rewards = purchasedLottos.check(winningNumbers);
         OutputView.showResults(rewards);
