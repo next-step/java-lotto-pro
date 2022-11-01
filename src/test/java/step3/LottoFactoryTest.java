@@ -17,11 +17,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoFactoryTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"12000:12", "13000:13", "3000:3"}, delimiter = ':')
-    @DisplayName("입력한 돈만큼 로또개수를 반환")
+    @CsvSource(value = {"12000:9", "13000:10", "4000:1"}, delimiter = ':')
+    @DisplayName("입력한 돈만큼 자동로또개수를 반환")
     void test_that_returns_size_of_money(int money,int count){
         //given,when
-        List<Lotto> lottos = LottoFactory.createLottosByAuto(new LottoMoney(money));
+        List<Lotto> lottos = LottoFactory.createLottosByAuto(new LottoMoney(money,3));
 
         //then
         assertThat(lottos).hasSize(count);

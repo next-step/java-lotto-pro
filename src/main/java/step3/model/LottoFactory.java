@@ -11,7 +11,7 @@ public class LottoFactory {
 
     public static List<Lotto> createLottosByAuto(LottoMoney lottoMoney) {
         List<Lotto> lottos = new ArrayList();
-        for (int i = 0; i < lottoMoney.getCountOfPurchasePrice(); i++) {
+        for (int i = 0; i < lottoMoney.getCountOfAutoPurchase(); i++) {
             lottos.add(createLottoByAuto());
         }
         return lottos;

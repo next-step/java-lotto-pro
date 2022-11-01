@@ -20,11 +20,11 @@ import static step3.LottoUtils.getLottoNumbers;
 public class LottoMachineTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"1000:1", "6000:6", "5000:5", "12000:12"}, delimiter = ':')
+    @CsvSource(value = {"2000:1", "5000:4", "4000:3", "12000:11"}, delimiter = ':')
     @DisplayName("로또를 구매하면 구매가격만큼 컬렉션에서 로또개수를 조회")
     void test_that_throw_exception_when_number_is_outofrange(int price, int count) {
         //given
-        LottoMoney lottoMoney = new LottoMoney(price);
+        LottoMoney lottoMoney = new LottoMoney(price,1);
         Lottos lottos = new Lottos(LottoFactory.createLottosByAuto(lottoMoney));
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
 
@@ -44,7 +44,7 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottoList.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        LottoMoney lottoMoney = new LottoMoney(14000);
+        LottoMoney lottoMoney = new LottoMoney(14000,1);
         Lottos lottos = new Lottos(lottoList);
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{11, 22, 23, 24, 25, 26})
@@ -67,7 +67,7 @@ public class LottoMachineTest {
         List<Lotto> lottoList = new ArrayList();
         lottoList.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
 
-        LottoMoney lottoMoney = new LottoMoney(14000);
+        LottoMoney lottoMoney = new LottoMoney(14000,1);
         Lottos lottos = new Lottos(lottoList);
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, count, 3, 4, 5, 6})
@@ -89,7 +89,7 @@ public class LottoMachineTest {
         List<Lotto> lottoList = new ArrayList();
         lottoList.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
 
-        LottoMoney lottoMoney = new LottoMoney(14000);
+        LottoMoney lottoMoney = new LottoMoney(14000,1);
         Lottos lottos = new Lottos(lottoList);
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
@@ -112,7 +112,7 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottoList.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        LottoMoney lottoMoney = new LottoMoney(14000);
+        LottoMoney lottoMoney = new LottoMoney(14000,1);
         Lottos lottos = new Lottos(lottoList);
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed()
@@ -136,7 +136,7 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottoList.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        LottoMoney lottoMoney = new LottoMoney(14000);
+        LottoMoney lottoMoney = new LottoMoney(14000,1);
         Lottos lottos = new Lottos(lottoList);
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 5, 6})
@@ -161,7 +161,7 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottoList.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        LottoMoney lottoMoney = new LottoMoney(14000);
+        LottoMoney lottoMoney = new LottoMoney(14000,1);
         Lottos lottos = new Lottos(lottoList);
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 15, 6})
@@ -187,7 +187,7 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottoList.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        LottoMoney lottoMoney = new LottoMoney(14000);
+        LottoMoney lottoMoney = new LottoMoney(14000,1);
         Lottos lottos = new Lottos(lottoList);
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 15, 16})

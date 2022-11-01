@@ -25,9 +25,12 @@ public class LottoConsoleView {
         return SCANNER.nextInt();
     }
 
-    public static List<String> inputPurchaseManual() {
+    public static int inputPurchaseManualCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        int count = SCANNER.nextInt();
+        return SCANNER.nextInt();
+    }
+
+    public static List<String> inputPurchaseManual(int count) {
         if (count > 0) {
             System.out.println("수동으로 구매할 번호를 입력해 주세요.");
             return IntStream.rangeClosed(1, count)

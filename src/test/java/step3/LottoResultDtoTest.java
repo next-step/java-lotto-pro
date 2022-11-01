@@ -27,7 +27,7 @@ public class LottoResultDtoTest {
         rankStats.put(Rank.FIFTH, count);
 
         //when
-        LottoResultDto lottoResultDto = new LottoResultDto(rankStats, new LottoMoney(14000));
+        LottoResultDto lottoResultDto = new LottoResultDto(rankStats, new LottoMoney(14000, 1));
 
         //then
         assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.FIFTH.getWinningPrice() * count) / (double) 14000);
@@ -46,7 +46,7 @@ public class LottoResultDtoTest {
         rankStats.put(Rank.FIFTH, 0);
 
         //when
-        LottoResultDto lottoResultDto = new LottoResultDto(rankStats, new LottoMoney(14000));
+        LottoResultDto lottoResultDto = new LottoResultDto(rankStats, new LottoMoney(14000, 1));
 
         //then
         assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.FOURTH.getWinningPrice() * count) / (double) 14000);
@@ -65,7 +65,7 @@ public class LottoResultDtoTest {
         rankStats.put(Rank.FIFTH, 0);
 
         //when
-        LottoResultDto lottoResultDto = new LottoResultDto(rankStats, new LottoMoney(14000));
+        LottoResultDto lottoResultDto = new LottoResultDto(rankStats, new LottoMoney(14000, 1));
 
         //then
         assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.THIRD.getWinningPrice() * count) / (double) 14000);
@@ -84,7 +84,7 @@ public class LottoResultDtoTest {
         rankStats.put(Rank.FIFTH, 0);
 
         //when
-        LottoResultDto lottoResultDto = new LottoResultDto(rankStats, new LottoMoney(14000));
+        LottoResultDto lottoResultDto = new LottoResultDto(rankStats, new LottoMoney(14000, 1));
 
         //then
         assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.SECOND.getWinningPrice() * count) / (double) 14000);
@@ -103,7 +103,7 @@ public class LottoResultDtoTest {
         rankStats.put(Rank.FIFTH, 0);
 
         //when
-        LottoResultDto lottoResultDto = new LottoResultDto(rankStats, new LottoMoney(14000));
+        LottoResultDto lottoResultDto = new LottoResultDto(rankStats, new LottoMoney(14000, 1));
 
         //then
         assertThat(lottoResultDto.getPriceRatio()).isEqualTo((Rank.FIRST.getWinningPrice() * count) / (double) 14000);
