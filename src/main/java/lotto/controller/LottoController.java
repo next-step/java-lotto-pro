@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.domain.LottoGame;
 import lotto.view.LottoView;
 
@@ -23,20 +24,11 @@ public class LottoController {
         }
     }
 
-    public void createWinningNumber() {
-        Runnable readWinningNumber = () -> lottoGame.createWinningNumber(view.readWinningNumber());
-        while (isNotComplete(readWinningNumber)) {
-        }
-    }
-
-    public void createLottoNumberMatcher() {
-        lottoGame.createLottoNumberMatcher();
-    }
-
-    public void createLottoNumberMatcherWithBonus() {
-        Runnable readBonus = () -> lottoGame.createLottoNumberMatcherWithBonus(view.readBonus());
-        while (isNotComplete(readBonus)) {
-        }
+    public void createNumberAndMatcher(List<Runnable> bonusStrategy) {
+        bonusStrategy.forEach(runnable -> {
+            while (isNotComplete(runnable)) {
+            }
+        });
     }
 
     public void startLottoGame() {
