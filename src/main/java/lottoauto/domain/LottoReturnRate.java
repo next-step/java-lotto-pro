@@ -1,17 +1,17 @@
 package lottoauto.domain;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class LottoReturnRate {
     public static final int ZERO = 0;
-    private double returnRate;
-    public LottoReturnRate(){}
-    public LottoReturnRate(double returnRate){
+    private BigDecimal returnRate;
+    public LottoReturnRate(BigDecimal returnRate) {
         this.returnRate = returnRate;
     }
-    public LottoReturnRate(int winningMoney, int payment) {
-        validatePayment(payment);
-        returnRate = winningMoney / (double)payment ;
+    public LottoReturnRate(BigDecimal winningMoney, BigDecimal payment) {
+        validatePayment(payment.intValue());
+        this.returnRate = winningMoney.divide(payment);
     }
 
     private void validatePayment(int payment) {
@@ -22,10 +22,14 @@ public class LottoReturnRate {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         LottoReturnRate that = (LottoReturnRate) o;
-        return Double.compare(that.returnRate, returnRate) == 0;
+        return Objects.equals(returnRate, that.returnRate);
     }
 
     @Override

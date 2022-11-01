@@ -12,7 +12,6 @@ public class LottoService {
     private List<Lotto> lottos;
     private Lotto winning;
     private LottoNumberStrategy lottoNumberStrategy;
-    public LottoService(){}
 
     public LottoService(List<Lotto> lottos, Lotto winning) {
         this.lottos = lottos;
@@ -24,12 +23,6 @@ public class LottoService {
         this.lottos = lottos;
         this.lottoNumberStrategy = lottoNumberStrategy;
         this.winning = generateWinningLotto();
-    }
-
-    public LottoService(List<Lotto> lottos, Lotto winning, LottoNumberStrategy lottoNumberStrategy) {
-        this.lottos = lottos;
-        this.winning = winning;
-        this.lottoNumberStrategy = lottoNumberStrategy;
     }
 
     public Lotto generateWinningLotto() {

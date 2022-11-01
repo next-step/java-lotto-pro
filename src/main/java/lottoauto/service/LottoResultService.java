@@ -1,5 +1,8 @@
 package lottoauto.service;
 
+import static lottoauto.domain.LottoPayment.*;
+
+import java.math.BigDecimal;
 import lottoauto.domain.LottoPayment;
 import lottoauto.domain.LottoResult;
 import lottoauto.domain.LottoReturnRate;
@@ -17,6 +20,6 @@ public class LottoResultService {
     }
 
     public LottoReturnRate calculateReturnRate(int buyCount) {
-        return new LottoReturnRate(calculateWinningMoney(), buyCount * LottoPayment.PRICE);
+        return new LottoReturnRate(new BigDecimal(String.valueOf(calculateWinningMoney())), new BigDecimal(String.valueOf(buyCount * PRICE)));
     }
 }

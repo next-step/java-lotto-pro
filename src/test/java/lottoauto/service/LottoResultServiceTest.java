@@ -1,5 +1,6 @@
 package lottoauto.service;
 
+import java.math.BigDecimal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,6 @@ public class LottoResultServiceTest {
     @Test
     @DisplayName("당첨금에 대한 수익률을 계산한다.")
     void 수익률_계산(){
-        assertThat(lottoResultService.calculateReturnRate(1000)).isEqualTo(new LottoReturnRate(1.56));
+        assertThat(lottoResultService.calculateReturnRate(1000)).isEqualTo(new LottoReturnRate(new BigDecimal(String.valueOf(1.56))));
     }
 }

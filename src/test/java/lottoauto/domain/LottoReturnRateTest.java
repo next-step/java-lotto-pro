@@ -1,5 +1,6 @@
 package lottoauto.domain;
 
+import java.math.BigDecimal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,15 +11,15 @@ public class LottoReturnRateTest {
     @Test
     @DisplayName("수익률을 계산한다.")
     void 수익률_계산(){
-        LottoReturnRate returnRate = new LottoReturnRate(15000, 20000);
-        assertThat(returnRate).isEqualTo(new LottoReturnRate(0.75));
+        assertThat(new LottoReturnRate(new BigDecimal(String.valueOf(15000)), new BigDecimal(String.valueOf(20000))))
+                .isEqualTo(new LottoReturnRate(new BigDecimal(String.valueOf(0.75))));
     }
 
     @Test
     @DisplayName("구매금액 0원에 대한 예외 처리")
     void 구매금액_0원_예외_테스트(){
         assertThatIllegalArgumentException().isThrownBy(
-                () -> new LottoReturnRate(15000, 0)
+                () -> new LottoReturnRate(new BigDecimal(String.valueOf(15000)), new BigDecimal(String.valueOf(0)))
         );
     }
 }
