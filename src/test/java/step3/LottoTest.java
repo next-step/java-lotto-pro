@@ -8,24 +8,15 @@ import step3.model.Lotto;
 import step3.model.LottoNumber;
 import step3.model.Rank;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static step3.LottoUtils.getLottoNumbers;
 
 public class LottoTest {
-
-    List<LottoNumber> getLottoNumbers(int... numbers) {
-
-        List<LottoNumber> lottoNumbers = new ArrayList();
-        for (int number : numbers) {
-            lottoNumbers.add(LottoNumber.valueOf(number));
-        }
-        return lottoNumbers;
-    }
 
     @Test
     @DisplayName("번호조회하면 번호를 반환")
@@ -186,7 +177,7 @@ public class LottoTest {
     }
 
     @ParameterizedTest
-    @ValueSource(booleans = {true,false})
+    @ValueSource(booleans = {true, false})
     @DisplayName("생성자에서 로또 자동여부 지정시 메소드에서 조회")
     void test_that_returns_auto_if_selected_at_constructor(boolean isAuto) {
         //given
@@ -195,7 +186,7 @@ public class LottoTest {
                 .collect(Collectors.toList());
 
         //when
-        Lotto lotto = new Lotto(numbers,isAuto);
+        Lotto lotto = new Lotto(numbers, isAuto);
 
         //then
         assertThat(lotto.isAuto()).isEqualTo(isAuto);

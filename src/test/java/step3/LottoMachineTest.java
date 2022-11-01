@@ -16,17 +16,9 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static step3.LottoUtils.getLottoNumbers;
 
 public class LottoMachineTest {
-
-    List<LottoNumber> getLottoNumbers(int... numbers) {
-
-        List<LottoNumber> lottoNumbers = new ArrayList();
-        for (int number : numbers) {
-            lottoNumbers.add(LottoNumber.valueOf(number));
-        }
-        return lottoNumbers;
-    }
 
     @ParameterizedTest
     @CsvSource(value = {"1000:1", "6000:6", "5000:5", "12000:12"}, delimiter = ':')

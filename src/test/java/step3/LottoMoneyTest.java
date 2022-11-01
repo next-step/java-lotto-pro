@@ -6,27 +6,18 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import step3.model.Lotto;
 import step3.model.LottoMoney;
-import step3.model.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static step3.LottoUtils.getLottoNumbers;
 
 public class LottoMoneyTest {
 
-    List<LottoNumber> getLottoNumbers(int... numbers) {
-
-        List<LottoNumber> lottoNumbers = new ArrayList();
-        for (int number : numbers) {
-            lottoNumbers.add(LottoNumber.valueOf(number));
-        }
-        return lottoNumbers;
-    }
-
     @ParameterizedTest
-    @ValueSource(ints = {-1,0,1,2,3,999})
+    @ValueSource(ints = {-1, 0, 1, 2, 3, 999})
     @DisplayName("금액이 천원 미만이면 예외발생")
     void test_that_it_throw_exception_if_money_less_then_1000(int money) {
         //given,when,then
@@ -36,7 +27,7 @@ public class LottoMoneyTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {1001,9999,9990,7700})
+    @ValueSource(ints = {1001, 9999, 9990, 7700})
     @DisplayName("금액이 천원 미만이면 예외발생")
     void test_that_it_throw_exception_if_money_not_1000_unit(int money) {
         //given,when,then
@@ -48,7 +39,7 @@ public class LottoMoneyTest {
     @ParameterizedTest
     @CsvSource(value = {"1000:1", "6000:6", "5000:5", "12000:12"}, delimiter = ':')
     @DisplayName("개수를 입력하면 로또가격의 총합을 반환")
-    void test_that_it_throw_exception_if_money_not_1000_unit(int money,int count) {
+    void test_that_it_throw_exception_if_money_not_1000_unit(int money, int count) {
         //given,when
         LottoMoney lottoMoney = new LottoMoney(1000);
 
@@ -73,7 +64,7 @@ public class LottoMoneyTest {
     void test_that_returns_remain_money_if_lottos_input(int money, int count) {
         //given
         List<Lotto> lottoNumbers = new ArrayList();
-        for(int i = 0; i < count; i++){
+        for (int i = 0; i < count; i++) {
             lottoNumbers.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
 
@@ -83,9 +74,6 @@ public class LottoMoneyTest {
         //then
         assertThat(lottoMoney.getRemainMoney(lottoNumbers)).isEqualTo(0);
     }
-
-
-
 
 
 }
