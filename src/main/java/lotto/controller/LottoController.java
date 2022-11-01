@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.controller.acceptor.MoneyToBuyAcceptor;
 import lotto.controller.acceptor.WinningNumbersAcceptor;
+import lotto.model.lotto.ticket.LottoTicket;
 import lotto.model.lotto.ticket.LottoTicketsBucket;
 import lotto.model.money.to.buy.MoneyToBuy;
 import lotto.model.winning.numbers.WinningNumbers;
@@ -15,13 +16,14 @@ public class LottoController {
     private static final int LOTTO_MAXIMUM_NUMBER = 45;
 
     public void run() {
-//        final MoneyToBuy moneyToBuy = userInputMoneyToBuy();
-//        int numberOfAffordableLotto = moneyToBuy.affordableLottoTicketNumber();
-//        final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucket(numberOfAffordableLotto);
-//        while (0 < numberOfAffordableLotto--) {
-//            numberOfAffordableLottoLeft(lottoTicketsBucket);
-//        }
-//        final WinningNumbers winningNumbers = userInputWinningNumbers();
+        final MoneyToBuy moneyToBuy = userInputMoneyToBuy();
+        int numberOfAffordableLotto = moneyToBuy.affordableTicketCount();
+        final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucket(numberOfAffordableLotto);
+        while (moneyToBuy.canBuyMoreLotto()) {
+            moneyToBuy.buyOneLotto();
+            numberOfAffordableLottoLeft(lottoTicketsBucket);
+        }
+        final WinningNumbers winningNumbers = userInputWinningNumbers();
 //        displayLottoResult(winningNumbers, lottoTicketsBucket, moneyToBuy);
     }
 
@@ -32,10 +34,9 @@ public class LottoController {
     }
 
     private void numberOfAffordableLottoLeft(LottoTicketsBucket lottoTicketsBucket) {
-        final List<Integer> candidates = intsFromOneToFortyFive();
-//        final LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator);
-//        LottoTicketPrinter.print(lottoTicket);
-//        lottoTicketsBucket.addLottoTicket(lottoTicket);
+        final LottoTicket lottoTicket = new LottoTicket();
+        LottoTicketPrinter.print(lottoTicket);
+        lottoTicketsBucket.addLottoTicket(lottoTicket);
     }
 
     private List<Integer> intsFromOneToFortyFive() {
