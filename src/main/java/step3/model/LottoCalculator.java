@@ -3,6 +3,7 @@ package step3.model;
 import step3.constant.Rank;
 import step3.constant.WinnerRule;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static step3.constant.Constant.ONE;
@@ -11,14 +12,13 @@ import static step3.constant.Message.*;
 import static step3.constant.WinnerRule.rules;
 public class LottoCalculator {
 
-    private static Lotto lastWeekWinner;
-    private static List<Lotto> purchasedLottos;
-    private static LottoResult lottoResult;
-
+    private Lotto lastWeekWinner;
+    private List<Lotto> purchasedLottos;
+    private LottoResult lottoResult = new LottoResult();
 
     public LottoCalculator() {
         this.lastWeekWinner = new Lotto();
-        this.lottoResult = new LottoResult();
+        this.purchasedLottos = new ArrayList<>();
     }
     public LottoCalculator(Lotto lastWeekWinner) {
         this.lastWeekWinner = lastWeekWinner;
@@ -27,14 +27,6 @@ public class LottoCalculator {
     public Lotto getLastWeekWinner() {
         return lastWeekWinner;
     }
-
-//    public void calculateWinnerStatistics(Lottos lottos) {
-//        WinnerRule.setWinnerRules();
-//        purchasedLottos = lottos.getLottos();
-//        for(Lotto lotto : purchasedLottos) {
-//            lottoResult.addResult(compareWinnerRules(lotto));
-//        }
-//    }
 
     public void calculateWinnerStatistics(Lottos lottos) {
         purchasedLottos = lottos.getLottoList();
