@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.stream.IntStream;
-import lotto.util.Constants;
 
 public class Lotto {
     private static final String STR_BUY_LOTTO = "%d개를 구매했습니다.\n";
@@ -25,10 +24,10 @@ public class Lotto {
         return this.tickets.toString();
     }
 
-    public String getResultStr(String winningTicketStr) {
+    public String getResultStr(String winningTicketStr, String bonusNumStr) {
         Result result = new Result();
 
-        this.tickets.countTicketResult(result, new Ticket(winningTicketStr));
+        this.tickets.countTicketResult(result, new Ticket(winningTicketStr, bonusNumStr));
 
         int usedMoney = this.tickets.size() * TICKET_VALUE;
         return result.toString(usedMoney);

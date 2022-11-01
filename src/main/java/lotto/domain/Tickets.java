@@ -31,7 +31,9 @@ public class Tickets {
 
     public Result countTicketResult(Result result, Ticket winningTicket) {
         for (Ticket t : this.tickets) {
-            result.setResult(t.getCorrectNumberCount(winningTicket));
+            int countOfMatch = t.getCountOfMatch(winningTicket.lottoNumbers);
+            boolean matchBonus = t.isBonusballMatch(winningTicket.bonusNum);
+            result.setResult(countOfMatch, matchBonus);
         }
 
         return result;

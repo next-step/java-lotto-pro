@@ -7,13 +7,17 @@ import lotto.view.OutputView;
 public class LottoController {
     public void playLotto() {
         OutputView.startLottoOutput();
-        Lotto lotto = new Lotto(InputView.startLottoInput());
-        OutputView.printString(lotto.getTicketsSizeStr());
+        Lotto lotto = new Lotto(InputView.getInput());
+        OutputView.print(lotto.getTicketsSizeStr());
         
-        OutputView.printString(lotto.getLottoListStr());
+        OutputView.print(lotto.getLottoListStr());
+        
         OutputView.printWinningLottoNumOutput();
+        String winningTicketStr = InputView.getInput();
         
-        String winningTicketStr = InputView.getWinningLottoNumInput();
-        OutputView.printString(lotto.getResultStr(winningTicketStr));
+        OutputView.printBonusNumOutput();
+        String bonusNumStr = InputView.getInput();
+        
+        OutputView.print(lotto.getResultStr(winningTicketStr, bonusNumStr));
     }
 }
