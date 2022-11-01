@@ -12,8 +12,8 @@ public class LottosTest {
 
     @Test
     void 로또들의_총_구입_금액_반환() {
-        Lottos lottos = new Lottos(Money.createLottoMoney(5500L), new RandomLottoNumberGenerator());
-        assertThat(lottos.findTotalPrice()).isEqualTo(Money.createLottoMoney(5000L));
+        Lottos lottos = createLottos();
+        assertThat(lottos.findTotalPrice()).isEqualTo(Money.createLottoMoney(3000L));
     }
 
     @Test
