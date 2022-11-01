@@ -7,14 +7,14 @@ import java.util.List;
 
 import static lotto.LottoPrinter.newLine;
 import static lotto.LottoPrinter.print;
-import static lotto.LottoScanner.scanWinningNumbers;
-import static lotto.LottoScanner.scanPayAmount;
+import static lotto.LottoScanner.*;
 
 public class LottoApp implements App {
 
     private static final String WELCOME = "구입금액을 입력해 주세요.";
     private static final String BUY_LOTTO = "%d개를 구매했습니다.";
     private static final String WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
     public void run() throws IOException {
         LottoStore lottoStore = new LottoStore();
@@ -34,9 +34,15 @@ public class LottoApp implements App {
         print(WINNING_NUMBER);
         Lotto winLotto = Lotto.valueOf(new ManualLottoNumberGenerateStrategy(Arrays.asList(scanWinningNumbers())));
 
+        print(BONUS_NUMBER);
+        LottoNumber bonusLottoNumber = LottoNumber.valueOf(scanOneNumber());
+
+        newLine();
+
         App lottoStaticApp = LottoStaticApp.builder()
             .lottoList(lottoList)
             .winLotto(winLotto)
+            .bonusLottoNumber(bonusLottoNumber)
             .payAmount(new PayAmount(payAmount))
             .build();
 
