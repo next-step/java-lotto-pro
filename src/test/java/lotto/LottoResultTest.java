@@ -10,6 +10,7 @@ import org.junit.jupiter.api.RepeatedTest;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,12 +34,15 @@ class LottoResultTest {
     @RepeatedTest(10)
     @DisplayName("랜덤하게 발생한 10개의 로또에 대한 수익률 계산")
     void 수익률_계산() {
-        int lottoCount = (int) (Math.random() * 10 + 1);
+        int lottoCount = 10;
+        Random random = new Random();
         Collections.shuffle(LOTTO_LIST);
         LottoResult lottoResult = new LottoResult();
 
         for(int i=0; i<lottoCount; i++) {
-            lottoResult.add(Rank.valueOf(i % RANK_SIZE));
+            int matchCount = random.nextInt(6) + 1;
+            boolean hasBonusBall = random.nextBoolean();
+            lottoResult.add(Rank.valueOf(matchCount, hasBonusBall));
         }
 
         assertThat(lottoResult.getReturnRate())
