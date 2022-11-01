@@ -9,12 +9,12 @@ public class Order {
     }
 
     public long getTotalPrice(int ticketPrice){
-        return ticketCount*ticketPrice;
+        return (long) ticketCount * ticketPrice;
     }
 
     @Override
     public String toString() {
-        return ticketCount+"개를 구매했습니다.";
+        return Integer.toString(ticketCount);
     }
 
     public int getAutoTicketCount() {

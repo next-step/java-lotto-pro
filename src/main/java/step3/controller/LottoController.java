@@ -1,8 +1,7 @@
 package step3.controller;
 
-import java.util.List;
-import step3.model.lotto.Lotto;
 import step3.model.lotto.LottoList;
+import step3.model.lotto.WinningLotto;
 import step3.model.machine.Money;
 import step3.model.machine.Order;
 import step3.model.machine.Results;
@@ -24,7 +23,7 @@ public class LottoController {
     public void start() {
         Order order = makeOrder();
         LottoList lottoList = createAutoLottoListByOrder(order);
-        Lotto winningLotto = getWinningLotto();
+        WinningLotto winningLotto = getWinningLotto();
         Results results = getLottoResults(lottoList, winningLotto);
         evaluateStatisticResult(order, results);
     }
@@ -51,19 +50,17 @@ public class LottoController {
         OutputView.printStatisticResult(statisticResult);
     }
 
-    private Results getLottoResults(LottoList lottoList, Lotto lotto) {
-        List<Integer> lottoResults = lottoList.getResults(lotto);
-        Results results = new Results();
-        results.recordResult(lottoResults);
+    private Results getLottoResults(LottoList lottoList, WinningLotto winningLotto) {
+        Results results = lottoList.getMatchResults(winningLotto);
         OutputView.printResults(results);
         return results;
     }
 
 
-    private Lotto getWinningLotto() {
+    private WinningLotto getWinningLotto() {
         String lottoInput = InputView.requestInputLotto();
-        System.out.println(lottoInput);
-        return lottoMachine.createWinningLotto(lottoInput);
+        int bonusInput = InputView.requestInputBonus();
+        return lottoMachine.createWinningLotto(lottoInput, bonusInput);
     }
 
     private Money getMoneyInput() {
