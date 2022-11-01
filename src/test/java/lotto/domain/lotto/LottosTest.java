@@ -3,30 +3,21 @@ package lotto.domain.lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import lotto.domain.amount.Amount;
 import lotto.domain.quantity.Quantity;
 
 class LottosTest {
-
 	@Test
-	void 객체_생성() {
-		Assertions.assertThat(Lottos.from(Collections::emptyList)).isEqualTo(Lottos.from((Collections::emptyList)));
-	}
-
-	@Test
-	void 갯수_반환() {
-		List<Lotto> lottos = Arrays.asList(Lotto.random(), Lotto.random(), Lotto.random());
-		assertThat(Lottos.from(() -> lottos).getQuantity()).isEqualTo(Quantity.from(3));
+	void 로또_15000원어치_구매() {
+		assertThat(Lottos.purchase(Amount.from(15000)).getQuantity()).isEqualTo(Quantity.from(15));
 	}
 
 	@Test
 	void 로또_결과_변환() {
-		Lottos lottos = Lottos.from(() -> Arrays.asList(
+		Lottos lottos = Lottos.from(Arrays.asList(
 			Lotto.random(),
 			Lotto.random(),
 			Lotto.random()
