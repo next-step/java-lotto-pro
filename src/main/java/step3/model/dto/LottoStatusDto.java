@@ -36,4 +36,5 @@ public class LottoStatusDto {
     public int getManualLottoCount() {
         return manualLottoCount;
     }
+
 }

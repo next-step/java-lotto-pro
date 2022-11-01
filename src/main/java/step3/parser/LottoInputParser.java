@@ -14,4 +14,5 @@ public class LottoInputParser {
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
+
 }

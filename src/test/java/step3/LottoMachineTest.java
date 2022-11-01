@@ -29,7 +29,7 @@ public class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
 
         //when
-        LottoStatusDto lottoStatusDto = lottoMachine.getLottoNumber();
+        LottoStatusDto lottoStatusDto = lottoMachine.getLottoStatus();
 
         //then
         assertThat(lottoStatusDto.getLottosNumber()).hasSize(count);

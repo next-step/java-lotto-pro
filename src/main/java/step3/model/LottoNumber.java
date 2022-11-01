@@ -60,4 +60,5 @@ public class LottoNumber {
     public int hashCode() {
         return Objects.hash(number);
     }
+
 }

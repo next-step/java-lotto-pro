@@ -30,6 +30,7 @@ public class LottoMachine {
     }
 
     public LottoStatusDto getLottoStatus() {
-        return new LottoStatusDto(lottos,lottoMoney);
+        return new LottoStatusDto(lottos, lottoMoney);
     }
+
 }

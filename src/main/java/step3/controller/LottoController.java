@@ -14,15 +14,12 @@ import java.util.stream.Stream;
 public class LottoController {
 
     public void start() {
-
         int amount = LottoConsoleView.inputPurchasingAmount();
         int manualCount = LottoConsoleView.inputPurchaseManualCount();
-        LottoMoney purchaseMoney = new LottoMoney(amount,manualCount);
+        LottoMoney purchaseMoney = new LottoMoney(amount, manualCount);
         List<Lotto> manualLottos = LottoFactory.createLottosByManual(LottoConsoleView.inputPurchaseManual(manualCount));
         List<Lotto> autoLottos = LottoFactory.createLottosByAuto(purchaseMoney);
-
         Lottos lottos = new Lottos(Stream.concat(manualLottos.stream(), autoLottos.stream()).collect(Collectors.toList()));
-
         LottoMachine lottoMachine = new LottoMachine(purchaseMoney, lottos);
 
         LottoStatusDto lottoStatus = lottoMachine.getLottoStatus();
@@ -37,4 +34,5 @@ public class LottoController {
     public static void main(String[] args) {
         new LottoController().start();
     }
+
 }

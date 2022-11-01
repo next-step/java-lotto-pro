@@ -26,4 +26,5 @@ public class LottoResultDto {
     public int getWinningCount(Rank rank) {
         return rankOfLottos.getOrDefault(rank, 0);
     }
+
 }
