@@ -10,8 +10,9 @@ import lotto.domain.LottoResultStat;
 public class View {
 
     private static final String RESULT_BY_RANK_TEXT = "%d개 일치(%d원)- %d개";
-    public static final String TOTAL_PROFIT_TEXT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
-    public static final String LOTTO_TICKET_SIZE_TEXT = "%d개를 구매했습니다.";
+    private static final String SECOND_RANK_RESULT_TEXT = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
+    private static final String TOTAL_PROFIT_TEXT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String LOTTO_TICKET_SIZE_TEXT = "%d개를 구매했습니다.";
     private final Input input;
     private final Output output;
 
@@ -26,7 +27,7 @@ public class View {
     }
 
     public void printLottoSize(int size) {
-        output.print(String.format(LOTTO_TICKET_SIZE_TEXT,size));
+        output.print(String.format(LOTTO_TICKET_SIZE_TEXT, size));
     }
 
     public void printText(String text) {
@@ -47,9 +48,17 @@ public class View {
                 .sorted(Comparator.reverseOrder())
                 .filter(rank -> !rank.equals(LottoRank.FAIL))
                 .map(rank ->
-                        String.format(RESULT_BY_RANK_TEXT, rank.getMatchCount(), rank.getWinningPrice(),
-                                lottoResultStat.resultByRank(rank)))
+                        String.format(
+                                rank.equals(LottoRank.SECOND) ? SECOND_RANK_RESULT_TEXT : RESULT_BY_RANK_TEXT,
+                                rank.getMatchCount(), rank.getWinningPrice(),
+                                lottoResultStat.resultByRank(rank))
+                )
                 .forEach(output::print);
         output.print(String.format(TOTAL_PROFIT_TEXT, lottoResultStat.totalProfit()));
+    }
+
+    public int insertBonusNumber() {
+        output.print("보너스 볼을 입력해 주세요.");
+        return Integer.parseInt(input.nextLine());
     }
 }

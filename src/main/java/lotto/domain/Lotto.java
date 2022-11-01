@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Lotto {
 
-    private final Numbers numbers;
+    final Numbers numbers;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = new Numbers(numbers);
@@ -18,4 +18,5 @@ public class Lotto {
     public String toString() {
         return "[" + numbers + "]";
     }
+
 }

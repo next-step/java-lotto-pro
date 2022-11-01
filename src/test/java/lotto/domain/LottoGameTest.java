@@ -1,20 +1,24 @@
 package lotto.domain;
 
+import java.io.ByteArrayInputStream;
+import java.util.Scanner;
 import lotto.ui.Input;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoGameTest {
 
-
     @DisplayName("LottoGame 이 정상적으로 수행된다.")
     @Test
     void integration_test() {
 
+        System.setIn( new ByteArrayInputStream("10000\n7".getBytes()));
+        Scanner scanner = new Scanner(System.in);
+
         LottoGame lottoGame = new LottoGame(new Input() {
             @Override
             public String nextLine() {
-                return "10000";
+                return scanner.nextLine();
             }
 
             @Override
@@ -26,4 +30,5 @@ class LottoGameTest {
 
         lottoGame.run();
     }
+
 }

@@ -19,6 +19,7 @@ public class LottoGame {
         view.printLottoSize(money.availableLottoSize());
         lottos.buyRandomNumberLottos(money.availableLottoSize());
         view.printText(lottos.toString());
-        view.printResultStat(lottos.checkResultStat(new WinningLotto(view.insertWinningNumber())));
+        view.printResultStat(lottos.checkResultStat(
+                new WinningLotto(view.insertWinningNumber(), view.insertBonusNumber())));
     }
 }
