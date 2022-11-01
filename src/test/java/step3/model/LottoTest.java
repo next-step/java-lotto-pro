@@ -25,7 +25,7 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("new Lotto 할때 인자로 널이 들어올경우 에러")
+    @DisplayName("로또를 생성할때 인자로 널이 들어올경우 에러")
     void givenNull_whenNewLotto_thenThrow() {
         assertThatThrownBy(() -> new Lotto(null))
                 .isInstanceOf(RuntimeException.class)
@@ -34,7 +34,7 @@ class LottoTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"14,32,41", "10,23,34,40,41,42,43"})
-    @DisplayName("new Lotto 할때 숫자가 6개가 안될경우 에러")
+    @DisplayName("로또를 생성할때 6개가 안될경우 에러")
     void givenLessOrExceed_whenNewLotto_thenThrow(String text) {
         assertThatThrownBy(() -> new Lotto(generateNumbersByText(text)))
                 .isInstanceOf(RuntimeException.class)
@@ -43,7 +43,7 @@ class LottoTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"10,11,11,12,13,14", "20,20,21,22,23,24", "30,31,32,33,34,34"})
-    @DisplayName("new Lotto 할때 숫자가 겹치는게 있을경우 에러")
+    @DisplayName("로또를 생성할때 숫자가 겹치는게 있을경우 에러")
     void givenDuplicated_whenNewLotto_thenThrow(String text) {
         assertThatThrownBy(() -> new Lotto(generateNumbersByText(text)))
                 .isInstanceOf(RuntimeException.class)
@@ -52,7 +52,7 @@ class LottoTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"-1,1,2,3,4,5", "40,41,42,43,44,47"})
-    @DisplayName("new Lotto 할때 숫자가 로또숫자 범위를 벗어날경우 에러")
+    @DisplayName("로또를 생성할때 숫자가 로또숫자 범위를 벗어날경우 에러")
     void givenOverOrLessLottoNumber_whenNewLotto_thenThrow(String text) {
         assertThatThrownBy(() -> new Lotto(generateNumbersByText(text)))
                 .isInstanceOf(RuntimeException.class)
@@ -67,23 +67,23 @@ class LottoTest {
 
     @ParameterizedTest
     @ValueSource(ints = {1, 10, 20, 32})
-    @DisplayName("contains 할때 숫자가 포함되어있을경우 참 리턴")
+    @DisplayName("로또내에 해당 숫자가 포함되어있지않으면 true 를 리턴")
     void givenNumber_whenContains_thenTrue(int number) {
         assertThat(lotto.contains(number)).isTrue();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {5, 30, 40, 41})
-    @DisplayName("contains 할때 숫자가 포함되어있을경우 거짓 리턴")
+    @DisplayName("로또내에 해당 숫자가 포함되어있지않으면 false 를 리턴")
     void givenNumber_whenContains_thenFalse(int number) {
         assertThat(lotto.contains(number)).isFalse();
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1,10,20,32,42,45:6", "1,10,20,30,31,40:3", "2,3,4,5,6,7:0"}, delimiter = ':')
-    @DisplayName("getMatchedCountComparedToLotto 할때 로또숫자와 n개가 겹칠경우 n 리턴")
-    void givenWinningLotto_whenGetMatchedCountComparedToLotto_thenMatchedCount(String text, int expectedMatchedCount) {
+    @DisplayName("구매한 로또에서 당첨번호가 n 개 있으면 n 개를 리턴")
+    void givenWinningLotto_whenGetMatchedCount_thenMatchedCount(String text, int expectedMatchedCount) {
         Lotto winningLotto = new Lotto(generateNumbersByText(text));
-        assertThat(this.lotto.getMatchedCountComparedToLotto(winningLotto)).isEqualTo(expectedMatchedCount);
+        assertThat(this.lotto.getMatchedCount(winningLotto)).isEqualTo(expectedMatchedCount);
     }
 }

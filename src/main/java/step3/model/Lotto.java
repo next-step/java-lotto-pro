@@ -80,7 +80,7 @@ public class Lotto {
                 .collect(Collectors.joining(StringConstant.COMMA));
     }
 
-    public int getMatchedCountComparedToLotto(Lotto winningLotto) {
+    public int getMatchedCount(Lotto winningLotto) {
         Iterator<Integer> winningNumbers = winningLotto.iterate();
         int count = 0;
         while (winningNumbers.hasNext()) {

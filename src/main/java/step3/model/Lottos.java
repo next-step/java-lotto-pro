@@ -39,7 +39,7 @@ public class Lottos {
     }
 
     private void calculate(Lotto winningLotto, LottoResult lottoResult, Lotto lotto) {
-        int count = lotto.getMatchedCountComparedToLotto(winningLotto);
+        int count = lotto.getMatchedCount(winningLotto);
         lottoResult.addByLottoScoreType(LottoScoreType.getByScore(count));
     }
 }
