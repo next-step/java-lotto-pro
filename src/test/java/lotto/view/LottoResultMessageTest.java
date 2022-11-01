@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import lotto.domain.match.count.MatchCount;
 import lotto.domain.quantity.Quantity;
-import lotto.view.LottoResultMessage;
 
 class LottoResultMessageTest {
 	@Test

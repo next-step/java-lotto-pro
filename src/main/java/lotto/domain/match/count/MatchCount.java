@@ -3,12 +3,11 @@ package lotto.domain.match.count;
 import java.util.Objects;
 
 import lotto.domain.amount.Amount;
-import lotto.domain.amount.MatchCountWinningPriceStrategy;
+import lotto.domain.amount.MatchRank;
 import lotto.domain.lotto.Lotto;
 
 public class MatchCount {
 	private static final int MIN_MATCH_COUNT = 0;
-	private static final int MAX_MATCH_COUNT = 6;
 
 	private final int matchCount;
 
@@ -32,7 +31,7 @@ public class MatchCount {
 	}
 
 	public Amount winningPrice() {
-		return new MatchCountWinningPriceStrategy(this).winningPrice();
+		return MatchRank.getWinningPrice(this);
 	}
 
 	public int getInt() {
