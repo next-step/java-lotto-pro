@@ -58,6 +58,12 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("입력된 당첨번호가 중복된 경우 예외처리")
+    void duplicate_number_test() {
+        assertThatThrownBy(() -> new Lotto("1,1,1,1,1,1")).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     @DisplayName("로또에 특정 숫자 포함 여부 확인 테스트")
     void isContained_test() {
         assertThat(new Lotto("1,2,3,4,5,6").isContained(1)).isTrue();

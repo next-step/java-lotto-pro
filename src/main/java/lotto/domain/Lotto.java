@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Lotto {
 
@@ -16,6 +14,7 @@ public class Lotto {
     private static final String INVALID_LENGTH_MESSAGE = "로또 당첨 번호는 6자리여야 합니다.";
     private static final String INVALID_NUMBER_MESSAGE = "로또 당첨 번호는 1 이상 45 이하의 숫자여야 합니다.";
     private static final String INVALID_DELIMITER_MESSAGE = "로또 당첨 번호는 ,(콤마)로 구분되어야 합니다.";
+    private static final String DUPLICATE_NUMBER_MESSAGE = "로또 당첨 번호는 중복되지 않은 값이어야 합니다.";
     private List<Integer> lotto;
 
     public Lotto() {
@@ -40,6 +39,11 @@ public class Lotto {
 
         for (String num : nums) {
             validateNumber(num);
+        }
+
+        Set<String> set = new HashSet<>(Arrays.asList(nums));
+        if (set.size() != LOTTO_LENGTH) {
+            throw new IllegalArgumentException(DUPLICATE_NUMBER_MESSAGE);
         }
 
         return nums;
