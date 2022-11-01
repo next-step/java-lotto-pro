@@ -35,10 +35,6 @@ public enum LottoMatchType {
         return this == OTHER;
     }
 
-    public int getMatchCount() {
-        return this.matchCount;
-    }
-
     public int getWinningAmount() {
         return this.winningAmount;
     }

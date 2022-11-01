@@ -10,7 +10,7 @@ import static lotto.LottoPrinter.print;
 public class LottoStaticApp implements App {
 
     private static final String WELCOME = "당첨 통계\n---------";
-    private static final String MATCH = "%d개 일치 (%d원)- %d개";
+    private static final String MATCH = "%s (%d원)- %d개";
     private static final String PROFIT = "총 수익률은 %.2f입니다.";
     private static final String PROFIT_EASTER_EGG = PROFIT + "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
@@ -19,6 +19,7 @@ public class LottoStaticApp implements App {
     private List<Lotto> lottoList;
     private Lotto winLotto;
     private PayAmount payAmount;
+    private LottoNumber bonusLottoNumber;
 
     private LottoStaticApp() {
     }
@@ -39,6 +40,7 @@ public class LottoStaticApp implements App {
     private void prepareLottoMatchStatistics() {
         for (Lotto lotto : lottoList) {
             LottoMatchType lottoMatchType = lotto.match(winLotto);
+            lottoMatchType = lottoMatchType.promotionBonusBall(lotto.contains(bonusLottoNumber));
             Integer count = countMap.getOrDefault(lottoMatchType, 0);
             countMap.put(lottoMatchType, ++count);
         }
@@ -50,7 +52,7 @@ public class LottoStaticApp implements App {
         }
         Integer count = countMap.getOrDefault(lottoMatchType, 0);
         print(String.format(MATCH,
-            lottoMatchType.getMatchCount(), lottoMatchType.getWinningAmount(), count));
+            lottoMatchType.getPresentString(), lottoMatchType.getWinningAmount(), count));
     }
 
     private void printLottoProfitStatistics() {
@@ -77,6 +79,7 @@ public class LottoStaticApp implements App {
         private List<Lotto> lottoList;
         private Lotto winLotto;
         private PayAmount payAmount;
+        private LottoNumber bonusLottoNumber;
 
         public Builder lottoList(List<Lotto> lottoList) {
             this.lottoList = lottoList;
@@ -85,6 +88,11 @@ public class LottoStaticApp implements App {
 
         public Builder winLotto(Lotto winLotto) {
             this.winLotto = winLotto;
+            return this;
+        }
+
+        public Builder bonusLottoNumber(LottoNumber bonusLottoNumber) {
+            this.bonusLottoNumber = bonusLottoNumber;
             return this;
         }
 
@@ -98,6 +106,7 @@ public class LottoStaticApp implements App {
             app.lottoList = this.lottoList;
             app.winLotto = this.winLotto;
             app.payAmount = this.payAmount;
+            app.bonusLottoNumber = this.bonusLottoNumber;
             return app;
         }
     }
