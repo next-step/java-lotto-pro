@@ -2,7 +2,7 @@ package step3.controller;
 
 import step3.domain.LottoGenerator;
 import step3.domain.LottoNumbers;
-import step3.domain.LottoShop;
+import step3.domain.LottoUtil;
 import step3.domain.Lottos;
 import step3.domain.Money;
 import step3.domain.Rewards;
@@ -14,8 +14,8 @@ public class LottoController {
     public void run() {
         Money money = new Money(InputView.inputPurchaseAmount());
 
-        Lottos purchasedLottos = LottoGenerator.createLottos(new LottoShop().buy(money));
-        OutputView.showPurchaseLottoCount(new LottoShop().buy(money));
+        Lottos purchasedLottos = LottoGenerator.createLottos(LottoUtil.buy(money));
+        OutputView.showPurchaseLottoCount(LottoUtil.buy(money));
         OutputView.showPurchasedLottos(purchasedLottos);
 
         LottoNumbers winningNumbers = new LottoNumbers(InputView.inputWinningNumber());

@@ -4,7 +4,6 @@ public class Money {
 
     private int money;
     public static final int MIN_SIZE = 0;
-    public static final int MIN_MONEY = 1000;
     public static final String LESS_THAN_MIN_SIZE = "[ERROR] 구입금액은 음수일 수 없습니다.";
 
     public Money(int value) {
