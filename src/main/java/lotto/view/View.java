@@ -11,7 +11,7 @@ import java.util.List;
 
 // TODO: InputView / OutputView 로 이관
 public class View {
-    private static final String MSG_LOTTO_COUNT = "%d개를 구매했습니다.";
+    private static final String MSG_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String MSG_CORRECT_COUNT = "%d개 일치";
     private static final String MSG_BONUS = ", 보너스 볼 일치";
     private static final String MSG_PRIZE = " (%d원)- %d개";
@@ -42,8 +42,8 @@ public class View {
         OutputView.print(text);
     }
 
-    public void printLottoCount(int count) {
-        print(String.format(MSG_LOTTO_COUNT, count));
+    public void printLottoCount(int manualCount, int autoCount) {
+        print(String.format(MSG_LOTTO_COUNT, manualCount, autoCount - manualCount));
     }
 
     public List<LottoNumber> insertWinningLotto() {

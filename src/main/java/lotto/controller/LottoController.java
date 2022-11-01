@@ -17,8 +17,8 @@ public class LottoController {
         Money money = new Money(view.insertMoney());
         int manualLottoCount = view.insertManualLottoCount();
         Lottos lottos = new Lottos(view.insertManualLotto(manualLottoCount));
-        view.printLottoCount(money.getBuyableLottoCount());
-        lottos.buyLottos(money.getBuyableLottoCount());
+        lottos.buyLottos(money.getBuyableLottoCount() - manualLottoCount);
+        view.printLottoCount(manualLottoCount, money.getBuyableLottoCount());
         view.print(lottos.toString());
         WinningLotto winningLotto = new WinningLotto(view.insertWinningLotto(), view.insertBonusBall());
         LottoResult result = lottos.getResult(winningLotto);
