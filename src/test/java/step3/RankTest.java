@@ -43,7 +43,7 @@ public class RankTest {
     @DisplayName("valueOf값이 5이면서 보너스값이 true이면 TWO 반환")
     void test_that_it_returns_rank_at_match_count_5_and_bonus_value_true() {
         //then
-        assertThat(Rank.valueOf((countParam, bonusParam) -> countParam == 5 && bonusParam,true)).isEqualTo(Rank.TWO);
+        assertThat(Rank.valueOf((countParam, bonusParam) -> countParam == 5 && bonusParam, true)).isEqualTo(Rank.SECOND);
     }
 
     @Test

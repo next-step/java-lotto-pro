@@ -78,7 +78,7 @@ public class LottosTest {
         Map<Rank, Integer> rankStats = lottos.getRankOfLottos(new WinningLotto(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 45)), LottoNumber.valueOf(16)));
 
         //then
-        assertThat(rankStats.get(Rank.TWO)).isEqualTo(1);
+        assertThat(rankStats.get(Rank.SECOND)).isEqualTo(1);
     }
 
     @Test

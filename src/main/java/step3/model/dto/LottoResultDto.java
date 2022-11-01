@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoResultDto {
+
     private final List<RankDto> ranks;
     private final double priceRatio;
 

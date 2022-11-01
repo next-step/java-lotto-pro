@@ -18,7 +18,7 @@ public class RankDto {
     }
 
     public boolean isRankTwo(){
-        return rank == Rank.TWO;
+        return rank == Rank.SECOND;
     }
 
     public int getMatchCount() {

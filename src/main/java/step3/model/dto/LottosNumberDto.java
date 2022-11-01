@@ -9,10 +9,10 @@ import java.util.stream.Collectors;
 
 public class LottosNumberDto {
 
-
     private final List<List<Integer>> lottosNumber;
     private final int autoLottoCount;
     private final int manualLottoCount;
+
     public LottosNumberDto(Lottos lottoCollection) {
         List<Lotto> lottos = lottoCollection.getNumbersOfLottos();
         this.lottosNumber = lottos
