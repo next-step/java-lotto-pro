@@ -1,26 +1,17 @@
 package lotto.domain;
 
-import lotto.view.OutputView;
-
 import java.util.Objects;
+import lotto.view.OutputView;
 
 public class LottoPurchaseAmount  {
     public static final int LOTTO_PRICE = 1000;
 
     private final int amount;
 
-    public LottoPurchaseAmount(String inputAmount) {
-        this.amount = parseAmount(inputAmount);
+    public LottoPurchaseAmount(int amount) {
+        this.amount = amount;
         validMinAmount();
         validThousands();
-    }
-
-    private int parseAmount(String inputAmount) {
-        try {
-            return Integer.parseInt(inputAmount);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException(OutputView.ERROR_MESSAGE_INPUT_AMOUNT_EXCESS);
-        }
     }
 
     private void validThousands() {
