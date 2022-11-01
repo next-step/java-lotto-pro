@@ -34,37 +34,9 @@ public class Statistic {
     }
 
     private void inputCountPrize(int hit) {
-        if (isHitThree(hit)) {
-            addCount(Prize.FOURTH.getHit());
-            return;
+        if (prize.containsKey(hit)) {
+            addCount(hit);
         }
-        if (isHitFour(hit)) {
-            addCount(Prize.THIRD.getHit());
-            return;
-        }
-        if (isHitFive(hit)) {
-            addCount(Prize.SECOND.getHit());
-            return;
-        }
-        if (isHitSix(hit)) {
-            addCount(Prize.FIRST.getHit());
-        }
-    }
-
-    private boolean isHitThree(int hit) {
-        return hit == Prize.FOURTH.getHit();
-    }
-
-    private boolean isHitFour(int hit) {
-        return hit == Prize.THIRD.getHit();
-    }
-
-    private boolean isHitFive(int hit) {
-        return hit == Prize.SECOND.getHit();
-    }
-
-    private boolean isHitSix(int hit) {
-        return hit == Prize.FIRST.getHit();
     }
 
     private void addCount(int hit) {
