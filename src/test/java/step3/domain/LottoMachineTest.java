@@ -10,11 +10,12 @@ public class LottoMachineTest {
     @DisplayName("로또 발급 테스트")
     @Test
     void 로또발급테스트() {
-        assertThat(LottoMachine.getLotto()).isInstanceOf(Lotto.class);
-        assertThat(LottoMachine.getLotto()).isInstanceOf(Lotto.class);
-        assertThat(LottoMachine.getLotto()).isInstanceOf(Lotto.class);
-        assertThat(LottoMachine.getLotto()).isInstanceOf(Lotto.class);
-        assertThat(LottoMachine.getLotto()).isInstanceOf(Lotto.class);
-        assertThat(LottoMachine.getLotto()).isInstanceOf(Lotto.class);
+        LottoCreateStrategy strategy = new AutoLottoCreateStrategy();
+        assertThat(LottoMachine.getLotto(strategy)).isInstanceOf(Lotto.class);
+        assertThat(LottoMachine.getLotto(strategy)).isInstanceOf(Lotto.class);
+        assertThat(LottoMachine.getLotto(strategy)).isInstanceOf(Lotto.class);
+        assertThat(LottoMachine.getLotto(strategy)).isInstanceOf(Lotto.class);
+        assertThat(LottoMachine.getLotto(strategy)).isInstanceOf(Lotto.class);
+        assertThat(LottoMachine.getLotto(strategy)).isInstanceOf(Lotto.class);
     }
 }

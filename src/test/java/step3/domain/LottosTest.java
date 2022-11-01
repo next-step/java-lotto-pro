@@ -14,11 +14,12 @@ public class LottosTest {
     @Test
     void 로또들_생성() {
         List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(LottoMachine.getLotto());
-        lottoList.add(LottoMachine.getLotto());
-        lottoList.add(LottoMachine.getLotto());
-        lottoList.add(LottoMachine.getLotto());
-        lottoList.add(LottoMachine.getLotto());
+        LottoCreateStrategy strategy = new AutoLottoCreateStrategy();
+        lottoList.add(LottoMachine.getLotto(strategy));
+        lottoList.add(LottoMachine.getLotto(strategy));
+        lottoList.add(LottoMachine.getLotto(strategy));
+        lottoList.add(LottoMachine.getLotto(strategy));
+        lottoList.add(LottoMachine.getLotto(strategy));
 
         Lottos lottos = new Lottos(lottoList);
 

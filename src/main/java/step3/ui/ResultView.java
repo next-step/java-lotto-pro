@@ -9,5 +9,5 @@ public interface ResultView {
 
     void printLottoTickets(PurchaseAmount purchaseAmount);
 
-    void printWinningResult(WinningLotto winningLotto, Lottos lottos);
+    void printWinningResult(WinningLotto winningLotto, Lottos lottos, PurchaseAmount purchaseAmount);
 }

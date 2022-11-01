@@ -1,26 +1,43 @@
 package step3.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WinningResult {
-    private static final int DECIMAL_CORRECTION_VALUE = 100;
-    // TODO : List 말고 Map으로 해야 할듯...? --> 마지막 ResultView에서 사용하기 용이함
-    private final List<WinningLottoRank> ranks;
+    private static final int DEFAULT_VALUE = 0;
+    private static final int DEFAULT_ADD_VALUE = 1;
+    private final Map<WinningLottoRank, Integer> ranks;
 
     public WinningResult() {
-        ranks = new ArrayList<>();
+        ranks = new HashMap<>();
+        for (WinningLottoRank value : WinningLottoRank.values()) {
+            ranks.put(value, ranks.getOrDefault(value, DEFAULT_VALUE));
+        }
     }
 
     public void addRank(WinningLottoRank rank) {
-        ranks.add(rank);
+        ranks.put(rank, ranks.get(rank) + DEFAULT_ADD_VALUE);
     }
 
     public double getYield(PurchaseAmount purchaseAmount) {
         int totalReward = 0;
-        for (WinningLottoRank rank : ranks) {
-            totalReward += rank.getReward();
+        for (WinningLottoRank rank : ranks.keySet()) {
+            totalReward += ranks.get(rank) * rank.getReward();
         }
-        return Math.floor((double) totalReward / (double) purchaseAmount.purchaseAmount() * DECIMAL_CORRECTION_VALUE) / DECIMAL_CORRECTION_VALUE;
+        return (double) totalReward / (double) purchaseAmount.purchaseAmount();
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("당첨 통계\n");
+        sb.append("---------\n");
+        for (WinningLottoRank rank : WinningLottoRank.values()) {
+            sb.append(rank);
+            sb.append("- ");
+            sb.append(ranks.get(rank));
+            sb.append("개\n");
+        }
+        return sb.toString();
     }
 }

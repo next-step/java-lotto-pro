@@ -8,7 +8,7 @@ public class Lotto {
     private static final int MISMATCH_POINT = 0;
     public static final int LOTTO_NUMBERS_SIZE = 6;
     public static final String EXCEPTION_MESSAGE_INCONSISTENCY_LOTTO_NUMBERS_SIZE = "로또번호 갯수는 " + LOTTO_NUMBERS_SIZE + "이어야 합니다.";
-    protected final List<LottoNumber> lottoNumbers;
+    final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);

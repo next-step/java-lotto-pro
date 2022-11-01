@@ -27,4 +27,9 @@ public enum WinningLottoRank {
                 .findFirst()
                 .orElse(FIFTH);
     }
+
+    @Override
+    public String toString() {
+        return matchCount + "개 일치 (" + reward + "원)";
+    }
 }

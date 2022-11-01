@@ -1,12 +1,11 @@
 package step3.ui;
 
-import step3.domain.Lottos;
-import step3.domain.PurchaseAmount;
-import step3.domain.WinningLotto;
+import step3.domain.*;
 
 public class ConsoleResultView implements ResultView {
 
-    public static final String MESSAGE_FOR_PRINT_LOTTO_TICKETS = "개를 구매했습니다.";
+    private static final String MESSAGE_FOR_PRINT_LOTTO_TICKETS = "개를 구매했습니다.";
+    private static final String MESSAGE_FOR_PRINT_TOTAL_YIELD = "총 수익률은 %.2f입니다.";
 
     @Override
     public void printLottos(Lottos lottos) {
@@ -19,7 +18,12 @@ public class ConsoleResultView implements ResultView {
     }
 
     @Override
-    public void printWinningResult(WinningLotto winningLotto, Lottos lottos) {
-
+    public void printWinningResult(WinningLotto winningLotto, Lottos lottos, PurchaseAmount purchaseAmount) {
+        WinningResult result = new WinningResult();
+        for (Lotto lotto : lottos.lottos()) {
+            result.addRank(winningLotto.rank(lotto));
+        }
+        System.out.print(result);
+        System.out.printf(MESSAGE_FOR_PRINT_TOTAL_YIELD, result.getYield(purchaseAmount));
     }
 }
