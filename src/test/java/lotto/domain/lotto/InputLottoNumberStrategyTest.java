@@ -7,9 +7,6 @@ import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.lotto.InputLottoNumberStrategy;
-import lotto.domain.lotto.LottoNumber;
-
 class InputLottoNumberStrategyTest {
 	@Test
 	void 로또_번호_6개_입력() {

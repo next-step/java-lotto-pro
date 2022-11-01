@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.yield.Yield;
-
 class YieldTest {
 	@Test
 	void 객체_생성() {

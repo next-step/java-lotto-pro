@@ -11,7 +11,8 @@ class DefaultYieldStrategyTest {
 
 	@Test
 	void 수익률_15배() {
-		Assertions.assertThat(new DefaultYieldStrategy(Amount.from(15000), Amount.from(1000)).yield()).isEqualTo(Yield.from(15));
+		Assertions.assertThat(new DefaultYieldStrategy(Amount.from(15000), Amount.from(1000)).yield())
+			.isEqualTo(Yield.from(15));
 	}
 
 	@Test

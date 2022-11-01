@@ -7,8 +7,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.amount.Amount;
-import lotto.domain.lotto.DefaultPurchaseStrategy;
-import lotto.domain.lotto.Lotto;
 
 class DefaultPurchaseStrategyTest {
 	@Test
