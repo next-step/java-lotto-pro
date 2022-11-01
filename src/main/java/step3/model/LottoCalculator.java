@@ -36,7 +36,7 @@ public class LottoCalculator {
 //    }
 
     public void calculateWinnerStatistics(Lottos lottos) {
-        purchasedLottos = lottos.getLottos();
+        purchasedLottos = lottos.getLottoList();
         for(Lotto lotto : purchasedLottos) {
             lottoResult.addResult(compareWinnerRules(lotto), isEqualToBonusNumber(lotto));
         }

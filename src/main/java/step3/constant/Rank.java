@@ -2,6 +2,8 @@ package step3.constant;
 
 import java.util.Arrays;
 
+import static step3.constant.Constant.BONUS_WINNER_SAME_COUNT;
+
 public enum Rank {
     FIRST(6, 2000000000),
     SECOND(5, 30000000),
@@ -33,7 +35,7 @@ public enum Rank {
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         Rank[] ranks = values();
 
-        if(countOfMatch == 5 && matchBonus) {
+        if(countOfMatch == BONUS_WINNER_SAME_COUNT && matchBonus) {
             return SECOND;
         }
         return Arrays.stream(ranks).filter(rank -> rank.getCountOfMatch() == countOfMatch)

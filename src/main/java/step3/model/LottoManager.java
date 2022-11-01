@@ -16,7 +16,7 @@ public class LottoManager {
     private static void generateLottos() {
         InputView.inputPurchasePrice(lottoGenerator);
         lottoGenerator.generateLottos();
-        OutputView.outputPurchasedLotto(lottoGenerator.getLottos());
+        OutputView.outputPurchasedLotto(lottoGenerator);
     }
 
     private static void calculateStatistics() {

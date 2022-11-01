@@ -1,10 +1,14 @@
 package step3.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static step3.constant.Constant.EACH_LOTTO_PRICE;
 import static step3.constant.Message.*;
 
 public class LottoGenerator {
     private int purchasePrice;
+    private int purchaseCount;
     private Lottos lottos = new Lottos();
 
     public void setPurchasePrice(String price) {
@@ -16,8 +20,8 @@ public class LottoGenerator {
     }
 
     public Lottos generateLottos() {
-        lottos.setPurchasedCount(purchasePrice);
-        lottos.addLottos();
+        calculatePurchaseCount();
+        addLottos();
         return lottos;
     }
 
@@ -51,8 +55,20 @@ public class LottoGenerator {
         }
     }
 
+    public void calculatePurchaseCount() {
+        purchaseCount = purchasePrice / EACH_LOTTO_PRICE;
+    }
+
+    public void addLottos() {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < purchaseCount; i++) {
+            lottoList.add(new Lotto());
+        }
+        lottos = new Lottos(lottoList);
+    }
+
     public int getPurchasedCount() {
-        return lottos.getPurchasedCount();
+        return purchaseCount;
     }
 
 }

@@ -7,34 +7,16 @@ import static step3.constant.Constant.EACH_LOTTO_PRICE;
 
 public class Lottos {
     public List<Lotto> lottos;
-    public int purchasedCount;
 
     public Lottos() {
         this.lottos = new ArrayList<>();
     }
+
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
-        this.purchasedCount = lottos.size();
     }
 
-    public void addLottos() {
-        for (int i = 0; i < purchasedCount; i++) {
-            Lotto lotto = new Lotto();
-            lottos.add(lotto);
-        }
-    }
-
-    public void setPurchasedCount(int price) {
-        this.purchasedCount = price / EACH_LOTTO_PRICE;
-    }
-
-    public int getPurchasedCount() {
-        return purchasedCount;
-    }
-
-    public List<Lotto> getLottos() {
+    public List<Lotto> getLottoList() {
         return lottos;
     }
-
-
 }
