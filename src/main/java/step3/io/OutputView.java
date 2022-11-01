@@ -8,9 +8,26 @@ import step3.domain.Reward;
 
 public class OutputView {
 
-    public static void printPurchaseCount(Money payment, Money pricePerLotto) {
+    public static void printPurchaseCount(int autoCount, int manualCount) {
         System.out.println();
-        System.out.println(payment.divide(pricePerLotto) + "개를 구매했습니다.");
+        printManualCount(manualCount);
+        if (autoCount != 0 && manualCount != 0) {
+            System.out.print(", ");
+        }
+        printAutoCount(autoCount);
+        System.out.println("를 구매했습니다.");
+    }
+
+    private static void printManualCount(int manualCount) {
+        if (manualCount != 0) {
+            System.out.print("수동으로 " + manualCount + "장");
+        }
+    }
+
+    private static void printAutoCount(int autoCount) {
+        if (autoCount != 0) {
+            System.out.print("자동으로 " + autoCount + "개");
+        }
     }
 
     public static void printLottoNumbers(Lottos lottos) {

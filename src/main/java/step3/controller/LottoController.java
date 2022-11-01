@@ -42,7 +42,8 @@ public class LottoController {
     private Lottos purchase(Money payment, int manualCount) {
         List<Lotto> manualLottos = lottoStore.generateManualLottos(manualCount);
         Lottos lottos = lottoStore.sell(payment, manualLottos);
-        OutputView.printPurchaseCount(payment, LottoStore.pricePerLotto);
+        int autoCount = payment.divide(LottoStore.pricePerLotto) - manualCount;
+        OutputView.printPurchaseCount(autoCount, manualCount);
         OutputView.printLottoNumbers(lottos);
         return lottos;
     }
