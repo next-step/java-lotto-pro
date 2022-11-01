@@ -6,8 +6,11 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CalculatorInput {
-    private final List<String> delimiters = new ArrayList<>(Arrays.asList(",", ":"));
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final int CUSTOM_DELIMITER_GROUP = 1;
+    private static final int TEXT_GROUP = 2;
     private String text;
+    private final List<String> delimiters = new ArrayList<>(Arrays.asList(",", ":"));
 
     public CalculatorInput(String text) {
         this.text = text;
@@ -30,11 +33,11 @@ public class CalculatorInput {
     }
 
     private void parseCustomDelimiter(String text) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+        Matcher m = CUSTOM_DELIMITER_PATTERN.matcher(text);
         if (m.find()) {
-            String customDelimiter = m.group(1);
+            String customDelimiter = m.group(CUSTOM_DELIMITER_GROUP);
             delimiters.add(customDelimiter);
-            this.text = m.group(2);
+            this.text = m.group(TEXT_GROUP);
         }
     }
 }

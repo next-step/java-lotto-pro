@@ -1,4 +1,7 @@
+import java.util.regex.Pattern;
+
 public class Number {
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
     private final int number;
 
     public Number(String text) {
@@ -13,9 +16,7 @@ public class Number {
     }
 
     private void validateNumeric(String text) {
-        try {
-            Double.parseDouble(text);
-        } catch (NumberFormatException e) {
+        if (!NUMBER_PATTERN.matcher(text).matches()) {
             throw new RuntimeException();
         }
     }
