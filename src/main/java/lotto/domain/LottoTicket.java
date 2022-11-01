@@ -24,6 +24,10 @@ public class LottoTicket {
 		return lottoNumbers;
 	}
 
+	public boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
+	}
+
 	@Override
 	public String toString() {
 		return "[" + lottoNumbers.toString() + "]";

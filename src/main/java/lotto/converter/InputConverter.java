@@ -3,6 +3,7 @@ package lotto.converter;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
 import lotto.exception.InvalidUserInputException;
@@ -31,6 +32,11 @@ public class InputConverter {
 		validate(input);
 		String[] split = input.split(",");
 		return lottoNumbers(split);
+	}
+
+	public static LottoNumber toLottoNumber(String input) {
+		validate(input);
+		return LottoNumber.from(toInt(input));
 	}
 
 	private static LottoNumbers lottoNumbers(String[] split) {

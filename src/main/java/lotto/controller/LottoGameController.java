@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicketMachine;
 import lotto.domain.LottoTickets;
@@ -41,7 +42,7 @@ public class LottoGameController {
 
 	private Result result(Money inputMoney, LottoTickets lottoTickets,
 		WinningLottoTicket winningLottoTicket) {
-		Ranks ranks = Ranks.from(lottoTickets.match(winningLottoTicket));
+		Ranks ranks = Ranks.from(lottoTickets.ranks(winningLottoTicket));
 		return Result.of(ranks, inputMoney);
 	}
 
@@ -57,7 +58,8 @@ public class LottoGameController {
 
 	private WinningLottoTicket winningTicket() {
 		LottoNumbers lottoNumbers = inputView.readWinningNumbers();
-		return WinningLottoTicket.from(lottoNumbers);
+		LottoNumber bonusNumber = inputView.readBonusNumber();
+		return WinningLottoTicket.from(lottoNumbers, bonusNumber);
 	}
 
 	private LottoTickets purchasedLottoTickets(Money money) {

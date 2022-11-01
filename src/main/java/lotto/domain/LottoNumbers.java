@@ -63,4 +63,8 @@ public class LottoNumbers {
 			.filter(purchaseLottoNumbers.lottoNumbers::contains)
 			.count();
 	}
+
+	public boolean contains(LottoNumber bonusNumber) {
+		return lottoNumbers.contains(bonusNumber);
+	}
 }
