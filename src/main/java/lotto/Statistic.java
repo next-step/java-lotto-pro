@@ -13,9 +13,9 @@ import java.util.Map;
 
 public class Statistic {
     private final Map<Integer, Integer> prize = new HashMap<>();
-    private final WinningNumber winningNumber;
+    private final LottoNumber winningNumber;
 
-    public Statistic(WinningNumber winningNumber) {
+    public Statistic(LottoNumber winningNumber) {
         initialize();
         this.winningNumber = winningNumber;
     }

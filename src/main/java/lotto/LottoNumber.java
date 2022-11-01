@@ -18,6 +18,12 @@ public class LottoNumber {
         return sixNumbers.contains(number);
     }
 
+    public int countHit(LottoNumber lottoNumber) {
+        return (int) sixNumbers.stream()
+                .filter(lottoNumber::contains)
+                .count();
+    }
+
     @Override
     public String toString() {
         return sixNumbers.toString();
