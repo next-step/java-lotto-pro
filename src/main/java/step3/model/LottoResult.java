@@ -19,6 +19,9 @@ public class LottoResult {
     public int getTotalWinnerPrice() {
         return totalWinnerPrice;
     }
+    public double getProfitRate() {
+        return profitRate;
+    }
 
     public void addResult(int sameCount) {
         if (isNotExistsCount(sameCount)) {
