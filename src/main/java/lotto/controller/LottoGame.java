@@ -1,12 +1,11 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
-import lotto.domain.PayAmount;
+import lotto.domain.*;
+import lotto.util.InputValidator;
 import lotto.util.ProfitCalculator;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
@@ -31,10 +30,17 @@ public class LottoGame {
         }
     }
 
-    public void start(List<Integer> winningNumbers) {
-        LottoResult lottoResult = lottos.findWinner(new Lotto(winningNumbers));
+    public void start(List<Integer> winningNumbers, int bonusBall) {
+        validateDuplicateBonusBall(winningNumbers, bonusBall);
+        LottoResult lottoResult = lottos.findWinner(new Lotto(winningNumbers), new LottoNumber(bonusBall));
         double profitRatio = ProfitCalculator.calculateProfit(lottoResult, lottos.getLottos().size());
         printLottoResult(lottoResult, profitRatio);
+    }
+
+    public void validateDuplicateBonusBall(List<Integer> winningNumbers, int bonusBall) {
+        List<Integer> lottoNumberIncludeBonusBall = new ArrayList<>(winningNumbers);
+        lottoNumberIncludeBonusBall.add(bonusBall);
+        InputValidator.validateDuplicateLottoNumber(lottoNumberIncludeBonusBall);
     }
 
     private void printLottoResult(LottoResult lottoResult, double profitRatio) {
