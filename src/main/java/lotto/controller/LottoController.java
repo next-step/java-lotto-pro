@@ -18,33 +18,33 @@ public class LottoController {
     public void startLotto() {
 
         LottoMoney lottoMoney = InputView.getLottoPurchasePrice();
-        int customLottoTicketCount = InputView.getCustomLottoCount(lottoMoney);
+        int manualLottoTicketCount = InputView.getManualLottoCount(lottoMoney);
 
-        List<LottoGenerator> lottoGeneratorList = getCustomLottoNumbers(customLottoTicketCount);
-        buyLotto(lottoMoney, customLottoTicketCount, lottoGeneratorList);
+        List<LottoGenerator> lottoGeneratorList = getManualLottoNumbers(manualLottoTicketCount);
+        buyLotto(lottoMoney, manualLottoTicketCount, lottoGeneratorList);
 
         ResultView.winningResult(lottoGame.winningResult());
         ResultView.StatisticsPercent(lottoGame.statisticsPercent(lottoMoney.getMoney()));
     }
 
-    private static List<LottoGenerator> getCustomLottoNumbers(int customLottoTicketCount) {
+    private static List<LottoGenerator> getManualLottoNumbers(int manualLottoTicketCount) {
         List<LottoGenerator> lottoGeneratorList = new ArrayList<>();
 
-        if (customLottoTicketCount == 0) {
+        if (manualLottoTicketCount == 0) {
             return lottoGeneratorList;
         }
 
-        InputView.customLottoNumberScript();
-        for (int i = 0; i < customLottoTicketCount; i++) {
-            lottoGeneratorList.add(InputView.getCustomLottoNumbers(i, customLottoTicketCount));
+        InputView.manualLottoNumberScript();
+        for (int i = 0; i < manualLottoTicketCount; i++) {
+            lottoGeneratorList.add(InputView.getManualLottoNumbers(i, manualLottoTicketCount));
         }
 
         return lottoGeneratorList;
     }
 
-    private void buyLotto(LottoMoney lottoMoney, int customTicketCount, List<LottoGenerator> lottoGeneratorList) {
+    private void buyLotto(LottoMoney lottoMoney, int manualTicketCount, List<LottoGenerator> lottoGeneratorList) {
         LottoTickets lottoTickets = lottoGame.buy(lottoMoney, lottoGeneratorList);
-        ResultView.lottoPurchase(customTicketCount, lottoTickets.autoTicketCount(customTicketCount), lottoTickets.toString());
+        ResultView.lottoPurchase(manualTicketCount, lottoTickets.autoTicketCount(manualTicketCount), lottoTickets.toString());
         WinningLottoNumbers winningNumbers = InputView.getWinningNumbers();
         lottoGame.makeLottoResult(winningNumbers, lottoTickets);
     }

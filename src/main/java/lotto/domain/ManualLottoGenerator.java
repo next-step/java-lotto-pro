@@ -8,23 +8,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class CustomLottoGenerator implements LottoGenerator {
+public class ManualLottoGenerator implements LottoGenerator {
 
-    private LottoNumbers customLottoNumbers;
+    private LottoNumbers manualLottoNumbers;
 
     private static final String DELIMITER = ",";
     private static final Pattern LOTTO_COMMA_PATTERN
             = Pattern.compile("^(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+,(\\d|\\s)+$");
 
-    public CustomLottoGenerator(String lottoNumbers) {
+    public ManualLottoGenerator(String lottoNumbers) {
         validNullOrEmpty(lottoNumbers);
         checkLottoPattern(lottoNumbers);
-        this.customLottoNumbers = new LottoNumbers(convertToIntegerList(lottoNumbers));
+        this.manualLottoNumbers = new LottoNumbers(convertToIntegerList(lottoNumbers));
     }
 
     @Override
     public LottoNumbers generateLottoNumber() {
-        return customLottoNumbers;
+        return manualLottoNumbers;
     }
 
     private void validNullOrEmpty(String lottoNumbers) {

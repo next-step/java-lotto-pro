@@ -22,9 +22,9 @@ public class ResultView {
 
     }
 
-    public static void lottoPurchase(int customLottoCount, int autoLottoCount, String purchaseLottoTickets) {
+    public static void lottoPurchase(int manualLottoCount, int autoLottoCount, String purchaseLottoTickets) {
         System.out.println();
-        System.out.println(String.format(LOTTO_PURCHASE, customLottoCount, autoLottoCount));
+        System.out.println(String.format(LOTTO_PURCHASE, manualLottoCount, autoLottoCount));
         System.out.println(purchaseLottoTickets);
     }
 

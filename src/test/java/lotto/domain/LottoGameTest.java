@@ -13,12 +13,12 @@ class LottoGameTest {
 
     @DisplayName("정해진 금액에서 수동 구매후 나머지는 모두 자동을 구매한다.")
     @Test
-    void custom_purchase_after_auto_purchase() {
+    void manual_purchase_after_auto_purchase() {
         List<LottoGenerator> lottoGeneratorList = new ArrayList<>(
                 Arrays.asList(
-                    new CustomLottoGenerator("1,2,3,4,5,6"),
-                    new CustomLottoGenerator("1,2,3,4,5,6"),
-                    new CustomLottoGenerator("1,2,3,4,5,6")
+                    new ManualLottoGenerator("1,2,3,4,5,6"),
+                    new ManualLottoGenerator("1,2,3,4,5,6"),
+                    new ManualLottoGenerator("1,2,3,4,5,6")
                 )
         );
         LottoGame lottoGame = new LottoGame();

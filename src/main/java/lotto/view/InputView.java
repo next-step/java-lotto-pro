@@ -9,9 +9,9 @@ public class InputView {
     private static final String ENTER_PURCHASE_AMOUNT = "구매금액을 입력해 주세요.";
     private static final String ENTER_LAST_WEEK_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String ENTER_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
-    private static final String ENTER_CUSTOM_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
-    private static final String ENTER_CUSTOM_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
-    private static final String REMAIN_CUSTOM_LOTTO_COUNT = "[남은 수동 로또 입력 회수(%d/%d)]";
+    private static final String ENTER_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String ENTER_MANUAL_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String REMAIN_MANUAL_LOTTO_COUNT = "[남은 수동 로또 입력 회수(%d/%d)]";
     private static final String ERROR_PREFIX = "[ERROR] %s";
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -33,18 +33,18 @@ public class InputView {
         }
     }
 
-    public static int getCustomLottoCount(LottoMoney lottoMoney) {
+    public static int getManualLottoCount(LottoMoney lottoMoney) {
         System.out.println();
-        System.out.println(ENTER_CUSTOM_LOTTO_COUNT);
-        return customPurchaseCount(lottoMoney);
+        System.out.println(ENTER_MANUAL_LOTTO_COUNT);
+        return manualPurchaseCount(lottoMoney);
     }
 
-    private static int customPurchaseCount(LottoMoney lottoMoney) {
+    private static int manualPurchaseCount(LottoMoney lottoMoney) {
         try {
             return lottoMoney.getValidLottoPurchaseCount(SCANNER.nextLine());
         } catch (Exception e) {
             System.out.println(String.format(ERROR_PREFIX, e.getMessage()));
-            return customPurchaseCount(lottoMoney);
+            return manualPurchaseCount(lottoMoney);
         }
     }
 
@@ -69,18 +69,18 @@ public class InputView {
         return bonusNumber;
     }
 
-    public static void customLottoNumberScript() {
+    public static void manualLottoNumberScript() {
         System.out.println();
-        System.out.println(ENTER_CUSTOM_LOTTO_NUMBER);
+        System.out.println(ENTER_MANUAL_LOTTO_NUMBER);
     }
 
-    public static LottoGenerator getCustomLottoNumbers(int count, int total) {
+    public static LottoGenerator getManualLottoNumbers(int count, int total) {
         try {
-            LottoGenerator lottoGeneratorList = new CustomLottoGenerator(SCANNER.nextLine());
+            LottoGenerator lottoGeneratorList = new ManualLottoGenerator(SCANNER.nextLine());
             return lottoGeneratorList;
         } catch (Exception e) {
-            System.out.println(String.format(ERROR_PREFIX, e.getMessage() + String.format(REMAIN_CUSTOM_LOTTO_COUNT, count, total)));
-            return getCustomLottoNumbers(count, total);
+            System.out.println(String.format(ERROR_PREFIX, e.getMessage() + String.format(REMAIN_MANUAL_LOTTO_COUNT, count, total)));
+            return getManualLottoNumbers(count, total);
         }
     }
 

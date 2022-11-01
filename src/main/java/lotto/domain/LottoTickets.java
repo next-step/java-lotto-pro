@@ -28,8 +28,8 @@ public class LottoTickets {
         });
     }
 
-    public int autoTicketCount(int customTicketCount) {
-        return lottoTicketList.size() - customTicketCount;
+    public int autoTicketCount(int manualTicketCount) {
+        return lottoTicketList.size() - manualTicketCount;
     }
 
     @Override
