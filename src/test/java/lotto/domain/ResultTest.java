@@ -15,7 +15,7 @@ class ResultTest {
 	@Test
 	@DisplayName("결과 생성")
 	void createResult() {
-		Result result = Result.of(Ranks.from(List.of(4)), Money.from(1L));
+		Result result = Result.of(Ranks.from(List.of(Rank.SECOND)), Money.from(1L));
 		assertThat(result).isInstanceOf(Result.class);
 	}
 
@@ -24,7 +24,7 @@ class ResultTest {
 	@DisplayName("수익률 반환 테스트")
 	void profitTest(Long inputMoney, Double expected) {
 		// given
-		Result result = Result.of(Ranks.from(List.of(4)), Money.from(inputMoney));
+		Result result = Result.of(Ranks.from(List.of(Rank.FOURTH)), Money.from(inputMoney));
 
 		// when
 		double profitRate = result.getProfitRate();

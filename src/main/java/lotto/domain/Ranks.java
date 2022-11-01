@@ -5,7 +5,6 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Ranks {
 
@@ -15,10 +14,8 @@ public class Ranks {
 		this.ranks = ranks;
 	}
 
-	public static Ranks from(List<Integer> matchCounts) {
-		return new Ranks(matchCounts.stream()
-				.map(Rank::from)
-				.collect(Collectors.toList()));
+	public static Ranks from(List<Rank> ranks) {
+		return new Ranks(ranks);
 	}
 
 	public Map<Rank, Long> groupBy() {
@@ -31,7 +28,8 @@ public class Ranks {
 		Map<Rank, Long> resultRankMap = new LinkedHashMap<>();
 		Arrays.stream(Rank.values())
 			.filter(r -> !r.equals(Rank.LOSE))
-			.sorted(Comparator.comparingInt(Rank::getMatchCount))
+			.sorted(Comparator.comparingInt(Rank::getMatchCount)
+				.thenComparing(Rank::matchingBonus))
 			.forEach(r -> resultRankMap.put(r, 0L));
 		return resultRankMap;
 	}
