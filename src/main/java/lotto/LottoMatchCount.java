@@ -3,7 +3,7 @@ package lotto;
 public class LottoMatchCount {
 
     private static final int INIT_COUNT = 0;
-    public int matchCount;
+    private int matchCount;
 
     public LottoMatchCount() {
         this(INIT_COUNT);
