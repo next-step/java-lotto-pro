@@ -26,6 +26,10 @@ public final class Money {
         return new Money(this.value - price.value);
     }
 
+    public Money multiply(final int value) {
+        return new Money(this.value * value);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
