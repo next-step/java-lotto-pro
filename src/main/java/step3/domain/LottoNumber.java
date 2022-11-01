@@ -30,7 +30,7 @@ public class LottoNumber {
 
     @Override
     public String toString() {
-        return lottoNumber+"";
+        return String.valueOf(lottoNumber);
     }
 
 }
