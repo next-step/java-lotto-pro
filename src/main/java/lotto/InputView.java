@@ -5,6 +5,7 @@
  */
 package lotto;
 
+import static lotto.Constant.INPUT_BONUS_NUMBER_LAST_WEEK;
 import static lotto.Constant.INPUT_PAY_MONEY;
 import static lotto.Constant.INPUT_WINNING_NUMBER_LAST_WEEK;
 
@@ -40,5 +41,14 @@ public class InputView {
 
     private void printInputWinningNumberLastWeek() {
         System.out.println("\n" + INPUT_WINNING_NUMBER_LAST_WEEK);
+    }
+
+    int inputBonusNumberLastWeek() {
+        printInputBonusNumberLastWeek();
+        return scanner.nextInt();
+    }
+
+    private void printInputBonusNumberLastWeek() {
+        System.out.println(INPUT_BONUS_NUMBER_LAST_WEEK);
     }
 }

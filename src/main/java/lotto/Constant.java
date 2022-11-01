@@ -11,12 +11,14 @@ public class Constant {
     public static final String REGEX_ONLY_NUMBER = "^[0-9]*$";
     public static final String INPUT_PAY_MONEY = "구입금액을 입력해 주세요.";
     public static final String INPUT_WINNING_NUMBER_LAST_WEEK = "지난 주 당첨 번호를 입력해 주세요.";
+    public static final String INPUT_BONUS_NUMBER_LAST_WEEK = "보너스 볼을 입력해 주세요.";
     public static final String RESULT_BOUGHT_SOME = "개를 구매했습니다.";
     public static final String RESULT_WINNING_STATISTICS = "당첨 통계\n---------";
     public static final String EA = "개";
     public static final String RESULT_HIT_THREE = "3개 일치 (5000원)-";
     public static final String RESULT_HIT_FOUR = "4개 일치 (50000원)- ";
     public static final String RESULT_HIT_FIVE = "5개 일치 (1500000원)- ";
+    public static final String RESULT_HIT_FIVE_AND_BONUS = "5개 일치, 보너스 볼 일치(30000000원)- ";
     public static final String RESULT_HIT_SIX = "6개 일치 (2000000000원)- ";
     public static final int ZERO = 0;
     public static final int LOTTO_START_NUMBER = 1;
