@@ -3,10 +3,10 @@ package step3.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import static step3.constant.Constant.EACH_LOTTO_PRICE;
-import static step3.constant.Message.*;
 import static step3.utils.CommonUtils.*;
 
+import static step3.constant.Constant.Lotto.*;
+import static step3.constant.Message.Error.*;
 
 public class LottoGenerator {
     private int purchasePrice;
@@ -57,4 +57,9 @@ public class LottoGenerator {
             throw new IllegalArgumentException(UNDER_MIN_PRICE);
         }
     }
+
+    public int getPurchasedCount() {
+        return lottos.getPurchasedCount();
+    }
+
 }
