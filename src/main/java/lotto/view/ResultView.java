@@ -15,7 +15,7 @@ public class ResultView {
 		Quantity quantity = lottos.getQuantity();
 		System.out.printf("%d개를 구매했습니다.\n", quantity.getInt());
 		for (Lotto lotto : lottos.getLottos()) {
-			System.out.println(lotto.getResultMessage());
+			System.out.println(new LottoMessage(lotto));
 		}
 		System.out.print("\n");
 	}

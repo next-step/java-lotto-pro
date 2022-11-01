@@ -23,6 +23,6 @@ class LottoNumberTest {
 
 	@Test
 	void 로또_번호_반환() {
-		assertThat(LottoNumber.from(1).toString()).isEqualTo("1");
+		assertThat(LottoNumber.from(1).getInt()).isEqualTo(1);
 	}
 }

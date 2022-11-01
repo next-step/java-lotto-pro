@@ -43,11 +43,8 @@ public class Lotto {
 		return this.lottoNumbers.contains(lottoNumber);
 	}
 
-	public String getResultMessage() {
-		return lottoNumbers.stream()
-			.sorted()
-			.map(Object::toString)
-			.collect(Collectors.joining(", ", "[", "]"));
+	public Set<LottoNumber> getLottoNumbers() {
+		return lottoNumbers;
 	}
 
 	@Override
