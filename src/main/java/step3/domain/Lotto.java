@@ -11,7 +11,7 @@ public class Lotto {
         this.lottoNumbers = numbers;
     }
 
-    public int compareNumbers(final LottoNumbers winningNumbers) {
+    public int matchNumbers(final LottoNumbers winningNumbers) {
         return this.lottoNumbers.compareTo(winningNumbers);
     }
 
