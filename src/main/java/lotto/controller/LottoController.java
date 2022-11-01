@@ -1,8 +1,8 @@
 package lotto.controller;
 
-import lotto.domain.Lottos;
-import lotto.domain.Amount;
-import lotto.domain.WinningLotto;
+import lotto.domain.amount.Amount;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 

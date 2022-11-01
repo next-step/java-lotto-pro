@@ -2,15 +2,13 @@ package lotto.view;
 
 import java.util.stream.IntStream;
 
-import lotto.domain.Amount;
-import lotto.domain.Lotto;
-import lotto.domain.LottoResultMessage;
-import lotto.domain.LottoResults;
-import lotto.domain.Lottos;
-import lotto.domain.MatchCount;
-import lotto.domain.Quantity;
-import lotto.domain.WinningLotto;
-import lotto.domain.YieldMessage;
+import lotto.domain.amount.Amount;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoResults;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.match.count.MatchCount;
+import lotto.domain.quantity.Quantity;
+import lotto.domain.lotto.WinningLotto;
 
 public class ResultView {
 	public void lottosResult(Lottos lottos) {
