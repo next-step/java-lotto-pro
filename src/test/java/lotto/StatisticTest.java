@@ -14,37 +14,44 @@ public class StatisticTest {
     @BeforeEach
     void init() {
         fakePurchaseLottoNumbers.add(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
-        fakePurchaseLottoNumbers.add(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7))));
-        fakePurchaseLottoNumbers.add(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 7, 8))));
-        fakePurchaseLottoNumbers.add(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9))));
+        fakePurchaseLottoNumbers.add(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 45))));
+        fakePurchaseLottoNumbers.add(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 44, 45))));
+        fakePurchaseLottoNumbers.add(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 43, 44, 45))));
     }
 
     @Test
     void 여섯개_맞춘_개수_가져오기() {
-        Statistic statistic = new Statistic(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        Statistic statistic = new Statistic(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 7));
         statistic.countPrize(fakePurchaseLottoNumbers);
         assertThat(statistic.getCountOfFirst()).isEqualTo(1);
     }
 
     @Test
-    void 다섯개_맞춘_개수_가져오기() {
-        Statistic statistic = new Statistic(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+    void 다섯개와_보너스_번호_맞춘_개수_가져오기() {
+        Statistic statistic = new Statistic(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 45));
         statistic.countPrize(fakePurchaseLottoNumbers);
         assertThat(statistic.getCountOfSecond()).isEqualTo(1);
     }
 
     @Test
-    void 네개_맞춘_개수_가져오기() {
-        Statistic statistic = new Statistic(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+    void 다섯개_맞춘_개수_가져오기() {
+        Statistic statistic = new Statistic(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 7));
         statistic.countPrize(fakePurchaseLottoNumbers);
         assertThat(statistic.getCountOfThird()).isEqualTo(1);
     }
 
     @Test
-    void 세개_맞춘_개수_가져오기() {
-        Statistic statistic = new Statistic(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+    void 네개_맞춘_개수_가져오기() {
+        Statistic statistic = new Statistic(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 7));
         statistic.countPrize(fakePurchaseLottoNumbers);
         assertThat(statistic.getCountOfFourth()).isEqualTo(1);
+    }
+
+    @Test
+    void 세개_맞춘_개수_가져오기() {
+        Statistic statistic = new Statistic(new LottoNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 7));
+        statistic.countPrize(fakePurchaseLottoNumbers);
+        assertThat(statistic.getCountOfFifth()).isEqualTo(1);
     }
 
     @Test

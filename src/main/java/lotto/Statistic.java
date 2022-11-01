@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Statistic {
-    private final Map<Integer, Integer> rank = new HashMap<>();
+    private final Map<Rank, Integer> prize = new HashMap<>();
     private final LottoNumber winningNumber;
 
     public Statistic(LottoNumber winningNumber) {
@@ -21,42 +21,48 @@ public class Statistic {
     }
 
     private void initialize() {
-        rank.put(Rank.FIRST.getCountOfMatch(), ZERO);
-        rank.put(Rank.SECOND.getCountOfMatch(), ZERO);
-        rank.put(Rank.THIRD.getCountOfMatch(), ZERO);
-        rank.put(Rank.FOURTH.getCountOfMatch(), ZERO);
+        prize.put(Rank.FIRST, ZERO);
+        prize.put(Rank.SECOND, ZERO);
+        prize.put(Rank.THIRD, ZERO);
+        prize.put(Rank.FOURTH, ZERO);
+        prize.put(Rank.FIFTH, ZERO);
+        prize.put(Rank.MISS, ZERO);
     }
 
     public void countPrize(List<LottoNumber> lottoNumbers) {
         for (LottoNumber lottoNumber : lottoNumbers) {
-            inputCountPrize(winningNumber.countHit(lottoNumber));
+            inputCountPrize(winningNumber.countHit(lottoNumber), winningNumber.containsBonus(lottoNumber));
         }
     }
 
-    private void inputCountPrize(int hit) {
-        if (rank.containsKey(hit)) {
-            addCount(hit);
+    private void inputCountPrize(int hit, boolean matchBonus) {
+        if (prize.containsKey(Rank.valueOf(hit, matchBonus))) {
+            addCount(Rank.valueOf(hit, matchBonus));
         }
     }
 
-    private void addCount(int hit) {
-        rank.put(hit, rank.get(hit) + 1);
+    private void addCount(Rank rank) {
+        prize.put(rank, prize.get(rank) + 1);
     }
 
     public int getCountOfFirst() {
-        return rank.get(Rank.FIRST.getCountOfMatch());
+        return prize.get(Rank.FIRST);
     }
 
     public int getCountOfSecond() {
-        return rank.get(Rank.SECOND.getCountOfMatch());
+        return prize.get(Rank.SECOND);
     }
 
     public int getCountOfThird() {
-        return rank.get(Rank.THIRD.getCountOfMatch());
+        return prize.get(Rank.THIRD);
     }
 
     public int getCountOfFourth() {
-        return rank.get(Rank.FOURTH.getCountOfMatch());
+        return prize.get(Rank.FOURTH);
+    }
+
+    public int getCountOfFifth() {
+        return prize.get(Rank.FIFTH);
     }
 
     public double calculateTotalEarningsRate(int payMoney) {
@@ -64,9 +70,10 @@ public class Statistic {
     }
 
     public double calculateTotalEarnings() {
-        return Rank.FOURTH.getWinningMoney() * rank.get(Rank.FOURTH.getCountOfMatch())
-                + Rank.THIRD.getWinningMoney() * rank.get(Rank.THIRD.getCountOfMatch())
-                + Rank.SECOND.getWinningMoney() * rank.get(Rank.SECOND.getCountOfMatch())
-                + Rank.FIRST.getWinningMoney() * rank.get(Rank.FIRST.getCountOfMatch());
+        return Rank.FIFTH.getWinningMoney() * prize.get(Rank.FIFTH)
+                + Rank.FOURTH.getWinningMoney() * prize.get(Rank.FOURTH)
+                + Rank.THIRD.getWinningMoney() * prize.get(Rank.THIRD)
+                + Rank.SECOND.getWinningMoney() * prize.get(Rank.SECOND)
+                + Rank.FIRST.getWinningMoney() * prize.get(Rank.FIRST);
     }
 }
