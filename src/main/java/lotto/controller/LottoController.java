@@ -13,9 +13,9 @@ public class LottoController {
         LottoCoin manuallyLottoCoin = LottoInput.inputBuyManuallyNumber(lottoCoin);
 
         Lottos manuallyLottos = LottoInput.inputManuallyLottos(manuallyLottoCoin);
-        LottoOutput.printLottoCount(lottoCoin.size());
-
         Lottos lottos = Lottos.autoGenerateSizeOf(lottoCoin.size() - manuallyLottoCoin.size());
+
+        LottoOutput.printLottoCount(manuallyLottos.size(), lottos.size());
         LottoOutput.printLottos(lottos);
 
         WinningLotto winningLotto = LottoInput.inputWinningLotto();
