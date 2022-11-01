@@ -5,25 +5,22 @@ import step4.constant.LottoConstant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoGenerator {
 
-    private final List<LottoNumber> lottoCandidateNumbers = new ArrayList<>();
+    private static final List<LottoNumber> lottoCandidateNumbers;
 
-    public LottoGenerator() {
-        initLottoCandidateNumbers();
-    }
-
-    private void initLottoCandidateNumbers() {
-        for (int i = LottoConstant.LOTTO_MIN_NUM; i <= LottoConstant.LOTTO_MAX_NUM; i++) {
-            this.lottoCandidateNumbers.add(new LottoNumber(i));
-        }
+    static {
+        lottoCandidateNumbers = IntStream.range(LottoConstant.LOTTO_MIN_NUM, LottoConstant.LOTTO_MAX_NUM + 1)
+                .mapToObj(LottoNumber::new).collect(Collectors.toList());
     }
 
     public LottoResult createLottoResult() {
-        Collections.shuffle(this.lottoCandidateNumbers);
+        Collections.shuffle(lottoCandidateNumbers);
         return new LottoResult(
-                new ArrayList<>(this.lottoCandidateNumbers.subList(0, LottoConstant.PICK_LOTTO_MAX_NUM))
+                new ArrayList<>(lottoCandidateNumbers.subList(0, LottoConstant.PICK_LOTTO_MAX_NUM))
         );
     }
 }
