@@ -15,13 +15,10 @@ public class LottoController {
 
 	public static void main(String[] args) {
 		Money payment = Input.inputPayment();
-		Lottos manualLottos = Input.inputManualLottos();
 
-		Money moneyAfterBuyLotto = payment.minus(manualLottos.getTotalSpent());
 		LottoShop lottoShop = new LottoShop(new LottoRandomCreateStrategy());
-		Lottos auttoLottos = lottoShop.buy(moneyAfterBuyLotto);
+		Lottos lottos = lottoShop.buyManually(payment, Input.inputManualLottos());
 
-		Lottos lottos = manualLottos.merge(auttoLottos);
 		Output.printLottos(lottos);
 
 		Lotto winnerLotto = Input.inputWinnerLotto();
