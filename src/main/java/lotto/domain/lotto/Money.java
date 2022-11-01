@@ -1,30 +1,42 @@
 package lotto.domain.lotto;
 
+import static lotto.utils.Validations.requireNotNull;
+
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Money {
-    public static final Money ZERO = new Money(0);
+    public static final Money ZERO = new Money(BigDecimal.ZERO);
 
-    private final long value;
+    private final BigDecimal value;
 
     public Money(long value) {
-        if (value < 0L) {
-            throw new IllegalArgumentException("금액은 음수가 아니어야 합니다. value=[" + value + "]");
-        }
+        this(BigDecimal.valueOf(value));
+    }
+
+    public Money(BigDecimal value) {
+        requireNotNull(value, "값이 null이 아니어야 합니다.");
+        requirePositiveOrZero(value);
 
         this.value = value;
     }
 
-    public boolean isZero() {
-        return this.value == 0;
+    private static void requirePositiveOrZero(BigDecimal value) {
+        if (value.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("금액은 음수가 아니어야 합니다. value=[" + value + "]");
+        }
     }
 
-    public int divide(final Money other) {
-        return Math.toIntExact(this.value / other.value);
+    public boolean isZero() {
+        return BigDecimal.ZERO.equals(this.value);
+    }
+
+    public BigDecimal divide(final Money other) {
+        return this.value.divide(other.value);
     }
 
     public Money multiply(long value) {
-        return new Money(this.value * value);
+        return new Money(this.value.multiply(BigDecimal.valueOf(value)));
     }
 
     @Override
@@ -36,7 +48,7 @@ public class Money {
             return false;
         }
         Money money = (Money) o;
-        return value == money.value;
+        return value.equals(money.value);
     }
 
     @Override

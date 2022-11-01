@@ -2,6 +2,7 @@ package lotto.domain.lotto;
 
 import static lotto.utils.Validations.requireNotNull;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,7 +28,8 @@ public class LottoStore {
             return Collections.emptyList();
         }
 
-        final int quantity = money.divide(this.lottoUnitPrice);
+        final BigDecimal quotient = money.divide(this.lottoUnitPrice);
+        final int quantity = quotient.intValue();
 
         return pickStrategy.pickNumbers(quantity);
     }

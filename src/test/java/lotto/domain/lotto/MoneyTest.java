@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import java.math.BigDecimal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -49,13 +50,13 @@ class MoneyTest {
     @CsvSource({
             "10000, 1000, 10",
             "0, 1000, 0",
-            "1500, 1000, 1"
+            "1500, 1000, 1.5"
     })
-    void 나누기(final int oneValue, final int otherValue, final int expected) {
+    void 나누기(final int oneValue, final int otherValue, final BigDecimal expected) {
         final Money something = new Money(oneValue);
         final Money other = new Money(otherValue);
 
-        final int actual = something.divide(other);
+        final BigDecimal actual = something.divide(other);
 
         assertThat(actual).isEqualTo(expected);
     }
