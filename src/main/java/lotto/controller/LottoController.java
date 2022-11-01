@@ -10,6 +10,8 @@ public class LottoController {
 
     public void run() {
         LottoCoin lottoCoin = LottoInput.inputMoneyAndAvailableToPurchaseCoin();
+        LottoCoin manuallyLottoCoin = LottoInput.inputBuyManuallyNumber(lottoCoin);
+
         LottoOutput.printLottoCount(lottoCoin.size());
 
         Lottos lottos = Lottos.autoGenerateSizeOf(lottoCoin.size());

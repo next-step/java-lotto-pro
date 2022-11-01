@@ -49,5 +49,18 @@ public class LottoInput {
         }
     }
 
+    public static LottoCoin inputBuyManuallyNumber(LottoCoin lottoCoin) {
+        try {
+            int input = Integer.parseInt(InputConsole.inputBuyManuallyNumber());
+            if (input == 0) {
+                return LottoCoin.empty();
+            }
+            return lottoCoin.pop(input);
+        } catch (IllegalArgumentException e) {
+            OutputConsole.out(String.format("0 ~ %d의 숫자만 입력 가능합니다.", lottoCoin.size()));
+            return inputBuyManuallyNumber(lottoCoin);
+        }
+    }
+
 
 }
