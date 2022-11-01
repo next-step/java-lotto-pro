@@ -1,11 +1,11 @@
 package lotto;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -93,5 +93,13 @@ public class LottoTest {
                 LottoMatchType.OTHER
             )
         );
+    }
+
+    @Test
+    void 로또에_로또_번호_하나가_포함되는지_확인한다() {
+        Lotto lotto = Lotto.valueOf(new ManualLottoNumberGenerateStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
+
+        assertThat(lotto.contains(LottoNumber.valueOf(1))).isTrue();
+        assertThat(lotto.contains(LottoNumber.valueOf(12))).isFalse();
     }
 }
