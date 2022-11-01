@@ -2,6 +2,8 @@ package lotto.model.lotto.ticket;
 
 import lotto.constant.utils.StringUtils;
 
+import java.util.Objects;
+
 public class LottoNumber {
     private static final int LOTTO_MINIMUM_NUMBER = 1;
     private static final int LOTTO_MAXIMUM_NUMBER = 45;
@@ -33,6 +35,19 @@ public class LottoNumber {
 
     private boolean lessThanOneOrGreaterThanFortyFive(int tokenValue) {
         return tokenValue < LOTTO_MINIMUM_NUMBER || LOTTO_MAXIMUM_NUMBER < tokenValue;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 
     @Override

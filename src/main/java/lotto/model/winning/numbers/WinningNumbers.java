@@ -46,4 +46,8 @@ public class WinningNumbers {
         }
         return lottoNumbersData;
     }
+
+    public List<LottoNumber> lottoNumbers() {
+        return lottoNumbers;
+    }
 }
