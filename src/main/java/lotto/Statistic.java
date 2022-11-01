@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Statistic {
-    private final Map<Integer, Integer> prize = new HashMap<>();
+    private final Map<Integer, Integer> rank = new HashMap<>();
     private final LottoNumber winningNumber;
 
     public Statistic(LottoNumber winningNumber) {
@@ -21,10 +21,10 @@ public class Statistic {
     }
 
     private void initialize() {
-        prize.put(Prize.FIRST.getHit(), ZERO);
-        prize.put(Prize.SECOND.getHit(), ZERO);
-        prize.put(Prize.THIRD.getHit(), ZERO);
-        prize.put(Prize.FOURTH.getHit(), ZERO);
+        rank.put(Rank.FIRST.getCountOfMatch(), ZERO);
+        rank.put(Rank.SECOND.getCountOfMatch(), ZERO);
+        rank.put(Rank.THIRD.getCountOfMatch(), ZERO);
+        rank.put(Rank.FOURTH.getCountOfMatch(), ZERO);
     }
 
     public void countPrize(List<LottoNumber> lottoNumbers) {
@@ -34,29 +34,29 @@ public class Statistic {
     }
 
     private void inputCountPrize(int hit) {
-        if (prize.containsKey(hit)) {
+        if (rank.containsKey(hit)) {
             addCount(hit);
         }
     }
 
     private void addCount(int hit) {
-        prize.put(hit, prize.get(hit) + 1);
+        rank.put(hit, rank.get(hit) + 1);
     }
 
     public int getCountOfFirst() {
-        return prize.get(Prize.FIRST.getHit());
+        return rank.get(Rank.FIRST.getCountOfMatch());
     }
 
     public int getCountOfSecond() {
-        return prize.get(Prize.SECOND.getHit());
+        return rank.get(Rank.SECOND.getCountOfMatch());
     }
 
     public int getCountOfThird() {
-        return prize.get(Prize.THIRD.getHit());
+        return rank.get(Rank.THIRD.getCountOfMatch());
     }
 
     public int getCountOfFourth() {
-        return prize.get(Prize.FOURTH.getHit());
+        return rank.get(Rank.FOURTH.getCountOfMatch());
     }
 
     public double calculateTotalEarningsRate(int payMoney) {
@@ -64,9 +64,9 @@ public class Statistic {
     }
 
     public double calculateTotalEarnings() {
-        return Prize.FOURTH.getPrize() * prize.get(Prize.FOURTH.getHit())
-                + Prize.THIRD.getPrize() * prize.get(Prize.THIRD.getHit())
-                + Prize.SECOND.getPrize() * prize.get(Prize.SECOND.getHit())
-                + Prize.FIRST.getPrize() * prize.get(Prize.FIRST.getHit());
+        return Rank.FOURTH.getWinningMoney() * rank.get(Rank.FOURTH.getCountOfMatch())
+                + Rank.THIRD.getWinningMoney() * rank.get(Rank.THIRD.getCountOfMatch())
+                + Rank.SECOND.getWinningMoney() * rank.get(Rank.SECOND.getCountOfMatch())
+                + Rank.FIRST.getWinningMoney() * rank.get(Rank.FIRST.getCountOfMatch());
     }
 }
