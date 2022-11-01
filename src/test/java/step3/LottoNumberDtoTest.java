@@ -3,6 +3,7 @@ package step3;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import step3.model.Lotto;
 import step3.model.LottoMoney;
@@ -38,41 +39,38 @@ public class LottoNumberDtoTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 4, 5})
-    @DisplayName("로또를 생성시 자동여부지정안하면 기본을 자동설정")
-    void test_that_returns_auto_if_created_at_constructor(int count) {
+    @CsvSource(value = {"1:13", "2:12", "3:11", "4:10"}, delimiter = ':')
+    @DisplayName("로또를 생성시 자동개수 반환")
+    void test_that_returns_auto_if_created_at_constructor(int manualCount, int autoCount) {
         //given
         List<Lotto> lottoNumbers = new ArrayList();
-        for (int i = 0; i < count; i++) {
-            lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
-        }
+        lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
         Lottos lottos = new Lottos(lottoNumbers);
-        LottosNumberDto lottosNumberDto = new LottosNumberDto(lottos, new LottoMoney(3000, 1));
+        LottosNumberDto lottosNumberDto = new LottosNumberDto(lottos, new LottoMoney(14000, manualCount));
 
         //when
         int autoLottoCount = lottosNumberDto.getAutoLottoCount();
 
         //then
-        assertThat(autoLottoCount).isEqualTo(count);
+        assertThat(autoLottoCount).isEqualTo(autoCount);
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 4, 5})
-    @DisplayName("로또를 생성시 수동으로하면 로또개수에서 수동개수반환")
-    void test_that_returns_autocount_if_created_at_constructor(int count) {
+    @ValueSource(ints = {1,2,3,4,5})
+    @DisplayName("로또를 생성시 수동개수반환")
+    void test_that_returns_autocount_if_created_at_constructor(int manualCount) {
         //given
         List<Lotto> lottoNumbers = new ArrayList();
-        for (int i = 0; i < count; i++) {
-            lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
-            lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
-        }
+        lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
+        lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
+
         Lottos lottos = new Lottos(lottoNumbers);
-        LottosNumberDto lottosNumberDto = new LottosNumberDto(lottos, new LottoMoney(3000, 1));
+        LottosNumberDto lottosNumberDto = new LottosNumberDto(lottos, new LottoMoney(14000, manualCount));
 
         //when
-        int autoLottoCount = lottosNumberDto.getAutoLottoCount();
+        int manualLottoCount = lottosNumberDto.getManualLottoCount();
 
         //then
-        assertThat(autoLottoCount).isEqualTo(count);
+        assertThat(manualLottoCount).isEqualTo(manualCount);
     }
 }
