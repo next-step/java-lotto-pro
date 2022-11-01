@@ -59,7 +59,8 @@
 
 ### 예외처리
 * 구입금액에 숫자가 아닌 문자 타입이 들어오는 경우 IllegalArgumentException을 반환한다.
-* 구입금액에 1000원 미만의 숫자가 들어오는 경우 IllegalArgumentException을 반환한다.
+* 구입금액에 음수가 들어오는 경우 IllegalArgumentException을 반환한다.
+* 로또 구입금액으로 1000원 미만의 수가 들어오는 경우 IllegalArgumentException을 반환한다.
 * 입력받은 지난 주 당첨 번호가 6개의 숫자가 아닌 경우 IllegalArgumentException을 반환한다.
 * 입력받은 지난 주 당첨 번호가 1~45 범위의 숫자가 아닌 경우 IllegalArguemntException을 반환한다.
 * 입력받은 지난 주 당첨 번호가 ,(comma)로 구분되지 않은 경우 IllegalArguemntException을 반환한다.
