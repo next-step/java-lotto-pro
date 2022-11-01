@@ -8,8 +8,8 @@ public class Lottos {
     private static final int UNIT_PRICE_PER_LOTTO = 1000;
     private List<Lotto> lottos;
 
-    public Lottos() {
-        this.lottos = new ArrayList<>();
+    public Lottos(List<Lotto> lottoList) {
+        this.lottos = lottoList;
     }
 
     public Lottos(Payment payment) {
@@ -42,9 +42,5 @@ public class Lottos {
 
     public List<Lotto> getLottoList() {
         return this.lottos;
-    }
-
-    public void addLotto(Lotto lotto) {
-        this.lottos.add(lotto);
     }
 }
