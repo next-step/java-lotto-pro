@@ -1,7 +1,7 @@
 package step3.model;
 
 import step3.model.dto.LottoResultDto;
-import step3.model.dto.LottosNumberDto;
+import step3.model.dto.LottoStatusDto;
 
 import java.util.Map;
 
@@ -29,7 +29,7 @@ public class LottoMachine {
         return new LottoResultDto(rankOfLottos, lottoMoney);
     }
 
-    public LottosNumberDto getLottoNumber() {
-        return new LottosNumberDto(lottos,lottoMoney);
+    public LottoStatusDto getLottoStatus() {
+        return new LottoStatusDto(lottos,lottoMoney);
     }
 }

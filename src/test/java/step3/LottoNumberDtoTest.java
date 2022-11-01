@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import step3.model.Lotto;
 import step3.model.LottoMoney;
 import step3.model.Lottos;
-import step3.model.dto.LottosNumberDto;
+import step3.model.dto.LottoStatusDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +27,10 @@ public class LottoNumberDtoTest {
         lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
         lottoNumbers.add(new Lotto(getLottoNumbers(1, 11, 33, 2, 35, 3)));
         Lottos lottos = new Lottos(lottoNumbers);
-        LottosNumberDto lottosNumberDto = new LottosNumberDto(lottos, new LottoMoney(3000, 1));
+        LottoStatusDto lottoStatusDto = new LottoStatusDto(lottos, new LottoMoney(3000, 1));
 
         //when
-        List<List<Integer>> numbers = lottosNumberDto.getLottosNumber();
+        List<List<Integer>> numbers = lottoStatusDto.getLottosNumber();
 
         //then
         assertThat(numbers.get(0)).containsExactly(1, 2, 3, 14, 15, 16);
@@ -46,10 +46,10 @@ public class LottoNumberDtoTest {
         List<Lotto> lottoNumbers = new ArrayList();
         lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
         Lottos lottos = new Lottos(lottoNumbers);
-        LottosNumberDto lottosNumberDto = new LottosNumberDto(lottos, new LottoMoney(14000, manualCount));
+        LottoStatusDto lottoStatusDto = new LottoStatusDto(lottos, new LottoMoney(14000, manualCount));
 
         //when
-        int autoLottoCount = lottosNumberDto.getAutoLottoCount();
+        int autoLottoCount = lottoStatusDto.getAutoLottoCount();
 
         //then
         assertThat(autoLottoCount).isEqualTo(autoCount);
@@ -65,10 +65,10 @@ public class LottoNumberDtoTest {
         lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
 
         Lottos lottos = new Lottos(lottoNumbers);
-        LottosNumberDto lottosNumberDto = new LottosNumberDto(lottos, new LottoMoney(14000, manualCount));
+        LottoStatusDto lottoStatusDto = new LottoStatusDto(lottos, new LottoMoney(14000, manualCount));
 
         //when
-        int manualLottoCount = lottosNumberDto.getManualLottoCount();
+        int manualLottoCount = lottoStatusDto.getManualLottoCount();
 
         //then
         assertThat(manualLottoCount).isEqualTo(manualCount);

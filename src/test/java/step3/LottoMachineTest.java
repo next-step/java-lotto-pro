@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import step3.model.*;
 import step3.model.dto.LottoResultDto;
-import step3.model.dto.LottosNumberDto;
+import step3.model.dto.LottoStatusDto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,10 +29,10 @@ public class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
 
         //when
-        LottosNumberDto lottosNumberDto = lottoMachine.getLottoNumber();
+        LottoStatusDto lottoStatusDto = lottoMachine.getLottoNumber();
 
         //then
-        assertThat(lottosNumberDto.getLottosNumber()).hasSize(count);
+        assertThat(lottoStatusDto.getLottosNumber()).hasSize(count);
     }
 
     @ParameterizedTest

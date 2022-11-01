@@ -2,16 +2,16 @@ package step3.view;
 
 import step3.model.Rank;
 import step3.model.dto.LottoResultDto;
-import step3.model.dto.LottosNumberDto;
+import step3.model.dto.LottoStatusDto;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class LottoOutputView {
 
-    public static void printPurchasingLottos(LottosNumberDto lottosNumberDto) {
-        List<List<Integer>> lottoTickets = lottosNumberDto.getLottosNumber();
-        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lottosNumberDto.getManualLottoCount(),lottosNumberDto.getAutoLottoCount());
+    public static void printPurchasingLottos(LottoStatusDto lottoStatusDto) {
+        List<List<Integer>> lottoTickets = lottoStatusDto.getLottosNumber();
+        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lottoStatusDto.getManualLottoCount(), lottoStatusDto.getAutoLottoCount());
         lottoTickets.forEach(System.out::println);
         System.out.println();
     }

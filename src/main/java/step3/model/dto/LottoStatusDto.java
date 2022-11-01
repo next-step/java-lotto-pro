@@ -8,13 +8,13 @@ import step3.model.Lottos;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottosNumberDto {
+public class LottoStatusDto {
 
     private final List<List<Integer>> lottosNumber;
     private final int autoLottoCount;
     private final int manualLottoCount;
 
-    public LottosNumberDto(Lottos lottoCollection, LottoMoney lottoMoney) {
+    public LottoStatusDto(Lottos lottoCollection, LottoMoney lottoMoney) {
         List<Lotto> lottos = lottoCollection.getNumbersOfLottos();
         this.lottosNumber = lottos
                 .stream()
