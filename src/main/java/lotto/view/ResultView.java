@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoTickets;
+import lotto.domain.Rank;
 import lotto.domain.Result;
 
 public class ResultView {
@@ -31,10 +32,19 @@ public class ResultView {
 
 	private static void appendResultPerRank(Result result, StringBuilder resultBuilder) {
 		result.getRankResult()
-			.forEach((key, value) -> resultBuilder.append(String.format("%d개 일치 (%d원) - %d개%n",
-				key.getMatchCount(),
-				key.getPrize(),
-				value)));
+			.forEach((key, value) -> {
+				if (key.equals(Rank.SECOND)) {
+					resultBuilder.append(String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개%n",
+						key.getMatchCount(),
+						key.getPrize(),
+						value));
+					return;
+				}
+				resultBuilder.append(String.format("%d개 일치 (%d원) - %d개%n",
+					key.getMatchCount(),
+					key.getPrize(),
+					value));
+			});
 	}
 
 	private static void appendProfitRatio(Result result, StringBuilder resultBuilder) {
