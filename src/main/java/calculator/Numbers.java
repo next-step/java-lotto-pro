@@ -24,7 +24,7 @@ public class Numbers {
     public int sum() {
         int sum = 0;
         for (String number : this.numbers) {
-            sum = sum + Integer.parseInt(number);
+            sum += Integer.parseInt(number);
         }
         return sum;
     }
