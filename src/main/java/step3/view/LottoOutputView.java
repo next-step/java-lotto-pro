@@ -29,12 +29,12 @@ public class LottoOutputView {
     private static void printRankStats(LottoResultDto resultDto) {
         Rank[] ranks = new Rank[]{Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIFTH};
         Arrays.stream(ranks).forEach(rank -> {
-                    if (rank == Rank.SECOND) {
-                        System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개\n", rank.getMatchCount(),rank.getWinningPrice(), resultDto.getWinningCount(rank));
-                        return;
-                    }
-                    System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getMatchCount(), rank.getWinningPrice(), resultDto.getWinningCount(rank));
-                });
+            if (rank == Rank.SECOND) {
+                System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개\n", rank.getMatchCount(), rank.getWinningPrice(), resultDto.getWinningCount(rank));
+                return;
+            }
+            System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getMatchCount(), rank.getWinningPrice(), resultDto.getWinningCount(rank));
+        });
     }
 
     public static void printMinusStatus(double priceRatio) {

@@ -19,7 +19,7 @@ public class Lotto {
         this.isAuto = true;
     }
 
-    public Lotto(List<LottoNumber> numbers,boolean isAuto) {
+    public Lotto(List<LottoNumber> numbers, boolean isAuto) {
         validateNumbers(numbers);
         this.numbers = numbers;
         this.isAuto = isAuto;
@@ -44,7 +44,7 @@ public class Lotto {
                 .stream()
                 .filter(winningLotto::contains)
                 .count();
-        return Rank.valueOf(matchCount,false);
+        return Rank.valueOf(matchCount, false);
     }
 
     public Rank getRank(WinningLotto winningLotto) {
@@ -53,7 +53,7 @@ public class Lotto {
                 .filter(winningLotto::contains)
                 .count();
         boolean isBonus = winningLotto.isMatchBonusNumber(numbers);
-        return Rank.valueOf(matchCount,isBonus);
+        return Rank.valueOf(matchCount, isBonus);
     }
 
     public boolean contains(LottoNumber number) {
@@ -62,7 +62,7 @@ public class Lotto {
                 .count() > 0;
     }
 
-    public boolean isAuto(){
+    public boolean isAuto() {
         return isAuto;
     }
 
