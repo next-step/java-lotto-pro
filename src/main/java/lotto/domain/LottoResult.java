@@ -1,22 +1,20 @@
 package lotto.domain;
 
+import lotto.constants.Rank;
+
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 public class LottoResult {
 
-    public static final int MIN_WINNING_NUM = 3;
+    private final HashMap<Rank, Integer> lottoResult;
 
-    private final HashMap<Integer, Integer> lottoResult;
-
-    public LottoResult() {
-        lottoResult = new HashMap<>();
+    public LottoResult(HashMap<Rank, Integer> lottoResult) {
+        this.lottoResult = lottoResult;
     }
 
-    public void putLottoResult(int collectNumberCnt) {
-        lottoResult.put(collectNumberCnt, getLottoResult(collectNumberCnt) + 1);
-    }
-
-    public int getLottoResult(int collectNumberCnt) {
-        return lottoResult.getOrDefault(collectNumberCnt, 0);
+    public Map<Rank, Integer> getLottoResult() {
+        return Collections.unmodifiableMap(lottoResult);
     }
 }
