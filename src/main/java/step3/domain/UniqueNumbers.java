@@ -37,7 +37,7 @@ public class UniqueNumbers {
     }
 
     public boolean contains(Number lottoNumber) {
-        return numbers.stream().anyMatch(number -> number.equals(lottoNumber));
+        return numbers.contains(lottoNumber);
     }
 
     @Override
