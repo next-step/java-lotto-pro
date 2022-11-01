@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.lottonumber.factory.LottoNumberFactoryImpl;
 import lotto.domain.lottonumber.purchase.Purchase;
+import lotto.domain.matcher.count.MatchCount;
 import lotto.domain.winningnumber.WinningNumber;
 
 public class LottoNumbers {
@@ -30,9 +31,10 @@ public class LottoNumbers {
         return result.toString();
     }
 
-    public List<Integer> createMatchCount(WinningNumber winningNumber) {
+    public List<MatchCount> createMatchCount(WinningNumber winningNumber) {
         return lottoNumbers.stream()
-                .map(lottoNumber -> winningNumber.matchNumber(lottoNumber.createIterator()))
+                .map(lottoNumber -> new MatchCount(winningNumber.matchNumber(lottoNumber.createIterator()),
+                        winningNumber.isMatchBonus(lottoNumber.createIterator())))
                 .collect(Collectors.toList());
     }
 }

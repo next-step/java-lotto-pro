@@ -15,6 +15,6 @@ class DefaultWinningNumberValidatorTest {
     @ValueSource(strings = {"test", "123456"})
     void comma(String ex) {
         assertThatIllegalArgumentException().isThrownBy(() -> validator.validate(ex))
-                .withMessageContaining(WinningNumberValidator.ERROR_SEPARATOR_MESSAGE);
+                .withMessageContaining("[ERROR]");
     }
 }

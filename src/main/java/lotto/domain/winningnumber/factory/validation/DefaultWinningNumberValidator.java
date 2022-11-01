@@ -7,6 +7,7 @@ import java.util.Set;
 
 public class DefaultWinningNumberValidator implements WinningNumberValidator {
 
+    private static final String ERROR_SEPARATOR_MESSAGE = "[ERROR] 쉼표(,)로 구분하여 입력해주세요.";
     private static final String WINNING_NUMBER_SEPARATOR = ",";
     private final List<WinningNumberValidator> validators;
 

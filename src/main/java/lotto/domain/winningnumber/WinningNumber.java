@@ -1,35 +1,18 @@
 package lotto.domain.winningnumber;
 
 import java.util.Iterator;
-import java.util.Set;
-import lotto.domain.winningnumber.role.CommaSplitter;
-import lotto.domain.winningnumber.role.WinningNumberRole;
 
-public class WinningNumber {
+public abstract class WinningNumber {
 
-    private static final int DEFAULT_MATCH_NUMBER = 0;
-    private Set<Integer> winningNumber;
+    private static final String ERROR_UNSUPPORTED_MESSAGE = "[ERROR] 지원하지 않는 기능입니다.";
 
-    public WinningNumber(String winningNumber) {
-        this.winningNumber = createWinningNumber(winningNumber, new CommaSplitter());
-    }
+    abstract public int matchNumber(Iterator<Integer> lottoNumberIterator);
 
-    public int matchNumber(Iterator<Integer> lottoNumberIterator) {
-        int matchNumber = DEFAULT_MATCH_NUMBER;
-        while (lottoNumberIterator.hasNext()) {
-            matchNumber = isContainsWinningNumberThenAddMatchNumber(lottoNumberIterator, matchNumber);
-        }
-        return matchNumber;
-    }
+    abstract public boolean isMatchBonus(Iterator<Integer> lottoNumberIterator);
 
-    private Set<Integer> createWinningNumber(String winningNumber, WinningNumberRole role) {
-        return role.createWinningNumber(winningNumber);
-    }
+    abstract int isContainsWinningNumberThenAddMatchNumber(Iterator<Integer> lottoNumberIterator, int matchNumber);
 
-    private int isContainsWinningNumberThenAddMatchNumber(Iterator<Integer> lottoNumberIterator, int matchNumber) {
-        if (winningNumber.contains(lottoNumberIterator.next())) {
-            matchNumber++;
-        }
-        return matchNumber;
+    public WinningNumber createWinningNumberWithBonus(String bonus) {
+        throw new UnsupportedOperationException(ERROR_UNSUPPORTED_MESSAGE);
     }
 }

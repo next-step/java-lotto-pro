@@ -1,30 +1,42 @@
 package lotto.domain.result;
 
+import lotto.domain.matcher.count.MatchCount;
+
 public enum LottoResult {
 
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000);
+    THREE(3, 5000, false),
+    FOUR(4, 50000, false),
+    FIVE(5, 1500000, false),
+    FIVE_BONUS(5, 30000000, true),
+    SIX(6, 2000000000, false),
+    MISS(0, 0, false);
 
     private static final String RESULT_MATCH_COUNT_TEXT = "개 일치 (";
+    private static final String RESULT_MATCH_BONUS_COUNT_TEXT = "개 일치, 보너스 볼 일치(";
     private static final String RESULT_MONEY_TEXT = "원)- ";
     private static final String RESULT_TOTAL_COUNT_TEXT = "개";
     private static final int DEFAULT_PROFIT = 0;
     private static final int CLEAR_TOTAL_COUNT = 0;
     private int matchCount;
     private int money;
+    private boolean isBonus;
     private int totalCount;
 
-    LottoResult(int matchCount, int money) {
+    LottoResult(int matchCount, int money, boolean isBonus) {
         this.matchCount = matchCount;
         this.money = money;
+        this.isBonus = isBonus;
     }
 
-    public void calculateTotalCount(int matchCount) {
-        if (this.matchCount == matchCount) {
-            totalCount++;
+    public LottoResult matchResult(MatchCount matchCount) {
+        if (matchCount.equals(this.matchCount)) {
+            return matchCount.isMatchBonus(this);
         }
+        return MISS;
+    }
+
+    public void addTotalCount() {
+        this.totalCount++;
     }
 
     public int profit() {
@@ -38,7 +50,9 @@ public enum LottoResult {
 
     @Override
     public String toString() {
-        return matchCount + RESULT_MATCH_COUNT_TEXT + money + RESULT_MONEY_TEXT
+        return matchCount
+                + (isBonus ? RESULT_MATCH_BONUS_COUNT_TEXT : RESULT_MATCH_COUNT_TEXT)
+                + money + RESULT_MONEY_TEXT
                 + totalCount + RESULT_TOTAL_COUNT_TEXT;
     }
 }

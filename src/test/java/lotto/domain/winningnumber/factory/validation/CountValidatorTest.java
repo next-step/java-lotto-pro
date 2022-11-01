@@ -1,6 +1,5 @@
 package lotto.domain.winningnumber.factory.validation;
 
-import static lotto.domain.winningnumber.factory.validation.WinningNumberValidator.ERROR_COUNT_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
@@ -28,7 +27,7 @@ class CountValidatorTest {
     @DisplayName("당첨번호의 갯수가 6개가 아니면 EX 발생")
     void count_ex() {
         assertThatIllegalArgumentException().isThrownBy(() -> validator.validate(winningNumbers))
-                .withMessageContaining(ERROR_COUNT_MESSAGE);
+                .withMessageContaining("[ERROR]");
     }
 
     @Test

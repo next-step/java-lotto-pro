@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 public class WinningNumberTypeValidator implements WinningNumberValidator {
 
+    private static final String ERROR_WINNING_NUMBER_TYPE_MESSAGE = "[ERROR] 당첨 번호에 숫자가 아닌 값이 포함되어 있습니다.";
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]+$");
 
     @Override

@@ -7,16 +7,27 @@ import lotto.view.LottoView;
 
 public abstract class AppConfig {
 
+    private static final LottoGame lottoGame = new LottoGame();
+    private static final LottoView lottoView = new LottoConsoleView();
+
     public static LottoController lottoController() {
         return new LottoController(lottoGame(), lottoView());
     }
 
+    public static Runnable withBonus() {
+        return () -> lottoGame().createLottoNumberMatcherWithBonus(lottoView().readBonus());
+    }
+
+    public static Runnable withOutBonus() {
+        return () -> lottoGame().createLottoNumberMatcher();
+    }
+
     private static LottoView lottoView() {
-        return new LottoConsoleView();
+        return lottoView;
     }
 
     private static LottoGame lottoGame() {
-        return new LottoGame();
+        return lottoGame;
     }
 }
 
