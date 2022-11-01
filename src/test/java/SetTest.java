@@ -27,14 +27,14 @@ public class SetTest {
     @DisplayName("Set의 크기를 확인한다.")
     @Test
     void size() {
-        assertThat(numbers.size()).isEqualTo(3);
+        assertThat(numbers).hasSize(3);
     }
 
     @DisplayName("Set의 값을 확인한다. - ParameterizedTest를 중복 코드를 제거한다.")
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     void contains(int input) {
-        assertThat(numbers.contains(input)).isTrue();
+        assertThat(numbers).contains(input);
     }
 
     @DisplayName("Set의 값을 확인한다. - 성공과 실패를 모두 검증하는 테스트를 구현한다.")

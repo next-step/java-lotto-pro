@@ -18,12 +18,7 @@ class StringTest {
     void splitTwoWords(String text) {
 
         String[] actual = text.split(DELIMITER);
-
-        assertAll(
-                () -> assertThat(actual).contains("1"),
-                () -> assertThat(actual).contains("2"),
-                () -> assertThat(actual).containsExactly("1", "2")
-        );
+        assertThat(actual).containsExactly("1", "2");
     }
 
     @DisplayName("1을 ,로 split 한다.")
@@ -32,11 +27,7 @@ class StringTest {
     void splitOneWord(String text) {
 
         String[] actual = text.split(DELIMITER);
-
-        assertAll(
-                () -> assertThat(actual).contains("1"),
-                () -> assertThat(actual).containsExactly("1")
-        );
+        assertThat(actual).containsExactly("1");
     }
 
     @DisplayName("(1,2)의 ()를 제거하여  1,2를 반환한다.")
