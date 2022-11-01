@@ -13,7 +13,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class LottoTest {
+class LottoTicketTest {
 
     private static final String EXCEPTION_MESSAGE_PREFIX = "[ERROR]";
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -31,7 +31,7 @@ class LottoTest {
     @NullAndEmptySource
     void nullOrEmptyLottoNumbers(final List<LottoNumber> invalidNumbers) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new Lotto(invalidNumbers))
+            .isThrownBy(() -> new LottoTicket(invalidNumbers))
             .withMessageContaining(EXCEPTION_MESSAGE_PREFIX);
     }
 
@@ -39,7 +39,7 @@ class LottoTest {
     @NullAndEmptySource
     void nullOrEmptyNumbers(final int[] invalidNumbers) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> Lotto.of(invalidNumbers))
+            .isThrownBy(() -> LottoTicket.of(invalidNumbers))
             .withMessageContaining(EXCEPTION_MESSAGE_PREFIX);
     }
 
@@ -47,7 +47,7 @@ class LottoTest {
     @ValueSource(ints = {1, 2, 3, 4, 5, 7, 8, 9, 10})
     void invalidLottoNumberSize(final int size) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new Lotto(pickUniqueLottoNumbers(size)))
+            .isThrownBy(() -> new LottoTicket(pickUniqueLottoNumbers(size)))
             .withMessageContaining(EXCEPTION_MESSAGE_PREFIX);
     }
 
@@ -63,7 +63,7 @@ class LottoTest {
             Collections.shuffle(numbers);
 
             assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new Lotto(numbers))
+                .isThrownBy(() -> new LottoTicket(numbers))
                 .withMessageContaining(EXCEPTION_MESSAGE_PREFIX);
         }
     }
@@ -73,49 +73,49 @@ class LottoTest {
         for (int i = 0; i < numbers.size(); i++) {
             Collections.shuffle(numbers);
 
-            assertThatCode(() -> new Lotto(numbers)).doesNotThrowAnyException();
+            assertThatCode(() -> new LottoTicket(numbers)).doesNotThrowAnyException();
         }
     }
 
     @Test
     void match_nothing() {
-        assertThat(Lotto.of(1, 2, 3, 4, 5, 6).matchTo(Lotto.of(7, 8, 9, 10, 11, 12)))
+        assertThat(LottoTicket.of(1, 2, 3, 4, 5, 6).matchTo(LottoTicket.of(7, 8, 9, 10, 11, 12)))
             .isEqualTo(LottoMatchResult.NOTHING);
     }
 
     @Test
     void match_one() {
-        assertThat(Lotto.of(1, 2, 3, 4, 5, 6).matchTo(Lotto.of(1, 7, 8, 9, 10, 11)))
+        assertThat(LottoTicket.of(1, 2, 3, 4, 5, 6).matchTo(LottoTicket.of(1, 7, 8, 9, 10, 11)))
             .isEqualTo(LottoMatchResult.ONE);
     }
 
     @Test
     void match_two() {
-        assertThat(Lotto.of(1, 2, 3, 4, 5, 6).matchTo(Lotto.of(1, 2, 8, 9, 10, 11)))
+        assertThat(LottoTicket.of(1, 2, 3, 4, 5, 6).matchTo(LottoTicket.of(1, 2, 8, 9, 10, 11)))
             .isEqualTo(LottoMatchResult.TWO);
     }
 
     @Test
     void match_three() {
-        assertThat(Lotto.of(1, 2, 3, 4, 5, 6).matchTo(Lotto.of(1, 2, 3, 9, 10, 11)))
+        assertThat(LottoTicket.of(1, 2, 3, 4, 5, 6).matchTo(LottoTicket.of(1, 2, 3, 9, 10, 11)))
             .isEqualTo(LottoMatchResult.THREE);
     }
 
     @Test
     void match_four() {
-        assertThat(Lotto.of(1, 2, 3, 4, 5, 6).matchTo(Lotto.of(1, 2, 3, 4, 10, 11)))
+        assertThat(LottoTicket.of(1, 2, 3, 4, 5, 6).matchTo(LottoTicket.of(1, 2, 3, 4, 10, 11)))
             .isEqualTo(LottoMatchResult.FOUR);
     }
 
     @Test
     void match_five() {
-        assertThat(Lotto.of(1, 2, 3, 4, 5, 6).matchTo(Lotto.of(1, 2, 3, 4, 5, 11)))
+        assertThat(LottoTicket.of(1, 2, 3, 4, 5, 6).matchTo(LottoTicket.of(1, 2, 3, 4, 5, 11)))
             .isEqualTo(LottoMatchResult.FIVE);
     }
 
     @Test
     void match_all() {
-        assertThat(Lotto.of(1, 2, 3, 4, 5, 6).matchTo(Lotto.of(1, 2, 3, 4, 5, 6)))
+        assertThat(LottoTicket.of(1, 2, 3, 4, 5, 6).matchTo(LottoTicket.of(1, 2, 3, 4, 5, 6)))
             .isEqualTo(LottoMatchResult.ALL);
     }
 

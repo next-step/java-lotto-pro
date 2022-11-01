@@ -19,7 +19,6 @@
 ## 기능 구현 목록 TODO-list
 
 [] 유저로부터, 로또 구입 금액을 입력 받을 수 있다.
-
 - [] 로또 구입 금액이, Null인 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
 - [] 로또 구입 금액이, Empty인 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
 - [] 로또 구입 금액이, Non-Numeric한 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
@@ -32,7 +31,6 @@
 [] 발급한 로또 번호들을, 유저에게 표시 할 수 있다.
 
 [] 유저로부터, 지난 주 당첨 번호를 쉼표 구분으로 입력 받을 수 있다.
-
 - [] 지난 주 당첨 로또번호가, Null인 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
 - [] 지난 주 당첨 로또번호가, Empty인 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
 - [] 지난 주 당첨 로또번호를, 쉼표로 구분할 수 없는 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
@@ -48,33 +46,28 @@
 
 ### Domain Models
 
-[] Money - 구입금액을 나타내는 value object
+[X] Money - 구입금액을 나타내는 value object
 
-- [] 주어진 금액이, Null인 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
-- [] 주어진 금액이, Empty인 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
-- [] 주어진 금액이, Non-Numeric한 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
+[X] LottoCusomter - 로또 구매자를 나타내는 domain model
+- [X] 가진 금액으로, 구입 가능한 만큼 로또를  구입 할 수 있다.
+- [X] 가진 금액이 로또 가격보다 적다면 로또를 구입 할 수 없다.
 
-[] Game
-
-- [] 구입 금액이 주어지면, 구입 가능한 만큼 로또를 생성 할 수 있다.
-    - [] 주어진 로또 구입 금액이, 로또 1장의 가격보다 작을 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
-- [] 주어진 개수만큼, 로또를 생성할 수 있다.
-- [] 생성한 로또 번호 목록을 반환 할 수 있다.
-- [] 생성한 로또 번호 목록과, 다른 로또 번호와 번호 조회하여, 당첨 통계와 총 수익률을 계산할 수 있다.
+[] LottoStore - 로또 상점을 나타내는 object
+- [] 로또번호를 생성하여, 로또 구매자에게 팔 수 있다.
+- [] 지난주 당첨 번호를 이용하여, 로또 구매자의 당첨 통계를 계산하여 알려 줄 수 있다.
+- [] 지난주 당첨 번호를 이용하여, 로또 구매자의 총 수익률을 알려 줄 수 있다.
 
 [X] LottoNumber - 하나의 로또번호를 나타내는 value object
-
 - [X] 1부터 45까지중 하나의 번호를 골라, 로또번호를 만들 수 있다.
 - [X] 주어진 번호가, 1부터 45까지의 범위에 존재 하지 않는 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
 - [X] 메모리 효율을 높이기 위해, 로또번호는 캐시되어, 매번 새롭게 개체 생성을 하지 않을 수 있다.
 - [X] 같은 로또번호를 가질 경우, 같은 개체라고 판단한다.
 
 [X] Lotto - 6개의 중복되지 않는 로또번호를 나타내는 value object
-
 - [X] 1부터 45까지의 중복되지 않는 6개의 로또번호로, 로또를 생성 할 수 있다.
 - [X] 주어진 로또번호가 6개이지 않은 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
 - [X] 주어진 로또번호중 중복되는 번호가 존재하는 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
-- [] 다른 로또와 비교하여, 얼마나 번호가 일치하는지 알 수 있다.
+- [X] 다른 로또와 비교하여, 얼마나 번호가 일치하는지 알 수 있다.
 
 ### Views
 

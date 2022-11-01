@@ -6,19 +6,30 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class Lotto {
+public final class LottoTicket {
 
+    private static final Money DEFAULT_FEE = Money.wons(1000);
     private static final int SIZE = 6;
 
+    private final Money fee;
     private final List<LottoNumber> numbers;
 
-    public Lotto(final List<LottoNumber> numbers) {
-        validateNumbers(numbers);
-        this.numbers = numbers;
+    public LottoTicket(final List<LottoNumber> numbers) {
+        this(DEFAULT_FEE, numbers);
     }
 
-    public static Lotto of(final int... numbers) {
-        return new Lotto(mapToLottoNumberList(numbers));
+    public LottoTicket(final Money fee, final List<LottoNumber> numbers) {
+        validateNumbers(numbers);
+        this.numbers = numbers;
+        this.fee = fee;
+    }
+
+    public static LottoTicket of(final int... numbers) {
+        return new LottoTicket(mapToLottoNumberList(numbers));
+    }
+
+    public static LottoTicket of(final Money fee, final int... numbers) {
+        return new LottoTicket(fee, mapToLottoNumberList(numbers));
     }
 
     private static List<LottoNumber> mapToLottoNumberList(final int... numbers) {
@@ -38,7 +49,7 @@ public final class Lotto {
             throw new LottoException(String.format("numbers size should be %d", SIZE));
         }
 
-        numbers.forEach(Lotto::validateNumber);
+        numbers.forEach(LottoTicket::validateNumber);
 
         if (!isUnique(numbers)) {
             throw new LottoException("all numbers should be unique");
@@ -55,7 +66,7 @@ public final class Lotto {
         return numbers.size() == new HashSet<>(numbers).size();
     }
 
-    public LottoMatchResult matchTo(final Lotto other) {
+    public LottoMatchResult matchTo(final LottoTicket other) {
         final int matchedCount = (int) numbers.stream()
             .filter(other::containsNumber)
             .count();
@@ -65,4 +76,9 @@ public final class Lotto {
     private boolean containsNumber(final LottoNumber other) {
         return numbers.contains(other);
     }
+
+    public Money getFee() {
+        return fee;
+    }
+
 }

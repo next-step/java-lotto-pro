@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public final class Money {
 
-    public static final Money ZERO = Money.amountOf(0);
-    public static final Money ONE = Money.amountOf(1);
+    public static final Money ZERO = Money.wons(0);
+    public static final Money ONE = Money.wons(1);
 
     private final int amount;
 
@@ -20,16 +20,32 @@ public final class Money {
         }
     }
 
-    public static Money amountOf(final int amount) {
+    public static Money wons(final int amount) {
         return new Money(amount);
+    }
+
+    public Money plus(final Money other) {
+        return new Money(amount + other.amount);
+    }
+
+    public Money minus(final Money other) {
+        return new Money(amount - other.amount);
     }
 
     public Money divide(final Money other) {
         return new Money(this.amount / other.amount);
     }
 
+    public Money multiply(final Money other) {
+        return new Money(this.amount * other.amount);
+    }
+
     public boolean isLessThan(final Money other) {
         return amount < other.amount;
+    }
+
+    public boolean isGreaterThanOrEqual(final Money other) {
+        return amount >= other.amount;
     }
 
     @Override
@@ -55,4 +71,5 @@ public final class Money {
             "amount=" + amount +
             '}';
     }
+
 }

@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+// TODO : test more
 class MoneyTest {
 
     private static final String EXCEPTION_MESSAGE_PREFIX = "[ERROR]";
@@ -16,33 +17,33 @@ class MoneyTest {
     @ValueSource(ints = {-1, -5, -10})
     void invalidAmount(final int amount) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> Money.amountOf(amount))
+            .isThrownBy(() -> Money.wons(amount))
             .withMessageContaining(EXCEPTION_MESSAGE_PREFIX);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 5, 10})
     void validAmount(final int amount) {
-        assertThatCode(() -> Money.amountOf(amount)).doesNotThrowAnyException();
+        assertThatCode(() -> Money.wons(amount)).doesNotThrowAnyException();
     }
 
     @ParameterizedTest
     @CsvSource(value = {"0:1", "1:2", "5:10"}, delimiter = ':')
     void isLessThan_differentAmount(final int smallAmount, final int amount) {
-        assertThat(Money.amountOf(smallAmount).isLessThan(Money.amountOf(amount))).isTrue();
-        assertThat(Money.amountOf(amount).isLessThan(Money.amountOf(smallAmount))).isFalse();
+        assertThat(Money.wons(smallAmount).isLessThan(Money.wons(amount))).isTrue();
+        assertThat(Money.wons(amount).isLessThan(Money.wons(smallAmount))).isFalse();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 5, 10})
     void isLessThan_sameAmount(final int amount) {
-        assertThat(Money.amountOf(amount).isLessThan(Money.amountOf(amount))).isFalse();
+        assertThat(Money.wons(amount).isLessThan(Money.wons(amount))).isFalse();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1, 5, 10})
     void divide_self(final int amount) {
-        assertThat(Money.amountOf(amount).divide(Money.amountOf(amount)))
+        assertThat(Money.wons(amount).divide(Money.wons(amount)))
             .isEqualTo(Money.ONE);
     }
 
@@ -50,8 +51,8 @@ class MoneyTest {
     @CsvSource(value = {"1:2:0", "2:1:2", "4:2:2", "2:4:0", "3:5:0", "5:3:1",
         "100:10:10", "10:100:0"}, delimiter = ':')
     void divide_nonZero(final int amount1, final int amount2, final int expected) {
-        assertThat(Money.amountOf(amount1).divide(Money.amountOf(amount2)))
-            .isEqualTo(Money.amountOf(expected));
+        assertThat(Money.wons(amount1).divide(Money.wons(amount2)))
+            .isEqualTo(Money.wons(expected));
     }
 
 }
