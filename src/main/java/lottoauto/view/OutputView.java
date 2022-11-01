@@ -6,6 +6,7 @@ import lottoauto.domain.LottoReturnRate;
 
 import java.util.List;
 import java.util.Map;
+import lottoauto.domain.LottoWinningMoneyEnum;
 
 import static lottoauto.io.PrintUtils.println;
 
@@ -27,13 +28,12 @@ public abstract class OutputView {
 
 
     public static void printWinningStats(LottoResult result){
-        Map<Integer, Integer> moneyTable = result.getWinningMoneyTable();
         println("당첨 통계");
         println("------------");
-        for (Integer containCount : moneyTable.keySet()) {
-            String sentence = "" + (containCount + "개 일치")
-                    + (" (" + moneyTable.get(containCount) + "원)")
-                    + (" - " + result.getResultCount(containCount) + "개");
+        for (LottoWinningMoneyEnum money : LottoWinningMoneyEnum.values()) {
+            String sentence = "" + (money.getMatchedCount() + "개 일치")
+                    + (" (" + money.getWinningMoney() + "원)")
+                    + (" - " + result.getResultCount(money.getMatchedCount()) + "개");
             println(sentence);
         }
     }

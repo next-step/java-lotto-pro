@@ -7,11 +7,9 @@ public class LottoResult {
     public static final int MIN_CONTAIN_COUNT = 3;
     public static final int ZERO = 0;
     private Map<Integer, Integer> result;
-    private LottoWinningMoney lottoWinningMoney;
 
     public LottoResult(){
         result = new HashMap<>();
-        lottoWinningMoney = new LottoWinningMoney();
     }
 
     public void addLottoResult(int containNumberCount) {
@@ -30,11 +28,11 @@ public class LottoResult {
         return containNumberCount < MIN_CONTAIN_COUNT;
     }
 
-    public int calculateWinningMoney() {
-        return lottoWinningMoney.calculateWinningMoney(result);
-    }
-
-    public Map<Integer, Integer> getWinningMoneyTable() {
-        return lottoWinningMoney.getWinningMoneyTable();
+    public long calculateWinningMoney() {
+        long totalWinningMoney = 0L;
+        for (Integer key : result.keySet()) {
+            totalWinningMoney += LottoWinningMoneyEnum.calculateWinningMoneyByContainCount(key, result.getOrDefault(key, ZERO));
+        }
+        return totalWinningMoney;
     }
 }
