@@ -8,33 +8,24 @@ import step4.util.StringUtil;
 import step4.view.InputView;
 import step4.view.OutputView;
 
+import java.util.List;
+
 public class GameController {
-    LottoResult winLottoResult;
-    LottoNumber bonusLottoNumber;
+
     Game game;
-    LottoWinningStatistics lottoWinningStatistics;
 
     public void startGame() {
         game = new Game(InputView.inputLottoBuyMoney());
         OutputView.printLottoBuyCount(game.getLottoBuyCount());
-        game.startLottoGame();
-        OutputView.printBuyLottoResult(game.getLottoResults());
-        setWinLottoResult(InputView.inputWinnerLottoResult());
-        setBonusNumber(InputView.inputLottoBonusNumber());
-        setLottoWinningStatistics();
+        List<LottoResult> lottoResults = game.startLottoGame();
+        OutputView.printBuyLottoResult(lottoResults);
+        
+        LottoResult winLottoResult = new LottoResult(StringUtil.parseLottoText(InputView.inputWinnerLottoResult()));
+        LottoNumber bonusLottoNumber = new LottoNumber(InputView.inputLottoBonusNumber());
+
+        LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(lottoResults, winLottoResult, bonusLottoNumber);
         OutputView.printLottoStatistics(lottoWinningStatistics.getLottoWinningStatistics()
                 , lottoWinningStatistics.getTotalProfitPercent(game.getBuyMoney()));
     }
 
-    private void setWinLottoResult(String inputLottoNumbers) {
-        winLottoResult = new LottoResult(StringUtil.parseLottoText(inputLottoNumbers));
-    }
-
-    private void setBonusNumber(String inputLottoNumber) {
-        bonusLottoNumber = new LottoNumber(inputLottoNumber);
-    }
-
-    private void setLottoWinningStatistics() {
-        lottoWinningStatistics = new LottoWinningStatistics(game.getLottoResults(), winLottoResult, bonusLottoNumber);
-    }
 }
