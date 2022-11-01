@@ -27,12 +27,21 @@ public class LottoTest {
             .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("다른 로또와 로또 번호가 일치하는 개수를 반환되는지 확인")
     @Test
-    @DisplayName("다른 로또와 로또 번호가 일치하는 개수를 반환")
-    void testWinningMatchCount() {
+    void winningMatchCount() {
         Lotto lotto1 = Lotto.from(Arrays.asList(1, 10, 20, 30, 40, 45));
         Lotto lotto2 = Lotto.from(Arrays.asList(1, 11, 22, 33, 44, 45));
 
         assertThat(lotto1.matchLottoNumber(lotto2)).isEqualTo(2);
+    }
+
+    @DisplayName("당첨 로또 보너스 번호와 일치하는지 확인")
+    @Test
+    void matchBounsNumber() {
+        LottoNumber winningLottoNumber = LottoNumber.from(7);
+        Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 7));
+
+        assertThat(lotto.matchBounsNumber(winningLottoNumber)).isTrue();
     }
 }
