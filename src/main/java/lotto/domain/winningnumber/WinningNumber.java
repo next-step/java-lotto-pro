@@ -2,13 +2,17 @@ package lotto.domain.winningnumber;
 
 import java.util.Iterator;
 
-public interface WinningNumber {
+public abstract class WinningNumber {
 
-    int matchNumber(Iterator<Integer> lottoNumberIterator);
+    private static final String ERROR_UNSUPPORTED_MESSAGE = "[ERROR] 지원하지 않는 기능입니다.";
 
-    boolean isMatchBonus(Iterator<Integer> lottoNumberIterator);
+    abstract public int matchNumber(Iterator<Integer> lottoNumberIterator);
 
-    default WinningNumber createWinningNumberWithBonus(String bonus) {
-        throw new UnsupportedOperationException("[ERROR] 지원하지 않는 기능입니다.");
+    abstract public boolean isMatchBonus(Iterator<Integer> lottoNumberIterator);
+
+    abstract int isContainsWinningNumberThenAddMatchNumber(Iterator<Integer> lottoNumberIterator, int matchNumber);
+
+    public WinningNumber createWinningNumberWithBonus(String bonus) {
+        throw new UnsupportedOperationException(ERROR_UNSUPPORTED_MESSAGE);
     }
 }
