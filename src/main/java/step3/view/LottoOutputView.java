@@ -3,12 +3,9 @@ package step3.view;
 import step3.model.Rank;
 import step3.model.dto.LottoResultDto;
 import step3.model.dto.LottosNumberDto;
-import step3.model.dto.RankDto;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoOutputView {
 
