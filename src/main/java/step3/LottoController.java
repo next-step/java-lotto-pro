@@ -1,22 +1,26 @@
 package step3;
 
 import step3.domain.*;
-import step3.ui.ConsoleInputView;
-import step3.ui.ConsoleResultView;
+import step3.ui.InputView;
+import step3.ui.ResultView;
 
 public class LottoController {
-    public LottoController(){
+    private final InputView inputView;
+    private final ResultView resultView;
+    public LottoController(InputView inputView, ResultView resultView){
+        this.inputView = inputView;
+        this.resultView = resultView;
     }
     public void start() {
-        LotteryTicket lotteryTicket = new LotteryTicket(ConsoleInputView.inputPayment());
+        LotteryTicket lotteryTicket = new LotteryTicket(inputView.inputPayment());
         lottoFactory(lotteryTicket);
     
-        ConsoleResultView.resultLotteryTicket(lotteryTicket);
+        resultView.resultLotteryTicket(lotteryTicket);
        
-        WinningBonusNumber winningBonusNumber = new WinningBonusNumber(ConsoleInputView.inputWinningNumber(), ConsoleInputView.inputBonusNumber());
+        WinningBonusNumber winningBonusNumber = new WinningBonusNumber(inputView.inputWinningNumber(), inputView.inputBonusNumber());
         
         Statistics statistics = new Statistics(lotteryTicket, winningBonusNumber);
-        ConsoleResultView.resultStatistics(statistics, lotteryTicket.getPayment());
+        resultView.resultStatistics(statistics, lotteryTicket.getPayment());
     }
     
     private static void lottoFactory(LotteryTicket lotteryTicket){

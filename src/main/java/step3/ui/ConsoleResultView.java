@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class ConsoleResultView {
+public class ConsoleResultView implements ResultView {
     private static final String RESULT_COUNT = "%d개를 구매했습니다.%n";
     private static final String RESULT_LOTTO = "[%s]%n";
     private static final String RESULT_STAT_TITLE = "당첨 통계";
@@ -19,7 +19,7 @@ public class ConsoleResultView {
     private static final String RESULT_STAT_NEGATIVE_CONCLUSION = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String RESULT_STAT_EQUAL_CONCLUSION = "(기준이 1이기 때문에 결과적으로 본전이라는 의미임)";
     
-    public static void resultLotteryTicket(LotteryTicket lotteryTicket) {
+    public void resultLotteryTicket(LotteryTicket lotteryTicket) {
         System.out.printf(RESULT_COUNT,lotteryTicket.getPayment().getLottoCount());
         List<Lotto> lottos = lotteryTicket.getLotteryTicket();
         for (Lotto lotto: lottos) {
@@ -28,7 +28,7 @@ public class ConsoleResultView {
         }
     }
     
-    public static void resultStatistics(Statistics statistics, Payment payment) {
+    public void resultStatistics(Statistics statistics, Payment payment) {
         System.out.println(RESULT_STAT_TITLE);
         System.out.println(RESULT_STAT_LINE);
         resultStatisticsContents(statistics);
@@ -41,7 +41,7 @@ public class ConsoleResultView {
         if(ratio == 1) { System.out.println(RESULT_STAT_EQUAL_CONCLUSION);}
     }
     
-    private static void resultStatisticsContents(Statistics statistics) {
+    private void resultStatisticsContents(Statistics statistics) {
         Map<Rank, Integer> countByRank = statistics.countByRank();
         ArrayList<Rank> keySet = new ArrayList<>(countByRank.keySet());
         Collections.sort(keySet);
@@ -50,7 +50,7 @@ public class ConsoleResultView {
         }
     }
     
-    private static String printContentsByRank(Rank rank){
+    private String printContentsByRank(Rank rank){
         if(rank == Rank.SECOND){
             return RESULT_STAT_BONUS_CONTENTS;
         }
