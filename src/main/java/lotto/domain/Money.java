@@ -7,12 +7,16 @@ public class Money implements Comparable<Money> {
 
     private final long won;
 
-    public Money(String won) {
-        this(parseLong(won));
+    private Money(long won) {
+        this.won = won;
     }
 
-    public Money(long won) {
-        this.won = won;
+    public static Money of(long won) {
+        return new Money(won);
+    }
+
+    public static Money of(String won) {
+        return new Money(parseLong(won));
     }
 
     private static long parseLong(String won) {

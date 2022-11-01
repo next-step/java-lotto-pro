@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoCalculator;
-import lotto.domain.Money;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 
 public class LottoInput {
 
@@ -13,7 +10,7 @@ public class LottoInput {
     public static int inputMoneyAndAvailableToPurchaseCount() {
         try {
             String input = InputConsole.inputMoneyForPurchaseLotto();
-            Money money = new Money(input);
+            Money money = Money.of(input);
             return LottoCalculator.availableToPurchaseCount(money);
         } catch (IllegalArgumentException e) {
             OutputConsole.out(e.getMessage());
@@ -23,12 +20,34 @@ public class LottoInput {
 
     public static WinningLotto inputWinningLotto() {
         try {
-            String input = InputConsole.inputWinningLottoNumbers();
-            return new WinningLotto(new Lotto(input));
+            Lotto lotto = inputLotto();
+            LottoNumber bonusLottoNumber = inputBonusLottoNumber();
+            return WinningLotto.of(lotto, bonusLottoNumber);
         } catch (IllegalArgumentException e) {
             OutputConsole.out(e.getMessage());
             return inputWinningLotto();
         }
     }
+
+    private static Lotto inputLotto() {
+        try {
+            String input = InputConsole.inputWinningLottoNumbers();
+            return Lotto.of(input);
+        } catch (IllegalArgumentException e) {
+            OutputConsole.out(e.getMessage());
+            return inputLotto();
+        }
+    }
+
+    private static LottoNumber inputBonusLottoNumber() {
+        try {
+            String input = InputConsole.inputBonusLottoNumber();
+            return LottoNumber.of(input);
+        } catch (IllegalArgumentException e) {
+            OutputConsole.out(e.getMessage());
+            return inputBonusLottoNumber();
+        }
+    }
+
 
 }

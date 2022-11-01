@@ -64,11 +64,11 @@ public class LottoNumbers {
 
     public int match(LottoNumbers target) {
         return (int) lottoNumbers.stream()
-                .filter(target::contains)
+                .filter(target::match)
                 .count();
     }
 
-    private boolean contains(LottoNumber lottoNumber) {
+    public boolean match(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
