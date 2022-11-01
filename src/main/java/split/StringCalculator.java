@@ -8,6 +8,7 @@ public class StringCalculator {
 
     private static final Pattern regex = Pattern.compile("//(.)\n(.*)");
     public static final int DEFAULT_VALUE = 0;
+    public static final int TEXT_PART = 2;
     private final String text;
     private final String delimiter;
 
@@ -22,7 +23,7 @@ public class StringCalculator {
         }
         Matcher m = regex.matcher(text);
         if (m.find()) {
-            return m.group(2).split(this.delimiter);
+            return m.group(TEXT_PART).split(this.delimiter);
         }
         return text.split(this.delimiter);
     }
