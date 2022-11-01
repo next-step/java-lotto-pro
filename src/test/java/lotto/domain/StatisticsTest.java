@@ -13,9 +13,9 @@ public class StatisticsTest {
 
         Lottos lottos = new Lottos();
         Lotto winLotto = new Lotto("1,2,3,4,5,6");
-        lottos.setLottoList(new Lotto("1,2,3,4,5,6"));
-        lottos.setLottoList(new Lotto("11,12,13,14,15,16"));
-        lottos.setLottoList(new Lotto("12,13,14,15,16,17"));
+        lottos.addLotto(new Lotto("1,2,3,4,5,6"));
+        lottos.addLotto(new Lotto("11,12,13,14,15,16"));
+        lottos.addLotto(new Lotto("12,13,14,15,16,17"));
 
         Statistics statistics = new Statistics(lottos, winLotto);
 
@@ -28,9 +28,9 @@ public class StatisticsTest {
     void valid_yield_test() {
         Lottos lottos = new Lottos();
         Lotto winLotto = new Lotto("1,2,3,4,5,6");
-        lottos.setLottoList(new Lotto("1,2,3,11,12,13"));
-        lottos.setLottoList(new Lotto("11,12,13,14,15,16"));
-        lottos.setLottoList(new Lotto("12,13,14,15,16,17"));
+        lottos.addLotto(new Lotto("1,2,3,11,12,13"));
+        lottos.addLotto(new Lotto("11,12,13,14,15,16"));
+        lottos.addLotto(new Lotto("12,13,14,15,16,17"));
 
         Statistics statistics = new Statistics(lottos, winLotto);
         assertThat(statistics.getYield(new Payment("14000"))).isEqualTo(0.35);

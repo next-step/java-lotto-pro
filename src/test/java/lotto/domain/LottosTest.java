@@ -2,9 +2,6 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -28,9 +25,9 @@ public class LottosTest {
     @DisplayName("당첨 로또와 일치 번호 개수 카운트 테스트")
     void match_number_count_test() {
         Lottos lottos = new Lottos();
-        lottos.setLottoList(new Lotto("1,2,3,4,5,6"));
-        lottos.setLottoList(new Lotto("1,2,3,11,12,13"));
-        lottos.setLottoList(new Lotto("11,12,13,14,15,16"));
+        lottos.addLotto(new Lotto("1,2,3,4,5,6"));
+        lottos.addLotto(new Lotto("1,2,3,11,12,13"));
+        lottos.addLotto(new Lotto("11,12,13,14,15,16"));
         Lotto winLotto = new Lotto("1,2,3,4,5,6");
 
         assertThat(lottos.getMatchNumCnt(0, winLotto)).isEqualTo(6);

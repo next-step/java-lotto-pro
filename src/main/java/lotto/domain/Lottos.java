@@ -44,7 +44,7 @@ public class Lottos {
         return this.lottos;
     }
 
-    public void setLottoList(Lotto lotto) {
+    public void addLotto(Lotto lotto) {
         this.lottos.add(lotto);
     }
 }
