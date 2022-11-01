@@ -27,12 +27,12 @@ public class AutoLottoMachine implements LottoMachine {
     }
 
     @Override
-    public List<Lotto> purchaseLotte(int lottoTicketCount) {
-        List<Lotto> lottoList = new ArrayList<>();
+    public Lottos purchaseLotto(int lottoTicketCount) {
+        Lottos lottos = new Lottos(new ArrayList<>());
         for (int i = 0; i < lottoTicketCount; i++) {
-            lottoList.add(createLottoNumber());
+            lottos.add(createLottoNumber());
         }
-        return lottoList;
+        return lottos;
     }
 
 }

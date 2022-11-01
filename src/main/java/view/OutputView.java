@@ -1,10 +1,9 @@
 package view;
 
 import domain.Lotto;
+import domain.Lottos;
 import domain.WinLotto;
 import domain.WinReport;
-
-import java.util.List;
 
 public class OutputView {
     private static final int[] PRIZE_MONEY = {0, 0, 0, 5000, 50000, 1500000, 2000000000};
@@ -15,8 +14,8 @@ public class OutputView {
         System.out.println(lottoTicketCount + "개를 구매했습니다.");
     }
 
-    public static void outputPurchaseLottoList(List<Lotto> lottolist) {
-        for (Lotto lotto : lottolist) {
+    public static void outputPurchaseLottoList(Lottos lottos) {
+        for(Lotto lotto : lottos.getLottos()){
             System.out.println(lotto.getLottoNumbers());
         }
     }

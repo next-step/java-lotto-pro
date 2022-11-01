@@ -14,6 +14,10 @@ public class WinLotto {
         this.winLottoNumbers = splitWinLottoNumbers(inputWinLottoNumbers);
         this.winLottoReport = winLottoReport;
     }
+    public WinLotto(String inputWinLottoNumbers) {
+        this.winLottoNumbers = splitWinLottoNumbers(inputWinLottoNumbers);
+        this.winLottoReport = new WinReport();
+    }
 
     public Lotto splitWinLottoNumbers(String inputWinLottNumbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
@@ -25,8 +29,8 @@ public class WinLotto {
         return new Lotto(lottoNumbers);
     }
 
-    public WinReport findWinner(List<Lotto> inputLottoList) {
-        for (Lotto lotto : inputLottoList) {
+    public WinReport findWinner(Lottos lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
             winLottoReport.putLottoResult(countCollectNumber(lotto));
         }
         return winLottoReport;
@@ -70,5 +74,5 @@ public class WinLotto {
                 "winLottoNumbers=" + winLottoNumbers +
                 '}';
     }
-    
+
 }
