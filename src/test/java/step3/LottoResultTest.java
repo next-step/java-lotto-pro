@@ -2,16 +2,13 @@ package step3;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import step3.constant.WinnerRule;
-import step3.model.*;
+import step3.model.LottoResult;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static step3.constant.Constant.Symbols.COLON;
-import static step3.constant.Constant.Symbols.COMMA;
+import static step3.constant.Constant.Symbols.*;
 
 public class LottoResultTest {
     private LottoResult lottoResult;
@@ -26,7 +23,8 @@ public class LottoResultTest {
 
     @DisplayName("최종_우승_금액_테스트")
     @ParameterizedTest
-    @CsvSource(value = {"3,1,3,4,0:60000", "0,3,3,3,1,1:15000"}, delimiter = ':')
+    @CsvSource(value = {"3-false,1-false,3-false,4-false,0-false:60000",
+            "0-false,3-false,3-false,3-false,1-false,1-false:15000"}, delimiter = ':')
     void 최종_우승_금액_테스트(String input, String expected) {
         makeResult(input);
         lottoResult.sumWinnerPrice();
@@ -35,7 +33,9 @@ public class LottoResultTest {
 
     @DisplayName("수익률_계산_테스트")
     @ParameterizedTest
-    @CsvSource(value = {"3,1,3,4,0:12.0", "0,3,3,3,1,1:2.5", "3,1,1,2,0,0:0.83"}, delimiter = ':')
+    @CsvSource(value = {"3-false,1-false,3-false,4-false,0-false:12.0",
+            "0-false,3-false',3-false,3-false,1-false,1-false:2.5",
+            "3-false,1-false,1-false,2-false,0-false,0-false:0.83"}, delimiter = ':')
     void 수익률_계산_테스트(String input, String expected) {
         makeResult(input);
         lottoResult.calculateProfitRate(purchasedCount);
@@ -45,7 +45,8 @@ public class LottoResultTest {
     private void makeResult(String input) {
         String[] inputArr = input.split(COLON)[0].split(COMMA);
         for (String s : inputArr) {
-            lottoResult.addResult(Integer.parseInt(s), false);
+            String[] detail = s.split(BAR);
+            lottoResult.addResult(Integer.parseInt(detail[0]), detail[1].equals("true"));
             purchasedCount++;
         }
     }

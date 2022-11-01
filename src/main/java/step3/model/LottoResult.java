@@ -25,11 +25,13 @@ public class LottoResult {
 
     public void addResult(int sameCount, boolean isBonus) {
         Rank rank = Rank.valueOf(sameCount, isBonus);
-        if (isNotExistsCount(sameCount)) {
+        if (isNotExistsCount(rank)) {
             result.put(rank, 0);
         }
         int count = result.get(rank);
         result.put(rank, ++count);
+
+        result.get(rank);
     }
 
     public double calculateProfitRate(int size) {
@@ -49,8 +51,8 @@ public class LottoResult {
         profitRate = Math.floor(Double.valueOf(totalWinnerPrice) / totalPurchasedPrice * ONE_HUNDRED) / ONE_HUNDRED;
     }
 
-    public boolean isNotExistsCount(int sameCount) {
-        return !result.containsKey(sameCount);
+    public boolean isNotExistsCount(Rank rank) {
+        return !result.containsKey(rank);
     }
 
     public String getWinningCount(Rank rank) {
