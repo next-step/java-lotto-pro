@@ -10,3 +10,7 @@
 
 ## Step 2 - 요구사항 정리
 * [문자열 덧셈 계산기를 통한 TDD/리팩토링 실습](./src/main/java/study/step2/README.md)
+
+## Step 3 - 요구사항 정리
+* [로또(자동)](./src/main/java/study/step3/README.md)
+성

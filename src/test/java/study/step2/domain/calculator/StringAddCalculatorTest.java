@@ -9,12 +9,16 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class StringAddCalculatorTest {
 
     @Test
-    @DisplayName("Text 값이 Null 또는 빈문자인경우 [0]값을 반환한다")
-    void splitAndSum_null_or_empty_text() {
+    @DisplayName("Text 값이 Null인경우 [0]값을 반환한다")
+    void splitAndSum_null_text() {
         int result = StringAddCalculator.splitAndSum(null);
         assertThat(result).isEqualTo(0);
+    }
 
-        result = StringAddCalculator.splitAndSum("");
+    @Test
+    @DisplayName("Text 값이빈문자인경우 [0]값을 반환한다")
+    void splitAndSum_empty_text() {
+        int result = StringAddCalculator.splitAndSum("");
         assertThat(result).isEqualTo(0);
     }
 
