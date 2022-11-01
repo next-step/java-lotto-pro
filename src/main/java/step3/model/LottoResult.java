@@ -16,6 +16,10 @@ public class LottoResult {
     private int totalWinnerPrice = 0;
     private double profitRate;
 
+    public int getTotalWinnerPrice() {
+        return totalWinnerPrice;
+    }
+
     public void addResult(int sameCount) {
         if (isNotExistsCount(sameCount)) {
             result.put(sameCount, 0);
@@ -31,7 +35,7 @@ public class LottoResult {
         return profitRate;
     }
 
-    private void sumWinnerPrice() {
+    public void sumWinnerPrice() {
         for (Integer winnerKey : result.keySet()) {
             Map<Integer, Integer> rules = WinnerRule.getRules();
             totalWinnerPrice += Optional.ofNullable(rules.get(winnerKey)).orElse(0) * result.get(winnerKey);
