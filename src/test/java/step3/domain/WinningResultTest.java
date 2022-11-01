@@ -9,6 +9,7 @@ public class WinningResultTest {
 
     @DisplayName("당첨결과 집계 테스트입니다.")
     @Test
+    // TODO : ParameterezdTest로 변경
     void 당첨결과집계() {
         WinningResult result = new WinningResult();
         result.addRank(WinningLottoRank.FOURTH);
