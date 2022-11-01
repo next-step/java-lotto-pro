@@ -36,6 +36,7 @@ public class InputView {
         Validate.validateWinningNumber(input);
         Validate.validateWinningNumberCount(input);
         Validate.validateWinningNumberRange(input);
+        Validate.validateWinningNumberDuplicate(input);
         return spliter.split(input);
     }
 
@@ -43,9 +44,13 @@ public class InputView {
         System.out.println("\n" + INPUT_WINNING_NUMBER_LAST_WEEK);
     }
 
-    int inputBonusNumberLastWeek() {
+    int inputBonusNumberLastWeek(List<Integer> winningNumber) {
         printInputBonusNumberLastWeek();
-        return scanner.nextInt();
+        String input = scanner.nextLine();
+        Validate.validateOnlyNumber(input);
+        Validate.validateWinningNumberRange(input);
+        Validate.validateBonusNumberDuplicate(Integer.parseInt(input), winningNumber);
+        return Integer.parseInt(input);
     }
 
     private void printInputBonusNumberLastWeek() {
