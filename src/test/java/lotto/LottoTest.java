@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+import static lotto.LottoNumberTest.makeLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
@@ -21,10 +22,23 @@ class LottoTest {
     @Test
     void winningResult_lotto_success() {
         //given:
-        Lotto lotto = new Lotto(new LottoNumberBag(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Lotto lotto = new Lotto(new LottoNumberBag(makeLottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"))));
         //when:
-        LottoNumberBag winningNumbers = new LottoNumberBag(Arrays.asList(1, 2, 3, 10, 20, 30));
+        WinningLottoBallBag winningLottoBallBag = new WinningLottoBallBag("1,2,3,10,20,30", new WinScore());
+        winningLottoBallBag.add(new LottoBall("45", new BonusScore()));
         //then:
-        assertThat(lotto.getResult(winningNumbers)).isEqualTo(WinningResult.WIN_FOURTH);
+        assertThat(lotto.getResult(winningLottoBallBag)).isEqualTo(WinningResult.WIN_FOURTH);
+    }
+
+    @DisplayName("2등 당첨 여부 제공 테스트")
+    @Test
+    void winSecondBonus_lotto_success() {
+        //given:
+        Lotto lotto = new Lotto(new LottoNumberBag(makeLottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"))));
+        //when:
+        WinningLottoBallBag winningLottoBallBag = new WinningLottoBallBag("1,2,3,4,5,45", new WinScore());
+        winningLottoBallBag.add(new LottoBall("6", new BonusScore()));
+        //then:
+        assertThat(lotto.getResult(winningLottoBallBag)).isEqualTo(WinningResult.WIN_SECOND_BONUS);
     }
 }

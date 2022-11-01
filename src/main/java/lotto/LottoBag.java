@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,9 +13,9 @@ public class LottoBag {
         this.lottoList = lottoList;
     }
 
-    public List<WinningResult> getResult(LottoNumberBag winningNumbers) {
+    public List<WinningResult> getResult(WinningLottoBallBag winningLottoBallBag) {
         return lottoList.stream()
-                .map(lotto -> lotto.getResult(winningNumbers))
+                .map(lotto -> lotto.getResult(winningLottoBallBag))
                 .collect(Collectors.toList());
     }
 
@@ -24,7 +23,7 @@ public class LottoBag {
         return lottoList.size();
     }
 
-    public List<List<Integer>> getLottoNumbers() {
+    public List<NumberBag> getLottoNumbers() {
         return lottoList.stream()
                 .map(Lotto::getNumbers)
                 .collect(Collectors.toList());
