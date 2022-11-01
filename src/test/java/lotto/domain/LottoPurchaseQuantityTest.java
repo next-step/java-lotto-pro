@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,5 +24,20 @@ class LottoPurchaseQuantityTest {
         LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(input);
         LottoPurchaseQuantity lottoPurchaseQuantity = LottoPurchaseQuantity.of(lottoPurchaseAmount.calculateQuantity());
         assertThat(lottoPurchaseQuantity.getMessage()).isEqualTo(String.format(LottoPurchaseQuantity.PRINT_QUANTITY_FORMAT, expect));
+    }
+
+    @Test
+    @DisplayName("수동 로또 횟수 생성")
+    void create_manual_lotto_purchase_quantity() {
+        LottoPurchaseQuantity lottoPurchaseQuantity = LottoPurchaseQuantity.manualQuantity("3");
+        assertThat(lottoPurchaseQuantity).isEqualTo(LottoPurchaseQuantity.manualQuantity("3"));
+    }
+
+    @Test
+    @DisplayName("로또 구매 횟수는 숫자만 입력 가능")
+    void lotto_purchase_quantity_is_only_number() {
+        assertThatThrownBy(() -> LottoPurchaseQuantity.manualQuantity("d1"))
+                .isInstanceOf(NumberFormatException.class)
+                .hasMessage("숫자를 입력해주세요.");
     }
 }

@@ -53,4 +53,21 @@ class LottoPurchaseAmountTest {
         LottoLottery lottoLottery = lottoPurchaseAmount.toLottoLottery(new ManualNumberGenerator("1,2,3,4,5,6"));
         assertThat(lottoLottery).isEqualTo(LottoLottery.of(LottoPurchaseQuantity.of(1), new ManualNumberGenerator("1,2,3,4,5,6")));
     }
+
+    @Test
+    @DisplayName("수동 로또 구매 횟수를 통해 자동 로또 구매 횟수를 구한다")
+    void calculate_auto_lotto_quantity_by_manual_lotto_quantity() {
+        LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(10000);
+        assertThat(lottoPurchaseAmount.calculateAutoQuantity(LottoPurchaseQuantity.manualQuantity("3")))
+                .isEqualTo(LottoPurchaseQuantity.of(7));
+    }
+
+    @Test
+    @DisplayName("수동 로또 구매 횟수는 총 구매 횟수 보다 클수 없다")
+    void manual_quantity_cannot_be_greater_than_purchase_quantity() {
+        LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(10000);
+        assertThatThrownBy(() -> lottoPurchaseAmount.calculateAutoQuantity(LottoPurchaseQuantity.manualQuantity("11")))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("수동 구매 가능 횟수는 최대 10장 입니다.");
+    }
 }

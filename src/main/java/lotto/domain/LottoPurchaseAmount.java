@@ -30,6 +30,10 @@ public class LottoPurchaseAmount  {
         return this.amount / LOTTO_PRICE;
     }
 
+    public LottoPurchaseQuantity calculateAutoQuantity(LottoPurchaseQuantity manualQuantity) {
+        return manualQuantity.calculateAutoQuantity(calculateQuantity());
+    }
+
     public LottoLottery toLottoLottery(LottoNumberGenerator lottoNumberGenerator) {
         return LottoLottery.of(LottoPurchaseQuantity.of(calculateQuantity()), lottoNumberGenerator);
     }
