@@ -23,4 +23,18 @@ public class InputView {
         return scanner.nextLine();
     }
 
+    public static String inputManualCount() {
+        System.out.println();
+        System.out.println(MANUAL_COUNT_MESSAGE);
+        return scanner.nextLine();
+    }
+
+    public static void inputManualLottoTitle() {
+        System.out.println();
+        System.out.println(MANUAL_NUMBER_MESSAGE);
+    }
+
+    public static String inputManualLotto() {
+        return scanner.nextLine();
+    }
 }
