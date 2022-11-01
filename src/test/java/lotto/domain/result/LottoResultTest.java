@@ -1,55 +1,42 @@
 package lotto.domain.result;
 
+import static lotto.domain.result.LottoResult.FIVE;
+import static lotto.domain.result.LottoResult.FIVE_BONUS;
+import static lotto.domain.result.LottoResult.FOUR;
+import static lotto.domain.result.LottoResult.MISS;
+import static lotto.domain.result.LottoResult.SIX;
+import static lotto.domain.result.LottoResult.THREE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
+import java.util.stream.Stream;
 import lotto.domain.matcher.count.MatchCount;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.api.Test;
 
 class LottoResultTest {
 
-    @ParameterizedTest
-    @DisplayName("6개 맞췄을때의 수익을 계산한다")
-    @CsvSource(value = {"1:2000000000", "2:2000000000", "3:2000000000"}, delimiter = ':')
-    void profit_six(int matchCount, int expected) {
-        LottoResult matchThree = LottoResult.SIX;
-        for (int i = 0; i < matchCount; i++) {
-            matchThree.calculateTotalCount(new MatchCount(6, false));
-        }
-        assertThat(matchThree.profit()).isEqualTo(matchCount * expected);
+    @Test
+    @DisplayName("로또를 맞춘 만큼 이익이 발생한다")
+    void profit() {
+        int profit = Stream.of(THREE, FOUR, FIVE, FIVE_BONUS, SIX).mapToInt(lottoResult -> {
+            lottoResult.addTotalCount();
+            return lottoResult.profit();
+        }).sum();
+        assertThat(profit).isEqualTo(5000 + 50000 + 1500000 + 30000000 + 2000000000);
     }
 
-    @ParameterizedTest
-    @DisplayName("5개 맞췄을때의 수익을 계산한다")
-    @CsvSource(value = {"1:1500000", "2:1500000", "3:1500000"}, delimiter = ':')
-    void profit_five(int matchCount, int expected) {
-        LottoResult matchThree = LottoResult.FIVE;
-        for (int i = 0; i < matchCount; i++) {
-            matchThree.calculateTotalCount(new MatchCount(5, false));
-        }
-        assertThat(matchThree.profit()).isEqualTo(matchCount * expected);
-    }
-
-    @ParameterizedTest
-    @DisplayName("4개 맞췄을때의 수익을 계산한다")
-    @CsvSource(value = {"1:50000", "2:50000", "3:50000"}, delimiter = ':')
-    void profit_four(int matchCount, int expected) {
-        LottoResult matchThree = LottoResult.FOUR;
-        for (int i = 0; i < matchCount; i++) {
-            matchThree.calculateTotalCount(new MatchCount(4, false));
-        }
-        assertThat(matchThree.profit()).isEqualTo(matchCount * expected);
-    }
-
-    @ParameterizedTest
-    @DisplayName("3개 맞췄을때의 수익을 계산한다")
-    @CsvSource(value = {"1:5000", "2:5000", "3:5000"}, delimiter = ':')
-    void profit_three(int matchCount, int expected) {
-        LottoResult matchThree = LottoResult.THREE;
-        for (int i = 0; i < matchCount; i++) {
-            matchThree.calculateTotalCount(new MatchCount(3, false));
-        }
-        assertThat(matchThree.profit()).isEqualTo(matchCount * expected);
+    @Test
+    @DisplayName("matchCont 갯수가 같고 및 보너스볼 맟춤 여부에 따라 결과가 나온다")
+    void matchResult() {
+        assertAll(
+                () -> assertSame(MISS.matchResult(new MatchCount(0, false)), MISS),
+                () -> assertSame(THREE.matchResult(new MatchCount(3, false)), THREE),
+                () -> assertSame(FOUR.matchResult(new MatchCount(4, false)), FOUR),
+                () -> assertSame(FIVE.matchResult(new MatchCount(5, false)), FIVE),
+                () -> assertSame(FIVE_BONUS.matchResult(new MatchCount(6, true)), FIVE_BONUS),
+                () -> assertSame(SIX.matchResult(new MatchCount(6, false)), SIX)
+        );
     }
 }

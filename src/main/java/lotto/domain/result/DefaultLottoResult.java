@@ -1,5 +1,6 @@
 package lotto.domain.result;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import lotto.domain.matcher.count.MatchCount;
@@ -15,7 +16,9 @@ public class DefaultLottoResult {
     }
 
     public void calculateTotalCount(MatchCount matchCount) {
-        lottoResults.forEach(lottoResult -> lottoResult.calculateTotalCount(matchCount));
+        List<LottoResult> matchLottoResults = new ArrayList<>();
+        lottoResults.forEach(lottoResult -> matchLottoResults.add(lottoResult.matchResult(matchCount)));
+        matchLottoResults.forEach(LottoResult::addTotalCount);
     }
 
     public int totalProfit() {

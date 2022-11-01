@@ -8,7 +8,8 @@ public enum LottoResult {
     FOUR(4, 50000, false),
     FIVE(5, 1500000, false),
     FIVE_BONUS(5, 30000000, true),
-    SIX(6, 2000000000, false);
+    SIX(6, 2000000000, false),
+    MISS(0, 0, false);
 
     private static final String RESULT_MATCH_COUNT_TEXT = "개 일치 (";
     private static final String RESULT_MATCH_BONUS_COUNT_TEXT = "개 일치, 보너스 볼 일치(";
@@ -16,7 +17,6 @@ public enum LottoResult {
     private static final String RESULT_TOTAL_COUNT_TEXT = "개";
     private static final int DEFAULT_PROFIT = 0;
     private static final int CLEAR_TOTAL_COUNT = 0;
-    private static final int NOT_BONUS_MATCH_COUNT = 5;
     private int matchCount;
     private int money;
     private boolean isBonus;
@@ -28,22 +28,15 @@ public enum LottoResult {
         this.isBonus = isBonus;
     }
 
-    public void calculateTotalCount(MatchCount matchCount) {
-        if (matchCount.isEquals(this.matchCount)) {
-            addTotalCount(matchCount);
+    public LottoResult matchResult(MatchCount matchCount) {
+        if (matchCount.equals(this.matchCount)) {
+            return matchCount.isMatchBonus(this);
         }
+        return MISS;
     }
 
-    private void addTotalCount(MatchCount matchCount) {
-        if (this.matchCount != NOT_BONUS_MATCH_COUNT) {
-            totalCount++;
-        }
-        if (this == FIVE && !matchCount.isMatchBonus()) {
-            totalCount++;
-        }
-        if (this == FIVE_BONUS && matchCount.isMatchBonus()) {
-            totalCount++;
-        }
+    public void addTotalCount() {
+        this.totalCount++;
     }
 
     public int profit() {
