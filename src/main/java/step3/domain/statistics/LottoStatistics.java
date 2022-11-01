@@ -1,10 +1,9 @@
 package step3.domain.statistics;
 
-import step3.domain.lotto.BonusLottoNumber;
-import step3.domain.lotto.Lotto;
-import step3.domain.lotto.Lottos;
-import step3.domain.lotto.WinningLottoNumbers;
+import step3.domain.lotto.*;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,9 +21,9 @@ public class LottoStatistics {
         this.lottoResult = lottoResult;
     }
 
-    public LottoStatistics(Lottos lottos, WinningLottoNumbers winningLottoNumbers, BonusLottoNumber bonusLottoNumber) {
+    public LottoStatistics(Lottos lottos, WinningLotto winningLotto) {
         this.lottos = lottos;
-        lottoResult(lottos, winningLottoNumbers, bonusLottoNumber);
+        lottoResult(lottos, winningLotto.getWinningLottoNumbers(), winningLotto.getBonusLottoNumber());
     }
 
     public double getTotalProfit() {
@@ -35,35 +34,46 @@ public class LottoStatistics {
 
     public int getTotalWinningAmount() {
         int totalWinningAmount = 0;
-        for (Rank winningLottoType : lottoResult.keySet()) {
-            Integer count = lottoResult.get(winningLottoType);
-            totalWinningAmount += winningLottoType.getWinningAmount() * count;
+        for (Rank rank : lottoResult.keySet()) {
+            totalWinningAmount += rank.getWinningAmount() * lottoResult.get(rank);
         }
         return totalWinningAmount;
     }
 
     public int getTotalLottoPrice(Lottos lottos) {
-        return lottos.getLottos().stream()
+        return lottos.value().stream()
                 .mapToInt(Lotto::getPrice)
                 .sum();
     }
 
-    public Map<Rank, Integer> getLottoResult() {
-        return lottoResult;
-    }
-
     private void lottoResult(Lottos lottos, WinningLottoNumbers winningLottoNumbers, BonusLottoNumber bonusLottoNumber) {
-        lottos.getLottos()
+        lottos.value()
                 .forEach(lotto -> {
                     Rank type = lotto.getRank(winningLottoNumbers, bonusLottoNumber);
                     lottoResult.put(type, lottoResult.getOrDefault(type, 0) + 1);
                 });
     }
 
+    private String getString(Rank rank) {
+        if (rank == Rank.SECOND) {
+            return getFormat("%d개 일치, 보너스 볼 일치(%d원)- %d개%n", rank);
+        }
+        return getFormat("%d개 일치 (%d원)- %d개%n", rank);
+    }
+
+    private String getFormat(String format, Rank rank) {
+        return String.format(format, rank.getMatch().getCount(),
+                rank.getWinningAmount(),
+                lottoResult.getOrDefault(rank, 0));
+    }
+
     @Override
     public String toString() {
-        return "LottoStatistics{" +
-                "lottoResult=" + lottoResult +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        Arrays.stream(Rank.values())
+                .filter(rank -> rank != Rank.MISS)
+                .sorted(Comparator.reverseOrder())
+                .forEach(rank -> sb.append(getString(rank)));
+        return sb.toString();
     }
 }

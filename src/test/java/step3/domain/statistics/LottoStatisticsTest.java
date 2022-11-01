@@ -33,7 +33,6 @@ class LottoStatisticsTest {
 
         Lottos lottos = new Lottos(new Amount(14000));
         LottoStatistics lottoStatistics = new LottoStatistics(lottos, lottoResult);
-        double totalProfit = lottoStatistics.getTotalProfit();
-        assertThat(totalProfit).isEqualTo(0.35);
+        assertThat(lottoStatistics.getTotalProfit()).isEqualTo(0.35);
     }
 }

@@ -1,67 +1,26 @@
 package step3.view;
 
-import step3.domain.lotto.Lotto;
-import step3.domain.lotto.LottoNumber;
-import step3.domain.lotto.LottoNumbers;
 import step3.domain.lotto.Lottos;
-import step3.domain.statistics.Rank;
-
-import java.util.List;
-import java.util.Map;
-
-import static step3.domain.statistics.Rank.*;
+import step3.domain.statistics.LottoStatistics;
 
 public class ResultView {
 
-    public static void printLottoSize(List<Lotto> lottos) {
-        System.out.printf("%d개를 구매했습니다.%n", lottos.size());
+    public static void printLottosQuantity(Lottos lottos) {
+        System.out.printf("%d개를 구매했습니다.%n", lottos.value().size());
     }
 
-    public static void printLotto(Lottos lottos) {
-        for (Lotto lotto : lottos.getLottos()) {
-            StringBuilder sb = getStringBuilder(lotto.getLottoNumbers());
-            System.out.println(sb.toString().replaceAll(", ]", "]"));
-        }
+    public static void printLottos(Lottos lottos) {
+        System.out.println(lottos);
     }
 
-    public static void printResult(Map<Rank, Integer> lottoResult) {
+    public static void printResult(LottoStatistics lottoStatistics) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("------------");
-        printWinningResult(FIFTH, lottoResult);
-        printWinningResult(FOURTH, lottoResult);
-        printWinningResult(THIRD, lottoResult);
-        printWinningResultWithBonus(SECOND, lottoResult);
-        printWinningResult(FIRST, lottoResult);
+        System.out.println(lottoStatistics);
     }
 
-    public static void printTotalProfit(double totalProfit) {
-        System.out.printf("총 수익률은 %.2f입니다.%n", totalProfit);
-    }
-
-    private static StringBuilder getStringBuilder(LottoNumbers lottoNumbers) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        for (LottoNumber lottoNumber : lottoNumbers.value()) {
-            sb.append(lottoNumber.getLottoNumber()).append(", ");
-        }
-        sb.append("]");
-        return sb;
-    }
-
-    private static void printWinningResult(Rank rank, Map<Rank, Integer> lottoResult) {
-        System.out.printf("%d개 일치 (%d원)- %d개%n",
-                rank.getMatchCount(),
-                rank.getWinningAmount(),
-                lottoResult.getOrDefault(rank, 0)
-        );
-    }
-
-    private static void printWinningResultWithBonus(Rank rank, Map<Rank, Integer> lottoResult) {
-        System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개%n",
-                rank.getMatchCount(),
-                rank.getWinningAmount(),
-                lottoResult.getOrDefault(rank, 0)
-        );
+    public static void printTotalProfit(LottoStatistics lottoStatistics) {
+        System.out.printf("총 수익률은 %.2f입니다.%n", lottoStatistics.getTotalProfit());
     }
 }

@@ -1,13 +1,14 @@
-package step3.domain.input;
+package step3.view.input;
 
 import java.util.Scanner;
 
 import static step3.type.ErrorMessageType.INPUT_NOT_ALLOW_BLANK;
 
 public interface Input<T> {
+
     Scanner scanner = new Scanner(System.in);
 
-    T create(String input);
+    T create();
 
     default void validateBlank(String input) {
         if (isNull(input) || isEmpty(input)) {

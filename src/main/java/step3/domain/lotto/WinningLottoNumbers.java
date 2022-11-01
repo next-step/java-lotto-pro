@@ -1,10 +1,10 @@
 package step3.domain.lotto;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
-import static step3.type.ErrorMessageType.INPUT_ONLY_ALLOW_NUMBER;
+import static step3.domain.lotto.LottoNumbers.DEFAULT_LOTTO_SIZE;
+import static step3.type.ErrorMessageType.*;
 
 public class WinningLottoNumbers {
 
@@ -13,11 +13,20 @@ public class WinningLottoNumbers {
     private final List<LottoNumber> lottoNumbers;
 
     public WinningLottoNumbers(String input) {
-        this.lottoNumbers = getLottoNumbers(input);
+        List<LottoNumber> numbers = getLottoNumbers(input);
+        validateDuplicate(numbers);
+        this.lottoNumbers = numbers;
+    }
+
+    private void validateDuplicate(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
+        if (lottoNumberSet.size() != lottoNumbers.size()) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATE.getMessage());
+        }
     }
 
     private List<LottoNumber> getLottoNumbers(String input) {
-        return Arrays.stream(getSplit(input))
+        return Arrays.stream(getStrings(input))
                 .map(s -> {
                     try {
                         int lottoNumber = Integer.parseInt(s.trim());
@@ -29,12 +38,20 @@ public class WinningLottoNumbers {
                 .collect(Collectors.toList());
     }
 
+    private String[] getStrings(String input) {
+        String[] split = getSplit(input);
+        if (DEFAULT_LOTTO_SIZE != split.length) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_WRONG_SIZE.getMessage());
+        }
+        return split;
+    }
+
     private String[] getSplit(String input) {
         return input.split(REGEX);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public List<LottoNumber> value() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     @Override

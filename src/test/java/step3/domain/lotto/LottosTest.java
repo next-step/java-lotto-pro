@@ -12,6 +12,6 @@ class LottosTest {
     @DisplayName("구입 금액에 해당하는 로또 번호를 발급한다.")
     void createLottos() {
         Lottos lottos = new Lottos(new Amount(14000));
-        assertThat(lottos.getLottos()).hasSize(14);
+        assertThat(lottos.value()).hasSize(14);
     }
 }

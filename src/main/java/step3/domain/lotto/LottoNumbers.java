@@ -1,5 +1,6 @@
 package step3.domain.lotto;
 
+import step3.domain.statistics.Match;
 import step3.domain.statistics.Rank;
 
 import java.util.Collections;
@@ -9,6 +10,7 @@ import java.util.stream.IntStream;
 
 import static step3.domain.lotto.LottoNumber.END_INCLUSIVE;
 import static step3.domain.lotto.LottoNumber.START_INCLUSIVE;
+import static step3.domain.statistics.Rank.*;
 import static step3.type.ErrorMessageType.LOTTO_NUMBER_WRONG_SIZE;
 
 public class LottoNumbers {
@@ -27,7 +29,16 @@ public class LottoNumbers {
     }
 
     public Rank getRank(WinningLottoNumbers winningLottoNumbers, BonusLottoNumber bonusLottoNumber) {
-        return Rank.valueOf(getMatchCount(winningLottoNumbers), isContains(bonusLottoNumber));
+        int count = getMatchCount(winningLottoNumbers);
+        return valueOf(new Match(count, isContains(bonusLottoNumber, count)));
+    }
+
+    private boolean isContains(BonusLottoNumber bonusLottoNumber, int matchCount) {
+        boolean contains = false;
+        if (isSecond(matchCount)) {
+            contains = isContains(bonusLottoNumber);
+        }
+        return contains;
     }
 
     public boolean isContains(BonusLottoNumber bonusLottoNumber) {
@@ -35,9 +46,17 @@ public class LottoNumbers {
     }
 
     private int getMatchCount(WinningLottoNumbers winningLottoNumbers) {
-        return (int) winningLottoNumbers.getLottoNumbers().stream()
+        int count = (int) winningLottoNumbers.value().stream()
                 .filter(this.lottoNumbers::contains)
                 .count();
+        return getCount(count);
+    }
+
+    private static int getCount(int count) {
+        if (count < FIFTH.getMatch().getCount()) {
+            return 0;
+        }
+        return count;
     }
 
     private void validateLottoSize(final List<LottoNumber> lottoNumbers) {
