@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class WinStatsTest {
 
     @ParameterizedTest
-    @CsvSource(value = { "20:75.50", "14:107.86", "100:15.10", "50:30.20" }, delimiter = ':')
+    @CsvSource(value = { "20:1505.00", "14:2150.00", "100:301.00", "50:602.00" }, delimiter = ':')
     void 당첨_계산_검증(int quantity, String expected) {
         WinStats winStats = new WinStats(quantity);
 

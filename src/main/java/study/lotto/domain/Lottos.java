@@ -7,8 +7,8 @@ public class Lottos {
     private final WinStats stats;
 
     public Lottos(List<Lotto> allNumbersFromStore) {
-        lottos = allNumbersFromStore;
-        stats = new WinStats(lottos.size());
+        this.lottos = allNumbersFromStore;
+        this.stats = new WinStats(lottos.size());
     }
 
     public WinStats drawLots(WinningLotto winningLotto) {
@@ -18,9 +18,11 @@ public class Lottos {
     @Override
     public String toString() {
         StringBuffer buffer = new StringBuffer();
+
         lottos.forEach((lotto) -> {
             buffer.append(lotto.toString()).append("\n");
         });
+
         return buffer.toString();
     }
 }

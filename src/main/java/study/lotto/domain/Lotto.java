@@ -1,5 +1,7 @@
 package study.lotto.domain;
 
+import study.lotto.domain.number.CacheLottoNumbers;
+import study.lotto.domain.number.LottoNumber;
 import study.util.NumberUtil;
 
 import java.util.*;
@@ -7,18 +9,15 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final int MATCH = 1;
-    private static final int NOT_MATCH = 0;
-
     private final Set<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbersFromStore) {
-        this(toSet(numbersFromStore));
+        this.numbers = createLottoNumbers(numbersFromStore);
     }
 
-    private static Set<LottoNumber> toSet(List<Integer> numbersFromStore) {
+    private Set<LottoNumber> createLottoNumbers(List<Integer> numbersFromStore) {
         return numbersFromStore.stream()
-                .map((num) -> LottoNumber.of(num))
+                .map(CacheLottoNumbers::of)
                 .collect(Collectors.toSet());
     }
 
@@ -27,29 +26,31 @@ public class Lotto {
     }
 
     public LottoStatus drawLots(WinningLotto winningLotto) {
-        int result = matchNumbers(winningLotto);
-        return LottoStatus.getLottoStatus(result);
+        return LottoStatus.getLottoStatus(
+                matchNumbers(winningLotto),
+                winningLotto.isMatchBonusBall(this)
+        );
     }
 
     private int matchNumbers(WinningLotto winningLotto) {
         int result = NumberUtil.INIT_ZERO;
+
         for(LottoNumber lottoNumber : numbers) {
             result += winningLotto.matchNumber(lottoNumber);
         }
+
         return result;
     }
 
-    public int contains(LottoNumber lottoNumber) {
-        if(numbers.contains(lottoNumber)) {
-            return MATCH;
-        }
-        return NOT_MATCH;
+    public boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
 
     @Override
     public String toString() {
         List<LottoNumber> lottoNumbers = new ArrayList<>(numbers);
         Collections.sort(lottoNumbers);
+
         return Arrays.toString(lottoNumbers.toArray());
     }
 }

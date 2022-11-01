@@ -1,5 +1,6 @@
 package study.lotto.domain;
 
+import study.message.LottoExceptionCode;
 import study.util.NumberUtil;
 
 public class Order {
@@ -13,11 +14,20 @@ public class Order {
     }
 
     private int checkTotalAmount(String totalAmount) {
-        int totalAmountConverted = NumberUtil.convertToPositiveIntNotContainsZero(totalAmount);
-        if(totalAmountConverted >= Store.LOTTO_PRICE) {
+        try {
+            int totalAmountConverted = NumberUtil.convertToPositiveIntNotContainsZero(totalAmount);
+            checkLottoSize(totalAmountConverted);
+
             return totalAmountConverted;
+        } catch (IllegalArgumentException iae) {
+            throw new IllegalArgumentException(LottoExceptionCode.INSUFFICIENT_FUNDS.getMessage());
         }
-        throw new IllegalArgumentException("[ERROR] You must purchase at least one lotto.");
+    }
+
+    private void checkLottoSize(int totalAmountCoverted) {
+        if (totalAmountCoverted < Store.LOTTO_PRICE) {
+            throw new IllegalArgumentException(LottoExceptionCode.INSUFFICIENT_FUNDS.getMessage());
+        }
     }
 
     public int getQuantity() {

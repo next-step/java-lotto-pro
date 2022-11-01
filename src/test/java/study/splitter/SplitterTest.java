@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("문자열을 구분자로 자르는 클래스 테스트")
 class SplitterTest {
 
     @DisplayName("문자열을 기본 구분자로 분리하여 리턴하는 테스트")

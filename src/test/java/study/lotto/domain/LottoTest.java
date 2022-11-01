@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import study.lotto.domain.number.CacheLottoNumbers;
+import study.lotto.domain.number.LottoNumber;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,28 +30,46 @@ class LottoTest {
     }
 
     @Test
+    void drawLots_5등_당첨() {
+        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 11, 23, 45");
+        winningLotto.addBonusBall(18);
+
+        assertEquals(LottoStatus.FIFTH_PLACE, lotto.drawLots(winningLotto));
+    }
+
+    @Test
     void drawLots_4등_당첨() {
-        assertEquals(LottoStatus.FOURTH_PLACE, lotto.drawLots(new WinningLotto(("1, 2, 3, 11, 23, 45"))));
+        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 23, 45");
+        winningLotto.addBonusBall(18);
+
+        assertEquals(LottoStatus.FOURTH_PLACE, lotto.drawLots(winningLotto));
     }
 
     @Test
     void drawLots_3등_당첨() {
-        assertEquals(LottoStatus.THIRD_PLACE, lotto.drawLots(new WinningLotto("1, 2, 3, 4, 11, 23")));
+        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 23");
+        winningLotto.addBonusBall(18);
+
+        assertEquals(LottoStatus.THIRD_PLACE, lotto.drawLots(winningLotto));
     }
 
     @Test
     void drawLots_2등_당첨() {
-        assertEquals(LottoStatus.SECOND_PLACE, lotto.drawLots(new WinningLotto(("1, 2, 3, 4, 5, 11"))));
+        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 23");
+        winningLotto.addBonusBall(6);
+
+        assertEquals(LottoStatus.SECOND_PLACE, lotto.drawLots(winningLotto));
     }
 
     @Test
     void drawLosts_1등_당첨() {
-        assertEquals(LottoStatus.FIRST_PLACE, lotto.drawLots(new WinningLotto(("1, 2, 3, 4, 5, 6"))));
+        assertEquals(LottoStatus.FIRST_PLACE,
+                lotto.drawLots(new WinningLotto(("1, 2, 3, 4, 5, 6"))));
     }
 
     @ParameterizedTest
-    @CsvSource(value = { "1:1", "8:0", "2:1", "45:0" }, delimiter = ':')
-    void Lotto가_가진_LottoNumber_목록에_입력된_LottoNumber의_포함여부(int lottoNumber, int expected) {
-        assertEquals(expected, lotto.contains(LottoNumber.of(lottoNumber)));
+    @CsvSource(value = { "1:true", "8:false", "2:true", "45:false" }, delimiter = ':')
+    void Lotto가_가진_LottoNumber_목록에_입력된_LottoNumber의_포함여부(int lottoNumber, boolean expected) {
+        assertEquals(expected, lotto.contains(CacheLottoNumbers.of(lottoNumber)));
     }
 }

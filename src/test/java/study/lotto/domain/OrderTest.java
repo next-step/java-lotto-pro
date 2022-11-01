@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
+import study.message.LottoExceptionCode;
+import study.message.NumberExceptionCode;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -16,7 +18,7 @@ class OrderTest {
         assertThatThrownBy(() -> {
             new Order("0");
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] The given string cannot contain zero.");
+                .hasMessage(LottoExceptionCode.INSUFFICIENT_FUNDS.getMessage());
     }
 
     @ParameterizedTest
@@ -25,7 +27,7 @@ class OrderTest {
         assertThatThrownBy(() -> {
             new Order(totalAmount);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] The given string cannot contain negative numbers.");
+                .hasMessage(LottoExceptionCode.INSUFFICIENT_FUNDS.getMessage());
     }
 
     @ParameterizedTest
@@ -35,7 +37,7 @@ class OrderTest {
         assertThatThrownBy(() -> {
             new Order(totalAmount);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] The given string contains characters that cannot be converted to numbers.");
+                .hasMessage(LottoExceptionCode.INSUFFICIENT_FUNDS.getMessage());
     }
 
     @ParameterizedTest
@@ -44,6 +46,6 @@ class OrderTest {
         assertThatThrownBy(() -> {
             new Order(totalAmount);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] You must purchase at least one lotto.");
+                .hasMessage(LottoExceptionCode.INSUFFICIENT_FUNDS.getMessage());
     }
 }

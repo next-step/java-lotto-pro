@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@DisplayName("숫자와 관련된 유틸성 메소드 테스트")
 class NumberUtilTest {
 
     @Test
@@ -35,7 +36,8 @@ class NumberUtilTest {
         assertThatThrownBy(() -> {
             NumberUtil.convertToPositiveInt(str);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] The given string contains characters that cannot be converted to numbers.");
+                .hasMessage("[ERROR] The given string contains characters " +
+                        "that cannot be converted to numbers.");
     }
 
     @DisplayName("문자열을 숫자로 변환하는 테스트")
