@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("문자열 덧셈 계산기")
-class StringSplitterTest {
+class StringCalculatorTest {
 
     @DisplayName("공백 또는 null 을 입력할 경우 0을 반환한다.")
     @ParameterizedTest
