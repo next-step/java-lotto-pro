@@ -13,4 +13,13 @@ public class Lottos {
         return lottos;
     }
 
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        for (Lotto lotto : lottos) {
+            sb.append(lotto);
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }

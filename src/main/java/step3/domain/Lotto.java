@@ -32,4 +32,9 @@ public class Lotto {
         Lotto lotto = (Lotto) o;
         return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }
