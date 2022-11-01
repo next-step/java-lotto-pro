@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lottos {
-    private final List<Lotto> lottoList;
+    private final List<Lotto> lottos;
 
     public Lottos() {
-        this.lottoList = new ArrayList<>();
+        this.lottos = new ArrayList<>();
     }
 
     public void buyLottos(int count) {
         for(int i=0; i<count; i++) {
-            lottoList.add(new Lotto(LottoNumberGenerator.generate()
+            lottos.add(new Lotto(LottoNumberGenerator.generate()
                     .stream()
                     .map(LottoNumber::new)
                     .collect(Collectors.toList())));
@@ -21,20 +21,19 @@ public class Lottos {
     }
 
     public int size() {
-        return lottoList.size();
+        return lottos.size();
     }
 
     @Override
     public String toString() {
-        return lottoList.stream()
+        return lottos.stream()
                 .map(Lotto::toString)
                 .collect(Collectors.joining("\n"));
     }
 
     public LottoResult getResult(WinningLotto winningLotto) {
         LottoResult result = new LottoResult();
-        lottoList.forEach(lotto ->
-                result.add(Rank.valueOf(winningLotto.getCorrectCount(lotto))));
+        lottos.forEach(lotto -> result.add(winningLotto.getRank(lotto)));
 
         return result;
     }

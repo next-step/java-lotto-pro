@@ -9,7 +9,9 @@ import java.util.List;
 
 public class View {
     private static final String MSG_LOTTO_COUNT = "%d개를 구매했습니다.";
-    private static final String MSG_RESULT = "%d개 일치 (%d원)- %d개";
+    private static final String MSG_CORRECT_COUNT = "%d개 일치";
+    private static final String MSG_BONUS = ", 보너스 볼 일치";
+    private static final String MSG_PRIZE = " (%d원)- %d개";
     private static final String MSG_RETURN_RATE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     public int insertMoney() {
@@ -30,12 +32,30 @@ public class View {
         return InputView.inputLotto();
     }
 
+    public LottoNumber insertBonusBall() {
+        OutputView.print("보너스 볼을 입력해 주세요.");
+        return InputView.inputBonusBall();
+    }
+
     public void printResult(LottoResult result) {
         OutputView.print("당첨 통계");
         OutputView.print("---------");
         Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.NONE)
-                .forEach(rank -> print(String.format(MSG_RESULT, rank.getCount(), rank.getPrize(), result.getRankCount(rank))));
+                .forEach(rank -> print(generateResultMessage(rank, result.getRankCount(rank))));
         print(String.format(MSG_RETURN_RATE, result.getReturnRate()));
+    }
+
+    private String generateResultMessage(Rank rank, int count) {
+        return String.format(MSG_CORRECT_COUNT, rank.getMatchCount()) +
+                generateBonusMessage(rank) +
+                String.format(MSG_PRIZE, rank.getPrize(), count);
+    }
+
+    private String generateBonusMessage(Rank rank) {
+        if(rank == Rank.SECOND) {
+            return MSG_BONUS;
+        }
+        return "";
     }
 }

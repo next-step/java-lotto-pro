@@ -3,29 +3,33 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    THREE(3, 5_000),
-    FOUR(4, 50_000),
-    FIVE(5, 1_500_000),
-    SIX(6, 2_000_000_000),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000),
     NONE(0, 0);
 
-    private final int count;
+    private final int matchCount;
     private final int prize;
 
-    Rank(int count, int prize) {
-        this.count = count;
+    Rank(int matchCount, int prize) {
+        this.matchCount = matchCount;
         this.prize = prize;
     }
 
-    public static Rank valueOf(int count) {
+    public static Rank valueOf(int matchCount, boolean hasBonusBall) {
+        if(matchCount == SECOND.getMatchCount() && hasBonusBall) {
+            return SECOND;
+        }
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.count == count)
-                .findFirst()
+                .filter(rank -> rank.matchCount == matchCount)
+                .findAny()
                 .orElse(NONE);
     }
 
-    public int getCount() {
-        return this.count;
+    public int getMatchCount() {
+        return this.matchCount;
     }
 
     public int getPrize() {
