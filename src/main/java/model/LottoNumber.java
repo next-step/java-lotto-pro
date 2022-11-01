@@ -7,7 +7,6 @@ import java.util.List;
 public class LottoNumber {
 
     private final List<Integer> number;
-    private static final int ADD_WIN_NUMBER_COUNT = 1;
 
     public LottoNumber(List<Integer> number) {
         Collections.sort(number);
@@ -20,23 +19,28 @@ public class LottoNumber {
     }
 
     public int getWinNumberCount(List<Integer> winNumber) {
-        int winNumberCount = 0;
-        for (Integer targetNumber : number) {
-            winNumberCount = addCountIfContain(winNumber, targetNumber, winNumberCount);
-        }
-
-        return winNumberCount;
+        return (int) number.stream()
+                .map(integer -> addCountIfContain(winNumber, integer))
+                .count();
     }
 
-    private int addCountIfContain(List<Integer> winNumber, Integer targetNumber, int winNumberCount) {
-        if (winNumber.contains(targetNumber)) {
-            winNumberCount += ADD_WIN_NUMBER_COUNT;
-        }
-
-        return winNumberCount;
+    private int addCountIfContain(List<Integer> winNumber, Integer targetNumber) {
+        return (int) winNumber.stream()
+                .filter(integer -> integer.equals(targetNumber))
+                .count();
     }
 
     public List<Integer> getNumber() {
         return number;
+    }
+
+    public int getCountOfContain(List<Integer> winNumber) {
+        return (int) winNumber.stream()
+                .filter(this.number::contains)
+                .count();
+    }
+
+    public boolean isMatchBonusNumber(int bonusNumber) {
+        return this.number.contains(bonusNumber);
     }
 }
