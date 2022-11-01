@@ -12,15 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LottoTest {
 
-    @ParameterizedTest
-    @CsvSource(value = {"1:true", "10:true", "30:true", "45:false", "2:false"}, delimiterString = ":")
-    @DisplayName("6개의 번호에 특정 번호가 있는지 확인한다.")
-    void 로또_번호_비교_테스트(int number, boolean result){
-        Lotto lotto = Lotto.create(Arrays.asList(1,10,15,20,25,30));
-
-        assertThat(lotto.isContain(LottoNumber.create(number))).isEqualTo(result);
-    }
-
     @Test
     @DisplayName("당첨 번호와 구매 번호가 몇개 맞았는지 확인한다.")
     void 당첨_구매_비교(){

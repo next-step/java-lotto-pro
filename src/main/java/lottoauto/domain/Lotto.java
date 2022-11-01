@@ -19,7 +19,7 @@ public class Lotto {
         return lotto;
     }
 
-    public boolean isContain(LottoNumber number) {
+    private boolean isContain(LottoNumber number) {
         return this.numbers.contains(number);
     }
 
