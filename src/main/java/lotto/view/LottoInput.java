@@ -2,6 +2,9 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoInput {
 
     private LottoInput() {
@@ -59,6 +62,25 @@ public class LottoInput {
         } catch (IllegalArgumentException e) {
             OutputConsole.out(String.format("0 ~ %d의 숫자만 입력 가능합니다.", lottoCoin.size()));
             return inputBuyManuallyNumber(lottoCoin);
+        }
+    }
+
+    public static Lottos inputManuallyLottos(LottoCoin lottoCoin) {
+        InputConsole.inputManuallyLottoNumbers();
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < lottoCoin.size(); i++) {
+            lottos.add(inputManuallyLotto());
+        }
+        return Lottos.of(lottos);
+    }
+
+    private static Lotto inputManuallyLotto() {
+        try {
+            String input = InputConsole.nextLine();
+            return Lotto.of(input);
+        } catch (IllegalArgumentException e) {
+            OutputConsole.out(e.getMessage());
+            return inputManuallyLotto();
         }
     }
 
