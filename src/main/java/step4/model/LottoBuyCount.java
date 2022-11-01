@@ -9,12 +9,12 @@ import java.util.Objects;
 public class LottoBuyCount {
 
     private int lottoBuyCount;
-    private final static Money oneGameMoney = new Money(LottoConstant.LOTTO_ONE_GAME_MONEY);
+    private static final Money ONE_GAME_MONEY = new Money(LottoConstant.LOTTO_ONE_GAME_MONEY);
     public LottoBuyCount(Money money) {
-        if (money.isLessThan(oneGameMoney)) {
+        if (money.isLessThan(ONE_GAME_MONEY)) {
             throw new LottoFormatException(ErrorMessageConstant.ZERO_LOTTO_BUY_COUNT);
         }
-        this.lottoBuyCount = money.divideValue(oneGameMoney);
+        this.lottoBuyCount = money.divideValue(ONE_GAME_MONEY);
     }
 
     public LottoBuyCount(int count) {
