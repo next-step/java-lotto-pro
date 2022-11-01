@@ -9,15 +9,22 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
-        // TODO: 예외 처리 로직 분
+        validateNumbersSize(numbers);
+        validateDuplicate(numbers);
+        this.numbers = numbers;
+        Collections.sort(numbers);
+    }
+
+    private void validateNumbersSize(List<LottoNumber> numbers) throws IllegalArgumentException {
         if(numbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호는 6개의 숫자만 설정 가능합니다.");
         }
+    }
+
+    private void validateDuplicate(List<LottoNumber> numbers) throws IllegalArgumentException {
         if(new HashSet<>(numbers).size() != numbers.size()) {
             throw new IllegalArgumentException("로또 번호가 중복됩니다.");
         }
-        this.numbers = numbers;
-        Collections.sort(numbers);
     }
 
     public boolean hasBonusBall(LottoNumber bonusBall) {
