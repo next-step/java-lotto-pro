@@ -39,14 +39,11 @@ public class LottoResult {
     }
 
     private void calculateProfit() {
-        int ymep = totalWinnerPrice;
-        int ddd = totalPurchasedPrice;
-
         profitRate = Math.floor(Double.valueOf(totalWinnerPrice) / totalPurchasedPrice * ONE_HUNDRED) / ONE_HUNDRED;
     }
 
     public boolean isNotExistsCount(int sameCount) {
-        return result.get(sameCount) == null;
+        return result.containsKey(sameCount);
     }
 
     public String getResultValue(int winnerKey) {

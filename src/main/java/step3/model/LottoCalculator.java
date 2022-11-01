@@ -8,6 +8,8 @@ import java.util.Map;
 
 import static step3.constant.Constant.Lotto.LOTTO_NUMBER_LENGTH;
 import static step3.constant.Constant.Number.*;
+import static step3.constant.Constant.Symbols.COMMA;
+import static step3.constant.Constant.Symbols.SPACE;
 import static step3.constant.Message.Error.*;
 public class LottoCalculator {
     private static List<LottoNumber> lastWeekWinner;
@@ -65,12 +67,12 @@ public class LottoCalculator {
     private void validateSameNumber(String[] afterNumbers) {
         List<String> tempList = new ArrayList<>();
         for(String str : afterNumbers) {
-            isStringContain(tempList, str);
+            listHasString(tempList, str);
             tempList.add(str);
         }
     }
 
-    private void isStringContain(List<String> list, String str) {
+    private void listHasString(List<String> list, String str) {
         if(list.contains(str)) {
             throw new IllegalArgumentException(SMAE_LOTTO_NUMBER);
         }
