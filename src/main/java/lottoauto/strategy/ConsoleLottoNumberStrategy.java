@@ -10,10 +10,11 @@ import static lottoauto.io.InputUtils.*;
 public class ConsoleLottoNumberStrategy implements LottoNumberStrategy{
     @Override
     public List<Integer> generateNumbers() {
-        Arrays.asList(readConsole().split(",")).stream()
+        String[] numbers = readConsole().split(",");
+        Arrays.asList(numbers).stream()
                 .forEach(number -> validateOnlyNumber(number));
 
-        return Arrays.asList(readConsole().split(","))
+        return Arrays.asList(numbers)
                 .stream()
                 .map(number -> new Integer(number))
                 .sorted()
