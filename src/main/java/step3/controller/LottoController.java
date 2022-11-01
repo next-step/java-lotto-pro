@@ -1,6 +1,7 @@
 package step3.controller;
 
 import java.util.List;
+import step3.domain.Lotto;
 import step3.domain.LottoStore;
 import step3.domain.Lottos;
 import step3.domain.UniqueNumbers;
@@ -12,42 +13,42 @@ import step3.io.OutputView;
 
 public class LottoController {
 
-    private final InputView inputView;
-    private final OutputView outputView;
-
     private final LottoStore lottoStore;
 
-    public LottoController(InputView inputView, OutputView outputView, LottoStore lottoStore) {
-        this.inputView = inputView;
-        this.outputView = outputView;
+    public LottoController(LottoStore lottoStore) {
         this.lottoStore = lottoStore;
     }
 
     public void start() {
         Money payment = payment();
-        Lottos lottos = purchase(payment);
-        UniqueNumbers winningNumbers = UniqueNumbers.generate(inputView.inputNumbers());
-        int bonusNumber = inputView.inputBonusNumber();
+        int manualCount = manualCount();
+        Lottos lottos = purchase(payment, manualCount);
+        UniqueNumbers winningNumbers = UniqueNumbers.generate(InputView.inputWinningNumbers());
+        int bonusNumber = InputView.inputBonusNumber();
         List<Rank> ranks = lottos.getRanks(winningNumbers, bonusNumber);
         Reward reward = Reward.generate(ranks);
         result(payment, reward);
     }
 
     private Money payment() {
-        Money payment = Money.generate(inputView.inputPayment());
-        outputView.printPurchaseCount(payment, LottoStore.pricePerLotto);
-        return payment;
+        return Money.generate(InputView.inputPayment());
     }
 
-    private Lottos purchase(Money payment) {
-        Lottos lottos = lottoStore.sell(payment);
-        outputView.printLottoNumbers(lottos);
+    private int manualCount() {
+        return InputView.inputManualCount();
+    }
+
+    private Lottos purchase(Money payment, int manualCount) {
+        List<Lotto> manualLottos = lottoStore.generateManualLottos(manualCount);
+        Lottos lottos = lottoStore.sell(payment, manualLottos);
+        OutputView.printPurchaseCount(payment, LottoStore.pricePerLotto);
+        OutputView.printLottoNumbers(lottos);
         return lottos;
     }
 
     private void result(Money payment, Reward reward) {
-        outputView.printResultHeader();
-        outputView.printStatistics(reward);
-        outputView.printWinningMoneyRate(payment, reward);
+        OutputView.printResultHeader();
+        OutputView.printStatistics(reward);
+        OutputView.printWinningMoneyRate(payment, reward);
     }
 }

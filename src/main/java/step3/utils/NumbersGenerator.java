@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import step3.domain.UniqueNumbers;
+import step3.io.InputView;
 
 public class NumbersGenerator {
 
@@ -24,5 +25,9 @@ public class NumbersGenerator {
         return IntStream.range(START_NUMBER, END_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
+    }
+
+    public static UniqueNumbers userInput() {
+        return UniqueNumbers.generate(InputView.inputManualNumbers());
     }
 }

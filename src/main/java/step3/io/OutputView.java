@@ -8,20 +8,22 @@ import step3.domain.Reward;
 
 public class OutputView {
 
-    public void printPurchaseCount(Money payment, Money pricePerLotto) {
+    public static void printPurchaseCount(Money payment, Money pricePerLotto) {
+        System.out.println();
         System.out.println(payment.divide(pricePerLotto) + "개를 구매했습니다.");
     }
 
-    public void printLottoNumbers(Lottos lottos) {
+    public static void printLottoNumbers(Lottos lottos) {
         System.out.println(lottos.toString());
     }
 
-    public void printResultHeader() {
+    public static void printResultHeader() {
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
     }
 
-    public void printStatistics(Reward reward) {
+    public static void printStatistics(Reward reward) {
         reward.getKeySet()
                 .stream()
                 .sorted(Comparator.comparing(Rank::getCountOfMatch)
@@ -30,7 +32,7 @@ public class OutputView {
                 .forEach(rank -> printStatistic(reward, rank));
     }
 
-    private void printStatistic(Reward reward, Rank rank) {
+    private static void printStatistic(Reward reward, Rank rank) {
         System.out.println(rank.getCountOfMatch()
                 + "개 일치"
                 + generateBonusMatchMessage(rank)
@@ -41,14 +43,14 @@ public class OutputView {
                 + "개");
     }
 
-    private String generateBonusMatchMessage(Rank rank) {
+    private static String generateBonusMatchMessage(Rank rank) {
         if (rank.isMatchBonus()) {
             return ", 보너스 볼 일치";
         }
         return " ";
     }
 
-    public void printWinningMoneyRate(Money payment, Reward reward) {
+    public static void printWinningMoneyRate(Money payment, Reward reward) {
         String winningMoneyRate = reward.getWinningMoneyRate(payment);
         String output = "총 수익률은 " + winningMoneyRate + "입니다.";
         if (Float.parseFloat(winningMoneyRate) < 1) {
