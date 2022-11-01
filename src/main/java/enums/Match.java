@@ -31,7 +31,7 @@ public enum Match {
     }
 
     private static boolean isSecond(int matchCount, boolean isMatchBonusBall) {
-        return matchCount + BONUS_BALL_ADD_DELIMETER == SECOND.matchCount && isMatchBonusBall;
+        return matchCount == FOURTH.matchCount && isMatchBonusBall;
     }
 
     public static boolean isSecond(Match match) {
