@@ -1,6 +1,7 @@
 package step3.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 import step3.io.InputView;
@@ -14,17 +15,18 @@ public class LottoStore {
         return sell(payment, generateManualLottos(0));
     }
 
-    public Lottos sell(Money payment, List<Lotto> lottos) {
+    public Lottos sell(Money payment, List<Lotto> manualLottos) {
         int totalCount = payment.divide(pricePerLotto);
-        int manualCount = lottos.size();
+        int manualCount = manualLottos.size();
         validate(totalCount, manualCount);
+        List<Lotto> lottos = new ArrayList<>(manualLottos);
         lottos.addAll(generateAutoLottos(totalCount - manualCount));
         return Lottos.generate(lottos);
     }
 
     public List<Lotto> generateManualLottos(int manualCount) {
         if (manualCount == 0) {
-            return new ArrayList<>();
+            return Collections.emptyList();
         }
         InputView.printInputManualNumbers();
         return generateLottos(manualCount, NumbersGenerator::userInput);
