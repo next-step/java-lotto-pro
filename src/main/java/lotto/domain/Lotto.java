@@ -61,4 +61,12 @@ public class Lotto {
         return this.lotto;
     }
 
+    public boolean isContained(int number) {
+        return lotto.contains(number);
+    }
+
+    public int countMatchNum(Lotto winLotto) {
+        return (int) lotto.stream().filter(winLotto::isContained).count();
+    }
+
 }

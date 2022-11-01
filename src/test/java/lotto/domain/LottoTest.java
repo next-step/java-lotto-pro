@@ -57,4 +57,18 @@ public class LottoTest {
         assertThatThrownBy(() -> new Lotto("1,2,3,4.5.6")).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    @DisplayName("로또에 특정 숫자 포함 여부 확인 테스트")
+    void isContained_test() {
+        assertThat(new Lotto("1,2,3,4,5,6").isContained(1)).isTrue();
+    }
+
+    @Test
+    @DisplayName("두 Lotto의 일치한 숫자 개수 테스트")
+    void countMatchNum_test() {
+        Lotto lotto1 = new Lotto("1,2,3,4,5,6");
+        Lotto lotto2 = new Lotto("4,5,6,7,8,9");
+        assertThat(lotto1.countMatchNum(lotto2)).isEqualTo(3);
+    }
+
 }
