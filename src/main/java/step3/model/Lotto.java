@@ -11,18 +11,10 @@ public class Lotto {
     private static final String NUMBER_SIZE_MESSAGE = "번호는 6개만 허용합니다";
     private static final String DUPLICATE_NUMBER_MESSAGE = "중복없는 번호만 허용합니다";
     private final List<LottoNumber> numbers;
-    private final boolean isAuto;
 
     public Lotto(List<LottoNumber> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers;
-        this.isAuto = true;
-    }
-
-    public Lotto(List<LottoNumber> numbers, boolean isAuto) {
-        validateNumbers(numbers);
-        this.numbers = numbers;
-        this.isAuto = isAuto;
     }
 
     public static int getNumberSize() {
@@ -60,10 +52,6 @@ public class Lotto {
         return numbers.stream()
                 .filter(lottoNumber -> lottoNumber.equals(number))
                 .count() > 0;
-    }
-
-    public boolean isAuto() {
-        return isAuto;
     }
 
 }
