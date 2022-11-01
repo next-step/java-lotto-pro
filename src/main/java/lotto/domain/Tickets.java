@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.util.Constants;
 
 public class Tickets {
     private final List<Ticket> tickets;
