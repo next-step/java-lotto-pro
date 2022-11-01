@@ -23,6 +23,6 @@ public class InputView {
 
     public static Lotto inputLastWeekBonusNumber(String[] lastWeekLottos) {
         System.out.println(LAST_BONUS_NUMBER_INPUT_MESSAGE);
-        return new Lotto(lastWeekLottos, Integer.parseInt(scanner.nextLine()));
+        return new Lotto(lastWeekLottos, scanner.nextLine());
     }
 }

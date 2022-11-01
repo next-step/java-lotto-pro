@@ -15,6 +15,8 @@ public class Message {
     public static final String UNDER_MIN_PRICE = ERROR_PREFIX + "금액이 부족합니다.";
     public static final String UNVALID_LOTTO_NUMBER_LENGTH = ERROR_PREFIX + "로또 번호는 6개만 입력 가능합니다.";
     public static final String SMAE_LOTTO_NUMBER = ERROR_PREFIX + "중복된 숫자가 입력되었습니다.";
+    public static final String SMAE_BONUS_NUMBER = ERROR_PREFIX + "중복된 숫자가 보너스 번호로 입력되었습니다.";
+
 
     public static final String BONUS_CUSTOM_RESULT_MESSAGE= "개 일치, 보너스 볼 일치(";
     public static final String GENERAL_RESULT_MESSAGE= "개 일치 (";

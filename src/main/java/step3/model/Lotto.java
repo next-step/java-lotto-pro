@@ -28,13 +28,14 @@ public class Lotto {
         this.lottoNumbers = list;
     }
 
-    public Lotto(String[] numbers, int number) {
+    public Lotto(String[] numbers, String StringNumber) {
         List<LottoNumber> list = new ArrayList<>();
         for (String str : numbers) {
             list.add(new LottoNumber(commonStringToNumber(str)));
         }
+
         this.lottoNumbers = list;
-        this.bonusNumber = new LottoNumber(number);
+        this.bonusNumber = new LottoNumber(validateBonusNumber(StringNumber));
     }
 
     public List<LottoNumber> getNumbers() {
@@ -68,6 +69,21 @@ public class Lotto {
         validateSameNumber(afterNumbers);
 
         return afterNumbers;
+    }
+
+    private int validateBonusNumber(String stringNumber) {
+        commonCheckEmpty(stringNumber);
+        int number = commonStringToNumber(stringNumber);
+        checkWinningNumbersContainBonusNumber(number);
+
+
+        return number;
+    }
+
+    private void checkWinningNumbersContainBonusNumber(int number) {
+        if(isMatchNumber(new LottoNumber(number))) {
+            throw new IllegalArgumentException(SMAE_BONUS_NUMBER);
+        }
     }
 
     private String[] changeBeforeNumbers(String beforeNumbers) {

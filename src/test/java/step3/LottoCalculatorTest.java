@@ -78,7 +78,7 @@ public class LottoCalculatorTest {
     void 보너스볼_수익률_테스트(String input, String expected) {
         String[] inputArr = input.split(COLON)[0].split(COMMA);
         Lottos lottos = new Lottos(createTestLottos(inputArr));
-        int bonusNumber = 7;
+        String bonusNumber = "7";
 
         String[] lastWeekWinnerNumbers = "8-21-23-41-42-16".split(BAR);
         Lotto lastWeekWinner = new Lotto(lastWeekWinnerNumbers, bonusNumber);
