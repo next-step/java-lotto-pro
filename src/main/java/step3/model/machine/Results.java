@@ -8,17 +8,19 @@ public class Results {
 
     private final LinkedHashMap<Result, Integer> lottoResultMap;
 
+    private static final int DEFAULT_RESULT_COUNT = 0;
+
+    private static final int RESULT_INCREASE_STEP = 1;
+
     public Results() {
         lottoResultMap = new LinkedHashMap<>();
         for (Result result : Result.values()) {
-            lottoResultMap.put(result, 0);
+            lottoResultMap.put(result, DEFAULT_RESULT_COUNT);
         }
     }
 
-    public void recordResult(List<Integer> matchCounts) {
-        matchCounts.stream().map(Result::getMatchResult).forEach(
-               result ->  lottoResultMap.put(result, lottoResultMap.get(result)+1)
-        );
+    public void recordResult(Result result) {
+        lottoResultMap.put(result, lottoResultMap.get(result)+RESULT_INCREASE_STEP);
 
     }
     private long getTotalPrize(Result result) {

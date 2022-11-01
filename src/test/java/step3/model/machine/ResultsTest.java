@@ -11,7 +11,10 @@ class ResultsTest {
     @BeforeEach
     void setup() {
         results = new Results();
-        results.recordResult(Arrays.asList(5,4,4,3));
+        results.recordResult(Result.FIRST_PRIZE);
+        results.recordResult(Result.THIRD_PRIZE);
+        results.recordResult(Result.SECOND_PRIZE);
+        results.recordResult(Result.THIRD_PRIZE);
     }
 
     @Test
@@ -19,7 +22,7 @@ class ResultsTest {
         assertThat(results.getWinningPrize()).isEqualTo(
                 Result.SECOND_PRIZE.getTotalPrize(1)
                 + Result.THIRD_PRIZE.getTotalPrize(2)
-                + Result.FOURTH_PRIZE.getTotalPrize(1)
+                + Result.FIRST_PRIZE.getTotalPrize(1)
         );
     }
     @Test
