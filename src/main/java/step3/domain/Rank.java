@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public enum Rank {
     FIRST(6, 2_000_000_000L),
+    SECOND(5, 30_000_000L),
     THIRD(5, 1_500_000L),
     FOURTH(4, 50_000L),
     FIFTH(3, 5_000L),
@@ -17,9 +18,12 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank of(int matchCount) {
+    public static Rank of(final int matchCount, final boolean matchBonus) {
+        if (matchCount == SECOND.matchCount && matchBonus) {
+            return SECOND;
+        }
         return Arrays.stream(values())
-                .filter(rank -> rank.matchCount == matchCount)
+                .filter(rank -> rank != SECOND && rank.matchCount == matchCount)
                 .findFirst()
                 .orElse(MISS);
     }

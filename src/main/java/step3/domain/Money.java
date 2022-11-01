@@ -1,10 +1,10 @@
 package step3.domain;
 
 import java.util.Objects;
-import step3.message.ErrorMessage;
 
 public final class Money {
     private static final int ZERO = 0;
+    private static final String MONEY_CAN_NOT_BE_NEGATIVE = "금액은 음수일 수 없습니다.";
     private final long value;
 
     public Money(final long value) {
@@ -14,7 +14,7 @@ public final class Money {
 
     private static void validateValueIsPositive(final long value) {
         if (value < ZERO) {
-            throw new IllegalArgumentException(ErrorMessage.ERR_MONEY_CAN_NOT_BE_NEGATIVE.message);
+            throw new IllegalArgumentException(MONEY_CAN_NOT_BE_NEGATIVE);
         }
     }
 

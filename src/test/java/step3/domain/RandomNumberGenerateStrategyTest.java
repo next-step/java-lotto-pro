@@ -3,6 +3,7 @@ package step3.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 class RandomNumberGenerateStrategyTest {
@@ -14,7 +15,9 @@ class RandomNumberGenerateStrategyTest {
     @Test
     void 생성된_숫자는_1부터_45_범위_내_숫자이다() {
         Set<Integer> generateRandomNumber = new RandomNumberGenerateStrategy().generate();
-        long outOfRangeCount = generateRandomNumber.stream().filter(number -> number < 1 || number > 45).count();
-        assertThat(outOfRangeCount).isEqualTo(0);
+        Set<Integer> inRange = generateRandomNumber.stream()
+                .filter(number -> number >= 1 && number <= 45)
+                .collect(Collectors.toSet());
+        assertThat(generateRandomNumber).isEqualTo(inRange);
     }
 }

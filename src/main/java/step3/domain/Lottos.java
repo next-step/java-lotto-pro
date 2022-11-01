@@ -14,9 +14,9 @@ public class Lottos {
         return lottoList.size();
     }
 
-    public Rewards check(final LottoNumbers winningNumbers) {
+    public Rewards check(final WinningLottoNumber winningLottoNumber) {
         return this.lottoList.stream()
-                .map(lotto -> Rank.of(lotto.compareNumbers(winningNumbers)))
+                .map(winningLottoNumber::check)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Rewards::new));
     }
 
