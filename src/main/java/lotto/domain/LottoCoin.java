@@ -12,6 +12,10 @@ public class LottoCoin {
         this.coins = coins;
     }
 
+    public static LottoCoin empty() {
+        return new LottoCoin(0);
+    }
+
     public static LottoCoin of(Money money) {
         return new LottoCoin(availableToPurchaseCount(money));
     }
@@ -23,7 +27,7 @@ public class LottoCoin {
         return money.quotient(LOTTO_MONEY);
     }
 
-    public boolean empty() {
+    public boolean isEmpty() {
         if (this.coins == 0) {
             return true;
         }
@@ -40,7 +44,7 @@ public class LottoCoin {
     }
 
     private void vaildatePop(int size) {
-        if (empty()) {
+        if (isEmpty()) {
             throw new IllegalArgumentException("더이상 로또 코인이 없습니다.");
         }
         if (size > this.coins || size < 0) {
