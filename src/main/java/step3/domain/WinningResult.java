@@ -5,6 +5,7 @@ import java.util.List;
 
 public class WinningResult {
     private static final int DECIMAL_CORRECTION_VALUE = 100;
+    // TODO : List 말고 Map으로 해야 할듯...? --> 마지막 ResultView에서 사용하기 용이함
     private final List<WinningLottoRank> ranks;
 
     public WinningResult() {

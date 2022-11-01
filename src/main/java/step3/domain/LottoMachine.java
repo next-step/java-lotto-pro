@@ -15,6 +15,7 @@ public class LottoMachine {
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toMap(LottoNumber::lottoNumber, e -> e));
 
+    // TODO : 전략을 Interface로 받아 다형성을 이용하여 자동발급 / 수동발급 나눠서 구현
     private LottoMachine() {
 
     }
