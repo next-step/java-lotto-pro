@@ -1,7 +1,9 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.domain.lotto.LottoCount;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.WinningLotto;
 import lotto.domain.money.Money;
 import lotto.generator.LottoGenerator;
 import lotto.generator.LottoNumberGenerator;
@@ -21,7 +23,11 @@ public class LottoController {
         Lottos lottos = generateLottos(lottoCount);
 
         ResultView.printPurchaseResult(lottos, lottoCount);
-        ResultView.printResult(lottos, InputView.inputWinningLotto());
+
+        List<Integer> winningNumbers = InputView.inputWinningNumbers();
+        int bonusNumber = InputView.inputBonusNumber(winningNumbers);
+
+        ResultView.printResult(lottos, WinningLotto.of(winningNumbers, bonusNumber));
     }
 
     private static LottoCount getLottoCount() {
@@ -31,7 +37,7 @@ public class LottoController {
     }
 
     private Lottos generateLottos(LottoCount lottoCount) {
-        Lottos manualLottos = InputView.inputManualLottos(lottoCount.getManual());
+        Lottos manualLottos = Lottos.fromBy(InputView.inputManualLottos(lottoCount.getManual()));
         Lottos autoCreatedLottos = lottoGenerator.generate(lottoCount.getAuto());
         return manualLottos.add(autoCreatedLottos);
     }

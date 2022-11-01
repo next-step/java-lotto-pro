@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import lotto.constant.LottoConstant;
-import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.WinningLotto;
-import lotto.domain.lotto.Lotto;
 import lotto.message.ErrorMessages;
 import lotto.message.LottoMessage;
 import lotto.util.LottoInputValidator;
@@ -31,11 +28,6 @@ public class InputView {
         return inputPurchasePrice();
     }
 
-    public static WinningLotto inputWinningLotto() {
-        List<Integer> winningNumbers = inputWinningNumbers();
-        return WinningLotto.of(winningNumbers, inputBonusNumber(winningNumbers));
-    }
-
     public static int inputManualLottoCount(int total) {
         System.out.println(LottoMessage.INPUT_MANUAL_LOTTO_COUNT);
         String input = SCANNER.nextLine();
@@ -48,18 +40,18 @@ public class InputView {
         return inputManualLottoCount(total);
     }
 
-    public static Lottos inputManualLottos(int manual) {
+    public static List<List<Integer>> inputManualLottos(int manual) {
         System.out.println(LottoMessage.INPUT_MANUAL_LOTTO_NUMBERS);
-        List<Lotto> manualLottos = new ArrayList<>();
+        List<List<Integer>> manualLottos = new ArrayList<>();
 
         for (int i = 0; i < manual; i++) {
-            manualLottos.add(Lotto.fromBy(inputLottoNumbers()));
+            manualLottos.add(inputLottoNumbers());
         }
 
-        return Lottos.from(manualLottos);
+        return manualLottos;
     }
 
-    private static List<Integer> inputWinningNumbers() {
+    public static List<Integer> inputWinningNumbers() {
         System.out.println(LottoMessage.INPUT_WINNING_NUMBERS);
         return inputLottoNumbers();
     }
@@ -75,7 +67,7 @@ public class InputView {
         return inputLottoNumbers();
     }
 
-    private static int inputBonusNumber(List<Integer> winningNumbers) {
+    public static int inputBonusNumber(List<Integer> winningNumbers) {
         System.out.println(LottoMessage.INPUT_BONUS_NUMBER);
         String input = SCANNER.nextLine();
 
