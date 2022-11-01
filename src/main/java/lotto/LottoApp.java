@@ -20,7 +20,7 @@ public class LottoApp implements App {
         LottoStore lottoStore = new LottoStore();
 
         print(WELCOME);
-        int payAmount = scanPayAmount();
+        int payAmount = scanOneNumber();
 
         List<Lotto> lottoList = lottoStore.pay(new PayAmount(payAmount));
         print(String.format(BUY_LOTTO, lottoList.size()));
