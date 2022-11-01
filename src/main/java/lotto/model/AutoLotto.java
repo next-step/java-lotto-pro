@@ -2,7 +2,7 @@ package lotto.model;
 
 import java.util.Collection;
 
-public class AutoLotto extends Lotto{
+public class AutoLotto extends Lotto {
 	public AutoLotto(final Collection<LottoNumber> numbers) {
 		super(numbers);
 	}

@@ -24,7 +24,8 @@ class LottoTest {
 
 	@Test
 	void 로또의_순서는_정렬되어_있다() {
-		assertThat(new AutoLotto(LottoNumber.of(6, 5, 4, 3, 2, 1))).isEqualTo(new AutoLotto(LottoNumber.of(1, 2, 3, 4, 5, 6)));
+		assertThat(new AutoLotto(LottoNumber.of(6, 5, 4, 3, 2, 1))).isEqualTo(
+			new AutoLotto(LottoNumber.of(1, 2, 3, 4, 5, 6)));
 	}
 
 	@Test

@@ -23,6 +23,7 @@ public abstract class Lotto {
 	}
 
 	public abstract boolean isAuto();
+
 	public abstract boolean isManual();
 
 	public int match(final Lotto winnerLotto) {
