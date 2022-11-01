@@ -13,26 +13,33 @@ public enum LottoPrize {
     ;
 
     private final int matchCount;
-    private final int lottoPrizeMoney;
+    private final long lottoPrizeMoney;
 
-    LottoPrize(int matchCount, int lottoPrizeMoney) {
+    LottoPrize(int matchCount, long lottoPrizeMoney) {
         this.matchCount = matchCount;
         this.lottoPrizeMoney = lottoPrizeMoney;
     }
 
     public static LottoPrize findLottoPrize(int matchCount, boolean isMatchBonusLottoNumber) {
-        LottoPrize lottoPrize = Arrays.stream(LottoPrize.values()).filter(prize -> prize.getMatchCount() == matchCount)
-                .findFirst()
-                .orElse(NO_PRIZE);
+        if(isNoPrize(matchCount)) {
+            return LottoPrize.NO_PRIZE;
+        }
 
         if(isSecondPrize(matchCount, isMatchBonusLottoNumber)) {
             return LottoPrize.SECOND;
         }
-        return lottoPrize;
+
+        return Arrays.stream(LottoPrize.values()).filter(prize -> prize.getMatchCount() == matchCount)
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     private static boolean isSecondPrize(int matchCount, boolean isMatchBonusLottoNumber) {
         return LottoPrize.SECOND.matchCount == matchCount && isMatchBonusLottoNumber;
+    }
+
+    private static boolean isNoPrize(int matchCount) {
+        return matchCount >= NO_PRIZE.matchCount && matchCount < FIFTH.matchCount;
     }
 
     public static boolean isSecondPrize(LottoPrize lottoPrize) {
@@ -47,7 +54,7 @@ public enum LottoPrize {
         return matchCount;
     }
 
-    public int getLottoPrizeMoney() {
+    public long getLottoPrizeMoney() {
         return lottoPrizeMoney;
     }
 }

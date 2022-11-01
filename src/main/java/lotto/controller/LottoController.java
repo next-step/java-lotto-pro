@@ -1,7 +1,10 @@
 package lotto.controller;
 
+import static java.util.Collections.emptyList;
 import static lotto.view.InputView.printBonusLottoDirection;
+import static lotto.view.InputView.printManualLottoDirection;
 import static lotto.view.InputView.printPurchasingLottoDirection;
+import static lotto.view.InputView.printPurchasingManualLottoCountDirection;
 import static lotto.view.InputView.printWinningLottoDirection;
 import static lotto.view.InputView.readLine;
 import static lotto.view.ResultView.printExceptionErrorMessage;
@@ -11,23 +14,28 @@ import static lotto.view.ResultView.printPurchasingLottos;
 
 import common.utils.IntegerUtils;
 import common.utils.LongUtils;
+import java.util.ArrayList;
+import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResults;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RandomLottoNumberGenerator;
 import lotto.domain.ReadLineLottoNumberGenerator;
+import lotto.domain.WinningLotto;
 
 public class LottoController {
+
+    private static final int ZERO = 0;
 
     public LottoController() {
     }
 
     public void process() {
-        Lottos lottos = createLottos(getMoney());
-        Lotto winningLotto = getWinningLotto();
-        LottoNumber bonusLottoNumber = getBonusLottoNumber(winningLotto);
-        getLottoResults(lottos, winningLotto, bonusLottoNumber);
+        Lottos purchaseLottos = createLottos(getMoney());
+        WinningLotto winningLotto = getWinningLotto();
+        getLottoResults(winningLotto.createLottoResults(purchaseLottos), purchaseLottos.findTotalPrice());
     }
 
     private Money getMoney() {
@@ -42,34 +50,81 @@ public class LottoController {
     }
 
     private Lottos createLottos(Money money) {
-        printPurchasingLottoCount(money.maxLottoCount());
-        Lottos lottos = new Lottos(money, new RandomLottoNumberGenerator());
+        int manualLottoCount = getManualLottoCount(money);
+        Lottos manualLottos = createManualLottos(manualLottoCount);
+
+        int autoLottoCount = money.maxLottoCountExclude(manualLottoCount);
+        printPurchasingLottoCount(autoLottoCount, manualLottoCount);
+
+        Lottos lottos = Lottos.mergeLottos(autoLottoCount, new RandomLottoNumberGenerator(), manualLottos);
         printPurchasingLottos(lottos.unmodifiedLottos());
+
         return lottos;
     }
 
-    private Lotto getWinningLotto() {
+    private int getManualLottoCount(Money money) {
+        printPurchasingManualLottoCountDirection();
+        try {
+            String readCount = readLine();
+            int manualLottoCount = IntegerUtils.parseInt(readCount);
+            money.isBuyableLottoCount(manualLottoCount);
+            return manualLottoCount;
+        } catch (IllegalArgumentException e) {
+            printExceptionErrorMessage(e);
+            return getManualLottoCount(money);
+        }
+    }
+
+    private Lottos createManualLottos(int manualLottoCount) {
+        if(manualLottoCount == ZERO) {
+            return new Lottos(emptyList());
+        }
+
+        printManualLottoDirection();
+        try {
+            return generateManualLottos(manualLottoCount);
+        } catch (IllegalArgumentException e) {
+            printExceptionErrorMessage(e);
+            return createManualLottos(manualLottoCount);
+        }
+    }
+
+    private Lottos generateManualLottos(int manualLottoCount) {
+        List<Lotto> lottos = new ArrayList<>();
+        for(int count = 0; count < manualLottoCount; count++) {
+            lottos.add(Lotto.generateLotto(new ReadLineLottoNumberGenerator(readLine())));
+        }
+        return new Lottos(lottos);
+    }
+
+    private WinningLotto getWinningLotto() {
+        Lotto winningLotto = generateWinningLotto();
+        LottoNumber bonusLottoNumber = generateBonusLottoNumber(winningLotto);
+        return new WinningLotto(winningLotto, bonusLottoNumber);
+    }
+
+    private Lotto generateWinningLotto() {
         printWinningLottoDirection();
         try {
             return Lotto.generateLotto(new ReadLineLottoNumberGenerator(readLine()));
         } catch (IllegalArgumentException e) {
             printExceptionErrorMessage(e);
-            return getWinningLotto();
+            return generateWinningLotto();
         }
     }
 
-    private LottoNumber getBonusLottoNumber(Lotto winningLotto) {
+    private LottoNumber generateBonusLottoNumber(Lotto winningLotto) {
         printBonusLottoDirection();
         try {
             String readLottoNumber = readLine();
             return LottoNumber.fromIfNotIn(IntegerUtils.parseInt(readLottoNumber), winningLotto);
         } catch (IllegalArgumentException e) {
             printExceptionErrorMessage(e);
-            return getBonusLottoNumber(winningLotto);
+            return generateBonusLottoNumber(winningLotto);
         }
     }
 
-    private void getLottoResults(Lottos lottos, Lotto winningLotto, LottoNumber bonusLottoNumber) {
-        printLottoResults(lottos.createLottoResults(winningLotto, bonusLottoNumber), lottos.findTotalPrice());
+    private void getLottoResults(LottoResults lottoResults, Money totalMoney) {
+        printLottoResults(lottoResults, totalMoney);
     }
 }

@@ -111,10 +111,10 @@
     ;
   
     private final int matchCount;
-    private final int lottoPrizeMoney;
+    private final long lottoPrizeMoney;
     private final String lottoPrizeMessage;
   
-    LottoPrize(int matchCount, int lottoPrizeMoney, String lottoPrizeMessage) {
+    LottoPrize(int matchCount, long lottoPrizeMoney, String lottoPrizeMessage) {
       this.matchCount = matchCount;
       this.lottoPrizeMoney = lottoPrizeMoney;
       this.lottoPrizeMessage = lottoPrizeMessage;
@@ -130,7 +130,7 @@
         return matchCount;
     }
       
-    public int getLottoPrizeMoney() {
+    public long getLottoPrizeMoney() {
       return lottoPrizeMoney;
     }
   }
@@ -178,3 +178,9 @@
 4. 당첨 로또에 존재하는 로또번호를 보너스 숫자로 입력하면 에러 발생한다.
   * [ERROR] 보너스 볼은 당첨 로또의 각 숫자와 일치할 수 없습니다.
 5. 당첨 로또에 존재하지 않는 로또번호를 보너스 숫자로 입력하면 정상 작동한다.
+
+## 5단계 - 로또(수동)
+* 구매한 로또 일부는 수동으로 번호를 입력할 수 있음
+  * 구입 금액 내에서 수동으로 구매할 로또 개수 입력
+    * [x] 개수가 0보다 작거나, 구입 금액 내 구매할 수 없는 개수거나, 숫자가 아니면 validation
+  * 주어진 개수 만큼 수동으로 로또 입력

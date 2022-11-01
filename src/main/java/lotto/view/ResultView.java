@@ -11,7 +11,7 @@ import lotto.domain.Money;
 
 public class ResultView {
 
-    private static final String PURCHASING_LOTTO_COUNT = "%d개를 구매했습니다." + System.lineSeparator();
+    private static final String PURCHASING_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다." + System.lineSeparator();
     private static final String LOTTO_RESULTS_DIRECTION = "당첨 통계";
     private static final String NEW_LINE = "";
     private static final String DIVISION_LINE = "---------";
@@ -24,8 +24,9 @@ public class ResultView {
         System.out.println(e.getMessage());
     }
 
-    public static void printPurchasingLottoCount(int maxLottoCount) {
-        System.out.printf(PURCHASING_LOTTO_COUNT, maxLottoCount);
+    public static void printPurchasingLottoCount(int autoLottoCount, int manualLottoCount) {
+        System.out.println(NEW_LINE);
+        System.out.printf(PURCHASING_LOTTO_COUNT, manualLottoCount, autoLottoCount);
     }
 
     public static void printPurchasingLottos(List<Lotto> lottos) {
