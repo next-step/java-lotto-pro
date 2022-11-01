@@ -66,7 +66,9 @@ public class LottoInput {
     }
 
     public static Lottos inputManuallyLottos(LottoCoin lottoCoin) {
-        InputConsole.inputManuallyLottoNumbers();
+        if (!lottoCoin.isEmpty()) {
+            InputConsole.inputManuallyLottoNumbers();
+        }
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCoin.size(); i++) {
             lottos.add(inputManuallyLotto());

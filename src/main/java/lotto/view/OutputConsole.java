@@ -12,6 +12,7 @@ public class OutputConsole {
     }
 
     public static void purchaseResult(int manuallyLottoCount, int autoLottoCount) {
+        System.out.println();
         if (manuallyLottoCount != 0) {
             System.out.print(String.format("수동으로 %d장, ", manuallyLottoCount));
         }
