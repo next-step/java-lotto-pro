@@ -5,13 +5,8 @@ import java.util.List;
 
 public class Game {
     private final LottoGenerator lottoGenerator = new LottoGenerator();
-    private List<LottoResult> lottoResults = new ArrayList<>();
-    private LottoBuyCount lottoBuyCount;
+    private final LottoBuyCount lottoBuyCount;
     private Money buyMoney;
-
-    public Game() {
-
-    }
 
     public Game(int count) {
         this.lottoBuyCount = new LottoBuyCount(count);
@@ -26,18 +21,14 @@ public class Game {
         return lottoBuyCount;
     }
 
-    public void startLottoGame() {
+    public List<LottoResult> startLottoGame() {
         List<LottoResult> result = new ArrayList<>();
         LottoBuyCount index = new LottoBuyCount(0);
         while (!index.equals(this.lottoBuyCount)) {
             result.add(lottoGenerator.createLottoResult());
             index.plus();
         }
-        this.lottoResults = result;
-    }
-
-    public List<LottoResult> getLottoResults() {
-        return this.lottoResults;
+        return result;
     }
 
     public Money getBuyMoney() {
