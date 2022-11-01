@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class LottoTest {
 
@@ -48,6 +50,21 @@ public class LottoTest {
     int count = lotto.getMatchingCount(targetLotto);
     //then
     assertThat(count).isEqualTo(3);
+  }
+
+  @ParameterizedTest(name = "숫자가 포함되어 있을 떄, specificNumber: {0}, result: {1}")
+  @CsvSource(value = {
+      "6 : true",
+      "8: false"
+  }, delimiter = ':')
+  @DisplayName("로또에 특정 번호가 포함되어 있는지 확인")
+  void lotto_is_contain_number(int specificNumber, boolean isContain) {
+    //given
+    Lotto lotto = Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    //when
+    boolean result = lotto.isContainNumber(specificNumber);
+    //then
+    assertThat(result).isEqualTo(isContain);
   }
 
 }

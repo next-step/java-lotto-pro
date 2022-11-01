@@ -35,9 +35,11 @@ public class Lotto {
     return count;
   }
 
-  private int countContainNumber(int number, int count) {
-    return this.numbers.contains(number) ? count+1 : count;
+  public boolean isContainNumber(int number) {
+    return this.numbers.contains(number);
   }
 
-
+  private int countContainNumber(int number, int count) {
+    return isContainNumber(number) ? count + 1 : count;
+  }
 }
