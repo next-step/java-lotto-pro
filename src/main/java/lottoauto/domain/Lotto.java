@@ -23,7 +23,7 @@ public class Lotto {
         return this.numbers.contains(number);
     }
 
-    public int containNumberCount(Lotto target) {
+    public int getContainNumberCount(Lotto target) {
         int result = 0;
         for (LottoNumber number : this.numbers) {
             result += target.getContainResult(number);

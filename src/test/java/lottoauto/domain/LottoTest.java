@@ -28,8 +28,8 @@ public class LottoTest {
         Lotto buy = Lotto.create(Arrays.asList(1,10,15,20,25,30));
 
         assertAll(
-                () -> assertThat(win.containNumberCount(buy)).isEqualTo(3),
-                () -> assertThat(buy.containNumberCount(win)).isEqualTo(3)
+                () -> assertThat(win.getContainNumberCount(buy)).isEqualTo(3),
+                () -> assertThat(buy.getContainNumberCount(win)).isEqualTo(3)
         );
     }
 

@@ -40,7 +40,7 @@ public class LottoService {
         LottoResult result = new LottoResult();
 
         for (Lotto lotto : lottos) {
-            result.addLottoResult(lotto.containNumberCount(winning), lotto);
+            result.addLottoResult(lotto.getContainNumberCount(winning), lotto);
         }
 
         return result;
