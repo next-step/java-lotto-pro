@@ -1,9 +1,11 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,6 +25,17 @@ public class View {
     public int insertManualLottoCount() {
         OutputView.print("수동으로 구매할 로또 수를 입력해 주세요");
         return InputView.nextInt();
+    }
+
+    public List<Lotto> insertManualLotto(int count) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        OutputView.print("수동으로 구매할 번호를 입력해 주세요.");
+        for(int i=0; i<count; i++) {
+            lottos.add(new Lotto(InputView.inputLotto()));
+        }
+
+        return lottos;
     }
 
     public void print(String text) {

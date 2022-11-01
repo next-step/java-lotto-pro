@@ -7,17 +7,16 @@ import lotto.domain.WinningLotto;
 import lotto.view.View;
 
 public class LottoController {
-    private final Lottos lottos;
     private final View view;
 
     public LottoController() {
-        this.lottos = new Lottos();
         this.view = new View();
     }
 
     public void run() {
         Money money = new Money(view.insertMoney());
         int manualLottoCount = view.insertManualLottoCount();
+        Lottos lottos = new Lottos(view.insertManualLotto(manualLottoCount));
         view.printLottoCount(money.getBuyableLottoCount());
         lottos.buyLottos(money.getBuyableLottoCount());
         view.print(lottos.toString());
