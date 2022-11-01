@@ -11,7 +11,7 @@ public class Lotto {
 
     private Lotto(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new RuntimeException(LOTTO_SIZE_ERROR);
+            throw new IllegalArgumentException(LOTTO_SIZE_ERROR);
         }
         Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
