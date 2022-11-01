@@ -1,16 +1,10 @@
 package step3.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static step3.constant.Constant.EACH_LOTTO_PRICE;
-
 public class Lottos {
+    // 일급 컬렉션은 다른 맴버 변수가 없음
     public List<Lotto> lottos;
-
-    public Lottos() {
-        this.lottos = new ArrayList<>();
-    }
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
