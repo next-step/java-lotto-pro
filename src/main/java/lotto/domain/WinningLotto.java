@@ -3,15 +3,10 @@ package lotto.domain;
 import java.util.List;
 
 public class WinningLotto extends Lotto {
-    private LottoNumber bonusBall;
-
-    // TODO: 생성자 제거
-    public WinningLotto(List<LottoNumber> insertWinningLotto) {
-        super(insertWinningLotto);
-    }
+    private final LottoNumber bonusBall;
 
     public WinningLotto(List<LottoNumber> insertWinningLotto, LottoNumber bonusBall) {
-        this(insertWinningLotto);
+        super(insertWinningLotto);
 
         if(insertWinningLotto.stream()
                 .anyMatch(number -> number.equals(bonusBall))) {
