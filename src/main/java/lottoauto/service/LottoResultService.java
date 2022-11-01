@@ -3,7 +3,6 @@ package lottoauto.service;
 import static lottoauto.domain.LottoPayment.*;
 
 import java.math.BigDecimal;
-import lottoauto.domain.LottoPayment;
 import lottoauto.domain.LottoResult;
 import lottoauto.domain.LottoReturnRate;
 

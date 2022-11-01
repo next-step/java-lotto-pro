@@ -39,6 +39,6 @@ public class LottoReturnRate {
 
     @Override
     public String toString() {
-        return String.valueOf(returnRate);
+        return returnRate.toPlainString();
     }
 }

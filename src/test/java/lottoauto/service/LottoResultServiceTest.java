@@ -17,10 +17,10 @@ public class LottoResultServiceTest {
     @BeforeEach
     void beforeEach(){
         LottoResult result = new LottoResult();
-        result.addLottoResult(3, Lotto.create(Arrays.asList(1,2,3,4,5,6)));
-        result.addLottoResult(3, Lotto.create(Arrays.asList(1,2,3,4,5,6)));
-        result.addLottoResult(4, Lotto.create(Arrays.asList(1,2,3,4,5,6)));
-        result.addLottoResult(5, Lotto.create(Arrays.asList(1,2,3,4,5,6)));
+        result.addLottoResult(3);
+        result.addLottoResult(3);
+        result.addLottoResult(4);
+        result.addLottoResult(5);
 
         lottoResultService = new LottoResultService(result);
     }

@@ -22,7 +22,7 @@ public class LottoResultTest {
         Lotto buy = Lotto.create(Arrays.asList(1,10,15,20,25,30));
 
         LottoResult result = new LottoResult();
-        result.addLottoResult(win.getContainNumberCount(buy), buy);
+        result.addLottoResult(win.getContainNumberCount(buy));
 
         assertThat(result.getResultCount(3)).isEqualTo(1);
     }
@@ -33,7 +33,7 @@ public class LottoResultTest {
         Lotto buy = Lotto.create(Arrays.asList(5,10,15,20,25,30));
 
         LottoResult result = new LottoResult();
-        result.addLottoResult(win.getContainNumberCount(buy), buy);
+        result.addLottoResult(win.getContainNumberCount(buy));
 
         assertThat(result.getResultCount(4)).isEqualTo(1);
     }
@@ -44,7 +44,7 @@ public class LottoResultTest {
         Lotto buy = Lotto.create(Arrays.asList(5,45,15,20,25,30));
 
         LottoResult result = new LottoResult();
-        result.addLottoResult(win.getContainNumberCount(buy), buy);
+        result.addLottoResult(win.getContainNumberCount(buy));
 
         assertThat(result.getResultCount(5)).isEqualTo(1);
     }
@@ -55,7 +55,7 @@ public class LottoResultTest {
         Lotto buy = Lotto.create(Arrays.asList(35,45,30,5,15,25));
 
         LottoResult result = new LottoResult();
-        result.addLottoResult(win.getContainNumberCount(buy), buy);
+        result.addLottoResult(win.getContainNumberCount(buy));
 
         assertThat(result.getResultCount(6)).isEqualTo(1);
     }
@@ -68,9 +68,9 @@ public class LottoResultTest {
         Lotto buy2 = Lotto.create(Arrays.asList(34,45,29,4,15,24));
 
         LottoResult result = new LottoResult();
-        result.addLottoResult(win.getContainNumberCount(buy0), buy0);
-        result.addLottoResult(win.getContainNumberCount(buy1), buy1);
-        result.addLottoResult(win.getContainNumberCount(buy2), buy2);
+        result.addLottoResult(win.getContainNumberCount(buy0));
+        result.addLottoResult(win.getContainNumberCount(buy1));
+        result.addLottoResult(win.getContainNumberCount(buy2));
 
         assertAll(
                 () -> assertThat(result.getResultCount(0)).isEqualTo(0),
