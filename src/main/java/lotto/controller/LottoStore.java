@@ -1,5 +1,11 @@
-package lotto;
+package lotto.controller;
 
+import lotto.LottoBag;
+import lotto.LottoIssuer;
+import lotto.LottoNumberBag;
+import lotto.LottoNumberGenerator;
+import lotto.Money;
+import lotto.WinningResultBag;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 

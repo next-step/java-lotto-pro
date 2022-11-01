@@ -15,15 +15,15 @@ class LottoBagTest {
     @DisplayName("생성 테스트")
     @Test
     void create_lottoBag_success() {
-        assertThatNoException().isThrownBy(() -> new LottoBag(new Money(10000), new LottoNumberGenerator()));
+        assertThatNoException().isThrownBy(() -> LottoIssuer.issue(new Money(10000), new LottoNumberGenerator()));
     }
 
     @ParameterizedTest(name = "발급 로또 갯수 테스트 " + DEFAULT_DISPLAY_NAME)
     @CsvSource(value = { "10000:10", "10500:10", "500:0" }, delimiter = ':')
     void create_numberOfLotto_success(int money, int numberOfLotto) {
         //given:
-        LottoBag lottoBag = new LottoBag(new Money(money), new LottoNumberGenerator());
+        LottoBag lottoBag = LottoIssuer.issue(new Money(money), new LottoNumberGenerator());
         //when, then:
-        assertThat(lottoBag.hasSize()).isEqualTo(numberOfLotto);
+        assertThat(lottoBag.lottoSize()).isEqualTo(numberOfLotto);
     }
 }

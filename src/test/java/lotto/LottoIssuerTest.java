@@ -20,13 +20,13 @@ class LottoIssuerTest {
         //given:
         LottoBag lottoBag = LottoIssuer.issue(new Money(money), new LottoNumberGenerator());
         //when, then:
-        assertThat(lottoBag.hasSize()).isEqualTo(numberOfLotto);
+        assertThat(lottoBag.lottoSize()).isEqualTo(numberOfLotto);
     }
 
     @DisplayName("로또 당첨 결과 성공")
     @Test
     void result_issuedLotto_success() {
-        LottoBag lottoList = new LottoBag(new Money(0), new LottoNumberGenerator());
+        LottoBag lottoList = LottoIssuer.issue(new Money(0), new LottoNumberGenerator());
         LottoNumberBag winningNumbers = new LottoNumberBag(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThatNoException().isThrownBy(() -> LottoIssuer.result(lottoList, winningNumbers));
     }

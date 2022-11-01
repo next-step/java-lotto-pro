@@ -10,12 +10,8 @@ public class LottoBag {
 
     public static final Money LOTTO_PRICE = new Money(1000);
 
-    public LottoBag(Money money, NumberGenerator numberGenerator) {
-        lottoList = new ArrayList<>();
-        while (money.isEqualsOrGreater(LOTTO_PRICE)) {
-            money = money.minus(LOTTO_PRICE);
-            lottoList.add(new Lotto(numberGenerator));
-        }
+    public LottoBag(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
     }
 
     public List<WinningResult> getResult(LottoNumberBag winningNumbers) {
@@ -24,9 +20,7 @@ public class LottoBag {
                 .collect(Collectors.toList());
     }
 
-    public long hasSize() {
-        // 캡슐화하여 내부로 은닉한 lottoList의 갯수를 테스트에서 비교하기 위해 생성한 메서드
-        // 테스트를 위한 메서드 생성이 허용 되어야 한다면, 허용 기준이 무엇일까..?
+    public long lottoSize() {
         return lottoList.size();
     }
 

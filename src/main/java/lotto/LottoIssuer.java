@@ -1,6 +1,9 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static lotto.LottoBag.LOTTO_PRICE;
 
 public class LottoIssuer {
 
@@ -9,7 +12,12 @@ public class LottoIssuer {
     }
 
     public static LottoBag issue(Money money, NumberGenerator numberGenerator) {
-        return new LottoBag(money, numberGenerator);
+        List<Lotto> lottoList = new ArrayList<>();
+        while (money.isEqualsOrGreater(LOTTO_PRICE)) {
+            money = money.minus(LOTTO_PRICE);
+            lottoList.add(new Lotto(numberGenerator));
+        }
+        return new LottoBag(lottoList);
     }
 
     public static WinningResultBag result(LottoBag lottoBag, LottoNumberBag winningNumbers) {
