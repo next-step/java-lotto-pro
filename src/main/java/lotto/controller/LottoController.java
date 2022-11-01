@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.controller.acceptor.MoneyToBuyAcceptor;
 import lotto.controller.acceptor.WinningNumbersAcceptor;
+import lotto.model.lotto.ticket.LottoNumberGenerator;
 import lotto.model.lotto.ticket.LottoTicket;
 import lotto.model.lotto.ticket.LottoTicketsBucket;
 import lotto.model.money.to.buy.MoneyToBuy;
@@ -14,6 +15,11 @@ import java.util.List;
 public class LottoController {
     private static final int LOTTO_MINIMUM_NUMBER = 1;
     private static final int LOTTO_MAXIMUM_NUMBER = 45;
+    private final LottoNumberGenerator lottoNumberGenerator;
+
+    public LottoController(LottoNumberGenerator lottoNumberGenerator) {
+        this.lottoNumberGenerator = lottoNumberGenerator;
+    }
 
     public void run() {
         final MoneyToBuy moneyToBuy = userInputMoneyToBuy();
@@ -34,7 +40,7 @@ public class LottoController {
     }
 
     private void numberOfAffordableLottoLeft(LottoTicketsBucket lottoTicketsBucket) {
-        final LottoTicket lottoTicket = new LottoTicket();
+        final LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator);
         LottoTicketPrinter.print(lottoTicket);
         lottoTicketsBucket.addLottoTicket(lottoTicket);
     }

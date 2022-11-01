@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.model.lotto.ticket.LottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +10,7 @@ public class LottoControllerTest {
     @Test
     @DisplayName("LottoController 이상 없음 확인")
     void createLottoController() {
-        assertDoesNotThrow(LottoController::new);
+        final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        assertDoesNotThrow(() -> new LottoController(lottoNumberGenerator));
     }
 }

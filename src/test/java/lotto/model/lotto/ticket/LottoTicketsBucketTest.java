@@ -45,9 +45,10 @@ class LottoTicketsBucketTest {
         @DisplayName("지정한 개수만큼 addLottoTicket 호출하면 lottoTickets 멤버 변수의 size 가 지정한 개수가 되어야 한다.")
         void success(int numberOfTickets) {
             final LottoTicketsBucketForTest lottoTicketsBucket = new LottoTicketsBucketForTest(numberOfTickets);
+            final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
             int numberCount = numberOfTickets;
             while (0 < numberCount) {
-                lottoTicketsBucket.addLottoTicket(new LottoTicket());
+                lottoTicketsBucket.addLottoTicket(new LottoTicket(lottoNumberGenerator));
                 numberCount = numberCount - 1;
             }
             assertThat(lottoTicketsBucket.bucketSize()).isEqualTo(numberOfTickets);
