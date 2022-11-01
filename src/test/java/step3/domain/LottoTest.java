@@ -3,11 +3,24 @@ package step3.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step3.utils.NumbersGenerator;
+import step3.utils.TestNumberProvider;
 
-public class LottoTest extends AbstractTest {
+public class LottoTest {
+
+    private static UniqueNumbers start1Numbers;
+    private static UniqueNumbers start4Numbers;
+    private static UniqueNumbers exceptNumbers;
+
+    @BeforeAll
+    public static void init() {
+        start1Numbers = TestNumberProvider.rangeUniqueNumbers(1,6);
+        start4Numbers = TestNumberProvider.rangeUniqueNumbers(4,9);
+        exceptNumbers = TestNumberProvider.rangeUniqueNumbers(1,3);
+    }
 
     @Test
     @DisplayName("로또 생성")
@@ -21,6 +34,7 @@ public class LottoTest extends AbstractTest {
     @DisplayName("번호 비교시 대상 개수가 다른 경우 Exception 발생")
     public void testNumberSizeError() {
         assertThatThrownBy(() -> {
+            UniqueNumbers randomNumbers = NumbersGenerator.random();
             Lotto lotto = Lotto.generate(randomNumbers);
             lotto.getCountOfMatch(exceptNumbers);
         }).isInstanceOf(IndexOutOfBoundsException.class)

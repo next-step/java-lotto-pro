@@ -3,23 +3,25 @@ package step3.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import step3.utils.TestNumberProvider;
 
-public class LottoStoreTest extends AbstractTest{
+public class LottoStoreTest {
 
-    private static final List<UniqueNumbers> emptyNumbersList = Collections.emptyList();
-    private static final List<UniqueNumbers> manualNumbersList = Arrays.asList(
-            start1Numbers,
-            start4Numbers
-    );
+    private static List<UniqueNumbers> manualNumbersList;
+
+    @BeforeAll
+    public static void init() {
+        manualNumbersList = TestNumberProvider.randomUniqueNumbersList(2);
+    }
 
     @Test
     @DisplayName("가진 금액만큼 로또 구입")
@@ -52,7 +54,7 @@ public class LottoStoreTest extends AbstractTest{
 
     private static Stream<Arguments> provider() {
         return Stream.of(
-                Arguments.of(0, emptyNumbersList),
+                Arguments.of(0, Collections.emptyList()),
                 Arguments.of(1000, manualNumbersList)
         );
     }
