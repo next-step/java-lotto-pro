@@ -1,6 +1,5 @@
 package study.lotto.domain;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class WinStats {

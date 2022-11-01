@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import study.lotto.domain.number.CacheLottoNumbers;
-import study.lotto.domain.number.LottoNumber;
+import study.lotto.domain.number.LottoGenerator;
 import study.message.LottoExceptionCode;
 
 import java.util.Arrays;
@@ -67,13 +66,13 @@ class WinningLottoTest {
     @ParameterizedTest
     @ValueSource(ints = { 7, 8, 9, 23, 36, 41 })
     void matchNumber_winningNumbers에_포함되지_않은_숫자(int num) {
-        assertEquals(0, tempWinningLotto.matchNumber(CacheLottoNumbers.of(num)));
+        assertEquals(0, tempWinningLotto.matchNumber(LottoGenerator.toLottoNumber(num)));
     }
 
     @ParameterizedTest
     @ValueSource(ints = { 1, 2, 3, 4, 5, 6 })
     void matchNumber_winningNumbers에_포함된_숫자(int num) {
-        assertEquals(1, tempWinningLotto.matchNumber(CacheLottoNumbers.of(num)));
+        assertEquals(1, tempWinningLotto.matchNumber(LottoGenerator.toLottoNumber(num)));
     }
 
     @ParameterizedTest

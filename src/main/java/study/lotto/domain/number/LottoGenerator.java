@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
-public class CacheLottoNumbers {
+public class LottoGenerator {
 
     private static final int LOTTO_MIN_NUM = 1;
     private static final int LOTTO_MAX_NUM = 45;
@@ -20,15 +20,15 @@ public class CacheLottoNumbers {
                 .forEach((num) -> cacheLottoNumbers.put(num, new LottoNumber(num)));
     }
 
-    public static LottoNumber ofString(String number) {
+    public static LottoNumber toLottoNumber(String number) {
         try {
-            return of(NumberUtil.convertToPositiveIntNotContainsZero(number));
+            return toLottoNumber(NumberUtil.convertToPositiveIntNotContainsZero(number));
         } catch (IllegalArgumentException iae) {
             throw new IllegalArgumentException(LottoExceptionCode.INVALID_LOTTO_NUMBER.getMessage());
         }
     }
 
-    public static LottoNumber of(int number) {
+    public static LottoNumber toLottoNumber(int number) {
         if(Objects.isNull(cacheLottoNumbers.get(number))) {
             throw new IllegalArgumentException(LottoExceptionCode.INVALID_LOTTO_NUMBER.getMessage());
         }

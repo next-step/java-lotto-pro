@@ -5,8 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import study.lotto.domain.number.CacheLottoNumbers;
-import study.lotto.domain.number.LottoNumber;
+import study.lotto.domain.number.LottoGenerator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -70,6 +69,6 @@ class LottoTest {
     @ParameterizedTest
     @CsvSource(value = { "1:true", "8:false", "2:true", "45:false" }, delimiter = ':')
     void Lotto가_가진_LottoNumber_목록에_입력된_LottoNumber의_포함여부(int lottoNumber, boolean expected) {
-        assertEquals(expected, lotto.contains(CacheLottoNumbers.of(lottoNumber)));
+        assertEquals(expected, lotto.contains(LottoGenerator.toLottoNumber(lottoNumber)));
     }
 }

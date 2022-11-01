@@ -1,6 +1,6 @@
 package study.lotto.domain;
 
-import study.lotto.domain.number.CacheLottoNumbers;
+import study.lotto.domain.number.LottoGenerator;
 import study.lotto.domain.number.LottoNumber;
 import study.util.NumberUtil;
 
@@ -33,18 +33,18 @@ public class Store {
         List<Lotto> allNumbers = new ArrayList<>();
 
         IntStream.range(NumberUtil.INIT_ZERO, quantity).forEach((i) -> {
-            allNumbers.add(new Lotto(shuffleAndGetLottoNumbers()));
+            allNumbers.add(new Lotto(createLottoNumbers()));
         });
 
         return allNumbers;
     }
 
-    private static Set<LottoNumber> shuffleAndGetLottoNumbers() {
+    private static Set<LottoNumber> createLottoNumbers() {
         Collections.shuffle(rangeOfLottoNumbers);
 
         return rangeOfLottoNumbers.subList(LOTTO_STAT_IDX, LOTTO_END_IDX)
                 .stream()
-                .map(CacheLottoNumbers::of)
+                .map(LottoGenerator::toLottoNumber)
                 .collect(Collectors.toSet());
     }
 }

@@ -1,6 +1,6 @@
 package study.lotto.domain;
 
-import study.lotto.domain.number.CacheLottoNumbers;
+import study.lotto.domain.number.LottoGenerator;
 import study.lotto.domain.number.LottoNumber;
 import study.message.LottoExceptionCode;
 import study.splitter.Splitter;
@@ -36,7 +36,7 @@ public class WinningLotto {
 
     private Set<LottoNumber> convertStringArrToSet(String[] winningNumbersSplited) {
         return Arrays.stream(winningNumbersSplited)
-                .map((str) -> CacheLottoNumbers.ofString(str.trim()))
+                .map((str) -> LottoGenerator.toLottoNumber(str.trim()))
                 .collect(Collectors.toSet());
     }
 
@@ -54,7 +54,7 @@ public class WinningLotto {
     }
 
     public void addBonusBall(int bonusBall) {
-        LottoNumber bonusBallConverted = CacheLottoNumbers.of(bonusBall);
+        LottoNumber bonusBallConverted = LottoGenerator.toLottoNumber(bonusBall);
 
         if(winningLotto.contains(bonusBallConverted)) {
             throw new IllegalArgumentException(LottoExceptionCode.INVALID_BONUS_BALL.getMessage());

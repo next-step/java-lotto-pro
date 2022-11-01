@@ -1,6 +1,6 @@
 package study.lotto.domain;
 
-import study.lotto.domain.number.CacheLottoNumbers;
+import study.lotto.domain.number.LottoGenerator;
 import study.lotto.domain.number.LottoNumber;
 import study.util.NumberUtil;
 
@@ -17,7 +17,7 @@ public class Lotto {
 
     private Set<LottoNumber> createLottoNumbers(List<Integer> numbersFromStore) {
         return numbersFromStore.stream()
-                .map(CacheLottoNumbers::of)
+                .map(LottoGenerator::toLottoNumber)
                 .collect(Collectors.toSet());
     }
 
