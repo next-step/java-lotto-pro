@@ -6,7 +6,7 @@ import step3.domain.Rewards;
 
 public class ConsoleOutputView {
 
-    private static final String PURCHASE_LOTTO_COUNT = "%d개를 구매하셨습니다.%n";
+    private static final String PURCHASE_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.%n";
     private static final String WINNING_STATS = "당첨 통계";
     private static final String DIVISION_LINE = "---------";
     private static final String FIFTH_MATCH_COUNT = "3개 일치 (5000원)- %d개%n";
@@ -22,8 +22,11 @@ public class ConsoleOutputView {
     }
 
     public static void printLottos(Lottos lottos) {
-        System.out.printf(PURCHASE_LOTTO_COUNT, lottos.getHasLottoSize());
         System.out.println(lottos);
+    }
+
+    public static void printLottosCount(int manual, int auto) {
+        System.out.printf(PURCHASE_LOTTO_COUNT, manual, auto);
     }
 
     public static void printRewards(Rewards rewards) {
