@@ -11,22 +11,24 @@ public class Lotto {
 	public static final int LOTTO_NUMBERS_SIZE = 6;
 	private final Set<LottoNumber> lottoNumbers;
 
-	private Lotto(LottoNumberStrategy lottoNumberStrategy) {
-		Set<LottoNumber> lottoNumbers = lottoNumberStrategy.pickNumbers();
-		validateNumberSize(lottoNumbers);
+	private Lotto(List<Integer> numbers) {
+		Set<LottoNumber> lottoNumbers = convert(numbers);
+		validateNumberSize(lottoNumbers.size());
 		this.lottoNumbers = lottoNumbers;
 	}
 
-	public static Lotto inputNumber(List<Integer> numbers) {
-		return new Lotto(new InputLottoNumberStrategy(numbers));
+	public static Lotto from(List<Integer> numbers) {
+		return new Lotto(numbers);
 	}
 
-	public static Lotto random() {
-		return new Lotto(new RandomLottoNumberStrategy());
+	private Set<LottoNumber> convert(List<Integer> numbers) {
+		return numbers.stream()
+			.map(LottoNumber::from)
+			.collect(Collectors.toSet());
 	}
 
-	private void validateNumberSize(Set<LottoNumber> lottoNumbers) {
-		if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
+	private void validateNumberSize(long size) {
+		if (size != LOTTO_NUMBERS_SIZE) {
 			throw new IllegalArgumentException("로또 번호는 6자리여야 합니다.");
 		}
 	}

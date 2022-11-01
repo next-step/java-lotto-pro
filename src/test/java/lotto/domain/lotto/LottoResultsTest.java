@@ -13,10 +13,10 @@ import lotto.domain.quantity.Quantity;
 
 class LottoResultsTest {
 	List<LottoResult> lottoResults = Arrays.asList(
-		LottoResult.from(Lotto.random(), MatchCount.from(3)),
-		LottoResult.from(Lotto.random(), MatchCount.from(4)),
-		LottoResult.from(Lotto.random(), MatchCount.from(4)),
-		LottoResult.from(Lotto.random(), MatchCount.from(5))
+		LottoResult.from(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), MatchCount.from(3)),
+		LottoResult.from(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), MatchCount.from(4)),
+		LottoResult.from(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), MatchCount.from(4)),
+		LottoResult.from(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), MatchCount.from(5))
 	);
 
 	@Test

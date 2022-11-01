@@ -27,7 +27,7 @@ public class Lottos {
 		validateHasChanges(purchaseAmount);
 		return new Lottos(
 			LongStream.range(0, purchaseCount(purchaseAmount))
-				.mapToObj(i -> Lotto.random())
+				.mapToObj(i -> new RandomLottoGenerator().generate())
 				.collect(Collectors.toList())
 		);
 	}

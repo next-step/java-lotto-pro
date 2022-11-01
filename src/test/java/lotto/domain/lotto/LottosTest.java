@@ -30,12 +30,8 @@ class LottosTest {
 
 	@Test
 	void 로또_결과_변환() {
-		Lottos lottos = Lottos.from(Arrays.asList(
-			Lotto.random(),
-			Lotto.random(),
-			Lotto.random()
-		));
-		Lotto winLotto = Lotto.inputNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+		Lottos lottos = Lottos.purchase(Amount.from(3000));
+		Lotto winLotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
 
 		LottoResults lottoResults = lottos.toLottoResults(winLotto);
 		assertThat(lottoResults).isNotNull();
