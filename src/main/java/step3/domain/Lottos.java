@@ -16,9 +16,9 @@ public class Lottos {
         return lottoList;
     }
 
-    public Rewards check(final LottoNumbers winningNumbers) {
+    public Rewards check(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         return this.lottoList.stream()
-            .map(lotto -> Rank.from(lotto.matchNumbers(winningNumbers)))
+            .map(lotto -> Rank.from(lotto.matchNumbers(winningNumbers), lotto.matchBonus(bonusNumber)))
             .collect(Collectors.collectingAndThen(Collectors.toList(), Rewards::new));
     }
 }

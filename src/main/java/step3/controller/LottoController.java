@@ -22,7 +22,7 @@ public class LottoController {
         LottoNumbers winningNumbers = new LottoNumbers(InputView.inputWinningNumber());
         LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
 
-        Rewards rewards = purchasedLottos.check(winningNumbers);
+        Rewards rewards = purchasedLottos.check(winningNumbers, bonusNumber);
         OutputView.showResults(rewards);
         OutputView.showProfitRate(rewards);
 
