@@ -20,4 +20,7 @@ public class LottoList {
     }
 
 
+    public int getTotalLotto() {
+        return lottoList.size();
+    }
 }

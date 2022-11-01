@@ -30,8 +30,7 @@ public class LottoController {
     }
 
     private LottoList createAutoLottoListByOrder(Order order) {
-        List<Lotto> lottos = lottoMachine.issueAutoLottoList(order);
-        LottoList lottoList = new LottoList(lottos);
+        LottoList lottoList = lottoMachine.issueAutoLottoList(order);
         OutputView.printTickets(lottoList);
         return lottoList;
     }
@@ -64,8 +63,7 @@ public class LottoController {
     private Lotto getWinningLotto() {
         String lottoInput = InputView.requestInputLotto();
         System.out.println(lottoInput);
-        List<Integer> lotto =  lottoMachine.createWinningLotto(lottoInput);
-        return new Lotto(lotto);
+        return lottoMachine.createWinningLotto(lottoInput);
     }
 
     private Money getMoneyInput() {

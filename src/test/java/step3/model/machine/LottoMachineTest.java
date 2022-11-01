@@ -10,7 +10,7 @@ class LottoMachineTest {
     @Test
     void 갯수_맞게_생성() {
         Order order = new Order(5);
-        int lottoCount = lottoMachine.issueAutoLottoList(order).size();
+        int lottoCount = lottoMachine.issueAutoLottoList(order).getTotalLotto();
         assertThat(lottoCount).isEqualTo(5);
     }
 }

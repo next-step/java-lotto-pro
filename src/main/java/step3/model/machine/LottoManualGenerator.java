@@ -11,18 +11,7 @@ import step3.model.value.Rule;
 public class LottoManualGenerator {
     public List<Integer> createLotto(String lottoManualInput) {
         InputValidation.validateEmpty(lottoManualInput);
-        List<Integer> lottoNumbers = splitLottoNumbers(lottoManualInput);
-        verifyLotto(lottoNumbers);
-        return lottoNumbers;
-    }
-
-    private void verifyLotto(List<Integer> lottoNumbers) {
-        if(lottoNumbers.size() != Rule.LOTTO_NUMBER_LENGTH){
-            throw new IllegalArgumentException(ErrMsg.WRONG_LENGTH);
-        }
-        if(lottoNumbers.size() != new HashSet<>(lottoNumbers).size()){
-            throw new IllegalArgumentException(ErrMsg.DUPLICATED_INPUT);
-        }
+        return splitLottoNumbers(lottoManualInput);
     }
 
     private List<Integer> splitLottoNumbers(String lottoManualInput) {
