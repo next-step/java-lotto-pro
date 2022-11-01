@@ -13,6 +13,7 @@ public class LottoTest {
     Lotto lotto;
     Tickets myTickets = new Tickets();
     String winningTicketStr = "1,2,3,4,5,6";
+    String winningBonusNumStr = "7";
     
     @Test
     @DisplayName("구입금액에_따른_발급로또_개수_확인")
@@ -22,17 +23,18 @@ public class LottoTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"'1,2,3,4,5,6':'6개 일치 (2000000000원) - 1개'"
-                        , "'1,2,3,4,5,7':'5개 일치 (1500000원) - 1개'"
-                        , "'1,2,3,4,7,8':'4개 일치 (50000원) - 1개'"
-                        , "'1,2,3,7,8,9':'3개 일치 (5000원) - 1개'"
+    @CsvSource(value = {"'1,2,3,4,5,6':'6개 일치(2000000000원) - 1개'"
+                        , "'1,2,3,4,5,7':'5개 일치, 보너스 볼 일치(30000000원) - 1개'"
+                        , "'1,2,3,4,5,8':'5개 일치(1500000원) - 1개'"
+                        , "'1,2,3,4,7,8':'4개 일치(50000원) - 1개'"
+                        , "'1,2,3,7,8,9':'3개 일치(5000원) - 1개'"
                         }, delimiter = ':')
     @DisplayName("사용자_입력값과_로또_비교하여_결과_출력")
     public void lotto_get_result(String param, String expected) {
         myTickets.addTicket(new Ticket(param));
         
         lotto = new Lotto(myTickets);
-        assertThat(lotto.getResultStr(winningTicketStr)).contains(expected);
+        assertThat(lotto.getResultStr(winningTicketStr, winningBonusNumStr)).contains(expected);
     }  
     
     @Test
@@ -54,6 +56,6 @@ public class LottoTest {
         myTickets.addTicket(new Ticket("3, 8, 27, 30, 35, 44"));
         
         lotto = new Lotto(myTickets);
-        assertThat(lotto.getResultStr(winningTicketStr)).contains("총 수익률은 0.35입니다.");
+        assertThat(lotto.getResultStr(winningTicketStr, winningBonusNumStr)).contains("총 수익률은 0.35입니다.");
     } 
 }
