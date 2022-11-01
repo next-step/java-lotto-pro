@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.model.LottoType;
 import lotto.model.Lottos;
 import lotto.model.Rank;
 import lotto.model.Ranks;
@@ -13,8 +12,8 @@ public class Output {
 
 	public static void printLottos(final Lottos lottos) {
 		System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",
-			lottos.countByType(LottoType.MANUAL),
-			lottos.countByType(LottoType.AUTO)
+			lottos.countManual(),
+			lottos.countAuto()
 		);
 		System.out.println(lottos);
 	}

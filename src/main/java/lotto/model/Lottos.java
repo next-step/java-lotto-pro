@@ -18,12 +18,6 @@ public class Lottos {
 			.collect(Collectors.collectingAndThen(Collectors.toList(), Ranks::new));
 	}
 
-	public long countByType(final LottoType type) {
-		return lottos.stream()
-			.filter(lotto -> lotto.isTypeOf(type))
-			.count();
-	}
-
 	public Money getTotalSpent() {
 		return Lotto.LOTTO_PRICE.multiply(lottos.size());
 	}
@@ -33,6 +27,18 @@ public class Lottos {
 		result.addAll(this.lottos);
 		result.addAll(otherLotto.lottos);
 		return new Lottos(result);
+	}
+
+	public long countManual() {
+		return lottos.stream()
+			.filter(Lotto::isManual)
+			.count();
+	}
+
+	public long countAuto() {
+		return lottos.stream()
+			.filter(Lotto::isAuto)
+			.count();
 	}
 
 	@Override

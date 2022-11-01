@@ -15,7 +15,7 @@ class LottoShopTest {
 		LottoShop lottoShop = new LottoShop(new LottoRandomCreateStrategy());
 		Lottos lottos = lottoShop.buy(new Money(14000));
 
-		assertThat(lottos.countByType(LottoType.AUTO)).isEqualTo(14);
+		assertThat(lottos.countAuto()).isEqualTo(14);
 	}
 
 	@Test
@@ -23,12 +23,12 @@ class LottoShopTest {
 		LottoShop lottoShop = new LottoShop(new LottoRandomCreateStrategy());
 		Lottos lottos = lottoShop.buyManually(new Money(14000), new Lottos(
 			Arrays.asList(
-				new Lotto(LottoNumber.of(1, 2, 3, 4, 5, 6), LottoType.MANUAL),
-				new Lotto(LottoNumber.of(2, 3, 4, 5, 6, 7), LottoType.MANUAL)
+				new ManualLotto(LottoNumber.of(1, 2, 3, 4, 5, 6)),
+				new ManualLotto(LottoNumber.of(2, 3, 4, 5, 6, 7))
 			)
 		));
 
-		assertThat(lottos.countByType(LottoType.MANUAL)).isEqualTo(2);
+		assertThat(lottos.countManual()).isEqualTo(2L);
 	}
 
 }

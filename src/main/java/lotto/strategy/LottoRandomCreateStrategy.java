@@ -5,6 +5,7 @@ import static java.util.concurrent.ThreadLocalRandom.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import lotto.model.AutoLotto;
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 
@@ -19,6 +20,6 @@ public class LottoRandomCreateStrategy implements LottoCreateStrategy {
 		while (result.size() < LOTTO_SIZE) {
 			result.add(LottoNumber.of(current().nextInt(ORIGIN, MAX_BOUND)));
 		}
-		return new Lotto(result);
+		return new AutoLotto(result);
 	}
 }

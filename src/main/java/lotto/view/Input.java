@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
-import lotto.model.LottoType;
 import lotto.model.Lottos;
+import lotto.model.ManualLotto;
 import lotto.model.Money;
 
 public class Input {
@@ -46,7 +46,7 @@ public class Input {
 	private static Lottos inputLottos(final int manualCount) {
 		List<Lotto> result = new ArrayList<>();
 		for (int i = 0; i < manualCount; i++) {
-			result.add(inputLotto(LottoType.MANUAL));
+			result.add(inputLotto());
 		}
 		System.out.println();
 		return new Lottos(result);
@@ -60,15 +60,15 @@ public class Input {
 	public static Lotto inputWinnerLotto() {
 		try {
 			System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-			return inputLotto(LottoType.WINNER);
+			return inputLotto();
 		} catch (IllegalArgumentException e) {
 			return inputWinnerLotto();
 		}
 	}
 
-	private static Lotto inputLotto(final LottoType lottoType) {
+	private static Lotto inputLotto() {
 		String number = nextLine();
-		return new Lotto(LottoNumber.of(number.split(SPLITER)), lottoType);
+		return new ManualLotto(LottoNumber.of(number.split(SPLITER)));
 	}
 
 	public static LottoNumber inputBonusNumber() {
