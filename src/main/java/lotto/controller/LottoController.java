@@ -1,6 +1,9 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.dto.LottoManualGeneratorRequestDto;
+import lotto.dto.LottoMoneyRequestDto;
+import lotto.dto.WinningLottoNumberRequestDto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -16,8 +19,8 @@ public class LottoController {
     }
 
     public void startLotto() {
-
-        LottoMoney lottoMoney = InputView.getLottoPurchasePrice();
+        LottoMoneyRequestDto lottoPurchasePrice = InputView.getLottoPurchasePrice();
+        LottoMoney lottoMoney = lottoPurchasePrice.getLottoMoney();
         int manualLottoTicketCount = InputView.getManualLottoCount(lottoMoney);
 
         List<LottoGenerator> lottoGeneratorList = getManualLottoNumbers(manualLottoTicketCount);
@@ -36,7 +39,8 @@ public class LottoController {
 
         InputView.manualLottoNumberScript();
         for (int i = 0; i < manualLottoTicketCount; i++) {
-            lottoGeneratorList.add(InputView.getManualLottoNumbers(i, manualLottoTicketCount));
+            LottoManualGeneratorRequestDto manualLottoNumbers = InputView.getManualLottoNumbers(i, manualLottoTicketCount);
+            lottoGeneratorList.add(manualLottoNumbers.getLottoGenerator());
         }
 
         return lottoGeneratorList;
@@ -45,7 +49,7 @@ public class LottoController {
     private void buyLotto(LottoMoney lottoMoney, int manualTicketCount, List<LottoGenerator> lottoGeneratorList) {
         LottoTickets lottoTickets = lottoGame.buy(lottoMoney, lottoGeneratorList);
         ResultView.lottoPurchase(manualTicketCount, lottoTickets.autoTicketCount(manualTicketCount), lottoTickets.toString());
-        WinningLottoNumbers winningNumbers = InputView.getWinningNumbers();
+        WinningLottoNumbers winningNumbers = InputView.getWinningNumbers().getWinningLottoNumbers();
         lottoGame.makeLottoResult(winningNumbers, lottoTickets);
     }
 

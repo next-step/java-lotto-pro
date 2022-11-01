@@ -1,6 +1,9 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.LottoMoney;
+import lotto.dto.LottoManualGeneratorRequestDto;
+import lotto.dto.LottoMoneyRequestDto;
+import lotto.dto.WinningLottoNumberRequestDto;
 
 import java.util.Scanner;
 
@@ -19,14 +22,14 @@ public class InputView {
 
     }
 
-    public static LottoMoney getLottoPurchasePrice() {
+    public static LottoMoneyRequestDto getLottoPurchasePrice() {
         System.out.println(ENTER_PURCHASE_AMOUNT);
         return getLottoMoney();
     }
 
-    private static LottoMoney getLottoMoney() {
+    private static LottoMoneyRequestDto getLottoMoney() {
         try {
-            return new LottoMoney(SCANNER.nextLine());
+            return new LottoMoneyRequestDto(SCANNER.nextLine());
         } catch (IllegalArgumentException e) {
             System.out.printf((ERROR_PREFIX) + "%n", e.getMessage());
             return getLottoMoney();
@@ -74,20 +77,20 @@ public class InputView {
         System.out.println(ENTER_MANUAL_LOTTO_NUMBER);
     }
 
-    public static LottoGenerator getManualLottoNumbers(int count, int total) {
+    public static LottoManualGeneratorRequestDto getManualLottoNumbers(int count, int total) {
         try {
-            return new ManualLottoGenerator(SCANNER.nextLine());
+            return new LottoManualGeneratorRequestDto(SCANNER.nextLine());
         } catch (Exception e) {
             System.out.printf((ERROR_PREFIX) + "%n", e.getMessage() + String.format(REMAIN_MANUAL_LOTTO_COUNT, count, total));
             return getManualLottoNumbers(count, total);
         }
     }
 
-    public static WinningLottoNumbers getWinningNumbers() {
+    public static WinningLottoNumberRequestDto getWinningNumbers() {
         try {
             String winningNumber = InputView.getLastWeekWinningNumber();
-            LottoNumber bonusNumber = new LottoNumber(InputView.getBonusNumber());
-            return new WinningLottoNumbers(winningNumber, bonusNumber);
+            int bonusNumber = InputView.getBonusNumber();
+            return new WinningLottoNumberRequestDto(winningNumber, bonusNumber);
         } catch (Exception e) {
             System.out.printf((ERROR_PREFIX) + "%n", e.getMessage());
             return getWinningNumbers();
