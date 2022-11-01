@@ -4,8 +4,8 @@ import step3.model.Lotto;
 import step3.model.LottoCalculator;
 import step3.model.Lottos;
 
-import static step3.constant.Message.*;
-import static step3.constant.Constant.*;
+import static step3.constant.Message.System.*;
+import static step3.constant.Constant.Lotto.*;
 
 public class OutputView {
     public static void outputPurchasedLotto(Lottos lottos) {

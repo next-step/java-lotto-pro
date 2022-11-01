@@ -4,11 +4,11 @@ import step3.constant.WinnerRule;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import static step3.constant.Constant.*;
-import static step3.constant.Message.SMAE_LOTTO_NUMBER;
-import static step3.constant.Message.UNVALID_LOTTO_NUMBER_LENGTH;
-import static step3.constant.WinnerRule.rules;
+import static step3.constant.Constant.Lotto.LOTTO_NUMBER_LENGTH;
+import static step3.constant.Constant.Number.*;
+import static step3.constant.Message.Error.*;
 public class LottoCalculator {
     private static List<LottoNumber> lastWeekWinner;
     private static List<Lotto> purchasedLottos;
@@ -88,8 +88,8 @@ public class LottoCalculator {
         }
     }
 
-
     public String createResultMessage(int winnerCount) {
+        Map<Integer, Integer> rules = WinnerRule.getRules();
         return new StringBuilder(String.valueOf(winnerCount))
                 .append("개 일치 (")
                 .append(rules.get(winnerCount))

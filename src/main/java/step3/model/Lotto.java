@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static step3.constant.Constant.*;
+import static step3.constant.Constant.Number.*;
+import static step3.constant.Constant.Lotto.*;
 public class Lotto {
 
     private List<LottoNumber> lottoNumbers;

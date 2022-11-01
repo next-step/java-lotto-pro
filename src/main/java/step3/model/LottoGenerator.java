@@ -1,7 +1,7 @@
 package step3.model;
 
-import static step3.constant.Constant.EACH_LOTTO_PRICE;
-import static step3.constant.Message.*;
+import static step3.constant.Constant.Lotto.*;
+import static step3.constant.Message.Error.*;
 
 public class LottoGenerator {
     private int purchasePrice;

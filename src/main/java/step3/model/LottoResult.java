@@ -1,10 +1,13 @@
 package step3.model;
 
+import step3.constant.WinnerRule;
+
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
-import static step3.constant.Constant.*;
-import static step3.constant.WinnerRule.rules;
+import static step3.constant.Constant.Number.*;
+import static step3.constant.Constant.Lotto.*;
 
 public class LottoResult {
 
@@ -30,6 +33,7 @@ public class LottoResult {
 
     private void sumWinnerPrice() {
         for (Integer winnerKey : result.keySet()) {
+            Map<Integer, Integer> rules = WinnerRule.getRules();
             totalWinnerPrice += Optional.ofNullable(rules.get(winnerKey)).orElse(0) * result.get(winnerKey);
         }
     }

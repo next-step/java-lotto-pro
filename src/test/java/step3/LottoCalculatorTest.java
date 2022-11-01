@@ -12,7 +12,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static step3.constant.Constant.*;
+import static step3.constant.Constant.Symbols.*;
+import static step3.constant.Constant.Number.*;
+import static step3.constant.Constant.Lotto.*;
 
 public class LottoCalculatorTest {
     private LottoCalculator lottoCalculator = new LottoCalculator();
