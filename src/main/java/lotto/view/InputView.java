@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.LottoBag;
+import lotto.NumberBag;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,12 +16,12 @@ public class InputView {
         printNumbers(lottoBag.getLottoNumbers());
     }
 
-    private static void printNumbers(List<List<Integer>> lottoNumbers) {
-        for (List<Integer> numbers : lottoNumbers) {
+    private static void printNumbers(List<NumberBag> lottoNumbers) {
+        for (NumberBag numbers : lottoNumbers) {
             StringBuilder builder = new StringBuilder();
             builder.append("[")
-                    .append(numbers.stream()
-                            .map(String::valueOf)
+                    .append(numbers.getNumbers().stream()
+                            .map(it -> String.valueOf(it.getIntNumber()))
                             .collect(Collectors.joining(", ")))
                     .append("]");
             System.out.println(builder);
