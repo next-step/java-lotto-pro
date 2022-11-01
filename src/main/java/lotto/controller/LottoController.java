@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.LottoCoin;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
 import lotto.view.LottoInput;
@@ -8,10 +9,10 @@ import lotto.view.LottoOutput;
 public class LottoController {
 
     public void run() {
-        int lottoCount = LottoInput.inputMoneyAndAvailableToPurchaseCount();
-        LottoOutput.printLottoCount(lottoCount);
+        LottoCoin lottoCoin = LottoInput.inputMoneyAndAvailableToPurchaseCoin();
+        LottoOutput.printLottoCount(lottoCoin.size());
 
-        Lottos lottos = Lottos.autoGenerateSizeOf(lottoCount);
+        Lottos lottos = Lottos.autoGenerateSizeOf(lottoCoin.size());
         LottoOutput.printLottos(lottos);
 
         WinningLotto winningLotto = LottoInput.inputWinningLotto();

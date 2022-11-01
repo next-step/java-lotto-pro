@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class LottoCoin {
 
-    private final static long LOTTO_PRICE = 1000;
+    public final static long LOTTO_PRICE = 1000;
     private final static Money LOTTO_MONEY = Money.of(LOTTO_PRICE);
     private final int coins;
 

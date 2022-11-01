@@ -7,14 +7,14 @@ public class LottoInput {
     private LottoInput() {
     }
 
-    public static int inputMoneyAndAvailableToPurchaseCount() {
+    public static LottoCoin inputMoneyAndAvailableToPurchaseCoin() {
         try {
             String input = InputConsole.inputMoneyForPurchaseLotto();
             Money money = Money.of(input);
-            return LottoCalculator.availableToPurchaseCount(money);
+            return LottoCoin.of(money);
         } catch (IllegalArgumentException e) {
             OutputConsole.out(e.getMessage());
-            return inputMoneyAndAvailableToPurchaseCount();
+            return inputMoneyAndAvailableToPurchaseCoin();
         }
     }
 
