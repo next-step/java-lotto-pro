@@ -5,16 +5,19 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step3.model.*;
+import step3.model.Lotto;
+import step3.model.LottoCalculator;
+import step3.model.LottoNumber;
+import step3.model.Lottos;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static step3.constant.Constant.Lotto.MAX_WINNER_NUMBER;
+import static step3.constant.Constant.Lotto.MIN_LOTTO_NUMBER;
 import static step3.constant.Constant.Symbols.*;
-import static step3.constant.Constant.Number.*;
-import static step3.constant.Constant.Lotto.*;
 
 public class LottoCalculatorTest {
     private LottoCalculator lottoCalculator = new LottoCalculator();

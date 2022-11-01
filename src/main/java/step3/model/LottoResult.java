@@ -43,7 +43,7 @@ public class LottoResult {
     }
 
     public boolean isNotExistsCount(int sameCount) {
-        return result.containsKey(sameCount);
+        return !result.containsKey(sameCount);
     }
 
     public String getResultValue(int winnerKey) {
