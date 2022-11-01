@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public enum LottoInfo {
+ public enum LottoInfo {
 
 	MAX_LOTTO_NUMBER(45),
 	MIN_LOTTO_NUMBER(1),

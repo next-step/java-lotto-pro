@@ -58,7 +58,7 @@ public class LottoNumbers {
 		return Objects.hash(lottoNumbers);
 	}
 
-	public int winningConfirm(LottoNumbers purchaseLottoNumbers) {
+	public int matchCount(LottoNumbers purchaseLottoNumbers) {
 		return (int) this.lottoNumbers.stream()
 			.filter(purchaseLottoNumbers.lottoNumbers::contains)
 			.count();

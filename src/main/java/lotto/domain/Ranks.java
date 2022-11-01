@@ -20,19 +20,19 @@ public class Ranks {
 				.map(Rank::from)
 				.collect(Collectors.toList()));
 	}
+
+	public Map<Rank, Long> groupBy() {
+		Map<Rank, Long> resultRankMap = initResultMap();
+		ranks.forEach(rank -> resultRankMap.computeIfPresent(rank, (key, value) -> ++value));
+		return resultRankMap;
+	}
+
 	private Map<Rank, Long> initResultMap() {
 		Map<Rank, Long> resultRankMap = new LinkedHashMap<>();
 		Arrays.stream(Rank.values())
 			.filter(r -> !r.equals(Rank.LOSE))
 			.sorted(Comparator.comparingInt(Rank::getMatchCount))
 			.forEach(r -> resultRankMap.put(r, 0L));
-		return resultRankMap;
-	}
-
-
-	public Map<Rank, Long> groupBy() {
-		Map<Rank, Long> resultRankMap = initResultMap();
-		ranks.forEach(rank -> resultRankMap.computeIfPresent(rank, (key, value) -> ++value));
 		return resultRankMap;
 	}
 }

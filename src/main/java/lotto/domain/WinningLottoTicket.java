@@ -11,7 +11,7 @@ public class WinningLottoTicket extends LottoTicket {
 
 	public int matchCount(LottoTicket lottoTicket) {
 		LottoNumbers winningNumbers = super.lottonumbers();
-		return winningNumbers.winningConfirm(lottoTicket.lottonumbers());
+		return winningNumbers.matchCount(lottoTicket.lottonumbers());
 	}
 
 }

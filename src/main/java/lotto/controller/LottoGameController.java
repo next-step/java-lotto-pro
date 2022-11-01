@@ -4,6 +4,7 @@ import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicketMachine;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
+import lotto.domain.Ranks;
 import lotto.domain.Result;
 import lotto.domain.WinningLottoTicket;
 import lotto.domain.strategy.RandomGenerateStrategy;
@@ -31,11 +32,17 @@ public class LottoGameController {
 			LottoTickets lottoTickets = purchasedTickets(inputMoney);
 			WinningLottoTicket winningLottoTicket = winningTicket();
 
-			Result result = Result.of(lottoTickets, winningLottoTicket, inputMoney);
+			Result result = result(inputMoney, lottoTickets, winningLottoTicket);
 			printResult(result);
 		} catch (RuntimeException e) {
 			resultView.printErrorMessage(e.getMessage());
 		}
+	}
+
+	private Result result(Money inputMoney, LottoTickets lottoTickets,
+		WinningLottoTicket winningLottoTicket) {
+		Ranks ranks = Ranks.from(lottoTickets.match(winningLottoTicket));
+		return Result.of(ranks, inputMoney);
 	}
 
 	private void printResult(Result result) {

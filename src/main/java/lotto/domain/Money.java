@@ -38,6 +38,10 @@ public class Money {
 		return (double)this.value / money.value;
 	}
 
+	public boolean isLessThan(Money money) {
+		return this.value < money.value;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
