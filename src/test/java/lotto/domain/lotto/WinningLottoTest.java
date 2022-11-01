@@ -16,9 +16,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class WinningLottoTest {
 
-    private final List<LottoNumber> winningNumbers =
-            TestLottoNumberGenerator.from(Arrays.asList(1, 2, 3, 4, 5, 6)).generate();
-    private final LottoNumber bonusNumber = LottoNumber.from(7);
+    private final List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
     private static Stream<Arguments> winningCount() {
         return Stream.of(
@@ -43,7 +41,7 @@ class WinningLottoTest {
     @MethodSource(value = "winningCount")
     @DisplayName("당첨등수 별 당첨된 로또 갯수 확인")
     void winResults(WinRanking input, int expected) {
-        WinningLotto winningLotto = WinningLotto.of(winningNumbers, bonusNumber);
+        WinningLotto winningLotto = WinningLotto.of(winningNumbers, 7);
 
         Map<WinRanking, Integer> winningCountByWinRanking = winningLotto.winResults(getTestLottos());
 

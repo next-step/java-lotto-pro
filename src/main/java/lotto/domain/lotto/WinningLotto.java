@@ -17,13 +17,9 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLotto of(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    public static WinningLotto of(List<Integer> winningNumbers, int bonusNumber) {
         validateBonusNumberNotInWinningNumbers(winningNumbers, bonusNumber);
-        return new WinningLotto(winningNumbers, bonusNumber);
-    }
-
-    public static WinningLotto of(List<Integer> winningNumbers, int inputBonusNumber) {
-        return of(toWinningNumbers(winningNumbers), LottoNumber.from(inputBonusNumber));
+        return new WinningLotto(toWinningNumbers(winningNumbers), LottoNumber.from(bonusNumber));
     }
 
     private static List<LottoNumber> toWinningNumbers(List<Integer> numbers) {
@@ -32,8 +28,8 @@ public class WinningLotto {
                 .collect(Collectors.toList());
     }
 
-    private static void validateBonusNumberNotInWinningNumbers(List<LottoNumber> winningNumbers,
-                                                               LottoNumber bonusNumber) {
+    private static void validateBonusNumberNotInWinningNumbers(List<Integer> winningNumbers,
+                                                               int bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(String.format(ErrorMessages.DUPLICATED_BONUS_NUMBER, bonusNumber));
         }
