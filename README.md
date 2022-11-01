@@ -73,4 +73,4 @@
 - [x] 입력된 수동 로또 번호가 범위 내 숫자가 아닐 경우 IllegalArgumentException 를 발생시킨다.
 - [x] 수동, 자동으로 구매한 로또 수를 각각 출력한다.
 - [x] 구매한 로또 번호를 모두 출력한다.
-- [ ] IllegalArgumentException 이 발생하면 에러 메시지 출력 후 프로그램을 종료한다.
+- [x] IllegalArgumentException 이 발생하면 에러 메시지 출력 후 프로그램을 종료한다.
