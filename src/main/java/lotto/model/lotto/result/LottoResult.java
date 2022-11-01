@@ -29,7 +29,7 @@ public class LottoResult {
         return moneyToBuy.profitRatio(sumOfPrizes);
     }
 
-    public int sumOfPrizes() {
+    protected int sumOfPrizes() {
         final Set<Integer> keySet = prizeMoney.keySet();
         final List<Integer> numbersMatchCandidates = new ArrayList<>(keySet.size());
         numbersMatchCandidates.addAll(keySet);
