@@ -1,4 +1,4 @@
-package split;
+package calculator;
 
 public class Numbers {
 
