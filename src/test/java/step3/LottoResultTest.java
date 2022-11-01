@@ -45,7 +45,7 @@ public class LottoResultTest {
     private void makeResult(String input) {
         String[] inputArr = input.split(COLON)[0].split(COMMA);
         for (String s : inputArr) {
-            lottoResult.addResult(Integer.parseInt(s));
+            lottoResult.addResult(Integer.parseInt(s), false);
             purchasedCount++;
         }
     }

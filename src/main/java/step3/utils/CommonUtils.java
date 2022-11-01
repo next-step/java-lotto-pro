@@ -2,8 +2,8 @@ package step3.utils;
 
 import java.util.List;
 
-import static step3.constant.Message.ERROR_IS_NUMBERIC;
-import static step3.constant.Message.NOT_VALID_NULL;
+import static step3.constant.Message.Error.ERROR_IS_NUMBERIC;
+import static step3.constant.Message.Error.NOT_VALID_NULL;
 
 public class CommonUtils {
     public static void commonCheckEmpty(String target) {

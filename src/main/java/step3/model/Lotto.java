@@ -6,6 +6,9 @@ import java.util.List;
 
 import static step3.constant.Constant.Number.*;
 import static step3.constant.Constant.Lotto.*;
+import static step3.constant.Constant.Symbols.COMMA;
+import static step3.constant.Constant.Symbols.SPACE;
+import static step3.constant.Message.Error.*;
 import static step3.utils.CommonUtils.*;
 
 public class Lotto {
@@ -67,7 +70,6 @@ public class Lotto {
         validateLength(afterNumbers);
         validateNumberType(afterNumbers);
         validateSameNumber(afterNumbers);
-
         return afterNumbers;
     }
 
@@ -75,8 +77,6 @@ public class Lotto {
         commonCheckEmpty(stringNumber);
         int number = commonStringToNumber(stringNumber);
         checkWinningNumbersContainBonusNumber(number);
-
-
         return number;
     }
 

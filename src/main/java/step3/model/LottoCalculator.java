@@ -1,17 +1,16 @@
 package step3.model;
 
 import step3.constant.Rank;
-import step3.constant.WinnerRule;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static step3.constant.Constant.Lotto.LOTTO_NUMBER_LENGTH;
-import static step3.constant.Constant.Number.*;
-import static step3.constant.Constant.Symbols.COMMA;
-import static step3.constant.Constant.Symbols.SPACE;
-import static step3.constant.Message.Error.*;
+import static step3.constant.Constant.Number.ONE;
+import static step3.constant.Constant.Number.ZERO;
+import static step3.constant.Message.Error.UNVALID_LOTTO_NUMBER_LENGTH;
+import static step3.constant.Message.Output.*;
+
 public class LottoCalculator {
 
     private Lotto lastWeekWinner;
@@ -70,11 +69,5 @@ public class LottoCalculator {
                 .append(WON_RESULT_MESSAGE)
                 .append(lottoResult.getWinningCount(rank))
                 .append(COUNT_UNIT_RESULT_MESSAGE).toString();
-    }
-
-    private void validateLength(String[] afterNumbers) {
-        if(afterNumbers.length != LOTTO_NUMBER_LENGTH) {
-            throw new IllegalArgumentException(UNVALID_LOTTO_NUMBER_LENGTH);
-        }
     }
 }

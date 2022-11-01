@@ -2,7 +2,7 @@ package step3.constant;
 
 import java.util.Arrays;
 
-import static step3.constant.Constant.BONUS_WINNER_SAME_COUNT;
+import static step3.constant.Constant.Lotto.BONUS_WINNER_SAME_COUNT;
 
 public enum Rank {
     FIRST(6, 2000000000),

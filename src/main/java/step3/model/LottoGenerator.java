@@ -25,10 +25,9 @@ public class LottoGenerator {
         this.purchasePrice = validatePrice(price);
     }
 
-    public Lottos generateLottos() {
+    public void generateLottos() {
         calculatePurchaseCount();
         addLottos();
-        return lottos;
     }
 
     public void addLottos() {
@@ -57,9 +56,4 @@ public class LottoGenerator {
             throw new IllegalArgumentException(UNDER_MIN_PRICE);
         }
     }
-
-    public int getPurchasedCount() {
-        return lottos.getPurchasedCount();
-    }
-
 }

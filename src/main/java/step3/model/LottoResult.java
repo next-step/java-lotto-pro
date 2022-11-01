@@ -2,14 +2,12 @@ package step3.model;
 
 import step3.constant.Rank;
 
-import step3.constant.WinnerRule;
-
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
-import static step3.constant.Constant.Number.*;
-import static step3.constant.Constant.Lotto.*;
+import static step3.constant.Constant.Lotto.EACH_LOTTO_PRICE;
+import static step3.constant.Constant.Number.ONE_HUNDRED;
+import static step3.constant.Constant.Number.ZERO;
 
 public class LottoResult {
 
@@ -25,12 +23,13 @@ public class LottoResult {
         return profitRate;
     }
 
-    public void addResult(int sameCount) {
+    public void addResult(int sameCount, boolean isBonus) {
+        Rank rank = Rank.valueOf(sameCount, isBonus);
         if (isNotExistsCount(sameCount)) {
-            result.put(sameCount, 0);
+            result.put(rank, 0);
         }
-        int count = result.get(sameCount);
-        result.put(sameCount, ++count);
+        int count = result.get(rank);
+        result.put(rank, ++count);
     }
 
     public double calculateProfitRate(int size) {
@@ -40,15 +39,7 @@ public class LottoResult {
         return profitRate;
     }
 
-    public void addResult(int sameCount, boolean isBonus) {
-        if (isNotExistsCount(sameCount)) {
-            result.put(Rank.valueOf(sameCount, isBonus), 0);
-        }
-        int count = result.get(Rank.valueOf(sameCount, isBonus));
-        result.put(Rank.valueOf(sameCount, isBonus), ++count);
-    }
-
-    private void sumWinnerPrice() {
+    public void sumWinnerPrice() {
         for (Rank rank : result.keySet()) {
             totalWinnerPrice += Optional.ofNullable(result.get(rank)).orElse(0) * rank.getWinningMoney();
         }
