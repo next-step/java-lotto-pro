@@ -54,4 +54,8 @@ public class LottoNumbers {
             .filter(winningNumbers.lottoNumberSet::contains)
             .count();
     }
+
+    public boolean containsNumber(final LottoNumber lottoNumber) {
+        return this.lottoNumberSet.contains(lottoNumber);
+    }
 }
