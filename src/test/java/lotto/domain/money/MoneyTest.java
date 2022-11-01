@@ -18,7 +18,7 @@ class MoneyTest {
         );
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{index} | {displayName} | 로또 구매 금액 = {0}")
     @ValueSource(ints = {-1, 0, 500})
     @DisplayName("구매금액이 로또 1장(1000원) 가격보다 작을 때 IllegalArgumentException을 발생한다.")
     void moneyException(double input) {
@@ -26,7 +26,7 @@ class MoneyTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{index} | {displayName} | 구매 금액 = {0}, 구매할 수 있는 수량 = {1}")
     @MethodSource(value = "purchasePrice")
     @DisplayName("구매금액이 주어졌을 때 로또를 구매할 수 있는 수량을 확인한다.")
     void purchasableQuantity(Money input, int expected) {

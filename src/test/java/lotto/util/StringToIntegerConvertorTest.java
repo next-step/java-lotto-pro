@@ -20,7 +20,7 @@ class StringToIntegerConvertorTest {
         );
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{index} | {displayName} | input = {0}, output = {1}")
     @MethodSource("strNumbers")
     @DisplayName("String 타입의 숫자 배열이 주어졌을 때 숫자타입으로 변환되는지 확인")
     void convertStringToNumbers(String[] input, List<Integer> expected) {
@@ -28,7 +28,7 @@ class StringToIntegerConvertorTest {
         Assertions.assertThat(results).containsExactlyElementsOf(expected);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{index} | {displayName} | input = {0}, output = {1}")
     @CsvSource(value = {"1:1", "10:10", "45:45"}, delimiter = ':')
     @DisplayName("String 타입의 숫자를 int 타입으로 변환되는지 확인")
     void convertStringToNumber(String input, int expected) {

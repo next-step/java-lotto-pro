@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.constant.LottoConstant;
 import lotto.message.ErrorMessages;
 
@@ -17,6 +18,16 @@ public class Lotto {
         validateNonDuplicatedNumbers(lottoNumbers);
         validateSixNumbers(lottoNumbers);
         return new Lotto(lottoNumbers);
+    }
+
+    public static Lotto fromBy(List<Integer> lottoNumbers) {
+        return from(toLottoNumbers(lottoNumbers));
+    }
+
+    private static List<LottoNumber> toLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toList());
     }
 
     private static void validateNonDuplicatedNumbers(List<LottoNumber> lottoNumbers) {

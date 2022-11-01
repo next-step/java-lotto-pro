@@ -1,9 +1,9 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import lotto.constant.LottoConstant;
-import lotto.domain.lotto.WinningLottos;
 import lotto.message.ErrorMessages;
 import lotto.message.LottoMessage;
 import lotto.util.LottoInputValidator;
@@ -28,24 +28,46 @@ public class InputView {
         return inputPurchasePrice();
     }
 
-    public static WinningLottos inputWinningLottos() {
-        List<Integer> winningNumbers = inputWinningNumbers();
-        return WinningLottos.of(winningNumbers, inputBonusNumber(winningNumbers));
-    }
-
-    private static List<Integer> inputWinningNumbers() {
-        System.out.println(LottoMessage.INPUT_WINNING_NUMBERS);
+    public static int inputManualLottoCount(int total) {
+        System.out.println(LottoMessage.INPUT_MANUAL_LOTTO_COUNT);
         String input = SCANNER.nextLine();
 
-        if (LottoInputValidator.validateWinningNumbers(input)) {
+        if (LottoInputValidator.validateManualLottoCount(total, input)) {
+            return StringToIntegerConvertor.convertNumber(input);
+        }
+
+        System.out.printf((ErrorMessages.INVALID_MANUAL_PURCHASABLE_QUANTITY) + "%n", total);
+        return inputManualLottoCount(total);
+    }
+
+    public static List<List<Integer>> inputManualLottos(int manual) {
+        System.out.println(LottoMessage.INPUT_MANUAL_LOTTO_NUMBERS);
+        List<List<Integer>> manualLottos = new ArrayList<>();
+
+        for (int i = 0; i < manual; i++) {
+            manualLottos.add(inputLottoNumbers());
+        }
+
+        return manualLottos;
+    }
+
+    public static List<Integer> inputWinningNumbers() {
+        System.out.println(LottoMessage.INPUT_WINNING_NUMBERS);
+        return inputLottoNumbers();
+    }
+
+    private static List<Integer> inputLottoNumbers() {
+        String input = SCANNER.nextLine();
+
+        if (LottoInputValidator.validateLottoNumbers(input)) {
             return StringToIntegerConvertor.convertNumbers(input.split(LottoConstant.COMMA_DELIMITER_REGEX));
         }
 
-        System.out.printf((ErrorMessages.INVALID_WINNING_NUMBERS) + "%n", input);
-        return inputWinningNumbers();
+        System.out.printf((ErrorMessages.INVALID_LOTTO_NUMBERS) + "%n", input);
+        return inputLottoNumbers();
     }
 
-    private static int inputBonusNumber(List<Integer> winningNumbers) {
+    public static int inputBonusNumber(List<Integer> winningNumbers) {
         System.out.println(LottoMessage.INPUT_BONUS_NUMBER);
         String input = SCANNER.nextLine();
 

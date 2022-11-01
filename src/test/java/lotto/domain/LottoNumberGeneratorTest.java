@@ -47,7 +47,7 @@ class LottoNumberGeneratorTest {
                 .isBetween(LottoNumber.from(1), LottoNumber.from(45));
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{index} | {displayName} | input = {0}")
     @ValueSource(ints = {-1, 0, 46})
     @DisplayName("1 ~ 45 이외의 값이 입력되면 IllegalArgumentException 을 던진다.")
     void lottoNumberException(int input) {
