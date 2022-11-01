@@ -19,7 +19,7 @@ class LottoResultTest {
         @Test
         @DisplayName("LottoResult 객체 생성 성공")
         void success() {
-            final int[][] prizes = new int[][] { {3, 5000}, {4, 50000}, {5, 150000}, {6, 2000000000} };
+            final int[][] prizes = new int[][]{{3, 5000}, {4, 50000}, {5, 150000}, {6, 2000000000}};
             final Map<Integer, Integer> prizeMoney = new HashMap<>();
             final Map<Integer, Integer> lottoCount = new HashMap<>();
             for (int[] prize : prizes) {
@@ -36,7 +36,7 @@ class LottoResultTest {
         private final LottoResult lottoResult;
 
         PrizeMoneyForNumbersMatch() {
-            final int[][] prizes = new int[][] { {3, 5000}, {4, 50000}, {5, 150000}, {6, 2000000000} };
+            final int[][] prizes = new int[][]{{3, 5000}, {4, 50000}, {5, 150000}, {6, 2000000000}};
             final Map<Integer, Integer> prizeMoney = new HashMap<>();
             final Map<Integer, Integer> lottoCount = new HashMap<>();
             for (int[] prize : prizes) {
@@ -60,12 +60,12 @@ class LottoResultTest {
         private final LottoResult lottoResult;
 
         LottoCountForNumbersMatch() {
-            final int[][] prizes = new int[][] { {3, 5000}, {4, 50000}, {5, 150000}, {6, 2000000000} };
+            final int[][] prizes = new int[][]{{3, 5000}, {4, 50000}, {5, 150000}, {6, 2000000000}};
             final Map<Integer, Integer> prizeMoney = new HashMap<>();
             for (int[] prize : prizes) {
                 prizeMoney.put(prize[0], prize[1]);
             }
-            final int[][] counts = new int[][] { {3, 4}, {4, 2}, {5, 1}, {6, 0} };
+            final int[][] counts = new int[][]{{3, 4}, {4, 2}, {5, 1}, {6, 0}};
             final Map<Integer, Integer> lottoCount = new HashMap<>();
             for (int[] count : counts) {
                 lottoCount.put(count[0], count[1]);
@@ -78,6 +78,40 @@ class LottoResultTest {
         @DisplayName("일치하는 숫자 개수에 맞는 당첨 상금을 반환한다")
         void success(int numbersMatch, int count) {
             assertThat(lottoResult.lottoCountForNumbersMatch(numbersMatch)).isEqualTo(count);
+        }
+    }
+
+    @Nested
+    @DisplayName("sumOfPrizes 메서드 테스트")
+    class SumOfPrizes {
+        private final int[][] prizes;
+        private final int[][] counts;
+        private final LottoResult lottoResult;
+
+        SumOfPrizes() {
+            prizes = new int[][]{{3, 5000}, {4, 50000}, {5, 150000}, {6, 2000000000}};
+            final Map<Integer, Integer> prizeMoney = new HashMap<>();
+            for (int[] prize : prizes) {
+                prizeMoney.put(prize[0], prize[1]);
+            }
+            counts = new int[][]{{3, 4}, {4, 2}, {5, 1}, {6, 0}};
+            final Map<Integer, Integer> lottoCount = new HashMap<>();
+            for (int[] count : counts) {
+                lottoCount.put(count[0], count[1]);
+            }
+            lottoResult = new LottoResult(prizeMoney, lottoCount);
+        }
+
+        @Test
+        @DisplayName("성공")
+        void success() {
+            final int sumOfPrizesResult = lottoResult.sumOfPrizes();
+            final int expectedResult =
+                    prizes[0][1] * counts[0][1] +
+                            prizes[1][1] * counts[1][1] +
+                            prizes[2][1] * counts[2][1] +
+                            prizes[3][1] * counts[3][1];
+            assertThat(sumOfPrizesResult).isEqualTo(expectedResult);
         }
     }
 }

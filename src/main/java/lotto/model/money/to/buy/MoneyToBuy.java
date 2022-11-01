@@ -41,4 +41,8 @@ public class MoneyToBuy {
     public void buyOneLotto() {
         ++boughtLottoCount;
     }
+
+    public double profitRatio(double sumOfPrizesFromLottoResult) {
+        return sumOfPrizesFromLottoResult / money;
+    }
 }
