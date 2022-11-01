@@ -1,12 +1,10 @@
 package step3.model;
 
-import static step3.constant.ErrorMessage.ONLY_NUMBER_PURCHASE_PRICE_INPUT;
-
 public class LottoGenerator {
 
-    public Lottos generateLottos(String price) {
+    public Lottos generateLottos(int price, int manualCount) {
         Lottos lottos = new Lottos();
-        lottos.generate(getGeneratorCount(price));
+        lottos.generate(getGeneratorCount(price, manualCount));
         return lottos;
     }
 
@@ -18,13 +16,8 @@ public class LottoGenerator {
         return new LottoNumber(number);
     }
 
-    public int getGeneratorCount(String price) {
-        try {
-            int purchasePrice = Integer.parseInt(price);
-            return purchasePrice / 1000;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ONLY_NUMBER_PURCHASE_PRICE_INPUT);
-        }
+    public int getGeneratorCount(int price, int manual) {
+        return (price / 1000) - manual;
     }
 
 }

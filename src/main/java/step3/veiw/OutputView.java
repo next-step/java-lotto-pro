@@ -16,6 +16,7 @@ public class OutputView {
 
     private static void outputPurchaseCount(Lottos lottos) {
         String purchaseCount = String.valueOf(lottos.getSize());
+        System.out.println();
         System.out.println(new StringBuilder(purchaseCount).append(PURCHASE_COUNT_MESSAGE));
     }
 

@@ -8,5 +8,7 @@ public class GameMessage {
     public final static String RESULT_STATISTICS = "당첨 통계";
     public final static String DIVIDING_LINE = "---------";
     public final static String BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
+    public final static String MANUAL_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public final static String MANUAL_NUMBER_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
 }

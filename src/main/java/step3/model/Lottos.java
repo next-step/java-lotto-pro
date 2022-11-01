@@ -5,10 +5,9 @@ import java.util.List;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
+    private List<Lotto> lottos = new ArrayList<>();
 
     public void generate(int generatorCount) {
-        lottos = new ArrayList<>();
         for (int i = 0; i < generatorCount; i++) {
             Lotto lotto = new Lotto();
             lotto.generateRandomNumber();
@@ -32,5 +31,13 @@ public class Lottos {
             lottoResult.addResult(sameCount, containBonus);
         }
         return lottoResult;
+    }
+
+    public void addedLotto(Lotto lotto) {
+        this.lottos.add(lotto);
+    }
+
+    public void addedLottos(Lottos lottos) {
+        this.lottos.addAll(lottos.lottos);
     }
 }
