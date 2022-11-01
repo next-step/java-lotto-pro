@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import step3.model.Lotto;
+import step3.model.LottoMoney;
 import step3.model.Lottos;
 import step3.model.dto.LottosNumberDto;
 
@@ -25,7 +26,7 @@ public class LottoNumberDtoTest {
         lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
         lottoNumbers.add(new Lotto(getLottoNumbers(1, 11, 33, 2, 35, 3)));
         Lottos lottos = new Lottos(lottoNumbers);
-        LottosNumberDto lottosNumberDto = new LottosNumberDto(lottos);
+        LottosNumberDto lottosNumberDto = new LottosNumberDto(lottos, new LottoMoney(3000, 1));
 
         //when
         List<List<Integer>> numbers = lottosNumberDto.getLottosNumber();
@@ -46,7 +47,7 @@ public class LottoNumberDtoTest {
             lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
         }
         Lottos lottos = new Lottos(lottoNumbers);
-        LottosNumberDto lottosNumberDto = new LottosNumberDto(lottos);
+        LottosNumberDto lottosNumberDto = new LottosNumberDto(lottos, new LottoMoney(3000, 1));
 
         //when
         int autoLottoCount = lottosNumberDto.getAutoLottoCount();
@@ -62,11 +63,11 @@ public class LottoNumberDtoTest {
         //given
         List<Lotto> lottoNumbers = new ArrayList();
         for (int i = 0; i < count; i++) {
-            lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6), false));
+            lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
             lottoNumbers.add(new Lotto(getLottoNumbers(2, 11, 3, 4, 1, 6)));
         }
         Lottos lottos = new Lottos(lottoNumbers);
-        LottosNumberDto lottosNumberDto = new LottosNumberDto(lottos);
+        LottosNumberDto lottosNumberDto = new LottosNumberDto(lottos, new LottoMoney(3000, 1));
 
         //when
         int autoLottoCount = lottosNumberDto.getAutoLottoCount();

@@ -30,6 +30,6 @@ public class LottoMachine {
     }
 
     public LottosNumberDto getLottoNumber() {
-        return new LottosNumberDto(lottos);
+        return new LottosNumberDto(lottos,lottoMoney);
     }
 }

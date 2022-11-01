@@ -38,6 +38,10 @@ public class LottoMoney {
         return autoPurchaseCount;
     }
 
+    public int getCountOfManualPurchase() {
+        return manualPurchaseCount;
+    }
+
     public double getPriceRatio(int price) {
         return price / (double) purchasePrice;
     }
