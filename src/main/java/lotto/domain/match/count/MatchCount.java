@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import lotto.domain.amount.Amount;
 import lotto.domain.amount.MatchCountWinningPriceStrategy;
+import lotto.domain.lotto.Lotto;
 
 public class MatchCount {
 	private static final int MIN_MATCH_COUNT = 0;
@@ -25,8 +26,8 @@ public class MatchCount {
 			throw new IllegalArgumentException("일치 횟수는 0보다 작을 수 없습니다.");
 		}
 
-		if (matchCount > MAX_MATCH_COUNT) {
-			throw new IllegalArgumentException("일치 횟수는 6보다 클 수 없습니다.");
+		if (matchCount > Lotto.LOTTO_NUMBERS_SIZE) {
+			throw new IllegalArgumentException("일치 횟수는 로또 숫자 갯수보다 클 수 없습니다.");
 		}
 	}
 

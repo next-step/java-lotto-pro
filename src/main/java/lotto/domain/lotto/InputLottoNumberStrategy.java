@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Set;
 
 public class InputLottoNumberStrategy implements LottoNumberStrategy {
-	private static final int INPUT_LOTTO_NUMBER_SIZE = 6;
 	private final List<Integer> numbers;
 
 	public InputLottoNumberStrategy(List<Integer> numbers) {
@@ -19,7 +18,7 @@ public class InputLottoNumberStrategy implements LottoNumberStrategy {
 	}
 
 	private void validateInputLottoNumbers(int size) {
-		if (size != INPUT_LOTTO_NUMBER_SIZE) {
+		if (size != Lotto.LOTTO_NUMBERS_SIZE) {
 			throw new IllegalArgumentException("로또 번호 갯수가 6개이여야 합니다.");
 		}
 	}

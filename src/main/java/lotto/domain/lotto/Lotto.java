@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import lotto.domain.match.count.MatchCount;
 
 public class Lotto {
-	private static final int LOTTO_NUMBERS_SIZE = 6;
+	public static final int LOTTO_NUMBERS_SIZE = 6;
 	private final Set<LottoNumber> lottoNumbers;
 
 	private Lotto(LottoNumberStrategy lottoNumberStrategy) {

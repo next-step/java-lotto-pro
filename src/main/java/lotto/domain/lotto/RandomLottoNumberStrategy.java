@@ -8,7 +8,6 @@ import lotto.util.RandomNumbersGenerator;
 public class RandomLottoNumberStrategy implements LottoNumberStrategy {
 	public static final int RANDOM_RANGE_START = 1;
 	public static final int RANDOM_RANGE_END = 45;
-	public static final int NUMBER_SIZE = 6;
 
 	@Override
 	public Set<LottoNumber> pickNumbers() {
@@ -16,6 +15,6 @@ public class RandomLottoNumberStrategy implements LottoNumberStrategy {
 	}
 
 	private List<Integer> pickRandomNumbers() {
-		return RandomNumbersGenerator.generate(RANDOM_RANGE_START, RANDOM_RANGE_END, NUMBER_SIZE);
+		return RandomNumbersGenerator.generate(RANDOM_RANGE_START, RANDOM_RANGE_END, Lotto.LOTTO_NUMBERS_SIZE);
 	}
 }
