@@ -28,7 +28,7 @@ public class InputView {
         try {
             return new LottoMoney(SCANNER.nextLine());
         } catch (IllegalArgumentException e) {
-            System.out.println(String.format(ERROR_PREFIX, e.getMessage()));
+            System.out.printf((ERROR_PREFIX) + "%n", e.getMessage());
             return getLottoMoney();
         }
     }
@@ -43,7 +43,7 @@ public class InputView {
         try {
             return lottoMoney.getValidLottoPurchaseCount(SCANNER.nextLine());
         } catch (Exception e) {
-            System.out.println(String.format(ERROR_PREFIX, e.getMessage()));
+            System.out.printf((ERROR_PREFIX) + "%n", e.getMessage());
             return manualPurchaseCount(lottoMoney);
         }
     }
@@ -76,10 +76,9 @@ public class InputView {
 
     public static LottoGenerator getManualLottoNumbers(int count, int total) {
         try {
-            LottoGenerator lottoGeneratorList = new ManualLottoGenerator(SCANNER.nextLine());
-            return lottoGeneratorList;
+            return new ManualLottoGenerator(SCANNER.nextLine());
         } catch (Exception e) {
-            System.out.println(String.format(ERROR_PREFIX, e.getMessage() + String.format(REMAIN_MANUAL_LOTTO_COUNT, count, total)));
+            System.out.printf((ERROR_PREFIX) + "%n", e.getMessage() + String.format(REMAIN_MANUAL_LOTTO_COUNT, count, total));
             return getManualLottoNumbers(count, total);
         }
     }
@@ -90,7 +89,7 @@ public class InputView {
             LottoNumber bonusNumber = new LottoNumber(InputView.getBonusNumber());
             return new WinningLottoNumbers(winningNumber, bonusNumber);
         } catch (Exception e) {
-            System.out.println(String.format(ERROR_PREFIX, e.getMessage()));
+            System.out.printf((ERROR_PREFIX) + "%n", e.getMessage());
             return getWinningNumbers();
         }
     }

@@ -19,7 +19,7 @@ public class LottoGame {
         }
 
         LottoGenerator lottoGenerator = new AutoLottoGenerator();
-        int autoTicketCount = lottoMoney.minusTicketCount(lottoGeneratorList.size());
+        int autoTicketCount = lottoMoney.autoLottoCount(lottoGeneratorList.size());
         for (int i = 0; i < autoTicketCount; i++) {
             lottoTicketList.add(new LottoTicket(lottoGenerator.generateLottoNumber()));
         }

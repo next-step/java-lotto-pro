@@ -77,7 +77,7 @@ public class LottoMoney {
         return ticketCount;
     }
 
-    public int minusTicketCount(int count) {
+    public int autoLottoCount(int count) {
         return ticketCount - count;
     }
 

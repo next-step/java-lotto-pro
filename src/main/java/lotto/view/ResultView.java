@@ -24,7 +24,7 @@ public class ResultView {
 
     public static void lottoPurchase(int manualLottoCount, int autoLottoCount, String purchaseLottoTickets) {
         System.out.println();
-        System.out.println(String.format(LOTTO_PURCHASE, manualLottoCount, autoLottoCount));
+        System.out.printf((LOTTO_PURCHASE) + "%n", manualLottoCount, autoLottoCount);
         System.out.println(purchaseLottoTickets);
     }
 
@@ -40,8 +40,8 @@ public class ResultView {
 
     private static void statisticsResult(LottoRank lottoRank, HashMap<LottoRank, Integer> winningStatistic) {
         if (!lottoRank.equals(LottoRank.NONE)) {
-            System.out.println(String.format(REWARD_MATCH_LOTTO,
-                    lottoRank.getMatchCount(), bonusMatch(lottoRank), lottoRank.getReward(), winningStatistic.get(lottoRank)));
+            System.out.printf((REWARD_MATCH_LOTTO) + "%n",
+                    lottoRank.getMatchCount(), bonusMatch(lottoRank), lottoRank.getReward(), winningStatistic.get(lottoRank));
         }
     }
 
@@ -53,8 +53,8 @@ public class ResultView {
     }
 
     public static void StatisticsPercent(double statisticsPercent) {
-        System.out.print(String.format(TOTAL_PROFIT_PERCENT, statisticsPercent));
-        System.out.print(String.format(TOTAL_PROFIT_RESULT, checkStatisticsResult(statisticsPercent)));
+        System.out.printf(TOTAL_PROFIT_PERCENT, statisticsPercent);
+        System.out.printf(TOTAL_PROFIT_RESULT, checkStatisticsResult(statisticsPercent));
     }
 
     private static String checkStatisticsResult(double profitPercent) {
