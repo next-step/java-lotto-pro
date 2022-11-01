@@ -2,6 +2,8 @@ package step3;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import step3.model.Lotto;
 import step3.model.LottoNumber;
 import step3.model.Rank;
@@ -160,13 +162,43 @@ public class LottoTest {
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
-
         //when
         Lotto lotto = new Lotto(numbers);
         Rank rank = lotto.getRank(new Lotto(getLottoNumbers(1, 2, 13, 14, 15, 16)));
 
         //then
         assertThat(rank).isEqualTo(Rank.MISS);
+    }
+
+    @Test
+    @DisplayName("기본생성자인경우 로또조회시 자동로또")
+    void test_that_returns_auto_if_base_constructor() {
+        //given
+        List<LottoNumber> numbers = IntStream.rangeClosed(1, 6).boxed()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
+
+        //when
+        Lotto lotto = new Lotto(numbers);
+
+        //then
+        assertThat(lotto.isAuto()).isTrue();
+    }
+
+    @ParameterizedTest
+    @ValueSource(booleans = {true,false})
+    @DisplayName("생성자에서 로또 자동여부 지정시 메소드에서 조회")
+    void test_that_returns_auto_if_selected_at_constructor(boolean isAuto) {
+        //given
+        List<LottoNumber> numbers = IntStream.rangeClosed(1, 6).boxed()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
+
+        //when
+        Lotto lotto = new Lotto(numbers,isAuto);
+
+        //then
+        assertThat(lotto.isAuto()).isEqualTo(isAuto);
     }
 
 
