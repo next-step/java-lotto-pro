@@ -15,14 +15,6 @@ public class LottoResult {
     private int totalWinnerPrice = 0;
     private double profitRate;
 
-    public void addResult(int sameCount, boolean isBonus) {
-        if (isNotExistsCount(sameCount)) {
-            result.put(Rank.valueOf(sameCount, isBonus), 0);
-        }
-        int count = result.get(Rank.valueOf(sameCount, isBonus));
-        result.put(Rank.valueOf(sameCount, isBonus), ++count);
-    }
-
     public double calculateProfitRate(int size) {
         totalPurchasedPrice = EACH_LOTTO_PRICE * size;
         sumWinnerPrice();
@@ -30,11 +22,13 @@ public class LottoResult {
         return profitRate;
     }
 
-//    private void sumWinnerPrice() {
-//        for (Integer winnerKey : result.keySet()) {
-//            totalWinnerPrice += Optional.ofNullable(rules.get(winnerKey)).orElse(0) * result.get(winnerKey);
-//        }
-//    }
+    public void addResult(int sameCount, boolean isBonus) {
+        if (isNotExistsCount(sameCount)) {
+            result.put(Rank.valueOf(sameCount, isBonus), 0);
+        }
+        int count = result.get(Rank.valueOf(sameCount, isBonus));
+        result.put(Rank.valueOf(sameCount, isBonus), ++count);
+    }
 
     private void sumWinnerPrice() {
         for (Rank rank : result.keySet()) {
@@ -50,11 +44,7 @@ public class LottoResult {
         return result.get(sameCount) == null;
     }
 
-//    public String getResultValue(int winnerKey) {
-//        return Optional.ofNullable(result.get(winnerKey)).orElse(ZERO).toString();
-//    }
-
-    public String getResultValue(Rank rank) {
+    public String getWinningCount(Rank rank) {
         return Optional.ofNullable(result.get(rank)).orElse(ZERO).toString();
     }
 }

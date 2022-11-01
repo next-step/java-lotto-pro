@@ -28,19 +28,15 @@ public class LottoCalculator {
         return lastWeekWinner;
     }
 
+    public void setLastWeekWinner(Lotto lotto) {
+        lastWeekWinner = lotto;
+    }
+
     public void calculateWinnerStatistics(Lottos lottos) {
         purchasedLottos = lottos.getLottoList();
         for(Lotto lotto : purchasedLottos) {
             lottoResult.addResult(compareWinnerRules(lotto), isEqualToBonusNumber(lotto));
         }
-    }
-
-    private boolean isEqualToBonusNumber(Lotto lotto) {
-        return lotto.isMatchNumber(lastWeekWinner.getBonusNumber());
-    }
-
-    public double calculateProfitRate() {
-        return lottoResult.calculateProfitRate(purchasedLottos.size());
     }
 
     private int compareWinnerRules(Lotto lotto) {
@@ -55,6 +51,14 @@ public class LottoCalculator {
         return lastWeekWinner.isMatchNumber(lottoNumber) ? ONE : ZERO;
     }
 
+    private boolean isEqualToBonusNumber(Lotto lotto) {
+        return lotto.isMatchNumber(lastWeekWinner.getBonusNumber());
+    }
+
+    public double calculateProfitRate() {
+        return lottoResult.calculateProfitRate(purchasedLottos.size());
+    }
+
     public String createResultMessage(Rank rank) {
         String second = rank == Rank.SECOND ? BONUS_CUSTOM_RESULT_MESSAGE : GENERAL_RESULT_MESSAGE;
 
@@ -62,11 +66,7 @@ public class LottoCalculator {
                 .append(second)
                 .append(rank.getWinningMoney())
                 .append(WON_RESULT_MESSAGE)
-                .append(lottoResult.getResultValue(rank))
+                .append(lottoResult.getWinningCount(rank))
                 .append(COUNT_UNIT_RESULT_MESSAGE).toString();
-    }
-
-    public void setLastWeekWinner(Lotto lotto) {
-        lastWeekWinner = lotto;
     }
 }
