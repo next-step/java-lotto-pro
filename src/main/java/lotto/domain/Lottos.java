@@ -8,6 +8,10 @@ public class Lottos {
     private static final int UNIT_PRICE_PER_LOTTO = 1000;
     private List<Lotto> lottos;
 
+    public Lottos() {
+        this.lottos = new ArrayList<>();
+    }
+
     public Lottos(Payment payment) {
         validateMinPayment(payment);
         this.lottos = generateLottos(payment);
@@ -28,11 +32,19 @@ public class Lottos {
         return lottos;
     }
 
+    public int getMatchNumCnt(int index, Lotto winLotto) {
+        return lottos.get(index).countMatchNum(winLotto);
+    }
+
     public int getLottosSize() {
         return this.lottos.size();
     }
 
     public List<Lotto> getLottoList() {
         return this.lottos;
+    }
+
+    public void setLottoList(Lotto lotto) {
+        this.lottos.add(lotto);
     }
 }
