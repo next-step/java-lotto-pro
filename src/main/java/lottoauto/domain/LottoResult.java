@@ -1,48 +1,33 @@
 package lottoauto.domain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
     public static final int MIN_CONTAIN_COUNT = 3;
     public static final int ZERO = 0;
-    private Map<Integer, List<Lotto>> result;
+    private Map<Integer, Integer> result;
     private LottoWinningMoney lottoWinningMoney;
 
     public LottoResult(){
         result = new HashMap<>();
         lottoWinningMoney = new LottoWinningMoney();
     }
-    public LottoResult(HashMap<Integer, List<Lotto>> result){
-        this.result = result;
-        lottoWinningMoney = new LottoWinningMoney();
-    }
-    public void addLottoResult(int containNumberCount, Lotto buy) {
+
+    public void addLottoResult(int containNumberCount) {
         if(isValidateMinContainCount(containNumberCount)){
             return;
         }
 
-        if(isResultNull(containNumberCount)){
-            result.put(containNumberCount, new ArrayList<>());
-        }
-        result.get(containNumberCount).add(buy);
+        result.put(containNumberCount, result.getOrDefault(containNumberCount, ZERO) + 1);
     }
 
     public int getResultCount(int containNumberCount) {
-        if(isResultNull(containNumberCount)){
-            return ZERO;
-        }
-        return result.get(containNumberCount).size();
+        return result.getOrDefault(containNumberCount, ZERO);
     }
 
     private boolean isValidateMinContainCount(int containNumberCount){
         return containNumberCount < MIN_CONTAIN_COUNT;
-    }
-
-    private boolean isResultNull(int containNumberCount){
-        return result.get(containNumberCount)==null;
     }
 
     public int calculateWinningMoney() {

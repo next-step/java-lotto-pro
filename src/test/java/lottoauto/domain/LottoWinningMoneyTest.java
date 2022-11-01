@@ -9,25 +9,23 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoWinningMoneyTest {
-    Map<Integer, List<Lotto>> resultAll;
-    Map<Integer, List<Lotto>> resultOnlyThree;
+    Map<Integer, Integer> resultAll;
+    Map<Integer, Integer> resultOnlyThree;
 
     @BeforeEach
     void beforeEach(){
-        resultAll = new HashMap<Integer, List<Lotto>>(){{
-            put(3, Arrays.asList(Lotto.create(Arrays.asList(1,2,3,4,5,6))));
-            put(4, Arrays.asList(Lotto.create(Arrays.asList(1,2,3,4,5,6))));
-            put(5, Arrays.asList(Lotto.create(Arrays.asList(1,2,3,4,5,6))));
-            put(6, Arrays.asList(Lotto.create(Arrays.asList(1,2,3,4,5,6))));
+        resultAll = new HashMap<Integer, Integer>(){{
+            put(3, 1);
+            put(4, 1);
+            put(5, 1);
+            put(6, 1);
         }};
 
-        resultOnlyThree =  new HashMap<Integer, List<Lotto>>(){{
-            put(3, Arrays.asList(Lotto.create(Arrays.asList(1,2,3,4,5,6))
-                                ,Lotto.create(Arrays.asList(1,2,3,4,5,6))
-                                ,Lotto.create(Arrays.asList(1,2,3,4,5,6))));
-            put(4, new ArrayList<>());
-            put(5, new ArrayList<>());
-            put(6, new ArrayList<>());
+        resultOnlyThree =  new HashMap<Integer, Integer>(){{
+            put(3, 3);
+            put(4, 0);
+            put(5, 0);
+            put(6, 0);
         }};
     }
 

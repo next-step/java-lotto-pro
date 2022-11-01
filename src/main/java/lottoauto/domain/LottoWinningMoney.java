@@ -1,8 +1,6 @@
 package lottoauto.domain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LottoWinningMoney {
@@ -23,10 +21,10 @@ public class LottoWinningMoney {
         winningMoneyTable.put(SIX, SIX_MONEY);
     }
 
-    public int calculateWinningMoney(Map<Integer, List<Lotto>> result) {
+    public int calculateWinningMoney(Map<Integer, Integer> result) {
         int money = 0;
         for (Integer containCount : winningMoneyTable.keySet()) {
-            money += result.getOrDefault(containCount, new ArrayList<>()).size() * getWinningMoney(containCount);
+            money += result.getOrDefault(containCount, 0) * getWinningMoney(containCount);
         }
         return money;
     }

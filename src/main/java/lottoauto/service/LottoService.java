@@ -33,7 +33,7 @@ public class LottoService {
         LottoResult result = new LottoResult();
 
         for (Lotto lotto : lottos) {
-            result.addLottoResult(lotto.getContainNumberCount(winning), lotto);
+            result.addLottoResult(lotto.getContainNumberCount(winning));
         }
 
         return result;
