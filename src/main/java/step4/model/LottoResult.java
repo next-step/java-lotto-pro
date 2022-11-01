@@ -4,7 +4,9 @@ import step4.constant.ErrorMessageConstant;
 import step4.constant.LottoConstant;
 import step4.exception.LottoFormatException;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoResult {
@@ -16,19 +18,15 @@ public class LottoResult {
     }
 
     public LottoResult(String[] lottoNumbersText) {
-        if (lottoNumbersText == null || lottoNumbersText.length == 0) {
-            throw new IllegalArgumentException(ErrorMessageConstant.EMPTY_TEXT);
-        }
-        this.lottoNumbers = getLottoNumbersFromTexts(lottoNumbersText);
+        this(getLottoNumbersFromTexts(lottoNumbersText));
     }
 
-    private List<LottoNumber> getLottoNumbersFromTexts(String[] lottoNumbers) {
-        Set<LottoNumber> lottoSet = new HashSet<>();
-        for (String numberText : lottoNumbers) {
-            lottoSet.add(new LottoNumber(numberText));
+    private static List<LottoNumber> getLottoNumbersFromTexts(String[] lottoNumbers) {
+        if (lottoNumbers == null || lottoNumbers.length == 0) {
+            throw new IllegalArgumentException(ErrorMessageConstant.EMPTY_TEXT);
         }
-        checkLottoOutOfSize(lottoSet.size());
-        return new ArrayList<>(lottoSet).stream().sorted().collect(Collectors.toList());
+
+        return Arrays.stream(lottoNumbers).map(LottoNumber::new).collect(Collectors.toList());
     }
 
     private void checkLottoOutOfSize(int lottoNumbersSize) {
