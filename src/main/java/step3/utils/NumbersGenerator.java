@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import step3.domain.Number;
 import step3.domain.UniqueNumbers;
 import step3.io.InputView;
 
@@ -14,16 +15,16 @@ public class NumbersGenerator {
     public static final int MAX_SELECT_NUMBER = 6;
 
     public static UniqueNumbers random() {
-        List<Integer> numbers = generateNumbers();
+        List<Number> numbers = generateNumbers();
         Collections.shuffle(numbers);
-        List<Integer> subNumbers = numbers.subList(0, MAX_SELECT_NUMBER);
-        Collections.sort(subNumbers);
-        return UniqueNumbers.generate(subNumbers);
+        numbers = numbers.subList(0, MAX_SELECT_NUMBER);
+        return UniqueNumbers.generate(numbers);
     }
 
-    private static List<Integer> generateNumbers() {
+    private static List<Number> generateNumbers() {
         return IntStream.range(START_NUMBER, END_NUMBER)
                 .boxed()
+                .map(Number::new)
                 .collect(Collectors.toList());
     }
 

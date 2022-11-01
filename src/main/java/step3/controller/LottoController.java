@@ -2,6 +2,7 @@ package step3.controller;
 
 import java.util.List;
 import step3.domain.Lotto;
+import step3.domain.Number;
 import step3.domain.LottoStore;
 import step3.domain.Lottos;
 import step3.domain.UniqueNumbers;
@@ -24,7 +25,7 @@ public class LottoController {
         int manualCount = manualCount();
         Lottos lottos = purchase(payment, manualCount);
         UniqueNumbers winningNumbers = UniqueNumbers.generate(InputView.inputWinningNumbers());
-        int bonusNumber = InputView.inputBonusNumber();
+        Number bonusNumber = InputView.inputBonusNumber();
         List<Rank> ranks = lottos.getRanks(winningNumbers, bonusNumber);
         Reward reward = Reward.generate(ranks);
         result(payment, reward);

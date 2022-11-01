@@ -1,28 +1,30 @@
 package step3.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class UniqueNumbers {
 
-    private final List<Integer> numbers;
+    private final List<Number> numbers;
 
-    private UniqueNumbers(List<Integer> numbers) {
+    private UniqueNumbers(List<Number> numbers) {
         validateDuplicated(numbers);
         this.numbers = numbers;
     }
 
-    public static UniqueNumbers generate(List<Integer> numbers) {
+    public static UniqueNumbers generate(List<Number> numbers) {
+        Collections.sort(numbers);
         return new UniqueNumbers(numbers);
     }
 
     public int match(UniqueNumbers selectNumbers) {
         return (int) numbers.stream()
-                .filter(selectNumbers.numbers::contains)
+                .filter(selectNumbers::contains)
                 .count();
     }
 
-    private void validateDuplicated(List<Integer> numbers) {
+    private void validateDuplicated(List<Number> numbers) {
         int size = numbers.size();
         long distinct = numbers.stream().distinct().count();
         if (size != distinct) {
@@ -34,8 +36,8 @@ public class UniqueNumbers {
         return this.numbers.size() == numbers.numbers.size();
     }
 
-    public boolean contains(int number) {
-        return numbers.contains(number);
+    public boolean contains(Number lottoNumber) {
+        return numbers.stream().anyMatch(number -> number.equals(lottoNumber));
     }
 
     @Override

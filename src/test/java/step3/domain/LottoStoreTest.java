@@ -15,7 +15,13 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import step3.utils.NumbersGenerator;
 
-public class LottoStoreTest {
+public class LottoStoreTest extends AbstractTest{
+
+    private static final List<Lotto> emptyManualLottos = Collections.emptyList();
+    private static final List<Lotto> manualLottos = Arrays.asList(
+            Lotto.generate(start1Numbers),
+            Lotto.generate(start1Numbers)
+    );
 
     @Test
     @DisplayName("가진 금액만큼 로또 구입")
@@ -54,10 +60,4 @@ public class LottoStoreTest {
                 Arguments.of(1000, manualLottos)
         );
     }
-
-    private static final List<Lotto> emptyManualLottos = Collections.emptyList();
-    private static final List<Lotto> manualLottos = Arrays.asList(
-            Lotto.generate(UniqueNumbers.generate(Arrays.asList(1,2,3,4,5,6))),
-            Lotto.generate(UniqueNumbers.generate(Arrays.asList(1,2,3,4,5,6)))
-    );
 }

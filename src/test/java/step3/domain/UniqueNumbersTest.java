@@ -3,6 +3,7 @@ package step3.domain;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,17 +13,21 @@ import org.junit.jupiter.params.provider.MethodSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class UniqueNumbersTest {
+public class UniqueNumbersTest extends AbstractTest{
 
-    private final UniqueNumbers winning = UniqueNumbers.generate(Arrays.asList(1,2,3,4,5,6));
+    private static UniqueNumbers winning;
+
+    @BeforeAll
+    public static void init() {
+        winning = UniqueNumbers.generate(start1NumberList);
+    }
 
     @Test
     @DisplayName("중복된 번호를 사용하여 UniqueNumbers 생성시 Exception 발생")
     public void testInputNumbersError() {
         assertThatThrownBy(() -> {
-            UniqueNumbers.generate(Arrays.asList(1, 1, 1, 1, 1, 1));
-        })
-                .isInstanceOf(IllegalArgumentException.class)
+            UniqueNumbers.generate(duplicatedNumberList);
+        }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Duplicate numbers cannot input.");
     }
 
@@ -30,7 +35,8 @@ public class UniqueNumbersTest {
     @MethodSource("numberProvider")
     @DisplayName("일치하는 번호 개수 확인")
     public void testMatch(List<Integer> selectNumbers, int expected) {
-        UniqueNumbers select = UniqueNumbers.generate(selectNumbers);
+        List<Number> numbers = generateLottoNumbers(selectNumbers);
+        UniqueNumbers select = UniqueNumbers.generate(numbers);
         assertThat(winning.match(select)).isEqualTo(expected);
     }
 

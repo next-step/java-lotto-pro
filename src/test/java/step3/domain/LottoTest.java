@@ -3,12 +3,11 @@ package step3.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step3.utils.NumbersGenerator;
 
-public class LottoTest {
+public class LottoTest extends AbstractTest {
 
     @Test
     @DisplayName("로또 생성")
@@ -22,22 +21,17 @@ public class LottoTest {
     @DisplayName("번호 비교시 대상 개수가 다른 경우 Exception 발생")
     public void testNumberSizeError() {
         assertThatThrownBy(() -> {
-            UniqueNumbers numbers = UniqueNumbers.generate(Arrays.asList(1, 2, 3));
-            UniqueNumbers random = NumbersGenerator.random();
-            Lotto lotto = Lotto.generate(random);
-            lotto.getCountOfMatch(numbers);
+            Lotto lotto = Lotto.generate(randomNumbers);
+            lotto.getCountOfMatch(exceptNumbers);
         }).isInstanceOf(IndexOutOfBoundsException.class)
                 .hasMessageContaining("Incomparable subject. please check lottoNumbers size.");
     }
 
-
     @Test
     @DisplayName("일치하는 번호 개수 확인")
     public void testGetCountOfMatch() {
-        UniqueNumbers winner = UniqueNumbers.generate(Arrays.asList(1,2,3,4,5,6));
-        UniqueNumbers select = UniqueNumbers.generate(Arrays.asList(4,5,6,7,8,9));
-        Lotto lotto = Lotto.generate(select);
-        int countOfMatch = lotto.getCountOfMatch(winner);
+        Lotto lotto = Lotto.generate(start4Numbers);
+        int countOfMatch = lotto.getCountOfMatch(start1Numbers);
         assertThat(countOfMatch).isEqualTo(3);
     }
 
@@ -45,9 +39,8 @@ public class LottoTest {
     @DisplayName("보너스 번호 포함 확인")
     public void testIsBonusMatch() {
         int bonusNumber = 3;
-        UniqueNumbers select = UniqueNumbers.generate(Arrays.asList(1,2,3,4,5,6));
-        Lotto lotto = Lotto.generate(select);
-        assertThat(lotto.isBonusMatch(6)).isTrue();
-        assertThat(lotto.isBonusMatch(7)).isFalse();
+        Lotto lotto = Lotto.generate(start1Numbers);
+        assertThat(lotto.isBonusMatch(new Number(6))).isTrue();
+        assertThat(lotto.isBonusMatch(new Number(7))).isFalse();
     }
 }

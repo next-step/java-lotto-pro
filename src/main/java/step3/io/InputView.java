@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import step3.domain.Number;
 
 public class InputView {
 
@@ -20,7 +21,7 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static List<Integer> inputWinningNumbers() {
+    public static List<Number> inputWinningNumbers() {
         printWinningNumbers();
         return inputNumbers();
     }
@@ -30,7 +31,7 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    public static List<Integer> inputManualNumbers() {
+    public static List<Number> inputManualNumbers() {
         return inputNumbers();
     }
 
@@ -39,18 +40,19 @@ public class InputView {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 
-    public static List<Integer> inputNumbers() {
+    public static List<Number> inputNumbers() {
         String input = scanner.nextLine();
         return Arrays.stream(
                         input.replace(" ", "")
                                 .split(","))
                 .map(Integer::parseInt)
+                .map(Number::new)
                 .collect(Collectors.toList());
     }
 
-    public static int inputBonusNumber() {
+    public static Number inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        String input = scanner.nextLine();
-        return Integer.parseInt(input);
+        int input = Integer.parseInt(scanner.nextLine());
+        return new Number(input);
     }
 }
