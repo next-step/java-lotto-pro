@@ -7,9 +7,10 @@ import step3.domain.Rank;
 import step3.domain.Rewards;
 
 public class OutputView {
-    public static final String PURCHASE_LOTTO_COUNT = "%d개를 구매했습니다.\n";
-    public static final String RESULT_FORMAT = "%d개 일치 (%d원)- %d개\n";
-    public static final String PROFIT_RATE = "총 수익률은 %s입니다.";
+    private static final String PURCHASE_LOTTO_COUNT = "%d개를 구매했습니다.\n";
+    private static final String RESULT_FORMAT = "%d개 일치 (%d원)- %d개\n";
+    private static final String PROFIT_RATE = "총 수익률은 %s입니다.";
+    private static final String SECOND_MATCH_COUNT = "5개 일치, 보너스 볼 일치(30000000원)- %d개%n";
 
     public static void showPurchaseLottoCount(int count) {
         System.out.format(PURCHASE_LOTTO_COUNT, count);
@@ -44,9 +45,17 @@ public class OutputView {
         result.append(resultsTitle);
 
         for (Rank rank : Rank.valuesTheLowestOrder()) {
-            result.append(String.format(RESULT_FORMAT, rank.matchedCount(), rank.winnings(), rewards.count(rank)));
+            result.append(String.format(getResultFormat(rank), rank.matchedCount(), rank.winnings(), rewards.count(rank)));
         }
 
         System.out.println(result);
     }
+
+    public static String getResultFormat(Rank rank) {
+        if (rank == Rank.SECOND) {
+            return SECOND_MATCH_COUNT;
+        }
+        return RESULT_FORMAT;
+    }
+
 }
