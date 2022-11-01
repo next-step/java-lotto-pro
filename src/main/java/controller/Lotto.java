@@ -12,7 +12,8 @@ public class Lotto {
         LottoLotteryTickets lottoLotteryTickets = new LottoLotteryTickets(lottoPurchaseAmount.getQuantityPerAmountLotto(), new LottoNumberGenerator());
         OutputWriter.print(lottoLotteryTickets.toString());
 
-        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(new LottoNumbers(InputReader.readLastWeekWinningNumber()));
+        LottoNumbers lastWeekWinningLottoNumbers = new LottoNumbers(InputReader.readLastWeekWinningNumber());
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(lastWeekWinningLottoNumbers);
         winningLottoNumbers.addBonusBall(new LottoNumber(InputReader.readBonusBall()));
 
         Result result = lottoLotteryTickets.matchResult(winningLottoNumbers);
