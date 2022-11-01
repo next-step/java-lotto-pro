@@ -43,7 +43,7 @@ class LottoTest {
 
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6:6", "1,2,3,4,5,7:5", "1,2,3,4,7,8:4", "1,2,3,7,8,9:3"}, delimiter = ':')
-    @DisplayName("서로 다른 로또 2개의 번호 일치 개수 확인")
+    @DisplayName("당첨번호와 로또의 번호 일치 개수 확인")
     void 로또_번호_일치_개수(String input, int expected) {
         Lotto winLotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
