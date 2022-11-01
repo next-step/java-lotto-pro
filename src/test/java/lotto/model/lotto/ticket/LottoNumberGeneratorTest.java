@@ -12,15 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoNumberGeneratorTest {
-    static class LottoNumberGeneratorForTest extends LottoNumberGenerator {
-        Set<LottoNumber> numberMadeSet() {
-            return new HashSet<>(lottoNumbers);
-        }
-
-        List<LottoNumber> lottoNumbers() {
-            return lottoNumbers;
-        }
-    }
 
     @Nested
     @DisplayName("LottoNumberGenerator 생성자 테스트")
@@ -28,10 +19,12 @@ public class LottoNumberGeneratorTest {
         @RepeatedTest(value = 100)
         @DisplayName("한 장의 로또에 있는 숫자는 총 6개이고, 어떤 숫자도 서로 중복이 없다.")
         void success() {
-            final LottoNumberGeneratorForTest lottoNumberGeneratorForTest = new LottoNumberGeneratorForTest();
+            final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+            final List<LottoNumber> generatedNumbers = lottoNumberGenerator.generate();
+            final Set<LottoNumber> generatedNumbersSet = new HashSet<>(generatedNumbers);
             assertAll(
-                    () -> assertThat(lottoNumberGeneratorForTest.lottoNumbers().size()).isEqualTo(LottoNumberGeneratorForTest.NUMBER_COUNT_IN_SINGLE_LOTTO_TICKET),
-                    () -> assertThat(lottoNumberGeneratorForTest.lottoNumbers().size()).isEqualTo(lottoNumberGeneratorForTest.numberMadeSet().size())
+                    () -> assertThat(lottoNumberGenerator.generate().size()).isEqualTo(LottoNumberGenerator.NUMBER_COUNT_IN_SINGLE_LOTTO_TICKET),
+                    () -> assertThat(lottoNumberGenerator.generate().size()).isEqualTo(generatedNumbersSet.size())
             );
         }
     }
