@@ -11,8 +11,8 @@ public class RankTest {
     @Test
     @DisplayName("매치 카운트에 따른 랭크 값을 출력하는 테스트")
     void rankTest() {
-        Rank rank = Rank.from(3);
-        assertThat(rank).isEqualTo(Rank.FOURTH);
+        assertThat(Rank.from(5, true)).isEqualTo(Rank.SECOND);
+        assertThat(Rank.from(3, false)).isEqualTo(Rank.FIFTH);
     }
 
 }

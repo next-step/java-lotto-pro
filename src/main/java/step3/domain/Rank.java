@@ -20,7 +20,10 @@ public enum Rank {
         this.winnings = winnings;
     }
 
-    public static Rank from(int count) {
+    public static Rank from(int count, boolean bonus) {
+        if (count == SECOND.count && bonus) {
+            return SECOND;
+        }
         Optional<Rank> rank = Arrays.stream(Rank.values())
             .filter(r -> r.count == count)
             .findAny();
