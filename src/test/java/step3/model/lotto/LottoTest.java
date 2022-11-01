@@ -6,12 +6,25 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
 class LottoTest {
     private List<LottoNumber> changeToLottoNumbers(List<Integer> numbers){
         return numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
+    }
+    @Test
+    void 중복된_입력() {
+        assertThatThrownBy(() -> new Lotto(Stream.of(1,1,3,4,5,6).map(LottoNumber::new).collect(Collectors.toList())))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+    @Test
+    void 잘못된_로또_사이즈() {
+        assertThatThrownBy(() -> new Lotto(Stream.of(1,2,3,4).map(LottoNumber::new).collect(Collectors.toList())))
+                .isInstanceOf(IllegalArgumentException.class);
     }
     @Test
     void 정상_생성_프린트_검증() {

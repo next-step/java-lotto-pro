@@ -1,6 +1,7 @@
 package step3.model.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,11 +35,9 @@ class LottoListTest {
     @Test
     void 결과_확인_1등_2등_3등() {
         LottoList lottoTickets = new LottoList(lottoList);
-        Results results = new Results();
-        results.recordResult(Result.FIRST_PRIZE);
-        results.recordResult(Result.SECOND_PRIZE_BONUS);
-        results.recordResult(Result.SECOND_PRIZE);
-        assertThat(lottoTickets.getMatchResults(winningLotto)).isEqualTo(results);
+        assertThat(lottoTickets.getMatchResults(winningLotto).getResultCount(Result.FIRST_PRIZE)).isEqualTo(1);
+        assertThat(lottoTickets.getMatchResults(winningLotto).getResultCount(Result.SECOND_PRIZE_BONUS)).isEqualTo(1);
+        assertThat(lottoTickets.getMatchResults(winningLotto).getResultCount(Result.SECOND_PRIZE)).isEqualTo(1);
     }
 
 
