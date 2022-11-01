@@ -44,7 +44,7 @@ public class Lotto {
                 .stream()
                 .filter(winningLotto::contains)
                 .count();
-        return Rank.valueOf((countParam, bonusParam) -> countParam == matchCount && bonusParam);
+        return Rank.valueOf(matchCount,false);
     }
 
     public Rank getRank(WinningLotto winningLotto) {
@@ -53,7 +53,7 @@ public class Lotto {
                 .filter(winningLotto::contains)
                 .count();
         boolean isBonus = winningLotto.isMatchBonusNumber(numbers);
-        return Rank.valueOf((countParam, bonusParam) -> countParam == matchCount && bonusParam ,isBonus);
+        return Rank.valueOf(matchCount,isBonus);
     }
 
     public boolean contains(LottoNumber number) {
