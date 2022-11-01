@@ -14,6 +14,7 @@ import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// TODO : 클라이언트 중심 테스트 코드 추가
 class LottoResultTest {
     private final List<Rank> LOTTO_LIST = Arrays.asList(Rank.values());
     private final int RANK_SIZE = Rank.values().length;

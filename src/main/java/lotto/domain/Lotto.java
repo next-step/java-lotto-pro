@@ -9,6 +9,7 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
+        // TODO: 예외 처리 로직 분
         if(numbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호는 6개의 숫자만 설정 가능합니다.");
         }
@@ -35,6 +36,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return "[" + numbers + "]";
+        return numbers.toString();
     }
 }

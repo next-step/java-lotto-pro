@@ -5,6 +5,7 @@ import java.util.List;
 public class WinningLotto extends Lotto {
     private LottoNumber bonusBall;
 
+    // TODO: 생성자 제거
     public WinningLotto(List<LottoNumber> insertWinningLotto) {
         super(insertWinningLotto);
     }

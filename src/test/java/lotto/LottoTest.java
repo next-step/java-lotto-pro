@@ -54,6 +54,7 @@ class LottoTest {
                 .collect(Collectors.toList());
         assertThat(winLotto.getCorrectCount(new Lotto(numbers))).isEqualTo(expected);
     }
+
     @Test
     @DisplayName("보너스 볼 일치 여부 확인")
     void 보너스_볼_일치_여부() {

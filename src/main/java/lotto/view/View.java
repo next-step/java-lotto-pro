@@ -7,6 +7,7 @@ import lotto.domain.Rank;
 import java.util.Arrays;
 import java.util.List;
 
+// TODO: InputView / OutputView 로 이관
 public class View {
     private static final String MSG_LOTTO_COUNT = "%d개를 구매했습니다.";
     private static final String MSG_CORRECT_COUNT = "%d개 일치";
