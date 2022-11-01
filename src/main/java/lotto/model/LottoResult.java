@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.code.RankCode;
 
 public class LottoResult {
 
@@ -16,16 +15,17 @@ public class LottoResult {
   private static final double MATH_ROUND_VALUE = 100d;
 
 
-  private final HashMap<RankCode, Integer> resultMap;
+  private final HashMap<LottoRank, Integer> resultMap;
   private final LottoList lottoList;
   private final WinningLotto winningLotto;
 
 
   public LottoResult(LottoList lottoList, WinningLotto winningLotto) {
-    resultMap = new HashMap<RankCode, Integer>();
+    resultMap = new HashMap<LottoRank, Integer>();
     this.lottoList = lottoList;
     this.winningLotto = winningLotto;
     calculateLottoResult();
+    System.out.println(resultMap);
   }
 
   private void calculateLottoResult() {
@@ -35,28 +35,29 @@ public class LottoResult {
   }
 
   private void calculateLottoMatch(Lotto lotto) {
-    int matchingCount = lotto.getMatchingCount(winningLotto.getLotto());
+    LottoRank lottoRank = LottoRank.getLottoRank(
+        lotto.getMatchingCount(winningLotto.getLotto()),
+        lotto.isContainNumber(winningLotto.getBonusNumber())
+    );
 
-    RankCode rankCode = RankCode.getRankCode(matchingCount);
-
-    if (resultMap.containsKey(rankCode)) {
-      int value = resultMap.get(rankCode);
+    if (resultMap.containsKey(lottoRank)) {
+      int value = resultMap.get(lottoRank);
 
       value++;
 
-      resultMap.put(rankCode, value);
+      resultMap.put(lottoRank, value);
 
       return;
     }
 
-    resultMap.put(rankCode, 1);
+    resultMap.put(lottoRank, 1);
   }
 
   public List<String> convertResultMapToString() {
 
     List<String> rankStringList = new ArrayList<>();
 
-    for (Map.Entry<RankCode, Integer> rankEntry : resultMap.entrySet()) {
+    for (Map.Entry<LottoRank, Integer> rankEntry : resultMap.entrySet()) {
       validNothing(rankStringList, rankEntry);
     }
     Collections.sort(rankStringList);
@@ -64,24 +65,36 @@ public class LottoResult {
     return rankStringList;
   }
 
-  private String stringBuilderAppend(Map.Entry<RankCode, Integer> rankEntry) {
-    RankCode rankCode = rankEntry.getKey();
+  private String generateRankResultByStringFormat(Map.Entry<LottoRank, Integer> rankEntry) {
+    if (rankEntry.getKey() == LottoRank.SECOND) {
+      return this.generateSecondRankResultByStringFormat(rankEntry);
+    }
+
+    LottoRank lottoRank = rankEntry.getKey();
+
     return String.format("%d개 일치 (%d원)- %d개",
-        rankCode.containsCount(), rankCode.getMoney(), rankEntry.getValue());
+        lottoRank.containsCount(), lottoRank.getMoney(), rankEntry.getValue());
   }
 
-  private void validNothing(List<String> rankStringList, Map.Entry<RankCode, Integer> rankEntry) {
-    if (rankEntry.getKey() != RankCode.NOTHING) {
-      rankStringList.add(stringBuilderAppend(rankEntry));
+  public String generateSecondRankResultByStringFormat(Map.Entry<LottoRank, Integer> rankEntry) {
+    LottoRank lottoRank = rankEntry.getKey();
+
+    return String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개",
+        lottoRank.containsCount(), lottoRank.getMoney(), rankEntry.getValue());
+  }
+
+  private void validNothing(List<String> rankStringList, Map.Entry<LottoRank, Integer> rankEntry) {
+    if (rankEntry.getKey() != LottoRank.NOTHING) {
+      rankStringList.add(generateRankResultByStringFormat(rankEntry));
     }
   }
 
   private double calculateYield() {
     int prizeMoney = DEFAULT_VALUE;
 
-    for (RankCode rankCode : resultMap.keySet()) {
-      int money = rankCode.getMoney();
-      int value = resultMap.get(rankCode);
+    for (LottoRank lottoRank : resultMap.keySet()) {
+      int money = lottoRank.getMoney();
+      int value = resultMap.get(lottoRank);
 
       prizeMoney += money * value;
     }
