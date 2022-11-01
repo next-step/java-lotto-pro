@@ -5,7 +5,7 @@ import java.util.function.BiFunction;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
-    TWO(5, 30_000_000),
+    SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
@@ -21,17 +21,16 @@ public enum Rank {
 
     public static Rank valueOf(BiFunction<Integer,Boolean,Boolean> op) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank != Rank.TWO)
+                .filter(rank -> rank != Rank.SECOND)
                 .filter(rank -> op.apply(rank.matchCount,true))
                 .findFirst()
                 .orElse(MISS);
     }
 
-
     public static Rank valueOf(BiFunction<Integer,Boolean,Boolean> op,boolean isBonus) {
         Rank rank = valueOf(op);
         if (rank == Rank.THIRD && isBonus) {
-            return Rank.TWO;
+            return Rank.SECOND;
         }
         return rank;
     }
