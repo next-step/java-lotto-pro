@@ -1,10 +1,10 @@
 package lotto.domain;
 
+import lotto.constants.Rank;
 import lotto.util.InputValidator;
 import lotto.util.LottoNumberGenerator;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,8 +20,13 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> lottoNumbers) {
-        InputValidator.validateDuplicateLottoNumber(lottoNumbers);
+        validateLottoNumber(lottoNumbers);
         this.lottoNumbers = mapToLotto(lottoNumbers);
+    }
+
+    private void validateLottoNumber(List<Integer> lottoNumbers) {
+        InputValidator.validateLottoNumberCount(lottoNumbers.size());
+        InputValidator.validateDuplicateLottoNumber(lottoNumbers);
     }
 
     private List<LottoNumber> mapToLotto(List<Integer> lottoNumbers) {
@@ -32,15 +37,15 @@ public class Lotto {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public int countCollectNumber(Lotto winningNumbers) {
+    public Rank countCollectNumber(Lotto winningNumbers, LottoNumber bonusBall) {
         int collectCount = 0;
         for (LottoNumber winningNumber : winningNumbers.lottoNumbers) {
             collectCount += containNumbers(winningNumber);
         }
-        return collectCount;
+        return Rank.valueOf(collectCount, containNumbers(bonusBall) == COLLECT_ADD_NUMBER);
     }
 
-    private int containNumbers(LottoNumber winningNumber) {
+    public int containNumbers(LottoNumber winningNumber) {
         if (lottoNumbers.contains(winningNumber)) {
             return COLLECT_ADD_NUMBER;
         }
