@@ -74,3 +74,6 @@
       * "5개 일치, 보너스 볼 일치(30000000원) - X개" 추가
 * LottoNumber
   * 보너스 볼 일치 여부
+* Validate
+  * 지난주 당첨 번호에 입력했던 번호 입력 불가
+    * IllegalArgumentException
