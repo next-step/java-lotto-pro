@@ -3,25 +3,24 @@ package lotto.controller.dto;
 import static java.util.stream.Collectors.joining;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
-public class BoughtLottoTicketsResponse {
+public class BoughtLottoResponse {
 
 	private final List<List<Integer>> manualLottoNumbers;
 	private final List<List<Integer>> autoLottoNumbers;
 
-	private BoughtLottoTicketsResponse(List<List<Integer>> manualLottoNumbers,
-									   List<List<Integer>> autoLottoNumbers) {
+	private BoughtLottoResponse(List<List<Integer>> manualLottoNumbers,
+								List<List<Integer>> autoLottoNumbers) {
 		this.manualLottoNumbers = manualLottoNumbers;
 		this.autoLottoNumbers = autoLottoNumbers;
 	}
 
-	public static BoughtLottoTicketsResponse of(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
-		return new BoughtLottoTicketsResponse(manualLottoTickets.getLottoNumbersList(),
+	public static BoughtLottoResponse of(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
+		return new BoughtLottoResponse(
+			manualLottoTickets.getLottoNumbersList(),
 			autoLottoTickets.getLottoNumbersList());
 	}
 
@@ -33,17 +32,12 @@ public class BoughtLottoTicketsResponse {
 		return autoLottoNumbers.size();
 	}
 
-	public LottoTickets toLottoTickets() {
-		return LottoTickets.of(
-			Stream.concat(
-				toStream(manualLottoNumbers),
-				toStream(autoLottoNumbers))
-				.collect(Collectors.toList()));
+	public List<List<Integer>> getManualLottoNumbers() {
+		return manualLottoNumbers;
 	}
 
-	private Stream<LottoTicket> toStream(List<List<Integer>> lottoNumbers) {
-		return lottoNumbers.stream()
-			.map(LottoTicket::of);
+	public List<List<Integer>> getAutoLottoNumbers() {
+		return autoLottoNumbers;
 	}
 
 	private String numbersToString(List<Integer> numbers) {
