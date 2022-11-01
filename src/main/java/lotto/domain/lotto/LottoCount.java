@@ -1,6 +1,5 @@
 package lotto.domain.lotto;
 
-import java.util.Objects;
 import lotto.message.ErrorMessages;
 
 public class LottoCount {
@@ -39,20 +38,4 @@ public class LottoCount {
         return this.manual;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        LottoCount that = (LottoCount) o;
-        return total == that.total && manual == that.manual;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(total, manual);
-    }
 }

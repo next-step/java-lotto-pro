@@ -10,12 +10,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 class LottoCountTest {
 
     @Test
-    @DisplayName("equals 테스트")
-    void equals() {
-        Assertions.assertThat(LottoCount.of(0, 0)).isEqualTo(LottoCount.of(0, 0));
-    }
-
-    @Test
     @DisplayName("전체 구입할 수 있는 수량이 음수일 때 IllegalArgumentException을 던진다.")
     void purchasableQuantityException1() {
         Assertions.assertThatThrownBy(() -> LottoCount.of(-1, 0))
