@@ -58,17 +58,14 @@ public class LottoTicket {
 
 	public LottoWinPrize match(LottoTicket other, LottoNumber bonusBall) {
 		int matchCount = getMatchCount(other);
-
 		if (isSecondPrize(matchCount, bonusBall)) {
 			return SECOND;
 		}
-
 		return LottoWinPrize.matchCountOf(matchCount);
 	}
 
 	private int getMatchCount(LottoTicket other) {
 		Set<LottoNumber> comparedLottoNumbers = new HashSet<>(other.lottoNumbers);
-
 		int matchCount = 0;
 		for (LottoNumber lottoNumber : this.lottoNumbers) {
 			matchCount += comparedLottoNumbers.contains(lottoNumber) ? 1 : 0;
@@ -82,6 +79,11 @@ public class LottoTicket {
 		}
 
 		return lottoNumbers.stream().anyMatch(number -> number.equals(bonusBall));
+	}
+
+	public List<Integer> getLottoNumbers() {
+		return lottoNumbers.stream()
+			.map(LottoNumber::getNumber).collect(Collectors.toList());
 	}
 
 	@Override
@@ -106,10 +108,5 @@ public class LottoTicket {
 		return lottoNumbers.stream()
 			.map(LottoNumber::toString)
 			.collect(joining(", ", "[", "]"));
-	}
-
-	public List<Integer> getLottoNumbers() {
-		return lottoNumbers.stream()
-			.map(LottoNumber::getNumber).collect(Collectors.toList());
 	}
 }

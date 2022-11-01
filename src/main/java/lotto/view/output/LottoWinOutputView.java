@@ -1,47 +1,24 @@
-package lotto.view;
+package lotto.view.output;
 
-import lotto.controller.LottoController;
 import lotto.controller.dto.LottoWinResultResponse;
-import lotto.controller.dto.LottoWinResultsRequest;
 import lotto.controller.dto.LottoWinResultsResponse;
-import lotto.controller.dto.PurchasedLottoTicketsResponse;
-import lotto.controller.dto.WinningLottoTicketResponse;
 import lotto.domain.ProfitMargin;
-import utils.InputHandler;
 
-public class LottoWinResultView {
-
+public class LottoWinOutputView {
 	private static final String WIN_RESULT_OUTPUT = "당첨 통계 \n--------- \n";
-	private static final String BONUS_NUMBER_PROMPT = "보너스 볼을 입력해 주세요.";
 	private static final String PROFIT_RESULT_OUTPUT = "총 수익률은 %s입니다.";
 	private static final String LOSS_RESULT_OUTPUT = " (기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-	private final LottoController lottoController;
-
-	public LottoWinResultView(LottoController lottoController) {
-		this.lottoController = lottoController;
+	public LottoWinOutputView() {
 	}
 
-	public void printWinResult(PurchasedLottoTicketsResponse purchasedLottoTickets,
-							   WinningLottoTicketResponse winningLottoTicketResponse) {
-		LottoWinResultsResponse lottoWinResultsResponse = lottoController.getWinResults(
-			getWinResultRequest(purchasedLottoTickets, winningLottoTicketResponse));
-
-		printMatchCount(lottoWinResultsResponse);
-		printProfitMargin(lottoWinResultsResponse);
-	}
-
-	private LottoWinResultsRequest getWinResultRequest(PurchasedLottoTicketsResponse purchasedLottoTickets,
-													   WinningLottoTicketResponse winningLottoTicketResponse) {
-		return new LottoWinResultsRequest(purchasedLottoTickets, winningLottoTicketResponse, inputBonusNumber());
-	}
-
-	private int inputBonusNumber() {
-		System.out.println(BONUS_NUMBER_PROMPT);
-		return InputHandler.inputInteger();
+	public void printWinResult(LottoWinResultsResponse response) {
+		printMatchCount(response);
+		printProfitMargin(response);
 	}
 
 	private void printMatchCount(LottoWinResultsResponse lottoWinResultsResponse) {
+		System.out.println();
 		System.out.println(WIN_RESULT_OUTPUT);
 		lottoWinResultsResponse.forEach(this::printMatchCount);
 	}
