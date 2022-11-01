@@ -23,9 +23,11 @@ public class LottoNumbers {
         this.lottoNumbers = createLottoNumbers();
     }
 
-    public LottoNumbers(final List<LottoNumber> lottoNumbers) {
-        validateLottoSize(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+    public LottoNumbers(final List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
+        validateLottoSize(this.lottoNumbers);
     }
 
     public Rank getRank(WinningLottoNumbers winningLottoNumbers, BonusLottoNumber bonusLottoNumber) {
@@ -67,7 +69,7 @@ public class LottoNumbers {
 
     private List<LottoNumber> createLottoNumbers() {
         return pickNumberInRange().stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 

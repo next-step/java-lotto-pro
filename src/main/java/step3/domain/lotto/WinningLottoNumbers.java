@@ -30,7 +30,7 @@ public class WinningLottoNumbers {
                 .map(s -> {
                     try {
                         int lottoNumber = Integer.parseInt(s.trim());
-                        return new LottoNumber(lottoNumber);
+                        return LottoNumber.of(lottoNumber);
                     } catch (NumberFormatException e) {
                         throw new IllegalArgumentException(INPUT_ONLY_ALLOW_NUMBER.getMessage());
                     }

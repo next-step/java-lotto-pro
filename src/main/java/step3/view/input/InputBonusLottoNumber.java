@@ -12,7 +12,7 @@ public class InputBonusLottoNumber implements Input<BonusLottoNumber> {
         String input = scanner.nextLine();
         validateBlank(input);
         try {
-            return new BonusLottoNumber(new LottoNumber(Integer.parseInt(input)));
+            return new BonusLottoNumber(LottoNumber.of(Integer.parseInt(input)));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INPUT_ONLY_ALLOW_NUMBER.getMessage());
         }

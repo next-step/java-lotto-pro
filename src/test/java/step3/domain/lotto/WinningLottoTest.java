@@ -14,7 +14,7 @@ class WinningLottoTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> {
                     WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers("1, 2, 3, 4, 5, 6");
-                    BonusLottoNumber bonusLottoNumber = new BonusLottoNumber(new LottoNumber(6));
+                    BonusLottoNumber bonusLottoNumber = new BonusLottoNumber(LottoNumber.of(6));
                     new WinningLotto(winningLottoNumbers, bonusLottoNumber);
                 })
                 .withMessageContaining(LOTTO_NUMBER_DUPLICATE.getMessage());

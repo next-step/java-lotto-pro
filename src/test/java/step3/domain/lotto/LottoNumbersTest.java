@@ -17,15 +17,7 @@ class LottoNumbersTest {
     void lottoWrongSize() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() ->
-                        new LottoNumbers(
-                                Arrays.asList(
-                                        new LottoNumber(1),
-                                        new LottoNumber(2),
-                                        new LottoNumber(3),
-                                        new LottoNumber(4),
-                                        new LottoNumber(5)
-                                )
-                        )
+                        new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5))
                 )
                 .withMessageContaining(LOTTO_NUMBER_WRONG_SIZE.getMessage());
     }
@@ -33,16 +25,7 @@ class LottoNumbersTest {
     @Test
     @DisplayName("6자리 지정 로또 번호를 생성한다.")
     void createFixedLottoNumbers() {
-        LottoNumbers lottoNumbers = new LottoNumbers(
-                Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(6)
-                )
-        );
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lottoNumbers.value()).hasSize(DEFAULT_LOTTO_SIZE);
     }
 
