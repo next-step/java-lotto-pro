@@ -27,7 +27,7 @@ public class Lotto {
     }
 
     public static List<LottoNumber> getLottoDigitList(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.subList(0,6);
+        return lottoNumbers.subList(0,DIGIT);
     }
 
     public boolean isMatch(LottoNumber inputLottoNumber) {
