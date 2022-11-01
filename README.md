@@ -67,10 +67,10 @@
 ### 로또(수동)
 #### 기능 요구사항
 - [x] 수동으로 구매할 로또 수를 입력받는다.
-- [ ] 구입 금액보다 수동으로 구매할 로또 금액이 더 크면 IllegalArgumentException 을 발생시킨다.
+- [x] 구입 금액보다 수동으로 구매할 로또 금액이 더 크면 IllegalArgumentException 을 발생시킨다.
 - [x] 수동 로또 번호 6개를 입력받은 수 만큼 ,로 구분하여 입력받는다.
 - [x] 입력된 수동 로또 번호에 구분자(,)를 제외한 문자가 입력되는 경우 IllegalArgumentException 를 발생시킨다.
 - [x] 입력된 수동 로또 번호가 범위 내 숫자가 아닐 경우 IllegalArgumentException 를 발생시킨다.
 - [x] 수동, 자동으로 구매한 로또 수를 각각 출력한다.
 - [x] 구매한 로또 번호를 모두 출력한다.
-- [ ] IllegalArgumentException 이 발생하면 발생 시점부터 다시 입력받는다.
+- [ ] IllegalArgumentException 이 발생하면 에러 메시지 출력 후 프로그램을 종료한다.
