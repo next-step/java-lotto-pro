@@ -1,7 +1,5 @@
 package lotto.config;
 
-import java.util.Arrays;
-import java.util.List;
 import lotto.controller.LottoController;
 import lotto.domain.LottoGame;
 import lotto.view.LottoConsoleView;
@@ -16,16 +14,12 @@ public abstract class AppConfig {
         return new LottoController(lottoGame(), lottoView());
     }
 
-    public static List<Runnable> withBonus() {
-        return Arrays.asList(
-                () -> lottoGame().createWinningNumber(lottoView().readWinningNumber()),
-                () -> lottoGame().createLottoNumberMatcherWithBonus(lottoView().readBonus()));
+    public static Runnable withBonus() {
+        return () -> lottoGame().createLottoNumberMatcherWithBonus(lottoView().readBonus());
     }
 
-    public static List<Runnable> withOutBonus() {
-        return Arrays.asList(
-                () -> lottoGame().createWinningNumber(lottoView().readWinningNumber()),
-                () -> lottoGame().createLottoNumberMatcher());
+    public static Runnable withOutBonus() {
+        return () -> lottoGame().createLottoNumberMatcher();
     }
 
     private static LottoView lottoView() {
