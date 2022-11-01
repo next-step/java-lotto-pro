@@ -34,14 +34,6 @@ public enum Match {
         return matchCount == FOURTH.matchCount && isMatchBonusBall;
     }
 
-    public static boolean isSecond(Match match) {
-        return match.equals(Match.SECOND);
-    }
-
-    public static boolean isZero(Match match) {
-        return match.equals(Match.ZERO);
-    }
-
     public int getCount() {
         return matchCount;
     }

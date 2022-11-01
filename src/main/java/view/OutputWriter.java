@@ -4,8 +4,7 @@ import enums.Match;
 import model.LottoPurchaseAmount;
 import model.Result;
 
-import static enums.Match.isSecond;
-import static enums.Match.isZero;
+import static enums.Match.*;
 
 public class OutputWriter {
     private static final String RESULT_START_MESSAGE = System.lineSeparator() + "당첨 통계";
@@ -33,11 +32,11 @@ public class OutputWriter {
 
     private static void printResult(Match match, int lottoResultCount) {
         String printLottoMatchFomat = LOTTO_RESULT;
-        if (isSecond(match)) {
+        if ( match == SECOND ) {
             printLottoMatchFomat = LOTTO_RESULT_CONTAIN_BONUS;
         }
 
-        if (!isZero(match)) {
+        if ( match != ZERO ) {
             System.out.println(String.format(printLottoMatchFomat, match.getCount(), match.getAmount(), lottoResultCount));
         }
     }
