@@ -4,11 +4,11 @@ import java.util.Map;
 
 public class LottoResult {
     private final Map<Integer, Integer> prizeMoney;
-    private final Map<Integer, Integer> lottoCount;
+    private final Map<Integer, Integer> numbersMatchCount;
 
-    public LottoResult(Map<Integer, Integer> prizeMoney, Map<Integer, Integer> lottoCount) {
+    public LottoResult(Map<Integer, Integer> prizeMoney, Map<Integer, Integer> numbersMatchCount) {
         this.prizeMoney = prizeMoney;
-        this.lottoCount = lottoCount;
+        this.numbersMatchCount = numbersMatchCount;
     }
 
     public int prizeMoneyForNumbersMatch(int numbersMatch) {
@@ -16,6 +16,6 @@ public class LottoResult {
     }
 
     public int lottoCountForNumbersMatch(int numbersMatch) {
-        return lottoCount.get(numbersMatch);
+        return numbersMatchCount.get(numbersMatch);
     }
 }
