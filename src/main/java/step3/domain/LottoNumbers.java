@@ -29,24 +29,9 @@ public class LottoNumbers {
         return lottoNumbers.contains(bonusNumber);
     }
 
-    public static LottoNumbers getRandomSixNumbers() {
-        Collections.shuffle(LottoNumber.RANGE);
-        return new LottoNumbers(LottoNumber.RANGE.subList(0, 6).stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())
-        );
-    }
-
     public static LottoNumbers gainNumbers(String numbersWithComma) {
-        List<LottoNumber> winnerNumbers = split(numbersWithComma);
+        List<LottoNumber> winnerNumbers = LottoFactory.split(numbersWithComma);
         return new LottoNumbers(winnerNumbers);
-    }
-
-    private static List<LottoNumber> split(String numbersWithComma) {
-        return Arrays.stream(numbersWithComma.replace(" ", "").split(","))
-                .mapToInt(Integer::parseInt)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
     }
 
     @Override

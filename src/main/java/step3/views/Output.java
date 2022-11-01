@@ -1,5 +1,6 @@
 package step3.views;
 
+import java.util.List;
 import java.util.Map;
 import step3.domain.Lottos;
 import step3.enums.Message;
@@ -34,14 +35,14 @@ public class Output {
         });
     }
 
-    public void statistic(Map<Integer, Integer> statistics, double returnOnInvestmentRate) {
+    public void statistics (double returnOnInvestmentRate) {
         System.out.println("\n" + Message.STATISTICS.getMessage());
-        System.out.println(Message.MATCH_THREE.resultMatchNumber(statistics.get(Rank.FIFTH.getCount())));
-        System.out.println(Message.MATCH_FOUR.resultMatchNumber(statistics.get(Rank.FOURTH.getCount())));
-        System.out.println(Message.MATCH_FIVE.resultMatchNumber(statistics.get(Rank.THIRD.getCount())));
+        System.out.println(Message.MATCH_THREE.resultMatchNumber(Rank.FIFTH.getLottoMatcher().lottoCount()));
+        System.out.println(Message.MATCH_FOUR.resultMatchNumber(Rank.FOURTH.getLottoMatcher().lottoCount()));
+        System.out.println(Message.MATCH_FIVE.resultMatchNumber(Rank.THIRD.getLottoMatcher().lottoCount()));
         System.out.println(Message.MATCH_FIVE_BONUS
-                .resultMatchNumber(statistics.get(Rank.SECOND.getCount() + 2)));
-        System.out.println(Message.MATCH_SIX.resultMatchNumber(statistics.get(Rank.FIRST.getCount())));
+                .resultMatchNumber(Rank.SECOND.getLottoMatcher().lottoCount()));
+        System.out.println(Message.MATCH_SIX.resultMatchNumber(Rank.FIRST.getLottoMatcher().lottoCount()));
         System.out.println(Message.STATISTICS_RESULT.resultStatistic(returnOnInvestmentRate));
     }
 

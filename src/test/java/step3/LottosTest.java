@@ -2,6 +2,7 @@ package step3;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +20,7 @@ class LottosTest {
     private Lotto lotto4;
     private Lotto lotto5;
     WinningLotto winningLotto;
-    private Map<Integer, Integer> statistics;
+    private List<Rank> statistics;
 
     @BeforeEach
     void init() {
@@ -65,7 +66,7 @@ class LottosTest {
                                                                         new LottoNumber(4),
                                                                         new LottoNumber(5),
                                                                         new LottoNumber(6))), 8);
-        statistics = lottos.calculateWinningBallsEachLotto(winningLotto);
+        statistics = lottos.resultLottoRanks(winningLotto);
     }
 
     @Test

@@ -1,54 +1,42 @@
 package step3.enums;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import step3.domain.LottoMatcher;
+
+import java.util.*;
 
 public enum Rank {
-    BASE(0, 0, 0),
-    FIFTH(5, 3, 5000),
-    FOURTH(4, 4, 50000),
-    THIRD(3, 5, 1500000),
-    SECOND(2, 5, 30000000),
-    FIRST(1, 6, 2000000000);
+    BASE(0, new LottoMatcher(0, false), 0),
+    FIFTH(5, new LottoMatcher(3, false), 5000),
+    FOURTH(4, new LottoMatcher(4, false), 50000),
+    THIRD(3, new LottoMatcher(5, false), 1500000),
+    SECOND(2, new LottoMatcher(5, true), 30000000),
+    FIRST(1, new LottoMatcher(6, false), 2000000000);
 
     private static int MONEY = 1000;
 
     private final int rank;
-    private final int count;
+    private final LottoMatcher lottoMatcher;
     private final int amount;
 
-    Rank(int rank, int count, int amount) {
+    Rank(int rank, LottoMatcher lottoMatcher, int amount) {
         this.rank = rank;
-        this.count = count;
+        this.lottoMatcher = lottoMatcher;
         this.amount = amount;
     }
 
-    public int getCount() {
-        return count;
+    public LottoMatcher getLottoMatcher() {
+        return lottoMatcher;
     }
-
     public int getAmount() {
         return amount;
     }
 
-    public static Map<Integer, Integer> initRank() {
-        Map<Integer, Integer> rank = new HashMap<>();
-
-        rank.put(Rank.FIFTH.getCount(), 0);
-        rank.put(Rank.FOURTH.getCount(), 0);
-        rank.put(Rank.THIRD.getCount(), 0);
-        rank.put(Rank.SECOND.getCount() + 2, 0);
-        rank.put(Rank.FIRST.getCount(), 0);
-
-        return rank;
-    }
-
     public static Rank rank(int matchCount, boolean isBonusMatch) {
-        if (matchCount == THIRD.getCount() && isBonusMatch) {
+        if (SECOND.getLottoMatcher().isEqualsToMatchCount(matchCount) && isBonusMatch) {
             return SECOND;
         }
-        return Arrays.stream(values()).filter(award -> award.count == matchCount)
+        return Arrays.stream(values())
+                .filter(award -> award.getLottoMatcher().isEqualsToMatchCount(matchCount))
                 .findAny()
                 .orElse(Rank.BASE);
     }
@@ -57,14 +45,10 @@ public enum Rank {
         return money / MONEY;
     }
 
-    public static double statistic(Map<Integer, Integer> statistics, int money) {
-
-        double sum = statistics.get(Rank.FIFTH.getCount()) * Rank.FIFTH.amount;
-        sum += statistics.get(Rank.FOURTH.getCount()) * Rank.FOURTH.amount;
-        sum += statistics.get(Rank.THIRD.getCount()) * Rank.THIRD.amount;
-        sum += statistics.get((Rank.SECOND.getCount()) + 2) * Rank.SECOND.amount;
-        sum += statistics.get(Rank.FIRST.getCount()) * Rank.FIRST.amount;
-
+    public static double statistic(List<Rank> ranks, int money) {
+        double sum = ranks.stream()
+                .mapToDouble(Rank::getAmount)
+                .sum();
         System.out.println(sum);
         System.out.println(MONEY);
         System.out.println(Math.floor(sum / money * 100) / 100);

@@ -9,6 +9,8 @@ public class Lotto {
 
     private final LottoNumbers lottoNumbers;
 
+    private Rank rank = Rank.BASE;
+
     public Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
@@ -27,7 +29,8 @@ public class Lotto {
                 .boxed()
                 .collect(Collectors.toList());
         copy.retainAll(winningNumbers);
-        return Rank.rank(copy.size(), lottoNumbers.hasBonusNumber(winningLotto.getBonusNumber()));
+        this.rank = Rank.rank(copy.size(), lottoNumbers.hasBonusNumber(winningLotto.getBonusNumber()));
+        return this.rank ;
     }
 
 }

@@ -1,13 +1,12 @@
 package step3;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import step3.domain.*;
 import step3.enums.Rank;
 import step3.views.Input;
 import step3.views.Output;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
@@ -23,8 +22,8 @@ public class LottoApplication {
         output.generateLottos(purchasingNumber, totalLottos);
 
         WinningLotto winningLotto = gainWinnerLotto(output, input);
-        Map<Integer, Integer> statistics =  totalLottos.calculateWinningBallsEachLotto(winningLotto);
-        result(output, statistics, money);
+        List<Rank> ranks = totalLottos.resultLottoRanks(winningLotto);
+        result(output, ranks, money);
 
     }
 
@@ -41,8 +40,8 @@ public class LottoApplication {
 
     static Lottos initLottos(Lottos manualLottos, int purchasingNumber) {
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < purchasingNumber-manualLottos.getLottos().size(); i++) {
-            lottoList.add(new Lotto(LottoNumbers.getRandomSixNumbers()));
+        for (int i = 0; i < purchasingNumber - manualLottos.getLottos().size(); i++) {
+            lottoList.add(new Lotto(LottoFactory.getRandomSixNumbers()));
         }
         return new Lottos(lottoList).unionLottos(manualLottos);
     }
@@ -56,10 +55,10 @@ public class LottoApplication {
         return new WinningLotto(LottoNumbers.gainNumbers(inputNumbersWithComma), bonusball);
     }
 
-    static void result (Output output, Map<Integer, Integer> statistics, int money) {
+    static void result(Output output, List<Rank> ranks, int money) {
 
-        double returnOnInvestmentRate = Rank.statistic(statistics, money);
-        output.statistic(statistics, returnOnInvestmentRate);
+        double returnOnInvestmentRate = Rank.statistic(ranks, money);
+        output.statistics(returnOnInvestmentRate);
     }
 
 }

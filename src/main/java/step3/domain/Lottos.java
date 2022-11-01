@@ -5,7 +5,6 @@ import step3.enums.Rank;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 public class Lottos {
 
@@ -19,17 +18,14 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public Map<Integer, Integer> calculateWinningBallsEachLotto(WinningLotto winningLotto) {
-        Map<Integer, Integer> statistics = Rank.initRank();
+    public List<Rank> resultLottoRanks(WinningLotto winningLotto) {
+        List<Rank> resultRanks = new ArrayList<>();
         lottos.forEach(lotto -> {
             Rank rank = lotto.match(winningLotto);
-            if (rank == Rank.SECOND) {
-                statistics.computeIfPresent(Rank.SECOND.getCount()+2, (k, v) -> v + 1);
-                return;
-            }
-            statistics.computeIfPresent(rank.getCount(), (k, v) -> v + 1);
+            rank.getLottoMatcher().plusLottoCountOne();
+            resultRanks.add(rank);
         });
-        return statistics;
+        return resultRanks;
     }
 
     public Lottos unionLottos(Lottos additionalLottos) {
