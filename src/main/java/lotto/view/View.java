@@ -20,6 +20,11 @@ public class View {
         return InputView.nextInt();
     }
 
+    public int insertManualLottoCount() {
+        OutputView.print("수동으로 구매할 로또 수를 입력해 주세요");
+        return InputView.nextInt();
+    }
+
     public void print(String text) {
         OutputView.print(text);
     }
