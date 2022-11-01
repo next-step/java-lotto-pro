@@ -20,7 +20,7 @@ public class LottoIssuer {
         return new LottoBag(lottoList);
     }
 
-    public static WinningResultBag result(LottoBag lottoBag, LottoNumberBag winningNumbers) {
-        return new WinningResultBag(lottoBag.getResult(winningNumbers));
+    public static WinningResultBag result(LottoBag lottoBag, WinningLottoBallBag winningLottoBallBag) {
+        return new WinningResultBag(lottoBag.getResult(winningLottoBallBag));
     }
 }

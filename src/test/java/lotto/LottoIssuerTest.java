@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 
+import static lotto.WinningLottoBallBagTest.makeLottoBalls;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.junit.jupiter.params.ParameterizedTest.DEFAULT_DISPLAY_NAME;
@@ -27,7 +28,7 @@ class LottoIssuerTest {
     @Test
     void result_issuedLotto_success() {
         LottoBag lottoList = LottoIssuer.issue(new Money(0), new LottoNumberGenerator());
-        LottoNumberBag winningNumbers = new LottoNumberBag(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThatNoException().isThrownBy(() -> LottoIssuer.result(lottoList, winningNumbers));
+        WinningLottoBallBag winningLottoBallBag = new WinningLottoBallBag("1,2,3,4,5,6", () -> 0);
+        assertThatNoException().isThrownBy(() -> LottoIssuer.result(lottoList, winningLottoBallBag));
     }
 }
