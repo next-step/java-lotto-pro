@@ -1,8 +1,12 @@
 package model;
 
+import Utils.PatternUtils;
 import exception.LottoNumberRangeException;
+import exception.NotPositiveNumberException;
 
 import java.util.Objects;
+
+import static model.LottoPurchaseAmount.NOT_POSITIVE_NUMBER_ERROR_MESSAGE;
 
 public class LottoNumber implements Number {
     public static final int MINIMUM_RANGE_NUMBER = 1;
@@ -15,12 +19,26 @@ public class LottoNumber implements Number {
     public LottoNumber() {
     }
 
+    public LottoNumber(String number) {
+        if (!PatternUtils.isPositiveNumber(number)) {
+            throw new NotPositiveNumberException(NOT_POSITIVE_NUMBER_ERROR_MESSAGE);
+        }
+
+        validNumber(Integer.parseInt(number));
+        this.number = Integer.parseInt(number);
+    }
+
     public LottoNumber(int number) {
+        validNumber(number);
+
+        this.number = number;
+    }
+
+    private void validNumber(int number) {
         if (isNotRightNumber(number)) {
             throw new LottoNumberRangeException(LOTTO_NUMBER_RAGNE_ERROR_MESSSAGE);
         }
 
-        this.number = number;
     }
 
     @Override

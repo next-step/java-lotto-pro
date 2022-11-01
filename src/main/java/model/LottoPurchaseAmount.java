@@ -9,7 +9,7 @@ public class LottoPurchaseAmount {
     private static final double FLOOR_STAND_DELIMETER = 100;
 
     private static final String AMOUNT_UNIT_ERROR_MESSSAGE = "1000 단위로 입력해주세요.";
-    private static final String NOT_POSITIVE_NUMBER_ERROR_MESSAGE = "양수만 입력 가능합니다.";
+    public static final String NOT_POSITIVE_NUMBER_ERROR_MESSAGE = "양수만 입력 가능합니다.";
 
     private int amount;
 

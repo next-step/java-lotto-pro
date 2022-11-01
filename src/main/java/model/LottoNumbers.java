@@ -1,5 +1,6 @@
 package model;
 
+import exception.LottoNumberDuplicationException;
 import exception.LottoNumbersSizeException;
 
 import java.util.Arrays;
@@ -22,6 +23,10 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumberGenerator.generate(new LottoNumber());
 
         validCheck();
+    }
+
+    public int size() {
+        return this.lottoNumbers.size();
     }
 
     public LottoNumbers(String lottoNumbers) {
@@ -68,5 +73,13 @@ public class LottoNumbers {
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(TO_STRING_JOIN_DELIMETER));
         return "[" + lottonumbersToString + "]";
+    }
+
+    public boolean containLottoNumber(LottoNumber lottoNumber) {
+        if (this.lottoNumbers.contains(lottoNumber)) {
+            return true;
+        }
+
+        return false;
     }
 }
