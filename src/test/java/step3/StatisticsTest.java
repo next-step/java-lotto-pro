@@ -16,28 +16,32 @@ public class StatisticsTest {
     private static Statistics statistics;
     @BeforeAll
     static void beforeAll() {
-        WinningNumber winningNumbers = new WinningNumber("3, 4, 5, 6, 7,8");
-        ArrayList<Integer> lottoNumbers3rd = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        ArrayList<Integer> lottoNumbers2nd = new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7));
+        WinningBonusNumber winningBonusNumber = new WinningBonusNumber("3, 4, 5, 6, 7,8", "9");
+        ArrayList<Integer> lottoNumbers4 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        ArrayList<Integer> lottoNumbers3 = new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7));
+        ArrayList<Integer> lottoNumbers2 = new ArrayList<>(Arrays.asList(4, 5, 6, 7, 8, 9));
        
-        Lotto lotto3rd_1 = new Lotto(lottoNumbers3rd);
-        Lotto lotto3rd_2 = new Lotto(lottoNumbers3rd);
-        Lotto lotto2nd = new Lotto(lottoNumbers2nd);
+        Lotto lotto4th_1 = new Lotto(lottoNumbers4);
+        Lotto lotto4th_2 = new Lotto(lottoNumbers4);
+        Lotto lotto3rd = new Lotto(lottoNumbers3);
+        Lotto lotto2nd = new Lotto(lottoNumbers2);
     
-        LotteryTicket lotteryTicket = new LotteryTicket(new Payment(3000));
-        lotteryTicket.add(lotto3rd_1);
-        lotteryTicket.add(lotto3rd_2);
+        LotteryTicket lotteryTicket = new LotteryTicket(3000);
+        lotteryTicket.add(lotto4th_1);
+        lotteryTicket.add(lotto4th_2);
+        lotteryTicket.add(lotto3rd);
         lotteryTicket.add(lotto2nd);
     
-        statistics = new Statistics(lotteryTicket, winningNumbers);
+        statistics = new Statistics(lotteryTicket, winningBonusNumber);
     }
     
     @Test
     @DisplayName("각 순위별 당첨 개수 확인")
     public void Statistics_count_by_rank() {
         Map<Rank, Integer> countByRank = new HashMap<>();
-        countByRank.put(Rank.FORTH,0);
-        countByRank.put(Rank.THIRD,2);
+        countByRank.put(Rank.FIFTH,0);
+        countByRank.put(Rank.FORTH,2);
+        countByRank.put(Rank.THIRD,1);
         countByRank.put(Rank.SECOND,1);
         countByRank.put(Rank.FIRST,0);
     
@@ -47,7 +51,8 @@ public class StatisticsTest {
     @Test
     @DisplayName("총 당첨금 확인")
     public void Statistics_total_prize() {
-        assertThat(statistics.totalPrize()).isEqualTo(Rank.SECOND.getPrize() + Rank.THIRD.getPrize() * 2);
+        assertThat(statistics.totalPrize())
+                .isEqualTo(Rank.SECOND.getPrize() + Rank.THIRD.getPrize() + Rank.FORTH.getPrize() * 2);
     }
 
 }

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step3.domain.Lotto;
 import step3.domain.Rank;
-import step3.domain.WinningNumber;
+import step3.domain.WinningBonusNumber;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,12 +14,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
     private static ArrayList<Integer> lottoNumbers;
-    private static WinningNumber winningNumber;
+    private static WinningBonusNumber winningBonusNumber;
     
     @BeforeAll
     static void beforeAll() {
         lottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        winningNumber = new WinningNumber("2, 3, 4, 5, 6, 7");
+        winningBonusNumber = new WinningBonusNumber("2, 3, 4, 5, 6, 7","1");
     }
     
     @Test
@@ -37,27 +37,26 @@ public class LottoTest {
     }
     
     @Test
-    @DisplayName("당첨번호와 같은 숫자가 있다면 카운트를 올린다")
-    public void lotto_match_countUp() {
-        Lotto lotto = new Lotto(lottoNumbers);
-        lotto.matchCountUp(5);
-        assertThat(lotto.getMatchCount()).isEqualTo(1);
-    }
-    
-    @Test
     @DisplayName("당첨번호와 같은 숫자가 몇개 있는지 검증")
     public void lotto_compare_count() {
         Lotto lotto = new Lotto(lottoNumbers);
-        assertThat(lotto.compareMath(winningNumber)).isEqualTo(5);
+        assertThat(lotto.compareMath(winningBonusNumber.getWinningNumber())).isEqualTo(5);
     }
     
     @Test
     @DisplayName("로또 번호와 당첨번호를 비교하여 순위 및 당첨금 확인")
     void lotto_match_prize() {
         Lotto lotto = new Lotto(lottoNumbers);
-        int count = lotto.compareMath(winningNumber);
-        assertThat(Rank.getRank(count)).isEqualTo(Rank.SECOND);
-        assertThat(Rank.getPrize(count)).isEqualTo(Rank.SECOND.getPrize());
+        int count = lotto.compareMath(winningBonusNumber.getWinningNumber());
+        assertThat(Rank.valueOf(count, false)).isEqualTo(Rank.THIRD);
+        assertThat(Rank.valueOf(count, false).getPrize()).isEqualTo(Rank.THIRD.getPrize());
+    }
+    
+    @Test
+    @DisplayName("로또 객체에서 보너스번호가 포함되는지 매칭")
+    public void lotto_match_bonusNumber() {
+        Lotto lotto = new Lotto(lottoNumbers);
+        assertThat(lotto.matchBonusNumber(winningBonusNumber)).isEqualTo(true);
     }
     
 }

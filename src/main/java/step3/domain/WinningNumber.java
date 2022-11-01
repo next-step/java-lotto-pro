@@ -1,8 +1,8 @@
 package step3.domain;
 
-import java.util.ArrayList;
+import step3.ValidationUtils;
 
-import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
 
 public class WinningNumber {
     
@@ -25,7 +25,7 @@ public class WinningNumber {
     private static ArrayList<Integer> convertToIntList(String[] stringArray){
         ArrayList<Integer> result = new ArrayList<>();
         for (String string: stringArray) {
-            result.add(parseInt(string));
+            result.add(ValidationUtils.parseInt(string));
         }
         return result;
     }

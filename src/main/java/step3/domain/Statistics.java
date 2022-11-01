@@ -4,12 +4,12 @@ import java.util.*;
 
 public class Statistics {
     private final LotteryTicket lotteryTicket;
-    private final WinningNumber winningNumber;
+    private final WinningBonusNumber winningBonusNumber;
     private Map<Rank, Integer> countByRank;
     
-    public Statistics(LotteryTicket lotteryTicket, WinningNumber winningNumber) {
+    public Statistics(LotteryTicket lotteryTicket, WinningBonusNumber winningBonusNumber) {
         this.lotteryTicket = lotteryTicket;
-        this.winningNumber = winningNumber;
+        this.winningBonusNumber = winningBonusNumber;
     }
     private void statisticsInit(){
         this.countByRank = new HashMap<>();
@@ -33,7 +33,9 @@ public class Statistics {
     public Map<Rank, Integer> countByRank() {
         statisticsInit();
         for (Lotto lotto: this.lotteryTicket.getLotteryTicket()) {
-            mapMerge(Rank.getRank(lotto.compareMath(this.winningNumber)));
+            int matchCount = lotto.compareMath(this.winningBonusNumber.getWinningNumber());
+            boolean isMatchBonusNumber = lotto.matchBonusNumber(this.winningBonusNumber);
+            mapMerge(Rank.valueOf(matchCount, isMatchBonusNumber));
         }
         return this.countByRank;
     }
