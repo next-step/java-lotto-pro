@@ -28,10 +28,15 @@ public class LottoFactory {
     }
 
     public static List<Lotto> createLottosByManual(List<String> lottoNumbers) {
-        return lottoNumbers.stream()
-                .map(StringParser::parseToIntegerArray)
-                .map(integers -> new Lotto(integers.stream().map(LottoNumber::valueOf).collect(Collectors.toList()),false))
-                .collect(Collectors.toList());
+        List<Lotto> lottos = new ArrayList();
+        for (int i = 0; i < lottoNumbers.size(); i++) {
+            lottos.add(createLottoByManual(StringParser.parseToIntegerArray(lottoNumbers.get(i))));
+        }
+        return lottos;
+    }
+
+    private static Lotto createLottoByManual(List<Integer> lottNumber) {
+        return new Lotto(lottNumber.stream().map(LottoNumber::valueOf).collect(Collectors.toList()));
     }
 
 }
