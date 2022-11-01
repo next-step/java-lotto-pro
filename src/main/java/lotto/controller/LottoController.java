@@ -35,7 +35,7 @@ public class LottoController {
     public void process() {
         Lottos purchaseLottos = createLottos(getMoney());
         WinningLotto winningLotto = getWinningLotto();
-        getLottoResults(purchaseLottos.createLottoResults(winningLotto), purchaseLottos.findTotalPrice());
+        getLottoResults(winningLotto.createLottoResults(purchaseLottos), purchaseLottos.findTotalPrice());
     }
 
     private Money getMoney() {

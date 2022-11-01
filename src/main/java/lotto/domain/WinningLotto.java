@@ -1,6 +1,11 @@
 package lotto.domain;
 
+import static lotto.domain.LottoResults.ADD_COUNT_AMOUNT;
+import static lotto.domain.LottoResults.DEFALUT_COUNT;
+
 import common.constant.ErrorCode;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WinningLotto {
 
@@ -25,5 +30,16 @@ public class WinningLotto {
 
     public boolean isMatchBonusLottoNumber(Lotto lotto) {
         return lotto.isMatchLottoNumber(bonusLottoNumber);
+    }
+
+    public LottoResults createLottoResults(Lottos lottos) {
+        Map<LottoPrize, Integer> lottoResults = new HashMap<>();
+        for(Lotto lotto: lottos.unmodifiedLottos()) {
+            int matchCount = findLottoMatchCount(lotto);
+            boolean isMatchBonusLottoNumber = isMatchBonusLottoNumber(lotto);
+            LottoPrize lottoPrize = LottoPrize.findLottoPrize(matchCount, isMatchBonusLottoNumber);
+            lottoResults.put(lottoPrize, lottoResults.getOrDefault(lottoPrize, DEFALUT_COUNT) + ADD_COUNT_AMOUNT);
+        }
+        return LottoResults.createLottoResults(lottoResults);
     }
 }

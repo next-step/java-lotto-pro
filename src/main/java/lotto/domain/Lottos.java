@@ -1,14 +1,10 @@
 package lotto.domain;
 
 import static lotto.domain.Lotto.LOTTO_PRICE;
-import static lotto.domain.LottoResults.ADD_COUNT_AMOUNT;
-import static lotto.domain.LottoResults.DEFALUT_COUNT;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Lottos {
 
@@ -34,17 +30,6 @@ public class Lottos {
 
     public Money findTotalPrice() {
         return Money.createMoney((long) lottos.size() * LOTTO_PRICE);
-    }
-
-    public LottoResults createLottoResults(WinningLotto winningLotto) {
-        Map<LottoPrize, Integer> lottoResults = new HashMap<>();
-        for(Lotto lotto: lottos) {
-            int matchCount = winningLotto.findLottoMatchCount(lotto);
-            boolean isMatchBonusLottoNumber = winningLotto.isMatchBonusLottoNumber(lotto);
-            LottoPrize lottoPrize = LottoPrize.findLottoPrize(matchCount, isMatchBonusLottoNumber);
-            lottoResults.put(lottoPrize, lottoResults.getOrDefault(lottoPrize, DEFALUT_COUNT) + ADD_COUNT_AMOUNT);
-        }
-        return LottoResults.createLottoResults(lottoResults);
     }
 
     public List<Lotto> unmodifiedLottos() {

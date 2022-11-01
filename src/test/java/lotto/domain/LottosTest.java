@@ -19,9 +19,8 @@ public class LottosTest {
     @Test
     void 로또_결과_생성_시_각_등수별로_일치_개수가_존재() {
         Lottos lottos = createLottos();
-        Lotto winningLotto = Lotto.generateLotto(new ReadLineLottoNumberGenerator("1,2,3,4,5,8"));
-        LottoNumber bonusLottoNumber = LottoNumber.from(32);
-        LottoResults lottoResults = lottos.createLottoResults(new WinningLotto(winningLotto, bonusLottoNumber));
+        WinningLotto winningLotto = new WinningLotto(Lotto.generateLotto(new ReadLineLottoNumberGenerator("1,2,3,4,5,8")), LottoNumber.from(32));
+        LottoResults lottoResults = winningLotto.createLottoResults(lottos);
         assertAll(
                 () -> assertThat(lottoResults.findLottoResultCount(LottoPrize.NO_PRIZE)).isEqualTo(1),
                 () -> assertThat(lottoResults.findLottoResultCount(LottoPrize.FOURTH)).isEqualTo(1),
