@@ -26,9 +26,13 @@ public enum Rank {
             return SECOND;
         }
         return Arrays.stream(values())
-                .filter(rank -> rank.countOfMatch == sameNumber)
+                .filter(rank -> rank.isMatchingCount(sameNumber))
                 .findFirst()
                 .orElse(MISS);
+    }
+
+    private boolean isMatchingCount(int sameNumber) {
+        return countOfMatch == sameNumber;
     }
 
     public String sameCountMessage() {
