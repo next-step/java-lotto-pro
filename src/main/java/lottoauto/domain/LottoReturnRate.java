@@ -9,13 +9,13 @@ public class LottoReturnRate {
     public LottoReturnRate(BigDecimal returnRate) {
         this.returnRate = returnRate;
     }
-    public LottoReturnRate(BigDecimal winningMoney, BigDecimal payment) {
-        validatePayment(payment.intValue());
-        this.returnRate = winningMoney.divide(payment);
+    public LottoReturnRate(long winningMoney, int payment) {
+        validatePayment(payment);
+        this.returnRate = new BigDecimal(String.valueOf(winningMoney)).divide(new BigDecimal(String.valueOf(payment)));
     }
 
     private void validatePayment(int payment) {
-        if(payment <= ZERO){
+        if(payment <= ZERO ){
             throw new IllegalArgumentException("구매금액은 0보다 커야 합니다.");
         }
     }
