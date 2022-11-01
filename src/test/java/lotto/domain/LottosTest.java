@@ -9,7 +9,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 public class LottosTest {
 
     @Test
-    @DisplayName("로또 구매 개수")
+    @DisplayName("로또 구매 개수 테스트")
     void purchase_lotto_cnt_test() {
         assertThat(new Lottos(new Payment("14000")).getLottosSize()).isEqualTo(14);
     }
