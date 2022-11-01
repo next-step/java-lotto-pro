@@ -79,6 +79,8 @@
   * prize 변수 key값을 Integer 타입에서 Rank 타입으로 변경
 * Validate
   * 지난주 당첨 번호 중에 중복된 번호가 있는지 검사
+    * "로또 번호는 중복될 수 없습니다." 추가
     * IllegalArgumentException
   * 지난주 당첨 번호에 입력했던 번호 입력 불가
+    * "입력하신 보너스 번호는 지난주 당첨 번호에 이미 있는 번호입니다." 추가 
     * IllegalArgumentException
