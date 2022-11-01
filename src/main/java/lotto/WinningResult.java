@@ -9,13 +9,14 @@ public enum WinningResult {
     WIN_FOURTH(3, 5000),
     WIN_THIRD(4, 50000),
     WIN_SECOND(5, 1500000),
+    WIN_SECOND_BONUS(5.5, 30000000),
     WIN_FIRST(6, 2000000000);
 
-    private final int matchCount;
+    private final double matchScore;
     private final int winningPrice;
 
-    WinningResult(int matchCount, int winningResult) {
-        this.matchCount = matchCount;
+    WinningResult(double matchScore, int winningResult) {
+        this.matchScore = matchScore;
         this.winningPrice = winningResult;
     }
 
@@ -27,9 +28,9 @@ public enum WinningResult {
         return winningPrice;
     }
 
-    public static WinningResult getResultByMatchCount(int matchCount) {
+    public static WinningResult getResultByMatchScore(double matchScore) {
         return Arrays.stream(WinningResult.values())
-                .filter(it -> it.matchCount == matchCount)
+                .filter(it -> it.matchScore == matchScore)
                 .findFirst()
                 .orElse(NOT_MATCH);
     }
