@@ -13,7 +13,7 @@ public class Lotto {
 
 	private Lotto(LottoNumberStrategy lottoNumberStrategy) {
 		Set<LottoNumber> lottoNumbers = lottoNumberStrategy.pickNumbers();
-		validateDistinct(lottoNumbers);
+		validateNumberSize(lottoNumbers);
 		this.lottoNumbers = lottoNumbers;
 	}
 
@@ -25,7 +25,7 @@ public class Lotto {
 		return new Lotto(new RandomLottoNumberStrategy());
 	}
 
-	private void validateDistinct(Set<LottoNumber> lottoNumbers) {
+	private void validateNumberSize(Set<LottoNumber> lottoNumbers) {
 		if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
 			throw new IllegalArgumentException("로또 번호는 6자리여야 합니다.");
 		}
