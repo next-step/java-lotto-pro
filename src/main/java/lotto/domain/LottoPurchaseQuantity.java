@@ -1,10 +1,16 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoPurchaseQuantity {
     public static final String PRINT_QUANTITY_FORMAT = "%d개를 구매했습니다.";
+
+    public static final String PRINT_QUANTITY_FORMAT_MANUAL_AUTO = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
 
     private final int quantity;
 
@@ -32,12 +38,45 @@ public class LottoPurchaseQuantity {
         return new LottoPurchaseQuantity(autoQuantity);
     }
 
-    public String getMessage() {
+    public LottoLottery toLottoLottery(LottoNumberGenerator lottoNumberGenerator) {
+        List<LottoNumbers> lottoLottery = new ArrayList<>();
+        for (int i = 0; i < this.quantity; i++) {
+            lottoLottery.add(LottoNumbers.of(lottoNumberGenerator));
+        }
+        return new LottoLottery(lottoLottery);
+    }
+
+    public LottoLottery toAutoLottoLottery() {
+        return LottoLottery.of(this, new AutoNumberGenerator());
+    }
+
+    public Optional<LottoLottery> toManualLottoLottery() {
+        if (isNonePurchase()) {
+            return Optional.empty();
+        }
+
+        return Optional.of(addInputManualNumbers());
+    }
+
+    private boolean isNonePurchase() {
+        return this.quantity == 0;
+    }
+
+    private LottoLottery addInputManualNumbers() {
+        InputView.inputManualNumbersInformation();
+        List<LottoNumbers> manualNumbersList = new ArrayList<>();
+        for (int i = 0; i < this.quantity; i++) {
+            manualNumbersList.add(LottoNumbers.of(new ManualNumberGenerator(InputView.inputManualNumbers())));
+        }
+        return new LottoLottery(manualNumbersList);
+    }
+
+    public String history() {
         return String.format(PRINT_QUANTITY_FORMAT, this.quantity);
     }
 
-    public int getQuantity() {
-        return quantity;
+    public static String history(LottoPurchaseQuantity manualQuantity, LottoPurchaseQuantity autoQuantity) {
+        return String.format(PRINT_QUANTITY_FORMAT_MANUAL_AUTO, manualQuantity.quantity, autoQuantity.quantity);
     }
 
     @Override
