@@ -11,8 +11,12 @@ public class LottoFactory {
     public static Lotto create(NumberGenerateStrategy numberGenerateStrategy) {
         Set<Integer> generatedNumber = numberGenerateStrategy.generate();
         LottoNumbers lottoNumbers = new LottoNumbers(generatedNumber.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet()));
         return new Lotto(lottoNumbers);
+    }
+
+    public static Lotto create(String manualLottoNumbers) {
+        return new Lotto(new LottoNumbers(manualLottoNumbers));
     }
 }
