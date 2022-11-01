@@ -2,6 +2,7 @@ package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,18 @@ class LottosTest {
 	@Test
 	void 로또_15000원어치_구매() {
 		assertThat(Lottos.purchase(Amount.from(15000)).getQuantity()).isEqualTo(Quantity.from(15));
+	}
+
+	@Test
+	void 로또_0장_구매시_IllegalArugumentException() {
+		assertThatThrownBy(() -> Lottos.from(new ArrayList<>()))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	void 로또_구매_잔돈_있을경우_IllegalArugumentException() {
+		assertThatThrownBy(() -> Lottos.purchase(Amount.from(2500)))
+			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
