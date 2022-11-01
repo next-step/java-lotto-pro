@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,5 +32,15 @@ class QuickPickStrategyTest {
 
         final List<Lotto> actual = strategy.pickNumbers(quantity);
         Assertions.assertThat(actual).containsExactlyElementsOf(expected);
+    }
+
+    @Test
+    void 로또_길이와_다른_숫자가_생성() {
+        final QuickPickStrategy strategy = new QuickPickStrategy(() -> Arrays.asList(1, 2, 3));
+        final int quantity = 1;
+
+        assertThatIllegalStateException()
+                .isThrownBy(() -> strategy.pickNumbers(quantity))
+                .withMessageMatching("생성된 숫자의 길이가 \\d+이어야 합니다. elements=.+");
     }
 }
