@@ -11,7 +11,7 @@ public class LottoReturnRate {
     }
     public LottoReturnRate(long winningMoney, int payment) {
         validatePayment(payment);
-        this.returnRate = new BigDecimal(String.valueOf(winningMoney)).divide(new BigDecimal(String.valueOf(payment)));
+        this.returnRate = new BigDecimal(String.valueOf(winningMoney)).divide(new BigDecimal(String.valueOf(payment)), 2, BigDecimal.ROUND_HALF_UP);
     }
 
     private void validatePayment(int payment) {

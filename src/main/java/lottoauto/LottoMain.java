@@ -24,9 +24,10 @@ public class LottoMain {
         OutputView.printLottoNumbers(lottos);
 
         OutputView.printLastWeekWinningNumber();
-        LottoService lottoService = new LottoService(lottos ,new ConsoleLottoNumberStrategy());
+        LottoService lottoService = new LottoService(new ConsoleLottoNumberStrategy());
+        Lotto winning = lottoService.generateWinningLotto();
 
-        LottoResult result = lottoService.matched();
+        LottoResult result = lottoService.matched(lottos, winning);
         OutputView.printWinningStats(result);
 
         LottoResultService lottoResultService = new LottoResultService(result);

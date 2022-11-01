@@ -1,5 +1,6 @@
 package lottoauto.service;
 
+import lottoauto.strategy.AutoLottoNumberStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import lottoauto.domain.Lotto;
@@ -26,8 +27,8 @@ public class LottoServiceTest {
 
         Lotto winning = Lotto.create(Arrays.asList(2, 3, 5, 8, 9, 11));
 
-        lottoService = new LottoService(lottos, winning);
-        LottoResult result = lottoService.matched();
+        lottoService = new LottoService(new AutoLottoNumberStrategy());
+        LottoResult result = lottoService.matched(lottos, winning);
 
         assertThat(result.getResultCount(3)).isEqualTo(2);
         assertThat(result.getResultCount(4)).isEqualTo(1);
