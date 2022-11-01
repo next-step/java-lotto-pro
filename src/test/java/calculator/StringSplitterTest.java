@@ -9,14 +9,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("문자열 덧셈 계산기")
-class StringCalculatorTest {
+class StringSplitterTest {
 
     @DisplayName("공백 또는 null 을 입력할 경우 0을 반환한다.")
     @ParameterizedTest
     @NullAndEmptySource
     void splitAndSum_null_또는_빈문자(String text) {
         Delimiters delimiters = new Delimiters(text);
-        String[] splitText = new StringCalculator(text, delimiters.delimiter()).split();
+        String[] splitText = new StringSplitter(text, delimiters.delimiter()).split();
         assertThat(new Numbers(splitText).sum()).isEqualTo(0);
     }
 
@@ -25,7 +25,7 @@ class StringCalculatorTest {
     @ValueSource(strings = {"1"})
     void splitAndSum_숫자하나(String text) {
         Delimiters delimiters = new Delimiters(text);
-        String[] splitText = new StringCalculator(text, delimiters.delimiter()).split();
+        String[] splitText = new StringSplitter(text, delimiters.delimiter()).split();
         assertThat(new Numbers(splitText).sum()).isEqualTo(1);
     }
 
@@ -34,7 +34,7 @@ class StringCalculatorTest {
     @ValueSource(strings = {"1,2"})
     void splitAndSum_쉼표구분자(String text) {
         Delimiters delimiters = new Delimiters(text);
-        String[] splitText = new StringCalculator(text, delimiters.delimiter()).split();
+        String[] splitText = new StringSplitter(text, delimiters.delimiter()).split();
         assertThat(new Numbers(splitText).sum()).isEqualTo(3);
     }
 
@@ -43,7 +43,7 @@ class StringCalculatorTest {
     @ValueSource(strings = {"1,2:3", "1,2,3", "1:2:3"})
     void splitAndSum_쉼표_또는_콜론_구분자(String text) {
         Delimiters delimiters = new Delimiters(text);
-        String[] splitText = new StringCalculator(text, delimiters.delimiter()).split();
+        String[] splitText = new StringSplitter(text, delimiters.delimiter()).split();
         assertThat(new Numbers(splitText).sum()).isEqualTo(6);
     }
 
@@ -52,7 +52,7 @@ class StringCalculatorTest {
     @ValueSource(strings = {"//;\n1;2;3"})
     void splitAndSum_custom_구분자(String text) {
         Delimiters delimiters = new Delimiters(text);
-        String[] splitText = new StringCalculator(text, delimiters.delimiter()).split();
+        String[] splitText = new StringSplitter(text, delimiters.delimiter()).split();
         assertThat(new Numbers(splitText).sum()).isEqualTo(6);
     }
 
@@ -61,7 +61,7 @@ class StringCalculatorTest {
     @ValueSource(strings = {"-1,2,3"})
     void splitAndSum_negative(String text) {
         Delimiters delimiters = new Delimiters(text);
-        String[] splitText = new StringCalculator(text, delimiters.delimiter()).split();
+        String[] splitText = new StringSplitter(text, delimiters.delimiter()).split();
         assertThatThrownBy(() -> new Numbers(splitText).sum())
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -71,7 +71,7 @@ class StringCalculatorTest {
     @ValueSource(strings = {"1,2:a", "b", "3:c"})
     void splitAndSum_not_number(String text) {
         Delimiters delimiters = new Delimiters(text);
-        String[] splitText = new StringCalculator(text, delimiters.delimiter()).split();
+        String[] splitText = new StringSplitter(text, delimiters.delimiter()).split();
         assertThatThrownBy(() -> new Numbers(splitText).sum())
                 .isInstanceOf(IllegalArgumentException.class);
     }

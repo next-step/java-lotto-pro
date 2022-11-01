@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringCalculator {
+public class StringSplitter {
 
     private static final Pattern regex = Pattern.compile("//(.)\n(.*)");
     public static final int DEFAULT_VALUE = 0;
@@ -12,7 +12,7 @@ public class StringCalculator {
     private final String text;
     private final String delimiter;
 
-    public StringCalculator(String text, String delimiter) {
+    public StringSplitter(String text, String delimiter) {
         this.text = text;
         this.delimiter = delimiter;
     }
