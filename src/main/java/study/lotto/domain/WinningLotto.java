@@ -3,16 +3,10 @@ package study.lotto.domain;
 import study.lotto.domain.number.LottoGenerator;
 import study.lotto.domain.number.LottoNumber;
 import study.message.LottoExceptionCode;
-import study.splitter.Splitter;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class WinningLotto {
-
-    private static final int LOTTO_SIZE = 6;
     private static final int MATCH = 1;
     private static final int NOT_MATCH = 0;
 
@@ -20,24 +14,7 @@ public class WinningLotto {
     private LottoNumber bonusBall;
 
     public WinningLotto(String winningNumbers) {
-        this.winningLotto = new Lotto(inputWinningNumbers(winningNumbers));
-    }
-
-    private Set<LottoNumber> inputWinningNumbers(String winningNumbers) {
-        String[] winningNumbersSplited = Splitter.split(winningNumbers);
-        Set<LottoNumber> winningNumbersConverted = convertStringArrToSet(winningNumbersSplited);
-
-        if(winningNumbersConverted.size() == LOTTO_SIZE) {
-            return winningNumbersConverted;
-        }
-
-        throw new IllegalArgumentException(LottoExceptionCode.NOT_MATCH_LOTTO_SIZE.getMessage());
-    }
-
-    private Set<LottoNumber> convertStringArrToSet(String[] winningNumbersSplited) {
-        return Arrays.stream(winningNumbersSplited)
-                .map((str) -> LottoGenerator.toLottoNumber(str.trim()))
-                .collect(Collectors.toSet());
+        this.winningLotto = Store.buyLottoByManual(winningNumbers);
     }
 
     public int matchNumber(LottoNumber lottoNumber) {
