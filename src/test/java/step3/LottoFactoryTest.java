@@ -25,7 +25,6 @@ public class LottoFactoryTest {
 
         //then
         assertThat(lottos).hasSize(count);
-
     }
 
     @Test
