@@ -69,6 +69,26 @@ public class LottoCalculatorTest {
         assertEquals(expected, Double.toString(result));
     }
 
+    @DisplayName("보너스볼_수익률_테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"8-21-23-41-42-7," +
+            "3-5-11-16-32-38," +
+            "8-21-23-9-11-26" +
+            ":10001.66"}, delimiter = ':')
+    void 보너스볼_수익률_테스트(String input, String expected) {
+        String[] inputArr = input.split(COLON)[0].split(COMMA);
+        Lottos lottos = new Lottos(createTestLottos(inputArr));
+        int bonusNumber = 7;
+
+        String[] lastWeekWinnerNumbers = "8-21-23-41-42-16".split(BAR);
+        Lotto lastWeekWinner = new Lotto(lastWeekWinnerNumbers, bonusNumber);
+
+        lottoCalculator.setLastWeekWinner(lastWeekWinner);
+        lottoCalculator.calculateWinnerStatistics(lottos);
+        double result = lottoCalculator.calculateProfitRate();
+        assertEquals(expected, Double.toString(result));
+    }
+
     private List<Lotto> createTestLottos(String[] inputArr) {
         List<Lotto> testLottos = new ArrayList<>();
         for (String lottoNumbers : inputArr) {
