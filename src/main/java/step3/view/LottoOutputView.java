@@ -11,7 +11,7 @@ public class LottoOutputView {
 
     public static void printPurchasingLottos(LottosNumberDto lottosNumberDto) {
         List<List<Integer>> lottoTickets = lottosNumberDto.getLottosNumber();
-        System.out.printf("%d개를 구매했습니다.\n", lottoTickets.size());
+        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lottosNumberDto.getManualLottoCount(),lottosNumberDto.getAutoLottoCount());
         lottoTickets.forEach(System.out::println);
         System.out.println();
     }

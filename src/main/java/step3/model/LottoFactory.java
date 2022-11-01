@@ -30,7 +30,7 @@ public class LottoFactory {
     public static List<Lotto> createLottosByManual(List<String> lottoNumbers) {
         return lottoNumbers.stream()
                 .map(StringParser::parseToIntegerArray)
-                .map(integers -> new Lotto(integers.stream().map(LottoNumber::valueOf).collect(Collectors.toList())))
+                .map(integers -> new Lotto(integers.stream().map(LottoNumber::valueOf).collect(Collectors.toList()),false))
                 .collect(Collectors.toList());
     }
 

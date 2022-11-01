@@ -18,7 +18,6 @@ public class LottoController {
         List<Lotto> manualLottos = LottoFactory.createLottosByManual(LottoConsoleView.inputPurchaseManual());
         LottoMoney remainMoney = new LottoMoney(purchaseMoney.getRemainMoney(manualLottos));
         List<Lotto> autoLottos = LottoFactory.createLottosByAuto(remainMoney);
-
         Lottos lottos = new Lottos(Stream.concat(manualLottos.stream(), autoLottos.stream()).collect(Collectors.toList()));
         LottoMachine lottoMachine = new LottoMachine(purchaseMoney, lottos);
 
