@@ -1,20 +1,22 @@
 package study.lotto;
 
 import study.lotto.domain.*;
+import study.lotto.domain.order.UserOrder;
 import study.lotto.view.LottoInput;
 import study.lotto.view.LottoOutput;
+import study.splitter.Splitter;
 
 import java.util.Map;
 
 public class LottoGames {
 
+    private static final int MANUAL_ORDER_MIN = 1;
+
     private final LottoInput input = new LottoInput();
     private final LottoOutput output = new LottoOutput();
 
     public void start() {
-        Order order = order();
-        Lottos lottos = new Lottos(Store.buy(order.getQuantity()));
-
+        Lottos lottos = order();
         printLottos(lottos);
 
         WinningLotto winningLotto = inputWinningNumbers();
@@ -23,11 +25,31 @@ public class LottoGames {
         printWinStats(lottos.drawLots(winningLotto));
     }
 
-    private Order order() {
+    private Lottos order() {
         output.printMessage("구입금액을 입력해 주세요.");
-        Order order = input.inputQuantity();
-        output.printMessage(order.getQuantity() + "개를 구매했습니다.");
-        return order;
+        UserOrder userOrder = input.inputUserPurchase();
+
+        output.printMessage("수동으로 구매할 로또 수를 입력해 주세요.");
+        int manualQuantity = input.inputManualQuantity(userOrder);
+        userOrder.prepareOrder(manualQuantity);
+        inputManualLottos(manualQuantity, userOrder);
+
+        Lottos lottos = userOrder.order();
+        printOrderResult(userOrder.toString());
+
+        return lottos;
+    }
+
+    private void inputManualLottos(int manualQuantity, UserOrder userOrder) {
+        if(manualQuantity >= MANUAL_ORDER_MIN) {
+            output.printMessage("수동으로 구매할 번호를 입력해 주세요.");
+            input.inputManualLottos(manualQuantity, userOrder);
+        }
+    }
+
+    private void printOrderResult(String orderResult) {
+        String[] orderMsg = Splitter.split(orderResult);
+        output.printMessage("수동으로 " + orderMsg[0] + "개, 자동으로 " + orderMsg[1] + "개를 구매했습니다.");
     }
 
     private void printLottos(Lottos lottos) {
