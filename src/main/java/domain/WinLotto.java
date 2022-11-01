@@ -5,54 +5,51 @@ import java.util.List;
 import java.util.Objects;
 
 public class WinLotto {
-
     private static final String DEFAULT_SPLIT_DILIMETER = ",";
+
     private final Lotto winLottoNumbers;
-
     private final WinReport winLottoReport;
-
 
     public WinLotto(String inputWinLottoNumbers, WinReport winLottoReport) {
         this.winLottoNumbers = splitWinLottoNumbers(inputWinLottoNumbers);
         this.winLottoReport = winLottoReport;
     }
 
-    public Lotto splitWinLottoNumbers(String inputWinLottNumbers){
+    public Lotto splitWinLottoNumbers(String inputWinLottNumbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-        for (String winNumber: inputWinLottNumbers.split(DEFAULT_SPLIT_DILIMETER)) {
+        for (String winNumber : inputWinLottNumbers.split(DEFAULT_SPLIT_DILIMETER)) {
             lottoNumbers.add(new LottoNumber(Integer.parseInt(winNumber.trim())));
         }
 
         return new Lotto(lottoNumbers);
     }
 
-    public WinReport findWinner(List<Lotto> inputLottoList){
-        for (Lotto lotto: inputLottoList ) {
+    public WinReport findWinner(List<Lotto> inputLottoList) {
+        for (Lotto lotto : inputLottoList) {
             winLottoReport.putLottoResult(countCollectNumber(lotto));
         }
         return winLottoReport;
     }
 
-    public WinReport getWinLottoReport(){
+    public WinReport getWinLottoReport() {
         return winLottoReport;
     }
 
-    public int countCollectNumber(Lotto inputLotto){
+    public int countCollectNumber(Lotto inputLotto) {
         int collectCount = 0;
-        for( LottoNumber lottoNumber : inputLotto.getLottoNumbers()){
+        for (LottoNumber lottoNumber : inputLotto.getLottoNumbers()) {
             collectCount += containNumbers(lottoNumber);
         }
         return collectCount;
     }
 
     private int containNumbers(LottoNumber lottoNumber) {
-        if(winLottoNumbers.getLottoNumbers().contains(lottoNumber)){
+        if (winLottoNumbers.getLottoNumbers().contains(lottoNumber)) {
             return 1;
         }
         return 0;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -73,4 +70,5 @@ public class WinLotto {
                 "winLottoNumbers=" + winLottoNumbers +
                 '}';
     }
+    
 }

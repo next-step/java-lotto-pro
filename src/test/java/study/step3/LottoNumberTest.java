@@ -8,12 +8,10 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberTest {
-
     private LottoNumber lottoNumber;
-
     @Test
     @DisplayName("로또범위 1~45범위 검증")
-    public void 로또번호_범위_체크(){
+    public void 로또번호_범위_체크() {
         assertThatThrownBy(() ->
                 lottoNumber = new LottoNumber(56)
         ).isInstanceOf(IllegalArgumentException.class)

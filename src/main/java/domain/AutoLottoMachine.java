@@ -26,7 +26,6 @@ public class AutoLottoMachine implements LottoMachine {
         return new Lotto(new ArrayList<>(LOTTO_NUMBERS.subList(0, 6)));
     }
 
-
     @Override
     public List<Lotto> purchaseLotte(int lottoTicketCount) {
         List<Lotto> lottoList = new ArrayList<>();

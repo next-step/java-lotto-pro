@@ -13,11 +13,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
-
     private List<LottoNumber> lottoNumbers;
+
     @Test
     @DisplayName("로또번호 6개를 저장한다.")
-    public void 로또번호_저장(){
+    public void 로또번호_저장() {
         lottoNumbers = new ArrayList<>();
         lottoNumbers.add(new LottoNumber(1));
         lottoNumbers.add(new LottoNumber(45));
@@ -29,12 +29,11 @@ public class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         assertThat(lotto).isEqualTo(new Lotto(lottoNumbers));
-
     }
 
     @Test
     @DisplayName("로또번호 중복 입력 시 Exception발생")
-    public void 로또번호_중복번호_체크(){
+    public void 로또번호_중복번호_체크() {
         lottoNumbers = new ArrayList<>();
         lottoNumbers.add(new LottoNumber(1));
         lottoNumbers.add(new LottoNumber(45));
@@ -51,12 +50,12 @@ public class LottoTest {
 
     @Test
     @DisplayName("로또번호가 6자리가 입력 되지 않으면 Exception")
-    public void 로또번호_6자리_체크(){
+    public void 로또번호_6자리_체크() {
         lottoNumbers = new ArrayList<>();
         lottoNumbers.add(new LottoNumber(1));
         lottoNumbers.add(new LottoNumber(45));
         lottoNumbers.add(new LottoNumber(4));
-        lottoNumbers.add(new LottoNumber(4));
+        lottoNumbers.add(new LottoNumber(5));
         lottoNumbers.add(new LottoNumber(18));
 
         assertThatThrownBy(() ->
@@ -64,6 +63,5 @@ public class LottoTest {
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또번호는 6개 입력 되어야 합니다.");
     }
-
 
 }

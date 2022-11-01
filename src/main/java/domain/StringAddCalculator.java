@@ -13,7 +13,7 @@ public class StringAddCalculator {
 
     public String[] split(String inputStr) {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(inputStr);
-        if(matcher.find()){
+        if (matcher.find()) {
             return matcher.group(CUSTOM_PATTERN_TEXT_INDEX).split(matcher.group(CUSTOM_PATTHERN_DELIMITER_INDEX));
         }
         return inputStr.split(DEFALUT_DELIMETER);
@@ -21,7 +21,7 @@ public class StringAddCalculator {
     }
 
     public int splitAndSum(String inputStr) {
-        if(isNullOrEmpty(inputStr)){
+        if (isNullOrEmpty(inputStr)) {
             return 0;
         }
         String[] stringNumbers = split(inputStr);
@@ -33,16 +33,15 @@ public class StringAddCalculator {
         int sum = 0;
         Numbers numbers = new Numbers(stringNumbers);
 
-        for(int number : numbers.getNumbers()) {
-           sum += number;
+        for (int number : numbers.getNumbers()) {
+            sum += number;
         }
 
         return sum;
     }
 
-    public boolean isNullOrEmpty(String inputStr){
+    public boolean isNullOrEmpty(String inputStr) {
         return inputStr == null || inputStr.isEmpty();
     }
-
 
 }

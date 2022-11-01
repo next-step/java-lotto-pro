@@ -3,9 +3,9 @@ package domain;
 import java.util.Objects;
 
 public class LottoNumber {
-
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
+
     int number;
 
     public LottoNumber(int number) {
@@ -13,13 +13,13 @@ public class LottoNumber {
         this.number = number;
     }
 
-    private void isValidNumber(int number){
+    private void isValidNumber(int number) {
         isValidRangeNumber(number);
 
     }
 
-    private void isValidRangeNumber(int number){
-        if( number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER ){
+    private void isValidRangeNumber(int number) {
+        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException("로또번호는 1~45까지 가능합니다.");
         }
     }
@@ -42,4 +42,5 @@ public class LottoNumber {
     public String toString() {
         return String.valueOf(number);
     }
+
 }

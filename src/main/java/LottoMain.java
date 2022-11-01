@@ -15,18 +15,19 @@ public class LottoMain {
         OutputView.outputCountLottoTicket(lottoTicketCount);
         // 자동으로 발급된 로또 번호 저장
         LottoMachine lottoMachine = new AutoLottoMachine();
-        List<Lotto> lottoList =  lottoMachine.purchaseLotte(lottoTicketCount);
+        List<Lotto> lottoList = lottoMachine.purchaseLotte(lottoTicketCount);
         // 지난주 당첨번호 입력
         OutputView.outputPurchaseLottoList(lottoList);
         // 당첨 비교
         WinLotto winLotto = new WinLotto(InputView.inputWinLottoNumbers(), new WinReport());
         winLotto.findWinner(lottoList);
-        OutputView.outputReportStart();;
+        OutputView.outputReportStart();
+
         // 결과 출력
-        lottoMain.getResultPrintMessage(winLotto,lottoTicketCount);
+        lottoMain.getResultPrintMessage(winLotto, lottoTicketCount);
     }
 
-    public void getResultPrintMessage(WinLotto winLotto, int lottoTicketCount){
+    public void getResultPrintMessage(WinLotto winLotto, int lottoTicketCount) {
         OutputView.MatchReportResult(winLotto);
         OutputView.outputProfit(winLotto, lottoTicketCount);
     }

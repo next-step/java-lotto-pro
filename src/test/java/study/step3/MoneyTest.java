@@ -14,7 +14,7 @@ public class MoneyTest {
 
     @Test
     @DisplayName("입력받은 숫자를 횟수로 반환")
-    void 금액을_횟수로_반환(){
+    void 금액을_횟수로_반환() {
         money = new Money(14000);
         int expectValue = 14;
 
@@ -24,9 +24,9 @@ public class MoneyTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {-1,0})
+    @ValueSource(ints = {-1, 0})
     @DisplayName("입력받은 금액이 0원 이하일 경우 Exception 발생")
-    void 금액_유효성_음수_체크(int given){
+    void 금액_유효성_음수_체크(int given) {
         assertThatThrownBy(() ->
                 new Money(given)
         ).isInstanceOf(IllegalArgumentException.class)
@@ -36,7 +36,7 @@ public class MoneyTest {
     @ParameterizedTest
     @ValueSource(ints = {1155, 1999})
     @DisplayName("입력받은 금액이 천원단위가 아닐 경우 Exception 발생")
-    void 금액_유효성_천원단위_체크(int given){
+    void 금액_유효성_천원단위_체크(int given) {
         assertThatThrownBy(() ->
                 new Money(given)
         ).isInstanceOf(IllegalArgumentException.class)
