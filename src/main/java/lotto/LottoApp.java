@@ -15,6 +15,7 @@ public class LottoApp implements App {
     private static final String BUY_LOTTO = "%d개를 구매했습니다.";
     private static final String WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+    private static final String BONUS_BALL_DUPLICATION = "중복된 번호를 보너스볼로 입력하셨습니다.";
 
     public void run() throws IOException {
         LottoStore lottoStore = new LottoStore();
@@ -36,6 +37,10 @@ public class LottoApp implements App {
 
         print(BONUS_NUMBER);
         LottoNumber bonusLottoNumber = LottoNumber.valueOf(scanOneNumber());
+
+        if (winLotto.contains(bonusLottoNumber)) {
+            throw new IllegalArgumentException(BONUS_BALL_DUPLICATION);
+        }
 
         newLine();
 
