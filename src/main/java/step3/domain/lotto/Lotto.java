@@ -1,6 +1,6 @@
 package step3.domain.lotto;
 
-import step3.domain.statistics.WinningLottoType;
+import step3.domain.statistics.Rank;
 
 public class Lotto {
 
@@ -14,15 +14,19 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public WinningLottoType getWinningLottoType(WinningLottoNumbers winningLottoNumbers) {
-        return this.lottoNumbers.getWinningLottoType(winningLottoNumbers);
+    public Rank getRank(WinningLottoNumbers winningLottoNumbers, BonusLottoNumber bonusLottoNumber) {
+        return this.lottoNumbers.getRank(winningLottoNumbers, bonusLottoNumber);
+    }
+
+    public boolean isMatchBonus(BonusLottoNumber bonusLottoNumber) {
+        return this.lottoNumbers.isContains(bonusLottoNumber);
     }
 
     public int getPrice() {
         return price;
     }
 
-    public LottoNumbers getLottoNumbers() {
+    public LottoNumbers value() {
         return lottoNumbers;
     }
 

@@ -3,6 +3,7 @@ package step3.domain.lotto;
 import step3.domain.amount.Amount;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static step3.domain.lotto.Lotto.DEFAULT_LOTTO_PRICE;
@@ -21,14 +22,21 @@ public class Lottos {
         }
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    public List<Lotto> value() {
+        return Collections.unmodifiableList(this.lottos);
     }
 
     @Override
     public String toString() {
-        return "Lottos{" +
-                "lottos=" + lottos +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        for (Lotto lotto : this.lottos) {
+            sb.append("[");
+            LottoNumbers lottoNumbers = lotto.value();
+            for (LottoNumber lottoNumber : lottoNumbers.value()) {
+                sb.append(lottoNumber.getLottoNumber()).append(", ");
+            }
+            sb.append("]\n");
+        }
+        return sb.toString().replaceAll(", ]", "]");
     }
 }

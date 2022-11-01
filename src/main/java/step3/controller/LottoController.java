@@ -1,45 +1,28 @@
 package step3.controller;
 
-import step3.domain.amount.Amount;
-import step3.domain.input.Input;
-import step3.domain.input.InputAmount;
-import step3.domain.input.InputWinningLottoNumbers;
+import step3.domain.lotto.BonusLottoNumber;
 import step3.domain.lotto.Lottos;
+import step3.domain.lotto.WinningLotto;
 import step3.domain.lotto.WinningLottoNumbers;
 import step3.domain.statistics.LottoStatistics;
 
-import java.util.Scanner;
-
-import static step3.view.InputView.printInputAmount;
-import static step3.view.InputView.printInputWinningLottoNumber;
+import static step3.view.InputView.*;
 import static step3.view.ResultView.*;
 
 public class LottoController {
 
-    private static final Scanner scanner = new Scanner(System.in);
-
     public void run() {
-        printInputAmount();
-        Lottos lottos = getLottos();
+        Lottos lottos = inputAmount();
 
-        printLottoSize(lottos.getLottos());
-        printLotto(lottos);
-        printInputWinningLottoNumber();
+        printLottosQuantity(lottos);
+        printLottos(lottos);
 
-        LottoStatistics lottoStatistics = getLottoStatistics(lottos);
-        printResult(lottoStatistics.getLottoResult());
-        printTotalProfit(lottoStatistics.getTotalProfit());
-    }
+        WinningLottoNumbers winningLottoNumbers = inputWinningLottoNumber();
+        BonusLottoNumber bonusLottoNumber = inputBonusLottoNumber();
 
-    private LottoStatistics getLottoStatistics(Lottos lottos) {
-        Input<WinningLottoNumbers> inputWinningLottoNumbers = new InputWinningLottoNumbers();
-        WinningLottoNumbers winningLottoNumbers = inputWinningLottoNumbers.create(scanner.nextLine());
-        return new LottoStatistics(lottos, winningLottoNumbers);
-    }
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos, new WinningLotto(winningLottoNumbers, bonusLottoNumber));
 
-    private Lottos getLottos() {
-        Input<Amount> inputAmount = new InputAmount();
-        Amount amount = inputAmount.create(scanner.nextLine());
-        return new Lottos(amount);
+        printResult(lottoStatistics);
+        printTotalProfit(lottoStatistics);
     }
 }

@@ -7,7 +7,8 @@ public enum ErrorMessageType {
     INPUT_ONLY_ALLOW_NUMBER("숫자만 입력이 가능합니다."),
     LOTTO_NUMBER_CANNOT_BE_LESS_THAN_START_INCLUSIVE("로또 번호는 1보다 작을 수 없습니다."),
     LOTTO_NUMBER_CANNOT_BE_GREATER_THAN_END_INCLUSIVE("로또 번호는 45보다 클 수 없습니다."),
-    LOTTO_NUMBER_WRONG_SIZE("잘못된 로또 번호 사이즈입니다.");
+    LOTTO_NUMBER_WRONG_SIZE("잘못된 로또 번호 사이즈입니다."),
+    LOTTO_NUMBER_DUPLICATE("중복된 로또 번호는 불가능합니다.");
 
     private final String message;
 

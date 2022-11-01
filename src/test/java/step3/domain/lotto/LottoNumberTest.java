@@ -16,7 +16,7 @@ class LottoNumberTest {
     @DisplayName("로또번호는 1보다 작을 수 없습니다.")
     void lottoNumberCannotBeLessThanStartInclusive() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumber(LottoNumber.START_INCLUSIVE - 1))
+                .isThrownBy(() -> LottoNumber.of(LottoNumber.START_INCLUSIVE - 1))
                 .withMessageContaining(LOTTO_NUMBER_CANNOT_BE_LESS_THAN_START_INCLUSIVE.getMessage());
     }
 
@@ -24,7 +24,7 @@ class LottoNumberTest {
     @DisplayName("로또번호는 45보다 클 수 없습니다.")
     void lottoNumberCannotBeGreaterThanEndInclusive() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumber(LottoNumber.END_INCLUSIVE + 1))
+                .isThrownBy(() -> LottoNumber.of(LottoNumber.END_INCLUSIVE + 1))
                 .withMessageContaining(LOTTO_NUMBER_CANNOT_BE_GREATER_THAN_END_INCLUSIVE.getMessage());
     }
 
@@ -32,7 +32,7 @@ class LottoNumberTest {
     @ValueSource(ints = {1, 45})
     @DisplayName("유효한 번호를 입력하여 로또 번호를 생성합니다.")
     void lottoCreateSuccess(int input) {
-        LottoNumber lottoNumber = new LottoNumber(input);
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(input));
+        LottoNumber lottoNumber = LottoNumber.of(input);
+        assertThat(lottoNumber).isEqualTo(LottoNumber.of(input));
     }
 }
