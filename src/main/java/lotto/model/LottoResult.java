@@ -25,7 +25,6 @@ public class LottoResult {
     this.lottoList = lottoList;
     this.winningLotto = winningLotto;
     calculateLottoResult();
-    System.out.println(resultMap);
   }
 
   private void calculateLottoResult() {
