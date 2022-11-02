@@ -24,11 +24,15 @@ public class LottoVendingMachine {
     }
 
     public Lottos buy(Money paidByUser, List<String> manualLottoNumbers) {
-        if (paidByUser.canBuy(lottoPrice.multiply(manualLottoNumbers.size()))) {
+        if (paidByUser.canBuy(calculateTotalPrice(manualLottoNumbers.size()))) {
             return manualLottoNumbers.stream()
                     .map(LottoFactory::create)
                     .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
         }
         return new Lottos(Collections.emptyList());
+    }
+
+    public Money calculateTotalPrice(int purchaseCount) {
+        return lottoPrice.multiply(purchaseCount);
     }
 }

@@ -29,4 +29,10 @@ class LottoVendingMachineTest {
         Lottos generatedLottos = vendingMachine.buy(paidByUser, manualLottoNumbers);
         assertThat(generatedLottos.getHasLottoSize()).isEqualTo(2);
     }
+
+    @Test
+    void 구매하려는_로또의_총_가격을_알_수_있다() {
+        int purchaseCount = 3;
+        assertThat(vendingMachine.calculateTotalPrice(purchaseCount)).isEqualTo(new Money(3000L));
+    }
 }

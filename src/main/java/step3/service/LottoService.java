@@ -11,7 +11,6 @@ import step3.view.ConsoleOutputView;
 
 public class LottoService {
     private final LottoVendingMachine lottoVendingMachine;
-    private final Money LOTTO_PRICE = new Money(1000L);
 
     public LottoService(final LottoVendingMachine lottoVendingMachine) {
         this.lottoVendingMachine = lottoVendingMachine;
@@ -27,7 +26,7 @@ public class LottoService {
 
     private Lottos buyLottos(Money paidByUser) {
         Lottos manualLottos = lottoVendingMachine.buy(paidByUser, receiveManualLottoNumbers());
-        Money change = paidByUser.pay(LOTTO_PRICE.multiply(manualLottos.getHasLottoSize()));
+        Money change = paidByUser.pay(lottoVendingMachine.calculateTotalPrice(manualLottos.getHasLottoSize()));
         Lottos autoLottos = lottoVendingMachine.buy(change);
         ConsoleOutputView.printLottosCount(manualLottos.getHasLottoSize(), autoLottos.getHasLottoSize());
         Lottos lottos = manualLottos.merge(autoLottos);
