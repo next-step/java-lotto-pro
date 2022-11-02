@@ -8,13 +8,22 @@ import lotto.util.InputSplitter;
 
 public class WinningLotto {
 	private final Lotto winLotto;
+	private final LottoNumber bonusNumber;
 
-	public WinningLotto(List<Integer> winNumbers) {
+	public WinningLotto(List<Integer> winNumbers, int bonusNumber) {
+		validateDuplicateBonusNumber(winNumbers, bonusNumber);
 		this.winLotto = new InputLottoGenerator(winNumbers).generate();
+		this.bonusNumber = LottoNumber.from(bonusNumber);
 	}
 
-	public WinningLotto(String input) {
-		this(convertInputToIntegerList(input));
+	private void validateDuplicateBonusNumber(List<Integer> winNumbers, int bonusNumber) {
+		if (winNumbers.contains(bonusNumber)) {
+			throw new IllegalStateException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+		}
+	}
+
+	public static WinningLotto from(String input, String bonusBallInput) {
+		return new WinningLotto(convertInputToIntegerList(input), Integer.parseInt(bonusBallInput));
 	}
 
 	private static List<Integer> convertInputToIntegerList(String input) {
@@ -34,11 +43,11 @@ public class WinningLotto {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		WinningLotto that = (WinningLotto)o;
-		return Objects.equals(winLotto, that.winLotto);
+		return Objects.equals(winLotto, that.winLotto) && Objects.equals(bonusNumber, that.bonusNumber);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(winLotto);
+		return Objects.hash(winLotto, bonusNumber);
 	}
 }

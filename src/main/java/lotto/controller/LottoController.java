@@ -21,8 +21,9 @@ public class LottoController {
 		Lottos lottos = Lottos.purchase(purchaseAmount);
 		resultView.lottosResult(lottos);
 
-		String input = inputView.prevWinNumbers();
-		WinningLotto winningLotto = new WinningLotto(input);
+		String winNumbersInput = inputView.prevWinNumbers();
+		String bonusBallInput = inputView.bonusBall();
+		WinningLotto winningLotto = WinningLotto.from(winNumbersInput, bonusBallInput);
 
 		resultView.winStatisticsResult(lottos, winningLotto, purchaseAmount);
 	}
