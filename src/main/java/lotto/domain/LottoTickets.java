@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.common.ConstValue.LOTTO_PRICE;
-
 public class LottoTickets {
 
     private final List<LottoTicket> lottoTicketList;
@@ -15,10 +13,6 @@ public class LottoTickets {
 
     public int ticketCount() {
         return lottoTicketList.size();
-    }
-
-    public int ticketListPrice() {
-        return lottoTicketList.size() * LOTTO_PRICE;
     }
 
     public void lottoWinningConfirm(WinningLottoNumbers winningLottoNumber, LottoResult lottoResult) {

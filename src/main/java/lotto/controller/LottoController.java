@@ -1,9 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.dto.LottoManualGeneratorRequestDto;
-import lotto.dto.LottoMoneyRequestDto;
-import lotto.dto.WinningLottoNumberRequestDto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -19,12 +16,14 @@ public class LottoController {
     }
 
     public void startLotto() {
-        LottoMoneyRequestDto lottoPurchasePrice = InputView.getLottoPurchasePrice();
-        LottoMoney lottoMoney = lottoPurchasePrice.getLottoMoney();
+        LottoMoney lottoMoney = InputView.getLottoPurchasePrice();
         int manualLottoTicketCount = InputView.getManualLottoCount(lottoMoney);
 
         List<LottoGenerator> lottoGeneratorList = getManualLottoNumbers(manualLottoTicketCount);
-        buyLotto(lottoMoney, manualLottoTicketCount, lottoGeneratorList);
+        LottoTickets lottoTickets = buyLotto(lottoMoney, manualLottoTicketCount, lottoGeneratorList);
+
+        WinningLottoNumbers winningNumbers = InputView.getWinningNumbers();
+        lottoGame.makeLottoResult(winningNumbers, lottoTickets);
 
         ResultView.winningResult(lottoGame.winningResult());
         ResultView.StatisticsPercent(lottoGame.statisticsPercent(lottoMoney.getMoney()));
@@ -39,18 +38,17 @@ public class LottoController {
 
         InputView.manualLottoNumberScript();
         for (int i = 0; i < manualLottoTicketCount; i++) {
-            LottoManualGeneratorRequestDto manualLottoNumbers = InputView.getManualLottoNumbers(i, manualLottoTicketCount);
-            lottoGeneratorList.add(manualLottoNumbers.getLottoGenerator());
+            LottoGenerator manualLottoNumbers = InputView.getManualLottoNumbers(i, manualLottoTicketCount);
+            lottoGeneratorList.add(manualLottoNumbers);
         }
 
         return lottoGeneratorList;
     }
 
-    private void buyLotto(LottoMoney lottoMoney, int manualTicketCount, List<LottoGenerator> lottoGeneratorList) {
+    private LottoTickets buyLotto(LottoMoney lottoMoney, int manualTicketCount, List<LottoGenerator> lottoGeneratorList) {
         LottoTickets lottoTickets = lottoGame.buy(lottoMoney, lottoGeneratorList);
         ResultView.lottoPurchase(manualTicketCount, lottoTickets.autoTicketCount(manualTicketCount), lottoTickets.toString());
-        WinningLottoNumbers winningNumbers = InputView.getWinningNumbers().getWinningLottoNumbers();
-        lottoGame.makeLottoResult(winningNumbers, lottoTickets);
+        return lottoTickets;
     }
 
 }

@@ -12,13 +12,15 @@ public class AutoLottoGenerator implements LottoGenerator {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
+    private static final List<Integer> availableLottoRange = availableLottoRange();
+
     @Override
     public LottoNumbers generateLottoNumber() {
         return new LottoNumbers(getShuffleLottoNumber());
     }
 
     private static List<Integer> getShuffleLottoNumber() {
-        List<Integer> lottoNumbers = availableLottoRange();
+        List<Integer> lottoNumbers = availableLottoRange;
         Collections.shuffle(lottoNumbers);
         lottoNumbers = lottoNumbers.subList(MIN_SIZE, MAX_SIZE);
         Collections.sort(lottoNumbers);
