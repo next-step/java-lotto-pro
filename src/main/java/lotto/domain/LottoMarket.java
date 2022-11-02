@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public class LottoMarket {
     private static final Money TICKET_PRICE = new Money(1_000L);
 
-    private static final LottoGenerator randomGenerator = new RandomLottoGenerator();;
+    private static final LottoGenerator randomGenerator = new RandomLottoGenerator();
 
     private LottoMarket() {}
 

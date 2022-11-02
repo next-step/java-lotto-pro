@@ -18,25 +18,28 @@ public class MoneyTest {
     @DisplayName("돈을 나눌 수 있다")
     @Test
     void divide_test() {
-        assertThat(new Money(1_000L).divide(new Money(1_000L))).isEqualTo(1);
+        double result = new Money(1_000L).divide(new Money(1_000L));
+        assertThat(result).isEqualTo(1);
     }
 
     @DisplayName("돈을 더할 수 있다")
     @Test
     void sum_test() {
-        Money money = new Money(1_000L);
-        assertThat(money.sum(new Money(1_000L))).isEqualTo(new Money(2_000L));
+        Money result = new Money(1_000L).sum(new Money(1_000L));
+        assertThat(result).isEqualTo(new Money(2_000L));
     }
 
     @DisplayName("돈을 곱할 수 있다")
     @Test
     void multiply_test() {
-        assertThat(new Money(1_000L).multiply(2)).isEqualTo(new Money(2_000L));
+        Money result = new Money(1_000L).multiply(2);
+        assertThat(result).isEqualTo(new Money(2_000L));
     }
 
     @DisplayName("돈을 뺄수 있다")
     @Test
     void subtract_test() {
-        assertThat(new Money(2_000L).subtract(new Money(1_000L))).isEqualTo(new Money(1_000L));
+        Money result = new Money(2_000L).subtract(new Money(1_000L));
+        assertThat(result).isEqualTo(new Money(1_000L));
     }
 }
