@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoResult {
 
@@ -53,36 +54,26 @@ public class LottoResult {
 
     List<String> rankStringList = new ArrayList<>();
 
-    for (Map.Entry<LottoRank, Integer> rankEntry : resultMap.entrySet()) {
-      validNothing(rankStringList, rankEntry);
-    }
+    rankStringList = resultMap.entrySet().stream()
+        .filter(entry -> entry.getKey() != LottoRank.NOTHING)
+        .map(this::generateRankResultByStringFormat)
+        .collect(Collectors.toList());
+
     Collections.sort(rankStringList);
 
     return rankStringList;
   }
 
   private String generateRankResultByStringFormat(Map.Entry<LottoRank, Integer> rankEntry) {
-    if (rankEntry.getKey() == LottoRank.SECOND) {
-      return this.generateSecondRankResultByStringFormat(rankEntry);
-    }
-
     LottoRank lottoRank = rankEntry.getKey();
+
+    if (lottoRank == LottoRank.SECOND) {
+      return String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개",
+          lottoRank.containsCount(), lottoRank.getMoney(), rankEntry.getValue());
+    }
 
     return String.format("%d개 일치 (%d원)- %d개",
         lottoRank.containsCount(), lottoRank.getMoney(), rankEntry.getValue());
-  }
-
-  public String generateSecondRankResultByStringFormat(Map.Entry<LottoRank, Integer> rankEntry) {
-    LottoRank lottoRank = rankEntry.getKey();
-
-    return String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개",
-        lottoRank.containsCount(), lottoRank.getMoney(), rankEntry.getValue());
-  }
-
-  private void validNothing(List<String> rankStringList, Map.Entry<LottoRank, Integer> rankEntry) {
-    if (rankEntry.getKey() != LottoRank.NOTHING) {
-      rankStringList.add(generateRankResultByStringFormat(rankEntry));
-    }
   }
 
   private double calculateYield() {
@@ -95,7 +86,7 @@ public class LottoResult {
       prizeMoney += money * value;
     }
 
-    return prizeMoney / (lottoList.getLottoList().size() * LOTTO_PRICE);
+    return (double) prizeMoney / (lottoList.getLottoList().size() * LOTTO_PRICE);
   }
 
   public String convertYieldToString() {
