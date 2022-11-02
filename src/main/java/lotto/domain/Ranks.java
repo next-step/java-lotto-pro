@@ -28,8 +28,7 @@ public class Ranks {
 		Map<Rank, Long> resultRankMap = new LinkedHashMap<>();
 		Arrays.stream(Rank.values())
 			.filter(r -> !r.equals(Rank.LOSE))
-			.sorted(Comparator.comparingInt(Rank::getMatchCount)
-				.thenComparing(Rank::matchingBonus))
+			.sorted(Comparator.comparingLong(Rank::getPrize))
 			.forEach(r -> resultRankMap.put(r, 0L));
 		return resultRankMap;
 	}
