@@ -13,10 +13,11 @@ public class Lotteries {
         this.lotteries = lotteries;
     }
 
-    public Map<Lotto, Integer> getLottoMatchNumberMap(WinningNumbers winningNumbers) {
-        Map<Lotto,Integer> lottoMatchNumberMap = new HashMap<>();
+    public Map<Lotto, Rank> getLottoMatchRankMap(WinningNumbers winningNumbers) {
+        Map<Lotto,Rank> lottoMatchNumberMap = new HashMap<>();
         for (Lotto lotto : lotteries) {
-            lottoMatchNumberMap.put(lotto, winningNumbers.getMatchNumber(lotto));
+            lottoMatchNumberMap.put(lotto,
+                    Rank.valueOf(winningNumbers.getMatchNumber(lotto), winningNumbers.isBonus(lotto)));
         }
         return lottoMatchNumberMap;
     }

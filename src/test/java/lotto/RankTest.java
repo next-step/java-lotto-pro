@@ -17,8 +17,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class RankTest {
 
-
-    static Stream<Arguments> winningNumbers_validate_test() {
+    static Stream<Arguments> rank_value_test() {
         return Stream.of(
                 Arguments.of(Rank.valueOf(0,true), Rank.MISS),
                 Arguments.of(Rank.valueOf(0,false), Rank.MISS),
@@ -41,6 +40,6 @@ public class RankTest {
     @DisplayName("랭크가 경우의 수에 따라 순위가 적절히 매겨지는지 확인")
     @MethodSource
     void rank_value_test(Rank input, Rank expected) {
-        assertThat(rank).isEqualTo(rank);
+        assertThat(input).isEqualTo(expected);
     }
 }
