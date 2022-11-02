@@ -1,7 +1,6 @@
 package study.step4.models;
 
 import study.step4.exception.LottoConsistOfSameNumbersException;
-import study.step4.exception.LottoNumberListSizeException;
 import study.step4.helper.NumbersParser;
 
 import java.util.HashSet;
@@ -15,7 +14,6 @@ public class Numbers {
     private final List<Integer> numbers;
 
     public Numbers(List<Integer> numbers) {
-        validateLottoNumberListSize(numbers);
         validateLottoConsistOfDifferentNumbers(numbers);
         this.numbers = numbers;
     }
@@ -28,14 +26,7 @@ public class Numbers {
         Set<Integer> numberSet = new HashSet<>(numbers);
         int expectedLottoNumberListSize = SUB_LIST_END_INDEX - SUB_LIST_START_INDEX;
         if (numberSet.size() != expectedLottoNumberListSize) {
-            throw new LottoConsistOfSameNumbersException("로또는 서로 다른 숫자로 이루어져야 합니다.");
-        }
-    }
-
-    private void validateLottoNumberListSize(List<Integer> numbers) {
-        int expectedLottoNumberListSize = SUB_LIST_END_INDEX - SUB_LIST_START_INDEX;
-        if (numbers.size() != expectedLottoNumberListSize) {
-            throw new LottoNumberListSizeException(String.format("로또는 %d개의 숫자로 이루어져야 합니다.", expectedLottoNumberListSize));
+            throw new LottoConsistOfSameNumbersException(String.format("로또는 서로 다른 %d 숫자로 이루어져야 합니다.", expectedLottoNumberListSize));
         }
     }
 
