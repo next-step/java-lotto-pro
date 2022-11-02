@@ -1,6 +1,6 @@
 package step3.ui;
 
-import step3.domain.LottoNumber;
+import step3.domain.LottoCreateStrategy;
 import step3.domain.PurchaseAmount;
 import step3.domain.WinningLotto;
 
@@ -32,7 +32,7 @@ public class ConsoleInputView implements InputView {
 
         return new WinningLotto(Arrays.stream(split)
                 .mapToInt(i -> Integer.parseInt(i.trim()))
-                .mapToObj(LottoNumber::new)
+                .mapToObj(i -> LottoCreateStrategy.lottoNumberMap.get(i))
                 .collect(Collectors.toList()));
     }
 }
