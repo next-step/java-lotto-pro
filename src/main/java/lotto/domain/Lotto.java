@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static lotto.domain.LottoGenerator.LOTTO_NUMBER_COUNT;
@@ -51,6 +49,8 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lottoNumbers.toString();
+        ArrayList<LottoNumber> copy = new ArrayList<>(this.lottoNumbers);
+        Collections.sort(copy);
+        return copy.toString();
     }
 }
