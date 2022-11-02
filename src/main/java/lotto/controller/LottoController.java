@@ -11,15 +11,15 @@ import java.util.List;
 public class LottoController {
     public void run() {
         Money money = new Money(InputView.getMoney());
-        Quantity quantity = new Quantity(InputView.getManualLottoCount());
-        InputView.getManualNumbers(quantity);
+        Quantity manualQuantity = new Quantity(InputView.getManualLottoCount());
+        InputView.getManualNumbers(manualQuantity);
 
         List<LottoTicket> tickets = LottoMarket.sell(
                 money,
                 new RandomLottoGenerator()
         );
 
-        OutputView.printTickets(tickets);
+        OutputView.printTickets(tickets, manualQuantity);
         showLottoResult(money, tickets);
     }
 
