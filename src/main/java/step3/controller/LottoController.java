@@ -19,11 +19,10 @@ public class LottoController {
         LottoMoney purchaseMoney = new LottoMoney(amount, manualCount);
         List<Lotto> manualLottos = LottoFactory.createLottosByManual(LottoConsoleView.inputPurchaseManual(manualCount));
         List<Lotto> autoLottos = LottoFactory.createLottosByAuto(purchaseMoney);
+
         Lottos lottos = new Lottos(Stream.concat(manualLottos.stream(), autoLottos.stream()).collect(Collectors.toList()));
         LottoMachine lottoMachine = new LottoMachine(purchaseMoney, lottos);
-
-        LottoStatusDto lottoStatus = lottoMachine.getLottoStatus();
-        LottoOutputView.printPurchasingLottos(lottoStatus);
+        LottoOutputView.printPurchasingLottos(lottoMachine.getLottoStatus());
 
         List<LottoNumber> lottoNumbers = LottoInputParser.parseToLottoNumberArray(LottoConsoleView.inputWinningNumber());
         LottoNumber bonusNumber = LottoNumber.valueOf(LottoConsoleView.inputBonusNumber());
