@@ -1,6 +1,8 @@
 package step3.domain;
 
-public class LottoNumber implements Comparable{
+import java.util.Objects;
+
+public class LottoNumber implements Comparable {
 
 
     public static final int MINIMUM_LOTTO_NUMBER = 1;
@@ -24,6 +26,11 @@ public class LottoNumber implements Comparable{
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof LottoNumber)) return false;
@@ -33,7 +40,7 @@ public class LottoNumber implements Comparable{
 
     @Override
     public int compareTo(Object lottoNumber) {
-        return this.lottoNumber - ((LottoNumber) lottoNumber).lottoNumber();
+        return Integer.compare(this.lottoNumber, ((LottoNumber) lottoNumber).lottoNumber());
     }
 
     @Override

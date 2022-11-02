@@ -80,7 +80,7 @@
   - LottoMachine.java
     - [x] 로또 기계와 로또 판매자를 결합
   - LottoNumber.java 
-    - [ ] Integer.compare 확인 해 볼 것
+    - [x] Integer.compare 확인 해 볼 것
   - Lottos.java
     - [ ] 이 클래스가 필요한지에 대해 근본적인 고민을 해볼 것 
   - WinningResult.java
