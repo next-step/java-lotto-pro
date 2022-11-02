@@ -1,9 +1,6 @@
 package controller;
 
-import model.Lottos;
-import model.Money;
-import model.Rank;
-import model.Revenue;
+import model.*;
 import model.strategy.RandomStrategy;
 import view.InputView;
 import view.OutPutView;
@@ -18,19 +15,40 @@ public class LottoGame {
 
     public void start() {
         int money = InputView.moneyInput();
-        List<Integer> arrangeNumber = initArrangeNumber();
-        Lottos lottos = new Lottos(new Money(money), new RandomStrategy(arrangeNumber));
+        int manualCount = InputView.manualBuyCountInput();
+        List<LottoNumber> manualLotto = buyManualLotto(manualCount);
+        int autoCount = new Money(money).availableBuyAutoLottoCount(manualCount);
+        Lottos lottos = new Lottos(autoCount, manualLotto, new RandomStrategy(initArrangeNumber()));
 
         OutPutView.outPutLottoNumber(lottos.getLotto());
-        List<Integer> winNumber = InputView.winNumberInput();
-        int bonusNumber = InputView.bonusNumberInput();
 
+        InputView.winNumberMessage();
+        List<Integer> winNumber = InputView.inputNumber();
+        Rank rank = getRank(lottos, winNumber);
+
+        OutPutView.outPutResult(rank.getCountRank(), new Revenue(rank.getCountRank()).getPercent(money));
+    }
+
+    private Rank getRank(Lottos lottos, List<Integer> winNumber) {
+        int bonusNumber = InputView.bonusNumberInput();
         Rank rank = new Rank();
         rank.stats(lottos, winNumber, bonusNumber);
+        return rank;
+    }
 
-        double percent = new Revenue(rank.getCountRank()).getPercent(money);
+    private List<LottoNumber> buyManualLotto(int manualCount) {
+        InputView.manualNumberMessage();
+        return getManualInput(manualCount);
+    }
 
-        OutPutView.outPutResult(rank.getCountRank(), percent);
+    public static List<LottoNumber> getManualInput(int count) {
+        List<LottoNumber> manualLotto = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            List<Integer> integers = InputView.inputNumber();
+            manualLotto.add(new LottoNumber(integers));
+        }
+
+        return manualLotto;
     }
 
 
