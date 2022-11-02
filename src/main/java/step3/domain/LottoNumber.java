@@ -20,7 +20,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public static LottoNumber of(final int number) {
+    public static LottoNumber from(final int number) {
         validateNumberRange(number);
         return CACHED_NUMBER.get(number - SUBTRACT_VALUE_FOR_INDEX);
     }
