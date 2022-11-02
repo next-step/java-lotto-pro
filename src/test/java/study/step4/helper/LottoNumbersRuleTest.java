@@ -1,7 +1,7 @@
 package study.step4.helper;
 
 import org.junit.jupiter.api.Test;
-import study.step3.helper.LottoNumbersRule;
+import study.step4.helper.LottoNumbersRule;
 
 import java.util.ArrayList;
 import java.util.HashSet;

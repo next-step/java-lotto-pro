@@ -1,8 +1,7 @@
 package study.step4.models;
 
 import org.junit.jupiter.api.Test;
-import study.step3.exception.LottoInputMoneyTypeException;
-import study.step3.models.Money;
+import study.step4.exception.LottoInputMoneyTypeException;
 
 import static org.assertj.core.api.Assertions.*;
 

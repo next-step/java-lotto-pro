@@ -1,11 +1,6 @@
 package study.step4.models;
 
 import org.junit.jupiter.api.Test;
-import study.step3.models.Lotto;
-import study.step3.models.Lottos;
-import study.step3.models.Money;
-import study.step3.models.Numbers;
-import study.step3.models.Winners;
 
 import java.util.ArrayList;
 import java.util.Arrays;

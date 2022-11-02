@@ -1,12 +1,11 @@
 package study.step4.helper;
 
 import org.junit.jupiter.api.Test;
-import study.step3.helper.LottoMaker;
-import study.step3.models.Lottos;
-import study.step3.models.Money;
+import study.step4.helper.LottoMaker;
+import study.step4.models.Lottos;
+import study.step4.models.Money;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static study.step3.constants.CommonConstants.PRICE_PER_LOTTO;
 
 public class LottoMakerTest {
     @Test
@@ -14,6 +13,6 @@ public class LottoMakerTest {
         Money inputMoney = new Money("14000");
         Lottos lottos = LottoMaker.makeLottos(inputMoney);
 
-        assertThat(lottos.hasEqualSize(inputMoney.dividedBy(PRICE_PER_LOTTO))).isTrue();
+        assertThat(lottos.hasEqualSize(inputMoney.dividedBy(Money.PRICE_PER_LOTTO))).isTrue();
     }
 }

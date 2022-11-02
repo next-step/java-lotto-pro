@@ -25,4 +25,8 @@ public class Lottos {
             System.out.println(lotto);
         }
     }
+
+    public boolean hasEqualSize(int expected) {
+        return lottos.size() == expected;
+    }
 }

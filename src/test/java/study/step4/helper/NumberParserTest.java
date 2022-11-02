@@ -1,7 +1,7 @@
 package study.step4.helper;
 
 import org.junit.jupiter.api.Test;
-import study.step3.helper.NumbersParser;
+import study.step4.helper.NumbersParser;
 
 import java.util.Arrays;
 import java.util.List;
