@@ -1,5 +1,6 @@
 package lotto.model.lotto.ticket;
 
+import lotto.controller.converter.WinningNumbersConverter;
 import lotto.model.winning.numbers.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -47,7 +48,8 @@ class LottoTicketTest {
         @Test
         @DisplayName("결과가 0 개일 때 성공")
         void zero() {
-            final WinningNumbers winningNumbers = new WinningNumbers("3, 4, 5, 6, 7, 8");
+            final WinningNumbersConverter winningNumbersConverter = new WinningNumbersConverter("3, 4, 5, 6, 7, 8");
+            final WinningNumbers winningNumbers = new WinningNumbers(winningNumbersConverter.convertToLottoNumbers());
             final int result = lottoTicket.numberMatch(winningNumbers);
             assertThat(result).isEqualTo(0);
         }
@@ -55,7 +57,8 @@ class LottoTicketTest {
         @Test
         @DisplayName("결과가 1 개일 때 성공")
         void one() {
-            final WinningNumbers winningNumbers = new WinningNumbers("1, 4, 5, 6, 7, 8");
+            final WinningNumbersConverter winningNumbersConverter = new WinningNumbersConverter("1, 4, 5, 6, 7, 8");
+            final WinningNumbers winningNumbers = new WinningNumbers(winningNumbersConverter.convertToLottoNumbers());
             final int result = lottoTicket.numberMatch(winningNumbers);
             assertThat(result).isEqualTo(1);
         }
@@ -63,7 +66,8 @@ class LottoTicketTest {
         @Test
         @DisplayName("결과가 2 개일 때 성공")
         void two() {
-            final WinningNumbers winningNumbers = new WinningNumbers("1, 45, 5, 6, 7, 8");
+            final WinningNumbersConverter winningNumbersConverter = new WinningNumbersConverter("1, 45, 5, 6, 7, 8");
+            final WinningNumbers winningNumbers = new WinningNumbers(winningNumbersConverter.convertToLottoNumbers());
             final int result = lottoTicket.numberMatch(winningNumbers);
             assertThat(result).isEqualTo(2);
         }
@@ -71,7 +75,8 @@ class LottoTicketTest {
         @Test
         @DisplayName("결과가 3 개일 때 성공")
         void three() {
-            final WinningNumbers winningNumbers = new WinningNumbers("1, 45, 9, 6, 7, 8");
+            final WinningNumbersConverter winningNumbersConverter = new WinningNumbersConverter("1, 45, 9, 6, 7, 8");
+            final WinningNumbers winningNumbers = new WinningNumbers(winningNumbersConverter.convertToLottoNumbers());
             final int result = lottoTicket.numberMatch(winningNumbers);
             assertThat(result).isEqualTo(3);
         }
@@ -79,7 +84,8 @@ class LottoTicketTest {
         @Test
         @DisplayName("결과가 4 개일 때 성공")
         void four() {
-            final WinningNumbers winningNumbers = new WinningNumbers("1, 45, 9, 27, 7, 8");
+            final WinningNumbersConverter winningNumbersConverter = new WinningNumbersConverter("1, 45, 9, 27, 7, 8");
+            final WinningNumbers winningNumbers = new WinningNumbers(winningNumbersConverter.convertToLottoNumbers());
             final int result = lottoTicket.numberMatch(winningNumbers);
             assertThat(result).isEqualTo(4);
         }
@@ -87,7 +93,8 @@ class LottoTicketTest {
         @Test
         @DisplayName("결과가 5 개일 때 성공")
         void five() {
-            final WinningNumbers winningNumbers = new WinningNumbers("1, 45, 9, 27, 10, 8");
+            final WinningNumbersConverter winningNumbersConverter = new WinningNumbersConverter("1, 45, 9, 27, 10, 8");
+            final WinningNumbers winningNumbers = new WinningNumbers(winningNumbersConverter.convertToLottoNumbers());
             final int result = lottoTicket.numberMatch(winningNumbers);
             assertThat(result).isEqualTo(5);
         }
@@ -95,7 +102,8 @@ class LottoTicketTest {
         @Test
         @DisplayName("결과가 6 개일 때 성공")
         void six() {
-            final WinningNumbers winningNumbers = new WinningNumbers("1, 45, 9, 27, 10, 2");
+            final WinningNumbersConverter winningNumbersConverter = new WinningNumbersConverter("1, 45, 9, 27, 10, 2");
+            final WinningNumbers winningNumbers = new WinningNumbers(winningNumbersConverter.convertToLottoNumbers());
             final int result = lottoTicket.numberMatch(winningNumbers);
             assertThat(result).isEqualTo(6);
         }

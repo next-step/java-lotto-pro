@@ -1,8 +1,11 @@
 package lotto.controller.acceptor;
 
+import lotto.controller.converter.WinningNumbersConverter;
+import lotto.model.lotto.ticket.LottoNumber;
 import lotto.model.winning.numbers.WinningNumbers;
 import lotto.view.DemandWinningNumbersInputPrinter;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class WinningNumbersAcceptor {
@@ -10,6 +13,12 @@ public class WinningNumbersAcceptor {
         DemandWinningNumbersInputPrinter.print();
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        return new WinningNumbers(input);
+        List<LottoNumber> lottoNumbers = convertToLottoNumbers(input);
+        return new WinningNumbers(lottoNumbers);
+    }
+
+    public List<LottoNumber> convertToLottoNumbers(String input) {
+        final WinningNumbersConverter winningNumbersConverter = new WinningNumbersConverter(input);
+        return winningNumbersConverter.convertToLottoNumbers();
     }
 }

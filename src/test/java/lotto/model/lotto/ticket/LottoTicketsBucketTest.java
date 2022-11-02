@@ -1,5 +1,6 @@
 package lotto.model.lotto.ticket;
 
+import lotto.controller.converter.WinningNumbersConverter;
 import lotto.model.winning.numbers.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -172,7 +173,8 @@ class LottoTicketsBucketTest {
             for (int[] prize : prizes) {
                 prizeMoney.put(prize[0], prize[1]);
             }
-            final WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6");
+            final WinningNumbersConverter winningNumbersConverter = new WinningNumbersConverter("1, 2, 3, 4, 5, 6");
+            final WinningNumbers winningNumbers = new WinningNumbers(winningNumbersConverter.convertToLottoNumbers());
             final Map<Integer, Integer> result = lottoTicketsBucket.calculateNumbersMatchCount(prizeMoney,
                     winningNumbers);
             assertAll(
