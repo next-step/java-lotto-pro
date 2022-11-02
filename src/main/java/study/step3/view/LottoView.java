@@ -24,7 +24,7 @@ public class LottoView {
 
     public static LottoNumbers inputWinningNumbers() {
         String winningNumbers = null;
-        while (!validateWinningNumbers(winningNumbers)) {
+        while (validateLottoNumbers(winningNumbers)) {
             ResultView.output(LottoMessage.INPUT_WINNING_NUMBERS.message());
             winningNumbers = InputView.input();
         }
@@ -32,11 +32,20 @@ public class LottoView {
         return mapToLottoNumbers(winningNumbers);
     }
 
-    private static boolean validateWinningNumbers(String winningNumbers) {
-        if (winningNumbers == null || winningNumbers.isEmpty()) {
-            return false;
+    public static LottoNumber inputBonusNumber() {
+        String bonusNumber = null;
+        while (validateLottoNumbers(bonusNumber)) {
+            ResultView.output(LottoMessage.INPUT_BONUS_NUMBER.message());
+            bonusNumber = InputView.input();
         }
-        return PATTERN_NUMBER_AND_COMMA.matcher(winningNumbers).find();
+        return new LottoNumber(Integer.parseInt(bonusNumber));
+    }
+
+    private static boolean validateLottoNumbers(String winningNumbers) {
+        if (winningNumbers == null || winningNumbers.isEmpty()) {
+            return true;
+        }
+        return !PATTERN_NUMBER_AND_COMMA.matcher(winningNumbers).find();
     }
 
     private static LottoNumbers mapToLottoNumbers(String winningNumbers) {

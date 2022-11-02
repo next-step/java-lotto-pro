@@ -7,6 +7,7 @@ import study.step3.domain.lottostatistics.LottoStatistics;
 import study.step3.message.LottoMessage;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class LottoStatisticsView {
 
@@ -22,7 +23,7 @@ public class LottoStatisticsView {
     private static void appendCountOfAllRanks(LottoStatistics lottoStatistics, StringBuilder printer) {
         Arrays.stream(LottoRank.values())
                 .filter(LottoRank::isWinning)
-                .sorted((o1, o2) -> (int) (o1.matchCount() - o2.matchCount()))
+                .sorted(Comparator.comparing(LottoRank::matchResult))
                 .forEach(rank -> appendCountOfRank(rank, lottoStatistics, printer));
     }
 
@@ -30,7 +31,8 @@ public class LottoStatisticsView {
         Money winningMoney = rank.winningMoney();
         printer.append(
                 String.format(LottoMessage.OUTPUT_COUNTS_OF_ALL_RANKS_FORMAT.message(),
-                        rank.matchCount(),
+                        rank.reportLottoMatchResult(),
+                        rank.reportBonusNumberMatchResult(),
                         winningMoney.money(),
                         lottoStatistics.findLottoRankCount(rank))
         );
