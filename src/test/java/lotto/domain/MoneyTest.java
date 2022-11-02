@@ -65,24 +65,24 @@ class MoneyTest {
         assertThat(actual).isEqualTo(expectMoney);
     }
 
-    @DisplayName("가지고 있는 금액대비 구매 가능한 수이면 true 이다.")
+    @DisplayName("가지고 있는 금액대비 구매 가능한 수이면 구매가능수가 반환된다.")
     @ParameterizedTest
     @CsvSource(value = {"2000:2", "2000:1", "2000:0"}, delimiter = ':')
     void possible_lotto_count(int money, int count) {
 
         Money fromMoney = Money.from(money);
 
-        assertThat(fromMoney.isPossibleLottoCount(count)).isTrue();
+        assertThat(fromMoney.checkPossibleLottoCount(count)).isEqualTo(count);
     }
 
-    @DisplayName("가지고 있는 금액대비 구매 가능한 수이면 false 이다.")
+    @DisplayName("구매가능한 수 이상이 입력되면 IllegalArgumentException 이 발생한다.")
     @ParameterizedTest
     @CsvSource(value = {"2000:3", "2000:4", "2000:5"}, delimiter = ':')
     void possible_lotto_count_false(int money, int count) {
 
         Money fromMoney = Money.from(money);
 
-        assertThat(fromMoney.isPossibleLottoCount(count)).isFalse();
+        assertThatThrownBy(() -> fromMoney.checkPossibleLottoCount(count)).isInstanceOf(IllegalArgumentException.class);
     }
 
 }

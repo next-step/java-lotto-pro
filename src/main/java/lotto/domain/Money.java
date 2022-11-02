@@ -24,8 +24,11 @@ public class Money {
         return money / DEFAULT_LOTTO_PRICE;
     }
 
-    public boolean isPossibleLottoCount(int count) {
-        return money >= count * DEFAULT_LOTTO_PRICE;
+    public int checkPossibleLottoCount(int count) {
+        if (money < count * DEFAULT_LOTTO_PRICE) {
+            throw new IllegalArgumentException("구매 가능 수를 초과했습니다.");
+        }
+        return count;
     }
 
     public Money minus(Money money) {
