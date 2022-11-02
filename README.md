@@ -73,10 +73,10 @@
 ### 3단계 피드백
 - domain 
   - Lotto.java
-    - [ ] 접근제어자에 대한 고찰.. private 으로 만들고 getter를 쓰는 방식이 일급컬렉션을 쓰는 의의에 부합하는 방식이다.
-    - [ ] 로또 번호 중복에 대한 체크 추가 
+    - [x] 접근제어자에 대한 고찰.. private 으로 만들고 getter를 쓰는 방식이 일급컬렉션을 쓰는 의의에 부합하는 방식이다.
+    - [x] 로또 번호 중복에 대한 체크 추가 
   - LottoCreateStrategy.java
-    - [ ] 캐싱된 번호를 사용하는 방식으로 활용 
+    - [x] 캐싱된 번호를 사용하는 방식으로 활용 
   - LottoMachine.java
     - [ ] 로또 기계와 로또 판매자를 결합
   - LottoNumber.java 

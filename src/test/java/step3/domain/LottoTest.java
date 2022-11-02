@@ -23,7 +23,7 @@ public class LottoTest {
     void 로또생성() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < LOTTO_NUMBERS_SIZE; i++) {
-            lottoNumbers.add(new LottoNumber(i + 1));
+            lottoNumbers.add(LottoCreateStrategy.lottoNumberMap.get(i + 1));
         }
         Lotto lotto = new Lotto(lottoNumbers);
 
@@ -35,7 +35,7 @@ public class LottoTest {
     void 로또생성시_6개가_아닌경우_예외() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < LOTTO_NUMBERS_SIZE + 2; i++) {
-            lottoNumbers.add(new LottoNumber(i + 1));
+            lottoNumbers.add(LottoCreateStrategy.lottoNumberMap.get(i + 1));
         }
 
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
@@ -48,9 +48,9 @@ public class LottoTest {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         int limit = LOTTO_NUMBERS_SIZE - 1;
         for (int i = 0; i < limit; i++) {
-            lottoNumbers.add(new LottoNumber(i + 1));
+            lottoNumbers.add(LottoCreateStrategy.lottoNumberMap.get(i + 1));
         }
-        lottoNumbers.add(new LottoNumber(limit - 1));
+        lottoNumbers.add(LottoCreateStrategy.lottoNumberMap.get(limit - 1));
 
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
@@ -61,12 +61,12 @@ public class LottoTest {
     void 로또_equal_검증() {
         List<LottoNumber> lottoNumbersCompare1 = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            lottoNumbersCompare1.add(new LottoNumber(i + 1));
+            lottoNumbersCompare1.add(LottoCreateStrategy.lottoNumberMap.get(i + 1));
         }
 
         List<LottoNumber> lottoNumbersCompare2 = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            lottoNumbersCompare2.add(new LottoNumber(i + 1));
+            lottoNumbersCompare2.add(LottoCreateStrategy.lottoNumberMap.get(i + 1));
         }
 
         Lotto lotto1 = new Lotto(lottoNumbersCompare1);
