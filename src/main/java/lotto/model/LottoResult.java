@@ -4,7 +4,6 @@ import static lotto.model.Counter.LOTTO_PRICE;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -16,13 +15,13 @@ public class LottoResult {
   private static final double MATH_ROUND_VALUE = 100d;
 
 
-  private final HashMap<LottoRank, Integer> resultMap;
+  private final Map<LottoRank, Integer> resultMap;
   private final LottoList lottoList;
   private final WinningLotto winningLotto;
 
 
   public LottoResult(LottoList lottoList, WinningLotto winningLotto) {
-    resultMap = new HashMap<LottoRank, Integer>();
+    resultMap = LottoRank.generateRankCodeMap();
     this.lottoList = lottoList;
     this.winningLotto = winningLotto;
     calculateLottoResult();

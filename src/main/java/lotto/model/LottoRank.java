@@ -1,6 +1,8 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.Map;
 
 public enum LottoRank {
   FIRST(6, false, 2_000_000_000),
@@ -26,6 +28,14 @@ public enum LottoRank {
             && lottoRank.isContainBonusNumber == isContainBonusNumber)
         .findAny()
         .orElse(NOTHING);
+  }
+
+  public static Map<LottoRank, Integer> generateRankCodeMap() {
+    Map<LottoRank, Integer> rankCodeMap = new EnumMap<>(LottoRank.class);
+    for (LottoRank rankCode : LottoRank.values()) {
+      rankCodeMap.put(rankCode, NOTHING.containsCount);
+    }
+    return rankCodeMap;
   }
 
   public int containsCount() {
