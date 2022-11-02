@@ -6,9 +6,9 @@ import lotto.auto.Rank;
 import java.text.NumberFormat;
 import java.util.List;
 
-public class ResultView {
-    private static final int DECIMAL_POINT = 2;
+import static lotto.auto.common.Constants.DECIMAL_POINT;
 
+public class ResultView {
     private StringBuilder sb;
 
     public ResultView() {
