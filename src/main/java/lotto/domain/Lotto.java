@@ -1,37 +1,29 @@
 package lotto.domain;
 
 import java.util.stream.IntStream;
-import lotto.util.Constants;
+import lotto.domain.ticket.Ticket;
+import lotto.domain.ticket.Tickets;
 
 public class Lotto {
-    private static final String STR_BUY_LOTTO = "%d개를 구매했습니다.\n";
     private static final int TICKET_VALUE = 1000;
     
     public Tickets tickets;
+    public Result result;
 
-    public Lotto(String moneyStr) {
-        buyLotto(new Money(moneyStr));
+    public Lotto(String money) {
+        buyLotto(new Money(money));
     }
 
     public Lotto(Tickets myTickets) {
         this.tickets = myTickets;
     }
 
-    public String getTicketsSizeStr() {
-        return String.format(STR_BUY_LOTTO, this.tickets.size());
-    }
-
-    public String getLottoListStr() {
-        return this.tickets.toString();
-    }
-
-    public String getResultStr(String winningTicketStr) {
-        Result result = new Result();
-
-        this.tickets.countTicketResult(result, new Ticket(winningTicketStr));
-
+    public void checkResult(Ticket winningTicket) {
+        this.result = new Result();
+        this.tickets.countTicketResult(result, winningTicket);
+        
         int usedMoney = this.tickets.size() * TICKET_VALUE;
-        return result.toString(usedMoney);
+        result.checkResultRate(usedMoney);
     }
 
     private void buyLotto(Money money) {

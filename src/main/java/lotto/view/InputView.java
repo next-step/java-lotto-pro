@@ -5,11 +5,7 @@ import java.util.Scanner;
 public class InputView {
     private static Scanner scanner = new Scanner(System.in);
 
-    public static String startLottoInput() {
-        return scanner.nextLine();
-    }
-
-    public static String getWinningLottoNumInput() {
+    public static String getInput() {
         return scanner.nextLine();
     }
 }
