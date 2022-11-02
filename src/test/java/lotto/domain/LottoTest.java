@@ -24,7 +24,7 @@ public class LottoTest {
         List<Integer> lottoNumbers = Arrays.stream(givenNumbers).boxed().collect(Collectors.toList());
 
         LottoNumber bonusBall = new LottoNumber(7);
-        Rank rank = new Lotto(lottoNumbers).countCollectNumber(new Lotto(winnerNumbers), bonusBall);
+        Rank rank = Lotto.of(lottoNumbers).countCollectNumber(Lotto.of(winnerNumbers), bonusBall);
         assertThat(rank).isEqualTo(expected);
     }
 

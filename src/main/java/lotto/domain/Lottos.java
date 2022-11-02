@@ -1,9 +1,7 @@
 package lotto.domain;
 
 import lotto.constants.Rank;
-import lotto.util.LottoNumberGenerator;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -12,17 +10,8 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    //test를 위한 생성자
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
-    }
-
-    public Lottos(int lottoAmount) {
-        lottos = new ArrayList<>();
-        for (int i = 0; i < lottoAmount; i++) {
-            Lotto lotto = new Lotto(LottoNumberGenerator.generateLottoNumbers());
-            lottos.add(lotto);
-        }
     }
 
     public LottoResult findWinner(Lotto winningNumbers, LottoNumber bonusBall) {
