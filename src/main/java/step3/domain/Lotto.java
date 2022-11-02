@@ -10,7 +10,7 @@ public class Lotto {
         this.lottoNumbers = numbers;
     }
 
-    public int matchNumbers(LottoNumbers winningNumbers) {
+    public int matchedNumbersCount(LottoNumbers winningNumbers) {
         return this.lottoNumbers.compareTo(winningNumbers);
     }
 

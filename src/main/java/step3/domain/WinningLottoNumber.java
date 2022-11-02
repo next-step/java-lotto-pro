@@ -5,9 +5,9 @@ public class WinningLottoNumber {
     private final LottoNumber bonusNumber;
 
     public WinningLottoNumber(String receiveWinningNumber, int receiveBonusNumber) {
+        validateDuplicateNumber();
         this.winningLottoNumbers = new LottoNumbers(receiveWinningNumber);
         this.bonusNumber = new LottoNumber(receiveBonusNumber);
-        validateDuplicateNumber();
     }
 
     private void validateDuplicateNumber() {

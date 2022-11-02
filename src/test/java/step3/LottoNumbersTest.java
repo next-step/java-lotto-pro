@@ -7,15 +7,20 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import step3.domain.LottoNumber;
 import step3.domain.LottoNumbers;
+import step3.domain.Rank;
 
 public class LottoNumbersTest {
+
     @Test
     @DisplayName("로또번호 개수가 6개 이상인 경우 에러 발생 테스트")
     void lottoNumbersOverMaxCnt() {
         List<LottoNumber> lottoNumberList = Arrays.asList(new LottoNumber(1),
-            new LottoNumber(2),new LottoNumber(3),new LottoNumber(4),new LottoNumber(5),new LottoNumber(6), new LottoNumber(7));
+            new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5),
+            new LottoNumber(6), new LottoNumber(7));
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new LottoNumbers(lottoNumberList))
             .withMessage(LottoNumbers.NOT_MATCHED_NUMBER_SIZE);
@@ -25,7 +30,8 @@ public class LottoNumbersTest {
     @DisplayName("로또번호 개수가 중복되는 경우 에러 발생 테스트")
     void lottoNumbersDuplicate() {
         List<LottoNumber> lottoNumberList = Arrays.asList(new LottoNumber(1),
-            new LottoNumber(1),new LottoNumber(3),new LottoNumber(4),new LottoNumber(5),new LottoNumber(6));
+            new LottoNumber(1), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5),
+            new LottoNumber(6));
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new LottoNumbers(lottoNumberList))
             .withMessage(LottoNumbers.EXIST_DUPLICATE_VALUE);
@@ -39,4 +45,12 @@ public class LottoNumbersTest {
         assertThat(lottoNumbers.containsNumber(bonusNumber)).isTrue();
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"1, 2, 3, 4, 5, 6:6:true", "1, 2, 3, 4, 5, 6:7:false"}, delimiter = ':')
+    @DisplayName("보너스 번호가 로또번호에 포함되어있는지 아닌지 확인하는 테스트")
+    void lottoContainsBonusNumber2(String receiveWinningNumber, int bonusNumber,
+        boolean isBonus) {
+        assertThat(new LottoNumbers(receiveWinningNumber).containsNumber(
+            new LottoNumber(bonusNumber))).isEqualTo(isBonus);
+    }
 }

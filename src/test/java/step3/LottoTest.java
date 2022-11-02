@@ -21,7 +21,7 @@ public class LottoTest {
             new LottoNumber(6));
         Lotto lotto = new Lotto(new LottoNumbers(lottoNumberList));
         LottoNumbers winningNumbers = new LottoNumbers("1, 2, 3, 4, 5, 7");
-        assertThat(lotto.matchNumbers(winningNumbers)).isEqualTo(5);
+        assertThat(lotto.matchedNumbersCount(winningNumbers)).isEqualTo(5);
     }
 
 }

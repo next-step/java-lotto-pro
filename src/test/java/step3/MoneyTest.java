@@ -21,6 +21,6 @@ public class MoneyTest {
     @DisplayName("양수를 입력하면 금액 객체가 생성된다.")
     void amountCreateSuccess() {
         Money money = new Money(1000);
-        assertThat(money).isEqualTo(new Money(1000));
+        assertThat(money.getMoney()).isEqualTo(1000);
     }
 }

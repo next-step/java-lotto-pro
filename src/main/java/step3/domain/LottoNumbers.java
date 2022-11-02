@@ -55,7 +55,7 @@ public class LottoNumbers {
             .count();
     }
 
-    public boolean containsNumber(final LottoNumber lottoNumber) {
+    public boolean containsNumber(LottoNumber lottoNumber) {
         return this.lottoNumberSet.contains(lottoNumber);
     }
 }
