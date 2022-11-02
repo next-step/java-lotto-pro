@@ -7,11 +7,6 @@ import java.util.stream.Collectors;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(int count) {
-        this.lottos = new ArrayList<>();
-        buyLottos(count);
-    }
-
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
