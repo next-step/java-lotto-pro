@@ -33,7 +33,7 @@ public class LottoResultTest {
     System.out.println(result.convertResultMapToString());
 
     //then
-    assertThat(result.convertResultMapToString()).containsExactly(lottoRankResult);
+    assertThat(result.convertResultMapToString()).contains(lottoRankResult);
   }
 
   @DisplayName("로또 당첨 수익률이 정상적으로 나오는지 확인")
