@@ -17,15 +17,11 @@ public class LottoMachine {
 
     public LottoResultDto getLottoResult(Lotto lotto) {
         Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(lotto);
-        return getLottoResultDto(rankOfLottos);
+        return new LottoResultDto(rankOfLottos, lottoMoney);
     }
 
     public LottoResultDto getLottoResult(WinningLotto winningLotto) {
         Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(winningLotto);
-        return getLottoResultDto(rankOfLottos);
-    }
-
-    private LottoResultDto getLottoResultDto(Map<Rank, Integer> rankOfLottos) {
         return new LottoResultDto(rankOfLottos, lottoMoney);
     }
 
