@@ -12,12 +12,12 @@ public class AutoLottoService {
 
     public void autoLottoService() {
         Payment payment = new Payment(InputView.printConsoleMsg(Messages.ASK_PAYMENT));
-        Lottos lottos = new Lottos(payment);
-        ResultView.printPurchasedlottoCnt(lottos);
+        Lottos lottos = new Lottos(payment.getPurchasedLottoCnt());
+        ResultView.printPurchasedLottoCnt(lottos);
         ResultView.printGeneratedLotto(lottos);
         Lotto winLotto = new Lotto(InputView.printConsoleMsg(Messages.ASK_LAST_WIN_LOTTO_NUMBERS));
         Statistics statistics = new Statistics(lottos, winLotto);
         ResultView.printTotalResult(payment, statistics);
     }
-
+    
 }

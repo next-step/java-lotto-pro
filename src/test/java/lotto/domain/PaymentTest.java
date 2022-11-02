@@ -22,4 +22,11 @@ public class PaymentTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    @DisplayName("구입금액에 1000원 미만인 경우 예외처리")
+    void payment_less_than_1000_test() {
+        assertThatThrownBy(() -> new Payment("400"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }

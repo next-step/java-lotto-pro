@@ -14,14 +14,7 @@ public class LottosTest {
     @Test
     @DisplayName("로또 구매 개수 테스트")
     void purchase_lotto_cnt_test() {
-        assertThat(new Lottos(new Payment("14000")).getLottosSize()).isEqualTo(14);
-    }
-
-    @Test
-    @DisplayName("구입금액에 1000원 미만인 경우 예외처리")
-    void payment_less_than_1000_test() {
-        assertThatThrownBy(() -> new Lottos(new Payment("400")))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThat(new Lottos(new Payment("14000").getPurchasedLottoCnt()).getLottosSize()).isEqualTo(14);
     }
 
     @Test

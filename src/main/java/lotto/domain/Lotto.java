@@ -4,18 +4,17 @@ import java.util.*;
 
 public class Lotto {
 
-    private static final int MIN_LOTTO_NUM = 1;
-    private static final int MAX_LOTTO_NUM = 45;
     private static final int LOTTO_LENGTH = 6;
     private static final String SPACE = " ";
     private static final String BLANK = "";
+    private static final String SQUARE_BRACKET_LEFT = "[";
+    private static final String SQUARE_BRACKET_RIGHT = "]";
     private static final String PATTERN = "^[0-9,]*$";
     private static final String DELIMITER = ",";
     private static final String INVALID_LENGTH_MESSAGE = "로또 당첨 번호는 6자리여야 합니다.";
-    private static final String INVALID_NUMBER_MESSAGE = "로또 당첨 번호는 1 이상 45 이하의 숫자여야 합니다.";
     private static final String INVALID_DELIMITER_MESSAGE = "로또 당첨 번호는 ,(콤마)로 구분되어야 합니다.";
     private static final String DUPLICATE_NUMBER_MESSAGE = "로또 당첨 번호는 중복되지 않은 값이어야 합니다.";
-    private List<Integer> lotto;
+    private List<LottoNumber> lotto;
 
     public Lotto() {
         this.lotto = new AutoLottoGenerator().getShuffledNum();
@@ -23,49 +22,53 @@ public class Lotto {
 
     public Lotto(String input) {
         String[] nums = validateInput(input);
-        setWinLottoNum(nums);
+        setLottoNum(nums);
     }
 
     private String[] validateInput(String input) {
-        input = input.replace(SPACE, BLANK);
-        if (!input.matches(PATTERN)) {
-            throw new IllegalArgumentException(INVALID_DELIMITER_MESSAGE);
-        }
 
-        String[] nums = input.split(DELIMITER);
-        if (nums.length < LOTTO_LENGTH) {
-            throw new IllegalArgumentException(INVALID_LENGTH_MESSAGE);
-        }
+        String[] nums = validateDelimiter(input);
 
-        for (String num : nums) {
-            validateNumber(num);
-        }
+        validateLottoLength(nums.length);
 
-        Set<String> set = new HashSet<>(Arrays.asList(nums));
-        if (set.size() != LOTTO_LENGTH) {
-            throw new IllegalArgumentException(DUPLICATE_NUMBER_MESSAGE);
-        }
+        validateNonDuplicate(nums);
 
         return nums;
     }
 
-    private void validateNumber(String value) {
-        int num = Integer.parseInt(value);
-        if (num < MIN_LOTTO_NUM || num > MAX_LOTTO_NUM) {
-            throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE);
+    private String[] validateDelimiter(String input) {
+        input = input.replace(SPACE, BLANK);
+
+        if (!input.matches(PATTERN)) {
+            throw new IllegalArgumentException(INVALID_DELIMITER_MESSAGE);
+        }
+
+        return input.split(DELIMITER);
+    }
+
+    private void validateLottoLength(int length) {
+        if (length < LOTTO_LENGTH) {
+            throw new IllegalArgumentException(INVALID_LENGTH_MESSAGE);
         }
     }
 
-    private void setWinLottoNum(String[] nums) {
+    private void validateNonDuplicate(String[] nums) {
+        Set<String> set = new HashSet<>(Arrays.asList(nums));
+        if (set.size() != LOTTO_LENGTH) {
+            throw new IllegalArgumentException(DUPLICATE_NUMBER_MESSAGE);
+        }
+    }
+
+    private void setLottoNum(String[] nums) {
         lotto = new ArrayList<>();
-        Arrays.stream(nums).forEach(num -> lotto.add(Integer.parseInt(num)));
+        Arrays.stream(nums).forEach(num -> lotto.add(new LottoNumber(num)));
     }
 
-    public List<Integer> getLotto() {
-        return this.lotto;
+    public List<LottoNumber> getLotto() {
+        return Collections.unmodifiableList(lotto);
     }
 
-    public boolean isContained(int number) {
+    public boolean isContained(LottoNumber number) {
         return lotto.contains(number);
     }
 
@@ -73,4 +76,18 @@ public class Lotto {
         return (int) lotto.stream().filter(winLotto::isContained).count();
     }
 
+    @Override
+    public String toString() {
+        StringBuilder reportLotto = new StringBuilder();
+        reportLotto.append(SQUARE_BRACKET_LEFT);
+
+        for (LottoNumber lottoNumber : lotto) {
+            reportLotto.append(lottoNumber.toString() + DELIMITER + SPACE);
+        }
+
+        reportLotto = reportLotto.delete(reportLotto.length()-2, reportLotto.length());
+
+        return reportLotto.append(SQUARE_BRACKET_RIGHT).toString();
+
+    }
 }

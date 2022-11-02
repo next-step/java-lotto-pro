@@ -4,12 +4,12 @@ import lotto.domain.*;
 
 public class ResultView {
 
-    public static void printPurchasedlottoCnt(Lottos lottos) {
+    public static void printPurchasedLottoCnt(Lottos lottos) {
         System.out.println(lottos.getLottosSize() + Messages.NOTIFY_PURCHASES.getMsg());
     }
 
     public static void printGeneratedLotto(Lottos lottos) {
-        lottos.getLottoList().stream().forEach(lotto -> System.out.println(lotto.getLotto()));
+        lottos.getLottoList().stream().forEach(lotto -> System.out.println(lotto.toString()));
     }
 
     public static void printTotalResult(Payment payment, Statistics statistics) {

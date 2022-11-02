@@ -3,10 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -23,11 +20,8 @@ public class LottoTest {
     @Test
     @DisplayName("생성된 로또가 중복되지 않은 숫자로 이루어졌는지 테스트")
     void not_duplicate_composition_test() {
-        Set<Integer> lottoComposition = new HashSet<>();
         Lotto lotto = new Lotto();
-        for (Integer num : lotto.getLotto()) {
-            lottoComposition.add(num);
-        }
+        Set<LottoNumber> lottoComposition = new HashSet<>(lotto.getLotto());
         assertThat(lottoComposition).hasSize(6);
     }
 
@@ -35,7 +29,13 @@ public class LottoTest {
     @DisplayName("당첨 번호로 로또 생성되는지 테스트")
     void win_lotto_generate_test() {
         Lotto lotto = new Lotto("1,2,3,4,5,6");
-        List<Integer> numList = Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6});
+        List<LottoNumber> numList = new ArrayList<>();
+        numList.add(new LottoNumber(1));
+        numList.add(new LottoNumber(2));
+        numList.add(new LottoNumber(3));
+        numList.add(new LottoNumber(4));
+        numList.add(new LottoNumber(5));
+        numList.add(new LottoNumber(6));
         assertThat(lotto.getLotto()).isEqualTo(numList);
     }
 
@@ -66,7 +66,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또에 특정 숫자 포함 여부 확인 테스트")
     void isContained_test() {
-        assertThat(new Lotto("1,2,3,4,5,6").isContained(1)).isTrue();
+        assertThat(new Lotto("1,2,3,4,5,6").isContained(new LottoNumber(1))).isTrue();
     }
 
     @Test
