@@ -11,25 +11,33 @@ import java.util.Map;
 public class WinningMatcher {
     private ResultView resultView;
     private MatchNumberMap matchNumberMap;
-    private int BonusNumber;
+    private int bonusNumber;
 
     public WinningMatcher(Buyer buyer, LottoNumbers lottoNumbers, String inputBonusNumber) {
         resultView = new ResultView();
+        this.bonusNumber = new LottoAutoUtils().stringToNumber(inputBonusNumber);
         this.matchNumberMap = matchWinningNumbers(buyer.getLottos(), lottoNumbers);
     }
 
     private MatchNumberMap matchWinningNumbers(List<Lotto> lottoList, LottoNumbers winningNumbers) {
         Map<Rank, Integer> result = new HashMap<>();  // (하나의 로또에서 일치한 수, 일치한 로또의 개수)
-
         for (Lotto lotto : lottoList) {
             int cnt = countMatchNumber(lotto, winningNumbers);
-            makeResult(result, cnt);
+            boolean isMatchBonusNumber = isMatchBonusNumber(lotto, bonusNumber);
+            makeResult(result, cnt, isMatchBonusNumber);
         }
         return new MatchNumberMap(result);
     }
 
-    private void makeResult(Map<Rank, Integer> result, int cnt) {
-        Rank rank = Rank.valueOf(cnt);
+    private boolean isMatchBonusNumber(Lotto lotto, int bonusNumber) {
+        if (lotto.getLottoNumbers().contains(bonusNumber)) {
+            return true;
+        }
+        return false;
+    }
+
+    private void makeResult(Map<Rank, Integer> result, int cnt, boolean isMatchBonusNumber) {
+        Rank rank = Rank.valueOf(cnt, isMatchBonusNumber);
         if (rank != null && result.containsKey(rank)) {
             result.put(rank, result.get(rank) + 1);
         }
