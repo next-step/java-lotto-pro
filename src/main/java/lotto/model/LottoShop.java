@@ -21,7 +21,7 @@ public class LottoShop {
 		return new Lottos(lottoList);
 	}
 
-	public Lottos buyManually(final Money payment, final Lottos manualLottos) {
+	public Lottos buyLottos(final Money payment, final Lottos manualLottos) {
 		Money change = payment.minus(manualLottos.getTotalSpent());
 		Lottos autoLotto = buy(change);
 		return manualLottos.merge(autoLotto);

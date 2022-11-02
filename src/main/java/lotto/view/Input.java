@@ -1,13 +1,9 @@
 package lotto.view;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import lotto.model.Lotto;
 import lotto.model.LottoNumber;
-import lotto.model.Lottos;
-import lotto.model.ManualLotto;
 import lotto.model.Money;
 
 public class Input {
@@ -32,24 +28,16 @@ public class Input {
 		}
 	}
 
-	public static Lottos inputManualLottos() {
+	public static int inputManualLottoNumbers() {
 		try {
-			int manualCount = inputManualCount();
-			System.out.println();
-			System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-			return inputLottos(manualCount);
+			return inputManualCount();
 		} catch (Exception e) {
-			return inputManualLottos();
+			return inputManualLottoNumbers();
 		}
 	}
 
-	private static Lottos inputLottos(final int manualCount) {
-		List<Lotto> result = new ArrayList<>();
-		for (int i = 0; i < manualCount; i++) {
-			result.add(inputLotto());
-		}
-		System.out.println();
-		return new Lottos(result);
+	public static List<LottoNumber> inputManualLottoNumber() {
+		return inputLottoNumber();
 	}
 
 	private static int inputManualCount() {
@@ -57,18 +45,18 @@ public class Input {
 		return Integer.parseInt(nextLine());
 	}
 
-	public static Lotto inputWinnerLotto() {
+	public static List<LottoNumber> inputWinnerLottoNumber() {
 		try {
 			System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-			return inputLotto();
+			return inputLottoNumber();
 		} catch (IllegalArgumentException e) {
-			return inputWinnerLotto();
+			return inputWinnerLottoNumber();
 		}
 	}
 
-	private static Lotto inputLotto() {
+	private static List<LottoNumber> inputLottoNumber() {
 		String number = nextLine();
-		return new ManualLotto(LottoNumber.of(number.split(SPLITER)));
+		return LottoNumber.of(number.split(SPLITER));
 	}
 
 	public static LottoNumber inputBonusNumber() {
