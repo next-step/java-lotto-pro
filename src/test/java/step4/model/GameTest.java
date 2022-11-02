@@ -32,7 +32,7 @@ public class GameTest {
     public void startLottoGame_pass_01(int count) {
         Game game = new Game(count);
         game.startLottoGame();
-        List<LottoResult> result = game.startLottoGame();
+        List<Lotto> result = game.startLottoGame();
 
         assertThat(result.size()).isEqualTo(count);
     }

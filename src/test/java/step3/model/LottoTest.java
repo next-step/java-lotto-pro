@@ -1,4 +1,4 @@
-package step4.model;
+package step3.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("로또_결과값_저장_클래스")
-public class LottoResultTest {
+public class LottoTest {
     @DisplayName("LottoResult_정상_입력")
     @Test
     void LottoResult_pass_01() {
@@ -56,14 +56,6 @@ public class LottoResultTest {
         assertThat(lottoResult).isEqualTo(otherLottoResult);
     }
 
-    @DisplayName("LottoResult_contains_성공.")
-    @Test
-    void LottoResult_pass_05() {
-        String[] inputNumberTexts = new String[]{"6", "4", "5", "3", "2", "1"};
-        LottoResult lottoResult = new LottoResult(inputNumberTexts);
-        assertThat(lottoResult.isContains(new LottoNumber(6))).isTrue();
-    }
-
     @DisplayName("LottoResult_중복값_들어오면_에러를_반환한다.")
     @Test
     void LottoResult_fail_01() {
@@ -90,13 +82,4 @@ public class LottoResultTest {
         assertThatThrownBy(() -> new LottoResult(inputNumberTexts))
                 .isInstanceOf(IllegalArgumentException.class);
     }
-
-    @DisplayName("LottoResult_contains_실패.")
-    @Test
-    void LottoResult_fail_04() {
-        String[] inputNumberTexts = new String[]{"6", "4", "5", "3", "2", "1"};
-        LottoResult lottoResult = new LottoResult(inputNumberTexts);
-        assertThat(lottoResult.isContains(new LottoNumber(7))).isFalse();
-    }
-
 }

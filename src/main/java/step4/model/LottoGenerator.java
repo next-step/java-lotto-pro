@@ -17,9 +17,9 @@ public class LottoGenerator {
                 .mapToObj(LottoNumber::new).collect(Collectors.toList());
     }
 
-    public LottoResult createLottoResult() {
+    public Lotto createLotto() {
         Collections.shuffle(lottoCandidateNumbers);
-        return new LottoResult(
+        return new Lotto(
                 new ArrayList<>(lottoCandidateNumbers.subList(0, LottoConstant.PICK_LOTTO_MAX_NUM))
         );
     }

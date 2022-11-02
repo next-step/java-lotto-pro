@@ -9,15 +9,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class LottoResult {
+public class Lotto {
     List<LottoNumber> lottoNumbers;
 
-    public LottoResult(List<LottoNumber> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         checkLottoOutOfSize((int) lottoNumbers.stream().distinct().count());
         this.lottoNumbers = lottoNumbers.stream().distinct().sorted().collect(Collectors.toList());
     }
 
-    public LottoResult(String[] lottoNumbersText) {
+    public Lotto(String[] lottoNumbersText) {
         this(getLottoNumbersFromTexts(lottoNumbersText));
     }
 
@@ -35,8 +35,8 @@ public class LottoResult {
         }
     }
 
-    public int getEqualCount(LottoResult otherLottoResult) {
-        return (int) this.lottoNumbers.stream().filter(otherLottoResult::isContains).count();
+    public int getEqualCount(Lotto otherLotto) {
+        return (int) this.lottoNumbers.stream().filter(otherLotto::isContains).count();
     }
 
 
@@ -52,7 +52,7 @@ public class LottoResult {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        LottoResult that = (LottoResult) o;
+        Lotto that = (Lotto) o;
         return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 

@@ -9,15 +9,15 @@ public class LottoWinningStatistics {
     private final Map<Rank, Integer> lottoWinningStatistics = new LinkedHashMap<>();
     private final Money totalProfit = new Money(0);
 
-    public LottoWinningStatistics(List<LottoResult> lottoResults, LottoResult winLottoResult, LottoNumber bonusLottoNumber) {
-        validWinLottoResult(winLottoResult, bonusLottoNumber);
+    public LottoWinningStatistics(List<Lotto> lottos, Lotto winLotto, LottoNumber bonusLottoNumber) {
+        validWinLottoResult(winLotto, bonusLottoNumber);
         initLottoWinningStatistics();
-        setLottoWinningStatistics(lottoResults, winLottoResult, bonusLottoNumber);
+        setLottoWinningStatistics(lottos, winLotto, bonusLottoNumber);
         setTotalProfit();
     }
 
-    private void validWinLottoResult(LottoResult winLottoResult, LottoNumber bonusLottoNumber) {
-        if (winLottoResult.isContains(bonusLottoNumber)) {
+    private void validWinLottoResult(Lotto winLotto, LottoNumber bonusLottoNumber) {
+        if (winLotto.isContains(bonusLottoNumber)) {
             throw new LottoFormatException(ErrorMessageConstant.BONUS_NUMBER_IN_LOTTO_WIN_RESULT);
         }
     }
@@ -30,10 +30,10 @@ public class LottoWinningStatistics {
         }
     }
 
-    private void setLottoWinningStatistics(List<LottoResult> lottoResults, LottoResult winLottoResult, LottoNumber bonusLottoNumber) {
-        for (LottoResult lottoResult : lottoResults) {
-            int matchedCount = lottoResult.getEqualCount(winLottoResult);
-            setLottoWinningStatistic(Rank.valueOf(matchedCount, lottoResult.isContains(bonusLottoNumber)));
+    private void setLottoWinningStatistics(List<Lotto> lottos, Lotto winLotto, LottoNumber bonusLottoNumber) {
+        for (Lotto lotto : lottos) {
+            int matchedCount = lotto.getEqualCount(winLotto);
+            setLottoWinningStatistic(Rank.valueOf(matchedCount, lotto.isContains(bonusLottoNumber)));
         }
     }
 
