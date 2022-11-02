@@ -5,10 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step3.model.Lotto;
-import step3.model.LottoCalculator;
-import step3.model.LottoNumber;
-import step3.model.Lottos;
+import step3.model.*;
+import step3.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +25,7 @@ public class LottoCalculatorTest {
 
     @BeforeEach
     void setUp() {
-        lottoCalculator = new LottoCalculator(new Lotto(testLastWeek()));
+        lottoCalculator = new LottoCalculator(new WinnerLotto(testLastWeek()));
     }
 
     @Test
@@ -58,7 +56,6 @@ public class LottoCalculatorTest {
         String[] inputArr = input.split(COLON)[0].split(COMMA);
         Lottos lottos = new Lottos(createTestLottos(inputArr));
 
-        // todo 질문 beforeEach로 생성했는데 result 부분이 null?
         lottoCalculator.calculateWinnerStatistics(lottos);
         double result = lottoCalculator.calculateProfitRate();
         assertEquals(expected, Double.toString(result));
@@ -88,7 +85,12 @@ public class LottoCalculatorTest {
         String bonusNumber = "7";
 
         String[] lastWeekWinnerNumbers = "8-21-23-41-42-16".split(BAR);
-        Lotto lastWeekWinner = new Lotto(lastWeekWinnerNumbers, bonusNumber);
+        List<LottoNumber> list = new ArrayList<>();
+        for (String str : lastWeekWinnerNumbers) {
+            list.add(new LottoNumber(CommonUtils.commonStringToNumber(str)));
+        }
+
+        WinnerLotto lastWeekWinner = new WinnerLotto(list, bonusNumber);
 
         lottoCalculator.setLastWeekWinner(lastWeekWinner);
         lottoCalculator.calculateWinnerStatistics(lottos);

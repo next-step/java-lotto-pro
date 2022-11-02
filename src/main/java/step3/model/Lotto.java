@@ -14,7 +14,7 @@ public class Lotto {
     public static final int LOTTO_NUMBER_LENGTH = 6;
 
     private List<LottoNumber> lottoNumbers;
-    private LottoNumber bonusNumber;
+//    private LottoNumber bonusNumber;
 
     public Lotto() {
         lottoNumbers = generateRandomNumbers();
@@ -32,23 +32,23 @@ public class Lotto {
         this.lottoNumbers = list;
     }
 
-    public Lotto(String[] numbers, String StringNumber) {
-        List<LottoNumber> list = new ArrayList<>();
-        for (String str : numbers) {
-            list.add(new LottoNumber(commonStringToNumber(str)));
-        }
-
-        this.lottoNumbers = list;
-        this.bonusNumber = new LottoNumber(validateBonusNumber(StringNumber));
-    }
+//    public Lotto(String[] numbers, String StringNumber) {
+//        List<LottoNumber> list = new ArrayList<>();
+//        for (String str : numbers) {
+//            list.add(new LottoNumber(commonStringToNumber(str)));
+//        }
+//
+//        this.lottoNumbers = list;
+//        this.bonusNumber = new LottoNumber(validateBonusNumber(StringNumber));
+//    }
 
     public List<LottoNumber> getNumbers() {
         return lottoNumbers;
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
-    }
+//    public LottoNumber getBonusNumber() {
+//        return bonusNumber;
+//    }
 
     public List<LottoNumber> generateRandomNumbers() {
         List<LottoNumber> rangeNumbers = createLottoNumberList(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
