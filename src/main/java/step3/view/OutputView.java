@@ -39,7 +39,9 @@ public class OutputView {
     }
 
     private static void printPurchasedCount(LottoGenerator lottoGenerator) {
-        System.out.printf(PURCHASED_LOTTO_TOTAL_COUNT_OUTPUT_MESSAGE, lottoGenerator.getPurchasedCount());
+        int manualCount = lottoGenerator.getManualCount();
+        int autoCount = lottoGenerator.getPurchasedCount() - lottoGenerator.getManualCount();
+        System.out.printf(PURCHASED_LOTTO_TOTAL_COUNT_OUTPUT_MESSAGE, manualCount, autoCount);
     }
 
     private static void printGeneratedLotto(Lottos lottos) {

@@ -2,10 +2,19 @@ package step3;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import step3.model.Lotto;
 import step3.model.LottoGenerator;
+import step3.model.Lottos;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static step3.constant.Constant.Common.*;
 
 public class LottoGeneratorTest {
     private LottoGenerator lottoGenerator = new LottoGenerator();
@@ -37,7 +46,6 @@ public class LottoGeneratorTest {
 
     @Test
     @DisplayName("수동 로또 수량 빈값, 숫자 테스트")
-
     void 수동_로또_수량_빈값_테스트() {
         assertThatThrownBy(() -> lottoGenerator.setPurchasePriceAndManualCount("1000", ""))
                 .isInstanceOf(IllegalArgumentException.class);
