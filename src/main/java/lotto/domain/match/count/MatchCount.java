@@ -31,7 +31,9 @@ public class MatchCount {
 	}
 
 	public Amount winningPrice() {
-		return MatchRank.getWinningPrice(this);
+		return Amount.from(
+			MatchRank.getWinningPrice(this.matchCount)
+		);
 	}
 
 	public int getInt() {

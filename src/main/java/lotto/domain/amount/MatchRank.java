@@ -2,37 +2,35 @@ package lotto.domain.amount;
 
 import java.util.Arrays;
 
-import lotto.domain.match.count.MatchCount;
-
 public enum MatchRank {
-	THREE_MATCH(MatchCount.from(3), Amount.from(5000L)),
-	FOUR_MATCH(MatchCount.from(4), Amount.from(50000L)),
-	FIVE_MATCH(MatchCount.from(5), Amount.from(1500000L)),
-	SIX_MATCH(MatchCount.from(6), Amount.from(2000000000L));
+	THREE_MATCH(3, 5000L),
+	FOUR_MATCH(4, 50000L),
+	FIVE_MATCH(5, 1500000L),
+	SIX_MATCH(6, 2000000000L);
 
-	public static final int NO_WINNING_PRICE = 0;
+	public static final long NO_WINNING_PRICE = 0;
 
-	private final MatchCount matchCount;
-	private final Amount winningPrice;
+	private final int matchCount;
+	private final long winningPrice;
 
-	MatchRank(MatchCount matchCount, Amount winningPrice) {
+	MatchRank(int matchCount, long winningPrice) {
 		this.matchCount = matchCount;
 		this.winningPrice = winningPrice;
 	}
 
-	public static Amount getWinningPrice(MatchCount matchCount) {
+	public static long getWinningPrice(int matchCount) {
 		return Arrays.stream(MatchRank.values())
 			.filter(matchRank -> matchRank.hasMatchCount(matchCount))
 			.findAny()
 			.map(matchRank -> matchRank.winningPrice)
-			.orElse(Amount.from(NO_WINNING_PRICE));
+			.orElse(NO_WINNING_PRICE);
 	}
 
-	private boolean hasMatchCount(MatchCount matchCount) {
-		return this.matchCount.equals(matchCount);
+	private boolean hasMatchCount(int matchCount) {
+		return this.matchCount == matchCount;
 	}
 
 	public int getMatchCount() {
-		return matchCount.getInt();
+		return matchCount;
 	}
 }
