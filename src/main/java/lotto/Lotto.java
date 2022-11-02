@@ -1,10 +1,10 @@
-package lotto.auto;
+package lotto;
 
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.auto.common.Constants.BEGIN_INDEX;
-import static lotto.auto.common.Constants.LOTTO_LENGTH;
+import static lotto.common.Constants.BEGIN_INDEX;
+import static lotto.common.Constants.LOTTO_LENGTH;
 
 public class Lotto {
     private LottoNumbers lottoNumbers;

@@ -1,19 +1,19 @@
-package lotto.auto;
+package lotto;
 
-import lotto.auto.common.LottoAutoUtils;
-import lotto.auto.ui.ResultView;
+import lotto.common.LottoAutoUtils;
+import lotto.ui.ResultView;
+import lotto.common.Constants;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.auto.common.Constants.INIT_NUM;
-
 public class WinningMatcher {
     private ResultView resultView;
     private MatchNumberMap matchNumberMap;
+    private int BonusNumber;
 
-    public WinningMatcher(Buyer buyer, LottoNumbers lottoNumbers) {
+    public WinningMatcher(Buyer buyer, LottoNumbers lottoNumbers, String inputBonusNumber) {
         resultView = new ResultView();
         this.matchNumberMap = matchWinningNumbers(buyer.getLottos(), lottoNumbers);
     }
@@ -37,7 +37,7 @@ public class WinningMatcher {
     }
 
     private int countMatchNumber(Lotto lotto, LottoNumbers winningNumbers) {
-        int cnt = INIT_NUM;
+        int cnt = Constants.INIT_NUM;
         for (int num: lotto.getLottoNumbers()) {
             cnt += isMatched(num, winningNumbers);
         }

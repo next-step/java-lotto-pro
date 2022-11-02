@@ -1,4 +1,4 @@
-package lotto.auto;
+package lotto;
 
 public enum Rank {
     FOURTH(3, 5_000),
