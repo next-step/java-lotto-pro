@@ -77,7 +77,7 @@
   * else를 쓰지 말라고 하니 switch/case로 구현하는 경우가 있는데 switch/case도 허용하지 않는다.
 * java enum을 적용해 프로그래밍을 구현한다.
 * 규칙 8: 일급 콜렉션을 쓴다.
-* 
+
 ## 힌트
 * 로또 자동 생성은 Collections.shuffle() 메소드 활용한다.
 * Collections.sort() 메소드를 활용해 정렬 가능하다.

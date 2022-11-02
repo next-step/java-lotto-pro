@@ -13,4 +13,3 @@
 
 ## Step 3 - 요구사항 정리
 * [로또(자동)](./src/main/java/study/step3/README.md)
-성
