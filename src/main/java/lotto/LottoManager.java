@@ -6,7 +6,6 @@ import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinnerLotto;
 import lotto.domain.money.Money;
-import lotto.domain.seller.LottoSeller;
 import lotto.prize.Prizes;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -22,16 +21,18 @@ public class LottoManager {
         int amount = InputView.inputMoney();
 
         LottoBuyer lottoBuyer = new LottoBuyer(new Money(amount));
-        Lottos lottos = lottoBuyer.buyLotto(new LottoSeller());
+        int manualQuantity = InputView.inputManualLottoQuantity();
+        List<String> maunalNumbers = InputView.inputManualLottoNumbers(manualQuantity);
+        Lottos buyLottos = lottoBuyer.buyAutoAndManualLotto(maunalNumbers);
 
-        OutputView.printLottoCount(lottos.getLottoCount());
-        OutputView.printLottos(lottos.toString());
+        OutputView.printLottoCount(buyLottos.getLottoCount(), manualQuantity);
+        OutputView.printLottos(buyLottos.toString());
 
         Lotto winnerLotto = new WinnerLotto(createWinnerLotto(InputView.inputWinLottoNumber()),
                 new LottoNumber(InputView.inputBonusNumber()));
 
-        Prizes prizes = lottos.getPrizeOfLotto(winnerLotto);
-        BigDecimal bigDecimal = lottoBuyer.calculateYield(prizes, lottos.getLottoCount());
+        Prizes prizes = buyLottos.getPrizeOfLotto(winnerLotto);
+        BigDecimal bigDecimal = lottoBuyer.calculateYield(prizes, buyLottos.getLottoCount());
         OutputView.printStatistic(prizes, bigDecimal);
     }
 
