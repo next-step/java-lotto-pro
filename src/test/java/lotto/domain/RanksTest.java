@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,25 +19,24 @@ class RanksTest {
 	}
 
 	@Test
-	@DisplayName("FOURTH 부터 역순으로 정렬 된 순위 별 개수 map 반환")
+	@DisplayName("FOURTH 부터 역순으로 정렬 된 RanksResults 객체 반환")
 	void groupByTest() {
 		// given
 		Ranks ranks = Ranks.from(List.of(Rank.FIRST, Rank.FIRST, Rank.FIRST, Rank.SECOND, Rank.THIRD));
 
-		LinkedHashMap<Rank, Long> expected = new LinkedHashMap<>();
-		expected.put(Rank.FIFTH, 0L);
-		expected.put(Rank.FOURTH, 0L);
-		expected.put(Rank.THIRD, 1L);
-		expected.put(Rank.SECOND, 1L);
-		expected.put(Rank.FIRST, 3L);
+		LinkedHashMap<Rank, Long> resultMap = new LinkedHashMap<>();
+		resultMap.put(Rank.FIFTH, 0L);
+		resultMap.put(Rank.FOURTH, 0L);
+		resultMap.put(Rank.THIRD, 1L);
+		resultMap.put(Rank.SECOND, 1L);
+		resultMap.put(Rank.FIRST, 3L);
+		RankResult expected = RankResult.from(resultMap);
 
 		// when
-		Map<Rank, Long> groupBy = ranks.groupBy();
-		System.out.println("groupBy = " + groupBy);
-		System.out.println("expected = " + expected);
+		RankResult rankResult = ranks.rankResults();
 
 		// then
-		assertThat(groupBy).containsExactlyEntriesOf(expected);
+		assertThat(rankResult).isEqualTo(expected);
 	}
 
 }

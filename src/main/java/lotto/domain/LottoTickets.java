@@ -17,7 +17,7 @@ public class LottoTickets {
         return new LottoTickets(lottoTickets);
     }
 
-    public int size() {
+    public int count() {
         return lottoTickets.size();
     }
 
@@ -35,10 +35,9 @@ public class LottoTickets {
         return stringBuilder.toString();
     }
 
-    public List<Rank> ranks(WinningLottoTicket winningLottoTicket) {
+    public Ranks ranks(WinningLottoTicket winningLottoTicket) {
         return lottoTickets.stream()
             .map(winningLottoTicket::rank)
-            .collect(Collectors.toList());
-
+            .collect(Collectors.collectingAndThen(Collectors.toList(), Ranks::from));
     }
 }

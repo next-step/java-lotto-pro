@@ -25,7 +25,7 @@ public class InputConverter {
 	}
 
 	public static Money toMoney(String input) {
-		return Money.from(toInt(input));
+		return Money.from(((toInt(input)) / 100) * 100);
 	}
 
 	public static LottoNumbers toLottoNumbers(String input) {

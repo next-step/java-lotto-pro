@@ -24,6 +24,14 @@ public class Ranks {
 		return resultRankMap;
 	}
 
+	public RankResult rankResults() {
+		return RankResult.from(groupBy());
+	}
+
+	public int size() {
+		return ranks.size();
+	}
+
 	private Map<Rank, Long> initResultMap() {
 		Map<Rank, Long> resultRankMap = new LinkedHashMap<>();
 		Arrays.stream(Rank.values())

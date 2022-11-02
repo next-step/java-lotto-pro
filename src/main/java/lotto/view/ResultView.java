@@ -1,8 +1,9 @@
 package lotto.view;
 
 import lotto.domain.LottoTickets;
+import lotto.domain.Money;
 import lotto.domain.Rank;
-import lotto.domain.Result;
+import lotto.domain.RankResult;
 
 public class ResultView {
 
@@ -17,21 +18,21 @@ public class ResultView {
 	}
 
 	private void appendLottoCount(LottoTickets lottoTickets, StringBuilder ticketStringBuilder) {
-		ticketStringBuilder.append(lottoTickets.size()).append("개를 구매했습니다.");
+		ticketStringBuilder.append(lottoTickets.count()).append("개를 구매했습니다.");
 		ticketStringBuilder.append(NEXT_LINE);
 	}
 
-	public void printResult(Result result) {
+	public void printResult(RankResult rankResult, Money inputMoney) {
 		StringBuilder resultBuilder = new StringBuilder();
 		resultBuilder.append("당첨 통계").append(NEXT_LINE);
 		resultBuilder.append("---------").append(NEXT_LINE);
-		appendResultPerRank(result, resultBuilder);
-		appendProfitRatio(result, resultBuilder);
+		appendResultPerRank(rankResult, resultBuilder);
+		appendProfitRatio(rankResult.profitRate(inputMoney), resultBuilder);
 		System.out.println(resultBuilder);
 	}
 
-	private static void appendResultPerRank(Result result, StringBuilder resultBuilder) {
-		result.getRankResult()
+	private static void appendResultPerRank(RankResult rankResult, StringBuilder resultBuilder) {
+		rankResult.getRankResult()
 			.forEach((key, value) -> {
 				if (key.equals(Rank.SECOND)) {
 					resultBuilder.append(String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개%n",
@@ -47,8 +48,7 @@ public class ResultView {
 			});
 	}
 
-	private static void appendProfitRatio(Result result, StringBuilder resultBuilder) {
-		double profitRate = result.getProfitRate();
+	public static void appendProfitRatio(double profitRate, StringBuilder resultBuilder) {
 		resultBuilder.append(String.format(PROFIT_RATIO_PRINT_FORMAT, profitRate, profitRate > 1 ? "이득" : "손해"));
 	}
 

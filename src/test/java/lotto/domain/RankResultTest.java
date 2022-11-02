@@ -9,14 +9,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-@DisplayName("결과 테스트")
-class ResultTest {
+@DisplayName("순위 결과 테스트")
+class RankResultTest {
 
 	@Test
-	@DisplayName("결과 생성")
+	@DisplayName("순위 결과 생성")
 	void createResult() {
-		Result result = Result.of(Ranks.from(List.of(Rank.SECOND)), Money.from(1L));
-		assertThat(result).isInstanceOf(Result.class);
+		Ranks ranks = Ranks.from(List.of(Rank.SECOND));
+		RankResult rankResult = ranks.rankResults();
+		assertThat(rankResult).isInstanceOf(RankResult.class);
 	}
 
 	@ParameterizedTest
@@ -24,10 +25,11 @@ class ResultTest {
 	@DisplayName("수익률 반환 테스트")
 	void profitTest(Long inputMoney, Double expected) {
 		// given
-		Result result = Result.of(Ranks.from(List.of(Rank.FOURTH)), Money.from(inputMoney));
+		Ranks ranks = Ranks.from(List.of(Rank.FOURTH));
+		RankResult rankResult = ranks.rankResults();
 
 		// when
-		double profitRate = result.getProfitRate();
+		double profitRate = rankResult.profitRate(Money.from(inputMoney));
 
 		// then
 		assertThat(profitRate).isEqualTo(expected);
