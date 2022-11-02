@@ -11,12 +11,13 @@ class LottoResultTest {
 	@Test
 	void 객체_생성() {
 		Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-		Assertions.assertThat(LottoResult.from(lotto, 3)).isEqualTo(LottoResult.from(lotto, 3));
+		LottoNumber bonusNumber = LottoNumber.from(7);
+		Assertions.assertThat(LottoResult.from(lotto, 3, bonusNumber)).isEqualTo(LottoResult.from(lotto, 3, bonusNumber));
 	}
 
 	@Test
 	void 일치_횟수_0미만_IllegalArgumentException() {
-		assertThatThrownBy(() -> LottoResult.from(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), -1))
+		assertThatThrownBy(() -> LottoResult.from(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), -1, LottoNumber.from(7)))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
@@ -25,7 +26,7 @@ class LottoResultTest {
 		Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
 		MatchRank matchRank = MatchRank.THREE_MATCH;
 
-		LottoResult lottoResult = LottoResult.from(lotto, 3);
+		LottoResult lottoResult = LottoResult.from(lotto, 3, LottoNumber.from(7));
 
 		assertThat(lottoResult.hasMatchRank(matchRank)).isTrue();
 		assertThat(lottoResult.hasMatchRank(MatchRank.FOUR_MATCH)).isFalse();

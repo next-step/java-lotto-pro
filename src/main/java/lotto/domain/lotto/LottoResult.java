@@ -8,10 +8,10 @@ public class LottoResult {
 	private final Lotto lotto;
 	private final MatchRank matchRank;
 
-	private LottoResult(Lotto lotto, int matchCount) {
+	private LottoResult(Lotto lotto, int matchCount, LottoNumber bonusNumber) {
 		validateMatchCount(matchCount);
 		this.lotto = lotto;
-		this.matchRank = MatchRank.valueOfMatchCount(matchCount);
+		this.matchRank = MatchRank.valueOfMatchCount(matchCount, lotto.contains(bonusNumber));
 	}
 
 	private void validateMatchCount(int matchCount) {
@@ -20,8 +20,8 @@ public class LottoResult {
 		}
 	}
 
-	public static LottoResult from(Lotto lotto, int matchCount) {
-		return new LottoResult(lotto, matchCount);
+	public static LottoResult from(Lotto lotto, int matchCount, LottoNumber bonusNumber) {
+		return new LottoResult(lotto, matchCount, bonusNumber);
 	}
 
 	public boolean hasMatchRank(MatchRank matchRank) {

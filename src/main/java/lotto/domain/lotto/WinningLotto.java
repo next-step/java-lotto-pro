@@ -33,7 +33,7 @@ public class WinningLotto {
 	}
 
 	public LottoResults getLottoResults(Lottos lottos) {
-		return lottos.toLottoResults(winLotto);
+		return lottos.toLottoResults(winLotto, bonusNumber);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 import lotto.domain.amount.Amount;
@@ -25,11 +26,10 @@ public class ResultView {
 		System.out.println("---------");
 
 		LottoResults lottoResults = winningLotto.getLottoResults(lottos);
-		IntStream.rangeClosed(3, 6).forEach(i -> {
-			MatchRank matchCount = MatchRank.valueOfMatchCount(i);
-			LottoResults filteredLottoResults = lottoResults.filterByMatchRank(matchCount);
+		Arrays.stream(MatchRank.values()).forEach(matchRank -> {
+			LottoResults filteredLottoResults = lottoResults.filterByMatchRank(matchRank);
 			Quantity matchQuantity = filteredLottoResults.quantity();
-			System.out.println(new LottoResultMessage(matchCount, matchQuantity));
+			System.out.println(new LottoResultMessage(matchRank, matchQuantity));
 		});
 		System.out.println(new YieldMessage(lottoResults.yield(purchaseAmount)));
 	}

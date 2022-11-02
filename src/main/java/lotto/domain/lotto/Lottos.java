@@ -56,10 +56,10 @@ public class Lottos {
 		return this.lottos;
 	}
 
-	public LottoResults toLottoResults(Lotto winLotto) {
+	public LottoResults toLottoResults(Lotto winLotto, LottoNumber bonusNumber) {
 		return LottoResults.from(
 			this.lottos.stream()
-				.map(lotto -> LottoResult.from(lotto, lotto.countMatchCount(winLotto)))
+				.map(lotto -> LottoResult.from(lotto, lotto.countMatchCount(winLotto), bonusNumber))
 				.collect(Collectors.toList())
 		);
 	}
