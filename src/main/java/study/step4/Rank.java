@@ -1,5 +1,7 @@
 package study.step4;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 1500_000),
@@ -24,12 +26,10 @@ public enum Rank {
     }
 
     public static Rank valueOf(int numberOfMatching) {
-        for (Rank rank : Rank.values()) {
-            if (rank.hasNumberOfMatching(numberOfMatching)) {
-                return rank;
-            }
-        }
-        return Rank.NONE;
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.hasNumberOfMatching(numberOfMatching))
+                .findFirst()
+                .orElse(Rank.NONE);
     }
 
     private boolean hasNumberOfMatching(int numberOfMatching) {
