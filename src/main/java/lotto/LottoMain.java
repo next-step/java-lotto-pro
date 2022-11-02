@@ -1,37 +1,37 @@
 package lotto;
 
+import static lotto.domain.LottoPayment.*;
+
 import lotto.domain.*;
-import lotto.service.LottoBuyService;
-import lotto.service.LottoResultService;
 import lotto.service.LottoService;
 import lotto.strategy.AutoLottoNumberStrategy;
 import lotto.strategy.ConsoleLottoNumberStrategy;
+import lotto.strategy.LottoNumberStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-
-import java.util.List;
-
 
 public class LottoMain {
     public static void main(String[] args) {
 
-        LottoBuyService buyService = new LottoBuyService(
-                new LottoPayment(InputView.payLotto()), new AutoLottoNumberStrategy());
+        LottoNumberStrategy buyingLottoStrategy = new AutoLottoNumberStrategy();
+        LottoNumberStrategy winningLottoStrategy = new ConsoleLottoNumberStrategy();
 
-        OutputView.buyLottoCountPrint(buyService.getCount());
+        LottoService lottoService = new LottoService(buyingLottoStrategy, winningLottoStrategy);
+        LottoPayment lottoPayment = lottoService.buyLotto(InputView.payLotto());
+        OutputView.buyLottoCountPrint(lottoPayment.getBuyLottoCount());
 
-        List<Lotto> lottos = buyService.generateLottos();
-        OutputView.printLottoNumbers(lottos);
+        BuyingLottoGroup buyingLottoGroup = lottoService.generateBuyingLottoGroup(lottoPayment.getBuyLottoCount());
+        OutputView.printLottoNumbers(buyingLottoGroup.getLottos());
 
         OutputView.printLastWeekWinningNumber();
-        LottoService lottoService = new LottoService(new ConsoleLottoNumberStrategy());
-        Lotto winning = lottoService.generateWinningLotto();
+        Lotto basicLotto = lottoService.generateWinningBasicLotto();
+        LottoNumber bonusNumber = lottoService.generateWinningBonusNumber(InputView.inputBonusNumber());
 
-        LottoResult result = lottoService.matched(lottos, winning);
+        WinningLotto winningLotto = WinningLotto.create(basicLotto, bonusNumber);
+        LottoResult result = lottoService.getMatchingResultBuyingLottoGroupAndWinningLotto(
+                buyingLottoGroup, winningLotto);
+
         OutputView.printWinningStats(result);
-
-        LottoResultService lottoResultService = new LottoResultService(result);
-        LottoReturnRate lottoReturnRate = lottoResultService.calculateReturnRate(buyService.getCount());
-        OutputView.printReturnRate(lottoReturnRate);
+        OutputView.printReturnRate(new LottoReturnRate(result.calculateWinningMoney(), lottoPayment.getBuyLottoCount() * PRICE));
     }
 }

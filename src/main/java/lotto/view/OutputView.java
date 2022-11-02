@@ -30,10 +30,13 @@ public abstract class OutputView {
         println("당첨 통계");
         println("------------");
         for (LottoWinningMoneyEnum money : LottoWinningMoneyEnum.values()) {
-            String sentence = "" + (money.getMatchedCount() + "개 일치")
-                    + (" (" + money.getWinningMoney() + "원)")
-                    + (" - " + result.getResultCount(money.getMatchedCount()) + "개");
-            println(sentence);
+            if(money!=LottoWinningMoneyEnum.MISS) {
+                String sentence = "" + (money.getMatchedCount() + "개 일치"
+                        + (money==LottoWinningMoneyEnum.SECOND ? ", 보너스 볼 일치" : ""))
+                        + (" (" + money.getWinningMoney() + "원)")
+                        + (" - " + result.getResultCount(money) + "개");
+                println(sentence);
+            }
         }
     }
 
