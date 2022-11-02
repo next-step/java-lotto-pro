@@ -21,6 +21,8 @@ public class Amount {
 
     private final static String MIN_BUY_LOTTO_MESSAGE = "로또는 1개 이상 구매해야 합니다.";
 
+    private final static String PURCHASE_EXCEEDED_MESSAGE = "구매 가능한 수량을 초과하였습니다.";
+
     private final int amount;
 
     public Amount(final String amount) {
@@ -71,6 +73,16 @@ public class Amount {
         BigDecimal buyAmountBigDecimal = new BigDecimal(buyAmount.getBuyAmount());
 
         return totalAmountBigDecimal.divide(buyAmountBigDecimal, 2, RoundingMode.HALF_UP).doubleValue();
+    }
+
+    public void purchaseAvailable(int count) {
+        if (count > buyLottoCount()) {
+            throw new IllegalArgumentException(PURCHASE_EXCEEDED_MESSAGE);
+        }
+    }
+
+    public int buyLottoAutoCount(int manualLottoCount) {
+        return buyLottoCount() - manualLottoCount;
     }
 
     public int getBuyAmount() {
