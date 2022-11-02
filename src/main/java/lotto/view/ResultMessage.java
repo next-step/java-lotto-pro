@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.lotto.MatchRank;
 
-public enum MatchRankMessage {
+public enum ResultMessage {
 	THREE_MATCH_MESSAGE(MatchRank.THREE_MATCH, "3개 일치 (5000원)"),
 	FOUR_MATCH_MESSAGE(MatchRank.FOUR_MATCH, "4개 일치 (50000원)"),
 	FIVE_MATCH_MESSAGE(MatchRank.FIVE_MATCH, "5개 일치 (1500000원)"),
@@ -12,7 +12,7 @@ public enum MatchRankMessage {
 	private final MatchRank matchRank;
 	private final String message;
 
-	MatchRankMessage(MatchRank matchRank, String message) {
+	ResultMessage(MatchRank matchRank, String message) {
 		this.matchRank = matchRank;
 		this.message = message;
 	}
@@ -23,5 +23,9 @@ public enum MatchRankMessage {
 
 	public String getMessage() {
 		return message;
+	}
+
+	public String getResultMessage(int quantity) {
+		return String.format("%s- %d개", this.message, quantity);
 	}
 }
