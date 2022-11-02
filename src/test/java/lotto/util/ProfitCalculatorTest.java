@@ -18,7 +18,7 @@ class ProfitCalculatorTest {
         HashMap<Rank, Integer> lottoResultMap = new HashMap<>();
         lottoResultMap.put(Rank.FIFTH, 1);
         LottoResult lottoResult = new LottoResult(lottoResultMap);
-        double actualProfitRatio = ProfitCalculator.calculateProfit(lottoResult, lottoAmount);
+        double actualProfitRatio = ProfitCalculator.calculateProfitRatio(lottoResult, lottoAmount);
         double expected = Math.floor(5.0);
         assertThat(actualProfitRatio).isEqualTo(expected);
     }

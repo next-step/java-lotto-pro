@@ -17,4 +17,8 @@ public class LottoResult {
     public Map<Rank, Integer> getLottoResult() {
         return Collections.unmodifiableMap(lottoResult);
     }
+
+    public double profit(Rank rank) {
+        return rank.getWinningMoney() * lottoResult.getOrDefault(rank, 0);
+    }
 }
