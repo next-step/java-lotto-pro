@@ -4,7 +4,7 @@ import step3.model.LottoManager;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        new LottoManager();
-        LottoManager.purchaseLotto();
+        LottoManager lottoManager = new LottoManager();
+        lottoManager.purchaseLotto();
     }
 }
