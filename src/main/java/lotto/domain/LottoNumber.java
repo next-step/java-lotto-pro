@@ -13,15 +13,25 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int LOTTO_MAX_NUMBER = 45;
 
     private int lottoNumber;
+    private boolean isBonus;
 
     public LottoNumber(String lottoNumberString) {
-        this(Optional.ofNullable(lottoNumberString)
-                .filter(str -> str.trim().matches("\\d+"))
-                .map(str -> Integer.parseInt(str.trim()))
-                .orElseThrow(()->new IllegalArgumentException("자연수 형식이 아닙니다.")));
+        this(lottoNumberString, false);
     }
 
     public LottoNumber(int lottoNumber) {
+        this(lottoNumber, false);
+    }
+
+    public LottoNumber(String lottoNumberString, boolean isBonus) {
+        this(Optional.ofNullable(lottoNumberString)
+                .filter(str -> str.trim().matches("\\d+"))
+                .map(str -> Integer.parseInt(str.trim()))
+                .orElseThrow(()->new IllegalArgumentException("자연수 형식이 아닙니다."))
+        ,isBonus);
+    }
+
+    public LottoNumber(int lottoNumber, boolean isBonus) {
         if(lottoNumber < LOTTO_MIN_NUMBER) {
             throw new IllegalArgumentException("숫자는 "+ LOTTO_MIN_NUMBER +"이상이여야 합니다.");
         }
@@ -29,6 +39,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
             throw new IllegalArgumentException("숫자는 "+ LOTTO_MAX_NUMBER +"이하여야 합니다.");
         }
         this.lottoNumber = lottoNumber;
+        this.isBonus = isBonus;
     }
 
     public static List<LottoNumber> lottoNumberMinToMax() {
@@ -68,5 +79,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public LottoNumberDto getLottoNumberDto() {
         return new LottoNumberDto(lottoNumber);
+    }
+
+    public boolean isBonus() {
+        return isBonus;
     }
 }

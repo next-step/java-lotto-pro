@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 public class WinningNumbers extends Lotto {
 
     private List<LottoNumber> winningNumbers;
+    private BonusNumber bonusNumber;
 
     public WinningNumbers(String winningNumbersString) {
         this(winningNumbersString, new StringCommaSplitter());
