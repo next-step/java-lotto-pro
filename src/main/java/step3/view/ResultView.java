@@ -2,8 +2,8 @@ package step3.view;
 
 public class ResultView {
 
-    public static void printLottosQuantity(int quantity) {
-        System.out.printf("%d개를 구매했습니다.%n", quantity);
+    public static void printLottosQuantity(long manual, long automatic) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manual, automatic);
     }
 
     public static void printLottos(String lottos) {

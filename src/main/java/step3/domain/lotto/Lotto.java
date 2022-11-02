@@ -1,5 +1,6 @@
 package step3.domain.lotto;
 
+import step3.domain.factory.LottoFactory;
 import step3.domain.statistics.Rank;
 
 public class Lotto {
@@ -8,10 +9,12 @@ public class Lotto {
 
     private final int price;
     private final LottoNumbers lottoNumbers;
+    private final LottoType lottoType;
 
-    public Lotto(final LottoNumbers lottoNumbers) {
+    public Lotto(LottoFactory lottoFactory) {
         this.price = DEFAULT_LOTTO_PRICE;
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = lottoFactory.create();
+        this.lottoType = lottoFactory.getLottoType();
     }
 
     public Rank getRank(WinningLottoNumbers winningLottoNumbers, BonusLottoNumber bonusLottoNumber) {
@@ -28,6 +31,10 @@ public class Lotto {
 
     public LottoNumbers value() {
         return lottoNumbers;
+    }
+
+    public LottoType getLottoType() {
+        return lottoType;
     }
 
     @Override

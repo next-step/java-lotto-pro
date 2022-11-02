@@ -1,4 +1,4 @@
-package step3.domain.generator;
+package step3.domain.factory;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,14 +15,14 @@ class LottoFactoryTest {
     @Test
     @DisplayName("로또 생성 전략 - 랜덤")
     void lottoRandomGenerate() {
-        LottoNumbers lottoNumbers = new LottoNumbers(new Random());
+        LottoNumbers lottoNumbers = new Automatic().create();
         assertThat(lottoNumbers.value()).hasSize(DEFAULT_LOTTO_SIZE);
     }
 
     @Test
     @DisplayName("로또 생성 전략 - 수동")
     void lottoManualGenerate() {
-        LottoNumbers lottoNumbers = new LottoNumbers(new Manual(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LottoNumbers lottoNumbers = new Manual(Arrays.asList(1, 2, 3, 4, 5, 6)).create();
         assertThat(lottoNumbers.value()).containsExactly(
                 LottoNumber.of(1),
                 LottoNumber.of(2),

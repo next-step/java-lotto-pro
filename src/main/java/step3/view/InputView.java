@@ -32,8 +32,11 @@ public class InputView {
                 .orElseThrow(() -> new IllegalArgumentException(INPUT_NOT_ALLOW_BLANK.getMessage()));
     }
 
-    public static List<Integer> inputManualLottoNumbers() {
+    public static void printManualLottoQuantity() {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static List<Integer> inputManualLottoNumbers() {
         return new InputManualLottoNumbers().create()
                 .orElseThrow(() -> new IllegalArgumentException(INPUT_NOT_ALLOW_BLANK.getMessage()));
     }

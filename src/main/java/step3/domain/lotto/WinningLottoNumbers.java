@@ -1,36 +1,29 @@
 package step3.domain.lotto;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static step3.domain.lotto.LottoNumbers.DEFAULT_LOTTO_SIZE;
-import static step3.type.ErrorMessageType.*;
+import static step3.type.ErrorMessageType.INPUT_ONLY_ALLOW_NUMBER;
+import static step3.type.ErrorMessageType.LOTTO_NUMBER_WRONG_SIZE;
 
 public class WinningLottoNumbers {
 
     private static final String REGEX = ",";
 
-    private final List<LottoNumber> lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
     public WinningLottoNumbers(String input) {
-        List<LottoNumber> numbers = getLottoNumbers(input);
-        validateDuplicate(numbers);
-        this.lottoNumbers = numbers;
+        this.lottoNumbers = new LottoNumbers(getLottoNumbers(input));
     }
 
-    private void validateDuplicate(List<LottoNumber> lottoNumbers) {
-        Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
-        if (lottoNumberSet.size() != lottoNumbers.size()) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATE.getMessage());
-        }
-    }
-
-    private List<LottoNumber> getLottoNumbers(String input) {
+    private List<Integer> getLottoNumbers(String input) {
         return Arrays.stream(getStrings(input))
                 .map(s -> {
                     try {
-                        int lottoNumber = Integer.parseInt(s.trim());
-                        return LottoNumber.of(lottoNumber);
+                        return Integer.parseInt(s.trim());
                     } catch (NumberFormatException e) {
                         throw new IllegalArgumentException(INPUT_ONLY_ALLOW_NUMBER.getMessage());
                     }
@@ -51,7 +44,7 @@ public class WinningLottoNumbers {
     }
 
     public List<LottoNumber> value() {
-        return Collections.unmodifiableList(lottoNumbers);
+        return Collections.unmodifiableList(lottoNumbers.value());
     }
 
     @Override

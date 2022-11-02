@@ -1,6 +1,7 @@
-package step3.domain.generator;
+package step3.domain.factory;
 
-import step3.domain.lotto.LottoNumber;
+import step3.domain.lotto.LottoNumbers;
+import step3.domain.lotto.LottoType;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,13 +12,16 @@ import static step3.domain.lotto.LottoNumber.END_INCLUSIVE;
 import static step3.domain.lotto.LottoNumber.START_INCLUSIVE;
 import static step3.domain.lotto.LottoNumbers.DEFAULT_LOTTO_SIZE;
 
-public class Random implements LottoFactory {
+public class Automatic implements LottoFactory {
 
     @Override
-    public List<LottoNumber> create() {
-        return pickNumberInRange().stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
+    public LottoNumbers create() {
+        return new LottoNumbers(pickNumberInRange());
+    }
+
+    @Override
+    public LottoType getLottoType() {
+        return LottoType.AUTOMATIC;
     }
 
     private List<Integer> pickNumberInRange() {

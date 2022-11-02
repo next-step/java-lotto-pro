@@ -2,9 +2,11 @@ package step3.domain.statistics;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.domain.amount.Amount;
+import step3.domain.factory.Automatic;
+import step3.domain.lotto.Lotto;
 import step3.domain.lotto.Lottos;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,8 +33,8 @@ class LottoStatisticsTest {
         Map<Rank, Integer> lottoResult = new HashMap<>();
         lottoResult.put(Rank.FIFTH, 1);
 
-        Lottos lottos = new Lottos(new Amount(14000));
+        Lottos lottos = new Lottos(Arrays.asList(new Lotto(new Automatic())));
         LottoStatistics lottoStatistics = new LottoStatistics(lottos, lottoResult);
-        assertThat(lottoStatistics.getTotalProfit()).isEqualTo(0.35);
+        assertThat(lottoStatistics.getTotalProfit()).isEqualTo(5.0);
     }
 }

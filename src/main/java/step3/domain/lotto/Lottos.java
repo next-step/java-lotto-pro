@@ -1,30 +1,30 @@
 package step3.domain.lotto;
 
-import step3.domain.amount.Amount;
-import step3.domain.generator.Random;
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static step3.domain.lotto.Lotto.DEFAULT_LOTTO_PRICE;
-
 public class Lottos {
 
-    private final List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
-    public Lottos(Amount amount) {
-        createLottos(amount);
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public List<Lotto> value() {
         return Collections.unmodifiableList(this.lottos);
     }
 
-    private void createLottos(Amount amount) {
-        for (int i = 0; i < amount.getLottoPurchasesCount(DEFAULT_LOTTO_PRICE); i++) {
-            lottos.add(new Lotto(new LottoNumbers(new Random())));
-        }
+    public long getManualCount() {
+        return lottos.stream()
+                .filter(lotto -> lotto.getLottoType() == LottoType.MANUAL)
+                .count();
+    }
+
+    public long getAutomaticCount() {
+        return lottos.stream()
+                .filter(lotto -> lotto.getLottoType() == LottoType.AUTOMATIC)
+                .count();
     }
 
     private static void appendLottoNumber(StringBuilder sb, LottoNumbers lottoNumbers) {

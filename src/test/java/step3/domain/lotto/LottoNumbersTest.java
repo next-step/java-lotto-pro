@@ -2,7 +2,7 @@ package step3.domain.lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.domain.generator.Random;
+import step3.domain.factory.Automatic;
 
 import java.util.Arrays;
 
@@ -33,7 +33,7 @@ class LottoNumbersTest {
     @Test
     @DisplayName("6자리 랜덤 로또 번호를 생성한다.")
     void createRandomLottoNumbers() {
-        LottoNumbers lottoNumbers = new LottoNumbers(new Random());
+        LottoNumbers lottoNumbers = new Automatic().create();
         assertThat(lottoNumbers.value()).hasSize(DEFAULT_LOTTO_SIZE);
     }
 }
