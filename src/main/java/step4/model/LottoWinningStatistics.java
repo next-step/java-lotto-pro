@@ -1,8 +1,5 @@
 package step4.model;
 
-import step3.exception.LottoFormatException;
-import step4.constant.ErrorMessageConstant;
-
 import java.util.*;
 
 public class LottoWinningStatistics {
@@ -10,16 +7,13 @@ public class LottoWinningStatistics {
     private final Money totalProfit = new Money(0);
 
     public LottoWinningStatistics(List<Lotto> lottos, Lotto winLotto, LottoNumber bonusLottoNumber) {
-        validWinLottoResult(winLotto, bonusLottoNumber);
-        initLottoWinningStatistics();
-        setLottoWinningStatistics(lottos, winLotto, bonusLottoNumber);
-        setTotalProfit();
+        this(lottos, new WinningLotto(winLotto, bonusLottoNumber));
     }
 
-    private void validWinLottoResult(Lotto winLotto, LottoNumber bonusLottoNumber) {
-        if (winLotto.isContains(bonusLottoNumber)) {
-            throw new LottoFormatException(ErrorMessageConstant.BONUS_NUMBER_IN_LOTTO_WIN_RESULT);
-        }
+    public LottoWinningStatistics(List<Lotto> lottos, WinningLotto winLotto) {
+        initLottoWinningStatistics();
+        setLottoWinningStatistics(lottos, winLotto);
+        setTotalProfit();
     }
 
     private void initLottoWinningStatistics() {
@@ -30,10 +24,9 @@ public class LottoWinningStatistics {
         }
     }
 
-    private void setLottoWinningStatistics(List<Lotto> lottos, Lotto winLotto, LottoNumber bonusLottoNumber) {
+    private void setLottoWinningStatistics(List<Lotto> lottos, WinningLotto winningLotto) {
         for (Lotto lotto : lottos) {
-            int matchedCount = lotto.getEqualCount(winLotto);
-            setLottoWinningStatistic(Rank.valueOf(matchedCount, lotto.isContains(bonusLottoNumber)));
+            setLottoWinningStatistic(winningLotto.match(lotto));
         }
     }
 

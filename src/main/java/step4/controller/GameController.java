@@ -1,9 +1,6 @@
 package step4.controller;
 
-import step4.model.Game;
-import step4.model.Lotto;
-import step4.model.LottoNumber;
-import step4.model.LottoWinningStatistics;
+import step4.model.*;
 import step4.util.StringUtil;
 import step4.view.InputView;
 import step4.view.OutputView;
@@ -23,7 +20,7 @@ public class GameController {
         Lotto winLotto = new Lotto(StringUtil.parseLottoText(InputView.inputWinnerLottoResult()));
         LottoNumber bonusLottoNumber = new LottoNumber(InputView.inputLottoBonusNumber());
 
-        LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(lottos, winLotto, bonusLottoNumber);
+        LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(lottos, new WinningLotto(winLotto, bonusLottoNumber));
         OutputView.printLottoStatistics(lottoWinningStatistics.getLottoWinningStatistics()
                 , lottoWinningStatistics.getTotalProfitPercent(game.getBuyMoney()));
     }

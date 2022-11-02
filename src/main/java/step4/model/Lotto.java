@@ -3,6 +3,7 @@ package step4.model;
 import step4.constant.ErrorMessageConstant;
 import step4.constant.LottoConstant;
 import step4.exception.LottoFormatException;
+import step4.util.StringUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         checkLottoOutOfSize((int) lottoNumbers.stream().distinct().count());
@@ -19,6 +20,10 @@ public class Lotto {
 
     public Lotto(String[] lottoNumbersText) {
         this(getLottoNumbersFromTexts(lottoNumbersText));
+    }
+
+    public Lotto(String lottoNumbersText) {
+        this(StringUtil.parseLottoText(lottoNumbersText));
     }
 
     private static List<LottoNumber> getLottoNumbersFromTexts(String[] lottoNumbers) {
