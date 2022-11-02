@@ -41,4 +41,11 @@ public class LottoTicketTest {
         LottoTicket ticket2 = LottoTicketFixture.create();
         assertThat(ticket1.containCount(ticket2)).isEqualTo(6);
     }
+
+    @DisplayName("로또 티켓은 특정 번호를 가지고 있는지 알 수 있다")
+    @Test
+    void lotto_number_contain_test() {
+        LottoTicket ticket1 = LottoTicketFixture.create();
+        assertThat(ticket1.contain(LottoNumber.get(1))).isTrue();
+    }
 }

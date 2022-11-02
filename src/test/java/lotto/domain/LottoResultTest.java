@@ -18,7 +18,7 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult(winningTicket);
         List<LottoTicket> tickets = Arrays.asList(LottoTicketFixture.create());
 
-        Map<Rank, Integer> statistics = lottoResult.statistics(tickets);
+        Map<Rank, Integer> statistics = lottoResult.statistics(tickets, LottoNumber.get(7));
         assertThat(statistics.get(Rank.FIRST)).isEqualTo(1);
     }
 
@@ -28,7 +28,7 @@ public class LottoResultTest {
         LottoTicket winningTicket = new ManualLottoGenerator(Arrays.asList(1, 2, 3, 4, 5, 6)).create();
         LottoTicket myTicket = new ManualLottoGenerator(Arrays.asList(1, 2, 3, 4, 5, 6)).create();
         LottoResult result = new LottoResult(winningTicket);
-        result.statistics(Arrays.asList(myTicket));
+        result.statistics(Arrays.asList(myTicket), LottoNumber.get(7));
         Money spendingMoney = new Money(1_000L);
 
         double expect = (double) Rank.FIRST.getMoneyValue() / spendingMoney.value();

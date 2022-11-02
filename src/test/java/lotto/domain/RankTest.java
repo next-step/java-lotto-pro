@@ -4,36 +4,31 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class RankTest {
-    @DisplayName("랭크 최소값과 비교할 수 있다")
-    @Test
-    void isBiggerThanMinimum_test() {
-        assertThat(Rank.isBiggerThanMinimum(2)).isFalse();
-        assertThat(Rank.isBiggerThanMinimum(3)).isTrue();
-    }
-
-    @DisplayName("랭크를 역순으로 구할 수 있다")
-    @Test
-    void reverse_rank_test() {
-        Rank reverseFirstRank = Rank.reverseValues()[0];
-        assertThat(reverseFirstRank).isEqualTo(Rank.FOURTH);
-    }
-
     @DisplayName("일치하는 숫자로 Rank를 알 수 있다")
     @Test
     void rank_get_test() {
         int count = Rank.FIRST.getMatchCount();
-        assertThat(Rank.get(count)).isEqualTo(Rank.FIRST);
+        assertThat(Rank.get(count, false)).isEqualTo(Rank.FIRST);
     }
 
-    @DisplayName("최소값보다 작은 값이 들어올 경우 예외가 발생한다")
+    @DisplayName("티켓의 번호가 5개가 일치하고 보너스 볼이 다를 경우 순위는 3등이다")
     @Test
-    void rank_get_exception_test() {
-        assertThatThrownBy(() -> Rank.get(2))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("일치하는 랭크가 없습니다.");
+    void rank_get_third_rank_test() {
+        assertThat(Rank.get(5, false)).isEqualTo(Rank.THIRD);
+    }
+
+    @DisplayName("티켓의 번호가 5개가 일치하고 보너스 볼이 일치하는 경우 순위는 2등이다")
+    @Test
+    void rank_get_second_rank_test() {
+        assertThat(Rank.get(5, true)).isEqualTo(Rank.SECOND);
+    }
+
+    @DisplayName("티켓의 번호가 5개가 일치하지 않으면 보너스 볼은 의미가 없다")
+    @Test
+    void rank_get_bonus_not_five_test() {
+        assertThat(Rank.get(4, true)).isEqualTo(Rank.FOURTH);
     }
 
     @DisplayName("각 랭크의 일치하는 숫자를 알 수 있다")

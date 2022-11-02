@@ -29,6 +29,10 @@ public class LottoTicket {
                 .count();
     }
 
+    public boolean contain(LottoNumber number) {
+        return lottoNumbers.contains(number);
+    }
+
     @Override
     public String toString() {
         String result = lottoNumbers.stream()

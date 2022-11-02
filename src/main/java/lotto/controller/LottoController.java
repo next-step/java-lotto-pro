@@ -23,11 +23,10 @@ public class LottoController {
     }
 
     private void showLottoResult(Money money, List<LottoTicket> tickets) {
-        LottoResult lottoResult = new LottoResult(
-                new ManualLottoGenerator(createWinningNumbers()).create()
-        );
+        LottoTicket winningTicket = new ManualLottoGenerator(createWinningNumbers()).create();
+        LottoResult lottoResult = new LottoResult(winningTicket);
 
-        OutputView.printStatistics(lottoResult.statistics(tickets));
+        OutputView.printStatistics(lottoResult.statistics(tickets, chooseBonusNumber(winningTicket)));
         OutputView.printReturnRate(lottoResult.returnRate(money));
     }
 
@@ -35,5 +34,15 @@ public class LottoController {
         return Arrays.stream(STANDARD_PATTERN.split(InputView.getWiningNumber()))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    private LottoNumber chooseBonusNumber(LottoTicket winningTicket) {
+        LottoNumber number = LottoNumber.get(InputView.getBonusNumber());
+        if (winningTicket.contain(number)) {
+            OutputView.printDuplicateNumber();
+            return chooseBonusNumber(winningTicket);
+        }
+
+        return number;
     }
 }

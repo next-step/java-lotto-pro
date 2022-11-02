@@ -22,20 +22,15 @@ public class LottoResult {
         }
     }
 
-    public Map<Rank, Integer> statistics(List<LottoTicket> tickets) {
-        tickets.forEach(this::addLottoResultCounts);
+    public Map<Rank, Integer> statistics(List<LottoTicket> tickets, LottoNumber bonusNumber) {
+        tickets.forEach(ticket -> addLottoResultCounts(ticket, bonusNumber));
+        lottoResultCounts.entrySet().removeIf(entry -> entry.getKey() == Rank.MISS);
         return lottoResultCounts;
     }
 
-    private void addLottoResultCounts(LottoTicket ticket) {
-        int matchCount = countOfMatch(ticket);
-        if (Rank.isBiggerThanMinimum(matchCount)) {
-            lottoResultCounts.merge(Rank.get(matchCount), INCREASE_VALUE, Integer::sum);
-        }
-    }
-
-    private int countOfMatch(LottoTicket ticket) {
-        return winningTicket.containCount(ticket);
+    private void addLottoResultCounts(LottoTicket ticket, LottoNumber bonusNumber) {
+        int matchCount = winningTicket.containCount(ticket);
+        lottoResultCounts.merge(Rank.get(matchCount, ticket.contain(bonusNumber)), INCREASE_VALUE, Integer::sum);
     }
 
     public double returnRate(Money money) {
@@ -44,7 +39,7 @@ public class LottoResult {
 
     private Money calculateTotalPrice() {
         Money totalMoney = new Money(0L);
-        for (Rank rank : Rank.values()) {
+        for (Rank rank : lottoResultCounts.keySet()) {
             int count = lottoResultCounts.get(rank);
             totalMoney = totalMoney.sum(rank.getMoney().multiply(count));
         }
