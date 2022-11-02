@@ -34,10 +34,7 @@ public class LottoResult {
   }
 
   private void calculateLottoMatch(Lotto lotto) {
-    LottoRank lottoRank = LottoRank.getLottoRank(
-        lotto.getMatchingCount(winningLotto.getLotto()),
-        lotto.isContainNumber(winningLotto.getBonusNumber())
-    );
+    LottoRank lottoRank = this.winningLotto.getLottoRankByLotto(lotto);
 
     if (resultMap.containsKey(lottoRank)) {
       int value = resultMap.get(lottoRank);

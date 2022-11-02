@@ -34,6 +34,15 @@ public class WinningLotto {
     return this.bonusNumber;
   }
 
+  public LottoRank getLottoRankByLotto(Lotto lotto) {
+    LottoRank lottoRank = LottoRank.getLottoRank(
+        lotto.getMatchingCount(this.lotto),
+        lotto.isContainNumber(this.bonusNumber)
+    );
+
+    return lottoRank;
+  }
+
 
   private Lotto generateWinningLotto(String winningLottoNumber) {
     validWinningLottoNumber(winningLottoNumber);

@@ -50,4 +50,20 @@ public class WinningLottoTest {
     );
   }
 
+  @Test
+  @DisplayName("당첨 로또를 통해서 특정 로또의 당첨 결과를 확인")
+  void get_lotto_rank_by_lotto() {
+    //given
+    String winningLottoNumber = "1, 2, 3, 4, 5, 6";
+    String bonusNumber = "7";
+    Lotto lotto = Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    WinningLotto winningLotto = new WinningLotto(winningLottoNumber, bonusNumber);
+
+    //when
+    LottoRank lottoRank = winningLotto.getLottoRankByLotto(lotto);
+
+    //then
+    assertThat(lottoRank).isEqualTo(LottoRank.FIRST);
+  }
+
 }
