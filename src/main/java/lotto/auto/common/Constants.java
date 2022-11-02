@@ -9,4 +9,5 @@ public class Constants {
     public static final int LOTTO_MAX_NUM = 45;
     public static final int INIT_NUM = 0;
     public static final int DECIMAL_POINT = 2;
+    public static final int ZERO = 0;
 }
