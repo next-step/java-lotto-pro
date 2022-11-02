@@ -28,7 +28,7 @@ class LottoBundleTest {
     void countWinning() {
         LottoBundle lottoBundle = new LottoBundle(lottoList);
 
-        WinningMoney winningMoney = lottoBundle.countWinning(new WinningLotto(Arrays.asList(10, 11, 12, 13, 14, 15)));
+        WinningMoney winningMoney = lottoBundle.countWinning(new WinningLotto(Arrays.asList(10, 11, 12, 13, 14, 15),16));
 
         assertThat(winningMoney).isEqualTo(new WinningMoney(Collections.EMPTY_LIST));
     }
@@ -37,8 +37,8 @@ class LottoBundleTest {
     void countWinning2() {
         LottoBundle lottoBundle = new LottoBundle(lottoList);
 
-        WinningMoney winningMoney = lottoBundle.countWinning(new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        WinningMoney winningMoney = lottoBundle.countWinning(new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6),16));
 
-        assertThat(winningMoney).isEqualTo(new WinningMoney(Arrays.asList(FIRST,SECOND,THIRD,FOURTH)));
+        assertThat(winningMoney).isEqualTo(new WinningMoney(Arrays.asList(FIRST, THIRD, FOURTH, FIFTH)));
     }
 }

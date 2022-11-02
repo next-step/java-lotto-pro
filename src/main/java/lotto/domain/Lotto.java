@@ -33,9 +33,8 @@ public class Lotto {
                 .count();
 
         boolean hasBonusNumber = numbers.stream()
-                .filter(winningLotto::hasBonus)
-                .count() == 1;
-        return Rank.findRank((int) matchCount, hasBonusNumber);
+                .anyMatch(winningLotto::hasBonus);
+        return Rank.findRank(matchCount, hasBonusNumber);
     }
 
     public boolean hasSameNumber(LottoNumber lottoNumber) {

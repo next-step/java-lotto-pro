@@ -19,7 +19,7 @@ class WinningLottoTest {
 
         Rank rank = lotto.getRankBy(winningLotto);
 
-        assertThat(rank).isEqualTo(Rank.SECOND_WITH_BONUS);
+        assertThat(rank).isEqualTo(Rank.SECOND);
     }
 
     @Test
@@ -30,14 +30,14 @@ class WinningLottoTest {
 
         Rank rank = lotto.getRankBy(winningLotto);
 
-        assertThat(rank).isEqualTo(Rank.SECOND);
+        assertThat(rank).isEqualTo(Rank.THIRD);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1,2,3,4,5,6})
     @DisplayName("보너스 번호가 없는 로또일 때는 항상 false를 반환함")
     void hasBonus(int bonusTry) {
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6),16);
 
         assertThat(winningLotto.hasBonus(LottoNumber.of(bonusTry))).isFalse();
     }

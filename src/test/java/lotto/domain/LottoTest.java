@@ -13,9 +13,9 @@ class LottoTest {
     void test1() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        Rank rank = lotto.getRankBy(new WinningLotto(Arrays.asList(1, 2, 3, 10, 11, 12)));
+        Rank rank = lotto.getRankBy(new WinningLotto(Arrays.asList(1, 2, 3, 10, 11, 12),16));
 
-        assertThat(rank).isEqualTo(Rank.FOURTH);
+        assertThat(rank).isEqualTo(Rank.FIFTH);
     }
 
 
