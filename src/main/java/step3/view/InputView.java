@@ -9,7 +9,7 @@ public class InputView {
     private InputView() {
         throw new AssertionError();
     }
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static String requestInputMoney() {
         System.out.println(OperationMsg.REQUEST_INPUT_MONEY);
@@ -22,4 +22,8 @@ public class InputView {
     }
 
 
+    public static int requestInputBonus() {
+        System.out.println(OperationMsg.REQUEST_INPUT_BONUS);
+        return scanner.nextInt();
+    }
 }

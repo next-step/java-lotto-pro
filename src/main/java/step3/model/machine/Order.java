@@ -8,15 +8,16 @@ public class Order {
         this.ticketCount = ticketCount;
     }
 
-    public boolean leftToTicketing(int ticketNumber) {
-        return ticketCount>ticketNumber;
-    }
     public long getTotalPrice(int ticketPrice){
-        return ticketCount*ticketPrice;
+        return (long) ticketCount * ticketPrice;
     }
 
     @Override
     public String toString() {
-        return ticketCount+"개를 구매했습니다.";
+        return Integer.toString(ticketCount);
+    }
+
+    public int getAutoTicketCount() {
+        return ticketCount;
     }
 }

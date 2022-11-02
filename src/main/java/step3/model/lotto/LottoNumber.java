@@ -4,7 +4,7 @@ import java.util.Objects;
 import step3.model.value.ErrMsg;
 import step3.model.value.Rule;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber{
     private final int number;
     public LottoNumber(final int input) {
         validateIntRange(input);
@@ -40,14 +40,4 @@ public class LottoNumber implements Comparable<LottoNumber>{
         return Integer.toString(number);
     }
 
-    @Override
-    public int compareTo(LottoNumber o) {
-       if(this.number>o.number){
-           return 1;
-       }
-       if(this.number<o.number){
-           return -1;
-       }
-       return 0;
-    }
 }

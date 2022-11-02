@@ -3,7 +3,9 @@ package step3.model.machine;
 import java.util.ArrayList;
 import java.util.List;
 import step3.model.lotto.Lotto;
-import step3.model.value.Rule;
+import step3.model.lotto.LottoList;
+import step3.model.lotto.LottoNumber;
+import step3.model.lotto.WinningLotto;
 
 
 // 로또 머신은 로또를 생성하는 기능을 담당한다.
@@ -15,16 +17,16 @@ public class LottoMachine {
         this.manualGenerator = new LottoManualGenerator();
     }
 
-    public List<Lotto> issueAutoLottoList(Order order) {
+    public LottoList issueAutoLottoList(Order order) {
         List<Lotto> lottoList = new ArrayList<>();
-        int ticketCount=0;
-        while(order.leftToTicketing(ticketCount)){
-            ticketCount+=1;
-            lottoList.add(new Lotto(autoGenerator.generateLottoAuto(Rule.LOTTO_NUMBER_LENGTH)));
+        int ticketCount = order.getAutoTicketCount();
+        for (int i=0; i< ticketCount; i++) {
+            lottoList.add(new Lotto(autoGenerator.generateLottoAuto()));
         }
-        return lottoList;
+        return new LottoList(lottoList);
     }
-    public List<Integer> createWinningLotto(String input) {
-        return manualGenerator.createLotto(input);
+    public WinningLotto createWinningLotto(String lottoInput, int bonusInput) {
+        List<LottoNumber> lotto = manualGenerator.createLotto(lottoInput);
+        return new WinningLotto(lotto,new LottoNumber(bonusInput));
     }
 }
