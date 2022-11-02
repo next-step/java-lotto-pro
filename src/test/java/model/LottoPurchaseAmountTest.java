@@ -1,5 +1,6 @@
 package model;
 
+import exception.BuyableLottoNumberSizeException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,5 +45,23 @@ class LottoPurchaseAmountTest {
         LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount("14000");
 
         assertThat(lottoPurchaseAmount.getQuantityPerAmountLotto()).isEqualTo(14);
+    }
+
+    @Test
+    @DisplayName("구매 수량 확인 테스트 ( 구매 가능 )")
+    void valid_check_buyable_lotto_success_test() {
+        LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount("14000");
+
+        lottoPurchaseAmount.validCheckBuyableLotto("14");
+        assertThat(lottoPurchaseAmount.getQuantityPerAmountLotto()).isEqualTo(14);
+    }
+
+    @Test
+    @DisplayName("구매 수량 확인 테스트 ( 구매 실패 )")
+    void valid_check_buyable_lotto_fail_test() {
+        LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount("14000");
+
+        assertThatThrownBy(() -> lottoPurchaseAmount.validCheckBuyableLotto("15"))
+                .isInstanceOf(BuyableLottoNumberSizeException.class);
     }
 }
