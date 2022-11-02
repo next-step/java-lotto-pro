@@ -39,7 +39,7 @@ public class LottoController {
 
         InputView.manualLottoNumberScript();
         for (int i = 0; i < manualLottoTicketCount; i++) {
-            String lottoNumbers = InputView.getManualLottoNumbers(i, manualLottoTicketCount);
+            String lottoNumbers = InputView.getManualLottoNumbers();
             LottoGenerator manualLottoNumbers = new ManualLottoGenerator(lottoNumbers);
             lottoGeneratorList.add(manualLottoNumbers);
         }

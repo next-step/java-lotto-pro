@@ -15,7 +15,6 @@ public class InputView {
     private static final String ENTER_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String ENTER_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String ENTER_MANUAL_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
-    private static final String REMAIN_MANUAL_LOTTO_COUNT = "[남은 수동 로또 입력 회수(%d/%d)]";
     private static final String ERROR_PREFIX = "[ERROR] %s";
     private static final String COMMA = ",";
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -70,14 +69,14 @@ public class InputView {
         System.out.println(ENTER_MANUAL_LOTTO_NUMBER);
     }
 
-    public static String getManualLottoNumbers(int count, int total) {
+    public static String getManualLottoNumbers() {
         try {
             String lottoNumbers = SCANNER.nextLine();
             LottoValidationUtils.validLottoNumbers(lottoNumbers);
             return lottoNumbers;
         } catch (Exception e) {
-            System.out.printf((ERROR_PREFIX) + "%n", e.getMessage() + String.format(REMAIN_MANUAL_LOTTO_COUNT, count, total));
-            return getManualLottoNumbers(count, total);
+            System.out.printf((ERROR_PREFIX) + "%n", e.getMessage());
+            return getManualLottoNumbers();
         }
     }
 
