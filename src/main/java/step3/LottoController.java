@@ -1,6 +1,9 @@
 package step3;
 
-import step3.domain.*;
+import step3.domain.LotteryTicket;
+import step3.domain.Payment;
+import step3.domain.Statistics;
+import step3.domain.WinningBonusNumber;
 import step3.ui.InputView;
 import step3.ui.ResultView;
 
@@ -12,13 +15,15 @@ public class LottoController {
         this.resultView = resultView;
     }
     public void start() {
-        LotteryTicket lotteryTicket = new LotteryTicket(inputView.inputPayment());
+        Payment payment = new Payment(inputView.inputPayment(), inputView.inputManualCount());
+        LotteryTicket lotteryTicket = new LotteryTicket(payment);
         lottoFactory(lotteryTicket);
     
         resultView.resultLotteryTicket(lotteryTicket);
-       
-        WinningBonusNumber winningBonusNumber = new WinningBonusNumber(inputView.inputWinningNumber(), inputView.inputBonusNumber());
-        
+
+        WinningBonusNumber winningBonusNumber =
+                new WinningBonusNumber(inputView.inputWinningNumber(), inputView.inputBonusNumber());
+
         Statistics statistics = new Statistics(lotteryTicket, winningBonusNumber);
         resultView.resultStatistics(statistics, lotteryTicket.getPayment());
     }

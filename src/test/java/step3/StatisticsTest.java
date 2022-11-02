@@ -1,16 +1,20 @@
 package step3;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import step3.domain.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import step3.domain.LotteryTicket;
+import step3.domain.Lotto;
+import step3.domain.Payment;
+import step3.domain.Rank;
+import step3.domain.Statistics;
+import step3.domain.WinningBonusNumber;
 
 public class StatisticsTest {
     private static Statistics statistics;
@@ -20,18 +24,19 @@ public class StatisticsTest {
         ArrayList<Integer> lottoNumbers4 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         ArrayList<Integer> lottoNumbers3 = new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7));
         ArrayList<Integer> lottoNumbers2 = new ArrayList<>(Arrays.asList(4, 5, 6, 7, 8, 9));
-       
+
         Lotto lotto4th_1 = new Lotto(lottoNumbers4);
         Lotto lotto4th_2 = new Lotto(lottoNumbers4);
         Lotto lotto3rd = new Lotto(lottoNumbers3);
         Lotto lotto2nd = new Lotto(lottoNumbers2);
-    
-        LotteryTicket lotteryTicket = new LotteryTicket(3000);
+
+        Payment payment = new Payment(3000, 0);
+        LotteryTicket lotteryTicket = new LotteryTicket(payment);
         lotteryTicket.add(lotto4th_1);
         lotteryTicket.add(lotto4th_2);
         lotteryTicket.add(lotto3rd);
         lotteryTicket.add(lotto2nd);
-    
+
         statistics = new Statistics(lotteryTicket, winningBonusNumber);
     }
     

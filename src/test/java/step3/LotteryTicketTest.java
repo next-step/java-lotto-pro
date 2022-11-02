@@ -1,15 +1,15 @@
 package step3;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step3.domain.LotteryTicket;
 import step3.domain.Lotto;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import step3.domain.Payment;
 
 public class LotteryTicketTest {
     private static LotteryTicket lotteryTicket;
@@ -20,8 +20,10 @@ public class LotteryTicketTest {
         ArrayList<Integer> lottoNumbers2nd = new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7));
         Lotto lotto3rd = new Lotto(lottoNumbers3rd);
         Lotto lotto2nd = new Lotto(lottoNumbers2nd);
-        
-        lotteryTicket = new LotteryTicket(2000);
+
+        Payment payment = new Payment(2000, 0);
+
+        lotteryTicket = new LotteryTicket(payment);
         lotteryTicket.add(lotto3rd);
         lotteryTicket.add(lotto2nd);
     }
