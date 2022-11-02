@@ -62,9 +62,7 @@ public class LottoStatistics {
     }
 
     private String getFormat(String format, Rank rank) {
-        return String.format(format, rank.getMatch().getCount(),
-                rank.getWinningAmount(),
-                lottoResult.getOrDefault(rank, 0));
+        return String.format(format, rank.getMatch().getCount(), rank.getWinningAmount(), lottoResult.getOrDefault(rank, 0));
     }
 
     @Override

@@ -36,4 +36,11 @@ class RankTest {
     void isSecondByCount() {
         assertTrue(isSecond(5));
     }
+
+    @Test
+    @DisplayName("카운트가 0~2개인 경우 0개로 처리한다.")
+    void count() {
+        Match match = new Match(2, false);
+        assertThat(match.getCount()).isEqualTo(0);
+    }
 }
