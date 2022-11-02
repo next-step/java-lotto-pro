@@ -11,7 +11,7 @@ public class Numbers {
     private static String DELIMITER_PATTERN = ",|:";
     private static String SEPARATOR = "|";
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\\n(.*)";
-    private final Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
+    private static final Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
     private List<Number> numbers;
 
     public Numbers(String input) {
