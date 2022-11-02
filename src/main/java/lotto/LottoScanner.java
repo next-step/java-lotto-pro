@@ -8,7 +8,7 @@ public class LottoScanner {
     private static final String DELIMITER = ",";
 
 
-    public static Integer scanPayAmount() throws IOException {
+    public static Integer scanOneNumber() throws IOException {
         return Integer.parseInt(br.readLine());
     }
 

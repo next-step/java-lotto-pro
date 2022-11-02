@@ -15,7 +15,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber valueOf(int number) {
         if (number < START_INCLUSIVE || number > END_INCLUSIVE) {
-            throw new RuntimeException(RANGE_ERROR_MESSAGE);
+            throw new IllegalArgumentException(RANGE_ERROR_MESSAGE);
         }
         return new LottoNumber(number);
     }
