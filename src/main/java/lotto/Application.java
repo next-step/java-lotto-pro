@@ -6,9 +6,7 @@ import lotto.controller.LottoController;
 public class Application {
 
     public static void main(String[] args) {
-        LottoController lottoController = AppConfig.lottoController();
-        lottoController.createLottoNumbers();
-        lottoController.createWinningNumberAndMatcher(AppConfig.withBonus());
-        lottoController.startLottoGame();
+        LottoController lottoController = AppConfig.manualLottoController();
+        lottoController.start();
     }
 }

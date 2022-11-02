@@ -3,38 +3,35 @@ package lotto.controller;
 import lotto.domain.LottoGame;
 import lotto.view.LottoView;
 
-public class LottoController {
+public abstract class LottoController {
 
-    private final LottoGame lottoGame;
-    private final LottoView view;
+    final LottoGame lottoGame;
+    final LottoView view;
+    final Runnable bonusStrategy;
 
-    public LottoController(LottoGame lottoGame, LottoView view) {
+    public LottoController(LottoGame lottoGame, LottoView view, Runnable bonusStrategy) {
         this.lottoGame = lottoGame;
         this.view = view;
+        this.bonusStrategy = bonusStrategy;
     }
 
-    public void createLottoNumbers() {
+    public void start() {
+        createLottoNumbers();
+        createWinningNumberAndMatcher();
+        startLottoGame();
+    }
+
+    void createLottoNumbers() {
         Runnable readPurchase = () -> {
             lottoGame.createPurchase(view.readPurchase());
             lottoGame.createLottoNumbers();
-            view.printLottoNumbers(lottoGame.getLottoNumbers());
+            view.printLottoNumbers(lottoGame.makeLottoNumbersResult());
         };
         while (isNotComplete(readPurchase)) {
         }
     }
 
-    public void createWinningNumberAndMatcher(Runnable bonusStrategy) {
-        lottoGame.createWinningNumber(view.readWinningNumber());
-        while (isNotComplete(bonusStrategy)) {
-        }
-    }
-
-    public void startLottoGame() {
-        view.printResult(lottoGame.result());
-        view.printProfitMargin(lottoGame.makeProfitMargin());
-    }
-
-    private boolean isNotComplete(Runnable runnable) {
+    boolean isNotComplete(Runnable runnable) {
         try {
             runnable.run();
             return false;
@@ -42,5 +39,16 @@ public class LottoController {
             view.printErrorMessage(ex.getMessage());
         }
         return true;
+    }
+
+    private void createWinningNumberAndMatcher() {
+        lottoGame.createWinningNumber(view.readWinningNumber());
+        while (isNotComplete(bonusStrategy)) {
+        }
+    }
+
+    private void startLottoGame() {
+        view.printResult(lottoGame.result());
+        view.printProfitMargin(lottoGame.makeProfitMargin());
     }
 }
