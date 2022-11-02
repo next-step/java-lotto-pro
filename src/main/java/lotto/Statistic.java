@@ -13,9 +13,9 @@ import java.util.Map;
 
 public class Statistic {
     private final Map<Rank, Integer> prize = new HashMap<>();
-    private final LottoNumber winningNumber;
+    private final LottoNumbers winningNumber;
 
-    public Statistic(LottoNumber winningNumber) {
+    public Statistic(LottoNumbers winningNumber) {
         initialize();
         this.winningNumber = winningNumber;
     }
@@ -29,8 +29,8 @@ public class Statistic {
         prize.put(Rank.MISS, ZERO);
     }
 
-    public void countPrize(List<LottoNumber> lottoNumbers) {
-        for (LottoNumber lottoNumber : lottoNumbers) {
+    public void countPrize(List<LottoNumbers> lottoNumbers) {
+        for (LottoNumbers lottoNumber : lottoNumbers) {
             inputCountPrize(winningNumber.countHit(lottoNumber), winningNumber.containsBonus(lottoNumber));
         }
     }

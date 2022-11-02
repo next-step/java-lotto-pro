@@ -7,16 +7,16 @@ package lotto;
 
 import java.util.List;
 
-public class LottoNumber {
+public class LottoNumbers {
     private final List<Integer> sixNumbers;
     private final int bonusNumber;
 
-    public LottoNumber(List<Integer> sixNumbers) {
+    public LottoNumbers(List<Integer> sixNumbers) {
         this.sixNumbers = sixNumbers;
         this.bonusNumber = 0;
     }
 
-    public LottoNumber(List<Integer> sixNumbers, int bonusNumber) {
+    public LottoNumbers(List<Integer> sixNumbers, int bonusNumber) {
         this.sixNumbers = sixNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -25,13 +25,13 @@ public class LottoNumber {
         return sixNumbers.contains(number);
     }
 
-    public boolean containsBonus(LottoNumber lottoNumber) {
-        return lottoNumber.contains(bonusNumber);
+    public boolean containsBonus(LottoNumbers lottoNumbers) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
-    public int countHit(LottoNumber lottoNumber) {
+    public int countHit(LottoNumbers lottoNumbers) {
         return (int) sixNumbers.stream()
-                .filter(lottoNumber::contains)
+                .filter(lottoNumbers::contains)
                 .count();
     }
 

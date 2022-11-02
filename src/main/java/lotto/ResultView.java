@@ -23,8 +23,8 @@ public class ResultView {
         System.out.println(purchaseCount + RESULT_BOUGHT_SOME);
     }
 
-    void printResultPurchase(List<LottoNumber> lottoNumbers) {
-        for (LottoNumber lottoNumber : lottoNumbers) {
+    void printResultPurchase(List<LottoNumbers> lottoNumbers) {
+        for (LottoNumbers lottoNumber : lottoNumbers) {
             System.out.println(lottoNumber);
         }
     }
