@@ -1,9 +1,7 @@
 package lotto.model;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.util.SplitUtil;
 
 public class Counter {
 
@@ -13,12 +11,13 @@ public class Counter {
 
   private final LottoList lottoList;
 
-  public Counter(String inputMoney) {
-    this.lottoList = buyLotto(inputMoney);
-  }
+  private final String inputMoney;
+  private final int manualLottoAmount;
 
   public Counter(String inputMoney, List<String> manualNumbers) {
     this.lottoList = buyLotto(inputMoney, manualNumbers);
+    this.inputMoney = inputMoney;
+    this.manualLottoAmount = manualNumbers.size();
   }
 
 
@@ -36,6 +35,14 @@ public class Counter {
     return this.lottoList;
   }
 
+  public String getInputMoney() {
+    return inputMoney;
+  }
+
+  public int getManualLottoAmount() {
+    return manualLottoAmount;
+  }
+
   public LottoList buyLotto(String inputMoney) {
     validInputMoney(inputMoney);
 
@@ -44,29 +51,20 @@ public class Counter {
     return lottoList;
   }
 
-  private LottoList buyManualLotto(String manualNumber) {
-
-    return null;
-  }
-
   public LottoList buyLotto(String inputMoney, List<String> manualNumbers) {
     validInputMoney(inputMoney);
 
-    List<String[]> test = manualNumbers.stream()
-        .map(manualNumber -> SplitUtil.splitInputNumbers(manualNumber))
-        .collect(Collectors.toList());
-
-    List<List<Integer>> test2 = test.stream()
-        .map(i ->
-            Arrays.stream(i)
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toList())
-        ).collect(Collectors.toList());
-
     int lottoAmount = calculateLottoAmount(inputMoney);
 
-    LottoList lottoList = new LottoList(lottoAmount);
+    List<Lotto> lottos = manualNumbers.stream()
+        .map(manualNumber -> Lotto.createManualLotto(manualNumber)).collect(
+            Collectors.toList());
+
+    LottoList lottoList = new LottoList(lottos);
+    int manualLottoAmount = lottoList.getLottoList().size();
+    LottoList lottoListByAuto = new LottoList(lottoAmount - manualLottoAmount);
+
+    lottoList.getLottoList().addAll(lottoListByAuto.getLottoList());
 
     return lottoList;
   }
