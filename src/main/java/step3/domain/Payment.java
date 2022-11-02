@@ -1,25 +1,22 @@
 package step3.domain;
 
+import step3.ValidationUtils;
+
 public class Payment {
     private static final int LOTTO_PRICE = 1000;
-    private static final String INPUT_EXCEPTION_MESSAGE = "입력값은 0 이상이어야 합니다.";
     private final int payment;
     private final int manualCount;
 
     public Payment(int payment, int manualCount) {
-        this.payment = checkNegative(payment);
-        this.manualCount = checkNegative(manualCount);
+        ValidationUtils.isNegative(payment);
+        this.payment = payment;
+
+        ValidationUtils.validManualCount(manualCount, getLottoCount());
+        this.manualCount = manualCount;
     }
 
     public int getPayment() {
         return this.payment;
-    }
-
-    private int checkNegative(int value) {
-        if (value < 0) {
-            throw new IllegalArgumentException(INPUT_EXCEPTION_MESSAGE);
-        }
-        return value;
     }
 
     public int getLottoCount() {

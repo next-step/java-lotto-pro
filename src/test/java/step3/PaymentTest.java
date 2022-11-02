@@ -19,7 +19,7 @@ public class PaymentTest {
     }
 
     @Test
-    @DisplayName("구입금액 음수인 경우 0으로 처리")
+    @DisplayName("구입금액 음수인 경우 예외처리")
     public void payment_Negative() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Payment(-1000, 0));
@@ -51,6 +51,9 @@ public class PaymentTest {
     public void payment_manual_count_exception() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Payment(10000, -1));
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new Payment(10000, 11));
     }
 
     @Test

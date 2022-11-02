@@ -25,13 +25,28 @@ public class ValidationUtilsTest {
                 .isThrownBy(() -> new Lotto("1,2,-1,4,5,7"))
                 .withMessageContaining("1부터 45까지의 숫자");
     }
-    
+
     @Test
     @DisplayName("보너스 숫자 0~45 이외의 숫자 예외처리")
     public void WinningBonusNumber_exception() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new WinningBonusNumber("1,2,3,4,5,6","-1"))
+                .isThrownBy(() -> new WinningBonusNumber("1,2,3,4,5,6", "-1"))
                 .withMessageContaining("1부터 45까지의 숫자");
     }
+
+    @Test
+    @DisplayName("음수 입력 체크")
+    public void is_negative() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> ValidationUtils.isNegative(-1));
+    }
+
+    @Test
+    @DisplayName("수동 입력 개수 비교")
+    public void payment_valid_exception() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> ValidationUtils.validManualCount(2, 1));
+    }
+
 
 }
