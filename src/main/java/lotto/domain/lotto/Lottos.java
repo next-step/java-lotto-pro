@@ -4,8 +4,10 @@ import lotto.prize.Prize;
 import lotto.prize.Prizes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -13,6 +15,11 @@ public class Lottos {
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public Lottos(List<Lotto> autoLottos, List<Lotto> manualLottos) {
+        this.lottos = Stream.concat(autoLottos.stream(), manualLottos.stream())
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
     }
 
     public Prizes getPrizeOfLotto(Lotto winnerLotto) {
