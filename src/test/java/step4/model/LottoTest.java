@@ -16,8 +16,8 @@ public class LottoTest {
     void Lotto_pass_01() {
         assertThatNoException().isThrownBy(() -> new Lotto(
                 Arrays.asList(
-                        new LottoNumber("1"), new LottoNumber("2"), new LottoNumber("3"),
-                        new LottoNumber("4"), new LottoNumber("5"), new LottoNumber("6")
+                        LottoNumber.of("1"), LottoNumber.of("2"), LottoNumber.of("3"),
+                        LottoNumber.of("4"), LottoNumber.of("5"), LottoNumber.of("6")
                 )
         ));
     }
@@ -29,8 +29,8 @@ public class LottoTest {
         Lotto numbers = new Lotto(inputNumberTexts);
         assertThat(numbers).isEqualTo(new Lotto(
                         Arrays.asList(
-                                new LottoNumber("1"), new LottoNumber("2"), new LottoNumber("3"),
-                                new LottoNumber("4"), new LottoNumber("5"), new LottoNumber("6")
+                                LottoNumber.of("1"), LottoNumber.of("2"), LottoNumber.of("3"),
+                                LottoNumber.of("4"), LottoNumber.of("5"), LottoNumber.of("6")
                         )
                 )
         );
@@ -61,20 +61,14 @@ public class LottoTest {
     void Lotto_pass_05() {
         String[] inputNumberTexts = new String[]{"6", "4", "5", "3", "2", "1"};
         Lotto lotto = new Lotto(inputNumberTexts);
-        assertThat(lotto.isContains(new LottoNumber(6))).isTrue();
+        assertThat(lotto.isContains(LottoNumber.of(6))).isTrue();
     }
 
     @DisplayName("Lotto_중복값_들어오면_에러를_반환한다.")
     @Test
     void Lotto_fail_01() {
-        assertThatThrownBy(() -> new Lotto(
-                Arrays.asList(
-                        new LottoNumber("1"), new LottoNumber("3"), new LottoNumber("3"),
-                        new LottoNumber("4"), new LottoNumber("5"), new LottoNumber("6")
-                )
-        )).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> new Lotto("1,2,3,4,5,5")).isInstanceOf(RuntimeException.class);
     }
-
 
     @DisplayName("Lotto_크기가_넘어가는_값이_들어오면_에러를_반환한다.")
     @ParameterizedTest
@@ -96,7 +90,7 @@ public class LottoTest {
     void Lotto_fail_04() {
         String[] inputNumberTexts = new String[]{"6", "4", "5", "3", "2", "1"};
         Lotto lotto = new Lotto(inputNumberTexts);
-        assertThat(lotto.isContains(new LottoNumber(7))).isFalse();
+        assertThat(lotto.isContains(LottoNumber.of(7))).isFalse();
     }
 
 }

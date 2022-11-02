@@ -36,7 +36,7 @@ public class LottoWinningStatisticsTest {
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(new String[]{"1", "2", "3", "4", "5", "6"}));
         Lotto winLotto = new Lotto(new String[]{"1", "2", "3", "4", "5", "6"});
-        LottoNumber bonusLottoNumber = new LottoNumber(7);
+        LottoNumber bonusLottoNumber = LottoNumber.of(7);
         assertThatNoException().isThrownBy(() -> new LottoWinningStatistics(lottos, winLotto, bonusLottoNumber));
     }
 
@@ -48,7 +48,7 @@ public class LottoWinningStatisticsTest {
     )
     void LottoWinningStatistics_pass_02(String lottoResultText, String rankName) {
         Lotto winLotto = new Lotto(new String[]{"1", "2", "3", "4", "5", "6"});
-        LottoNumber bonusLottoNumber = new LottoNumber(7);
+        LottoNumber bonusLottoNumber = LottoNumber.of(7);
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(StringUtil.parseLottoText(lottoResultText)));
         expectedData.put(Rank.valueOf(rankName), 1);
@@ -62,7 +62,7 @@ public class LottoWinningStatisticsTest {
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(new String[]{"1", "2", "3", "4", "5", "6"}));
         Lotto winLotto = new Lotto(new String[]{"1", "2", "3", "4", "5", "6"});
-        LottoNumber bonusLottoNumber = new LottoNumber(7);
+        LottoNumber bonusLottoNumber = LottoNumber.of(7);
         LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(lottos, winLotto, bonusLottoNumber);
         assertThat(lottoWinningStatistics.getTotalProfitPercent(new Money(1000))).isEqualTo((double) Rank.FIRST.getWinningMoney() / 1000);
     }
@@ -73,7 +73,7 @@ public class LottoWinningStatisticsTest {
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(new String[]{"1", "2", "3", "4", "5", "6"}));
         Lotto winLotto = new Lotto(new String[]{"1", "2", "3", "4", "5", "6"});
-        LottoNumber bonusLottoNumber = new LottoNumber(6);
+        LottoNumber bonusLottoNumber = LottoNumber.of(6);
         assertThatThrownBy(
                 () -> new LottoWinningStatistics(lottos, winLotto, bonusLottoNumber)
         ).isInstanceOf(RuntimeException.class);

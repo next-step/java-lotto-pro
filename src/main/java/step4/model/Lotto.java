@@ -31,7 +31,7 @@ public class Lotto {
             throw new IllegalArgumentException(ErrorMessageConstant.EMPTY_TEXT);
         }
 
-        return Arrays.stream(lottoNumbers).map(LottoNumber::new).collect(Collectors.toList());
+        return Arrays.stream(lottoNumbers).map(LottoNumber::of).collect(Collectors.toList());
     }
 
     private void checkLottoOutOfSize(int lottoNumbersSize) {

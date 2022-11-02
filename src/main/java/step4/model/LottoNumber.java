@@ -4,24 +4,39 @@ import step4.constant.ErrorMessageConstant;
 import step4.constant.LottoConstant;
 import step4.exception.LottoFormatException;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
     private final int number;
 
-    public LottoNumber(String text) {
-        int lottoNumber = convertNumber(text);
-        checkOutOfSize(lottoNumber);
-        this.number = lottoNumber;
+    static {
+        IntStream.rangeClosed(LottoConstant.LOTTO_MIN_NUM, LottoConstant.LOTTO_MAX_NUM)
+                .forEach(num ->
+                        lottoNumbers.put(num, new LottoNumber(num))
+                );
     }
 
-    public LottoNumber(int number) {
-        checkOutOfSize(number);
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private int convertNumber(String text) {
+    public static LottoNumber of(int number) {
+        LottoNumber lottoNumber = lottoNumbers.get(number);
+        if (lottoNumber == null) {
+            throw new LottoFormatException(ErrorMessageConstant.OUT_OF_SIZE_LOTTO_NUMBER);
+        }
+        return lottoNumber;
+    }
+
+    public static LottoNumber of(String text) {
+        return of(convertNumber(text));
+    }
+
+    private static int convertNumber(String text) {
         int result;
         try {
             result = Integer.parseInt(text);
@@ -29,12 +44,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
             throw new LottoFormatException(ErrorMessageConstant.NOT_NUMBER);
         }
         return result;
-    }
-
-    private void checkOutOfSize(int number) {
-        if (number < LottoConstant.LOTTO_MIN_NUM || number > LottoConstant.LOTTO_MAX_NUM) {
-            throw new LottoFormatException(ErrorMessageConstant.OUT_OF_SIZE_LOTTO_NUMBER);
-        }
     }
 
     @Override
