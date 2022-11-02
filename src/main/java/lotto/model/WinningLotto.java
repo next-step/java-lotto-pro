@@ -21,9 +21,9 @@ public class WinningLotto {
   private final Lotto lotto;
   private final int bonusNumber;
 
-  public WinningLotto(String winningLottoNumber, String bonusNUmber) {
+  public WinningLotto(String winningLottoNumber, String bonusNumber) {
     this.lotto = generateWinningLotto(winningLottoNumber);
-    this.bonusNumber = generateBonusNumber(bonusNUmber);
+    this.bonusNumber = generateBonusNumber(bonusNumber);
   }
 
   public Lotto getLotto() {
