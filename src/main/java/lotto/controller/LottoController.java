@@ -19,10 +19,17 @@ import java.util.Map;
 public class LottoController {
     private static final int LOTTO_MINIMUM_NUMBER = 1;
     private static final int LOTTO_MAXIMUM_NUMBER = 45;
+    private final int[][] prizes;
+    private final MoneyToBuyAcceptor moneyToBuyAcceptor;
     private final LottoNumberGenerator lottoNumberGenerator;
+    private final WinningNumbersAcceptor winningNumbersAcceptor;
 
-    public LottoController(LottoNumberGenerator lottoNumberGenerator) {
+    public LottoController(int[][] prizes, MoneyToBuyAcceptor moneyToBuyAcceptor,
+                           LottoNumberGenerator lottoNumberGenerator, WinningNumbersAcceptor winningNumbersAcceptor) {
+        this.prizes = prizes;
+        this.moneyToBuyAcceptor = moneyToBuyAcceptor;
         this.lottoNumberGenerator = lottoNumberGenerator;
+        this.winningNumbersAcceptor = winningNumbersAcceptor;
     }
 
     public void run() {
@@ -38,7 +45,7 @@ public class LottoController {
     }
 
     private MoneyToBuy userInputMoneyToBuy() {
-        final MoneyToBuy moneyToBuy = new MoneyToBuyAcceptor().accept();
+        final MoneyToBuy moneyToBuy = moneyToBuyAcceptor.accept();
         NumberOfLottoTicketsPrinters.print(moneyToBuy);
         return moneyToBuy;
     }
@@ -58,8 +65,7 @@ public class LottoController {
     }
 
     private WinningNumbers userInputWinningNumbers() {
-        BlankLinePrinter.print();
-        return new WinningNumbersAcceptor().accept();
+        return winningNumbersAcceptor.accept();
     }
 
     private void displayLottoResult(LottoTicketsBucket lottoTicketsBucket, WinningNumbers winningNumbers,
@@ -69,7 +75,6 @@ public class LottoController {
     }
 
     private LottoResult displayLottoStatistics(LottoTicketsBucket lottoTicketsBucket, WinningNumbers winningNumbers) {
-        final int[][] prizes = new int[][]{{3, 5000}, {4, 50000}, {5, 150000}, {6, 2000000000}};
         final Map<Integer, Integer> prizeMoney = new HashMap<>();
         for (int[] prize : prizes) {
             prizeMoney.put(prize[0], prize[1]);

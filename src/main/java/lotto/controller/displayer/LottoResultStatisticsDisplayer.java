@@ -1,7 +1,6 @@
 package lotto.controller.displayer;
 
 import lotto.model.lotto.result.LottoResult;
-import lotto.model.lotto.ticket.LottoTicketsBucket;
 import lotto.view.BlankLinePrinter;
 import lotto.view.LottoScoreTitlePrinter;
 import lotto.view.LottoWinningStatisticsPrinter;
