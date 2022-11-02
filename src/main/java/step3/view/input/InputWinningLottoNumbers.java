@@ -1,13 +1,11 @@
 package step3.view.input;
 
-import step3.domain.lotto.WinningLottoNumbers;
-
-public class InputWinningLottoNumbers implements Input<WinningLottoNumbers> {
+public class InputWinningLottoNumbers implements Input<String> {
 
     @Override
-    public WinningLottoNumbers create() {
+    public String create() {
         String input = scanner.nextLine();
         validateBlank(input);
-        return new WinningLottoNumbers(input);
+        return input;
     }
 }

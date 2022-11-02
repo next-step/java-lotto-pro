@@ -1,17 +1,15 @@
 package step3.view.input;
 
-import step3.domain.amount.Amount;
-
 import static step3.type.ErrorMessageType.INPUT_ONLY_ALLOW_NUMBER;
 
-public class InputAmount implements Input<Amount> {
+public class InputAmount implements Input<Integer> {
 
     @Override
-    public Amount create() {
+    public Integer create() {
         String input = scanner.nextLine();
         validateBlank(input);
         try {
-            return new Amount(Integer.parseInt(input));
+            return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INPUT_ONLY_ALLOW_NUMBER.getMessage());
         }
