@@ -1,17 +1,17 @@
 package calculator.domain;
 
-public class Num {
+public class Number {
 
     private static final String ILLEGAL_ELEMENT_MESSAGE = "계산기의 연산 대상은 양의 정수여야 합니다. 입력값을 확인하세요";
-    int element;
+    private int element;
 
-    public Num(String str) {
-        int num = isNumberType(str);
+    public Number(String str) {
+        int num = parseStrToInt(str);
         isNegative(num);
         this.element = num;
     }
 
-    private int isNumberType(String str) {
+    private int parseStrToInt(String str) {
 
         int num = 0;
 
@@ -31,8 +31,7 @@ public class Num {
     }
 
     private void handleIllegalArgument() {
-        System.out.println(ILLEGAL_ELEMENT_MESSAGE);
-        throw new RuntimeException();
+        throw new RuntimeException(ILLEGAL_ELEMENT_MESSAGE);
     }
 
     public int getElement() {

@@ -1,22 +1,27 @@
 package calculator;
 
-import calculator.domain.Nums;
-import calculator.util.Common;
+import calculator.domain.Numbers;
 
 public class StringAddCalculator {
 
     public static int splitAndSum(String input) {
 
-        if (Common.validateEmptyInput(input)) {
+        if (validateEmptyInput(input)) {
             return 0;
         }
 
-        Nums nums = new Nums(input);
+        Numbers numbers = new Numbers(input);
 
-        return nums.addElements();
+        return numbers.addElements();
 
     }
 
+    private static boolean validateEmptyInput(String input) {
+        if (input == null || input.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
 
 
 
