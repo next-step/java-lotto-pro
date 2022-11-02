@@ -3,12 +3,13 @@ package step3.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import static step3.utils.CommonUtils.*;
-
-import static step3.constant.Constant.Lotto.*;
-import static step3.constant.Message.Error.*;
+import static step3.constant.Message.Error.UNDER_MIN_PRICE;
+import static step3.utils.CommonUtils.commonCheckEmpty;
+import static step3.utils.CommonUtils.commonStringToNumber;
 
 public class LottoGenerator {
+    public static final int EACH_LOTTO_PRICE = 1000;
+
     private int purchasePrice;
     private int purchaseCount;
     private Lottos lottos;

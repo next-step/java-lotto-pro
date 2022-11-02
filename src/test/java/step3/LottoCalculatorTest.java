@@ -15,13 +15,15 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static step3.constant.Constant.Lotto.MAX_WINNER_NUMBER;
-import static step3.constant.Constant.Lotto.MIN_LOTTO_NUMBER;
-import static step3.constant.Constant.Symbols.*;
+import static step3.constant.Constant.Common.*;
 
 public class LottoCalculatorTest {
+    public static final int MAX_WINNER_NUMBER = 6;
+
     private LottoCalculator lottoCalculator = new LottoCalculator();
     private Lotto lotto = lottoCalculator.getLastWeekWinner();
+
+    public static final int MIN_LOTTO_NUMBER = 1;
 
     @BeforeEach
     void setUp() {

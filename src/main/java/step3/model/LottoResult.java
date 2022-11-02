@@ -5,11 +5,10 @@ import step3.constant.Rank;
 import java.util.HashMap;
 import java.util.Optional;
 
-import static step3.constant.Constant.Lotto.EACH_LOTTO_PRICE;
-import static step3.constant.Constant.Number.ONE_HUNDRED;
-import static step3.constant.Constant.Number.ZERO;
+import static step3.constant.Constant.Common.*;
 
 public class LottoResult {
+    public static final int EACH_LOTTO_PRICE = 1000;
 
     private HashMap<Rank, Integer> result = new HashMap<>();
     private int totalPurchasedPrice;

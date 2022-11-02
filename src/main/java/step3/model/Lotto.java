@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static step3.constant.Constant.Number.*;
-import static step3.constant.Constant.Lotto.*;
-import static step3.constant.Constant.Symbols.COMMA;
-import static step3.constant.Constant.Symbols.SPACE;
+import static step3.constant.Constant.Common.*;
 import static step3.constant.Message.Error.*;
 import static step3.utils.CommonUtils.*;
 
 public class Lotto {
+    public static final int MAX_LOTTO_NUMBER = 45;
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int LOTTO_NUMBER_LENGTH = 6;
+
     private List<LottoNumber> lottoNumbers;
     private LottoNumber bonusNumber;
 

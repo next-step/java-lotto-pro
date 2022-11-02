@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static step3.constant.Message.System.*;
-import static step3.constant.Constant.Lotto.*;
 
 public class OutputView {
     public static void outputPurchasedLotto(LottoGenerator lottoGenerator) {

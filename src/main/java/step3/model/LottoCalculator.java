@@ -5,10 +5,7 @@ import step3.constant.Rank;
 import java.util.ArrayList;
 import java.util.List;
 
-import static step3.constant.Constant.Lotto.LOTTO_NUMBER_LENGTH;
-import static step3.constant.Constant.Number.ONE;
-import static step3.constant.Constant.Number.ZERO;
-import static step3.constant.Message.Error.UNVALID_LOTTO_NUMBER_LENGTH;
+import static step3.constant.Constant.Common.*;
 import static step3.constant.Message.Output.*;
 
 public class LottoCalculator {
