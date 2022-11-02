@@ -1,5 +1,9 @@
 package lotto.view;
 
+import lotto.domain.Quantity;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -17,6 +21,17 @@ public class InputView {
     public static int getManualLottoCount() {
         OutputView.printManualLottoCount();
         return parseInt(read());
+    }
+
+    public static List<String> getManualNumbers(Quantity quantity) {
+        OutputView.printManualLotto();
+        List<String> inputs = new ArrayList<>();
+
+        for (int i = 0; i < quantity.value(); i++) {
+            inputs.add(read().replaceAll(WHITE_SPACE_REGEX_STRING, EMPTY));
+        }
+
+        return inputs;
     }
 
     public static String getWiningNumber() {

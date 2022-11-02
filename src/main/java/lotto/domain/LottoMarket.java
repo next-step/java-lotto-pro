@@ -12,13 +12,13 @@ public class LottoMarket {
         return make(lottoGenerator, getLottoAmount(money));
     }
 
-    private static long getLottoAmount(Money money) {
-        return (long) money.divide(TICKET_PRICE);
+    private static Quantity getLottoAmount(Money money) {
+        return new Quantity((int) money.divide(TICKET_PRICE));
     }
 
-    private static List<LottoTicket> make(LottoGenerator lottoGenerator, long amount) {
+    private static List<LottoTicket> make(LottoGenerator lottoGenerator, Quantity quantity) {
         List<LottoTicket> tickets = new ArrayList<>();
-        for (long i = 0; i < amount; i++) {
+        for (long i = 0; i < quantity.value(); i++) {
             tickets.add(lottoGenerator.create());
         }
 

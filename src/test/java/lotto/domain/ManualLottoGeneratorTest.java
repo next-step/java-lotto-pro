@@ -23,4 +23,10 @@ public class ManualLottoGeneratorTest {
         LottoTicket result = new ManualLottoGenerator(numbers).create();
         assertThat(result.containCount(ticket)).isEqualTo(6);
     }
+
+    @DisplayName("주어진 문자를 숫자 리스트로 변형할 수 있다")
+    @Test
+    void to_numbers_test() {
+        assertThat(ManualLottoGenerator.toNumbers("1,2,3,4,5,6")).containsExactly(1, 2, 3, 4, 5, 6);
+    }
 }
