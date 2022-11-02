@@ -11,7 +11,12 @@ public class InputView {
     private final static Scanner scanner = new Scanner(System.in);
     public static void inputPurchasePrice(LottoGenerator lottoGenerator) {
         System.out.println(TOTAL_LOTTO_PRICE_INPUT_MESSAGE);
-        lottoGenerator.setPurchasePrice(scanner.nextLine());
+        String purchasePrice = scanner.nextLine();
+
+        System.out.println(SELF_SELECT_LOTTO_COUNT_INPUT_MESSAGE);
+        String selfCount = scanner.nextLine();
+
+        lottoGenerator.setPurchasePriceAndSelfCount(purchasePrice, selfCount);
     }
 
     public static void inputLastWeekLottoNumbers(LottoCalculator calculator) {

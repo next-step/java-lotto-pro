@@ -58,7 +58,6 @@ public class LottoCalculatorTest {
         String[] inputArr = input.split(COLON)[0].split(COMMA);
         Lottos lottos = new Lottos(createTestLottos(inputArr));
 
-        // todo 질문 beforeEach로 생성했는데 result 부분이 null?
         lottoCalculator.calculateWinnerStatistics(lottos);
         double result = lottoCalculator.calculateProfitRate();
         assertEquals(expected, Double.toString(result));

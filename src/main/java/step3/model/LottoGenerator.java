@@ -12,6 +12,7 @@ public class LottoGenerator {
 
     private int purchasePrice;
     private int purchaseCount;
+    private int selfCount;
     private Lottos lottos;
 
     public Lottos getLottos() {
@@ -21,9 +22,11 @@ public class LottoGenerator {
     public int getPurchasedCount() {
         return purchaseCount;
     }
+    public int getSelfCount() { return selfCount; }
 
-    public void setPurchasePrice(String price) {
+    public void setPurchasePriceAndSelfCount(String price, String selfCount) {
         this.purchasePrice = validatePrice(price);
+        this.selfCount = validateSelfCount(selfCount);
     }
 
     public void generateLottos() {
@@ -44,8 +47,13 @@ public class LottoGenerator {
         commonCheckEmpty(price);
         int integerPrice = commonStringToNumber(price);
         checkPriceMinLimit(integerPrice);
-
         return integerPrice;
+    }
+
+    private int validateSelfCount(String selfCount) {
+        commonCheckEmpty(selfCount);
+        int integerCount = commonStringToNumber(selfCount);
+        return integerCount;
     }
 
     public void calculatePurchaseCount() {
