@@ -9,17 +9,14 @@ public class WinningLotto {
 
   private static final String NUMBER_COMMA_REGEX = "[\\s0-9,]+";
   private static final String NUMBER_REGEX = "[0-9]+";
-
   private static final int LOTTO_SIZE = 6;
   private static final int BONUS_NUMBER_SIZE = 1;
   private static final String ERROR_MESSAGE_BY_WRONG_WINNING_LOTTO_NUMBER_INPUT
       = "올바른 형식의 지난 당청 번호를 입력해주세요.";
-
   private static final String ERROR_MESSAGE_BY_WRONG_BONUS_NUMBER_INPUT
       = "올바른 형식의 보너스 볼을 입력해주세요.";
-
   private final Lotto lotto;
-  private final int bonusNumber;
+  private final LottoNumber bonusNumber;
 
   public WinningLotto(String winningLottoNumber, String bonusNumber) {
     this.lotto = generateWinningLotto(winningLottoNumber);
@@ -30,7 +27,7 @@ public class WinningLotto {
     return this.lotto;
   }
 
-  public int getBonusNumber() {
+  public LottoNumber getBonusNumber() {
     return this.bonusNumber;
   }
 
@@ -57,21 +54,13 @@ public class WinningLotto {
     return Lotto.createManualLotto(nums);
   }
 
-  private int generateBonusNumber(String bonusNumber) {
+  private LottoNumber generateBonusNumber(String bonusNumber) {
     validBonusNumber(bonusNumber);
-    String[] splitNumber = SplitUtil.splitInputNumbers(bonusNumber);
-    validBonusNumberSize(splitNumber);
-    return Integer.parseInt(splitNumber[0]);
+    return LottoNumber.from(bonusNumber);
   }
 
   private void validBonusNumber(String bonusNumber) {
     if (!bonusNumber.matches(NUMBER_REGEX)) {
-      throw new IllegalArgumentException(ERROR_MESSAGE_BY_WRONG_BONUS_NUMBER_INPUT);
-    }
-  }
-
-  private void validBonusNumberSize(String[] splitNumbers) {
-    if (splitNumbers.length != BONUS_NUMBER_SIZE) {
       throw new IllegalArgumentException(ERROR_MESSAGE_BY_WRONG_BONUS_NUMBER_INPUT);
     }
   }

@@ -23,7 +23,7 @@ public class LottoTest {
     assertAll(
         () -> assertThat(lotto.getNumbers().size()).isEqualTo(6),
         () -> lotto.getNumbers().forEach(
-            number -> assertThat(number).isBetween(1, 45))
+            number -> assertThat(number.toInt()).isBetween(1, 45))
     );
   }
 
@@ -37,7 +37,15 @@ public class LottoTest {
     Lotto lotto = Lotto.createManualLotto(numbers);
 
     //then
-    assertThat(lotto.getNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
+    assertAll(
+        () -> assertThat(lotto.getNumbers().get(0)).isEqualTo(LottoNumber.from(1)),
+        () -> assertThat(lotto.getNumbers().get(1)).isEqualTo(LottoNumber.from(2)),
+        () -> assertThat(lotto.getNumbers().get(2)).isEqualTo(LottoNumber.from(3)),
+        () -> assertThat(lotto.getNumbers().get(3)).isEqualTo(LottoNumber.from(4)),
+        () -> assertThat(lotto.getNumbers().get(4)).isEqualTo(LottoNumber.from(5)),
+        () -> assertThat(lotto.getNumbers().get(5)).isEqualTo(LottoNumber.from(6))
+
+    );
   }
 
   @Test
@@ -62,7 +70,7 @@ public class LottoTest {
     //given
     Lotto lotto = Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
     //when
-    boolean result = lotto.isContainNumber(specificNumber);
+    boolean result = lotto.isContainNumber(LottoNumber.from(specificNumber));
     //then
     assertThat(result).isEqualTo(isContain);
   }

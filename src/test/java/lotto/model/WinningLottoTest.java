@@ -42,11 +42,12 @@ public class WinningLottoTest {
     String bonusNumber = "7";
     //when
     WinningLotto winningLotto = new WinningLotto(winningLottoNumber, bonusNumber);
+    System.out.println(winningLotto);
     //then
     assertAll(
-        () -> assertThat(winningLotto.getLotto().getNumbers()).isEqualTo(
-            Arrays.asList(1, 2, 3, 4, 5, 6)),
-        () -> assertThat(winningLotto.getBonusNumber()).isEqualTo(7)
+        () -> assertThat(winningLotto.getLotto()).isEqualTo(
+            new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))),
+        () -> assertThat(winningLotto.getBonusNumber()).isEqualTo(LottoNumber.from(7))
     );
   }
 

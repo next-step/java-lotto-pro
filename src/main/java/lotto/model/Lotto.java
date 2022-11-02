@@ -1,14 +1,18 @@
 package lotto.model;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import lotto.util.LottoGenerator;
 
 public class Lotto {
 
-  private final List<Integer> numbers;
+  private final List<LottoNumber> numbers;
 
   public Lotto(List<Integer> numbers) {
-    this.numbers = numbers;
+    List<LottoNumber> lottoNumbers = numbers.stream().map(LottoNumber::from)
+        .collect(Collectors.toList());
+    this.numbers = lottoNumbers;
   }
 
   public static Lotto createAutoLotto() {
@@ -19,27 +23,45 @@ public class Lotto {
     return new Lotto(numbers);
   }
 
-  public List<Integer> getNumbers() {
+  public List<LottoNumber> getNumbers() {
     return this.numbers;
   }
 
   public int getMatchingCount(Lotto targetLotto) {
     int count = 0;
 
-    List<Integer> targetLottoNumber = targetLotto.getNumbers();
+    List<LottoNumber> targetLottoNumber = targetLotto.getNumbers();
 
-    for (int number : targetLottoNumber) {
+    for (LottoNumber number : targetLottoNumber) {
       count = this.countContainNumber(number, count);
     }
 
     return count;
   }
 
-  public boolean isContainNumber(int number) {
+  public boolean isContainNumber(LottoNumber number) {
     return this.numbers.contains(number);
   }
 
-  private int countContainNumber(int number, int count) {
+  private int countContainNumber(LottoNumber number, int count) {
     return isContainNumber(number) ? count + 1 : count;
+  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Lotto lotto = (Lotto) o;
+    return Objects.equals(numbers, lotto.numbers);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(numbers);
   }
 }
