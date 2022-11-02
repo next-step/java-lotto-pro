@@ -13,33 +13,22 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int LOTTO_MAX_NUMBER = 45;
 
     private int lottoNumber;
-    private boolean isBonus;
 
     public LottoNumber(String lottoNumberString) {
-        this(lottoNumberString, false);
+        this(Optional.ofNullable(lottoNumberString)
+                        .filter(str -> str.trim().matches("\\d+"))
+                        .map(str -> Integer.parseInt(str.trim()))
+                        .orElseThrow(() -> new IllegalArgumentException("자연수 형식이 아닙니다.")));
     }
 
     public LottoNumber(int lottoNumber) {
-        this(lottoNumber, false);
-    }
-
-    public LottoNumber(String lottoNumberString, boolean isBonus) {
-        this(Optional.ofNullable(lottoNumberString)
-                .filter(str -> str.trim().matches("\\d+"))
-                .map(str -> Integer.parseInt(str.trim()))
-                .orElseThrow(()->new IllegalArgumentException("자연수 형식이 아닙니다."))
-        ,isBonus);
-    }
-
-    public LottoNumber(int lottoNumber, boolean isBonus) {
-        if(lottoNumber < LOTTO_MIN_NUMBER) {
-            throw new IllegalArgumentException("숫자는 "+ LOTTO_MIN_NUMBER +"이상이여야 합니다.");
+        if (lottoNumber < LOTTO_MIN_NUMBER) {
+            throw new IllegalArgumentException("숫자는 " + LOTTO_MIN_NUMBER + "이상이여야 합니다.");
         }
-        if(lottoNumber > LOTTO_MAX_NUMBER) {
-            throw new IllegalArgumentException("숫자는 "+ LOTTO_MAX_NUMBER +"이하여야 합니다.");
+        if (lottoNumber > LOTTO_MAX_NUMBER) {
+            throw new IllegalArgumentException("숫자는 " + LOTTO_MAX_NUMBER + "이하여야 합니다.");
         }
         this.lottoNumber = lottoNumber;
-        this.isBonus = isBonus;
     }
 
     public static List<LottoNumber> lottoNumberMinToMax() {
@@ -52,14 +41,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        LottoNumber that = (LottoNumber) o;
-        return lottoNumber == that.lottoNumber;
+        if(o instanceof LottoNumber)
+            return equals((LottoNumber) o);
+        return false;
     }
 
     @Override
@@ -67,6 +51,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return Objects.hash(lottoNumber);
     }
 
+    public boolean equals(LottoNumber lottoNumber) {
+        return lottoNumber.compareTo(this) == 0;
+    }
 
     @Override
     public int compareTo(LottoNumber o) {
@@ -81,7 +68,4 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return new LottoNumberDto(lottoNumber);
     }
 
-    public boolean isBonus() {
-        return isBonus;
-    }
 }

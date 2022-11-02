@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
@@ -41,6 +44,14 @@ public enum Rank {
             return FIFTH;
         }
         return MISS;
+    }
+
+    public static List<Rank> getAllRanks() {
+        return Arrays.asList(FIRST,SECOND,THIRD,FOURTH,FIFTH,MISS);
+    }
+
+    public static List<Rank> getAllRanksExceptMiss() {
+        return Arrays.asList(FIFTH,FOURTH,THIRD,SECOND,FIRST);
     }
 }
 

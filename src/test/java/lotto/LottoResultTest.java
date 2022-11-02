@@ -14,7 +14,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
 
-    private static final WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
+    private static final WinningNumbers winningNumbers =
+            new WinningNumbers(Arrays.asList(1,2,3,4,5,6), new BonusNumber(45));
     private static final LottoResultView lottoResultView = new LottoResultView();
 
     @Test
@@ -82,5 +83,24 @@ public class LottoResultTest {
         //then
         assertThat(lottoResultView.lottoResultMessage(lottoResult.getLottoResultDto()))
                 .contains("기준이 1이기 때문에 결과적으로 손해라는 의미임");
+    }
+
+    @Test
+    @DisplayName("2등 테스트")
+    void second_winner_test() {
+        //given
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(numbersToLotto(Arrays.asList(1,2,3,4,5,45)));
+        lottoList.add(numbersToLotto(Arrays.asList(1,12,13,14,25,26)));
+        lottoList.add(numbersToLotto(Arrays.asList(1,12,13,14,15,36)));
+        lottoList.add(numbersToLotto(Arrays.asList(1,12,13,14,25,36)));
+        lottoList.add(numbersToLotto(Arrays.asList(1,12,13,14,45,36)));
+        lottoList.add(numbersToLotto(Arrays.asList(1,12,13,14,27,36)));
+        Lotteries lotteries = new Lotteries(lottoList);
+        //when
+        LottoResult lottoResult = new LottoResult(lotteries, winningNumbers, new BuyAmount("6000"));
+        //then
+        assertThat(lottoResultView.lottoResultMessage(lottoResult.getLottoResultDto()))
+                .contains("5개 일치, 보너스 볼 일치(30000000원) - 1개");
     }
 }
