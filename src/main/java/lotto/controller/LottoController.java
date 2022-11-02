@@ -19,7 +19,7 @@ public class LottoController {
         LottoOutput.printLottos(lottos);
 
         WinningLotto winningLotto = LottoInput.inputWinningLotto();
-        LottoOutput.printStatistics(winningLotto, lottos);
+        LottoOutput.printStatistics(winningLotto, manuallyLottos.add(lottos));
     }
 
 }

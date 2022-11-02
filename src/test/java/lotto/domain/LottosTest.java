@@ -23,4 +23,18 @@ public class LottosTest {
         assertThat(lottos.size()).isEqualTo(5);
     }
 
+    @Test
+    @DisplayName("로또 콜렉션은 로또 콜렉션과 더하여 새로운 콜렉션을 생성한다")
+    void add() {
+        // given
+        Lottos source = Lottos.autoGenerateSizeOf(5);
+        Lottos target = Lottos.autoGenerateSizeOf(2);
+
+        // when
+        Lottos result = source.add(target);
+
+        // then
+        assertThat(result.size()).isEqualTo(7);
+    }
+
 }
