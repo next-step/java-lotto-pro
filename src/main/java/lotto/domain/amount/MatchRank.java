@@ -3,13 +3,12 @@ package lotto.domain.amount;
 import java.util.Arrays;
 
 public enum MatchRank {
+	FAILED(0, 0L),
 	THREE_MATCH(3, 5000L),
 	FOUR_MATCH(4, 50000L),
 	FIVE_MATCH(5, 1500000L),
 	SIX_MATCH(6, 2000000000L);
-
-	public static final long NO_WINNING_PRICE = 0;
-
+	
 	private final int matchCount;
 	private final long winningPrice;
 
@@ -18,13 +17,13 @@ public enum MatchRank {
 		this.winningPrice = winningPrice;
 	}
 
-	public static long getWinningPrice(int matchCount) {
+	public static MatchRank valueOfMatchCount(int matchCount) {
 		return Arrays.stream(MatchRank.values())
 			.filter(matchRank -> matchRank.hasMatchCount(matchCount))
 			.findAny()
-			.map(matchRank -> matchRank.winningPrice)
-			.orElse(NO_WINNING_PRICE);
+			.orElse(FAILED);
 	}
+
 
 	private boolean hasMatchCount(int matchCount) {
 		return this.matchCount == matchCount;
@@ -32,5 +31,9 @@ public enum MatchRank {
 
 	public int getMatchCount() {
 		return matchCount;
+	}
+
+	public long getWinningPrice() {
+		return winningPrice;
 	}
 }

@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import java.util.Objects;
 
 import lotto.domain.amount.Amount;
+import lotto.domain.amount.MatchRank;
 import lotto.domain.match.count.MatchCount;
 
 public class LottoResult {
@@ -23,7 +24,7 @@ public class LottoResult {
 	}
 
 	public Amount winningPrice() {
-		return matchCount.winningPrice();
+		return Amount.from(MatchRank.valueOfMatchCount(matchCount.getInt()).getWinningPrice());
 	}
 
 	@Override

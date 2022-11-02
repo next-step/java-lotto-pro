@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import lotto.domain.amount.MatchRank;
 import lotto.domain.match.count.MatchCount;
 import lotto.domain.quantity.Quantity;
 
@@ -15,7 +16,7 @@ class LottoResultMessageTest {
 		LottoResultMessage lottoResultMessage = new LottoResultMessage(matchCount, quantity);
 
 		assertThat(lottoResultMessage.toString())
-			.isEqualTo(String.format("%d개 일치 (%d원)- %d", matchCount.getInt(), matchCount.winningPrice().getLong(),
+			.isEqualTo(String.format("%d개 일치 (%d원)- %d", MatchRank.THREE_MATCH.getMatchCount(), MatchRank.THREE_MATCH.getWinningPrice(),
 				quantity.getInt()));
 	}
 }
