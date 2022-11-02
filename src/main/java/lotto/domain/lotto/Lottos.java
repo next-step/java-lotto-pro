@@ -9,8 +9,8 @@ import lotto.domain.amount.Amount;
 import lotto.domain.quantity.Quantity;
 
 public class Lottos {
-	public static final int MIN_LOTTOS_SIZE = 1;
-	public static final int CHECK_HAS_CHANGES_NUM = 0;
+	private static final int MIN_LOTTOS_SIZE = 1;
+	private static final int CHECK_HAS_CHANGES_NUM = 0;
 	private static final int LOTTO_PURCHASE_PRICE = 1000;
 	private final List<Lotto> lottos;
 

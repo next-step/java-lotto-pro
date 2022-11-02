@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 public enum MatchRank {
 	FAILED(0, 0L),
-	THREE_MATCH(3, 5000L),
-	FOUR_MATCH(4, 50000L),
-	FIVE_MATCH(5, 1500000L),
-	SIX_MATCH(6, 2000000000L);
+	THREE_MATCH(3, 5_000L),
+	FOUR_MATCH(4, 50_000L),
+	FIVE_MATCH(5, 1_500_000L),
+	SIX_MATCH(6, 2_000_000_000L);
 
 	private final int matchCount;
 	private final long winningPrice;
