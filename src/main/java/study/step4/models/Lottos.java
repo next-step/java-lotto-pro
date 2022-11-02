@@ -30,7 +30,7 @@ public class Lottos {
         Winners winners = new Winners();
         for (Lotto lotto : lottos) {
             int numberOfMatching = lotto.countNumberOfMatching(winLotto);
-            winners.add(new Winner(lotto, Rank.valueOf(numberOfMatching)));
+            winners.add(Rank.valueOf(numberOfMatching));
         }
         return winners;
     }

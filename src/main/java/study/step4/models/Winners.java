@@ -2,24 +2,21 @@ package study.step4.models;
 
 import study.step4.Rank;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Winners {
-    private final List<Winner> winners;
+    private final Map<Rank, Integer> winners;
 
     public Winners() {
-        winners = new ArrayList<>();
+        winners = new EnumMap<>(Rank.class);
     }
 
-    public Winners(List<Winner> winners) {
+    public Winners(Map<Rank, Integer> winners) {
         this.winners = winners;
     }
 
     public int numberOfRankers(Rank rank) {
-        return (int) winners.stream()
-                .filter(winner -> winner.isSameRank(rank))
-                .count();
+        return winners.get(rank);
     }
 
     public double earningRate(Money inputMoney) {
@@ -27,12 +24,14 @@ public class Winners {
     }
 
     private int totalReward() {
-        return winners.stream()
-                .mapToInt(Winner::reward)
-                .sum();
+        int total = 0;
+        for (Map.Entry<Rank, Integer> map : winners.entrySet()) {
+            total += map.getKey().getReward() * map.getValue();
+        }
+        return total;
     }
 
-    public void add(Winner winner) {
-        winners.add(winner);
+    public void add(Rank rank) {
+        winners.put(rank, winners.getOrDefault(rank, 0) + 1);
     }
 }
