@@ -30,7 +30,7 @@ public enum Rank {
     }
 
     public static Rank get(int matchCount, boolean isBonus) {
-        if (matchCount == Rank.THIRD.getMatchCount() && isBonus) {
+        if (matchCount == Rank.SECOND.getMatchCount() && isBonus) {
             return Rank.SECOND;
         }
 
