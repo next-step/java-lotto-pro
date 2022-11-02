@@ -12,7 +12,7 @@ class LottoGameTest {
     @Test
     @DisplayName("당첨번호와 보너스볼 중복여부 테스트")
     public void validateDuplicateBonusBallTest() {
-        assertThatThrownBy(() -> new LottoGame(0).validateDuplicateBonusBall(Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed().collect(Collectors.toList())
+        assertThatThrownBy(() -> LottoGame.of(0).validateDuplicateBonusBall(Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed().collect(Collectors.toList())
                 , 1)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
