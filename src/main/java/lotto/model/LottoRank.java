@@ -21,27 +21,11 @@ public enum LottoRank {
   }
 
   public static LottoRank getLottoRank(int containsCount, boolean isContainBonusNumber) {
-    if (isSecondRank(containsCount)) {
-      return getSecondLottoRank(containsCount, isContainBonusNumber);
-    }
-
     return Arrays.stream(LottoRank.values())
-        .filter(lottoRank -> lottoRank.containsCount == containsCount)
+        .filter(lottoRank -> lottoRank.containsCount == containsCount
+            && lottoRank.isContainBonusNumber == isContainBonusNumber)
         .findAny()
         .orElse(NOTHING);
-  }
-
-  public static LottoRank getSecondLottoRank(int containsCount, boolean isContainBonusNumber) {
-    return Arrays.stream(LottoRank.values())
-        .filter(
-            lottoRank -> lottoRank.containsCount == containsCount
-                && isContainBonusNumber == SECOND.isContainBonusNumber)
-        .findAny()
-        .orElse(THIRD);
-  }
-
-  public static boolean isSecondRank(int containsCount) {
-    return containsCount == LottoRank.SECOND.containsCount;
   }
 
   public int containsCount() {
