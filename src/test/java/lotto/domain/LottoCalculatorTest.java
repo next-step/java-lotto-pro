@@ -11,20 +11,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoCalculatorTest {
 
     @Test
-    @DisplayName("500원은 로또 구매 최소비용이 안된다.")
-    void validateMoney() {
-        assertThatThrownBy(() -> {
-            LottoCalculator.availableToPurchaseCount(Money.of(500));
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    @DisplayName("5000원으로 구매 가능한 로또 개수는 5개이다")
-    void availableToPurchaseCount() {
-        assertThat(LottoCalculator.availableToPurchaseCount(Money.of(5000))).isEqualTo(5);
-    }
-
-    @Test
     @DisplayName("1등 당첨 개수는 2개이다")
     void winning() {
         WinningLotto winningLotto = WinningLotto.of(Lotto.of("1,2,3,4,5,6"), LottoNumber.of("7"));

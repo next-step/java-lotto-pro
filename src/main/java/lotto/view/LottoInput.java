@@ -2,19 +2,22 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoInput {
 
     private LottoInput() {
     }
 
-    public static int inputMoneyAndAvailableToPurchaseCount() {
+    public static LottoCoin inputMoneyAndAvailableToPurchaseCoin() {
         try {
             String input = InputConsole.inputMoneyForPurchaseLotto();
             Money money = Money.of(input);
-            return LottoCalculator.availableToPurchaseCount(money);
+            return LottoCoin.of(money);
         } catch (IllegalArgumentException e) {
             OutputConsole.out(e.getMessage());
-            return inputMoneyAndAvailableToPurchaseCount();
+            return inputMoneyAndAvailableToPurchaseCoin();
         }
     }
 
@@ -46,6 +49,40 @@ public class LottoInput {
         } catch (IllegalArgumentException e) {
             OutputConsole.out(e.getMessage());
             return inputBonusLottoNumber();
+        }
+    }
+
+    public static LottoCoin inputBuyManuallyNumber(LottoCoin lottoCoin) {
+        try {
+            int input = Integer.parseInt(InputConsole.inputBuyManuallyNumber());
+            if (input == 0) {
+                return LottoCoin.empty();
+            }
+            return lottoCoin.pop(input);
+        } catch (IllegalArgumentException e) {
+            OutputConsole.out(String.format("0 ~ %d의 숫자만 입력 가능합니다.", lottoCoin.size()));
+            return inputBuyManuallyNumber(lottoCoin);
+        }
+    }
+
+    public static Lottos inputManuallyLottos(LottoCoin lottoCoin) {
+        if (!lottoCoin.isEmpty()) {
+            InputConsole.inputManuallyLottoNumbers();
+        }
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < lottoCoin.size(); i++) {
+            lottos.add(inputManuallyLotto());
+        }
+        return Lottos.of(lottos);
+    }
+
+    private static Lotto inputManuallyLotto() {
+        try {
+            String input = InputConsole.nextLine();
+            return Lotto.of(input);
+        } catch (IllegalArgumentException e) {
+            OutputConsole.out(e.getMessage());
+            return inputManuallyLotto();
         }
     }
 

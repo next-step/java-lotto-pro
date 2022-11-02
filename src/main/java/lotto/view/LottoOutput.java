@@ -11,8 +11,8 @@ public class LottoOutput {
     private LottoOutput() {
     }
 
-    public static void printLottoCount(int lottoCount) {
-        OutputConsole.purchaseResult(lottoCount);
+    public static void printLottoCount(int manuallyLottoCount, int autoLottoCount) {
+        OutputConsole.purchaseResult(manuallyLottoCount, autoLottoCount);
     }
 
     public static void printStatistics(WinningLotto winningLotto, Lottos lottos) {

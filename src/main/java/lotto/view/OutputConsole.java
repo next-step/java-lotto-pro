@@ -11,8 +11,9 @@ public class OutputConsole {
         System.out.println(message);
     }
 
-    public static void purchaseResult(int lottoCount) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottoCount));
+    public static void purchaseResult(int manuallyLottoCount, int autoLottoCount) {
+        System.out.println();
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manuallyLottoCount, autoLottoCount));
     }
 
     public static void statistics() {

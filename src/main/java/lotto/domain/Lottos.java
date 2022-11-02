@@ -33,9 +33,15 @@ public class Lottos {
         return lottos.size();
     }
 
+    public Lottos add(Lottos lottos) {
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.addAll(this.lottos);
+        lottoList.addAll(lottos.lottos);
+        return new Lottos(lottoList);
+    }
+
     @Override
     public boolean equals(Object o) {
-
         if (this == o) return true;
         if (!(o instanceof Lottos)) return false;
         Lottos lottos1 = (Lottos) o;
