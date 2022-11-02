@@ -13,7 +13,7 @@ public class LottoNumberTest {
     void lottoInRange() {
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new LottoNumber(100))
-            .withMessage(LottoNumber.ERROR_RANGE_NUMBER);
+            .withMessage(LottoNumber.ERROR_RANGE_NUMBER + 100);
     }
 
 }

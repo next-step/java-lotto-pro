@@ -14,13 +14,13 @@ public class RewardsTest {
 
     @BeforeEach
     void setUp() {
-        rewards = new Rewards(Arrays.asList(Rank.NOTHING, Rank.NOTHING, Rank.NOTHING, Rank.NOTHING, Rank.FOURTH));
+        rewards = new Rewards(Arrays.asList(Rank.NOTHING, Rank.NOTHING, Rank.NOTHING, Rank.NOTHING, Rank.FIFTH));
     }
 
     @Test
     @DisplayName("등수 별로 몇개가 있는지 확인하는 테스트")
     void cntRewards() {
-        assertThat(rewards.count(Rank.FOURTH)).isEqualTo(1);
+        assertThat(rewards.count(Rank.FIFTH)).isEqualTo(1);
         assertThat(rewards.count(Rank.NOTHING)).isEqualTo(4);
     }
 
