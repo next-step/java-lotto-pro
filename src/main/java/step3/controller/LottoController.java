@@ -1,5 +1,7 @@
 package step3.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import step3.model.lotto.LottoList;
 import step3.model.lotto.WinningLotto;
 import step3.model.machine.Money;
@@ -22,14 +24,18 @@ public class LottoController {
 
     public void start() {
         Order order = makeOrder();
-        LottoList lottoList = createAutoLottoListByOrder(order);
+        LottoList lottoList = createLottoListByOrder(order);
+
         WinningLotto winningLotto = getWinningLotto();
         Results results = getLottoResults(lottoList, winningLotto);
         evaluateStatisticResult(order, results);
     }
 
-    private LottoList createAutoLottoListByOrder(Order order) {
-        LottoList lottoList = lottoMachine.issueAutoLottoList(order);
+    private LottoList createLottoListByOrder(Order order) {
+        int manualTicketCount = order.getManualTicketCount();
+        List<String> manualInputs = InputView.requestInputBonusLotto(manualTicketCount);
+        LottoList lottoList = lottoMachine.issueLottoList(order, manualInputs);
+        OutputView.printOrder(order);
         OutputView.printTickets(lottoList);
         return lottoList;
     }
@@ -37,8 +43,8 @@ public class LottoController {
     private Order makeOrder() {
         Money money = getMoneyInput();
         int ticketCount = money.availableTicketCount(Rule.TICKET_PRICE);
-        Order order =  new Order(ticketCount);
-        OutputView.printOrder(order);
+        int manualTicketCount = InputView.requestManualTicketCount();
+        Order order =  new Order(ticketCount, manualTicketCount);
         return order;
     }
 

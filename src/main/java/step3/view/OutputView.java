@@ -4,6 +4,7 @@ import java.util.List;
 import step3.model.lotto.LottoList;
 import step3.model.machine.Order;
 import step3.model.machine.Results;
+import step3.model.value.OperationMsg;
 import step3.model.value.Rule;
 
 public class OutputView {
@@ -44,6 +45,10 @@ public class OutputView {
     }
 
     public static void printOrder(Order order) {
-        System.out.println(order+"개를 구매했습니다.");
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n",order.getManualTicketCount(), order.getAutoTicketCount());
+    }
+
+    public static void printRequestBonusInput(){
+        System.out.println(OperationMsg.REQUEST_MANUAL_TICKET_NUMBER);
     }
 }
