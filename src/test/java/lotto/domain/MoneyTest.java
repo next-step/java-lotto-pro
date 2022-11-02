@@ -21,4 +21,12 @@ class MoneyTest {
 
         assertThat(count).isEqualTo(10);
     }
+
+    @Test
+    @DisplayName("4000원이 반환됨")
+    void minus() {
+        Money money1 = Money.of(14000);
+
+        assertThat(money1.minus(10000).equals(Money.of(4000))).isTrue();
+    }
 }
