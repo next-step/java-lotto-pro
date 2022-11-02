@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoNumbersRuleTest {
+public class LottoNumbersTest {
     @Test
     void 섞여있는_숫자_리스트_반환_1부터_45까지() {
         List<Integer> shuffledNumbers = LottoNumbersRule.shuffledNumbers();

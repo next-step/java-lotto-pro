@@ -1,7 +1,6 @@
 package study.step4.helper;
 
 import org.junit.jupiter.api.Test;
-import study.step4.helper.LottoMaker;
 import study.step4.models.Lottos;
 import study.step4.models.Money;
 
@@ -13,6 +12,6 @@ public class LottoMakerTest {
         Money inputMoney = new Money("14000");
         Lottos lottos = LottoMaker.makeLottos(inputMoney);
 
-        assertThat(lottos.hasEqualSize(inputMoney.dividedBy(Money.PRICE_PER_LOTTO))).isTrue();
+        assertThat(lottos.size()).isEqualTo(inputMoney.dividedBy(Money.PRICE_PER_LOTTO));
     }
 }
