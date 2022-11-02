@@ -3,18 +3,27 @@ package step3.model;
 import step3.view.InputView;
 import step3.view.OutputView;
 
+import static step3.constant.Message.System.*;
+
 public class LottoManager {
     private static LottoGenerator lottoGenerator = new LottoGenerator();
     private static LottoCalculator calculator = new LottoCalculator();
 
 
     public static void purchaseLotto() {
+        inputPurchasePriceAndManualCount();
         generateLottos();
         calculateStatistics();
     }
 
+    private static void inputPurchasePriceAndManualCount() {
+        String purchasePrice = InputView.inputString(TOTAL_LOTTO_PRICE_INPUT_MESSAGE);
+        String manualCount = InputView.inputString(MANUAL_LOTTO_COUNT_INPUT_MESSAGE);
+
+        lottoGenerator.setPurchasePriceAndManualCount(purchasePrice, manualCount);
+    }
+
     private static void generateLottos() {
-        InputView.inputPurchasePrice(lottoGenerator);
         lottoGenerator.generateLottos();
         OutputView.outputPurchasedLotto(lottoGenerator);
     }
