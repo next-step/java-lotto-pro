@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.view.Error;
 import lotto.view.OutputView;
 
 import java.util.Objects;
@@ -11,14 +12,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public LottoNumber(int number) {
         if (!isValid(number)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(Error.LOTTO_NUMBER_RANGE);
         }
         this.number = number;
     }
 
     public static boolean isValid(int number) {
         if (MIN > number || number > MAX) {
-            OutputView.print("로또 번호는 1 이상 45 이하의 숫자만 가능합니다.");
+            OutputView.print(Error.LOTTO_NUMBER_RANGE);
             return false;
         }
         return true;

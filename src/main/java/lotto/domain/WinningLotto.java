@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.view.Error;
+import lotto.view.OutputView;
+
 import java.util.List;
 
 public class WinningLotto extends Lotto {
@@ -8,11 +11,22 @@ public class WinningLotto extends Lotto {
     public WinningLotto(List<LottoNumber> insertWinningLotto, LottoNumber bonusBall) {
         super(insertWinningLotto);
 
-        if (insertWinningLotto.stream()
-                .anyMatch(number -> number.equals(bonusBall))) {
-            throw new IllegalArgumentException("로또 번호와 보너스 볼 번호가 중복됩니다.");
+        if (!isValid(insertWinningLotto, bonusBall)) {
+            throw new IllegalArgumentException(Error.BONUS_BALL_DUPLICATE);
         }
         this.bonusBall = bonusBall;
+    }
+
+    public static boolean isValid(List<LottoNumber> insertWinningLotto, LottoNumber bonusBall) {
+        if (!Lotto.isValid(insertWinningLotto)) {
+            return false;
+        }
+        if (insertWinningLotto.stream()
+                .anyMatch(number -> number.equals(bonusBall))) {
+            OutputView.print(Error.BONUS_BALL_DUPLICATE);
+            return false;
+        }
+        return true;
     }
 
     public Rank getRank(Lotto lotto) {

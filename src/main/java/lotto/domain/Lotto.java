@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.view.Error;
 import lotto.view.OutputView;
 
 import java.util.Collections;
@@ -12,7 +13,7 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> numbers) {
         if (!isValid(numbers)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(Error.LOTTO_NUMBER);
         }
         this.numbers = numbers;
         Collections.sort(numbers);
@@ -24,7 +25,7 @@ public class Lotto {
 
     private static boolean isValidNumbersSize(List<LottoNumber> numbers) throws IllegalArgumentException {
         if (numbers.size() != 6) {
-            OutputView.print("로또 번호는 6개의 숫자만 설정 가능합니다.");
+            OutputView.print(Error.LOTTO_NUMBER_LENGTH);
             return false;
         }
         return true;
@@ -32,7 +33,7 @@ public class Lotto {
 
     private static boolean isValidDuplicate(List<LottoNumber> numbers) throws IllegalArgumentException {
         if (new HashSet<>(numbers).size() != numbers.size()) {
-            OutputView.print("로또 번호가 중복됩니다.");
+            OutputView.print(Error.LOTTO_NUMBER_DUPLICATE);
             return false;
         }
         return true;

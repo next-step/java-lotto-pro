@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.view.Error;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -26,7 +27,7 @@ public class LottoController {
     private void buyLottos() throws IllegalArgumentException {
         int manualLottoCount = InputView.insertManualLottoCount();
         if (manualLottoCount > money.getBuyableLottoCount()) {
-            OutputView.print("수동으로 구매할 로또 수가 구매할 수 있는 로또 수보다 많습니다.");
+            OutputView.print(Error.CANNOT_BUY);
             buyLottos();
         }
 
@@ -38,7 +39,14 @@ public class LottoController {
     }
 
     private void insertWinningLotto() throws IllegalArgumentException {
-        winningLotto = new WinningLotto(InputView.insertWinningLotto(), InputView.insertBonusBall());
+        List<LottoNumber> winningLottoNumbers = InputView.insertWinningLotto();
+        LottoNumber bonusBall = InputView.insertBonusBall();
+
+        if (!WinningLotto.isValid(winningLottoNumbers, bonusBall)) {
+            insertWinningLotto();
+            return;
+        }
+        winningLotto = new WinningLotto(winningLottoNumbers, bonusBall);
     }
 
     private void printResult() {

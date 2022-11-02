@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.view.Error;
 import lotto.view.OutputView;
 
 public class Money {
@@ -7,18 +8,18 @@ public class Money {
 
     public Money(int money) {
         if (!isValid(money)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(Error.MONEY);
         }
         this.money = money;
     }
 
     public static boolean isValid(int money) {
         if (money < 0) {
-            OutputView.print("투입 금액은 0 이상의 숫자만 가능합니다.");
+            OutputView.print(Error.MONEY_ALLOW_POSITIVE);
             return false;
         }
         if (money % Lotto.LOTTO_PRICE != 0) {
-            OutputView.print("투입 금액은 1000 단위의 숫자만 가능합니다.");
+            OutputView.print(Error.MONEY_UNIT);
             return false;
         }
         return true;
