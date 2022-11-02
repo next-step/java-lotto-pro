@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.Arrays;
 
-public enum LottoMatchResult {
+public enum LottoNumberMatchCount {
     NOTHING(0),
     ONE(1),
     TWO(2),
@@ -13,14 +13,15 @@ public enum LottoMatchResult {
 
     private final int count;
 
-    public static LottoMatchResult fromCount(final int count) {
+    LottoNumberMatchCount(final int count) {
+        this.count = count;
+    }
+
+    public static LottoNumberMatchCount fromCount(final int count) {
         return Arrays.stream(values())
             .filter(lottoMatchResult -> lottoMatchResult.count == count)
             .findFirst()
-            .orElse(LottoMatchResult.NOTHING);
+            .orElse(LottoNumberMatchCount.NOTHING);
     }
 
-    LottoMatchResult(final int count) {
-        this.count = count;
-    }
 }
