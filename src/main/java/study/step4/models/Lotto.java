@@ -1,33 +1,43 @@
 package study.step4.models;
 
-import study.step4.Rank;
+import study.step4.exception.LottoInvalidSizeException;
+import study.step4.helper.LottoStringParser;
+
+import java.util.List;
 
 public class Lotto {
-    public static final int SUB_LIST_START_INDEX = 0;
-    public static final int SUB_LIST_END_INDEX = 6;
+    private static final int LOTTO_SIZE = 6;
 
-    private final Numbers numbers;
-    private Rank rank;
+    private List<LottoNumber> lottoNumbers;
 
-    public Lotto(Numbers numbers) {
-        this.numbers = numbers;
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        validateLottoSize(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    public Lotto(String lottoNumbers) {
+        this(LottoStringParser.stringToLottoNumbers(lottoNumbers));
+    }
+
+    private void validateLottoSize(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new LottoInvalidSizeException(String.format("로또 사이즈는 %d이어야 합니다.", LOTTO_SIZE));
+        }
+    }
+
+    public int countNumberOfMatching(Lotto winLotto) {
+        return (int) lottoNumbers.stream()
+                .filter(winLotto::containsNumber)
+                .count();
+    }
+
+    private boolean containsNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(number -> number.compare(lottoNumber) == 0);
     }
 
     @Override
     public String toString() {
-        return numbers.toString();
-    }
-
-    public void rank(Numbers winLottoNumbers) {
-        int matchingCount = numbers.countNumberOfMatching(winLottoNumbers);
-        this.rank = Rank.valueOf(matchingCount);
-    }
-
-    public boolean isSameRank(Rank rank) {
-        return this.rank == rank;
-    }
-
-    public int reward() {
-        return rank.getReward();
+        return lottoNumbers.toString();
     }
 }
