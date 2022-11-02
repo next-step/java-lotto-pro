@@ -22,17 +22,17 @@ public class LottoManager {
 
         LottoBuyer lottoBuyer = new LottoBuyer(new Money(amount));
         int manualQuantity = InputView.inputManualLottoQuantity();
-        List<String> maunalNumbers = InputView.inputManualLottoNumbers(manualQuantity);
-        Lottos buyLottos = lottoBuyer.buyAutoAndManualLotto(maunalNumbers);
+        List<String> manualLottoNumbersNumbers = InputView.inputManualLottoNumbers(manualQuantity);
+        Lottos buyLotto = lottoBuyer.buyAutoAndManualLotto(manualLottoNumbersNumbers);
 
-        OutputView.printLottoCount(buyLottos.getLottoCount(), manualQuantity);
-        OutputView.printLottos(buyLottos.toString());
+        OutputView.printLottoCount(buyLotto.getLottoCount(), manualQuantity);
+        OutputView.printLottos(buyLotto.toString());
 
         Lotto winnerLotto = new WinnerLotto(createWinnerLotto(InputView.inputWinLottoNumber()),
                 new LottoNumber(InputView.inputBonusNumber()));
 
-        Prizes prizes = buyLottos.getPrizeOfLotto(winnerLotto);
-        BigDecimal bigDecimal = lottoBuyer.calculateYield(prizes, buyLottos.getLottoCount());
+        Prizes prizes = buyLotto.getPrizeOfLotto(winnerLotto);
+        BigDecimal bigDecimal = lottoBuyer.calculateYield(prizes, buyLotto.getLottoCount());
         OutputView.printStatistic(prizes, bigDecimal);
     }
 

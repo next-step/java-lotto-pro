@@ -4,7 +4,6 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.money.Money;
 import lotto.generate.LottoNumberGenerator;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
