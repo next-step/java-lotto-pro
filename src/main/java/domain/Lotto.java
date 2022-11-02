@@ -2,6 +2,7 @@ package domain;
 
 import domain.strategy.NumberGenerateStrategy;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -12,16 +13,18 @@ public class Lotto {
         .boxed()
         .collect(Collectors.toList());
 
-    private final List<Integer> numbers;
+    private final Set<Integer> numbers;
 
     public Lotto(NumberGenerateStrategy numberGenerateStrategy) {
         this.numbers = numberGenerateStrategy.generate(TOTAL_NUMBER_POOL, NUMBER_SIZE);
     }
 
-    public LottoWinning findWinning(List<Integer> winningNumbers) {
-        return LottoWinning.of((int) numbers.stream()
+    public LottoWinning findWinning(List<Integer> winningNumbers, int bonusNumber) {
+        int countOfMatch = (int) numbers.stream()
             .filter(winningNumbers::contains)
-            .count());
+            .count();
+        boolean isBonusNumberMatched = numbers.contains(bonusNumber);
+        return LottoWinning.of(countOfMatch, isBonusNumberMatched);
     }
 
     @Override

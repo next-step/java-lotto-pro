@@ -7,22 +7,22 @@ import java.util.Map;
 
 public class LottoResult {
     private final List<Lotto> lottos;
-    private final List<Integer> winningNumbers;
+    private final WinningNumber winningNumber;
     private final Map<LottoWinning, Integer> winningResult = new HashMap<LottoWinning, Integer>() {{
         Arrays.stream(LottoWinning.values()).forEach(lottoWinning -> put(lottoWinning, 0));
     }};
 
-    public static LottoResult of(List<Lotto> lottos, List<Integer> winningNumbers) {
-        return new LottoResult(lottos, winningNumbers);
+    public static LottoResult of(List<Lotto> lottos, WinningNumber winningNumber) {
+        return new LottoResult(lottos, winningNumber);
     }
 
-    private LottoResult(List<Lotto> lottos, List<Integer> winningNumbers) {
+    private LottoResult(List<Lotto> lottos, WinningNumber winningNumber) {
         this.lottos = lottos;
-        this.winningNumbers = winningNumbers;
+        this.winningNumber = winningNumber;
         updateWinningResult();
     }
 
-    public int findWinning(LottoWinning lottoWinning) {
+    public int getCountOfWinning(LottoWinning lottoWinning) {
         return winningResult.get(lottoWinning);
     }
 
@@ -42,7 +42,8 @@ public class LottoResult {
 
     private void updateWinningResult() {
         for (Lotto lotto : lottos) {
-            LottoWinning lottoWinning = lotto.findWinning(winningNumbers);
+            LottoWinning lottoWinning = lotto.findWinning(winningNumber.getWinningNumbers(),
+                winningNumber.getBonusNumber());
             winningResult.put(lottoWinning, winningResult.get(lottoWinning) + 1);
         }
     }
