@@ -20,7 +20,7 @@ public class WinningLottoTest {
     String bonusNumber = "7";
     // when, then
     assertThatThrownBy(() -> new WinningLotto(winningLottoNumber, bonusNumber))
-        .isInstanceOf(IllegalArgumentException.class).hasMessage("올바른 형식의 지난 당청 번호를 입력해주세요.");
+        .isInstanceOf(IllegalArgumentException.class).hasMessage("올바른 로또 번호를 입력해 주세요.");
   }
 
   @DisplayName("올바르지 않은 보너스 볼 입력시 예외 발생 확인")
@@ -58,7 +58,7 @@ public class WinningLottoTest {
     //given
     String winningLottoNumber = "1, 2, 3, 4, 5, 6";
     String bonusNumber = "7";
-    Lotto lotto = Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    Lotto lotto = Lotto.createManualLotto("1, 2, 3, 4, 5, 6");
     WinningLotto winningLotto = new WinningLotto(winningLottoNumber, bonusNumber);
 
     //when
