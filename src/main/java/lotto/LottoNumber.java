@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public final class LottoNumber {
 
-    private static final int MIN = 1;
-    private static final int MAX = 45;
+    public static final int MIN = 1;
+    public static final int MAX = 45;
 
     private static final class LottoNumberCache {
 
@@ -75,9 +75,7 @@ public final class LottoNumber {
 
     @Override
     public String toString() {
-        return "LottoNumber{" +
-            "value=" + value +
-            '}';
+        return String.format("{%d}", value);
     }
 
 }

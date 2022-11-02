@@ -48,9 +48,9 @@ class MoneyTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1:2:0", "2:1:2", "4:2:2", "2:4:0", "3:5:0", "5:3:1",
-        "100:10:10", "10:100:0"}, delimiter = ':')
-    void divide_nonZero(final int amount1, final int amount2, final int expected) {
+    @CsvSource(value = {"1:2:0.5", "2:1:2", "4:2:2", "2:4:0.5", "3:5:0.6", "5:3:1.67",
+        "100:10:10", "10:100:0.1"}, delimiter = ':')
+    void divide_nonZero(final int amount1, final int amount2, final double expected) {
         assertThat(Money.wons(amount1).divide(Money.wons(amount2)))
             .isEqualTo(Money.wons(expected));
     }

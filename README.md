@@ -48,14 +48,14 @@
 
 [X] Money - 구입금액을 나타내는 value object
 
-[X] LottoCusomter - 로또 구매자를 나타내는 domain model
+[ ] LottoCusomter - 로또 구매자를 나타내는 domain model
 - [X] 가진 금액으로, 구입 가능한 만큼 로또를  구입 할 수 있다.
 - [X] 가진 금액이 로또 가격보다 적다면 로또를 구입 할 수 없다.
+- [ ] 지난주 당첨 번호를 이용하여, 당첨 통계를 계산할 수 있다.
+- [ ] 지난주 당첨 번호를 이용하여, 총 수익률을 계산할 수 있다
 
-[] LottoStore - 로또 상점을 나타내는 object
-- [] 로또번호를 생성하여, 로또 구매자에게 팔 수 있다.
-- [] 지난주 당첨 번호를 이용하여, 로또 구매자의 당첨 통계를 계산하여 알려 줄 수 있다.
-- [] 지난주 당첨 번호를 이용하여, 로또 구매자의 총 수익률을 알려 줄 수 있다.
+[X] LottoStore - 로또 상점을 나타내는 domain model
+- [X] 로또번호를 생성하여, 로또 구매자에게 팔 수 있다.
 
 [X] LottoNumber - 하나의 로또번호를 나타내는 value object
 - [X] 1부터 45까지중 하나의 번호를 골라, 로또번호를 만들 수 있다.
@@ -87,3 +87,35 @@
 * 로또 자동 생성은 Collections.shuffle() 메소드 활용한다.
 * Collections.sort() 메소드를 활용해 정렬 가능하다.
 * ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 유무를 판단할 수 있다.
+
+
+## TODO
+- [x] refactor : LottoTicket에서, LottoNumbers에 관련한 로직 분리.
+- [x] LottoTicket은 단지, Fee와 LottoNumber를 가지고 있는 컨테이너로 분리
+
+
+## Notes
+
+- Q : 너무 로또 도메인 세부사항에 묶여있지 않나? 무언가 더 추상화 할 것은 없나?
+- Learned : How to divide BigDecimal 
+	- https://www.baeldung.com/java-bigdecimal-biginteger
+- Q : 로또 당첨 통계 계산 책임은 누구에게 주어야 하나? 
+	- 로또상점? 로또고객자신?
+- Q : 로또 당첨 상금과 당첨 정책은 자주 바뀌지 않을까?
+	- 일단 Enum으로 분리하고, 정책이 바뀔것같으면 Interface화.
+- Q : Maintain Order in Map => TreeMap? SortedMap? ProsCons?
+- Q : Enum compareTo default behavior?
+	- A : The natural order implemented by this method is the order in which the constants are declared.
+	- https://docs.oracle.com/javase/8/docs/api/java/lang/Enum.html#compareTo-E-
+- Learned : Java 8에서 도입된 SummaryStatistics.
+	- count, min, max, sum average 등의 statistics 정보를 계산해주는 클래스. 
+	- 스트림과 함께 사용 가능.
+	- IntSummaryStatistics, LongSummaryStatistics, DoubleSummaryStatistics
+- Q : How to repeat vim ‘f’ command?
+	- A : The command to repeat an f is ; (semicolon)
+- Q : List Comparator?
+- Q : List equals?
+	- A :  two lists are defined to be equal if they contain the same elements in the same order.
+	- https://docs.oracle.com/javase/8/docs/api/java/util/List.html#equals-java.lang.Object-
+- Q : Enum에 너무 의존하지 있지 않나? Enum값을 그대로 쓰는게 아니라, 메시지전달을 통해서 해야 하나?
+	- 
