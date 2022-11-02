@@ -13,13 +13,14 @@ public class Counter {
 
   private final String inputMoney;
   private final int manualLottoAmount;
+  private final int autoLottoAmount;
 
   public Counter(String inputMoney, List<String> manualNumbers) {
     this.lottoList = buyLotto(inputMoney, manualNumbers);
     this.inputMoney = inputMoney;
     this.manualLottoAmount = manualNumbers.size();
+    this.autoLottoAmount = lottoList.getLottoList().size() - manualLottoAmount;
   }
-
 
   private static void validNumber(String input) {
     if (isNumber(input)) {
@@ -29,6 +30,10 @@ public class Counter {
 
   private static boolean isNumber(String input) {
     return !input.matches(NUMBER_REGEX);
+  }
+
+  public int getAutoLottoAmount() {
+    return autoLottoAmount;
   }
 
   public LottoList getLottoList() {
@@ -41,14 +46,6 @@ public class Counter {
 
   public int getManualLottoAmount() {
     return manualLottoAmount;
-  }
-
-  public LottoList buyLotto(String inputMoney) {
-    validInputMoney(inputMoney);
-
-    int lottoAmount = calculateLottoAmount(inputMoney);
-
-    return lottoList;
   }
 
   public LottoList buyLotto(String inputMoney, List<String> manualNumbers) {
