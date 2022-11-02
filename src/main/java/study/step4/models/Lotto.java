@@ -3,6 +3,9 @@ package study.step4.models;
 import study.step4.Rank;
 
 public class Lotto {
+    public static final int SUB_LIST_START_INDEX = 0;
+    public static final int SUB_LIST_END_INDEX = 6;
+
     private final Numbers numbers;
     private Rank rank;
 

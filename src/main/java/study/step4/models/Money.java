@@ -4,6 +4,8 @@ import study.step4.constants.PatternConstants;
 import study.step4.exception.LottoInputMoneyTypeException;
 
 public class Money {
+    public static final int PRICE_PER_LOTTO = 1000;
+
     private final int money;
 
     public Money(String money) {
