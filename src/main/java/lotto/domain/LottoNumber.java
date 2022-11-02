@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
@@ -33,7 +33,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
 
     public static List<LottoNumber> lottoNumberMinToMax() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for(int number = LOTTO_MIN_NUMBER; number < LOTTO_MAX_NUMBER; number++) {
+        for (int number = LOTTO_MIN_NUMBER; number < LOTTO_MAX_NUMBER; number++) {
             lottoNumbers.add(new LottoNumber(number));
         }
         return lottoNumbers;

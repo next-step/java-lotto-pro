@@ -25,7 +25,7 @@ public class LottoResult {
 
     private int getWinningPrice() {
         int winningPrice = 0;
-        for(int matchNumber : winningPriceMap.keySet()) {
+        for (int matchNumber : winningPriceMap.keySet()) {
             winningPrice += winningPriceMap.get(matchNumber) * lottoNumberMatcher.getMatchLottoNumber(matchNumber);
         }
         return winningPrice;

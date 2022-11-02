@@ -21,7 +21,7 @@ public class LottoResultView {
     public String lottoResultMessage(Map<Integer,Integer> winningPriceMap,
                                      LottoNumberMatcher lottoNumberMatcher, double profit) {
         String result = "당첨 통계\n---------\n";
-        for(int matchNumber : winningPriceMap.keySet()) {
+        for (int matchNumber : winningPriceMap.keySet()) {
             result += (matchNumber + "개 일치 (" + winningPriceMap.get(matchNumber) + "원)- "
                     + lottoNumberMatcher.getMatchLottoNumber(matchNumber) + "개\n");
         }

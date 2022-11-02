@@ -9,7 +9,7 @@ public class AutoLottoCreator implements LottoCreator {
     @Override
     public Lotteries createLotteries(int buyLottoCount) {
         List<Lotto> lotteries = new ArrayList();
-        for (int i=0; i<buyLottoCount; i++) {
+        for (int i = 0; i < buyLottoCount; i++) {
             lotteries.add(createLotto());
         }
         return new Lotteries(lotteries);
