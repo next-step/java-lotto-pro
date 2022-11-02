@@ -43,4 +43,8 @@ public class OutPutView {
 
         return "이득이";
     }
+
+    public static void oupPutBuyLottoTypeCount(int manualCount, int autoCount) {
+        System.out.println("수동으로" + manualCount + "장, 자동으로" + autoCount + "개를 구매 했습니다.");
+    }
 }
