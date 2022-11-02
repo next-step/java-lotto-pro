@@ -26,9 +26,9 @@ public class LottoNumberMatcherTest {
         lottoList.add(numbersToLotto(Arrays.asList(1,2,3,34,35,36)));
         Lotteries lotteries = new Lotteries(lottoList);
         //when
-        LottoRankMatcher lottoNumberMatcher = new LottoRankMatcher(lotteries, winningNumbers);
+        LottoRankMatcher lottoRankMatcher = new LottoRankMatcher(lotteries, winningNumbers);
         //then
-        assertThat(lottoNumberMatcher.getMatchLottoRank(Rank.FIFTH)).isEqualTo(3);
+        assertThat(lottoRankMatcher.getMatchLottoRank(Rank.FIFTH)).isEqualTo(3);
     }
 
     @Test
@@ -41,9 +41,9 @@ public class LottoNumberMatcherTest {
         lottoList.add(numbersToLotto(Arrays.asList(1,2,3,34,35,36)));
         Lotteries lotteries = new Lotteries(lottoList);
         //when
-        LottoRankMatcher lottoNumberMatcher = new LottoRankMatcher(lotteries, winningNumbers);
+        LottoRankMatcher lottoRankMatcher = new LottoRankMatcher(lotteries, winningNumbers);
         //then
-        assertThat(lottoNumberMatcher.getMatchLottoRank(Rank.MISS)).isEqualTo(0);
+        assertThat(lottoRankMatcher.getMatchLottoRank(Rank.MISS)).isEqualTo(0);
     }
 
     @Test
@@ -56,8 +56,8 @@ public class LottoNumberMatcherTest {
         lottoList.add(numbersToLotto(Arrays.asList(1,2,3,34,35,36)));
         Lotteries lotteries = new Lotteries(lottoList);
         //when
-        LottoRankMatcher lottoNumberMatcher = new LottoRankMatcher(lotteries, winningNumbers);
+        LottoRankMatcher lottoRankMatcher = new LottoRankMatcher(lotteries, winningNumbers);
         //then
-        assertThat(lottoNumberMatcher.getMatchLottoRank(Rank.FIRST)).isEqualTo(1);
+        assertThat(lottoRankMatcher.getMatchLottoRank(Rank.FIRST)).isEqualTo(1);
     }
 }

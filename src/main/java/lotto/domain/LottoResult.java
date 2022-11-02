@@ -4,12 +4,12 @@ import lotto.dto.LottoResultDto;
 
 public class LottoResult {
 
-    private LottoRankMatcher lottoNumberMatcher;
+    private LottoRankMatcher lottoRankMatcher;
     private BuyAmount buyAmount;
     private WinningNumbers winningNumbers;
 
     public LottoResult (Lotteries lotteries, WinningNumbers winningNumbers, BuyAmount buyAmount) {
-        this.lottoNumberMatcher = new LottoRankMatcher(lotteries, winningNumbers);
+        this.lottoRankMatcher = new LottoRankMatcher(lotteries, winningNumbers);
         this.buyAmount = buyAmount;
         this.winningNumbers = winningNumbers;
     }
@@ -17,7 +17,7 @@ public class LottoResult {
     private int getWinningPrice() {
         int winningPrice = 0;
         for (Rank rank : Rank.getAllRanks()) {
-            winningPrice += rank.getWinningMoney() * lottoNumberMatcher.getMatchLottoRank(rank);
+            winningPrice += rank.getWinningMoney() * lottoRankMatcher.getMatchLottoRank(rank);
         }
         return winningPrice;
     }
@@ -27,6 +27,6 @@ public class LottoResult {
     }
 
     public LottoResultDto getLottoResultDto() {
-        return new LottoResultDto(lottoNumberMatcher, getProfit());
+        return new LottoResultDto(lottoRankMatcher, getProfit());
     }
 }
