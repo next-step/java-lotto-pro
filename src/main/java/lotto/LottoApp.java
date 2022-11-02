@@ -32,7 +32,7 @@ public class LottoApp implements App {
         newLine();
         
         print(WINNING_NUMBER);
-        Lotto winLotto = Lotto.valueOf(new ManualLottoNumberGenerateStrategy(Arrays.asList(scanWinningNumbers())));
+        Lotto winLotto = Lotto.valueOf(new ManualLottoNumberGenerateStrategy(Arrays.asList(scanManyNumbers())));
 
         print(BONUS_NUMBER);
         BonusLottoNumber bonusLottoNumber = BonusLottoNumber.valueOf(scanOneNumber(), winLotto);

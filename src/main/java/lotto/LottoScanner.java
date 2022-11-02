@@ -12,7 +12,7 @@ public class LottoScanner {
         return Integer.parseInt(br.readLine());
     }
 
-    public static Integer[] scanWinningNumbers() throws IOException {
+    public static Integer[] scanManyNumbers() throws IOException {
         String[] tokens = br.readLine()
             .split(DELIMITER);
         Integer[] winningNumbers = new Integer[tokens.length];
