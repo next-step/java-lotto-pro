@@ -8,16 +8,15 @@ import java.util.List;
 
 import static lotto.auto.common.Constants.DELIMITER;
 import static lotto.auto.common.Constants.LOTTO_LENGTH;
+import static lotto.auto.common.Constants.LOTTO_MAX_NUM;
+import static lotto.auto.common.Constants.LOTTO_MIN_NUM;
 
+// 일급콜렉션
 public class LottoNumbers {
-    private final int BEGIN_INDEX = 0;
-    private final int LOTTO_NUMBER_LIST_SIZE = 6;
-
-    private List<Integer> lottoNumbers;
+    private List<Integer> numbers;
 
     public LottoNumbers() {
         setUp();
-        makeLottoNumbers();
     }
 
     public LottoNumbers(String inputStr) {
@@ -25,8 +24,12 @@ public class LottoNumbers {
         stringToNumbersByToken(inputStr);
     }
 
+    public LottoNumbers(List<Integer> inputNumList) {
+        numbers = inputNumList;
+    }
+
     private void setUp() {
-        lottoNumbers = new ArrayList<>();
+        numbers = new ArrayList<>();
     }
 
     private void stringToNumbersByToken(String inputStr) {
@@ -38,21 +41,19 @@ public class LottoNumbers {
             throw new IllegalArgumentException();
         }
         for (String number : str) {
-            this.lottoNumbers.add(new LottoAutoUtils().stringToNumber(number));
+            this.numbers.add(new LottoAutoUtils().stringToNumber(number));
         }
-        Collections.sort(lottoNumbers);
+        Collections.sort(numbers);
     }
 
-    private void makeLottoNumbers() {
-        for (int num = 1; num <= 45; num++) {
-            lottoNumbers.add(num);
-        }
-        Collections.shuffle(lottoNumbers);
-        lottoNumbers = lottoNumbers.subList(BEGIN_INDEX, BEGIN_INDEX + LOTTO_NUMBER_LIST_SIZE);
-        Collections.sort(lottoNumbers);
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+    public void add(int num) {
+        if (num < LOTTO_MIN_NUM || num > LOTTO_MAX_NUM) {
+            throw new IllegalArgumentException("로또의 숫자 범위는 1~45입니다.");
+        }
+        numbers.add(num);
     }
 }
