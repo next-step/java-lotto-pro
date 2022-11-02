@@ -3,9 +3,9 @@ package lotto.auto;
 import java.util.List;
 
 import static lotto.auto.common.Constants.DEFAULT_PRICE;
+import static lotto.auto.common.Constants.INIT_NUM;
 
 public class Buyer {
-    private static final int INIT_NUM = 0;
 
     private Money amount;
     private Lottos lottos;
