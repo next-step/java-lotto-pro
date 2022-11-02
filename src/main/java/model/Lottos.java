@@ -1,6 +1,7 @@
 package model;
 
 import model.strategy.NumberStrategy;
+import model.strategy.RandomStrategy;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,9 +10,11 @@ public class Lottos {
 
     private final List<LottoNumber> lotto;
 
-    public Lottos(Money money, NumberStrategy strategy) {
-        int count = money.availableBuyLottoCount();
-        this.lotto = new Seller().buy(count, strategy);
+    public Lottos(int autoCount, List<LottoNumber> manualList, NumberStrategy strategy) {
+        Seller seller = new Seller();
+        seller.buyManual(manualList);
+        seller.buyAuto(autoCount, strategy);
+        this.lotto = seller.getLotto();
     }
 
     public List<LottoNumber> getLotto() {
