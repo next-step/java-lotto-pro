@@ -13,7 +13,7 @@ public class LottoShop {
 	}
 
 	public Lottos buy(final Money payment) {
-		long quantity = payment.calculateQuantity();
+		long quantity = payment.calculateQuantity(Lotto.LOTTO_PRICE);
 		List<Lotto> lottoList = new ArrayList<>();
 		for (int i = 0; i < quantity; i++) {
 			lottoList.add(lottoCreateStrategy.create());
