@@ -10,7 +10,7 @@ public class WinningLotto extends Lotto {
 
     public WinningLottoRank rank(Lotto lotto) {
         int matchCount = 0;
-        for (LottoNumber lottoNumber : this.lottoNumbers) {
+        for (LottoNumber lottoNumber : this.lottoNumbers()) {
             matchCount += lotto.getMatchPoint(lottoNumber);
         }
         return WinningLottoRank.getRank(matchCount);
