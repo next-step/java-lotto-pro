@@ -46,6 +46,10 @@ public class BuyAmount {
         return Objects.hash(buyAmount);
     }
 
+    public boolean isEqualValue(int buyAmount) {
+        return this.buyAmount == buyAmount;
+    }
+
     public double getProfit(int winningPrice) {
         return (double)winningPrice/(double)buyAmount;
     }

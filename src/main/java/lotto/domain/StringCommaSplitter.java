@@ -1,8 +1,11 @@
 package lotto.domain;
 
-public class StringCommaSplitter implements LottoStringSplitter {
+import java.util.Arrays;
+import java.util.List;
+
+public class StringCommaSplitter implements StringToIntListSplitter {
     @Override
-    public String[] split(String str) {
-        return str.split(",");
+    public List<String> split(String str) {
+        return Arrays.asList(str.split(","));
     }
 }

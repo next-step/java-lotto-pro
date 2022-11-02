@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotteries;
-import lotto.domain.Lotto;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +14,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LotteriesTest {
 
-    private static final WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
+    private static final WinningNumbers winningNumbers =
+            new WinningNumbers(Arrays.asList(1,2,3,4,5,6), new BonusNumber(45));
 
     @Test
     @DisplayName("지난주 당첨 목록과 로또 여섯개 숫자가 일치하는 경우 테스트")
@@ -25,7 +24,7 @@ public class LotteriesTest {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(numbersToLotto(Arrays.asList(1,2,3,4,5,6)));
         Lotteries lotteries = new Lotteries(lottoList);
-        Map<Lotto,Integer> lottoNumberMatcher = lotteries.getLottoMatchNumberMap(winningNumbers);
+        Map<Lotto, Rank> lottoNumberMatcher = lotteries.getLottoMatchRankMap(winningNumbers);
         int matchNumber = 0;
         //when (lotto가 하나이므로 키목록도 하나)
         for(Lotto lotto : lottoNumberMatcher.keySet()) {
@@ -42,7 +41,7 @@ public class LotteriesTest {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(numbersToLotto(Arrays.asList(1,12,13,14,15,16)));
         Lotteries lotteries = new Lotteries(lottoList);
-        Map<Lotto,Integer> lottoMatchNumberMap = lotteries.getLottoMatchNumberMap(winningNumbers);
+        Map<Lotto,Rank> lottoMatchNumberMap = lotteries.getLottoMatchRankMap(winningNumbers);
         int matchNumber = 0;
         //when (lotto가 하나이므로 키목록도 하나)
         for(Lotto lotto : lottoMatchNumberMap.keySet()) {
@@ -59,7 +58,7 @@ public class LotteriesTest {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(numbersToLotto(Arrays.asList(11,12,13,14,15,16)));
         Lotteries lotteries = new Lotteries(lottoList);
-        Map<Lotto,Integer> lottoMatchNumberMap = lotteries.getLottoMatchNumberMap(winningNumbers);
+        Map<Lotto,Rank> lottoMatchNumberMap = lotteries.getLottoMatchRankMap(winningNumbers);
         int matchNumber = 0;
         //when (lotto가 하나이므로 키목록도 하나)
         for(Lotto lotto : lottoMatchNumberMap.keySet()) {

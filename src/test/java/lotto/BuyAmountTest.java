@@ -16,7 +16,7 @@ public class BuyAmountTest {
     @DisplayName("구매금액 입력값이 유효성체크 통과하는지 확인")
     @CsvSource(value = {"5000:5000","1000:1000","2000000000:2000000000"}, delimiter = ':')
     void buyAmount_validate_test(int input, int expected) {
-        assertThat((new BuyAmount(input)).equals(expected)).isTrue();
+        assertThat((new BuyAmount(input)).isEqualValue(expected)).isTrue();
     }
 
     @ParameterizedTest
