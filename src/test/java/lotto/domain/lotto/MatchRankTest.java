@@ -24,4 +24,10 @@ class MatchRankTest {
 	void 다섯개_보너스_번호_일치() {
 		assertThat(MatchRank.valueOfMatchCount(5, true)).isEqualTo(MatchRank.FIVE_MATCH_WITH_BONUS);
 	}
+
+	@Test
+	void 일치갯수_0미만시_IllegalArgumentException() {
+		assertThatThrownBy(() -> MatchRank.valueOfMatchCount(-1, false))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
 }

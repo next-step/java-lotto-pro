@@ -59,8 +59,12 @@ public class Lottos {
 	public LottoResults toLottoResults(Lotto winLotto, LottoNumber bonusNumber) {
 		return LottoResults.from(
 			this.lottos.stream()
-				.map(lotto -> LottoResult.from(lotto, lotto.countMatchCount(winLotto), bonusNumber))
-				.collect(Collectors.toList())
+				.map(lotto -> LottoResult.from(lotto,
+					MatchRank.valueOfMatchCount(
+						lotto.countMatchCount(winLotto),
+						lotto.contains(bonusNumber)
+					))
+				).collect(Collectors.toList())
 		);
 	}
 

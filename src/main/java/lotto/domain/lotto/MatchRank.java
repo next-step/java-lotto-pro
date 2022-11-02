@@ -22,10 +22,18 @@ public enum MatchRank {
 	}
 
 	public static MatchRank valueOfMatchCount(int matchCount, boolean bonusMatch) {
+		validateMatchCount(matchCount);
 		return Arrays.stream(MatchRank.values())
 			.filter(matchRank -> matchRank.func.apply(matchCount, bonusMatch))
 			.findAny()
 			.orElse(FAILED);
+	}
+
+
+	private static void validateMatchCount(int matchCount) {
+		if (matchCount < 0) {
+			throw new IllegalArgumentException("일치 횟수는 0보다 작을수 없습니다.");
+		}
 	}
 
 	public int getMatchCount() {
