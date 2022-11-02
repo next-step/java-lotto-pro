@@ -33,4 +33,10 @@ public class MoneyTest {
     void multiply_test() {
         assertThat(new Money(1_000L).multiply(2)).isEqualTo(new Money(2_000L));
     }
+
+    @DisplayName("돈을 뺄수 있다")
+    @Test
+    void subtract_test() {
+        assertThat(new Money(2_000L).subtract(new Money(1_000L))).isEqualTo(new Money(1_000L));
+    }
 }

@@ -29,4 +29,15 @@ public class ManualLottoGeneratorTest {
     void to_numbers_test() {
         assertThat(ManualLottoGenerator.toNumbers("1,2,3,4,5,6")).containsExactly(1, 2, 3, 4, 5, 6);
     }
+
+    @DisplayName("입력된 문자열 개수만큼 로또를 생성할 수 있다")
+    @Test
+    void create_many_test() {
+        List<String> inputs = Arrays.asList(
+                "1,2,3,4,5,6",
+                "2,3,4,5,6,7",
+                "3,4,5,6,7,8"
+        );
+        assertThat(ManualLottoGenerator.createMany(inputs)).hasSize(inputs.size());
+    }
 }
