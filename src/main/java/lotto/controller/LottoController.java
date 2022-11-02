@@ -18,7 +18,7 @@ public class LottoController {
     }
 
     public void start() {
-        Amount buyAmount = lottoService.buyLottoAuto();
+        Amount buyAmount = lottoService.buyLotto();
         Lottos buyLottos = lottoService.generateLottos(buyAmount);
         WinningLotto winningLotto = lottoService.winningLotto();
         Map<LottoRank, Integer> rankInfo = lottoService.checkWinnginLotto(buyLottos, winningLotto);
