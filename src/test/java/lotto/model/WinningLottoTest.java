@@ -25,7 +25,7 @@ public class WinningLottoTest {
 
   @DisplayName("올바르지 않은 보너스 볼 입력시 예외 발생 확인")
   @ParameterizedTest(name = "보너스 볼 : {0} 일 떄, 예외 발생하는지 확인")
-  @ValueSource(strings = {"7, 8", "test"})
+  @ValueSource(strings = {"7, 8", "test", "6"})
   void valid_generate_bonus_number(String bonusNumber) {
     //given
     String winningLottoNumber = "1, 2, 3, 4, 5, 6";
@@ -33,6 +33,7 @@ public class WinningLottoTest {
     assertThatThrownBy(() -> new WinningLotto(winningLottoNumber, bonusNumber))
         .isInstanceOf(IllegalArgumentException.class).hasMessage("올바른 형식의 보너스 볼을 입력해주세요.");
   }
+
 
   @Test
   @DisplayName("입력받은 지난준 당청 번호와 보너스 볼 입력을 통해 올바르게 WinningLotto 가 생성되는지 확인")
