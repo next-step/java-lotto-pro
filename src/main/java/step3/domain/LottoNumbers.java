@@ -26,7 +26,9 @@ public class LottoNumbers {
     }
 
     public boolean hasBonusNumber(int bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+        return lottoNumbers.stream()
+                .mapToInt(LottoNumber::getLottoNumber)
+                .anyMatch(num -> num == bonusNumber);
     }
 
     public static LottoNumbers gainNumbers(String numbersWithComma) {
