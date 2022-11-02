@@ -5,7 +5,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Lotto {
+public abstract class Lotto {
+	public final static Money LOTTO_PRICE = new Money(1000L);
 	private final static int SIZE_OF_LOTTO = 6;
 
 	private final Set<LottoNumber> numbers;
@@ -21,13 +22,17 @@ public class Lotto {
 		}
 	}
 
+	public abstract boolean isAuto();
+
+	public abstract boolean isManual();
+
 	public int match(final Lotto winnerLotto) {
 		return (int)numbers.stream()
 			.filter(winnerLotto::contain)
 			.count();
 	}
 
-	public boolean matchBonus(final LottoNumber number){
+	public boolean matchBonus(final LottoNumber number) {
 		return numbers.contains(number);
 	}
 
@@ -37,12 +42,10 @@ public class Lotto {
 
 	@Override
 	public boolean equals(final Object o) {
-		if (this == o) {
+		if (this == o)
 			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
+		if (o == null || getClass() != o.getClass())
 			return false;
-		}
 		final Lotto lotto = (Lotto)o;
 		return Objects.equals(numbers, lotto.numbers);
 	}

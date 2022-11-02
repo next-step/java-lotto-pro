@@ -6,7 +6,6 @@ import java.util.List;
 import lotto.strategy.LottoCreateStrategy;
 
 public class LottoShop {
-	private static final Money LOTTO_PRICE = new Money(1000L);
 	private final LottoCreateStrategy lottoCreateStrategy;
 
 	public LottoShop(final LottoCreateStrategy lottoCreateStrategy) {
@@ -14,11 +13,17 @@ public class LottoShop {
 	}
 
 	public Lottos buy(final Money payment) {
-		long quantity = payment.calculateQuantity(LOTTO_PRICE);
+		long quantity = payment.calculateQuantity(Lotto.LOTTO_PRICE);
 		List<Lotto> lottoList = new ArrayList<>();
 		for (int i = 0; i < quantity; i++) {
 			lottoList.add(lottoCreateStrategy.create());
 		}
 		return new Lottos(lottoList);
+	}
+
+	public Lottos buyLottos(final Money payment, final Lottos manualLottos) {
+		Money change = payment.minus(manualLottos.getTotalSpent());
+		Lottos autoLotto = buy(change);
+		return manualLottos.merge(autoLotto);
 	}
 }

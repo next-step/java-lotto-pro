@@ -20,6 +20,14 @@ public class Money {
 		return this.money / price.money;
 	}
 
+	public Money minus(final Money otherMoney) {
+		return new Money(this.money - otherMoney.money);
+	}
+
+	public Money multiply(final int amount) {
+		return new Money(this.money * amount);
+	}
+
 	public float ratio(final Money income) {
 		BigDecimal money = BigDecimal.valueOf(this.money);
 		BigDecimal incomeMoney = BigDecimal.valueOf(income.money);
