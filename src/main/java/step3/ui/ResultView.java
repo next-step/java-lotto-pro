@@ -6,5 +6,6 @@ import step3.domain.Statistics;
 
 public interface ResultView {
     void resultLotteryTicket(LotteryTicket lotteryTicket);
+
     void resultStatistics(Statistics statistics, Payment payment);
 }

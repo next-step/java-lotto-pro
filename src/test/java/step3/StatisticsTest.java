@@ -11,7 +11,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step3.domain.LotteryTicket;
 import step3.domain.Lotto;
-import step3.domain.Payment;
 import step3.domain.Rank;
 import step3.domain.Statistics;
 import step3.domain.WinningBonusNumber;
@@ -30,8 +29,7 @@ public class StatisticsTest {
         Lotto lotto3rd = new Lotto(lottoNumbers3);
         Lotto lotto2nd = new Lotto(lottoNumbers2);
 
-        Payment payment = new Payment(3000, 0);
-        LotteryTicket lotteryTicket = new LotteryTicket(payment);
+        LotteryTicket lotteryTicket = new LotteryTicket();
         lotteryTicket.add(lotto4th_1);
         lotteryTicket.add(lotto4th_2);
         lotteryTicket.add(lotto3rd);

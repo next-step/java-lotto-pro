@@ -9,7 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step3.domain.LotteryTicket;
 import step3.domain.Lotto;
-import step3.domain.Payment;
 
 public class LotteryTicketTest {
     private static LotteryTicket lotteryTicket;
@@ -21,16 +20,20 @@ public class LotteryTicketTest {
         Lotto lotto3rd = new Lotto(lottoNumbers3rd);
         Lotto lotto2nd = new Lotto(lottoNumbers2nd);
 
-        Payment payment = new Payment(2000, 0);
-
-        lotteryTicket = new LotteryTicket(payment);
+        lotteryTicket = new LotteryTicket();
         lotteryTicket.add(lotto3rd);
         lotteryTicket.add(lotto2nd);
     }
+
     @Test
     @DisplayName("2개짜리 로또복권 생성")
     public void LotteryTicket_two() {
         assertThat(lotteryTicket.getLotteryTicket()).hasSize(2);
     }
-    
+
+    @Test
+    @DisplayName("로또복권 개수 가져오기")
+    public void LotteryTicket_count() {
+        assertThat(lotteryTicket.getCount()).isEqualTo(2);
+    }
 }

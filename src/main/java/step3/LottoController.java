@@ -16,23 +16,16 @@ public class LottoController {
     }
     public void start() {
         Payment payment = new Payment(inputView.inputPayment(), inputView.inputManualCount());
-        LotteryTicket lotteryTicket = new LotteryTicket(payment);
-        lottoFactory(lotteryTicket);
-    
+
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        LotteryTicket lotteryTicket = lottoGenerator.generateLotteryTicket(payment);
+
         resultView.resultLotteryTicket(lotteryTicket);
 
         WinningBonusNumber winningBonusNumber =
                 new WinningBonusNumber(inputView.inputWinningNumber(), inputView.inputBonusNumber());
 
         Statistics statistics = new Statistics(lotteryTicket, winningBonusNumber);
-        resultView.resultStatistics(statistics, lotteryTicket.getPayment());
-    }
-    
-    private static void lottoFactory(LotteryTicket lotteryTicket){
-        Payment payment = lotteryTicket.getPayment();
-        for (int i = 0; i < payment.getLottoCount(); i++){
-            LottoGenerator lottoGenerator = new LottoGenerator();
-            lotteryTicket.add(lottoGenerator.lottoGenerate());
-        }
+        resultView.resultStatistics(statistics, payment);
     }
 }
