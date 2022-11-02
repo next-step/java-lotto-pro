@@ -14,6 +14,10 @@ public class Lotto {
         makeLottoNumbers();
     }
 
+    public Lotto(String lottoNumbers) {
+        this.lottoNumbers = new LottoNumbers(lottoNumbers);
+    }
+
     public List<Integer> getLottoNumbers() {
         return lottoNumbers.getNumbers();
     }
