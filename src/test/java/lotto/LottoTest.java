@@ -6,13 +6,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import lotto.domain.Lotto;
-import lotto.domain.Ticket;
-import lotto.domain.Tickets;
+import lotto.domain.Rank;
+import lotto.domain.ticket.Ticket;
+import lotto.domain.ticket.Tickets;
 
 public class LottoTest {    
     Lotto lotto;
     Tickets myTickets = new Tickets();
-    String winningTicketStr = "1,2,3,4,5,6";
+    Ticket winningTicket = new Ticket("1,2,3,4,5,6", "7");
     
     @Test
     @DisplayName("구입금액에_따른_발급로또_개수_확인")
@@ -22,21 +23,24 @@ public class LottoTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"'1,2,3,4,5,6':'6개 일치 (2000000000원) - 1개'"
-                        , "'1,2,3,4,5,7':'5개 일치 (1500000원) - 1개'"
-                        , "'1,2,3,4,7,8':'4개 일치 (50000원) - 1개'"
-                        , "'1,2,3,7,8,9':'3개 일치 (5000원) - 1개'"
+    @CsvSource(value = {"'1,2,3,4,5,6':0"
+                        , "'1,2,3,4,5,7':1"
+                        , "'1,2,3,4,5,8':2"
+                        , "'1,2,3,4,7,8':3"
+                        , "'1,2,3,7,8,9':4"
                         }, delimiter = ':')
     @DisplayName("사용자_입력값과_로또_비교하여_결과_출력")
-    public void lotto_get_result(String param, String expected) {
-        myTickets.addTicket(new Ticket(param));
+    public void lotto_get_result(String lottoNumber, int index) {
+        myTickets.addTicket(new Ticket(lottoNumber));
         
         lotto = new Lotto(myTickets);
-        assertThat(lotto.getResultStr(winningTicketStr)).contains(expected);
+        lotto.checkResult(winningTicket);
+        
+        assertThat(lotto.result.winningMap.get(Rank.values()[index])).isEqualTo(1);
     }  
     
     @Test
-    @DisplayName("사용자_입력값과_로또_비교하여_수익률_출력")
+    @DisplayName("사용자 입력값과 로또 비교하여 수익률 체크")
     public void lotto_get_return_rate() {
         myTickets.addTicket(new Ticket("8, 21, 23, 41, 42, 43"));
         myTickets.addTicket(new Ticket("3, 5, 11, 16, 32, 38"));
@@ -54,6 +58,8 @@ public class LottoTest {
         myTickets.addTicket(new Ticket("3, 8, 27, 30, 35, 44"));
         
         lotto = new Lotto(myTickets);
-        assertThat(lotto.getResultStr(winningTicketStr)).contains("총 수익률은 0.35입니다.");
+        lotto.checkResult(winningTicket);
+        
+        assertThat(lotto.result.returnRate).isEqualTo(0.35);
     } 
 }
