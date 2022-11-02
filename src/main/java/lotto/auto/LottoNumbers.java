@@ -34,11 +34,11 @@ public class LottoNumbers {
 
     private void stringToNumbersByToken(String inputStr) {
         if (inputStr == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("입력하신 내용이 없습니다.");
         }
         String[] str = inputStr.split(DELIMITER);
         if (str.length != LOTTO_LENGTH) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또의  길이는 " + LOTTO_LENGTH + " 입니다.");
         }
         for (String number : str) {
             this.numbers.add(new LottoAutoUtils().stringToNumber(number));

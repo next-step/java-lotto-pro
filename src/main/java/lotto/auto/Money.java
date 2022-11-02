@@ -21,7 +21,7 @@ public class Money {
     public int substractMoney(String subtract) {
         int subtractMoney = new LottoAutoUtils().stringToNumber(subtract);
         if (this.money < subtractMoney) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("소유한 금액이 로또 최소금액보다 적습니다.");
         }
         this.money = this.money - subtractMoney;
 
