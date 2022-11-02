@@ -1,7 +1,9 @@
 package step3.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import step3.utils.NumbersGenerator;
 
 public class LottoStore {
@@ -9,18 +11,35 @@ public class LottoStore {
     public static final Money pricePerLotto = Money.generate(1000);
 
     public Lottos sell(Money payment) {
-        validate(payment);
-        List<Lotto> lottoList = new ArrayList<>();
-        int divide = payment.divide(pricePerLotto);
-        for (int count = 0; count < divide; count++) {
-            UniqueNumbers random = NumbersGenerator.random();
-            lottoList.add(Lotto.generate(random));
-        }
-        return Lottos.generate(lottoList);
+        return sell(payment, Collections.emptyList());
     }
 
-    private void validate(Money payment) {
-        if (payment.divide(pricePerLotto) == 0) {
+    public Lottos sell(Money payment, List<UniqueNumbers> manualNumbersList) {
+        int totalCount = payment.divide(pricePerLotto);
+        int manualCount = manualNumbersList.size();
+        validate(totalCount, manualCount);
+        List<Lotto> lottos = generateManualLottos(manualNumbersList);
+        lottos.addAll(generateAutoLottos(totalCount - manualCount));
+        return Lottos.generate(lottos);
+    }
+
+    private List<Lotto> generateManualLottos(List<UniqueNumbers> manualNumbersList) {
+        return manualNumbersList.stream()
+                .map(Lotto::generate)
+                .collect(Collectors.toList());
+    }
+
+    private List<Lotto> generateAutoLottos(int autoCount) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int count = 0; count < autoCount; count++) {
+            UniqueNumbers random = NumbersGenerator.random();
+            lottos.add(Lotto.generate(random));
+        }
+        return lottos;
+    }
+
+    private void validate(int divide, int manualCount) {
+        if (divide == 0 || divide < manualCount) {
             throw new IllegalArgumentException("You don't have enough money.");
         }
     }
