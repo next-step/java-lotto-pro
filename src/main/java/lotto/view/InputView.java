@@ -1,8 +1,12 @@
 package lotto.view;
 
 import lotto.domain.*;
+import lotto.utils.LottoValidationUtils;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -13,20 +17,22 @@ public class InputView {
     private static final String ENTER_MANUAL_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String REMAIN_MANUAL_LOTTO_COUNT = "[남은 수동 로또 입력 회수(%d/%d)]";
     private static final String ERROR_PREFIX = "[ERROR] %s";
+    private static final String COMMA = ",";
     private static final Scanner SCANNER = new Scanner(System.in);
 
     private InputView() {
 
     }
 
-    public static LottoMoney getLottoPurchasePrice() {
+    public static String getLottoPurchasePrice() {
         System.out.println(ENTER_PURCHASE_AMOUNT);
         return getLottoMoney();
     }
 
-    private static LottoMoney getLottoMoney() {
+    private static String getLottoMoney() {
         try {
-            return new LottoMoney(SCANNER.nextLine());
+            String lottoMoney = LottoValidationUtils.validLottoMoney(SCANNER.nextLine());
+            return lottoMoney;
         } catch (IllegalArgumentException e) {
             System.out.printf((ERROR_PREFIX) + "%n", e.getMessage());
             return getLottoMoney();
@@ -44,7 +50,7 @@ public class InputView {
             return lottoMoney.getValidLottoPurchaseCount(SCANNER.nextLine());
         } catch (Exception e) {
             System.out.printf((ERROR_PREFIX) + "%n", e.getMessage());
-            return manualPurchaseCount(lottoMoney);
+            return getManualLottoCount(lottoMoney);
         }
     }
 
@@ -54,19 +60,9 @@ public class InputView {
         return SCANNER.nextLine();
     }
 
-    public static int getBonusNumber() {
+    public static String getBonusNumber() {
         System.out.println(ENTER_BONUS_NUMBER);
-        return getNumber();
-    }
-
-    private static int getNumber() {
-        int bonusNumber;
-        try {
-            bonusNumber = Integer.parseInt(SCANNER.nextLine());
-        } catch (Exception e) {
-            throw new IllegalArgumentException("숫자를 입력해주세요.");
-        }
-        return bonusNumber;
+        return SCANNER.nextLine();
     }
 
     public static void manualLottoNumberScript() {
@@ -74,21 +70,33 @@ public class InputView {
         System.out.println(ENTER_MANUAL_LOTTO_NUMBER);
     }
 
-    public static LottoGenerator getManualLottoNumbers(int count, int total) {
+    public static String getManualLottoNumbers(int count, int total) {
         try {
-            LottoGenerator lottoGeneratorList = new ManualLottoGenerator(SCANNER.nextLine());
-            return lottoGeneratorList;
+            String lottoNumbers = SCANNER.nextLine();
+            LottoValidationUtils.validLottoNumbers(lottoNumbers);
+            return lottoNumbers;
         } catch (Exception e) {
             System.out.printf((ERROR_PREFIX) + "%n", e.getMessage() + String.format(REMAIN_MANUAL_LOTTO_COUNT, count, total));
             return getManualLottoNumbers(count, total);
         }
     }
 
-    public static WinningLottoNumbers getWinningNumbers() {
+    public static String[] getWinningNumbers() {
         try {
-            String winningNumber = InputView.getLastWeekWinningNumber();
-            LottoNumber bonusNumber = new LottoNumber(InputView.getBonusNumber());
-            return new WinningLottoNumbers(winningNumber, bonusNumber);
+            String lastWeekWinningNumber = InputView.getLastWeekWinningNumber();
+            LottoValidationUtils.validLottoNumbers(lastWeekWinningNumber);
+            List<Integer> validWinningNumbers = Arrays
+                    .asList(lastWeekWinningNumber.split(COMMA))
+                    .stream()
+                    .map(Integer::valueOf)
+                    .collect(Collectors.toList());
+
+            String bonusNumber = InputView.getBonusNumber();
+            int validBonusNumber = LottoValidationUtils.validLottoNumber(bonusNumber);
+
+            LottoValidationUtils.checkDuplicatedBonusNumber(validWinningNumbers, validBonusNumber);
+
+            return new String[]{lastWeekWinningNumber, bonusNumber};
         } catch (Exception e) {
             System.out.printf((ERROR_PREFIX) + "%n", e.getMessage());
             return getWinningNumbers();

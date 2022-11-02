@@ -11,8 +11,8 @@ public class LottoMoney {
 
     private final int money;
     private final int ticketCount;
-    private static final Pattern NUMBER_POSITIVE = Pattern.compile("^[0-9]+$");
     private static final int ZERO = 0;
+    private static final Pattern NUMBER_POSITIVE = Pattern.compile("^[0-9]+$");
 
     public LottoMoney(String money) {
         validEmpty(money);

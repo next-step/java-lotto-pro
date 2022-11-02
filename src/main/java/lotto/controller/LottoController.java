@@ -16,13 +16,14 @@ public class LottoController {
     }
 
     public void startLotto() {
-        LottoMoney lottoMoney = InputView.getLottoPurchasePrice();
+        LottoMoney lottoMoney = new LottoMoney(InputView.getLottoPurchasePrice());
         int manualLottoTicketCount = InputView.getManualLottoCount(lottoMoney);
 
         List<LottoGenerator> lottoGeneratorList = getManualLottoNumbers(manualLottoTicketCount);
         LottoTickets lottoTickets = buyLotto(lottoMoney, manualLottoTicketCount, lottoGeneratorList);
 
-        WinningLottoNumbers winningNumbers = InputView.getWinningNumbers();
+        String[] inputWinningLottoTicket = InputView.getWinningNumbers();
+        WinningLottoNumbers winningNumbers = new WinningLottoNumbers(inputWinningLottoTicket[0], Integer.parseInt(inputWinningLottoTicket[1]));
         lottoGame.makeLottoResult(winningNumbers, lottoTickets);
 
         ResultView.winningResult(lottoGame.winningResult());
@@ -38,7 +39,8 @@ public class LottoController {
 
         InputView.manualLottoNumberScript();
         for (int i = 0; i < manualLottoTicketCount; i++) {
-            LottoGenerator manualLottoNumbers = InputView.getManualLottoNumbers(i, manualLottoTicketCount);
+            String lottoNumbers = InputView.getManualLottoNumbers(i, manualLottoTicketCount);
+            LottoGenerator manualLottoNumbers = new ManualLottoGenerator(lottoNumbers);
             lottoGeneratorList.add(manualLottoNumbers);
         }
 

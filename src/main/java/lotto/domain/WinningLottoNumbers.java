@@ -7,7 +7,8 @@ public class WinningLottoNumbers {
     private LottoNumbers lottoNumbers;
     private LottoNumber bonusNumber;
 
-    public WinningLottoNumbers(String lottoNumbers, LottoNumber bonusNumber) {
+    public WinningLottoNumbers(String lottoNumbers, int number) {
+        LottoNumber bonusNumber = new LottoNumber(number);
         LottoNumbers winningLottoNumbers = new ManualLottoGenerator(lottoNumbers).generateLottoNumber();
         checkDuplicatedBonusNumber(winningLottoNumbers.numbers(), bonusNumber.getNumber());
         this.lottoNumbers = winningLottoNumbers;

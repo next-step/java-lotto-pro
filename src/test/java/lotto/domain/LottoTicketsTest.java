@@ -27,7 +27,7 @@ class LottoTicketsTest {
                         new LottoTicket(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 8)))
                 )
         ));
-        winningLottoNumbers = new WinningLottoNumbers("1,2,3,4,5,6", new LottoNumber(10));
+        winningLottoNumbers = new WinningLottoNumbers("1,2,3,4,5,6", 10);
     }
 
     @DisplayName("고정된 당첨금과 로또번호로 당첨 사실을 알 수 있다.")
