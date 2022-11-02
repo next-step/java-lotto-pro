@@ -26,13 +26,13 @@ public class LottoConsoleView {
     }
 
     public static int inputPurchaseManualCount() {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
         return SCANNER.nextInt();
     }
 
     public static List<String> inputPurchaseManual(int count) {
         if (count > 0) {
-            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+            System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
             return IntStream.rangeClosed(1, count)
                     .mapToObj(operand -> SCANNER.next())
                     .collect(Collectors.toList());
