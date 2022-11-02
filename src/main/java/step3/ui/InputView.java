@@ -5,6 +5,8 @@ public interface InputView {
 
     String inputWinningNumber();
 
+    String inputManualNumber();
+
     String inputBonusNumber();
 
     int inputManualCount();
