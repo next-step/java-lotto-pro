@@ -11,24 +11,24 @@ import static step3.constant.Message.Output.*;
 
 public class LottoCalculator {
 
-    private Lotto lastWeekWinner;
+    private WinnerLotto lastWeekWinner;
     private List<Lotto> purchasedLottos;
     private LottoResult lottoResult = new LottoResult();
 
     public LottoCalculator() {
-        this.lastWeekWinner = new Lotto();
+        this.lastWeekWinner = new WinnerLotto();
         this.purchasedLottos = new ArrayList<>();
     }
-    public LottoCalculator(Lotto lastWeekWinner) {
+    public LottoCalculator(WinnerLotto lastWeekWinner) {
         this.lastWeekWinner = lastWeekWinner;
     }
 
-    public Lotto getLastWeekWinner() {
+    public WinnerLotto getLastWeekWinner() {
         return lastWeekWinner;
     }
     public LottoResult getLottoResult() { return lottoResult; }
 
-    public void setLastWeekWinner(Lotto lotto) {
+    public void setLastWeekWinner(WinnerLotto lotto) {
         lastWeekWinner = lotto;
     }
 

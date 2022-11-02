@@ -10,20 +10,20 @@ public class LottoManager {
     private static LottoCalculator calculator = new LottoCalculator();
 
 
-    public static void purchaseLotto() {
+    public void purchaseLotto() {
         inputPurchasePriceAndManualCount();
         generateLottos();
         calculateStatistics();
     }
 
-    private static void inputPurchasePriceAndManualCount() {
+    private void inputPurchasePriceAndManualCount() {
         String purchasePrice = InputView.inputString(TOTAL_LOTTO_PRICE_INPUT_MESSAGE);
         String manualCount = InputView.inputString(MANUAL_LOTTO_COUNT_INPUT_MESSAGE);
 
         lottoGenerator.setPurchasePriceAndManualCount(purchasePrice, manualCount);
     }
 
-    private static void generateLottos() {
+    private void generateLottos() {
         lottoGenerator.generateLottos();
         OutputView.outputPurchasedLotto(lottoGenerator);
     }

@@ -1,5 +1,7 @@
 package step3.model;
 
+import step3.utils.CommonUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,7 +16,6 @@ public class Lotto {
     public static final int LOTTO_NUMBER_LENGTH = 6;
 
     private List<LottoNumber> lottoNumbers;
-    private LottoNumber bonusNumber;
 
     public Lotto() {
         lottoNumbers = generateRandomNumbers();
@@ -32,35 +33,31 @@ public class Lotto {
         this.lottoNumbers = list;
     }
 
-    public Lotto(String[] numbers, String StringNumber) {
-        List<LottoNumber> list = new ArrayList<>();
-        for (String str : numbers) {
-            list.add(new LottoNumber(commonStringToNumber(str)));
-        }
-        this.lottoNumbers = list;
-        this.bonusNumber = new LottoNumber(validateBonusNumber(StringNumber));
-    }
-
     public List<LottoNumber> getNumbers() {
         return lottoNumbers;
     }
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
-    }
 
     public List<LottoNumber> generateRandomNumbers() {
-        List<LottoNumber> rangeNumbers = createAutoLottoNumberList(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
+        List<LottoNumber> rangeNumbers = createLottoNumberList(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
         Collections.shuffle(rangeNumbers);
         this.lottoNumbers = rangeNumbers.subList(ZERO, LOTTO_NUMBER_LENGTH);
         return lottoNumbers;
     }
 
-    private List<LottoNumber> createAutoLottoNumberList(int startValue, int length) {
+    private List<LottoNumber> createLottoNumberList(int startValue, int length) {
         List<LottoNumber> numbers = new ArrayList<>();
         for (int i = startValue; i <= length; i++) {
             numbers.add(new LottoNumber(i));
         }
         return numbers;
+    }
+
+    public static List<LottoNumber> makeLottoNumberList(String[] numbers){
+        List<LottoNumber> list = new ArrayList<>();
+        for (String str : numbers) {
+            list.add(new LottoNumber(CommonUtils.commonStringToNumber(str)));
+        }
+        return list;
     }
 
     public String[] validateInputStringLottoNumber(String beforeNumbers) {
@@ -72,19 +69,15 @@ public class Lotto {
         return afterNumbers;
     }
 
-    private int validateBonusNumber(String stringNumber) {
-        commonCheckEmpty(stringNumber);
-        int number = commonStringToNumber(stringNumber);
-        checkWinningNumbersContainBonusNumber(number);
-        return number;
-    }
 
-    private void checkWinningNumbersContainBonusNumber(int number) {
-        if(isMatchNumber(new LottoNumber(number))) {
-            throw new IllegalArgumentException(SMAE_BONUS_NUMBER);
-        }
+    public String[] validateLastWeekWinner(String beforeNumbers) {
+        commonCheckEmpty(beforeNumbers);
+        String[] afterNumbers = changeBeforeNumbers(beforeNumbers);
+        validateLength(afterNumbers);
+        validateNumberType(afterNumbers);
+        validateSameNumber(afterNumbers);
+        return afterNumbers;
     }
-
     private String[] changeBeforeNumbers(String beforeNumbers) {
         beforeNumbers = beforeNumbers.replaceAll(SPACE, "");
         return beforeNumbers.split(COMMA);

@@ -5,10 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step3.model.Lotto;
-import step3.model.LottoCalculator;
-import step3.model.LottoNumber;
-import step3.model.Lottos;
+import step3.model.*;
+import step3.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +25,13 @@ public class LottoCalculatorTest {
 
     @BeforeEach
     void setUp() {
-        lottoCalculator = new LottoCalculator(new Lotto(testLastWeek()));
+        lottoCalculator = new LottoCalculator(new WinnerLotto(testLastWeek()));
     }
 
     @Test
     @DisplayName("지난주 우승 번호 유효성 테스트")
     void 지난주_우승_번호_유효성_테스트() {
-        assertThatThrownBy(() -> lotto.validateInputStringLottoNumber("1,1,2,3,4,5"))
+        assertThatThrownBy(() -> lotto.validateLastWeekWinner("1,1,2,3,4,5"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -87,8 +85,12 @@ public class LottoCalculatorTest {
         String bonusNumber = "7";
 
         String[] lastWeekWinnerNumbers = "8-21-23-41-42-16".split(BAR);
-        Lotto lastWeekWinner = new Lotto(lastWeekWinnerNumbers, bonusNumber);
+        List<LottoNumber> list = new ArrayList<>();
+        for (String str : lastWeekWinnerNumbers) {
+            list.add(new LottoNumber(CommonUtils.commonStringToNumber(str)));
+        }
 
+        WinnerLotto lastWeekWinner = new WinnerLotto(list, bonusNumber);
         lottoCalculator.setLastWeekWinner(lastWeekWinner);
         lottoCalculator.calculateWinnerStatistics(lottos);
         double result = lottoCalculator.calculateProfitRate();
