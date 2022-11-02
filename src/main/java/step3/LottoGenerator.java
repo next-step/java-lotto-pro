@@ -34,11 +34,9 @@ public class LottoGenerator {
     }
 
 
-    public LotteryTicket generateLotteryTicket(Payment payment) {
-        LotteryTicket lotteryTicket = new LotteryTicket();
+    public void generateLotteryTicket(LotteryTicket lotteryTicket, Payment payment) {
         for (int i = 0; i < payment.getAutoLottoCount(); i++) {
             lotteryTicket.add(lottoGenerate());
         }
-        return lotteryTicket;
     }
 }

@@ -11,7 +11,7 @@ import step3.domain.Rank;
 import step3.domain.Statistics;
 
 public class ConsoleResultView implements ResultView {
-    private static final String RESULT_COUNT = "%d개를 구매했습니다.%n";
+    private static final String RESULT_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.%n";
     private static final String RESULT_LOTTO = "[%s]%n";
     private static final String RESULT_STAT_TITLE = "당첨 통계";
     private static final String RESULT_STAT_LINE = "---------";
@@ -21,9 +21,10 @@ public class ConsoleResultView implements ResultView {
     private static final String RESULT_STAT_POSITIVE_CONCLUSION = "(기준이 1이기 때문에 결과적으로 이득라는 의미임)";
     private static final String RESULT_STAT_NEGATIVE_CONCLUSION = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String RESULT_STAT_EQUAL_CONCLUSION = "(기준이 1이기 때문에 결과적으로 본전이라는 의미임)";
+    private static final String REQUEST_MANUAL_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
 
-    public void resultLotteryTicket(LotteryTicket lotteryTicket) {
-        System.out.printf(RESULT_COUNT, lotteryTicket.getCount());
+    public void resultLotteryTicket(LotteryTicket lotteryTicket, Payment payment) {
+        System.out.printf(RESULT_COUNT, payment.getManualLottoCount(), payment.getAutoLottoCount());
         List<Lotto> lottos = lotteryTicket.getLotteryTicket();
         for (Lotto lotto : lottos) {
             String lottoNumber = lotto.numberToString();
@@ -40,6 +41,10 @@ public class ConsoleResultView implements ResultView {
 
         System.out.printf(RESULT_STAT_RATIO, ratio);
         printConclusion(ratio);
+    }
+
+    public void printRequestManualNumber() {
+        System.out.println(REQUEST_MANUAL_NUMBER);
     }
 
     private void printConclusion(double ratio) {
