@@ -1,6 +1,7 @@
 package step3.domain;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Statistics {
     private final LotteryTicket lotteryTicket;
@@ -17,16 +18,16 @@ public class Statistics {
             putDefault(rank);
         }
     }
-    
+
     private void putDefault(Rank rank) {
-        if(!rank.isNone()){
+        if (!rank.isNone()) {
             this.countByRank.put(rank, 0);
         }
     }
     
     private void mapMerge(Rank rank) {
-        if(!rank.isNone()){
-            this.countByRank.merge(rank, 1 , Integer::sum);
+        if (!rank.isNone()) {
+            this.countByRank.merge(rank, 1, Integer::sum);
         }
     }
     

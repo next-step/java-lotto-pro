@@ -1,19 +1,19 @@
 package step3;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import step3.domain.WinningBonusNumber;
-import step3.domain.WinningNumber;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import step3.domain.Lotto;
+import step3.domain.WinningBonusNumber;
+
 public class WinningBonusNumberTest {
-    private static WinningNumber winningNumber;
+    private static Lotto winningNumber;
     @BeforeAll
     static void beforeAll() {
-        winningNumber = new WinningNumber("1,2,3,4,5,6");
+        winningNumber = new Lotto("1,2,3,4,5,6");
     }
     
     @Test

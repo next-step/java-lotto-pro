@@ -1,16 +1,15 @@
 package step3;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step3.domain.Lotto;
 import step3.domain.Rank;
 import step3.domain.WinningBonusNumber;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
     private static ArrayList<Integer> lottoNumbers;
@@ -51,12 +50,19 @@ public class LottoTest {
         assertThat(Rank.valueOf(count, false)).isEqualTo(Rank.THIRD);
         assertThat(Rank.valueOf(count, false).getPrize()).isEqualTo(Rank.THIRD.getPrize());
     }
-    
+
     @Test
     @DisplayName("로또 객체에서 보너스번호가 포함되는지 매칭")
     public void lotto_match_bonusNumber() {
         Lotto lotto = new Lotto(lottoNumbers);
         assertThat(lotto.matchBonusNumber(winningBonusNumber)).isEqualTo(true);
     }
-    
+
+    @Test
+    @DisplayName("문자열로 당첨번호 생성")
+    public void lotto_Create_String() {
+        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
+        assertThat(lotto.getWinningNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
+    }
+
 }

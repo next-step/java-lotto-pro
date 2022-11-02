@@ -10,10 +10,12 @@ import step3.ui.ResultView;
 public class LottoController {
     private final InputView inputView;
     private final ResultView resultView;
-    public LottoController(InputView inputView, ResultView resultView){
+
+    public LottoController(InputView inputView, ResultView resultView) {
         this.inputView = inputView;
         this.resultView = resultView;
     }
+
     public void start() {
         Payment payment = new Payment(inputView.inputPayment(), inputView.inputManualCount());
 

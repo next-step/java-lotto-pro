@@ -1,12 +1,12 @@
 package step3;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import step3.domain.WinningBonusNumber;
-import step3.domain.WinningNumber;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import step3.domain.Lotto;
+import step3.domain.WinningBonusNumber;
 
 public class ValidationUtilsTest {
     @Test
@@ -22,7 +22,7 @@ public class ValidationUtilsTest {
     @DisplayName("당첨번호 0~45 이외의 숫자 예외처리")
     public void WinningNumber_exception() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new WinningNumber("1,2,-1,4,5,7"))
+                .isThrownBy(() -> new Lotto("1,2,-1,4,5,7"))
                 .withMessageContaining("1부터 45까지의 숫자");
     }
     
