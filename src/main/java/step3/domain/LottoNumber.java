@@ -1,28 +1,38 @@
 package step3.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import step3.enums.Rule;
+
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoNumber {
 
-    private List<Integer> lottoNumber;
+    private final int lottoNumber;
 
-    public LottoNumber(List<Integer> lottoNumber) {
-        this.lottoNumber = new ArrayList<>(lottoNumber);
+    public LottoNumber(int lottoNumber) {
+        if(!isValid(lottoNumber)){
+            throw new IllegalArgumentException("로또 숫자 범위가 아닙니다.");
+        }
+        this.lottoNumber = lottoNumber;
     }
 
-    public List<Integer> getLottoNumber() {
+    public int getLottoNumber() {
         return lottoNumber;
     }
 
-    public boolean hasBonusNumber(int bonusNumber) {
-        return lottoNumber.contains(bonusNumber);
+    private boolean isValid(int lottoNumber){
+        return Rule.isRuleApplied(lottoNumber) ;
     }
 
     @Override
     public String toString() {
-        return lottoNumber.toString();
+        return String.valueOf(lottoNumber);
     }
+
 }
+
 
 

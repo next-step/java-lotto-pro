@@ -16,4 +16,10 @@ public enum Rule {
     public int getRange() {
         return range;
     }
+
+    public static boolean isRuleApplied(int lottoNumber) {
+        return Rule.TOTAL_START_NUMBER.getRange() <= lottoNumber
+                && lottoNumber <= Rule.TOTAL_END_NUMBER.getRange();
+    }
+
 }

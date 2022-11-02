@@ -1,25 +1,36 @@
 package step3.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 import step3.enums.Rank;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private final LottoNumber lottoNumber;
+    private final LottoNumbers lottoNumbers;
 
-    public Lotto(LottoNumber lottoNumber) {
-        this.lottoNumber = lottoNumber;
+    private Rank rank = Rank.BASE;
+
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoNumber getLottoNumber() {
-        return lottoNumber;
+    public LottoNumbers getLottoNumbers() {
+        return lottoNumbers;
     }
 
     public Rank match(WinningLotto winningLotto) {
-        List<Integer> copy = new ArrayList<>(lottoNumber.getLottoNumber());
-        copy.retainAll(winningLotto.getWinningNumber().getLottoNumber());
-        return Rank.rank(copy.size(), lottoNumber.hasBonusNumber(winningLotto.getBonusNumber()));
+        List<Integer> copy = lottoNumbers.getLottoNumbers().stream()
+                .mapToInt(LottoNumber::getLottoNumber)
+                .boxed()
+                .collect(Collectors.toList());
+        List<Integer> winningNumbers = winningLotto.getWinningNumber().getLottoNumbers().stream()
+                .mapToInt(LottoNumber::getLottoNumber)
+                .boxed()
+                .collect(Collectors.toList());
+        copy.retainAll(winningNumbers);
+        this.rank = Rank.rank(copy.size(), lottoNumbers.hasBonusNumber(winningLotto.getBonusNumber()));
+        return this.rank ;
     }
 
 }

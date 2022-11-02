@@ -1,16 +1,12 @@
 package step3;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import step3.domain.Lotto;
-import step3.domain.LottoNumber;
-import step3.domain.Lottos;
-import step3.domain.Range;
-import step3.domain.WinningLotto;
+import step3.domain.*;
 import step3.enums.Rank;
 import step3.views.Input;
 import step3.views.Output;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
@@ -19,33 +15,50 @@ public class LottoApplication {
 
         output.purchase();
         int money = input.inputNumber();
-        int purchasingNumber = Rank.calculateLottoCount(input.inputNumber());
-        Lottos lottos = initLottos(purchasingNumber);
+        int purchasingNumber = Rank.calculateLottoCount(money);
 
-        output.generateLottos(purchasingNumber, lottos);
+        Lottos manualLottos = getManualLottos(output, input);
+        Lottos totalLottos = initLottos(manualLottos, purchasingNumber);
+        output.generateLottos(purchasingNumber, totalLottos, manualLottos);
+
+        WinningLotto winningLotto = gainWinnerLotto(output, input);
+        List<Rank> ranks = totalLottos.resultLottoRanks(winningLotto);
+        result(output, ranks, money);
+
+    }
+
+    static Lottos getManualLottos(Output output, Input input) {
+        output.manualCount();
+        int lottoCount = input.inputNumber();
+        output.manualNumber();
+        List<Lotto> manualLottoList = new ArrayList<>();
+        for (int i = 0; i < lottoCount; i++) {
+            manualLottoList.add(new Lotto(LottoNumbers.gainNumbers(input.inputString())));
+        }
+        return new Lottos(manualLottoList);
+    }
+
+    static Lottos initLottos(Lottos manualLottos, int purchasingNumber) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < purchasingNumber - manualLottos.getLottos().size(); i++) {
+            lottoList.add(new Lotto(LottoFactory.getRandomSixNumbers()));
+        }
+        return new Lottos(lottoList).unionLottos(manualLottos);
+    }
+
+    static WinningLotto gainWinnerLotto(Output output, Input input) {
         output.winnerNumbers();
         String inputNumbersWithComma = input.inputString();
-
         output.bonusball();
         int bonusball = input.inputNumber();
 
-        Map<Integer, Integer> statistics = result(lottos, inputNumbersWithComma, bonusball);
-        double returnOnInvestmentRate = Rank.statistic(statistics, money);
-        output.statistic(statistics, returnOnInvestmentRate);
+        return new WinningLotto(LottoNumbers.gainNumbers(inputNumbersWithComma), bonusball);
     }
 
-    static Lottos initLottos(int purchasingNumber) {
-        Range range = new Range(1, 45);
-        List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < purchasingNumber; i++) {
-            lottoList.add(new Lotto(new LottoNumber(range.getRandomSixNumbers())));
-        }
-        return new Lottos(lottoList);
-    }
+    static void result(Output output, List<Rank> ranks, int money) {
 
-    static Map<Integer, Integer> result(Lottos lottos, String inputNumbersWithComma, int bonusball) {
-        WinningLotto winningLotto = new WinningLotto(inputNumbersWithComma, bonusball);
-        return lottos.calculateWinningBallsEachLotto(winningLotto);
+        double returnOnInvestmentRate = Rank.statistic(money);
+        output.statistics(returnOnInvestmentRate);
     }
 
 }

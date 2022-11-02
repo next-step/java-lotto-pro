@@ -1,9 +1,10 @@
 package step3.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import step3.enums.Rank;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Lottos {
 
@@ -14,31 +15,29 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 
-    public Map<Integer, Integer> calculateWinningBallsEachLotto(WinningLotto winningLotto) {
-        Map<Integer, Integer> statistics = Rank.initRank();
+    public List<Rank> resultLottoRanks(WinningLotto winningLotto) {
+        List<Rank> resultRanks = new ArrayList<>();
         lottos.forEach(lotto -> {
             Rank rank = lotto.match(winningLotto);
-            if (rank == Rank.SECOND) {
-                statistics.computeIfPresent(Rank.THIRD.getCount() + Rank.SECOND.getCount(), (k, v) -> v + 1);
-                return;
-            }
-            statistics.computeIfPresent(rank.getCount(), (k, v) -> v + 1);
+            rank.getLottoMatcher().plusLottoCountOne();
+            resultRanks.add(rank);
         });
-        return statistics;
+        return resultRanks;
     }
 
-    public void unionLottos(List<Lotto> manual, List<Lotto> auto) {
-        ArrayList<Lotto> merge = new ArrayList<>();
-        merge.addAll(manual);
-        merge.addAll(auto);
-        this.lottos = merge;
+    public Lottos unionLottos(Lottos additionalLottos) {
+        List<Lotto> merge = new ArrayList<>();
+        merge.addAll(additionalLottos.getLottos());
+        merge.addAll(this.lottos);
+        return new Lottos(merge);
     }
 
     @Override
     public String toString() {
         return lottos.toString();
     }
+
 }
