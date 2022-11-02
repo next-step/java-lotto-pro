@@ -2,12 +2,17 @@ package study.step4.models;
 
 import study.step4.Rank;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Winners {
-    private final List<Lotto> winners;
+    private final List<Winner> winners;
 
-    public Winners(List<Lotto> winners) {
+    public Winners() {
+        winners = new ArrayList<>();
+    }
+
+    public Winners(List<Winner> winners) {
         this.winners = winners;
     }
 
@@ -23,7 +28,11 @@ public class Winners {
 
     private int totalReward() {
         return winners.stream()
-                .mapToInt(Lotto::reward)
+                .mapToInt(Winner::reward)
                 .sum();
+    }
+
+    public void add(Winner winner) {
+        winners.add(winner);
     }
 }
