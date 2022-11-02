@@ -18,14 +18,20 @@ public class LottoBuyer {
         this.money = money;
     }
 
-    public Lottos buyLotto(LottoSeller lottoSeller) {
-        List<Lotto> lottos = lottoSeller.sellAutoLotto(money);
-        return new Lottos(lottos);
+    public Lottos buyAutoAndManualLotto(List<String> lottoNumbers) {
+        int lottoQuantity = LottoSeller.possibleBuyLottoQuantity(money);
+        List<Lotto> manual = LottoSeller.sellManualLotto(lottoNumbers);
+        List<Lotto> lottos = LottoSeller.sellAutoLotto(possibleAutoLottoQuantity(manual, lottoQuantity));
+        return new Lottos(lottos, manual);
     }
 
     public BigDecimal calculateYield(Prizes prizes, int lottoCount) {
         BigDecimal rewardSum = prizes.sumReward();
         return rewardSum.divide(BigDecimal.valueOf(lottoCount * LottoSeller.LOTTO_PRICE), DECIMAL_POINT_POSITION, BigDecimal.ROUND_FLOOR);
+    }
+
+    private int possibleAutoLottoQuantity(List<Lotto> manualLotto, int lottoQuantity) {
+        return lottoQuantity - manualLotto.size();
     }
 
 }
