@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import static step3.type.ErrorMessageType.INPUT_ONLY_ALLOW_NUMBER;
 
-public class InputBonusLottoNumber implements Input<Optional<Integer>> {
+public class InputManualLottoQuantity implements Input<Optional<Integer>> {
 
     @Override
     public Optional<Integer> create() {

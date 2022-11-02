@@ -1,11 +1,13 @@
 package step3.view.input;
 
-public class InputWinningLottoNumbers implements Input<String> {
+import java.util.Optional;
+
+public class InputWinningLottoNumbers implements Input<Optional<String>> {
 
     @Override
-    public String create() {
+    public Optional<String> create() {
         String input = scanner.nextLine();
         validateBlank(input);
-        return input;
+        return Optional.of(input);
     }
 }
