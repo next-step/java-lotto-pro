@@ -34,7 +34,14 @@ public class ResultView {
     }
 
     public void printWinningStatisticsMessage(Rank rank, int value) {
-        sb.append(rank.getCountOfMatch() + "개 일치(" + rank.getWinningMoney() + ")-" + value + "개\n");
+        if (rank == Rank.MISS) {
+            return;
+        }
+        if (rank == Rank.SECOND) {
+            sb.append(rank.getCountOfMatch() + "개 일치, 보너스 볼 일치(" + rank.getWinningMoney() + "원)-" + value + "개\n");
+            return;
+        }
+        sb.append(rank.getCountOfMatch() + "개 일치(" + rank.getWinningMoney() + "원)-" + value + "개\n");
     }
 
     public void printProfitMessage(int inputMoney, float profit) {
