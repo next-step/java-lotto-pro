@@ -25,8 +25,15 @@ public class LottoController {
         showResult(paidMoney, winningMoney);
     }
 
-    private Lotto getWinningLotto() {
-        return new Lotto(getWinningNumbers());
+    private WinningLotto getWinningLotto() {
+        List<Integer> winningNumbers = getWinningNumbers();
+        Integer bonusNumber = getBonusNumber();
+        return new WinningLotto(winningNumbers, LottoNumber.of(bonusNumber));
+    }
+
+    private Integer getBonusNumber() {
+        view.showMessageRequestBonusNumber();
+        return input.getPositiveInteger();
     }
 
     private void showLottoBundle(LottoBundle lottoBundle) {

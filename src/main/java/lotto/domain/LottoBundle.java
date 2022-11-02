@@ -15,7 +15,7 @@ public class LottoBundle {
         return lottoTickets.size();
     }
 
-    public WinningMoney countWinning(Lotto winningLotto) {
+    public WinningMoney countWinning(WinningLotto winningLotto) {
         List<Rank> ranks = lottoTickets.stream()
                 .map(lotto -> lotto.getRankBy(winningLotto))
                 .filter(rank -> rank != Rank.FAIL)

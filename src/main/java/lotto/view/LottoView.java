@@ -16,4 +16,6 @@ public interface LottoView {
     void showStatistics(Rank bonus, int count);
 
     void showYield(double calcYield);
+
+    void showMessageRequestBonusNumber();
 }

@@ -1,6 +1,8 @@
-import domain.Numbers;
-import domain.SafeString;
-import util.Splitter;
+package string_add_calculator;
+
+import string_add_calculator.domain.Numbers;
+import string_add_calculator.domain.SafeString;
+import string_add_calculator.util.Splitter;
 
 public class StringAddCalculator {
     private StringAddCalculator(){}

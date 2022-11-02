@@ -1,4 +1,4 @@
-package util;
+package string_add_calculator.util;
 
 public class ParseData {
     private static final String defaultDelimiter = ",|:";

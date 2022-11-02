@@ -1,11 +1,9 @@
-package domain;
+package string_add_calculator.domain;
 
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
+import string_add_calculator.domain.Numbers;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class NumbersTest {
 
