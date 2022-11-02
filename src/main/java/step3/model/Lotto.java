@@ -1,5 +1,7 @@
 package step3.model;
 
+import step3.utils.CommonUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -48,6 +50,14 @@ public class Lotto {
             numbers.add(new LottoNumber(i));
         }
         return numbers;
+    }
+
+    public static List<LottoNumber> makeLottoNumberList(String[] numbers){
+        List<LottoNumber> list = new ArrayList<>();
+        for (String str : numbers) {
+            list.add(new LottoNumber(CommonUtils.commonStringToNumber(str)));
+        }
+        return list;
     }
 
     public String[] validateLastWeekWinner(String beforeNumbers) {

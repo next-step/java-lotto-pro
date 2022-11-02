@@ -23,14 +23,6 @@ public class InputView {
 
     public static WinnerLotto inputLastWeekBonusNumber(String[] lastWeekLottos) {
         System.out.println(LAST_BONUS_NUMBER_INPUT_MESSAGE);
-        return new WinnerLotto(makeLottoNumberList(lastWeekLottos), scanner.nextLine());
-    }
-
-    private static List<LottoNumber> makeLottoNumberList(String[] numbers){
-        List<LottoNumber> list = new ArrayList<>();
-        for (String str : numbers) {
-            list.add(new LottoNumber(CommonUtils.commonStringToNumber(str)));
-        }
-        return list;
+        return new WinnerLotto(Lotto.makeLottoNumberList(lastWeekLottos), scanner.nextLine());
     }
 }
