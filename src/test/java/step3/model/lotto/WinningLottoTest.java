@@ -15,7 +15,8 @@ import step3.model.machine.Result;
 
 class WinningLottoTest {
 
-    private List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private Lotto lotto;
+    private LottoNumber bonusNumber;
     private WinningLotto winningLotto;
 
     private List<LottoNumber> changeToLottoNumbers(List<Integer> numbers){
@@ -23,35 +24,39 @@ class WinningLottoTest {
     }
     @BeforeEach
     void setup() {
-        lottoNumbers = changeToLottoNumbers(Arrays.asList(1,2,3,4,5,6));
-        winningLotto = new WinningLotto(lottoNumbers, new LottoNumber(7));
+        List<LottoNumber> lottoNumbers = changeToLottoNumbers(Arrays.asList(1,2,3,4,5,6));
+        lotto = new Lotto(lottoNumbers);
+        bonusNumber = new LottoNumber(7);
+        winningLotto = new WinningLotto(lotto, bonusNumber);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1,2,3,4,5,6})
     void 보너스_번호_중복_에러(int input) {
-        LottoNumber bonusNumber = new LottoNumber(input);
-        assertThatThrownBy(() -> new WinningLotto(lottoNumbers, bonusNumber))
+        LottoNumber newBonusNumber = new LottoNumber(input);
+        assertThatThrownBy(() -> new WinningLotto(lotto, newBonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 결과_매칭_검증_2등() {
-        Lotto second_winner_lotto = new Lotto(changeToLottoNumbers(Arrays.asList(1,2,3,4,5,8)));
-        assertThat(winningLotto.getMatchResult(second_winner_lotto)).isEqualTo(Result.SECOND_PRIZE);
+        List<LottoNumber> secondWinningLottoNumbers = changeToLottoNumbers(Arrays.asList(1,2,3,4,5,8));
+        Lotto secondWinningLotto = new Lotto(secondWinningLottoNumbers);
+        assertThat(winningLotto.getMatchResult(secondWinningLotto)).isEqualTo(Result.SECOND_PRIZE);
     }
 
     @Test
     void 결과_매칭_검증_2등_보너스() {
-        Lotto second_bonus_lotto = new Lotto(changeToLottoNumbers(Arrays.asList(1,2,3,4,5,7)));
-        assertThat(winningLotto.getMatchResult(second_bonus_lotto)).isEqualTo(Result.SECOND_PRIZE_BONUS);
+        List<LottoNumber> secondBonusLottoNumbers = changeToLottoNumbers(Arrays.asList(1,2,3,4,5,7));
+        Lotto secondBonusLotto = new Lotto(secondBonusLottoNumbers);
+        assertThat(winningLotto.getMatchResult(secondBonusLotto)).isEqualTo(Result.SECOND_PRIZE_BONUS);
     }
     @Test
     void 이등_외에는_보너스_상관없음() {
-        Lotto third_winner_match_bonus = new Lotto(changeToLottoNumbers(Arrays.asList(1,2,3,4,7,8)));
-        Lotto third_winner_no_match_bonus= new Lotto(changeToLottoNumbers(Arrays.asList(1,2,3,4,8,9)));
-        assertThat(winningLotto.getMatchResult(third_winner_match_bonus))
-                .isEqualTo(winningLotto.getMatchResult(third_winner_no_match_bonus));
+        Lotto thirdWinnerBonusLotto = new Lotto(changeToLottoNumbers(Arrays.asList(1,2,3,4,7,8)));
+        Lotto thirdWinnerNoBonusLotto = new Lotto(changeToLottoNumbers(Arrays.asList(1,2,3,4,8,9)));
+        assertThat(winningLotto.getMatchResult(thirdWinnerBonusLotto))
+                .isEqualTo(winningLotto.getMatchResult(thirdWinnerNoBonusLotto));
     }
 
 }

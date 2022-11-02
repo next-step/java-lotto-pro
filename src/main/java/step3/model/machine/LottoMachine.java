@@ -26,7 +26,7 @@ public class LottoMachine {
         return new LottoList(lottoList);
     }
     public WinningLotto createWinningLotto(String lottoInput, int bonusInput) {
-        List<LottoNumber> lotto = manualGenerator.createLotto(lottoInput);
-        return new WinningLotto(lotto,new LottoNumber(bonusInput));
+        Lotto lotto = manualGenerator.createLotto(lottoInput);
+        return new WinningLotto(lotto, new LottoNumber(bonusInput));
     }
 }

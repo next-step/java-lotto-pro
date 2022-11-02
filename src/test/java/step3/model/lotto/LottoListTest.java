@@ -24,8 +24,9 @@ class LottoListTest {
     @BeforeEach
     void setup() {
         List<LottoNumber> winningLottoNumbers = changeToLottoNumbers(Arrays.asList(1,2,3,4,5,6));
+        Lotto winnigLotto = new Lotto(winningLottoNumbers);
         LottoNumber bonusNumber = new LottoNumber(7);
-        winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
+        winningLotto = new WinningLotto(winnigLotto, bonusNumber);
         Lotto first_winner = new Lotto(changeToLottoNumbers(Arrays.asList(1,2,3,4,5,6)));
         Lotto second_bonus_winner = new Lotto(changeToLottoNumbers(Arrays.asList(1,2,3,4,5,7)));
         Lotto second_winner = new Lotto(changeToLottoNumbers(Arrays.asList(1,2,3,4,5,8)));

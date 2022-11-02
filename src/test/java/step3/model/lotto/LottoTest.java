@@ -23,13 +23,13 @@ class LottoTest {
     }
     @Test
     void 잘못된_로또_사이즈() {
-        assertThatThrownBy(() -> new Lotto(Stream.of(1,2,3,4).map(LottoNumber::new).collect(Collectors.toList())))
-                .isInstanceOf(IllegalArgumentException.class);
+        List<LottoNumber> lottoNumbers = Stream.of(1,2,3,4).map(LottoNumber::new).collect(Collectors.toList());
+        assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
     }
     @Test
     void 정상_생성_프린트_검증() {
         Lotto lotto = new Lotto(changeToLottoNumbers(Arrays.asList(1,2,3,4,5,6)));
-        assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+        assertThat(lotto.toString()).hasToString("[1, 2, 3, 4, 5, 6]");
     }
     @ParameterizedTest
     @CsvSource(value = {"1:true", "2:true", "3:true", "7:false", "8:false"}, delimiter = ':')

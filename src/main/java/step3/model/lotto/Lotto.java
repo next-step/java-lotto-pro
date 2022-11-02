@@ -1,12 +1,8 @@
 package step3.model.lotto;
 
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import step3.model.machine.Match;
 import step3.model.value.ErrMsg;
 import step3.model.value.Rule;
 
@@ -15,6 +11,10 @@ public class Lotto{
     public Lotto(List<LottoNumber> lotto) {
         verifyLotto(lotto);
         this.lotto = lotto;
+    }
+
+    public int getMatchCount(Lotto targetLotto){
+        return (int)lotto.stream().filter(targetLotto::isMatched).count();
     }
 
 
