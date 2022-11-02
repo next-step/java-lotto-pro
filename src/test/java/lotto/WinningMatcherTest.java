@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class WinningMatcherTest {
     private static final String ONCE = "1000";
     private static final int ZERO = 0;
-    private static final String BONUS_NUMBER = "1";
+    private static final String BONUS_NUMBER = "10";
 
     private OutputStream captor;
     Lottos lottos;
@@ -41,11 +41,23 @@ class WinningMatcherTest {
     }
 
     @Test
+    public void 결과_테스트_2등() {
+        // given
+        Buyer buyer = new Buyer(lottos);
+        // when
+        WinningMatcher winningMatcher = new WinningMatcher(buyer, new LottoNumbers("1,2,3,4,5,8"), BONUS_NUMBER);
+        winningMatcher.printProfit(ONCE);
+        // then
+        float expected = Rank.SECOND.getWinningMoney() / Integer.parseInt(ONCE);
+        assertThat(output()).contains(cutDecimal(Constants.DECIMAL_POINT, expected));
+    }
+
+    @Test
     public void 결과_테스트_3등() {
         // given
         Buyer buyer = new Buyer(lottos);
         // when
-        WinningMatcher winningMatcher = new WinningMatcher(buyer, new LottoNumbers("1,2,3,4,7,8"), BONUS_NUMBER);
+        WinningMatcher winningMatcher = new WinningMatcher(buyer, new LottoNumbers("1,2,3,4,5,10"), BONUS_NUMBER);
         winningMatcher.printProfit(ONCE);
         // then
         float expected = Rank.THIRD.getWinningMoney() / Integer.parseInt(ONCE);
