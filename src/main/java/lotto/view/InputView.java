@@ -22,6 +22,8 @@ public class InputView {
 
     private static final String INPUT_BOUNS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
 
+    private static final int MANUAL_LOTTO_ZERO = 0;
+
     private static final Scanner scanner = new Scanner(System.in);
 
     public static String inputAmount() {
@@ -37,8 +39,9 @@ public class InputView {
     }
 
     public static List<Lotto> inputManualLottoNumber(int manualLottoCount) {
-        System.out.println(INPUT_MANUAL_LOTTO_NUMBER_MESSAGE);
-
+        if(manualLottoCount > MANUAL_LOTTO_ZERO) {
+            System.out.println(INPUT_MANUAL_LOTTO_NUMBER_MESSAGE);
+        }
         List<Lotto> manualLottos = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
             manualLottos.add(createLotto(scanner.nextLine()));
