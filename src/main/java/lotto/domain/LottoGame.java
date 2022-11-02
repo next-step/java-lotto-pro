@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import java.util.List;
 import lotto.domain.lottonumber.LottoNumbers;
+import lotto.domain.lottonumber.factory.LottoNumberFactory;
+import lotto.domain.lottonumber.factory.LottoNumberFactoryImpl;
 import lotto.domain.lottonumber.purchase.Purchase;
 import lotto.domain.lottonumber.purchase.factory.PurchaseFactory;
 import lotto.domain.lottonumber.purchase.factory.PurchaseFactoryImpl;
@@ -16,6 +19,11 @@ public class LottoGame {
     private LottoNumbers lottoNumbers;
     private WinningNumber winningNumber;
     private LottoNumberMatcher lottoNumberMatcher;
+    private LottoNumberFactory lottoNumberFactory;
+
+    public LottoGame() {
+        this.lottoNumberFactory = new LottoNumberFactoryImpl();
+    }
 
     public void createPurchase(String purchase) {
         PurchaseFactory purchaseFactory = new PurchaseFactoryImpl(purchase);
@@ -23,11 +31,20 @@ public class LottoGame {
     }
 
     public void createLottoNumbers() {
-        lottoNumbers = new LottoNumbers(purChase);
+        lottoNumbers = new LottoNumbers(purChase, lottoNumberFactory);
     }
 
-    public LottoNumbers getLottoNumbers() {
-        return lottoNumbers;
+    public void createManualLottoNumbers(String manualLottoCount) {
+        purChase.validateManualLottoCount(manualLottoCount);
+        lottoNumbers = new LottoNumbers(purChase, lottoNumberFactory);
+    }
+
+    public void addManualLottoNumbers(List<String> manualLottoNumbers) {
+        lottoNumbers.addManualLottoNumbers(manualLottoNumbers, lottoNumberFactory);
+    }
+
+    public String makeLottoNumbersResult() {
+        return purChase.makeLottoNumbersResultHeader() + lottoNumbers.toString();
     }
 
     public void createWinningNumber(String readWinningNumber) {
