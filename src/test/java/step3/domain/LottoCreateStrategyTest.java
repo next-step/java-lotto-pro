@@ -12,8 +12,7 @@ public class LottoCreateStrategyTest {
     @DisplayName("로또 자동발급 전략패턴 인터페이스 적용")
     @Test
     void 로또_자동발급_전략패턴_적용() {
-        LottoCreateStrategy strategy = new AutoLottoCreateStrategy();
-        Lotto lotto = LottoMachine.getLotto(strategy);
+        Lotto lotto = new AutoLottoCreateStrategy().createLotto();
 
         assertThat(lotto).isInstanceOf(Lotto.class);
         assertThat(lotto.lottoNumbers()).hasSize(6);
@@ -22,7 +21,7 @@ public class LottoCreateStrategyTest {
     @DisplayName("로또 발급 후 일급컬렉션 getter 테스트")
     @Test
     void 로또_일급컬렉션_getter테스트() {
-        Lotto lotto = LottoMachine.getLotto(new AutoLottoCreateStrategy());
+        Lotto lotto = new AutoLottoCreateStrategy().createLotto();
         List<LottoNumber> lottoNumbers = lotto.lottoNumbers();
         lottoNumbers.remove(5);
         lottoNumbers.add(LottoCreateStrategy.lottoNumberMap.get(10));

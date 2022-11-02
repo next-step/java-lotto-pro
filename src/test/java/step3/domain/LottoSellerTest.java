@@ -1,6 +1,7 @@
 package step3.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -26,5 +27,12 @@ public class LottoSellerTest {
         assertThatThrownBy(() -> LottoSeller.sellLottos(new PurchaseAmount(purchaseAmount)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(PurchaseAmount.EXCEPTION_MESSAGE_FOR_MINIMUM_PURCHASE_AMOUNT);
+    }
+
+    @DisplayName("로또 발급 테스트")
+    @Test
+    void 로또발급테스트() {
+        LottoCreateStrategy strategy = new AutoLottoCreateStrategy();
+        assertThat(strategy.createLotto()).isInstanceOf(Lotto.class);
     }
 }

@@ -15,11 +15,11 @@ public class LottosTest {
     void 로또들_생성() {
         List<Lotto> lottoList = new ArrayList<>();
         LottoCreateStrategy strategy = new AutoLottoCreateStrategy();
-        lottoList.add(LottoMachine.getLotto(strategy));
-        lottoList.add(LottoMachine.getLotto(strategy));
-        lottoList.add(LottoMachine.getLotto(strategy));
-        lottoList.add(LottoMachine.getLotto(strategy));
-        lottoList.add(LottoMachine.getLotto(strategy));
+        lottoList.add(strategy.createLotto());
+        lottoList.add(strategy.createLotto());
+        lottoList.add(strategy.createLotto());
+        lottoList.add(strategy.createLotto());
+        lottoList.add(strategy.createLotto());
 
         Lottos lottos = new Lottos(lottoList);
 

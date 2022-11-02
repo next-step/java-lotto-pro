@@ -78,7 +78,7 @@
   - LottoCreateStrategy.java
     - [x] 캐싱된 번호를 사용하는 방식으로 활용 
   - LottoMachine.java
-    - [ ] 로또 기계와 로또 판매자를 결합
+    - [x] 로또 기계와 로또 판매자를 결합
   - LottoNumber.java 
     - [ ] Integer.compare 확인 해 볼 것
   - Lottos.java

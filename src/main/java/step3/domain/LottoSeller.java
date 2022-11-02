@@ -12,8 +12,12 @@ public class LottoSeller {
         int lottoTicketCount = purchaseAmount.getLottoTicketCount();
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoTicketCount; i++) {
-            lottos.add(LottoMachine.getLotto(new AutoLottoCreateStrategy()));
+            lottos.add(getLotto(new AutoLottoCreateStrategy()));
         }
         return new Lottos(lottos);
+    }
+
+    private static Lotto getLotto(LottoCreateStrategy lottoCreateStrategy) {
+        return lottoCreateStrategy.createLotto();
     }
 }
