@@ -7,7 +7,13 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class LottoVendingMachineTest {
-    private final LottoVendingMachine vendingMachine = new LottoVendingMachine(new RandomNumberGenerateStrategy());
+    private final LottoVendingMachine vendingMachine;
+
+    {
+        NumberGenerateStrategy numberGenerateStrategy = new RandomNumberGenerateStrategy();
+        Money lottoPrice = new Money(1000L);
+        vendingMachine = new LottoVendingMachine(numberGenerateStrategy, lottoPrice);
+    }
 
     @Test
     void 보유한_금액만큼_로또를_자동으로_구매할_수_있다() {

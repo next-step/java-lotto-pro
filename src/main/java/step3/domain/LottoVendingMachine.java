@@ -6,24 +6,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoVendingMachine {
-    private final Money LOTTO_PRICE = new Money(1000L);
+    private final Money lottoPrice;
     private final NumberGenerateStrategy numberGenerateStrategy;
 
-    public LottoVendingMachine(final NumberGenerateStrategy numberGenerateStrategy) {
+    public LottoVendingMachine(final NumberGenerateStrategy numberGenerateStrategy, final Money lottoPrice) {
         this.numberGenerateStrategy = numberGenerateStrategy;
+        this.lottoPrice = lottoPrice;
     }
 
     public Lottos buy(Money paidByUser) {
         List<Lotto> lottoList = new ArrayList<>();
-        while (paidByUser.canBuy(LOTTO_PRICE)) {
-            paidByUser = paidByUser.pay(LOTTO_PRICE);
+        while (paidByUser.canBuy(lottoPrice)) {
+            paidByUser = paidByUser.pay(lottoPrice);
             lottoList.add(LottoFactory.create(numberGenerateStrategy));
         }
         return new Lottos(lottoList);
     }
 
     public Lottos buy(Money paidByUser, List<String> manualLottoNumbers) {
-        if (paidByUser.canBuy(LOTTO_PRICE.multiply(manualLottoNumbers.size()))) {
+        if (paidByUser.canBuy(lottoPrice.multiply(manualLottoNumbers.size()))) {
             return manualLottoNumbers.stream()
                     .map(LottoFactory::create)
                     .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
