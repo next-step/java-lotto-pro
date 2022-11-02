@@ -7,8 +7,6 @@ import java.util.Arrays;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.match.count.MatchCount;
-
 class LottoTest {
 	@Test
 	void 객체_생성() {
@@ -33,13 +31,13 @@ class LottoTest {
 	@Test
 	void 로또_일치_갯수_확인() {
 		Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-		assertThat(lotto.countMatchCount(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)))).isEqualTo(MatchCount.from(6));
-		assertThat(lotto.countMatchCount(Lotto.from(Arrays.asList(2, 3, 4, 5, 6, 7)))).isEqualTo(MatchCount.from(5));
-		assertThat(lotto.countMatchCount(Lotto.from(Arrays.asList(3, 4, 5, 6, 7, 8)))).isEqualTo(MatchCount.from(4));
-		assertThat(lotto.countMatchCount(Lotto.from(Arrays.asList(4, 5, 6, 7, 8, 9)))).isEqualTo(MatchCount.from(3));
-		assertThat(lotto.countMatchCount(Lotto.from(Arrays.asList(5, 6, 7, 8, 9, 10)))).isEqualTo(MatchCount.from(2));
-		assertThat(lotto.countMatchCount(Lotto.from(Arrays.asList(6, 7, 8, 9, 10, 11)))).isEqualTo(MatchCount.from(1));
-		assertThat(lotto.countMatchCount(Lotto.from(Arrays.asList(7, 8, 9, 10, 11, 12)))).isEqualTo(MatchCount.from(0));
+		assertThat(lotto.countMatchCount(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)))).isEqualTo(6);
+		assertThat(lotto.countMatchCount(Lotto.from(Arrays.asList(2, 3, 4, 5, 6, 7)))).isEqualTo(5);
+		assertThat(lotto.countMatchCount(Lotto.from(Arrays.asList(3, 4, 5, 6, 7, 8)))).isEqualTo(4);
+		assertThat(lotto.countMatchCount(Lotto.from(Arrays.asList(4, 5, 6, 7, 8, 9)))).isEqualTo(3);
+		assertThat(lotto.countMatchCount(Lotto.from(Arrays.asList(5, 6, 7, 8, 9, 10)))).isEqualTo(2);
+		assertThat(lotto.countMatchCount(Lotto.from(Arrays.asList(6, 7, 8, 9, 10, 11)))).isEqualTo(1);
+		assertThat(lotto.countMatchCount(Lotto.from(Arrays.asList(7, 8, 9, 10, 11, 12)))).isEqualTo(0);
 	}
 
 	@Test

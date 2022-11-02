@@ -1,4 +1,4 @@
-package lotto.domain.amount;
+package lotto.domain.lotto;
 
 import java.util.Arrays;
 
@@ -8,7 +8,7 @@ public enum MatchRank {
 	FOUR_MATCH(4, 50000L),
 	FIVE_MATCH(5, 1500000L),
 	SIX_MATCH(6, 2000000000L);
-	
+
 	private final int matchCount;
 	private final long winningPrice;
 
@@ -23,7 +23,6 @@ public enum MatchRank {
 			.findAny()
 			.orElse(FAILED);
 	}
-
 
 	private boolean hasMatchCount(int matchCount) {
 		return this.matchCount == matchCount;

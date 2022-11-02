@@ -1,4 +1,4 @@
-package lotto.domain.amount;
+package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 

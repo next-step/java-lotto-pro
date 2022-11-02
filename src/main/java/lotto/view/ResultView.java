@@ -3,10 +3,10 @@ package lotto.view;
 import java.util.stream.IntStream;
 
 import lotto.domain.amount.Amount;
+import lotto.domain.lotto.MatchRank;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoResults;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.match.count.MatchCount;
 import lotto.domain.quantity.Quantity;
 import lotto.domain.lotto.WinningLotto;
 
@@ -26,8 +26,8 @@ public class ResultView {
 
 		LottoResults lottoResults = winningLotto.getLottoResults(lottos);
 		IntStream.rangeClosed(3, 6).forEach(i -> {
-			MatchCount matchCount = MatchCount.from(i);
-			LottoResults filteredLottoResults = lottoResults.filterByMatchCount(matchCount);
+			MatchRank matchCount = MatchRank.valueOfMatchCount(i);
+			LottoResults filteredLottoResults = lottoResults.filterByMatchRank(matchCount);
 			Quantity matchQuantity = filteredLottoResults.quantity();
 			System.out.println(new LottoResultMessage(matchCount, matchQuantity));
 		});

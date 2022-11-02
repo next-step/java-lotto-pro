@@ -5,8 +5,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import lotto.domain.match.count.MatchCount;
-
 public class Lotto {
 	public static final int LOTTO_NUMBERS_SIZE = 6;
 	private final Set<LottoNumber> lottoNumbers;
@@ -33,12 +31,10 @@ public class Lotto {
 		}
 	}
 
-	public MatchCount countMatchCount(Lotto other) {
-		return MatchCount.from(
-			(int)lottoNumbers.stream()
-				.filter(other::contains)
-				.count()
-		);
+	public int countMatchCount(Lotto other) {
+		return (int)lottoNumbers.stream()
+			.filter(other::contains)
+			.count();
 	}
 
 	public boolean contains(LottoNumber lottoNumber) {

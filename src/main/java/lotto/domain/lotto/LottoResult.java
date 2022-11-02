@@ -3,28 +3,33 @@ package lotto.domain.lotto;
 import java.util.Objects;
 
 import lotto.domain.amount.Amount;
-import lotto.domain.amount.MatchRank;
-import lotto.domain.match.count.MatchCount;
 
 public class LottoResult {
 	private final Lotto lotto;
-	private final MatchCount matchCount;
+	private final MatchRank matchRank;
 
-	private LottoResult(Lotto lotto, MatchCount matchCount) {
+	private LottoResult(Lotto lotto, int matchCount) {
+		validateMatchCount(matchCount);
 		this.lotto = lotto;
-		this.matchCount = matchCount;
+		this.matchRank = MatchRank.valueOfMatchCount(matchCount);
 	}
 
-	public static LottoResult from(Lotto lotto, MatchCount matchCount) {
+	private void validateMatchCount(int matchCount) {
+		if (matchCount < 0) {
+			throw new IllegalArgumentException("일치 횟수는 0보다 작을수 없습니다.");
+		}
+	}
+
+	public static LottoResult from(Lotto lotto, int matchCount) {
 		return new LottoResult(lotto, matchCount);
 	}
 
-	public boolean hasMatchCount(MatchCount matchCount) {
-		return this.matchCount.equals(matchCount);
+	public boolean hasMatchRank(MatchRank matchRank) {
+		return this.matchRank.equals(matchRank);
 	}
 
 	public Amount winningPrice() {
-		return Amount.from(MatchRank.valueOfMatchCount(matchCount.getInt()).getWinningPrice());
+		return Amount.from(this.matchRank.getWinningPrice());
 	}
 
 	@Override
@@ -34,11 +39,11 @@ public class LottoResult {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		LottoResult that = (LottoResult)o;
-		return Objects.equals(lotto, that.lotto) && Objects.equals(matchCount, that.matchCount);
+		return Objects.equals(lotto, that.lotto) && Objects.equals(matchRank, that.matchRank);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(lotto, matchCount);
+		return Objects.hash(lotto, matchRank);
 	}
 }

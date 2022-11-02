@@ -7,25 +7,27 @@ import java.util.Arrays;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.match.count.MatchCount;
-
 class LottoResultTest {
 	@Test
 	void 객체_생성() {
 		Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-		MatchCount matchCount = MatchCount.from(3);
-
-		Assertions.assertThat(LottoResult.from(lotto, matchCount)).isEqualTo(LottoResult.from(lotto, matchCount));
+		Assertions.assertThat(LottoResult.from(lotto, 3)).isEqualTo(LottoResult.from(lotto, 3));
 	}
 
 	@Test
-	void 일치_갯수_체크() {
+	void 일치_횟수_0미만_IllegalArgumentException() {
+		assertThatThrownBy(() -> LottoResult.from(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), -1))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	void 당첨_등급_체크() {
 		Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-		MatchCount matchCount = MatchCount.from(3);
+		MatchRank matchRank = MatchRank.THREE_MATCH;
 
-		LottoResult lottoResult = LottoResult.from(lotto, matchCount);
+		LottoResult lottoResult = LottoResult.from(lotto, 3);
 
-		assertThat(lottoResult.hasMatchCount(MatchCount.from(3))).isTrue();
-		assertThat(lottoResult.hasMatchCount(MatchCount.from(4))).isFalse();
+		assertThat(lottoResult.hasMatchRank(matchRank)).isTrue();
+		assertThat(lottoResult.hasMatchRank(MatchRank.FOUR_MATCH)).isFalse();
 	}
 }

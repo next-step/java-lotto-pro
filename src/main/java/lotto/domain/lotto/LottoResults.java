@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import lotto.domain.amount.Amount;
 import lotto.domain.amount.Amounts;
-import lotto.domain.match.count.MatchCount;
 import lotto.domain.quantity.Quantity;
 import lotto.domain.yield.DefaultYieldStrategy;
 import lotto.domain.yield.Yield;
@@ -22,10 +21,11 @@ public class LottoResults {
 		return new LottoResults(lottoResults);
 	}
 
-	public LottoResults filterByMatchCount(MatchCount matchCount) {
+	public LottoResults filterByMatchRank(MatchRank matchRank) {
+
 		return new LottoResults(
 			this.lottoResults.stream()
-				.filter(lottoResult -> lottoResult.hasMatchCount(matchCount))
+				.filter(lottoResult -> lottoResult.hasMatchRank(matchRank))
 				.collect(Collectors.toList())
 		);
 	}
