@@ -17,7 +17,7 @@ public class OutputView {
 
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
-    private static final String BUY_LOTTO_COUNT_MESSAGE = "%d개 구매했습니다.";
+    private static final String BUY_LOTTO_COUNT_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
     private static final String LOTTO_STATISTICS = "\n당첨 통계\n---------";
 
@@ -31,8 +31,8 @@ public class OutputView {
 
     private static final int LOSS_STANDARD = 1;
 
-    public static void outputBuyLottosCount(final int buyLottoCount) {
-        System.out.println(String.format(BUY_LOTTO_COUNT_MESSAGE, buyLottoCount));
+    public static void outputBuyLottosCount(final int buyLottoManualCount, final int buyLottoAutoCount) {
+        System.out.println(String.format(BUY_LOTTO_COUNT_MESSAGE, buyLottoManualCount, buyLottoAutoCount));
     }
 
     public static void outputBuyLottos(final Lottos lottos) {

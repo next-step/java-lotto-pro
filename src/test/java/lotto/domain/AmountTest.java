@@ -37,4 +37,19 @@ public class AmountTest {
         assertThatThrownBy(() -> new Amount("900").buyLottoCount())
             .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("수동으로 구매할 로또가 구입 가능한 로또보다 많으면 에러가 발생되는지 확인")
+    @Test
+    void purchaseAvailable() {
+        assertThatThrownBy(() -> new Amount("3000").purchaseAvailable(4))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("자동으로 구매할 로또 개수가 일치하는지 확인")
+    @Test
+    void buyLottoAutoCount() {
+        Amount buyAmount = new Amount("3000");
+
+        assertThat(buyAmount.buyLottoAutoCount(2)).isEqualTo(1);
+    }
 }
