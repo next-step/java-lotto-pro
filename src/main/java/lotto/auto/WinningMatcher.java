@@ -15,8 +15,6 @@ public class WinningMatcher {
 
     public WinningMatcher(Buyer buyer, LottoNumbers lottoNumbers) {
         resultView = new ResultView();
-        resultView.printBuyLottoCountMessage(buyer.buyLotto());
-        resultView.printBuyLotto(buyer.getLottos());
         this.matchNumberMap = matchWinningNumbers(buyer.getLottos(), lottoNumbers);
     }
 
@@ -32,8 +30,8 @@ public class WinningMatcher {
 
     private void makeResult(Map<Rank, Integer> result, int cnt) {
         Rank rank = Rank.valueOf(cnt);
-        if (result.containsKey(rank)) {
-            result.put(rank, result.get(cnt) + 1);
+        if (rank != null && result.containsKey(rank)) {
+            result.put(rank, result.get(rank) + 1);
         }
         result.put(rank, 1);
     }
