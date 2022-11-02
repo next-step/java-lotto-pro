@@ -4,11 +4,11 @@ import study.step4.constants.PatternConstants;
 import study.step4.exception.LottoInputMoneyTypeException;
 
 public class Money {
-    private final String money;
+    private final int money;
 
     public Money(String money) {
         validatePositiveNumber(money);
-        this.money = money;
+        this.money = Integer.parseInt(money);
     }
 
     private void validatePositiveNumber(String money) {
@@ -18,10 +18,10 @@ public class Money {
     }
 
     public int dividedBy(int pricePerLotto) {
-        return Integer.parseInt(money) / pricePerLotto;
+        return money / pricePerLotto;
     }
 
     public double divide(int totalReward) {
-        return totalReward / Double.parseDouble(money);
+        return (double) totalReward / money;
     }
 }
