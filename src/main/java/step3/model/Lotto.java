@@ -37,7 +37,6 @@ public class Lotto {
         for (String str : numbers) {
             list.add(new LottoNumber(commonStringToNumber(str)));
         }
-
         this.lottoNumbers = list;
         this.bonusNumber = new LottoNumber(validateBonusNumber(StringNumber));
     }
@@ -45,19 +44,18 @@ public class Lotto {
     public List<LottoNumber> getNumbers() {
         return lottoNumbers;
     }
-
     public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
 
     public List<LottoNumber> generateRandomNumbers() {
-        List<LottoNumber> rangeNumbers = createLottoNumberList(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
+        List<LottoNumber> rangeNumbers = createAutoLottoNumberList(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
         Collections.shuffle(rangeNumbers);
         this.lottoNumbers = rangeNumbers.subList(ZERO, LOTTO_NUMBER_LENGTH);
         return lottoNumbers;
     }
 
-    private List<LottoNumber> createLottoNumberList(int startValue, int length) {
+    private List<LottoNumber> createAutoLottoNumberList(int startValue, int length) {
         List<LottoNumber> numbers = new ArrayList<>();
         for (int i = startValue; i <= length; i++) {
             numbers.add(new LottoNumber(i));

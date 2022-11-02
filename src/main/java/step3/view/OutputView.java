@@ -1,15 +1,14 @@
 package step3.view;
 
 import step3.constant.Rank;
-import step3.model.Lotto;
-import step3.model.LottoCalculator;
-import step3.model.LottoGenerator;
-import step3.model.Lottos;
+import step3.model.*;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static step3.constant.Message.Output.*;
+import static step3.constant.Message.Output.COUNT_UNIT_RESULT_MESSAGE;
 import static step3.constant.Message.System.*;
 
 public class OutputView {
@@ -26,7 +25,6 @@ public class OutputView {
 
     private static void printLottoProfitRate(LottoCalculator calculator) {
         System.out.printf(PROFIT_RATE_RESULT, calculator.calculateProfitRate());
-
     }
 
     private static void printLottoResult(LottoCalculator calculator) {
@@ -34,7 +32,8 @@ public class OutputView {
                 .collect(Collectors.toList());
 
         for(Rank rank : ranks) {
-            System.out.println(calculator.createResultMessage(rank));
+            String resultMessage = createResultMessage(rank, calculator.getLottoResult());
+            System.out.println(resultMessage);
         }
     }
 
@@ -53,6 +52,17 @@ public class OutputView {
     private static void printStatisticsNotice() {
         System.out.println(WINNER_STATISTICS);
         System.out.println(SPLIT_LINE);
+    }
+
+    public static String createResultMessage(Rank rank, LottoResult lottoResult) {
+        String second = rank == Rank.SECOND ? BONUS_CUSTOM_RESULT_MESSAGE : GENERAL_RESULT_MESSAGE;
+
+        return new StringBuilder(String.valueOf(rank.getCountOfMatch()))
+                .append(second)
+                .append(rank.getWinningMoney())
+                .append(WON_RESULT_MESSAGE)
+                .append(lottoResult.getWinningCount(rank))
+                .append(COUNT_UNIT_RESULT_MESSAGE).toString();
     }
 
 }
