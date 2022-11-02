@@ -15,6 +15,10 @@ public class Buyer {
         lottos = new Lottos();
     }
 
+    public Buyer(Lottos lottos) {
+        this.lottos = lottos;
+    }
+
     public int buyLotto() {
         int cnt = INIT_NUM;
         while (amount.getMoney() > 0) {
