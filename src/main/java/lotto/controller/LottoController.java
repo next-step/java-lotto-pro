@@ -56,14 +56,6 @@ public class LottoController {
         lottoTicketsBucket.addLottoTicket(lottoTicket);
     }
 
-    private List<Integer> intsFromOneToFortyFive() {
-        final List<Integer> fullCandidateList = new ArrayList<>(LOTTO_MAXIMUM_NUMBER);
-        for (int i = LOTTO_MINIMUM_NUMBER; i <= LOTTO_MAXIMUM_NUMBER; ++i) {
-            fullCandidateList.add(i);
-        }
-        return fullCandidateList;
-    }
-
     private WinningNumbers userInputWinningNumbers() {
         return winningNumbersAcceptor.accept();
     }
