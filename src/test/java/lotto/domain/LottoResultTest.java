@@ -6,76 +6,88 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+import static lotto.domain.LottoWinningMoneyEnum.*;
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class LottoResultTest {
-    Lotto win;
+    WinningLotto winningLotto;
     @BeforeEach
     void beforeEach(){
-        win = Lotto.create(Arrays.asList(5,15,25,35,45,30));
+        winningLotto = WinningLotto.create(
+                Lotto.create(Arrays.asList(5,15,25,35,45,30)), LottoNumber.create(10)
+        );
     }
 
     @Test
-    @DisplayName("3개 당첨 결과 저장하고 조회하기")
-    void _3개_당첨_결과_저장_조회(){
-        Lotto buy = Lotto.create(Arrays.asList(1,10,15,20,25,30));
+    @DisplayName("5등 당첨 결과 저장하고 조회하기")
+    void fifthResult(){
+        LottoResult result = LottoResult.create();
+        result.addLottoResult(winningLotto.getLottoRank(Lotto.create(Arrays.asList(1,10,15,20,25,30))));
 
-        LottoResult result = new LottoResult();
-        result.addLottoResult(win.getContainNumberCount(buy));
-
-        assertThat(result.getResultCount(3)).isEqualTo(1);
+        assertThat(result.getResultCount(FIFTH)).isEqualTo(1);
     }
 
     @Test
-    @DisplayName("4개 당첨 결과 저장하고 조회하기")
-    void _4개_당첨_결과_저장_조회(){
-        Lotto buy = Lotto.create(Arrays.asList(5,10,15,20,25,30));
+    @DisplayName("4등 당첨 결과 저장하고 조회하기")
+    void fourthResult(){
+        LottoResult result = LottoResult.create();
+        result.addLottoResult(winningLotto.getLottoRank(Lotto.create(Arrays.asList(5,10,15,20,25,30))));
 
-        LottoResult result = new LottoResult();
-        result.addLottoResult(win.getContainNumberCount(buy));
-
-        assertThat(result.getResultCount(4)).isEqualTo(1);
+        assertThat(result.getResultCount(FOURTH)).isEqualTo(1);
     }
 
     @Test
-    @DisplayName("5개 당첨 결과 저장하고 조회하기")
-    void _5개_당첨_결과_저장_조회(){
-        Lotto buy = Lotto.create(Arrays.asList(5,45,15,20,25,30));
+    @DisplayName("3등 당첨 결과 저장하고 조회하기")
+    void thirdResult(){
+        LottoResult result = LottoResult.create();
+        result.addLottoResult(winningLotto.getLottoRank(Lotto.create(Arrays.asList(5,45,15,20,25,30))));
 
-        LottoResult result = new LottoResult();
-        result.addLottoResult(win.getContainNumberCount(buy));
-
-        assertThat(result.getResultCount(5)).isEqualTo(1);
+        assertThat(result.getResultCount(THIRD)).isEqualTo(1);
     }
 
     @Test
-    @DisplayName("6개 당첨 결과 저장하고 조회하기")
-    void _6개_당첨_결과_저장_조회(){
-        Lotto buy = Lotto.create(Arrays.asList(35,45,30,5,15,25));
+    @DisplayName("2등 당첨 결과 저장하고 조회하기")
+    void secondResult(){
+        LottoResult result = LottoResult.create();
+        result.addLottoResult(winningLotto.getLottoRank(Lotto.create(Arrays.asList(35,45,30,10,15,25))));
 
-        LottoResult result = new LottoResult();
-        result.addLottoResult(win.getContainNumberCount(buy));
-
-        assertThat(result.getResultCount(6)).isEqualTo(1);
+        assertThat(result.getResultCount(SECOND)).isEqualTo(1);
     }
 
     @Test
-    @DisplayName("0,1,2 개 당첨 결과는 저장하지 않는다.")
-    void _0개_당첨_결과_미저장(){
+    @DisplayName("1등 당첨 결과 저장하고 조회하기")
+    void firstResult(){
+        LottoResult result = LottoResult.create();
+        result.addLottoResult(winningLotto.getLottoRank(Lotto.create(Arrays.asList(35,45,30,5,15,25))));
+
+        assertThat(result.getResultCount(FIRST)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("0,1,2 개 당첨 결과는 MISS 로 처리한다.")
+    void noResultTest(){
         Lotto buy0 = Lotto.create(Arrays.asList(34,44,29,4,14,24));
         Lotto buy1 = Lotto.create(Arrays.asList(34,45,29,4,14,24));
         Lotto buy2 = Lotto.create(Arrays.asList(34,45,29,4,15,24));
 
-        LottoResult result = new LottoResult();
-        result.addLottoResult(win.getContainNumberCount(buy0));
-        result.addLottoResult(win.getContainNumberCount(buy1));
-        result.addLottoResult(win.getContainNumberCount(buy2));
+        LottoResult result = LottoResult.create();
+        result.addLottoResult(winningLotto.getLottoRank(buy0));
+        result.addLottoResult(winningLotto.getLottoRank(buy1));
+        result.addLottoResult(winningLotto.getLottoRank(buy2));
 
-        assertAll(
-                () -> assertThat(result.getResultCount(0)).isEqualTo(0),
-                () -> assertThat(result.getResultCount(1)).isEqualTo(0),
-                () -> assertThat(result.getResultCount(2)).isEqualTo(0)
-        );
+        assertThat(result.getResultCount(MISS)).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("당첨금을 계산한다.")
+    void calculateMoney(){
+        LottoResult result = LottoResult.create();
+
+        // winning : Lotto.create(Arrays.asList(5,15,25,35,45,30)), LottoNumber.create(10)
+        result.addLottoResult(winningLotto.getLottoRank(Lotto.create(Arrays.asList(5,15,25,35,45,10)))); // 2등
+        result.addLottoResult(winningLotto.getLottoRank(Lotto.create(Arrays.asList(5,15,25,35,45,11)))); // 3등
+        result.addLottoResult(winningLotto.getLottoRank(Lotto.create(Arrays.asList(5,15,25,36,44,11)))); // 5등
+
+        assertThat(result.calculateWinningMoney()).isEqualTo(4505000);
     }
 }

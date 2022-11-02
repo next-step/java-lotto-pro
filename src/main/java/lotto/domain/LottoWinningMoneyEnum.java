@@ -3,26 +3,29 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoWinningMoneyEnum {
-    FIRST(6, 2000000000),
-    THIRD(5, 1500000),
-    FOURTH(4, 50000),
-    FIFTH(3, 5000);
+    MISS(0, false, 0),
+    FIFTH(3, false,5000),
+    FOURTH(4, false,50000),
+    THIRD(5, false,1500000),
+    SECOND(5, true, 3000000),
+    FIRST(6, false,2000000000);
 
     private int matchedCount;
+    private boolean isBonusContain;
     private long winningMoney;
 
-    LottoWinningMoneyEnum(int matchedCount, long winningMoney) {
+    LottoWinningMoneyEnum(int matchedCount, boolean isBonusContain, long winningMoney) {
         this.matchedCount = matchedCount;
+        this.isBonusContain = isBonusContain;
         this.winningMoney = winningMoney;
     }
 
-    public static long calculateWinningMoneyByContainCount(int containCount, int resultCount) {
+    public static LottoWinningMoneyEnum findEnumByContainCountAndBonusContain(int containCount,
+                                                                              boolean isBonusContain) {
         return Arrays.stream(values())
-                .filter(value -> value.matchedCount == containCount)
+                .filter(value -> value.matchedCount == containCount && value.isBonusContain == isBonusContain)
                 .findFirst()
-                .orElseThrow(
-                        () -> new IllegalStateException("로또 순위 정보가 조회되지 않았습니다.")
-                ).winningMoney * resultCount;
+                .orElse(MISS);
     }
 
     public int getMatchedCount() {

@@ -4,34 +4,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    public static final int MIN_CONTAIN_COUNT = 3;
     public static final int ZERO = 0;
-    private Map<Integer, Integer> result;
+    private Map<LottoWinningMoneyEnum, Integer> result;
 
     public LottoResult(){
         result = new HashMap<>();
     }
 
-    public void addLottoResult(int containNumberCount) {
-        if(isValidateMinContainCount(containNumberCount)){
-            return;
-        }
+    public static LottoResult create(){
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.result = new HashMap<>();
 
-        result.put(containNumberCount, result.getOrDefault(containNumberCount, ZERO) + 1);
+        return lottoResult;
     }
 
-    public int getResultCount(int containNumberCount) {
-        return result.getOrDefault(containNumberCount, ZERO);
+    public void addLottoResult(LottoWinningMoneyEnum lottoRank) {
+        result.put(lottoRank, result.getOrDefault(lottoRank, ZERO) + 1);
     }
 
-    private boolean isValidateMinContainCount(int containNumberCount){
-        return containNumberCount < MIN_CONTAIN_COUNT;
+    public int getResultCount(LottoWinningMoneyEnum winningEnum) {
+        return result.getOrDefault(winningEnum, ZERO);
     }
 
     public long calculateWinningMoney() {
         long totalWinningMoney = 0L;
-        for (Integer key : result.keySet()) {
-            totalWinningMoney += LottoWinningMoneyEnum.calculateWinningMoneyByContainCount(key, result.getOrDefault(key, ZERO));
+        for (LottoWinningMoneyEnum key : result.keySet()) {
+            totalWinningMoney += key.getWinningMoney() * result.getOrDefault(key, ZERO);
         }
         return totalWinningMoney;
     }
