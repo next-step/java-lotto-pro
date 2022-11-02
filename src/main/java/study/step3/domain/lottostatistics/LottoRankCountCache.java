@@ -2,6 +2,7 @@ package study.step3.domain.lottostatistics;
 
 import study.step3.domain.lotto.LottoRank;
 import study.step3.domain.lotto.Money;
+import study.step3.domain.lottonumber.LottoMatchResult;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,16 +19,16 @@ public class LottoRankCountCache {
         this.rankCountCache = new HashMap<>(rankCountCache);
     }
 
-    public static LottoRankCountCache of(List<Long> matchCounts) {
+    public static LottoRankCountCache of(List<LottoMatchResult> matchCounts) {
         Map<LottoRank, Long> lottoRankCountCache = matchCounts.stream()
                 .filter(isGreaterThanOrEqualMatchCount(LottoRank.minimumLottoRank()))
-                .map(LottoRank::ofMatchCount)
+                .map(LottoRank::ofMatchResult)
                 .collect(Collectors.groupingBy(identity(), Collectors.counting()));
         return new LottoRankCountCache(lottoRankCountCache);
     }
 
-    private static Predicate<Long> isGreaterThanOrEqualMatchCount(LottoRank lottoRank) {
-        return matchCount -> matchCount >= lottoRank.matchCount();
+    private static Predicate<LottoMatchResult> isGreaterThanOrEqualMatchCount(LottoRank lottoRank) {
+        return matchResult -> matchResult.isGreaterThanOrEqualMatchCount(lottoRank.matchResult());
     }
 
     public Long count(LottoRank lottoRank) {

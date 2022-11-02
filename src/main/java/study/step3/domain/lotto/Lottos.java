@@ -1,6 +1,6 @@
 package study.step3.domain.lotto;
 
-import study.step3.domain.lottonumber.LottoNumbers;
+import study.step3.domain.lottonumber.LottoMatchResult;
 import study.step3.domain.lottostatistics.LottoRankCountCache;
 
 import java.util.ArrayList;
@@ -30,10 +30,10 @@ public class Lottos {
         return output.toString();
     }
 
-    public LottoRankCountCache matchAll(Lotto winningLotto) {
-        List<Long> matchCounts = this.lottos.stream()
-                .map(lotto -> lotto.match(winningLotto))
+    public LottoRankCountCache matchAll(WinningLotto winningLotto) {
+        List<LottoMatchResult> matchResults = this.lottos.stream()
+                .map(winningLotto::matchLotto)
                 .collect(collectingAndThen(toList(), Collections::unmodifiableList));
-        return LottoRankCountCache.of(matchCounts);
+        return LottoRankCountCache.of(matchResults);
     }
 }
