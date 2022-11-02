@@ -14,7 +14,11 @@ public class Money {
         this.money = inputMoney;
     }
 
-    public int availableBuyLottoCount() {
+    private int availableBuyLottoCount() {
         return this.money / LOTTO_PRICE;
+    }
+
+    public int availableBuyAutoLottoCount(int manualCount) {
+        return this.availableBuyLottoCount() - manualCount;
     }
 }
