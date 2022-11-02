@@ -1,6 +1,6 @@
-package lotto.auto;
+package lotto;
 
-import lotto.auto.common.LottoAutoUtils;
+import lotto.common.LottoAutoUtils;
 
 public class Money {
     private final int DEFAULT_MONEY = 0;

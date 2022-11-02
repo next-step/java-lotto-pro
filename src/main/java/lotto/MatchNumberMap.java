@@ -1,9 +1,8 @@
-package lotto.auto;
+package lotto;
+
+import lotto.common.Constants;
 
 import java.util.Map;
-
-import static lotto.auto.common.Constants.INIT_NUM;
-import static lotto.auto.common.Constants.ZERO;
 
 // 일급콜렉션
 public class MatchNumberMap {
@@ -15,16 +14,16 @@ public class MatchNumberMap {
 
     public int value(Rank rank) {
         if (!matchNumberMap.containsKey(rank)) {
-            return INIT_NUM;
+            return Constants.INIT_NUM;
         }
         return matchNumberMap.get(rank);
     }
 
     public float profit() {
         if (matchNumberMap.containsKey(null)) {
-            return ZERO;
+            return Constants.ZERO;
         }
-        float profit = INIT_NUM;
+        float profit = Constants.INIT_NUM;
         for (Rank keyRank : matchNumberMap.keySet()) {
             profit += keyRank.getWinningMoney() * matchNumberMap.get(keyRank);
         }

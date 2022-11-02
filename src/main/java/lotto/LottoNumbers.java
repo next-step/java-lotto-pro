@@ -1,15 +1,15 @@
-package lotto.auto;
+package lotto;
 
-import lotto.auto.common.LottoAutoUtils;
+import lotto.common.LottoAutoUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.auto.common.Constants.DELIMITER;
-import static lotto.auto.common.Constants.LOTTO_LENGTH;
-import static lotto.auto.common.Constants.LOTTO_MAX_NUM;
-import static lotto.auto.common.Constants.LOTTO_MIN_NUM;
+import static lotto.common.Constants.DELIMITER;
+import static lotto.common.Constants.LOTTO_LENGTH;
+import static lotto.common.Constants.LOTTO_MAX_NUM;
+import static lotto.common.Constants.LOTTO_MIN_NUM;
 
 // 일급콜렉션
 public class LottoNumbers {

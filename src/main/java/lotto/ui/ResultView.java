@@ -1,12 +1,11 @@
-package lotto.auto.ui;
+package lotto.ui;
 
-import lotto.auto.Lotto;
-import lotto.auto.Rank;
+import lotto.Lotto;
+import lotto.Rank;
+import lotto.common.Constants;
 
 import java.text.NumberFormat;
 import java.util.List;
-
-import static lotto.auto.common.Constants.DECIMAL_POINT;
 
 public class ResultView {
     private StringBuilder sb;
@@ -39,6 +38,6 @@ public class ResultView {
     }
 
     public void printProfitMessage(int inputMoney, float profit) {
-        System.out.println(sb + "총 수익률은 " + cutDecimal(DECIMAL_POINT, profit/inputMoney) + "입니다.");
+        System.out.println(sb + "총 수익률은 " + cutDecimal(Constants.DECIMAL_POINT, profit/inputMoney) + "입니다.");
     }
 }
