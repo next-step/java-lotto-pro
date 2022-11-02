@@ -1,10 +1,11 @@
-package lotto.domain;
+package lotto.domain.ticket;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.util.Constants;
+import lotto.domain.Result;
 
 public class Tickets {
+    private final static String NEWLINE = "\n";
     private final List<Ticket> tickets;
 
     public Tickets() {
@@ -19,23 +20,24 @@ public class Tickets {
         return this.tickets.size();
     }
 
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        for (Ticket t : tickets) {
-            sb.append(t.toString());
-        }
-
-        return sb.toString();
-    }
-
     public Result countTicketResult(Result result, Ticket winningTicket) {
         for (Ticket t : this.tickets) {
             int countOfMatch = t.getCountOfMatch(winningTicket.lottoNumbers);
             boolean matchBonus = t.isBonusballMatch(winningTicket.bonusNum);
-            result.setResult(countOfMatch, matchBonus);
+            result.checkPrizeMoney(countOfMatch, matchBonus);
         }
 
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        for (Ticket t : tickets) {
+            sb.append(t.toString()).append(NEWLINE);
+        }
+
+        return sb.toString();
     }
 }
