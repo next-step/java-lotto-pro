@@ -29,7 +29,7 @@ public class LottoApplication {
 
     private static Lottos getLottos(ResultView resultView, PurchaseAmount purchaseAmount) {
         Lottos lottos = LottoSeller.sellLottos(purchaseAmount);
-        resultView.printLottos(lottos);
+        resultView.printLottos(lottos.lottos());
         return lottos;
     }
 

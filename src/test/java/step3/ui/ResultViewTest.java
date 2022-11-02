@@ -18,6 +18,6 @@ public class ResultViewTest {
     @Test
     void Lottos_출력테스트() {
         resultView.printLottoTickets(new PurchaseAmount(14000));
-        resultView.printLottos(LottoSeller.sellLottos(new PurchaseAmount(14000)));
+        resultView.printLottos(LottoSeller.sellLottos(new PurchaseAmount(14000)).lottos());
     }
 }

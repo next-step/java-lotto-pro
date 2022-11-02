@@ -2,14 +2,19 @@ package step3.ui;
 
 import step3.domain.*;
 
+import java.util.List;
+import java.util.Map;
+
 public class ConsoleResultView implements ResultView {
 
     private static final String MESSAGE_FOR_PRINT_LOTTO_TICKETS = "개를 구매했습니다.";
     private static final String MESSAGE_FOR_PRINT_TOTAL_YIELD = "총 수익률은 %.2f입니다.";
 
     @Override
-    public void printLottos(Lottos lottos) {
-        System.out.println(lottos);
+    public void printLottos(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto);
+        }
     }
 
     @Override

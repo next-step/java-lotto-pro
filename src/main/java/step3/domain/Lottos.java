@@ -1,5 +1,6 @@
 package step3.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
@@ -10,16 +11,6 @@ public class Lottos {
     }
 
     public List<Lotto> lottos() {
-        return lottos;
-    }
-
-    @Override
-    public String toString() {
-        StringBuffer sb = new StringBuffer();
-        for (Lotto lotto : lottos) {
-            sb.append(lotto);
-            sb.append("\n");
-        }
-        return sb.toString();
+        return new ArrayList<>(lottos);
     }
 }
