@@ -2,8 +2,6 @@ package step3;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 import step3.model.*;
 
 import java.util.ArrayList;
@@ -11,17 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static step3.LottoUtils.getLottoNumbers;
 
 public class LottosTest {
-
-    List<LottoNumber> getLottoNumbers(int... numbers) {
-
-        List<LottoNumber> lottoNumbers = new ArrayList();
-        for (int number : numbers) {
-            lottoNumbers.add(LottoNumber.valueOf(number));
-        }
-        return lottoNumbers;
-    }
 
     @Test
     @DisplayName("5등이 당첨될 경우 당첨됫 횟수를 조회")
@@ -85,10 +75,10 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(new WinningLotto(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 45)),LottoNumber.valueOf(16)));
+        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(new WinningLotto(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 45)), LottoNumber.valueOf(16)));
 
         //then
-        assertThat(rankStats.get(Rank.TWO)).isEqualTo(1);
+        assertThat(rankStats.get(Rank.SECOND)).isEqualTo(1);
     }
 
     @Test
@@ -102,7 +92,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
 
         //when
-        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(new WinningLotto(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)),LottoNumber.valueOf(29)));
+        Map<Rank, Integer> rankStats = lottos.getRankOfLottos(new WinningLotto(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)), LottoNumber.valueOf(29)));
 
         //then
         assertThat(rankStats.get(Rank.FIRST)).isEqualTo(3);

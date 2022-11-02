@@ -1,18 +1,17 @@
 package step3.view;
 
+import step3.model.Rank;
 import step3.model.dto.LottoResultDto;
-import step3.model.dto.LottosNumberDto;
-import step3.model.dto.RankDto;
+import step3.model.dto.LottoStatusDto;
 
-import java.util.Comparator;
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoOutputView {
 
-    public static void printPurchasingLottos(LottosNumberDto lottosNumberDto) {
-        List<List<Integer>> lottoTickets = lottosNumberDto.getLottosNumber();
-        System.out.printf("%d개를 구매했습니다.\n", lottoTickets.size());
+    public static void printPurchasingLottos(LottoStatusDto lottoStatusDto) {
+        List<List<Integer>> lottoTickets = lottoStatusDto.getLottosNumber();
+        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lottoStatusDto.getManualLottoCount(), lottoStatusDto.getAutoLottoCount());
         lottoTickets.forEach(System.out::println);
         System.out.println();
     }
@@ -28,12 +27,13 @@ public class LottoOutputView {
     }
 
     private static void printRankStats(LottoResultDto resultDto) {
-        getSortedRank(resultDto).forEach(rankDto -> {
-            if (rankDto.isRankTwo()) {
-                System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개\n", rankDto.getMatchCount(), rankDto.getWinningPrice(), rankDto.getWinningCount());
+        Rank[] ranks = new Rank[]{Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST};
+        Arrays.stream(ranks).forEach(rank -> {
+            if (rank == Rank.SECOND) {
+                System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개\n", rank.getMatchCount(), rank.getWinningPrice(), resultDto.getWinningCount(rank));
                 return;
             }
-            System.out.printf("%d개 일치 (%d원)- %d개\n", rankDto.getMatchCount(), rankDto.getWinningPrice(), rankDto.getWinningCount());
+            System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getMatchCount(), rank.getWinningPrice(), resultDto.getWinningCount(rank));
         });
     }
 
@@ -43,11 +43,4 @@ public class LottoOutputView {
         }
     }
 
-    public static List<RankDto> getSortedRank(LottoResultDto resultDto) {
-        return resultDto.getRanks()
-                .stream()
-                .filter(rankDto -> rankDto.isWin())
-                .sorted(Comparator.comparingInt(RankDto::getWinningPrice))
-                .collect(Collectors.toList());
-    }
 }

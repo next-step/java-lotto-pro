@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.BiFunction;
 
 public class Lotto {
 
@@ -37,7 +36,7 @@ public class Lotto {
                 .stream()
                 .filter(winningLotto::contains)
                 .count();
-        return Rank.valueOf((countParam, bonusParam) -> countParam == matchCount && bonusParam);
+        return Rank.valueOf(matchCount, false);
     }
 
     public Rank getRank(WinningLotto winningLotto) {
@@ -46,8 +45,7 @@ public class Lotto {
                 .filter(winningLotto::contains)
                 .count();
         boolean isBonus = winningLotto.isMatchBonusNumber(numbers);
-        Rank getRank = Rank.valueOf((countParam, bonusParam) -> countParam == matchCount && bonusParam ,isBonus);
-        return getRank;
+        return Rank.valueOf(matchCount, isBonus);
     }
 
     public boolean contains(LottoNumber number) {

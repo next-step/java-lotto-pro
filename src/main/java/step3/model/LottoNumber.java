@@ -9,7 +9,6 @@ import java.util.stream.IntStream;
 
 public class LottoNumber {
 
-
     private static final int LOTTO_MIN_VALUE = 1;
     private static final int LOTTO_MAX_VALUE = 45;
     private static final String OUT_OF_NUMBER_MESSAGE = "번호는 1에서 45사이만 허용합니다";
@@ -61,4 +60,5 @@ public class LottoNumber {
     public int hashCode() {
         return Objects.hash(number);
     }
+
 }

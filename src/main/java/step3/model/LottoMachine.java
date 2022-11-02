@@ -1,14 +1,9 @@
 package step3.model;
 
 import step3.model.dto.LottoResultDto;
-import step3.model.dto.LottosNumberDto;
-import step3.model.dto.RankDto;
+import step3.model.dto.LottoStatusDto;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoMachine {
 
@@ -22,34 +17,16 @@ public class LottoMachine {
 
     public LottoResultDto getLottoResult(Lotto lotto) {
         Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(lotto);
-        return getLottoResultDto(rankOfLottos);
+        return new LottoResultDto(rankOfLottos, lottoMoney);
     }
 
     public LottoResultDto getLottoResult(WinningLotto winningLotto) {
         Map<Rank, Integer> rankOfLottos = lottos.getRankOfLottos(winningLotto);
-        return getLottoResultDto(rankOfLottos);
+        return new LottoResultDto(rankOfLottos, lottoMoney);
     }
 
-    private LottoResultDto getLottoResultDto(Map<Rank, Integer> rankOfLottos) {
-        List<RankDto> rankDtos = getRankDtos(rankOfLottos);
-        double getPriceRatio = getPriceRatio(rankOfLottos);
-        return new LottoResultDto(rankDtos, getPriceRatio);
+    public LottoStatusDto getLottoStatus() {
+        return new LottoStatusDto(lottos, lottoMoney);
     }
 
-    private List<RankDto> getRankDtos(Map<Rank, Integer> rankOfLottos) {
-        return Arrays.stream(Rank.values())
-                .map(rank -> new RankDto(rank, rankOfLottos.getOrDefault(rank, 0)))
-                .collect(Collectors.toList());
-    }
-
-    private double getPriceRatio(Map<Rank, Integer> rankOfLottos) {
-        int sumOfRankPrice = Arrays.stream(Rank.values())
-                .mapToInt(rank -> rank.getWinningPrice() * rankOfLottos.getOrDefault(rank, 0))
-                .sum();
-        return lottoMoney.getPriceRatio(sumOfRankPrice);
-    }
-
-    public LottosNumberDto getLottoNumber() {
-        return new LottosNumberDto(lottos);
-    }
 }

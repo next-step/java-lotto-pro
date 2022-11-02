@@ -3,7 +3,6 @@ package step3.model;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -13,10 +12,8 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<List<LottoNumber>> getNumbersOfLottos() {
-        return lottos.stream()
-                .map(Lotto::getNumbers)
-                .collect(Collectors.toList());
+    public List<Lotto> getNumbersOfLottos() {
+        return lottos;
     }
 
     public Map<Rank, Integer> getRankOfLottos(Lotto winningLotto) {
@@ -36,4 +33,5 @@ public class Lottos {
         });
         return result;
     }
+
 }

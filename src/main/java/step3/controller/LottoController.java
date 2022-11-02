@@ -2,22 +2,27 @@ package step3.controller;
 
 import step3.model.*;
 import step3.model.dto.LottoResultDto;
-import step3.model.dto.LottosNumberDto;
+import step3.model.dto.LottoStatusDto;
 import step3.parser.LottoInputParser;
 import step3.view.LottoConsoleView;
 import step3.view.LottoOutputView;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoController {
 
     public void start() {
-        int price = LottoConsoleView.inputPurchasingAmount();
-        LottoMoney lottoMoney = new LottoMoney(price);
+        int amount = LottoConsoleView.inputPurchasingAmount();
+        int manualCount = LottoConsoleView.inputPurchaseManualCount();
+        LottoMoney purchaseMoney = new LottoMoney(amount, manualCount);
+        List<Lotto> manualLottos = LottoFactory.createLottosByManual(LottoConsoleView.inputPurchaseManual(manualCount));
+        List<Lotto> autoLottos = LottoFactory.createLottosByAuto(purchaseMoney);
 
-        LottoMachine lottoMachine = new LottoMachine(lottoMoney,new Lottos(LottoFactory.createLottos(lottoMoney)));
-        LottosNumberDto lottosNumberDto = lottoMachine.getLottoNumber();
-        LottoOutputView.printPurchasingLottos(lottosNumberDto);
+        Lottos lottos = new Lottos(Stream.concat(manualLottos.stream(), autoLottos.stream()).collect(Collectors.toList()));
+        LottoMachine lottoMachine = new LottoMachine(purchaseMoney, lottos);
+        LottoOutputView.printPurchasingLottos(lottoMachine.getLottoStatus());
 
         List<LottoNumber> lottoNumbers = LottoInputParser.parseToLottoNumberArray(LottoConsoleView.inputWinningNumber());
         LottoNumber bonusNumber = LottoNumber.valueOf(LottoConsoleView.inputBonusNumber());
@@ -28,4 +33,5 @@ public class LottoController {
     public static void main(String[] args) {
         new LottoController().start();
     }
+
 }

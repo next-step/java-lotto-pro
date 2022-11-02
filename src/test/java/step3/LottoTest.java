@@ -2,28 +2,21 @@ package step3;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import step3.model.Lotto;
 import step3.model.LottoNumber;
 import step3.model.Rank;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static step3.LottoUtils.getLottoNumbers;
 
 public class LottoTest {
-
-    List<LottoNumber> getLottoNumbers(int... numbers) {
-
-        List<LottoNumber> lottoNumbers = new ArrayList();
-        for (int number : numbers) {
-            lottoNumbers.add(LottoNumber.valueOf(number));
-        }
-        return lottoNumbers;
-    }
 
     @Test
     @DisplayName("번호조회하면 번호를 반환")
@@ -160,7 +153,6 @@ public class LottoTest {
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
-
         //when
         Lotto lotto = new Lotto(numbers);
         Rank rank = lotto.getRank(new Lotto(getLottoNumbers(1, 2, 13, 14, 15, 16)));
@@ -168,6 +160,5 @@ public class LottoTest {
         //then
         assertThat(rank).isEqualTo(Rank.MISS);
     }
-
 
 }

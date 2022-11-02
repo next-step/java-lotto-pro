@@ -1,13 +1,12 @@
 package step3;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import step3.model.*;
 import step3.model.dto.LottoResultDto;
-import step3.model.dto.LottosNumberDto;
+import step3.model.dto.LottoStatusDto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,32 +15,24 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static step3.LottoUtils.getLottoNumbers;
 
 public class LottoMachineTest {
 
-    List<LottoNumber> getLottoNumbers(int... numbers) {
-
-        List<LottoNumber> lottoNumbers = new ArrayList();
-        for (int number : numbers) {
-            lottoNumbers.add(LottoNumber.valueOf(number));
-        }
-        return lottoNumbers;
-    }
-
     @ParameterizedTest
-    @CsvSource(value = {"1000:1", "6000:6", "5000:5", "12000:12"}, delimiter = ':')
+    @CsvSource(value = {"2000:1", "5000:4", "4000:3", "12000:11"}, delimiter = ':')
     @DisplayName("로또를 구매하면 구매가격만큼 컬렉션에서 로또개수를 조회")
     void test_that_throw_exception_when_number_is_outofrange(int price, int count) {
         //given
-        LottoMoney lottoMoney = new LottoMoney(price);
-        Lottos lottos = new Lottos(LottoFactory.createLottos(lottoMoney));
+        LottoMoney lottoMoney = new LottoMoney(price,1);
+        Lottos lottos = new Lottos(LottoFactory.createLottosByAuto(lottoMoney));
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
 
         //when
-        LottosNumberDto lottosNumberDto = lottoMachine.getLottoNumber();
+        LottoStatusDto lottoStatusDto = lottoMachine.getLottoStatus();
 
         //then
-        assertThat(lottosNumberDto.getLottosNumber()).hasSize(count);
+        assertThat(lottoStatusDto.getLottosNumber()).hasSize(count);
     }
 
     @ParameterizedTest
@@ -53,7 +44,7 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottoList.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        LottoMoney lottoMoney = new LottoMoney(14000);
+        LottoMoney lottoMoney = new LottoMoney(14000,1);
         Lottos lottos = new Lottos(lottoList);
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{11, 22, 23, 24, 25, 26})
@@ -76,7 +67,7 @@ public class LottoMachineTest {
         List<Lotto> lottoList = new ArrayList();
         lottoList.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
 
-        LottoMoney lottoMoney = new LottoMoney(14000);
+        LottoMoney lottoMoney = new LottoMoney(14000,1);
         Lottos lottos = new Lottos(lottoList);
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, count, 3, 4, 5, 6})
@@ -98,7 +89,7 @@ public class LottoMachineTest {
         List<Lotto> lottoList = new ArrayList();
         lottoList.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
 
-        LottoMoney lottoMoney = new LottoMoney(14000);
+        LottoMoney lottoMoney = new LottoMoney(14000,1);
         Lottos lottos = new Lottos(lottoList);
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
@@ -121,7 +112,7 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottoList.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        LottoMoney lottoMoney = new LottoMoney(14000);
+        LottoMoney lottoMoney = new LottoMoney(14000,1);
         Lottos lottos = new Lottos(lottoList);
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed()
@@ -145,7 +136,7 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottoList.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        LottoMoney lottoMoney = new LottoMoney(14000);
+        LottoMoney lottoMoney = new LottoMoney(14000,1);
         Lottos lottos = new Lottos(lottoList);
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 5, 6})
@@ -170,7 +161,7 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottoList.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        LottoMoney lottoMoney = new LottoMoney(14000);
+        LottoMoney lottoMoney = new LottoMoney(14000,1);
         Lottos lottos = new Lottos(lottoList);
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 15, 6})
@@ -196,7 +187,7 @@ public class LottoMachineTest {
         for (int i = 0; i < count; i++) {
             lottoList.add(new Lotto(getLottoNumbers(1, 2, 3, 14, 15, 16)));
         }
-        LottoMoney lottoMoney = new LottoMoney(14000);
+        LottoMoney lottoMoney = new LottoMoney(14000,1);
         Lottos lottos = new Lottos(lottoList);
         LottoMachine lottoMachine = new LottoMachine(lottoMoney, lottos);
         List<LottoNumber> winningNumbers = Arrays.stream(new int[]{1, 2, 3, 14, 15, 16})

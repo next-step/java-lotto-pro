@@ -1,22 +1,30 @@
 package step3.model.dto;
 
 
-import java.util.List;
+import step3.model.LottoMoney;
+import step3.model.Rank;
+
+import java.util.Arrays;
+import java.util.Map;
 
 public class LottoResultDto {
-    private final List<RankDto> ranks;
+
+    private final Map<Rank, Integer> rankOfLottos;
     private final double priceRatio;
 
-    public LottoResultDto(List<RankDto> ranks, double priceRatio) {
-        this.ranks = ranks;
-        this.priceRatio = priceRatio;
-    }
-
-    public List<RankDto> getRanks() {
-        return ranks;
+    public LottoResultDto(Map<Rank, Integer> rankOfLottos, LottoMoney lottoMoney) {
+        this.rankOfLottos = rankOfLottos;
+        this.priceRatio = lottoMoney.getPriceRatio(Arrays.stream(Rank.values())
+                .mapToInt(rank -> rank.getWinningPrice() * rankOfLottos.getOrDefault(rank, 0))
+                .sum());
     }
 
     public double getPriceRatio() {
         return priceRatio;
     }
+
+    public int getWinningCount(Rank rank) {
+        return rankOfLottos.getOrDefault(rank, 0);
+    }
+
 }
