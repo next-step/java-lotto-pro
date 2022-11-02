@@ -10,4 +10,8 @@ public class LottoMessageFormats {
     public static final String MESSAGE_YIELD = "총 수익률은 %.2f입니다.";
     public static final String MESSAGE_REQUEST_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
+    public static final String MESSAGE_REQUEST_MANUAL_COUNT = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String MESSAGE_REQUEST_MANUAL_NUMBERS = "\n수동으로 구매할 번호를 입력해 주세요.";
+    public static final String MESSAGE_MANUAL_AUTO_COUNT = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.";
+
 }

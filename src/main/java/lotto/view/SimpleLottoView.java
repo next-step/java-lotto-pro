@@ -19,18 +19,18 @@ public class SimpleLottoView implements LottoView {
     }
 
     @Override
-    public void showLottoCount(int count) {
-        output.print(String.format(MESSAGE_LOTTO_COUNT,count));
+    public void showLottoCount(int manualCount,int autoCount) {
+        output.print(String.format(MESSAGE_MANUAL_AUTO_COUNT,manualCount,autoCount));
     }
 
     @Override
     public void showLotto(String lottoString) {
         output.print(lottoString);
-        output.print("");
     }
 
     @Override
     public void showMessageRequestWinningNumbers() {
+        output.print("");
         output.print(MESSAGE_REQUEST_WINNING_NUMBERS);
     }
 
@@ -57,5 +57,15 @@ public class SimpleLottoView implements LottoView {
     @Override
     public void showMessageRequestBonusNumber() {
         output.print(MESSAGE_REQUEST_BONUS_NUMBER);
+    }
+
+    @Override
+    public void showRequestManualLottoCount() {
+        output.print(MESSAGE_REQUEST_MANUAL_COUNT);
+    }
+
+    @Override
+    public void showRequestManualLottoList() {
+        output.print(MESSAGE_REQUEST_MANUAL_NUMBERS);
     }
 }
