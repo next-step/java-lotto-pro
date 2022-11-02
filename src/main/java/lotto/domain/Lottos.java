@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.constants.Rank;
+import lotto.util.LottoNumberGenerator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +20,7 @@ public class Lottos {
     public Lottos(int lottoAmount) {
         lottos = new ArrayList<>();
         for (int i = 0; i < lottoAmount; i++) {
-            Lotto lotto = new Lotto();
+            Lotto lotto = new Lotto(LottoNumberGenerator.generateLottoNumbers());
             lottos.add(lotto);
         }
     }

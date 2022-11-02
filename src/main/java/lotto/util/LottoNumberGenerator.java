@@ -1,7 +1,5 @@
 package lotto.util;
 
-import lotto.domain.Lotto;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,9 +11,8 @@ public class LottoNumberGenerator {
     private static final int SUBLIST_START_IDX = 0;
     private static final int SUBLIST_END_IDX = 6;
 
-    public static Lotto generateLottoNumbers() {
-        List<Integer> lottoNumbers = generateLottoRangeNumbers().subList(SUBLIST_START_IDX, SUBLIST_END_IDX);
-        return new Lotto(lottoNumbers);
+    public static List<Integer> generateLottoNumbers() {
+        return generateLottoRangeNumbers().subList(SUBLIST_START_IDX, SUBLIST_END_IDX);
     }
 
     private static List<Integer> generateLottoRangeNumbers() {

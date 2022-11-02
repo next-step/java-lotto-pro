@@ -2,9 +2,7 @@ package lotto.domain;
 
 import lotto.constants.Rank;
 import lotto.util.InputValidator;
-import lotto.util.LottoNumberGenerator;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,12 +13,7 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto() {
-        lottoNumbers = LottoNumberGenerator.generateLottoNumbers().lottoNumbers;
-    }
-
     public Lotto(List<Integer> lottoNumbers) {
-        validateLottoNumber(lottoNumbers);
         this.lottoNumbers = mapToLotto(lottoNumbers);
     }
 
@@ -30,11 +23,8 @@ public class Lotto {
     }
 
     private List<LottoNumber> mapToLotto(List<Integer> lottoNumbers) {
+        validateLottoNumber(lottoNumbers);
         return lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toList());
-    }
-
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
     }
 
     public Rank countCollectNumber(Lotto winningNumbers, LottoNumber bonusBall) {
