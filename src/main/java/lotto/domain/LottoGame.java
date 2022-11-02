@@ -15,7 +15,7 @@ public class LottoGame {
     }
 
     public void run() {
-        Money money = new Money(view.insertMoney());
+        Money money = Money.from(view.insertMoney());
         view.printLottoSize(money.availableLottoSize());
         lottos.buyRandomNumberLottos(money.availableLottoSize());
         view.printText(lottos.toString());
