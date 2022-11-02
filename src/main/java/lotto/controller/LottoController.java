@@ -16,6 +16,7 @@ public class LottoController {
 
     public void run() {
         Money money = new Money(InputView.getMoney());
+        Quantity quantity = new Quantity(InputView.getManualLottoCount());
         List<LottoTicket> tickets = LottoMarket.sell(money, new RandomLottoGenerator());
         OutputView.printTickets(tickets);
 

@@ -14,6 +14,11 @@ public class InputView {
         return parseInt(read());
     }
 
+    public static int getManualLottoCount() {
+        OutputView.printManualLottoCount();
+        return parseInt(read());
+    }
+
     public static String getWiningNumber() {
         OutputView.printWinningNumber();
         return read().replaceAll(WHITE_SPACE_REGEX_STRING, EMPTY);
