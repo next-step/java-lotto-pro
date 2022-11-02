@@ -27,7 +27,7 @@ public class BuyerTest {
         // when
         buyer.buyLotto();
         // then
-        assertThat(buyer.getLotto()).hasSize(10);
+        assertThat(buyer.getLottos()).hasSize(10);
 
     }
 }
