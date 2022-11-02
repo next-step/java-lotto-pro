@@ -1,5 +1,10 @@
 package lotto.model;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import lotto.util.SplitUtil;
+
 public class Counter {
 
   public static final int LOTTO_PRICE = 1000;
@@ -12,12 +17,52 @@ public class Counter {
     this.lottoList = buyLotto(inputMoney);
   }
 
+  public Counter(String inputMoney, List<String> manualNumbers) {
+    this.lottoList = buyLotto(inputMoney, manualNumbers);
+  }
+
+
+  private static void validNumber(String input) {
+    if (isNumber(input)) {
+      throw new IllegalArgumentException(COUNTER_ERROR_MESSAGE);
+    }
+  }
+
+  private static boolean isNumber(String input) {
+    return !input.matches(NUMBER_REGEX);
+  }
+
   public LottoList getLottoList() {
     return this.lottoList;
   }
 
   public LottoList buyLotto(String inputMoney) {
     validInputMoney(inputMoney);
+
+    int lottoAmount = calculateLottoAmount(inputMoney);
+
+    return lottoList;
+  }
+
+  private LottoList buyManualLotto(String manualNumber) {
+
+    return null;
+  }
+
+  public LottoList buyLotto(String inputMoney, List<String> manualNumbers) {
+    validInputMoney(inputMoney);
+
+    List<String[]> test = manualNumbers.stream()
+        .map(manualNumber -> SplitUtil.splitInputNumbers(manualNumber))
+        .collect(Collectors.toList());
+
+    List<List<Integer>> test2 = test.stream()
+        .map(i ->
+            Arrays.stream(i)
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toList())
+        ).collect(Collectors.toList());
 
     int lottoAmount = calculateLottoAmount(inputMoney);
 
@@ -38,15 +83,6 @@ public class Counter {
     validNullOrEmpty(inputMoney);
     validNumber(inputMoney);
     validUnderLottoPrice(inputMoney);
-  }
-
-  private static void validNumber(String input) {
-    if (isNumber(input)) {
-      throw new IllegalArgumentException(COUNTER_ERROR_MESSAGE);
-    }
-  }
-  private static boolean isNumber(String input) {
-    return !input.matches(NUMBER_REGEX);
   }
 
   private void validUnderLottoPrice(String input) {
