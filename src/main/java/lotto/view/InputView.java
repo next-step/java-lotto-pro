@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.Money;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +23,13 @@ public class InputView {
 
     public static int insertMoney() {
         OutputView.print("구입금액을 입력해 주세요.");
-        return nextInt();
+        int money = nextInt();
+
+        if (!Money.isValid(money)) {
+            return insertMoney();
+        }
+
+        return money;
     }
 
     public static int insertManualLottoCount() {
@@ -32,22 +39,36 @@ public class InputView {
 
     public static List<Lotto> insertManualLotto(int count) {
         List<Lotto> lottos = new ArrayList<>();
+        List<List<LottoNumber>> lottoNumbers = new ArrayList<>();
 
         OutputView.print("수동으로 구매할 번호를 입력해 주세요.");
         for(int i=0; i<count; i++) {
-            lottos.add(new Lotto(inputLotto()));
+            lottoNumbers.add(inputLotto());
         }
 
+        if (!lottoNumbers.stream().allMatch(Lotto::isValid)) {
+            return insertManualLotto(count);
+        }
+
+        lottoNumbers.forEach(ln -> lottos.add(new Lotto(ln)));
         return lottos;
     }
 
     public static List<LottoNumber> insertWinningLotto() {
         OutputView.print("지난 주 당첨 번호를 입력해 주세요.");
-        return inputLotto();
+        List<LottoNumber> lottoNumbers = inputLotto();
+        if (!Lotto.isValid(lottoNumbers)) {
+            return insertWinningLotto();
+        }
+        return lottoNumbers;
     }
 
     public static List<LottoNumber> inputLotto() {
-        return Arrays.stream(scanner.next().split(","))
+        String[] input = scanner.next().split(",");
+        if (!Arrays.stream(input).map(Integer::parseInt).allMatch(LottoNumber::isValid)) {
+            return inputLotto();
+        }
+        return Arrays.stream(input)
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
@@ -55,6 +76,10 @@ public class InputView {
 
     public static LottoNumber insertBonusBall() {
         OutputView.print("보너스 볼을 입력해 주세요.");
-        return new LottoNumber(nextInt());
+        int lottoNumber = nextInt();
+        if (!LottoNumber.isValid(lottoNumber)) {
+            return insertBonusBall();
+        }
+        return new LottoNumber(lottoNumber);
     }
 }

@@ -26,7 +26,8 @@ public class LottoController {
     private void buyLottos() throws IllegalArgumentException {
         int manualLottoCount = InputView.insertManualLottoCount();
         if (manualLottoCount > money.getBuyableLottoCount()) {
-            throw new IllegalArgumentException("수동으로 구매할 로또 수가 구매할 수 있는 로또 수보다 많습니다.");
+            OutputView.print("수동으로 구매할 로또 수가 구매할 수 있는 로또 수보다 많습니다.");
+            buyLottos();
         }
 
         lottos = new Lottos(InputView.insertManualLotto(manualLottoCount));

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.view.OutputView;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -9,22 +11,31 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
-        validateNumbersSize(numbers);
-        validateDuplicate(numbers);
+        if (!isValid(numbers)) {
+            throw new IllegalArgumentException();
+        }
         this.numbers = numbers;
         Collections.sort(numbers);
     }
 
-    private void validateNumbersSize(List<LottoNumber> numbers) throws IllegalArgumentException {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException("로또 번호는 6개의 숫자만 설정 가능합니다.");
-        }
+    public static boolean isValid(List<LottoNumber> numbers) throws IllegalArgumentException {
+        return isValidNumbersSize(numbers) && isValidDuplicate(numbers);
     }
 
-    private void validateDuplicate(List<LottoNumber> numbers) throws IllegalArgumentException {
-        if (new HashSet<>(numbers).size() != numbers.size()) {
-            throw new IllegalArgumentException("로또 번호가 중복됩니다.");
+    private static boolean isValidNumbersSize(List<LottoNumber> numbers) throws IllegalArgumentException {
+        if (numbers.size() != 6) {
+            OutputView.print("로또 번호는 6개의 숫자만 설정 가능합니다.");
+            return false;
         }
+        return true;
+    }
+
+    private static boolean isValidDuplicate(List<LottoNumber> numbers) throws IllegalArgumentException {
+        if (new HashSet<>(numbers).size() != numbers.size()) {
+            OutputView.print("로또 번호가 중복됩니다.");
+            return false;
+        }
+        return true;
     }
 
     public boolean hasBonusBall(LottoNumber bonusBall) {
