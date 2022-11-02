@@ -6,7 +6,7 @@ public class LottoCoin {
 
     public final static long LOTTO_PRICE = 1000;
     private final static Money LOTTO_MONEY = Money.of(LOTTO_PRICE);
-    private final int coins;
+    private int coins;
 
     private LottoCoin(int coins) {
         this.coins = coins;
@@ -40,6 +40,7 @@ public class LottoCoin {
 
     public LottoCoin pop(int size) {
         vaildatePop(size);
+        this.coins -= size;
         return new LottoCoin(size);
     }
 

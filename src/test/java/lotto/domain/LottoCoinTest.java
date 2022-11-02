@@ -61,5 +61,19 @@ public class LottoCoinTest {
         });
     }
 
+    @Test
+    @DisplayName("3개의 로또 코인은 pop을 이용해서 2개를 꺼내면 1개가 남는다.")
+    void pop_remain() {
+        // given
+        Money money = Money.of(3000);
+        LottoCoin lottoCoin = LottoCoin.of(money);
+
+        // then
+        LottoCoin popLottoCoin = lottoCoin.pop(2);
+
+        // then
+        assertThat(lottoCoin.size()).isEqualTo(1);
+    }
+
 
 }
