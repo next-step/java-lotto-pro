@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -11,5 +12,5 @@ public interface LottoGenerator {
                     .limit(45)
                     .collect(Collectors.toList());
 
-    List<Integer> create();
+    List<Integer> create(Supplier<List<Integer>> numbersSupplier);
 }

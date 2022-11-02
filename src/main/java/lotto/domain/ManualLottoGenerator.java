@@ -1,13 +1,15 @@
 package lotto.domain;
 
-import lotto.ui.InputView;
-
+import java.util.Collections;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class ManualLottoGenerator implements LottoGenerator {
 
     @Override
-    public List<Integer> create() {
-        return InputView.inputManualLottoNumber();
+    public List<Integer> create(Supplier<List<Integer>> numbersSupplier) {
+        List<Integer> numbers = numbersSupplier.get();
+        Collections.sort(numbers);
+        return numbers;
     }
 }
