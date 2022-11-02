@@ -13,10 +13,7 @@ public class OutputConsole {
 
     public static void purchaseResult(int manuallyLottoCount, int autoLottoCount) {
         System.out.println();
-        if (manuallyLottoCount != 0) {
-            System.out.print(String.format("수동으로 %d장, ", manuallyLottoCount));
-        }
-        System.out.println(String.format("자동으로 %d개를 구매했습니다.", autoLottoCount));
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manuallyLottoCount, autoLottoCount));
     }
 
     public static void statistics() {
