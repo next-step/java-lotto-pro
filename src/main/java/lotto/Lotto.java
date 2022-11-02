@@ -1,14 +1,32 @@
 package lotto;
 
+import java.util.Objects;
+
 public class Lotto {
 
     public static final int MINIMUM_NUMBER = 1;
     public static final int MAXIMUM_NUMBER = 45;
 
+    private int number;
+
     private Lotto(){}
 
     public Lotto(int number) {
         validate(number);
+        this.number = number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return number == lotto.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 
     private static void validate(int number) {
