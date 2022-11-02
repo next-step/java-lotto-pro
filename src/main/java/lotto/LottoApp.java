@@ -22,7 +22,7 @@ public class LottoApp implements App {
         print(WELCOME);
         int payAmount = scanOneNumber();
 
-        List<Lotto> lottoList = lottoStore.pay(new PayAmount(payAmount));
+        List<Lotto> lottoList = lottoStore.payAll(new PayAmount(payAmount));
         print(String.format(BUY_LOTTO, lottoList.size()));
 
         for (Lotto lotto : lottoList) {

@@ -16,7 +16,7 @@ public class LottoStoreTest {
     void 구입금액만큼_로또를_산다(long payAmount, int expectedLottoCount) {
         LottoStore lottoStore = new LottoStore();
 
-        List<Lotto> lottoList = lottoStore.pay(new PayAmount(payAmount));
+        List<Lotto> lottoList = lottoStore.payAll(new PayAmount(payAmount));
 
         assertThat(lottoList).hasSize(expectedLottoCount);
     }
@@ -29,7 +29,7 @@ public class LottoStoreTest {
             Arrays.asList(1, 2, 3, 4, 5, 6)
         ));
 
-        List<Lotto> lottoList = lottoStore.pay(new PayAmount(1000));
+        List<Lotto> lottoList = lottoStore.payAll(new PayAmount(1000));
 
         assertThat(lottoList).hasSize(1);
         assertThat(lottoList.get(0))
@@ -42,8 +42,29 @@ public class LottoStoreTest {
 
         lottoStore.buyWith(RandomLottoNumberGenerateStrategy::new);
 
-        List<Lotto> lottoList = lottoStore.pay(new PayAmount(1000));
+        List<Lotto> lottoList = lottoStore.payAll(new PayAmount(1000));
 
         assertThat(lottoList).hasSize(1);
+    }
+
+    @ParameterizedTest(name = "가지고_있는_돈중에서_로또를_몇개만_산다")
+    @CsvSource(value = {"14000:7", "14000:14", "14000:1"}, delimiter = ':')
+    void 가지고_있는_돈중에서_로또를_몇개만_산다(long payAmount, int count) {
+        LottoStore lottoStore = new LottoStore();
+
+        List<Lotto> lottoList = lottoStore.pay(new PayAmount(payAmount), new PayCount(count));
+
+        assertThat(lottoList).hasSize(count);
+    }
+
+    @ParameterizedTest(name = "가지고_있는_돈을_초과하는_수만큼_로또를_사면_최대로_산다")
+    @CsvSource(value = {"14000:15:14", "12000:99:12"}, delimiter = ':')
+    void 가지고_있는_돈을_초과하는_수만큼_로또를_사면_최대로_산다(long payAmount, int count, int expectedCount) {
+
+        LottoStore lottoStore = new LottoStore();
+
+        List<Lotto> lottoList = lottoStore.pay(new PayAmount(payAmount), new PayCount(count));
+
+        assertThat(lottoList).hasSize(expectedCount);
     }
 }
