@@ -40,7 +40,7 @@ public class OutputView {
     }
 
     private static String generateBonusMessage(Rank rank) {
-        if(rank == Rank.SECOND) {
+        if (rank == Rank.SECOND) {
             return MSG_BONUS;
         }
         return "";

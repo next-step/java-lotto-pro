@@ -15,7 +15,7 @@ public class TokenValidator {
         long charCount = getCharCount(tokens);
         long negativeCount = getNegativeCount(tokens);
 
-        if(charCount > 0 || negativeCount > 0) {
+        if (charCount > 0 || negativeCount > 0) {
             throw new RuntimeException("숫자 이외의 값 또는 음수는 지원하지 않습니다.");
         }
     }

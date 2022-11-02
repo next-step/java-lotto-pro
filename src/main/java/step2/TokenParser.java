@@ -8,7 +8,7 @@ public class TokenParser {
 
     public static String[] split(String text) {
         String[] tokens = null;
-        if(text.contains(",") || text.contains(":")) {
+        if (text.contains(",") || text.contains(":")) {
             tokens = splitWithDefaultSeparator(text);
         }
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
