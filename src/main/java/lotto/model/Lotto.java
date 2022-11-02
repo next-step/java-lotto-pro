@@ -1,11 +1,18 @@
 package lotto.model;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import lotto.util.LottoGenerator;
+import lotto.util.SplitUtil;
 
 public class Lotto {
+
+  private static final String NUMBER_COMMA_REGEX = "[\\s0-9,]+";
+  private static final String ERROR_BY_WRONG_LOTTO_NUMBERS_INPUT = "올바른 로또 번호를 입력해 주세요.";
+  private static final int LOTTO_SIZE = 6;
+
 
   private final List<LottoNumber> numbers;
 
@@ -19,8 +26,29 @@ public class Lotto {
     return new Lotto(LottoGenerator.generateLottoNumbers());
   }
 
-  public static Lotto createManualLotto(List<Integer> numbers) {
-    return new Lotto(numbers);
+  public static Lotto createManualLotto(String numbers) {
+    validateStringNumbers(numbers);
+
+    String[] splitNumbers = SplitUtil.splitInputNumbers(numbers);
+
+    validLottoSize(splitNumbers);
+
+    List<Integer> nums = Arrays.stream(splitNumbers).mapToInt(Integer::parseInt)
+        .boxed().collect(Collectors.toList());
+
+    return new Lotto(nums);
+  }
+
+  private static void validateStringNumbers(String numbers) {
+    if (!numbers.matches(NUMBER_COMMA_REGEX)) {
+      throw new IllegalArgumentException(ERROR_BY_WRONG_LOTTO_NUMBERS_INPUT);
+    }
+  }
+
+  private static void validLottoSize(String[] splitNumbers) {
+    if (splitNumbers.length != LOTTO_SIZE) {
+      throw new IllegalArgumentException(ERROR_BY_WRONG_LOTTO_NUMBERS_INPUT);
+    }
   }
 
   public List<LottoNumber> getNumbers() {

@@ -1,10 +1,5 @@
 package lotto.model;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import lotto.util.SplitUtil;
-
 public class WinningLotto {
 
   private static final String NUMBER_COMMA_REGEX = "[\\s0-9,]+";
@@ -47,16 +42,7 @@ public class WinningLotto {
   }
 
   private Lotto generateWinningLotto(String winningLottoNumber) {
-    validWinningLottoNumber(winningLottoNumber);
-
-    String[] splitNumbers = SplitUtil.splitInputNumbers(winningLottoNumber);
-
-    validLottoSize(splitNumbers);
-
-    List<Integer> nums = Arrays.stream(splitNumbers).mapToInt(Integer::parseInt)
-        .boxed().collect(Collectors.toList());
-
-    return Lotto.createManualLotto(nums);
+    return Lotto.createManualLotto(winningLottoNumber);
   }
 
   private LottoNumber generateBonusNumber(String bonusNumber) {
