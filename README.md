@@ -69,3 +69,22 @@
   - [x] 발급한 로또들의 번호
   - [x] 당첨 통계
   - [x] 총 수익률(소수점 2째 자리 표시)
+
+### 3단계 피드백
+- domain 
+  - Lotto.java
+    - [ ] 접근제어자에 대한 고찰.. private 으로 만들고 getter를 쓰는 방식이 일급컬렉션을 쓰는 의의에 부합하는 방식이다.
+    - [ ] 로또 번호 중복에 대한 체크 추가 
+  - LottoCreateStrategy.java
+    - [ ] 캐싱된 번호를 사용하는 방식으로 활용 
+  - LottoMachine.java
+    - [ ] 로또 기계와 로또 판매자를 결합 
+  - Lottos.java
+    - [ ] 이 클래스가 필요한지에 대해 근본적인 고민을 해볼 것 
+  - WinningResult.java
+    - [ ] DTO를 반환하는 식으로 변경해보자..!! View와의 결합이 높다 
+  - LottoTest.java
+    - [ ] 테스트 코드에 로직(if, for 등등.. 흐름제어 코드)이 포함되어 있으므로,  
+      로직이 없는 테스트 코드를 작성할 수 있는 방법 모색
+- ui.ConsoleResultView.java 
+  - [ ] 비즈니스 로직이 View에 존재, 도메인으로 옮겨 줄 것
