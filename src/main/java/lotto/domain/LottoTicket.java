@@ -52,4 +52,11 @@ public class LottoTicket {
     public int hashCode() {
         return Objects.hash(ticket);
     }
+
+    @Override
+    public String toString() {
+        return ticket.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(", ", "[", "]"));
+    }
 }

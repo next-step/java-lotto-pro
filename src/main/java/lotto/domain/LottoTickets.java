@@ -20,4 +20,11 @@ public class LottoTickets {
     public int getTicketCount() {
         return this.ticketList.size();
     }
+
+    @Override
+    public String toString() {
+        return ticketList.stream()
+                .map(LottoTicket::toString)
+                .collect(Collectors.joining("\n"));
+    }
 }
