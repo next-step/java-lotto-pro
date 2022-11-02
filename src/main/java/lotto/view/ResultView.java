@@ -26,10 +26,10 @@ public class ResultView {
 		System.out.println("---------");
 
 		LottoResults lottoResults = winningLotto.getLottoResults(lottos);
-		Arrays.stream(MatchRank.values()).forEach(matchRank -> {
-			LottoResults filteredLottoResults = lottoResults.filterByMatchRank(matchRank);
+		Arrays.stream(MatchRankMessage.values()).forEach(matchRankMessage -> {
+			LottoResults filteredLottoResults = lottoResults.filterByMatchRank(matchRankMessage.getMatchRank());
 			Quantity matchQuantity = filteredLottoResults.quantity();
-			System.out.println(new LottoResultMessage(matchRank, matchQuantity));
+			System.out.println(new LottoResultMessage(matchRankMessage, matchQuantity));
 		});
 		System.out.println(new YieldMessage(lottoResults.yield(purchaseAmount)));
 	}
