@@ -23,19 +23,16 @@ public enum Rank {
         return reward;
     }
 
-    public static Rank valueOf(int countOfMatching) {
-        if (countOfMatching == FIRST.numberOfMatching) {
-            return Rank.FIRST;
-        }
-        if (countOfMatching == SECOND.numberOfMatching) {
-            return Rank.SECOND;
-        }
-        if (countOfMatching == THIRD.numberOfMatching) {
-            return Rank.THIRD;
-        }
-        if (countOfMatching == FOURTH.numberOfMatching) {
-            return Rank.FOURTH;
+    public static Rank valueOf(int numberOfMatching) {
+        for (Rank rank : Rank.values()) {
+            if (rank.hasNumberOfMatching(numberOfMatching)) {
+                return rank;
+            }
         }
         return Rank.NONE;
+    }
+
+    private boolean hasNumberOfMatching(int numberOfMatching) {
+        return this.numberOfMatching == numberOfMatching;
     }
 }
