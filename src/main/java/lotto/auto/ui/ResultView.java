@@ -16,7 +16,7 @@ public class ResultView {
         sb.append("당첨 통계\n" + "---------\n");
     }
 
-    public String cutDecimal(int cutSize, double value) {
+    public String cutDecimal(int cutSize, float value) {
         NumberFormat nf = NumberFormat.getNumberInstance();
         nf.setMaximumFractionDigits(cutSize);
         nf.setGroupingUsed(false);
