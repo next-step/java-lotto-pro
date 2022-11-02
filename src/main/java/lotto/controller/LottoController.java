@@ -1,23 +1,28 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
+import lotto.domain.ticket.Ticket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
     public void playLotto() {
         OutputView.startLottoOutput();
+        
         Lotto lotto = new Lotto(InputView.getInput());
-        OutputView.print(lotto.getTicketsSizeStr());
         
-        OutputView.print(lotto.getLottoListStr());
-        
+        OutputView.printHowManyTicketsPurchased(lotto.tickets.size());
+        OutputView.print(lotto.tickets.toString());
         OutputView.printWinningLottoNumOutput();
-        String winningTicketStr = InputView.getInput();
         
+        String winningTicketNumbers = InputView.getInput();
+
         OutputView.printBonusNumOutput();
-        String bonusNumStr = InputView.getInput();
         
-        OutputView.print(lotto.getResultStr(winningTicketStr, bonusNumStr));
+        Ticket winningTicket = new Ticket(winningTicketNumbers, InputView.getInput());
+        lotto.checkResult(winningTicket);
+        
+        OutputView.printResultOutput(lotto.result.winningMap, lotto.result.returnRate);
     }
+
 }

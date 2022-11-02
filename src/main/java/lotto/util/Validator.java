@@ -23,4 +23,10 @@ public class Validator {
             throw new IllegalArgumentException(Constants.ERR_VALUE_NOT_VALID);
         }
     }
+    
+    public static void validateLottoNumberBoundary(int lottoNumber) {
+        if (lottoNumber < Constants.MIN_LOTTO_TICKET_NUM || lottoNumber > Constants.MAX_LOTTO_TICKET_NUM) {
+            throw new IllegalArgumentException(Constants.ERR_VALUE_NOT_VALID);
+        }
+    }
 }
