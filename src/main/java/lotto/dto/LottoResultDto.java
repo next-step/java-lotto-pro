@@ -1,26 +1,19 @@
 package lotto.dto;
 
-import lotto.domain.LottoNumberMatcher;
-
-import java.util.Map;
+import lotto.domain.LottoRankMatcher;
 
 public class LottoResultDto {
 
-    private Map<Integer,Integer> winningPriceMap;
-    private LottoNumberMatcher lottoNumberMatcher;
+    private LottoRankMatcher lottoNumberMatcher;
     private double profit;
 
-    public LottoResultDto(Map<Integer, Integer> winningPriceMap, LottoNumberMatcher lottoNumberMatcher, double profit) {
-        this.winningPriceMap=winningPriceMap;
+    public LottoResultDto(LottoRankMatcher lottoNumberMatcher, double profit) {
         this.lottoNumberMatcher=lottoNumberMatcher;
         this.profit=profit;
     }
 
-    public Map<Integer, Integer> getWinningPriceMap() {
-        return winningPriceMap;
-    }
 
-    public LottoNumberMatcher getLottoNumberMatcher() {
+    public LottoRankMatcher getLottoNumberMatcher() {
         return lottoNumberMatcher;
     }
 

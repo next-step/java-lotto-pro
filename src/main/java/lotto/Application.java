@@ -1,8 +1,7 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.dto.LotteriesDto;
-import lotto.dto.LottoResultDto;
+import lotto.dto.*;
 import lotto.view.LotteriesView;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
@@ -18,8 +17,12 @@ public class Application {
         String buyAmountUserInput = lottoInputView.readUserInput("구입금액을 입력해 주세요.");
         LotteriesDto lotteriesDto = lottoController.buyLotto(buyAmountUserInput);
         lotteriesView.lotteriesResult(lotteriesDto);
-        String winningNumbersUserInput = lottoInputView.readUserInput("지난 주 당첨 번호를 입력해 주세요.");
-        LottoResultDto lottoResultDto = lottoController.lottoResult(lotteriesDto, winningNumbersUserInput, buyAmountUserInput);
+        WinningNumbersDto winningNumbersDto = lottoController
+                .readWinningNumbers(lottoInputView.readUserInput("지난 주 당첨 번호를 입력해 주세요."));
+        winningNumbersDto = lottoController
+                .readBonusNumber(winningNumbersDto, lottoInputView.readUserInput("보너스 볼을 입력해 주세요."));
+        LottoResultDto lottoResultDto = lottoController
+                .lottoResult(new LottoResultRequestDto(lotteriesDto, winningNumbersDto, buyAmountUserInput));
         lottoResultView.lottoResult(lottoResultDto);
     }
 }

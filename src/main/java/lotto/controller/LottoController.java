@@ -1,8 +1,9 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.dto.LotteriesDto;
-import lotto.dto.LottoResultDto;
+import lotto.dto.*;
+
+import java.util.List;
 
 public class LottoController {
 
@@ -12,10 +13,20 @@ public class LottoController {
         return lotteries.getLotteriesDto();
     }
 
-    public LottoResultDto lottoResult(LotteriesDto lotteriesDto, String winningNumbersUserInput, String buyAmountUserInput) {
-        return new LottoResult(lotteriesDto.getLotteriesDomain(),
-                new WinningNumbers(winningNumbersUserInput),
-                new BuyAmount(buyAmountUserInput))
+    public WinningNumbersDto readWinningNumbers(String readUserInput) {
+        return new WinningNumbersDto(new WinningNumbers(readUserInput));
+    }
+
+    public WinningNumbersDto readBonusNumber(WinningNumbersDto winningNumbersDto, String readUserInput) {
+        List<Integer> winningNumbers = winningNumbersDto.getWinningNumbers();
+        return new WinningNumbersDto(new WinningNumbers(winningNumbers, new BonusNumber(readUserInput)));
+    }
+
+    public LottoResultDto lottoResult(LottoResultRequestDto lottoResultRequestDto) {
+        return new LottoResult(lottoResultRequestDto.getLotteriesDto().getLotteriesDomain(),
+                lottoResultRequestDto.getWinningNumbers().getWinningNumbersDomain(),
+                new BuyAmount(lottoResultRequestDto.getBuyAmountUserInput()))
                 .getLottoResultDto();
     }
+
 }
