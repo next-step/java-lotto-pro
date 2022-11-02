@@ -3,8 +3,11 @@ package lotto.domain;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoGenerator.LOTTO_NUMBER_COUNT;
+import static lotto.ui.ConsoleMessage.ERROR_VALID_LOTTO_NUMBERS;
+
 public class Lotto {
-    public static final Integer LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(final List<Integer> numbers) {
@@ -16,8 +19,8 @@ public class Lotto {
     }
 
     private void validate(final Set<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException("로또 숫자는 6개가 필요 합니다.");
+        if (numbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException(ERROR_VALID_LOTTO_NUMBERS.getMessage());
         }
     }
 
@@ -25,10 +28,10 @@ public class Lotto {
 
         Set<LottoNumber> copy = new HashSet<>(lottoNumbers);
 
-        int matchBonusBallCount = matchBonusBallCount(winningLotto, copy);
+        boolean isMatchBonusBall = matchBonusBallCount(winningLotto, copy);
         int matchBallCount = matchBallCount(winningLotto, copy);
 
-        return Rank.valueOf(new MatchCount(matchBallCount, matchBonusBallCount));
+        return Rank.valueOf(new MatchCount(matchBallCount, isMatchBonusBall));
     }
 
     private int matchBallCount(final WinningLotto winningLotto, final Set<LottoNumber> lottoNumbers) {
@@ -36,14 +39,18 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
-    private int matchBonusBallCount(final WinningLotto winningLotto, final Set<LottoNumber> copy) {
-        if(copy.contains(winningLotto.getBonusBall())) {
-            return 1;
-        }
-        return 0;
+    private boolean matchBonusBallCount(final WinningLotto winningLotto, final Set<LottoNumber> lottoNumbers) {
+        return lottoNumbers.contains(winningLotto.getBonusBall());
     }
 
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    @Override
+    public String toString() {
+        ArrayList<LottoNumber> copy = new ArrayList<>(this.lottoNumbers);
+        Collections.sort(copy);
+        return copy.toString();
     }
 }

@@ -5,9 +5,9 @@ import java.util.Map;
 public class StatisticsResult {
 
     private final Map<Rank, Integer> countsOfRanks;
-    private final Double yields;
+    private final Yields yields;
 
-    public StatisticsResult(final Map<Rank, Integer> countsOfRanks, final Double yields) {
+    public StatisticsResult(final Map<Rank, Integer> countsOfRanks, final Yields yields) {
         this.countsOfRanks = countsOfRanks;
         this.yields = yields;
     }
@@ -16,7 +16,7 @@ public class StatisticsResult {
         return countsOfRanks;
     }
 
-    public Double getYields() {
+    public Yields getYields() {
         return yields;
     }
 }

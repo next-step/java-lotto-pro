@@ -31,6 +31,6 @@ public class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(numbers))
-                .withMessageMatching("로또 숫자는 6개가 필요 합니다.");
+                .withMessageMatching("로또를 생성하기 위해서는 중복되지 않은 숫자 6개가 필요 합니다.");
     }
 }
