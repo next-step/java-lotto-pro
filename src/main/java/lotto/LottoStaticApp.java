@@ -19,7 +19,7 @@ public class LottoStaticApp implements App {
     private List<Lotto> lottoList;
     private Lotto winLotto;
     private PayAmount payAmount;
-    private LottoNumber bonusLottoNumber;
+    private BonusLottoNumber bonusLottoNumber;
 
     private LottoStaticApp() {
     }
@@ -40,7 +40,7 @@ public class LottoStaticApp implements App {
     private void prepareLottoMatchStatistics() {
         for (Lotto lotto : lottoList) {
             LottoMatchType lottoMatchType = lotto.match(winLotto);
-            lottoMatchType = lottoMatchType.promotionBonusBall(lotto.contains(bonusLottoNumber));
+            lottoMatchType = lottoMatchType.promotionBonusBall(bonusLottoNumber.match(lotto));
             Integer count = countMap.getOrDefault(lottoMatchType, 0);
             countMap.put(lottoMatchType, ++count);
         }
@@ -79,7 +79,7 @@ public class LottoStaticApp implements App {
         private List<Lotto> lottoList;
         private Lotto winLotto;
         private PayAmount payAmount;
-        private LottoNumber bonusLottoNumber;
+        private BonusLottoNumber bonusLottoNumber;
 
         public Builder lottoList(List<Lotto> lottoList) {
             this.lottoList = lottoList;
@@ -91,7 +91,7 @@ public class LottoStaticApp implements App {
             return this;
         }
 
-        public Builder bonusLottoNumber(LottoNumber bonusLottoNumber) {
+        public Builder bonusLottoNumber(BonusLottoNumber bonusLottoNumber) {
             this.bonusLottoNumber = bonusLottoNumber;
             return this;
         }
