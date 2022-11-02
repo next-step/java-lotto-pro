@@ -1,34 +1,35 @@
 package lotto.auto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static lotto.auto.common.Constants.DEFAULT_PRICE;
 
 public class Buyer {
+    private static final int INIT_NUM = 0;
+
     private Money amount;
-    private List<Lotto> lotto;
+    private Lottos lottos;
 
     public Buyer(String inputMoney) {
         amount = new Money(inputMoney);
-        lotto = new ArrayList<>();
+        lottos = new Lottos();
     }
 
-    public void buyLotto() {
-        int cnt = 0;
+    public int buyLotto() {
+        int cnt = INIT_NUM;
         while (amount.getMoney() > 0) {
-            lotto.add(new Lotto(DEFAULT_PRICE));
+            lottos.add(new Lotto());
             this.amount.substractMoney(DEFAULT_PRICE);
             cnt++;
         }
-        System.out.println(cnt + "개를 구매했습니다.");
+        return cnt;
     }
 
     public int getAmount() {
         return amount.getMoney();
     }
 
-    public List<Lotto> getLotto() {
-        return lotto;
+    public List<Lotto> getLottos() {
+        return lottos.getLottos();
     }
 }
