@@ -14,6 +14,10 @@ public class LottoMatcher {
         return lottoCount;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public void plusLottoCountOne() {
         this.lottoCount++;
     }

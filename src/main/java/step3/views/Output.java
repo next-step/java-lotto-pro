@@ -28,9 +28,10 @@ public class Output {
         System.out.println(Message.MANUAL_NUMBER.getMessage());
     }
 
-    public void generateLottos(int count, Lottos lottos) {
-        System.out.println(count + Message.COUNT.getMessage());
-        lottos.getLottos().forEach(lotto -> {
+    public void generateLottos(int count, Lottos totalLottos, Lottos manualLottos) {
+        int manualLottosCnt = manualLottos.getLottos().size();
+        System.out.println(count + Message.resultMatchNumber(manualLottosCnt, count-manualLottosCnt ));
+        totalLottos.getLottos().forEach(lotto -> {
             System.out.println(lotto.getLottoNumbers());
         });
     }

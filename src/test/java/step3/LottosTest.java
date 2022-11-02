@@ -76,8 +76,7 @@ class LottosTest {
 
     @Test
     void calculateWinningBallsEachLotto() {
-        Assertions.assertEquals(1, Rank.statistic(statistics, 5000));
-
+        Assertions.assertEquals(1, Rank.statistic(5000));
     }
 
     @Test

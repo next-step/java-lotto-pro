@@ -45,13 +45,10 @@ public enum Rank {
         return money / MONEY;
     }
 
-    public static double statistic(List<Rank> ranks, int money) {
-        double sum = ranks.stream()
-                .mapToDouble(Rank::getAmount)
+    public static double statistic(int money) {
+        double sum = Arrays.stream(values())
+                .mapToInt(r -> r.getLottoMatcher().lottoCount() * r.getAmount())
                 .sum();
-        System.out.println(sum);
-        System.out.println(MONEY);
-        System.out.println(Math.floor(sum / money * 100) / 100);
         return Math.floor(sum / money * 100) / 100;
     }
 

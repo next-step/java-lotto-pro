@@ -19,7 +19,7 @@ public class LottoApplication {
 
         Lottos manualLottos = getManualLottos(output, input);
         Lottos totalLottos = initLottos(manualLottos, purchasingNumber);
-        output.generateLottos(purchasingNumber, totalLottos);
+        output.generateLottos(purchasingNumber, totalLottos, manualLottos);
 
         WinningLotto winningLotto = gainWinnerLotto(output, input);
         List<Rank> ranks = totalLottos.resultLottoRanks(winningLotto);
@@ -57,7 +57,7 @@ public class LottoApplication {
 
     static void result(Output output, List<Rank> ranks, int money) {
 
-        double returnOnInvestmentRate = Rank.statistic(ranks, money);
+        double returnOnInvestmentRate = Rank.statistic(money);
         output.statistics(returnOnInvestmentRate);
     }
 

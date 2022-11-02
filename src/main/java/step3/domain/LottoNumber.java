@@ -24,8 +24,7 @@ public class LottoNumber {
     }
 
     private boolean isValid(int lottoNumber){
-        return Rule.TOTAL_START_NUMBER.getRange() <= lottoNumber
-                && lottoNumber <= Rule.TOTAL_END_NUMBER.getRange() ;
+        return Rule.isRuleApplied(lottoNumber) ;
     }
 
     @Override
