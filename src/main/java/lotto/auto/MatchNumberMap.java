@@ -23,8 +23,8 @@ public class MatchNumberMap {
         return matchNumberMap.get(rank);
     }
 
-    public int profit() {
-        int profit = INIT_NUM;
+    public float profit() {
+        float profit = INIT_NUM;
         for (Rank keyRank : matchNumberMap.keySet()) {
             profit += keyRank.getWinningMoney() * matchNumberMap.get(keyRank);
         }

@@ -7,10 +7,13 @@ import java.text.NumberFormat;
 import java.util.List;
 
 public class ResultView {
+    private static final int DECIMAL_POINT = 2;
+
     private StringBuilder sb;
 
     public ResultView() {
         sb = new StringBuilder();
+        sb.append("당첨 통계\n" + "---------\n");
     }
 
     public String cutDecimal(int cutSize, double value) {
@@ -32,12 +35,10 @@ public class ResultView {
     }
 
     public void printWinningStatisticsMessage(Rank rank, int value) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("당첨 통계\n" + "---------\n");
         sb.append(rank.getCountOfMatch() + "개 일치(" + rank.getWinningMoney() + ")-" + value + "개\n");
     }
 
-    public void printProfitMessage(int stringToNumber, int profit) {
-        System.out.println(sb + "총 수익률은 " + cutDecimal(2, profit) + "입니다.");
+    public void printProfitMessage(int inputMoney, float profit) {
+        System.out.println(sb + "총 수익률은 " + cutDecimal(DECIMAL_POINT, profit/inputMoney) + "입니다.");
     }
 }
