@@ -86,7 +86,7 @@
   - WinningResult.java
     - [x] DTO를 반환하는 식으로 변경해보자..!! View와의 결합이 높다 
   - LottoTest.java
-    - [ ] 테스트 코드에 로직(if, for 등등.. 흐름제어 코드)이 포함되어 있으므로,  
+    - [x] 테스트 코드에 로직(if, for 등등.. 흐름제어 코드)이 포함되어 있으므로,  
       로직이 없는 테스트 코드를 작성할 수 있는 방법 모색
 - ui.ConsoleResultView.java 
   - [x] 비즈니스 로직이 View에 존재, 도메인으로 옮겨 줄 것
