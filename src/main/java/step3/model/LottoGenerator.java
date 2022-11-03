@@ -45,7 +45,10 @@ public class LottoGenerator {
         InputView.inputStringNoReply(MANUAL_LOTTO_NUMBER_INPUT_MESSAGE);
         List<Lotto> manualLottos = generateManualLottos();
         List<Lotto> autoLottos = generateAutoLottos();
+        mergeManualAndAuto(manualLottos, autoLottos);
+    }
 
+    public void mergeManualAndAuto(List<Lotto> manualLottos, List<Lotto> autoLottos) {
         List<Lotto> mergedList = Stream.of(manualLottos, autoLottos)
                 .flatMap(x -> x.stream())
                 .collect(Collectors.toList());
@@ -61,7 +64,7 @@ public class LottoGenerator {
         return manualLottoList;
     }
 
-    private List<Lotto> generateAutoLottos() {
+    public List<Lotto> generateAutoLottos() {
         List<Lotto> autoLottoList = new ArrayList<>();
         int restCount = purchaseCount - manualCount;
         for (int i = 0; i < restCount; i++) {
