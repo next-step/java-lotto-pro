@@ -33,9 +33,9 @@ class LottoNumberBagTest {
                 makeLottoNumbers(Arrays.asList("1", "2", "3", "10", "20", "30")));
         WinningLottoBallBag winningNumbers = new WinningLottoBallBag("1,2,3,4,5,6");
         //when:
-        double correctCount = lottoNumberBag.matchScore(winningNumbers);
+        Score correctCount = lottoNumberBag.matchScore(winningNumbers);
         //then:
-        assertThat(correctCount).isEqualTo(3);
+        assertThat(correctCount).isEqualTo(Score.of(3));
     }
 
     @ParameterizedTest(name = "생성 예외 테스트 - " + DEFAULT_DISPLAY_NAME)

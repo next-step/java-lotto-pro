@@ -51,10 +51,10 @@ public class WinningLottoBallBag {
         }
     }
 
-    public double matchScore(List<Number> lottoNumbers) {
-        return lottoBalls.stream()
+    public Score matchScore(List<Number> lottoNumbers) {
+        return Score.of(lottoBalls.stream()
                 .filter(lottoBall -> lottoNumbers.contains(lottoBall.getLottoNumber()))
                 .mapToDouble(LottoBall::getScore)
-                .sum();
+                .sum());
     }
 }

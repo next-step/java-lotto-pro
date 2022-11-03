@@ -41,4 +41,16 @@ class LottoTest {
         //then:
         assertThat(lotto.getResult(winningLottoBallBag)).isEqualTo(WinningResult.WIN_SECOND_BONUS);
     }
+
+    @DisplayName("4등 당첨 여부 제공 테스트 - 보너스 공 일치")
+    @Test
+    void winThirdBonus_lotto_success() {
+        //given:
+        Lotto lotto = new Lotto(new LottoNumberBag(makeLottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"))));
+        //when:
+        WinningLottoBallBag winningLottoBallBag = new WinningLottoBallBag("1,2,3,4,44,45");
+        winningLottoBallBag.add(LottoBall.fromStringBonus("5"));
+        //then:
+        assertThat(lotto.getResult(winningLottoBallBag)).isEqualTo(WinningResult.WIN_THIRD);
+    }
 }

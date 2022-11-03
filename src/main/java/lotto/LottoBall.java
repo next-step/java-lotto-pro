@@ -44,10 +44,10 @@ public class LottoBall {
     }
 
     public static LottoBall fromStringNormal(String number) {
-        return new LottoBall(number, new Score(WIN_SCORE));
+        return new LottoBall(number, Score.of(WIN_SCORE));
     }
 
     public static LottoBall fromStringBonus(String number) {
-        return new LottoBall(number, new Score(BONUS_SCORE));
+        return new LottoBall(number, Score.of(BONUS_SCORE));
     }
 }

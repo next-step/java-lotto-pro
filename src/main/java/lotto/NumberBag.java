@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface NumberBag {
 
-    double matchScore(WinningLottoBallBag winningLottoBallBag);
+    Score matchScore(WinningLottoBallBag winningLottoBallBag);
 
     List<Number> getNumbers();
 }

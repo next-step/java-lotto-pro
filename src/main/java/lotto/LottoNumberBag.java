@@ -17,7 +17,7 @@ public class LottoNumberBag implements NumberBag {
         this.lottoNumbers = numbers;
     }
 
-    public double matchScore(WinningLottoBallBag winningLottoBallBag) {
+    public Score matchScore(WinningLottoBallBag winningLottoBallBag) {
         return winningLottoBallBag.matchScore(lottoNumbers);
     }
 

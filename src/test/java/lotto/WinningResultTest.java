@@ -14,6 +14,6 @@ class WinningResultTest {
     @CsvSource(value = { "0:NOT_MATCH", "1:MATCH_ONE", "2:MATCH_TWO",
             "3:WIN_FOURTH", "4:WIN_THIRD", "5:WIN_SECOND", "6:WIN_FIRST" }, delimiter = ':')
     void getResultByMatchScore_winningRedsult_success(int matchCount, WinningResult winningResult) {
-        assertThat(WinningResult.getResultByMatchScore(matchCount)).isEqualTo(winningResult);
+        assertThat(WinningResult.getResultByMatchScore(Score.of(matchCount))).isEqualTo(winningResult);
     }
 }
