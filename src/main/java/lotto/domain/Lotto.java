@@ -47,7 +47,7 @@ public class Lotto {
     }
 
     private void validateLottoLength(int length) {
-        if (length < LOTTO_LENGTH) {
+        if (length != LOTTO_LENGTH ) {
             throw new IllegalArgumentException(INVALID_LENGTH_MESSAGE);
         }
     }
@@ -88,6 +88,5 @@ public class Lotto {
         reportLotto = reportLotto.delete(reportLotto.length()-2, reportLotto.length());
 
         return reportLotto.append(SQUARE_BRACKET_RIGHT).toString();
-
     }
 }

@@ -5,10 +5,12 @@ import java.util.List;
 
 public enum Winning {
 
-    THREE_MATCHES(3, 5_000),
-    FOUR_MATCHES(4, 50_000),
-    FIVE_MATCHES(5, 1_500_000),
-    SIX_MATCHES(6, 2_000_000_000);
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0);
 
     private final int matches;
     private final int reward;
@@ -26,26 +28,21 @@ public enum Winning {
         return reward;
     }
 
-    public static double getRewardsByMatch(int matches) {
-
-        double rewards = 0;
-
-        for (Winning winning : getWinningInfo()) {
-            rewards += getRewards(winning, matches);
-        }
-
-        return rewards;
+    private static Winning getWinningByMatch(int matches) {
+        return getWinningInfo().stream()
+                .filter(winning -> winning.getMatches() == matches && winning != SECOND)
+                .findFirst()
+                .orElse(MISS);
     }
 
-    private static double getRewards(Winning winning, int matches) {
-        if (winning.getMatches() == matches) {
-            return winning.getReward();
+    public static Winning valueOf(int matches, boolean matchBonus) {
+        if (matches == SECOND.getMatches() && matchBonus) {
+            return SECOND;
         }
-        return 0;
+        return Winning.getWinningByMatch(matches);
     }
 
     public static List<Winning> getWinningInfo() {
-        return Arrays.asList(THREE_MATCHES, FOUR_MATCHES, FIVE_MATCHES, SIX_MATCHES);
+        return Arrays.asList(FIRST, SECOND, THIRD, FOURTH, FIFTH);
     }
-
 }
