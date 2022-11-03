@@ -13,29 +13,107 @@
 
 ## 기능 요구사항
 
-* 쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열을 전달하는 경우 구분자를 기준으로 분리한 각 숫자의 합을 반환
-    * (예: “” => 0, "1,2" => 3, "1,2,3" => 6, “1,2:3” => 6)
-* 앞의 기본 구분자(쉼표, 콜론)외에 커스텀 구분자를 지정할 수 있다.
-    * 커스텀 구분자는 문자열 앞부분의 “//”와 “\n” 사이에 위치하는 문자를 커스텀 구분자로 사용한다.
-    * 예를 들어 “//;\n1;2;3”과 같이 값을 입력할 경우 커스텀 구분자는 세미콜론(;)이며, 결과 값은 6이 반환되어야 한다.
-* 문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw한다.
+* 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
+* 로또 1장의 가격은 1000원이다.
 
 ## 기능 구현 목록 TODO-list
 
-[X] 입력받은 문자열을, 구분자를 기준으로 분리하여, 각 문자숫자의 합을 반환할 수 있어야 한다.
+[x] 유저로부터, 로또 구입 금액을 입력 받을 수 있다.
+- [x] 로또 구입 금액이, Null인 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
+- [x] 로또 구입 금액이, Empty인 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
+- [x] 로또 구입 금액이, Non-Numeric한 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
+- [x] 로또 구입 금액이, 0보다 작을 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
 
-- [X] 다음과 같은 구분자를 이용하여, 입력받은 문자열을 분리 할 수 있어야 한다.
-    - [X] 기본 구분자(, or :)로 문자열을 분리할 수 있어야 한다.
-    - [X] 커스텀 구분자(문자열 앞부분의 “//”와 “\n” 사이에 위치하는 문자)로 문자열을 분리할 수 있어야 한다.
-- [X] 구분한 각 문자를, 정수값으로 치환하여, 각 숫자의 합을 더하여 반환 해야 한다.
-    - [X] 구분한 각 문자의 총합이 0일 경우(아무숫자도 입력하지 않았을경우), 0을 반환 해야 한다.
-        - [X] 구분한 문자가 null일 경우, 0을 반환 해야 한다.
-        - [X] 구분한 문자가 Empty일 경우, 0을 반환 해야 한다.
-    - [X] 구분한 각 문자의 총합이 1일 경우(한문자를 입력하였을 경우), 다음과 같이 동작해야 한다.
-        - [X] 구분한 문자가 Non-Numeric할 경우, RuntimeException 예외를 throw하여 프로그램을 종료해야 한다.
-        - [X] 구분한 문자가 0보다 작을 경우, RuntimeException 예외를 throw하여 프로그램을 종료해야 한다.
-        - [X] 구분한 문자가 0보다 클 경우, 해당 숫자를 반환해야 한다.
-    - [X] 구분한 각 문자의 총합이 1보다 클 경우(한문자이상을 입력하였을 경우), 다음과 같이 동작해야 한다.
-        - [X] 구분한 문자중, Non-Numeric한 숫자가 포함된 경우, RuntimeException 예외를 throw하여 프로그램을 종료해야 한다.
-        - [X] 구분한 문자중, 0보다 작은 숫자가 포함된 경우, RuntimeException 예외를 throw하여 프로그램을 종료해야 한다.
-        - [X] 구분한 문자가 모두 0보다 큰 숫자일 경우, 각 숫자의 합을 반환해야 한다.
+[x] 입력 받은 금액을 토대로, 구입 가능한 만큼 로또를 생성 할 수 있다.
+
+[x] 발급한 로또 개수를, 유저에게 표시 할 수 있다.
+
+[x] 발급한 로또 번호들을, 유저에게 표시 할 수 있다.
+
+[x] 유저로부터, 지난 주 당첨 번호를 쉼표 구분으로 입력 받을 수 있다.
+- [x] 지난 주 당첨 로또번호가, Null인 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
+- [x] 지난 주 당첨 로또번호가, Empty인 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
+- [x] 지난 주 당첨 로또번호를, 쉼표로 구분할 수 없는 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
+- [x] 쉼표로 구분한 로또번호 개수가, 6개가 아닌 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
+- [x] 쉼표로 구분한 로또번호중, 1~45번이 아닌 번호가 섞여있는 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
+- [x] 쉼표로 구분한 로또번호중, 중복되는 번호가 존재 하는 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
+
+[x] 발행한 로또와, 지난 주 당첨 번호를 조회하여, 당첨 통계를 계산할 수 있다.
+
+[x] 발행한 로또와, 지난 주 당첨 번호를 조회하여, 총 수익률을 계산할 수 있다.
+
+[x] 계산한 당첨 통계와, 총 수익률을, 유저에게 출력 후, 프로그램을 종료 할 수 있다.
+
+### Domain Models
+
+[x] Money - 구입금액을 나타내는 value object
+
+[x] LottoCusomter - 로또 구매자를 나타내는 domain model
+- [x] 가진 금액으로, 구입 가능한 만큼 로또를  구입 할 수 있다.
+- [x] 가진 금액이 로또 가격보다 적다면 로또를 구입 할 수 없다.
+- [x] 지난주 당첨 번호를 이용하여, 당첨 통계를 계산할 수 있다.
+- [x] 지난주 당첨 번호를 이용하여, 총 수익률을 계산할 수 있다
+
+[x] LottoStore - 로또 상점을 나타내는 domain model
+- [x] 로또번호를 생성하여, 로또 구매자에게 팔 수 있다.
+
+[x] LottoNumber - 하나의 로또번호를 나타내는 value object
+- [x] 1부터 45까지중 하나의 번호를 골라, 로또번호를 만들 수 있다.
+- [x] 주어진 번호가, 1부터 45까지의 범위에 존재 하지 않는 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
+- [x] 메모리 효율을 높이기 위해, 로또번호는 캐시되어, 매번 새롭게 개체 생성을 하지 않을 수 있다.
+- [x] 같은 로또번호를 가질 경우, 같은 개체라고 판단한다.
+
+[x] Lotto - 6개의 중복되지 않는 로또번호를 나타내는 value object
+- [x] 1부터 45까지의 중복되지 않는 6개의 로또번호로, 로또를 생성 할 수 있다.
+- [x] 주어진 로또번호가 6개이지 않은 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
+- [x] 주어진 로또번호중 중복되는 번호가 존재하는 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
+- [x] 다른 로또와 비교하여, 얼마나 번호가 일치하는지 알 수 있다.
+
+### Views
+
+[x] InputView
+- [x] 유저로부터, 로또 구입 금액을 입력 받을 수 있다.
+- [x] 유저로부터, 지난 주 당첨 번호를 쉼표 구분으로 입력 받을 수 있다.
+
+[x] ResultView
+- [x] 생성된 로또번호 목록을 출력 할 수 있다.
+- [x] 당첨 통계를 출력 할 수 있다.
+- [x] 총 수익률을 출력 할 수 있다.
+
+## Hints
+
+* 로또 자동 생성은 Collections.shuffle() 메소드 활용한다.
+* Collections.sort() 메소드를 활용해 정렬 가능하다.
+* ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 유무를 판단할 수 있다.
+
+
+## TODO
+- [x] refactor : LottoTicket에서, LottoNumbers에 관련한 로직 분리.
+- [x] LottoTicket은 단지, Fee와 LottoNumber를 가지고 있는 컨테이너로 분리
+
+
+## Notes
+
+- Q : 너무 로또 도메인 세부사항에 묶여있지 않나? 무언가 더 추상화 할 것은 없나?
+- Learned : How to divide BigDecimal 
+	- https://www.baeldung.com/java-bigdecimal-biginteger
+- Q : 로또 당첨 통계 계산 책임은 누구에게 주어야 하나? 
+	- 로또상점? 로또고객자신?
+- Q : 로또 당첨 상금과 당첨 정책은 자주 바뀌지 않을까?
+	- 일단 Enum으로 분리하고, 정책이 바뀔것같으면 Interface화.
+- Q : Maintain Order in Map => TreeMap? SortedMap? ProsCons?
+- Q : Enum compareTo default behavior?
+	- A : The natural order implemented by this method is the order in which the constants are declared.
+	- https://docs.oracle.com/javase/8/docs/api/java/lang/Enum.html#compareTo-E-
+- Learned : Java 8에서 도입된 SummaryStatistics.
+	- count, min, max, sum average 등의 statistics 정보를 계산해주는 클래스. 
+	- 스트림과 함께 사용 가능.
+	- IntSummaryStatistics, LongSummaryStatistics, DoubleSummaryStatistics
+- Q : How to repeat vim ‘f’ command?
+	- A : The command to repeat an f is ; (semicolon)
+- Q : List Comparator?
+- Q : List equals?
+	- A :  two lists are defined to be equal if they contain the same elements in the same order.
+	- https://docs.oracle.com/javase/8/docs/api/java/util/List.html#equals-java.lang.Object-
+- Q : Enum에 너무 의존하지 있지 않나? Enum값을 그대로 쓰는게 아니라, 메시지전달을 통해서 해야 하나?
+	- 
