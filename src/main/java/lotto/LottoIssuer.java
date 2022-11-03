@@ -3,18 +3,15 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.LottoBag.LOTTO_PRICE;
-
 public class LottoIssuer {
 
     private LottoIssuer() {
         throw new IllegalStateException("유틸 클래스 입니다");
     }
 
-    public static LottoBag issue(Money money, NumberGenerator numberGenerator) {
+    public static LottoBag issue(int availableCount, NumberGenerator numberGenerator) {
         List<Lotto> lottoList = new ArrayList<>();
-        while (money.isEqualsOrGreater(LOTTO_PRICE)) {
-            money = money.minus(LOTTO_PRICE);
+        for (int i = 0; i < availableCount; i++) {
             lottoList.add(new Lotto(numberGenerator));
         }
         return new LottoBag(lottoList);

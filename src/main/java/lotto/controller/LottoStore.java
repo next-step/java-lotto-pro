@@ -19,7 +19,8 @@ public class LottoStore {
     public void entrance() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("구매 금액을 입력해 주세요.");
-        LottoBag lottoList = LottoIssuer.issue(new Money(scanner.nextLine()), new LottoNumberGenerator());
+        int availableCount = LottoBag.availableCount(new Money(scanner.nextLine()));
+        LottoBag lottoList = LottoIssuer.issue(availableCount, new LottoNumberGenerator());
         InputView.printNumbers(lottoList);
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");

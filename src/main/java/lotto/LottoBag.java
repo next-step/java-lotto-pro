@@ -28,4 +28,8 @@ public class LottoBag {
                 .map(Lotto::getNumbers)
                 .collect(Collectors.toList());
     }
+
+    public static int availableCount(Money money) {
+        return money.divide(LOTTO_PRICE);
+    }
 }
