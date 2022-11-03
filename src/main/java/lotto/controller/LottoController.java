@@ -4,6 +4,7 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
@@ -15,19 +16,46 @@ public class LottoController {
     }
 
     public void startLotto() {
-        int purchasePrice = InputView.getLottoPurchasePrice();
-        LottoTickets lottoTickets = lottoGame.buy(purchasePrice);
+        LottoMoney lottoMoney = new LottoMoney(InputView.getLottoPurchasePrice());
+        int manualLottoTicketCount = InputView.getManualLottoCount();
+        lottoMoney.getValidLottoPurchaseCount(manualLottoTicketCount);
 
-        ResultView.lottoPurchase(lottoTickets.ticketCount(), lottoTickets.toString());
+        List<LottoGenerator> lottoGeneratorList = getManualLottoNumbers(manualLottoTicketCount);
+        LottoTickets lottoTickets = buyLotto(lottoMoney, manualLottoTicketCount, lottoGeneratorList);
 
-        String winningNumber = InputView.getLastWeekWinningNumber();
-        LottoNumber bonusNumber = new LottoNumber(InputView.getBonusNumber());
-        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningNumber, bonusNumber);
-
-        lottoGame.makeLottoResult(winningLottoNumbers, lottoTickets);
+        WinningLottoNumbers winningNumbers = winningLottoNumbers();
+        lottoGame.makeLottoResult(winningNumbers, lottoTickets);
 
         ResultView.winningResult(lottoGame.winningResult());
-        ResultView.StatisticsPercent(lottoGame.statisticsPercent(purchasePrice));
+        ResultView.StatisticsPercent(lottoGame.statisticsPercent(lottoMoney.getMoney()));
+    }
+
+    private static List<LottoGenerator> getManualLottoNumbers(int manualLottoTicketCount) {
+        List<LottoGenerator> lottoGeneratorList = new ArrayList<>();
+
+        if (manualLottoTicketCount == 0) {
+            return lottoGeneratorList;
+        }
+
+        InputView.manualLottoNumberScript();
+        for (int i = 0; i < manualLottoTicketCount; i++) {
+            LottoGenerator manualLottoGenerator = new ManualLottoGenerator(InputView.getManualLottoNumbers());
+            lottoGeneratorList.add(manualLottoGenerator);
+        }
+
+        return lottoGeneratorList;
+    }
+
+    private LottoTickets buyLotto(LottoMoney lottoMoney, int manualTicketCount, List<LottoGenerator> lottoGeneratorList) {
+        LottoTickets lottoTickets = lottoGame.buy(lottoMoney, lottoGeneratorList);
+        ResultView.lottoPurchase(manualTicketCount, lottoTickets.autoTicketCount(manualTicketCount), lottoTickets.toString());
+        return lottoTickets;
+    }
+
+    private WinningLottoNumbers winningLottoNumbers() {
+        String lastWeekWinningNumber = InputView.getLastWeekWinningNumber();
+        int bonusNumber = InputView.getBonusNumber();
+        return new WinningLottoNumbers(lastWeekWinningNumber, new LottoNumber(bonusNumber));
     }
 
 }

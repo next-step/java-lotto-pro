@@ -41,4 +41,5 @@ class LottoNumbersTest {
         LottoNumbers lottoNumbers2 = new LottoNumbers(Arrays.asList(3, 4, 5, 6, 7, 8));
         assertThat(lottoNumbers1.match(lottoNumbers2)).containsExactlyInAnyOrderElementsOf(Arrays.asList(3, 4, 5, 6));
     }
+
 }

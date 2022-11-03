@@ -1,36 +1,33 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @DisplayName("로또 게임 테스트")
 class LottoGameTest {
 
-    LottoGame lottoGame;
-
-    @BeforeEach
-    void init() {
-        lottoGame = new LottoGame();
-    }
-
-    @DisplayName("로또 구입 실패")
+    @DisplayName("정해진 금액에서 수동 구매후 나머지는 모두 자동을 구매한다.")
     @Test
-    void lotto_buy_failure() {
-        assertThatThrownBy(() -> lottoGame.buy(999))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
+    void manual_purchase_after_auto_purchase() {
+        List<LottoGenerator> lottoGeneratorList = new ArrayList<>(
+                Arrays.asList(
+                    new ManualLottoGenerator("1,2,3,4,5,6"),
+                    new ManualLottoGenerator("1,2,3,4,5,6"),
+                    new ManualLottoGenerator("1,2,3,4,5,6")
+                )
+        );
+        LottoGame lottoGame = new LottoGame();
 
-    @DisplayName("로또 구입 후 로또의 개수 확인")
-    @ParameterizedTest(name = "#{index} - {0}원으로 {1}장을 구매할 수 있다.")
-    @CsvSource(value = {"1000=1", "10000=10", "96000=96"}, delimiter = '=')
-    void check_the_number_of_lottery_purchases(int input, int expect) {
-        assertThat(lottoGame.buy(input).ticketCount()).isEqualTo(expect);
+        LottoTickets lottoTickets = lottoGame.buy(new LottoMoney("10000"), lottoGeneratorList);
+        Assertions.assertThat(lottoTickets.ticketCount()).isEqualTo(10);
+
+        lottoTickets = lottoGame.buy(new LottoMoney("3000"), lottoGeneratorList);
+        Assertions.assertThat(lottoTickets.ticketCount()).isEqualTo(3);
     }
 
 }

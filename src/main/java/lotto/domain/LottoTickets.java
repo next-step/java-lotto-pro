@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.common.ConstValue.LOTTO_PRICE;
-
 public class LottoTickets {
 
     private final List<LottoTicket> lottoTicketList;
@@ -14,17 +12,18 @@ public class LottoTickets {
     }
 
     public int ticketCount() {
-        return this.lottoTicketList.size();
+        return lottoTicketList.size();
     }
 
-    public int ticketListPrice() {
-        return this.lottoTicketList.size() * LOTTO_PRICE;
+    public void lottoWinningConfirm(WinningLottoNumbers winningLottoNumber, LottoResult lottoResult) {
+        lottoTicketList.stream().forEach(lottoTicket -> {
+            lottoTicket.lottoWinningConfirm(winningLottoNumber);
+            lottoResult.increaseRankCount(lottoTicket.getLottoRankResult());
+        });
     }
 
-    public void matchLottoResult(WinningLottoNumbers winningLottoNumber, LottoResult lottoResult) {
-        for (LottoTicket lottoTicket : lottoTicketList) {
-            lottoResult.increaseRankCount(lottoTicket.compareLotto(winningLottoNumber));
-        }
+    public int autoTicketCount(int manualTicketCount) {
+        return lottoTicketList.size() - manualTicketCount;
     }
 
     @Override

@@ -1,13 +1,14 @@
 package lotto.domain;
 
 import lotto.enums.LottoRank;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("다량의 로또 티켓 테스트")
 class LottoTicketsTest {
@@ -33,9 +34,9 @@ class LottoTicketsTest {
     @Test
     void lotto_number_know_you_win() {
         LottoResult lottoResult = new LottoResult();
-        lottoTickets.matchLottoResult(winningLottoNumbers, lottoResult);
-        Assertions.assertThat(lottoResult.getLottoResultMap().get(LottoRank.FIRST)).isEqualTo(4);
-        Assertions.assertThat(lottoResult.getLottoResultMap().get(LottoRank.THIRD)).isEqualTo(1);
+        lottoTickets.lottoWinningConfirm(winningLottoNumbers, lottoResult);
+        assertThat(lottoResult.getLottoResultMap().get(LottoRank.FIRST)).isEqualTo(4);
+        assertThat(lottoResult.getLottoResultMap().get(LottoRank.THIRD)).isEqualTo(1);
     }
 
 }

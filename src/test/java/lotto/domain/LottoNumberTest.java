@@ -16,4 +16,5 @@ class LottoNumberTest {
         assertThatThrownBy(() -> new LottoNumber(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
 }

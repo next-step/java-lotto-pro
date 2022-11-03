@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class ResultView {
 
-    private static final String LOTTO_PURCHASE = "%d개를 구매했습니다.";
+    private static final String LOTTO_PURCHASE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String WINNING_STATISTICS = "당첨 통계";
     private static final String DASH = "---------";
     private static final String REWARD_MATCH_LOTTO = "%d개 일치%s(%d원) - %d개";
@@ -18,17 +18,18 @@ public class ResultView {
     private static final String LOSS = "손해";
     private static final String SPACE = " ";
 
-
     private ResultView() {
 
     }
 
-    public static void lottoPurchase(int count, String purchaseLottoTickets) {
-        System.out.println(String.format(LOTTO_PURCHASE, count));
+    public static void lottoPurchase(int manualLottoCount, int autoLottoCount, String purchaseLottoTickets) {
+        System.out.println();
+        System.out.printf((LOTTO_PURCHASE) + "%n", manualLottoCount, autoLottoCount);
         System.out.println(purchaseLottoTickets);
     }
 
     public static void winningResult(LottoResult lottoResult) {
+        System.out.println();
         System.out.println(WINNING_STATISTICS);
         System.out.println(DASH);
         HashMap<LottoRank, Integer> lottoResultMap = lottoResult.getLottoResultMap();
@@ -39,8 +40,8 @@ public class ResultView {
 
     private static void statisticsResult(LottoRank lottoRank, HashMap<LottoRank, Integer> winningStatistic) {
         if (!lottoRank.equals(LottoRank.NONE)) {
-            System.out.println(String.format(REWARD_MATCH_LOTTO,
-                    lottoRank.getMatchCount(), bonusMatch(lottoRank), lottoRank.getReward(), winningStatistic.get(lottoRank)));
+            System.out.printf((REWARD_MATCH_LOTTO) + "%n",
+                    lottoRank.getMatchCount(), bonusMatch(lottoRank), lottoRank.getReward(), winningStatistic.get(lottoRank));
         }
     }
 
@@ -52,8 +53,8 @@ public class ResultView {
     }
 
     public static void StatisticsPercent(double statisticsPercent) {
-        System.out.print(String.format(TOTAL_PROFIT_PERCENT, statisticsPercent));
-        System.out.print(String.format(TOTAL_PROFIT_RESULT, checkStatisticsResult(statisticsPercent)));
+        System.out.printf(TOTAL_PROFIT_PERCENT, statisticsPercent);
+        System.out.printf(TOTAL_PROFIT_RESULT, checkStatisticsResult(statisticsPercent));
     }
 
     private static String checkStatisticsResult(double profitPercent) {

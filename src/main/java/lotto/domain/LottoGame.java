@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.common.ConstValue.LOTTO_PRICE;
-
 public class LottoGame {
 
     private final LottoResult lottoResult;
@@ -13,26 +11,24 @@ public class LottoGame {
         this.lottoResult = new LottoResult();
     }
 
-    public LottoTickets buy(int purchasePrice) {
-        validLottoPrice(purchasePrice);
-        int ticketCount = purchasePrice / LOTTO_PRICE;
+    public LottoTickets buy(LottoMoney lottoMoney, List<LottoGenerator> lottoGeneratorList) {
 
-        LottoGenerator lottoGenerator = new LottoGenerator();
         List<LottoTicket> lottoTicketList = new ArrayList<>();
-        for (int i = 0; i < ticketCount; i++) {
+        for (LottoGenerator lottoGenerator : lottoGeneratorList) {
             lottoTicketList.add(new LottoTicket(lottoGenerator.generateLottoNumber()));
         }
+
+        LottoGenerator lottoGenerator = new AutoLottoGenerator();
+        int autoTicketCount = lottoMoney.autoLottoCount(lottoGeneratorList.size());
+        for (int i = 0; i < autoTicketCount; i++) {
+            lottoTicketList.add(new LottoTicket(lottoGenerator.generateLottoNumber()));
+        }
+
         return new LottoTickets(lottoTicketList);
     }
 
-    private void validLottoPrice(int purchasePrice) {
-        if (purchasePrice < LOTTO_PRICE || (purchasePrice % LOTTO_PRICE) != 0) {
-            throw new IllegalArgumentException("로또 금액은 1000원 단위로 입력해야 합니다.");
-        }
-    }
-
     public void makeLottoResult(WinningLottoNumbers winningLottoNumber, LottoTickets lottoTickets) {
-        lottoTickets.matchLottoResult(winningLottoNumber, lottoResult);
+        lottoTickets.lottoWinningConfirm(winningLottoNumber, lottoResult);
     }
 
     public double statisticsPercent(int purchasePrice) {

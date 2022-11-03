@@ -1,6 +1,5 @@
 package lotto.enums;
 
-import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,14 +13,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("로또 랭크 테스트")
 class LottoRankTest {
 
-
     @DisplayName("숫자가 매칭되는 값에 따라 해당 순위를 알 수 있다.")
     @ParameterizedTest(name = "#{index} - {0}개가 매칭되고 보너스가 {1}이면 {2}이며 {3}원이다.")
     @MethodSource("match_rank")
     void number_matching_rank(int matchCount, boolean isBonus, LottoRank lottoRank, int price) {
         assertThat(LottoRank.findLottoRank(matchCount, isBonus)).isEqualTo(lottoRank);
     }
-
 
     @DisplayName("숫자가 매칭되는 값에 따라 해당 순위의 상금을 알 수 있다.")
     @ParameterizedTest(name = "#{index} - {0}개가 매칭되고 보너스가 {1}이면 상금은 {3}이다.")
