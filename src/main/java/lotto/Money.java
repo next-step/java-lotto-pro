@@ -32,6 +32,10 @@ public class Money {
         return this;
     }
 
+    public int divide(Money money) {
+        return this.amount / money.getAmount();
+    }
+
     public int getAmount() {
         return amount;
     }

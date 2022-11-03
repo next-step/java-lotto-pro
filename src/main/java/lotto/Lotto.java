@@ -1,24 +1,22 @@
 package lotto;
 
-import java.util.List;
-
 public class Lotto {
 
-    private final LottoNumberBag lottoNumberBag;
+    private final NumberBag numberBag;
 
     public Lotto(NumberGenerator numberGenerator) {
-        lottoNumberBag = new LottoNumberBag(numberGenerator);
+        numberBag = new LottoNumberBag(numberGenerator);
     }
 
     public Lotto(LottoNumberBag lottoNumberBag) {
-        this.lottoNumberBag = lottoNumberBag;
+        this.numberBag = lottoNumberBag;
     }
 
-    public WinningResult getResult(LottoNumberBag winningNumbers) {
-        return WinningResult.getResultByMatchCount(lottoNumberBag.correctCount(winningNumbers));
+    public WinningResult getResult(WinningLottoBallBag winningLottoBallBag) {
+        return WinningResult.getResultByMatchScore(numberBag.matchScore(winningLottoBallBag));
     }
 
-    public List<Integer> getNumbers() {
-        return lottoNumberBag.getNumbers();
+    public NumberBag getNumbers() {
+        return numberBag;
     }
 }
