@@ -11,8 +11,8 @@ public class LottoMoney {
 
     private final int money;
     private final int ticketCount;
-    private static final int ZERO = 0;
     private static final Pattern NUMBER_POSITIVE = Pattern.compile("^[0-9]+$");
+    private static final int ZERO = 0;
 
     public LottoMoney(String money) {
         validEmpty(money);
@@ -41,11 +41,9 @@ public class LottoMoney {
         }
     }
 
-    public int getValidLottoPurchaseCount(String lottoPurchaseCount) {
-        int count = convertToInt(lottoPurchaseCount);
-        validPositiveLottoTicketCount(count);
-        compareLottoTicketCountToMoney(count);
-        return count;
+    public void getValidLottoPurchaseCount(int lottoPurchaseCount) {
+        validPositiveLottoTicketCount(lottoPurchaseCount);
+        compareLottoTicketCountToMoney(lottoPurchaseCount);
     }
 
     private int convertToInt(String lottoTicketCount) {

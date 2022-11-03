@@ -17,13 +17,13 @@ public class LottoController {
 
     public void startLotto() {
         LottoMoney lottoMoney = new LottoMoney(InputView.getLottoPurchasePrice());
-        int manualLottoTicketCount = InputView.getManualLottoCount(lottoMoney);
+        int manualLottoTicketCount = InputView.getManualLottoCount();
+        lottoMoney.getValidLottoPurchaseCount(manualLottoTicketCount);
 
         List<LottoGenerator> lottoGeneratorList = getManualLottoNumbers(manualLottoTicketCount);
         LottoTickets lottoTickets = buyLotto(lottoMoney, manualLottoTicketCount, lottoGeneratorList);
 
-        String[] inputWinningLottoTicket = InputView.getWinningNumbers();
-        WinningLottoNumbers winningNumbers = new WinningLottoNumbers(inputWinningLottoTicket[0], Integer.parseInt(inputWinningLottoTicket[1]));
+        WinningLottoNumbers winningNumbers = winningLottoNumbers();
         lottoGame.makeLottoResult(winningNumbers, lottoTickets);
 
         ResultView.winningResult(lottoGame.winningResult());
@@ -39,9 +39,8 @@ public class LottoController {
 
         InputView.manualLottoNumberScript();
         for (int i = 0; i < manualLottoTicketCount; i++) {
-            String lottoNumbers = InputView.getManualLottoNumbers();
-            LottoGenerator manualLottoNumbers = new ManualLottoGenerator(lottoNumbers);
-            lottoGeneratorList.add(manualLottoNumbers);
+            LottoGenerator manualLottoGenerator = new ManualLottoGenerator(InputView.getManualLottoNumbers());
+            lottoGeneratorList.add(manualLottoGenerator);
         }
 
         return lottoGeneratorList;
@@ -51,6 +50,12 @@ public class LottoController {
         LottoTickets lottoTickets = lottoGame.buy(lottoMoney, lottoGeneratorList);
         ResultView.lottoPurchase(manualTicketCount, lottoTickets.autoTicketCount(manualTicketCount), lottoTickets.toString());
         return lottoTickets;
+    }
+
+    private WinningLottoNumbers winningLottoNumbers() {
+        String lastWeekWinningNumber = InputView.getLastWeekWinningNumber();
+        int bonusNumber = InputView.getBonusNumber();
+        return new WinningLottoNumbers(lastWeekWinningNumber, new LottoNumber(bonusNumber));
     }
 
 }
