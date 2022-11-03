@@ -2,10 +2,10 @@ package lotto.controller;
 
 import lotto.model.dto.LottoResult;
 import lotto.model.dto.PurchaseAmount;
-import lotto.model.vo.WinLotto;
 import lotto.model.vo.Lottos;
 import lotto.model.vo.Profit;
 import lotto.model.vo.PurchaseCount;
+import lotto.model.vo.WinLotto;
 import lotto.model.vo.WinResult;
 import lotto.service.LottoServiceImpl;
 import lotto.view.InputView;
@@ -46,11 +46,12 @@ public class LottoController {
 
     /**
      * 당첨 통계 확인
-     *
+     * <p>
      * 당첨 결과, 수익률 확인
+     *
      * @param purchaseAmount 구입금액
-     * @param lottos 발급된 로또(전체)
-     * @param winLotto 당첨 로또
+     * @param lottos         발급된 로또(전체)
+     * @param winLotto       당첨 로또
      * @return 당첨 통계
      */
     private LottoResult getLottoStatistics(PurchaseAmount purchaseAmount, Lottos lottos, WinLotto winLotto) {

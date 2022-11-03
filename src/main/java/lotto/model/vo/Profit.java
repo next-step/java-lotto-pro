@@ -1,7 +1,5 @@
 package lotto.model.vo;
 
-import lotto.model.constants.ErrorMessage;
-
 public class Profit {
 
     private double profit;

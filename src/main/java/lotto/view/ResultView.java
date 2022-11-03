@@ -9,7 +9,7 @@ import lotto.model.vo.WinResult;
 public class ResultView {
 
     public void printPurchaseCount(PurchaseCount purchaseCount) {
-        System.out.println(purchaseCount.getPurchaseCount()+"개를 구매했습니다.");
+        System.out.println(purchaseCount.getPurchaseCount() + "개를 구매했습니다.");
     }
 
     public void printLotto(Lottos lottos) {

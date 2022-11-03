@@ -68,7 +68,7 @@ public class Lotto {
         System.out.print(LottoConstants.LOTTO_PRINT_START);
         StringJoiner sj = new StringJoiner(LottoConstants.LOTTO_PRINT_DELIMITER);
         for (LottoNumber lottoNumber : lotto) {
-            sj.add(lottoNumber.getLottoNumber()+"");
+            sj.add(lottoNumber.getLottoNumber() + "");
         }
         System.out.print(sj);
         System.out.println(LottoConstants.LOTTO_PRINT_END);

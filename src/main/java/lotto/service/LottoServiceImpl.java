@@ -4,13 +4,13 @@ import java.util.Collections;
 import lotto.model.constants.LottoConstants;
 import lotto.model.domain.LottoRun;
 import lotto.model.dto.PurchaseAmount;
-import lotto.model.vo.LottoNumber;
-import lotto.model.vo.WinLotto;
 import lotto.model.vo.Lotto;
+import lotto.model.vo.LottoNumber;
 import lotto.model.vo.Lottos;
 import lotto.model.vo.MatchCounts;
 import lotto.model.vo.Profit;
 import lotto.model.vo.PurchaseCount;
+import lotto.model.vo.WinLotto;
 import lotto.model.vo.WinResult;
 
 public class LottoServiceImpl implements LottoService {
@@ -58,8 +58,9 @@ public class LottoServiceImpl implements LottoService {
 
     /**
      * 생성한 로또 추가
-     *
+     * <p>
      * 중복여부 검사하여 이미 추가된 경우 다시 생성하여 추가
+     *
      * @param lottos 발급된 로또 목록
      */
     public void addOneLotto(Lottos lottos) {
@@ -73,7 +74,7 @@ public class LottoServiceImpl implements LottoService {
      * 로또 당첨 결과 확인
      *
      * @param winLotto 당첨 로또 번호
-     * @param lottos 발급된 로또 목록
+     * @param lottos   발급된 로또 목록
      * @return 당첨기준에 따른 로또 당첨 결과
      */
     @Override
@@ -88,7 +89,7 @@ public class LottoServiceImpl implements LottoService {
      * 수익률 계산
      *
      * @param purchaseAmount 구입 금액
-     * @param winResult 당첨 결과
+     * @param winResult      당첨 결과
      * @return 수익률
      */
     @Override
