@@ -10,16 +10,12 @@ public class LottoLottery {
 
     private final List<LottoNumbers> lottoLottery;
 
-    private LottoLottery(List<LottoNumbers> lottoLottery) {
+    public LottoLottery(List<LottoNumbers> lottoLottery) {
         this.lottoLottery = lottoLottery;
     }
 
     public static LottoLottery of(LottoPurchaseQuantity lottoPurchaseQuantity, LottoNumberGenerator lottoNumberGenerator) {
-        List<LottoNumbers> lottoLottery = new ArrayList<>();
-        for (int i = 0; i < lottoPurchaseQuantity.getQuantity(); i++) {
-            lottoLottery.add(LottoNumbers.of(lottoNumberGenerator));
-        }
-        return new LottoLottery(lottoLottery);
+        return lottoPurchaseQuantity.toLottoLottery(lottoNumberGenerator);
     }
 
     public WinningRanks matchWinningRank(WinningNumbers winningNumbers) {
@@ -34,6 +30,10 @@ public class LottoLottery {
             histories.add(lottoNumbers.history());
         }
         return String.join(NEWLINE_DELIMITER, histories);
+    }
+
+    public void addLottery(LottoLottery autoLottery) {
+        this.lottoLottery.addAll(autoLottery.lottoLottery);
     }
 
     @Override

@@ -8,7 +8,7 @@ public class WinningNumbers {
     private final LottoNumbers winningNumbers;
     private final LottoNumber bonusBall;
 
-    private WinningNumbers(LottoNumbers winningNumbers, LottoNumber bonusBall) {
+    public WinningNumbers(LottoNumbers winningNumbers, LottoNumber bonusBall) {
         this.winningNumbers = winningNumbers;
         this.bonusBall = bonusBall;
         validDuplicateBonusNumber();

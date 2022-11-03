@@ -1,65 +1,79 @@
 package lotto.view;
 
+import lotto.domain.*;
+
 import java.util.InputMismatchException;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
-    private static final int FIRST_CHAR_INDEX = 0;
-    private static final int SECOND_CHAR_INDEX = 1;
-    private static final char NEGATIVE_CHAR = '-';
-
     private static final String INPUT_MESSAGE_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
+    private static final String INPUT_MESSAGE_MANUAL_PURCHASE_QUANTITY = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MESSAGE_MANUAL_NUMBERS_INFORMATION = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String INPUT_MESSAGE_LAST_WEEKS_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_MESSAGE_BONUS_NUMBER = "보너스 번호를 입력해 주세요.";
 
     private InputView() {
     }
 
-    public static String inputPurchaseAmount() {
-        OutputView.println(INPUT_MESSAGE_PURCHASE_AMOUNT);
-        String inputAmount = scanner.nextLine();
-        validFirstChar(inputAmount);
-        validString(inputAmount);
-        return inputAmount;
-    }
-
-    private static void validFirstChar(String inputAmount) {
-        char firstChar = inputAmount.charAt(FIRST_CHAR_INDEX);
-        if (isValidFirstChar(firstChar)) {
-            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_INPUT_ONLY_NUMBER);
+    public static LottoPurchaseAmount inputPurchaseAmount() {
+        try {
+            OutputView.println(INPUT_MESSAGE_PURCHASE_AMOUNT);
+            return new LottoPurchaseAmount(Money.of(scanner.nextLine()));
+        } catch (Exception e) {
+            OutputView.error(e.getMessage());
+            return inputPurchaseAmount();
         }
     }
 
-    private static boolean isValidFirstChar(char firstChar) {
-        return !(firstChar == NEGATIVE_CHAR || Character.isDigit(firstChar));
-    }
-
-    private static void validString(String inputAmount) {
-        for (int i = SECOND_CHAR_INDEX; i < inputAmount.length(); i++) {
-            isDigit(inputAmount, i);
+    public static LottoLotteryQuantity inputManualPurchaseQuantity(LottoPurchaseAmount lottoPurchaseAmount) {
+        try {
+            OutputView.printNewLine();
+            OutputView.println(INPUT_MESSAGE_MANUAL_PURCHASE_QUANTITY);
+            return LottoLotteryQuantity.of(lottoPurchaseAmount, LottoPurchaseQuantity.manualQuantity(scanner.nextLine()));
+        } catch (Exception e) {
+            OutputView.error(e.getMessage());
+            return inputManualPurchaseQuantity(lottoPurchaseAmount);
         }
     }
 
-    private static void isDigit(String inputAmount, int i) {
-        if (!Character.isDigit(inputAmount.charAt(i))) {
-            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_INPUT_ONLY_NUMBER);
+    public static Optional<LottoLottery> inputManualNumbersInformation(LottoLotteryQuantity lottoLotteryQuantity) {
+        try {
+            OutputView.printNewLine();
+            OutputView.println(INPUT_MESSAGE_MANUAL_NUMBERS_INFORMATION);
+            return lottoLotteryQuantity.toManualLottoLottery();
+        } catch (Exception e) {
+            OutputView.error(e.getMessage());
+            return inputManualNumbersInformation(lottoLotteryQuantity);
         }
     }
 
-    public static String inputLastWeeksWinningNumber() {
-        OutputView.printNewLine();
-        OutputView.println(INPUT_MESSAGE_LAST_WEEKS_WINNING_NUMBER);
+    public static String inputManualNumbers() {
         return scanner.nextLine();
     }
 
-    public static int inputBonusNumber() {
-        OutputView.println(INPUT_MESSAGE_BONUS_NUMBER);
+    public static LottoNumbers inputLastWeeksWinningNumber() {
         try {
-            return scanner.nextInt();
+            OutputView.printNewLine();
+            OutputView.println(INPUT_MESSAGE_LAST_WEEKS_WINNING_NUMBER);
+            return LottoNumbers.of(new ManualNumberGenerator(scanner.nextLine()));
+        } catch (Exception e) {
+            OutputView.error(e.getMessage());
+            return inputLastWeeksWinningNumber();
+        }
+    }
+
+    public static LottoNumber inputBonusNumber() {
+        try {
+            OutputView.println(INPUT_MESSAGE_BONUS_NUMBER);
+            return LottoNumber.of(scanner.nextInt());
         } catch (InputMismatchException e) {
             throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_INPUT_ONLY_NUMBER);
+        } catch (Exception e) {
+            OutputView.error(e.getMessage());
+            return inputBonusNumber();
         }
     }
 }
