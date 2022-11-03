@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import step4.model.generator.LottoAutoGenerator;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -15,6 +16,23 @@ public class GameTest {
     @ValueSource(strings = {"1000", "2000"})
     void Game_pass_01(String money) {
         assertThatNoException().isThrownBy(() -> new Game(money));
+    }
+
+    @DisplayName("게임_클래스_생성_정상_케이스_02")
+    @ParameterizedTest
+    @CsvSource(value = {"1000:1:0", "10000:9:1"}, delimiter = ':')
+    public void Game_pass_02(int money, int manualCount, int autoCount) {
+        Game game = new Game(new Money(money), new LottoBuyCount(manualCount));
+
+        assertThat(game.getLottoAutoBuyCount(new LottoBuyCount(manualCount))).isEqualTo(new LottoBuyCount(autoCount));
+    }
+
+    @DisplayName("게임_클래스_수동_구입_개수가_총_살수있는_개수보다_클경우_에러반환")
+    @ParameterizedTest
+    @CsvSource(value = {"1000:2", "10000:11"}, delimiter = ':')
+    public void Game_fail_03(int money, int manualCount) {
+        assertThatThrownBy(() -> new Game(new Money(money), new LottoBuyCount(manualCount)))
+                .isInstanceOf(RuntimeException.class);
     }
 
     @DisplayName("구입금액이_부족할_경우_에러_반환")
@@ -30,8 +48,7 @@ public class GameTest {
     @ValueSource(strings = {"1", "10"})
     public void startLottoGame_pass_01(int count) {
         Game game = new Game(count);
-        game.startLottoGame();
-        Lottos result = game.startLottoGame();
+        Lottos result = game.startLottoGame(new LottoAutoGenerator(count));
 
         assertThat(result.count()).isEqualTo(count);
     }
@@ -42,6 +59,7 @@ public class GameTest {
     public void startLottoGame_pass_01(int money, int manualCount, int autoCount) {
         Game game = new Game(new Money(money), new LottoBuyCount(manualCount));
 
-        assertThat(game.getLottoAutoBuyCount()).isEqualTo(new LottoBuyCount(autoCount));
+        assertThat(game.getLottoAutoBuyCount(new LottoBuyCount(manualCount))).isEqualTo(new LottoBuyCount(autoCount));
     }
+
 }

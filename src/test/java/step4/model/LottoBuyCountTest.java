@@ -63,4 +63,34 @@ public class LottoBuyCountTest {
         assertThatThrownBy(() -> lottoBuyCount.minus(otherBuyCount))
                 .isInstanceOf(LottoFormatException.class);
     }
+
+    @DisplayName("equalValue_함수_테스트")
+    @Test
+    public void LottoBuyCount_equalValue_01() {
+        LottoBuyCount lottoBuyCount = new LottoBuyCount(1);
+        assertThat(lottoBuyCount.isEqualValue(1)).isTrue();
+    }
+
+    @DisplayName("equalValue_함수_fail_테스트")
+    @Test
+    public void LottoBuyCount_equalValue_fail_01() {
+        LottoBuyCount lottoBuyCount = new LottoBuyCount(1);
+        assertThat(lottoBuyCount.isEqualValue(0)).isFalse();
+    }
+
+    @DisplayName("isLessThan_함수_pass_테스트")
+    @Test
+    public void LottoBuyCount_isLessThan_pass_01() {
+        LottoBuyCount lottoBuyCount = new LottoBuyCount(1);
+        assertThat(lottoBuyCount.isLessThan(new LottoBuyCount(2))).isTrue();
+    }
+
+    @DisplayName("isLessThan_함수_fail_테스트")
+    @ParameterizedTest
+    @ValueSource(strings = {"1", "2", "100"})
+    public void LottoBuyCount_isLessThan_fail_01(int otherCount) {
+        LottoBuyCount lottoBuyCount = new LottoBuyCount(100);
+        assertThat(lottoBuyCount.isLessThan(new LottoBuyCount(otherCount))).isFalse();
+    }
+
 }

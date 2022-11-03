@@ -39,9 +39,12 @@ public class InputView {
     }
 
     public static List<String> inputBuyManualLottos(LottoBuyCount lottoBuyCount) {
-        System.out.println(INPUT_BUY_MANUAL_LOTTOS);
         List<String> result = new ArrayList<>();
-        for (LottoBuyCount index = new LottoBuyCount(0); !index.equals(lottoBuyCount); index.plus()) {
+        if (lottoBuyCount.isEqualValue(0)) {
+            return result;
+        }
+        System.out.println(INPUT_BUY_MANUAL_LOTTOS);
+        for (LottoBuyCount index = new LottoBuyCount(0); index.isLessThan(lottoBuyCount); index.plus()) {
             result.add(sc.nextLine());
         }
         return result;

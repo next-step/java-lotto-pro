@@ -8,6 +8,10 @@ import java.util.stream.Stream;
 public class Lottos {
     private final List<Lotto> lottos;
 
+    public Lottos(Lotto lotto) {
+        this.lottos = Stream.of(lotto).collect(Collectors.toList());
+    }
+
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }

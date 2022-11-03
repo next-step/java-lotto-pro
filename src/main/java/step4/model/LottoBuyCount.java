@@ -46,6 +46,14 @@ public class LottoBuyCount {
         return new LottoBuyCount(this.lottoBuyCount - otherLottoBuyCount.lottoBuyCount);
     }
 
+    public boolean isEqualValue(int count) {
+        return this.lottoBuyCount == count;
+    }
+
+    public boolean isLessThan(LottoBuyCount otherLottoBuyCount) {
+        return this.lottoBuyCount < otherLottoBuyCount.lottoBuyCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

@@ -1,42 +1,38 @@
 package step4.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import step4.constant.ErrorMessageConstant;
+import step4.exception.LottoFormatException;
+import step4.model.generator.LottoGenerator;
 
 public class Game {
-    private final LottoGenerator lottoGenerator = new LottoGenerator();
-    private final LottoBuyCount lottoAutoBuyCount;
+    private final LottoBuyCount totalLottoBuyCount;
     private Money buyMoney;
 
     public Game(int count) {
-        this.lottoAutoBuyCount = new LottoBuyCount(count);
+        this.totalLottoBuyCount = new LottoBuyCount(count);
     }
 
     public Game(String money) {
         this.buyMoney = new Money(money);
-        this.lottoAutoBuyCount = new LottoBuyCount(this.buyMoney);
+        this.totalLottoBuyCount = new LottoBuyCount(this.buyMoney);
     }
 
-    public Game(Money money, LottoBuyCount manualLottoBuyCount) {
+    public Game(Money money, LottoBuyCount manualBuyCount) {
         this.buyMoney = money;
-        this.lottoAutoBuyCount = new LottoBuyCount(this.buyMoney).minus(manualLottoBuyCount);
-    }
-
-    public LottoBuyCount getLottoAutoBuyCount() {
-        return lottoAutoBuyCount;
-    }
-
-    public Lottos startLottoGame() {
-        List<Lotto> result = new ArrayList<>();
-        LottoBuyCount index = new LottoBuyCount(0);
-        while (!index.equals(this.lottoAutoBuyCount)) {
-            result.add(lottoGenerator.createLotto());
-            index.plus();
+        this.totalLottoBuyCount = new LottoBuyCount(this.buyMoney);
+        if (totalLottoBuyCount.isLessThan(manualBuyCount)) {
+            throw new LottoFormatException(ErrorMessageConstant.MANUAL_BUY_LOTTO_GREATER_THAN_TOTAL_BUY_LOTTO);
         }
-        return new Lottos(result);
     }
 
-    public Money getBuyMoney() {
-        return buyMoney;
+    public LottoBuyCount getLottoAutoBuyCount(LottoBuyCount manualLottoBuyCount) {
+        if (totalLottoBuyCount.isLessThan(manualLottoBuyCount)) {
+            throw new LottoFormatException(ErrorMessageConstant.MANUAL_BUY_LOTTO_GREATER_THAN_TOTAL_BUY_LOTTO);
+        }
+        return totalLottoBuyCount.minus(manualLottoBuyCount);
+    }
+
+    public Lottos startLottoGame(LottoGenerator lottoGenerator) {
+        return lottoGenerator.createLottos();
     }
 }
