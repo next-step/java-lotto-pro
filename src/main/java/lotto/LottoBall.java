@@ -3,6 +3,9 @@ package lotto;
 import java.util.Objects;
 
 public class LottoBall {
+
+    private static final double WIN_SCORE = 1;
+    private static final double BONUS_SCORE = 0.5;
     private final Number lottoNumber;
     private final Score score;
 
@@ -18,6 +21,7 @@ public class LottoBall {
     public Number getLottoNumber() {
         return lottoNumber;
     }
+
     public double getScore() {
         return score.getScore();
     }
@@ -37,5 +41,13 @@ public class LottoBall {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    public static LottoBall fromStringNormal(String number) {
+        return new LottoBall(number, new Score(WIN_SCORE));
+    }
+
+    public static LottoBall fromStringBonus(String number) {
+        return new LottoBall(number, new Score(BONUS_SCORE));
     }
 }

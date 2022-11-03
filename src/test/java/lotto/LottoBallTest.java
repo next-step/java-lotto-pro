@@ -12,20 +12,20 @@ class LottoBallTest {
     @DisplayName("생성 성공")
     @Test
     void create_ball_successIsBonusBallFalse() {
-        assertThatNoException().isThrownBy(() -> new LottoBall("1", () -> 0));
+        assertThatNoException().isThrownBy(() -> LottoBall.fromStringNormal("1"));
     }
 
     @DisplayName("보너스 로또 공 생성 성공")
     @Test
     void create_ball_successIsBonusBallTrue() {
-        assertThatNoException().isThrownBy(() -> new LottoBall("1", () -> 0));
+        assertThatNoException().isThrownBy(() -> LottoBall.fromStringNormal("1"));
     }
 
     @DisplayName("생성 실패 - 숫자가 아닌 값 입력")
     @Test
     void create_ball_NumberFormatException() {
         //given:
-        LottoBall lottoBall = new LottoBall("asd", () -> 0);
+        LottoBall lottoBall = LottoBall.fromStringNormal("asc");
         assertThatThrownBy(lottoBall::getIntNumber).isInstanceOf(NumberFormatException.class);
     }
 
@@ -33,7 +33,7 @@ class LottoBallTest {
     @Test
     void create_ball_IllegalArgumentException() {
         //given:
-        LottoBall lottoBall = new LottoBall("46", () -> 0);
+        LottoBall lottoBall = LottoBall.fromStringNormal("46");
         assertThatThrownBy(lottoBall::getIntNumber).isInstanceOf(IllegalArgumentException.class);
     }
 }

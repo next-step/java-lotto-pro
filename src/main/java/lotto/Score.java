@@ -1,6 +1,14 @@
 package lotto;
 
-public interface Score {
+public class Score {
 
-    double getScore();
+    private final double score;
+
+    public Score(double score) {
+        this.score = score;
+    }
+
+    public double getScore() {
+        return this.score;
+    }
 }

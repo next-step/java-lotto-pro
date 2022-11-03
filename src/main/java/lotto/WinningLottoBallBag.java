@@ -14,9 +14,9 @@ public class WinningLottoBallBag {
     private static final int CONTAINS_BONUS_BALL_SIZE = 7;
     private final List<LottoBall> lottoBalls;
 
-    public WinningLottoBallBag(String lottoNumbers, Score score) {
+    public WinningLottoBallBag(String lottoNumbers) {
         this.lottoBalls = Arrays.stream(lottoNumbers.split(WINNING_NUMBER_INPUT_SPLIT_DELIMITER))
-                .map(num -> new LottoBall(num, score))
+                .map(LottoBall::fromStringNormal)
                 .collect(Collectors.toList());
         shouldLessThanSize(WINNING_BALL_SIZE);
         validUnique();

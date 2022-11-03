@@ -1,12 +1,10 @@
 package lotto.controller;
 
-import lotto.BonusScore;
 import lotto.LottoBag;
 import lotto.LottoBall;
 import lotto.LottoIssuer;
 import lotto.LottoNumberGenerator;
 import lotto.Money;
-import lotto.WinScore;
 import lotto.WinningLottoBallBag;
 import lotto.WinningResultBag;
 import lotto.view.InputView;
@@ -24,9 +22,9 @@ public class LottoStore {
         InputView.printNumbers(lottoList);
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        WinningLottoBallBag winningLottoBallBag = new WinningLottoBallBag(scanner.nextLine(), new WinScore());
+        WinningLottoBallBag winningLottoBallBag = new WinningLottoBallBag(scanner.nextLine());
         System.out.println("보너스 볼을 입력해 주세요.");
-        winningLottoBallBag.add(new LottoBall(scanner.nextLine(), new BonusScore()));
+        winningLottoBallBag.add(LottoBall.fromStringBonus(scanner.nextLine()));
 
         WinningResultBag results = LottoIssuer.result(lottoList, winningLottoBallBag);
         ResultView.printResult(results.groupByWinningResult());
