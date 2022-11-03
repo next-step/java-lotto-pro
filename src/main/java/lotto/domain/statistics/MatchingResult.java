@@ -5,6 +5,7 @@ import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 import static lotto.utils.Validations.requireNotNull;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -12,20 +13,28 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Matches;
 
 public class MatchingResult {
-    private final Map<Matches, Long> result;
+    private final Map<Matches, Long> result = new EnumMap<>(Matches.class);
+    ;
 
     public MatchingResult(final Map<Matches, Long> result) {
-        this.result = result;
+        initializeAllValuesAsZero(result);
+        this.result.putAll(result);
     }
 
-    public MatchingResult(final List<Lotto> lottos, final Lotto winningNumbers) {
+    private static void initializeAllValuesAsZero(Map<Matches, Long> result) {
+        for (Matches matches : Matches.values()) {
+            result.put(matches, 0L);
+        }
+    }
+
+    public static MatchingResult matches(final List<Lotto> lottos, final Lotto winningNumbers) {
         requireNotNull(lottos, "로또 목록은 null이 아니어야 합니다.");
         requireNotNull(winningNumbers, "당첨 번호는 null이 아니어야 합니다.");
 
-        this.result = countByMatches(lottos, winningNumbers);
+        return new MatchingResult(countByMatches(lottos, winningNumbers));
     }
 
-    private Map<Matches, Long> countByMatches(final List<Lotto> lottos, final Lotto winningNumbers) {
+    private static Map<Matches, Long> countByMatches(final List<Lotto> lottos, final Lotto winningNumbers) {
         return lottos.stream()
                 .map(lotto -> lotto.match(winningNumbers))
                 .collect(groupingBy(identity(), counting()));

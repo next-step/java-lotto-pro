@@ -16,12 +16,33 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
 
 class MatchingResultTest {
+    @DisplayName("결과가 같으면, 동일하다.")
+    @Test
+    void 동일성() {
+        final MatchingResult one = new MatchingResult(
+                new HashMap<Matches, Long>() {{
+                    put(Matches.SIX, 1L);
+                }}
+        );
+        final MatchingResult another = new MatchingResult(
+                new HashMap<Matches, Long>() {{
+                    put(Matches.SIX, 1L);
+                    put(Matches.FIVE, 0L);
+                    put(Matches.FOUR, 0L);
+                    put(Matches.THREE, 0L);
+                    put(Matches.BLANK, 0L);
+                }}
+        );
+
+        assertThat(one).isEqualTo(another);
+    }
+
     @DisplayName("로또 목록은 null이 아니어야 한다.")
     @ParameterizedTest(name = ParameterizedTest.DISPLAY_NAME_PLACEHOLDER)
     @NullSource
     void 로또_목록_null(final List<Lotto> lottos) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new MatchingResult(lottos, Fixture.winningNumbers123456()))
+                .isThrownBy(() -> MatchingResult.matches(lottos, Fixture.winningNumbers123456()))
                 .withMessage("로또 목록은 null이 아니어야 합니다.");
     }
 
@@ -32,7 +53,7 @@ class MatchingResultTest {
         final List<Lotto> lottos = Collections.singletonList(new Lotto(1, 2, 3, 4, 5, 6));
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new MatchingResult(lottos, winningNumbers))
+                .isThrownBy(() -> MatchingResult.matches(lottos, winningNumbers))
                 .withMessage("당첨 번호는 null이 아니어야 합니다.");
     }
 
@@ -40,19 +61,16 @@ class MatchingResultTest {
     void 당첨_결과() {
         final List<Lotto> lottos = Arrays.asList(
                 new Lotto(1, 2, 3, 4, 5, 6),
-                new Lotto(1, 2, 3, 43, 44, 45),
-                new Lotto(40, 41, 42, 4, 5, 6),
                 new Lotto(40, 41, 42, 43, 44, 45)
         );
         final MatchingResult expected = new MatchingResult(
                 new HashMap<Matches, Long>() {{
                     put(Matches.SIX, 1L);
-                    put(Matches.THREE, 2L);
                     put(Matches.BLANK, 1L);
                 }}
         );
 
-        final MatchingResult actual = new MatchingResult(lottos, Fixture.winningNumbers123456());
+        final MatchingResult actual = MatchingResult.matches(lottos, Fixture.winningNumbers123456());
 
         assertThat(actual).isEqualTo(expected);
     }
