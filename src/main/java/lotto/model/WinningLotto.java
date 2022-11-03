@@ -1,14 +1,12 @@
 package lotto.model;
 
+import lotto.exception.ErrorCode;
+import lotto.exception.LottoException;
+
 public class WinningLotto {
 
-  private static final String NUMBER_COMMA_REGEX = "[\\s0-9,]+";
   private static final String NUMBER_REGEX = "[0-9]+";
-  private static final int LOTTO_SIZE = 6;
-  private static final String ERROR_MESSAGE_BY_WRONG_WINNING_LOTTO_NUMBER_INPUT
-      = "올바른 형식의 지난 당청 번호를 입력해주세요.";
-  private static final String ERROR_MESSAGE_BY_WRONG_BONUS_NUMBER_INPUT
-      = "올바른 형식의 보너스 볼을 입력해주세요.";
+
   private final Lotto lotto;
   private final LottoNumber bonusNumber;
 
@@ -20,7 +18,7 @@ public class WinningLotto {
 
   private void validDuplicateBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
     if (winningLotto.isContainNumber(bonusNumber)) {
-      throw new IllegalArgumentException(ERROR_MESSAGE_BY_WRONG_BONUS_NUMBER_INPUT);
+      throw new LottoException(ErrorCode.BONUS_NUMBER_DUPLICATE_ERROR);
     }
   }
 
@@ -52,19 +50,7 @@ public class WinningLotto {
 
   private void validBonusNumber(String bonusNumber) {
     if (!bonusNumber.matches(NUMBER_REGEX)) {
-      throw new IllegalArgumentException(ERROR_MESSAGE_BY_WRONG_BONUS_NUMBER_INPUT);
-    }
-  }
-
-  private void validLottoSize(String[] splitNumbers) {
-    if (splitNumbers.length != LOTTO_SIZE) {
-      throw new IllegalArgumentException(ERROR_MESSAGE_BY_WRONG_WINNING_LOTTO_NUMBER_INPUT);
-    }
-  }
-
-  private void validWinningLottoNumber(String winningLottoNumber) {
-    if (!winningLottoNumber.matches(NUMBER_COMMA_REGEX)) {
-      throw new IllegalArgumentException(ERROR_MESSAGE_BY_WRONG_WINNING_LOTTO_NUMBER_INPUT);
+      throw new LottoException(ErrorCode.INVALID_INPUT_NUMBER_ERROR);
     }
   }
 }
