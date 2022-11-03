@@ -46,6 +46,19 @@ public class PrizesTest {
         assertThat(prizes.sumReward()).isEqualTo(expect);
     }
 
+    @ParameterizedTest
+    @MethodSource("calculateStatisticSample")
+    @DisplayName("수익률 계산(14개의 로또중 딱 하나만 3개 일치함)")
+    void calculate_yield(Prizes prizes, int lottoCount, double expect) {
+        assertThat(prizes.calculateYield(lottoCount)).isEqualTo(BigDecimal.valueOf(expect));
+    }
+
+    private static Stream<Arguments> calculateStatisticSample() {
+        return Stream.of(
+                Arguments.of(new Prizes(Collections.singletonList(Prize.FIFTH)), 14, 0.35)
+        );
+    }
+
     private static Stream<Arguments> prizeCountTestCase() {
         return Stream.of(
                 Arguments.of(new Prizes(Arrays.asList(Prize.FOURTH, Prize.FOURTH)), Prize.FOURTH, 2),
