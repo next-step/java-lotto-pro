@@ -18,10 +18,10 @@ public class WinReport {
         return result.getOrDefault(collectNumber, 0);
     }
 
-    public double calculateProfit(int lottoTicketCount) {
+    public double calculateProfit(int lottoTicketCount, boolean matchBonus) {
         double profit = 0;
         for (int i = WIN_MIN_NUMBER; i < WIN_MAX_NUMBER; i++) {
-            profit += getLottoResult(i) * PrizeMoney.valueOf(i).prizeMoney();
+            profit += getLottoResult(i) * PrizeMoney.valueOf(i, matchBonus).prizeMoney();
         }
         return Math.floor(profit / (lottoTicketCount * LOTTE_PRICE) * 100) / 100;
     }
