@@ -30,7 +30,7 @@ public class LottoTicketMachine {
 	}
 
 	private TicketCount getTicketCount(Money money) {
-		if (money.getValue() < LOTTO_COST_PER_TICKET) {
+		if (money.isLessThan(PRICE_PER_TICKET)) {
 			throw new InvalidMoneyException(INVALID_INPUT_MONEY_MESSAGE);
 		}
 		return TicketCount.from((int)money.divide(PRICE_PER_TICKET));

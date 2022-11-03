@@ -1,12 +1,14 @@
 package lotto.controller;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicketMachine;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
-import lotto.domain.Result;
+import lotto.domain.RandomGenerateStrategy;
+import lotto.domain.RankResult;
+import lotto.domain.Ranks;
 import lotto.domain.WinningLottoTicket;
-import lotto.domain.strategy.RandomGenerateStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -31,15 +33,20 @@ public class LottoGameController {
 			LottoTickets lottoTickets = purchasedTickets(inputMoney);
 			WinningLottoTicket winningLottoTicket = winningTicket();
 
-			Result result = Result.of(lottoTickets, winningLottoTicket, inputMoney);
-			printResult(result);
+			RankResult rankResult = rankResults(lottoTickets, winningLottoTicket);
+			printRankResults(rankResult, inputMoney);
 		} catch (RuntimeException e) {
 			resultView.printErrorMessage(e.getMessage());
 		}
 	}
 
-	private void printResult(Result result) {
-		resultView.printResult(result);
+	private RankResult rankResults(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket) {
+		Ranks ranks = lottoTickets.ranks(winningLottoTicket);
+		return ranks.rankResults();
+	}
+
+	private void printRankResults(RankResult rankResult, Money inputMoney) {
+		resultView.printResult(rankResult, inputMoney);
 	}
 
 	private LottoTickets purchasedTickets(Money money) {
@@ -50,7 +57,8 @@ public class LottoGameController {
 
 	private WinningLottoTicket winningTicket() {
 		LottoNumbers lottoNumbers = inputView.readWinningNumbers();
-		return WinningLottoTicket.from(lottoNumbers);
+		LottoNumber bonusNumber = inputView.readBonusNumber();
+		return WinningLottoTicket.from(lottoNumbers, bonusNumber);
 	}
 
 	private LottoTickets purchasedLottoTickets(Money money) {

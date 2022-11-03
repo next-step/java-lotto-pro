@@ -41,7 +41,7 @@ class LottoTicketMachineTest {
 		"10000:10"}, delimiter = ':')
 	@DisplayName("입력한 금액에 따라 로또 티켓 구매")
 	void buyLottoTicketsTest(int money, int expected) {
-		assertThat(lottoTicketMachine.buyLottoTickets(Money.from(money)).size()).isEqualTo(expected);
+		assertThat(lottoTicketMachine.buyLottoTickets(Money.from(money)).count()).isEqualTo(expected);
 	}
 
 	@Test
