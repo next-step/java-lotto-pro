@@ -9,6 +9,10 @@ public class Money implements Comparable<Money> {
 
     private double money;
 
+    public Money() {
+        this.money = 0;
+    }
+
     public Money(String text) {
         int money = convertNumber(text);
         checkOutOfSize(money);

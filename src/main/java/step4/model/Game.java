@@ -6,9 +6,10 @@ import step4.model.generator.LottoGenerator;
 
 public class Game {
     private final LottoBuyCount totalLottoBuyCount;
-    private Money buyMoney;
+    private final Money buyMoney;
 
-    public Game(int count) {
+    public Game(final int count) {
+        this.buyMoney = new Money();
         this.totalLottoBuyCount = new LottoBuyCount(count);
     }
 
