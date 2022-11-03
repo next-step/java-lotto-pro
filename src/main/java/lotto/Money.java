@@ -69,6 +69,10 @@ public final class Money {
         return amount.doubleValue();
     }
 
+    public int intValue() {
+        return amount.intValue();
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
