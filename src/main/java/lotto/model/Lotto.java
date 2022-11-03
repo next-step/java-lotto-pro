@@ -4,13 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import lotto.exception.ErrorCode;
+import lotto.exception.LottoException;
 import lotto.util.LottoGenerator;
 import lotto.util.SplitUtil;
 
 public class Lotto {
 
   private static final String NUMBER_COMMA_REGEX = "[\\s0-9,]+";
-  private static final String ERROR_BY_WRONG_LOTTO_NUMBERS_INPUT = "올바른 로또 번호를 입력해 주세요.";
   private static final int LOTTO_SIZE = 6;
 
 
@@ -41,13 +42,13 @@ public class Lotto {
 
   private static void validateStringNumbers(String numbers) {
     if (!numbers.matches(NUMBER_COMMA_REGEX)) {
-      throw new IllegalArgumentException(ERROR_BY_WRONG_LOTTO_NUMBERS_INPUT);
+      throw new LottoException(ErrorCode.IS_NOT_LOTTO_NUMBER_SIZE_ERROR);
     }
   }
 
   private static void validLottoSize(String[] splitNumbers) {
     if (splitNumbers.length != LOTTO_SIZE) {
-      throw new IllegalArgumentException(ERROR_BY_WRONG_LOTTO_NUMBERS_INPUT);
+      throw new LottoException(ErrorCode.IS_NOT_LOTTO_NUMBER_SIZE_ERROR);
     }
   }
 
