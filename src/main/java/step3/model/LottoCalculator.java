@@ -1,102 +1,70 @@
 package step3.model;
 
-import step3.constant.WinnerRule;
+import step3.constant.Rank;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import static step3.constant.Constant.Lotto.LOTTO_NUMBER_LENGTH;
-import static step3.constant.Constant.Number.*;
-import static step3.constant.Constant.Symbols.COMMA;
-import static step3.constant.Constant.Symbols.SPACE;
-import static step3.constant.Message.Error.*;
+import static step3.constant.Constant.Common.*;
+import static step3.constant.Message.Output.*;
+
 public class LottoCalculator {
-    private static List<LottoNumber> lastWeekWinner;
-    private static List<Lotto> purchasedLottos;
-    private static LottoResult lottoResult;
+
+    private WinnerLotto lastWeekWinner;
+    private List<Lotto> purchasedLottos;
+    private LottoResult lottoResult = new LottoResult();
 
     public LottoCalculator() {
-        this.lastWeekWinner = new ArrayList<>();
-        this.lottoResult = new LottoResult();
+        this.lastWeekWinner = new WinnerLotto();
+        this.purchasedLottos = new ArrayList<>();
     }
-    public LottoCalculator(List<LottoNumber> lastWeekWinner) {
+    public LottoCalculator(WinnerLotto lastWeekWinner) {
         this.lastWeekWinner = lastWeekWinner;
     }
 
-    public void setLastWeekLottoNumbers(String beforeNumbers) {
-        String[] afterNumbers = validateLastWeekWinner(beforeNumbers);
-        lastWeekWinner = new Lotto(afterNumbers).getNumbers();
+    public WinnerLotto getLastWeekWinner() {
+        return lastWeekWinner;
+    }
+
+    public void setLastWeekWinner(WinnerLotto lotto) {
+        lastWeekWinner = lotto;
     }
 
     public void calculateWinnerStatistics(Lottos lottos) {
-        WinnerRule.setWinnerRules();
-        purchasedLottos = lottos.getLottos();
+        purchasedLottos = lottos.getLottoList();
         for(Lotto lotto : purchasedLottos) {
-            lottoResult.addResult(compareWinnerRules(lotto));
+            lottoResult.addResult(compareWinnerRules(lotto), isEqualToBonusNumber(lotto));
         }
+    }
+
+    private int compareWinnerRules(Lotto lotto) {
+        int sameCount = ZERO;
+        for(LottoNumber lottoNumber : lotto.getNumbers()) {
+            sameCount += countMatchNumber(lottoNumber);
+        }
+        return sameCount;
+    }
+
+    private int countMatchNumber(LottoNumber lottoNumber) {
+        return lastWeekWinner.isMatchNumber(lottoNumber) ? ONE : ZERO;
+    }
+
+    private boolean isEqualToBonusNumber(Lotto lotto) {
+        return lotto.isMatchNumber(lastWeekWinner.getBonusNumber());
     }
 
     public double calculateProfitRate() {
         return lottoResult.calculateProfitRate(purchasedLottos.size());
     }
 
-    private int compareWinnerRules(Lotto lotto) {
-        int sameCount = ZERO;
-        for(LottoNumber lottoNumber : lotto.getNumbers()) {
-            sameCount += isContain(lottoNumber);
-        }
-        return sameCount;
-    }
+    public String createResultMessage(Rank rank) {
+        String second = rank == Rank.SECOND ? BONUS_CUSTOM_RESULT_MESSAGE : GENERAL_RESULT_MESSAGE;
 
-    private int isContain(LottoNumber lottoNumber) {
-        return lastWeekWinner.contains(lottoNumber) ? ONE : ZERO;
-    }
-
-    public String[] validateLastWeekWinner(String beforeNumbers) {
-        LottoGenerator.commonCheckEmpty(beforeNumbers);
-        beforeNumbers = beforeNumbers.replaceAll(SPACE, "");
-        String[] afterNumbers = beforeNumbers.split(COMMA);
-        validateLength(afterNumbers);
-        validateNumberType(afterNumbers);
-        validateSameNumber(afterNumbers);
-
-        return afterNumbers;
-    }
-
-    private void validateSameNumber(String[] afterNumbers) {
-        List<String> tempList = new ArrayList<>();
-        for(String str : afterNumbers) {
-            listHasString(tempList, str);
-            tempList.add(str);
-        }
-    }
-
-    private void listHasString(List<String> list, String str) {
-        if(list.contains(str)) {
-            throw new IllegalArgumentException(SMAE_LOTTO_NUMBER);
-        }
-    }
-
-    private void validateLength(String[] afterNumbers) {
-        if(afterNumbers.length != LOTTO_NUMBER_LENGTH) {
-            throw new IllegalArgumentException(UNVALID_LOTTO_NUMBER_LENGTH);
-        }
-    }
-
-    private void validateNumberType(String[] afterNumbers) {
-        for(int i=0; i< afterNumbers.length; i++) {
-            LottoGenerator.commonStringToNumber(afterNumbers[i]);
-        }
-    }
-
-    public String createResultMessage(int winnerCount) {
-        Map<Integer, Integer> rules = WinnerRule.getRules();
-        return new StringBuilder(String.valueOf(winnerCount))
-                .append("개 일치 (")
-                .append(rules.get(winnerCount))
-                .append("원)- ")
-                .append(lottoResult.getResultValue(winnerCount))
-                .append("개").toString();
+        return new StringBuilder(String.valueOf(rank.getCountOfMatch()))
+                .append(second)
+                .append(rank.getWinningMoney())
+                .append(WON_RESULT_MESSAGE)
+                .append(lottoResult.getWinningCount(rank))
+                .append(COUNT_UNIT_RESULT_MESSAGE).toString();
     }
 }

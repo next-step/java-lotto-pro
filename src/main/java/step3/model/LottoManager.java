@@ -7,19 +7,18 @@ public class LottoManager {
     private static LottoGenerator lottoGenerator = new LottoGenerator();
     private static LottoCalculator calculator = new LottoCalculator();
 
-
-    public static void purchaseLotto() {
+    public void purchaseLotto() {
         generateLottos();
         calculateStatistics();
     }
 
-    private static void generateLottos() {
+    private void generateLottos() {
         InputView.inputPurchasePrice(lottoGenerator);
         lottoGenerator.generateLottos();
-        OutputView.outputPurchasedLotto(lottoGenerator.getLottos());
+        OutputView.outputPurchasedLotto(lottoGenerator);
     }
 
-    private static void calculateStatistics() {
+    private void calculateStatistics() {
         InputView.inputLastWeekLottoNumbers(calculator);
         calculator.calculateWinnerStatistics(lottoGenerator.getLottos());
         OutputView.outputStatisticsResult(calculator);

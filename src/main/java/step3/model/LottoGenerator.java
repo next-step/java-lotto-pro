@@ -1,25 +1,44 @@
 package step3.model;
 
-import static step3.constant.Constant.Lotto.*;
-import static step3.constant.Message.Error.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static step3.constant.Message.Error.UNDER_MIN_PRICE;
+import static step3.utils.CommonUtils.commonCheckEmpty;
+import static step3.utils.CommonUtils.commonStringToNumber;
 
 public class LottoGenerator {
-    private int purchasePrice;
-    private Lottos lottos = new Lottos();
+    public static final int EACH_LOTTO_PRICE = 1000;
 
-    public void setPurchasePrice(String price) {
-        this.purchasePrice = validatePrice(price);
-    }
+    private int purchasePrice;
+    private int purchaseCount;
+    private Lottos lottos;
 
     public Lottos getLottos() {
         return lottos;
     }
 
-    public Lottos generateLottos() {
-        lottos.setPurchasedCount(purchasePrice);
-        lottos.addLottos();
-        return lottos;
+    public int getPurchasedCount() {
+        return purchaseCount;
     }
+
+    public void setPurchasePrice(String price) {
+        this.purchasePrice = validatePrice(price);
+    }
+
+    public void generateLottos() {
+        calculatePurchaseCount();
+        addLottos();
+    }
+
+    public void addLottos() {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < purchaseCount; i++) {
+            lottoList.add(new Lotto());
+        }
+        lottos = new Lottos(lottoList);
+    }
+
 
     private int validatePrice(String price) {
         commonCheckEmpty(price);
@@ -29,20 +48,8 @@ public class LottoGenerator {
         return integerPrice;
     }
 
-    public static void commonCheckEmpty(String target) {
-        if (target == null || target.isEmpty()) {
-            throw new IllegalArgumentException(NOT_VALID_NULL);
-        }
-    }
-
-    public static int commonStringToNumber(String target) {
-        int afterNumber;
-        try {
-            afterNumber = Integer.parseInt(target);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ERROR_IS_NUMBERIC);
-        }
-        return afterNumber;
+    public void calculatePurchaseCount() {
+        purchaseCount = purchasePrice / EACH_LOTTO_PRICE;
     }
 
     private void checkPriceMinLimit(int price) {
@@ -50,9 +57,4 @@ public class LottoGenerator {
             throw new IllegalArgumentException(UNDER_MIN_PRICE);
         }
     }
-
-    public int getPurchasedCount() {
-        return lottos.getPurchasedCount();
-    }
-
 }

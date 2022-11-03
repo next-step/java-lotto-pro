@@ -1,8 +1,10 @@
 package step3.view;
 
-import step3.model.LottoCalculator;
-import step3.model.LottoGenerator;
+import step3.model.*;
+import step3.utils.CommonUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static step3.constant.Message.System.*;
@@ -15,6 +17,12 @@ public class InputView {
 
     public static void inputLastWeekLottoNumbers(LottoCalculator calculator) {
         System.out.println(LAST_LOTTO_NUMBERS_INPUT_MESSAGE);
-        calculator.setLastWeekLottoNumbers(scanner.nextLine());
+        String[] lastWeekNumbers = new Lotto().validateLastWeekWinner(scanner.nextLine());
+        calculator.setLastWeekWinner(inputLastWeekBonusNumber(lastWeekNumbers));
+    }
+
+    public static WinnerLotto inputLastWeekBonusNumber(String[] lastWeekLottos) {
+        System.out.println(LAST_BONUS_NUMBER_INPUT_MESSAGE);
+        return new WinnerLotto(Lotto.makeLottoNumberList(lastWeekLottos), scanner.nextLine());
     }
 }

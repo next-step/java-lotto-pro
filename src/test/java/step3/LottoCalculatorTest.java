@@ -5,32 +5,33 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step3.model.Lotto;
-import step3.model.LottoCalculator;
-import step3.model.LottoNumber;
-import step3.model.Lottos;
+import step3.model.*;
+import step3.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static step3.constant.Constant.Lotto.MAX_WINNER_NUMBER;
-import static step3.constant.Constant.Lotto.MIN_LOTTO_NUMBER;
-import static step3.constant.Constant.Symbols.*;
+import static step3.constant.Constant.Common.*;
 
 public class LottoCalculatorTest {
+    public static final int MAX_WINNER_NUMBER = 6;
+
     private LottoCalculator lottoCalculator = new LottoCalculator();
+    private Lotto lotto = lottoCalculator.getLastWeekWinner();
+
+    public static final int MIN_LOTTO_NUMBER = 1;
 
     @BeforeEach
     void setUp() {
-        lottoCalculator = new LottoCalculator(testLastWeek());
+        lottoCalculator = new LottoCalculator(new WinnerLotto(testLastWeek()));
     }
 
     @Test
     @DisplayName("지난주 우승 번호 유효성 테스트")
     void 지난주_우승_번호_유효성_테스트() {
-        assertThatThrownBy(() -> lottoCalculator.validateLastWeekWinner("1,1,2,3,4,5"))
+        assertThatThrownBy(() -> lotto.validateLastWeekWinner("1,1,2,3,4,5"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -67,6 +68,31 @@ public class LottoCalculatorTest {
         String[] inputArr = input.split(COLON)[0].split(COMMA);
         Lottos lottos = new Lottos(createTestLottos(inputArr));
 
+        lottoCalculator.calculateWinnerStatistics(lottos);
+        double result = lottoCalculator.calculateProfitRate();
+        assertEquals(expected, Double.toString(result));
+    }
+
+    @DisplayName("보너스볼_수익률_테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"8-21-23-41-42-7," +
+            "3-5-11-16-32-38," +
+            "8-21-23-9-11-26" +
+            ":10001.66"}, delimiter = ':')
+    void 보너스볼_수익률_테스트(String input, String expected) {
+        String[] inputArr = input.split(COLON)[0].split(COMMA);
+        Lottos lottos = new Lottos(createTestLottos(inputArr));
+        String bonusNumber = "7";
+
+        String[] lastWeekWinnerNumbers = "8-21-23-41-42-16".split(BAR);
+        List<LottoNumber> list = new ArrayList<>();
+        for (String str : lastWeekWinnerNumbers) {
+            list.add(new LottoNumber(CommonUtils.commonStringToNumber(str)));
+        }
+
+        WinnerLotto lastWeekWinner = new WinnerLotto(list, bonusNumber);
+
+        lottoCalculator.setLastWeekWinner(lastWeekWinner);
         lottoCalculator.calculateWinnerStatistics(lottos);
         double result = lottoCalculator.calculateProfitRate();
         assertEquals(expected, Double.toString(result));
