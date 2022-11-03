@@ -18,13 +18,15 @@ class ResultTest {
         int[] matchCountArray = Arrays.stream(match.split(Rule.DELIMITER)).mapToInt(Integer::parseInt).toArray();
         int matchCount = matchCountArray[0];
         int bonusCount = matchCountArray[1];
-        assertThat(Result.getMatchResult(new Match(matchCount, bonusCount)).isRewarded()).isEqualTo(result);
+        assertThat(Result.getMatchResult(matchCount, bonusCount).isRewarded()).isEqualTo(result);
     }
     @ParameterizedTest
     @CsvSource(value = {"6,0:FIRST_PRIZE", "5,1:SECOND_PRIZE_BONUS", "5,0:SECOND_PRIZE", "2,0:NO_PRIZE"}, delimiter = ':')
     void 수상_결과_테스트(String match, Result result) {
-        int[] matchCount = Arrays.stream(match.split(Rule.DELIMITER)).mapToInt(Integer::parseInt).toArray();
-        assertThat(Result.getMatchResult(new Match(matchCount[0], matchCount[1]))).isEqualTo(result);
+        int[] matchCountArray = Arrays.stream(match.split(Rule.DELIMITER)).mapToInt(Integer::parseInt).toArray();
+        int matchCount = matchCountArray[0];
+        int bonusCount = matchCountArray[1];
+        assertThat(Result.getMatchResult(matchCount, bonusCount)).isEqualTo(result);
     }
 
 }

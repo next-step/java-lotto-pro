@@ -19,4 +19,7 @@ public class ErrMsg {
     public static final String BONUS_NUMBER_DUPLICATE = "보너스 숫자는 당첨숫자 외에 다른 값이어야합니다.";
 
     public static final String WRONG_STATISTICS_INPUT = "최종상금 혹은 투입금은 음수가 될 수 없습니다.";
+
+    public static final String ORDER_OVER_MONEY_LIMIT = "구매가능한 수량 이상을 구매하였습니다.";
+
 }

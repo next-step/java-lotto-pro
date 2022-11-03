@@ -16,6 +16,9 @@ public class Rule {
     public static final int LOTTO_NUMBER_LENGTH = 6;
     public static final int TICKET_PRICE = 1_000;
     public static final int BONUS_COUNT_NUMBER = 5;
+    public static final int BONUS_COUNT = 1;
+
+    public static final int DEFAULT_BONUS_COUNT = 0;
     public static final String DELIMITER = ",";
 
 }
