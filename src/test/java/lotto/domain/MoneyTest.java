@@ -52,4 +52,21 @@ class MoneyTest {
 			.isInstanceOf(InvalidMoneyException.class);
 	}
 
+	@Test
+	@DisplayName("금액을 뺀 값을 반환")
+	void subtractTest() {
+		Money inputMoney = Money.from(1000L);
+		Money prizeMoney = Money.from(500L);
+		assertThat(inputMoney.subtract(prizeMoney)).isEqualTo(Money.from(500L));
+	}
+
+	@Test
+	@DisplayName("금액을 뺀 값이 0보다 작을 경우 InvalidMoneyException 발생")
+	void throwInvalidMoneyExceptionWhenSubtractTest() {
+		Money inputMoney = Money.from(1000L);
+		Money prizeMoney = Money.from(2000L);
+		assertThatThrownBy(() -> inputMoney.subtract(prizeMoney))
+			.isInstanceOf(InvalidMoneyException.class);
+	}
+
 }
