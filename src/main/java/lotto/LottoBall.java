@@ -9,7 +9,7 @@ public class LottoBall {
     private final Number lottoNumber;
     private final Score score;
 
-    public LottoBall(String lottoNumber, Score score) {
+    private LottoBall(String lottoNumber, Score score) {
         this.lottoNumber = new LottoNumber(lottoNumber);
         this.score = score;
     }

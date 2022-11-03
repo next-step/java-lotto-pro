@@ -31,7 +31,7 @@ class LottoNumberBagTest {
         //given:
         LottoNumberBag lottoNumberBag = new LottoNumberBag(
                 makeLottoNumbers(Arrays.asList("1", "2", "3", "10", "20", "30")));
-        WinningLottoBallBag winningNumbers = new WinningLottoBallBag("1,2,3,4,5,6", () -> 1);
+        WinningLottoBallBag winningNumbers = new WinningLottoBallBag("1,2,3,4,5,6");
         //when:
         double correctCount = lottoNumberBag.matchScore(winningNumbers);
         //then:

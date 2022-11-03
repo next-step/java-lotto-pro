@@ -25,7 +25,7 @@ class LottoIssuerTest {
     @Test
     void result_issuedLotto_success() {
         LottoBag lottoList = LottoIssuer.issue(0, new LottoNumberGenerator());
-        WinningLottoBallBag winningLottoBallBag = new WinningLottoBallBag("1,2,3,4,5,6", () -> 0);
+        WinningLottoBallBag winningLottoBallBag = new WinningLottoBallBag("1,2,3,4,5,6");
         assertThatNoException().isThrownBy(() -> LottoIssuer.result(lottoList, winningLottoBallBag));
     }
 }
