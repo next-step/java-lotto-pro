@@ -1,6 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.prize.Prize;
 import lotto.prize.Prizes;
 
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+        this.lottos = Collections.unmodifiableList(new ArrayList<>(lottos));
     }
 
     public Lottos(List<Lotto> autoLottos, List<Lotto> manualLottos) {
@@ -23,12 +22,9 @@ public class Lottos {
     }
 
     public Prizes getPrizeOfLotto(Lotto winnerLotto) {
-        List<Prize> resultPrizes = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            Prize prize = winnerLotto.matchPrize(lotto);
-            resultPrizes.add(prize);
-        }
-        return new Prizes(resultPrizes);
+        return new Prizes(lottos.stream()
+                .map(winnerLotto::matchPrize)
+                .collect(Collectors.toList()));
     }
 
     public int getLottoCount() {
