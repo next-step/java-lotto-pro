@@ -53,18 +53,6 @@ public class MoneyTest {
         assertThat(lottoCount).isEqualTo(expect);
     }
 
-    @ParameterizedTest
-    @DisplayName("투자 금액 반환")
-    @MethodSource("investmentTestCase")
-    void return_investment(int amount, int price, int expect) {
-        Money money = new Money(amount);
-        money.possibleBuyLottoCount(price);
-        assertThat(money.getInvestment()).isEqualTo(expect);
-    }
-
-
-
-
     private static Stream<Arguments> amountAndLottoPrice() {
         return Stream.of(
                 Arguments.of(1000, 300, 3),

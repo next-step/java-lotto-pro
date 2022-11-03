@@ -1,26 +1,18 @@
 package lotto.domain.lotto;
 
-import lotto.constant.LottoConstant;
+import lotto.prize.Prize;
 import lotto.status.ErrorStatus;
 
 import java.util.List;
 
-public class WinnerLotto {
+public class WinnerLotto extends Lotto {
 
-    private final List<LottoNumber> lottoNumbers;
     private final LottoNumber bonusNumber;
 
     public WinnerLotto(List<LottoNumber> lottoNumbers, LottoNumber bonus) {
-        validateLottoNumber(lottoNumbers);
+        super(lottoNumbers);
         validateBonusNumber(lottoNumbers, bonus);
         this.bonusNumber = bonus;
-        this.lottoNumbers = lottoNumbers;
-    }
-
-    private void validateLottoNumber(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LottoConstant.LOTTO_COMPONENT_COUNT) {
-            throw new IllegalArgumentException(ErrorStatus.INVALID_LOTTO_COMPONENT.getMessage());
-        }
     }
 
     private void validateBonusNumber(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
@@ -29,11 +21,15 @@ public class WinnerLotto {
         }
     }
 
-    public boolean matchBonusNumber(LottoNumber lottoNumber) {
-        return bonusNumber.equals(lottoNumber);
+    @Override
+    public Prize matchPrize(Lotto lotto) {
+        int count = (int) this.lottoNumbers.stream()
+                .filter(lotto::containLottoNumber)
+                .count();
+        return Prize.prizeOf(count, matchBonusNumber(lotto));
     }
 
-    public boolean containLottoNumber(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
+    public boolean matchBonusNumber(Lotto lotto) {
+        return lotto.containLottoNumber(bonusNumber);
     }
 }

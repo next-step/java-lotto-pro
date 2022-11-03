@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -43,12 +44,12 @@ public class WinnerLottoTest {
 
     @ParameterizedTest
     @DisplayName("보너스 볼의 숫자와 구매한 로또 번호가 일치하는지 테스트")
-    @CsvSource(value = {"7:7:true", "8:8:true", "9:10:false"}, delimiter = ':')
-    void match_bonus_number_and_buy_lotto_number(int bonusNumber, int buyLottNumber, boolean expect) {
+    @CsvSource(value = {"7:true", "8:true", "9:false"}, delimiter = ':')
+    void match_bonus_number_and_buy_lotto_number(int bonusNumber, boolean expect) {
         List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(Collectors.toList());
-        LottoNumber buyLottoNumber = new LottoNumber(buyLottNumber);
         WinnerLotto winnerLotto = new WinnerLotto(lottoNumbers, new LottoNumber(bonusNumber));
-        assertThat(winnerLotto.matchBonusNumber(buyLottoNumber)).isEqualTo(expect);
+        assertThat(winnerLotto.matchBonusNumber(new Lotto(Stream.of(1,2,3,7,8,5).map(LottoNumber::new
+        ).collect(Collectors.toList())))).isEqualTo(expect);
     }
 
     @Test

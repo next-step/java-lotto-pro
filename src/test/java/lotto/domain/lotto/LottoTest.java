@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import lotto.generate.LottoNumberGenerator;
+import lotto.prize.Prize;
 import lotto.status.ErrorStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -32,27 +33,12 @@ public class LottoTest {
     }
 
     @ParameterizedTest
-    @DisplayName("당첨 로또와 자기가 구매한 로또번호들과 비교하여 일치하는 개수 반환")
+    @DisplayName("당첨 로또와 자기가 구매한 로또번호들과 비교하여 일치하는 개수에 해당하는 Prize 반환")
     @MethodSource("lottoCompareWinnerLotto")
-    void match_lotto_number_compare_winn_lotto(Lotto lotto, WinnerLotto winnerLotto, int expect) {
-        assertThat(lotto.matchCount(winnerLotto)).isEqualTo(expect);
+    void match_lotto_number_compare_winn_lotto(Lotto lotto, WinnerLotto winnerLotto, Prize expect) {
+        assertThat(lotto.matchPrize(winnerLotto)).isEqualTo(expect);
     }
 
-    @ParameterizedTest
-    @DisplayName("로또 번호 중 보너스 볼과 일치하는게 있다면 true 반환")
-    @MethodSource("lottoHasBonusNumberReturnTrue")
-    void match_bonus_number_return_true(Lotto lotto, WinnerLotto winnerLotto) {
-        boolean hasBonusNumber = lotto.hasBonusNumber(winnerLotto);
-        assertThat(hasBonusNumber).isTrue();
-    }
-
-    @ParameterizedTest
-    @DisplayName("로또 번호 중 보너스 볼과 일치하는게 없다면 false 반환")
-    @MethodSource("lottoHasBonusNumberReturnFalse")
-    void match_bonus_number_return_false(Lotto lotto, WinnerLotto winnerLotto, boolean expect) {
-        boolean hasBonusNumber = lotto.hasBonusNumber(winnerLotto);
-        assertThat(hasBonusNumber).isFalse();
-    }
 
     private static Stream<List<LottoNumber>> lottoNumbers() {
         List<LottoNumber> lottoNumbers = LottoNumberGenerator.generate();
@@ -73,25 +59,7 @@ public class LottoTest {
         List<LottoNumber> winnerLottoNumbers = Stream.of(1, 20, 3, 5, 4, 7).map(LottoNumber::new).collect(Collectors.toList());
         LottoNumber bonus = new LottoNumber(45);
         return Stream.of(
-                Arguments.of(new Lotto(lottoNumbers), new WinnerLotto(winnerLottoNumbers, bonus), 4)
-        );
-    }
-
-    private static Stream<Arguments> lottoHasBonusNumberReturnTrue() {
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(Collectors.toList());
-        List<LottoNumber> winnerLottoNumbers = Stream.of(1, 20, 3, 5, 4, 7).map(LottoNumber::new).collect(Collectors.toList());
-        LottoNumber bonus = new LottoNumber(2);
-        return Stream.of(
-                Arguments.of(new Lotto(lottoNumbers), new WinnerLotto(winnerLottoNumbers, bonus), true)
-        );
-    }
-
-    private static Stream<Arguments> lottoHasBonusNumberReturnFalse() {
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(Collectors.toList());
-        List<LottoNumber> winnerLottoNumbers = Stream.of(1, 20, 3, 5, 4, 7).map(LottoNumber::new).collect(Collectors.toList());
-        LottoNumber bonus = new LottoNumber(45);
-        return Stream.of(
-                Arguments.of(new Lotto(lottoNumbers), new WinnerLotto(winnerLottoNumbers, bonus), false)
+                Arguments.of(new Lotto(lottoNumbers), new WinnerLotto(winnerLottoNumbers, bonus), Prize.FOURTH)
         );
     }
 }

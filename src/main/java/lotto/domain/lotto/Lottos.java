@@ -1,28 +1,30 @@
 package lotto.domain.lotto;
 
-import lotto.prize.Prize;
+import lotto.prize.Prizes;
 
-import java.util.EnumMap;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
 
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+        this.lottos = Collections.unmodifiableList(new ArrayList<>(lottos));
     }
 
-    public Map<Prize, Integer> getPrizeOfLotto(WinnerLotto winnerLotto) {
-        Map<Prize, Integer> prizes = new EnumMap<Prize, Integer>(Prize.class);
-        for (Lotto lotto : lottos) {
-            int count = lotto.matchCount(winnerLotto);
-            boolean hasBonusBall = lotto.hasBonusNumber(winnerLotto);
-            prizes.merge(Prize.prizeOf(count, hasBonusBall), 1, Integer::sum);
-        }
-        return prizes;
+    public Lottos(List<Lotto> autoLottos, List<Lotto> manualLottos) {
+        this.lottos = Stream.concat(autoLottos.stream(), manualLottos.stream())
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
+    }
+
+    public Prizes getPrizeOfLotto(Lotto winnerLotto) {
+        return new Prizes(lottos.stream()
+                .map(winnerLotto::matchPrize)
+                .collect(Collectors.toList()));
     }
 
     public int getLottoCount() {

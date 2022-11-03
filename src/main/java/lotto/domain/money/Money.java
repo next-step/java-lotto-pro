@@ -7,8 +7,7 @@ import java.util.Objects;
 public class Money {
 
     private static final int MIN_AMOUNT = 0;
-    private int amount;
-    private int investment;
+    private final int amount;
 
     public Money(int amount) {
         validate(amount);
@@ -29,14 +28,7 @@ public class Money {
         if (!isPossibleBuyLotto(price)) {
             throw new RuntimeException(ErrorStatus.CAN_NOT_PURCHASE_LOTTO.getMessage());
         }
-        int count = Math.floorDiv(amount, price);
-        amount -= count * price;
-        investment = count * price;
-        return count;
-    }
-
-    public int getInvestment() {
-        return investment;
+        return Math.floorDiv(amount, price);
     }
 
     @Override

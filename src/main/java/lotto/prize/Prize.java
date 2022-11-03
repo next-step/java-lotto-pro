@@ -20,23 +20,24 @@ public enum Prize {
     }
 
     public static Prize prizeOf(int matchCount, boolean isBonusMatch) {
-        return Arrays.stream(Prize.values())
-                .filter(v -> v.matchCount == matchCount)
-                .map(v -> {
-                    if (Prize.THIRD.matchCount == matchCount) {
-                        return Prize.checkThirdOrSecond(matchCount, isBonusMatch);
-                    }
-                    return v;
-                })
-                .findFirst()
-                .orElse(Prize.MISS);
+        if (Prize.THIRD.matchesCount(matchCount)) {
+            return checkThirdOrSecond(isBonusMatch);
+        }
+        return Arrays.stream(values())
+                .filter(v -> v.matchesCount(matchCount))
+                .findAny()
+                .orElse(MISS);
     }
 
-    private static Prize checkThirdOrSecond(int matchCount, boolean isBonusMatch) {
+    private static Prize checkThirdOrSecond(boolean isBonusMatch) {
         if (isBonusMatch) {
             return Prize.SECOND;
         }
         return Prize.THIRD;
+    }
+
+    private boolean matchesCount(int count) {
+        return this.getMatchCount() == count;
     }
 
     public int getMatchCount() {
