@@ -1,9 +1,6 @@
 package lotto.service;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Payment;
-import lotto.domain.Statistics;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.Messages;
 import lotto.view.ResultView;
@@ -15,9 +12,11 @@ public class AutoLottoService {
         Lottos lottos = new Lottos(payment.getPurchasedLottoCnt());
         ResultView.printPurchasedLottoCnt(lottos);
         ResultView.printGeneratedLotto(lottos);
-        Lotto winLotto = new Lotto(InputView.printConsoleMsg(Messages.ASK_LAST_WIN_LOTTO_NUMBERS));
+        String winNumbers = InputView.printConsoleMsg(Messages.ASK_LAST_WIN_LOTTO_NUMBERS);
+        String bonusBall = InputView.printConsoleMsg(Messages.ASK_BONUS_NUMBERS);
+        WinLotto winLotto = new WinLotto(winNumbers, bonusBall);
         Statistics statistics = new Statistics(lottos, winLotto);
         ResultView.printTotalResult(payment, statistics);
     }
-    
+
 }
