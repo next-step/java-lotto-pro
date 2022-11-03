@@ -30,4 +30,7 @@ public enum LottoResult {
         return prizeMoney;
     }
 
+    public LottoNumberMatchCount getLottoNumberMatchCount() {
+        return lottoNumberMatchCount;
+    }
 }

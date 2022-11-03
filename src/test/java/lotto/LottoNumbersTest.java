@@ -123,12 +123,35 @@ class LottoNumbersTest {
     @DisplayName("같은 로또 번호를 가지고 있다면, 순서가 다르더라도 동일성을 가져야 한다")
     @Test
     void equals() {
-        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6)).isEqualTo(LottoNumbers.of(1, 2, 3, 4, 5, 6));
-        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6)).isEqualTo(LottoNumbers.of(6, 1, 2, 3, 4, 5));
-        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6)).isEqualTo(LottoNumbers.of(5, 6, 1, 2, 3, 4));
-        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6)).isEqualTo(LottoNumbers.of(4, 5, 6, 1, 2, 3));
-        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6)).isEqualTo(LottoNumbers.of(3, 4, 5, 6, 1, 2));
-        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6)).isEqualTo(LottoNumbers.of(2, 3, 4, 5, 6, 1));
+        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6))
+            .isEqualTo(LottoNumbers.of(1, 2, 3, 4, 5, 6));
+        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6))
+            .isEqualTo(LottoNumbers.of(6, 1, 2, 3, 4, 5));
+        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6))
+            .isEqualTo(LottoNumbers.of(5, 6, 1, 2, 3, 4));
+        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6))
+            .isEqualTo(LottoNumbers.of(4, 5, 6, 1, 2, 3));
+        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6))
+            .isEqualTo(LottoNumbers.of(3, 4, 5, 6, 1, 2));
+        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6))
+            .isEqualTo(LottoNumbers.of(2, 3, 4, 5, 6, 1));
+    }
+
+    @DisplayName("로또 반환시, 오름차순으로 반환 해야 한다")
+    @Test
+    void getValue() {
+        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6).getValue())
+            .containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6).getValue())
+            .containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6).getValue())
+            .containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6).getValue())
+            .containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6).getValue())
+            .containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6).getValue())
+            .containsExactly(1, 2, 3, 4, 5, 6);
     }
 
     private static List<Integer> pickUniqueNumberList(final int count) {

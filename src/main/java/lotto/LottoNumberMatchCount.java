@@ -24,4 +24,7 @@ public enum LottoNumberMatchCount {
             .orElse(LottoNumberMatchCount.NOTHING);
     }
 
+    public int intValue() {
+        return count;
+    }
 }

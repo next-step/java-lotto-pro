@@ -16,7 +16,7 @@ public final class Money {
 
     private Money(final BigDecimal amount) {
         validateAmount(amount);
-        this.amount = amount;
+        this.amount = amount.stripTrailingZeros();
     }
 
     private static void validateAmount(final BigDecimal amount) {
@@ -78,7 +78,7 @@ public final class Money {
             return false;
         }
         final Money money = (Money) o;
-        return amount.stripTrailingZeros().equals(money.amount.stripTrailingZeros());
+        return amount.equals(money.amount);
     }
 
     @Override
@@ -86,4 +86,10 @@ public final class Money {
         return Objects.hash(amount);
     }
 
+    @Override
+    public String toString() {
+        return "Money{" +
+            "amount=" + amount +
+            '}';
+    }
 }

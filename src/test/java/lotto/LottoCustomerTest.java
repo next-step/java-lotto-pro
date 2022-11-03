@@ -61,7 +61,7 @@ class LottoCustomerTest {
         assertThat(customer.getPurchasedCount()).isEqualTo(1);
     }
 
-    @DisplayName("가진 금액으로, 구입 가능한 만큼, 로또를  구입 할 수 있다")
+    @DisplayName("가진 금액으로, 구입 가능한 만큼, 로또를 구입 할 수 있다")
     @ParameterizedTest
     @ValueSource(ints = {1, 5, 10, 100})
     void purchase_multiple(final int purchaseCount) {
@@ -105,10 +105,10 @@ class LottoCustomerTest {
 
         final LottoResultStatistics resultStats = customer.getResultStats();
 
-        assertThat(resultStats.getCountOf(LottoResult.FIRST)).isZero();
-        assertThat(resultStats.getCountOf(LottoResult.SECOND)).isZero();
-        assertThat(resultStats.getCountOf(LottoResult.THIRD)).isZero();
-        assertThat(resultStats.getCountOf(LottoResult.FOURTH)).isZero();
+        assertThat(resultStats.getFirstRankCount()).isZero();
+        assertThat(resultStats.getSecondRankCount()).isZero();
+        assertThat(resultStats.getThirdRankCount()).isZero();
+        assertThat(resultStats.getFourthRankCount()).isZero();
     }
 
     @DisplayName("아무것도 당첨되지 않았을 경우, 모든 당첨 횟수는 ZERO여야 한다")
@@ -119,10 +119,10 @@ class LottoCustomerTest {
 
         final LottoResultStatistics resultStats = customer.getResultStats();
 
-        assertThat(resultStats.getCountOf(LottoResult.FIRST)).isZero();
-        assertThat(resultStats.getCountOf(LottoResult.SECOND)).isZero();
-        assertThat(resultStats.getCountOf(LottoResult.THIRD)).isZero();
-        assertThat(resultStats.getCountOf(LottoResult.FOURTH)).isZero();
+        assertThat(resultStats.getFirstRankCount()).isZero();
+        assertThat(resultStats.getSecondRankCount()).isZero();
+        assertThat(resultStats.getThirdRankCount()).isZero();
+        assertThat(resultStats.getFourthRankCount()).isZero();
     }
 
     @DisplayName("1등이 당첨되었을 경우, 1등을 제외한 당첨 횟수는 ZERO여야 한다")
@@ -133,10 +133,10 @@ class LottoCustomerTest {
 
         final LottoResultStatistics resultStats = customer.getResultStats();
 
-        assertThat(resultStats.getCountOf(LottoResult.FIRST)).isEqualTo(1);
-        assertThat(resultStats.getCountOf(LottoResult.SECOND)).isZero();
-        assertThat(resultStats.getCountOf(LottoResult.THIRD)).isZero();
-        assertThat(resultStats.getCountOf(LottoResult.FOURTH)).isZero();
+        assertThat(resultStats.getFirstRankCount()).isEqualTo(1);
+        assertThat(resultStats.getSecondRankCount()).isZero();
+        assertThat(resultStats.getThirdRankCount()).isZero();
+        assertThat(resultStats.getFourthRankCount()).isZero();
     }
 
     @DisplayName("2등이 당첨되었을 경우, 2등을 제외한 당첨 횟수는 ZERO여야 한다")
@@ -147,10 +147,10 @@ class LottoCustomerTest {
 
         final LottoResultStatistics resultStats = customer.getResultStats();
 
-        assertThat(resultStats.getCountOf(LottoResult.FIRST)).isZero();
-        assertThat(resultStats.getCountOf(LottoResult.SECOND)).isEqualTo(1);
-        assertThat(resultStats.getCountOf(LottoResult.THIRD)).isZero();
-        assertThat(resultStats.getCountOf(LottoResult.FOURTH)).isZero();
+        assertThat(resultStats.getFirstRankCount()).isZero();
+        assertThat(resultStats.getSecondRankCount()).isEqualTo(1);
+        assertThat(resultStats.getThirdRankCount()).isZero();
+        assertThat(resultStats.getFourthRankCount()).isZero();
     }
 
     @DisplayName("3등이 당첨되었을 경우, 3등을 제외한 당첨 횟수는 ZERO여야 한다")
@@ -161,10 +161,10 @@ class LottoCustomerTest {
 
         final LottoResultStatistics resultStats = customer.getResultStats();
 
-        assertThat(resultStats.getCountOf(LottoResult.FIRST)).isZero();
-        assertThat(resultStats.getCountOf(LottoResult.SECOND)).isZero();
-        assertThat(resultStats.getCountOf(LottoResult.THIRD)).isEqualTo(1);
-        assertThat(resultStats.getCountOf(LottoResult.FOURTH)).isZero();
+        assertThat(resultStats.getFirstRankCount()).isZero();
+        assertThat(resultStats.getSecondRankCount()).isZero();
+        assertThat(resultStats.getThirdRankCount()).isEqualTo(1);
+        assertThat(resultStats.getFourthRankCount()).isZero();
     }
 
     @DisplayName("4등이 당첨되었을 경우, 4등을 제외한 당첨 횟수는 ZERO여야 한다")
@@ -175,10 +175,10 @@ class LottoCustomerTest {
 
         final LottoResultStatistics resultStats = customer.getResultStats();
 
-        assertThat(resultStats.getCountOf(LottoResult.FIRST)).isZero();
-        assertThat(resultStats.getCountOf(LottoResult.SECOND)).isZero();
-        assertThat(resultStats.getCountOf(LottoResult.THIRD)).isZero();
-        assertThat(resultStats.getCountOf(LottoResult.FOURTH)).isEqualTo(1);
+        assertThat(resultStats.getFirstRankCount()).isZero();
+        assertThat(resultStats.getSecondRankCount()).isZero();
+        assertThat(resultStats.getThirdRankCount()).isZero();
+        assertThat(resultStats.getFourthRankCount()).isEqualTo(1);
     }
 
     @DisplayName("복수의 로또가 당첨되었을 경우, 각 등수의 당첨 횟수를 반환해야 한다")
@@ -204,11 +204,10 @@ class LottoCustomerTest {
 
         final LottoResultStatistics resultStats = customer.getResultStats();
 
-        assertThat(resultStats.getCountOf(LottoResult.NOTHING)).isEqualTo(3);
-        assertThat(resultStats.getCountOf(LottoResult.FIRST)).isEqualTo(1);
-        assertThat(resultStats.getCountOf(LottoResult.SECOND)).isEqualTo(2);
-        assertThat(resultStats.getCountOf(LottoResult.THIRD)).isEqualTo(3);
-        assertThat(resultStats.getCountOf(LottoResult.FOURTH)).isEqualTo(1);
+        assertThat(resultStats.getFirstRankCount()).isEqualTo(1);
+        assertThat(resultStats.getSecondRankCount()).isEqualTo(2);
+        assertThat(resultStats.getThirdRankCount()).isEqualTo(3);
+        assertThat(resultStats.getFourthRankCount()).isEqualTo(1);
     }
 
     @DisplayName("당첨 로또 번호를 모르는 상태에선, 수익률은 ZERO여야 한다")
@@ -223,32 +222,49 @@ class LottoCustomerTest {
     @ValueSource(ints = {0, 1, 10})
     void getProfitRate_beforePurchasing(final int initialAmount) {
         final LottoCustomer customer = new LottoCustomer(Money.wons(initialAmount));
+
         customer.setWiningLottoNumbers(LottoNumbers.of(1, 2, 3, 4, 5, 6));
         assertThat(customer.getProfitRate()).isZero();
     }
 
+    @DisplayName("당첨 되지 않았을 경우, 수익률은 0이어야 한다")
     @Test
-    void getProfitRate_lessThanOne() {
-        final LottoCustomer customer = new LottoCustomer(Money.wons(1_000));
+    void getProfitRate_zero() {
+        final LottoCustomer customer = new LottoCustomer(Money.wons(8_000));
         customer.purchase(new LottoTicket(Money.wons(1_000), LottoNumbers.of(1, 2, 3, 4, 5, 6)));
+
         customer.setWiningLottoNumbers(LottoNumbers.of(7, 8, 9, 10, 11, 12));
         assertThat(customer.getProfitRate()).isZero();
     }
 
+    @DisplayName("로또 구입 금액보다, 로또 당첨 상금이 낮을때, 수익률은 1이하여야 한다")
+    @Test
+    void getProfitRate_lessThanOne() {
+        final LottoCustomer customer = new LottoCustomer(Money.wons(8_000));
+        customer.purchase(new LottoTicket(Money.wons(1_000), LottoNumbers.of(1, 2, 3, 4, 5, 6)));
+
+        customer.setWiningLottoNumbers(LottoNumbers.of(1, 2, 3, 10, 11, 12));
+        assertThat(customer.getProfitRate()).isLessThan(Double.valueOf(1));
+    }
+
+    @DisplayName("로또 구입 금액과, 로또 당첨 상금이 같으면, 수익률은 1이여야 한다")
     @Test
     void getProfitRate_one() {
         final LottoCustomer customer = new LottoCustomer(Money.wons(5_000));
         customer.purchase(new LottoTicket(Money.wons(5_000), LottoNumbers.of(1, 2, 3, 4, 5, 6)));
+
         customer.setWiningLottoNumbers(LottoNumbers.of(1, 2, 3, 10, 15, 20));
-        assertThat(customer.getProfitRate()).isEqualTo(Double.valueOf("1.0"));
+        assertThat(customer.getProfitRate()).isEqualTo(Double.valueOf(1));
     }
 
+    @DisplayName("로또 구입 금액보다, 로또 당첨 상금이 높으면, 수익률은 1이상이여야 한다")
     @Test
     void getProfitRate_greaterThanOne() {
         final LottoCustomer customer = new LottoCustomer(Money.wons(1_000));
         customer.purchase(new LottoTicket(Money.wons(1_000), LottoNumbers.of(1, 2, 3, 4, 5, 6)));
+
         customer.setWiningLottoNumbers(LottoNumbers.of(1, 2, 3, 10, 15, 20));
-        assertThat(customer.getProfitRate()).isEqualTo(Double.valueOf("5.0"));
+        assertThat(customer.getProfitRate()).isEqualTo(Double.valueOf(5));
     }
 
 
