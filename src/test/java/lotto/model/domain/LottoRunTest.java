@@ -2,6 +2,7 @@ package lotto.model.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import lotto.model.dto.WinLotto;
 import lotto.model.vo.Lotto;
 import lotto.model.vo.LottoNumber;
 import lotto.model.vo.PurchaseCount;
@@ -21,13 +22,14 @@ public class LottoRunTest {
     @DisplayName("당첨번호 대비 일치 개수 확인")
     @Test
     void 일치_개수_확인() {
-        Lotto winLotto = new Lotto();
-        winLotto.addLottoNumber(new LottoNumber(1));
-        winLotto.addLottoNumber(new LottoNumber(2));
-        winLotto.addLottoNumber(new LottoNumber(3));
-        winLotto.addLottoNumber(new LottoNumber(4));
-        winLotto.addLottoNumber(new LottoNumber(5));
-        winLotto.addLottoNumber(new LottoNumber(6));
+        Lotto lotto = new Lotto();
+        lotto.addLottoNumber(new LottoNumber(1));
+        lotto.addLottoNumber(new LottoNumber(2));
+        lotto.addLottoNumber(new LottoNumber(3));
+        lotto.addLottoNumber(new LottoNumber(4));
+        lotto.addLottoNumber(new LottoNumber(5));
+        lotto.addLottoNumber(new LottoNumber(6));
+        WinLotto winLotto = new WinLotto(lotto);
         Lotto userLotto = new Lotto();
         userLotto.addLottoNumber(new LottoNumber(1));
         userLotto.addLottoNumber(new LottoNumber(2));
