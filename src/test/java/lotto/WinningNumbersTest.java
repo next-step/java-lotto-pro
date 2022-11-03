@@ -1,8 +1,7 @@
 package lotto;
 
 
-import lotto.domain.BuyAmount;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -10,10 +9,12 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static lotto.LottoTest.numbersToLotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -41,6 +42,13 @@ public class WinningNumbersTest {
             "1,2,3,4,5,46","1,0,3,4,5,6","1,-1,2,3,4,5"})
     void winningNumbers_invalidate_test(String input) {
         assertThatThrownBy(() -> new WinningNumbers(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("당첨번호와 보너스번호가 일치하는지 확인")
+    void winningNumber_bonusNumber_duplicate_test() {
+        assertThatThrownBy(() -> new WinningNumbers(Arrays.asList(1,2,3,4,5,6), new BonusNumber(6)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
