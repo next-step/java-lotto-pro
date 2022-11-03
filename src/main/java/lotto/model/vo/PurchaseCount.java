@@ -34,4 +34,8 @@ public class PurchaseCount {
     public int hashCode() {
         return Objects.hash(purchaseCount);
     }
+
+    public long getPurchaseCount() {
+        return purchaseCount;
+    }
 }
