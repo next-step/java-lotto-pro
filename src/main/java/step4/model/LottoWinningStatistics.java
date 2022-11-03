@@ -3,7 +3,12 @@ package step4.model;
 import java.util.*;
 
 public class LottoWinningStatistics {
-    private final Map<Rank, Integer> lottoWinningStatistics = new LinkedHashMap<>();
+    private static final Map<Rank, Integer> lottoWinningStatistics;
+
+    static {
+        lottoWinningStatistics = initLottoWinningStatistics();
+    }
+
     private final Money totalProfit = new Money(0);
 
     public LottoWinningStatistics(List<Lotto> lottos, Lotto winLotto, LottoNumber bonusLottoNumber) {
@@ -11,27 +16,32 @@ public class LottoWinningStatistics {
     }
 
     public LottoWinningStatistics(List<Lotto> lottos, WinningLotto winLotto) {
-        initLottoWinningStatistics();
+        this(new Lottos(lottos), winLotto);
+    }
+
+    public LottoWinningStatistics(Lottos lottos, WinningLotto winLotto) {
         setLottoWinningStatistics(lottos, winLotto);
         setTotalProfit();
     }
 
-    private void initLottoWinningStatistics() {
+    private static Map<Rank, Integer> initLottoWinningStatistics() {
+        Map<Rank, Integer> lottoWinningStatistics = new LinkedHashMap<>();
         List<Rank> ranks = Arrays.asList(Rank.values());
         Collections.reverse(ranks);
         for (Rank rank : ranks) {
-            this.lottoWinningStatistics.put(rank, 0);
+            lottoWinningStatistics.put(rank, 0);
+        }
+        return lottoWinningStatistics;
+    }
+
+    private void setLottoWinningStatistics(Lottos lottos, WinningLotto winningLotto) {
+        for (Rank rank : lottoWinningStatistics.keySet()) {
+            setLottoWinningStatistic(lottos, winningLotto, rank);
         }
     }
 
-    private void setLottoWinningStatistics(List<Lotto> lottos, WinningLotto winningLotto) {
-        for (Lotto lotto : lottos) {
-            setLottoWinningStatistic(winningLotto.match(lotto));
-        }
-    }
-
-    private void setLottoWinningStatistic(Rank rank) {
-        this.lottoWinningStatistics.put(rank, lottoWinningStatistics.get(rank) + 1);
+    private void setLottoWinningStatistic(Lottos lottos, WinningLotto winningLotto, Rank rank) {
+        lottoWinningStatistics.put(rank, lottos.matchCountAboutRank(winningLotto, rank));
     }
 
     public Map<Rank, Integer> getLottoWinningStatistics() {
@@ -57,11 +67,11 @@ public class LottoWinningStatistics {
             return false;
         }
         LottoWinningStatistics that = (LottoWinningStatistics) o;
-        return Objects.equals(lottoWinningStatistics, that.lottoWinningStatistics);
+        return Objects.equals(totalProfit, that.totalProfit);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoWinningStatistics);
+        return Objects.hash(totalProfit);
     }
 }

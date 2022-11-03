@@ -1,10 +1,9 @@
 package step4.view;
 
-import step4.model.Lotto;
 import step4.model.LottoBuyCount;
+import step4.model.Lottos;
 import step4.model.Rank;
 
-import java.util.List;
 import java.util.Map;
 
 
@@ -21,8 +20,8 @@ public class OutputView {
         System.out.printf(OUTPUT_LOTTO_BUY_COUNT, count);
     }
 
-    public static void printBuyLottoResult(List<Lotto> lottos) {
-        lottos.forEach(System.out::println);
+    public static void printBuyLottoResult(Lottos lottos) {
+        System.out.println(lottos);
     }
 
     public static void printLottoStatistics(Map<Rank, Integer> lottoWinningStatistics, double lottoProfitPercent) {

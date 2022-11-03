@@ -15,7 +15,6 @@ public class InputView {
     }
 
     public static String inputWinnerLottoResult() {
-        System.out.println();
         System.out.println(INPUT_WINNER_LOTTO_RESULT);
         return sc.nextLine();
     }

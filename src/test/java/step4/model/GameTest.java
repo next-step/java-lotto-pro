@@ -4,8 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("로또_프로그램_클래스")
@@ -32,8 +30,8 @@ public class GameTest {
     public void startLottoGame_pass_01(int count) {
         Game game = new Game(count);
         game.startLottoGame();
-        List<Lotto> result = game.startLottoGame();
+        Lottos result = game.startLottoGame();
 
-        assertThat(result.size()).isEqualTo(count);
+        assertThat(result.count()).isEqualTo(count);
     }
 }

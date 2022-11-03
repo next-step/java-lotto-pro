@@ -21,14 +21,14 @@ public class Game {
         return lottoBuyCount;
     }
 
-    public List<Lotto> startLottoGame() {
+    public Lottos startLottoGame() {
         List<Lotto> result = new ArrayList<>();
         LottoBuyCount index = new LottoBuyCount(0);
         while (!index.equals(this.lottoBuyCount)) {
             result.add(lottoGenerator.createLotto());
             index.plus();
         }
-        return result;
+        return new Lottos(result);
     }
 
     public Money getBuyMoney() {

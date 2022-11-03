@@ -5,8 +5,6 @@ import step4.util.StringUtil;
 import step4.view.InputView;
 import step4.view.OutputView;
 
-import java.util.List;
-
 public class GameController {
 
     Game game;
@@ -14,7 +12,7 @@ public class GameController {
     public void startGame() {
         game = new Game(InputView.inputLottoBuyMoney());
         OutputView.printLottoBuyCount(game.getLottoBuyCount());
-        List<Lotto> lottos = game.startLottoGame();
+        Lottos lottos = game.startLottoGame();
         OutputView.printBuyLottoResult(lottos);
 
         Lotto winLotto = new Lotto(StringUtil.parseLottoText(InputView.inputWinnerLottoResult()));
