@@ -17,37 +17,49 @@ public class LottoController {
     ResultView resultView = new ResultView();
     LottoServiceImpl lottoService = new LottoServiceImpl();
 
+    /**
+     * 로또 구입 및 당첨확인 시작
+     */
     public void play() {
-        // 구입금액 입력 iv_1
         PurchaseAmount purchaseAmount = inputView.purchaseAmountInput();
+        Lottos lottos = generateLotto(purchaseAmount);
 
-        // 구입 개수 계산
-        PurchaseCount purchaseCount = lottoService.getPurchaseCount(purchaseAmount);
-
-        // 구입 개수 출력 ov_1
-        resultView.printPurchaseCount(purchaseCount);
-
-        // 로또 발급 (자동구입 개수 만큼)
-        Lottos lottos = lottoService.generateAutoLotto(purchaseCount);
-
-        // 로또 발급 번호 출력 ov_2
-        resultView.printLotto(lottos);
-
-        // 지난 주 당첨 번호 입력 iv_2
         WinLotto winLotto = inputView.winLottoInput();
 
-        // 로또 당첨 결과 확인
-        // 1. 일치개수기준별 당첨로또 수 확인
+        LottoResult lottoResult = getLottoStatistics(purchaseAmount, lottos, winLotto);
+        resultView.printLottoResult(lottoResult);
+    }
+
+    /**
+     * 로또 발급
+     *
+     * @param purchaseAmount 구입금액
+     * @return 발급된 로또(전체)
+     */
+    private Lottos generateLotto(PurchaseAmount purchaseAmount) {
+        PurchaseCount purchaseCount = lottoService.getPurchaseCount(purchaseAmount);
+        resultView.printPurchaseCount(purchaseCount);
+        Lottos lottos = lottoService.generateAutoLotto(purchaseCount);
+        resultView.printLotto(lottos);
+        return lottos;
+    }
+
+    /**
+     * 당첨 통계 확인
+     *
+     * 당첨 결과, 수익률 확인
+     * @param purchaseAmount 구입금액
+     * @param lottos 발급된 로또(전체)
+     * @param winLotto 당첨 로또
+     * @return 당첨 통계
+     */
+    private LottoResult getLottoStatistics(PurchaseAmount purchaseAmount, Lottos lottos, WinLotto winLotto) {
         WinResult winResult = lottoService.checkLottoResult(winLotto, lottos);
-        // 2. 당첨로또 금액 합 계산 >> 수익률 계산
         Profit profit = lottoService.calculateProfit(purchaseAmount, winResult);
 
-        // 최종 결과 세팅
         LottoResult lottoResult = new LottoResult();
         lottoResult.setWinResult(winResult);
         lottoResult.setProfit(profit);
-
-        // 당첨 통계 출력 ov_3
-        resultView.printLottoResult(lottoResult);
+        return lottoResult;
     }
 }
