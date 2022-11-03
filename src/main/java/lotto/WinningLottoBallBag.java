@@ -53,10 +53,7 @@ public class WinningLottoBallBag {
 
     public double matchScore(List<Number> lottoNumbers) {
         return lottoBalls.stream()
-                .filter(it -> lottoNumbers.stream()
-                        .map(Number::getIntNumber)
-                        .collect(Collectors.toList())
-                        .contains(it.getIntNumber()))
+                .filter(lottoBall -> lottoNumbers.contains(lottoBall.getLottoNumber()))
                 .mapToDouble(LottoBall::getScore)
                 .sum();
     }

@@ -15,6 +15,9 @@ public class LottoBall {
         return lottoNumber.getIntNumber();
     }
 
+    public Number getLottoNumber() {
+        return lottoNumber;
+    }
     public double getScore() {
         return score.getScore();
     }
