@@ -10,6 +10,8 @@ import lotto.model.constants.LottoConstants;
 
 public class Lotto {
 
+    private static final int LOTTO_NUMBER_EXIST = 1;
+    private static final int LOTTO_NUMBER_DO_NOT_EXIST = 0;
     private List<LottoNumber> lotto;
 
     public void addLottoNumber(LottoNumber lottoNumber) {
@@ -50,6 +52,20 @@ public class Lotto {
         return this.lotto.size() == LottoConstants.LOTTO_NUMBER_COUNT;
     }
 
+    private int contains(LottoNumber lottoNumber) {
+        if (lotto.contains(lottoNumber)) {
+            return LOTTO_NUMBER_EXIST;
+        }
+        return LOTTO_NUMBER_DO_NOT_EXIST;
+    }
+
+    public int compare(Lotto userLotto) {
+        int count = 0;
+        for (LottoNumber lottoNumber : lotto) {
+            count += userLotto.contains(lottoNumber);
+        }
+        return count;
+    }
 
     public void sortNumbers() {
         Collections.sort(this.lotto);

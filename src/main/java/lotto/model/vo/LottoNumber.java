@@ -1,9 +1,10 @@
 package lotto.model.vo;
 
+import java.util.Objects;
 import lotto.model.constants.ErrorMessage;
 import lotto.model.constants.LottoConstants;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private int lottoNumber;
 
@@ -20,13 +21,6 @@ public class LottoNumber {
         return checkValue >= LottoConstants.LOTTO_NUMBER_MIN && checkValue <= LottoConstants.LOTTO_NUMBER_MAX;
     }
 
-    private void setLottoNumber(int lottoNumber) {
-        if (!validateNumber(lottoNumber)) {
-            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_CONSTRAINT);
-        }
-        this.lottoNumber = lottoNumber;
-    }
-
     protected static int parseInt(String number) {
         try {
             return Integer.parseInt(number);
@@ -37,5 +31,34 @@ public class LottoNumber {
 
     public int getLottoNumber() {
         return lottoNumber;
+    }
+
+    private void setLottoNumber(int lottoNumber) {
+        if (!validateNumber(lottoNumber)) {
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_CONSTRAINT);
+        }
+        this.lottoNumber = lottoNumber;
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.lottoNumber - o.lottoNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 }

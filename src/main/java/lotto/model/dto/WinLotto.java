@@ -15,4 +15,12 @@ public class WinLotto {
             this.winLotto.addLottoNumber(new LottoNumber(winLottoNumber));
         }
     }
+
+    public WinLotto(Lotto lotto) {
+        this.winLotto = lotto;
+    }
+
+    public int compareWithLotto(Lotto userLotto) {
+        return winLotto.compare(userLotto);
+    }
 }

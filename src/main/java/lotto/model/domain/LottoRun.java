@@ -1,6 +1,7 @@
 package lotto.model.domain;
 
 import lotto.model.constants.LottoConstants;
+import lotto.model.dto.WinLotto;
 import lotto.model.vo.Lotto;
 import lotto.model.vo.PurchaseCount;
 
@@ -9,11 +10,11 @@ public class LottoRun {
         return new PurchaseCount(buyAmount/LottoConstants.LOTTO_UNIT_PRICE);
     }
 
-    public static int countMatchNumber(Lotto winLotto, Lotto userLotto) {
-        return 0;
+    public static int countMatchNumber(WinLotto winLotto, Lotto userLotto) {
+        return winLotto.compareWithLotto(userLotto);
     }
 
     public static double calculateProfit(long buyAmount, long winAmount) {
-        return 0;
+        return Math.floor(winAmount*1.0/buyAmount*100)/100.0;
     }
 }

@@ -3,12 +3,14 @@ package lotto.service;
 import java.util.Collections;
 import lotto.model.constants.LottoConstants;
 import lotto.model.domain.LottoRun;
-import lotto.model.dto.LottoResult;
 import lotto.model.dto.PurchaseAmount;
 import lotto.model.dto.WinLotto;
 import lotto.model.vo.Lotto;
 import lotto.model.vo.Lottos;
+import lotto.model.vo.MatchCounts;
+import lotto.model.vo.Profit;
 import lotto.model.vo.PurchaseCount;
+import lotto.model.vo.WinResult;
 
 public class LottoServiceImpl implements LottoService {
 
@@ -66,8 +68,32 @@ public class LottoServiceImpl implements LottoService {
         } while (!lottos.addLotto(lotto));
     }
 
+    /**
+     * 로또 당첨 결과 확인
+     *
+     * @param winLotto 당첨 로또 번호
+     * @param lottos 발급된 로또 목록
+     * @return 당첨기준에 따른 로또 당첨 결과
+     */
     @Override
-    public LottoResult checkLottoResult(WinLotto winLotto, Lottos lottos) {
-        return null;
+    public WinResult checkLottoResult(WinLotto winLotto, Lottos lottos) {
+        // 일치 개수 리스트 생성
+        MatchCounts matchCounts = lottos.compareWinLotto(winLotto);
+        // 당첨 기준에 따라 WinResult 생성
+        return new WinResult(LottoConstants.LOTTO_WIN_CRITERIA, matchCounts);
+    }
+
+    /**
+     * 수익률 계산
+     *
+     * @param purchaseAmount 구입 금액
+     * @param winResult 당첨 결과
+     * @return 수익률
+     */
+    @Override
+    public Profit calculateProfit(PurchaseAmount purchaseAmount, WinResult winResult) {
+        long buyAmount = purchaseAmount.getPurchaseAmount();
+        long winAmount = winResult.calculateWinAmount();
+        return new Profit(LottoRun.calculateProfit(buyAmount, winAmount));
     }
 }
