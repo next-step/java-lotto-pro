@@ -28,6 +28,14 @@ class LottoNumbersTest {
     void createFixedLottoNumbers() {
         LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lottoNumbers.value()).hasSize(DEFAULT_LOTTO_SIZE);
+        assertThat(lottoNumbers.value()).containsExactly(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
+        );
     }
 
     @Test
@@ -35,5 +43,9 @@ class LottoNumbersTest {
     void createRandomLottoNumbers() {
         LottoNumbers lottoNumbers = new Automatic().create();
         assertThat(lottoNumbers.value()).hasSize(DEFAULT_LOTTO_SIZE);
+
+        for (LottoNumber lottoNumber : lottoNumbers.value()) {
+            assertThat(lottoNumber.getLottoNumber()).isBetween(1, 45);
+        }
     }
 }

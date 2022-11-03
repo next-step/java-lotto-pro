@@ -2,7 +2,7 @@ package step3.view.input;
 
 import static step3.type.ErrorMessageType.INPUT_ONLY_ALLOW_NUMBER;
 
-public class InputBonusLottoNumber implements Input<Integer> {
+public class InputNumber implements Input<Integer> {
 
     @Override
     public Integer create() {

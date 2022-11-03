@@ -1,7 +1,6 @@
 package step3.domain.factory;
 
 import step3.domain.lotto.LottoNumbers;
-import step3.domain.lotto.LottoType;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,11 +16,6 @@ public class Automatic implements LottoFactory {
     @Override
     public LottoNumbers create() {
         return new LottoNumbers(pickNumberInRange());
-    }
-
-    @Override
-    public LottoType getLottoType() {
-        return LottoType.AUTOMATIC;
     }
 
     private List<Integer> pickNumberInRange() {

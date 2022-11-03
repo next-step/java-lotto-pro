@@ -15,19 +15,7 @@ public class Lottos {
         return Collections.unmodifiableList(this.lottos);
     }
 
-    public long getManualCount() {
-        return lottos.stream()
-                .filter(lotto -> lotto.getLottoType() == LottoType.MANUAL)
-                .count();
-    }
-
-    public long getAutomaticCount() {
-        return lottos.stream()
-                .filter(lotto -> lotto.getLottoType() == LottoType.AUTOMATIC)
-                .count();
-    }
-
-    private static void appendLottoNumber(StringBuilder sb, LottoNumbers lottoNumbers) {
+    private void appendLottoNumber(StringBuilder sb, LottoNumbers lottoNumbers) {
         for (LottoNumber lottoNumber : lottoNumbers.value()) {
             sb.append(lottoNumber.getLottoNumber()).append(", ");
         }

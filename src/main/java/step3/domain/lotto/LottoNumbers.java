@@ -3,10 +3,7 @@ package step3.domain.lotto;
 import step3.domain.statistics.Match;
 import step3.domain.statistics.Rank;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static step3.domain.statistics.Rank.isSecond;
@@ -66,6 +63,19 @@ public class LottoNumbers {
         if (lottoNumberSet.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATE.getMessage());
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 
     @Override

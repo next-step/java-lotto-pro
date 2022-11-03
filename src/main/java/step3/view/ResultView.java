@@ -2,7 +2,7 @@ package step3.view;
 
 public class ResultView {
 
-    public static void printLottosQuantity(long manual, long automatic) {
+    public static void printLottosQuantity(int manual, int automatic) {
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manual, automatic);
     }
 
@@ -10,7 +10,7 @@ public class ResultView {
         System.out.println(lottos);
     }
 
-    public static void printResult(String lottoStatistics) {
+    public static void printLottoStatistics(String lottoStatistics) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("------------");

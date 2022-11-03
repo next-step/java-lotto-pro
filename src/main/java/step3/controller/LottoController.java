@@ -17,27 +17,39 @@ public class LottoController {
 
     public void run() {
         Amount amount = new Amount(inputAmount());
-        ManualLottoQuantity manualLottoQuantity = new ManualLottoQuantity(inputManualLottoQuantity());
+        int manualQuantity = new ManualLottoQuantity(inputManualLottoQuantity()).getQuantity();
+        Lottos lottos = getLottos(amount, manualQuantity);
 
-        printManualLottoQuantity();
-        Lottos lottos = new Lottos(getLottos(amount, manualLottoQuantity));
-
-        printLottosQuantity(lottos.getManualCount(), lottos.getAutomaticCount());
+        printLottosQuantity(manualQuantity, getAutomatic(manualQuantity, lottos));
         printLottos(lottos.toString());
+        printLottoResult(lottos);
+    }
 
-        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(inputWinningLottoNumber());
-        BonusLottoNumber bonusLottoNumber = new BonusLottoNumber(LottoNumber.of(inputBonusLottoNumber()));
+    private int getAutomatic(int manualQuantity, Lottos lottos) {
+        return lottos.value().size() - manualQuantity;
+    }
 
-        LottoStatistics lottoStatistics = new LottoStatistics(lottos, new WinningLotto(winningLottoNumbers, bonusLottoNumber));
+    private Lottos getLottos(Amount amount, int manualQuantity) {
+        printManualLottoQuantity();
+        return new Lottos(getLottos(amount.getLottoPurchasesCount(DEFAULT_LOTTO_PRICE), manualQuantity));
+    }
 
-        printResult(lottoStatistics.toString());
+    private void printLottoResult(Lottos lottos) {
+        LottoStatistics lottoStatistics = getLottoStatistics(lottos);
+        printLottoStatistics(lottoStatistics.toString());
         printTotalProfit(lottoStatistics.getTotalProfit());
     }
 
-    private static List<Lotto> getLottos(Amount amount, ManualLottoQuantity manualLottoQuantity) {
+    private LottoStatistics getLottoStatistics(Lottos lottos) {
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(inputWinningLottoNumber());
+        BonusLottoNumber bonusLottoNumber = new BonusLottoNumber(LottoNumber.of(inputBonusLottoNumber()));
+
+        return new LottoStatistics(lottos, new WinningLotto(winningLottoNumbers, bonusLottoNumber));
+    }
+
+    private static List<Lotto> getLottos(int lottoPurchasesCount, int manualQuantity) {
         List<Lotto> lottoList = new ArrayList<>();
-        int lottoPurchasesCount = amount.getLottoPurchasesCount(DEFAULT_LOTTO_PRICE);
-        for (int i = 0; i < manualLottoQuantity.getQuantity(); i++) {
+        for (int i = 0; i < manualQuantity; i++) {
             lottoList.add(new Lotto(new Manual(inputManualLottoNumbers())));
             lottoPurchasesCount--;
         }

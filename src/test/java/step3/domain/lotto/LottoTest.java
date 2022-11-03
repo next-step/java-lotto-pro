@@ -16,14 +16,12 @@ class LottoTest {
     void createDefaultLotto() {
         Lotto lotto = new Lotto(new Automatic());
         assertThat(lotto.getPrice()).isEqualTo(1000);
-        assertThat(lotto.getLottoType()).isEqualTo(LottoType.AUTOMATIC);
     }
 
     @Test
     @DisplayName("수동 로또를 생성한다.")
     void createManualLotto() {
         Lotto lotto = new Lotto(new Manual(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        assertThat(lotto.getPrice()).isEqualTo(1000);
-        assertThat(lotto.getLottoType()).isEqualTo(LottoType.MANUAL);
+        assertThat(lotto.value()).isEqualTo(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 }

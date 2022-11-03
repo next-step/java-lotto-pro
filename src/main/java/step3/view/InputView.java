@@ -1,6 +1,8 @@
 package step3.view;
 
-import step3.view.input.*;
+import step3.view.input.InputManualLottoNumbers;
+import step3.view.input.InputNumber;
+import step3.view.input.InputWinningLottoNumbers;
 
 import java.util.List;
 
@@ -8,7 +10,7 @@ public class InputView {
 
     public static Integer inputAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return new InputAmount().create();
+        return new InputNumber().create();
     }
 
     public static String inputWinningLottoNumber() {
@@ -18,12 +20,12 @@ public class InputView {
 
     public static Integer inputBonusLottoNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new InputBonusLottoNumber().create();
+        return new InputNumber().create();
     }
 
     public static Integer inputManualLottoQuantity() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return new InputManualLottoQuantity().create();
+        return new InputNumber().create();
     }
 
     public static void printManualLottoQuantity() {
