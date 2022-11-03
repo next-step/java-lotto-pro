@@ -146,15 +146,15 @@ class LottoNumbersTest {
     void getValue() {
         assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6).getValue())
             .containsExactly(1, 2, 3, 4, 5, 6);
-        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6).getValue())
+        assertThat(LottoNumbers.of(6, 5, 4, 3, 2, 1).getValue())
             .containsExactly(1, 2, 3, 4, 5, 6);
-        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6).getValue())
+        assertThat(LottoNumbers.of(5, 6, 1, 2, 3, 4).getValue())
             .containsExactly(1, 2, 3, 4, 5, 6);
-        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6).getValue())
+        assertThat(LottoNumbers.of(4, 5, 6, 1, 2, 3).getValue())
             .containsExactly(1, 2, 3, 4, 5, 6);
-        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6).getValue())
+        assertThat(LottoNumbers.of(3, 4, 5, 6, 1, 2).getValue())
             .containsExactly(1, 2, 3, 4, 5, 6);
-        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6).getValue())
+        assertThat(LottoNumbers.of(2, 3, 4, 5, 6, 1).getValue())
             .containsExactly(1, 2, 3, 4, 5, 6);
     }
 
