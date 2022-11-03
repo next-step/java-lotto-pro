@@ -7,5 +7,5 @@ public interface LottoUserInput {
 
     Integer getPositiveInteger();
 
-    List<Integer> getWinningLottoNumbers();
+    List<Integer> getLottoNumbers();
 }

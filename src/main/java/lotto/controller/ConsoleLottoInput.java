@@ -24,7 +24,7 @@ public class ConsoleLottoInput implements LottoUserInput {
     }
 
     @Override
-    public List<Integer> getWinningLottoNumbers() {
+    public List<Integer> getLottoNumbers() {
         String[] userInputNumberStringArray = getInput().split(",");
         List<Integer> winningLottoNumbers = mapToPositiveIntegers(userInputNumberStringArray);
         validateIsSixNumbers(winningLottoNumbers);

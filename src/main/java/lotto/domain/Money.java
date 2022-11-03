@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class Money {
     private final int won;
 
@@ -27,5 +29,21 @@ public class Money {
         if(won < lottoFee){
             throw new IllegalArgumentException("로또를 구매할 수 없습니다");
         }
+    }
+
+    public Money minus(int money) {
+        return Money.of(this.won - money);
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Money money = (Money) o;
+        return won == money.won;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(won);
     }
 }

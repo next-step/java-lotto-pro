@@ -1,7 +1,7 @@
 package lotto.domain;
 
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoBundle {
@@ -9,6 +9,15 @@ public class LottoBundle {
 
     public LottoBundle(List<Lotto> lottoTickets) {
         this.lottoTickets = lottoTickets;
+    }
+
+    public LottoBundle(final List<Lotto> lottoTickets, final List<Lotto> lottoTickets1) {
+        List<Lotto> allLottoTickets = new ArrayList<>(lottoTickets);
+        allLottoTickets.addAll(lottoTickets1);
+        this.lottoTickets = allLottoTickets;
+    }
+    public static LottoBundle merge(LottoBundle bundle1, LottoBundle bundle2) {
+        return new LottoBundle(bundle1.getLottoTickets(), bundle2.getLottoTickets());
     }
 
     public int size() {
@@ -28,5 +37,9 @@ public class LottoBundle {
         return lottoTickets.stream()
                 .map(Lotto::toString)
                 .collect(Collectors.joining("\n"));
+    }
+
+    public List<Lotto> getLottoTickets() {
+        return Collections.unmodifiableList(this.lottoTickets);
     }
 }

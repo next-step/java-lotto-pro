@@ -11,7 +11,7 @@ class LottoPurchaseTest {
     void test1() {
         LottoMachine machine = new LottoMachine();
         LottoStore lottoStore = new LottoStore(machine);
-        LottoBundle lottoBundle = lottoStore.buyLotto(Money.of(14000));
+        LottoBundle lottoBundle = lottoStore.buyAutoLotto(Money.of(14000));
 
         assertThat(lottoBundle.size()).isEqualTo(14);
     }

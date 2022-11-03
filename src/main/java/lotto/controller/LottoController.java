@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.view.LottoView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,14 +20,36 @@ public class LottoController {
 
     public void start() {
         Money paidMoney = getPaidMoney();
-        LottoBundle lottoBundle = lottoStore.buyLotto(paidMoney);
-        showLottoBundle(lottoBundle);
-        WinningMoney winningMoney = lottoBundle.countWinning(getWinningLotto());
+        Integer manualLottoTicketCount = getManualLottoCount();
+        LottoBundle manualLottoBundle = getManualLottoBundle(manualLottoTicketCount);
+        LottoBundle autoLottoBundle = lottoStore.buyAutoLotto(paidMoney, manualLottoTicketCount);
+        showLottoBundle(manualLottoBundle,autoLottoBundle);
+        LottoBundle allLotto = LottoBundle.merge(manualLottoBundle,autoLottoBundle);
+        WinningMoney winningMoney = allLotto.countWinning(getWinningLotto());
         showResult(paidMoney, winningMoney);
     }
 
+    private LottoBundle getManualLottoBundle(Integer manualLottoCount) {
+        view.showRequestManualLottoList();
+        return new LottoBundle(getManualLottoFromUser(manualLottoCount));
+    }
+
+    private List<Lotto> getManualLottoFromUser(Integer manualLottoCount) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int count = 0; count < manualLottoCount; count++) {
+            List<Integer> lottoNumbers = input.getLottoNumbers();
+            lottoList.add(new Lotto(lottoNumbers));
+        }
+        return lottoList;
+    }
+
+    private Integer getManualLottoCount() {
+        view.showRequestManualLottoCount();
+        return input.getPositiveInteger();
+    }
+
     private WinningLotto getWinningLotto() {
-        List<Integer> winningNumbers = getWinningNumbers();
+        List<Integer> winningNumbers = getWinningLottoNumbers();
         Integer bonusNumber = getBonusNumber();
         return new WinningLotto(winningNumbers, LottoNumber.of(bonusNumber));
     }
@@ -36,9 +59,10 @@ public class LottoController {
         return input.getPositiveInteger();
     }
 
-    private void showLottoBundle(LottoBundle lottoBundle) {
-        view.showLottoCount(lottoBundle.size());
-        view.showLotto(lottoBundle.toString());
+    private void showLottoBundle(LottoBundle manualBundle,LottoBundle autoBundle) {
+        view.showLottoCount(manualBundle.size(), autoBundle.size());
+        view.showLotto(manualBundle.toString());
+        view.showLotto(autoBundle.toString());
     }
 
     private Money getPaidMoney() {
@@ -46,9 +70,9 @@ public class LottoController {
         return Money.of((input.getPositiveInteger()));
     }
 
-    private List<Integer> getWinningNumbers() {
+    private List<Integer> getWinningLottoNumbers() {
         view.showMessageRequestWinningNumbers();
-        return input.getWinningLottoNumbers();
+        return input.getLottoNumbers();
     }
 
     private void showResult(Money paidMoney, WinningMoney winningMoney) {

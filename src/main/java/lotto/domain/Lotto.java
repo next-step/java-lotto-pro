@@ -1,26 +1,27 @@
 package lotto.domain;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private final List<LottoNumber> numbers;
+    private static final int LOTTO_NUMBER_COUNT = 6;
+    private final Set<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers.stream()
                 .map(LottoNumber::of)
-                .sorted()
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
+        if(numbers.size() != LOTTO_NUMBER_COUNT){
+            throw new IllegalArgumentException("로또 번호의 갯수는 6개 여야 합니다");
+        }
     }
-
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(this.numbers);
-    }
-
     @Override
     public String toString() {
         String joinedLottoNumbers = numbers.stream()
+                .sorted()
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(","));
 
@@ -33,9 +34,8 @@ public class Lotto {
                 .count();
 
         boolean hasBonusNumber = numbers.stream()
-                .filter(winningLotto::hasBonus)
-                .count() == 1;
-        return Rank.findRank((int) matchCount, hasBonusNumber);
+                .anyMatch(winningLotto::hasBonus);
+        return Rank.findRank(matchCount, hasBonusNumber);
     }
 
     public boolean hasSameNumber(LottoNumber lottoNumber) {

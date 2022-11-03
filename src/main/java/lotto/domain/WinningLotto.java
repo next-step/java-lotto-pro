@@ -14,15 +14,11 @@ public class WinningLotto {
     }
 
     public WinningLotto(List<Integer> lottoNumbers, LottoNumber bonusNumber) {
-        this.lotto = new Lotto(lottoNumbers);
-        this.bonusNumber = bonusNumber;
-        validateBonusNumber();
+        this(new Lotto(lottoNumbers),bonusNumber);
     }
 
-    public WinningLotto(List<Integer> lottoNumbers) {
-        this.lotto = new Lotto(lottoNumbers);
-        this.bonusNumber = null;
-
+    public WinningLotto(List<Integer> lottoNumbers, Integer bonusNumber) {
+        this(new Lotto(lottoNumbers),LottoNumber.of(bonusNumber));
     }
 
     public boolean hasSameNumber(LottoNumber lottoNumber) {

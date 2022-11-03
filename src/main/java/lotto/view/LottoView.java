@@ -5,7 +5,8 @@ import lotto.domain.Rank;
 
 public interface LottoView {
     void showMessageRequestPurchaseMoney();
-    void showLottoCount(int size);
+
+    void showLottoCount(int manualCount, int autoCount);
 
     void showLotto(String lottoString);
 
@@ -18,4 +19,8 @@ public interface LottoView {
     void showYield(double calcYield);
 
     void showMessageRequestBonusNumber();
+
+    void showRequestManualLottoCount();
+
+    void showRequestManualLottoList();
 }
