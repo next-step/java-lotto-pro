@@ -8,20 +8,21 @@ public class AutoLottoGenerator {
 
     private static final int MIN_LOTTO_NUM = 1;
     private static final int MAX_LOTTO_NUM = 45;
-    private List<LottoNumber> lottoNumbers = new ArrayList<>();
+    public static final List<LottoNumber> lottoNumbers = genLottoNumbers();
 
-    public AutoLottoGenerator() {
-        genLottoNumbers();
-    }
-
-    private void genLottoNumbers() {
+    private static List<LottoNumber> genLottoNumbers() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = MIN_LOTTO_NUM; i <= MAX_LOTTO_NUM; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
+
+        return lottoNumbers;
     }
 
     public List<LottoNumber> getShuffledNum() {
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.subList(0, 6);
+        List<LottoNumber> subList = new ArrayList<>(lottoNumbers.subList(0, 6));
+        Collections.sort(subList);
+        return subList;
     }
 }
