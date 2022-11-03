@@ -5,26 +5,31 @@ import java.util.List;
 
 public class Game {
     private final LottoGenerator lottoGenerator = new LottoGenerator();
-    private final LottoBuyCount lottoBuyCount;
+    private final LottoBuyCount lottoAutoBuyCount;
     private Money buyMoney;
 
     public Game(int count) {
-        this.lottoBuyCount = new LottoBuyCount(count);
+        this.lottoAutoBuyCount = new LottoBuyCount(count);
     }
 
     public Game(String money) {
         this.buyMoney = new Money(money);
-        this.lottoBuyCount = new LottoBuyCount(this.buyMoney);
+        this.lottoAutoBuyCount = new LottoBuyCount(this.buyMoney);
     }
 
-    public LottoBuyCount getLottoBuyCount() {
-        return lottoBuyCount;
+    public Game(Money money, LottoBuyCount manualLottoBuyCount) {
+        this.buyMoney = money;
+        this.lottoAutoBuyCount = new LottoBuyCount(this.buyMoney).minus(manualLottoBuyCount);
+    }
+
+    public LottoBuyCount getLottoAutoBuyCount() {
+        return lottoAutoBuyCount;
     }
 
     public Lottos startLottoGame() {
         List<Lotto> result = new ArrayList<>();
         LottoBuyCount index = new LottoBuyCount(0);
-        while (!index.equals(this.lottoBuyCount)) {
+        while (!index.equals(this.lottoAutoBuyCount)) {
             result.add(lottoGenerator.createLotto());
             index.plus();
         }

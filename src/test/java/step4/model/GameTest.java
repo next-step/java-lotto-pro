@@ -2,6 +2,7 @@ package step4.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
@@ -33,5 +34,14 @@ public class GameTest {
         Lottos result = game.startLottoGame();
 
         assertThat(result.count()).isEqualTo(count);
+    }
+
+    @DisplayName("로또_게임_Auto_Buy_Count_확인")
+    @ParameterizedTest
+    @CsvSource(value = {"1000:1:0", "10000:9:1"}, delimiter = ':')
+    public void startLottoGame_pass_01(int money, int manualCount, int autoCount) {
+        Game game = new Game(new Money(money), new LottoBuyCount(manualCount));
+
+        assertThat(game.getLottoAutoBuyCount()).isEqualTo(new LottoBuyCount(autoCount));
     }
 }

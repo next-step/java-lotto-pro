@@ -24,8 +24,26 @@ public class LottoBuyCount {
         this.lottoBuyCount = count;
     }
 
+    public LottoBuyCount(String count) {
+        this(convertNumber(count));
+    }
+
+    private static int convertNumber(String text) {
+        int result;
+        try {
+            result = Integer.parseInt(text);
+        } catch (NumberFormatException e) {
+            throw new LottoFormatException(ErrorMessageConstant.NOT_NUMBER);
+        }
+        return result;
+    }
+
     public void plus() {
         this.lottoBuyCount++;
+    }
+
+    public LottoBuyCount minus(LottoBuyCount otherLottoBuyCount) {
+        return new LottoBuyCount(this.lottoBuyCount - otherLottoBuyCount.lottoBuyCount);
     }
 
     @Override
