@@ -17,6 +17,14 @@ public class LottoApp implements App {
     private static final String BUY_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String BUY_MANUAL_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
 
+    private static final InputManualNumber scanManualNumber = () -> {
+        try {
+            return LottoScanner.scanManyNumbers();
+        } catch (IOException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    };
+
     public void run() throws IOException {
         LottoStore lottoStore = new LottoStore();
 
@@ -33,10 +41,7 @@ public class LottoApp implements App {
         newLine();
 
         print(BUY_MANUAL_NUMBER);
-        for (int i = 0; i < buyManualCount; i++) {
-            lottoBuyer.buyWithManual(lottoStore, Arrays.asList(scanManyNumbers()));
-        }
-
+        lottoBuyer.buyWithManual(lottoStore, new BuyManualCount(scanManualNumber, buyManualCount));
         lottoBuyer.buyWithRandom(lottoStore);
 
         newLine();

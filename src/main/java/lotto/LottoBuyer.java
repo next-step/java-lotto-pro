@@ -13,6 +13,12 @@ public class LottoBuyer {
         this.payAmount = payAmount;
     }
 
+    public void buyWithManual(LottoStore lottoStore, BuyManualCount buyManualCount) {
+        while (buyManualCount.hasCount()) {
+            buyWithManual(lottoStore, buyManualCount.give());
+        }
+    }
+
     public void buyWithManual(LottoStore lottoStore, List<Integer> numbers) {
         lottoStore.buyWith(() -> new ManualLottoNumberGenerateStrategy(numbers));
         List<Lotto> newLottoOne = lottoStore.pay(this.payAmount, new PayCount(1));
