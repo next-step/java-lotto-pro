@@ -1,6 +1,9 @@
 package study;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -33,10 +36,11 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(6);
     }
 
-    @Test
-    public void splitAndSum_custom_구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
-        assertThat(result).isEqualTo(6);
+    @ParameterizedTest
+    @CsvSource(value = {";:1;2;3:6", "l:3l4l5:12", "s:1s2s3:6"}, delimiter = ':')
+    public void splitAndSum_custom_구분자(String delimiter, String input, int expected) throws Exception {
+        int result = StringAddCalculator.splitAndSum("//" + delimiter + "\n" + input);
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
