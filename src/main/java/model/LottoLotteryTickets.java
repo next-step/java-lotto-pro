@@ -17,10 +17,14 @@ public class LottoLotteryTickets {
 
     public LottoLotteryTickets(int lottoQuantity, LottoNumberGenerator lottoNumberGenerator) {
         for (int i = 0; i < lottoQuantity; i++) {
-            LottoNumbers lottoNumber = new LottoNumbers(lottoNumberGenerator);
+            LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberGenerator);
 
-            lottoLotteryTickets.add(lottoNumber);
+            lottoLotteryTickets.add(lottoNumbers);
         }
+    }
+
+    public LottoLotteryTickets(List<LottoNumbers> lottoLotteryTickets) {
+        this.lottoLotteryTickets = new ArrayList<>(lottoLotteryTickets);
     }
 
     public int size() {
@@ -39,6 +43,15 @@ public class LottoLotteryTickets {
         }
 
         return new Result(lottoResults);
+    }
+
+    public static LottoLotteryTickets createLottoLotteryTickets(LottoLotteryTickets manualLottoLotteryTickets, int autoLottoCount) {
+        List<LottoNumbers> lottoLotteryTickets = new ArrayList<>(manualLottoLotteryTickets.lottoLotteryTickets);
+        for(int i = 0; i < autoLottoCount; i++) {
+            lottoLotteryTickets.add(new LottoNumbers(new LottoNumberGenerator()));
+        }
+
+        return new LottoLotteryTickets(lottoLotteryTickets);
     }
 
     @Override

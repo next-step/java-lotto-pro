@@ -9,6 +9,8 @@ public class InputReader {
     private static final String INQUIRE_LAST_WEEK_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INQUIRE_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
 
+    private static final String INQUIRE_PURCHASE_LOTTO_NUNBER_MESSAGE = System.lineSeparator() + "수동으로 구매할 로또 수를 입력해 주세요.";
+
     public static String readPurchaseAmount() {
         System.out.println(INQUIRE_PURCHASE_AMOUNT_MESSAGE);
         return scanner.nextLine();
@@ -22,6 +24,15 @@ public class InputReader {
     public static String readLastWeekWinningNumber() {
         System.out.println();
         System.out.println(INQUIRE_LAST_WEEK_WINNING_NUMBER_MESSAGE);
+        return scanner.nextLine();
+    }
+
+    public static String readPurchaseLottoNumber() {
+        System.out.println(INQUIRE_PURCHASE_LOTTO_NUNBER_MESSAGE);
+        return scanner.nextLine();
+    }
+
+    public static String readManualLottoNumbers() {
         return scanner.nextLine();
     }
 }

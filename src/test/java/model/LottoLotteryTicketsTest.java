@@ -18,4 +18,12 @@ class LottoLotteryTicketsTest {
 
         assertThat(lottoLotteryTickets.size()).isEqualTo(10);
     }
+
+    @Test
+    @DisplayName("로도 수동 포함 자동 생성 테스트")
+    void create_lotto_lottery_tickets_generate_test() {
+        LottoLotteryTickets lottoLotteryTickets = new LottoLotteryTickets(3, new LottoNumberGenerator());
+
+        assertThat(LottoLotteryTickets.createLottoLotteryTickets(lottoLotteryTickets, 6).size()).isEqualTo(9);
+    }
 }
