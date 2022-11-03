@@ -6,8 +6,8 @@ public class Validator {
     private static final String ERR_SIX_NUMBERS = "여섯 개의 숫자를 입력해 주세요.";
     private static final String ERR_NULL_VALUE = "값을 입력해 주세요";
     
-    public static void validateIsNull(String str) {
-        if (StringUtil.isNullOrEmpty(str)) {
+    public static void validateIsEmpty(String str) {
+        if ("".equals(str)) {
             throw new IllegalArgumentException(ERR_NULL_VALUE);
         }
     }

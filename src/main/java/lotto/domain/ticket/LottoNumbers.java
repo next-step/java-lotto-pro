@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.util.Constants;
+import lotto.util.IntUtil;
 import lotto.util.LottoNumberComparator;
 import lotto.util.Validator;
 
@@ -68,7 +69,7 @@ public class LottoNumbers {
     }
     
     private List<LottoNumber> generateLottoNumbers(String number) {
-        Validator.validateIsNull(number);
+        Validator.validateIsEmpty(number);
         
         String[] numberArray = number.split(COMMA);
         List<LottoNumber> tmpNumbers = new ArrayList<>();
@@ -79,7 +80,7 @@ public class LottoNumbers {
         Arrays.stream(numberArray).forEach(s -> {
             Validator.validateLottoNumberBoundary(s.trim());
             
-            int i = Integer.parseInt(s.trim());
+            int i = IntUtil.parseInt(s.trim());
             LottoNumber tmpNumber = new LottoNumber(i);
             
             tmpNumbers.add(tmpNumber);

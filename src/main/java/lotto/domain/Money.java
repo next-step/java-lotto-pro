@@ -20,7 +20,7 @@ public class Money {
     }
 
     private int generate(String amount) {
-        Validator.validateIsNull(amount);
+        Validator.validateIsEmpty(amount);
         validateIsNumber(amount);
 
         int result = IntUtil.parseInt(amount);
