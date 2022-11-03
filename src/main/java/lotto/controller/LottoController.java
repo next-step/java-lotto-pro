@@ -2,9 +2,11 @@ package lotto.controller;
 
 import lotto.model.dto.LottoResult;
 import lotto.model.dto.PurchaseAmount;
-import lotto.model.dto.WinLotto;
+import lotto.model.vo.WinLotto;
 import lotto.model.vo.Lottos;
+import lotto.model.vo.Profit;
 import lotto.model.vo.PurchaseCount;
+import lotto.model.vo.WinResult;
 import lotto.service.LottoServiceImpl;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -36,8 +38,14 @@ public class LottoController {
 
         // 로또 당첨 결과 확인
         // 1. 일치개수기준별 당첨로또 수 확인
+        WinResult winResult = lottoService.checkLottoResult(winLotto, lottos);
         // 2. 당첨로또 금액 합 계산 >> 수익률 계산
-        LottoResult lottoResult = lottoService.checkLottoResult(winLotto, lottos);
+        Profit profit = lottoService.calculateProfit(purchaseAmount, winResult);
+
+        // 최종 결과 세팅
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.setWinResult(winResult);
+        lottoResult.setProfit(profit);
 
         // 당첨 통계 출력 ov_3
         resultView.printLottoResult(lottoResult);
