@@ -27,8 +27,8 @@ public class Result {
         }
     }
 
-    public void checkResultRate(int usedMoney) {
-        double returnRate = (double) this.prizeMoney / usedMoney;
+    public void checkResultRate(Money usedMoney) {
+        double returnRate = (double) this.prizeMoney / usedMoney.amount;
         this.returnRate = Math.floor(returnRate * 100) / 100;
     }
 }

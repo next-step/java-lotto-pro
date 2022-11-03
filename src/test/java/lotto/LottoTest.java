@@ -1,25 +1,38 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import lotto.domain.Lotto;
+import lotto.domain.Money;
 import lotto.domain.Rank;
+import lotto.domain.Result;
 import lotto.domain.ticket.Ticket;
 import lotto.domain.ticket.Tickets;
 
 public class LottoTest {    
     Lotto lotto;
-    Tickets myTickets = new Tickets();
+    Tickets myTickets;
+    Result myResult;
     Ticket winningTicket = new Ticket("1,2,3,4,5,6", "7");
+    
+    @BeforeEach
+    public void initTest() {
+        myTickets = new Tickets();
+        myResult = new Result();
+    }
     
     @Test
     @DisplayName("구입금액에_따른_발급로또_개수_확인")
     public void lotto_issue_count() {
-        lotto = new Lotto("14000");
-        assertThat(lotto.tickets.size()).isEqualTo(14);
+        Money money = new Money("14000");
+        this.lotto = new Lotto();
+        this.myTickets = lotto.buyTickets(money);
+        
+        assertThat(this.myTickets.size()).isEqualTo(14);
     }
 
     @ParameterizedTest
@@ -33,10 +46,12 @@ public class LottoTest {
     public void lotto_get_result(String lottoNumber, int index) {
         myTickets.addTicket(new Ticket(lottoNumber));
         
-        lotto = new Lotto(myTickets);
-        lotto.checkResult(winningTicket);
+        this.lotto = new Lotto(myTickets);
         
-        assertThat(lotto.result.winningMap.get(Rank.values()[index])).isEqualTo(1);
+        this.myTickets.countTicketResult(this.myResult, this.winningTicket);
+        this.myResult.checkResultRate(lotto.getUsedMoney());
+        
+        assertThat(this.myResult.winningMap.get(Rank.values()[index])).isEqualTo(1);
     }  
     
     @Test
@@ -57,9 +72,11 @@ public class LottoTest {
         myTickets.addTicket(new Ticket("17, 21, 29, 37, 42, 45"));
         myTickets.addTicket(new Ticket("3, 8, 27, 30, 35, 44"));
         
-        lotto = new Lotto(myTickets);
-        lotto.checkResult(winningTicket);
+        this.lotto = new Lotto(myTickets);
         
-        assertThat(lotto.result.returnRate).isEqualTo(0.35);
+        this.myTickets.countTicketResult(this.myResult, this.winningTicket);
+        this.myResult.checkResultRate(lotto.getUsedMoney());
+        
+        assertThat(this.myResult.returnRate).isEqualTo(0.35);
     } 
 }

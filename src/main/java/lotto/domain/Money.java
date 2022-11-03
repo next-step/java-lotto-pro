@@ -12,10 +12,14 @@ public class Money {
     public final int amount;
 
     public Money(String amount) {
-        this.amount = validate(amount);
+        this.amount = generate(amount);
+    }
+    
+    public Money(int amount) {
+        this.amount = amount;
     }
 
-    private int validate(String amount) {
+    private int generate(String amount) {
         Validator.validateIsNull(amount);
         validateIsNumber(amount);
 
