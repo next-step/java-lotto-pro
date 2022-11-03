@@ -4,6 +4,7 @@ import calculator.StringAddCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class PaymentTest {
@@ -27,6 +28,12 @@ public class PaymentTest {
     void payment_less_than_1000_test() {
         assertThatThrownBy(() -> new Payment("400"))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("구매한 로또 개수 확인 테스트")
+    void check_purchased_lotto_cnt_by_payment_test() {
+        assertThat(new Payment("100000").getPurchasedLottoCnt()).isEqualTo(100);
     }
 
 }
