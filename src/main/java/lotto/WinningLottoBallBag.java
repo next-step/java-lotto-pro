@@ -1,7 +1,9 @@
 package lotto;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningLottoBallBag {
@@ -22,8 +24,8 @@ public class WinningLottoBallBag {
 
     public void add(LottoBall lottoBall) {
         shouldLessThanSize(CONTAINS_BONUS_BALL_SIZE);
+        validUnique(lottoBall);
         lottoBalls.add(lottoBall);
-        validUnique();
     }
 
     private void validUnique() {
@@ -32,6 +34,14 @@ public class WinningLottoBallBag {
                     "로또 숫자는 중복되지 않은 값이어야 합니다. 입력 값:" + lottoBalls.stream()
                             .map(String::valueOf)
                             .collect(Collectors.joining(",")));
+        }
+    }
+
+    private void validUnique(LottoBall lottoBall) {
+        Set<LottoBall> lottoBallSet = new HashSet<>(lottoBalls);
+        if (lottoBallSet.contains(lottoBall)) {
+            throw new IllegalArgumentException(
+                    "로또 숫자는 중복되지 않은 값이어야 합니다. 입력 값:" + lottoBall.getIntNumber());
         }
     }
 
