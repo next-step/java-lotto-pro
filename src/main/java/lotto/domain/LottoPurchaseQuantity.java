@@ -1,11 +1,12 @@
 package lotto.domain;
 
+import lotto.view.InputView;
+import lotto.view.OutputView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import lotto.view.InputView;
-import lotto.view.OutputView;
 
 public class LottoPurchaseQuantity {
     public static final String PRINT_QUANTITY_FORMAT = "%d개를 구매했습니다.";
@@ -70,7 +71,6 @@ public class LottoPurchaseQuantity {
     }
 
     private LottoLottery addInputManualNumbers() {
-        InputView.inputManualNumbersInformation();
         List<LottoNumbers> manualNumbersList = new ArrayList<>();
         for (int i = 0; i < this.quantity; i++) {
             manualNumbersList.add(LottoNumbers.of(new ManualNumberGenerator(InputView.inputManualNumbers())));

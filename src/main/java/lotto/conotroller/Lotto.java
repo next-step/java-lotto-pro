@@ -9,13 +9,12 @@ import java.util.Optional;
 public class Lotto {
     public void run() {
         LottoPurchaseAmount lottoPurchaseAmount = InputView.inputPurchaseAmount();
-        LottoPurchaseQuantity manualQuantity = InputView.inputManualPurchaseQuantity();
-        LottoPurchaseQuantity autoQuantity = lottoPurchaseAmount.calculateAutoQuantity(manualQuantity);
+        LottoLotteryQuantity lottoLotteryQuantity = InputView.inputManualPurchaseQuantity(lottoPurchaseAmount);
 
-        LottoLottery lottoLottery = getLottoLottery(manualQuantity, autoQuantity);
+        LottoLottery lottoLottery = getLottoLottery(lottoLotteryQuantity);
 
         OutputView.printNewLine();
-        OutputView.println(LottoPurchaseQuantity.history(manualQuantity, autoQuantity));
+        OutputView.println(lottoLotteryQuantity.history());
         OutputView.println(lottoLottery.lotteryHistory());
 
         WinningRanks winningRanks = getWinningRanks(lottoLottery);
@@ -23,16 +22,15 @@ public class Lotto {
         OutputView.printEarningRatio(winningRanks.calculateEarningRatio(lottoPurchaseAmount));
     }
 
-    private static LottoLottery getLottoLottery(LottoPurchaseQuantity manualQuantity,
-                                                LottoPurchaseQuantity autoQuantity) {
-        Optional<LottoLottery> manualLottery = manualQuantity.toManualLottoLottery();
-        LottoLottery autoLottery = autoQuantity.toAutoLottoLottery();
+    private static LottoLottery getLottoLottery(LottoLotteryQuantity lottoLotteryQuantity) {
+        Optional<LottoLottery> manualLottery = InputView.inputManualNumbersInformation(lottoLotteryQuantity);
+        LottoLottery autoLottery = lottoLotteryQuantity.toAutoLottoLottery();
         manualLottery.ifPresent(lottery -> lottery.addLottery(autoLottery));
         return manualLottery.orElse(autoLottery);
     }
 
     private static WinningRanks getWinningRanks(LottoLottery lottoLottery) {
-        WinningNumbers winningNumbers = WinningNumbers.of(InputView.inputLastWeeksWinningNumber(), InputView.inputBonusNumber());
+        WinningNumbers winningNumbers = new WinningNumbers(InputView.inputLastWeeksWinningNumber(), InputView.inputBonusNumber());
         return lottoLottery.matchWinningRank(winningNumbers);
     }
 }

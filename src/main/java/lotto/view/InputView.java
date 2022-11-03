@@ -1,10 +1,9 @@
 package lotto.view;
 
-import lotto.domain.LottoPurchaseAmount;
-import lotto.domain.LottoPurchaseQuantity;
-import lotto.domain.Money;
+import lotto.domain.*;
 
 import java.util.InputMismatchException;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class InputView {
@@ -29,38 +28,52 @@ public class InputView {
         }
     }
 
-    public static LottoPurchaseQuantity inputManualPurchaseQuantity() {
+    public static LottoLotteryQuantity inputManualPurchaseQuantity(LottoPurchaseAmount lottoPurchaseAmount) {
         try {
             OutputView.printNewLine();
             OutputView.println(INPUT_MESSAGE_MANUAL_PURCHASE_QUANTITY);
-            return LottoPurchaseQuantity.manualQuantity(scanner.nextLine());
+            return LottoLotteryQuantity.of(lottoPurchaseAmount, LottoPurchaseQuantity.manualQuantity(scanner.nextLine()));
         } catch (Exception e) {
             OutputView.error(e.getMessage());
-            return inputManualPurchaseQuantity();
+            return inputManualPurchaseQuantity(lottoPurchaseAmount);
         }
     }
 
-    public static void inputManualNumbersInformation() {
-        OutputView.printNewLine();
-        OutputView.println(INPUT_MESSAGE_MANUAL_NUMBERS_INFORMATION);
+    public static Optional<LottoLottery> inputManualNumbersInformation(LottoLotteryQuantity lottoLotteryQuantity) {
+        try {
+            OutputView.printNewLine();
+            OutputView.println(INPUT_MESSAGE_MANUAL_NUMBERS_INFORMATION);
+            return lottoLotteryQuantity.toManualLottoLottery();
+        } catch (Exception e) {
+            OutputView.error(e.getMessage());
+            return inputManualNumbersInformation(lottoLotteryQuantity);
+        }
     }
 
     public static String inputManualNumbers() {
         return scanner.nextLine();
     }
 
-    public static String inputLastWeeksWinningNumber() {
-        OutputView.printNewLine();
-        OutputView.println(INPUT_MESSAGE_LAST_WEEKS_WINNING_NUMBER);
-        return scanner.nextLine();
+    public static LottoNumbers inputLastWeeksWinningNumber() {
+        try {
+            OutputView.printNewLine();
+            OutputView.println(INPUT_MESSAGE_LAST_WEEKS_WINNING_NUMBER);
+            return LottoNumbers.of(new ManualNumberGenerator(scanner.nextLine()));
+        } catch (Exception e) {
+            OutputView.error(e.getMessage());
+            return inputLastWeeksWinningNumber();
+        }
     }
 
-    public static int inputBonusNumber() {
-        OutputView.println(INPUT_MESSAGE_BONUS_NUMBER);
+    public static LottoNumber inputBonusNumber() {
         try {
-            return scanner.nextInt();
+            OutputView.println(INPUT_MESSAGE_BONUS_NUMBER);
+            return LottoNumber.of(scanner.nextInt());
         } catch (InputMismatchException e) {
             throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_INPUT_ONLY_NUMBER);
+        } catch (Exception e) {
+            OutputView.error(e.getMessage());
+            return inputBonusNumber();
         }
     }
 }
