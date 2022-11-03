@@ -12,7 +12,7 @@ class LottoPurchaseQuantityTest {
     @Test
     @DisplayName("로또 갯수 생성")
     void lotto_quantity() {
-        LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(10000);
+        LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(new Money(10000));
         LottoPurchaseQuantity lottoPurchaseQuantity = LottoPurchaseQuantity.of(lottoPurchaseAmount.calculateQuantity());
         assertThat(lottoPurchaseQuantity).isEqualTo(LottoPurchaseQuantity.of(10));
     }
@@ -21,7 +21,7 @@ class LottoPurchaseQuantityTest {
     @CsvSource(value = {"1000:1", "2000:2", "3000:3", "10000:10", "15000:15"}, delimiter = ':')
     @DisplayName("구매 갯수 출력")
     void print_lotto_quantity(int input, int expect) {
-        LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(input);
+        LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(new Money(input));
         LottoPurchaseQuantity lottoPurchaseQuantity = LottoPurchaseQuantity.of(lottoPurchaseAmount.calculateQuantity());
         assertThat(lottoPurchaseQuantity.history()).isEqualTo(String.format(LottoPurchaseQuantity.PRINT_QUANTITY_FORMAT, expect));
     }
@@ -45,7 +45,7 @@ class LottoPurchaseQuantityTest {
     @DisplayName("구매 갯수 출력(자동, 수동)")
     void print_lotto_quantity_auto_manual() {
         LottoPurchaseQuantity manualQuantity = LottoPurchaseQuantity.manualQuantity("5");
-        LottoPurchaseQuantity autoQuantity = new LottoPurchaseAmount(9000).calculateAutoQuantity(manualQuantity);
+        LottoPurchaseQuantity autoQuantity = new LottoPurchaseAmount(new Money(9000)).calculateAutoQuantity(manualQuantity);
         assertThat(LottoPurchaseQuantity.history(manualQuantity, autoQuantity)).isEqualTo("수동으로 5장, 자동으로 4장을 구매했습니다.");
     }
 }

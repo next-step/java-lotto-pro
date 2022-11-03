@@ -2,47 +2,60 @@ package lotto.domain;
 
 import lotto.view.OutputView;
 
+import java.math.BigInteger;
+import java.util.Objects;
+
 public class Money {
-    private static final int FIRST_CHAR_INDEX = 0;
-    private static final int SECOND_CHAR_INDEX = 1;
-    private static final char NEGATIVE_CHAR = '-';
+    private final int money;
 
-    private final String money;
-
-    public Money(String inputMoney) {
-        this.money = inputMoney;
-        validFirstChar();
-        validString();
+    public Money(int money) {
+        this.money = money;
+        validNegative();
     }
 
-    private void validFirstChar() {
-        char firstChar = this.money.charAt(FIRST_CHAR_INDEX);
-        if (isValidFirstChar(firstChar)) {
-            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_INPUT_ONLY_NUMBER);
-        }
-    }
-
-    private static boolean isValidFirstChar(char firstChar) {
-        return !(firstChar == NEGATIVE_CHAR || Character.isDigit(firstChar));
-    }
-
-    private void validString() {
-        for (int i = SECOND_CHAR_INDEX; i < this.money.length(); i++) {
-            isDigit(this.money, i);
-        }
-    }
-
-    private static void isDigit(String inputAmount, int i) {
-        if (!Character.isDigit(inputAmount.charAt(i))) {
-            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_INPUT_ONLY_NUMBER);
-        }
-    }
-
-    public int parseAmount() {
+    public static Money of(String inputMoney) {
         try {
-            return Integer.parseInt(this.money);
+            BigInteger money = new BigInteger(inputMoney);
+            return new Money(money.intValueExact());
         } catch (NumberFormatException e) {
-            throw new NumberFormatException(OutputView.ERROR_MESSAGE_INPUT_AMOUNT_EXCESS);
+            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_INPUT_ONLY_NUMBER);
+        } catch (ArithmeticException e) {
+            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_INPUT_AMOUNT_EXCESS);
         }
+    }
+
+    private void validNegative() {
+        if (money < 0) {
+            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_NEGATIVE_NUMBER);
+        }
+    }
+
+    public int remainder(int value) {
+        return this.money % value;
+    }
+
+    public int divide(int value) {
+        return this.money / value;
+    }
+
+    public boolean isLessThanLottoPrice() {
+        return this.money < LottoPurchaseAmount.LOTTO_PRICE;
+    }
+
+    public double calculateEarningRatio(long earningAmount) {
+        return (double) earningAmount / this.money;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Money money1 = (Money) o;
+        return money == money1.money;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(money);
     }
 }

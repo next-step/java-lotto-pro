@@ -1,18 +1,14 @@
 package lotto.conotroller;
 
-import java.util.Optional;
-import lotto.domain.LottoLottery;
-import lotto.domain.LottoPurchaseAmount;
-import lotto.domain.LottoPurchaseQuantity;
-import lotto.domain.Money;
-import lotto.domain.WinningNumbers;
-import lotto.domain.WinningRanks;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.Optional;
+
 public class Lotto {
     public void run() {
-        LottoPurchaseAmount lottoPurchaseAmount = getLottoPurchaseAmount();
+        LottoPurchaseAmount lottoPurchaseAmount = InputView.inputPurchaseAmount();
         LottoPurchaseQuantity manualQuantity = LottoPurchaseQuantity.manualQuantity(InputView.inputManualPurchaseQuantity());
         LottoPurchaseQuantity autoQuantity = lottoPurchaseAmount.calculateAutoQuantity(manualQuantity);
 
@@ -25,11 +21,6 @@ public class Lotto {
         WinningRanks winningRanks = getWinningRanks(lottoLottery);
         OutputView.printStatistics(winningRanks.statistics());
         OutputView.printEarningRatio(winningRanks.calculateEarningRatio(lottoPurchaseAmount));
-    }
-
-    private static LottoPurchaseAmount getLottoPurchaseAmount() {
-        Money money = new Money(InputView.inputPurchaseAmount());
-        return new LottoPurchaseAmount(money.parseAmount());
     }
 
     private static LottoLottery getLottoLottery(LottoPurchaseQuantity manualQuantity,

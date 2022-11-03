@@ -6,28 +6,28 @@ import lotto.view.OutputView;
 public class LottoPurchaseAmount  {
     public static final int LOTTO_PRICE = 1000;
 
-    private final int amount;
+    private final Money amount;
 
-    public LottoPurchaseAmount(int amount) {
+    public LottoPurchaseAmount(Money amount) {
         this.amount = amount;
         validMinAmount();
         validThousands();
     }
 
     private void validThousands() {
-        if (this.amount % LOTTO_PRICE > 0) {
+        if (amount.remainder(LOTTO_PRICE) > 0) {
             throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_AMOUNT_UNIT_OF_1000);
         }
     }
 
     private void validMinAmount() {
-        if (this.amount < LOTTO_PRICE) {
+        if (amount.isLessThanLottoPrice()) {
             throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_MINIMUM_PURCHASE_AMOUNT);
         }
     }
 
     public int calculateQuantity() {
-        return this.amount / LOTTO_PRICE;
+        return amount.divide(LOTTO_PRICE);
     }
 
     public LottoPurchaseQuantity calculateAutoQuantity(LottoPurchaseQuantity manualQuantity) {
@@ -39,19 +39,15 @@ public class LottoPurchaseAmount  {
     }
 
     public double calculateEarningRatio(long earningAmount) {
-        return Math.floor((double) earningAmount / this.amount * 100) / 100.0;
+        return Math.floor(amount.calculateEarningRatio(earningAmount) * 100) / 100.0;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         LottoPurchaseAmount that = (LottoPurchaseAmount) o;
-        return amount == that.amount;
+        return Objects.equals(amount, that.amount);
     }
 
     @Override

@@ -16,6 +16,7 @@ public class OutputView {
     public static final String ERROR_MESSAGE_INPUT_MANUAL_NUMBER_DUPLICATE = "중복 된 숫자가 있습니다.";
     public static final String ERROR_MESSAGE_BONUS_NUMBER_NOT_DUPLICATE_LOTTO_NUMBER = "보너스 번호는 로또 번호와 중복될 수 없습니다.";
     public static final String ERROR_MESSAGE_FORMAT_MANUAL_LOTTO_EXCEED_QUANTITY = "수동 구매 가능 횟수는 최대 %d장 입니다.";
+    public static final String ERROR_MESSAGE_NEGATIVE_NUMBER = "음수는 입력 불가능합니다.";
 
     private OutputView() {
     }
