@@ -46,13 +46,6 @@ public class LottoBuyerTest {
         assertThat(lottos.getLottoCount()).isEqualTo(expectLottoCount);
     }
 
-    @ParameterizedTest
-    @MethodSource("calculateStatisticSample")
-    @DisplayName("로또에 대한 상금 정보와 자신의 돈을 통해 수익률 계산")
-    void calculate_yield(Prizes prizes, Lottos lottos, LottoBuyer lottoBuyer, double expect) {
-        assertThat(lottoBuyer.calculateYield(prizes, lottos.getLottoCount())).isEqualTo(BigDecimal.valueOf(expect));
-    }
-
     private static Stream<Arguments> buyLotto() {
         return Stream.of(
                 Arguments.of(new Money(4000), 4),
@@ -73,13 +66,4 @@ public class LottoBuyerTest {
                 Arguments.of(new Money(4000), 4)
         );
     }
-
-    private static Stream<Arguments> calculateStatisticSample() {
-        LottoBuyer lottoBuyer = new LottoBuyer(new Money(14000));
-        Lottos lottos = lottoBuyer.buyAutoAndManualLotto(Collections.EMPTY_LIST);
-        return Stream.of(
-                Arguments.of(new Prizes(Collections.singletonList(Prize.FIFTH)), lottos, lottoBuyer, 0.35)
-        );
-    }
-
 }
