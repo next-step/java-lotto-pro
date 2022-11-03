@@ -12,10 +12,10 @@ import lotto.domain.quantity.Quantity;
 
 class LottoResultsTest {
 	List<LottoResult> lottoResults = Arrays.asList(
-		LottoResult.from(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), MatchRank.THREE_MATCH),
-		LottoResult.from(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), MatchRank.FOUR_MATCH),
-		LottoResult.from(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), MatchRank.FOUR_MATCH),
-		LottoResult.from(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), MatchRank.FIVE_MATCH)
+		LottoResult.from(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), MatchRank.FIFTH),
+		LottoResult.from(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), MatchRank.FOURTH),
+		LottoResult.from(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), MatchRank.FOURTH),
+		LottoResult.from(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), MatchRank.THIRD)
 	);
 
 	@Test
@@ -30,9 +30,9 @@ class LottoResultsTest {
 
 	@Test
 	void 일치_갯수로_필터링() {
-		assertThat(LottoResults.from(lottoResults).filterByMatchRank(MatchRank.THREE_MATCH).quantity())
+		assertThat(LottoResults.from(lottoResults).filterByMatchRank(MatchRank.FIFTH).quantity())
 			.isEqualTo(Quantity.from(1));
-		assertThat(LottoResults.from(lottoResults).filterByMatchRank(MatchRank.FOUR_MATCH).quantity())
+		assertThat(LottoResults.from(lottoResults).filterByMatchRank(MatchRank.FOURTH).quantity())
 			.isEqualTo(Quantity.from(2));
 	}
 }

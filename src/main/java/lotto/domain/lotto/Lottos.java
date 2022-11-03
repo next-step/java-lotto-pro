@@ -60,7 +60,7 @@ public class Lottos {
 		return LottoResults.from(
 			this.lottos.stream()
 				.map(lotto -> LottoResult.from(lotto,
-					MatchRank.valueOfMatchCount(
+					MatchRank.valueOf(
 						lotto.countMatchCount(winLotto),
 						lotto.contains(bonusNumber)
 					))

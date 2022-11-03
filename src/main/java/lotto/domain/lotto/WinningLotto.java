@@ -16,12 +16,6 @@ public class WinningLotto {
 		this.bonusNumber = LottoNumber.from(bonusNumber);
 	}
 
-	private void validateDuplicateBonusNumber(List<Integer> winNumbers, int bonusNumber) {
-		if (winNumbers.contains(bonusNumber)) {
-			throw new IllegalStateException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
-		}
-	}
-
 	public static WinningLotto from(String input, String bonusBallInput) {
 		return new WinningLotto(convertInputToIntegerList(input), Integer.parseInt(bonusBallInput));
 	}
@@ -30,6 +24,12 @@ public class WinningLotto {
 		return InputSplitter.splitText(input).stream()
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
+	}
+
+	private void validateDuplicateBonusNumber(List<Integer> winNumbers, int bonusNumber) {
+		if (winNumbers.contains(bonusNumber)) {
+			throw new IllegalStateException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+		}
 	}
 
 	public LottoResults getLottoResults(Lottos lottos) {

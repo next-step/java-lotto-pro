@@ -2,30 +2,28 @@ package lotto.view;
 
 import lotto.domain.lotto.MatchRank;
 
-public enum ResultMessage {
-	THREE_MATCH_MESSAGE(MatchRank.THREE_MATCH, "3개 일치 (5000원)"),
-	FOUR_MATCH_MESSAGE(MatchRank.FOUR_MATCH, "4개 일치 (50000원)"),
-	FIVE_MATCH_MESSAGE(MatchRank.FIVE_MATCH, "5개 일치 (1500000원)"),
-	FIVE_MATCH_WITH_BONUS_MESSAGE(MatchRank.FIVE_MATCH_WITH_BONUS, "5개 일치, 보너스 볼 일치(30000000원)"),
-	SIX_MATCH_MESSAGE(MatchRank.SIX_MATCH, "6개 일치 (2000000000원)");
-
+public class ResultMessage {
 	private final MatchRank matchRank;
-	private final String message;
+	private final int quantity;
 
-	ResultMessage(MatchRank matchRank, String message) {
+	public ResultMessage(MatchRank matchRank, int quantity) {
 		this.matchRank = matchRank;
-		this.message = message;
+		this.quantity = quantity;
 	}
 
-	public MatchRank getMatchRank() {
-		return matchRank;
+	@Override
+	public String toString() {
+		return String.format("%s- %d개", matchRankMessage(), quantity);
 	}
 
-	public String getMessage() {
-		return message;
+	private String matchRankMessage() {
+		return String.format(matchRankFormat(), matchRank.getMatchCount(), matchRank.getWinningPrice());
 	}
 
-	public String getResultMessage(int quantity) {
-		return String.format("%s- %d개", this.message, quantity);
+	private String matchRankFormat() {
+		if (matchRank == MatchRank.SECOND) {
+			return "%d개 일치, 보너스 볼 일치(%d원)";
+		}
+		return "%d개 일치 (%d원)";
 	}
 }
