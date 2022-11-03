@@ -27,7 +27,7 @@ public class LottoController {
   }
 
   private WinningLotto winningLottoNumber() {
-    return new WinningLotto(InputView.innputWinningLottoNumber());
+    return new WinningLotto(InputView.inputWinningLottoNumber(), InputView.inputBonusLottoNumber());
   }
 
   private void generateLottoResult(LottoList lottoList, WinningLotto winningLotto) {
