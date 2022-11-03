@@ -14,4 +14,8 @@ public class LottoPurchaseAmount {
             throw new IllegalArgumentException("1000의 배수만 입력가능합니다.");
         }
     }
+
+    public long getNumber() {
+        return number;
+    }
 }
