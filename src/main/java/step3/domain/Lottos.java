@@ -2,6 +2,7 @@ package step3.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
     private final List<Lotto> lottoList;
@@ -18,6 +19,12 @@ public class Lottos {
         return this.lottoList.stream()
                 .map(winningLottoNumber::check)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Rewards::new));
+    }
+
+    public Lottos merge(final Lottos otherLottos) {
+        List<Lotto> mergeLottoList = Stream.concat(this.lottoList.stream(), otherLottos.lottoList.stream())
+                .collect(Collectors.toList());
+        return new Lottos(mergeLottoList);
     }
 
     @Override

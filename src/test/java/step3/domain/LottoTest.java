@@ -28,7 +28,7 @@ class LottoTest {
     @Test
     void 보유한_로또번호가_보너스_번호를_포함하고_있는지_확인() {
         Lotto lotto = new Lotto(new LottoNumbers("1, 2, 3, 4, 5, 6"));
-        LottoNumber bonusNumber = new LottoNumber(6);
+        LottoNumber bonusNumber = LottoNumber.from(6);
         assertThat(lotto.isBonusWin(bonusNumber)).isTrue();
     }
 }

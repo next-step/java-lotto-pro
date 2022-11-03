@@ -31,4 +31,10 @@ class LottosTest {
         String expectedString = "[1, 2, 3, 4, 5, 6]\n[1, 2, 3, 4, 5, 15]\n[2, 4, 5, 7, 9, 11]";
         assertThat(lottos.toString()).isEqualTo(expectedString);
     }
+
+    @Test
+    void 로또를_병합할_수_있다() {
+        Lottos mergeLottos = lottos.merge(lottos);
+        assertThat(mergeLottos.getHasLottoSize()).isEqualTo(6);
+    }
 }

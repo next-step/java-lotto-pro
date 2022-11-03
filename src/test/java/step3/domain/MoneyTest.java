@@ -39,4 +39,10 @@ class MoneyTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("금액은 음수일 수 없습니다.");
     }
+
+    @Test
+    void 금액을_곱할_수_있다() {
+        Money paidByUser = new Money(1000L);
+        assertThat(paidByUser.multiply(3)).isEqualTo(new Money(3000));
+    }
 }

@@ -7,7 +7,7 @@ public class WinningLottoNumber {
 
     public WinningLottoNumber(final String receiveWinningNumber, final int receiveBonusNumber) {
         this.winningLottoNumbers = new LottoNumbers(receiveWinningNumber);
-        this.bonusNumber = new LottoNumber(receiveBonusNumber);
+        this.bonusNumber = LottoNumber.from(receiveBonusNumber);
         validateBonusNumberIncludedInWinningNumbers();
     }
 

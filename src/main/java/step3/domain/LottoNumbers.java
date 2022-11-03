@@ -22,7 +22,7 @@ public class LottoNumbers {
     public LottoNumbers(final String receiveWinningNumber) {
         String trimWinningNumber = PATTERN_OF_WHITE_SPACE.matcher(receiveWinningNumber).replaceAll(EMPTY_STRING);
         this.lottoNumbers = Arrays.stream(PATTERN_OF_SPLIT_DELIMITER.split(trimWinningNumber))
-                .map((number) -> new LottoNumber(Integer.parseInt(number)))
+                .map(number -> LottoNumber.from(Integer.parseInt(number)))
                 .collect(Collectors.toSet());
         validateNumberSize();
     }
