@@ -46,11 +46,15 @@
 ### 기능 요구사항
 * 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또 발급
 * 로또 1장의 가격은 1000원
+* 2등을 위한 보너스 볼 추첨
+* 당첨 통계에도 2등 추가
 
 ### 프로그래밍 요구사항
 * 모든 기능을 TDD로 구현해 단위 테스트 필요 (단 UI 로직은 제외)
 * 핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 구분
 * UI로직은 InputView, ResultView 의 클래스로 분리
+* 상수의 경우 java enum 적용
+* 일급 콜렉션 사용
 * indent depth는 1까지만 허용됨
 * 메소드의 길이가 15라인을 넘어가지 않도록 구현
 * 메소드가 한 가지 일만 하도록 구현
@@ -64,3 +68,5 @@
 * 입력받은 지난 주 당첨 번호가 6개의 숫자가 아닌 경우 IllegalArgumentException을 반환한다.
 * 입력받은 지난 주 당첨 번호가 1~45 범위의 숫자가 아닌 경우 IllegalArguemntException을 반환한다.
 * 입력받은 지난 주 당첨 번호가 ,(comma)로 구분되지 않은 경우 IllegalArguemntException을 반환한다.
+* 로또 번호가 숫자가 아닌 경우 IllegalArgumentException을 반환한다.
+* 추첨한 보너스 볼이 기존 당첨번호에 포함된 경우 IllegalArgumentException을 반환한다.
