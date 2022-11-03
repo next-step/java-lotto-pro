@@ -5,6 +5,7 @@ import java.util.List;
 public class LottoBuyer {
     private final PayAmount payAmount;
     private final LottoList lottoList = new LottoList();
+    private final LottoMatchTypeCounter lottoMatchTypeCounter = new LottoMatchTypeCounter();
     private int manualLottoCount = 0;
     private int randomLottoCount = 0;
 
@@ -46,14 +47,17 @@ public class LottoBuyer {
     }
 
     public void match(Lotto winLotto, BonusLottoNumber bonusLottoNumber) {
-        lottoList.match(winLotto, bonusLottoNumber);
+        List<LottoMatchType> lottoMatchTypes = lottoList.match(winLotto, bonusLottoNumber);
+        for (LottoMatchType lottoMatchType : lottoMatchTypes) {
+            lottoMatchTypeCounter.add(lottoMatchType);
+        }
     }
 
     public Integer getLottoMatchTypeCount(LottoMatchType lottoMatchType) {
-        return lottoList.getLottoMatchTypeCount(lottoMatchType);
+        return lottoMatchTypeCounter.get(lottoMatchType);
     }
 
     public int getSumProfit() {
-        return lottoList.getSumProfit();
+        return lottoMatchTypeCounter.getSumProfit();
     }
 }

@@ -4,7 +4,6 @@ import java.util.*;
 
 public class LottoList {
 
-    private final HashMap<LottoMatchType, Integer> countMap = new HashMap<>();
     private final List<Lotto> lottoList = new ArrayList<>();
 
     public void add(Lotto lotto) {
@@ -29,26 +28,12 @@ public class LottoList {
         return builder.toString();
     }
 
-    public void match(Lotto winLotto, BonusLottoNumber bonusLottoNumber) {
+    public List<LottoMatchType> match(Lotto winLotto, BonusLottoNumber bonusLottoNumber) {
+        List<LottoMatchType> lottoMatchTypeList = new ArrayList<>();
         for (Lotto lotto : lottoList) {
             LottoMatchType lottoMatchType = lotto.match(winLotto);
-            lottoMatchType = lottoMatchType.promotionBonusBall(bonusLottoNumber.match(lotto));
-            Integer count = countMap.getOrDefault(lottoMatchType, 0);
-            countMap.put(lottoMatchType, ++count);
+            lottoMatchTypeList.add(lottoMatchType.promotionBonusBall(bonusLottoNumber.match(lotto)));
         }
-    }
-
-    public Integer getLottoMatchTypeCount(LottoMatchType lottoMatchType) {
-        return countMap.getOrDefault(lottoMatchType, 0);
-    }
-
-    public int getSumProfit() {
-        int sumProfit = 0;
-        for (Map.Entry<LottoMatchType, Integer> entry : countMap.entrySet()) {
-            LottoMatchType lottoMatchType = entry.getKey();
-            Integer count = entry.getValue();
-            sumProfit += lottoMatchType.multiply(count);
-        }
-        return sumProfit;
+        return lottoMatchTypeList;
     }
 }

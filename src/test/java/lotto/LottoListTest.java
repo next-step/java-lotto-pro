@@ -38,33 +38,33 @@ public class LottoListTest {
 
     @ParameterizedTest(name = "로또리스트와_당첨된_로또를_비교한다")
     @MethodSource("lottoListMatchFixture")
-    void 로또리스트와_당첨된_로또를_비교한다(List<Integer> winNumbers, LottoMatchType lottoMatchType, int expectedCount) {
+    void 로또리스트와_당첨된_로또를_비교한다(List<Integer> winNumbers, LottoMatchType lottoMatchType) {
         Lotto winLotto = Lotto.valueOf(new ManualLottoNumberGenerateStrategy(winNumbers));
 
-        lottoList.match(winLotto, BonusLottoNumber.valueOf(40, winLotto));
+        List<LottoMatchType> match = lottoList.match(winLotto, BonusLottoNumber.valueOf(40, winLotto));
 
-        assertThat(lottoList.getLottoMatchTypeCount(lottoMatchType)).isEqualTo(expectedCount);
+        assertThat(match).contains(lottoMatchType);
     }
 
     static Stream<Arguments> lottoListMatchFixture() {
         return Stream.of(
             Arguments.of(
-                Arrays.asList(8, 10, 16, 20, 37, 43), LottoMatchType.SIX, 1
+                Arrays.asList(8, 10, 16, 20, 37, 43), LottoMatchType.SIX
             ),
             Arguments.of(
-                Arrays.asList(8, 10, 16, 20, 37, 1), LottoMatchType.FIVE, 1
+                Arrays.asList(8, 10, 16, 20, 37, 1), LottoMatchType.FIVE
             ),
             Arguments.of(
-                Arrays.asList(1, 6, 19, 36, 38, 2), LottoMatchType.FIVE_BONUS, 1
+                Arrays.asList(1, 6, 19, 36, 38, 2), LottoMatchType.FIVE_BONUS
             ),
             Arguments.of(
-                Arrays.asList(8, 10, 16, 20, 1, 2), LottoMatchType.FOUR, 1
+                Arrays.asList(8, 10, 16, 20, 1, 2), LottoMatchType.FOUR
             ),
             Arguments.of(
-                Arrays.asList(8, 10, 16, 1, 2, 3), LottoMatchType.THREE, 1
+                Arrays.asList(8, 10, 16, 1, 2, 3), LottoMatchType.THREE
             ),
             Arguments.of(
-                Arrays.asList(8, 1, 2, 3, 4, 43), LottoMatchType.OTHER, 10
+                Arrays.asList(8, 1, 2, 3, 4, 43), LottoMatchType.OTHER
             )
         );
     }
