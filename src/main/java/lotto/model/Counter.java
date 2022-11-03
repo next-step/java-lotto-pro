@@ -2,29 +2,29 @@ package lotto.model;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.exception.ErrorCode;
+import lotto.exception.LottoException;
 
 public class Counter {
 
   public static final int LOTTO_PRICE = 1000;
   private static final String NUMBER_REGEX = "[0-9]+";
-  private static final String COUNTER_ERROR_MESSAGE = "[COUNTER_ERROR] 올바른 금액을 입력해주세요.";
-
-  private final LottoList lottoList;
-
   private final String inputMoney;
-  private final int manualLottoAmount;
-  private final int autoLottoAmount;
+  private LottoList lottoList;
+  private int manualLottoAmount;
+  private int autoLottoAmount;
 
-  public Counter(String inputMoney, List<String> manualNumbers) {
-    this.lottoList = buyLotto(inputMoney, manualNumbers);
+  public Counter(String inputMoney) {
+    validInputMoney(inputMoney);
+    this.lottoList = null;
     this.inputMoney = inputMoney;
-    this.manualLottoAmount = manualNumbers.size();
-    this.autoLottoAmount = lottoList.getLottoList().size() - manualLottoAmount;
+    this.manualLottoAmount = 0;
+    this.autoLottoAmount = 0;
   }
 
   private static void validNumber(String input) {
     if (isNumber(input)) {
-      throw new IllegalArgumentException(COUNTER_ERROR_MESSAGE);
+      throw new LottoException(ErrorCode.INVALID_INPUT_NUMBER_ERROR);
     }
   }
 
@@ -48,22 +48,22 @@ public class Counter {
     return manualLottoAmount;
   }
 
-  public LottoList buyLotto(String inputMoney, List<String> manualNumbers) {
-    validInputMoney(inputMoney);
-
+  public void issueLotto(List<String> manualNumbers) {
     int lottoAmount = calculateLottoAmount(inputMoney);
+
+    this.manualLottoAmount = manualNumbers.size();
+    this.autoLottoAmount = lottoAmount - manualLottoAmount;
 
     List<Lotto> lottos = manualNumbers.stream()
         .map(manualNumber -> Lotto.createManualLotto(manualNumber)).collect(
             Collectors.toList());
 
     LottoList lottoList = new LottoList(lottos);
-    int manualLottoAmount = lottoList.getLottoList().size();
-    LottoList lottoListByAuto = new LottoList(lottoAmount - manualLottoAmount);
+    LottoList lottoListByAuto = new LottoList(autoLottoAmount);
 
     lottoList.getLottoList().addAll(lottoListByAuto.getLottoList());
 
-    return lottoList;
+    this.lottoList = lottoList;
   }
 
   private int calculateLottoAmount(String input) {
@@ -82,7 +82,7 @@ public class Counter {
 
   private void validUnderLottoPrice(String input) {
     if (isUnderLottoPrice(input)) {
-      throw new IllegalArgumentException(COUNTER_ERROR_MESSAGE);
+      throw new LottoException(ErrorCode.UNDER_LOTTO_PRICE_ERROR);
     }
   }
 
@@ -92,7 +92,7 @@ public class Counter {
 
   private void validNullOrEmpty(String input) {
     if (isNullOrEmpty(input)) {
-      throw new IllegalArgumentException(COUNTER_ERROR_MESSAGE);
+      throw new LottoException(ErrorCode.INVALID_INPUT_NULL_VALUE_ERROR);
     }
   }
 

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.Arrays;
 import java.util.List;
+import lotto.exception.LottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +23,8 @@ public class CounterTest {
     String inputMoney = "14000";
     List<String> manualNumbers = Arrays.asList("1, 2, 3, 4, 5, 6", "3, 4, 5, 6, 7, 8");
     //when
-    Counter counter = new Counter(inputMoney, manualNumbers);
+    Counter counter = new Counter(inputMoney);
+    counter.issueLotto(manualNumbers);
     //then
     assertAll(
         () -> assertThat(counter.getLottoList().getLottoList()).hasSize(14),
@@ -37,8 +39,7 @@ public class CounterTest {
   void counter_valid(String input) {
     //when, then
     assertThatThrownBy(
-        () -> new Counter(input, Arrays.asList("1, 2, 3, 4, 5, 6", "3, 4, 5, 6, 7, 8")))
-        .isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("[COUNTER_ERROR] 올바른 금액을 입력해주세요.");
+        () -> new Counter(input))
+        .isInstanceOf(LottoException.class);
   }
 }
