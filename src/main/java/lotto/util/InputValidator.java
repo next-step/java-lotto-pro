@@ -15,28 +15,52 @@ public class InputValidator {
     private static final String REGEX_DIGIT = "\\d+";
     private static final int VALID_LOTTO_NUMBER_SIZE = 6;
 
+    private static void printErrorMsg(Exception e) {
+        System.out.println(e.getMessage());
+    }
+
     public static void validateNumberFormat(String input) {
         if (!input.matches(REGEX_DIGIT)) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_NUMBER);
+            try {
+                throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_NUMBER);
+            } catch (Exception e) {
+                printErrorMsg(e);
+                throw e;
+            }
         }
     }
 
     public static void validateDuplicateLottoNumber(List<Integer> numbers) {
         Set<Integer> uniqueNumbers = new HashSet<>(numbers);
         if (numbers.size() != uniqueNumbers.size()) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_DUPLICATED_NUMBER);
+            try {
+                throw new IllegalArgumentException(ERROR_MESSAGE_DUPLICATED_NUMBER);
+            } catch (Exception e) {
+                printErrorMsg(e);
+                throw e;
+            }
         }
     }
 
     public static void validateLottoNumberRange(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_RANGE_NUMBER);
+            try {
+                throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_RANGE_NUMBER);
+            } catch (Exception e) {
+                printErrorMsg(e);
+                throw e;
+            }
         }
     }
 
     public static void validateLottoNumberCount(int lottoNumberCount) {
         if (lottoNumberCount != VALID_LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_SIZE);
+            try {
+                throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_SIZE);
+            } catch (Exception e) {
+                printErrorMsg(e);
+                throw e;
+            }
         }
     }
 }

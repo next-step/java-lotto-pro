@@ -1,30 +1,26 @@
 package lotto.domain;
 
-import lotto.view.OutputView;
+import lotto.constants.Rank;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(int lottoAmount) {
-        lottos = new ArrayList<>();
-        for (int i = 0; i < lottoAmount; i++) {
-            Lotto lotto = new Lotto();
-            lottos.add(lotto);
-        }
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    public LottoResult findWinner(Lotto winningNumbers) {
-        LottoResult lottoResult = new LottoResult();
+    public LottoResult findWinner(Lotto winningNumbers, LottoNumber bonusBall) {
+        HashMap<Rank, Integer> lottoResult = new HashMap<>();
         for (Lotto lotto : lottos) {
-            int collectNumber = lotto.countCollectNumber(winningNumbers);
-            lottoResult.putLottoResult(collectNumber);
+            Rank collectNumber = lotto.countCollectNumber(winningNumbers, bonusBall);
+            lottoResult.put(collectNumber, lottoResult.getOrDefault(collectNumber, 0) + 1);
         }
-        return lottoResult;
+        return new LottoResult(lottoResult);
     }
 
     public List<Lotto> getLottos() {

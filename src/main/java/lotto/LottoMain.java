@@ -5,7 +5,9 @@ import lotto.view.InputView;
 
 public class LottoMain {
     public static void main(String[] args) {
-        LottoGame lottoGame = new LottoGame(InputView.inputPayAmount());
-        lottoGame.checkLottoNumbers(InputView.inputLottoWinningNumbers());
+        LottoGame lottoGame = LottoGame.of(InputView.inputPayAmount());
+        lottoGame.printLottoAmount();
+        lottoGame.printLottos();
+        lottoGame.start(InputView.inputLottoWinningNumbers(), InputView.inputBonusBall());
     }
 }
