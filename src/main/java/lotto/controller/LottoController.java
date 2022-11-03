@@ -109,5 +109,4 @@ public class LottoController {
         
         OutputView.printResultOutput(this.myResult.winningMap, this.myResult.returnRate);
     }
-
 }
