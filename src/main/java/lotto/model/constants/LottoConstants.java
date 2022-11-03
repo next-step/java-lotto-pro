@@ -10,7 +10,7 @@ public class LottoConstants {
     public static final int LOTTO_NUMBER_COUNT = 6;
     public static final int LOTTO_NUMBER_MIN = 1;
     public static final int LOTTO_NUMBER_MAX = 45;
-    public static final String WIN_LOTTO_DELIMITER = ", ";
+    public static final String WIN_LOTTO_DELIMITER = "[ ]*,[ ]*";
 
     public static final List<Integer> LOTTO_NUMBER_POOL = new ArrayList<Integer>() {
         {
@@ -21,6 +21,9 @@ public class LottoConstants {
     };
 
     public static final long LOTTO_UNIT_PRICE = 1000;
+    public static final String LOTTO_PRINT_START = "[";
+    public static final String LOTTO_PRINT_END = "]";
+    public static final String LOTTO_PRINT_DELIMITER = ", ";
 
     public static final WinCriteria LOTTO_WIN_CRITERIA = new WinCriteria() {
         {
