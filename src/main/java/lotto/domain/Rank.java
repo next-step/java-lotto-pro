@@ -30,18 +30,22 @@ public enum Rank {
     }
 
     public static Rank get(int matchCount, boolean isBonus) {
-        if (matchCount == Rank.THIRD.getMatchCount() && isBonus) {
-            return Rank.SECOND;
-        }
-
-        if (matchCount == Rank.THIRD.getMatchCount()) {
-            return Rank.THIRD;
+        if (matchCount == Rank.SECOND.getMatchCount()) {
+            return secondAndThird(isBonus);
         }
 
         return Arrays.stream(Rank.values())
                 .filter(s -> s.getMatchCount() == matchCount)
                 .findFirst()
                 .orElse(Rank.MISS);
+    }
+
+    private static Rank secondAndThird(boolean isBonus) {
+        if (isBonus) {
+            return Rank.SECOND;
+        }
+
+        return Rank.THIRD;
     }
 
     public Money getMoney() {

@@ -48,4 +48,13 @@ public class LottoTicketTest {
         LottoTicket ticket1 = LottoTicketFixture.create();
         assertThat(ticket1.contain(LottoNumber.get(1))).isTrue();
     }
+
+    @DisplayName("로또 티켓은 로또 번호 순서와 상관없이 비교된다")
+    @Test
+    void lotto_ticket_equal_test() {
+        LottoTicket origin = new ManualLottoGenerator(Arrays.asList(1, 2, 3, 4, 5, 6)).create();
+        LottoTicket compare = new ManualLottoGenerator(Arrays.asList(6, 5, 4, 3, 2, 1)).create();
+
+        assertThat(origin.equals(compare)).isTrue();
+    }
 }

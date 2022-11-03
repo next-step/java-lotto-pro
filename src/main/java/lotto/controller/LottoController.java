@@ -1,24 +1,23 @@
 package lotto.controller;
 
+import lotto.constant.LOTTO;
 import lotto.domain.*;
 import lotto.domain.ManualLottoGenerator;
 import lotto.domain.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class LottoController {
-    private static final Pattern STANDARD_PATTERN = Pattern.compile(",");
-
     public void run() {
         Money money = new Money(InputView.getMoney());
-        List<LottoTicket> tickets = LottoMarket.sell(money, new RandomLottoGenerator());
-        OutputView.printTickets(tickets);
+        Quantity manualQuantity = new Quantity(InputView.getManualLottoCount());
 
+        LottoMarket lottoMarket = new LottoMarket(new Money(LOTTO.PRICE), new RandomLottoGenerator());
+        List<LottoTicket> tickets = lottoMarket.sell(money, InputView.getManualNumbers(manualQuantity));
+
+        OutputView.printTickets(tickets, manualQuantity);
         showLottoResult(money, tickets);
     }
 
@@ -31,9 +30,7 @@ public class LottoController {
     }
 
     private List<Integer> createWinningNumbers() {
-        return Arrays.stream(STANDARD_PATTERN.split(InputView.getWiningNumber()))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        return ManualLottoGenerator.toNumbers(InputView.getWiningNumber());
     }
 
     private LottoNumber chooseBonusNumber(LottoTicket winningTicket) {
