@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.lottonumber.LottoNumbers;
+import java.util.List;
 import lotto.domain.result.DefaultLottoResult;
 
 public interface LottoView {
@@ -11,7 +11,11 @@ public interface LottoView {
 
     String readBonus();
 
-    void printLottoNumbers(LottoNumbers lottoNumbers);
+    String readManualLottoCount();
+
+    List<String> readManualLottoNumber(int manualLottoCount);
+
+    void printLottoNumbers(String lottoNumbersResult);
 
     void printResult(DefaultLottoResult lottoResult);
 

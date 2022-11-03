@@ -1,6 +1,8 @@
 package lotto.domain.lottonumber.purchase;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import lotto.domain.lottonumber.purchase.factory.PurchaseFactoryImpl;
 import org.junit.jupiter.api.DisplayName;
@@ -8,6 +10,21 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class PurchaseTest {
+
+
+    @ParameterizedTest
+    @CsvSource(value = {"1000:1", "2000:2", "3000:3"}, delimiter = ':')
+    void 수동_구매_로또_수가_숫자면_통과(String readPurchase, String manualLottoCount) {
+        Purchase purchase = new Purchase(readPurchase);
+        assertThatNoException().isThrownBy(() -> purchase.validateManualLottoCount(manualLottoCount));
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1000:a", "1000:ㄱ", "1000:@"}, delimiter = ':')
+    void 수동_구매_로또_수가_숫자_아니면_EX(String readPurchase, String manualLottoCount) {
+        Purchase purchase = new Purchase(readPurchase);
+        assertThatIllegalArgumentException().isThrownBy(() -> purchase.validateManualLottoCount(manualLottoCount));
+    }
 
     @ParameterizedTest
     @DisplayName("구매금액과 이윤으로 총 수익률 계산")

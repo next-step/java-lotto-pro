@@ -1,18 +1,18 @@
 package lotto.domain.winningnumber.factory;
 
+import lotto.domain.validation.DefaultNumberValidator;
+import lotto.domain.validation.NumberValidator;
 import lotto.domain.winningnumber.WinningNumber;
 import lotto.domain.winningnumber.WinningNumberOnly;
-import lotto.domain.winningnumber.factory.validation.DefaultWinningNumberValidator;
-import lotto.domain.winningnumber.factory.validation.WinningNumberValidator;
 
 public class WinningNumberOnlyFactory implements WinningNumberFactory {
 
-    private WinningNumberValidator validator;
+    private NumberValidator validator;
     private String winningNumber;
 
     public WinningNumberOnlyFactory(String winningNumber) {
         this.winningNumber = winningNumber;
-        this.validator = new DefaultWinningNumberValidator();
+        this.validator = new DefaultNumberValidator();
     }
 
     @Override

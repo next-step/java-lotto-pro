@@ -1,4 +1,4 @@
-package lotto.domain.winningnumber.factory.validation;
+package lotto.domain.validation;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -6,9 +6,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class DefaultWinningNumberValidatorTest {
+class DefaultNumberValidatorTest {
 
-    WinningNumberValidator validator = new DefaultWinningNumberValidator();
+    NumberValidator validator = new DefaultNumberValidator();
 
     @ParameterizedTest
     @DisplayName("쉼표(,) 가 포함되지 않으면 EX 발생")
