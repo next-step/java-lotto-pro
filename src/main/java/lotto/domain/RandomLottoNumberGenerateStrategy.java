@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomGenerateStrategy implements GenerateStrategy {
+public class RandomLottoNumberGenerateStrategy implements LottoNumberGenerateStrategy {
     private static final int START_INCLUSIVE = 1;
     private static final int END_INCLUSIVE = 45;
     private static final List<Integer> CACHED_NUMBER = IntStream.rangeClosed(START_INCLUSIVE, END_INCLUSIVE)

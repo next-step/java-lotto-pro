@@ -5,7 +5,7 @@ import lotto.view.InputProvider;
 import lotto.view.OutputProvider;
 
 public class LottoService {
-    private final LottoStore lottoStore = new LottoStore(new RandomGenerateStrategy());
+    private final LottoStore lottoStore = new LottoStore(new RandomLottoNumberGenerateStrategy());
 
     public void execute() {
         LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(InputProvider.purchaseAmount());
