@@ -3,6 +3,13 @@ package lotto;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.LottoCustomer;
+import lotto.domain.LottoException;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoStore;
+import lotto.domain.Money;
+import lotto.domain.UniqueLottoNumbersSupplier;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 

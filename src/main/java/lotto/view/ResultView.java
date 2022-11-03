@@ -2,10 +2,10 @@ package lotto.view;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.LottoNumberMatchCount;
-import lotto.LottoNumbers;
-import lotto.LottoResultStatistics;
-import lotto.Money;
+import lotto.domain.LottoNumberMatchCount;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoResultStatistics;
+import lotto.domain.Money;
 
 public final class ResultView {
 

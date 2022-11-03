@@ -2,6 +2,11 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import lotto.domain.LottoCustomer;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoResultStatistics;
+import lotto.domain.LottoTicket;
+import lotto.domain.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

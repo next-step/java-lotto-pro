@@ -1,7 +1,7 @@
 package lotto.view;
 
 import java.util.Scanner;
-import lotto.LottoException;
+import lotto.domain.LottoException;
 
 public final class InputView {
 
