@@ -61,3 +61,28 @@
     * 로또 복권 1장의 구입 가격 1000원 입니다.
 * Prize
   * 맞춘 개수, 보상 금액
+
+* * *
+
+## 로또(2등)
+### 기능 목록
+* 4단계 미션 문서에 enum Rank 소스에 따라 Prize 소스 수정
+* View
+  * Input View
+    * 보너스 볼 입력
+      * "보너스 볼을 입력해 주세요." 추가
+  * Result View
+    * 당첨 통계
+      * "5개 일치, 보너스 볼 일치(30000000원) - X개" 추가
+* LottoNumber
+  * 보너스볼 번호 변수 추가
+  * 보너스볼 번호 포함 여부 메소드 추가
+* Statistic
+  * prize 변수 key값을 Integer 타입에서 Rank 타입으로 변경
+* Validate
+  * 지난주 당첨 번호 중에 중복된 번호가 있는지 검사
+    * "로또 번호는 중복될 수 없습니다." 추가
+    * IllegalArgumentException
+  * 지난주 당첨 번호에 입력했던 번호 입력 불가
+    * "입력하신 보너스 번호는 지난주 당첨 번호에 이미 있는 번호입니다." 추가 
+    * IllegalArgumentException

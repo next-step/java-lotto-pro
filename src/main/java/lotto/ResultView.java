@@ -8,6 +8,7 @@ package lotto;
 import static lotto.Constant.EA;
 import static lotto.Constant.RESULT_BOUGHT_SOME;
 import static lotto.Constant.RESULT_HIT_FIVE;
+import static lotto.Constant.RESULT_HIT_FIVE_AND_BONUS;
 import static lotto.Constant.RESULT_HIT_FOUR;
 import static lotto.Constant.RESULT_HIT_SIX;
 import static lotto.Constant.RESULT_HIT_THREE;
@@ -22,8 +23,8 @@ public class ResultView {
         System.out.println(purchaseCount + RESULT_BOUGHT_SOME);
     }
 
-    void printResultPurchase(List<LottoNumber> lottoNumbers) {
-        for (LottoNumber lottoNumber : lottoNumbers) {
+    void printResultPurchase(List<LottoNumbers> lottoNumbers) {
+        for (LottoNumbers lottoNumber : lottoNumbers) {
             System.out.println(lottoNumber);
         }
     }
@@ -35,9 +36,10 @@ public class ResultView {
 
     private void printWinningCount(Statistic statistic) {
         System.out.println("\n" + RESULT_WINNING_STATISTICS);
-        System.out.println(RESULT_HIT_THREE + statistic.getCountOfFourth() + EA);
-        System.out.println(RESULT_HIT_FOUR + statistic.getCountOfThird() + EA);
-        System.out.println(RESULT_HIT_FIVE + statistic.getCountOfSecond() + EA);
+        System.out.println(RESULT_HIT_THREE + statistic.getCountOfFifth() + EA);
+        System.out.println(RESULT_HIT_FOUR + statistic.getCountOfFourth() + EA);
+        System.out.println(RESULT_HIT_FIVE + statistic.getCountOfThird() + EA);
+        System.out.println(RESULT_HIT_FIVE_AND_BONUS + statistic.getCountOfSecond() + EA);
         System.out.println(RESULT_HIT_SIX + statistic.getCountOfFirst() + EA);
     }
 

@@ -6,10 +6,12 @@
 package lotto;
 
 import static lotto.Constant.DELIMITER;
+import static lotto.Constant.ERROR_BONUS_NUMBER_DUPLICATED;
 import static lotto.Constant.ERROR_INPUT_EMPTY_COST;
 import static lotto.Constant.ERROR_INPUT_EMPTY_WINNING_NUMBER;
 import static lotto.Constant.ERROR_INPUT_SIX_NUMBER;
 import static lotto.Constant.ERROR_LOTTO_COST;
+import static lotto.Constant.ERROR_LOTTO_NUMBER_DUPLICATED;
 import static lotto.Constant.ERROR_NUMBER_RANGE;
 import static lotto.Constant.ERROR_ONLY_NUMBER;
 import static lotto.Constant.LOTTO_END_NUMBER;
@@ -19,6 +21,9 @@ import static lotto.Constant.LOTTO_START_NUMBER;
 import static lotto.Constant.NULL;
 import static lotto.Constant.REGEX_ONLY_NUMBER;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
@@ -73,6 +78,27 @@ public class Validate {
     static void validateWinningNumberCount(String input) {
         if (new StringTokenizer(input, DELIMITER).countTokens() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(ERROR_INPUT_SIX_NUMBER);
+        }
+    }
+
+    static void validateWinningNumberDuplicate(String input) {
+        if (isSixNumbers(input) < LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_DUPLICATED);
+        }
+    }
+
+    private static int isSixNumbers(String input) {
+        Set<String> checkSet = new HashSet<>();
+        StringTokenizer token = new StringTokenizer(input, DELIMITER);
+        while (token.hasMoreTokens()) {
+            checkSet.add(token.nextToken());
+        }
+        return checkSet.size();
+    }
+
+    static void validateBonusNumberDuplicate(int input, List<LottoNumber> winningNumber) {
+        if (winningNumber.contains(new LottoNumber(input))) {
+            throw new IllegalArgumentException(ERROR_BONUS_NUMBER_DUPLICATED);
         }
     }
 }

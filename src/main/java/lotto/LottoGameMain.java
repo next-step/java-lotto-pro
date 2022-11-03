@@ -18,11 +18,12 @@ public class LottoGameMain {
         int purchaseCount = lottoGame.getPurchaseCount();
         resultView.printResultPay(purchaseCount);
 
-        List<LottoNumber> lottoNumbers = lottoGame.purchaseLotto(purchaseCount);
+        List<LottoNumbers> lottoNumbers = lottoGame.purchaseLotto(purchaseCount);
         resultView.printResultPurchase(lottoNumbers);
 
-        Statistic statistic = new Statistic(new WinningNumber(inputView.inputWinningNumberLastWeek()));
-        statistic.countPrize(lottoNumbers);
+        List<LottoNumber> winningNumbers = inputView.inputWinningNumberLastWeek();
+        Statistic statistic = new Statistic(new LottoNumbers(winningNumbers));
+        statistic.countPrize(lottoNumbers, inputView.inputBonusNumberLastWeek(winningNumbers));
 
         resultView.printResultWinningStatistics(payMoney, statistic);
     }

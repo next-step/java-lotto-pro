@@ -8,5 +8,5 @@ package lotto;
 import java.util.List;
 
 public interface LottoNumberGenerator {
-    List<Integer> generateSixNumbers();
+    List<LottoNumber> generateSixNumbers();
 }

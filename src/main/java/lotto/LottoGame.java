@@ -23,10 +23,10 @@ public class LottoGame {
         return money / LOTTO_PRICE;
     }
 
-    public List<LottoNumber> purchaseLotto(int purchaseCount) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+    public List<LottoNumbers> purchaseLotto(int purchaseCount) {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
-            lottoNumbers.add(new LottoNumber(lottoNumberGenerator.generateSixNumbers()));
+            lottoNumbers.add(new LottoNumbers(lottoNumberGenerator.generateSixNumbers()));
         }
         return lottoNumbers;
     }

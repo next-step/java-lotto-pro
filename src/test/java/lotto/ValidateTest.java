@@ -2,6 +2,8 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 public class ValidateTest {
@@ -62,6 +64,25 @@ public class ValidateTest {
     @Test
     void 당첨_번호_5개만_입력() {
         assertThatThrownBy(() -> Validate.validateWinningNumberCount("1, 2, 3, 4, 5"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 당첨_번호중_중복된_번호_검사() {
+        assertThatThrownBy(() -> Validate.validateWinningNumberDuplicate("1, 1, 3, 4, 5"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 보너스_번호와_당첨_번호간에_중복_검사() {
+        assertThatThrownBy(
+                () -> Validate.validateBonusNumberDuplicate(1, new ArrayList<>(
+                        Arrays.asList(new LottoNumber(1),
+                                new LottoNumber(2),
+                                new LottoNumber(3),
+                                new LottoNumber(4),
+                                new LottoNumber(5),
+                                new LottoNumber(6)))))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

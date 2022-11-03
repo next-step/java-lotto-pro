@@ -6,85 +6,63 @@
 package lotto;
 
 import static lotto.Constant.ZERO;
+import static lotto.Rank.FIFTH;
+import static lotto.Rank.FIRST;
+import static lotto.Rank.FOURTH;
+import static lotto.Rank.MISS;
+import static lotto.Rank.SECOND;
+import static lotto.Rank.THIRD;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Statistic {
-    private final Map<Integer, Integer> prize = new HashMap<>();
-    private final WinningNumber winningNumber;
+    private final Map<Rank, Integer> prize = new HashMap<>();
+    private final LottoNumbers winningNumber;
 
-    public Statistic(WinningNumber winningNumber) {
+    public Statistic(LottoNumbers winningNumber) {
         initialize();
         this.winningNumber = winningNumber;
     }
 
     private void initialize() {
-        prize.put(Prize.FIRST.getHit(), ZERO);
-        prize.put(Prize.SECOND.getHit(), ZERO);
-        prize.put(Prize.THIRD.getHit(), ZERO);
-        prize.put(Prize.FOURTH.getHit(), ZERO);
+        prize.put(FIRST, ZERO);
+        prize.put(SECOND, ZERO);
+        prize.put(THIRD, ZERO);
+        prize.put(FOURTH, ZERO);
+        prize.put(FIFTH, ZERO);
+        prize.put(MISS, ZERO);
     }
 
-    public void countPrize(List<LottoNumber> lottoNumbers) {
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            inputCountPrize(winningNumber.countHit(lottoNumber));
+    public void countPrize(List<LottoNumbers> lottoNumbers, LottoNumber bonus) {
+        for (LottoNumbers lottoNumber : lottoNumbers) {
+            addCount(lottoNumber.getRank(winningNumber, bonus));
         }
     }
 
-    private void inputCountPrize(int hit) {
-        if (isHitThree(hit)) {
-            addCount(Prize.FOURTH.getHit());
-            return;
-        }
-        if (isHitFour(hit)) {
-            addCount(Prize.THIRD.getHit());
-            return;
-        }
-        if (isHitFive(hit)) {
-            addCount(Prize.SECOND.getHit());
-            return;
-        }
-        if (isHitSix(hit)) {
-            addCount(Prize.FIRST.getHit());
-        }
-    }
-
-    private boolean isHitThree(int hit) {
-        return hit == Prize.FOURTH.getHit();
-    }
-
-    private boolean isHitFour(int hit) {
-        return hit == Prize.THIRD.getHit();
-    }
-
-    private boolean isHitFive(int hit) {
-        return hit == Prize.SECOND.getHit();
-    }
-
-    private boolean isHitSix(int hit) {
-        return hit == Prize.FIRST.getHit();
-    }
-
-    private void addCount(int hit) {
-        prize.put(hit, prize.get(hit) + 1);
+    private void addCount(Rank rank) {
+        prize.put(rank, prize.get(rank) + 1);
     }
 
     public int getCountOfFirst() {
-        return prize.get(Prize.FIRST.getHit());
+        return prize.get(FIRST);
     }
 
     public int getCountOfSecond() {
-        return prize.get(Prize.SECOND.getHit());
+        return prize.get(SECOND);
     }
 
     public int getCountOfThird() {
-        return prize.get(Prize.THIRD.getHit());
+        return prize.get(THIRD);
     }
 
     public int getCountOfFourth() {
-        return prize.get(Prize.FOURTH.getHit());
+        return prize.get(FOURTH);
+    }
+
+    public int getCountOfFifth() {
+        return prize.get(FIFTH);
     }
 
     public double calculateTotalEarningsRate(int payMoney) {
@@ -92,9 +70,10 @@ public class Statistic {
     }
 
     public double calculateTotalEarnings() {
-        return Prize.FOURTH.getPrize() * prize.get(Prize.FOURTH.getHit())
-                + Prize.THIRD.getPrize() * prize.get(Prize.THIRD.getHit())
-                + Prize.SECOND.getPrize() * prize.get(Prize.SECOND.getHit())
-                + Prize.FIRST.getPrize() * prize.get(Prize.FIRST.getHit());
+        return FIFTH.getWinningMoney() * prize.get(FIFTH)
+                + FOURTH.getWinningMoney() * prize.get(FOURTH)
+                + THIRD.getWinningMoney() * prize.get(THIRD)
+                + SECOND.getWinningMoney() * prize.get(SECOND)
+                + FIRST.getWinningMoney() * prize.get(FIRST);
     }
 }
