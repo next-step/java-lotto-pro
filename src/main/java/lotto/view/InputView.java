@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoPurchaseAmount;
+import lotto.domain.LottoPurchaseQuantity;
 import lotto.domain.Money;
 
 import java.util.InputMismatchException;
@@ -28,10 +29,15 @@ public class InputView {
         }
     }
 
-    public static String inputManualPurchaseQuantity() {
-        OutputView.printNewLine();
-        OutputView.println(INPUT_MESSAGE_MANUAL_PURCHASE_QUANTITY);
-        return scanner.nextLine();
+    public static LottoPurchaseQuantity inputManualPurchaseQuantity() {
+        try {
+            OutputView.printNewLine();
+            OutputView.println(INPUT_MESSAGE_MANUAL_PURCHASE_QUANTITY);
+            return LottoPurchaseQuantity.manualQuantity(scanner.nextLine());
+        } catch (Exception e) {
+            OutputView.error(e.getMessage());
+            return inputManualPurchaseQuantity();
+        }
     }
 
     public static void inputManualNumbersInformation() {

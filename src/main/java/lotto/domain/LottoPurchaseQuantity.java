@@ -16,10 +16,17 @@ public class LottoPurchaseQuantity {
 
     private LottoPurchaseQuantity(int quantity) {
         this.quantity = quantity;
+        validNegative();
     }
 
     public static LottoPurchaseQuantity of(int quantity) {
         return new LottoPurchaseQuantity(quantity);
+    }
+
+    private void validNegative() {
+        if (quantity < 0) {
+            throw new IllegalArgumentException(OutputView.ERROR_MESSAGE_NEGATIVE_NUMBER);
+        }
     }
 
     public static LottoPurchaseQuantity manualQuantity(String inputQuantity) {

@@ -9,7 +9,7 @@ import java.util.Optional;
 public class Lotto {
     public void run() {
         LottoPurchaseAmount lottoPurchaseAmount = InputView.inputPurchaseAmount();
-        LottoPurchaseQuantity manualQuantity = LottoPurchaseQuantity.manualQuantity(InputView.inputManualPurchaseQuantity());
+        LottoPurchaseQuantity manualQuantity = InputView.inputManualPurchaseQuantity();
         LottoPurchaseQuantity autoQuantity = lottoPurchaseAmount.calculateAutoQuantity(manualQuantity);
 
         LottoLottery lottoLottery = getLottoLottery(manualQuantity, autoQuantity);

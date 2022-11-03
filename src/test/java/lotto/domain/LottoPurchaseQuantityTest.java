@@ -42,6 +42,14 @@ class LottoPurchaseQuantityTest {
     }
 
     @Test
+    @DisplayName("수동 로또 횟수 음수 입력 불가능")
+    void manual_lotto_purchase_quantity_not_negative() {
+        assertThatThrownBy(() -> LottoPurchaseQuantity.manualQuantity("-2"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("음수는 입력 불가능합니다.");
+    }
+
+    @Test
     @DisplayName("구매 갯수 출력(자동, 수동)")
     void print_lotto_quantity_auto_manual() {
         LottoPurchaseQuantity manualQuantity = LottoPurchaseQuantity.manualQuantity("5");
