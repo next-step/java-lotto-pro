@@ -27,9 +27,7 @@ public class LottoPurchaseAmountTest {
     @Test
     @DisplayName("구입_금액_단위_채크")
     void 구입_금액_단위_채크() {
-        assertThatThrownBy(() -> new LottoPurchaseAmount(5100))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.ERROR_PURCHASE_AMOUNT_UNIT);
+        assertThat(new LottoPurchaseAmount(5102).getQuantity()).isEqualTo(5);
     }
 
     @Test

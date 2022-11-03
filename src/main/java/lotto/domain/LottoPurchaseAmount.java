@@ -20,9 +20,6 @@ public class LottoPurchaseAmount {
         if (isOverPurchaseAmount(money)) {
             throw new IllegalArgumentException(ErrorMessage.ERROR_PURCHASE_AMOUNT_MAX);
         }
-        if (!isPurchaseAmountUnit(money)) {
-            throw new IllegalArgumentException(ErrorMessage.ERROR_PURCHASE_AMOUNT_UNIT);
-        }
         return money / LOTTO_PRICE;
     }
 
