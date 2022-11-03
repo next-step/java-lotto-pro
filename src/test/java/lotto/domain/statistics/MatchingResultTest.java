@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lotto.domain.lotto.Fixture;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Matches;
@@ -19,22 +20,19 @@ class MatchingResultTest {
     @DisplayName("결과가 같으면, 동일하다.")
     @Test
     void 동일성() {
-        final MatchingResult one = new MatchingResult(
-                new HashMap<Matches, Long>() {{
-                    put(Matches.SIX, 1L);
-                }}
-        );
-        final MatchingResult another = new MatchingResult(
-                new HashMap<Matches, Long>() {{
-                    put(Matches.SIX, 1L);
-                    put(Matches.FIVE, 0L);
-                    put(Matches.FOUR, 0L);
-                    put(Matches.THREE, 0L);
-                    put(Matches.BLANK, 0L);
-                }}
-        );
+        final Map<Matches, Long> one = new HashMap<Matches, Long>() {{
+            put(Matches.SIX, 1L);
+        }};
 
-        assertThat(one).isEqualTo(another);
+        final Map<Matches, Long> another = new HashMap<Matches, Long>() {{
+            put(Matches.SIX, 1L);
+            put(Matches.FIVE, 0L);
+            put(Matches.FOUR, 0L);
+            put(Matches.THREE, 0L);
+            put(Matches.BLANK, 0L);
+        }};
+
+        assertThat(new MatchingResult(one)).isEqualTo(new MatchingResult(another));
     }
 
     @DisplayName("로또 목록은 null이 아니어야 한다.")

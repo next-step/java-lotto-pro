@@ -13,18 +13,12 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Matches;
 
 public class MatchingResult {
-    private final Map<Matches, Long> result = new EnumMap<>(Matches.class);
-    ;
+    private final Map<Matches, Long> result;
 
     public MatchingResult(final Map<Matches, Long> result) {
-        initializeAllValuesAsZero(result);
+        this.result = new EnumMap<>(Matches.class);
+        initializeAllValuesAsZero();
         this.result.putAll(result);
-    }
-
-    private static void initializeAllValuesAsZero(Map<Matches, Long> result) {
-        for (Matches matches : Matches.values()) {
-            result.put(matches, 0L);
-        }
     }
 
     public static MatchingResult matches(final List<Lotto> lottos, final Lotto winningNumbers) {
@@ -38,6 +32,12 @@ public class MatchingResult {
         return lottos.stream()
                 .map(lotto -> lotto.match(winningNumbers))
                 .collect(groupingBy(identity(), counting()));
+    }
+
+    private void initializeAllValuesAsZero() {
+        for (Matches matches : Matches.values()) {
+            this.result.put(matches, 0L);
+        }
     }
 
     @Override
