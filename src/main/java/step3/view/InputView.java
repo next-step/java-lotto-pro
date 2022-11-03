@@ -11,6 +11,7 @@ import static step3.constant.Message.System.*;
 public class InputView {
     private final static Scanner scanner = new Scanner(System.in);
 
+
     public static String inputString(String message) {
         System.out.println(message);
         return scanner.nextLine();
@@ -24,9 +25,10 @@ public class InputView {
         return scanner.nextLine();
     }
 
+
     public static void inputLastWeekLottoNumbers(LottoCalculator calculator) {
         System.out.println(LAST_LOTTO_NUMBERS_INPUT_MESSAGE);
-        String[] lastWeekNumbers = new Lotto().validateInputStringLottoNumber(scanner.nextLine());
+        String[] lastWeekNumbers = new Lotto().validateLastWeekWinner(scanner.nextLine());
         calculator.setLastWeekWinner(inputLastWeekBonusNumber(lastWeekNumbers));
     }
 
@@ -34,6 +36,4 @@ public class InputView {
         System.out.println(LAST_BONUS_NUMBER_INPUT_MESSAGE);
         return new WinnerLotto(Lotto.makeLottoNumberList(lastWeekLottos), scanner.nextLine());
     }
-
-
 }
