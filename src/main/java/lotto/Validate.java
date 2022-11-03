@@ -96,8 +96,8 @@ public class Validate {
         return checkSet.size();
     }
 
-    static void validateBonusNumberDuplicate(int input, List<Integer> winningNumber) {
-        if (winningNumber.contains(input)) {
+    static void validateBonusNumberDuplicate(int input, List<LottoNumber> winningNumber) {
+        if (winningNumber.contains(new LottoNumber(input))) {
             throw new IllegalArgumentException(ERROR_BONUS_NUMBER_DUPLICATED);
         }
     }

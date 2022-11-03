@@ -29,7 +29,7 @@ public class InputView {
         System.out.println(INPUT_PAY_MONEY);
     }
 
-    List<Integer> inputWinningNumberLastWeek() {
+    List<LottoNumber> inputWinningNumberLastWeek() {
         printInputWinningNumberLastWeek();
         String input = scanner.nextLine();
         Validate.validateWinningNumberNull(input);
@@ -44,13 +44,13 @@ public class InputView {
         System.out.println("\n" + INPUT_WINNING_NUMBER_LAST_WEEK);
     }
 
-    int inputBonusNumberLastWeek(List<Integer> winningNumber) {
+    LottoNumber inputBonusNumberLastWeek(List<LottoNumber> winningNumber) {
         printInputBonusNumberLastWeek();
         String input = scanner.nextLine();
         Validate.validateOnlyNumber(input);
         Validate.validateWinningNumberRange(input);
         Validate.validateBonusNumberDuplicate(Integer.parseInt(input), winningNumber);
-        return Integer.parseInt(input);
+        return new LottoNumber(Integer.parseInt(input));
     }
 
     private void printInputBonusNumberLastWeek() {

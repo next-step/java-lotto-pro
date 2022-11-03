@@ -5,34 +5,29 @@
  */
 package lotto;
 
+import static lotto.Rank.valueOf;
+
 import java.util.List;
 
 public class LottoNumbers {
-    private final List<Integer> sixNumbers;
-    private final int bonusNumber;
+    private final List<LottoNumber> sixNumbers;
 
-    public LottoNumbers(List<Integer> sixNumbers) {
+    public LottoNumbers(List<LottoNumber> sixNumbers) {
         this.sixNumbers = sixNumbers;
-        this.bonusNumber = 0;
     }
 
-    public LottoNumbers(List<Integer> sixNumbers, int bonusNumber) {
-        this.sixNumbers = sixNumbers;
-        this.bonusNumber = bonusNumber;
-    }
-
-    public boolean contains(int number) {
-        return sixNumbers.contains(number);
-    }
-
-    public boolean containsBonus(LottoNumbers lottoNumbers) {
-        return lottoNumbers.contains(bonusNumber);
+    public boolean contains(LottoNumber lottoNumber) {
+        return sixNumbers.contains(lottoNumber);
     }
 
     public int countHit(LottoNumbers lottoNumbers) {
         return (int) sixNumbers.stream()
                 .filter(lottoNumbers::contains)
                 .count();
+    }
+
+    public Rank getRank(LottoNumbers winningNumbers, LottoNumber bonus) {
+        return valueOf(countHit(winningNumbers), contains(bonus));
     }
 
     @Override

@@ -6,6 +6,12 @@
 package lotto;
 
 import static lotto.Constant.ZERO;
+import static lotto.Rank.FIFTH;
+import static lotto.Rank.FIRST;
+import static lotto.Rank.FOURTH;
+import static lotto.Rank.MISS;
+import static lotto.Rank.SECOND;
+import static lotto.Rank.THIRD;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,23 +27,17 @@ public class Statistic {
     }
 
     private void initialize() {
-        prize.put(Rank.FIRST, ZERO);
-        prize.put(Rank.SECOND, ZERO);
-        prize.put(Rank.THIRD, ZERO);
-        prize.put(Rank.FOURTH, ZERO);
-        prize.put(Rank.FIFTH, ZERO);
-        prize.put(Rank.MISS, ZERO);
+        prize.put(FIRST, ZERO);
+        prize.put(SECOND, ZERO);
+        prize.put(THIRD, ZERO);
+        prize.put(FOURTH, ZERO);
+        prize.put(FIFTH, ZERO);
+        prize.put(MISS, ZERO);
     }
 
-    public void countPrize(List<LottoNumbers> lottoNumbers) {
+    public void countPrize(List<LottoNumbers> lottoNumbers, LottoNumber bonus) {
         for (LottoNumbers lottoNumber : lottoNumbers) {
-            inputCountPrize(winningNumber.countHit(lottoNumber), winningNumber.containsBonus(lottoNumber));
-        }
-    }
-
-    private void inputCountPrize(int hit, boolean matchBonus) {
-        if (prize.containsKey(Rank.valueOf(hit, matchBonus))) {
-            addCount(Rank.valueOf(hit, matchBonus));
+            addCount(lottoNumber.getRank(winningNumber, bonus));
         }
     }
 
@@ -46,23 +46,23 @@ public class Statistic {
     }
 
     public int getCountOfFirst() {
-        return prize.get(Rank.FIRST);
+        return prize.get(FIRST);
     }
 
     public int getCountOfSecond() {
-        return prize.get(Rank.SECOND);
+        return prize.get(SECOND);
     }
 
     public int getCountOfThird() {
-        return prize.get(Rank.THIRD);
+        return prize.get(THIRD);
     }
 
     public int getCountOfFourth() {
-        return prize.get(Rank.FOURTH);
+        return prize.get(FOURTH);
     }
 
     public int getCountOfFifth() {
-        return prize.get(Rank.FIFTH);
+        return prize.get(FIFTH);
     }
 
     public double calculateTotalEarningsRate(int payMoney) {
@@ -70,10 +70,10 @@ public class Statistic {
     }
 
     public double calculateTotalEarnings() {
-        return Rank.FIFTH.getWinningMoney() * prize.get(Rank.FIFTH)
-                + Rank.FOURTH.getWinningMoney() * prize.get(Rank.FOURTH)
-                + Rank.THIRD.getWinningMoney() * prize.get(Rank.THIRD)
-                + Rank.SECOND.getWinningMoney() * prize.get(Rank.SECOND)
-                + Rank.FIRST.getWinningMoney() * prize.get(Rank.FIRST);
+        return FIFTH.getWinningMoney() * prize.get(FIFTH)
+                + FOURTH.getWinningMoney() * prize.get(FOURTH)
+                + THIRD.getWinningMoney() * prize.get(THIRD)
+                + SECOND.getWinningMoney() * prize.get(SECOND)
+                + FIRST.getWinningMoney() * prize.get(FIRST);
     }
 }
