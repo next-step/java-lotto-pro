@@ -58,7 +58,7 @@ public class LottoApp implements App {
         newLine();
 
         App lottoStaticApp = LottoStaticApp.builder()
-            .lottoList(lottoBuyer.reportLottoList())
+            .lottoList(lottoBuyer)
             .winLotto(winLotto)
             .bonusLottoNumber(bonusLottoNumber)
             .payAmount(new PayAmount(payAmount))

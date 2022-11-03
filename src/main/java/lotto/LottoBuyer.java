@@ -1,11 +1,10 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoBuyer {
     private final PayAmount payAmount;
-    private final List<Lotto> lottoList = new ArrayList<>();
+    private final LottoList lottoList = new LottoList();
     private int manualLottoCount = 0;
     private int randomLottoCount = 0;
 
@@ -23,14 +22,14 @@ public class LottoBuyer {
         lottoStore.buyWith(() -> new ManualLottoNumberGenerateStrategy(numbers));
         List<Lotto> newLottoOne = lottoStore.pay(this.payAmount, new PayCount(1));
         this.manualLottoCount += newLottoOne.size();
-        lottoList.addAll(newLottoOne);
+        lottoList.add(newLottoOne);
     }
 
     public void buyWithRandom(LottoStore lottoStore) {
         lottoStore.buyWith(RandomLottoNumberGenerateStrategy::new);
         List<Lotto> newLottoMany = lottoStore.payAll(this.payAmount);
         this.randomLottoCount += newLottoMany.size();
-        lottoList.addAll(newLottoMany);
+        lottoList.add(newLottoMany);
     }
 
     public int getManualLottoCount() {
@@ -43,15 +42,18 @@ public class LottoBuyer {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        for (Lotto lotto : lottoList) {
-            builder.append(lotto.toString())
-                .append("\n");
-        }
-        return builder.toString();
+        return lottoList.toString();
     }
 
-    public List<Lotto> reportLottoList() {
-        return this.lottoList;
+    public void match(Lotto winLotto, BonusLottoNumber bonusLottoNumber) {
+        lottoList.match(winLotto, bonusLottoNumber);
+    }
+
+    public Integer getLottoMatchTypeCount(LottoMatchType lottoMatchType) {
+        return lottoList.getLottoMatchTypeCount(lottoMatchType);
+    }
+
+    public int getSumProfit() {
+        return lottoList.getSumProfit();
     }
 }
