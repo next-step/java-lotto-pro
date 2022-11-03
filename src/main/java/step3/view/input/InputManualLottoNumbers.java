@@ -2,22 +2,21 @@ package step3.view.input;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static step3.domain.lotto.LottoNumbers.DEFAULT_LOTTO_SIZE;
 import static step3.type.ErrorMessageType.INPUT_ONLY_ALLOW_NUMBER;
 import static step3.type.ErrorMessageType.LOTTO_NUMBER_WRONG_SIZE;
 
-public class InputManualLottoNumbers implements Input<Optional<List<Integer>>> {
+public class InputManualLottoNumbers implements Input<List<Integer>> {
 
     private static final String REGEX = ",";
 
     @Override
-    public Optional<List<Integer>> create() {
+    public List<Integer> create() {
         String input = scanner.nextLine();
         validateBlank(input);
-        return Optional.of(getLottoNumbers(input));
+        return getLottoNumbers(input);
     }
 
     private List<Integer> getLottoNumbers(String input) {
