@@ -1,7 +1,6 @@
-package step3.domain.lotto;
+package step3.view.input;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,14 +8,15 @@ import static step3.domain.lotto.LottoNumbers.DEFAULT_LOTTO_SIZE;
 import static step3.type.ErrorMessageType.INPUT_ONLY_ALLOW_NUMBER;
 import static step3.type.ErrorMessageType.LOTTO_NUMBER_WRONG_SIZE;
 
-public class WinningLottoNumbers {
+public class InputManualLottoNumbers implements Input<List<Integer>> {
 
     private static final String REGEX = ",";
 
-    private final LottoNumbers lottoNumbers;
-
-    public WinningLottoNumbers(String input) {
-        this.lottoNumbers = new LottoNumbers(getLottoNumbers(input));
+    @Override
+    public List<Integer> create() {
+        String input = scanner.nextLine();
+        validateBlank(input);
+        return getLottoNumbers(input);
     }
 
     private List<Integer> getLottoNumbers(String input) {
@@ -41,16 +41,5 @@ public class WinningLottoNumbers {
 
     private String[] getSplit(String input) {
         return input.split(REGEX);
-    }
-
-    public List<LottoNumber> value() {
-        return Collections.unmodifiableList(lottoNumbers.value());
-    }
-
-    @Override
-    public String toString() {
-        return "WinningLottoNumber{" +
-                "lottoNumbers=" + lottoNumbers +
-                '}';
     }
 }

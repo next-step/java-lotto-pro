@@ -1,6 +1,9 @@
 package step3.domain.lotto;
 
+import step3.domain.factory.LottoFactory;
 import step3.domain.statistics.Rank;
+
+import java.util.Objects;
 
 public class Lotto {
 
@@ -9,9 +12,9 @@ public class Lotto {
     private final int price;
     private final LottoNumbers lottoNumbers;
 
-    public Lotto(final LottoNumbers lottoNumbers) {
+    public Lotto(LottoFactory lottoFactory) {
         this.price = DEFAULT_LOTTO_PRICE;
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = lottoFactory.create();
     }
 
     public Rank getRank(WinningLottoNumbers winningLottoNumbers, BonusLottoNumber bonusLottoNumber) {
@@ -28,6 +31,19 @@ public class Lotto {
 
     public LottoNumbers value() {
         return lottoNumbers;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return price == lotto.price && Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(price, lottoNumbers);
     }
 
     @Override

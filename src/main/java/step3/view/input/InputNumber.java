@@ -1,18 +1,15 @@
 package step3.view.input;
 
-import step3.domain.lotto.BonusLottoNumber;
-import step3.domain.lotto.LottoNumber;
-
 import static step3.type.ErrorMessageType.INPUT_ONLY_ALLOW_NUMBER;
 
-public class InputBonusLottoNumber implements Input<BonusLottoNumber> {
+public class InputNumber implements Input<Integer> {
 
     @Override
-    public BonusLottoNumber create() {
+    public Integer create() {
         String input = scanner.nextLine();
         validateBlank(input);
         try {
-            return new BonusLottoNumber(LottoNumber.of(Integer.parseInt(input)));
+            return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INPUT_ONLY_ALLOW_NUMBER.getMessage());
         }

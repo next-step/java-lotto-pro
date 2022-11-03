@@ -4,12 +4,21 @@ import java.util.Objects;
 
 public class Match {
 
+    public static final int MISS_COUNT = 2;
+
     private final int count;
     private final boolean bonus;
 
     public Match(int count, boolean bonus) {
-        this.count = count;
+        this.count = getCount(count);
         this.bonus = bonus;
+    }
+
+    private int getCount(int count) {
+        if (count <= MISS_COUNT) {
+            return 0;
+        }
+        return count;
     }
 
     public int getCount() {
