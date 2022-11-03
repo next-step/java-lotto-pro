@@ -14,6 +14,10 @@ public class Lottos {
     protected Lottos() {
     }
 
+    public List<Lotto> getLottos() {
+        return this.lottos;
+    }
+
     public void add(Lotto lotto) {
         validate(lotto);
         this.lottos.add(lotto);
