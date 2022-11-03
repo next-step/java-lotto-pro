@@ -27,7 +27,7 @@ public class WinningNumbers extends Lotto {
         this(winningNumberIntList.stream()
                 .map(winningNumber -> winningNumber.toString())
                 .collect(Collectors.toList()));
-        if(super.isMatch(this.bonusNumber)) {
+        if(super.isMatch(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호가 당첨숫자와 중복될 수 없습니다.");
         }
         this.winningNumbers = super.lottoNumbers;
