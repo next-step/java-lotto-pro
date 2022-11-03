@@ -48,8 +48,10 @@ public class Lotto {
         validateLottoNumberCount();
     }
 
-    protected boolean checkLottoNumberCount() {
-        return this.lotto.size() == LottoConstants.LOTTO_NUMBER_COUNT;
+    protected void checkLottoNumberCount() {
+        if (this.lotto.size() != LottoConstants.LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_COUNT_NOT_MATCH);
+        }
     }
 
     private int contains(LottoNumber lottoNumber) {

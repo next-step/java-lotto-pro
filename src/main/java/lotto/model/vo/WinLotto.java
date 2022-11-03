@@ -1,8 +1,6 @@
-package lotto.model.dto;
+package lotto.model.vo;
 
 import lotto.model.constants.LottoConstants;
-import lotto.model.vo.Lotto;
-import lotto.model.vo.LottoNumber;
 
 public class WinLotto {
 
@@ -14,6 +12,7 @@ public class WinLotto {
         for (String winLottoNumber : winLottoNumbers) {
             this.winLotto.addLottoNumber(new LottoNumber(winLottoNumber));
         }
+        winLotto.checkLottoNumberCount();
     }
 
     public WinLotto(Lotto lotto) {

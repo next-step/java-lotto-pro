@@ -1,7 +1,7 @@
 package lotto.service;
 
 import lotto.model.dto.PurchaseAmount;
-import lotto.model.dto.WinLotto;
+import lotto.model.vo.WinLotto;
 import lotto.model.vo.Lotto;
 import lotto.model.vo.Lottos;
 import lotto.model.vo.Profit;

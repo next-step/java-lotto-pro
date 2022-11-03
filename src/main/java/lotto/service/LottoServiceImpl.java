@@ -4,7 +4,7 @@ import java.util.Collections;
 import lotto.model.constants.LottoConstants;
 import lotto.model.domain.LottoRun;
 import lotto.model.dto.PurchaseAmount;
-import lotto.model.dto.WinLotto;
+import lotto.model.vo.WinLotto;
 import lotto.model.vo.Lotto;
 import lotto.model.vo.Lottos;
 import lotto.model.vo.MatchCounts;

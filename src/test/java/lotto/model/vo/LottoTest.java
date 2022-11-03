@@ -8,19 +8,20 @@ import org.junit.jupiter.api.Test;
 
 public class LottoTest {
 
-    @DisplayName("로또 숫자 개수 확인")
+    @DisplayName("로또 숫자 개수 불일치 시 예외처리")
     @Test
-    void 로또_숫자_개수() {
+    void 로또_숫자_개수_불일치_예외처리() {
         Lotto lotto = new Lotto();
         lotto.addLottoNumber(new LottoNumber(1));
         lotto.addLottoNumber(new LottoNumber(2));
         lotto.addLottoNumber(new LottoNumber(3));
         lotto.addLottoNumber(new LottoNumber(4));
         lotto.addLottoNumber(new LottoNumber(5));
-        assertThat(lotto.checkLottoNumberCount()).isFalse();
-
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+            lotto.checkLottoNumberCount();
+        });
         lotto.addLottoNumber(new LottoNumber(6));
-        assertThat(lotto.checkLottoNumberCount()).isTrue();
+        lotto.checkLottoNumberCount();
     }
 
     @DisplayName("로또 중복 숫자 추가 예외처리")

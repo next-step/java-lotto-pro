@@ -1,7 +1,7 @@
 package lotto.model.domain;
 
 import lotto.model.constants.LottoConstants;
-import lotto.model.dto.WinLotto;
+import lotto.model.vo.WinLotto;
 import lotto.model.vo.Lotto;
 import lotto.model.vo.PurchaseCount;
 

@@ -3,7 +3,6 @@ package lotto.model.vo;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.model.domain.LottoRun;
-import lotto.model.dto.WinLotto;
 
 public class Lottos {
 
