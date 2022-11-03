@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.constant.LOTTO;
 import lotto.domain.*;
 import lotto.domain.ManualLottoGenerator;
 import lotto.domain.RandomLottoGenerator;
@@ -13,7 +14,8 @@ public class LottoController {
         Money money = new Money(InputView.getMoney());
         Quantity manualQuantity = new Quantity(InputView.getManualLottoCount());
 
-        List<LottoTicket> tickets = LottoMarket.sell(money, InputView.getManualNumbers(manualQuantity));
+        LottoMarket lottoMarket = new LottoMarket(new Money(LOTTO.PRICE), new RandomLottoGenerator());
+        List<LottoTicket> tickets = lottoMarket.sell(money, InputView.getManualNumbers(manualQuantity));
 
         OutputView.printTickets(tickets, manualQuantity);
         showLottoResult(money, tickets);
