@@ -22,15 +22,6 @@ public class Lotto {
         this.lotto.add(lottoNumber);
     }
 
-    public void addLottoNumber(int number) {
-        LottoNumber lottoNumber = new LottoNumber(number);
-        if (this.lotto == null) {
-            this.lotto = new ArrayList<>();
-        }
-        validateLotto(lottoNumber);
-        this.lotto.add(lottoNumber);
-    }
-
     protected void checkLottoNumberExist(LottoNumber lottoNumber) {
         if (lotto.contains(lottoNumber)) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_EXIST);

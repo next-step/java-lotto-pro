@@ -4,6 +4,7 @@ import java.util.Collections;
 import lotto.model.constants.LottoConstants;
 import lotto.model.domain.LottoRun;
 import lotto.model.dto.PurchaseAmount;
+import lotto.model.vo.LottoNumber;
 import lotto.model.vo.WinLotto;
 import lotto.model.vo.Lotto;
 import lotto.model.vo.Lottos;
@@ -49,7 +50,7 @@ public class LottoServiceImpl implements LottoService {
         Lotto lotto = new Lotto();
         Collections.shuffle(LottoConstants.LOTTO_NUMBER_POOL);
         for (int i = 0; i < LottoConstants.LOTTO_NUMBER_COUNT; i++) {
-            lotto.addLottoNumber(LottoConstants.LOTTO_NUMBER_POOL.get(i));
+            lotto.addLottoNumber(new LottoNumber(LottoConstants.LOTTO_NUMBER_POOL.get(i)));
         }
         lotto.sortNumbers();
         return lotto;
