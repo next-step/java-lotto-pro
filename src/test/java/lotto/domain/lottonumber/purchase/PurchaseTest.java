@@ -14,16 +14,16 @@ class PurchaseTest {
 
     @ParameterizedTest
     @CsvSource(value = {"1000:1", "2000:2", "3000:3"}, delimiter = ':')
-    void 수동_구매_로또_수가_숫자면_통과(String readPurchase, String autoLottoCount) {
+    void 수동_구매_로또_수가_숫자면_통과(String readPurchase, String manualLottoCount) {
         Purchase purchase = new Purchase(readPurchase);
-        assertThatNoException().isThrownBy(() -> purchase.validateManualLottoCount(autoLottoCount));
+        assertThatNoException().isThrownBy(() -> purchase.validateManualLottoCount(manualLottoCount));
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1000:a", "1000:ㄱ", "1000:@"}, delimiter = ':')
-    void 수동_구매_로또_수가_숫자_아니면_EX(String readPurchase, String autoLottoCount) {
+    void 수동_구매_로또_수가_숫자_아니면_EX(String readPurchase, String manualLottoCount) {
         Purchase purchase = new Purchase(readPurchase);
-        assertThatIllegalArgumentException().isThrownBy(() -> purchase.validateManualLottoCount(autoLottoCount));
+        assertThatIllegalArgumentException().isThrownBy(() -> purchase.validateManualLottoCount(manualLottoCount));
     }
 
     @ParameterizedTest
