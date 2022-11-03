@@ -7,7 +7,9 @@ public class OutputView {
     private static final String STR_START_LOTTO = "구입금액을 입력해 주세요.";
     private static final String STR_WINNING_LOTTO_NUM = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String STR_BONUS_BALL = "보너스 볼을 입력해 주세요.";
-    private static final String STR_BUY_LOTTO = "%d개를 구매했습니다.\n";
+    private static final String STR_BUY_LOTTO = "수동으로 %d장, 자동으로 %d장을 구매했습니다.\n";
+    private static final String STR_BUY_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String STR_BUY_MANUAL = "수동으로 구매할 번호를 입력해 주세요.";
     
     private static final String STR_RESULT_TITLE = "당첨 통계\n";
     private static final String STR_RESULT_SEPARATOR = "---------\n";
@@ -23,8 +25,16 @@ public class OutputView {
         print(STR_START_LOTTO);
     }
     
-    public static void printHowManyTicketsPurchased(int ticketSize) {
-        print(String.format(STR_BUY_LOTTO, ticketSize));
+    public static void printHowManyManualTickets() {
+        print(STR_BUY_MANUAL_COUNT);
+    }
+    
+    public static void printBuyManualTickets() {
+        print(STR_BUY_MANUAL);
+    }
+    
+    public static void printHowManyTicketsPurchased(int manualTicketCount, int autoTicketCount) {
+        print(String.format(STR_BUY_LOTTO, manualTicketCount, autoTicketCount));
     }
 
     public static void printWinningLottoNumOutput() {

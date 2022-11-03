@@ -30,7 +30,10 @@ public class LottoTest {
     public void lotto_issue_count() {
         Money money = new Money("14000");
         this.lotto = new Lotto();
-        this.myTickets = lotto.buyTickets(money);
+        
+        lotto.buyAutoTickets(money, 0);
+        
+        this.myTickets = lotto.getMyTickets();
         
         assertThat(this.myTickets.size()).isEqualTo(14);
     }
@@ -49,7 +52,7 @@ public class LottoTest {
         this.lotto = new Lotto(myTickets);
         
         this.myTickets.countTicketResult(this.myResult, this.winningTicket);
-        this.myResult.checkResultRate(lotto.getUsedMoney());
+        this.myResult.checkResultRate(new Money(5000));
         
         assertThat(this.myResult.winningMap.get(Rank.values()[index])).isEqualTo(1);
     }  
@@ -75,7 +78,7 @@ public class LottoTest {
         this.lotto = new Lotto(myTickets);
         
         this.myTickets.countTicketResult(this.myResult, this.winningTicket);
-        this.myResult.checkResultRate(lotto.getUsedMoney());
+        this.myResult.checkResultRate(new Money(14000));
         
         assertThat(this.myResult.returnRate).isEqualTo(0.35);
     } 

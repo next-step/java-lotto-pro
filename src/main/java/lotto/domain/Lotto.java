@@ -5,6 +5,7 @@ import lotto.domain.ticket.Ticket;
 import lotto.domain.ticket.Tickets;
 
 public class Lotto {
+    private static final String ERR_BUY_MORE_THAN_MONEY = "소지금이 부족합니다.";
     private static final int TICKET_VALUE = 1000;
     private Tickets tickets;
     
@@ -16,17 +17,27 @@ public class Lotto {
         this.tickets = myTickets;
     }
     
-    public Tickets buyTickets(Money money) {
-        int buyCount = money.amount / TICKET_VALUE;
+    public int buyAutoTickets(Money money, int manualTicketBuyCount) {
+        int autoTicketBuyCount = (int)(money.amount / TICKET_VALUE) - manualTicketBuyCount;
+        
+        if(autoTicketBuyCount < 0) {
+            throw new IllegalArgumentException(ERR_BUY_MORE_THAN_MONEY);
+        }
 
-        IntStream.rangeClosed(1, buyCount).forEach(i -> {
+        IntStream.rangeClosed(1, autoTicketBuyCount).forEach(i -> {
             this.tickets.addTicket(new Ticket());
         });
         
-        return this.tickets;
+        return autoTicketBuyCount;
     }
     
-    public Money getUsedMoney() {
-        return new Money(this.tickets.size() * TICKET_VALUE);
+    public void buyManualTicket(String number) {
+        Ticket t = new Ticket(number);
+        
+        this.tickets.addTicket(t);
+    }
+    
+    public Tickets getMyTickets() {
+        return this.tickets;
     }
 }
