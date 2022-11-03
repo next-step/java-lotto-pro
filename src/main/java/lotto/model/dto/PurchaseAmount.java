@@ -13,4 +13,8 @@ public class PurchaseAmount {
             throw new IllegalArgumentException(ErrorMessage.PURCHASE_AMOUNT_NOT_NUMBER);
         }
     }
+
+    public long getPurchaseAmount() {
+        return purchaseAmount;
+    }
 }
