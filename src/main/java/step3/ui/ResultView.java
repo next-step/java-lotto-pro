@@ -12,5 +12,5 @@ public interface ResultView {
 
     void printLottoTickets(PurchaseAmount purchaseAmount);
 
-    void printWinningResult(WinningLotto winningLotto, Lottos lottos, PurchaseAmount purchaseAmount);
+    void printWinningResult(WinningResultDTO winningResultDTO);
 }

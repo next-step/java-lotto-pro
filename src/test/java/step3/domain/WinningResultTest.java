@@ -18,6 +18,6 @@ public class WinningResultTest {
         WinningResult result = new WinningResult();
         result.addRank(WinningLottoRank.FOURTH);
 
-        assertThat(result.getYield(new PurchaseAmount(purchaseAmount))).isEqualTo(yield);
+        assertThat(result.reportYield(new PurchaseAmount(purchaseAmount))).isEqualTo(yield);
     }
 }

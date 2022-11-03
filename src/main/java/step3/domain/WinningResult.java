@@ -15,29 +15,22 @@ public class WinningResult {
         }
     }
 
+    public Map<WinningLottoRank, Integer> reportRanks(WinningLotto winningLotto, Lottos lottos) {
+        for (Lotto lotto : lottos.lottos()) {
+            addRank(winningLotto.rank(lotto));
+        }
+        return new HashMap<>(ranks);
+    }
+
     public void addRank(WinningLottoRank rank) {
         ranks.put(rank, ranks.get(rank) + DEFAULT_ADD_VALUE);
     }
 
-    public double getYield(PurchaseAmount purchaseAmount) {
+    public double reportYield(PurchaseAmount purchaseAmount) {
         int totalReward = 0;
         for (WinningLottoRank rank : ranks.keySet()) {
             totalReward += ranks.get(rank) * rank.getReward();
         }
         return (double) totalReward / (double) purchaseAmount.purchaseAmount();
-    }
-
-    @Override
-    public String toString() {
-        StringBuffer sb = new StringBuffer();
-        sb.append("당첨 통계\n");
-        sb.append("---------\n");
-        for (WinningLottoRank rank : WinningLottoRank.values()) {
-            sb.append(rank);
-            sb.append("- ");
-            sb.append(ranks.get(rank));
-            sb.append("개\n");
-        }
-        return sb.toString();
     }
 }

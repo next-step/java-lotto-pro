@@ -85,6 +85,6 @@ public class WinningLottoRankTest {
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList()));
         WinningLottoRank rank = winningLotto.rank(lotto);
-        assertThat(rank).isEqualTo(WinningLottoRank.FIFTH);
+        assertThat(rank).isEqualTo(WinningLottoRank.MISS);
     }
 }

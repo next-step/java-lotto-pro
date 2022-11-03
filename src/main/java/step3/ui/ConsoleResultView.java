@@ -1,9 +1,9 @@
 package step3.ui;
 
-import step3.domain.*;
+import step3.domain.Lotto;
+import step3.domain.PurchaseAmount;
 
 import java.util.List;
-import java.util.Map;
 
 public class ConsoleResultView implements ResultView {
 
@@ -23,12 +23,8 @@ public class ConsoleResultView implements ResultView {
     }
 
     @Override
-    public void printWinningResult(WinningLotto winningLotto, Lottos lottos, PurchaseAmount purchaseAmount) {
-        WinningResult result = new WinningResult();
-        for (Lotto lotto : lottos.lottos()) {
-            result.addRank(winningLotto.rank(lotto));
-        }
-        System.out.print(result);
-        System.out.printf(MESSAGE_FOR_PRINT_TOTAL_YIELD, result.getYield(purchaseAmount));
+    public void printWinningResult(WinningResultDTO winningResultDTO) {
+        System.out.println(winningResultDTO.ranks());
+        System.out.printf(MESSAGE_FOR_PRINT_TOTAL_YIELD, winningResultDTO.yield());
     }
 }
