@@ -1,5 +1,8 @@
 package lotto;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class BuyManualCount {
     private final InputManualNumber inputManualNumber;
     private int count;
@@ -13,8 +16,8 @@ public class BuyManualCount {
         return this.count > 0;
     }
 
-    public Integer[] give() {
+    public List<Integer> give() {
         --count;
-        return inputManualNumber.give();
+        return Arrays.asList(inputManualNumber.give());
     }
 }

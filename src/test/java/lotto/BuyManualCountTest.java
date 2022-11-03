@@ -14,7 +14,7 @@ public class BuyManualCountTest {
         InputManualNumber inputManualNumber = () -> new Integer[]{1, 2, 3, 4, 5, 6};
         BuyManualCount buyManualCount = new BuyManualCount(inputManualNumber, 3);
 
-        List<Integer[]> giveNumbers = new ArrayList<>();
+        List<List<Integer>> giveNumbers = new ArrayList<>();
         while (buyManualCount.hasCount()) {
             giveNumbers.add(buyManualCount.give());
         }
