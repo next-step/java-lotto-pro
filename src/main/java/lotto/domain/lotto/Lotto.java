@@ -4,6 +4,8 @@ import lotto.constant.LottoConstant;
 import lotto.prize.Prize;
 import lotto.status.ErrorStatus;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -14,7 +16,7 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = Collections.unmodifiableList(new ArrayList<>(lottoNumbers));
     }
 
     private void validate(List<LottoNumber> lottoNumbers) {
