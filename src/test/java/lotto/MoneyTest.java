@@ -18,29 +18,20 @@ class MoneyTest {
         //given:
         int amount = 1000;
         //when, then:
-        assertThatNoException().isThrownBy(() -> new Money(amount));
+        assertThatNoException().isThrownBy(() -> Money.of(amount));
     }
 
-    @ParameterizedTest(name = "minus 메서드 테스트 " + DEFAULT_DISPLAY_NAME)
-    @CsvSource(value = { "500:500", "2000:1000" }, delimiter = ':')
-    void minus_amount_success(int minusAmount, int result) {
-        //given:
-        int amount = 1000;
-        //when:
-        Money money = new Money(amount);
-        Money resultMoney = money.minus(minusAmount);
-        //then:
-        assertThat(resultMoney).isEqualTo(new Money(result));
+    @DisplayName("정적 팩토리 메서드 생성자 테스트")
+    @Test
+    void of_money_success() {
+        assertThatNoException().isThrownBy(() -> Money.of(0));
     }
 
-    @ParameterizedTest(name = "isEqualsOrGreater 메서드 테스트 " + DEFAULT_DISPLAY_NAME)
-    @CsvSource(value = { "500:true", "2000:false" }, delimiter = ':')
-    void isEqualsOrGreater_amount_success(int operandAmount, boolean result) {
+    @ParameterizedTest(name = "나누기 메서드 테스트" + DEFAULT_DISPLAY_NAME)
+    @CsvSource(value = { "150:15", "155:15" }, delimiter = ':')
+    void divide_money_success(long amount, long operandMoney) {
         //given:
-        int amount = 1000;
-        //when:
-        Money money = new Money(amount);
-        //then:
-        assertThat(money.isEqualsOrGreater(operandAmount)).isEqualTo(result);
+        long result = 10;
+        assertThat(Money.of(amount).divide(Money.of(operandMoney))).isEqualTo(result);
     }
 }
