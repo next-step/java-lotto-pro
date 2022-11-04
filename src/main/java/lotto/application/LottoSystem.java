@@ -1,12 +1,12 @@
-package step3.application;
+package lotto.application;
 
-import step3.application.io.Input;
-import step3.application.io.Output;
-import step3.domain.CreateLottoNumberPolicy.CreateShuffleLottoNumberPolicy;
-import step3.domain.Lotto;
-import step3.domain.LottoMachine;
-import step3.domain.Lottos;
-import step3.domain.Statistics;
+import lotto.application.io.Input;
+import lotto.application.io.Output;
+import lotto.domain.CreateLottoNumberPolicy.CreateShuffleLottoNumberPolicy;
+import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
+import lotto.domain.Lottos;
+import lotto.domain.Statistics;
 
 public class LottoSystem implements AutoCloseable {
 

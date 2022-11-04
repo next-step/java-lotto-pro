@@ -1,6 +1,6 @@
-package step3;
+package lotto;
 
-import step3.application.LottoSystem;
+import lotto.application.LottoSystem;
 
 public class Main {
 

@@ -1,4 +1,4 @@
-package step3.domain;
+package lotto.domain;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
