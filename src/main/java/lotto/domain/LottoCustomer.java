@@ -7,27 +7,25 @@ import java.util.stream.Collectors;
 
 public final class LottoCustomer {
 
-    private final Money initialAmount;
-    private Money remainingAmount;
+    private final Wallet wallet;
     private final List<LottoTicket> purchased;
     private LottoNumbers winingLottoNumbers;
 
     public LottoCustomer(final Money initialAmount) {
-        this.initialAmount = initialAmount;
-        this.remainingAmount = initialAmount;
+        this.wallet = new Wallet(initialAmount);
         this.purchased = new ArrayList<>();
         this.winingLottoNumbers = null;
     }
 
     public boolean canPurchase(final LottoTicket lottoTicket) {
-        return remainingAmount.isGreaterThanOrEqual(lottoTicket.getFee());
+        return wallet.hasAmount(lottoTicket.getFee());
     }
 
     public Money purchase(final LottoTicket lottoTicket) {
         if (!canPurchase(lottoTicket)) {
             return Money.ZERO;
         }
-        remainingAmount = remainingAmount.minus(lottoTicket.getFee());
+        wallet.minusAmount(lottoTicket.getFee());
         purchased.add(lottoTicket);
         return lottoTicket.getFee();
     }
@@ -47,18 +45,17 @@ public final class LottoCustomer {
     }
 
     public Double getProfitRate() {
-        if (initialAmount.isLessThan(Money.ONE)) {
+        final Money invested = wallet.getUsedAmount();
+        final Money earned = getEarnedAmount();
+        if (invested.isLessThan(Money.ONE)
+            || earned.isLessThan(Money.ONE)) {
             return Money.ZERO.doubleValue();
         }
-        return getEarnedAmount().divide(initialAmount).doubleValue();
+        return earned.divide(invested).doubleValue();
     }
 
     public int getPurchasedCount() {
         return purchased.size();
-    }
-
-    public Money getRemainingAmount() {
-        return remainingAmount;
     }
 
     private Money getEarnedAmount() {

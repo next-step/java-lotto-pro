@@ -34,14 +34,12 @@ class LottoCustomerTest {
         final LottoCustomer customer = new LottoCustomer(initialAmount);
 
         // Validate PreCondition
-        assertThat(customer.getRemainingAmount().isLessThan(lottoTicket1.getFee())).isTrue();
         assertThat(customer.canPurchase(lottoTicket1)).isFalse();
 
         assertThat(customer.purchase(lottoTicket1)).isEqualTo(Money.ZERO);
 
         // Validate PostCondition
         assertThat(customer.getPurchasedCount()).isZero();
-        assertThat(customer.getRemainingAmount()).isEqualTo(initialAmount);
     }
 
     @DisplayName("가진 금액이, 로또를 딱 한 번 구매 가능한 금액이라면, 로또를 한 번 구입할 수 있다")
@@ -52,16 +50,12 @@ class LottoCustomerTest {
         final LottoCustomer customer = new LottoCustomer(initialAmount);
 
         // Validate PreCondition
-        assertThat(customer.getRemainingAmount().isLessThan(lottoTicket1.getFee())).isFalse();
-        assertThat(customer.getRemainingAmount()).isEqualTo(initialAmount);
         assertThat(customer.canPurchase(lottoTicket1)).isTrue();
         assertThat(customer.getPurchasedCount()).isEqualTo(0);
 
         assertThat(customer.purchase(lottoTicket1)).isEqualTo(lottoTicket1.getFee());
 
         // Validate PostCondition
-        assertThat(customer.getRemainingAmount().isLessThan(initialAmount)).isTrue();
-        assertThat(customer.getRemainingAmount().isLessThan(lottoTicket1.getFee())).isTrue();
         assertThat(customer.canPurchase(lottoTicket1)).isFalse();
         assertThat(customer.getPurchasedCount()).isEqualTo(1);
     }
@@ -77,8 +71,6 @@ class LottoCustomerTest {
             customer.purchase(lottoTicket1);
         }
 
-        assertThat(customer.getRemainingAmount().isLessThan(initialAmount)).isTrue();
-        assertThat(customer.getRemainingAmount().isLessThan(lottoTicket1.getFee())).isTrue();
         assertThat(customer.getPurchasedCount()).isEqualTo(purchaseCount);
     }
 
@@ -246,7 +238,7 @@ class LottoCustomerTest {
     @Test
     void getProfitRate_lessThanOne() {
         final LottoCustomer customer = new LottoCustomer(Money.wons(8_000));
-        customer.purchase(new LottoTicket(Money.wons(1_000), LottoNumbers.of(1, 2, 3, 4, 5, 6)));
+        customer.purchase(new LottoTicket(Money.wons(8_000), LottoNumbers.of(1, 2, 3, 4, 5, 6)));
 
         customer.setWiningLottoNumbers(LottoNumbers.of(1, 2, 3, 10, 11, 12));
         assertThat(customer.getProfitRate()).isLessThan(Double.valueOf(1));

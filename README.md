@@ -124,3 +124,9 @@
 	- https://docs.oracle.com/javase/8/docs/api/java/util/List.html#equals-java.lang.Object-
 - Q : Enum에 너무 의존하지 있지 않나? Enum값을 그대로 쓰는게 아니라, 메시지전달을 통해서 해야 하나?
 	- A : 디미터 법칙 적용하여, Enum자체를 뷰에서는 쓰지 않는 방식으로 개선
+
+
+## Improvements
+
+- LottoCustomer가 너무 많은 기능을 처리 하고 있는 것 같다고 생각되어, 돈 관련 관리 기능을, 별도로 클래스 분리.
+	- Class Name = Wallter(put/take) or Account(deposit/withdraw )
