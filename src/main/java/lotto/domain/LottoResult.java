@@ -2,6 +2,11 @@ package lotto.domain;
 
 import lotto.dto.LottoResultDto;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 public class LottoResult {
 
     private LottoRankMatcher lottoRankMatcher;
@@ -27,6 +32,8 @@ public class LottoResult {
     }
 
     public LottoResultDto getLottoResultDto() {
-        return new LottoResultDto(lottoRankMatcher, getProfit());
+        Map<Rank, Integer> lotteriesRankPriceCounter = Rank.getAllRanksExceptMiss().stream()
+                .collect(Collectors.toMap(Function.identity(), lottoRankMatcher::getMatchLottoRank));
+        return new LottoResultDto(lottoRankMatcher, getProfit(), lotteriesRankPriceCounter);
     }
 }

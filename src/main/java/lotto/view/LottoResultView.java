@@ -4,6 +4,8 @@ import lotto.domain.LottoRankMatcher;
 import lotto.domain.Rank;
 import lotto.dto.LottoResultDto;
 
+import java.util.Map;
+
 public class LottoResultView {
 
     public void lottoResult(LottoResultDto lottoResultDto) {
@@ -11,15 +13,13 @@ public class LottoResultView {
     }
 
     public String lottoResultMessage(LottoResultDto lottoResultDto) {
-        LottoRankMatcher lottoNumberMatcher = lottoResultDto.getLottoNumberMatcher();
-        double profit = lottoResultDto.getProfit();
-        return lottoResultMessage(lottoNumberMatcher, profit);
+        return lottoResultMessage(lottoResultDto.getRankIntegerMatcher(), lottoResultDto.getProfit());
     }
 
-    public String lottoResultMessage(LottoRankMatcher lottoNumberMatcher, double profit) {
+    public String lottoResultMessage(Map<Rank, Integer> rankCounter, double profit) {
         String result = "당첨 통계\n---------\n";
         for (Rank rank : Rank.getAllRanksExceptMiss()) {
-            result += rankInfo(rank,lottoNumberMatcher.getMatchLottoRank(rank));
+            result += rankInfo(rank, rankCounter.get(rank));
         }
         String profitString = "" + profit;
         profitString = profitString.length() < 4 ? profitString : profitString.substring(0,4);
