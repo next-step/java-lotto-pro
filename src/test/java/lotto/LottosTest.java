@@ -3,6 +3,9 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static lotto.Lottos.DUPLICATE_EXCEPTION_MESSAGE;
 import static lotto.Lottos.MAX_SIZE;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -13,14 +16,9 @@ class LottosTest {
     @DisplayName("6개 이상의 수를 추가 할 수 없다.")
     @Test
     void maxSize() {
-        Lottos lottos = new Lottos();
-        lottos.add(new Lotto(3));
-        lottos.add(new Lotto(4));
-        lottos.add(new Lotto(5));
-        lottos.add(new Lotto(6));
-        lottos.add(new Lotto(7));
-        lottos.add(new Lotto(8));
-        assertThatThrownBy(() -> lottos.add(new Lotto(9)))
+        List<Integer> lottoNumbers = new ArrayList<>();
+        lottoNumbers.addAll(List.of(1, 2, 3, 4, 5, 6, 7));
+        assertThatThrownBy(() -> new Lottos(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(MAX_SIZE + "를 초과할 수 없습니다.");
     }
@@ -28,9 +26,9 @@ class LottosTest {
     @DisplayName("중복된 수를 추가할 수 없다.")
     @Test
     void duplicate() {
-        Lottos lottos = new Lottos();
-        lottos.add(new Lotto(3));
-        assertThatThrownBy(() -> lottos.add(new Lotto(3)))
+        List<Integer> lottoNumbers = new ArrayList<>();
+        lottoNumbers.addAll(List.of(1, 2, 3, 4, 5, 5));
+        assertThatThrownBy(() -> new Lottos(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(DUPLICATE_EXCEPTION_MESSAGE);
     }
