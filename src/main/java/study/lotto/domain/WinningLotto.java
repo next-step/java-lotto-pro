@@ -14,7 +14,7 @@ public class WinningLotto {
     private LottoNumber bonusBall;
 
     public WinningLotto(String winningNumbers) {
-        this.winningLotto = Store.buyLottoByManual(winningNumbers);
+        this.winningLotto = Store.buyLottoManually(winningNumbers);
     }
 
     public int matchNumber(LottoNumber lottoNumber) {

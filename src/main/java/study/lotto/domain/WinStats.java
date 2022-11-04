@@ -20,11 +20,11 @@ public class WinStats {
         profitRate.calculate(amountByLottoStatus.sumTotalAmount());
     }
 
-    public Map<LottoStatus, Long> getPrintDataWithCountsByLottoStatus() {
+    public Map<LottoStatus, Long> countsByLottoStatus() {
         return amountByLottoStatus.countsByLottoStatus();
     }
 
-    public String getPrintDataWithProfitRate() {
+    public String getProfitRate() {
         return profitRate.toString();
     }
 }

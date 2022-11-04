@@ -22,12 +22,12 @@ class WinStatsTest {
         winStats.accumulate(LottoStatus.SECOND_PLACE);
         winStats.calculate();
 
-        Map<LottoStatus, Long> printData = winStats.getPrintDataWithCountsByLottoStatus();
+        Map<LottoStatus, Long> printData = winStats.countsByLottoStatus();
 
         assertAll(
                 () -> assertEquals(2L, printData.get(LottoStatus.FOURTH_PLACE)),
                 () -> assertEquals(1L, printData.get(LottoStatus.SECOND_PLACE)),
-                () -> assertEquals(expected, winStats.getPrintDataWithProfitRate())
+                () -> assertEquals(expected, winStats.getProfitRate())
         );
     }
 }
