@@ -7,11 +7,11 @@ import lotto.lotto.domain.LottoMoney;
 import lotto.winning.domain.MatchCount;
 import lotto.winning.domain.TotalWinningMoney;
 import lotto.winning.domain.WinningNumber;
-import lotto.winning.ui.outputView.WinningResultOutputVeiw;
 
 import static lotto.lotto.ui.inputView.LottoPurchaseInputView.readPurchaseMoney;
 import static lotto.lotto.ui.outputView.GeneratedLottosOutputView.printLottos;
 import static lotto.winning.ui.inputView.WinningNumberInputView.readWinningNumbers;
+import static lotto.winning.ui.outputView.WinningResultOutputVeiw.winningResult;
 
 public class LottoController {
 
@@ -21,7 +21,7 @@ public class LottoController {
         printLottos(lottoGenerator.generateLottos());
         System.out.println();
         TotalWinningMoney totalWinningMoney = createTotalWinningMoney(lottoGenerator);
-        WinningResultOutputVeiw.winningResult(totalWinningMoney, lottoMoney);
+        winningResult(totalWinningMoney, lottoMoney);
     }
 
     private TotalWinningMoney createTotalWinningMoney(LottoGenerator lottoGenerator) {
