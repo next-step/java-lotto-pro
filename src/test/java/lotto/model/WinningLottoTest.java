@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.Arrays;
+import lotto.exception.LottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,7 +21,7 @@ public class WinningLottoTest {
     String bonusNumber = "7";
     // when, then
     assertThatThrownBy(() -> new WinningLotto(winningLottoNumber, bonusNumber))
-        .isInstanceOf(IllegalArgumentException.class).hasMessage("올바른 로또 번호를 입력해 주세요.");
+        .isInstanceOf(LottoException.class);
   }
 
   @DisplayName("올바르지 않은 보너스 볼 입력시 예외 발생 확인")
@@ -31,7 +32,7 @@ public class WinningLottoTest {
     String winningLottoNumber = "1, 2, 3, 4, 5, 6";
     // when, then
     assertThatThrownBy(() -> new WinningLotto(winningLottoNumber, bonusNumber))
-        .isInstanceOf(IllegalArgumentException.class).hasMessage("올바른 형식의 보너스 볼을 입력해주세요.");
+        .isInstanceOf(LottoException.class);
   }
 
 

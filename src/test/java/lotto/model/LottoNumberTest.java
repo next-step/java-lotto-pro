@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import lotto.exception.LottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,8 +20,8 @@ class LottoNumberTest {
     // given // when // then
     assertThatThrownBy(() -> {
       LottoNumber.from(outNumber);
-    }).isInstanceOf(IllegalArgumentException.class)
-        .hasMessageContaining("로또 번호는 1~45까지 수만 입력 가능합니다.");
+    }).isInstanceOf(LottoException.class)
+        .hasMessage("[ERROR] 로또 번호는 1~45까지 수만 입력 가능합니다.");
   }
 
 
