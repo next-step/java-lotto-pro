@@ -14,12 +14,12 @@ public class MatchingCount {
     private final WinningNumber winningNumber;
 
     public MatchingCount(List<Lotto> lottos, WinningNumber winningNumber) {
-        valiate(lottos, winningNumber);
+        validate(lottos, winningNumber);
         this.lottos = lottos;
         this.winningNumber = winningNumber;
     }
 
-    private static void valiate(List<Lotto> lottos, WinningNumber winningNumber) {
+    private static void validate(List<Lotto> lottos, WinningNumber winningNumber) {
         if (Objects.isNull(lottos) || lottos.isEmpty()) {
             throw new IllegalArgumentException(LOTTO_EXCEPTION_MESSAGE);
         }
