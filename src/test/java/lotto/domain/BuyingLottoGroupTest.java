@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.List;
 import lotto.strategy.TestLottoNumberStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,5 +31,17 @@ public class BuyingLottoGroupTest {
         LottoResult result = group.matchWinningLotto(winning);
 
         assertThat(result.getResultCount(LottoWinningMoneyEnum.SECOND)).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("방어적 복사 테스트")
+    void defensiveCopy(){
+        BuyingLottoGroup group = BuyingLottoGroup.create(5, new TestLottoNumberStrategy());
+        List<Lotto> lottos = group.getLottos();
+
+        lottos.add(Lotto.create(Arrays.asList(2,3,4,5,6,7)));
+
+        assertThat(group.getLottos().size()).isEqualTo(5);
+        assertThat(lottos.size()).isEqualTo(6);
     }
 }

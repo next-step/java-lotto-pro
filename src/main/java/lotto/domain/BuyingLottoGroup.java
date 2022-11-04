@@ -5,10 +5,11 @@ import java.util.List;
 import lotto.strategy.LottoNumberStrategy;
 
 public class BuyingLottoGroup {
-    private List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> lottos;
 
     public static BuyingLottoGroup create(int count, LottoNumberStrategy lottoNumberStrategy) {
         BuyingLottoGroup buyingLottoGroup = new BuyingLottoGroup();
+        buyingLottoGroup.lottos = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
             buyingLottoGroup.lottos.add(Lotto.create(lottoNumberStrategy.generateNumbers()));
@@ -17,7 +18,7 @@ public class BuyingLottoGroup {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return new ArrayList<>(lottos);
     }
 
     public LottoResult matchWinningLotto(WinningLotto winning) {
