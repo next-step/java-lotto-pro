@@ -14,14 +14,14 @@ import java.util.List;
 import static lotto.lotto.ui.inputView.LottoPurchaseInputView.readPurchaseMoney;
 import static lotto.lotto.ui.outputView.GeneratedLottosOutputView.printLottos;
 import static lotto.winning.ui.inputView.WinningNumberInputView.readWinningNumbers;
-import static lotto.winning.ui.outputView.WinningResultOutputVeiw.winningResult;
+import static lotto.winning.ui.outputView.WinningResultOutputView.winningResult;
 
 public class LottoController {
 
     public void run() {
         LottoMoney lottoMoney = new LottoMoney(readPurchaseMoney());
-        LottoGenerator lottoGenerator = new LottoGenerator(lottoMoney.purchaseCount());
-        List<Lotto> lottos = lottoGenerator.generateLottos();
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        List<Lotto> lottos = lottoGenerator.generate(lottoMoney.purchaseCount());
         printLottos(lottos);
         System.out.println();
         TotalWinningMoney totalWinningMoney = createTotalWinningMoney(lottos);

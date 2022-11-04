@@ -6,7 +6,7 @@ import lotto.winning.domain.TotalWinningMoney;
 
 import static lotto.winning.domain.WinningMoneyType.find;
 
-public class WinningResultOutputVeiw {
+public class WinningResultOutputView {
 
     public static void winningResult(TotalWinningMoney totalWinningMoney, LottoMoney lottoMoney) {
         winningMoney(totalWinningMoney);

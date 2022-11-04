@@ -8,25 +8,24 @@ public class LottoGenerator {
 
     public static final int MINIMUM_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
-    public static final String NEGATIVE_EXCEPTION_MESSAGE = "음수일 수 없습니다.";
+    public static final String PURCHASE_MINIMUM_COUNT_EXCEPTION_MESSAGE = "1개 이상부터 구매가능합니다.";
     private final List<Integer> range = new ArrayList<>();
-    private int purchaseCount;
 
-    public LottoGenerator(int purchaseCount) {
-        if (purchaseCount < 0) {
-            throw new IllegalArgumentException(NEGATIVE_EXCEPTION_MESSAGE);
-        }
-        init(purchaseCount);
+    public LottoGenerator() {
+        init();
     }
 
-    private void init(int purchaseCount) {
+    private void init() {
+
         for (int i = MINIMUM_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             this.range.add(i);
         }
-        this.purchaseCount = purchaseCount;
     }
 
-    public List<Lotto> generateLottos() {
+    public List<Lotto> generate(int purchaseCount) {
+        if (purchaseCount <= 0) {
+            throw new IllegalArgumentException(PURCHASE_MINIMUM_COUNT_EXCEPTION_MESSAGE);
+        }
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
             lottos.add(generateLotto());
