@@ -1,12 +1,20 @@
 package lotto.winning.domain;
 
-import com.sun.tools.javac.util.List;
 import lotto.lotto.domain.Lotto;
 import lotto.lotto.domain.Lottos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WinningNumber {
 
-    private List<Lotto> winningNumbers;
+    private List<Lotto> winningNumbers = new ArrayList<>();
+
+    public WinningNumber(String[] winningNumbers) {
+        for (String number : winningNumbers) {
+            this.winningNumbers.add(new Lotto(Integer.parseInt(number)));
+        }
+    }
 
     public void addAll(List<Lotto> winningNumbers) {
         this.winningNumbers = winningNumbers;

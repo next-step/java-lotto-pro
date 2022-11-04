@@ -1,14 +1,29 @@
 package lotto.lotto.domain;
 
-import com.sun.tools.javac.util.List;
-import lotto.lotto.domain.Lottos;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottosFixture {
     public static Lottos 로또번호123456() {
-        return new Lottos(List.of(1, 2, 3, 4, 5, 6));
+        List<Integer> numbers = new ArrayList<>();
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
+        numbers.add(5);
+        numbers.add(6);
+        return new Lottos(numbers);
     }
 
     public static Lottos 로또번호123457() {
-        return new Lottos(List.of(1, 2, 3, 4, 5, 7));
+        List<Integer> numbers = new ArrayList<>();
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
+        numbers.add(5);
+        numbers.add(7);
+        return new Lottos(numbers);
     }
+
 }

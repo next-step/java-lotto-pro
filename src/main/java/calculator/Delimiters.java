@@ -1,16 +1,16 @@
 package calculator;
 
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Delimiters {
 
-    private static final List<String> DEFAULT_DELIMITERS = List.of(",", ":");
+    private static final String[] DEFAULT_DELIMITERS = {",", ":"};
     private Set<String> delimiters = new HashSet<>();
 
     public Delimiters() {
-        delimiters.addAll(DEFAULT_DELIMITERS);
+        Collections.addAll(delimiters, DEFAULT_DELIMITERS);
     }
 
     public Set<String> getDelimiters() {

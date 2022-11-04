@@ -12,6 +12,14 @@ public class WinningMoneyCalculator {
         this.lottoCount = lottoCount;
     }
 
+    public int getLottoCount() {
+        return this.lottoCount;
+    }
+
+    public int getMatchCount() {
+        return this.matchCount;
+    }
+
     public long calculate() {
         return find(this.matchCount).getMoney() * lottoCount;
     }

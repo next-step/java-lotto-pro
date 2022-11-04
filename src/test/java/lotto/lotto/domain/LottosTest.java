@@ -18,7 +18,13 @@ class LottosTest {
     @Test
     void maxSize() {
         List<Integer> lottoNumbers = new ArrayList<>();
-        lottoNumbers.addAll(List.of(1, 2, 3, 4, 5, 6, 7));
+        lottoNumbers.add(1);
+        lottoNumbers.add(2);
+        lottoNumbers.add(3);
+        lottoNumbers.add(4);
+        lottoNumbers.add(5);
+        lottoNumbers.add(6);
+        lottoNumbers.add(7);
         assertThatThrownBy(() -> new Lottos(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(MAX_SIZE + "를 초과할 수 없습니다.");
@@ -28,7 +34,12 @@ class LottosTest {
     @Test
     void duplicate() {
         List<Integer> lottoNumbers = new ArrayList<>();
-        lottoNumbers.addAll(List.of(1, 2, 3, 4, 5, 5));
+        lottoNumbers.add(1);
+        lottoNumbers.add(2);
+        lottoNumbers.add(3);
+        lottoNumbers.add(4);
+        lottoNumbers.add(5);
+        lottoNumbers.add(5);
         assertThatThrownBy(() -> new Lottos(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(DUPLICATE_EXCEPTION_MESSAGE);
