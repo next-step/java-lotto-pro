@@ -1,28 +1,27 @@
 package study.lotto.domain;
 
-import study.lotto.domain.number.LottoGenerator;
 import study.lotto.domain.number.LottoNumber;
+import study.lotto.domain.order.OrderType;
+import study.message.LottoExceptionCode;
 import study.util.NumberUtil;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
+    private static final int LOTTO_SIZE = 6;
+    private final OrderType orderType;
+
     private final Set<LottoNumber> numbers;
 
-    public Lotto(List<Integer> numbersFromStore) {
-        this.numbers = createLottoNumbers(numbersFromStore);
-    }
+    public Lotto(Set<LottoNumber> lottoNumbers, OrderType orderType) {
+        if(lottoNumbers.size() == LOTTO_SIZE) {
+            this.numbers = lottoNumbers;
+            this.orderType = orderType;
+            return;
+        }
 
-    private Set<LottoNumber> createLottoNumbers(List<Integer> numbersFromStore) {
-        return numbersFromStore.stream()
-                .map(LottoGenerator::toLottoNumber)
-                .collect(Collectors.toSet());
-    }
-
-    public Lotto(Set<LottoNumber> lottoNumbers) {
-        this.numbers = lottoNumbers;
+        throw new IllegalArgumentException(LottoExceptionCode.NOT_MATCH_LOTTO_SIZE.getMessage());
     }
 
     public LottoStatus drawLots(WinningLotto winningLotto) {
@@ -44,6 +43,14 @@ public class Lotto {
 
     public boolean contains(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
+    }
+
+    public boolean isManual() {
+        return orderType.isManual();
+    }
+
+    public boolean isAuto() {
+        return orderType.isAuto();
     }
 
     @Override
