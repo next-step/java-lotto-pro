@@ -4,15 +4,28 @@ import common.vo.Count;
 import lotto.lotto.domain.Lotto;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MatchingCount {
 
+    public static final String LOTTO_EXCEPTION_MESSAGE = "로또가 없습니다.";
+    public static final String WINNING_NUMBER_EXCEPTION_MESSAGE = "당첨 번호가 없습니다.";
     private final List<Lotto> lottos;
     private final WinningNumber winningNumber;
 
     public MatchingCount(List<Lotto> lottos, WinningNumber winningNumber) {
+        valiate(lottos, winningNumber);
         this.lottos = lottos;
         this.winningNumber = winningNumber;
+    }
+
+    private static void valiate(List<Lotto> lottos, WinningNumber winningNumber) {
+        if (Objects.isNull(lottos) || lottos.isEmpty()) {
+            throw new IllegalArgumentException(LOTTO_EXCEPTION_MESSAGE);
+        }
+        if (Objects.isNull(winningNumber)) {
+            throw new IllegalArgumentException(WINNING_NUMBER_EXCEPTION_MESSAGE);
+        }
     }
 
     public Count lottoCount(int matchingCount) {
