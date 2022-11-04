@@ -2,10 +2,12 @@ package step3.constant;
 
 public class Message {
     public static class System {
-        public static final String TOTAL_LOTTO_PRICE_INPUT_MESSAGE = "구매금액을 입력해 주세요.";
+        public static final String TOTAL_LOTTO_PRICE_INPUT_MESSAGE = "구입금액을 입력해 주세요.";
+        public static final String MANUAL_LOTTO_COUNT_INPUT_MESSAGE = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+        public static final String MANUAL_LOTTO_NUMBER_INPUT_MESSAGE = "\n수동으로 구매할 번호를 입력해 주세요.";
         public static final String LAST_LOTTO_NUMBERS_INPUT_MESSAGE = "\n지난 주 당첨 번호를 입력해 주세요.";
         public static final String LAST_BONUS_NUMBER_INPUT_MESSAGE = "\n보너스 볼을 입력해 주세요.";
-        public static final String PURCHASED_LOTTO_TOTAL_COUNT_OUTPUT_MESSAGE = "%d개를 구매했습니다.\n";
+        public static final String PURCHASED_LOTTO_TOTAL_COUNT_OUTPUT_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
         public static final String WINNER_STATISTICS = "\n당첨 통계";
         public static final String SPLIT_LINE = "---------";
         public static final String PROFIT_RATE_RESULT = "총 수익률은 %.2f입니다.";

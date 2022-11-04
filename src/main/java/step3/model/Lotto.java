@@ -60,6 +60,16 @@ public class Lotto {
         return list;
     }
 
+    public String[] validateInputStringLottoNumber(String beforeNumbers) {
+        commonCheckEmpty(beforeNumbers);
+        String[] afterNumbers = changeBeforeNumbers(beforeNumbers);
+        validateLength(afterNumbers);
+        validateNumberType(afterNumbers);
+        validateSameNumber(afterNumbers);
+        return afterNumbers;
+    }
+
+
     public String[] validateLastWeekWinner(String beforeNumbers) {
         commonCheckEmpty(beforeNumbers);
         String[] afterNumbers = changeBeforeNumbers(beforeNumbers);

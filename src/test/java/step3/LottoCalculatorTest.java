@@ -91,7 +91,6 @@ public class LottoCalculatorTest {
         }
 
         WinnerLotto lastWeekWinner = new WinnerLotto(list, bonusNumber);
-
         lottoCalculator.setLastWeekWinner(lastWeekWinner);
         lottoCalculator.calculateWinnerStatistics(lottos);
         double result = lottoCalculator.calculateProfitRate();

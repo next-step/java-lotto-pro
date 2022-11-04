@@ -1,12 +1,22 @@
 package step3;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import step3.constant.WinnerRule;
+import step3.model.Lotto;
+import step3.model.LottoGenerator;
 import step3.model.LottoResult;
+import step3.model.Lottos;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static step3.constant.Constant.Common.*;
 
@@ -52,6 +62,32 @@ public class LottoResultTest {
         lottoResult.calculateProfitRate(purchasedCount);
         assertEquals(expected, Double.toString(lottoResult.getProfitRate()));
     }
+
+
+    @DisplayName("수동_로또_생성_테스트")
+    @Test
+    void 수동_로또_생성_테스트() {
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        lottoGenerator.setPurchasePriceAndManualCount("3000", "1");
+        lottoGenerator.calculatePurchaseCount();
+
+        String[] temp = "1,2,3,4,5,6".split(COMMA);
+        List<Lotto> lottos = new ArrayList<>();
+        Lotto lotto = new Lotto(temp);
+        lottos.add(lotto);
+
+        List<Lotto> manualLottos = lottos;
+        List<Lotto> autoLottos = lottoGenerator.generateAutoLottos();
+
+        lottoGenerator.mergeManualAndAuto(manualLottos, autoLottos);
+
+        assertAll(
+                () -> Assertions.assertThat(lottoGenerator.getLottos().lottos.size()).isEqualTo(3),
+                () -> Assertions.assertThat(lottoGenerator.getLottos().getLottoList()).contains(lottos.get(0))
+
+        );
+    }
+
 
     private void makeResult(String input) {
         String[] inputArr = input.split(COLON)[0].split(COMMA);
