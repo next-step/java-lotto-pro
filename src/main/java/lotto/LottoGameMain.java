@@ -5,8 +5,6 @@
  */
 package lotto;
 
-import java.util.List;
-
 public class LottoGameMain {
     private static final InputView inputView = new InputView();
     private static final ResultView resultView = new ResultView();
@@ -18,12 +16,12 @@ public class LottoGameMain {
         int purchaseCount = lottoGame.getPurchaseCount();
         resultView.printResultPay(purchaseCount);
 
-        List<LottoNumbers> lottoNumbers = lottoGame.purchaseLotto(purchaseCount);
-        resultView.printResultPurchase(lottoNumbers);
+        PurchaseLottoNumber purchaseLottoNumber = new PurchaseLottoNumber(lottoGame.purchaseLotto(purchaseCount));
+        resultView.printResultPurchase(purchaseLottoNumber);
 
         LottoNumbers winningNumbers = inputView.inputWinningNumberLastWeek();
         Statistic statistic = new Statistic(winningNumbers);
-        statistic.countPrize(lottoNumbers, inputView.inputBonusNumberLastWeek(winningNumbers));
+        statistic.countPrize(purchaseLottoNumber, inputView.inputBonusNumberLastWeek(winningNumbers));
 
         resultView.printResultWinningStatistics(payMoney, statistic);
     }

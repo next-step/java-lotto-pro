@@ -19,11 +19,11 @@ import java.util.Map;
 
 public class Statistic {
     private final Map<Rank, Integer> prize = new HashMap<>();
-    private final LottoNumbers winningNumber;
+    private final LottoNumbers winningNumbers;
 
-    public Statistic(LottoNumbers winningNumber) {
+    public Statistic(LottoNumbers winningNumbers) {
         initialize();
-        this.winningNumber = winningNumber;
+        this.winningNumbers = winningNumbers;
     }
 
     private void initialize() {
@@ -35,14 +35,14 @@ public class Statistic {
         prize.put(MISS, ZERO);
     }
 
-    public void countPrize(List<LottoNumbers> lottoNumbers, LottoNumber bonus) {
-        for (LottoNumbers lottoNumber : lottoNumbers) {
-            addCount(lottoNumber.getRank(winningNumber, bonus));
-        }
+    public void countPrize(PurchaseLottoNumber purchaseLottoNumber, LottoNumber bonus) {
+        addCount(purchaseLottoNumber.getRank(winningNumbers, bonus));
     }
 
-    private void addCount(Rank rank) {
-        prize.put(rank, prize.get(rank) + 1);
+    private void addCount(List<Rank> ranks) {
+        for (Rank rank : ranks) {
+            prize.put(rank, prize.get(rank) + 1);
+        }
     }
 
     public int getCountOfFirst() {

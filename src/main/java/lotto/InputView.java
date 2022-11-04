@@ -40,7 +40,7 @@ public class InputView {
     }
 
     private void printInputWinningNumberLastWeek() {
-        System.out.println("\n" + INPUT_WINNING_NUMBER_LAST_WEEK);
+        System.out.println(INPUT_WINNING_NUMBER_LAST_WEEK);
     }
 
     LottoNumber inputBonusNumberLastWeek(LottoNumbers winningNumbers) {
