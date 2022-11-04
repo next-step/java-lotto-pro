@@ -19,7 +19,7 @@ public enum Rank {
     }
 
     public static Rank valueOf(int matchCount, boolean hasBonusBall) {
-        if(matchCount == SECOND.getMatchCount() && hasBonusBall) {
+        if (matchCount == SECOND.getMatchCount() && hasBonusBall) {
             return SECOND;
         }
         return Arrays.stream(Rank.values())

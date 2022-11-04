@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.view.Error;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -9,14 +11,26 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
-        if(numbers.size() != 6) {
-            throw new IllegalArgumentException("로또 번호는 6개의 숫자만 설정 가능합니다.");
-        }
-        if(new HashSet<>(numbers).size() != numbers.size()) {
-            throw new IllegalArgumentException("로또 번호가 중복됩니다.");
-        }
+        validate(numbers);
         this.numbers = numbers;
         Collections.sort(numbers);
+    }
+
+    public static void validate(List<LottoNumber> numbers) throws IllegalArgumentException {
+        validateNumbersSize(numbers);
+        validateDuplicate(numbers);
+    }
+
+    private static void validateNumbersSize(List<LottoNumber> numbers) throws IllegalArgumentException {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException(Error.LOTTO_NUMBER_LENGTH);
+        }
+    }
+
+    private static void validateDuplicate(List<LottoNumber> numbers) throws IllegalArgumentException {
+        if (new HashSet<>(numbers).size() != numbers.size()) {
+            throw new IllegalArgumentException(Error.LOTTO_NUMBER_DUPLICATE);
+        }
     }
 
     public boolean hasBonusBall(LottoNumber bonusBall) {
@@ -35,6 +49,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return "[" + numbers + "]";
+        return numbers.toString();
     }
 }

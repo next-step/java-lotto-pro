@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 public class StringAddCalculator {
     public static int splitAndSum(String text) {
-        if(text == null || text.isEmpty()) {
+        if (text == null || text.isEmpty()) {
             return 0;
         }
-        if(TokenValidator.isNumberOnly(text)) {
+        if (TokenValidator.isNumberOnly(text)) {
             return Integer.parseInt(text);
         }
         String[] tokens = TokenParser.split(text);
