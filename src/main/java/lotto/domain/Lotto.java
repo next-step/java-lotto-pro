@@ -18,11 +18,8 @@ public class Lotto {
         this.numbers = new ArrayList<>(numbers);
     }
 
-    public Rank matche(Lotto lotto) {
-        return Rank.valueOf((int) numbers.stream()
-            .map(lotto::contains)
-            .filter(Boolean::booleanValue)
-            .count());
+    public int matche(Lotto lotto) {
+        return (int) numbers.stream().map(lotto::contains).filter(Boolean::booleanValue).count();
     }
 
     public List<LottoNumber> numbers() {
@@ -60,7 +57,7 @@ public class Lotto {
         }
     }
 
-    private boolean contains(LottoNumber number) {
+    public boolean contains(LottoNumber number) {
         return numbers.contains(number);
     }
 }

@@ -5,8 +5,10 @@ import lotto.application.io.Output;
 import lotto.domain.CreateLottoNumberPolicy.CreateShuffleLottoNumberPolicy;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Statistics;
+import lotto.domain.WinningLotto;
 
 public class LottoSystem implements AutoCloseable {
 
@@ -36,7 +38,12 @@ public class LottoSystem implements AutoCloseable {
         output.lottos(lottos);
 
         output.inputWinningLottoNumbers();
-        Lotto winningLotto = new Lotto(input.lottoNumbers());
+        Lotto lotto = new Lotto(input.lottoNumbers());
+
+        output.bonusNumber();
+        LottoNumber bonusNumber = input.bonusNumber();
+
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
         Statistics statistics = lottos.contains(winningLotto);
 
         output.result(statistics);
