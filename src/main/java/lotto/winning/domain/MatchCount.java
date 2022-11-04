@@ -4,7 +4,7 @@ import lotto.lotto.domain.Lotto;
 
 import java.util.List;
 
-public class WinningCount {
+public class MatchCount {
 
     private final List<Lotto> lottos;
     private final WinningNumber winningNumber;
@@ -13,7 +13,7 @@ public class WinningCount {
     private int fiveMatchCount;
     private int sixMatchCount;
 
-    public WinningCount(List<Lotto> lottos, WinningNumber winningNumber) {
+    public MatchCount(List<Lotto> lottos, WinningNumber winningNumber) {
         this.lottos = lottos;
         this.winningNumber = winningNumber;
     }

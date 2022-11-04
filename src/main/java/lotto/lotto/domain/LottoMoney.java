@@ -1,10 +1,10 @@
 package lotto.lotto.domain;
 
-public class LottoPurchaseAmount {
+public class LottoMoney {
 
     private final int number;
 
-    public LottoPurchaseAmount(int number) {
+    public LottoMoney(int number) {
         this.number = number;
         validateMultiple(number);
     }

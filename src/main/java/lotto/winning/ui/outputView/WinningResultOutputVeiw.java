@@ -1,13 +1,13 @@
 package lotto.winning.ui.outputView;
 
 import lotto.winning.domain.ReturnRate;
-import lotto.winning.domain.TotalWinningMoneyCalculator;
-import lotto.winning.domain.WinningMoneyCalculator;
+import lotto.winning.domain.TotalWinningMoney;
+import lotto.winning.domain.WinningMoney;
 
 public class WinningResultOutputVeiw {
 
-    public static void winningMoney(TotalWinningMoneyCalculator totalWinningMoneyCalculator) {
-        for (WinningMoneyCalculator calculator : totalWinningMoneyCalculator.getCalculators()) {
+    public static void winningMoney(TotalWinningMoney totalWinningMoney) {
+        for (WinningMoney calculator : totalWinningMoney.getCalculators()) {
             System.out.print(calculator.getMatchCount() + "개 일치");
             System.out.print(calculator.calculate() + "원");
             System.out.println(calculator.getLottoCount() + "개");

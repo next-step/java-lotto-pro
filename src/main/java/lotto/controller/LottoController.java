@@ -3,7 +3,7 @@ package lotto.controller;
 import calculator.Delimiters;
 import calculator.TextExtractor;
 import lotto.lotto.domain.LottoGenerator;
-import lotto.lotto.domain.LottoPurchaseAmount;
+import lotto.lotto.domain.LottoMoney;
 import lotto.winning.domain.*;
 import lotto.winning.ui.outputView.WinningResultOutputVeiw;
 
@@ -17,26 +17,26 @@ import static lotto.winning.ui.inputView.WinningNumberInputView.readWinningNumbe
 public class LottoController {
 
     public void run() {
-        LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(readPurchaseMoney());
-        int purchaseCount = lottoPurchaseAmount.purchaseCount();
+        LottoMoney lottoMoney = new LottoMoney(readPurchaseMoney());
+        int purchaseCount = lottoMoney.purchaseCount();
         LottoGenerator lottoGenerator = new LottoGenerator(purchaseCount);
         printLottos(lottoGenerator.generateLottos());
         System.out.println();
-        List<WinningMoneyCalculator> calculators = createCalculators(lottoGenerator);
-        TotalWinningMoneyCalculator totalWinningMoneyCalculator = new TotalWinningMoneyCalculator(calculators);
-        WinningResultOutputVeiw.winningMoney(totalWinningMoneyCalculator);
-        WinningResultOutputVeiw.returnRate(new ReturnRate(lottoPurchaseAmount, totalWinningMoneyCalculator));
+        List<WinningMoney> calculators = createCalculators(lottoGenerator);
+        TotalWinningMoney totalWinningMoney = new TotalWinningMoney(calculators);
+        WinningResultOutputVeiw.winningMoney(totalWinningMoney);
+        WinningResultOutputVeiw.returnRate(new ReturnRate(lottoMoney, totalWinningMoney));
     }
 
-    private static List<WinningMoneyCalculator> createCalculators(LottoGenerator lottoGenerator) {
+    private static List<WinningMoney> createCalculators(LottoGenerator lottoGenerator) {
         WinningNumber winningNumber = createWinningNumber();
-        WinningCount winningCount = new WinningCount(lottoGenerator.generateLottos(), winningNumber);
-        winningCount.generate();
-        List<WinningMoneyCalculator> calculators = new ArrayList<>();
-        calculators.add(new WinningMoneyCalculator(3, winningCount.getThreeMatchCount()));
-        calculators.add(new WinningMoneyCalculator(4, winningCount.getFourMatchCount()));
-        calculators.add(new WinningMoneyCalculator(5, winningCount.getFiveMatchCount()));
-        calculators.add(new WinningMoneyCalculator(6, winningCount.getSixMatchCount()));
+        MatchCount matchCount = new MatchCount(lottoGenerator.generateLottos(), winningNumber);
+        matchCount.generate();
+        List<WinningMoney> calculators = new ArrayList<>();
+        calculators.add(new WinningMoney(3, matchCount.getThreeMatchCount()));
+        calculators.add(new WinningMoney(4, matchCount.getFourMatchCount()));
+        calculators.add(new WinningMoney(5, matchCount.getFiveMatchCount()));
+        calculators.add(new WinningMoney(6, matchCount.getSixMatchCount()));
         return calculators;
     }
 

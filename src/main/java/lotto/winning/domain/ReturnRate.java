@@ -1,18 +1,18 @@
 package lotto.winning.domain;
 
-import lotto.lotto.domain.LottoPurchaseAmount;
+import lotto.lotto.domain.LottoMoney;
 
 public class ReturnRate {
 
-    private final LottoPurchaseAmount lottoPurchaseAmount;
-    private final TotalWinningMoneyCalculator winningMoneyCalculator;
+    private final LottoMoney lottoMoney;
+    private final TotalWinningMoney winningMoneyCalculator;
 
-    public ReturnRate(LottoPurchaseAmount lottoPurchaseAmount, TotalWinningMoneyCalculator winningMoneyCalculator) {
-        this.lottoPurchaseAmount = lottoPurchaseAmount;
+    public ReturnRate(LottoMoney lottoMoney, TotalWinningMoney winningMoneyCalculator) {
+        this.lottoMoney = lottoMoney;
         this.winningMoneyCalculator = winningMoneyCalculator;
     }
 
     public double calculate() {
-        return (double) winningMoneyCalculator.sum() / (double) lottoPurchaseAmount.getNumber();
+        return (double) winningMoneyCalculator.sum() / (double) lottoMoney.getNumber();
     }
 }

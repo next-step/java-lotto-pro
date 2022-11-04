@@ -3,11 +3,11 @@ package lotto.winning.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.winning.domain.WinningMoneyCalculatorFixture.list;
+import static lotto.winning.domain.WinningMoneyFixture.list;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("당첨 금액 총합")
-class TotalWinningMoneyCalculatorTest {
+class TotalWinningMoneyTest {
     /*
         0개 일치 1개
         2개 일치 1개
@@ -20,7 +20,7 @@ class TotalWinningMoneyCalculatorTest {
     @DisplayName("당첨 금액 총합 구하기")
     @Test
     void sum() {
-        TotalWinningMoneyCalculator totalWinningMoneyCalculator = new TotalWinningMoneyCalculator(list());
-        assertThat(totalWinningMoneyCalculator.sum()).isEqualTo(2_001_555_000);
+        TotalWinningMoney totalWinningMoney = new TotalWinningMoney(list());
+        assertThat(totalWinningMoney.sum()).isEqualTo(2_001_555_000);
     }
 }
