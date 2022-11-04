@@ -27,7 +27,7 @@ public class LottoController {
     private TotalWinningMoney createTotalWinningMoney(LottoGenerator lottoGenerator) {
         WinningNumber winningNumber = createWinningNumber();
         MatchCount matchCount = new MatchCount(lottoGenerator.generateLottos(), winningNumber);
-        return matchCount.generate();
+        return new TotalWinningMoney(matchCount.matchCount(3), matchCount.matchCount(4), matchCount.matchCount(5), matchCount.matchCount(6));
     }
 
     private static WinningNumber createWinningNumber() {

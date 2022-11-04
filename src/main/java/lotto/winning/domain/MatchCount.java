@@ -9,28 +9,28 @@ public class MatchCount {
 
     private final List<Lotto> lottos;
     private final WinningNumber winningNumber;
-    private Count threeMatchCount;
-    private Count fourMatchCount;
-    private Count fiveMatchCount;
-    private Count sixMatchCount;
 
     public MatchCount(List<Lotto> lottos, WinningNumber winningNumber) {
         this.lottos = lottos;
         this.winningNumber = winningNumber;
     }
 
-    public TotalWinningMoney generate() {
+    public Count matchCount(int number) {
+        int count = 0;
         for (Lotto lotto : this.lottos) {
-            if (this.winningNumber.matchCounts(lotto) == 3) {
-                this.threeMatchCount.plus();
-            } else if (this.winningNumber.matchCounts(lotto) == 4) {
-                this.fourMatchCount.plus();
-            } else if (this.winningNumber.matchCounts(lotto) == 5) {
-                this.fiveMatchCount.plus();
-            } else if (this.winningNumber.matchCounts(lotto) == 6) {
-                this.sixMatchCount.plus();
-            }
+            count = matchCountUp(number, count, lotto);
         }
-        return new TotalWinningMoney(threeMatchCount, fourMatchCount, fiveMatchCount, sixMatchCount);
+        return new Count(count);
+    }
+
+    private int matchCountUp(int number, int count, Lotto lotto) {
+        if (isMatch(number, lotto)) {
+            count++;
+        }
+        return count;
+    }
+
+    private boolean isMatch(int number, Lotto lotto) {
+        return this.winningNumber.matchCounts(lotto) == number;
     }
 }
