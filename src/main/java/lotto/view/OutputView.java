@@ -36,7 +36,7 @@ public class OutputView {
     private static void printLottoStatistics(LottoResult lottoResult) {
         Arrays.stream(Rank.values())
                 .sorted(Comparator.comparingInt(Rank::getWinningMoney))
-                .filter(rank -> rank.getCountOfMatch() > 2)
+                .filter(Rank::isWinner)
                 .forEach(rank -> System.out.printf(makeLottoResultMessage(rank)
                         , rank.getCountOfMatch()
                         , rank.getWinningMoney()
