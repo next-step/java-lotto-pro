@@ -45,20 +45,13 @@ public class WinningNumber {
     public int findMatchingCount(Lotto lotto) {
         int matchCounts = 0;
         for (Number number : lotto.getLottos()) {
-            matchCounts = plusMatchCounts(matchCounts, number);
+            matchCounts = plusMatchingCount(matchCounts, number);
         }
         return matchCounts;
     }
 
-    private int plusMatchCounts(int matchCounts, Number number) {
-        for (Number winningNumber : this.winningNumbers) {
-            matchCounts = plusMatchCount(matchCounts, number, winningNumber);
-        }
-        return matchCounts;
-    }
-
-    private static int plusMatchCount(int matchCounts, Number number, Number winningNumber) {
-        if (number.equals(winningNumber)) {
+    private int plusMatchingCount(int matchCounts, Number number) {
+        if (this.winningNumbers.contains(number)) {
             matchCounts++;
         }
         return matchCounts;
