@@ -1,12 +1,11 @@
-package lotto.auto.ui;
+package lotto.ui;
 
-import lotto.auto.Lotto;
-import lotto.auto.Rank;
+import lotto.Lotto;
+import lotto.Rank;
+import lotto.common.Constants;
 
 import java.text.NumberFormat;
 import java.util.List;
-
-import static lotto.auto.common.Constants.DECIMAL_POINT;
 
 public class ResultView {
     private StringBuilder sb;
@@ -35,10 +34,17 @@ public class ResultView {
     }
 
     public void printWinningStatisticsMessage(Rank rank, int value) {
-        sb.append(rank.getCountOfMatch() + "개 일치(" + rank.getWinningMoney() + ")-" + value + "개\n");
+        if (rank == Rank.MISS) {
+            return;
+        }
+        if (rank == Rank.SECOND) {
+            sb.append(rank.getCountOfMatch() + "개 일치, 보너스 볼 일치(" + rank.getWinningMoney() + "원)-" + value + "개\n");
+            return;
+        }
+        sb.append(rank.getCountOfMatch() + "개 일치(" + rank.getWinningMoney() + "원)-" + value + "개\n");
     }
 
     public void printProfitMessage(int inputMoney, float profit) {
-        System.out.println(sb + "총 수익률은 " + cutDecimal(DECIMAL_POINT, profit/inputMoney) + "입니다.");
+        System.out.println(sb + "총 수익률은 " + cutDecimal(Constants.DECIMAL_POINT, profit/inputMoney) + "입니다.");
     }
 }

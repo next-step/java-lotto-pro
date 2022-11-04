@@ -1,7 +1,7 @@
-package lotto.auto;
+package lotto;
 
-  import lotto.auto.ui.InputView;
-  import lotto.auto.ui.ResultView;
+  import lotto.ui.InputView;
+  import lotto.ui.ResultView;
 
 public class DestinyMatch {
     public void start() {
@@ -13,7 +13,10 @@ public class DestinyMatch {
         resultView.printBuyLottoCountMessage(buyer.buyLotto());
         resultView.printBuyLotto(buyer.getLottos());
 
-        WinningMatcher winningMatcher = new WinningMatcher(buyer, new LottoNumbers(inputView.getInputWinningNumbers()));
+        String inputLottoNumbers = inputView.getInputWinningNumbers();
+        String inputBonusNumber = inputView.getInputBonusNumbers();
+
+        WinningMatcher winningMatcher = new WinningMatcher(buyer, new LottoNumbers(inputLottoNumbers), inputBonusNumber);
         winningMatcher.printWinningStatistics();
         winningMatcher.printProfit(inputMoney);
     }

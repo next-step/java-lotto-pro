@@ -1,4 +1,4 @@
-package lotto.auto.common;
+package lotto.common;
 
 public class LottoAutoUtils {
     public int stringToNumber(String number) {

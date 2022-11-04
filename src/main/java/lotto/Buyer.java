@@ -1,9 +1,9 @@
-package lotto.auto;
+package lotto;
 
 import java.util.List;
 
-import static lotto.auto.common.Constants.DEFAULT_PRICE;
-import static lotto.auto.common.Constants.INIT_NUM;
+import static lotto.common.Constants.DEFAULT_PRICE;
+import static lotto.common.Constants.INIT_NUM;
 
 public class Buyer {
 
