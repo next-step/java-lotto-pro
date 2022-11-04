@@ -1,5 +1,6 @@
 package lotto.model.lotto.ticket;
 
+import lotto.model.lotto.enums.LottoNumberMatchCount;
 import lotto.model.winning.numbers.WinningNumbers;
 
 import java.util.*;
@@ -26,25 +27,43 @@ public class LottoTicketsBucket {
         lottoTickets.add(lottoTicket);
     }
 
-    public Map<Integer, Integer> calculateNumbersMatchCount(Map<Integer, Integer> prizeMoney,
-                                                            WinningNumbers winningNumbers) {
-        final Set<Integer> keySet = prizeMoney.keySet();
-        final List<Integer> numbersMatchCandidates = new ArrayList<>(keySet.size());
+    public Map<LottoNumberMatchCount, Integer> calculateNumbersMatchCount(Map<LottoNumberMatchCount, Integer> prizeMoney,
+                                                                          WinningNumbers winningNumbers) {
+        final Set<LottoNumberMatchCount> keySet = prizeMoney.keySet();
+        final List<LottoNumberMatchCount> numbersMatchCandidates = new ArrayList<>(keySet.size());
         numbersMatchCandidates.addAll(keySet);
-        final Map<Integer, Integer> numbersMatchCount = new HashMap<>(numbersMatchCandidates.size());
-        for (Integer candidate : numbersMatchCandidates) {
+        final Map<LottoNumberMatchCount, Integer> numbersMatchCount = new HashMap<>(numbersMatchCandidates.size());
+        for (LottoNumberMatchCount candidate : numbersMatchCandidates) {
             numbersMatchCount.put(candidate, 0);
         }
         for (LottoTicket lottoTicket : lottoTickets) {
             final int numbersMatch = lottoTicket.numberMatch(winningNumbers);
-            incrementCountWhenNumbersMatchIsOneOfTheCandidates(numbersMatchCandidates, numbersMatch, numbersMatchCount);
+            if (numbersMatch < 3 || 6 < numbersMatch) {
+                continue;
+            }
+            final LottoNumberMatchCount numberMatchEnum = convertToEnum(numbersMatch);
+            incrementCountWhenNumbersMatchIsOneOfTheCandidates(numbersMatchCandidates, numberMatchEnum,
+                    numbersMatchCount);
         }
         return numbersMatchCount;
     }
 
-    protected void incrementCountWhenNumbersMatchIsOneOfTheCandidates(List<Integer> numbersMatchCandidates,
-                                                                      int numbersMatch,
-                                                                      Map<Integer, Integer> numbersMatchCount) {
+    private LottoNumberMatchCount convertToEnum(int numbersMatch) {
+        if (numbersMatch == 3) {
+            return LottoNumberMatchCount.THREE;
+        }
+        if (numbersMatch == 4) {
+            return LottoNumberMatchCount.FOUR;
+        }
+        if (numbersMatch == 5) {
+            return LottoNumberMatchCount.FIVE;
+        }
+        return LottoNumberMatchCount.SIX;
+    }
+
+    protected void incrementCountWhenNumbersMatchIsOneOfTheCandidates(List<LottoNumberMatchCount> numbersMatchCandidates,
+                                                                      LottoNumberMatchCount numbersMatch,
+                                                                      Map<LottoNumberMatchCount, Integer> numbersMatchCount) {
         if (!numbersMatchCandidates.contains(numbersMatch)) {
             return;
         }

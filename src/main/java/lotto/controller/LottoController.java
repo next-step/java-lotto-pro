@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.controller.acceptor.MoneyToBuyAcceptor;
 import lotto.controller.acceptor.WinningNumbersAcceptor;
 import lotto.controller.displayer.LottoResultStatisticsDisplayer;
+import lotto.model.lotto.enums.LottoNumberMatchCount;
 import lotto.model.lotto.result.LottoResult;
 import lotto.model.lotto.ticket.LottoNumberGenerator;
 import lotto.model.lotto.ticket.LottoTicket;
@@ -11,20 +12,19 @@ import lotto.model.money.to.buy.MoneyToBuy;
 import lotto.model.winning.numbers.WinningNumbers;
 import lotto.view.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class LottoController {
     private static final int LOTTO_MINIMUM_NUMBER = 1;
     private static final int LOTTO_MAXIMUM_NUMBER = 45;
-    private final int[][] prizes;
+    private final Map<LottoNumberMatchCount, Integer> prizeMoney;
     private final MoneyToBuyAcceptor moneyToBuyAcceptor;
     private final LottoNumberGenerator lottoNumberGenerator;
     private final WinningNumbersAcceptor winningNumbersAcceptor;
 
-    public LottoController(int[][] prizes, MoneyToBuyAcceptor moneyToBuyAcceptor,
+    public LottoController(Map<LottoNumberMatchCount, Integer> prizeMoney, MoneyToBuyAcceptor moneyToBuyAcceptor,
                            LottoNumberGenerator lottoNumberGenerator, WinningNumbersAcceptor winningNumbersAcceptor) {
-        this.prizes = prizes;
+        this.prizeMoney = prizeMoney;
         this.moneyToBuyAcceptor = moneyToBuyAcceptor;
         this.lottoNumberGenerator = lottoNumberGenerator;
         this.winningNumbersAcceptor = winningNumbersAcceptor;
@@ -65,12 +65,8 @@ public class LottoController {
     }
 
     private LottoResult displayLottoStatistics(LottoTicketsBucket lottoTicketsBucket, WinningNumbers winningNumbers) {
-        final Map<Integer, Integer> prizeMoney = new HashMap<>();
-        for (int[] prize : prizes) {
-            prizeMoney.put(prize[0], prize[1]);
-        }
-        final Map<Integer, Integer> countsOfNumbersMatch = lottoTicketsBucket.calculateNumbersMatchCount(prizeMoney,
-                winningNumbers);
+        final Map<LottoNumberMatchCount, Integer> countsOfNumbersMatch =
+                lottoTicketsBucket.calculateNumbersMatchCount(prizeMoney, winningNumbers);
         final LottoResult lottoResult = new LottoResult(prizeMoney, countsOfNumbersMatch);
         new LottoResultStatisticsDisplayer(prizeMoney, lottoResult).show();
         return lottoResult;

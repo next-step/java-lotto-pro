@@ -1,6 +1,7 @@
 package lotto.model.lotto.ticket;
 
 import lotto.controller.converter.WinningNumbersConverter;
+import lotto.model.lotto.enums.LottoNumberMatchCount;
 import lotto.model.winning.numbers.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -70,14 +71,15 @@ class LottoTicketsBucketTest {
     @DisplayName("incrementCountWhenNumbersMatchIsOneOfTheCandidates 메서드 테스트")
     class IncrementCountWhenNumbersMatchIsOneOfTheCandidates {
         private final LottoTicketsBucketForTest2 lottoTicketsBucketForTest2;
-        private final List<Integer> numbersMatchCandidates;
+        private final List<LottoNumberMatchCount> numbersMatchCandidates;
         private final int numbersMatch;
-        private final Map<Integer, Integer> numbersMatchCount;
+        private final Map<LottoNumberMatchCount, Integer> numbersMatchCount;
 
         IncrementCountWhenNumbersMatchIsOneOfTheCandidates() {
             final int anyNumber = 3;
             lottoTicketsBucketForTest2 = new LottoTicketsBucketForTest2(anyNumber);
-            numbersMatchCandidates = new ArrayList<>(Arrays.asList(3, 4, 5, 6));
+            numbersMatchCandidates = new ArrayList<>(Arrays.asList(LottoNumberMatchCount.THREE,
+                    LottoNumberMatchCount.FOUR, LottoNumberMatchCount.FIVE, LottoNumberMatchCount.SIX));
             numbersMatch = 3;
             numbersMatchCount = new HashMap<>();
         }
@@ -87,15 +89,29 @@ class LottoTicketsBucketTest {
         @DisplayName("일치하는 번호 개수에 따라서 numbersMatchCount 맵의 값(value) 변경하는 데 성공")
         void success(int numbersMatch) {
             // arrange
+            final LottoNumberMatchCount matchCountEnum = convertToEnum(numbersMatch);
             final int prevNumbersMatch = 3;
-            numbersMatchCount.put(numbersMatch, prevNumbersMatch);
+            numbersMatchCount.put(matchCountEnum, prevNumbersMatch);
 
             // act
             lottoTicketsBucketForTest2.incrementCountWhenNumbersMatchIsOneOfTheCandidates(numbersMatchCandidates,
-                    numbersMatch, numbersMatchCount);
+                    matchCountEnum, numbersMatchCount);
 
             // assert
-            assertThat(numbersMatchCount.get(numbersMatch)).isEqualTo(prevNumbersMatch + 1);
+            assertThat(numbersMatchCount.get(matchCountEnum)).isEqualTo(prevNumbersMatch + 1);
+        }
+
+        private LottoNumberMatchCount convertToEnum(int numbersMatch) {
+            if (numbersMatch == 3) {
+                return LottoNumberMatchCount.THREE;
+            }
+            if (numbersMatch == 4) {
+                return LottoNumberMatchCount.FOUR;
+            }
+            if (numbersMatch == 5) {
+                return LottoNumberMatchCount.FIVE;
+            }
+            return LottoNumberMatchCount.SIX;
         }
     }
 
@@ -168,20 +184,20 @@ class LottoTicketsBucketTest {
                 final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGeneratorForTest(i);
                 lottoTicketsBucket.addLottoTicket(new LottoTicket((lottoNumberGenerator)));
             }
-            final int[][] prizes = new int[][]{{3, 5000}, {4, 50000}, {5, 150000}, {6, 2000000000}};
-            final Map<Integer, Integer> prizeMoney = new HashMap<>();
-            for (int[] prize : prizes) {
-                prizeMoney.put(prize[0], prize[1]);
-            }
+            final Map<LottoNumberMatchCount, Integer> prizeMoney = new HashMap<>();
+            prizeMoney.put(LottoNumberMatchCount.THREE, 5000);
+            prizeMoney.put(LottoNumberMatchCount.FOUR, 50000);
+            prizeMoney.put(LottoNumberMatchCount.FIVE, 150000);
+            prizeMoney.put(LottoNumberMatchCount.SIX, 2000000000);
             final WinningNumbersConverter winningNumbersConverter = new WinningNumbersConverter("1, 2, 3, 4, 5, 6");
             final WinningNumbers winningNumbers = new WinningNumbers(winningNumbersConverter.convertToLottoNumbers());
-            final Map<Integer, Integer> result = lottoTicketsBucket.calculateNumbersMatchCount(prizeMoney,
+            final Map<LottoNumberMatchCount, Integer> result = lottoTicketsBucket.calculateNumbersMatchCount(prizeMoney,
                     winningNumbers);
             assertAll(
-                    () -> assertThat(result.get(prizes[0][0])).isEqualTo(1),
-                    () -> assertThat(result.get(prizes[1][0])).isEqualTo(0),
-                    () -> assertThat(result.get(prizes[2][0])).isEqualTo(2),
-                    () -> assertThat(result.get(prizes[3][0])).isEqualTo(1)
+                    () -> assertThat(result.get(LottoNumberMatchCount.THREE)).isEqualTo(1),
+                    () -> assertThat(result.get(LottoNumberMatchCount.FOUR)).isEqualTo(0),
+                    () -> assertThat(result.get(LottoNumberMatchCount.FIVE)).isEqualTo(2),
+                    () -> assertThat(result.get(LottoNumberMatchCount.SIX)).isEqualTo(1)
             );
         }
     }

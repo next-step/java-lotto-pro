@@ -1,5 +1,6 @@
 package lotto.model.lotto.result;
 
+import lotto.model.lotto.enums.LottoNumberMatchCount;
 import lotto.model.money.to.buy.MoneyToBuy;
 
 import java.util.ArrayList;
@@ -8,19 +9,20 @@ import java.util.Map;
 import java.util.Set;
 
 public class LottoResult {
-    private final Map<Integer, Integer> prizeMoney;
-    private final Map<Integer, Integer> numbersMatchCount;
+    private final Map<LottoNumberMatchCount, Integer> prizeMoney;
+    private final Map<LottoNumberMatchCount, Integer> numbersMatchCount;
 
-    public LottoResult(Map<Integer, Integer> prizeMoney, Map<Integer, Integer> numbersMatchCount) {
+    public LottoResult(Map<LottoNumberMatchCount, Integer> prizeMoney,
+                       Map<LottoNumberMatchCount, Integer> numbersMatchCount) {
         this.prizeMoney = prizeMoney;
         this.numbersMatchCount = numbersMatchCount;
     }
 
-    public int prizeMoneyForNumbersMatch(int numbersMatch) {
+    public int prizeMoneyForNumbersMatch(LottoNumberMatchCount numbersMatch) {
         return prizeMoney.get(numbersMatch);
     }
 
-    public int lottoCountForNumbersMatch(int numbersMatch) {
+    public int lottoCountForNumbersMatch(LottoNumberMatchCount numbersMatch) {
         return numbersMatchCount.get(numbersMatch);
     }
 
@@ -30,11 +32,11 @@ public class LottoResult {
     }
 
     protected int sumOfPrizes() {
-        final Set<Integer> keySet = prizeMoney.keySet();
-        final List<Integer> numbersMatchCandidates = new ArrayList<>(keySet.size());
+        final Set<LottoNumberMatchCount> keySet = prizeMoney.keySet();
+        final List<LottoNumberMatchCount> numbersMatchCandidates = new ArrayList<>(keySet.size());
         numbersMatchCandidates.addAll(keySet);
         int sum = 0;
-        for (int numbersMatch : numbersMatchCandidates) {
+        for (LottoNumberMatchCount numbersMatch : numbersMatchCandidates) {
             final int prizeMultipliedByCount = prizeMoney.get(numbersMatch) * numbersMatchCount.get(numbersMatch);
             sum += prizeMultipliedByCount;
         }
