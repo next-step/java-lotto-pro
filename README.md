@@ -124,9 +124,14 @@
 	- https://docs.oracle.com/javase/8/docs/api/java/util/List.html#equals-java.lang.Object-
 - Q : Enum에 너무 의존하지 있지 않나? Enum값을 그대로 쓰는게 아니라, 메시지전달을 통해서 해야 하나?
 	- A : 디미터 법칙 적용하여, Enum자체를 뷰에서는 쓰지 않는 방식으로 개선
-
-
-## Improvements
-
+- Learend : 때로는 Top-Down추상화가 필요하다.
+	- TDD로 Bottom-Up 해나가며, Testable하게 만들어가는 것도 좋지만,  
+	- 클라이언트관점인 최상위 부터, 문제를 조금씩 하위 레벨로 추상화 해나가는 설계를 통해, 
+	- 클라이언트는 너무 많은 정보 없이 필요한 개념만으로 문제를 해결하게 해줄수 있도록하는 것이  필요하다고 느꼈다.
+	- 아마 TDD의 단점?중에 하나가 아닐까.
+## Refactoring
 - LottoCustomer가 너무 많은 기능을 처리 하고 있는 것 같다고 생각되어, 돈 관련 관리 기능을, 별도로 클래스 분리.
-	- Class Name = Wallter(put/take) or Account(deposit/withdraw )
+	- Moeny Class 새로 작성하고, 돈 관리 기능은 위임.
+	- 리팩토링을 하며, 투자수익률 계산에 버그가 있던 것도 발견할 수 있었다.
+		- ASIS : 투자수익률 = 수익금 / 초기금
+		- TOBE : 투자슈익률 = 수익금 / (초기금 - 남은금액)

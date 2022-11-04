@@ -18,12 +18,19 @@ public final class LottoResultStatistics {
         }
     }
 
+    public Money getTotalWiningMoney() {
+        return getFirstRankPrizeMoney().multiply(getFirstRankCount())
+            .plus(getSecondRankPrizeMoney().multiply(getSecondRankCount()))
+            .plus(getThirdRankPrizeMoney().multiply(getThirdRankCount()))
+            .plus(getFourthRankPrizeMoney().multiply(getFourthRankCount()));
+    }
+
     public LottoNumberMatchCount getFirstRankLottoNumberMatchCount() {
         return LottoResult.FIRST.getLottoNumberMatchCount();
     }
 
     public int getFirstRankCount() {
-        return getCountOf(LottoResult.FIRST);
+        return getCount(LottoResult.FIRST);
     }
 
     public Money getFirstRankPrizeMoney() {
@@ -35,7 +42,7 @@ public final class LottoResultStatistics {
     }
 
     public int getSecondRankCount() {
-        return getCountOf(LottoResult.SECOND);
+        return getCount(LottoResult.SECOND);
     }
 
     public Money getSecondRankPrizeMoney() {
@@ -47,7 +54,7 @@ public final class LottoResultStatistics {
     }
 
     public int getThirdRankCount() {
-        return getCountOf(LottoResult.THIRD);
+        return getCount(LottoResult.THIRD);
     }
 
     public Money getThirdRankPrizeMoney() {
@@ -59,14 +66,14 @@ public final class LottoResultStatistics {
     }
 
     public int getFourthRankCount() {
-        return getCountOf(LottoResult.FOURTH);
+        return getCount(LottoResult.FOURTH);
     }
 
     public Money getFourthRankPrizeMoney() {
         return LottoResult.FOURTH.getPrizeMoney();
     }
 
-    private int getCountOf(final LottoResult result) {
+    private int getCount(final LottoResult result) {
         return resultCounts.getOrDefault(result, DEFAULT_COUNT);
     }
 

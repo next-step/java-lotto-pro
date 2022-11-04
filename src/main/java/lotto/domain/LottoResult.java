@@ -18,8 +18,7 @@ public enum LottoResult {
         this.prizeMoney = prizeMoney;
     }
 
-    public static LottoResult fromLottoNumberMatchCount(
-        final LottoNumberMatchCount lottoNumberMatchCount) {
+    public static LottoResult valueOf(final LottoNumberMatchCount lottoNumberMatchCount) {
         return Arrays.stream(values())
             .filter(result -> result.lottoNumberMatchCount.equals(lottoNumberMatchCount))
             .findFirst()

@@ -7,6 +7,7 @@ import lotto.domain.LottoCustomer;
 import lotto.domain.LottoException;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.LottoResultStatsCalculator;
 import lotto.domain.LottoStore;
 import lotto.domain.Money;
 import lotto.domain.UniqueLottoNumbersSupplier;
@@ -18,12 +19,10 @@ public class Application {
     private static final Money DEFAULT_LOTTO_TICKET_FEE = Money.wons(1_000);
 
     public static void main(final String[] args) {
-        final Money givenMoney = parseMoney(InputView.getPurchaseMoney());
-        final LottoCustomer customer = new LottoCustomer(givenMoney);
+        final LottoCustomer customer = new LottoCustomer(parseMoney(InputView.getPurchaseMoney()));
         final LottoStore store = new LottoStore(
             DEFAULT_LOTTO_TICKET_FEE,
-            new UniqueLottoNumbersSupplier()
-        );
+            new UniqueLottoNumbersSupplier());
 
         store.sellAllTo(customer);
 
@@ -31,16 +30,20 @@ public class Application {
         ResultView.printPurchaseLottoNumbersList(customer.getPurchasedLottoNumbers());
         ResultView.printEmptyLine();
 
-        final LottoNumbers winningLottoNumbers = new LottoNumbers(
-            mapToLottoNumberList(mapToNumberList(InputView.getWiningLottoNumbers())));
-
-        customer.setWiningLottoNumbers(winningLottoNumbers);
+        final LottoResultStatsCalculator resultCalculator = new LottoResultStatsCalculator(
+            customer.getPurchasedLottoTickets(),
+            mapToLottoNumbers(InputView.getWiningLottoNumbers())
+        );
 
         ResultView.printEmptyLine();
         ResultView.printLottoResultStatsTitle();
         ResultView.printDivider();
-        ResultView.printLottoResultStatsBody(customer.getResultStats());
-        ResultView.printProfitRate(customer.getProfitRate());
+        ResultView.printLottoResultStatsBody(resultCalculator.computeLottoResultStats());
+        ResultView.printProfitRate(resultCalculator.computeProfitRate());
+    }
+
+    private static LottoNumbers mapToLottoNumbers(final String[] lottoNumbers) {
+        return new LottoNumbers(mapToLottoNumberList(mapToNumberList(lottoNumbers)));
     }
 
     private static List<Integer> mapToNumberList(final String[] winingLottoNumbers) {

@@ -17,7 +17,7 @@ public enum LottoNumberMatchCount {
         this.count = count;
     }
 
-    public static LottoNumberMatchCount fromCount(final int count) {
+    public static LottoNumberMatchCount valueOf(final int count) {
         return Arrays.stream(values())
             .filter(lottoMatchResult -> lottoMatchResult.count == count)
             .findFirst()

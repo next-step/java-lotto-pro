@@ -9,12 +9,10 @@ public final class LottoCustomer {
 
     private final Wallet wallet;
     private final List<LottoTicket> purchased;
-    private LottoNumbers winingLottoNumbers;
 
     public LottoCustomer(final Money initialAmount) {
         this.wallet = new Wallet(initialAmount);
         this.purchased = new ArrayList<>();
-        this.winingLottoNumbers = null;
     }
 
     public boolean canPurchase(final LottoTicket lottoTicket) {
@@ -30,53 +28,18 @@ public final class LottoCustomer {
         return lottoTicket.getFee();
     }
 
-    public void setWiningLottoNumbers(final LottoNumbers winingLottoNumbers) {
-        this.winingLottoNumbers = winingLottoNumbers;
+    public List<LottoTicket> getPurchasedLottoTickets() {
+        return Collections.unmodifiableList(purchased);
     }
 
     public List<LottoNumbers> getPurchasedLottoNumbers() {
-        return purchased.stream()
+        final List<LottoNumbers> result = purchased.stream()
             .map(LottoTicket::getLottoNumbers)
             .collect(Collectors.toList());
-    }
-
-    public LottoResultStatistics getResultStats() {
-        return new LottoResultStatistics(getLottoResults());
-    }
-
-    public Double getProfitRate() {
-        final Money invested = wallet.getUsedAmount();
-        final Money earned = getEarnedAmount();
-        if (invested.isLessThan(Money.ONE)
-            || earned.isLessThan(Money.ONE)) {
-            return Money.ZERO.doubleValue();
-        }
-        return earned.divide(invested).doubleValue();
+        return Collections.unmodifiableList(result);
     }
 
     public int getPurchasedCount() {
         return purchased.size();
     }
-
-    private Money getEarnedAmount() {
-        return getLottoResults().stream()
-            .map(LottoResult::getPrizeMoney)
-            .reduce(Money.ZERO, Money::plus);
-    }
-
-    private List<LottoResult> getLottoResults() {
-        return getLottoNumberMatchCounts().stream()
-            .map(LottoResult::fromLottoNumberMatchCount)
-            .collect(Collectors.toList());
-    }
-
-    private List<LottoNumberMatchCount> getLottoNumberMatchCounts() {
-        if (winingLottoNumbers == null) {
-            return Collections.emptyList();
-        }
-        return purchased.stream()
-            .map(lottoTicket -> winingLottoNumbers.matchTo(lottoTicket.getLottoNumbers()))
-            .collect(Collectors.toList());
-    }
-
 }

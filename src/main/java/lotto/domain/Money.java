@@ -57,6 +57,10 @@ public final class Money {
         return new Money(amount.multiply(other.amount));
     }
 
+    public Money multiply(final long percent) {
+        return new Money(amount.multiply(BigDecimal.valueOf(percent)));
+    }
+
     public boolean isLessThan(final Money other) {
         return amount.compareTo(other.amount) < 0;
     }
