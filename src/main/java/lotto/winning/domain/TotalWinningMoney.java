@@ -15,13 +15,14 @@ public class TotalWinningMoney {
     public static final int SIX_MATCH_COUNT = 6;
     private Map<Integer, Count> winningMonies = new HashMap<>();
 
-    protected TotalWinningMoney() {}
+    protected TotalWinningMoney() {
+    }
 
-    public TotalWinningMoney(Count threeMatchCount, Count fourMatchCount, Count fiveMatchCount, Count sixMatchCount) {
-        winningMonies.put(THREE_MATCH_COUNT, threeMatchCount);
-        winningMonies.put(FOUR_MATCH_COUNT, fourMatchCount);
-        winningMonies.put(FIVE_MATCH_COUNT, fiveMatchCount);
-        winningMonies.put(SIX_MATCH_COUNT, sixMatchCount);
+    public TotalWinningMoney(MatchCount matchCount) {
+        winningMonies.put(THREE_MATCH_COUNT, matchCount.matchCount(THREE_MATCH_COUNT));
+        winningMonies.put(FOUR_MATCH_COUNT, matchCount.matchCount(FOUR_MATCH_COUNT));
+        winningMonies.put(FIVE_MATCH_COUNT, matchCount.matchCount(FIVE_MATCH_COUNT));
+        winningMonies.put(SIX_MATCH_COUNT, matchCount.matchCount(SIX_MATCH_COUNT));
     }
 
     public Map<Integer, Count> getWinningMonies() {

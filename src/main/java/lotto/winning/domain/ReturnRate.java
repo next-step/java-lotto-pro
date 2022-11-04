@@ -5,14 +5,14 @@ import lotto.lotto.domain.LottoMoney;
 public class ReturnRate {
 
     private final LottoMoney lottoMoney;
-    private final TotalWinningMoney winningMoneyCalculator;
+    private final TotalWinningMoney totalWinningMoney;
 
-    public ReturnRate(LottoMoney lottoMoney, TotalWinningMoney winningMoneyCalculator) {
+    public ReturnRate(LottoMoney lottoMoney, TotalWinningMoney totalWinningMoney) {
         this.lottoMoney = lottoMoney;
-        this.winningMoneyCalculator = winningMoneyCalculator;
+        this.totalWinningMoney = totalWinningMoney;
     }
 
     public double calculate() {
-        return (double) winningMoneyCalculator.sum() / (double) lottoMoney.getNumber();
+        return (double) totalWinningMoney.sum() / (double) lottoMoney.getNumber();
     }
 }
