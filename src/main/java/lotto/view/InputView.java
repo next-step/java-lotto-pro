@@ -27,4 +27,8 @@ public class InputView {
             System.out.println(builder);
         }
     }
+
+    public static void printManualAutoCount(long manualCount, long autoCount) {
+        System.out.println("수동으로" + manualCount + "장, " + "자동으로 " + autoCount + "장 구매했습니다.");
+    }
 }
