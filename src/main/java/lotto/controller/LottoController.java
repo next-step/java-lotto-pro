@@ -15,8 +15,6 @@ import lotto.view.*;
 import java.util.Map;
 
 public class LottoController {
-    private static final int LOTTO_MINIMUM_NUMBER = 1;
-    private static final int LOTTO_MAXIMUM_NUMBER = 45;
     private final Map<LottoNumberMatchCount, Integer> prizeMoney;
     private final MoneyToBuyAcceptor moneyToBuyAcceptor;
     private final LottoNumberGenerator lottoNumberGenerator;
@@ -32,11 +30,10 @@ public class LottoController {
 
     public void run() {
         final MoneyToBuy moneyToBuy = userInputMoneyToBuy();
-        int numberOfAffordableLotto = moneyToBuy.affordableTicketCount();
-        final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucket(numberOfAffordableLotto);
-        while (moneyToBuy.canBuyMoreLotto()) {
-            moneyToBuy.buyOneLotto();
-            numberOfAffordableLottoLeft(lottoTicketsBucket);
+        final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucket(moneyToBuy);
+        while (lottoTicketsBucket.canBuyMoreLotto()) {
+            lottoTicketsBucket.buyOneLotto(new LottoTicket(lottoNumberGenerator));
+            numberOfAffordableLottoLeft();
         }
         final WinningNumbers winningNumbers = userInputWinningNumbers();
         displayLottoResult(lottoTicketsBucket, winningNumbers, moneyToBuy);
@@ -48,10 +45,9 @@ public class LottoController {
         return moneyToBuy;
     }
 
-    private void numberOfAffordableLottoLeft(LottoTicketsBucket lottoTicketsBucket) {
+    private void numberOfAffordableLottoLeft() {
         final LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator);
         LottoTicketPrinter.print(lottoTicket);
-        lottoTicketsBucket.addLottoTicket(lottoTicket);
     }
 
     private WinningNumbers userInputWinningNumbers() {

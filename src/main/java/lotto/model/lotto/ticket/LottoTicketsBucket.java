@@ -1,18 +1,23 @@
 package lotto.model.lotto.ticket;
 
 import lotto.model.lotto.enums.LottoNumberMatchCount;
+import lotto.model.money.to.buy.MoneyToBuy;
 import lotto.model.winning.numbers.WinningNumbers;
 
 import java.util.*;
 
 public class LottoTicketsBucket {
+    private static final int PRICE_OF_SINGLE_LOTTO_TICKET = 1000;
+    protected final int money;
+    private int boughtLottoCount;
     protected final List<LottoTicket> lottoTickets;
 
-    public LottoTicketsBucket(int howManyTickets) {
-        if (!isZeroOrPositive(howManyTickets)) {
+    public LottoTicketsBucket(MoneyToBuy moneyToBuy) {
+        money = moneyToBuy.value();
+        if (!isZeroOrPositive(money)) {
             throw new IllegalStateException("구매하려는 로또 개수가 올바르지 않습니다.");
         }
-        lottoTickets = new ArrayList<>(howManyTickets);
+        lottoTickets = new ArrayList<>(affordableTicketCount());
     }
 
     private boolean isZeroOrPositive(int howManyTickets) {
@@ -21,10 +26,20 @@ public class LottoTicketsBucket {
 
     protected LottoTicketsBucket(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
+        this.money = 1000 * lottoTickets.size();
     }
 
-    public void addLottoTicket(LottoTicket lottoTicket) {
+    public int affordableTicketCount() {
+        return money / PRICE_OF_SINGLE_LOTTO_TICKET;
+    }
+
+    public boolean canBuyMoreLotto() {
+        return boughtLottoCount < affordableTicketCount();
+    }
+
+    public void buyOneLotto(LottoTicket lottoTicket) {
         lottoTickets.add(lottoTicket);
+        ++boughtLottoCount;
     }
 
     public Map<LottoNumberMatchCount, Integer> calculateNumbersMatchCount(Map<LottoNumberMatchCount, Integer> prizeMoney,

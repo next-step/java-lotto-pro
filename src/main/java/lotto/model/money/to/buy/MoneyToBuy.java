@@ -30,19 +30,11 @@ public class MoneyToBuy {
         return inputMoney == moneyRemainderDiscarded;
     }
 
-    public int affordableTicketCount() {
-        return money / PRICE_OF_SINGLE_LOTTO_TICKET;
-    }
-
-    public boolean canBuyMoreLotto() {
-        return boughtLottoCount < affordableTicketCount();
-    }
-
-    public void buyOneLotto() {
-        ++boughtLottoCount;
-    }
-
     public double profitRatio(double sumOfPrizesFromLottoResult) {
         return sumOfPrizesFromLottoResult / money;
+    }
+
+    public int value() {
+        return money;
     }
 }

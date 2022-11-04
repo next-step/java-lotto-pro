@@ -2,11 +2,13 @@ package lotto.model.lotto.ticket;
 
 import lotto.controller.converter.WinningNumbersConverter;
 import lotto.model.lotto.enums.LottoNumberMatchCount;
+import lotto.model.money.to.buy.MoneyToBuy;
 import lotto.model.winning.numbers.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.*;
@@ -16,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTicketsBucketTest {
     static class LottoTicketsBucketForTest extends LottoTicketsBucket {
-        public LottoTicketsBucketForTest(int howManyTickets) {
-            super(howManyTickets);
+        public LottoTicketsBucketForTest(MoneyToBuy moneyToBuy) {
+            super(moneyToBuy);
         }
 
         int bucketSize() {
@@ -32,14 +34,8 @@ class LottoTicketsBucketTest {
         @ValueSource(ints = {0, 1, 2, 13, 597, 2000})
         @DisplayName("LottoTicketsBucket 클래스 생성자 실행 결과, 생성자에 야규먼트로 전달한 개수 만큼 로또 티켓을 만든다")
         void success(int numberOfTickets) {
-            assertDoesNotThrow(() -> new LottoTicketsBucket(numberOfTickets));
-        }
-
-        @ParameterizedTest
-        @ValueSource(ints = {Integer.MIN_VALUE, -987654321, -771, -19, -2, -1})
-        @DisplayName("LottoTicketsBucket 클래스 생성자 실행 결과, 생성자에 야규먼트로 전달한 개수 만큼 로또 티켓을 만든다")
-        void errorInvalidNumberOfTickets(int numberOfTickets) {
-            assertThrows(IllegalStateException.class, () -> new LottoTicketsBucket(numberOfTickets));
+            final MoneyToBuy moneyToBuy = new MoneyToBuy(String.valueOf(1000 * numberOfTickets));
+            assertDoesNotThrow(() -> new LottoTicketsBucket(moneyToBuy));
         }
     }
 
@@ -50,11 +46,12 @@ class LottoTicketsBucketTest {
         @ValueSource(ints = {0, 1, 2, 13, 597, 2000})
         @DisplayName("지정한 개수만큼 addLottoTicket 호출하면 lottoTickets 멤버 변수의 size 가 지정한 개수가 되어야 한다.")
         void success(int numberOfTickets) {
-            final LottoTicketsBucketForTest lottoTicketsBucket = new LottoTicketsBucketForTest(numberOfTickets);
+            final MoneyToBuy moneyToBuy = new MoneyToBuy("1000");
+            final LottoTicketsBucketForTest lottoTicketsBucket = new LottoTicketsBucketForTest(moneyToBuy);
             final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
             int numberCount = numberOfTickets;
             while (0 < numberCount) {
-                lottoTicketsBucket.addLottoTicket(new LottoTicket(lottoNumberGenerator));
+                lottoTicketsBucket.buyOneLotto(new LottoTicket(lottoNumberGenerator));
                 numberCount = numberCount - 1;
             }
             assertThat(lottoTicketsBucket.bucketSize()).isEqualTo(numberOfTickets);
@@ -62,8 +59,8 @@ class LottoTicketsBucketTest {
     }
 
     static class LottoTicketsBucketForTest2 extends LottoTicketsBucket {
-        public LottoTicketsBucketForTest2(int howManyTickets) {
-            super(howManyTickets);
+        public LottoTicketsBucketForTest2(MoneyToBuy moneyToBuy) {
+            super(moneyToBuy);
         }
     }
 
@@ -76,8 +73,8 @@ class LottoTicketsBucketTest {
         private final Map<LottoNumberMatchCount, Integer> numbersMatchCount;
 
         IncrementCountWhenNumbersMatchIsOneOfTheCandidates() {
-            final int anyNumber = 3;
-            lottoTicketsBucketForTest2 = new LottoTicketsBucketForTest2(anyNumber);
+            final MoneyToBuy moneyToBuy = new MoneyToBuy("1000");
+            lottoTicketsBucketForTest2 = new LottoTicketsBucketForTest2(moneyToBuy);
             numbersMatchCandidates = new ArrayList<>(Arrays.asList(LottoNumberMatchCount.THREE,
                     LottoNumberMatchCount.FOUR, LottoNumberMatchCount.FIVE, LottoNumberMatchCount.SIX));
             numbersMatch = 3;
@@ -116,8 +113,8 @@ class LottoTicketsBucketTest {
     }
 
     static class LottoTicketsBucketForTest3 extends LottoTicketsBucket {
-        public LottoTicketsBucketForTest3(int howManyTickets) {
-            super(howManyTickets);
+        public LottoTicketsBucketForTest3(MoneyToBuy moneyToBuy) {
+            super(moneyToBuy);
         }
 
         protected LottoTicketsBucketForTest3(List<LottoTicket> lottoTickets) {
@@ -179,10 +176,11 @@ class LottoTicketsBucketTest {
         @DisplayName("성공")
         void success() {
             final int numberOfTickets = 4;
-            final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucketForTest3(numberOfTickets);
+            final MoneyToBuy moneyToBuy = new MoneyToBuy(String.valueOf(1000 * numberOfTickets));
+            final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucketForTest3(moneyToBuy);
             for (int i = 0; i < numberOfTickets; ++i) {
                 final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGeneratorForTest(i);
-                lottoTicketsBucket.addLottoTicket(new LottoTicket((lottoNumberGenerator)));
+                lottoTicketsBucket.buyOneLotto(new LottoTicket(lottoNumberGenerator));
             }
             final Map<LottoNumberMatchCount, Integer> prizeMoney = new HashMap<>();
             prizeMoney.put(LottoNumberMatchCount.THREE, 5000);
@@ -199,6 +197,23 @@ class LottoTicketsBucketTest {
                     () -> assertThat(result.get(LottoNumberMatchCount.FIVE)).isEqualTo(2),
                     () -> assertThat(result.get(LottoNumberMatchCount.SIX)).isEqualTo(1)
             );
+        }
+    }
+
+    @Nested
+    @DisplayName("구매 금액을 가지고 가능한 만큼 로또 구매하기")
+    class CanBuyMoreLottoAndBuyOneLotto {
+        @ParameterizedTest
+        @CsvSource(value = {"0,0", "1000,1", "5000,5"}, delimiter = ',')
+        @DisplayName("canBuyMoreLotto 메서드, buyOneLotto 메서드 테스트 성공")
+        void success(String input, int countResult) {
+            int count = 0;
+            final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucket(new MoneyToBuy(input));
+            while (lottoTicketsBucket.canBuyMoreLotto()) {
+                lottoTicketsBucket.buyOneLotto(new LottoTicket(new LottoNumberGenerator()));
+                ++count;
+            }
+            assertThat(count).isEqualTo(countResult);
         }
     }
 }
