@@ -22,14 +22,14 @@ class WinningNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {6})
     void winningNumberCount_six_matches(int expected) {
-        assertThat(당첨번호123456().matchCounts(로또번호123456())).isEqualTo(expected);
+        assertThat(당첨번호123456().findMatchingCount(로또번호123456())).isEqualTo(expected);
     }
 
     @DisplayName("5개 일치 갯수 판별")
     @ParameterizedTest
     @ValueSource(ints = {5})
     void winningNumberCount_five_matches(int expected) {
-        assertThat(당첨번호123456().matchCounts(로또번호123457())).isEqualTo(expected);
+        assertThat(당첨번호123456().findMatchingCount(로또번호123457())).isEqualTo(expected);
     }
 
     @DisplayName("6자리 미만일 수 없다.")

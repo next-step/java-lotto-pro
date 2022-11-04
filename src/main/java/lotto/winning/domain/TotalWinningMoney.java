@@ -19,10 +19,10 @@ public class TotalWinningMoney {
     }
 
     public TotalWinningMoney(MatchCount matchCount) {
-        winningMonies.put(THREE_MATCH_COUNT, matchCount.matchCount(THREE_MATCH_COUNT));
-        winningMonies.put(FOUR_MATCH_COUNT, matchCount.matchCount(FOUR_MATCH_COUNT));
-        winningMonies.put(FIVE_MATCH_COUNT, matchCount.matchCount(FIVE_MATCH_COUNT));
-        winningMonies.put(SIX_MATCH_COUNT, matchCount.matchCount(SIX_MATCH_COUNT));
+        winningMonies.put(THREE_MATCH_COUNT, matchCount.lottoCount(THREE_MATCH_COUNT));
+        winningMonies.put(FOUR_MATCH_COUNT, matchCount.lottoCount(FOUR_MATCH_COUNT));
+        winningMonies.put(FIVE_MATCH_COUNT, matchCount.lottoCount(FIVE_MATCH_COUNT));
+        winningMonies.put(SIX_MATCH_COUNT, matchCount.lottoCount(SIX_MATCH_COUNT));
     }
 
     public Map<Integer, Count> getWinningMonies() {

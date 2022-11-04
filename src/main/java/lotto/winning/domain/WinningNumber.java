@@ -42,7 +42,7 @@ public class WinningNumber {
         }
     }
 
-    public int matchCounts(Lotto lotto) {
+    public int findMatchingCount(Lotto lotto) {
         int matchCounts = 0;
         for (Number number : lotto.getLottos()) {
             matchCounts = plusMatchCounts(matchCounts, number);

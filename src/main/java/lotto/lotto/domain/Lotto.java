@@ -18,7 +18,7 @@ public class Lotto {
         }
     }
 
-    public void add(int lottoNumber) {
+    private void add(int lottoNumber) {
         validateLottoNumbers(lottoNumber);
         this.numbers.add(new Number(lottoNumber));
     }

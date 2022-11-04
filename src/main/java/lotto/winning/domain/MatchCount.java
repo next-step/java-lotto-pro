@@ -15,22 +15,22 @@ public class MatchCount {
         this.winningNumber = winningNumber;
     }
 
-    public Count matchCount(int number) {
-        int count = 0;
+    public Count lottoCount(int matchingCount) {
+        int lottoCount = 0;
         for (Lotto lotto : this.lottos) {
-            count = matchCountUp(number, count, lotto);
+            lottoCount = lottoCountUp(matchingCount, lottoCount, lotto);
         }
-        return new Count(count);
+        return new Count(lottoCount);
     }
 
-    private int matchCountUp(int number, int count, Lotto lotto) {
-        if (isMatch(number, lotto)) {
-            count++;
+    private int lottoCountUp(int matchingCount, int lottoCount, Lotto lotto) {
+        if (isSame(matchingCount, lotto)) {
+            lottoCount++;
         }
-        return count;
+        return lottoCount;
     }
 
-    private boolean isMatch(int number, Lotto lotto) {
-        return this.winningNumber.matchCounts(lotto) == number;
+    private boolean isSame(int matchingCount, Lotto lotto) {
+        return this.winningNumber.findMatchingCount(lotto) == matchingCount;
     }
 }
