@@ -3,15 +3,16 @@ package lotto.winning.ui.outputView;
 import lotto.lotto.domain.LottoMoney;
 import lotto.winning.domain.ReturnRate;
 import lotto.winning.domain.TotalWinningMoney;
-import lotto.winning.domain.WinningMoney;
+
+import static lotto.winning.domain.WinningMoneyType.find;
 
 public class WinningResultOutputVeiw {
 
     public static void winningMoney(TotalWinningMoney totalWinningMoney) {
-        for (WinningMoney calculator : totalWinningMoney.getCalculators()) {
-            System.out.print(calculator.getMatchCount() + "개 일치");
-            System.out.print(calculator.calculate() + "원");
-            System.out.println(calculator.getLottoCount() + "개");
+        for (Integer matchCount : totalWinningMoney.getWinningMonies().keySet()) {
+            System.out.print(matchCount + "개 일치");
+            System.out.print(find(matchCount).getMoney() + "원");
+            System.out.println(totalWinningMoney.getWinningMonies().get(matchCount) + "개");
         }
     }
 
