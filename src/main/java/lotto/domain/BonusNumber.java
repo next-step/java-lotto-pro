@@ -19,10 +19,6 @@ public class BonusNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    public static BonusNumber of(String lottoNumber) {
-        return of(LottoNumber.of(lottoNumber));
-    }
-
     public static BonusNumber of(int lottoNumber) {
         return of(LottoNumber.of(lottoNumber));
     }

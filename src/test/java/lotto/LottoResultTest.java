@@ -28,7 +28,7 @@ public class LottoResultTest {
         lottoList.add(numbersToLotto(Arrays.asList(1,2,3,34,35,36)));
         Lotteries lotteries = new Lotteries(lottoList);
         //when
-        LottoResult lottoResult = new LottoResult(lotteries, winningNumbers, new BuyAmount("3000"));
+        LottoResult lottoResult = new LottoResult(lotteries, winningNumbers, new BuyAmount(3000));
         //then
         assertThat(lottoResultView.lottoResultMessage(lottoResult.getLottoResultDto()))
                 .contains("3개 일치 (5000원)- 3개");
@@ -44,7 +44,7 @@ public class LottoResultTest {
         lottoList.add(numbersToLotto(Arrays.asList(1,2,3,4,5,36)));
         Lotteries lotteries = new Lotteries(lottoList);
         //when
-        LottoResult lottoResult = new LottoResult(lotteries, winningNumbers, new BuyAmount("3000"));
+        LottoResult lottoResult = new LottoResult(lotteries, winningNumbers, new BuyAmount(3000));
         //then
         assertThat(lottoResultView.lottoResultMessage(lottoResult.getLottoResultDto()))
                 .contains("3개 일치 (5000원)- 1개\n4개 일치 (50000원)- 1개\n5개 일치 (1500000원)- 1개");
@@ -60,7 +60,7 @@ public class LottoResultTest {
         lottoList.add(numbersToLotto(Arrays.asList(1,2,3,4,5,36)));
         Lotteries lotteries = new Lotteries(lottoList);
         //when
-        LottoResult lottoResult = new LottoResult(lotteries, winningNumbers, new BuyAmount("3000"));
+        LottoResult lottoResult = new LottoResult(lotteries, winningNumbers, new BuyAmount(3000));
         //then
         assertThat(lottoResultView.lottoResultMessage(lottoResult.getLottoResultDto()))
                 .contains("6개 일치 (2000000000원)- 1개");
@@ -79,7 +79,7 @@ public class LottoResultTest {
         lottoList.add(numbersToLotto(Arrays.asList(1,12,13,14,27,36)));
         Lotteries lotteries = new Lotteries(lottoList);
         //when
-        LottoResult lottoResult = new LottoResult(lotteries, winningNumbers, new BuyAmount("6000"));
+        LottoResult lottoResult = new LottoResult(lotteries, winningNumbers, new BuyAmount(6000));
         //then
         assertThat(lottoResultView.lottoResultMessage(lottoResult.getLottoResultDto()))
                 .contains("기준이 1이기 때문에 결과적으로 손해라는 의미임");
@@ -98,7 +98,7 @@ public class LottoResultTest {
         lottoList.add(numbersToLotto(Arrays.asList(1,12,13,14,27,36)));
         Lotteries lotteries = new Lotteries(lottoList);
         //when
-        LottoResult lottoResult = new LottoResult(lotteries, winningNumbers, new BuyAmount("6000"));
+        LottoResult lottoResult = new LottoResult(lotteries, winningNumbers, new BuyAmount(6000));
         //then
         assertThat(lottoResultView.lottoResultMessage(lottoResult.getLottoResultDto()))
                 .contains("5개 일치, 보너스 볼 일치(30000000원) - 1개");

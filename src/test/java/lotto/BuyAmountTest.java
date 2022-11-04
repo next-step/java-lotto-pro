@@ -19,12 +19,4 @@ public class BuyAmountTest {
         assertThat((new BuyAmount(input)).isEqualValue(expected)).isTrue();
     }
 
-    @ParameterizedTest
-    @DisplayName("구매금액으로 천원미만의 값, 문자, 음수, 0을 입력했을 경우 Exception을 던지는지 확인")
-    @ValueSource(strings = {"500","aaa","-10","0"})
-    void buyAmount_invalidate_test(String input) {
-        assertThatThrownBy(() -> new BuyAmount(input))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
 }

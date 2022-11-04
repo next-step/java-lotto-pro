@@ -22,13 +22,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber of(String text) {
-        return of(Optional.ofNullable(text)
-                .filter(str -> str.trim().matches("\\d+"))
-                .map(str -> Integer.parseInt(str.trim()))
-                .orElseThrow(() -> new IllegalArgumentException("자연수 형식이 아닙니다.")));
-    }
-
     public static LottoNumber of(int number) {
         if (number < LOTTO_MIN_NUMBER) {
             throw new IllegalArgumentException("숫자는 " + LOTTO_MIN_NUMBER + "이상이여야 합니다.");

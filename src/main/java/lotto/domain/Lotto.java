@@ -46,7 +46,7 @@ public class Lotto {
 
     public boolean isEqualNumberList(List<Integer> numbers) {
         return numbers.stream().collect(Collectors.toSet()).size() == numbers.size()
-                && numbers.stream().filter(number -> isMatch(LottoNumber.of(number.toString())))
+                && numbers.stream().filter(number -> isMatch(LottoNumber.of(number)))
                 .count() == lottoNumbers.size();
     }
 }

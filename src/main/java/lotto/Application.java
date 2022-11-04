@@ -18,9 +18,9 @@ public class Application {
         LotteriesDto lotteriesDto = lottoController.buyLotto(buyAmountUserInput);
         lotteriesView.lotteriesResult(lotteriesDto);
         WinningNumbersDto winningNumbersDto = lottoController
-                .readWinningNumbers(lottoInputView.readUserInput("지난 주 당첨 번호를 입력해 주세요."));
+                .getWinningNumbers(lottoInputView.readUserInput("지난 주 당첨 번호를 입력해 주세요."));
         winningNumbersDto = lottoController
-                .readBonusNumber(winningNumbersDto, lottoInputView.readUserInput("보너스 볼을 입력해 주세요."));
+                .getBonusNumber(winningNumbersDto, lottoInputView.readUserInput("보너스 볼을 입력해 주세요."));
         LottoResultDto lottoResultDto = lottoController
                 .lottoResult(new LottoResultRequestDto(lotteriesDto, winningNumbersDto, buyAmountUserInput));
         lottoResultView.lottoResult(lottoResultDto);
