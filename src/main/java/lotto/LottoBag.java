@@ -2,12 +2,13 @@ package lotto;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoBag {
 
     private final List<Lotto> lottoList;
 
-    public static final Money LOTTO_PRICE = new Money(1000);
+    public static final Money LOTTO_PRICE = Money.of(1000);
 
     public LottoBag(List<Lotto> lottoList) {
         this.lottoList = lottoList;
@@ -29,7 +30,16 @@ public class LottoBag {
                 .collect(Collectors.toList());
     }
 
-    public static int availableCount(Money money) {
+    public List<Lotto> getLottoList() {
+        return this.lottoList;
+    }
+
+    public static long availableCount(Money money) {
         return money.divide(LOTTO_PRICE);
+    }
+
+    public static LottoBag concat(LottoBag first, LottoBag second) {
+        return new LottoBag(Stream.concat(first.lottoList.stream(), second.lottoList.stream())
+                .collect(Collectors.toList()));
     }
 }
