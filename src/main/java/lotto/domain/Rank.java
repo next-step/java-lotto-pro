@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
@@ -11,10 +13,29 @@ public enum Rank {
     FIFTH(3, 5_000),
     MISS(0,0);
 
-    private int countOfMatch;
-    private int winningMoney;
+    private final int countOfMatch;
+    private final int winningMoney;
+    private final static Map<MatchBonus, Rank> RANK_BY_MATCH_COUNT = new HashMap<MatchBonus, Rank>() {
+        {
+            put(MatchBonus.of(0, true), MISS);
+            put(MatchBonus.of(0, false), MISS);
+            put(MatchBonus.of(1, true), MISS);
+            put(MatchBonus.of(1, false), MISS);
+            put(MatchBonus.of(2, true), MISS);
+            put(MatchBonus.of(2, false), MISS);
+            put(MatchBonus.of(3, true), FIFTH);
+            put(MatchBonus.of(3, false), FIFTH);
+            put(MatchBonus.of(4, true), FOURTH);
+            put(MatchBonus.of(4, false), FOURTH);
+            put(MatchBonus.of(5, true), SECOND);
+            put(MatchBonus.of(5, false), THIRD);
+            put(MatchBonus.of(6, true), FIRST);
+            put(MatchBonus.of(6, false), FIRST);
 
-    private Rank(int countOfMatch, int winningMoney) {
+        }
+    };
+
+    Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
     }
@@ -28,22 +49,7 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        if(countOfMatch == 6) {
-            return FIRST;
-        }
-        if(countOfMatch == 5 && matchBonus) {
-            return SECOND;
-        }
-        if(countOfMatch == 5) {
-            return THIRD;
-        }
-        if(countOfMatch == 4) {
-            return FOURTH;
-        }
-        if(countOfMatch == 3) {
-            return FIFTH;
-        }
-        return MISS;
+        return RANK_BY_MATCH_COUNT.get(MatchBonus.of(countOfMatch,matchBonus));
     }
 
     public static List<Rank> getAllRanks() {
