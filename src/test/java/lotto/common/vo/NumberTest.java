@@ -1,11 +1,12 @@
-package lotto.lotto.domain;
+package lotto.common.vo;
 
+import common.vo.Number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static lotto.lotto.domain.Number.MAXIMUM_NUMBER;
-import static lotto.lotto.domain.Number.MINIMUM_NUMBER;
+import static common.vo.Number.MAXIMUM_NUMBER;
+import static common.vo.Number.MINIMUM_NUMBER;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

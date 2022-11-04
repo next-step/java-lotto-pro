@@ -1,6 +1,6 @@
 package lotto.lotto.ui.outputView;
 
-import lotto.lotto.domain.Number;
+import common.vo.Number;
 import lotto.lotto.domain.Lotto;
 
 import java.util.List;

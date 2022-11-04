@@ -1,5 +1,7 @@
 package lotto.lotto.domain;
 
+import common.vo.Number;
+
 import java.util.ArrayList;
 import java.util.List;
 
