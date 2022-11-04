@@ -15,12 +15,8 @@ public class Lotto {
         return this.lottoNumbers.match(other.lottoNumbers);
     }
 
-    public long matchBonusLottoNumber(LottoNumber bonusNumber) {
-        boolean isMatchedBonusNumber = this.lottoNumbers.contains(bonusNumber);
-        if(isMatchedBonusNumber) {
-            return 1L;
-        }
-        return 0L;
+    public boolean isMatchedBonusLottoNumber(LottoNumber bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
     }
 
     public String reportLottoNumbers() {

@@ -17,9 +17,9 @@ public class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
         LottoNumber bonusNumber = new LottoNumber(1);
 
-        long bonusNumberMatchCount = lotto.matchBonusLottoNumber(bonusNumber);
+        boolean isMatchedBonusLottoNumber = lotto.isMatchedBonusLottoNumber(bonusNumber);
 
-        assertThat(bonusNumberMatchCount).isEqualTo(1L);
+        assertThat(isMatchedBonusLottoNumber).isTrue();
     }
 
     @Test
@@ -29,8 +29,8 @@ public class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
         LottoNumber bonusNumber = new LottoNumber(7);
 
-        long bonusNumberMatchCount = lotto.matchBonusLottoNumber(bonusNumber);
+        boolean isMatchedBonusLottoNumber = lotto.isMatchedBonusLottoNumber(bonusNumber);
 
-        assertThat(bonusNumberMatchCount).isEqualTo(0L);
+        assertThat(isMatchedBonusLottoNumber).isFalse();
     }
 }

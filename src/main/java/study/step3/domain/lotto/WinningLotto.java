@@ -16,14 +16,14 @@ public class WinningLotto {
     }
 
     private void validateBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
-        if(winningLotto.matchBonusLottoNumber(bonusNumber) > 0L) {
+        if(winningLotto.isMatchedBonusLottoNumber(bonusNumber)) {
             throw new IllegalArgumentException(LottoMessage.ERROR_BONUS_NUMBER_IS_INCLUDING_WINNING_NUMBERS.message());
         }
     }
 
     public LottoMatchResult matchLotto(Lotto lotto) {
         long lottoMatchCount = lotto.matchLotto(this.winningLotto);
-        long bonusNumberMatchCount = lotto.matchBonusLottoNumber(this.bonusNumber);
+        long bonusNumberMatchCount = lotto.isMatchedBonusLottoNumber(this.bonusNumber) ? 1L : 0L;
         return new LottoMatchResult(lottoMatchCount, bonusNumberMatchCount);
     }
 }
