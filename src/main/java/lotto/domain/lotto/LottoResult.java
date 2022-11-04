@@ -8,20 +8,13 @@ public class LottoResult {
 	private final Lotto lotto;
 	private final MatchRank matchRank;
 
-	private LottoResult(Lotto lotto, int matchCount) {
-		validateMatchCount(matchCount);
+	private LottoResult(Lotto lotto, MatchRank matchRank) {
 		this.lotto = lotto;
-		this.matchRank = MatchRank.valueOfMatchCount(matchCount);
+		this.matchRank = matchRank;
 	}
 
-	private void validateMatchCount(int matchCount) {
-		if (matchCount < 0) {
-			throw new IllegalArgumentException("일치 횟수는 0보다 작을수 없습니다.");
-		}
-	}
-
-	public static LottoResult from(Lotto lotto, int matchCount) {
-		return new LottoResult(lotto, matchCount);
+	public static LottoResult from(Lotto lotto, MatchRank matchRank) {
+		return new LottoResult(lotto, matchRank);
 	}
 
 	public boolean hasMatchRank(MatchRank matchRank) {

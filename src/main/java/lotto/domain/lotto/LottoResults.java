@@ -22,7 +22,6 @@ public class LottoResults {
 	}
 
 	public LottoResults filterByMatchRank(MatchRank matchRank) {
-
 		return new LottoResults(
 			this.lottoResults.stream()
 				.filter(lottoResult -> lottoResult.hasMatchRank(matchRank))

@@ -1,14 +1,14 @@
 package lotto.view;
 
-import java.util.stream.IntStream;
+import java.util.Arrays;
 
 import lotto.domain.amount.Amount;
-import lotto.domain.lotto.MatchRank;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoResults;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.quantity.Quantity;
+import lotto.domain.lotto.MatchRank;
 import lotto.domain.lotto.WinningLotto;
+import lotto.domain.quantity.Quantity;
 
 public class ResultView {
 	public void lottosResult(Lottos lottos) {
@@ -25,11 +25,13 @@ public class ResultView {
 		System.out.println("---------");
 
 		LottoResults lottoResults = winningLotto.getLottoResults(lottos);
-		IntStream.rangeClosed(3, 6).forEach(i -> {
-			MatchRank matchCount = MatchRank.valueOfMatchCount(i);
-			LottoResults filteredLottoResults = lottoResults.filterByMatchRank(matchCount);
+		Arrays.stream(MatchRank.values()).forEach(matchRank -> {
+			if (matchRank == MatchRank.FAILED) {
+				return;
+			}
+			LottoResults filteredLottoResults = lottoResults.filterByMatchRank(matchRank);
 			Quantity matchQuantity = filteredLottoResults.quantity();
-			System.out.println(new LottoResultMessage(matchCount, matchQuantity));
+			System.out.println(new ResultMessage(matchRank, matchQuantity.getInt()));
 		});
 		System.out.println(new YieldMessage(lottoResults.yield(purchaseAmount)));
 	}
