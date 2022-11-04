@@ -24,10 +24,11 @@ public class WinningLottoRankTest {
     @DisplayName("1등 테스트")
     @Test
     void FIRST_테스트() {
-        WinningLotto winningLotto = new WinningLotto(IntStream
+        WinningLotto winningLotto = new WinningLotto(new Lotto(IntStream
                 .rangeClosed(1, 6)
                 .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()))
+                , new LottoNumber(7));
         WinningLottoRank rank = winningLotto.rank(lotto);
 
         assertThat(rank).isEqualTo(WinningLottoRank.FIRST);
@@ -36,10 +37,11 @@ public class WinningLottoRankTest {
     @DisplayName("2등 테스트")
     @Test
     void SECOND_테스트() {
-        WinningLotto winningLotto = new WinningLotto(IntStream
+        WinningLotto winningLotto = new WinningLotto(new Lotto(IntStream
                 .rangeClosed(2, 7)
                 .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()))
+                , new LottoNumber(1));
         WinningLottoRank rank = winningLotto.rank(lotto);
 
         assertThat(rank).isEqualTo(WinningLottoRank.SECOND);
@@ -48,10 +50,11 @@ public class WinningLottoRankTest {
     @DisplayName("3등 테스트")
     @Test
     void THIRD_테스트() {
-        WinningLotto winningLotto = new WinningLotto(IntStream
-                .rangeClosed(3, 8)
+        WinningLotto winningLotto = new WinningLotto(new Lotto(IntStream
+                .rangeClosed(2, 7)
                 .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()))
+                , new LottoNumber(8));
         WinningLottoRank rank = winningLotto.rank(lotto);
 
         assertThat(rank).isEqualTo(WinningLottoRank.THIRD);
@@ -60,30 +63,45 @@ public class WinningLottoRankTest {
     @DisplayName("4등 테스트")
     @Test
     void FOURTH_테스트() {
-        WinningLotto winningLotto = new WinningLotto(IntStream
-                .rangeClosed(4, 9)
+        WinningLotto winningLotto = new WinningLotto(new Lotto(IntStream
+                .rangeClosed(3, 8)
                 .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()))
+                , new LottoNumber(9));
         WinningLottoRank rank = winningLotto.rank(lotto);
 
         assertThat(rank).isEqualTo(WinningLottoRank.FOURTH);
     }
 
     @DisplayName("5등 테스트")
+    @Test
+    void FIFTH_테스트() {
+        WinningLotto winningLotto = new WinningLotto(new Lotto(IntStream
+                .rangeClosed(4, 9)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList()))
+                , new LottoNumber(10));
+        WinningLottoRank rank = winningLotto.rank(lotto);
+
+        assertThat(rank).isEqualTo(WinningLottoRank.FIFTH);
+    }
+
+    @DisplayName("낙첨 테스트")
     @ParameterizedTest
-    @CsvSource(value = {"5:10"
-            , "6:11"
-            , "7:12"
-            , "8:13"
-            , "9:14"
-            , "10:15"
-            , "11:16"
+    @CsvSource(value = {"5:10:11"
+            , "6:11:12"
+            , "7:12:13"
+            , "8:13:14"
+            , "9:14:15"
+            , "10:15:16"
+            , "11:16:17"
     }, delimiter = ':')
-    void FIFTH_테스트(int left, int right) {
-        WinningLotto winningLotto = new WinningLotto(IntStream
+    void MISS_테스트(int left, int right, int bonusNumber) {
+        WinningLotto winningLotto = new WinningLotto(new Lotto(IntStream
                 .rangeClosed(left, right)
                 .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()))
+                , new LottoNumber(bonusNumber));
         WinningLottoRank rank = winningLotto.rank(lotto);
         assertThat(rank).isEqualTo(WinningLottoRank.MISS);
     }
