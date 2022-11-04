@@ -22,38 +22,89 @@ public class LottoView {
         ResultView.output(printer);
     }
 
-    public static LottoNumbers inputWinningNumbers() {
-        String winningNumbers = null;
-        while (validateLottoNumbers(winningNumbers)) {
-            ResultView.output(LottoMessage.INPUT_WINNING_NUMBERS.message());
-            winningNumbers = InputView.input();
+    public static LottoNumbers getWinningNumbers() {
+        LottoNumbers winningNumbers = null;
+        while (isNeedToInputWinningNumbers(winningNumbers)) {
+            winningNumbers = inputWinningNumbers();
         }
         ResultView.newline();
-        return mapToLottoNumbers(winningNumbers);
+        return winningNumbers;
     }
 
-    public static LottoNumber inputBonusNumber() {
-        String bonusNumber = null;
-        while (validateLottoNumbers(bonusNumber)) {
-            ResultView.output(LottoMessage.INPUT_BONUS_NUMBER.message());
-            bonusNumber = InputView.input();
+    private static boolean isNeedToInputWinningNumbers(LottoNumbers winningNumbers) {
+        return winningNumbers == null;
+    }
+
+    private static LottoNumbers inputWinningNumbers() {
+        try {
+            ResultView.output(LottoMessage.INPUT_WINNING_NUMBERS.message());
+            String winningNumbers = InputView.input();
+            validateWinningNumbers(winningNumbers);
+            return mapToWinningNumbers(winningNumbers);
+        } catch (Exception e) {
+            ResultView.output(e.getMessage());
+            return null;
         }
-        return new LottoNumber(Integer.parseInt(bonusNumber));
     }
 
-    private static boolean validateLottoNumbers(String winningNumbers) {
-        if (winningNumbers == null || winningNumbers.isEmpty()) {
-            return true;
+    private static void validateWinningNumbers(String winningNumbers) {
+        validateLottoNumberIsNotEmpty(winningNumbers, LottoMessage.ERROR_WINNING_NUMBERS_SHOULD_BE_NOT_EMPTY);
+        validateLottoNumberIsNumber(winningNumbers);
+    }
+
+    private static void validateLottoNumberIsNotEmpty(String winningNumbers, LottoMessage message) {
+        if(winningNumbers == null || winningNumbers.isEmpty()) {
+            throw new IllegalArgumentException(message.message());
         }
-        return !PATTERN_NUMBER_AND_COMMA.matcher(winningNumbers).find();
     }
 
-    private static LottoNumbers mapToLottoNumbers(String winningNumbers) {
+    private static void validateLottoNumberIsNumber(String winningNumbers) {
+        if(!PATTERN_NUMBER_AND_COMMA.matcher(winningNumbers).find()) {
+            throw new IllegalArgumentException(LottoMessage.ERROR_WINNING_NUMBERS_SHOULD_BE_NUMBER.message());
+        }
+    }
+
+    private static LottoNumbers mapToWinningNumbers(String winningNumbers) {
         String[] numbers = winningNumbers.split(",");
         List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
                 .mapToInt(number -> Integer.parseInt(number.trim()))
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
         return new LottoNumbers(lottoNumbers);
+    }
+
+    public static LottoNumber getBonusNumber(LottoNumbers winningNumbers) {
+        LottoNumber bonusNumber = null;
+        while (isNeedToInputBonusNumber(bonusNumber)) {
+            bonusNumber = inputBonusNumber(winningNumbers);
+        }
+        return bonusNumber;
+    }
+
+    private static boolean isNeedToInputBonusNumber(LottoNumber bonusNumber) {
+        return bonusNumber == null;
+    }
+
+    private static LottoNumber inputBonusNumber(LottoNumbers winningNumbers) {
+        try {
+            ResultView.output(LottoMessage.INPUT_BONUS_NUMBER.message());
+            String bonusNumber = InputView.input();
+            validateBonusNumber(winningNumbers, bonusNumber);
+            return new LottoNumber(Integer.parseInt(bonusNumber));
+        } catch (Exception e) {
+            ResultView.output(e.getMessage());
+            return null;
+        }
+    }
+
+    private static void validateBonusNumber(LottoNumbers winningNumbers, String bonusNumber) {
+        validateLottoNumberIsNotEmpty(bonusNumber, LottoMessage.ERROR_BONUS_NUMBER_SHOULD_BE_NOT_EMPTY);
+        validateWinningIsContainsBonusNumber(winningNumbers, bonusNumber);
+    }
+
+    private static void validateWinningIsContainsBonusNumber(LottoNumbers winningNumbers, String bonusNumber) {
+        if(winningNumbers.contains(LottoNumber.of(bonusNumber))) {
+            throw new IllegalArgumentException(LottoMessage.ERROR_BONUS_NUMBER_IS_INCLUDING_WINNING_NUMBERS.message());
+        }
     }
 }

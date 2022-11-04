@@ -21,12 +21,12 @@ public class ConsoleMainView {
     }
 
     public void render() {
-        PurchaseMoney purchaseMoney = LottoMachineView.inputPurchaseMoney();
+        PurchaseMoney purchaseMoney = LottoMachineView.getPurchaseMoney();
         Lottos lottos = lottoMachineController.issueLottos(purchaseMoney);
         LottoView.printLottos(lottos);
 
-        LottoNumbers winnerNumbers = LottoView.inputWinningNumbers();
-        LottoNumber bonusNumber = LottoView.inputBonusNumber();
+        LottoNumbers winnerNumbers = LottoView.getWinningNumbers();
+        LottoNumber bonusNumber = LottoView.getBonusNumber(winnerNumbers);
         WinningLotto winningLotto = new WinningLotto(new Lotto(winnerNumbers), bonusNumber);
         LottoStatistics lottoStatistics = lottoController.match(purchaseMoney, lottos, winningLotto);
         LottoStatisticsView.printLottoStatistics(lottoStatistics);
