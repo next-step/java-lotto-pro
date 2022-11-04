@@ -12,10 +12,18 @@ import java.util.stream.Stream;
 
 import static lotto.lotto.domain.Lotto.DUPLICATE_EXCEPTION_MESSAGE;
 import static lotto.lotto.domain.Lotto.MAX_SIZE;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("로또")
 class LottoTest {
+
+    @DisplayName("로또 생성")
+    @ParameterizedTest
+    @MethodSource("constructor")
+    void constructor(List<Integer> lottoNumbers) {
+        assertThatNoException().isThrownBy(() -> new Lotto(lottoNumbers));
+    }
 
     @DisplayName("6개 이상의 수를 추가 할 수 없다.")
     @ParameterizedTest
@@ -44,6 +52,12 @@ class LottoTest {
     private static Stream<Arguments> duplicate() {
         List<Arguments> listOfArguments = new LinkedList<>();
         listOfArguments.add(Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 5)));
+        return listOfArguments.stream();
+    }
+
+    private static Stream<Arguments> constructor() {
+        List<Arguments> listOfArguments = new LinkedList<>();
+        listOfArguments.add(Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
         return listOfArguments.stream();
     }
 }
