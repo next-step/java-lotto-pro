@@ -21,10 +21,11 @@ public class WinningResultDTO {
         StringBuffer sb = new StringBuffer();
         sb.append("당첨 통계\n");
         sb.append("---------\n");
-        for (WinningLottoRank rank : WinningLottoRank.values()) {
-            sb.append(rank);
+        WinningLottoRank[] ranks = WinningLottoRank.values();
+        for (int i = ranks.length - 2; i >= 0; i--) {
+            sb.append(ranks[i]);
             sb.append("- ");
-            sb.append(ranks.get(rank));
+            sb.append(this.ranks.get(ranks[i]));
             sb.append("개\n");
         }
         return sb.toString();
