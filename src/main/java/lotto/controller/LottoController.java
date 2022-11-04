@@ -18,8 +18,7 @@ public class LottoController {
 
     public void run() {
         LottoMoney lottoMoney = new LottoMoney(readPurchaseMoney());
-        int purchaseCount = lottoMoney.purchaseCount();
-        LottoGenerator lottoGenerator = new LottoGenerator(purchaseCount);
+        LottoGenerator lottoGenerator = new LottoGenerator(lottoMoney.purchaseCount());
         printLottos(lottoGenerator.generateLottos());
         System.out.println();
         TotalWinningMoney totalWinningMoney = createTotalWinningMoney(lottoGenerator);
