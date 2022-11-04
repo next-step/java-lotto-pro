@@ -13,8 +13,7 @@ import static lotto.lotto.domain.fixture.LottoFixture.로또번호123456;
 import static lotto.lotto.domain.fixture.LottoFixture.로또번호123457;
 import static lotto.winning.domain.WinningNumber.WINNING_NUMBER;
 import static lotto.winning.fixture.WinningNumberFixture.당첨번호123456;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("당첨번호")
 class WinningNumberTest {
@@ -59,6 +58,13 @@ class WinningNumberTest {
                 .isInstanceOf(NumberFormatException.class);
     }
 
+    @DisplayName("숫자만 입력 가능하다.")
+    @ParameterizedTest
+    @MethodSource("constructor")
+    void constructor(String[] numbers) {
+        assertThatNoException().isThrownBy(() -> new WinningNumber(numbers));
+    }
+
     static Stream<Arguments> size() {
         return Stream.of(
                 Arguments.of((Object) new String[]{"1", "2", "3", "4"}),
@@ -76,6 +82,12 @@ class WinningNumberTest {
     static Stream<Arguments> type() {
         return Stream.of(
                 Arguments.of((Object) new String[]{"1", "2", "3", "4", "5", "x"})
+        );
+    }
+
+    static Stream<Arguments> constructor() {
+        return Stream.of(
+                Arguments.of((Object) new String[]{"1", "2", "3", "4", "5", "6"})
         );
     }
 }
