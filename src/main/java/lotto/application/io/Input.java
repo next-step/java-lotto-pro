@@ -20,6 +20,10 @@ public class Input implements Closeable {
         return parseWinningNumbers(scanner.nextLine());
     }
 
+    public LottoNumber bonusNumber() {
+        return new LottoNumber(Integer.parseInt(scanner.nextLine()));
+    }
+
     private List<LottoNumber> parseWinningNumbers(String winningNumbers) {
         return Arrays.stream(winningNumbers.split(","))
             .map(String::trim)

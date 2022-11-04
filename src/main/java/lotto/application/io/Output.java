@@ -41,6 +41,10 @@ public class Output {
         System.out.println(String.format("총 수익률은 %s입니다.", statistics.totalReward()));
     }
 
+    public void bonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+    }
+
     private void printLottoNumber(Lotto lotto) {
         ArrayDeque<LottoNumber> queue = new ArrayDeque<>(lotto.numbers());
 
