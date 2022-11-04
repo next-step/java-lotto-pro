@@ -13,7 +13,8 @@ class RankTests {
 
     @ParameterizedTest
     @MethodSource("rankProvider")
-    void test(int matcheCount, boolean isMatcheBonus, Rank expected) {
+    @DisplayName("순위를 계산한다")
+    void should_RankReturn(int matcheCount, boolean isMatcheBonus, Rank expected) {
         Rank actual = Rank.valueOf(matcheCount, isMatcheBonus);
         assertThat(actual).isEqualTo(expected);
     }
