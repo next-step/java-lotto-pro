@@ -6,7 +6,7 @@ public class LottoNumber implements Number {
 
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
-    private String number;
+    private final String number;
 
     public LottoNumber(String number) {
         this.number = number;
