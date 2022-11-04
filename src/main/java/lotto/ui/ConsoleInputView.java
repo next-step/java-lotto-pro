@@ -1,6 +1,9 @@
 package lotto.ui;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.PurchaseAmount;
+import lotto.domain.WinningLotto;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -36,7 +39,7 @@ public class ConsoleInputView implements InputView {
         String[] split = winningLottoNumbers.split(",");
         return new Lotto(Arrays.stream(split)
                 .mapToInt(i -> Integer.parseInt(i.trim()))
-                .mapToObj(LottoCreateStrategy.lottoNumberMap::get)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList()));
     }
 

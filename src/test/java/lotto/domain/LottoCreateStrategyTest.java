@@ -24,7 +24,7 @@ public class LottoCreateStrategyTest {
         Lotto lotto = new AutoLottoCreateStrategy().createLotto();
         List<LottoNumber> lottoNumbers = lotto.lottoNumbers();
         lottoNumbers.remove(5);
-        lottoNumbers.add(LottoCreateStrategy.lottoNumberMap.get(10));
+        lottoNumbers.add(new LottoNumber(10));
 
         assertThat(lottoNumbers.equals(lotto.lottoNumbers())).isFalse();
     }
