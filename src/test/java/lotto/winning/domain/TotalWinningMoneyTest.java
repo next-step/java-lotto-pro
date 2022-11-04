@@ -1,5 +1,6 @@
 package lotto.winning.domain;
 
+import common.vo.Count;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,7 @@ class TotalWinningMoneyTest {
     @DisplayName("당첨 금액 총합 구하기")
     @Test
     void sum() {
-        TotalWinningMoney totalWinningMoney = new TotalWinningMoney(1, 1, 1, 1);
+        TotalWinningMoney totalWinningMoney = new TotalWinningMoney(new Count(1), new Count(1), new Count(1), new Count(1));
         assertThat(totalWinningMoney.sum()).isEqualTo(2_001_555_000);
     }
 }

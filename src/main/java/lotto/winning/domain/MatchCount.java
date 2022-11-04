@@ -1,5 +1,6 @@
 package lotto.winning.domain;
 
+import common.vo.Count;
 import lotto.lotto.domain.Lotto;
 
 import java.util.List;

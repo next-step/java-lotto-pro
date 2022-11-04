@@ -1,4 +1,4 @@
-package lotto.winning.domain;
+package common.vo;
 
 public class Count {
 

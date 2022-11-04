@@ -1,5 +1,7 @@
 package lotto.winning.domain;
 
+import common.vo.Count;
+
 import java.util.HashMap;
 import java.util.Map;
 
