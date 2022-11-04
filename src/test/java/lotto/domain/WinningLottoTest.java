@@ -36,7 +36,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("당첨 로또와 구매 로또의 비교결과를 반환한다.")
     void returnResult(){
-        LottoWinningMoneyEnum rank = winningLotto.getLottoRank(lotto);
-        assertThat(rank).isEqualTo(LottoWinningMoneyEnum.SECOND);
+        LottoWinningMoney rank = winningLotto.getLottoRank(lotto);
+        assertThat(rank).isEqualTo(LottoWinningMoney.SECOND);
     }
 }

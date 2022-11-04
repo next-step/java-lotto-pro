@@ -5,7 +5,7 @@ import lotto.domain.LottoResult;
 import lotto.domain.LottoReturnRate;
 
 import java.util.List;
-import lotto.domain.LottoWinningMoneyEnum;
+import lotto.domain.LottoWinningMoney;
 
 import static lotto.io.PrintUtils.println;
 
@@ -29,10 +29,10 @@ public abstract class OutputView {
     public static void printWinningStats(LottoResult result){
         println("당첨 통계");
         println("------------");
-        for (LottoWinningMoneyEnum money : LottoWinningMoneyEnum.values()) {
-            if(money!=LottoWinningMoneyEnum.MISS) {
+        for (LottoWinningMoney money : LottoWinningMoney.values()) {
+            if(money!= LottoWinningMoney.MISS) {
                 String sentence = "" + (money.getMatchedCount() + "개 일치"
-                        + (money==LottoWinningMoneyEnum.SECOND ? ", 보너스 볼 일치" : ""))
+                        + (money== LottoWinningMoney.SECOND ? ", 보너스 볼 일치" : ""))
                         + (" (" + money.getWinningMoney() + "원)")
                         + (" - " + result.getResultCount(money) + "개");
                 println(sentence);

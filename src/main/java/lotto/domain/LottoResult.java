@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class LottoResult {
     public static final int ZERO = 0;
-    private Map<LottoWinningMoneyEnum, Integer> result;
+    private Map<LottoWinningMoney, Integer> result;
 
     public LottoResult(){
         result = new HashMap<>();
@@ -18,17 +18,17 @@ public class LottoResult {
         return lottoResult;
     }
 
-    public void addLottoResult(LottoWinningMoneyEnum lottoRank) {
+    public void addLottoResult(LottoWinningMoney lottoRank) {
         result.put(lottoRank, result.getOrDefault(lottoRank, ZERO) + 1);
     }
 
-    public int getResultCount(LottoWinningMoneyEnum winningEnum) {
+    public int getResultCount(LottoWinningMoney winningEnum) {
         return result.getOrDefault(winningEnum, ZERO);
     }
 
     public long calculateWinningMoney() {
         long totalWinningMoney = 0L;
-        for (LottoWinningMoneyEnum key : result.keySet()) {
+        for (LottoWinningMoney key : result.keySet()) {
             totalWinningMoney += key.getWinningMoney() * result.getOrDefault(key, ZERO);
         }
         return totalWinningMoney;

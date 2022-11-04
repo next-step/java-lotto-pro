@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static lotto.domain.LottoWinningMoneyEnum.*;
+import static lotto.domain.LottoWinningMoney.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoResultTest {
@@ -83,7 +83,6 @@ public class LottoResultTest {
     void calculateMoney(){
         LottoResult result = LottoResult.create();
 
-        // winning : Lotto.create(Arrays.asList(5,15,25,35,45,30)), LottoNumber.create(10)
         result.addLottoResult(winningLotto.getLottoRank(Lotto.create(Arrays.asList(5,15,25,35,45,10)))); // 2등
         result.addLottoResult(winningLotto.getLottoRank(Lotto.create(Arrays.asList(5,15,25,35,45,11)))); // 3등
         result.addLottoResult(winningLotto.getLottoRank(Lotto.create(Arrays.asList(5,15,25,36,44,11)))); // 5등
