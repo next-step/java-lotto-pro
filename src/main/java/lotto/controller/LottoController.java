@@ -4,7 +4,7 @@ import calculator.Delimiters;
 import calculator.TextExtractor;
 import lotto.lotto.domain.LottoGenerator;
 import lotto.lotto.domain.LottoMoney;
-import lotto.winning.domain.MatchCount;
+import lotto.winning.domain.MatchingCount;
 import lotto.winning.domain.TotalWinningMoney;
 import lotto.winning.domain.WinningNumber;
 
@@ -26,7 +26,7 @@ public class LottoController {
 
     private TotalWinningMoney createTotalWinningMoney(LottoGenerator lottoGenerator) {
         WinningNumber winningNumber = createWinningNumber();
-        return new TotalWinningMoney(new MatchCount(lottoGenerator.generateLottos(), winningNumber));
+        return new TotalWinningMoney(new MatchingCount(lottoGenerator.generateLottos(), winningNumber));
     }
 
     private static WinningNumber createWinningNumber() {

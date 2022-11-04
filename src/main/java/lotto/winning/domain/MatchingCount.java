@@ -5,12 +5,12 @@ import lotto.lotto.domain.Lotto;
 
 import java.util.List;
 
-public class MatchCount {
+public class MatchingCount {
 
     private final List<Lotto> lottos;
     private final WinningNumber winningNumber;
 
-    public MatchCount(List<Lotto> lottos, WinningNumber winningNumber) {
+    public MatchingCount(List<Lotto> lottos, WinningNumber winningNumber) {
         this.lottos = lottos;
         this.winningNumber = winningNumber;
     }
