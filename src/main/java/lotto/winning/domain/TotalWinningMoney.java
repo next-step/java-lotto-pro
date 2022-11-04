@@ -15,7 +15,7 @@ public class TotalWinningMoney {
     public static final int SIX_MATCH_COUNT = 6;
     private Map<Integer, Count> winningMonies = new HashMap<>();
 
-    protected TotalWinningMoney() {
+    private TotalWinningMoney() {
     }
 
     public TotalWinningMoney(MatchingCount matchingCount) {
