@@ -3,8 +3,8 @@ package lotto.lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottosFixture {
-    public static Lottos 로또번호123456() {
+public class LottoFixture {
+    public static Lotto 로또번호123456() {
         List<Integer> numbers = new ArrayList<>();
         numbers.add(1);
         numbers.add(2);
@@ -12,10 +12,10 @@ public class LottosFixture {
         numbers.add(4);
         numbers.add(5);
         numbers.add(6);
-        return new Lottos(numbers);
+        return new Lotto(numbers);
     }
 
-    public static Lottos 로또번호123457() {
+    public static Lotto 로또번호123457() {
         List<Integer> numbers = new ArrayList<>();
         numbers.add(1);
         numbers.add(2);
@@ -23,7 +23,7 @@ public class LottosFixture {
         numbers.add(4);
         numbers.add(5);
         numbers.add(7);
-        return new Lottos(numbers);
+        return new Lotto(numbers);
     }
 
 }

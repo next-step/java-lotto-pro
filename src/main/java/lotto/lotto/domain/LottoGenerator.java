@@ -22,16 +22,16 @@ public class LottoGenerator {
         this.purchaseCount = purchaseCount;
     }
 
-    public List<Lottos> generateLottoses() {
-        List<Lottos> lottosList = new ArrayList<>();
+    public List<Lotto> generateLottos() {
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
-            lottosList.add(generateLottos());
+            lottos.add(generateLotto());
         }
-        return lottosList;
+        return lottos;
     }
 
-    private Lottos generateLottos() {
+    private Lotto generateLotto() {
         Collections.shuffle(this.range);
-        return new Lottos(this.range.subList(0, 6));
+        return new Lotto(this.range.subList(0, 6));
     }
 }

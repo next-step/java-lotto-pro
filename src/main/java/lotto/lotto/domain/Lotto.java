@@ -1,52 +1,46 @@
 package lotto.lotto.domain;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Lotto {
 
-    public static final int MINIMUM_NUMBER = 1;
-    public static final int MAXIMUM_NUMBER = 45;
+    public static final String DUPLICATE_EXCEPTION_MESSAGE = "중복된 숫자를 입력할 수 없습니다.";
+    public static final int MAX_SIZE = 6;
 
-    private int number;
+    private List<Number> numbers = new ArrayList<>();
 
-    private Lotto(){}
-
-    public Lotto(int number) {
-        validate(number);
-        this.number = number;
-    }
-
-    public int getNumber() {
-        return this.number;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto = (Lotto) o;
-        return number == lotto.number;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
-    }
-
-    private static void validate(int number) {
-        validateMinimumNumber(number);
-        validateMaximumNumber(number);
-    }
-
-    private static void validateMinimumNumber(int number) {
-        if (number < MINIMUM_NUMBER) {
-            throw new IllegalArgumentException(MINIMUM_NUMBER + "보다 작을 수 없습니다.");
+    public Lotto(List<Integer> lottoNumbers) {
+        for (int lottoNumber : lottoNumbers) {
+            add(lottoNumber);
         }
     }
 
-    private static void validateMaximumNumber(int number) {
-        if (number > MAXIMUM_NUMBER) {
-            throw new IllegalArgumentException(MAXIMUM_NUMBER + "보다 클 수 없습니다.");
+    public void add(int lottoNumber) {
+        validateLottoNumbers(lottoNumber);
+        this.numbers.add(new Number(lottoNumber));
+    }
+
+    private void validateLottoNumbers(int lottoNumber) {
+        for (Number number : this.numbers) {
+            validateDuplicateNumber(lottoNumber, number);
+        }
+        validateMaxSize();
+    }
+
+    public List<Number> getLottos() {
+        return this.numbers;
+    }
+
+    private void validateMaxSize() {
+        if (this.numbers.size() >= MAX_SIZE) {
+            throw new IllegalArgumentException(MAX_SIZE + "를 초과할 수 없습니다.");
+        }
+    }
+
+    private static void validateDuplicateNumber(int lottoNumber, Number number) {
+        if (new Number(lottoNumber).equals(number)) {
+            throw new IllegalArgumentException(DUPLICATE_EXCEPTION_MESSAGE);
         }
     }
 }
