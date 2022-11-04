@@ -22,7 +22,7 @@ class LottoTest {
     @Test
     void winningResult_lotto_success() {
         //given:
-        Lotto lotto = new Lotto(new LottoNumberBag(makeLottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"))));
+        Lotto lotto = new Lotto(LottoNumberBag.fromManualNumbers("1,2,3,4,5,6"));
         //when:
         WinningLottoBallBag winningLottoBallBag = new WinningLottoBallBag("1,2,3,10,20,30");
         winningLottoBallBag.add(LottoBall.fromStringBonus("45"));
@@ -34,7 +34,7 @@ class LottoTest {
     @Test
     void winSecondBonus_lotto_success() {
         //given:
-        Lotto lotto = new Lotto(new LottoNumberBag(makeLottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"))));
+        Lotto lotto = new Lotto(LottoNumberBag.fromManualNumbers("1,2,3,4,5,6"));
         //when:
         WinningLottoBallBag winningLottoBallBag = new WinningLottoBallBag("1,2,3,4,5,45");
         winningLottoBallBag.add(LottoBall.fromStringBonus("6"));
@@ -46,7 +46,7 @@ class LottoTest {
     @Test
     void winThirdBonus_lotto_success() {
         //given:
-        Lotto lotto = new Lotto(new LottoNumberBag(makeLottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"))));
+        Lotto lotto = new Lotto(LottoNumberBag.fromManualNumbers("1,2,3,4,5,6"));
         //when:
         WinningLottoBallBag winningLottoBallBag = new WinningLottoBallBag("1,2,3,4,44,45");
         winningLottoBallBag.add(LottoBall.fromStringBonus("5"));
