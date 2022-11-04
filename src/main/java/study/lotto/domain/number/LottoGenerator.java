@@ -1,11 +1,14 @@
 package study.lotto.domain.number;
 
+import study.lotto.domain.Lotto;
+import study.lotto.domain.order.OrderType;
 import study.message.LottoExceptionCode;
-import study.util.NumberUtil;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGenerator {
@@ -20,12 +23,10 @@ public class LottoGenerator {
                 .forEach((num) -> cacheLottoNumbers.put(num, new LottoNumber(num)));
     }
 
-    public static LottoNumber toLottoNumber(String number) {
-        try {
-            return toLottoNumber(NumberUtil.convertToPositiveIntNotContainsZero(number));
-        } catch (IllegalArgumentException iae) {
-            throw new IllegalArgumentException(LottoExceptionCode.INVALID_LOTTO_NUMBER.getMessage());
-        }
+    public static Lotto generate(List<Integer> numbers, OrderType orderType) {
+        return new Lotto(numbers.stream()
+                .map(LottoGenerator::toLottoNumber)
+                .collect(Collectors.toSet()), orderType);
     }
 
     public static LottoNumber toLottoNumber(int number) {
