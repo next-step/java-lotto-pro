@@ -51,6 +51,14 @@ class WinningNumberTest {
                 .hasMessageContaining(DUPLICATE_EXCEPTION_MESSAGE);
     }
 
+    @DisplayName("숫자만 입력 가능하다.")
+    @ParameterizedTest
+    @MethodSource("type")
+    void type(String[] numbers) {
+        assertThatThrownBy(() -> new WinningNumber(numbers))
+                .isInstanceOf(NumberFormatException.class);
+    }
+
     static Stream<Arguments> size() {
         return Stream.of(
                 Arguments.of((Object) new String[]{"1", "2", "3", "4"}),
@@ -62,6 +70,12 @@ class WinningNumberTest {
     static Stream<Arguments> duplicate() {
         return Stream.of(
                 Arguments.of((Object) new String[]{"1", "2", "3", "4", "5", "5"})
+        );
+    }
+
+    static Stream<Arguments> type() {
+        return Stream.of(
+                Arguments.of((Object) new String[]{"1", "2", "3", "4", "5", "x"})
         );
     }
 }
