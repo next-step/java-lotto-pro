@@ -40,12 +40,12 @@ public class LottoController {
 
     private void insertWinningLotto() throws IllegalArgumentException {
         List<LottoNumber> winningLottoNumbers = InputView.insertWinningLotto();
-        LottoNumber bonusBall = InputView.insertBonusBall();
+        LottoNumber bonusBall;
 
-        if (!WinningLotto.isValid(winningLottoNumbers, bonusBall)) {
-            insertWinningLotto();
-            return;
-        }
+        do {
+            bonusBall = InputView.insertBonusBall();
+        } while(!WinningLotto.isValid(winningLottoNumbers, bonusBall));
+
         winningLotto = new WinningLotto(winningLottoNumbers, bonusBall);
     }
 
