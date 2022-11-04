@@ -3,7 +3,6 @@ package lotto.winning.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.winning.domain.WinningMoneyFixture.list;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("당첨 금액 총합")
@@ -20,7 +19,7 @@ class TotalWinningMoneyTest {
     @DisplayName("당첨 금액 총합 구하기")
     @Test
     void sum() {
-        TotalWinningMoney totalWinningMoney = new TotalWinningMoney(list());
+        TotalWinningMoney totalWinningMoney = new TotalWinningMoney(1, 1, 1, 1);
         assertThat(totalWinningMoney.sum()).isEqualTo(2_001_555_000);
     }
 }

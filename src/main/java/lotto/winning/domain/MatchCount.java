@@ -31,11 +31,6 @@ public class MatchCount {
                 sixMatchCount++;
             }
         }
-        List<WinningMoney> winningMonies = new ArrayList<>();
-        winningMonies.add(new WinningMoney(3, threeMatchCount));
-        winningMonies.add(new WinningMoney(4, threeMatchCount));
-        winningMonies.add(new WinningMoney(5, threeMatchCount));
-        winningMonies.add(new WinningMoney(6, threeMatchCount));
-        return new TotalWinningMoney(winningMonies);
+        return new TotalWinningMoney(threeMatchCount, fourMatchCount, fiveMatchCount, sixMatchCount);
     }
 }
