@@ -22,11 +22,11 @@ public class LottoController {
         LottoGenerator lottoGenerator = new LottoGenerator(purchaseCount);
         printLottos(lottoGenerator.generateLottos());
         System.out.println();
-        TotalWinningMoney totalWinningMoney = createCalculators(lottoGenerator);
+        TotalWinningMoney totalWinningMoney = createTotalWinningMoney(lottoGenerator);
         WinningResultOutputVeiw.winningResult(totalWinningMoney, lottoMoney);
     }
 
-    private static TotalWinningMoney createCalculators(LottoGenerator lottoGenerator) {
+    private TotalWinningMoney createTotalWinningMoney(LottoGenerator lottoGenerator) {
         WinningNumber winningNumber = createWinningNumber();
         MatchCount matchCount = new MatchCount(lottoGenerator.generateLottos(), winningNumber);
         return matchCount.generate();
