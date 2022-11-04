@@ -1,6 +1,6 @@
-package lotto;
+package lotto.winning.domain;
 
-import static lotto.WinningMoney.*;
+import static lotto.winning.domain.WinningMoney.*;
 
 public class WinningMoneyCalculator {
 

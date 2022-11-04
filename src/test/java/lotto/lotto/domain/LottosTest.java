@@ -1,13 +1,14 @@
-package lotto;
+package lotto.lotto.domain;
 
+import lotto.lotto.domain.Lottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.Lottos.DUPLICATE_EXCEPTION_MESSAGE;
-import static lotto.Lottos.MAX_SIZE;
+import static lotto.lotto.domain.Lottos.DUPLICATE_EXCEPTION_MESSAGE;
+import static lotto.lotto.domain.Lottos.MAX_SIZE;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("로또 번호들")

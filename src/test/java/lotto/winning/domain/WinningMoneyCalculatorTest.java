@@ -1,5 +1,6 @@
-package lotto;
+package lotto.winning.domain;
 
+import lotto.winning.domain.WinningMoneyCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

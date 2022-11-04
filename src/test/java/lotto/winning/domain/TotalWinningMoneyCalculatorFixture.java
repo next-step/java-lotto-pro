@@ -1,4 +1,7 @@
-package lotto;
+package lotto.winning.domain;
+
+import lotto.winning.domain.TotalWinningMoneyCalculator;
+import lotto.winning.domain.WinningMoneyCalculator;
 
 import java.util.ArrayList;
 import java.util.List;

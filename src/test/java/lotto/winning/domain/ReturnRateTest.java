@@ -1,10 +1,10 @@
-package lotto;
+package lotto.winning.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.LottoPurchaseAmountFixture.로또구매금액_10_000;
-import static lotto.TotalWinningMoneyCalculatorFixture.당첨금액_5000;
+import static lotto.lotto.domain.LottoPurchaseAmountFixture.로또구매금액_10_000;
+import static lotto.winning.domain.TotalWinningMoneyCalculatorFixture.당첨금액_5000;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("수익률")

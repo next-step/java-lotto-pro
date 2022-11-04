@@ -1,6 +1,8 @@
-package lotto;
+package lotto.winning.domain;
 
 import com.sun.tools.javac.util.List;
+import lotto.lotto.domain.Lotto;
+import lotto.lotto.domain.Lottos;
 
 public class WinningNumber {
 

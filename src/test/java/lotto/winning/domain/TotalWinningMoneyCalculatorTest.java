@@ -1,9 +1,9 @@
-package lotto;
+package lotto.winning.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.WinningMoneyCalculatorFixture.list;
+import static lotto.winning.domain.WinningMoneyCalculatorFixture.list;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("당첨 금액 총합")

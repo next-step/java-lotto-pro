@@ -1,6 +1,7 @@
-package lotto;
+package lotto.lotto.domain;
 
 import com.sun.tools.javac.util.List;
+import lotto.lotto.domain.Lottos;
 
 public class LottosFixture {
     public static Lottos 로또번호123456() {
