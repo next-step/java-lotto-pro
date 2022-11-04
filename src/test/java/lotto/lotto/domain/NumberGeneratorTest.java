@@ -13,7 +13,6 @@ class NumberGeneratorTest {
     @ParameterizedTest
     @ValueSource(ints = {3, 4, 5})
     void generate(int purchaseCount) {
-        LottoGenerator lottoGenerator = new LottoGenerator(purchaseCount);
-        assertThat(lottoGenerator.generateLottos()).hasSize(purchaseCount);
+        assertThat(new LottoGenerator(purchaseCount).generateLottos()).hasSize(purchaseCount);
     }
 }

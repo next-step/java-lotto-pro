@@ -14,14 +14,12 @@ class WinningNumberTest {
     @DisplayName("6개 일치 갯수 판별")
     @Test
     void winningNumberCount_six_matches() {
-        WinningNumber winningNumber = 당첨번호123456();
-        assertThat(winningNumber.matchCounts(로또번호123456())).isEqualTo(6);
+        assertThat(당첨번호123456().matchCounts(로또번호123456())).isEqualTo(6);
     }
 
     @DisplayName("5개 일치 갯수 판별")
     @Test
     void winningNumberCount_five_matches() {
-        WinningNumber winningNumber = 당첨번호123456();
-        assertThat(winningNumber.matchCounts(로또번호123457())).isEqualTo(5);
+        assertThat(당첨번호123456().matchCounts(로또번호123457())).isEqualTo(5);
     }
 }
