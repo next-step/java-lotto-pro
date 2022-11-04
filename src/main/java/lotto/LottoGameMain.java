@@ -13,7 +13,7 @@ public class LottoGameMain {
 
     public static void main(String[] args) {
         int payMoney = inputView.inputPay();
-        LottoGame lottoGame = new LottoGame(payMoney, new AutoLottoNumberGenerator());
+        LottoGame lottoGame = new LottoGame(payMoney, new LottoNumberAutoGenerator());
 
         int purchaseCount = lottoGame.getPurchaseCount();
         resultView.printResultPay(purchaseCount);

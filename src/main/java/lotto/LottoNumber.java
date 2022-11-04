@@ -1,8 +1,21 @@
 package lotto;
 
+import static lotto.Constant.LOTTO_END_NUMBER;
+import static lotto.Constant.LOTTO_START_NUMBER;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+
+    static {
+        for (int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
+            lottoNumbers.put(number, new LottoNumber(number));
+        }
+    }
+
     private final int number;
 
     private LottoNumber(int number) {
@@ -10,11 +23,11 @@ public class LottoNumber {
     }
 
     public static LottoNumber from(int number) {
-        return new LottoNumber(number);
+        return lottoNumbers.get(number);
     }
 
     public static LottoNumber from(String number) {
-        return new LottoNumber(Integer.parseInt(number));
+        return LottoNumber.from(Integer.parseInt(number));
     }
 
     @Override

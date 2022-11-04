@@ -5,8 +5,8 @@
  */
 package lotto;
 
-import java.util.List;
+import java.util.Set;
 
 public interface LottoNumberGenerator {
-    List<Integer> generateSixNumbers();
+    Set<LottoNumber> generateSixNumbers();
 }

@@ -16,7 +16,7 @@ public class Spliter {
         StringTokenizer token = new StringTokenizer(input, DELIMITER);
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         while (token.hasMoreTokens()) {
-            lottoNumbers.add(LottoNumber.from(Integer.parseInt(token.nextToken())));
+            lottoNumbers.add(LottoNumber.from(token.nextToken()));
         }
         return LottoNumbers.from(lottoNumbers);
     }

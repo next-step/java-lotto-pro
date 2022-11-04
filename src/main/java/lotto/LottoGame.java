@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
-    private final LottoNumberGenerator lottoNumberGenerator;
     private final int money;
+    private final LottoNumberGenerator lottoNumberGenerator;
 
     public LottoGame(int money, LottoNumberGenerator lottoNumberGenerator) {
         this.money = money;
