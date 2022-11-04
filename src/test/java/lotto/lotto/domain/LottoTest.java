@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static lotto.lotto.domain.Lotto.DUPLICATE_EXCEPTION_MESSAGE;
-import static lotto.lotto.domain.Lotto.MAX_SIZE;
+import static lotto.lotto.domain.Lotto.LOTTO_SIZE;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -27,11 +27,11 @@ class LottoTest {
 
     @DisplayName("6개 이상의 수를 추가 할 수 없다.")
     @ParameterizedTest
-    @MethodSource("maxSize")
+    @MethodSource("lottoSize")
     void maxSize(List<Integer> lottoNumbers) {
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(MAX_SIZE + "를 초과할 수 없습니다.");
+                .hasMessageContaining(LOTTO_SIZE + "개여야합니다.");
     }
 
     @DisplayName("중복된 수를 추가할 수 없다.")
@@ -43,9 +43,10 @@ class LottoTest {
                 .hasMessageContaining(DUPLICATE_EXCEPTION_MESSAGE);
     }
 
-    private static Stream<Arguments> maxSize() {
+    private static Stream<Arguments> lottoSize() {
         List<Arguments> listOfArguments = new LinkedList<>();
         listOfArguments.add(Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
+        listOfArguments.add(Arguments.of(Arrays.asList(1, 2, 3, 4, 5)));
         return listOfArguments.stream();
     }
 
