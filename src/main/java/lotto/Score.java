@@ -34,4 +34,8 @@ public class Score {
     public int hashCode() {
         return Objects.hash(score);
     }
+
+    public boolean isBetween(double start, double end) {
+        return start <= score && score < end;
+    }
 }

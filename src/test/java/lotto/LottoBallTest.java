@@ -18,7 +18,7 @@ class LottoBallTest {
     @DisplayName("보너스 로또 공 생성 성공")
     @Test
     void create_ball_successIsBonusBallTrue() {
-        assertThatNoException().isThrownBy(() -> LottoBall.fromStringNormal("1"));
+        assertThatNoException().isThrownBy(() -> LottoBall.fromStringBonus("1"));
     }
 
     @DisplayName("생성 실패 - 숫자가 아닌 값 입력")
