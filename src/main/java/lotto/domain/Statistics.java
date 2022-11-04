@@ -24,7 +24,7 @@ public class Statistics {
             return BigDecimal.ZERO;
         }
 
-        int totalReward = ranks.stream().mapToInt(Rank::reward).sum();
+        long totalReward = ranks.stream().mapToLong(Rank::reward).reduce(0L, Long::sum);
         int buyMoney = ranks.size() * 1_000;
 
         return BigDecimal.valueOf(totalReward)
