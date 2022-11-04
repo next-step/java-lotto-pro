@@ -38,20 +38,4 @@ public class MatchCount {
         winningMonies.add(new WinningMoney(6, threeMatchCount));
         return new TotalWinningMoney(winningMonies);
     }
-
-    public int getThreeMatchCount() {
-        return threeMatchCount;
-    }
-
-    public int getFourMatchCount() {
-        return fourMatchCount;
-    }
-
-    public int getFiveMatchCount() {
-        return fiveMatchCount;
-    }
-
-    public int getSixMatchCount() {
-        return sixMatchCount;
-    }
 }

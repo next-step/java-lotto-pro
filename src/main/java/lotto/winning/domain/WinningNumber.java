@@ -16,10 +16,6 @@ public class WinningNumber {
         }
     }
 
-    public void addAll(List<Number> winningNumbers) {
-        this.winningNumbers = winningNumbers;
-    }
-
     public int matchCounts(Lotto lotto) {
         int matchCounts = 0;
         for (Number number : lotto.getLottos()) {
