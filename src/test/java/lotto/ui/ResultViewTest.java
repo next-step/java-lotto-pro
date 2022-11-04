@@ -1,14 +1,15 @@
 package lotto.ui;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import lotto.configuration.AppConfig;
 import lotto.domain.LottoSeller;
 import lotto.domain.PurchaseAmount;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class ResultViewTest {
     private ResultView resultView;
+
     @BeforeEach
     void setUp() {
         resultView = AppConfig.resultView();

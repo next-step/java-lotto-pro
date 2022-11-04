@@ -9,7 +9,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
 
-
     @DisplayName("로또 번호 생성 테스트")
     @ParameterizedTest
     @ValueSource(ints = {1, 25, 45})

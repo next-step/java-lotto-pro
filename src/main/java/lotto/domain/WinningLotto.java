@@ -3,7 +3,6 @@ package lotto.domain;
 import static lotto.domain.WinningLottoRank.MATCH_COUNT_FOR_SECOND_OR_THIRD;
 
 public class WinningLotto {
-
     private static final String EXCEPTION_MESSAGE_FOR_BONUS_NUMBER_DUPLICATION = "보너스 번호는 로또번호와 중복일 수 없습니다.";
     private final Lotto lotto;
     private final LottoNumber bonusNumber;

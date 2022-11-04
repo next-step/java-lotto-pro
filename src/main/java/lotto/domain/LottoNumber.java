@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable {
-
-
     public static final int MINIMUM_LOTTO_NUMBER = 1;
     public static final int MAXIMUM_LOTTO_NUMBER = 45;
     public static final String EXCEPTION_MESSAGE_FOR_OUT_OF_LOTTO_NUMBER_BOUNDARY = "로또번호는 " + MINIMUM_LOTTO_NUMBER + "과 " + MAXIMUM_LOTTO_NUMBER + "사이의 숫자이어야 합니다.";
