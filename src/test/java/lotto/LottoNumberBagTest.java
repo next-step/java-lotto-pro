@@ -3,14 +3,8 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
-
-import static lotto.LottoNumberTest.makeLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
@@ -29,8 +23,7 @@ class LottoNumberBagTest {
     @Test
     void contains_number_success() {
         //given:
-        LottoNumberBag lottoNumberBag = new LottoNumberBag(
-                makeLottoNumbers(Arrays.asList("1", "2", "3", "10", "20", "30")));
+        LottoNumberBag lottoNumberBag = LottoNumberBag.fromManualNumbers("1,2,3,10,20,30");
         WinningLottoBallBag winningNumbers = new WinningLottoBallBag("1,2,3,4,5,6");
         //when:
         Score correctCount = lottoNumberBag.matchScore(winningNumbers);
@@ -39,22 +32,18 @@ class LottoNumberBagTest {
     }
 
     @ParameterizedTest(name = "생성 예외 테스트 - " + DEFAULT_DISPLAY_NAME)
-    @MethodSource("provideExceptionValues")
-    void validRange_bag_IllegalArgumentException(List<Number> lottoNumbers) {
-        //given:
-        LottoNumberBag lottoNumberBag = new LottoNumberBag(lottoNumbers);
-        //when, then//
-        assertThatIllegalArgumentException().isThrownBy(lottoNumberBag::getNumbers);
+    @ValueSource(strings = { "1,2,3,10,20,30,7", "1,1,3,10,20,30", "1,2,3,10,20,99" })
+    void validRange_bag_IllegalArgumentException(String lottoNumbers) {
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumberBag.fromManualNumbers(lottoNumbers));
     }
 
-    static Stream<Arguments> provideExceptionValues() {
-        return Stream.of(
-                /* 로또 숫자 갯수 불일치 */
-                Arguments.of(makeLottoNumbers(Arrays.asList("1", "2", "3", "10", "20", "30", "7"))),
-                /* 중복 된 로또 숫자 */
-                Arguments.of(makeLottoNumbers(Arrays.asList("1", "1", "3", "10", "20", "30"))),
-                /* 로또 숫자 범위를 벗어난 숫자 */
-                Arguments.of(makeLottoNumbers(Arrays.asList("1", "2", "3", "10", "20", "99")))
-        );
+    @DisplayName("수동 번호 생성 성공")
+    @Test
+    void fromManualNumbers_lottoNumberBag_success() {
+        //given:
+        String input = "1,2,3,4,5,6";
+        //when, then:
+        assertThatNoException().isThrownBy(() -> LottoNumberBag.fromManualNumbers(input));
     }
+
 }
