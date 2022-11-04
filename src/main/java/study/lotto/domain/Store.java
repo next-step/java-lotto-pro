@@ -1,14 +1,16 @@
 package study.lotto.domain;
 
+import static java.util.stream.Collectors.toList;
+
 import study.lotto.domain.number.LottoGenerator;
-import study.lotto.domain.number.LottoNumber;
-import study.message.LottoExceptionCode;
+import study.lotto.domain.order.Order;
+import study.lotto.domain.order.OrderType;
 import study.splitter.Splitter;
 import study.util.NumberUtil;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Store {
 
@@ -25,43 +27,43 @@ public class Store {
     private static List<Integer> getRangeOfLottoNumbers() {
         return IntStream.rangeClosed(LOTTO_MIN_NUM, LOTTO_MAX_NUM)
                 .boxed()
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
+    public static Lottos buyLottos(Order order) {
+        List<Lotto> lottosByManual = order.orderManually();
+        List<Lotto> lottosByAuto = order.orderAutomatically();
 
-    public static Lotto buyLottoByManual(String lotto) {
-        String[] lottoSplit = Splitter.split(lotto);
-        Set<LottoNumber> lottoNumbers = convertToLottoNumber(lottoSplit);
-
-        if(lottoNumbers.size() == LOTTO_END_IDX) {
-            return new Lotto(lottoNumbers);
-        }
-
-        throw new IllegalArgumentException(LottoExceptionCode.NOT_MATCH_LOTTO_SIZE.getMessage());
+        return new Lottos(Stream.of(lottosByAuto, lottosByManual)
+                .flatMap(Collection::stream)
+                .collect(toList()));
     }
 
-    private static Set<LottoNumber> convertToLottoNumber(String[] lottoSplit) {
-        return Arrays.stream(lottoSplit)
-                .map((str) -> LottoGenerator.toLottoNumber(str.trim()))
-                .collect(Collectors.toSet());
+    public static Lotto buyLottoManually(String lotto) {
+        return convertToLotto(Splitter.split(lotto));
     }
 
-    public static List<Lotto> buyLottosByAuto(int quantity) {
+    private static Lotto convertToLotto(String[] lottoSplit) {
+        return LottoGenerator.generate(Arrays.stream(lottoSplit)
+                .mapToInt((str) -> NumberUtil.convertToPositiveIntNotContainsZero(str.trim()))
+                .boxed()
+                .collect(toList()), OrderType.MANUAL);
+    }
+
+    public static List<Lotto> buyLottosAutomatically(int quantity) {
         List<Lotto> allNumbers = new ArrayList<>();
 
         IntStream.range(NumberUtil.INIT_ZERO, quantity).forEach((i) -> {
-            allNumbers.add(new Lotto(createLottoNumbersByAuto()));
+            allNumbers.add(createLottoByAuto());
         });
 
         return allNumbers;
     }
 
-    private static Set<LottoNumber> createLottoNumbersByAuto() {
+    private static Lotto createLottoByAuto() {
         Collections.shuffle(rangeOfLottoNumbers);
 
-        return rangeOfLottoNumbers.subList(LOTTO_STAT_IDX, LOTTO_END_IDX)
-                .stream()
-                .map(LottoGenerator::toLottoNumber)
-                .collect(Collectors.toSet());
+        return LottoGenerator.generate(
+                rangeOfLottoNumbers.subList(LOTTO_STAT_IDX, LOTTO_END_IDX), OrderType.AUTO);
     }
 }
