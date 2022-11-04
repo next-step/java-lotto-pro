@@ -15,6 +15,22 @@ public class Lottos {
         return winningLotto.drawLots(this.lottos, stats);
     }
 
+    public String countByOrderType() {
+        return getManualCount() + "," + getAutoCount();
+    }
+
+    private long getManualCount() {
+        return lottos.stream()
+                .filter(Lotto::isManual)
+                .count();
+    }
+
+    private long getAutoCount() {
+        return lottos.stream()
+                .filter(Lotto::isAuto)
+                .count();
+    }
+
     @Override
     public String toString() {
         StringBuffer buffer = new StringBuffer();

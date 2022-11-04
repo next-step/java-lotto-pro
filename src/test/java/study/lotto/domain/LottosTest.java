@@ -2,9 +2,8 @@ package study.lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import study.lotto.domain.order.Order;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -17,19 +16,32 @@ class LottosTest {
 
     @Test
     void drawLots_추첨_테스트() {
-        List<Lotto> allNumbersFromStore = Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 11, 22, 33)),
-                new Lotto(Arrays.asList(1, 2, 5, 6, 18, 19)));
-        Lottos lottos = new Lottos(allNumbersFromStore);
+        Order order = new Order("2000");
+        order.addManualQuantity(2);
+        order.addManualLotto("1, 2, 3, 11, 22, 33");
+        order.addManualLotto("1, 2, 3, 4, 22, 33");
+
+        Lottos lottos = Store.buyLottos(order);
 
         WinStats stats = lottos.drawLots(winningLotto);
-        Map<LottoStatus, Long> printData =
-                stats.getPrintDataWithCountsByLottoStatus();
+        Map<LottoStatus, Long> printData = stats.countsByLottoStatus();
 
         assertAll(
                 () -> assertEquals(1L, printData.get(LottoStatus.FIFTH_PLACE)),
                 () -> assertEquals(1L, printData.get(LottoStatus.FOURTH_PLACE)),
-                () -> assertEquals("27.50", stats.getPrintDataWithProfitRate())
+                () -> assertEquals("27.50", stats.getProfitRate())
         );
+    }
+
+    @Test
+    void orderType별_로또_개수를_구한다() {
+        Order order = new Order("5000");
+        order.addManualQuantity(2);
+        order.addManualLotto("1, 2, 3, 11, 22, 33");
+        order.addManualLotto("1, 2, 3, 4, 22, 33");
+
+        Lottos lottos = Store.buyLottos(order);
+
+        assertEquals("2,3", lottos.countByOrderType());
     }
 }
