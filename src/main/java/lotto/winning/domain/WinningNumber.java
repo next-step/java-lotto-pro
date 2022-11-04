@@ -8,11 +8,19 @@ import java.util.List;
 
 public class WinningNumber {
 
+    public static final int WINNING_NUMBER = 6;
     private List<Number> winningNumbers = new ArrayList<>();
 
     public WinningNumber(String[] winningNumbers) {
+        validate(winningNumbers);
         for (String number : winningNumbers) {
             this.winningNumbers.add(new Number(Integer.parseInt(number)));
+        }
+    }
+
+    private void validate(String[] winningNumbers) {
+        if (winningNumbers.length != WINNING_NUMBER) {
+            throw new IllegalArgumentException(WINNING_NUMBER + "자리여야합니다.");
         }
     }
 
