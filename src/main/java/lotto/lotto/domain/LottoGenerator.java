@@ -8,10 +8,14 @@ public class LottoGenerator {
 
     public static final int MINIMUM_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
+    public static final String NEGATIVE_EXCEPTION_MESSAGE = "음수일 수 없습니다.";
     private final List<Integer> range = new ArrayList<>();
     private int purchaseCount;
 
     public LottoGenerator(int purchaseCount) {
+        if (purchaseCount < 0) {
+            throw new IllegalArgumentException(NEGATIVE_EXCEPTION_MESSAGE);
+        }
         init(purchaseCount);
     }
 
