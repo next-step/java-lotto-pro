@@ -19,12 +19,15 @@ public class Lotto {
     }
 
     public List<LottoNumber> lottoNumbers() {
-        List<LottoNumber> copy = new ArrayList<>(lottoNumbers);
-        return copy;
+        return new ArrayList<>(lottoNumbers);
     }
 
     public int getMatchPoint(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber) ? MATCH_POINT : MISMATCH_POINT;
+    }
+
+    public boolean getMatchBonus(LottoNumber bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -34,7 +37,7 @@ public class Lotto {
 
     private static void validateLottoNumberDuplication(List<LottoNumber> lottoNumbers) {
         int setSize = lottoNumbers.stream()
-                .map(lottoNumber -> lottoNumber.lottoNumber())
+                .map(LottoNumber::lottoNumber)
                 .collect(Collectors.toSet())
                 .size();
         if (setSize != LOTTO_NUMBERS_SIZE) {

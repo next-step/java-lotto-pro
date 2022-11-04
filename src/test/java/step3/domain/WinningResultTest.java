@@ -16,7 +16,7 @@ public class WinningResultTest {
     }, delimiter = ':')
     void 당첨결과집계(int purchaseAmount, double yield) {
         WinningResult result = new WinningResult();
-        result.addRank(WinningLottoRank.FOURTH);
+        result.addRank(WinningLottoRank.FIFTH);
 
         assertThat(result.reportYield(new PurchaseAmount(purchaseAmount))).isEqualTo(yield);
     }
