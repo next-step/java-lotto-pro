@@ -30,7 +30,7 @@ public class BuyingLottoGroupTest {
 
         LottoResult result = group.matchWinningLotto(winning);
 
-        assertThat(result.getResultCount(LottoWinningMoney.SECOND)).isEqualTo(5);
+        assertThat(result.getResultCount(LottoWinningRank.SECOND)).isEqualTo(5);
     }
 
     @Test

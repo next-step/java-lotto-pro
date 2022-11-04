@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-public enum LottoWinningMoney {
+public enum LottoWinningRank {
     MISS(0, false, 0),
     FIFTH(3, false,5000),
     FOURTH(4, false,50000),
@@ -14,13 +14,13 @@ public enum LottoWinningMoney {
     private boolean isBonusContain;
     private long winningMoney;
 
-    LottoWinningMoney(int matchedCount, boolean isBonusContain, long winningMoney) {
+    LottoWinningRank(int matchedCount, boolean isBonusContain, long winningMoney) {
         this.matchedCount = matchedCount;
         this.isBonusContain = isBonusContain;
         this.winningMoney = winningMoney;
     }
 
-    public static LottoWinningMoney findEnumByContainCountAndBonusContain(int containCount,
+    public static LottoWinningRank findRankByContainCountAndBonusContain(int containCount,
                                                                           boolean isBonusContain) {
         return Arrays.stream(values())
                 .filter(value -> value.matchedCount == containCount && value.isBonusContain == isBonusContain)

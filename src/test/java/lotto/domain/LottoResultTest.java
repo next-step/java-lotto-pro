@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static lotto.domain.LottoWinningMoney.*;
+import static lotto.domain.LottoWinningRank.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoResultTest {
-    WinningLotto winningLotto;
+    private WinningLotto winningLotto;
     @BeforeEach
     void beforeEach(){
         winningLotto = WinningLotto.create(

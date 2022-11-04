@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.domain.LottoWinningMoney.*;
+import static lotto.domain.LottoWinningRank.findRankByContainCountAndBonusContain;
 import static lotto.domain.WinningLottoType.*;
 
 import java.util.HashMap;
@@ -28,13 +28,13 @@ public class WinningLotto {
         return lotto.isContain((LottoNumber) numbers.get(BONUS));
     }
 
-    public LottoWinningMoney getLottoRank(Lotto lotto) {
+    public LottoWinningRank getLottoRank(Lotto lotto) {
         int matchCountByBasic = getMatchCountByBasic(lotto);
         boolean isBonusContain = false;
         if(matchCountByBasic == FIVE){
             isBonusContain = isContainBonusNumber(lotto);
         }
 
-        return findEnumByContainCountAndBonusContain(matchCountByBasic, isBonusContain);
+        return findRankByContainCountAndBonusContain(matchCountByBasic, isBonusContain);
     }
 }

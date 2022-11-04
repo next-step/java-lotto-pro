@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 
 public class WinningLottoTest {
 
-    WinningLotto winningLotto;
-    Lotto lotto;
+    private WinningLotto winningLotto;
+    private Lotto lotto;
 
     @BeforeEach
     void beforeEach(){
@@ -36,7 +36,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("당첨 로또와 구매 로또의 비교결과를 반환한다.")
     void returnResult(){
-        LottoWinningMoney rank = winningLotto.getLottoRank(lotto);
-        assertThat(rank).isEqualTo(LottoWinningMoney.SECOND);
+        LottoWinningRank rank = winningLotto.getLottoRank(lotto);
+        assertThat(rank).isEqualTo(LottoWinningRank.SECOND);
     }
 }
