@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LotteriesTest {
 
     private static final WinningNumbers winningNumbers =
-            new WinningNumbers(Arrays.asList(1,2,3,4,5,6), new BonusNumber(45));
+            new WinningNumbers(Arrays.asList(1,2,3,4,5,6), BonusNumber.of(45));
 
     @Test
     @DisplayName("지난주 당첨 목록과 로또 여섯개 숫자가 일치하는 경우 테스트")

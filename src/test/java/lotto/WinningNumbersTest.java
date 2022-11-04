@@ -47,7 +47,7 @@ public class WinningNumbersTest {
     @Test
     @DisplayName("당첨번호와 보너스번호가 일치하는지 확인")
     void winningNumber_bonusNumber_duplicate_test() {
-        assertThatThrownBy(() -> new WinningNumbers(Arrays.asList(1,2,3,4,5,6), new BonusNumber(6)))
+        assertThatThrownBy(() -> new WinningNumbers(Arrays.asList(1,2,3,4,5,6), BonusNumber.of(6)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

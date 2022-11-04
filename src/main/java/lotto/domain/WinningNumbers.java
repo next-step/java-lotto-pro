@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 public class WinningNumbers extends Lotto {
 
-    private List<LottoNumber> winningNumbers;
     private BonusNumber bonusNumber;
 
     public WinningNumbers(String winningNumbersString) {
@@ -18,24 +17,22 @@ public class WinningNumbers extends Lotto {
 
     public WinningNumbers(List<String> winningNumberList) {
         super(winningNumberList.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList()));
-        this.winningNumbers = super.lottoNumbers;
     }
 
     public WinningNumbers(List<Integer> winningNumberIntList, BonusNumber bonusNumber) {
         this(winningNumberIntList.stream()
                 .map(winningNumber -> winningNumber.toString())
                 .collect(Collectors.toList()));
-        if(super.isMatch(bonusNumber)) {
+        if(bonusNumber.isMatch(winningNumberIntList)) {
             throw new IllegalArgumentException("보너스 번호가 당첨숫자와 중복될 수 없습니다.");
         }
-        this.winningNumbers = super.lottoNumbers;
         this.bonusNumber = bonusNumber;
     }
 
     public boolean isBonus(Lotto lotto) {
-        return lotto.isMatch(this.bonusNumber);
+        return bonusNumber.isLottoMatch(lotto);
     }
 
 }

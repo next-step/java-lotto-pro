@@ -19,7 +19,7 @@ public class LottoController {
 
     public WinningNumbersDto readBonusNumber(WinningNumbersDto winningNumbersDto, String readUserInput) {
         List<Integer> winningNumbers = winningNumbersDto.getWinningNumbers();
-        return new WinningNumbersDto(new WinningNumbers(winningNumbers, new BonusNumber(readUserInput)));
+        return new WinningNumbersDto(new WinningNumbers(winningNumbers, BonusNumber.of(readUserInput)));
     }
 
     public LottoResultDto lottoResult(LottoResultRequestDto lottoResultRequestDto) {

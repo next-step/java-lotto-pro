@@ -1,12 +1,41 @@
 package lotto.domain;
 
-public class BonusNumber extends LottoNumber {
-    public BonusNumber(String lottoNumberString) {
-        super(lottoNumberString);
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class BonusNumber {
+
+    private static Map<LottoNumber,BonusNumber> bonusNumbers;
+    private LottoNumber lottoNumber;
+
+    static {
+        bonusNumbers = LottoNumber.lottoNumberMinToMax().stream()
+                .collect(Collectors.toMap(Function.identity(), BonusNumber::new));
     }
 
-    public BonusNumber(int lottoNumber) {
-        super(lottoNumber);
+    private BonusNumber(LottoNumber lottoNumber) {
+        this.lottoNumber = lottoNumber;
     }
 
+    public static BonusNumber of(String lottoNumber) {
+        return of(LottoNumber.of(lottoNumber));
+    }
+
+    public static BonusNumber of(int lottoNumber) {
+        return of(LottoNumber.of(lottoNumber));
+    }
+
+    public static BonusNumber of(LottoNumber lottoNumber) {
+        return bonusNumbers.get(lottoNumber);
+    }
+
+    public boolean isLottoMatch(Lotto lotto) {
+        return lotto.isMatch(lottoNumber);
+    }
+
+    public boolean isMatch(List<Integer> intList) {
+        return intList.stream().map(LottoNumber::of).anyMatch(lottoNumber -> lottoNumber.equals(this.lottoNumber));
+    }
 }

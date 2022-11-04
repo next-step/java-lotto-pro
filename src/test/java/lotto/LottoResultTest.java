@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoResultTest {
 
     private static final WinningNumbers winningNumbers =
-            new WinningNumbers(Arrays.asList(1,2,3,4,5,6), new BonusNumber(45));
+            new WinningNumbers(Arrays.asList(1,2,3,4,5,6), BonusNumber.of(45));
     private static final LottoResultView lottoResultView = new LottoResultView();
 
     @Test
