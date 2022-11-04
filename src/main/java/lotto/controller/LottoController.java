@@ -4,11 +4,10 @@ import calculator.Delimiters;
 import calculator.TextExtractor;
 import lotto.lotto.domain.LottoGenerator;
 import lotto.lotto.domain.LottoMoney;
-import lotto.winning.domain.*;
+import lotto.winning.domain.MatchCount;
+import lotto.winning.domain.TotalWinningMoney;
+import lotto.winning.domain.WinningNumber;
 import lotto.winning.ui.outputView.WinningResultOutputVeiw;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static lotto.lotto.ui.inputView.LottoPurchaseInputView.readPurchaseMoney;
 import static lotto.lotto.ui.outputView.GeneratedLottosOutputView.printLottos;
