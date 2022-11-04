@@ -3,6 +3,7 @@ package lotto.lotto.domain;
 import common.vo.Number;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -32,6 +33,15 @@ public class Lotto {
 
     public List<Number> getLottos() {
         return this.numbers;
+    }
+
+    public List<Integer> sort() {
+        List<Integer> list = new ArrayList<>();
+        for (Number number : this.numbers) {
+            list.add(number.getNumber());
+        }
+        Collections.sort(list);
+        return list;
     }
 
     public int size() {
