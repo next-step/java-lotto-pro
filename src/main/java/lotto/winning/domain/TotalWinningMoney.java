@@ -25,10 +25,6 @@ public class TotalWinningMoney {
         winningMonies.put(SIX_MATCH_COUNT, matchingCount.lottoCount(SIX_MATCH_COUNT));
     }
 
-    public Map<Integer, Count> getWinningMonies() {
-        return this.winningMonies;
-    }
-
     public long sum() {
         long sum = 0;
         for (Integer matchCount : this.winningMonies.keySet()) {
@@ -43,5 +39,9 @@ public class TotalWinningMoney {
 
     private int matchedLottoCount(Integer matchCount) {
         return this.winningMonies.get(matchCount).getNumber();
+    }
+
+    public Map<Integer, Count> getWinningMonies() {
+        return this.winningMonies;
     }
 }

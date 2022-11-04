@@ -6,10 +6,10 @@ import java.util.regex.Pattern;
 
 public class TextExtractor {
 
-    private static final Pattern regex = Pattern.compile("//(.)\n(.*)");
     public static final String DEFAULT_VALUE = "0";
     public static final int TEXT_PART = 2;
     public static final int DELIMITER_PART = 1;
+    private static final Pattern regex = Pattern.compile("//(.)\n(.*)");
     private final String text;
 
     public TextExtractor(String text) {

@@ -16,23 +16,6 @@ public class Number {
         this.number = number;
     }
 
-    public int getNumber() {
-        return this.number;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Number number = (Number) o;
-        return this.number == number.number;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
-    }
-
     private static void validate(int number) {
         validateMinimumNumber(number);
         validateMaximumNumber(number);
@@ -48,5 +31,22 @@ public class Number {
         if (number > MAXIMUM_NUMBER) {
             throw new IllegalArgumentException(MAXIMUM_NUMBER + "보다 클 수 없습니다.");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Number number = (Number) o;
+        return this.number == number.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
+    }
+
+    public int getNumber() {
+        return this.number;
     }
 }

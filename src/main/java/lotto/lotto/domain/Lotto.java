@@ -20,6 +20,12 @@ public class Lotto {
         }
     }
 
+    private void validateSize(List<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(LOTTO_SIZE + "개여야합니다.");
+        }
+    }
+
     private void add(int lottoNumber) {
         validateLottoNumbers(lottoNumber);
         this.numbers.add(new Number(lottoNumber));
@@ -31,8 +37,10 @@ public class Lotto {
         }
     }
 
-    public List<Number> getLottos() {
-        return this.numbers;
+    private static void validateDuplicateNumber(int lottoNumber, Number number) {
+        if (new Number(lottoNumber).equals(number)) {
+            throw new IllegalArgumentException(DUPLICATE_EXCEPTION_MESSAGE);
+        }
     }
 
     public List<Integer> sort() {
@@ -44,19 +52,7 @@ public class Lotto {
         return list;
     }
 
-    public int size() {
-        return this.numbers.size();
-    }
-
-    private void validateSize(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(LOTTO_SIZE + "개여야합니다.");
-        }
-    }
-
-    private static void validateDuplicateNumber(int lottoNumber, Number number) {
-        if (new Number(lottoNumber).equals(number)) {
-            throw new IllegalArgumentException(DUPLICATE_EXCEPTION_MESSAGE);
-        }
+    public List<Number> getLottos() {
+        return this.numbers;
     }
 }

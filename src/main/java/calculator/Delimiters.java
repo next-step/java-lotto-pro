@@ -13,15 +13,15 @@ public class Delimiters {
         Collections.addAll(delimiters, DEFAULT_DELIMITERS);
     }
 
+    public void add(String delimiter) {
+        this.delimiters.add(delimiter);
+    }
+
     public Set<String> getDelimiters() {
         return delimiters;
     }
 
     public String delimiter() {
         return String.join("|", this.delimiters);
-    }
-
-    public void add(String delimiter) {
-        this.delimiters.add(delimiter);
     }
 }

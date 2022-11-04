@@ -12,8 +12,20 @@ public class Number {
         this.number = number;
     }
 
-    public int getNumber() {
+    private int convertNumber(String stringNumber) {
+        int number = 0;
+        try {
+            number = Integer.parseInt(stringNumber);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("숫자만 입력 가능합니다.");
+        }
         return number;
+    }
+
+    private static void validateNegativeNumber(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("양수만 입력 가능합니다.");
+        }
     }
 
     @Override
@@ -29,19 +41,7 @@ public class Number {
         return Objects.hash(number);
     }
 
-    private int convertNumber(String stringNumber) {
-        int number = 0;
-        try {
-            number = Integer.parseInt(stringNumber);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("숫자만 입력 가능합니다.");
-        }
+    public int getNumber() {
         return number;
-    }
-
-    private static void validateNegativeNumber(int number) {
-        if (number < 0) {
-            throw new IllegalArgumentException("양수만 입력 가능합니다.");
-        }
     }
 }

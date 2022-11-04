@@ -20,10 +20,6 @@ public class WinningNumber {
         }
     }
 
-    private void add(String number) {
-        this.winningNumbers.add(new Number(Integer.parseInt(number)));
-    }
-
     private void validateDuplicate(String nunber) {
         for (Number value : this.winningNumbers) {
             validateDuplicateNumber(Integer.parseInt(nunber), value);
@@ -40,6 +36,10 @@ public class WinningNumber {
         if (winningNumbers.length != WINNING_NUMBER) {
             throw new IllegalArgumentException(WINNING_NUMBER + "자리여야합니다.");
         }
+    }
+
+    private void add(String number) {
+        this.winningNumbers.add(new Number(Integer.parseInt(number)));
     }
 
     public int findMatchingCount(Lotto lotto) {
