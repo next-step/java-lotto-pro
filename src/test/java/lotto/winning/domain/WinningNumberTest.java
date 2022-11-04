@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
+import static lotto.lotto.domain.Lotto.DUPLICATE_EXCEPTION_MESSAGE;
 import static lotto.lotto.domain.fixture.LottoFixture.로또번호123456;
 import static lotto.lotto.domain.fixture.LottoFixture.로또번호123457;
 import static lotto.winning.domain.WinningNumber.WINNING_NUMBER;
@@ -41,11 +42,26 @@ class WinningNumberTest {
                 .hasMessageContaining(WINNING_NUMBER + "자리여야합니다.");
     }
 
+    @DisplayName("중복된 수를 입력할 수 없다.")
+    @ParameterizedTest
+    @MethodSource("duplicate")
+    void duplicateNumber(String[] numbers) {
+        assertThatThrownBy(() -> new WinningNumber(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(DUPLICATE_EXCEPTION_MESSAGE);
+    }
+
     static Stream<Arguments> size() {
         return Stream.of(
                 Arguments.of((Object) new String[]{"1", "2", "3", "4"}),
                 Arguments.of((Object) new String[]{"1", "2", "3", "4", "5"}),
                 Arguments.of((Object) new String[]{"1", "2", "3", "4", "5", "6", "7"})
+        );
+    }
+
+    static Stream<Arguments> duplicate() {
+        return Stream.of(
+                Arguments.of((Object) new String[]{"1", "2", "3", "4", "5", "5"})
         );
     }
 }
