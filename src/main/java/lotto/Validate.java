@@ -12,7 +12,7 @@ import static lotto.Constant.ERROR_INPUT_EMPTY_WINNING_NUMBER;
 import static lotto.Constant.ERROR_INPUT_SIX_NUMBER;
 import static lotto.Constant.ERROR_LOTTO_COST;
 import static lotto.Constant.ERROR_LOTTO_NUMBER_DUPLICATED;
-import static lotto.Constant.ERROR_NUMBER_RANGE;
+import static lotto.Constant.ERROR_NUMBER_OUT_OF_RANGE;
 import static lotto.Constant.ERROR_ONLY_NUMBER;
 import static lotto.Constant.LOTTO_END_NUMBER;
 import static lotto.Constant.LOTTO_NUMBER_SIZE;
@@ -51,7 +51,7 @@ public class Validate {
 
     static void validateNumberRange(int number) {
         if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
-            throw new IllegalArgumentException(ERROR_NUMBER_RANGE);
+            throw new IllegalArgumentException(ERROR_NUMBER_OUT_OF_RANGE);
         }
     }
 
