@@ -18,4 +18,8 @@ public class LottoPurchaseAmount {
     public long getNumber() {
         return number;
     }
+
+    public int purchaseCount() {
+        return number / 1000;
+    }
 }
