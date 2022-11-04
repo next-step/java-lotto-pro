@@ -11,6 +11,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static Map<Integer,LottoNumber> lottoNumbers = new HashMap<>();
     private int lottoNumber;
+    private boolean isBonus;
 
     static {
         for (int number = LOTTO_MIN_NUMBER; number <= LOTTO_MAX_NUMBER; number++) {
@@ -20,6 +21,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
+        this.isBonus = isBonus;
     }
 
     public static LottoNumber of(int number) {

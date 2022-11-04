@@ -25,4 +25,6 @@ public class WinningNumbers extends Lotto {
         return bonusNumber.isLottoMatch(lotto);
     }
 
+
+
 }
