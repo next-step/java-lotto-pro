@@ -20,11 +20,7 @@ public class LottoNumberTest {
     void compareTo_test() {
         assertThat(LottoNumber.of(1).compareTo(LottoNumber.of(2)) < 0)
                 .isTrue();
-        assertThat(LottoNumber.of(1).compareTo(2) < 0)
-                .isTrue();
         assertThat(LottoNumber.of(3).compareTo(LottoNumber.of(2)) > 0)
-                .isTrue();
-        assertThat(LottoNumber.of(3).compareTo(2) > 0)
                 .isTrue();
         assertThat(LottoNumber.of(1).compareTo(LottoNumber.of(1)))
                 .isEqualTo(0);
@@ -33,7 +29,7 @@ public class LottoNumberTest {
     @Test
     @DisplayName("dto 값 확인")
     void dto_value_test() {
-        assertThat(LottoNumber.of(1).getLottoNumberDto())
+        assertThat(LottoNumber.of(1).getLottoNumberDto().getLottoNumber())
                 .isEqualTo(1);
     }
 }
