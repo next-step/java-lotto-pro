@@ -34,6 +34,10 @@ public class Lotto {
         return this.numbers;
     }
 
+    public int size() {
+        return this.numbers.size();
+    }
+
     private void validateSize(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(LOTTO_SIZE + "개여야합니다.");

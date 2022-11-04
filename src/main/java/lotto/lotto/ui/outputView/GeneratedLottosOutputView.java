@@ -1,6 +1,5 @@
 package lotto.lotto.ui.outputView;
 
-import common.vo.Number;
 import lotto.lotto.domain.Lotto;
 
 import java.util.List;
@@ -8,18 +7,25 @@ import java.util.List;
 public class GeneratedLottosOutputView {
 
     public static void printLottos(List<Lotto> lottos) {
-        System.out.println("당첨 통계");
-        System.out.println("-----------");
+        System.out.println(lottos.size() + "개를 구매했습니다.");
         for (Lotto lotto : lottos) {
             printLotto(lotto);
-            System.out.println();
         }
-
     }
 
     private static void printLotto(Lotto lotto) {
-        for (Number number : lotto.getLottos()) {
-            System.out.print(number.getNumber() + ",");
+        System.out.print("[");
+        for (int i = 0; i < lotto.size(); i++) {
+            System.out.print(lotto.getLottos().get(i).getNumber());
+            printDelimiter(lotto, i);
+        }
+        System.out.print("]");
+        System.out.println();
+    }
+
+    private static void printDelimiter(Lotto lotto, int i) {
+        if (i + 1 != lotto.size()) {
+            System.out.print(",");
         }
     }
 }

@@ -2,11 +2,14 @@ package lotto.controller;
 
 import calculator.Delimiters;
 import calculator.TextExtractor;
+import lotto.lotto.domain.Lotto;
 import lotto.lotto.domain.LottoGenerator;
 import lotto.lotto.domain.LottoMoney;
 import lotto.winning.domain.MatchingCount;
 import lotto.winning.domain.TotalWinningMoney;
 import lotto.winning.domain.WinningNumber;
+
+import java.util.List;
 
 import static lotto.lotto.ui.inputView.LottoPurchaseInputView.readPurchaseMoney;
 import static lotto.lotto.ui.outputView.GeneratedLottosOutputView.printLottos;
@@ -18,15 +21,16 @@ public class LottoController {
     public void run() {
         LottoMoney lottoMoney = new LottoMoney(readPurchaseMoney());
         LottoGenerator lottoGenerator = new LottoGenerator(lottoMoney.purchaseCount());
-        printLottos(lottoGenerator.generateLottos());
+        List<Lotto> lottos = lottoGenerator.generateLottos();
+        printLottos(lottos);
         System.out.println();
-        TotalWinningMoney totalWinningMoney = createTotalWinningMoney(lottoGenerator);
+        TotalWinningMoney totalWinningMoney = createTotalWinningMoney(lottos);
         winningResult(totalWinningMoney, lottoMoney);
     }
 
-    private TotalWinningMoney createTotalWinningMoney(LottoGenerator lottoGenerator) {
+    private TotalWinningMoney createTotalWinningMoney(List<Lotto> lottos) {
         WinningNumber winningNumber = createWinningNumber();
-        return new TotalWinningMoney(new MatchingCount(lottoGenerator.generateLottos(), winningNumber));
+        return new TotalWinningMoney(new MatchingCount(lottos, winningNumber));
     }
 
     private static WinningNumber createWinningNumber() {
