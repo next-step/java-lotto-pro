@@ -11,10 +11,13 @@
 
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
+
 ## 기능 요구사항
 
 * 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
 * 로또 1장의 가격은 1000원이다.
+* 2등을 위해 추가 번호를 하나 더 추첨한다.
+* 당첨 통계에 2등도 추가해야 한다.
 
 ## 기능 구현 목록 TODO-list
 
@@ -38,7 +41,10 @@
 - [x] 쉼표로 구분한 로또번호중, 1~45번이 아닌 번호가 섞여있는 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
 - [x] 쉼표로 구분한 로또번호중, 중복되는 번호가 존재 하는 경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
 
-[x] 발행한 로또와, 지난 주 당첨 번호를 조회하여, 당첨 통계를 계산할 수 있다.
+[x] 유저로부터, 지난 주 당첨 보너스 볼을 입력 받을 수 있다.
+- [ ] 보너스 볼이 1~45 범위의 숫자가  아닌  경우, IllegalArgumentException을 발생시켜, 프로그램을 종료한다.
+
+[ ] 발행한 로또와, 지난 주 당첨 번호 + 보너스 볼을 조회하여, 당첨 통계를 계산할 수 있다.
 
 [x] 발행한 로또와, 지난 주 당첨 번호를 조회하여, 총 수익률을 계산할 수 있다.
 
@@ -71,9 +77,10 @@
 
 ### Views
 
-[x] InputView
+[ ] InputView
 - [x] 유저로부터, 로또 구입 금액을 입력 받을 수 있다.
 - [x] 유저로부터, 지난 주 당첨 번호를 쉼표 구분으로 입력 받을 수 있다.
+- [ ] 유저로부터, 보너스 볼을 입력 받을 수 있다.
 
 [x] ResultView
 - [x] 생성된 로또번호 목록을 출력 할 수 있다.
@@ -116,4 +123,4 @@
 	- A :  two lists are defined to be equal if they contain the same elements in the same order.
 	- https://docs.oracle.com/javase/8/docs/api/java/util/List.html#equals-java.lang.Object-
 - Q : Enum에 너무 의존하지 있지 않나? Enum값을 그대로 쓰는게 아니라, 메시지전달을 통해서 해야 하나?
-	- 
+	- A : 디미터 법칙 적용하여, Enum자체를 뷰에서는 쓰지 않는 방식으로 개선
