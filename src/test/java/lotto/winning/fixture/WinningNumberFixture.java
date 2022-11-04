@@ -1,4 +1,6 @@
-package lotto.winning.domain;
+package lotto.winning.fixture;
+
+import lotto.winning.domain.WinningNumber;
 
 public class WinningNumberFixture {
     public static WinningNumber 당첨번호123456() {

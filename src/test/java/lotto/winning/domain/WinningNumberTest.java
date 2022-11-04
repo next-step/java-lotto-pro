@@ -3,9 +3,9 @@ package lotto.winning.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.lotto.domain.LottoFixture.로또번호123456;
-import static lotto.lotto.domain.LottoFixture.로또번호123457;
-import static lotto.winning.domain.WinningNumberFixture.당첨번호123456;
+import static lotto.lotto.domain.fixture.LottoFixture.로또번호123456;
+import static lotto.lotto.domain.fixture.LottoFixture.로또번호123457;
+import static lotto.winning.fixture.WinningNumberFixture.당첨번호123456;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("당첨번호")

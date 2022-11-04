@@ -1,4 +1,6 @@
-package lotto.lotto.domain;
+package lotto.lotto.domain.fixture;
+
+import lotto.lotto.domain.Lotto;
 
 import java.util.ArrayList;
 import java.util.List;
