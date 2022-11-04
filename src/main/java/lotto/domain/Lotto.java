@@ -13,14 +13,16 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers){
+    private Lotto(List<LottoNumber> lottoNumbers) {
+        InputValidator.validateLottoNumberCount(lottoNumbers.size());
+        InputValidator.validateDuplicateLottoNumber(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto of(List<Integer> lottoNumbers){
-        InputValidator.validateLottoNumberCount(lottoNumbers.size());
-        InputValidator.validateDuplicateLottoNumber(lottoNumbers);
-        return new Lotto(lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toList()));
+    public static Lotto of(List<Integer> lottoNumbers) {
+        return new Lotto(lottoNumbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList()));
     }
 
     public Rank countCollectNumber(Lotto winningNumbers, LottoNumber bonusBall) {

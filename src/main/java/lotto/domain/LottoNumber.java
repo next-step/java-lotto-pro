@@ -6,9 +6,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int lottoNumber;
 
-    public LottoNumber(int lottoNumber) {
+    private LottoNumber(int lottoNumber) {
         InputValidator.validateLottoNumberRange(lottoNumber);
         this.lottoNumber = lottoNumber;
+    }
+
+    public static LottoNumber of(int lottoNumber) {
+        return new LottoNumber(lottoNumber);
     }
 
     @Override
@@ -27,5 +31,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int compareTo(LottoNumber o) {
         return this.lottoNumber - o.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return lottoNumber;
     }
 }

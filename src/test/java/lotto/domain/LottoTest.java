@@ -22,8 +22,7 @@ public class LottoTest {
     @DisplayName("적중 로또번호 갯수 테스트")
     public void countCollectNumber(int[] givenNumbers, Rank expected) {
         List<Integer> lottoNumbers = Arrays.stream(givenNumbers).boxed().collect(Collectors.toList());
-
-        LottoNumber bonusBall = new LottoNumber(7);
+        LottoNumber bonusBall = LottoNumber.of(7);
         Rank rank = Lotto.of(lottoNumbers).countCollectNumber(Lotto.of(winnerNumbers), bonusBall);
         assertThat(rank).isEqualTo(expected);
     }

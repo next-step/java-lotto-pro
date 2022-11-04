@@ -18,7 +18,7 @@ class LottosTest {
     public void findWinnerTest() {
         Lotto lotto = Lotto.of(Arrays.stream(new int[]{1, 2, 3, 4, 5, 45}).boxed().collect(Collectors.toList()));
         Lotto winningNums = Lotto.of(Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed().collect(Collectors.toList()));
-        LottoNumber bonusBall = new LottoNumber(45);
+        LottoNumber bonusBall = LottoNumber.of(45);
 
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(lotto);
