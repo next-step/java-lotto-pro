@@ -2,31 +2,27 @@ package lotto.domain;
 
 import lotto.dto.LottoResultDto;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class LottoResult {
 
-    private Map<Integer,Integer> winningPriceMap;
-    private LottoNumberMatcher lottoNumberMatcher;
+    private LottoRankMatcher lottoRankMatcher;
     private BuyAmount buyAmount;
+    private WinningNumbers winningNumbers;
 
     public LottoResult (Lotteries lotteries, WinningNumbers winningNumbers, BuyAmount buyAmount) {
-        this.lottoNumberMatcher = new LottoNumberMatcher(lotteries, winningNumbers);
+        this.lottoRankMatcher = new LottoRankMatcher(lotteries, winningNumbers);
         this.buyAmount = buyAmount;
-        Map<Integer,Integer> matchNumberPrice = new HashMap<>();
-        matchNumberPrice.put(3, 5000);
-        matchNumberPrice.put(4, 50000);
-        matchNumberPrice.put(5, 1500000);
-        matchNumberPrice.put(6, 2000000000);
-        this.winningPriceMap = Collections.unmodifiableMap(matchNumberPrice);
+        this.winningNumbers = winningNumbers;
     }
 
     private int getWinningPrice() {
         int winningPrice = 0;
-        for(int matchNumber : winningPriceMap.keySet()) {
-            winningPrice += winningPriceMap.get(matchNumber) * lottoNumberMatcher.getMatchLottoNumber(matchNumber);
+        for (Rank rank : Rank.getAllRanks()) {
+            winningPrice += rank.getWinningMoney() * lottoRankMatcher.getMatchLottoRank(rank);
         }
         return winningPrice;
     }
@@ -36,6 +32,8 @@ public class LottoResult {
     }
 
     public LottoResultDto getLottoResultDto() {
-        return new LottoResultDto(winningPriceMap, lottoNumberMatcher, getProfit());
+        Map<Rank, Integer> lotteriesRankPriceCounter = Rank.getAllRanksExceptMiss().stream()
+                .collect(Collectors.toMap(Function.identity(), lottoRankMatcher::getMatchLottoRank));
+        return new LottoResultDto(lottoRankMatcher, getProfit(), lotteriesRankPriceCounter);
     }
 }

@@ -12,7 +12,7 @@ public class Lotto {
 
     private static final int DIGIT = 6;
 
-    List<LottoNumber> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         if(lottoNumbers.size() != Lotto.DIGIT) {
@@ -46,7 +46,7 @@ public class Lotto {
 
     public boolean isEqualNumberList(List<Integer> numbers) {
         return numbers.stream().collect(Collectors.toSet()).size() == numbers.size()
-                && numbers.stream().filter(number -> isMatch(new LottoNumber(number.toString())))
+                && numbers.stream().filter(number -> isMatch(LottoNumber.of(number)))
                 .count() == lottoNumbers.size();
     }
 }

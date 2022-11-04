@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Objects;
-import java.util.Optional;
 
 public class BuyAmount {
 
@@ -9,13 +8,6 @@ public class BuyAmount {
     private static final int LOTTO_MAX_BUY_AMOUNT = 2000000000;
 
     private int buyAmount;
-
-    public BuyAmount(String buyAmountString) {
-        this(Optional.ofNullable(buyAmountString)
-                .filter(str -> str.trim().matches("\\d+"))
-                .map(str -> Integer.parseInt(str.trim()))
-                .orElseThrow(()->new IllegalArgumentException("자연수 형식이 아닙니다.")));
-    }
 
     public BuyAmount(int buyAmount) {
         if(buyAmount < LOTTO_PRICE)
@@ -44,6 +36,10 @@ public class BuyAmount {
     @Override
     public int hashCode() {
         return Objects.hash(buyAmount);
+    }
+
+    public boolean isEqualValue(int buyAmount) {
+        return this.buyAmount == buyAmount;
     }
 
     public double getProfit(int winningPrice) {

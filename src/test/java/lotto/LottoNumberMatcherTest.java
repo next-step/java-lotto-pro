@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotteries;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumberMatcher;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoNumberMatcherTest {
 
-    private static final WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
+    private static final WinningNumbers winningNumbers =
+            new WinningNumbers(Arrays.asList(1,2,3,4,5,6), BonusNumber.of(45));
 
     @Test
     @DisplayName("지난주 당첨번호와 숫자 세개 일치하는 로또 개수가 3개인지 확인")
@@ -28,9 +26,9 @@ public class LottoNumberMatcherTest {
         lottoList.add(numbersToLotto(Arrays.asList(1,2,3,34,35,36)));
         Lotteries lotteries = new Lotteries(lottoList);
         //when
-        LottoNumberMatcher lottoNumberMatcher = new LottoNumberMatcher(lotteries, winningNumbers);
+        LottoRankMatcher lottoRankMatcher = new LottoRankMatcher(lotteries, winningNumbers);
         //then
-        assertThat(lottoNumberMatcher.getMatchLottoNumber(3)).isEqualTo(3);
+        assertThat(lottoRankMatcher.getMatchLottoRank(Rank.FIFTH)).isEqualTo(3);
     }
 
     @Test
@@ -43,9 +41,9 @@ public class LottoNumberMatcherTest {
         lottoList.add(numbersToLotto(Arrays.asList(1,2,3,34,35,36)));
         Lotteries lotteries = new Lotteries(lottoList);
         //when
-        LottoNumberMatcher lottoNumberMatcher = new LottoNumberMatcher(lotteries, winningNumbers);
+        LottoRankMatcher lottoRankMatcher = new LottoRankMatcher(lotteries, winningNumbers);
         //then
-        assertThat(lottoNumberMatcher.getMatchLottoNumber(2)).isEqualTo(0);
+        assertThat(lottoRankMatcher.getMatchLottoRank(Rank.MISS)).isEqualTo(0);
     }
 
     @Test
@@ -58,8 +56,8 @@ public class LottoNumberMatcherTest {
         lottoList.add(numbersToLotto(Arrays.asList(1,2,3,34,35,36)));
         Lotteries lotteries = new Lotteries(lottoList);
         //when
-        LottoNumberMatcher lottoNumberMatcher = new LottoNumberMatcher(lotteries, winningNumbers);
+        LottoRankMatcher lottoRankMatcher = new LottoRankMatcher(lotteries, winningNumbers);
         //then
-        assertThat(lottoNumberMatcher.getMatchLottoNumber(6)).isEqualTo(1);
+        assertThat(lottoRankMatcher.getMatchLottoRank(Rank.FIRST)).isEqualTo(1);
     }
 }

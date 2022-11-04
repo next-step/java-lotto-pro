@@ -24,8 +24,8 @@ public class LottoTest {
     @ParameterizedTest
     @DisplayName("로또번호와 입력된 숫자가 일치하면 true가 불일치하면 false가 오는지 확인")
     @CsvSource(value = {"1:true","2:true","3:true","4:true","5:true","6:true","7:false"}, delimiter = ':')
-    void lotto_number_match_test(String input, boolean expected) {
-        assertThat(lotto.isMatch(new LottoNumber(input))).isEqualTo(expected);
+    void lotto_number_match_test(int input, boolean expected) {
+        assertThat(lotto.isMatch(LottoNumber.of(input))).isEqualTo(expected);
     }
 
     static Stream<Arguments> lotto_match_number_check_test() {
@@ -43,7 +43,7 @@ public class LottoTest {
 
     public static Lotto numbersToLotto(List<Integer> numberList) {
         return new Lotto(numberList.stream()
-                .map(number -> new LottoNumber(number.toString()))
+                .map(number -> LottoNumber.of(number))
                 .collect(Collectors.toList()));
     }
 }
