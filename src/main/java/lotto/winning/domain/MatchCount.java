@@ -2,6 +2,7 @@ package lotto.winning.domain;
 
 import lotto.lotto.domain.Lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MatchCount {
@@ -18,7 +19,7 @@ public class MatchCount {
         this.winningNumber = winningNumber;
     }
 
-    public void generate() {
+    public TotalWinningMoney generate() {
         for (Lotto lotto : this.lottos) {
             if (this.winningNumber.matchCounts(lotto) == 3) {
                 threeMatchCount++;
@@ -30,6 +31,12 @@ public class MatchCount {
                 sixMatchCount++;
             }
         }
+        List<WinningMoney> winningMonies = new ArrayList<>();
+        winningMonies.add(new WinningMoney(3, threeMatchCount));
+        winningMonies.add(new WinningMoney(4, threeMatchCount));
+        winningMonies.add(new WinningMoney(5, threeMatchCount));
+        winningMonies.add(new WinningMoney(6, threeMatchCount));
+        return new TotalWinningMoney(winningMonies);
     }
 
     public int getThreeMatchCount() {

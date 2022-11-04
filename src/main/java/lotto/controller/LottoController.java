@@ -22,22 +22,14 @@ public class LottoController {
         LottoGenerator lottoGenerator = new LottoGenerator(purchaseCount);
         printLottos(lottoGenerator.generateLottos());
         System.out.println();
-        List<WinningMoney> calculators = createCalculators(lottoGenerator);
-        TotalWinningMoney totalWinningMoney = new TotalWinningMoney(calculators);
-        WinningResultOutputVeiw.winningMoney(totalWinningMoney);
-        WinningResultOutputVeiw.returnRate(new ReturnRate(lottoMoney, totalWinningMoney));
+        TotalWinningMoney totalWinningMoney = createCalculators(lottoGenerator);
+        WinningResultOutputVeiw.winningResult(totalWinningMoney, lottoMoney);
     }
 
-    private static List<WinningMoney> createCalculators(LottoGenerator lottoGenerator) {
+    private static TotalWinningMoney createCalculators(LottoGenerator lottoGenerator) {
         WinningNumber winningNumber = createWinningNumber();
         MatchCount matchCount = new MatchCount(lottoGenerator.generateLottos(), winningNumber);
-        matchCount.generate();
-        List<WinningMoney> calculators = new ArrayList<>();
-        calculators.add(new WinningMoney(3, matchCount.getThreeMatchCount()));
-        calculators.add(new WinningMoney(4, matchCount.getFourMatchCount()));
-        calculators.add(new WinningMoney(5, matchCount.getFiveMatchCount()));
-        calculators.add(new WinningMoney(6, matchCount.getSixMatchCount()));
-        return calculators;
+        return matchCount.generate();
     }
 
     private static WinningNumber createWinningNumber() {
