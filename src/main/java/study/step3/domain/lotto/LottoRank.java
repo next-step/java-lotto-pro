@@ -3,6 +3,8 @@ package study.step3.domain.lotto;
 import study.step3.domain.lottonumber.LottoMatchResult;
 import study.step3.message.LottoMessage;
 
+import java.util.Arrays;
+
 public enum LottoRank {
     FIRST_PLACE(new LottoMatchResult(6L, 0L), 2_000_000_000L),
     SECOND_PLACE(new LottoMatchResult(5L, 1L), 30_000_000L),
@@ -24,27 +26,11 @@ public enum LottoRank {
     }
 
     public static LottoRank ofMatchResult(LottoMatchResult matchResult) {
-        LottoRank findRank = LottoRank.NONE;
-        for (LottoRank rank : values()) {
-            findRank = findLottoLank(findRank, rank, matchResult);
-        }
-
-        return findRank;
-    }
-
-    private static LottoRank findLottoLank(LottoRank findRank, LottoRank rank, LottoMatchResult matchResult) {
-        if(findRank.isWinning()) {
-            return findRank;
-        }
-
-        if(!matchResult.isEqualsLottoMatchCount(rank.matchResult)) {
-            return findRank;
-        }
-
-        if(!matchResult.isGreaterThanOrEqualBonusMatchCount(rank.matchResult)) {
-            return findRank;
-        }
-        return rank;
+        return Arrays.stream(values())
+                .filter(rank -> matchResult.isEqualsLottoMatchCount(rank.matchResult))
+                .filter(rank -> matchResult.isGreaterThanOrEqualBonusMatchCount(rank.matchResult))
+                .findFirst()
+                .orElse(LottoRank.NONE);
     }
 
     public boolean isNone() {
