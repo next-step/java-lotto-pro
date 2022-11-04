@@ -9,7 +9,6 @@ import static lotto.Constant.INPUT_BONUS_NUMBER_LAST_WEEK;
 import static lotto.Constant.INPUT_PAY_MONEY;
 import static lotto.Constant.INPUT_WINNING_NUMBER_LAST_WEEK;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -29,7 +28,7 @@ public class InputView {
         System.out.println(INPUT_PAY_MONEY);
     }
 
-    List<LottoNumber> inputWinningNumberLastWeek() {
+    LottoNumbers inputWinningNumberLastWeek() {
         printInputWinningNumberLastWeek();
         String input = scanner.nextLine();
         Validate.validateWinningNumberNull(input);
@@ -44,13 +43,13 @@ public class InputView {
         System.out.println("\n" + INPUT_WINNING_NUMBER_LAST_WEEK);
     }
 
-    LottoNumber inputBonusNumberLastWeek(List<LottoNumber> winningNumber) {
+    LottoNumber inputBonusNumberLastWeek(LottoNumbers winningNumbers) {
         printInputBonusNumberLastWeek();
         String input = scanner.nextLine();
         Validate.validateOnlyNumber(input);
         Validate.validateWinningNumberRange(input);
-        Validate.validateBonusNumberDuplicate(Integer.parseInt(input), winningNumber);
-        return new LottoNumber(Integer.parseInt(input));
+        Validate.validateBonusNumberDuplicate(input, winningNumbers);
+        return LottoNumber.from(input);
     }
 
     private void printInputBonusNumberLastWeek() {

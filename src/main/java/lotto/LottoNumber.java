@@ -5,8 +5,16 @@ import java.util.Objects;
 public class LottoNumber {
     private final int number;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         this.number = number;
+    }
+
+    public static LottoNumber from(int number) {
+        return new LottoNumber(number);
+    }
+
+    public static LottoNumber from(String number) {
+        return new LottoNumber(Integer.parseInt(number));
     }
 
     @Override

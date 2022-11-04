@@ -22,7 +22,6 @@ import static lotto.Constant.NULL;
 import static lotto.Constant.REGEX_ONLY_NUMBER;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
@@ -96,8 +95,8 @@ public class Validate {
         return checkSet.size();
     }
 
-    static void validateBonusNumberDuplicate(int input, List<LottoNumber> winningNumber) {
-        if (winningNumber.contains(new LottoNumber(input))) {
+    static void validateBonusNumberDuplicate(String input, LottoNumbers winningNumber) {
+        if (winningNumber.contains(LottoNumber.from(input))) {
             throw new IllegalArgumentException(ERROR_BONUS_NUMBER_DUPLICATED);
         }
     }

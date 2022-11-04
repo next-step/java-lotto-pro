@@ -11,7 +11,6 @@ import static lotto.Constant.LOTTO_START_NUMBER;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AutoLottoNumberGenerator implements LottoNumberGenerator {
     List<Integer> lottoNumbers = new ArrayList<>();
@@ -27,10 +26,8 @@ public class AutoLottoNumberGenerator implements LottoNumberGenerator {
     }
 
     @Override
-    public List<LottoNumber> generateSixNumbers() {
+    public List<Integer> generateSixNumbers() {
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.subList(0, 6).stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+        return new ArrayList<>(lottoNumbers.subList(0, 6));
     }
 }

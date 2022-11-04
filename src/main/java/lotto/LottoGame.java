@@ -26,7 +26,7 @@ public class LottoGame {
     public List<LottoNumbers> purchaseLotto(int purchaseCount) {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
-            lottoNumbers.add(new LottoNumbers(lottoNumberGenerator.generateSixNumbers()));
+            lottoNumbers.add(LottoNumbers.from(lottoNumberGenerator.generateSixNumbers()));
         }
         return lottoNumbers;
     }

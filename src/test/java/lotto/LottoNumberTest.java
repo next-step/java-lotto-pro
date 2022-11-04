@@ -6,7 +6,12 @@ import org.junit.jupiter.api.Test;
 
 public class LottoNumberTest {
     @Test
-    void 번호_생성() {
-        assertThat(new LottoNumber(1)).isEqualTo(new LottoNumber(1));
+    void LottoNumber_int_생성() {
+        assertThat(LottoNumber.from(1)).isEqualTo(LottoNumber.from(1));
+    }
+
+    @Test
+    void LottoNumber_String_생성() {
+        assertThat(LottoNumber.from("1")).isEqualTo(LottoNumber.from("1"));
     }
 }
