@@ -31,6 +31,6 @@ public class LottoPaymentTest {
     @CsvSource(value = {"10000:10", "15000:15", "4000:4", "1500:1"}, delimiterString = ":")
     @DisplayName("입력받은 구매금액으로 구매한 로또의 갯수를 구한다.(개당 1000원)")
     void 로또_구매_갯수_테스트(String payment, int count){
-        assertThat(LottoPayment.create(payment).getBuyLottoCount()).isEqualTo(count);
+        assertThat(LottoPayment.create(payment).getLottoCount()).isEqualTo(count);
     }
 }

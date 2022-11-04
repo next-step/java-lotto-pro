@@ -18,9 +18,9 @@ public class LottoMain {
 
         LottoService lottoService = new LottoService(buyingLottoStrategy, winningLottoStrategy);
         LottoPayment lottoPayment = lottoService.buyLotto(InputView.payLotto());
-        OutputView.buyLottoCountPrint(lottoPayment.getBuyLottoCount());
+        OutputView.buyLottoCountPrint(lottoPayment.getLottoCount());
 
-        BuyingLottoGroup buyingLottoGroup = lottoService.generateBuyingLottoGroup(lottoPayment.getBuyLottoCount());
+        BuyingLottoGroup buyingLottoGroup = lottoService.generateBuyingLottoGroup(lottoPayment.getLottoCount());
         OutputView.printLottoNumbers(buyingLottoGroup.getLottos());
 
         OutputView.printLastWeekWinningNumber();
@@ -32,6 +32,6 @@ public class LottoMain {
                 buyingLottoGroup, winningLotto);
 
         OutputView.printWinningStats(result);
-        OutputView.printReturnRate(new LottoReturnRate(result.calculateWinningMoney(), lottoPayment.getBuyLottoCount() * PRICE));
+        OutputView.printReturnRate(new LottoReturnRate(result.calculateWinningMoney(), lottoPayment.getLottoCount() * PRICE));
     }
 }

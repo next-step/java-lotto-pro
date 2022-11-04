@@ -22,7 +22,7 @@ public class LottoPayment {
         }
     }
 
-    public int getBuyLottoCount() {
+    public int getLottoCount() {
         return this.payment / PRICE;
     }
 }
