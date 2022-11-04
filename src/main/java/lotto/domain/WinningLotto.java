@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.view.Error;
-import lotto.view.OutputView;
 
 import java.util.List;
 
@@ -11,22 +10,16 @@ public class WinningLotto extends Lotto {
     public WinningLotto(List<LottoNumber> insertWinningLotto, LottoNumber bonusBall) {
         super(insertWinningLotto);
 
-        if (!isValid(insertWinningLotto, bonusBall)) {
-            throw new IllegalArgumentException(Error.BONUS_BALL_DUPLICATE);
-        }
+        validate(insertWinningLotto, bonusBall);
         this.bonusBall = bonusBall;
     }
 
-    public static boolean isValid(List<LottoNumber> insertWinningLotto, LottoNumber bonusBall) {
-        if (!Lotto.isValid(insertWinningLotto)) {
-            return false;
-        }
+    public static void validate(List<LottoNumber> insertWinningLotto, LottoNumber bonusBall) {
+        Lotto.validate(insertWinningLotto);
         if (insertWinningLotto.stream()
                 .anyMatch(number -> number.equals(bonusBall))) {
-            OutputView.print(Error.BONUS_BALL_DUPLICATE);
-            return false;
+            throw new IllegalArgumentException(Error.BONUS_BALL_DUPLICATE);
         }
-        return true;
     }
 
     public Rank getRank(Lotto lotto) {

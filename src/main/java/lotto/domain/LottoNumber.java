@@ -11,18 +11,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(int number) {
-        if (!isValid(number)) {
-            throw new IllegalArgumentException(Error.LOTTO_NUMBER_RANGE);
-        }
+        validate(number);
         this.number = number;
     }
 
-    public static boolean isValid(int number) {
+    public static void validate(int number) {
         if (MIN > number || number > MAX) {
-            OutputView.print(Error.LOTTO_NUMBER_RANGE);
-            return false;
+            throw new IllegalArgumentException(Error.LOTTO_NUMBER_RANGE);
         }
-        return true;
     }
 
     @Override

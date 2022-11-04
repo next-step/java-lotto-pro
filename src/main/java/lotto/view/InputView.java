@@ -1,8 +1,8 @@
 package lotto.view;
 
+import lotto.controller.LottoValidator;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.Money;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +25,7 @@ public class InputView {
         OutputView.print("구입금액을 입력해 주세요.");
         int money = nextInt();
 
-        if (!Money.isValid(money)) {
+        if (!LottoValidator.isValidMoney(money)) {
             return insertMoney();
         }
 
@@ -46,7 +46,7 @@ public class InputView {
             lottoNumbers.add(inputLotto());
         }
 
-        if (!lottoNumbers.stream().allMatch(Lotto::isValid)) {
+        if (!lottoNumbers.stream().allMatch(LottoValidator::isValidLotto)) {
             return insertManualLotto(count);
         }
 
@@ -57,7 +57,7 @@ public class InputView {
     public static List<LottoNumber> insertWinningLotto() {
         OutputView.print("지난 주 당첨 번호를 입력해 주세요.");
         List<LottoNumber> lottoNumbers = inputLotto();
-        if (!Lotto.isValid(lottoNumbers)) {
+        if (!LottoValidator.isValidLotto(lottoNumbers)) {
             return insertWinningLotto();
         }
         return lottoNumbers;
@@ -65,7 +65,7 @@ public class InputView {
 
     public static List<LottoNumber> inputLotto() {
         String[] input = scanner.next().split(",");
-        if (!Arrays.stream(input).map(Integer::parseInt).allMatch(LottoNumber::isValid)) {
+        if (!Arrays.stream(input).map(Integer::parseInt).allMatch(LottoValidator::isValidLottoNumber)) {
             return inputLotto();
         }
         return Arrays.stream(input)
@@ -77,7 +77,7 @@ public class InputView {
     public static LottoNumber insertBonusBall() {
         OutputView.print("보너스 볼을 입력해 주세요.");
         int lottoNumber = nextInt();
-        if (!LottoNumber.isValid(lottoNumber)) {
+        if (!LottoValidator.isValidLottoNumber(lottoNumber)) {
             return insertBonusBall();
         }
         return new LottoNumber(lottoNumber);

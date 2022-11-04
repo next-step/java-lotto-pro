@@ -1,28 +1,22 @@
 package lotto.domain;
 
 import lotto.view.Error;
-import lotto.view.OutputView;
 
 public class Money {
     private final int money;
 
     public Money(int money) {
-        if (!isValid(money)) {
-            throw new IllegalArgumentException(Error.MONEY);
-        }
+        validate(money);
         this.money = money;
     }
 
-    public static boolean isValid(int money) {
+    public static void validate(int money) throws IllegalArgumentException {
         if (money < 0) {
-            OutputView.print(Error.MONEY_ALLOW_POSITIVE);
-            return false;
+            throw new IllegalArgumentException(Error.MONEY_ALLOW_POSITIVE);
         }
         if (money % Lotto.LOTTO_PRICE != 0) {
-            OutputView.print(Error.MONEY_UNIT);
-            return false;
+            throw new IllegalArgumentException(Error.MONEY_UNIT);
         }
-        return true;
     }
 
     public int getBuyableLottoCount() {

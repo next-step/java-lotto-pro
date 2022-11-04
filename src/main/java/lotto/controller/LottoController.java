@@ -44,7 +44,7 @@ public class LottoController {
 
         do {
             bonusBall = InputView.insertBonusBall();
-        } while(!WinningLotto.isValid(winningLottoNumbers, bonusBall));
+        } while(!LottoValidator.isValidWinningLotto(winningLottoNumbers, bonusBall));
 
         winningLotto = new WinningLotto(winningLottoNumbers, bonusBall);
     }
