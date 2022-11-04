@@ -31,6 +31,10 @@ public class Money {
         return BigDecimal.ZERO.equals(this.value);
     }
 
+    public Money plus(Money other) {
+        return new Money(this.value.add(other.value));
+    }
+
     public BigDecimal divide(final Money other) {
         return this.value.divide(other.value);
     }

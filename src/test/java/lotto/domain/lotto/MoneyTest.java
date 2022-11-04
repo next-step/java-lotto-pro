@@ -81,4 +81,16 @@ class MoneyTest {
 
         assertThat(actual).isEqualTo(expected);
     }
+
+    @DisplayName("금액을 더할 수 있다.")
+    @Test
+    void 더하기() {
+        final Money one = new Money(1000);
+        final Money other = new Money(2000);
+        final Money expected = new Money(3000);
+
+        final Money actual = one.plus(other);
+
+        assertThat(actual).isEqualTo(expected);
+    }
 }

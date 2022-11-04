@@ -5,12 +5,16 @@ import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 import static lotto.utils.Validations.requireNotNull;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Matches;
+import lotto.domain.lotto.Money;
 
 public class MatchingResult {
     private final Map<Matches, Long> result;
@@ -38,6 +42,24 @@ public class MatchingResult {
         for (Matches matches : Matches.values()) {
             this.result.put(matches, 0L);
         }
+    }
+
+    public BigDecimal computeReturnOnInvestment(final Money totalAmount) {
+        final BigDecimal quotient = sumPrizes().divide(totalAmount);
+        return quotient.setScale(2, RoundingMode.HALF_EVEN);
+    }
+
+    private Money sumPrizes() {
+        return result.entrySet()
+                .stream()
+                .map(this::calculatePrize)
+                .reduce(Money.ZERO, Money::plus);
+    }
+
+    private Money calculatePrize(final Entry<Matches, Long> matchesToCount) {
+        final Matches match = matchesToCount.getKey();
+        final long matchCount = matchesToCount.getValue();
+        return match.calculatePrize(matchCount);
     }
 
     @Override

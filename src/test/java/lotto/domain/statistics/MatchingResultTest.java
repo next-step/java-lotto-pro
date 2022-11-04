@@ -3,6 +3,7 @@ package lotto.domain.statistics;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.Map;
 import lotto.domain.lotto.Fixture;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Matches;
+import lotto.domain.lotto.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -69,6 +71,22 @@ class MatchingResultTest {
         );
 
         final MatchingResult actual = MatchingResult.matches(lottos, Fixture.winningNumbers123456());
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("당첨 결과에 따라 수익률을 계산할 수 있다.")
+    @Test
+    void 수익률() {
+        final Money totalAmount = new Money(1_000_000L);
+        final MatchingResult matchingResult = new MatchingResult(
+                new HashMap<Matches, Long>() {{
+                    put(Matches.THREE, 2L);
+                }}
+        );
+        final BigDecimal expected = BigDecimal.valueOf(0.01);
+
+        final BigDecimal actual = matchingResult.computeReturnOnInvestment(totalAmount);
 
         assertThat(actual).isEqualTo(expected);
     }
