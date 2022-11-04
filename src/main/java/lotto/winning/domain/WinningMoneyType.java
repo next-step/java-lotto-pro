@@ -19,11 +19,17 @@ public enum WinningMoneyType {
 
     public static WinningMoneyType find(int count) {
         for (WinningMoneyType winningMoneyType : values()) {
-            if (winningMoneyType.count == count) {
-                return winningMoneyType;
-            }
+            WinningMoneyType winningMoneyType1 = isMatchCount(count, winningMoneyType);
+            if (winningMoneyType1 != null) return winningMoneyType1;
         }
         throw new IllegalArgumentException("일치하는 enum 타입이 없습니다.");
+    }
+
+    private static WinningMoneyType isMatchCount(int count, WinningMoneyType winningMoneyType) {
+        if (winningMoneyType.count == count) {
+            return winningMoneyType;
+        }
+        return null;
     }
 
     public long getMoney() {
