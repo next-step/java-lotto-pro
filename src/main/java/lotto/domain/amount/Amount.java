@@ -41,6 +41,10 @@ public class Amount {
 		return new Amount(this.amount + other.amount);
 	}
 
+	public Amount sub(Amount other) {
+		return new Amount(this.amount - other.amount);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

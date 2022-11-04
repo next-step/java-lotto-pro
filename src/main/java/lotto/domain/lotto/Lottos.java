@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 import lotto.domain.amount.Amount;
 import lotto.domain.quantity.Quantity;
+import lotto.util.InputSplitter;
 
 public class Lottos {
 	private static final int MIN_LOTTOS_SIZE = 1;
@@ -23,13 +25,18 @@ public class Lottos {
 		return new Lottos(lottos);
 	}
 
-	public static Lottos purchase(Amount purchaseAmount) {
+	public static Lottos purchaseManualLottos(List<String> manualLottoNumbers) {
+		return Lottos.from(manualLottoNumbers.stream()
+			.map(s -> new InputLottoGenerator(
+				InputSplitter.splitText(s).stream().map(Integer::parseInt).collect(Collectors.toList())).generate())
+			.collect(Collectors.toList()));
+	}
+
+	public static Lottos purchaseRandomLottos(Amount purchaseAmount) {
 		validateHasChanges(purchaseAmount);
-		return new Lottos(
-			LongStream.range(0, purchaseCount(purchaseAmount))
-				.mapToObj(i -> new RandomLottoGenerator().generate())
-				.collect(Collectors.toList())
-		);
+		return Lottos.from(LongStream.range(0, purchaseCount(purchaseAmount))
+			.mapToObj(i -> new RandomLottoGenerator().generate())
+			.collect(Collectors.toList()));
 	}
 
 	private static long purchaseCount(Amount purchaseAmount) {
@@ -40,6 +47,10 @@ public class Lottos {
 		if (purchaseAmount.getLong() % LOTTO_PURCHASE_PRICE != CHECK_HAS_CHANGES_NUM) {
 			throw new IllegalArgumentException("1000원 단위의 금액을 입력해야 합니다.");
 		}
+	}
+
+	public Lottos concat(Lottos other) {
+		return new Lottos(Stream.concat(this.lottos.stream(), other.lottos.stream()).collect(Collectors.toList()));
 	}
 
 	private void validateLottosSize(int size) {
@@ -57,15 +68,10 @@ public class Lottos {
 	}
 
 	public LottoResults toLottoResults(Lotto winLotto, LottoNumber bonusNumber) {
-		return LottoResults.from(
-			this.lottos.stream()
-				.map(lotto -> LottoResult.from(lotto,
-					MatchRank.valueOf(
-						lotto.countMatchCount(winLotto),
-						lotto.contains(bonusNumber)
-					))
-				).collect(Collectors.toList())
-		);
+		return LottoResults.from(this.lottos.stream()
+			.map(lotto -> LottoResult.from(lotto,
+				MatchRank.valueOf(lotto.countMatchCount(winLotto), lotto.contains(bonusNumber))))
+			.collect(Collectors.toList()));
 	}
 
 	@Override

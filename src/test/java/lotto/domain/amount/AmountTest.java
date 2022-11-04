@@ -24,7 +24,10 @@ class AmountTest {
 	@Test
 	void 금액_더하기() {
 		assertThat(Amount.from(5000).sum(Amount.from(10000))).isEqualTo(Amount.from(15000));
-
 	}
 
+	@Test
+	void 금액_빼기() {
+		assertThat(Amount.from(5000).sub(Amount.from(2000))).isEqualTo(Amount.from(3000));
+	}
 }

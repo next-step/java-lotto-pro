@@ -12,25 +12,35 @@ import lotto.domain.quantity.Quantity;
 
 class LottosTest {
 	@Test
-	void 로또_15000원어치_구매() {
-		assertThat(Lottos.purchase(Amount.from(15000)).getQuantity()).isEqualTo(Quantity.from(15));
+	void 자동_로또_15000원어치_구매() {
+		assertThat(Lottos.purchaseRandomLottos(Amount.from(15000)).getQuantity()).isEqualTo(Quantity.from(15));
 	}
 
 	@Test
-	void 로또_0장_구매시_IllegalArugumentException() {
+	void 자동_로또_0장_구매시_IllegalArugumentException() {
 		assertThatThrownBy(() -> Lottos.from(new ArrayList<>()))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
-	void 로또_구매_잔돈_있을경우_IllegalArugumentException() {
-		assertThatThrownBy(() -> Lottos.purchase(Amount.from(2500)))
+	void 자동_로또_구매_잔돈_있을경우_IllegalArugumentException() {
+		assertThatThrownBy(() -> Lottos.purchaseRandomLottos(Amount.from(2500)))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
+	void 수동_로또_구매() {
+		Lottos lottos = Lottos.purchaseManualLottos(Arrays.asList(
+			"1,2,3,4,5,6",
+			"2,3,4,5,6,7",
+			"3,4,5,6,7,8"
+		));
+		assertThat(lottos.getQuantity()).isEqualTo(Quantity.from(3));
+	}
+
+	@Test
 	void 로또_결과_변환() {
-		Lottos lottos = Lottos.purchase(Amount.from(3000));
+		Lottos lottos = Lottos.purchaseRandomLottos(Amount.from(3000));
 		Lotto winLotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
 		LottoNumber bonusNumber = LottoNumber.from(7);
 
