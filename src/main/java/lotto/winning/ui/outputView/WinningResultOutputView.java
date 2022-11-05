@@ -1,7 +1,6 @@
 package lotto.winning.ui.outputView;
 
 import lotto.lotto.domain.LottoMoney;
-import lotto.winning.domain.ReturnRate;
 import lotto.winning.domain.TotalWinningMoney;
 
 import static lotto.winning.domain.WinningMoneyType.find;
@@ -10,7 +9,11 @@ public class WinningResultOutputView {
 
     public static void winningResult(TotalWinningMoney totalWinningMoney, LottoMoney lottoMoney) {
         winningMoney(totalWinningMoney);
-        returnRate(new ReturnRate(lottoMoney, totalWinningMoney));
+        returnRate(lottoMoney, totalWinningMoney);
+    }
+
+    private static void returnRate(LottoMoney lottoMoney, TotalWinningMoney totalWinningMoney) {
+        System.out.println("총 수익률은 " + totalWinningMoney.sum() / lottoMoney.getNumber() + "입니다");
     }
 
     public static void winningMoney(TotalWinningMoney totalWinningMoney) {
@@ -21,9 +24,5 @@ public class WinningResultOutputView {
             System.out.print("(" + find(matchCount).getMoney() + "원)-");
             System.out.println(totalWinningMoney.getWinningMonies().get(matchCount).getNumber() + "개");
         }
-    }
-
-    public static void returnRate(ReturnRate returnRate) {
-        System.out.println("총 수익률은 " + returnRate.calculate() + "입니다");
     }
 }

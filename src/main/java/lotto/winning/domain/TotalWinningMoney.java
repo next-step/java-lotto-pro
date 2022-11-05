@@ -33,6 +33,10 @@ public class TotalWinningMoney {
         return sum;
     }
 
+    public double returnRate(int lottoMoney) {
+        return (double) sum() / (double) lottoMoney;
+    }
+
     private long winningMoney(Integer matchCount) {
         return find(matchCount).getMoney();
     }
