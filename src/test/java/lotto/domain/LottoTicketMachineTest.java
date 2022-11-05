@@ -19,7 +19,7 @@ class LottoTicketMachineTest {
 
 	@BeforeEach
 	void init() {
-		lottoTicketMachine = new LottoTicketMachine(new TestGenerateStrategy());
+		lottoTicketMachine = LottoTicketMachine.create();
 	}
 
 	@Test
@@ -32,7 +32,8 @@ class LottoTicketMachineTest {
 	@DisplayName("천원 이하의 값을 입력 시 InvalidMoneyException 발생")
 	void throwInvalidMoneyExceptionTest() {
 		Money money = Money.from(500);
-		assertThatThrownBy(() -> lottoTicketMachine.buyLottoTickets(money))
+		TestGenerateStrategy strategy = new TestGenerateStrategy();
+		assertThatThrownBy(() -> lottoTicketMachine.lottoTickets(money, strategy))
 			.isInstanceOf(InvalidMoneyException.class);
 	}
 
@@ -41,13 +42,14 @@ class LottoTicketMachineTest {
 		"10000:10"}, delimiter = ':')
 	@DisplayName("입력한 금액에 따라 로또 티켓 구매")
 	void buyLottoTicketsTest(int money, int expected) {
-		assertThat(lottoTicketMachine.buyLottoTickets(Money.from(money)).count()).isEqualTo(expected);
+		LottoTickets lottoTickets = lottoTicketMachine.lottoTickets(Money.from(money), new TestGenerateStrategy());
+		assertThat(lottoTickets.count()).isEqualTo(expected);
 	}
 
 	@Test
 	@DisplayName("생성 전략에서 지정한 번호로 로또 티켓 생성")
 	void generateLottoTicketTest() {
-		LottoTickets lottoTickets = lottoTicketMachine.buyLottoTickets(Money.from(1000));
+		LottoTickets lottoTickets = lottoTicketMachine.lottoTickets(Money.from(1000), new TestGenerateStrategy());
 		LottoTicket lottoTicket = lottoTickets.getLottoTickets().get(0);
 		assertThat(lottoTicket).isEqualTo(LottoTicket.from(Set.of(1, 2, 3, 4, 5, 6)));
 	}
