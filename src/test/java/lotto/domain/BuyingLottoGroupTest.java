@@ -17,8 +17,7 @@ public class BuyingLottoGroupTest {
         BuyingLottoGroup group = BuyingLottoGroup.create(5, new TestLottoNumberStrategy());
 
         assertAll(
-                () -> assertThat(group.getLottos().size()).isEqualTo(5),
-                () -> assertThat(group.getLottos().get(0)).isEqualTo(Lotto.create(Arrays.asList(1,2,3,4,5,6)))
+                () -> assertThat(group.getLottos().size()).isEqualTo(5)
         );
     }
 

@@ -57,21 +57,4 @@ public class Lotto {
         }
         return "[" + result.substring(0, result.length()-2) + "]";
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numbers);
-    }
 }
