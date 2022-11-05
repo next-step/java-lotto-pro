@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.domain.WinningMoney.*;
+import static lotto.domain.WinningMoney.NONE;
 
 public class Lottos {
     private static final int INIT_COUNT = 0;
@@ -25,10 +25,10 @@ public class Lottos {
 
     public Map<Integer, Lottos> matchLottos(WinningNumber winningNumber) {
         Map<Integer, Lottos> map = new HashMap<>();
-        map.put(THREE_MATCH.getCount(), findLottosByMatchCount(THREE_MATCH.getCount(), winningNumber));
-        map.put(FOUR_MATCH.getCount(), findLottosByMatchCount(FOUR_MATCH.getCount(), winningNumber));
-        map.put(FIVE_MATCH.getCount(), findLottosByMatchCount(FIVE_MATCH.getCount(), winningNumber));
-        map.put(SIX_MATCH.getCount(), findLottosByMatchCount(SIX_MATCH.getCount(), winningNumber));
+        for (WinningMoney winningMoney : WinningMoney.values()) {
+            map.put(winningMoney.getCount(), findLottosByMatchCount(winningMoney.getCount(), winningNumber));
+        }
+        map.remove(NONE.getCount());
         return map;
     }
 
