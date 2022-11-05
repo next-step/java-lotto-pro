@@ -34,7 +34,7 @@ public class LottoController {
         while (lottoTicketsBucket.canBuyMoreLotto()) {
             final LottoTicket newLottoTicket = new LottoTicket(lottoNumberGenerator);
             lottoTicketsBucket.buyOneLotto(newLottoTicket);
-            numberOfAffordableLottoLeft(newLottoTicket);
+            LottoTicketPrinter.print(newLottoTicket);
         }
         final WinningNumbers winningNumbers = userInputWinningNumbers();
         displayLottoResult(lottoTicketsBucket, winningNumbers, moneyToBuy);
@@ -44,10 +44,6 @@ public class LottoController {
         final MoneyToBuy moneyToBuy = moneyToBuyAcceptor.accept();
         NumberOfLottoTicketsPrinters.print(moneyToBuy);
         return moneyToBuy;
-    }
-
-    private void numberOfAffordableLottoLeft(LottoTicket lottoTicket) {
-        LottoTicketPrinter.print(lottoTicket);
     }
 
     private WinningNumbers userInputWinningNumbers() {
