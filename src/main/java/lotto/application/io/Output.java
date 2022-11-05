@@ -1,6 +1,6 @@
 package lotto.application.io;
 
-import static java.util.Collections.*;
+import static java.util.Collections.reverseOrder;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
@@ -17,7 +17,7 @@ public class Output {
     }
 
     public void lottos(Lottos lottos) {
-        System.out.println(String.format("%s개를 구매했습니다.", lottos.size()));
+        System.out.println(String.format("수동으로 %s장, 자동으로 %s장을 구매했습니다.", lottos.manualCount(), lottos.autoCount()));
         for (Lotto lotto : lottos.content()) {
             printLottoNumber(lotto);
         }
@@ -32,7 +32,6 @@ public class Output {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
-
         Arrays.stream(Rank.values())
             .filter(Rank::isNotMiss)
             .sorted(reverseOrder())
@@ -45,6 +44,14 @@ public class Output {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
+    public void inputSelfLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public void inputSelfLottoNumbers() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
     private void printLottoNumber(Lotto lotto) {
         ArrayDeque<LottoNumber> queue = new ArrayDeque<>(lotto.numbers());
 
@@ -53,7 +60,7 @@ public class Output {
         LottoNumber lottoNumber = queue.removeFirst();
         sb.append(lottoNumber.get());
 
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             lottoNumber = queue.removeFirst();
             sb.append(", ");
             sb.append(lottoNumber.get());
