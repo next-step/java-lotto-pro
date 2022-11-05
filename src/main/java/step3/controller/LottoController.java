@@ -15,17 +15,22 @@ public class LottoController {
     public void run() {
         Money money = new Money(InputView.inputPurchaseAmount());
 
-        Lottos purchasedLottos = LottoGenerator.createLottos(LottoUtil.buy(money));
-        OutputView.showPurchaseLottoCount(LottoUtil.buy(money));
-        OutputView.showPurchasedLottos(purchasedLottos);
+        int manualLottoCnt = InputView.inputManualLottoCount();
+        Lottos manualLottos = LottoUtil.buy(InputView.inputManualLottoNumbers(manualLottoCnt));
+        Money change = money.pay(LottoUtil.calculateTotalPrice(manualLottos.getHasLottoSize()));
+        Lottos purchasedLottos = LottoGenerator.createLottos(LottoUtil.buy(change));
+
+        OutputView.printLottosCount(manualLottos.getHasLottoSize(),
+            purchasedLottos.getHasLottoSize());
+        Lottos lottos = manualLottos.merge(purchasedLottos);
+        OutputView.showPurchasedLottos(lottos);
 
         LottoNumbers winningNumbers = new LottoNumbers(InputView.inputWinningNumber());
         LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
 
-        Rewards rewards = purchasedLottos.check(winningNumbers, bonusNumber);
+        Rewards rewards = lottos.check(winningNumbers, bonusNumber);
         OutputView.showResults(rewards);
         OutputView.showProfitRate(rewards);
 
     }
-
 }
