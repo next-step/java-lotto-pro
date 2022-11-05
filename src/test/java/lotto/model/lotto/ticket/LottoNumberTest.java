@@ -2,10 +2,13 @@ package lotto.model.lotto.ticket;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -59,6 +62,34 @@ public class LottoNumberTest {
         @DisplayName("1 보다 작은 숫자 또는 45 보다 큰 숫자를 사용하면 LottoNumber 객체 생성 실패")
         void errorLessThanOneOrGreaterThanFortyFive(int value) {
             assertThrows(IllegalArgumentException.class, () -> new LottoNumber(value));
+        }
+    }
+
+    @Nested
+    @DisplayName("LottoNumber 에 대한 객체를 사이의 비교는 멤버 변수 value 에 대한 Integer.compare 방식으로 한다")
+    class Compare {
+        @Test
+        @DisplayName("현재 value 가 비교대상 value 보다 작으면 0 보다 작다")
+        void currentSmallerThanComparedObject() {
+            final LottoNumber current = new LottoNumber(1);
+            final LottoNumber compared = new LottoNumber(2);
+            assertThat(current.compare(compared)).isLessThan(0);
+        }
+
+        @Test
+        @DisplayName("현재 value 가 비교대상 value 와 같으면 0 이다")
+        void currentEqualToComparedObject() {
+            final LottoNumber current = new LottoNumber(2);
+            final LottoNumber compared = new LottoNumber(2);
+            assertThat(current.compare(compared)).isEqualTo(0);
+        }
+
+        @Test
+        @DisplayName("현재 value 가 비교대상 value 보다 크면 0 보다 크다")
+        void currentBiggerThanComparedObject() {
+            final LottoNumber current = new LottoNumber(3);
+            final LottoNumber compared = new LottoNumber(2);
+            assertThat(current.compare(compared)).isGreaterThan(0);
         }
     }
 }

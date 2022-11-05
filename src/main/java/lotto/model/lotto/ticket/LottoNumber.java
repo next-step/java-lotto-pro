@@ -55,6 +55,10 @@ public class LottoNumber {
         return tokenValue < LOTTO_MINIMUM_NUMBER || LOTTO_MAXIMUM_NUMBER < tokenValue;
     }
 
+    public int compare(LottoNumber lottoNumber) {
+        return Integer.compare(value, lottoNumber.value);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

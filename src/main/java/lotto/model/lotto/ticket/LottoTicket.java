@@ -2,6 +2,7 @@ package lotto.model.lotto.ticket;
 
 import lotto.model.winning.numbers.WinningNumbers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicket {
@@ -14,7 +15,9 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        return lottoNumbers.toString();
+        List<LottoNumber> lottoNumbersToString = new ArrayList<>(lottoNumbers);
+        lottoNumbersToString.sort(LottoNumber::compare);
+        return lottoNumbersToString.toString();
     }
 
     public int numberMatch(WinningNumbers winningNumbers) {
