@@ -16,8 +16,7 @@ public class LottoController {
         LottoGenerator lottoGenerator = new LottoGenerator();
         Lottos lottos = lottoGenerator.generate(lottoMoney.purchaseCount());
         printLottos(lottos);
-        TotalWinningMoney totalWinningMoney = new TotalWinningMoney(new MatchingCount(lottos.getLottos(), createWinningNumber()));
-        winningResult(totalWinningMoney, new Statistics(lottos, createWinningNumber()));
+        winningResult(new TotalWinningMoney(new MatchingCount(lottos.getLottos(), createWinningNumber())), new Statistics(lottos, createWinningNumber()));
     }
 
     private WinningNumber createWinningNumber() {
