@@ -21,8 +21,10 @@ public class Seller {
         return lotto;
     }
 
-    public void buyManual(List<LottoNumber> manualList) {
-        lotto.addAll(manualList);
+    public List<LottoNumber> buyManual(List<Integer> numbers) {
+        lotto.add(new LottoNumber(numbers));
+
+        return lotto;
     }
 
     public List<LottoNumber> getLotto() {

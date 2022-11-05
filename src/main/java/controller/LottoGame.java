@@ -10,23 +10,32 @@ import java.util.List;
 
 public class LottoGame {
 
+    private static final int INIT_START_NUMBER = 0;
     private static final int START_LOTTO_NUMBER = 1;
     private static final int END_LOTTO_NUMBER = 45;
 
     public void start() {
         int money = InputView.moneyInput();
         int manualCount = InputView.manualBuyCountInput();
-        List<LottoNumber> manualLotto = buyManualLotto(manualCount);
         int autoCount = new Money(money).availableBuyAutoLottoCount(manualCount);
-        Lottos lottos = new Lottos(autoCount, manualLotto, new RandomStrategy(initArrangeNumber()));
+
+        List<LottoNumber> autoLottoNumber = buyAutoLotto(autoCount);
+        List<LottoNumber> manualLotto = buyManualLotto(manualCount);
+
+        Lottos lottos = new Lottos(autoLottoNumber, manualLotto);
 
         OutPutView.outPutLottoNumber(lottos.getLotto());
-
         InputView.winNumberMessage();
+
         List<Integer> winNumber = InputView.inputNumber();
         Rank rank = getRank(lottos, winNumber);
-
         OutPutView.outPutResult(rank.getCountRank(), new Revenue(rank.getCountRank()).getPercent(money));
+    }
+
+    private List<LottoNumber> buyAutoLotto(int autoCount) {
+        Seller seller = new Seller();
+        seller.buyAuto(autoCount, new RandomStrategy(initArrangeNumber()));
+        return seller.getLotto();
     }
 
     private Rank getRank(Lottos lottos, List<Integer> winNumber) {
@@ -42,13 +51,12 @@ public class LottoGame {
     }
 
     public static List<LottoNumber> getManualInput(int count) {
-        List<LottoNumber> manualLotto = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            List<Integer> integers = InputView.inputNumber();
-            manualLotto.add(new LottoNumber(integers));
+        Seller seller = new Seller();
+        for (int i = INIT_START_NUMBER; i < count; i++) {
+            seller.buyManual(InputView.inputNumber());
         }
 
-        return manualLotto;
+        return seller.getLotto();
     }
 
 

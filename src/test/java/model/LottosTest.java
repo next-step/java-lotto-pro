@@ -14,7 +14,8 @@ class LottosTest {
     void 로또번호를_입력갯수만큼_생성한다() {
         int count = new Money(10000).availableBuyAutoLottoCount(0);
 
-        Lottos lotto = new Lottos(count, Collections.emptyList(), new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Lottos lotto = new Lottos(Collections.emptyList(),
+                new Seller().buyAuto(count, new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6))));
 
         assertThat(lotto.getLotto()).hasSize(10);
     }

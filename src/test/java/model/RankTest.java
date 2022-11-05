@@ -16,7 +16,9 @@ class RankTest {
     void 당첨번호_결과통계를_보여준다_보너스번호미포함() {
         int count = new Money(1000).availableBuyAutoLottoCount(0);
         int bonusNumber = 20;
-        Lottos lottos = new Lottos(count, Collections.emptyList(), new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Lottos lottos = new Lottos(Collections.emptyList(),
+                new Seller().buyAuto(count, new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)))
+        );
         List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 9, 10);
 
         Rank rank = new Rank();
@@ -33,7 +35,9 @@ class RankTest {
     void 당첨번호_결과통계를_보여준다_보너스번호포함() {
         int count = new Money(1000).availableBuyAutoLottoCount(0);
         int bonusNumber = 6;
-        Lottos lottos = new Lottos(count, Collections.emptyList(), new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Lottos lottos = new Lottos(Collections.emptyList(),
+                new Seller().buyAuto(count, new MockStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)))
+        );
         List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 10);
 
         Rank rank = new Rank();
