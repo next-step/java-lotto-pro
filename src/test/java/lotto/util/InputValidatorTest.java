@@ -62,4 +62,12 @@ class InputValidatorTest {
                 .hasMessageContaining("[ERROR]");
     }
 
+    @Test
+    @DisplayName("수동 로또 수 입력 유효성검사 테스트")
+    public void validateUserWrittenLottoAmountTest() {
+        assertThatThrownBy(
+                () -> validateUserWrittenLottoAmount(1, 2)
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
 }
