@@ -11,30 +11,42 @@ public class TextExtractor {
     public static final int DELIMITER_PART = 1;
     private static final Pattern regex = Pattern.compile("//(.)\n(.*)");
     private final String text;
+    private Delimiters delimiters;
 
-    public TextExtractor(String text) {
+    public TextExtractor(Delimiters delimiters, String text) {
         if (Objects.isNull(text) || text.isEmpty()) {
             this.text = DEFAULT_VALUE;
             return;
         }
-        this.text = text;
+        addCustomDelimiter(delimiters, text);
+        this.delimiters = delimiters;
+        this.text = text(text);
     }
 
-    public String extract() {
-        Matcher m = regex.matcher(this.text);
+    private void addCustomDelimiter(Delimiters delimiters, String text) {
+        if (hasDelimiter(text)) {
+            delimiters.add(delimiter(text));
+        }
+    }
+
+    public String[] extract() {
+        return this.text.split(this.delimiters.delimiter());
+    }
+
+    private String text(String text) {
+        Matcher m = regex.matcher(text);
         if (m.find()) {
             return m.group(TEXT_PART);
         }
-        return this.text;
+        return text;
     }
 
-    public boolean hasDelimiter() {
-        Matcher m = regex.matcher(this.text);
-        return m.find();
+    public boolean hasDelimiter(String text) {
+        return regex.matcher(text).find();
     }
 
-    public String delimiter() {
-        Matcher m = regex.matcher(this.text);
+    public String delimiter(String text) {
+        Matcher m = regex.matcher(text);
         if (m.find()) {
             return m.group(DELIMITER_PART);
         }

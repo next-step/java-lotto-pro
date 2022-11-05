@@ -14,12 +14,6 @@ public class LottoController {
     public void run() {
         Lottos lottos = new LottoGenerator(new LottoMoney(readPurchaseMoney())).generate();
         printLottos(lottos);
-        winningResult(new Statistics(lottos, createWinningNumber()));
-    }
-
-    private WinningNumber createWinningNumber() {
-        Delimiters delimiters = new Delimiters();
-        TextExtractor extractor = new TextExtractor(readWinningNumbers());
-        return new WinningNumber(extractor.extract().split(delimiters.delimiter()));
+        winningResult(new Statistics(lottos, new WinningNumber(new TextExtractor(new Delimiters(), readWinningNumbers()).extract())));
     }
 }
