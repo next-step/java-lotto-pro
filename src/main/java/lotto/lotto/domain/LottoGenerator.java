@@ -9,6 +9,7 @@ public class LottoGenerator {
     public static final int MINIMUM_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
     public static final String PURCHASE_MINIMUM_COUNT_EXCEPTION_MESSAGE = "1개 이상부터 구매가능합니다.";
+    public static final int ZERO = 0;
     private final List<Integer> range = new ArrayList<>();
 
     public LottoGenerator() {
@@ -23,7 +24,7 @@ public class LottoGenerator {
     }
 
     public List<Lotto> generate(int purchaseCount) {
-        if (purchaseCount <= 0) {
+        if (purchaseCount <= ZERO) {
             throw new IllegalArgumentException(PURCHASE_MINIMUM_COUNT_EXCEPTION_MESSAGE);
         }
         List<Lotto> lottos = new ArrayList<>();
