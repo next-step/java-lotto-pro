@@ -23,10 +23,6 @@ public class Count {
         return Objects.hash(number);
     }
 
-    public void plus() {
-        this.number++;
-    }
-
     public int getNumber() {
         return this.number;
     }
