@@ -19,21 +19,25 @@ public class LottoController {
 	}
 
 	public void run() {
-		Amount purchaseAmount = Amount.from(inputView.purchaseAmount());
-		PurchaseLottos purchaseLottos = new PurchaseLottos(purchaseAmount);
+		try {
+			Amount purchaseAmount = Amount.from(inputView.purchaseAmount());
+			PurchaseLottos purchaseLottos = new PurchaseLottos(purchaseAmount);
 
-		List<String> manualLottoNumbers = inputView.manualLottoNumbers();
-		Lottos manualLottos = purchaseLottos.purchaseManualLottos(manualLottoNumbers);
-		Lottos randomLottos = purchaseLottos.purchaseRandomLottos();
+			List<String> manualLottoNumbers = inputView.manualLottoNumbers();
+			Lottos manualLottos = purchaseLottos.purchaseManualLottos(manualLottoNumbers);
+			Lottos randomLottos = purchaseLottos.purchaseRandomLottos();
 
-		resultView.lottosResult(manualLottos, randomLottos);
-		Lottos lottos = manualLottos.concat(randomLottos);
+			resultView.lottosResult(manualLottos, randomLottos);
+			Lottos lottos = manualLottos.concat(randomLottos);
 
-		String winNumbersInput = inputView.prevWinNumbers();
-		int bonusBallInput = inputView.bonusBall();
-		WinningLotto winningLotto = WinningLotto.from(winNumbersInput, bonusBallInput);
+			String winNumbersInput = inputView.prevWinNumbers();
+			int bonusBallInput = inputView.bonusBall();
+			WinningLotto winningLotto = WinningLotto.from(winNumbersInput, bonusBallInput);
 
-		resultView.winStatisticsResult(lottos, winningLotto, purchaseAmount);
+			resultView.winStatisticsResult(lottos, winningLotto, purchaseAmount);
+		} catch (IllegalArgumentException | IllegalStateException e) {
+			System.out.println("프로그램이 종료되었습니다: " + e.getMessage());
+		}
 	}
 }
 
