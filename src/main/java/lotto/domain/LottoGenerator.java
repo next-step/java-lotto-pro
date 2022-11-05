@@ -22,11 +22,11 @@ public class LottoGenerator {
         }
     }
 
-    public List<Lotto> generate(int purchaseCount) {
+    public Lottos generate(int purchaseCount) {
         if (purchaseCount <= ZERO) {
             throw new IllegalArgumentException(PURCHASE_MINIMUM_COUNT_EXCEPTION_MESSAGE);
         }
-        List<Lotto> lottos = new ArrayList<>();
+        Lottos lottos = new Lottos();
         for (int i = 0; i < purchaseCount; i++) {
             lottos.add(generateLotto());
         }

@@ -31,6 +31,6 @@ class LottoGeneratorTest {
     @ParameterizedTest
     @ValueSource(ints = {3, 4, 5})
     void generate(int purchaseCount) {
-        assertThat(new LottoGenerator().generate((purchaseCount))).hasSize(purchaseCount);
+        assertThat(new LottoGenerator().generate((purchaseCount)).getLottos()).hasSize(purchaseCount);
     }
 }

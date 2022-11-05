@@ -1,14 +1,15 @@
 package lotto.ui.outputView;
 
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 
 import java.util.List;
 
 public class GeneratedLottosOutputView {
 
-    public static void printLottos(List<Lotto> lottos) {
+    public static void printLottos(Lottos lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
             printLotto(lotto.sort());
         }
     }

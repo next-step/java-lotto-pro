@@ -2,12 +2,7 @@ package lotto.controller;
 
 import calculator.Delimiters;
 import calculator.TextExtractor;
-import lotto.domain.Lotto;
-import lotto.domain.LottoGenerator;
-import lotto.domain.LottoMoney;
-import lotto.domain.MatchingCount;
-import lotto.domain.TotalWinningMoney;
-import lotto.domain.WinningNumber;
+import lotto.domain.*;
 
 import java.util.List;
 
@@ -21,16 +16,16 @@ public class LottoController {
     public void run() {
         LottoMoney lottoMoney = new LottoMoney(readPurchaseMoney());
         LottoGenerator lottoGenerator = new LottoGenerator();
-        List<Lotto> lottos = lottoGenerator.generate(lottoMoney.purchaseCount());
+        Lottos lottos = lottoGenerator.generate(lottoMoney.purchaseCount());
         printLottos(lottos);
         System.out.println();
         TotalWinningMoney totalWinningMoney = createTotalWinningMoney(lottos);
         winningResult(totalWinningMoney, lottoMoney);
     }
 
-    private TotalWinningMoney createTotalWinningMoney(List<Lotto> lottos) {
+    private TotalWinningMoney createTotalWinningMoney(Lottos lottos) {
         WinningNumber winningNumber = createWinningNumber();
-        return new TotalWinningMoney(new MatchingCount(lottos, winningNumber));
+        return new TotalWinningMoney(new MatchingCount(lottos.getLottos(), winningNumber));
     }
 
     private WinningNumber createWinningNumber() {
