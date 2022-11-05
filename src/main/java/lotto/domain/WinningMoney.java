@@ -20,14 +20,14 @@ public enum WinningMoney {
         this.count = count;
     }
 
+    public long getMoney() {
+        return money;
+    }
+
     public static WinningMoney find(int count) {
         return Arrays.stream(values())
                 .filter(winningMoney -> winningMoney.count == count)
                 .findFirst()
                 .orElse(NONE);
-    }
-
-    public long getMoney() {
-        return money;
     }
 }

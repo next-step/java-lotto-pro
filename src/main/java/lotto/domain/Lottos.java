@@ -9,16 +9,16 @@ public class Lottos {
     private static final int INIT_COUNT = 0;
     private List<Lotto> lottos = new ArrayList<>();
 
+    public List<Lotto> getLottos() {
+        return this.lottos;
+    }
+
     public void add(Lotto lotto) {
         this.lottos.add(lotto);
     }
 
     public int size() {
         return this.lottos.size();
-    }
-
-    public List<Lotto> getLottos() {
-        return this.lottos;
     }
 
     public Map<Integer, Lottos> matchLottos(WinningNumber winningNumber) {

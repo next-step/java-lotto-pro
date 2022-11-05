@@ -41,6 +41,14 @@ public class Lotto {
         }
     }
 
+    public List<Number> getNumbers() {
+        return this.numbers;
+    }
+
+    public List<Number> getLotto() {
+        return this.numbers;
+    }
+
     public List<Integer> sort() {
         List<Integer> list = new ArrayList<>();
         for (Number number : this.numbers) {
@@ -48,13 +56,5 @@ public class Lotto {
         }
         Collections.sort(list);
         return list;
-    }
-
-    public List<Number> getNumbers() {
-        return this.numbers;
-    }
-
-    public List<Number> getLotto() {
-        return this.numbers;
     }
 }
