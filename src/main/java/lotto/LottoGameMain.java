@@ -18,7 +18,7 @@ public class LottoGameMain {
         PurchaseLottoNumbers purchaseLottoNumbers = new PurchaseLottoNumbers(
                 lottoGame.manualPurchaseLotto(manualPurchaseCount));
 
-        int autoPurchaseCount = lottoGame.getAutoPurchasableCount();
+        int autoPurchaseCount = lottoGame.getPurchasableCount();
         resultView.printResultPay(autoPurchaseCount, manualPurchaseCount);
 
         purchaseLottoNumbers.addLottoNumbers(lottoGame.autoPurchaseLotto(autoPurchaseCount));

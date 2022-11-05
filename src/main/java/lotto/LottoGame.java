@@ -5,35 +5,33 @@
  */
 package lotto;
 
-import static lotto.Constant.LOTTO_PRICE;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
     private static final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-    private final int totalMoney;
-    private int balance;
+    private final TotalMoney totalMoney;
+    private final Balance balance;
 
     public LottoGame(int totalMoney) {
-        this.totalMoney = totalMoney;
-        this.balance = totalMoney;
+        this.totalMoney = new TotalMoney(totalMoney);
+        this.balance = new Balance(totalMoney);
     }
 
     public int getTotalMoney() {
-        return totalMoney;
+        return totalMoney.getTotalMoney();
     }
 
     public int getBalance() {
-        return balance;
+        return balance.getBalance();
     }
 
-    public int getAutoPurchasableCount() {
-        return balance / LOTTO_PRICE;
+    public int getPurchasableCount() {
+        return balance.getPurchasableCount();
     }
 
     public void minusBalance() {
-        balance -= LOTTO_PRICE;
+        balance.minusBalance();
     }
 
     public List<LottoNumbers> autoPurchaseLotto(int purchaseCount) {

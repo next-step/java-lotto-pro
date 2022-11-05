@@ -16,7 +16,7 @@ public class LottoGameTest {
 
     @Test
     void 만원을_지불한_경우_로또_개수_테스트() {
-        assertThat(new LottoGame(10000).getAutoPurchasableCount()).isEqualTo(10);
+        assertThat(new LottoGame(10000).getPurchasableCount()).isEqualTo(10);
     }
 
     @Test
