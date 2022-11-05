@@ -18,10 +18,6 @@ public class WinningNumber {
         }
     }
 
-    public List<Number> getWinningNumbers() {
-        return winningNumbers;
-    }
-
     private void validateDuplicate(String nunber) {
         for (Number value : this.winningNumbers) {
             validateDuplicateNumber(Integer.parseInt(nunber), value);

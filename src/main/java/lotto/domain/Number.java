@@ -9,8 +9,6 @@ public class Number {
 
     private int number;
 
-    private Number(){}
-
     public Number(int number) {
         validate(number);
         this.number = number;

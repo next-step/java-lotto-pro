@@ -59,12 +59,4 @@ public class Lottos {
         }
         return count;
     }
-
-    public int sum() {
-        int sum = INIT_SUM;
-        for (Lotto lotto : this.lottos) {
-            sum += lotto.sum();
-        }
-        return sum;
-    }
 }
