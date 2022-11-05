@@ -113,4 +113,27 @@ class MatchingResultTest {
 
         assertThat(actual).isEqualTo(expected);
     }
+
+    @DisplayName("결과를 Map으로 반환할 수 있다.")
+    @Test
+    void toMap() {
+        final MatchingResult result = new MatchingResult(
+                new HashMap<Matches, Long>() {{
+                    put(Matches.SIX, 1L);
+                    put(Matches.BLANK, 1L);
+                }},
+                new Money(2000)
+        );
+        final Map<Matches, Long> expected = new HashMap<Matches, Long>() {{
+            put(Matches.SIX, 1L);
+            put(Matches.FIVE, 0L);
+            put(Matches.FOUR, 0L);
+            put(Matches.THREE, 0L);
+            put(Matches.BLANK, 1L);
+        }};
+
+        final Map<Matches, Long> actual = result.toMap();
+
+        assertThat(actual).isEqualTo(expected);
+    }
 }

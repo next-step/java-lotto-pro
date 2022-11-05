@@ -70,6 +70,10 @@ public class MatchingResult {
         return match.calculatePrize(matchCount);
     }
 
+    public Map<Matches, Long> toMap() {
+        return this.result;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
