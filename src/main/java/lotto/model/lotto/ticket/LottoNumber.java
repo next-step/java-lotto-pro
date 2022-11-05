@@ -20,20 +20,20 @@ public class LottoNumber {
         } catch (Exception e) {
             throw new IllegalArgumentException("개별 당첨 번호는 반드시 숫자여야 합니다.");
         }
-        if (lessThanOneOrGreaterThanFortyFive(tokenValue)) {
+        if (lottoNumberInValidRange(tokenValue)) {
             throw new IllegalArgumentException("개별 당첨 번호는 1 이상 45 이하의 숫자 중에 하나여야 합니다.");
         }
         this.value = tokenValue;
     }
 
     public LottoNumber(int value) {
-        if (lessThanOneOrGreaterThanFortyFive(value)) {
+        if (lottoNumberInValidRange(value)) {
             throw new IllegalArgumentException("개별 당첨 번호는 1 이상 45 이하의 숫자 중에 하나여야 합니다.");
         }
         this.value = value;
     }
 
-    private boolean lessThanOneOrGreaterThanFortyFive(int tokenValue) {
+    private boolean lottoNumberInValidRange(int tokenValue) {
         return tokenValue < LOTTO_MINIMUM_NUMBER || LOTTO_MAXIMUM_NUMBER < tokenValue;
     }
 
