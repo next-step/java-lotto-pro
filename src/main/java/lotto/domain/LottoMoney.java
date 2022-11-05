@@ -12,7 +12,7 @@ public class LottoMoney {
 
     private void validateMinimumPrice(int number) {
         if (number < LOTTO_MINIMUM_PRICE) {
-            throw new IllegalArgumentException(LOTTO_MINIMUM_PRICE + "이상부터 구매 가능합니다.");
+            throw new IllegalArgumentException(LOTTO_MINIMUM_PRICE + "원이상부터 로또 번호 생성 가능합니다.");
         }
     }
 
@@ -23,4 +23,5 @@ public class LottoMoney {
     public int getNumber() {
         return this.number;
     }
+
 }

@@ -17,7 +17,7 @@ class LottoMoneyTest {
     public void multiple(int number) {
         assertThatThrownBy(() -> new LottoMoney(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LOTTO_MINIMUM_PRICE + "이상부터 구매 가능합니다.");
+                .hasMessageContaining(LOTTO_MINIMUM_PRICE + "원이상부터 로또 번호 생성 가능합니다.");
     }
 
     @DisplayName("로또 구매 금액을 생성한다.")
