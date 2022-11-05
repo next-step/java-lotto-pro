@@ -93,4 +93,10 @@ class MoneyTest {
 
         assertThat(actual).isEqualTo(expected);
     }
+
+    @DisplayName("값을 문자열로 출력한다.")
+    @Test
+    void string() {
+        assertThat(new Money(1000).toString()).isEqualTo("1000");
+    }
 }
