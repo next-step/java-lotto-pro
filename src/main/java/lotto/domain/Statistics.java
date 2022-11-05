@@ -15,6 +15,10 @@ public class Statistics {
         this.winningNumber = winningNumber;
     }
 
+    public Map<Integer, Lottos> lottosMap() {
+        return this.lottos.matchLottos(this.winningNumber);
+    }
+
     public double returnRate() {
         return BigDecimal.valueOf(sum()).divide(BigDecimal.valueOf((int) this.lottos.size() * 1000), 2, RoundingMode.HALF_UP).doubleValue();
     }
