@@ -7,8 +7,10 @@ import lotto.domain.lotto.LottoStore;
 import lotto.domain.lotto.NumberPickStrategy;
 import lotto.domain.lotto.QuickPickStrategy;
 import lotto.ui.BuyLottoView;
+import lotto.ui.WinningStatisticsView;
 import lotto.ui.dto.BuyLottoInput;
 import lotto.ui.dto.BuyLottoOutput;
+import lotto.ui.dto.WinningNumbersInput;
 
 public class LottoApplication {
 
@@ -21,5 +23,7 @@ public class LottoApplication {
         final BuyLottoInput buyLottoInput = BuyLottoView.buyLotto();
         final List<Lotto> lottos = store.buyLottos(buyLottoInput.toMoney(), QUICK_PICK);
         BuyLottoView.printLottos(new BuyLottoOutput(lottos));
+
+        final WinningNumbersInput winningNumbersInput = WinningStatisticsView.receiveWinningNumbers();
     }
 }
