@@ -16,7 +16,9 @@ public class Statistics {
     }
 
     public int count(Rank rank) {
-        return (int) ranks.stream().filter(rank::equals).count();
+        return (int) ranks.stream()
+            .filter(rank::equals)
+            .count();
     }
 
     public BigDecimal totalReward() {
@@ -24,7 +26,9 @@ public class Statistics {
             return BigDecimal.ZERO;
         }
 
-        long totalReward = ranks.stream().mapToLong(Rank::reward).reduce(0L, Long::sum);
+        long totalReward = ranks.stream()
+            .mapToLong(Rank::reward)
+            .reduce(0L, Long::sum);
         int buyMoney = ranks.size() * 1_000;
 
         return BigDecimal.valueOf(totalReward)
