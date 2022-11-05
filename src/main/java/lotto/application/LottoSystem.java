@@ -48,6 +48,7 @@ public class LottoSystem implements AutoCloseable {
         if(selfLottoCount == 0) {
             return Lottos.empty();
         }
+        output.inputSelfLottoNumbers();
         return input.manualLottos(selfLottoCount);
     }
 
