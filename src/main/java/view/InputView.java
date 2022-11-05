@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import static view.InputPrintType.*;
+
 
 public class InputView {
 
@@ -12,7 +14,7 @@ public class InputView {
     private static final String SPLIT_WORD = ",";
 
     public static int moneyInput() {
-        System.out.println("구매 금액을 입력해주세요.");
+        System.out.println(MONEY_INPUT.getMessage());
         return scanner.nextInt();
     }
 
@@ -22,12 +24,12 @@ public class InputView {
     }
 
     public static int bonusNumberInput() {
-        System.out.println("보너스 볼을 입력해주세요.");
+        System.out.println(BONUS_NUMBER.getMessage());
         return Integer.parseInt(scanner.next());
     }
 
     public static int manualBuyCountInput() {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        System.out.println(MANUAL_NUMBER.getMessage());
         return scanner.nextInt();
     }
 
@@ -43,10 +45,5 @@ public class InputView {
 
     public static void winNumberMessage() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-    }
-
-    public static int bonusNumberInput() {
-        System.out.println("보너스 볼을 입력해주세요.");
-        return Integer.parseInt(scanner.next());
     }
 }

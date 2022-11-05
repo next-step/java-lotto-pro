@@ -37,14 +37,4 @@ public class LottoNumber {
     public boolean isMatchBonusNumber(int bonusNumber) {
         return this.number.contains(bonusNumber);
     }
-
-    public int getCountOfContain(List<Integer> winNumber) {
-        return (int) winNumber.stream()
-                .filter(this.number::contains)
-                .count();
-    }
-
-    public boolean isMatchBonusNumber(int bonusNumber) {
-        return this.number.contains(bonusNumber);
-    }
 }

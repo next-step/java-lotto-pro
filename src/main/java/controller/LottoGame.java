@@ -20,11 +20,12 @@ public class LottoGame {
         int manualCount = InputView.manualBuyCountInput();
         int autoCount = new Money(money).availableBuyAutoLottoCount(manualCount);
 
-        List<LottoNumber> autoLottoNumber = buyAutoLotto(autoCount);
         List<LottoNumber> manualLotto = buyManualLotto(manualCount);
+        List<LottoNumber> autoLottoNumber = buyAutoLotto(autoCount);
 
         Lottos lottos = new Lottos(autoLottoNumber, manualLotto);
 
+        OutPutView.oupPutBuyLottoTypeCount(manualCount, autoCount);
         OutPutView.outPutLottoNumber(lottos.getLotto());
         InputView.winNumberMessage();
 
