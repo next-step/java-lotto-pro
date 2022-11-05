@@ -44,7 +44,7 @@ public class WinningNumber {
 
     public int findMatchingCount(Lotto lotto) {
         int matchCounts = 0;
-        for (Number number : lotto.getLottos()) {
+        for (Number number : lotto.getLotto()) {
             matchCounts = plusMatchingCount(matchCounts, number);
         }
         return matchCounts;
