@@ -7,12 +7,12 @@ public class LottoMoney {
 
     public LottoMoney(int number) {
         this.number = number;
-        validateMultiple(number);
+        validateMinimumPrice(number);
     }
 
-    private void validateMultiple(int number) {
-        if (number % LOTTO_MINIMUM_PRICE != 0) {
-            throw new IllegalArgumentException(LOTTO_MINIMUM_PRICE + "의 배수만 입력가능합니다.");
+    private void validateMinimumPrice(int number) {
+        if (number < LOTTO_MINIMUM_PRICE) {
+            throw new IllegalArgumentException(LOTTO_MINIMUM_PRICE + "이상부터 구매 가능합니다.");
         }
     }
 
