@@ -12,7 +12,7 @@ class LottoGameTest {
     @Test
     void integration_test() {
 
-        System.setIn( new ByteArrayInputStream("10000\n7".getBytes()));
+        System.setIn( new ByteArrayInputStream("2000\n1\n7".getBytes()));
         Scanner scanner = new Scanner(System.in);
 
         LottoGame lottoGame = new LottoGame(new Input() {

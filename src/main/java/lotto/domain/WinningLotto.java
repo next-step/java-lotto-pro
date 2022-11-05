@@ -19,11 +19,11 @@ public class WinningLotto extends Lotto {
     }
 
     private boolean isMatchBonus(Lotto lotto) {
-        return lotto.numbers.contains(bonusNumber);
+        return lotto.contains(bonusNumber);
     }
 
     public LottoRank checkResult(Lotto lotto) {
-        return LottoRank.valueOf(this.getMatchCount(lotto), isMatchBonus(lotto));
+        return LottoRank.valueOf(getMatchCount(lotto), isMatchBonus(lotto));
     }
 
 }

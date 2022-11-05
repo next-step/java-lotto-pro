@@ -12,7 +12,7 @@ public class View {
     private static final String RESULT_BY_RANK_TEXT = "%d개 일치(%d원)- %d개";
     private static final String SECOND_RANK_RESULT_TEXT = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
     private static final String TOTAL_PROFIT_TEXT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
-    private static final String LOTTO_TICKET_SIZE_TEXT = "%d개를 구매했습니다.";
+    private static final String LOTTO_TICKET_SIZE_TEXT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private final Input input;
     private final Output output;
 
@@ -26,8 +26,8 @@ public class View {
         return Integer.parseInt(input.nextLine());
     }
 
-    public void printLottoSize(int size) {
-        output.print(String.format(LOTTO_TICKET_SIZE_TEXT, size));
+    public void printLottoSize(int manualSize, int autoSize) {
+        output.print(String.format(LOTTO_TICKET_SIZE_TEXT, manualSize, autoSize));
     }
 
     public void printText(String text) {
@@ -61,4 +61,20 @@ public class View {
         output.print("보너스 볼을 입력해 주세요.");
         return Integer.parseInt(input.nextLine());
     }
+
+    public int insertManualLottoCount() {
+        output.print("수동으로 구매할 로또 수를 입력해 주세요.");
+        return Integer.parseInt(input.nextLine());
+    }
+
+    public List<Integer> insertManualLotto() {
+        return Arrays.stream(input.inputNumbers())
+                .map(token -> Integer.parseInt(token.trim()))
+                .collect(Collectors.toList());
+    }
+
+    public void printInsertManualLotto() {
+        output.print("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
 }

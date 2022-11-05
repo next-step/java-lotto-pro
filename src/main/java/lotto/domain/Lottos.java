@@ -22,6 +22,10 @@ public class Lottos {
                 .forEach(lottos::add);
     }
 
+    public void buyManualLotto(NumberPickStrategy numberPickStrategy) {
+        lottos.add(new Lotto(numberPickStrategy.pick()));
+    }
+
     public LottoResultStat checkResultStat(WinningLotto winningLotto) {
         LottoResultStat lottoResultStat = new LottoResultStat();
 

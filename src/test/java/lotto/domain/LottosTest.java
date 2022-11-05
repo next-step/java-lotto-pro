@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -38,11 +39,31 @@ class LottosTest {
         assertThat(lottoResultStat.totalProfit()).isEqualTo(expect);
     }
 
+    @DisplayName("로또번호를 입력해 수동으로 로또를 구매할 수 있다.")
+    @ParameterizedTest
+    @MethodSource("manual_testcase")
+    void manual(List<Integer> numbers) {
+        Lottos lottos = new Lottos(Collections::emptyList);
+        lottos.buyManualLotto(() -> numbers);
+
+        assertThat(lottos.getLottosSize()).isEqualTo(1);
+
+    }
+
     private static Stream<Arguments> result_testcase() {
 
         return Stream.of(
                 Arguments.of(Arrays.asList(6, 5, 4, 3, 2, 1), Arrays.asList(6, 5, 4, 3, 2, 1), 7, 2000000),
                 Arguments.of(Arrays.asList(6, 5, 4, 3, 2, 1), Arrays.asList(7, 8, 9, 10, 11, 12), 13, 0)
+        );
+    }
+
+    private static Stream<Arguments> manual_testcase() {
+
+        return Stream.of(
+                Arguments.of(Arrays.asList(6, 5, 4, 3, 2, 1)),
+                Arguments.of(Arrays.asList(1, 4, 7, 23, 33, 41)),
+                Arguments.of(Arrays.asList(20, 21, 22, 23, 24, 35))
         );
     }
 }
