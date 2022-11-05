@@ -20,12 +20,12 @@ public class TextExtractor {
         }
         addCustomDelimiter(delimiters, text);
         this.delimiters = delimiters;
-        this.text = text(text);
+        this.text = exceptDelimiter(text);
     }
 
     private void addCustomDelimiter(Delimiters delimiters, String text) {
         if (hasDelimiter(text)) {
-            delimiters.add(delimiter(text));
+            delimiters.add(customDelimiter(text));
         }
     }
 
@@ -33,7 +33,7 @@ public class TextExtractor {
         return this.text.split(this.delimiters.delimiter());
     }
 
-    private String text(String text) {
+    private String exceptDelimiter(String text) {
         Matcher m = regex.matcher(text);
         if (m.find()) {
             return m.group(TEXT_PART);
@@ -45,7 +45,7 @@ public class TextExtractor {
         return regex.matcher(text).find();
     }
 
-    public String delimiter(String text) {
+    public String customDelimiter(String text) {
         Matcher m = regex.matcher(text);
         if (m.find()) {
             return m.group(DELIMITER_PART);
