@@ -26,21 +26,21 @@ public class LottoNumberTest {
         @DisplayName("1 보다 작은 숫자 또는 45 보다 큰 숫자를 사용하면 LottoNumber 객체 생성 실패")
         void errorLessThanOneOrGreaterThanFortyFive(int value) {
             String token = String.valueOf(value);
-            assertThrows(NumberFormatException.class, () -> new LottoNumber(token));
+            assertThrows(IllegalArgumentException.class, () -> new LottoNumber(token));
         }
 
         @ParameterizedTest
         @NullAndEmptySource
         @DisplayName("null 또는 \"\"(empty string) 사용하면 LottoNumber 객체 생성 실패")
         void errorNullOrEmpty(String token) {
-            assertThrows(NumberFormatException.class, () -> new LottoNumber(token));
+            assertThrows(IllegalArgumentException.class, () -> new LottoNumber(token));
         }
 
         @ParameterizedTest
         @ValueSource(strings = {"a", "b", "c", "abc", "!", "`", ".", " "})
         @DisplayName("숫자가 아닌 문자열을 사용하면 LottoNumber 객체 생성 실패")
         void errorNonDigit(String token) {
-            assertThrows(NumberFormatException.class, () -> new LottoNumber(token));
+            assertThrows(IllegalArgumentException.class, () -> new LottoNumber(token));
         }
     }
 
@@ -58,7 +58,7 @@ public class LottoNumberTest {
         @ValueSource(ints = {Integer.MIN_VALUE, -99999, -101, -2, -1, 0, 46, 47, 48, 140, 595959, Integer.MAX_VALUE})
         @DisplayName("1 보다 작은 숫자 또는 45 보다 큰 숫자를 사용하면 LottoNumber 객체 생성 실패")
         void errorLessThanOneOrGreaterThanFortyFive(int value) {
-            assertThrows(NumberFormatException.class, () -> new LottoNumber(value));
+            assertThrows(IllegalArgumentException.class, () -> new LottoNumber(value));
         }
     }
 }
