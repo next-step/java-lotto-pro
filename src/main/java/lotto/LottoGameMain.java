@@ -12,13 +12,13 @@ public class LottoGameMain {
     public static void main(String[] args) {
         LottoGame lottoGame = new LottoGame(inputView.inputPay());
 
-        int manualPurchaseCount = inputView.inputManualPurchase(lottoGame.getTotalMoney());
+        PurchaseCount manualPurchaseCount = new PurchaseCount(inputView.inputManualPurchase(lottoGame.getTotalMoney()));
 
         inputView.printInputManualLottoNumber();
         PurchaseLottoNumbers purchaseLottoNumbers = new PurchaseLottoNumbers(
                 lottoGame.manualPurchaseLotto(manualPurchaseCount));
 
-        int autoPurchaseCount = lottoGame.getPurchasableCount();
+        PurchaseCount autoPurchaseCount = new PurchaseCount(lottoGame.getPurchasableCount());
         resultView.printResultPay(autoPurchaseCount, manualPurchaseCount);
 
         purchaseLottoNumbers.addLottoNumbers(lottoGame.autoPurchaseLotto(autoPurchaseCount));

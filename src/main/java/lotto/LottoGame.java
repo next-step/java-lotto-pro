@@ -34,18 +34,18 @@ public class LottoGame {
         balance.minusBalance();
     }
 
-    public List<LottoNumbers> autoPurchaseLotto(int purchaseCount) {
+    public List<LottoNumbers> autoPurchaseLotto(PurchaseCount purchaseCount) {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < purchaseCount; i++) {
+        for (int i = 0; i < purchaseCount.getPurchaseCount(); i++) {
             minusBalance();
             lottoNumbers.add(LottoNumbers.from(lottoNumberGenerator.autoGenerateNumbers()));
         }
         return lottoNumbers;
     }
 
-    public List<LottoNumbers> manualPurchaseLotto(int purchaseCount) {
+    public List<LottoNumbers> manualPurchaseLotto(PurchaseCount purchaseCount) {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < purchaseCount; i++) {
+        for (int i = 0; i < purchaseCount.getPurchaseCount(); i++) {
             minusBalance();
             lottoNumbers.add(LottoNumbers.from(lottoNumberGenerator.manualGenerateNumbers()));
         }

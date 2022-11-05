@@ -21,6 +21,6 @@ public class LottoGameTest {
 
     @Test
     void 로또_1개_구매_테스트() {
-        assertThat(new LottoGame(1000).autoPurchaseLotto(1).size()).isEqualTo(1);
+        assertThat(new LottoGame(1000).autoPurchaseLotto(new PurchaseCount(1)).size()).isEqualTo(1);
     }
 }
