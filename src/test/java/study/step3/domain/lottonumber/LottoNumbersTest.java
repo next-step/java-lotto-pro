@@ -53,6 +53,6 @@ class LottoNumbersTest {
         LottoNumbers lottoNumbers = LottoNumbersGenerator.createLottoNumbers(1, 12, 22, 33, 44, 45);
         LottoNumbers winningsLottoNumbers = LottoNumbersGenerator.createLottoNumbers(1, 12, 22, 33, 32, 31);
         long matchCount = lottoNumbers.match(winningsLottoNumbers);
-        assertThat(matchCount).isEqualTo(4);
+        assertThat(matchCount).isEqualTo(4L);
     }
 }

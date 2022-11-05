@@ -34,9 +34,10 @@ class LottoStatisticsTest {
     private static Stream<Arguments> LottoRanksAndRateOfReturn() {
         return Stream.of(
                 Arguments.of(1L, LottoRank.FIRST_PLACE, 142857.14),
-                Arguments.of(1L, LottoRank.SECOND_PLACE, 107.14),
-                Arguments.of(2L, LottoRank.THIRD_PLACE, 7.14),
-                Arguments.of(3L, LottoRank.FOURTH_PLACE, 1.07)
+                Arguments.of(1L, LottoRank.SECOND_PLACE, 2142.85),
+                Arguments.of(1L, LottoRank.THIRD_PLACE, 107.14),
+                Arguments.of(3L, LottoRank.FOURTH_PLACE, 10.71),
+                Arguments.of(3L, LottoRank.FIFTH_PLACE, 1.07)
         );
     }
 }

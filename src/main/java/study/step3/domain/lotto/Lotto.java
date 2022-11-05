@@ -1,5 +1,6 @@
 package study.step3.domain.lotto;
 
+import study.step3.domain.lottonumber.LottoNumber;
 import study.step3.domain.lottonumber.LottoNumbers;
 
 public class Lotto {
@@ -10,8 +11,12 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public long match(Lotto winningLotto) {
-        return this.lottoNumbers.match(winningLotto.lottoNumbers);
+    public long matchLotto(Lotto other) {
+        return this.lottoNumbers.match(other.lottoNumbers);
+    }
+
+    public boolean isMatchedBonusLottoNumber(LottoNumber bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
     }
 
     public String reportLottoNumbers() {

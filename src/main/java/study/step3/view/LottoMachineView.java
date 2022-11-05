@@ -2,27 +2,57 @@ package study.step3.view;
 
 import study.step3.domain.lotto.PurchaseMoney;
 import study.step3.message.LottoMachineMessage;
-
-import java.util.regex.Pattern;
+import study.step3.util.Patterns;
 
 public class LottoMachineView {
 
-    private static final String REGEX_ONLY_NUMBERS = "^[0-9]*$";
-    private static final Pattern PATTERN_ONLY_NUMBERS = Pattern.compile(REGEX_ONLY_NUMBERS);
+    private static final long PURCHASE_MINIMUM_MONEY = 1000;
 
-    public static PurchaseMoney inputPurchaseMoney() {
-        String purchaseMoney = null;
-        while (!validatePurchaseMoney(purchaseMoney)) {
+    public static PurchaseMoney getPurchaseMoney() {
+        PurchaseMoney purchaseMoney = null;
+        while (isNeedToInputPurchaseMoney(purchaseMoney)) {
             ResultView.output(LottoMachineMessage.INPUT_PURCHASE_MONEY_MESSAGE.message());
-            purchaseMoney = InputView.input();
+            purchaseMoney = inputPurchaseMoney();
         }
-        return PurchaseMoney.of(Long.parseLong(purchaseMoney));
+        return purchaseMoney;
     }
 
-    private static boolean validatePurchaseMoney(String purchaseMoney) {
-        if(purchaseMoney == null || purchaseMoney.isEmpty()) {
-            return false;
+    private static boolean isNeedToInputPurchaseMoney(PurchaseMoney purchaseMoney) {
+        return purchaseMoney == null;
+    }
+
+    private static PurchaseMoney inputPurchaseMoney() {
+        try {
+            String purchaseMoney = InputView.input();
+            validatePurchaseMoney(purchaseMoney);
+            return PurchaseMoney.of(Long.parseLong(purchaseMoney));
+        } catch (Exception e) {
+            ResultView.output(e.getMessage());
+            return null;
         }
-        return PATTERN_ONLY_NUMBERS.matcher(purchaseMoney).find();
+    }
+
+    private static void validatePurchaseMoney(String purchaseMoney) {
+        validatePurchaseMoneyIsNotEmpty(purchaseMoney);
+        validatePurchaseMoneyIsNumber(purchaseMoney);
+        validatePurchaseMoneyIsGreaterThanMinimumMoney(purchaseMoney);
+    }
+
+    private static void validatePurchaseMoneyIsNotEmpty(String purchaseMoney) {
+        if(purchaseMoney == null || purchaseMoney.isEmpty()) {
+            throw new IllegalArgumentException(LottoMachineMessage.ERROR_PURCHASE_MONEY_SHOULD_BE_NOT_EMPTY.message());
+        }
+    }
+
+    private static void validatePurchaseMoneyIsNumber(String purchaseMoney) {
+        if(!Patterns.ONLY_NUMBERS.match(purchaseMoney)) {
+            throw new IllegalArgumentException(LottoMachineMessage.ERROR_PURCHASE_MONEY_SHOULD_BE_NUMBER.message());
+        }
+    }
+
+    private static void validatePurchaseMoneyIsGreaterThanMinimumMoney(String purchaseMoney) {
+        if(Long.parseLong(purchaseMoney) < PURCHASE_MINIMUM_MONEY) {
+            throw new IllegalArgumentException(LottoMachineMessage.ERROR_PURCHASE_MONEY_IS_GREATER_THAN_MINIMUM_MONEY.message());
+        }
     }
 }
