@@ -2,7 +2,7 @@ package lotto.ui.outputView;
 
 import lotto.domain.Statistics;
 
-import static lotto.domain.WinningMoneyType.find;
+import static lotto.domain.WinningMoney.find;
 
 public class WinningResultOutputView {
 

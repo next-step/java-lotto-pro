@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map;
 
-import static lotto.domain.WinningMoneyType.find;
+import static lotto.domain.WinningMoney.find;
 
 public class Statistics {
     public static final int SUM_INIT = 0;
