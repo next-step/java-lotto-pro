@@ -4,7 +4,7 @@ import lotto.domain.Statistics;
 
 import static lotto.domain.WinningMoney.find;
 
-public class WinningResultOutputView {
+public class StatisticsOutputView {
 
     public static void winningResult(Statistics statistics) {
         winningMoney(statistics);

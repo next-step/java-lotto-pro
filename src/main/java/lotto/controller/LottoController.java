@@ -4,10 +4,10 @@ import calculator.Delimiters;
 import calculator.TextExtractor;
 import lotto.domain.*;
 
-import static lotto.ui.inputView.LottoPurchaseInputView.readPurchaseMoney;
+import static lotto.ui.inputView.LottoMoneyInputView.readPurchaseMoney;
 import static lotto.ui.inputView.WinningNumberInputView.readWinningNumbers;
 import static lotto.ui.outputView.GeneratedLottosOutputView.printLottos;
-import static lotto.ui.outputView.WinningResultOutputView.winningResult;
+import static lotto.ui.outputView.StatisticsOutputView.winningResult;
 
 public class LottoController {
 

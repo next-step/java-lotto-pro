@@ -2,7 +2,7 @@ package lotto.ui.inputView;
 
 import java.util.Scanner;
 
-public class LottoPurchaseInputView {
+public class LottoMoneyInputView {
 
     public static int readPurchaseMoney() {
         System.out.println("구입금액을 입력해 주세요.");
