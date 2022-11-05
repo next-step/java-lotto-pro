@@ -2,19 +2,19 @@ package lotto.controller;
 
 import calculator.Delimiters;
 import calculator.TextExtractor;
-import lotto.lotto.domain.Lotto;
-import lotto.lotto.domain.LottoGenerator;
-import lotto.lotto.domain.LottoMoney;
-import lotto.winning.domain.MatchingCount;
-import lotto.winning.domain.TotalWinningMoney;
-import lotto.winning.domain.WinningNumber;
+import lotto.domain.Lotto;
+import lotto.domain.LottoGenerator;
+import lotto.domain.LottoMoney;
+import lotto.domain.MatchingCount;
+import lotto.domain.TotalWinningMoney;
+import lotto.domain.WinningNumber;
 
 import java.util.List;
 
-import static lotto.lotto.ui.inputView.LottoPurchaseInputView.readPurchaseMoney;
-import static lotto.lotto.ui.outputView.GeneratedLottosOutputView.printLottos;
-import static lotto.winning.ui.inputView.WinningNumberInputView.readWinningNumbers;
-import static lotto.winning.ui.outputView.WinningResultOutputView.winningResult;
+import static lotto.ui.inputView.LottoPurchaseInputView.readPurchaseMoney;
+import static lotto.ui.outputView.GeneratedLottosOutputView.printLottos;
+import static lotto.ui.inputView.WinningNumberInputView.readWinningNumbers;
+import static lotto.ui.outputView.WinningResultOutputView.winningResult;
 
 public class LottoController {
 
