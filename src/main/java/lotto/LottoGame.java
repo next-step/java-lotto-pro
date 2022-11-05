@@ -49,6 +49,10 @@ public class LottoGame {
     }
 
     public List<LottoNumbers> manualPurchaseLotto(int purchaseCount) {
+        if (totalMoney < (purchaseCount * LOTTO_PRICE)) {
+            throw new IllegalArgumentException();
+        }
+
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
             minusBalance();

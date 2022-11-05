@@ -47,11 +47,11 @@ public class InputView {
     LottoNumbers inputWinningNumberLastWeek() {
         printInputWinningNumberLastWeek();
         String input = scanner.nextLine();
-        Validate.validateWinningNumberNull(input);
-        Validate.validateWinningNumber(input);
-        Validate.validateWinningNumberCount(input);
-        Validate.validateWinningNumberRange(input);
-        Validate.validateWinningNumberDuplicate(input);
+        Validate.validateLottoNumberNull(input);
+        Validate.validateLottoNumber(input);
+        Validate.validateLottoNumberCount(input);
+        Validate.validateLottoNumberRange(input);
+        Validate.validateLottoNumberDuplicate(input);
         return LottoNumbers.from(spliter.splitToList(input));
     }
 
@@ -63,7 +63,7 @@ public class InputView {
         printInputBonusNumberLastWeek();
         String input = scanner.nextLine();
         Validate.validateOnlyNumber(input);
-        Validate.validateWinningNumberRange(input);
+        Validate.validateLottoNumberRange(input);
         Validate.validateBonusNumberDuplicate(input, winningNumbers);
         return LottoNumber.from(input);
     }

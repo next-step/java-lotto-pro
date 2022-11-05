@@ -1,6 +1,7 @@
 package lotto;
 
 import static lotto.Constant.LOTTO_END_NUMBER;
+import static lotto.Constant.LOTTO_NUMBER_SIZE;
 import static lotto.Constant.LOTTO_START_NUMBER;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class LottoNumberGenerator {
     public List<Integer> autoGenerateNumbers() {
         Collections.shuffle(lottoNumberKeys);
         return lottoNumberKeys.stream()
-                .limit(6)
+                .limit(LOTTO_NUMBER_SIZE)
                 .collect(Collectors.toList());
     }
 
@@ -29,6 +30,11 @@ public class LottoNumberGenerator {
         final Scanner scanner = new Scanner(System.in);
         final Spliter spliter = new Spliter();
         String input = scanner.nextLine();
+        Validate.validateLottoNumberNull(input);
+        Validate.validateLottoNumber(input);
+        Validate.validateLottoNumberCount(input);
+        Validate.validateLottoNumberRange(input);
+        Validate.validateLottoNumberDuplicate(input);
         return spliter.splitToList(input);
     }
 }
