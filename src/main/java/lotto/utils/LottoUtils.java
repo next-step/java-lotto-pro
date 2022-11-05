@@ -1,6 +1,7 @@
 package lotto.utils;
 
 import lotto.constant.LottoMessage;
+import lotto.domain.Lotto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,5 +31,12 @@ public class LottoUtils {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(LottoMessage.ERROR_INVALD_NUM);
         }
+    }
+
+    public static int duplicateWinBonus(Lotto winLotto, int bonusNumber) {
+        if (winLotto.lottoNumbers().contains(bonusNumber)) {
+            throw new IllegalArgumentException(LottoMessage.ERROR_MESSAGE_DUPLICATE_BONUS_WIN);
+        }
+        return bonusNumber;
     }
 }

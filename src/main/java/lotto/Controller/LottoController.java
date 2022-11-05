@@ -14,7 +14,8 @@ public class LottoController {
         Lottos lottos = Lottos.buyLottos(money.lottoCount());
         LottoOutPutView.writeBuyLottos(lottos);
         Lotto winLotto = readWinLotto(LottoInputView.readLottoWinNumber());
-        LottoNumber bonus = new LottoNumber(LottoUtils.StringToBonusNumber(LottoInputView.readBonusNumber()));
+        int bonusNumber = LottoUtils.StringToBonusNumber(LottoInputView.readBonusNumber());
+        LottoNumber bonus = new LottoNumber(LottoUtils.duplicateWinBonus(winLotto,bonusNumber));
         LottoResult result = new LottoResult(lottos, winLotto, money.totalLottoPrice(), bonus);
         LottoOutPutView.writeWinResult(result);
     }
