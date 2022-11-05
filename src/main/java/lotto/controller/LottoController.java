@@ -5,6 +5,7 @@ import lotto.controller.acceptor.WinningNumbersAcceptor;
 import lotto.controller.displayer.LottoResultStatisticsDisplayer;
 import lotto.model.lotto.enums.LottoNumberMatchCount;
 import lotto.model.lotto.result.LottoResult;
+import lotto.model.lotto.ticket.LottoNumber;
 import lotto.model.lotto.ticket.LottoNumberGenerator;
 import lotto.model.lotto.ticket.LottoTicket;
 import lotto.model.lotto.ticket.LottoTicketsBucket;
@@ -12,6 +13,7 @@ import lotto.model.money.to.buy.MoneyToBuy;
 import lotto.model.winning.numbers.WinningNumbers;
 import lotto.view.*;
 
+import java.util.List;
 import java.util.Map;
 
 public class LottoController {
@@ -46,7 +48,8 @@ public class LottoController {
     }
 
     private LottoTicket buyOneLottoTicket(LottoTicketsBucket lottoTicketsBucket) {
-        final LottoTicket newLottoTicket = new LottoTicket(lottoNumberGenerator);
+        final List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
+        final LottoTicket newLottoTicket = new LottoTicket(lottoNumbers);
         lottoTicketsBucket.buyOneLotto(newLottoTicket);
         return newLottoTicket;
     }

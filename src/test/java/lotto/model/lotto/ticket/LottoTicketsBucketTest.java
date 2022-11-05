@@ -51,7 +51,8 @@ class LottoTicketsBucketTest {
             final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
             int numberCount = numberOfTickets;
             while (0 < numberCount) {
-                lottoTicketsBucket.buyOneLotto(new LottoTicket(lottoNumberGenerator));
+                final List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
+                lottoTicketsBucket.buyOneLotto(new LottoTicket(lottoNumbers));
                 numberCount = numberCount - 1;
             }
             assertThat(lottoTicketsBucket.bucketSize()).isEqualTo(numberOfTickets);
@@ -180,7 +181,8 @@ class LottoTicketsBucketTest {
             final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucketForTest3(moneyToBuy);
             for (int i = 0; i < numberOfTickets; ++i) {
                 final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGeneratorForTest(i);
-                lottoTicketsBucket.buyOneLotto(new LottoTicket(lottoNumberGenerator));
+                final List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
+                lottoTicketsBucket.buyOneLotto(new LottoTicket(lottoNumbers));
             }
             final Map<LottoNumberMatchCount, Integer> prizeMoney = new HashMap<>();
             prizeMoney.put(LottoNumberMatchCount.THREE, 5000);
@@ -210,7 +212,8 @@ class LottoTicketsBucketTest {
             int count = 0;
             final LottoTicketsBucket lottoTicketsBucket = new LottoTicketsBucket(new MoneyToBuy(input));
             while (lottoTicketsBucket.canBuyMoreLotto()) {
-                lottoTicketsBucket.buyOneLotto(new LottoTicket(new LottoNumberGenerator()));
+                final List<LottoNumber> lottoNumbers = new LottoNumberGenerator().generate();
+                lottoTicketsBucket.buyOneLotto(new LottoTicket(lottoNumbers));
                 ++count;
             }
             assertThat(count).isEqualTo(countResult);

@@ -22,7 +22,8 @@ class LottoTicketTest {
         @DisplayName("성공")
         void success() {
             final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-            assertDoesNotThrow(() -> new LottoTicket(lottoNumberGenerator));
+            final List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
+            assertDoesNotThrow(() -> new LottoTicket(lottoNumbers));
         }
     }
 
@@ -43,7 +44,7 @@ class LottoTicketTest {
     @Nested
     @DisplayName("numberMatch 메서드 테스트")
     class NumberMatch {
-        private final LottoTicket lottoTicket = new LottoTicket(new LottoNumberGeneratorForTest());
+        private final LottoTicket lottoTicket = new LottoTicket(new LottoNumberGeneratorForTest().generate());
 
         @Test
         @DisplayName("결과가 0 개일 때 성공")

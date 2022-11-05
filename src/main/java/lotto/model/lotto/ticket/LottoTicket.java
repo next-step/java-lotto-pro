@@ -8,8 +8,8 @@ public class LottoTicket {
     protected final List<LottoNumber> lottoNumbers;
     private int count = 0;
 
-    public LottoTicket(LottoNumberGenerator lottoNumberGenerator) {
-        this.lottoNumbers = lottoNumberGenerator.generate();
+    public LottoTicket(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     @Override
@@ -32,4 +32,3 @@ public class LottoTicket {
         }
     }
 }
-
