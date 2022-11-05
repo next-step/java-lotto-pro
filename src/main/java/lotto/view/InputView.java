@@ -14,6 +14,7 @@ public class InputView {
     private static final String WINNING_NUMBERS_DELIMITER = ",";
     private static final String WHITE_SPACE = " ";
     private static final String EMPTY_STRING = "";
+    private static final String ASK_MESSAGE_USER_WRITTEN_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
 
     public static int inputPayAmount() {
         System.out.println(ASK_MESSAGE_PAY_AMOUNT);
@@ -25,7 +26,7 @@ public class InputView {
         return nextInt();
     }
 
-    private static int nextInt(){
+    public static int nextInt() {
         String input = new Scanner(System.in).next();
         InputValidator.validateNumberFormat(input);
         return Integer.parseInt(input);
@@ -33,13 +34,21 @@ public class InputView {
 
     public static List<Integer> inputLottoWinningNumbers() {
         System.out.println(ASK_MESSAGE_LAST_WINNING_NUMBERS);
-        String input = new Scanner(System.in).nextLine().replaceAll(WHITE_SPACE, EMPTY_STRING);
+        return inputLottoNumbers();
+    }
 
-        List<Integer> winningNumbers = new ArrayList<>();
+    public static List<Integer> inputLottoNumbers() {
+        String input = new Scanner(System.in).nextLine().replaceAll(WHITE_SPACE, EMPTY_STRING);
+        List<Integer> lottoNumbers = new ArrayList<>();
         for (String stringFormatNumber : input.split(WINNING_NUMBERS_DELIMITER)) {
             InputValidator.validateNumberFormat(stringFormatNumber);
-            winningNumbers.add(Integer.parseInt(stringFormatNumber));
+            lottoNumbers.add(Integer.parseInt(stringFormatNumber));
         }
-        return winningNumbers;
+        return lottoNumbers;
+    }
+
+    public static int inputUserWrittenLottoCount() {
+        System.out.println(ASK_MESSAGE_USER_WRITTEN_LOTTO_COUNT);
+        return nextInt();
     }
 }
