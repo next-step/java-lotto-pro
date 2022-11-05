@@ -61,20 +61,27 @@ public class LottoController {
 
     private void displayLottoResult(LottoTicketsBucket lottoTicketsBucket, WinningNumbers winningNumbers,
                                     MoneyToBuy moneyToBuy) {
-        final LottoResult lottoResult = displayLottoStatistics(lottoTicketsBucket, winningNumbers);
-        displayProfitRatio(lottoResult, moneyToBuy);
+        final LottoResult lottoResult = calculateLottoStatistics(lottoTicketsBucket, winningNumbers);
+        displayLottoResultStatistics(lottoResult);
+        final double profitRatio = calculateProfitRatio(lottoResult, moneyToBuy);
+        displayProfitRatio(profitRatio);
     }
 
-    private LottoResult displayLottoStatistics(LottoTicketsBucket lottoTicketsBucket, WinningNumbers winningNumbers) {
+    private LottoResult calculateLottoStatistics(LottoTicketsBucket lottoTicketsBucket, WinningNumbers winningNumbers) {
         final Map<LottoNumberMatchCount, Integer> countsOfNumbersMatch =
                 lottoTicketsBucket.calculateNumbersMatchCount(prizeMoney, winningNumbers);
-        final LottoResult lottoResult = new LottoResult(prizeMoney, countsOfNumbersMatch);
-        new LottoResultStatisticsDisplayer(prizeMoney, lottoResult).show();
-        return lottoResult;
+        return new LottoResult(prizeMoney, countsOfNumbersMatch);
     }
 
-    private void displayProfitRatio(LottoResult lottoResult, MoneyToBuy moneyToBuy) {
-        final double profitRatio = lottoResult.profitRatio(moneyToBuy);
+    private void displayLottoResultStatistics(LottoResult lottoResult) {
+        new LottoResultStatisticsDisplayer(prizeMoney, lottoResult).show();
+    }
+
+    private double calculateProfitRatio(LottoResult lottoResult, MoneyToBuy moneyToBuy) {
+        return lottoResult.profitRatio(moneyToBuy);
+    }
+
+    private void displayProfitRatio(double profitRatio) {
         ProfitRatioPrinter.print(profitRatio);
     }
 }
