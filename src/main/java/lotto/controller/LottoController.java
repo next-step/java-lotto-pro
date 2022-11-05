@@ -4,6 +4,7 @@ import java.util.List;
 
 import lotto.domain.amount.Amount;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.PurchaseLottos;
 import lotto.domain.lotto.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -19,14 +20,13 @@ public class LottoController {
 
 	public void run() {
 		Amount purchaseAmount = Amount.from(inputView.purchaseAmount());
-		List<String> manualLottoNumbers = inputView.manualLottoNumbers();
+		PurchaseLottos purchaseLottos = new PurchaseLottos(purchaseAmount);
 
-		Lottos manualLottos = Lottos.purchaseManualLottos(manualLottoNumbers);
-		Lottos randomLottos = Lottos.purchaseRandomLottos(
-			purchaseAmount.sub(Amount.from(manualLottos.getQuantity().getInt() * 1000L)));
+		List<String> manualLottoNumbers = inputView.manualLottoNumbers();
+		Lottos manualLottos = purchaseLottos.purchaseManualLottos(manualLottoNumbers);
+		Lottos randomLottos = purchaseLottos.purchaseRandomLottos();
 
 		resultView.lottosResult(manualLottos, randomLottos);
-
 		Lottos lottos = manualLottos.concat(randomLottos);
 
 		String winNumbersInput = inputView.prevWinNumbers();

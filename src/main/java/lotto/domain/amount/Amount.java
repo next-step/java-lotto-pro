@@ -45,6 +45,10 @@ public class Amount {
 		return new Amount(this.amount - other.amount);
 	}
 
+	public boolean greaterThanEqual(Amount other) {
+		return this.amount >= other.amount;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

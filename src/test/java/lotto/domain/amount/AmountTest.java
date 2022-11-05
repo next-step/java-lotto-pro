@@ -30,4 +30,10 @@ class AmountTest {
 	void 금액_빼기() {
 		assertThat(Amount.from(5000).sub(Amount.from(2000))).isEqualTo(Amount.from(3000));
 	}
+
+	@Test
+	void 금액_비교() {
+		assertThat(Amount.from(5000).greaterThanEqual(Amount.from(2000))).isTrue();
+		assertThat(Amount.from(2000).greaterThanEqual(Amount.from(5000))).isFalse();
+	}
 }
