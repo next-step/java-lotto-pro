@@ -91,4 +91,45 @@ class LottoTest {
 
         assertThat(actual).isEqualTo(expected);
     }
+
+    @DisplayName("오름차순으로 정렬된 정수 리스트로 변환할 수 있다.")
+    @ParameterizedTest(name = "로또: [{0}, {1}, {2}, {3}, {4}, {5}], 정렬된 리스트: [{6}, {7}, {8}, {9}, {10}, {11}]")
+    @CsvSource({
+            "6,5,4,3,2,1, 1,2,3,4,5,6",
+            "1,45,2,44,3,43, 1,2,3,43,44,45"
+    })
+    void 정렬된_정수_리스트(
+            final int givenNo1,
+            final int givenNo2,
+            final int givenNo3,
+            final int givenNo4,
+            final int givenNo5,
+            final int givenNo6,
+            final int expectedNo1,
+            final int expectedNo2,
+            final int expectedNo3,
+            final int expectedNo4,
+            final int expectedNo5,
+            final int expectedNo6
+    ) {
+        final Lotto lotto = new Lotto(
+                givenNo1,
+                givenNo2,
+                givenNo3,
+                givenNo4,
+                givenNo5,
+                givenNo6
+        );
+
+        final List<Integer> actual = lotto.toList();
+
+        assertThat(actual).containsExactly(
+                expectedNo1,
+                expectedNo2,
+                expectedNo3,
+                expectedNo4,
+                expectedNo5,
+                expectedNo6
+        );
+    }
 }

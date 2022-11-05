@@ -40,6 +40,13 @@ public class Lotto {
         return Matches.of(countMatchedNumber(winningNumbers));
     }
 
+    public List<Integer> toList() {
+        return this.numbers.stream()
+                .map(LottoNumber::toInt)
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
     private long countMatchedNumber(Lotto winningNumbers) {
         return winningNumbers.numbers.stream()
                 .filter(this.numbers::contains)
