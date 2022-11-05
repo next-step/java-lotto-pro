@@ -95,10 +95,9 @@
   * LottoNumber
 * 일급 컬렉션
   * List\<LottoNumbers\> -> PurchaseLottoNumbers
-  * totalMoney -> TotalMoney
-  * balance -> Balance
-  * manualPurchaseCount -> PurchaseCount
-  * autoPurchaseCount -> PurchaseCount
+  * totalMoney, balance -> Amount
+  * manualPurchaseQuantity -> PurchaseCount
+  * autoPurchaseQuantity -> PurchaseCount
 * Constant
   * "수동으로 X장, 자동으로 XX개를 구매했습니다." 추가
 * View
