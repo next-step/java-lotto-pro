@@ -1,37 +1,38 @@
 package step3.domain;
 
-import step3.ValidationUtils;
-
-import java.util.List;
 import java.util.Objects;
 
 public class WinningBonusNumber {
-    private final WinningNumber winningNumber;
-    private final int bonusNumber;
-    
+    private final Lotto winningNumber;
+    private final LottoNumber bonusNumber;
+
     public WinningBonusNumber(String winningNumbers, String bonusNumber) {
-        this.winningNumber = new WinningNumber(winningNumbers);
-        this.bonusNumber = ValidationUtils.parseInt(bonusNumber);
+        this.winningNumber = new Lotto(winningNumbers);
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public List<Integer> getWinningNumber() {
-        return winningNumber.getWinningNumbers();
+    public boolean checkBonusNumber(Lotto lottoNumbers) {
+        return lottoNumbers.matchNumber(bonusNumber);
     }
-    
-    public boolean checkBonusNumber(List<Integer> lottoNumbers) {
-        return lottoNumbers.contains(bonusNumber);
+
+    public int getMatchCount(Lotto lotto) {
+        return lotto.getMatchCount(winningNumber);
     }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         WinningBonusNumber that = (WinningBonusNumber) o;
-        return Objects.equals(winningNumber, that.winningNumber) && Objects.equals(bonusNumber, that.bonusNumber);
+        return bonusNumber == that.bonusNumber && Objects.equals(winningNumber, that.winningNumber);
     }
-    
+
     @Override
     public int hashCode() {
         return Objects.hash(winningNumber, bonusNumber);
     }
-
 }
