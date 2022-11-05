@@ -22,4 +22,11 @@ public class LottoTest {
         );
     }
 
+    @Test
+    @DisplayName("로또 번호 내 중복 예외 테스트")
+    void lottoDuplicateExceptionTest(){
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> Lotto.create(Arrays.asList(1, 2, 3, 4, 5, 5))
+        );
+    }
 }

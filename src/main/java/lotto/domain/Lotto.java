@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -11,6 +13,7 @@ public class Lotto {
     private List<LottoNumber> numbers;
     private Lotto(){}
     public static Lotto create(List<Integer> numbers) {
+        validateDuplicateLottoNumber(numbers);
         Lotto lotto = new Lotto();
         lotto.numbers = numbers.stream()
                 .sorted()
@@ -18,6 +21,13 @@ public class Lotto {
                 .collect(Collectors.toList());
 
         return lotto;
+    }
+
+    private static void validateDuplicateLottoNumber(List<Integer> numbers) {
+        Set<Integer> convertedNumbers = new HashSet<>(numbers);
+        if(convertedNumbers.size() != numbers.size()){
+            throw new IllegalArgumentException("로또 번호 내 중복된 번호가 존재합니다.");
+        }
     }
 
     public boolean isContain(LottoNumber number) {
