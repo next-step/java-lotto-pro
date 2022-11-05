@@ -1,7 +1,6 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,12 +12,6 @@ public class LottoGameTest {
             lottoGame.minusBalance();
         }
         assertThat(lottoGame.getBalance()).isEqualTo(5000);
-    }
-
-    @Test
-    void 지불_금액_보다_더_많은_개수를_구매하는_경우() {
-        LottoGame lottoGame = new LottoGame(500);
-        assertThatThrownBy(lottoGame::minusBalance).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

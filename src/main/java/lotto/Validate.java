@@ -13,14 +13,12 @@ import static lotto.Constant.ERROR_INPUT_EMPTY_WINNING_NUMBER;
 import static lotto.Constant.ERROR_INPUT_SIX_NUMBER;
 import static lotto.Constant.ERROR_LOTTO_COST;
 import static lotto.Constant.ERROR_LOTTO_NUMBER_DUPLICATED;
-import static lotto.Constant.ERROR_NOT_ENOUGH_BALANCE;
 import static lotto.Constant.ERROR_NUMBER_OUT_OF_RANGE;
 import static lotto.Constant.ERROR_ONLY_NUMBER;
 import static lotto.Constant.LOTTO_END_NUMBER;
 import static lotto.Constant.LOTTO_NUMBER_SIZE;
 import static lotto.Constant.LOTTO_PRICE;
 import static lotto.Constant.LOTTO_START_NUMBER;
-import static lotto.Constant.NULL;
 import static lotto.Constant.REGEX_ONLY_NUMBER;
 
 import java.util.HashSet;
@@ -30,7 +28,7 @@ import java.util.regex.Pattern;
 
 public class Validate {
     static void validateCostNull(String input) {
-        if (input.equals(NULL)) {
+        if (input.isEmpty()) {
             throw new IllegalArgumentException(ERROR_INPUT_EMPTY_COST);
         }
     }
@@ -42,7 +40,7 @@ public class Validate {
     }
 
     static void validateOnlyNumber(String input) {
-        if (input.equals(NULL)) {
+        if (input.isEmpty()) {
             throw new IllegalArgumentException(ERROR_ONLY_NUMBER);
         }
         if (!Pattern.matches(REGEX_ONLY_NUMBER, input)) {
@@ -57,7 +55,7 @@ public class Validate {
     }
 
     static void validateLottoNumberNull(String input) {
-        if (input.equals(NULL)) {
+        if (input.isEmpty()) {
             throw new IllegalArgumentException(ERROR_INPUT_EMPTY_WINNING_NUMBER);
         }
     }
@@ -107,12 +105,6 @@ public class Validate {
     static void validatePurchasableCount(int totalMoney, int purchaseCount) {
         if (totalMoney < (purchaseCount * LOTTO_PRICE)) {
             throw new IllegalArgumentException(ERROR_EXCEED_PURCHASABLE_COUNT);
-        }
-    }
-
-    static void validateBalance(int balance) {
-        if (balance < LOTTO_PRICE) {
-            throw new IllegalArgumentException(ERROR_NOT_ENOUGH_BALANCE);
         }
     }
 }

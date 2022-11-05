@@ -33,7 +33,6 @@ public class LottoGame {
     }
 
     public void minusBalance() {
-        Validate.validateBalance(balance);
         balance -= LOTTO_PRICE;
     }
 
@@ -47,7 +46,6 @@ public class LottoGame {
     }
 
     public List<LottoNumbers> manualPurchaseLotto(int purchaseCount) {
-        Validate.validatePurchasableCount(totalMoney, purchaseCount);
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
             minusBalance();

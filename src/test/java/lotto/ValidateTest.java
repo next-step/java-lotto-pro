@@ -84,9 +84,4 @@ public class ValidateTest {
         assertThatThrownBy(() -> Validate.validatePurchasableCount(1000, 2)).isInstanceOf(
                 IllegalArgumentException.class);
     }
-
-    @Test
-    void 남아있는_금액이_부족한_경우() {
-        assertThatThrownBy(() -> Validate.validateBalance(500)).isInstanceOf(IllegalArgumentException.class);
-    }
 }

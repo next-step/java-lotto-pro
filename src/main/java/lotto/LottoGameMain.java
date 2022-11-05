@@ -12,7 +12,7 @@ public class LottoGameMain {
     public static void main(String[] args) {
         LottoGame lottoGame = new LottoGame(inputView.inputPay());
 
-        int manualPurchaseCount = inputView.inputManualPurchase();
+        int manualPurchaseCount = inputView.inputManualPurchase(lottoGame.getTotalMoney());
 
         inputView.printInputManualLottoNumber();
         PurchaseLottoNumbers purchaseLottoNumbers = new PurchaseLottoNumbers(

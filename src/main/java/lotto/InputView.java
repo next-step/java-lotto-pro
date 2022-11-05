@@ -11,6 +11,7 @@ import static lotto.Constant.INPUT_MANUAL_PURCHASE;
 import static lotto.Constant.INPUT_PAY_MONEY;
 import static lotto.Constant.INPUT_WINNING_NUMBER_LAST_WEEK;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class InputView {
@@ -19,20 +20,22 @@ public class InputView {
 
     int inputPay() {
         printInputPay();
-        String input = scanner.nextLine();
-        Validate.validateCostNull(input);
-        Validate.validateOnlyNumber(input);
-        Validate.validatePay(input);
-        return Integer.parseInt(input);
+        Optional<String> input = Optional.ofNullable(scanner.nextLine());
+        String money = input.orElse("0");
+        Validate.validateOnlyNumber(money);
+        Validate.validatePay(money);
+        return Integer.parseInt(money);
     }
 
     private void printInputPay() {
         System.out.println(INPUT_PAY_MONEY);
     }
 
-    int inputManualPurchase() {
+    int inputManualPurchase(int money) {
         printInputManualPurchase();
         String input = scanner.nextLine();
+        Validate.validatePurchasableCount(money, Integer.parseInt(input));
+        Validate.validateOnlyNumber(input);
         return Integer.parseInt(input);
     }
 

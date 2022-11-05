@@ -9,7 +9,6 @@ public class Constant {
     public static final int LOTTO_PRICE = 1000;
     public static final int LOTTO_NUMBER_SIZE = 6;
     public static final String REGEX_ONLY_NUMBER = "^[0-9]*$";
-    public static final String NULL = "";
     public static final String INPUT_PAY_MONEY = "구입금액을 입력해 주세요.";
     public static final String INPUT_MANUAL_PURCHASE = "수동으로 구매할 로또 수를 입력해 주세요.";
     public static final String INPUT_MANUAL_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
@@ -40,5 +39,4 @@ public class Constant {
     public static final String ERROR_LOTTO_NUMBER_DUPLICATED = "로또 번호는 중복될 수 없습니다.";
     public static final String ERROR_BONUS_NUMBER_DUPLICATED = "입력하신 보너스 번호는 지난주 당첨 번호에 이미 있는 번호입니다.";
     public static final String ERROR_EXCEED_PURCHASABLE_COUNT = "구매할 수 있는 개수를 초과하였습니다.";
-    public static final String ERROR_NOT_ENOUGH_BALANCE = "남아있는 금액이 부족합니다.";
 }
