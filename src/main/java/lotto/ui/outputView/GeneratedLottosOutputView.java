@@ -12,6 +12,7 @@ public class GeneratedLottosOutputView {
         for (Lotto lotto : lottos.getLottos()) {
             printLotto(lotto.sort());
         }
+        System.out.println();
     }
 
     private static void printLotto(List<Integer> lottoNumbers) {

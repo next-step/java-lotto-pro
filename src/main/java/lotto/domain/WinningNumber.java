@@ -17,6 +17,10 @@ public class WinningNumber {
         }
     }
 
+    public List<Number> getWinningNumbers() {
+        return winningNumbers;
+    }
+
     private void validateDuplicate(String nunber) {
         for (Number value : this.winningNumbers) {
             validateDuplicateNumber(Integer.parseInt(nunber), value);
@@ -52,5 +56,9 @@ public class WinningNumber {
             matchCounts++;
         }
         return matchCounts;
+    }
+
+    public boolean contains(Number number) {
+        return this.winningNumbers.contains(number);
     }
 }

@@ -53,4 +53,16 @@ public class Lotto {
     public List<Number> getLotto() {
         return this.numbers;
     }
+
+    public List<Number> getNumbers() {
+        return this.numbers;
+    }
+
+    public int sum() {
+        int sum = 0;
+        for (Number number : this.numbers) {
+            sum += number.getNumber();
+        }
+        return sum;
+    }
 }

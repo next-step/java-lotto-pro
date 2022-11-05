@@ -4,11 +4,9 @@ import calculator.Delimiters;
 import calculator.TextExtractor;
 import lotto.domain.*;
 
-import java.util.List;
-
 import static lotto.ui.inputView.LottoPurchaseInputView.readPurchaseMoney;
-import static lotto.ui.outputView.GeneratedLottosOutputView.printLottos;
 import static lotto.ui.inputView.WinningNumberInputView.readWinningNumbers;
+import static lotto.ui.outputView.GeneratedLottosOutputView.printLottos;
 import static lotto.ui.outputView.WinningResultOutputView.winningResult;
 
 public class LottoController {
@@ -18,7 +16,6 @@ public class LottoController {
         LottoGenerator lottoGenerator = new LottoGenerator();
         Lottos lottos = lottoGenerator.generate(lottoMoney.purchaseCount());
         printLottos(lottos);
-        System.out.println();
         TotalWinningMoney totalWinningMoney = createTotalWinningMoney(lottos);
         winningResult(totalWinningMoney, lottoMoney);
     }
