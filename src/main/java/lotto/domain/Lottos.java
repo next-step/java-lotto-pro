@@ -15,10 +15,24 @@ public class Lottos {
         this.content = new ArrayList<>(content);
     }
 
+    public static Lottos empty() {
+        return new Lottos(new ArrayList<>());
+    }
+
+    public int manualCount() {
+        return (int) content.stream()
+            .filter(Lotto::isManual)
+            .count();
+    }
+
+    public int autoCount() {
+        return (int) content.stream()
+            .filter(Lotto::isAuto)
+            .count();
+    }
+
     public Statistics contains(WinningLotto winningLotto) {
-        List<Rank> ranks = content.stream()
-            .map(winningLotto::confirm)
-            .collect(toList());
+        List<Rank> ranks = content.stream().map(winningLotto::confirm).collect(toList());
         return new Statistics(ranks);
     }
 
@@ -45,5 +59,11 @@ public class Lottos {
     @Override
     public int hashCode() {
         return Objects.hash(content);
+    }
+
+    public Lottos combine(Lottos lottos) {
+        List<Lotto> combined = new ArrayList<>(content);
+        combined.addAll(lottos.content);
+        return new Lottos(combined);
     }
 }

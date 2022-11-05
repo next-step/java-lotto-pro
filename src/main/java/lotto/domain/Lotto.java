@@ -9,17 +9,38 @@ public class Lotto {
 
     private static final int LOTTO_NUMBER_COUNT = 6;
 
+    private final LottoType type;
     private final List<LottoNumber> numbers;
 
-    public Lotto(Collection<LottoNumber> numbers) {
+    private Lotto(LottoType type, Collection<LottoNumber> numbers) {
         validationSize(numbers);
         validationDuplicate(numbers);
 
+        this.type = type;
         this.numbers = new ArrayList<>(numbers);
     }
 
+    public static Lotto auto(Collection<LottoNumber> number) {
+        return new Lotto(LottoType.AUTO, number);
+    }
+
+    public static Lotto manual(Collection<LottoNumber> number) {
+        return new Lotto(LottoType.MANUAL, number);
+    }
+
+    public boolean isManual() {
+        return type == LottoType.MANUAL;
+    }
+
+    public boolean isAuto() {
+        return type == LottoType.AUTO;
+    }
+
     public int matche(Lotto lotto) {
-        return (int) numbers.stream().map(lotto::contains).filter(Boolean::booleanValue).count();
+        return (int) numbers.stream()
+            .map(lotto::contains)
+            .filter(Boolean::booleanValue)
+            .count();
     }
 
     public List<LottoNumber> numbers() {
@@ -51,7 +72,9 @@ public class Lotto {
     }
 
     private void validationDuplicate(Collection<LottoNumber> numbers) {
-        long deduplicatedCount = numbers.stream().distinct().count();
+        long deduplicatedCount = numbers.stream()
+            .distinct()
+            .count();
         if (deduplicatedCount != numbers.size()) {
             throw new IllegalArgumentException(String.format("로또 번호는 중복될 수 없습니다. (lottoNumbers: %s)", numbers));
         }
