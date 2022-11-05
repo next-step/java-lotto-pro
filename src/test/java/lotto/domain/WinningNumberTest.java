@@ -9,9 +9,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.stream.Stream;
 
 import static lotto.domain.Lotto.DUPLICATE_EXCEPTION_MESSAGE;
+import static lotto.domain.WinningNumber.WINNING_NUMBER;
 import static lotto.fixture.LottoFixture.로또번호123456;
 import static lotto.fixture.LottoFixture.로또번호123457;
-import static lotto.domain.WinningNumber.WINNING_NUMBER;
 import static lotto.fixture.WinningNumberFixture.당첨번호123456;
 import static org.assertj.core.api.Assertions.*;
 
