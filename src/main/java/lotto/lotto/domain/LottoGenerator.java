@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoGenerator {
+import static common.vo.Number.MAXIMUM_NUMBER;
+import static common.vo.Number.MINIMUM_NUMBER;
 
-    public static final int MINIMUM_LOTTO_NUMBER = 1;
-    public static final int MAX_LOTTO_NUMBER = 45;
+public class LottoGenerator {
     public static final String PURCHASE_MINIMUM_COUNT_EXCEPTION_MESSAGE = "1개 이상부터 구매가능합니다.";
     public static final int ZERO = 0;
     private final List<Integer> range = new ArrayList<>();
@@ -17,8 +17,7 @@ public class LottoGenerator {
     }
 
     private void init() {
-
-        for (int i = MINIMUM_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+        for (int i = MINIMUM_NUMBER; i <= MAXIMUM_NUMBER; i++) {
             this.range.add(i);
         }
     }
