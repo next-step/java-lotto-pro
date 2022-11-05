@@ -10,6 +10,7 @@ import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResultStatsCalculator;
 import lotto.domain.LottoStore;
 import lotto.domain.Money;
+import lotto.domain.UniqueLottoNumbersSupplier;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -21,7 +22,7 @@ public class Application {
         final LottoCustomer customer = new LottoCustomer(parseMoney(InputView.getPurchaseMoney()));
         final LottoStore store = new LottoStore(
             DEFAULT_LOTTO_TICKET_FEE,
-            () -> LottoNumbers.of(1, 2, 3, 4, 5, 6));
+            new UniqueLottoNumbersSupplier());
 
         store.sellAllTo(customer);
 
@@ -32,7 +33,7 @@ public class Application {
         final LottoResultStatsCalculator resultCalculator = new LottoResultStatsCalculator(
             customer.getPurchasedLottoTickets(),
             mapToLottoNumbers(InputView.getWiningLottoNumbers()),
-            LottoNumber.valueOf(7)
+            mapToLottoNumber(InputView.getBonusLottoNumber())
         );
 
         ResultView.printEmptyLine();
@@ -42,20 +43,18 @@ public class Application {
         ResultView.printProfitRate(resultCalculator.computeProfitRate());
     }
 
-    private static LottoNumbers mapToLottoNumbers(final String[] lottoNumbers) {
-        return new LottoNumbers(mapToLottoNumberList(mapToNumberList(lottoNumbers)));
+    private static LottoNumber mapToLottoNumber(final String lottoNumber) {
+        return LottoNumber.valueOf(parseInt(lottoNumber));
     }
 
-    private static List<Integer> mapToNumberList(final String[] winingLottoNumbers) {
+    private static LottoNumbers mapToLottoNumbers(final String[] lottoNumbers) {
+        return new LottoNumbers(mapToLottoNumberList(lottoNumbers));
+    }
+
+    private static List<LottoNumber> mapToLottoNumberList(final String[] winingLottoNumbers) {
         return Arrays.stream(winingLottoNumbers)
             .map(String::trim)
-            .map(Application::parseInt)
-            .collect(Collectors.toList());
-    }
-
-    private static List<LottoNumber> mapToLottoNumberList(final List<Integer> winingLottoNumbers) {
-        return winingLottoNumbers.stream()
-            .map(LottoNumber::valueOf)
+            .map(Application::mapToLottoNumber)
             .collect(Collectors.toList());
     }
 
