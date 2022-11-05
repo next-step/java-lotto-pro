@@ -8,24 +8,26 @@ import java.util.Map;
 
 public class WinningLotto {
 
-    private Map<WinningLottoType, Object> numbers = new HashMap<>();
+    private Lotto basicLotto;
+    private LottoNumber bonusNumber;
     public static final int FIVE = 5;
     private WinningLotto() {}
 
     public static WinningLotto create(Lotto basicLotto, LottoNumber bonusNumber){
         WinningLotto winningLotto = new WinningLotto();
-        winningLotto.numbers.put(BASIC, basicLotto);
-        winningLotto.numbers.put(BONUS, bonusNumber);
+
+        winningLotto.basicLotto = basicLotto;
+        winningLotto.bonusNumber = bonusNumber;
 
         return winningLotto;
     }
 
     public int getMatchCountByBasic(Lotto lotto) {
-        return lotto.getContainNumberCount((Lotto) numbers.get(BASIC));
+        return lotto.getContainNumberCount(this.basicLotto);
     }
 
     public boolean isContainBonusNumber(Lotto lotto) {
-        return lotto.isContain((LottoNumber) numbers.get(BONUS));
+        return lotto.isContain(this.bonusNumber);
     }
 
     public LottoWinningRank getLottoRank(Lotto lotto) {
