@@ -56,7 +56,7 @@ public class LottoTest {
     @DisplayName("로또 객체에서 보너스번호가 포함되는지 매칭")
     public void lotto_match_bonusNumber() {
         Lotto lotto = new Lotto(lottoNumbers);
-        assertThat(lotto.matchBonusNumber(winningBonusNumber)).isEqualTo(true);
+        assertThat(winningBonusNumber.checkBonusNumber(lotto)).isEqualTo(true);
     }
 
     @Test
