@@ -7,6 +7,7 @@ public class WinningNumber {
 
     public static final int WINNING_NUMBER = 6;
     private static final String DUPLICATE_EXCEPTION_MESSAGE = "중복된 숫자를 입력할 수 없습니다.";
+    private static final int INIT_COUNT = 0;
     private List<Number> winningNumbers = new ArrayList<>();
 
     public WinningNumber(String[] winningNumbers) {
@@ -44,7 +45,7 @@ public class WinningNumber {
     }
 
     public int findMatchingCount(Lotto lotto) {
-        int matchCounts = 0;
+        int matchCounts = INIT_COUNT;
         for (Number number : lotto.getLotto()) {
             matchCounts = plusMatchingCount(matchCounts, number);
         }

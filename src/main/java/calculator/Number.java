@@ -14,7 +14,7 @@ public class Number {
     }
 
     private int convertNumber(String stringNumber) {
-        int number = 0;
+        int number = ZERO;
         try {
             number = Integer.parseInt(stringNumber);
         } catch (NumberFormatException e) {

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Lottos {
+    private static final int INIT_COUNT = 0;
+    private static final int INIT_SUM = 0;
     private List<Lotto> lottos = new ArrayList<>();
 
     public void add(Lotto lotto) {
@@ -44,7 +46,7 @@ public class Lottos {
     }
 
     private boolean isMatch(int matchCount, WinningNumber winningNumber, Lotto lotto) {
-        int count = 0;
+        int count = INIT_COUNT;
         for (Number number : lotto.getNumbers()) {
             count = countUp(winningNumber, count, number);
         }
@@ -59,7 +61,7 @@ public class Lottos {
     }
 
     public int sum() {
-        int sum = 0;
+        int sum = INIT_SUM;
         for (Lotto lotto : this.lottos) {
             sum += lotto.sum();
         }

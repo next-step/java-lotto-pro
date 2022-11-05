@@ -7,6 +7,7 @@ import java.util.Map;
 import static lotto.domain.WinningMoneyType.find;
 
 public class Statistics {
+    public static final int SUM_INIT = 0;
     private final Lottos lottos;
     private final WinningNumber winningNumber;
 
@@ -24,7 +25,7 @@ public class Statistics {
     }
 
     public int sum() {
-        int sum = 0;
+        int sum = SUM_INIT;
         Map<Integer, Lottos> map = this.lottos.matchLottos(this.winningNumber);
         for (Integer count : map.keySet()) {
             sum += find(count).getMoney() * map.get(count).size();
