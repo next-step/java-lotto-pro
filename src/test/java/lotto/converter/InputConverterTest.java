@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.domain.LottoNumbers;
 import lotto.exception.InvalidLottoNumberException;
@@ -55,4 +56,11 @@ class InputConverterTest {
 			.hasMessageContaining("로또 번호는 중복되지 않는 6개의 숫자여야 합니다");
 	}
 
+	@ParameterizedTest
+	@ValueSource(strings = {"1, 2, 3, 4, 5, 6", " 1 , 2 , 3 , 4 , 5 , 6 "})
+	@DisplayName("수동 로또 번호 입력 시 공백 제거")
+	void removeWhiteSpaceTest(String input) {
+		assertThat(InputConverter.toLottoNumbers(input))
+			.isEqualTo(InputConverter.toLottoNumbers("1,2,3,4,5,6"));
+	}
 }
