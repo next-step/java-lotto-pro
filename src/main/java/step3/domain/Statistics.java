@@ -34,7 +34,7 @@ public class Statistics {
     public Map<Rank, Integer> countByRank() {
         statisticsInit();
         for (Lotto lotto: this.lotteryTicket.getLotteryTicket()) {
-            int matchCount = lotto.compareMath(this.winningBonusNumber.getWinningNumber());
+            int matchCount = winningBonusNumber.getMatchCount(lotto);
             boolean isMatchBonusNumber = lotto.matchBonusNumber(this.winningBonusNumber);
             mapMerge(Rank.valueOf(matchCount, isMatchBonusNumber));
         }

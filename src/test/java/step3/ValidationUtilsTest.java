@@ -15,7 +15,7 @@ public class ValidationUtilsTest {
         assertThat(ValidationUtils.parseInt("1")).isEqualTo(1);
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> ValidationUtils.parseInt("a"))
-                .withMessageContaining("1부터 45까지의 숫자");
+                .withMessageContaining("입력값은 숫자");
     }
     
     @Test

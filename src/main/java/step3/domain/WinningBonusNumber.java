@@ -2,23 +2,26 @@ package step3.domain;
 
 import java.util.List;
 import java.util.Objects;
-import step3.ValidationUtils;
 
 public class WinningBonusNumber {
     private final Lotto winningNumber;
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
     public WinningBonusNumber(String winningNumbers, String bonusNumber) {
         this.winningNumber = new Lotto(winningNumbers);
-        this.bonusNumber = ValidationUtils.parseInt(bonusNumber);
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public List<Integer> getWinningNumber() {
+    public List<LottoNumber> getWinningNumber() {
         return winningNumber.getWinningNumbers();
     }
 
-    public boolean checkBonusNumber(List<Integer> lottoNumbers) {
-        return lottoNumbers.contains(bonusNumber);
+    public boolean checkBonusNumber(Lotto lottoNumbers) {
+        return lottoNumbers.matchNumber(bonusNumber);
+    }
+
+    public int getMatchCount(Lotto lotto) {
+        return lotto.getMatchCount(winningNumber);
     }
 
     @Override
@@ -30,12 +33,11 @@ public class WinningBonusNumber {
             return false;
         }
         WinningBonusNumber that = (WinningBonusNumber) o;
-        return Objects.equals(winningNumber, that.winningNumber) && Objects.equals(bonusNumber, that.bonusNumber);
+        return bonusNumber == that.bonusNumber && Objects.equals(winningNumber, that.winningNumber);
     }
-    
+
     @Override
     public int hashCode() {
         return Objects.hash(winningNumber, bonusNumber);
     }
-
 }
