@@ -39,4 +39,6 @@ public class Constant {
     public static final String ERROR_INPUT_SIX_NUMBER = "로또 번호 6개를 입력해주세요.";
     public static final String ERROR_LOTTO_NUMBER_DUPLICATED = "로또 번호는 중복될 수 없습니다.";
     public static final String ERROR_BONUS_NUMBER_DUPLICATED = "입력하신 보너스 번호는 지난주 당첨 번호에 이미 있는 번호입니다.";
+    public static final String ERROR_EXCEED_PURCHASABLE_COUNT = "구매할 수 있는 개수를 초과하였습니다.";
+    public static final String ERROR_NOT_ENOUGH_BALANCE = "남아있는 금액이 부족합니다.";
 }

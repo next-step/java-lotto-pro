@@ -7,11 +7,13 @@ package lotto;
 
 import static lotto.Constant.DELIMITER;
 import static lotto.Constant.ERROR_BONUS_NUMBER_DUPLICATED;
+import static lotto.Constant.ERROR_EXCEED_PURCHASABLE_COUNT;
 import static lotto.Constant.ERROR_INPUT_EMPTY_COST;
 import static lotto.Constant.ERROR_INPUT_EMPTY_WINNING_NUMBER;
 import static lotto.Constant.ERROR_INPUT_SIX_NUMBER;
 import static lotto.Constant.ERROR_LOTTO_COST;
 import static lotto.Constant.ERROR_LOTTO_NUMBER_DUPLICATED;
+import static lotto.Constant.ERROR_NOT_ENOUGH_BALANCE;
 import static lotto.Constant.ERROR_NUMBER_OUT_OF_RANGE;
 import static lotto.Constant.ERROR_ONLY_NUMBER;
 import static lotto.Constant.LOTTO_END_NUMBER;
@@ -98,6 +100,19 @@ public class Validate {
     static void validateBonusNumberDuplicate(String input, LottoNumbers winningNumber) {
         if (winningNumber.contains(LottoNumber.from(input))) {
             throw new IllegalArgumentException(ERROR_BONUS_NUMBER_DUPLICATED);
+        }
+    }
+
+
+    static void validatePurchasableCount(int totalMoney, int purchaseCount) {
+        if (totalMoney < (purchaseCount * LOTTO_PRICE)) {
+            throw new IllegalArgumentException(ERROR_EXCEED_PURCHASABLE_COUNT);
+        }
+    }
+
+    static void validateBalance(int balance) {
+        if (balance < LOTTO_PRICE) {
+            throw new IllegalArgumentException(ERROR_NOT_ENOUGH_BALANCE);
         }
     }
 }

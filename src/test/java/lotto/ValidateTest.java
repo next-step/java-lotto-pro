@@ -78,4 +78,15 @@ public class ValidateTest {
                 () -> Validate.validateBonusNumberDuplicate("1", LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6))))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 수동으로_구입하려하는_로또_금액이_지불한_금액을_초과하는_경우() {
+        assertThatThrownBy(() -> Validate.validatePurchasableCount(1000, 2)).isInstanceOf(
+                IllegalArgumentException.class);
+    }
+
+    @Test
+    void 남아있는_금액이_부족한_경우() {
+        assertThatThrownBy(() -> Validate.validateBalance(500)).isInstanceOf(IllegalArgumentException.class);
+    }
 }
