@@ -52,7 +52,7 @@ public class Lotto {
         return list;
     }
 
-    public List<Number> getLottos() {
+    public List<Number> getLotto() {
         return this.numbers;
     }
 }
