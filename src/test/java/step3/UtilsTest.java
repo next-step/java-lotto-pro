@@ -8,16 +8,16 @@ import org.junit.jupiter.api.Test;
 import step3.domain.Lotto;
 import step3.domain.WinningBonusNumber;
 
-public class ValidationUtilsTest {
+public class UtilsTest {
     @Test
     @DisplayName("숫자 아닌경우 예외처리")
     public void ValidationUtils_parseInt_exception() {
-        assertThat(ValidationUtils.parseInt("1")).isEqualTo(1);
+        assertThat(Utils.parseInt("1")).isEqualTo(1);
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> ValidationUtils.parseInt("a"))
+                .isThrownBy(() -> Utils.parseInt("a"))
                 .withMessageContaining("입력값은 숫자");
     }
-    
+
     @Test
     @DisplayName("당첨번호 0~45 이외의 숫자 예외처리")
     public void WinningNumber_exception() {
@@ -38,14 +38,7 @@ public class ValidationUtilsTest {
     @DisplayName("음수 입력 체크")
     public void is_negative() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> ValidationUtils.isNegative(-1));
-    }
-
-    @Test
-    @DisplayName("수동 입력 개수 비교")
-    public void payment_valid_exception() {
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> ValidationUtils.validManualCount(2, 1));
+                .isThrownBy(() -> Utils.isNegative(-1));
     }
 
 

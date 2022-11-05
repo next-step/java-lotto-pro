@@ -62,4 +62,11 @@ public class PaymentTest {
         Payment payment = new Payment(10000, 3);
         assertThat(payment.getAutoLottoCount()).isEqualTo(7);
     }
+
+    @Test
+    @DisplayName("수동 입력 개수 예외처리")
+    public void payment_valid_exception() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new Payment(1000, 2));
+    }
 }

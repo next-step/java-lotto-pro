@@ -1,7 +1,7 @@
 package step3.domain;
 
 import java.util.Objects;
-import step3.ValidationUtils;
+import step3.Utils;
 
 public class LottoNumber {
     private static final int LOTTO_MIN_NUMBER = 1;
@@ -10,7 +10,7 @@ public class LottoNumber {
     private final int lottoNumber;
 
     public LottoNumber(String lottoNumber) {
-        int number = ValidationUtils.parseInt(lottoNumber);
+        int number = Utils.parseInt(lottoNumber);
         this.lottoNumber = validLottoNumber(number);
     }
 
