@@ -8,7 +8,6 @@ public class Lotto {
 
     public static final String DUPLICATE_EXCEPTION_MESSAGE = "중복된 숫자를 입력할 수 없습니다.";
     public static final int LOTTO_SIZE = 6;
-    public static final int SUM_INIT = 0;
 
     private List<Number> numbers = new ArrayList<>();
 
@@ -51,19 +50,11 @@ public class Lotto {
         return list;
     }
 
-    public List<Number> getLotto() {
-        return this.numbers;
-    }
-
     public List<Number> getNumbers() {
         return this.numbers;
     }
 
-    public int sum() {
-        int sum = SUM_INIT;
-        for (Number number : this.numbers) {
-            sum += number.getNumber();
-        }
-        return sum;
+    public List<Number> getLotto() {
+        return this.numbers;
     }
 }

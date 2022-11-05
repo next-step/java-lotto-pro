@@ -8,9 +8,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static lotto.domain.Lotto.DUPLICATE_EXCEPTION_MESSAGE;
 import static lotto.domain.Lotto.LOTTO_SIZE;
-import static lotto.fixture.LottoFixture.로또번호123456;
-import static lotto.fixture.LottoFixture.로또번호123457;
-import static lotto.fixture.WinningNumberFixture.당첨번호123456;
+import static lotto.fixture.LottoFixture.lotto;
+import static lotto.fixture.LottoFixture.lotto_five;
+import static lotto.fixture.WinningNumberFixture.winningNumber;
 import static org.assertj.core.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -21,14 +21,14 @@ class WinningNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {6})
     void winningNumberCount_six_matches(int expected) {
-        assertThat(당첨번호123456().findMatchingCount(로또번호123456())).isEqualTo(expected);
+        assertThat(winningNumber().findMatchingCount(lotto())).isEqualTo(expected);
     }
 
     @DisplayName("5개 일치 갯수 판별")
     @ParameterizedTest
     @ValueSource(ints = {5})
     void winningNumberCount_five_matches(int expected) {
-        assertThat(당첨번호123456().findMatchingCount(로또번호123457())).isEqualTo(expected);
+        assertThat(winningNumber().findMatchingCount(lotto_five())).isEqualTo(expected);
     }
 
     @DisplayName("6자리 미만일 수 없다.")

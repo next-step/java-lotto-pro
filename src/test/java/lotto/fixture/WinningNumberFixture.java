@@ -6,11 +6,11 @@ import org.junit.jupiter.params.provider.Arguments;
 import java.util.stream.Stream;
 
 public class WinningNumberFixture {
-    public static WinningNumber 당첨번호123456() {
+    public static WinningNumber winningNumber() {
         return new WinningNumber(new String[]{"1", "2", "3", "4", "5", "6"});
     }
 
-    public static WinningNumber 당첨번호45691011() {
+    public static WinningNumber winningNumber_one() {
         return new WinningNumber(new String[]{"4", "5", "6", "9", "10", "11"});
     }
 

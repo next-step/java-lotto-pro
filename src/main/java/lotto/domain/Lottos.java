@@ -7,7 +7,6 @@ import java.util.Map;
 
 public class Lottos {
     private static final int INIT_COUNT = 0;
-    private static final int INIT_SUM = 0;
     private List<Lotto> lottos = new ArrayList<>();
 
     public void add(Lotto lotto) {
