@@ -18,18 +18,26 @@ import lotto.domain.lotto.Money;
 
 public class MatchingResult {
     private final Map<Matches, Long> result;
+    private final Money totalSpendAmount;
 
-    public MatchingResult(final Map<Matches, Long> result) {
+    public MatchingResult(final Map<Matches, Long> result, final Money totalSpendAmount) {
         this.result = new EnumMap<>(Matches.class);
         initializeAllValuesAsZero();
         this.result.putAll(result);
+        this.totalSpendAmount = totalSpendAmount;
     }
 
-    public static MatchingResult matches(final List<Lotto> lottos, final Lotto winningNumbers) {
+    public static MatchingResult analyze(
+            final List<Lotto> lottos,
+            final Money lottoUnitPrice,
+            final Lotto winningNumbers
+    ) {
         requireNotNull(lottos, "로또 목록은 null이 아니어야 합니다.");
+        requireNotNull(lottoUnitPrice, "로또 단위 가격은 null이 아니어야 합니다.");
         requireNotNull(winningNumbers, "당첨 번호는 null이 아니어야 합니다.");
 
-        return new MatchingResult(countByMatches(lottos, winningNumbers));
+        final Money totalSpendAmount = lottoUnitPrice.multiply(lottos.size());
+        return new MatchingResult(countByMatches(lottos, winningNumbers), totalSpendAmount);
     }
 
     private static Map<Matches, Long> countByMatches(final List<Lotto> lottos, final Lotto winningNumbers) {
@@ -44,8 +52,8 @@ public class MatchingResult {
         }
     }
 
-    public BigDecimal computeReturnOnInvestment(final Money totalAmount) {
-        final BigDecimal quotient = sumPrizes().divide(totalAmount);
+    public BigDecimal computeReturnOnInvestment() {
+        final BigDecimal quotient = sumPrizes().divide(this.totalSpendAmount);
         return quotient.setScale(2, RoundingMode.HALF_EVEN);
     }
 
@@ -71,11 +79,11 @@ public class MatchingResult {
             return false;
         }
         MatchingResult that = (MatchingResult) o;
-        return result.equals(that.result);
+        return result.equals(that.result) && totalSpendAmount.equals(that.totalSpendAmount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(result);
+        return Objects.hash(result, totalSpendAmount);
     }
 }

@@ -8,4 +8,8 @@ public class Fixture {
     public static Lotto winningNumbers123456() {
         return new Lotto(1, 2, 3, 4, 5, 6);
     }
+
+    public static Money lottoUnitPrice1000() {
+        return new Money(1000);
+    }
 }

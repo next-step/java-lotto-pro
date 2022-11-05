@@ -22,19 +22,23 @@ class MatchingResultTest {
     @DisplayName("결과가 같으면, 동일하다.")
     @Test
     void 동일성() {
-        final Map<Matches, Long> one = new HashMap<Matches, Long>() {{
+        final Money oneTotalSpendAmount = new Money(10000);
+        final Map<Matches, Long> oneMatchingCount = new HashMap<Matches, Long>() {{
             put(Matches.SIX, 1L);
         }};
+        final MatchingResult one = new MatchingResult(oneMatchingCount, oneTotalSpendAmount);
 
-        final Map<Matches, Long> another = new HashMap<Matches, Long>() {{
+        final Money anotherTotalSpendAmount = new Money(10000);
+        final Map<Matches, Long> anotherMatchingCount = new HashMap<Matches, Long>() {{
             put(Matches.SIX, 1L);
             put(Matches.FIVE, 0L);
             put(Matches.FOUR, 0L);
             put(Matches.THREE, 0L);
             put(Matches.BLANK, 0L);
         }};
+        MatchingResult another = new MatchingResult(anotherMatchingCount, anotherTotalSpendAmount);
 
-        assertThat(new MatchingResult(one)).isEqualTo(new MatchingResult(another));
+        assertThat(one).isEqualTo(another);
     }
 
     @DisplayName("로또 목록은 null이 아니어야 한다.")
@@ -42,7 +46,9 @@ class MatchingResultTest {
     @NullSource
     void 로또_목록_null(final List<Lotto> lottos) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> MatchingResult.matches(lottos, Fixture.winningNumbers123456()))
+                .isThrownBy(
+                        () -> MatchingResult.analyze(lottos, Fixture.lottoUnitPrice1000(),
+                                Fixture.winningNumbers123456()))
                 .withMessage("로또 목록은 null이 아니어야 합니다.");
     }
 
@@ -53,8 +59,19 @@ class MatchingResultTest {
         final List<Lotto> lottos = Collections.singletonList(new Lotto(1, 2, 3, 4, 5, 6));
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> MatchingResult.matches(lottos, winningNumbers))
+                .isThrownBy(() -> MatchingResult.analyze(lottos, Fixture.lottoUnitPrice1000(), winningNumbers))
                 .withMessage("당첨 번호는 null이 아니어야 합니다.");
+    }
+
+    @DisplayName("로또 단위 가격은 null이 아니어야 한다.")
+    @ParameterizedTest(name = ParameterizedTest.DISPLAY_NAME_PLACEHOLDER)
+    @NullSource
+    void 로또단위가격_null(final Money lottoUnitPrice) {
+        final List<Lotto> lottos = Collections.singletonList(new Lotto(1, 2, 3, 4, 5, 6));
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> MatchingResult.analyze(lottos, lottoUnitPrice, Fixture.winningNumbers123456()))
+                .withMessage("로또 단위 가격은 null이 아니어야 합니다.");
     }
 
     @Test
@@ -67,10 +84,15 @@ class MatchingResultTest {
                 new HashMap<Matches, Long>() {{
                     put(Matches.SIX, 1L);
                     put(Matches.BLANK, 1L);
-                }}
+                }},
+                new Money(2000)
         );
 
-        final MatchingResult actual = MatchingResult.matches(lottos, Fixture.winningNumbers123456());
+        final MatchingResult actual = MatchingResult.analyze(
+                lottos,
+                Fixture.lottoUnitPrice1000(),
+                Fixture.winningNumbers123456()
+        );
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -82,11 +104,12 @@ class MatchingResultTest {
         final MatchingResult matchingResult = new MatchingResult(
                 new HashMap<Matches, Long>() {{
                     put(Matches.THREE, 2L);
-                }}
+                }},
+                totalAmount
         );
         final BigDecimal expected = BigDecimal.valueOf(0.01);
 
-        final BigDecimal actual = matchingResult.computeReturnOnInvestment(totalAmount);
+        final BigDecimal actual = matchingResult.computeReturnOnInvestment();
 
         assertThat(actual).isEqualTo(expected);
     }
