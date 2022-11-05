@@ -8,7 +8,7 @@ public class LottoUtil {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private LottoUtil() {
+    public LottoUtil() {
     }
 
     public static int buy(Money money) {
