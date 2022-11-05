@@ -14,13 +14,13 @@ public class TextExtractor {
     private Delimiters delimiters;
 
     public TextExtractor(Delimiters delimiters, String text) {
+        this.delimiters = delimiters;
         if (Objects.isNull(text) || text.isEmpty()) {
             this.text = DEFAULT_VALUE;
             return;
         }
         addCustomDelimiter(delimiters, text);
-        this.delimiters = delimiters;
-        this.text = exceptDelimiter(text);
+        this.text = extractText(text);
     }
 
     private void addCustomDelimiter(Delimiters delimiters, String text) {
@@ -33,7 +33,7 @@ public class TextExtractor {
         return this.text.split(this.delimiters.delimiter());
     }
 
-    private String exceptDelimiter(String text) {
+    public String extractText(String text) {
         Matcher m = regex.matcher(text);
         if (m.find()) {
             return m.group(TEXT_PART);

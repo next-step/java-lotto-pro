@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static lotto.domain.Lotto.DUPLICATE_EXCEPTION_MESSAGE;
-import static lotto.domain.WinningNumber.WINNING_NUMBER;
+import static lotto.domain.Lotto.LOTTO_SIZE;
 import static lotto.fixture.LottoFixture.로또번호123456;
 import static lotto.fixture.LottoFixture.로또번호123457;
 import static lotto.fixture.WinningNumberFixture.당첨번호123456;
@@ -37,7 +37,7 @@ class WinningNumberTest {
     void size(String[] numbers) {
         assertThatThrownBy(() -> new WinningNumber(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(WINNING_NUMBER + "자리여야합니다.");
+                .hasMessageContaining(LOTTO_SIZE + "개여야합니다.");
     }
 
     @DisplayName("중복된 수를 입력할 수 없다.")

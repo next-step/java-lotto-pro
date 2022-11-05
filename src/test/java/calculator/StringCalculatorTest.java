@@ -48,7 +48,7 @@ class StringCalculatorTest {
 
     @DisplayName("음수를 전달할 경우 RuntimeException 예외가 발생해야 한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"-1,2,3"})
+    @ValueSource(strings = {"-1,-2,-3"})
     void negative(String text) {
         assertThatThrownBy(() -> new Numbers(new TextExtractor(new Delimiters(), text).extract()).sum())
                 .isInstanceOf(IllegalArgumentException.class);
