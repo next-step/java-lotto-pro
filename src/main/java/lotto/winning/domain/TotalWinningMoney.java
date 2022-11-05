@@ -2,6 +2,8 @@ package lotto.winning.domain;
 
 import common.vo.Count;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +15,7 @@ public class TotalWinningMoney {
     public static final int FOUR_MATCH_COUNT = 4;
     public static final int FIVE_MATCH_COUNT = 5;
     public static final int SIX_MATCH_COUNT = 6;
-    private Map<Integer, Count> winningMonies = new HashMap<>();
+    private final Map<Integer, Count> winningMonies = new HashMap<>();
 
     private TotalWinningMoney() {
     }
@@ -33,8 +35,8 @@ public class TotalWinningMoney {
         return sum;
     }
 
-    public double returnRate(int lottoMoney) {
-        return (double) sum() / (double) lottoMoney;
+    public BigDecimal returnRate(int lottoMoney) {
+        return BigDecimal.valueOf(sum()).divide(BigDecimal.valueOf(lottoMoney), 2, RoundingMode.HALF_UP);
     }
 
     private long winningMoney(Integer matchCount) {
