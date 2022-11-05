@@ -1,5 +1,7 @@
 package study.splitter;
 
+import study.message.StringExceptionCode;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,7 +35,6 @@ public class Splitter {
             return m.group(CUSTOM_DELIMITER_NUMBERS_GROUP).split(customDelimiter);
         }
 
-        throw new IllegalArgumentException(
-                "[ERROR] The given string cannot be matched with a custom pattern.");
+        throw new IllegalArgumentException(StringExceptionCode.NOT_MATCH_CUSTOM_PATTERN.getMessage());
     }
 }

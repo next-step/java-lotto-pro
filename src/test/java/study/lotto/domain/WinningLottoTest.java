@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import study.lotto.domain.number.CacheLottoNumbers;
-import study.lotto.domain.number.LottoNumber;
+import study.lotto.domain.number.LottoGenerator;
 import study.message.LottoExceptionCode;
+import study.message.NumberExceptionCode;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +37,7 @@ class WinningLottoTest {
         assertThatThrownBy(() -> {
             new WinningLotto(winningNumbers);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoExceptionCode.INVALID_LOTTO_NUMBER.getMessage());
+                .hasMessage(NumberExceptionCode.INVALID_NUMBER_STRING.getMessage());
     }
 
     @ParameterizedTest
@@ -52,28 +52,29 @@ class WinningLottoTest {
     void drawLots_결과_검증() {
         tempWinningLotto.addBonusBall(7);
 
-        List<Lotto> allNumbersFromStore = Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
-                new Lotto(Arrays.asList(1, 2, 18, 27, 39, 45)));
+        List<Lotto> allNumbersFromStore = new ArrayList<>();
+        allNumbersFromStore.add(Store.buyLottoManually("1, 2, 3, 4, 5, 7"));
+        allNumbersFromStore.add(Store.buyLottoManually("1, 2, 18, 27, 39, 45"));
+
         WinStats stats = tempWinningLotto.drawLots(allNumbersFromStore, new WinStats(2));
-        Map<LottoStatus, Long> printData = stats.getPrintDataWithCountsByLottoStatus();
+        Map<LottoStatus, Long> printData = stats.countsByLottoStatus();
 
         assertAll(
                 () -> assertEquals(1L, printData.get(LottoStatus.SECOND_PLACE)),
-                () -> assertEquals("15000.00", stats.getPrintDataWithProfitRate())
+                () -> assertEquals("15000.00", stats.getProfitRate())
         );
     }
 
     @ParameterizedTest
     @ValueSource(ints = { 7, 8, 9, 23, 36, 41 })
     void matchNumber_winningNumbers에_포함되지_않은_숫자(int num) {
-        assertEquals(0, tempWinningLotto.matchNumber(CacheLottoNumbers.of(num)));
+        assertEquals(0, tempWinningLotto.matchNumber(LottoGenerator.toLottoNumber(num)));
     }
 
     @ParameterizedTest
     @ValueSource(ints = { 1, 2, 3, 4, 5, 6 })
     void matchNumber_winningNumbers에_포함된_숫자(int num) {
-        assertEquals(1, tempWinningLotto.matchNumber(CacheLottoNumbers.of(num)));
+        assertEquals(1, tempWinningLotto.matchNumber(LottoGenerator.toLottoNumber(num)));
     }
 
     @ParameterizedTest
@@ -88,7 +89,7 @@ class WinningLottoTest {
     @ParameterizedTest
     @CsvSource(value = { "7:false", "11:true", "9:false", "23:true", "45:true" }, delimiter = ':')
     void isMatchBonusBall_Lotto가_가지고_있는_숫자_중_bonusBall의_포함_여부(int bonusBall, boolean expected) {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 11, 23, 45));
+        Lotto lotto = Store.buyLottoManually("1, 2, 3, 11, 23, 45");
         tempWinningLotto.addBonusBall(bonusBall);
 
         assertEquals(expected, tempWinningLotto.isMatchBonusBall(lotto));

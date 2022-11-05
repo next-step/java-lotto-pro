@@ -1,15 +1,16 @@
 package study.lotto.domain;
 
-import study.lotto.domain.number.CacheLottoNumbers;
-import study.lotto.domain.number.LottoNumber;
+import static java.util.stream.Collectors.toList;
+
+import study.lotto.domain.number.LottoGenerator;
+import study.lotto.domain.order.Order;
+import study.lotto.domain.order.OrderType;
+import study.splitter.Splitter;
 import study.util.NumberUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Store {
 
@@ -26,25 +27,43 @@ public class Store {
     private static List<Integer> getRangeOfLottoNumbers() {
         return IntStream.rangeClosed(LOTTO_MIN_NUM, LOTTO_MAX_NUM)
                 .boxed()
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
-    public static List<Lotto> buy(int quantity) {
+    public static Lottos buyLottos(Order order) {
+        List<Lotto> lottosByManual = order.orderManually();
+        List<Lotto> lottosByAuto = order.orderAutomatically();
+
+        return new Lottos(Stream.of(lottosByAuto, lottosByManual)
+                .flatMap(Collection::stream)
+                .collect(toList()));
+    }
+
+    public static Lotto buyLottoManually(String lotto) {
+        return convertToLotto(Splitter.split(lotto));
+    }
+
+    private static Lotto convertToLotto(String[] lottoSplit) {
+        return LottoGenerator.generate(Arrays.stream(lottoSplit)
+                .mapToInt((str) -> NumberUtil.convertToPositiveIntNotContainsZero(str.trim()))
+                .boxed()
+                .collect(toList()), OrderType.MANUAL);
+    }
+
+    public static List<Lotto> buyLottosAutomatically(int quantity) {
         List<Lotto> allNumbers = new ArrayList<>();
 
         IntStream.range(NumberUtil.INIT_ZERO, quantity).forEach((i) -> {
-            allNumbers.add(new Lotto(shuffleAndGetLottoNumbers()));
+            allNumbers.add(createLottoByAuto());
         });
 
         return allNumbers;
     }
 
-    private static Set<LottoNumber> shuffleAndGetLottoNumbers() {
+    private static Lotto createLottoByAuto() {
         Collections.shuffle(rangeOfLottoNumbers);
 
-        return rangeOfLottoNumbers.subList(LOTTO_STAT_IDX, LOTTO_END_IDX)
-                .stream()
-                .map(CacheLottoNumbers::of)
-                .collect(Collectors.toSet());
+        return LottoGenerator.generate(
+                rangeOfLottoNumbers.subList(LOTTO_STAT_IDX, LOTTO_END_IDX), OrderType.AUTO);
     }
 }
