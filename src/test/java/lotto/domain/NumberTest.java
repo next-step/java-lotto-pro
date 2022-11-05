@@ -9,7 +9,7 @@ import static lotto.domain.Number.MINIMUM_NUMBER;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@DisplayName("로또")
+@DisplayName("로또 번호")
 class NumberTest {
 
     @DisplayName("1미만의 수를 가질 수 없다.")
