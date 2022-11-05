@@ -2,12 +2,30 @@ package lotto.model.lotto.ticket;
 
 import lotto.constant.utils.StringUtils;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
     private static final int LOTTO_MINIMUM_NUMBER = 1;
     private static final int LOTTO_MAXIMUM_NUMBER = 45;
+    public static final List<LottoNumber> fullCandidateList;
     private final int value;
+
+    static {
+        fullCandidateList = Collections.unmodifiableList(
+                IntStream.rangeClosed(LOTTO_MINIMUM_NUMBER, LOTTO_MAXIMUM_NUMBER)
+                        .mapToObj(LottoNumber::new)
+                        .collect(Collectors.toList())
+        );
+    }
+
+    public static List<LottoNumber> fullCandidateList() {
+        return new ArrayList<>(fullCandidateList);
+    }
 
     public LottoNumber(String token) {
         if (StringUtils.isNullOrEmpty(token)) {
