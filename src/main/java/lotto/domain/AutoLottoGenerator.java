@@ -6,9 +6,15 @@ import java.util.List;
 
 public class AutoLottoGenerator {
 
-    private static final int MIN_LOTTO_NUM = 1;
-    private static final int MAX_LOTTO_NUM = 45;
-    public static final List<LottoNumber> lottoNumbers = genLottoNumbers();
+    private static final int MIN_LOTTO_NUM;
+    private static final int MAX_LOTTO_NUM;
+    public static final List<LottoNumber> lottoNumbers;
+
+    static {
+        MIN_LOTTO_NUM = 1;
+        MAX_LOTTO_NUM= 45;
+        lottoNumbers = genLottoNumbers();
+    }
 
     private static List<LottoNumber> genLottoNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
