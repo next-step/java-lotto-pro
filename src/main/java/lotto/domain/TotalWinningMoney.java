@@ -33,10 +33,6 @@ public class TotalWinningMoney {
         return sum;
     }
 
-    public BigDecimal returnRate(int lottoMoney) {
-        return BigDecimal.valueOf(sum()).divide(BigDecimal.valueOf(lottoMoney), 2, RoundingMode.HALF_UP);
-    }
-
     private long winningMoney(Integer matchCount) {
         return find(matchCount).getMoney();
     }
