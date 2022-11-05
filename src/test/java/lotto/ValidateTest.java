@@ -13,12 +13,6 @@ public class ValidateTest {
     }
 
     @Test
-    void 공백_입력() {
-        assertThatThrownBy(() -> Validate.validateCostNull(""))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
     void 문자열_입력() {
         assertThatThrownBy(() -> Validate.validateOnlyNumber("abc"))
                 .isInstanceOf(IllegalArgumentException.class);

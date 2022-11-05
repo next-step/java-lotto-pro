@@ -7,9 +7,8 @@ package lotto;
 
 import static lotto.Constant.DELIMITER;
 import static lotto.Constant.ERROR_BONUS_NUMBER_DUPLICATED;
+import static lotto.Constant.ERROR_EMPTY_PAY_MONEY;
 import static lotto.Constant.ERROR_EXCEED_PURCHASABLE_COUNT;
-import static lotto.Constant.ERROR_INPUT_EMPTY_COST;
-import static lotto.Constant.ERROR_INPUT_EMPTY_WINNING_NUMBER;
 import static lotto.Constant.ERROR_INPUT_SIX_NUMBER;
 import static lotto.Constant.ERROR_LOTTO_COST;
 import static lotto.Constant.ERROR_LOTTO_NUMBER_DUPLICATED;
@@ -27,22 +26,19 @@ import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 public class Validate {
-    static void validateCostNull(String input) {
-        if (input.isEmpty()) {
-            throw new IllegalArgumentException(ERROR_INPUT_EMPTY_COST);
-        }
-    }
-
     static void validatePay(String input) {
         if (Integer.parseInt(input) < LOTTO_PRICE) {
             throw new IllegalArgumentException(ERROR_LOTTO_COST);
         }
     }
 
-    static void validateOnlyNumber(String input) {
+    static void validateEmpty(String input) {
         if (input.isEmpty()) {
-            throw new IllegalArgumentException(ERROR_ONLY_NUMBER);
+            throw new IllegalArgumentException(ERROR_EMPTY_PAY_MONEY);
         }
+    }
+
+    static void validateOnlyNumber(String input) {
         if (!Pattern.matches(REGEX_ONLY_NUMBER, input)) {
             throw new IllegalArgumentException(ERROR_ONLY_NUMBER);
         }
@@ -51,12 +47,6 @@ public class Validate {
     static void validateNumberRange(int number) {
         if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
             throw new IllegalArgumentException(ERROR_NUMBER_OUT_OF_RANGE);
-        }
-    }
-
-    static void validateLottoNumberNull(String input) {
-        if (input.isEmpty()) {
-            throw new IllegalArgumentException(ERROR_INPUT_EMPTY_WINNING_NUMBER);
         }
     }
 

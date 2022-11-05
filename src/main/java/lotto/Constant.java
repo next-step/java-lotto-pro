@@ -30,11 +30,10 @@ public class Constant {
     public static final int LOTTO_START_NUMBER = 1;
     public static final int LOTTO_END_NUMBER = 45;
     public static final String DELIMITER = "[, ]";
+    public static final String ERROR_EMPTY_PAY_MONEY = "금액을 입력해주세요.";
     public static final String ERROR_ONLY_NUMBER = "숫자만 입력할 수 있습니다.";
     public static final String ERROR_NUMBER_OUT_OF_RANGE = "숫자는 1 ~ 45까지 입력할 수 있습니다.";
     public static final String ERROR_LOTTO_COST = "로또 복권 1장의 구입 가격 " + LOTTO_PRICE + "원 입니다.";
-    public static final String ERROR_INPUT_EMPTY_COST = "금액을 입력해주세요.";
-    public static final String ERROR_INPUT_EMPTY_WINNING_NUMBER = "당첨 번호를 입력해주세요.";
     public static final String ERROR_INPUT_SIX_NUMBER = "로또 번호 6개를 입력해주세요.";
     public static final String ERROR_LOTTO_NUMBER_DUPLICATED = "로또 번호는 중복될 수 없습니다.";
     public static final String ERROR_BONUS_NUMBER_DUPLICATED = "입력하신 보너스 번호는 지난주 당첨 번호에 이미 있는 번호입니다.";
