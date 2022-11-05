@@ -57,7 +57,7 @@ class WinningNumberTest {
                 .isInstanceOf(NumberFormatException.class);
     }
 
-    @DisplayName("숫자만 입력 가능하다.")
+    @DisplayName("생성")
     @ParameterizedTest
     @MethodSource("lotto.fixture.WinningNumberFixture#constructor")
     void constructor(String[] numbers) {
