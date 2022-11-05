@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import static lotto.domain.Lotto.LOTTO_SIZE;
 import static lotto.domain.Number.MAXIMUM_NUMBER;
 import static lotto.domain.Number.MINIMUM_NUMBER;
 
@@ -55,6 +56,6 @@ public class LottoGenerator {
 
     private Lotto createLotto() {
         Collections.shuffle(this.range);
-        return new Lotto(this.range.subList(0, 6));
+        return new Lotto(this.range.subList(ZERO, LOTTO_SIZE));
     }
 }

@@ -4,10 +4,12 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map;
 
+import static lotto.domain.LottoMoney.LOTTO_MINIMUM_PRICE;
 import static lotto.domain.WinningMoney.find;
 
 public class Statistics {
     public static final int SUM_INIT = 0;
+    public static final int DIGIT = 2;
     private final Lottos lottos;
     private final WinningNumber winningNumber;
 
@@ -21,7 +23,7 @@ public class Statistics {
     }
 
     public double returnRate() {
-        return BigDecimal.valueOf(sum()).divide(BigDecimal.valueOf((int) this.lottos.size() * 1000), 2, RoundingMode.HALF_UP).doubleValue();
+        return BigDecimal.valueOf(sum()).divide(BigDecimal.valueOf((int) this.lottos.size() * LOTTO_MINIMUM_PRICE), DIGIT, RoundingMode.HALF_UP).doubleValue();
     }
 
     public int sum() {

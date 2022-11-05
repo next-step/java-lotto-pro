@@ -24,6 +24,10 @@ public enum WinningMoney {
         return money;
     }
 
+    public int getCount() {
+        return count;
+    }
+
     public static WinningMoney find(int count) {
         return Arrays.stream(values())
                 .filter(winningMoney -> winningMoney.count == count)
