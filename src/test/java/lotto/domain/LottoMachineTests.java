@@ -19,9 +19,9 @@ class LottoMachineTests {
         List<LottoNumber> lottoNumbers = createLottoNumbers();
         LottoMachine lottoMachine = new LottoMachine(money, () -> lottoNumbers);
 
-        Lottos lottos = lottoMachine.issue(money);
+        Lottos lottos = lottoMachine.issue(money, Lottos.empty());
 
-        Lottos expectedLottos = new Lottos(singletonList(new Lotto(lottoNumbers)));
+        Lottos expectedLottos = new Lottos(singletonList(Lotto.auto(lottoNumbers)));
         assertThat(lottos).isEqualTo(expectedLottos);
     }
 
@@ -33,7 +33,7 @@ class LottoMachineTests {
         List<LottoNumber> lottoNumbers = createLottoNumbers();
         LottoMachine lottoMachine = new LottoMachine(1_500, () -> lottoNumbers);
 
-        Lottos lottos = lottoMachine.issue(money);
+        Lottos lottos = lottoMachine.issue(money, Lottos.empty());
         assertThat(lottos).isEqualTo(new Lottos(new ArrayList<>()));
     }
 
