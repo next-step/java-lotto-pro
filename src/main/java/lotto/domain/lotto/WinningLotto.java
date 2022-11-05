@@ -1,33 +1,25 @@
 package lotto.domain.lotto;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-
-import lotto.util.InputSplitter;
 
 public class WinningLotto {
 	private final Lotto winLotto;
 	private final LottoNumber bonusNumber;
 
-	public WinningLotto(List<Integer> winNumbers, int bonusNumber) {
-		validateDuplicateBonusNumber(winNumbers, bonusNumber);
-		this.winLotto = new InputLottoGenerator(winNumbers).generate();
-		this.bonusNumber = LottoNumber.from(bonusNumber);
+	public WinningLotto(String inputWinLotto, int inputBonusNumber) {
+		Lotto winLotto = new InputLottoGenerator(inputWinLotto).generate();
+		LottoNumber bonusNumber = LottoNumber.from(inputBonusNumber);
+		validateDuplicateBonusNumber(winLotto, bonusNumber);
+		this.winLotto = winLotto;
+		this.bonusNumber = bonusNumber;
 	}
 
-	public static WinningLotto from(String input, String bonusBallInput) {
-		return new WinningLotto(convertInputToIntegerList(input), Integer.parseInt(bonusBallInput));
+	public static WinningLotto from(String input, int bonusBallInput) {
+		return new WinningLotto(input, bonusBallInput);
 	}
 
-	private static List<Integer> convertInputToIntegerList(String input) {
-		return InputSplitter.splitText(input).stream()
-			.map(Integer::parseInt)
-			.collect(Collectors.toList());
-	}
-
-	private void validateDuplicateBonusNumber(List<Integer> winNumbers, int bonusNumber) {
-		if (winNumbers.contains(bonusNumber)) {
+	private void validateDuplicateBonusNumber(Lotto winLotto, LottoNumber bonusNumber) {
+		if (winLotto.contains(bonusNumber)) {
 			throw new IllegalStateException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
 		}
 	}

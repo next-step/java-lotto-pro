@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import lotto.domain.amount.Amount;
 import lotto.domain.amount.Amounts;
-import lotto.domain.quantity.Quantity;
 import lotto.domain.yield.DefaultYieldStrategy;
 import lotto.domain.yield.Yield;
 
@@ -38,8 +37,8 @@ public class LottoResults {
 		return amounts.totalPrice();
 	}
 
-	public Quantity quantity() {
-		return Quantity.from(this.lottoResults.size());
+	public int getQuantity() {
+		return this.lottoResults.size();
 	}
 
 	public Yield yield(Amount purchaseAmount) {
