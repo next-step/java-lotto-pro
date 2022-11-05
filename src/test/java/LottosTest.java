@@ -121,5 +121,4 @@ class LottosTest {
 
         assertThat(lottos.getLotto()).hasSize(4);
     }
-
 }
