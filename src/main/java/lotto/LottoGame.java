@@ -11,22 +11,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
-    private final int money;
-    private final LottoNumberGenerator lottoNumberGenerator;
+    private static final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+    private final int totalMoney;
+    private int balance;
 
-    public LottoGame(int money, LottoNumberGenerator lottoNumberGenerator) {
-        this.money = money;
-        this.lottoNumberGenerator = lottoNumberGenerator;
+    public LottoGame(int totalMoney) {
+        this.totalMoney = totalMoney;
+        this.balance = totalMoney;
     }
 
-    public int getPurchaseCount() {
-        return money / LOTTO_PRICE;
+    public int getTotalMoney() {
+        return totalMoney;
     }
 
-    public List<LottoNumbers> purchaseLotto(int purchaseCount) {
+    public int getBalance() {
+        return balance;
+    }
+
+    public int getAutoPurchasableCount() {
+        return balance / LOTTO_PRICE;
+    }
+
+    public void minusBalance() {
+        if (balance < LOTTO_PRICE) {
+            throw new IllegalArgumentException();
+        }
+        balance -= LOTTO_PRICE;
+    }
+
+    public List<LottoNumbers> autoPurchaseLotto(int purchaseCount) {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
-            lottoNumbers.add(LottoNumbers.from(lottoNumberGenerator.generateSixNumbers()));
+            minusBalance();
+            lottoNumbers.add(LottoNumbers.from(lottoNumberGenerator.autoGenerateNumbers()));
+        }
+        return lottoNumbers;
+    }
+
+    public List<LottoNumbers> manualPurchaseLotto(int purchaseCount) {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        for (int i = 0; i < purchaseCount; i++) {
+            minusBalance();
+            lottoNumbers.add(LottoNumbers.from(lottoNumberGenerator.manualGenerateNumbers()));
         }
         return lottoNumbers;
     }

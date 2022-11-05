@@ -35,8 +35,8 @@ public class Statistic {
         prize.put(MISS, ZERO);
     }
 
-    public void countPrize(PurchaseLottoNumber purchaseLottoNumber, LottoNumber bonus) {
-        addCount(purchaseLottoNumber.getRank(winningNumbers, bonus));
+    public void countPrize(PurchaseLottoNumbers purchaseLottoNumbers, LottoNumber bonus) {
+        addCount(purchaseLottoNumbers.getRank(winningNumbers, bonus));
     }
 
     private void addCount(List<Rank> ranks) {

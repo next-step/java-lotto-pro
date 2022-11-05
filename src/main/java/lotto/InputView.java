@@ -6,6 +6,8 @@
 package lotto;
 
 import static lotto.Constant.INPUT_BONUS_NUMBER_LAST_WEEK;
+import static lotto.Constant.INPUT_MANUAL_LOTTO_NUMBER;
+import static lotto.Constant.INPUT_MANUAL_PURCHASE;
 import static lotto.Constant.INPUT_PAY_MONEY;
 import static lotto.Constant.INPUT_WINNING_NUMBER_LAST_WEEK;
 
@@ -28,6 +30,20 @@ public class InputView {
         System.out.println(INPUT_PAY_MONEY);
     }
 
+    int inputManualPurchase() {
+        printInputManualPurchase();
+        String input = scanner.nextLine();
+        return Integer.parseInt(input);
+    }
+
+    private void printInputManualPurchase() {
+        System.out.println(INPUT_MANUAL_PURCHASE);
+    }
+
+    public void printInputManualLottoNumber() {
+        System.out.println(INPUT_MANUAL_LOTTO_NUMBER);
+    }
+
     LottoNumbers inputWinningNumberLastWeek() {
         printInputWinningNumberLastWeek();
         String input = scanner.nextLine();
@@ -36,7 +52,7 @@ public class InputView {
         Validate.validateWinningNumberCount(input);
         Validate.validateWinningNumberRange(input);
         Validate.validateWinningNumberDuplicate(input);
-        return spliter.split(input);
+        return LottoNumbers.from(spliter.splitToList(input));
     }
 
     private void printInputWinningNumberLastWeek() {

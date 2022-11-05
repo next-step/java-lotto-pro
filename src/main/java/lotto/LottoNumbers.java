@@ -7,29 +7,22 @@ package lotto;
 
 import static lotto.Rank.valueOf;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private final Set<LottoNumber> sixNumbers;
+    private final List<LottoNumber> sixNumbers;
 
-    private LottoNumbers(Set<LottoNumber> sixNumbers) {
+    private LottoNumbers(List<LottoNumber> sixNumbers) {
         this.sixNumbers = sixNumbers;
     }
 
-    public static LottoNumbers from(Set<LottoNumber> sixNumbers) {
-        return new LottoNumbers(sixNumbers);
-    }
-
     public static LottoNumbers from(List<Integer> sixNumbers) {
-        return new LottoNumbers(toSet(sixNumbers));
-    }
-
-    private static Set<LottoNumber> toSet(List<Integer> sixNumbers) {
-        return sixNumbers.stream()
+        Collections.sort(sixNumbers);
+        return new LottoNumbers(sixNumbers.stream()
                 .map(LottoNumber::from)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList()));
     }
 
     public boolean contains(LottoNumber lottoNumber) {

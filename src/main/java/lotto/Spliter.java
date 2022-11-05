@@ -7,17 +7,17 @@ package lotto;
 
 import static lotto.Constant.DELIMITER;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class Spliter {
-    public LottoNumbers split(String input) {
+    public List<Integer> splitToList(String input) {
+        List<Integer> lottoNumbers = new ArrayList<>();
         StringTokenizer token = new StringTokenizer(input, DELIMITER);
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
         while (token.hasMoreTokens()) {
-            lottoNumbers.add(LottoNumber.from(token.nextToken()));
+            lottoNumbers.add(Integer.parseInt(token.nextToken()));
         }
-        return LottoNumbers.from(lottoNumbers);
+        return lottoNumbers;
     }
 }

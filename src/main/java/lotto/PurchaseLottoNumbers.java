@@ -3,10 +3,10 @@ package lotto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PurchaseLottoNumber {
+public class PurchaseLottoNumbers {
     private final List<LottoNumbers> purchaseLottoNumbers;
 
-    public PurchaseLottoNumber(List<LottoNumbers> purchaseLottoNumbers) {
+    public PurchaseLottoNumbers(List<LottoNumbers> purchaseLottoNumbers) {
         this.purchaseLottoNumbers = purchaseLottoNumbers;
     }
 
@@ -22,5 +22,9 @@ public class PurchaseLottoNumber {
         return purchaseLottoNumbers.stream()
                 .map(lottoNumbers -> lottoNumbers.getRank(winningNumbers, bonus))
                 .collect(Collectors.toList());
+    }
+
+    public void addLottoNumbers(List<LottoNumbers> lottoNumbers) {
+        purchaseLottoNumbers.addAll(lottoNumbers);
     }
 }

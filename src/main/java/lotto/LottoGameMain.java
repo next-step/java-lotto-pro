@@ -10,19 +10,24 @@ public class LottoGameMain {
     private static final ResultView resultView = new ResultView();
 
     public static void main(String[] args) {
-        int payMoney = inputView.inputPay();
-        LottoGame lottoGame = new LottoGame(payMoney, new LottoNumberAutoGenerator());
+        LottoGame lottoGame = new LottoGame(inputView.inputPay());
 
-        int purchaseCount = lottoGame.getPurchaseCount();
-        resultView.printResultPay(purchaseCount);
+        int manualPurchaseCount = inputView.inputManualPurchase();
 
-        PurchaseLottoNumber purchaseLottoNumbers = new PurchaseLottoNumber(lottoGame.purchaseLotto(purchaseCount));
+        inputView.printInputManualLottoNumber();
+        PurchaseLottoNumbers purchaseLottoNumbers = new PurchaseLottoNumbers(
+                lottoGame.manualPurchaseLotto(manualPurchaseCount));
+
+        int autoPurchaseCount = lottoGame.getAutoPurchasableCount();
+        resultView.printResultPay(autoPurchaseCount, manualPurchaseCount);
+
+        purchaseLottoNumbers.addLottoNumbers(lottoGame.autoPurchaseLotto(autoPurchaseCount));
         resultView.printResultPurchase(purchaseLottoNumbers);
 
         LottoNumbers winningNumbers = inputView.inputWinningNumberLastWeek();
         Statistic statistic = new Statistic(winningNumbers);
         statistic.countPrize(purchaseLottoNumbers, inputView.inputBonusNumberLastWeek(winningNumbers));
 
-        resultView.printResultWinningStatistics(payMoney, statistic);
+        resultView.printResultWinningStatistics(lottoGame.getTotalMoney(), statistic);
     }
 }
