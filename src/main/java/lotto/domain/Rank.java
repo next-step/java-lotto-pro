@@ -13,6 +13,8 @@ public enum Rank {
     private int countOfMatch;
     private int winningMoney;
 
+    public static final int RANK_BONUS_COUNT = 5;
+
     private Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
@@ -28,19 +30,29 @@ public enum Rank {
 
     public static Rank match(Lotto lotto, Lotto winLotto) {
         int matchCount = lotto.countMatchNumber(winLotto);
-        return findRewardType(matchCount);
+        return findRankNoBonus(matchCount);
     }
 
-    private static Rank findRewardType(int matchCount) {
+    private static Rank findRankNoBonus(int matchCount) {
         return Arrays.stream(Rank.values())
                 .filter(r -> r.getCountOfMatch() == matchCount)
+                .filter(r -> !r.equals(SECOND))
                 .findAny()
                 .orElse(MISS);
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        // TODO 일치하는 수를 로또 등수로 변경한다. enum 값 목록은 "Rank[] ranks = values();"와 같이 가져올 수 있다.
-        return null;
+        if (matchBonus) {
+            return findRankBonus(countOfMatch);
+        }
+        return findRankNoBonus(countOfMatch);
+    }
+
+    private static Rank findRankBonus(int countOfMatch) {
+        if (countOfMatch == RANK_BONUS_COUNT) {
+            return SECOND;
+        }
+        return findRankNoBonus(countOfMatch);
     }
 
 }

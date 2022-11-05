@@ -7,8 +7,8 @@ public class LottoResult {
     Map<Rank, Integer> rewardMap = new HashMap<>();
     int totalReward;
     double totalProfit;
-    public LottoResult(Lottos lottos, Lotto winLotto, int totalLottoPrice) {
-        calculateWinCount(lottos, winLotto);
+    public LottoResult(Lottos lottos, Lotto winLotto, int totalLottoPrice, LottoNumber bonus) {
+        calculateWinCount(lottos, winLotto, bonus);
         calculateTotalReward();
         calculateProfit(totalLottoPrice);
     }
@@ -23,8 +23,8 @@ public class LottoResult {
         }
     }
 
-    private void calculateWinCount(Lottos lottos, Lotto winLotto) {
-        rewardMap = Lottos.calculateWinResult(lottos, winLotto);
+    private void calculateWinCount(Lottos lottos, Lotto winLotto, LottoNumber bonus) {
+        rewardMap = Lottos.calculateWinResult(lottos, winLotto, bonus);
     }
 
     public int getRewardMapCount(Rank type) {

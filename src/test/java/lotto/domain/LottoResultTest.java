@@ -13,18 +13,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoResultTest {
     LottoResult result;
     Lottos lottos;
+    LottoNumber lottoNumber;
 
     @BeforeEach
     void init() {
       List<Lotto> lottoList = new ArrayList<>();
       lottoList.add(new Lotto(Arrays.asList(1,10,20,35,38,41)));
+      lottoList.add(new Lotto(Arrays.asList(1,3,10,20,35,38)));
       lottoList.add(new Lotto(Arrays.asList(1,10,20,35,38,45)));
       lottoList.add(new Lotto(Arrays.asList(1,10,20,35,40,45)));
       lottoList.add(new Lotto(Arrays.asList(1,10,20,36,42,44)));
       lottoList.add(new Lotto(Arrays.asList(1,10,22,36,42,44)));
       Lotto winLotto = new Lotto(Arrays.asList(1,10,20,35,38,41));
       lottos = new Lottos(lottoList);
-      result = new LottoResult(lottos, winLotto, 5000);
+      lottoNumber = new LottoNumber(3);
+      result = new LottoResult(lottos, winLotto, 6000,lottoNumber);
     }
 
     @Test
@@ -34,6 +37,7 @@ public class LottoResultTest {
         assertThat(result.getRewardMapCount(Rank.SECOND)).isEqualTo(1);
         assertThat(result.getRewardMapCount(Rank.THIRD)).isEqualTo(1);
         assertThat(result.getRewardMapCount(Rank.FOURTH)).isEqualTo(1);
+        assertThat(result.getRewardMapCount(Rank.FIFTH)).isEqualTo(1);
         assertThat(result.getRewardMapCount(Rank.MISS)).isEqualTo(1);
     }
 
@@ -44,7 +48,8 @@ public class LottoResultTest {
                 (double) (Rank.FIRST.getWinningMoney()
                         + Rank.SECOND.getWinningMoney()
                         + Rank.THIRD.getWinningMoney()
-                        + Rank.FOURTH.getWinningMoney()) / (lottos.size() * 1000)
+                        + Rank.FOURTH.getWinningMoney()
+                        + Rank.FIFTH.getWinningMoney()) / (lottos.size() * 1000)
         );
 
     }

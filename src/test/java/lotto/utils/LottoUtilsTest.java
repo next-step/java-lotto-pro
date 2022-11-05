@@ -33,4 +33,12 @@ public class LottoUtilsTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    @DisplayName("LottoUtils Bonus 숫자 아닌 값 입력 시, 에러 발생")
+    public void LottoUtils_bonus_숫자_아닌_값_에러_발생() {
+        assertThatThrownBy(() -> {
+            String str = "a,";
+            LottoUtils.StringToBonusNumber(str);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }

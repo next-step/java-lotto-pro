@@ -17,7 +17,7 @@ public class LottoOutPutView {
     public static void writeWinResult(LottoResult result) {
         System.out.println(LottoMessage.OUTPUT_LOTTO_RESULT);
         System.out.printf(LottoMessage.OUTPUT_REWARD_RESULT,
-                result.getRewardMapCount(Rank.FOURTH),result.getRewardMapCount(Rank.THIRD),result.getRewardMapCount(Rank.SECOND),result.getRewardMapCount(Rank.FIRST));
+                result.getRewardMapCount(Rank.FIFTH),result.getRewardMapCount(Rank.FOURTH),result.getRewardMapCount(Rank.THIRD),result.getRewardMapCount(Rank.SECOND),result.getRewardMapCount(Rank.FIRST));
         System.out.printf(LottoMessage.OUTPUT_PROFIT_RESULT, result.getTotalProfit());
         if (result.getTotalProfit() < 1) {
             System.out.println(LottoMessage.OUTPUT_PROFIT_UNDER);

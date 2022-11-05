@@ -8,10 +8,10 @@ public class Lottos{
         this.lottoList = lottoList;
     }
 
-    public static Map<Rank, Integer> calculateWinResult(Lottos lottos, Lotto winLotto) {
+    public static Map<Rank, Integer> calculateWinResult(Lottos lottos, Lotto winLotto, LottoNumber bonus) {
         Map<Rank, Integer> rewardMap = new HashMap<>();
         for (Lotto lotto : lottoList) {
-            Rank rewardType = Rank.match(lotto, winLotto);
+            Rank rewardType = Rank.valueOf(lotto.countMatchNumber(winLotto), lotto.matchBonus(bonus));
             rewardMap.put(rewardType, rewardMap.getOrDefault(rewardType, 0) + 1);
         }
         return rewardMap;
