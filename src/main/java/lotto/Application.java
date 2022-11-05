@@ -10,7 +10,6 @@ import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResultStatsCalculator;
 import lotto.domain.LottoStore;
 import lotto.domain.Money;
-import lotto.domain.UniqueLottoNumbersSupplier;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -22,7 +21,7 @@ public class Application {
         final LottoCustomer customer = new LottoCustomer(parseMoney(InputView.getPurchaseMoney()));
         final LottoStore store = new LottoStore(
             DEFAULT_LOTTO_TICKET_FEE,
-            new UniqueLottoNumbersSupplier());
+            () -> LottoNumbers.of(1, 2, 3, 4, 5, 6));
 
         store.sellAllTo(customer);
 
@@ -32,7 +31,8 @@ public class Application {
 
         final LottoResultStatsCalculator resultCalculator = new LottoResultStatsCalculator(
             customer.getPurchasedLottoTickets(),
-            mapToLottoNumbers(InputView.getWiningLottoNumbers())
+            mapToLottoNumbers(InputView.getWiningLottoNumbers()),
+            LottoNumber.valueOf(7)
         );
 
         ResultView.printEmptyLine();

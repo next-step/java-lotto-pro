@@ -7,22 +7,29 @@ public final class LottoResultStatsCalculator {
 
     private final List<LottoTicket> lottoTickets;
     private final LottoNumbers winingLottoNumbers;
+    private final LottoNumber bonusLottoNumber;
 
     public LottoResultStatsCalculator(
         final List<LottoTicket> lottoTickets,
-        final LottoNumbers winingLottoNumbers
+        final LottoNumbers winingLottoNumbers,
+        final LottoNumber bonusLottoNumber
     ) {
         this.lottoTickets = lottoTickets;
         this.winingLottoNumbers = winingLottoNumbers;
+        this.bonusLottoNumber = bonusLottoNumber;
     }
 
     public LottoResultStatistics computeLottoResultStats() {
         final List<LottoResult> lottoResults = lottoTickets.stream()
             .map(LottoTicket::getLottoNumbers)
-            .map(winingLottoNumbers::matchTo)
-            .map(LottoResult::valueOf)
+            .map(this::mapToLottoResult)
             .collect(Collectors.toList());
         return new LottoResultStatistics(lottoResults);
+    }
+
+    private LottoResult mapToLottoResult(final LottoNumbers lottoNumbers) {
+        return LottoResult.valueOf(lottoNumbers.matchTo(winingLottoNumbers),
+            lottoNumbers.contains(bonusLottoNumber));
     }
 
     public Double computeProfitRate() {

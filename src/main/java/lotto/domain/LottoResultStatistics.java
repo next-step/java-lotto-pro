@@ -18,11 +18,13 @@ public final class LottoResultStatistics {
         }
     }
 
+    // TODo : Test
     public Money getTotalWiningMoney() {
         return getFirstRankPrizeMoney().multiply(getFirstRankCount())
             .plus(getSecondRankPrizeMoney().multiply(getSecondRankCount()))
             .plus(getThirdRankPrizeMoney().multiply(getThirdRankCount()))
-            .plus(getFourthRankPrizeMoney().multiply(getFourthRankCount()));
+            .plus(getFourthRankPrizeMoney().multiply(getFourthRankCount()))
+            .plus(getFifthRankPrizeMoney().multiply(getFifthRankCount()));
     }
 
     public LottoNumberMatchCount getFirstRankLottoNumberMatchCount() {
@@ -73,6 +75,18 @@ public final class LottoResultStatistics {
         return LottoResult.FOURTH.getPrizeMoney();
     }
 
+    public LottoNumberMatchCount getFifthRankLottoNumberMatchCount() {
+        return LottoResult.FIFTH.getLottoNumberMatchCount();
+    }
+
+    public int getFifthRankCount() {
+        return getCount(LottoResult.FIFTH);
+    }
+
+    public Money getFifthRankPrizeMoney() {
+        return LottoResult.FIFTH.getPrizeMoney();
+    }
+
     private int getCount(final LottoResult result) {
         return resultCounts.getOrDefault(result, DEFAULT_COUNT);
     }
@@ -80,6 +94,5 @@ public final class LottoResultStatistics {
     private void increaseResultCount(final LottoResult result) {
         resultCounts.put(result, resultCounts.getOrDefault(result, DEFAULT_COUNT) + INCREASE_STEP);
     }
-
 
 }

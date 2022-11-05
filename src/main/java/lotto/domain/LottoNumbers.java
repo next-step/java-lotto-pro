@@ -30,6 +30,10 @@ public final class LottoNumbers {
         return LottoNumberMatchCount.valueOf(matchedCount);
     }
 
+    public boolean contains(final LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
+
     public List<Integer> getValue() {
         return numbers.stream()
             .sorted(LottoNumbers::compareLottoNumber)

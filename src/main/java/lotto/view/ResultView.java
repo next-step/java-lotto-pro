@@ -77,23 +77,23 @@ public final class ResultView {
 
     private static String getSecondRankResultStatsMessage(final LottoResultStatistics resultStats) {
         return getRankResultStatsMessage(
-            resultStats.getSecondRankLottoNumberMatchCount(),
-            resultStats.getSecondRankPrizeMoney(),
-            resultStats.getSecondRankCount());
-    }
-
-    private static String getThirdRankResultStatsMessage(final LottoResultStatistics resultStats) {
-        return getRankResultStatsMessage(
             resultStats.getThirdRankLottoNumberMatchCount(),
             resultStats.getThirdRankPrizeMoney(),
             resultStats.getThirdRankCount());
     }
 
-    private static String getFourthRankResultStatsMessage(final LottoResultStatistics resultStats) {
+    private static String getThirdRankResultStatsMessage(final LottoResultStatistics resultStats) {
         return getRankResultStatsMessage(
             resultStats.getFourthRankLottoNumberMatchCount(),
             resultStats.getFourthRankPrizeMoney(),
             resultStats.getFourthRankCount());
+    }
+
+    private static String getFourthRankResultStatsMessage(final LottoResultStatistics resultStats) {
+        return getRankResultStatsMessage(
+            resultStats.getFifthRankLottoNumberMatchCount(),
+            resultStats.getFifthRankPrizeMoney(),
+            resultStats.getFifthRankCount());
     }
 
     private static String getRankResultStatsMessage(
