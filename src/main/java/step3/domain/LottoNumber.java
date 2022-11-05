@@ -25,10 +25,6 @@ public class LottoNumber {
         return lottoNumber;
     }
 
-    public int getNumber() {
-        return lottoNumber;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

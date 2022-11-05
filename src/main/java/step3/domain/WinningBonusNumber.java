@@ -1,6 +1,5 @@
 package step3.domain;
 
-import java.util.List;
 import java.util.Objects;
 
 public class WinningBonusNumber {
@@ -10,10 +9,6 @@ public class WinningBonusNumber {
     public WinningBonusNumber(String winningNumbers, String bonusNumber) {
         this.winningNumber = new Lotto(winningNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
-    }
-
-    public List<LottoNumber> getWinningNumber() {
-        return winningNumber.getWinningNumbers();
     }
 
     public boolean checkBonusNumber(Lotto lottoNumbers) {

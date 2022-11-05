@@ -12,9 +12,9 @@ public class LottoNumberTest {
     @DisplayName("로또 숫자 생성")
     public void lotto_number() {
         LottoNumber lottoNumber = new LottoNumber("1");
-        assertThat(lottoNumber.getNumber()).isEqualTo(1);
+        assertThat(lottoNumber).isEqualTo(lottoNumber);
         LottoNumber lottoNumber45 = new LottoNumber("45");
-        assertThat(lottoNumber45.getNumber()).isEqualTo(45);
+        assertThat(lottoNumber45.toString()).isEqualTo("45");
     }
 
     @Test

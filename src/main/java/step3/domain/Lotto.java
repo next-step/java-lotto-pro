@@ -54,11 +54,7 @@ public class Lotto {
     public boolean matchBonusNumber(WinningBonusNumber winningBonusNumber) {
         return winningBonusNumber.checkBonusNumber(this);
     }
-
-    public List<LottoNumber> getWinningNumbers() {
-        return this.lottoNumbers;
-    }
-
+    
     private static String[] splitByDelimiter(String text) {
         return text.replaceAll(SPACE_REGEX, EMPTY).split(DELIMITER_REGEX);
     }

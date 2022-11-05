@@ -19,9 +19,9 @@ public class WinningBonusNumberTest {
     @Test
     @DisplayName("보너스 번호 생성")
     public void WinningBonusNumber_Create() {
-        WinningBonusNumber winningBonusNumber = new WinningBonusNumber("1,2,3,4,5,6","7");
+        WinningBonusNumber winningBonusNumber = new WinningBonusNumber("1,2,3,4,5,6", "7");
         assertThat(winningBonusNumber).isEqualTo(winningBonusNumber);
-        assertThat(winningBonusNumber.getWinningNumber()).isEqualTo(winningNumber.getWinningNumbers());
+        assertThat(winningBonusNumber.checkBonusNumber(winningNumber)).isFalse();
     }
     
     @Test
