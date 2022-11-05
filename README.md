@@ -108,8 +108,10 @@
     * "수동으로 구매할 번호를 입력해주세요." 추가
       * 1 - 45 범위 안의 숫자인지 유효성 검사
 * Validate
-  * 입력받은 금액과 비교해서 입력한 수 만큼 구매할 수 있는지 유효성 검사하는 기능 구현
-  * 사용자가 잘못된 값을 입력했을 Optional을 적용해 NullPointerException이 발생하지 않도록 한다.
+  * 지난주 당첨 번호만 검증하던 메소드가 수동 번호 입력도 검증해야 해서 메소드 명 변경
+    * validateWinningNumber~ -> validateLottoNumber~
 * LottoNumberGenerator
   * 인터페이스 -> 클래스로 수정
   * 수동 번호 생성 메소드 추가
+    * 번호 입력시 1 - 45 범위 안의 숫자인지 유효성 검사
+    * 사용자가 잘못된 값을 입력했을 Optional을 적용해 NullPointerException이 발생하지 않도록 한다.
