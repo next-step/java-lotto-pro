@@ -30,21 +30,21 @@ public class LottoResultTest {
     @Test
     @DisplayName("LottoResult 당첨 개수 반환")
     public void LottoResult_match_Type() {
-        assertThat(result.getRewardMapCount(RewardType.FIRST)).isEqualTo(1);
-        assertThat(result.getRewardMapCount(RewardType.SECOND)).isEqualTo(1);
-        assertThat(result.getRewardMapCount(RewardType.THIRD)).isEqualTo(1);
-        assertThat(result.getRewardMapCount(RewardType.FOURTH)).isEqualTo(1);
-        assertThat(result.getRewardMapCount(RewardType.MISS)).isEqualTo(1);
+        assertThat(result.getRewardMapCount(Rank.FIRST)).isEqualTo(1);
+        assertThat(result.getRewardMapCount(Rank.SECOND)).isEqualTo(1);
+        assertThat(result.getRewardMapCount(Rank.THIRD)).isEqualTo(1);
+        assertThat(result.getRewardMapCount(Rank.FOURTH)).isEqualTo(1);
+        assertThat(result.getRewardMapCount(Rank.MISS)).isEqualTo(1);
     }
 
     @Test
     @DisplayName("LottoResult 수익률 테스트")
     void LottoResult_수익률_테스트(){
         assertThat(result.getTotalProfit()).isEqualTo(
-                (double) (RewardType.FIRST.getRewardPrice()
-                        + RewardType.SECOND.getRewardPrice()
-                        + RewardType.THIRD.getRewardPrice()
-                        + RewardType.FOURTH.getRewardPrice()) / (lottos.size() * 1000)
+                (double) (Rank.FIRST.getWinningMoney()
+                        + Rank.SECOND.getWinningMoney()
+                        + Rank.THIRD.getWinningMoney()
+                        + Rank.FOURTH.getWinningMoney()) / (lottos.size() * 1000)
         );
 
     }

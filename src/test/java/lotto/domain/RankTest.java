@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RewardTypeTest {
+public class RankTest {
 
     @Test
     @DisplayName("Lotto, 기준 Lotto 와 match 되는 숫자에 따른 Reward Type 반환")
@@ -18,6 +18,6 @@ public class RewardTypeTest {
         List<Integer> winNumbers = new ArrayList<>(Arrays.asList(1, 20, 30, 40, 34, 45));
         Lotto lotto = new Lotto(numbers);
         Lotto winLotto = new Lotto(winNumbers);
-        assertThat(RewardType.match(lotto, winLotto)).isEqualTo(RewardType.THIRD);
+        assertThat(Rank.match(lotto, winLotto)).isEqualTo(Rank.FOURTH);
     }
 }

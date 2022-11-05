@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    Map<RewardType, Integer> rewardMap = new HashMap<>();
+    Map<Rank, Integer> rewardMap = new HashMap<>();
     int totalReward;
     double totalProfit;
     public LottoResult(Lottos lottos, Lotto winLotto, int totalLottoPrice) {
@@ -18,8 +18,8 @@ public class LottoResult {
     }
 
     private void calculateTotalReward() {
-        for (RewardType reward : RewardType.values()) {
-            totalReward += rewardMap.getOrDefault(reward,0) * reward.getRewardPrice();
+        for (Rank reward : Rank.values()) {
+            totalReward += rewardMap.getOrDefault(reward,0) * reward.getWinningMoney();
         }
     }
 
@@ -27,7 +27,7 @@ public class LottoResult {
         rewardMap = Lottos.calculateWinResult(lottos, winLotto);
     }
 
-    public int getRewardMapCount(RewardType type) {
+    public int getRewardMapCount(Rank type) {
         return rewardMap.getOrDefault(type, 0);
     }
 

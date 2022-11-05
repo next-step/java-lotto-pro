@@ -10,6 +10,7 @@ public class LottoMessage {
 
     public static final String INPUT_PRICE = "구입금액을 입력해 주세요.";
     public static final String INPUT_WIN_LOTTO = "지난 주 당첨 번호를 입력해 주세요.";
+    public static final String INPUT_BONUS = "보너스 볼을 입력해 주세요.";
     public static final String OUTPUT_LOTTO_COUNT = "%d개를 구매했습니다.%n";
     public static final String OUTPUT_LOTTO_RESULT = "당첨 통계\n---------";
     public static final String OUTPUT_REWARD_RESULT = "3개 일치 (5000원)- %d개\n4개 일치 (50000원)- %d개\n5개 일치 (1500000원)- %d개\n6개 일치 (2000000000원)- %d개%n";
