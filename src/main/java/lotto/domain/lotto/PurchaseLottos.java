@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 import lotto.domain.amount.Amount;
-import lotto.util.InputSplitter;
 
 public class PurchaseLottos {
 	private static final int EMPTY_BUDGET_NUM = 0;
@@ -27,11 +26,11 @@ public class PurchaseLottos {
 	public Lottos purchaseManualLottos(List<String> manualLottoNumbers) {
 		Amount purchaseAmount = purchaseAmount(manualLottoNumbers.size());
 		validateBudgetEnough(purchaseAmount);
-		Lottos lottos = Lottos.from(manualLottoNumbers.stream()
-			.map(s -> new InputLottoGenerator(
-				InputSplitter.splitText(s).stream().map(Integer::parseInt).collect(Collectors.toList())).generate())
-			.collect(Collectors.toList()));
-
+		Lottos lottos = Lottos.from(
+			manualLottoNumbers.stream()
+				.map(lottoNumbers -> new InputLottoGenerator(lottoNumbers).generate())
+				.collect(Collectors.toList())
+		);
 		this.budget = budget.sub(purchaseAmount);
 		return lottos;
 	}

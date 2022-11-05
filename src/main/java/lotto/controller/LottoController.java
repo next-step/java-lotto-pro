@@ -30,7 +30,7 @@ public class LottoController {
 		Lottos lottos = manualLottos.concat(randomLottos);
 
 		String winNumbersInput = inputView.prevWinNumbers();
-		String bonusBallInput = inputView.bonusBall();
+		int bonusBallInput = inputView.bonusBall();
 		WinningLotto winningLotto = WinningLotto.from(winNumbersInput, bonusBallInput);
 
 		resultView.winStatisticsResult(lottos, winningLotto, purchaseAmount);

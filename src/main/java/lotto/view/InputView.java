@@ -16,9 +16,9 @@ public class InputView {
         return new Scanner(System.in).nextLine();
     }
 
-    public String bonusBall() {
+    public int bonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new Scanner(System.in).nextLine();
+        return new Scanner(System.in).nextInt();
     }
 
     public List<String> manualLottoNumbers() {
