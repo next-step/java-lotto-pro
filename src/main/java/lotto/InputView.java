@@ -31,10 +31,10 @@ public class InputView {
         System.out.println(INPUT_PAY_MONEY);
     }
 
-    int inputManualPurchase(int money) {
+    int inputManualPurchase(int payMoney) {
         printInputManualPurchase();
         String input = scanner.nextLine();
-        Validate.validatePurchasableCount(money, Integer.parseInt(input));
+        Validate.validatePurchasableCount(payMoney, Integer.parseInt(input));
         Validate.validateOnlyNumber(input);
         return Integer.parseInt(input);
     }

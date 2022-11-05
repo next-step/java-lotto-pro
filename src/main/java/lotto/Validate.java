@@ -102,8 +102,8 @@ public class Validate {
     }
 
 
-    static void validatePurchasableCount(int totalMoney, int purchaseCount) {
-        if (totalMoney < (purchaseCount * LOTTO_PRICE)) {
+    static void validatePurchasableCount(int payMoney, int purchaseCount) {
+        if (payMoney < (purchaseCount * LOTTO_PRICE)) {
             throw new IllegalArgumentException(ERROR_EXCEED_PURCHASABLE_COUNT);
         }
     }
