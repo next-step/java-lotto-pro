@@ -7,14 +7,24 @@ import java.util.Map;
 public final class LottoResultStatistics {
 
     private static final int DEFAULT_COUNT = 0;
+    private static final int INCREASE_STEP = 1;
 
     private final Map<LottoResult, Integer> resultCounts;
 
     public LottoResultStatistics(final List<LottoResult> lottoResults) {
         resultCounts = new HashMap<>();
         for (final LottoResult lottoResult : lottoResults) {
-            accept(lottoResult);
+            increaseResultCount(lottoResult);
         }
+    }
+
+    // TODo : Test
+    public Money getTotalWiningMoney() {
+        return getFirstRankPrizeMoney().multiply(getFirstRankCount())
+            .plus(getSecondRankPrizeMoney().multiply(getSecondRankCount()))
+            .plus(getThirdRankPrizeMoney().multiply(getThirdRankCount()))
+            .plus(getFourthRankPrizeMoney().multiply(getFourthRankCount()))
+            .plus(getFifthRankPrizeMoney().multiply(getFifthRankCount()));
     }
 
     public LottoNumberMatchCount getFirstRankLottoNumberMatchCount() {
@@ -22,7 +32,7 @@ public final class LottoResultStatistics {
     }
 
     public int getFirstRankCount() {
-        return getCountOf(LottoResult.FIRST);
+        return getCount(LottoResult.FIRST);
     }
 
     public Money getFirstRankPrizeMoney() {
@@ -34,7 +44,7 @@ public final class LottoResultStatistics {
     }
 
     public int getSecondRankCount() {
-        return getCountOf(LottoResult.SECOND);
+        return getCount(LottoResult.SECOND);
     }
 
     public Money getSecondRankPrizeMoney() {
@@ -46,7 +56,7 @@ public final class LottoResultStatistics {
     }
 
     public int getThirdRankCount() {
-        return getCountOf(LottoResult.THIRD);
+        return getCount(LottoResult.THIRD);
     }
 
     public Money getThirdRankPrizeMoney() {
@@ -58,20 +68,31 @@ public final class LottoResultStatistics {
     }
 
     public int getFourthRankCount() {
-        return getCountOf(LottoResult.FOURTH);
+        return getCount(LottoResult.FOURTH);
     }
 
     public Money getFourthRankPrizeMoney() {
         return LottoResult.FOURTH.getPrizeMoney();
     }
 
-    private int getCountOf(final LottoResult result) {
+    public LottoNumberMatchCount getFifthRankLottoNumberMatchCount() {
+        return LottoResult.FIFTH.getLottoNumberMatchCount();
+    }
+
+    public int getFifthRankCount() {
+        return getCount(LottoResult.FIFTH);
+    }
+
+    public Money getFifthRankPrizeMoney() {
+        return LottoResult.FIFTH.getPrizeMoney();
+    }
+
+    private int getCount(final LottoResult result) {
         return resultCounts.getOrDefault(result, DEFAULT_COUNT);
     }
 
-    private void accept(final LottoResult result) {
-        resultCounts.put(result, resultCounts.getOrDefault(result, DEFAULT_COUNT) + 1);
+    private void increaseResultCount(final LottoResult result) {
+        resultCounts.put(result, resultCounts.getOrDefault(result, DEFAULT_COUNT) + INCREASE_STEP);
     }
-
 
 }

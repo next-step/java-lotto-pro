@@ -12,11 +12,12 @@ public final class ResultView {
     private static final String COMMA = ",";
     private static final String SPACE = " ";
     private static final String DIVIDER_LINE_STYLE = "----------";
-    private static final String LOTTO_RESULT_STATS_TITLE_MESSAGE = "당첨 통계";
-    private static final String LOTTO_RESULT_STATS_BODY_MESSAGE_FORMAT = "%d개 일치 (%d원)- %d개";
-    private static final String PROFIT_RATE_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.";
-    private static final String PURCHASED_COUNT_MESSAGE_FORMAT = "%d개를 구매했습니다.";
-    private static final String PURCHASED_LOTTO_NUMBERS_MESSAGE_FORMAT = "[%s]";
+    private static final String LOTTO_RESULT_STATS_TITLE = "당첨 통계";
+    private static final String LOTTO_RESULT_STATS_BODY_FORMAT = "%d개 일치 (%d원)- %d개";
+    private static final String LOTTO_RESULT_STATS_BONUS_BODY_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
+    private static final String PROFIT_RATE_FORMAT = "총 수익률은 %.2f입니다.";
+    private static final String PURCHASED_COUNT_FORMAT = "%d개를 구매했습니다.";
+    private static final String PURCHASED_LOTTO_NUMBERS_FORMAT = "[%s]";
 
     private ResultView() {
     }
@@ -35,7 +36,7 @@ public final class ResultView {
     }
 
     private static void printPurchaseLottoNumbers(final LottoNumbers purchasedLottoNumbers) {
-        print(String.format(PURCHASED_LOTTO_NUMBERS_MESSAGE_FORMAT,
+        print(String.format(PURCHASED_LOTTO_NUMBERS_FORMAT,
             getPurchaseLottoNumbersMessage(purchasedLottoNumbers)));
     }
 
@@ -46,15 +47,15 @@ public final class ResultView {
     }
 
     public static void printPurchasedCount(final int purchasedCount) {
-        print(String.format(PURCHASED_COUNT_MESSAGE_FORMAT, purchasedCount));
+        print(String.format(PURCHASED_COUNT_FORMAT, purchasedCount));
     }
 
     public static void printProfitRate(final Double profitRate) {
-        print(String.format(PROFIT_RATE_MESSAGE_FORMAT, profitRate));
+        print(String.format(PROFIT_RATE_FORMAT, profitRate));
     }
 
     public static void printLottoResultStatsTitle() {
-        print(LOTTO_RESULT_STATS_TITLE_MESSAGE);
+        print(LOTTO_RESULT_STATS_TITLE);
     }
 
     public static void printDivider() {
@@ -62,6 +63,7 @@ public final class ResultView {
     }
 
     public static void printLottoResultStatsBody(final LottoResultStatistics resultStats) {
+        print(getFifthRankResultStatsMessage(resultStats));
         print(getFourthRankResultStatsMessage(resultStats));
         print(getThirdRankResultStatsMessage(resultStats));
         print(getSecondRankResultStatsMessage(resultStats));
@@ -76,7 +78,7 @@ public final class ResultView {
     }
 
     private static String getSecondRankResultStatsMessage(final LottoResultStatistics resultStats) {
-        return getRankResultStatsMessage(
+        return getBonusRankResultStatsMessage(
             resultStats.getSecondRankLottoNumberMatchCount(),
             resultStats.getSecondRankPrizeMoney(),
             resultStats.getSecondRankCount());
@@ -96,15 +98,32 @@ public final class ResultView {
             resultStats.getFourthRankCount());
     }
 
+    private static String getFifthRankResultStatsMessage(final LottoResultStatistics resultStats) {
+        return getRankResultStatsMessage(
+            resultStats.getFifthRankLottoNumberMatchCount(),
+            resultStats.getFifthRankPrizeMoney(),
+            resultStats.getFifthRankCount());
+    }
+
     private static String getRankResultStatsMessage(
         final LottoNumberMatchCount lottoNumberMatchCount,
         final Money prizeMoney,
         final int rankCount
     ) {
-        return String.format(LOTTO_RESULT_STATS_BODY_MESSAGE_FORMAT,
+        return String.format(LOTTO_RESULT_STATS_BODY_FORMAT,
             lottoNumberMatchCount.intValue(),
             prizeMoney.intValue(),
             rankCount);
     }
 
+    private static String getBonusRankResultStatsMessage(
+        final LottoNumberMatchCount lottoNumberMatchCount,
+        final Money prizeMoney,
+        final int rankCount
+    ) {
+        return String.format(LOTTO_RESULT_STATS_BONUS_BODY_FORMAT,
+            lottoNumberMatchCount.intValue(),
+            prizeMoney.intValue(),
+            rankCount);
+    }
 }
