@@ -27,4 +27,15 @@ public class WinningLottoTest {
         LottoWinningRank rank = winningLotto.getLottoRank(lotto);
         assertThat(rank).isEqualTo(LottoWinningRank.SECOND);
     }
+
+    @Test
+    @DisplayName("보너스 번호 중복 예외 테스트")
+    void bonusExceptionTest(){
+        Lotto basic = Lotto.create(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber bonus = LottoNumber.create(6);
+
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> WinningLotto.create(basic, bonus)
+        );
+    }
 }

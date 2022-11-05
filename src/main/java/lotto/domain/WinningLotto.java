@@ -13,9 +13,16 @@ public class WinningLotto {
         WinningLotto winningLotto = new WinningLotto();
 
         winningLotto.basicLotto = basicLotto;
+        validateDuplicateBonusNumber(basicLotto, bonusNumber);
         winningLotto.bonusNumber = bonusNumber;
 
         return winningLotto;
+    }
+
+    private static void validateDuplicateBonusNumber(Lotto basicLotto, LottoNumber bonusNumber) {
+        if(basicLotto.isContain(bonusNumber)){
+            throw new IllegalArgumentException("보너스 볼 번호가 기존 당첨번호에 중복되어 있습니다.");
+        }
     }
 
     private int getMatchCountByBasic(Lotto lotto) {
