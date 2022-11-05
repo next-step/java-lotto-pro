@@ -54,33 +54,33 @@ public class Validate {
         }
     }
 
-    static void validateWinningNumberNull(String input) {
+    static void validateLottoNumberNull(String input) {
         if (input.equals(NULL)) {
             throw new IllegalArgumentException(ERROR_INPUT_EMPTY_WINNING_NUMBER);
         }
     }
 
-    static void validateWinningNumber(String input) {
+    static void validateLottoNumber(String input) {
         StringTokenizer token = new StringTokenizer(input, DELIMITER);
         while (token.hasMoreTokens()) {
             validateOnlyNumber(token.nextToken());
         }
     }
 
-    static void validateWinningNumberRange(String input) {
+    static void validateLottoNumberRange(String input) {
         StringTokenizer token = new StringTokenizer(input, DELIMITER);
         while (token.hasMoreTokens()) {
             validateNumberRange(Integer.parseInt(token.nextToken()));
         }
     }
 
-    static void validateWinningNumberCount(String input) {
+    static void validateLottoNumberCount(String input) {
         if (new StringTokenizer(input, DELIMITER).countTokens() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(ERROR_INPUT_SIX_NUMBER);
         }
     }
 
-    static void validateWinningNumberDuplicate(String input) {
+    static void validateLottoNumberDuplicate(String input) {
         if (isSixNumbers(input) < LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_DUPLICATED);
         }

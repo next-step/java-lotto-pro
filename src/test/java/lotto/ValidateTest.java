@@ -50,25 +50,25 @@ public class ValidateTest {
 
     @Test
     void 당첨_번호를_문자열만_입력() {
-        assertThatThrownBy(() -> Validate.validateWinningNumber("a, b, c, d, e, f"))
+        assertThatThrownBy(() -> Validate.validateLottoNumber("a, b, c, d, e, f"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 당첨_번호에_문자열_포함() {
-        assertThatThrownBy(() -> Validate.validateWinningNumber("1, 2, 3, d, e, f"))
+        assertThatThrownBy(() -> Validate.validateLottoNumber("1, 2, 3, d, e, f"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 당첨_번호_5개만_입력() {
-        assertThatThrownBy(() -> Validate.validateWinningNumberCount("1, 2, 3, 4, 5"))
+        assertThatThrownBy(() -> Validate.validateLottoNumberCount("1, 2, 3, 4, 5"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 당첨_번호중_중복된_번호_검사() {
-        assertThatThrownBy(() -> Validate.validateWinningNumberDuplicate("1, 1, 3, 4, 5"))
+        assertThatThrownBy(() -> Validate.validateLottoNumberDuplicate("1, 1, 3, 4, 5"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
