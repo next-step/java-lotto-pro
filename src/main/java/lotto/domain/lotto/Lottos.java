@@ -5,10 +5,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import lotto.domain.quantity.Quantity;
-
 public class Lottos {
-	private static final int MIN_LOTTOS_SIZE = 1;
 	private final List<Lotto> lottos;
 
 	private Lottos(List<Lotto> lottos) {
@@ -26,8 +23,8 @@ public class Lottos {
 		);
 	}
 
-	public Quantity getQuantity() {
-		return Quantity.from(this.lottos.size());
+	public int getQuantity() {
+		return this.lottos.size();
 	}
 
 	public List<Lotto> getLottos() {

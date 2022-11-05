@@ -6,8 +6,6 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.quantity.Quantity;
-
 class LottosTest {
 	@Test
 	void 로또_결과_변환() {
@@ -21,7 +19,7 @@ class LottosTest {
 
 		LottoResults lottoResults = lottos.toLottoResults(winLotto, bonusNumber);
 		assertThat(lottoResults).isNotNull();
-		assertThat(lottoResults.quantity()).isEqualTo(Quantity.from(3));
+		assertThat(lottoResults.getQuantity()).isEqualTo(3);
 	}
 
 	@Test

@@ -8,7 +8,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.amount.Amount;
-import lotto.domain.quantity.Quantity;
 
 class PurchaseLottosTest {
 
@@ -28,7 +27,7 @@ class PurchaseLottosTest {
 		PurchaseLottos purchaseLottos = new PurchaseLottos(Amount.from(3000));
 
 		Lottos lottos = purchaseLottos.purchaseManualLottos(manualLottoNumbers);
-		assertThat(lottos.getQuantity()).isEqualTo(Quantity.from(3));
+		assertThat(lottos.getQuantity()).isEqualTo(3);
 		assertThat(purchaseLottos.isEmptyBudget()).isTrue();
 	}
 
@@ -36,7 +35,7 @@ class PurchaseLottosTest {
 	void 자동_로또_구매() {
 		PurchaseLottos purchaseLottos = new PurchaseLottos(Amount.from(5000));
 		Lottos lottos = purchaseLottos.purchaseRandomLottos();
-		assertThat(lottos.getQuantity()).isEqualTo(Quantity.from(5));
+		assertThat(lottos.getQuantity()).isEqualTo(5);
 		assertThat(purchaseLottos.isEmptyBudget()).isTrue();
 	}
 
