@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Number {
 
+    public static final int ZERO = 0;
     private final int number;
 
     public Number(final String stringNumber) {
@@ -23,7 +24,7 @@ public class Number {
     }
 
     private void validateNegativeNumber(int number) {
-        if (number < 0) {
+        if (number < ZERO) {
             throw new IllegalArgumentException("양수만 입력 가능합니다.");
         }
     }

@@ -104,3 +104,6 @@
 - [ ] 수익률을 계산.
   - [ ] 구매 구입 금액에서 당첨 금액을 차감한 후 구매 금액으로 나눈다.
 
+- [ ] 컴포지트 패턴 winning number
+- [ ] enum null 제거 / stream
+- [ ]0 제거 lottoGenerator
