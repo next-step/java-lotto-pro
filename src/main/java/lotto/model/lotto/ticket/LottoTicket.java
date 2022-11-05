@@ -6,6 +6,7 @@ import java.util.List;
 
 public class LottoTicket {
     protected final List<LottoNumber> lottoNumbers;
+    private int count = 0;
 
     public LottoTicket(LottoNumberGenerator lottoNumberGenerator) {
         this.lottoNumbers = lottoNumberGenerator.generate();
@@ -17,18 +18,18 @@ public class LottoTicket {
     }
 
     public int numberMatch(WinningNumbers winningNumbers) {
-        int count = 0;
+        count = 0;
         final List<LottoNumber> lottoNumbersOfWinningNumbers = winningNumbers.lottoNumbers();
         for (LottoNumber winningNumber : lottoNumbersOfWinningNumbers) {
-            count = incrementCountIfLottoNumberMatch(count, winningNumber);
+            incrementCountIfLottoNumberMatch(winningNumber);
         }
         return count;
     }
 
-    private int incrementCountIfLottoNumberMatch(int count, LottoNumber winningNumber) {
+    private void incrementCountIfLottoNumberMatch(LottoNumber winningNumber) {
         if (lottoNumbers.contains(winningNumber)) {
-            return count + 1;
+            count += 1;
         }
-        return count;
     }
 }
+
