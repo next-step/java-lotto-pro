@@ -39,4 +39,8 @@ public enum Matches {
     public Money calculatePrize(Long count) {
         return this.prize.multiply(count);
     }
+
+    public Money getUnitPrize() {
+        return this.prize;
+    }
 }
