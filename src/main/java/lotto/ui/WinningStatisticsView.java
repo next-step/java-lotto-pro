@@ -1,11 +1,14 @@
 package lotto.ui;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
+import lotto.ui.dto.MatchingCount;
 import lotto.ui.dto.WinningNumbersInput;
+import lotto.ui.dto.WinningStatisticsOutput;
 
 public class WinningStatisticsView {
     private static final Scanner scanner = new Scanner(System.in);
@@ -45,5 +48,22 @@ public class WinningStatisticsView {
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    public static void printResult(WinningStatisticsOutput output) {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        printMatchingCount(output.getMatchingCounts());
+        printReturnOnInvestment(output.getReturnOnInvestment());
+    }
+
+    private static void printMatchingCount(List<MatchingCount> matchingCounts) {
+        matchingCounts.stream()
+                .filter(MatchingCount::isDisplayed)
+                .forEach(System.out::println);
+    }
+
+    private static void printReturnOnInvestment(BigDecimal returnOnInvestment) {
+        System.out.println("총 수익률은 " + returnOnInvestment + "입니다.");
     }
 }

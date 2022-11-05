@@ -4,17 +4,20 @@ import java.util.List;
 import lotto.domain.lotto.DefaultRandomNumberGenerator;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoStore;
+import lotto.domain.lotto.Money;
 import lotto.domain.lotto.NumberPickStrategy;
 import lotto.domain.lotto.QuickPickStrategy;
+import lotto.domain.statistics.MatchingResult;
 import lotto.ui.BuyLottoView;
 import lotto.ui.WinningStatisticsView;
 import lotto.ui.dto.BuyLottoInput;
 import lotto.ui.dto.BuyLottoOutput;
 import lotto.ui.dto.WinningNumbersInput;
+import lotto.ui.dto.WinningStatisticsOutput;
 
 public class LottoApplication {
 
-    public static final int LOTTO_UNIT_PRICE = 1000;
+    public static final Money LOTTO_UNIT_PRICE = new Money(1000);
     public static final NumberPickStrategy QUICK_PICK = new QuickPickStrategy(
             new DefaultRandomNumberGenerator());
 
@@ -25,5 +28,11 @@ public class LottoApplication {
         BuyLottoView.printLottos(new BuyLottoOutput(lottos));
 
         final WinningNumbersInput winningNumbersInput = WinningStatisticsView.receiveWinningNumbers();
+        final MatchingResult matchingResult = MatchingResult.analyze(
+                lottos,
+                LOTTO_UNIT_PRICE,
+                winningNumbersInput.toWinningNumbers()
+        );
+        WinningStatisticsView.printResult(new WinningStatisticsOutput(matchingResult));
     }
 }
