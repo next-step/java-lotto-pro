@@ -3,15 +3,18 @@ package lotto.util;
 import lotto.constants.Rank;
 import lotto.domain.LottoResult;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+
 import static lotto.domain.PayAmount.LOTTO_PRICE;
 
 public class ProfitCalculator {
 
-    public static double calculateProfitRatio(LottoResult lottoResult, int lottoAmount) {
-        double profit = 0;
+    public static BigDecimal calculateProfitRatio(LottoResult lottoResult, int lottoAmount) {
+        BigDecimal profit = BigDecimal.valueOf(0);
         for (Rank rank : lottoResult.getLottoResult().keySet()) {
-            profit += lottoResult.profit(rank);
+            profit = profit.add(lottoResult.profit(rank));
         }
-        return Math.floor(profit / (lottoAmount * LOTTO_PRICE) * 100) / 100;
+        return profit.divide(BigDecimal.valueOf(lottoAmount * LOTTO_PRICE), MathContext.UNLIMITED);
     }
 }

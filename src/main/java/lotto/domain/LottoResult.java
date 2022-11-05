@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.constants.Rank;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +19,8 @@ public class LottoResult {
         return Collections.unmodifiableMap(lottoResult);
     }
 
-    public double profit(Rank rank) {
-        return rank.getWinningMoney() * lottoResult.getOrDefault(rank, 0);
+    public BigDecimal profit(Rank rank) {
+        return BigDecimal.valueOf(rank.getWinningMoney())
+                .multiply(BigDecimal.valueOf(lottoResult.getOrDefault(rank, 0)));
     }
 }
