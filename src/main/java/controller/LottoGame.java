@@ -1,6 +1,7 @@
 package controller;
 
 import model.*;
+import model.strategy.ManualStrategy;
 import model.strategy.RandomStrategy;
 import view.InputView;
 import view.OutPutView;
@@ -53,7 +54,8 @@ public class LottoGame {
     public static List<LottoNumber> getManualInput(int count) {
         Seller seller = new Seller();
         for (int i = INIT_START_NUMBER; i < count; i++) {
-            seller.buyManual(InputView.inputNumber());
+            ManualStrategy manualStrategy = new ManualStrategy(InputView.inputNumber());
+            seller.buyManual(manualStrategy);
         }
 
         return seller.getLotto();

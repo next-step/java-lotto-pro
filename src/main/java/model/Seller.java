@@ -1,5 +1,6 @@
 package model;
 
+import model.strategy.ManualStrategy;
 import model.strategy.NumberStrategy;
 
 import java.util.ArrayList;
@@ -21,8 +22,8 @@ public class Seller {
         return lotto;
     }
 
-    public List<LottoNumber> buyManual(List<Integer> numbers) {
-        lotto.add(new LottoNumber(numbers));
+    public List<LottoNumber> buyManual(NumberStrategy strategy) {
+        lotto.add(new LottoNumber(strategy.shuffle()));
 
         return lotto;
     }

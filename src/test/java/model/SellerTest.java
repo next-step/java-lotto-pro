@@ -1,5 +1,6 @@
 package model;
 
+import model.strategy.ManualStrategy;
 import model.strategy.MockStrategy;
 import model.strategy.RandomStrategy;
 import org.junit.jupiter.api.Test;
@@ -26,8 +27,9 @@ class SellerTest {
     void 수동으로_로또를_구매한다() {
         Seller seller = new Seller();
         List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        ManualStrategy manualStrategy = new ManualStrategy(integers);
 
-        List<LottoNumber> manualLotto = seller.buyManual(integers);
+        List<LottoNumber> manualLotto = seller.buyManual(manualStrategy);
 
         assertThat(manualLotto).hasSize(1);
     }
