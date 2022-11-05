@@ -7,7 +7,7 @@ public class Number {
     public static final int MINIMUM_NUMBER = 1;
     public static final int MAXIMUM_NUMBER = 45;
 
-    private int number;
+    private final int number;
 
     public Number(int number) {
         validate(number);

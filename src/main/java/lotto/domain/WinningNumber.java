@@ -6,7 +6,7 @@ import java.util.List;
 public class WinningNumber {
 
     private static final int INIT_COUNT = 0;
-    private Lotto winningNumber;
+    private final Lotto winningNumber;
 
     public WinningNumber(String[] winningNumbers) {
         this.winningNumber = new Lotto(numbers(winningNumbers));
