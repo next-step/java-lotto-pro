@@ -1,4 +1,4 @@
-package step3.domain;
+package lotto.domain;
 
 import static java.util.stream.Collectors.toList;
 
@@ -15,9 +15,9 @@ public class Lottos {
         this.content = new ArrayList<>(content);
     }
 
-    public Statistics contains(Lotto lotto) {
+    public Statistics contains(WinningLotto winningLotto) {
         List<Rank> ranks = content.stream()
-            .map(lotto::matche)
+            .map(winningLotto::confirm)
             .collect(toList());
         return new Statistics(ranks);
     }

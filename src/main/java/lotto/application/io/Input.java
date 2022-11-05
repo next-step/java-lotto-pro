@@ -1,4 +1,4 @@
-package step3.application.io;
+package lotto.application.io;
 
 import static java.util.stream.Collectors.toList;
 
@@ -6,7 +6,7 @@ import java.io.Closeable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import step3.domain.LottoNumber;
+import lotto.domain.LottoNumber;
 
 public class Input implements Closeable {
 
@@ -18,6 +18,10 @@ public class Input implements Closeable {
 
     public List<LottoNumber> lottoNumbers() {
         return parseWinningNumbers(scanner.nextLine());
+    }
+
+    public LottoNumber bonusNumber() {
+        return new LottoNumber(Integer.parseInt(scanner.nextLine()));
     }
 
     private List<LottoNumber> parseWinningNumbers(String winningNumbers) {

@@ -1,4 +1,4 @@
-package step3.domain;
+package lotto.domain;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Java6Assertions.assertThat;

@@ -1,4 +1,4 @@
-package step3.domain;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,7 +15,7 @@ class StatisticsTests {
     void totalReward() {
         List<Rank> ranks = new ArrayList<>();
         ranks.add(Rank.MISS);
-        ranks.add(Rank.FOUR);
+        ranks.add(Rank.FIVE);
 
         Statistics statistics = new Statistics(ranks);
         assertThat(statistics.totalReward()).isEqualTo(new BigDecimal("2.50"));

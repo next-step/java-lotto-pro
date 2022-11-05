@@ -1,14 +1,14 @@
-package step3.application.io;
+package lotto.application.io;
 
 import static java.util.Collections.*;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
-import step3.domain.Lotto;
-import step3.domain.LottoNumber;
-import step3.domain.Lottos;
-import step3.domain.Rank;
-import step3.domain.Statistics;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
+import lotto.domain.Rank;
+import lotto.domain.Statistics;
 
 public class Output {
 
@@ -39,6 +39,10 @@ public class Output {
             .forEach(rank -> printMatch(statistics, rank));
 
         System.out.println(String.format("총 수익률은 %s입니다.", statistics.totalReward()));
+    }
+
+    public void bonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
     }
 
     private void printLottoNumber(Lotto lotto) {
