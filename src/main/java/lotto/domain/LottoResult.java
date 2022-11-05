@@ -4,18 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    private static final int LOTTO_PRICE = 1000;
     Map<RewardType, Integer> rewardMap = new HashMap<>();
     int totalReward;
     double totalProfit;
-    public LottoResult(Lottos lottos, Lotto winLotto) {
+    public LottoResult(Lottos lottos, Lotto winLotto, int totalLottoPrice) {
         calculateWinCount(lottos, winLotto);
         calculateTotalReward();
-        calculateProfit(lottos.size());
+        calculateProfit(totalLottoPrice);
     }
 
-    private void calculateProfit(int lottoSize) {
-        totalProfit = (double) totalReward / (lottoSize * LOTTO_PRICE);
+    private void calculateProfit(int totalLottoPrice) {
+        totalProfit = (double) totalReward / totalLottoPrice;
     }
 
     private void calculateTotalReward() {
@@ -25,10 +24,7 @@ public class LottoResult {
     }
 
     private void calculateWinCount(Lottos lottos, Lotto winLotto) {
-        for (Lotto lotto : lottos) {
-            RewardType rewardType = RewardType.match(lotto, winLotto);
-            rewardMap.put(rewardType, rewardMap.getOrDefault(rewardType, 0) + 1);
-        }
+        rewardMap = Lottos.calculateWinResult(lottos, winLotto);
     }
 
     public int getRewardMapCount(RewardType type) {

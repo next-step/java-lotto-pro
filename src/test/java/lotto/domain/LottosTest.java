@@ -21,4 +21,10 @@ public class LottosTest {
         assertThat(lottosList.size()).isEqualTo(1);
     }
 
+    @Test
+    @DisplayName("구매 개수에 맞는 Lotto 개수 생성")
+    public void Lottos_구매_정상생성() {
+        assertThat(Lottos.buyLottos(6).size()).isEqualTo(6);
+    }
+
 }

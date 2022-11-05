@@ -5,10 +5,15 @@ import lotto.constant.LottoMessage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lotto {
-    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private static final int LOTTO_NUMBER_MIN = 1;
+    private static final int LOTTO_NUMBER_MAX = 45;
     private static final int LOTTO_NUMBERS_SIZE = 6;
+    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private static final List<Integer> baseLottoNumbers = IntStream.rangeClosed(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX).boxed().collect(Collectors.toList());
 
     public Lotto(List<Integer> numbers) {
         validateLottoSize(numbers);
@@ -18,6 +23,11 @@ public class Lotto {
             lottoNumbers.add(lottoNumber);
         }
         Collections.sort(lottoNumbers);
+    }
+
+    public static Lotto createLotto() {
+        Collections.shuffle(baseLottoNumbers);
+        return new Lotto(baseLottoNumbers.subList(0,LOTTO_NUMBERS_SIZE));
     }
 
     private void validateLottoSize(List<Integer> lottoNumbers) {

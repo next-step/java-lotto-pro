@@ -9,7 +9,7 @@ import lotto.domain.RewardType;
 public class LottoOutPutView {
     public static void writeBuyLottos(Lottos lottos) {
         System.out.printf(LottoMessage.OUTPUT_LOTTO_COUNT, lottos.size());
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottos.getLottosAsUnmodifiableList()) {
             System.out.println(lotto.lottoNumbers());
         }
     }
