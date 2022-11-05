@@ -37,4 +37,8 @@ public class LottoGenerator {
             .collect(Collectors.toList());
         return new Lotto(new LottoNumbers(numberList));
     }
+
+    public static Lotto create(String manualLottoNumbers) {
+        return new Lotto(new LottoNumbers(manualLottoNumbers));
+    }
 }
