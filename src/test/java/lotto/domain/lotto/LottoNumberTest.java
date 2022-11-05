@@ -25,4 +25,13 @@ class LottoNumberTest {
 
         assertThat(one).isEqualTo(another);
     }
+
+    @DisplayName("정수로 변환할 수 있다.")
+    @ParameterizedTest(name = ParameterizedTest.DISPLAY_NAME_PLACEHOLDER + " 로또 번호 [{0}]")
+    @ValueSource(ints = {1, 6, 45})
+    void 정수값(final int value) {
+        final LottoNumber lottoNumber = new LottoNumber(value);
+
+        assertThat(lottoNumber.toInt()).isEqualTo(value);
+    }
 }

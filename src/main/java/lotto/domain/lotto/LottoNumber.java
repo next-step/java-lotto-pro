@@ -25,6 +25,10 @@ public class LottoNumber {
         return new ArrayList<>(ALL_NUMBERS);
     }
 
+    public int toInt() {
+        return this.value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
