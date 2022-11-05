@@ -12,22 +12,23 @@ public class LottoGameMain {
     public static void main(String[] args) {
         LottoGame lottoGame = new LottoGame(inputView.inputPay());
 
-        PurchaseCount manualPurchaseCount = new PurchaseCount(inputView.inputManualPurchase(lottoGame.getTotalMoney()));
+        PurchaseQuantity manualPurchaseQuantity = new PurchaseQuantity(
+                inputView.inputManualPurchase(lottoGame.getAmount()));
 
         inputView.printInputManualLottoNumber();
         PurchaseLottoNumbers purchaseLottoNumbers = new PurchaseLottoNumbers(
-                lottoGame.manualPurchaseLotto(manualPurchaseCount));
+                lottoGame.manualPurchaseLotto(manualPurchaseQuantity));
 
-        PurchaseCount autoPurchaseCount = new PurchaseCount(lottoGame.getPurchasableCount());
-        resultView.printResultPay(autoPurchaseCount, manualPurchaseCount);
+        PurchaseQuantity autoPurchaseQuantity = new PurchaseQuantity(lottoGame.getPurchase());
+        resultView.printResultPay(autoPurchaseQuantity, manualPurchaseQuantity);
 
-        purchaseLottoNumbers.addLottoNumbers(lottoGame.autoPurchaseLotto(autoPurchaseCount));
+        purchaseLottoNumbers.addLottoNumbers(lottoGame.autoPurchaseLotto(autoPurchaseQuantity));
         resultView.printResultPurchase(purchaseLottoNumbers);
 
         LottoNumbers winningNumbers = inputView.inputWinningNumberLastWeek();
         Statistic statistic = new Statistic(winningNumbers);
         statistic.countPrize(purchaseLottoNumbers, inputView.inputBonusNumberLastWeek(winningNumbers));
 
-        resultView.printResultWinningStatistics(lottoGame.getTotalMoney(), statistic);
+        resultView.printResultWinningStatistics(lottoGame.getAmount(), statistic);
     }
 }

@@ -10,43 +10,38 @@ import java.util.List;
 
 public class LottoGame {
     private static final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-    private final TotalMoney totalMoney;
-    private final Balance balance;
 
-    public LottoGame(int totalMoney) {
-        this.totalMoney = new TotalMoney(totalMoney);
-        this.balance = new Balance(totalMoney);
+    private final Amount amount;
+
+    public LottoGame(int payment) {
+        this.amount = new Amount(payment);
     }
 
-    public int getTotalMoney() {
-        return totalMoney.getTotalMoney();
+    public int getAmount() {
+        return amount.getAmount();
     }
 
-    public int getBalance() {
-        return balance.getBalance();
+    public int getPurchase() {
+        return amount.getPurchase();
     }
 
-    public int getPurchasableCount() {
-        return balance.getPurchasableCount();
+    public void purchase(PurchaseQuantity quantity) {
+        amount.purchase(quantity);
     }
 
-    public void minusBalance() {
-        balance.minusBalance();
-    }
-
-    public List<LottoNumbers> autoPurchaseLotto(PurchaseCount purchaseCount) {
+    public List<LottoNumbers> autoPurchaseLotto(PurchaseQuantity quantity) {
+        purchase(quantity);
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < purchaseCount.getPurchaseCount(); i++) {
-            minusBalance();
+        for (int i = 0; i < quantity.getPurchaseQuantity(); i++) {
             lottoNumbers.add(LottoNumbers.from(lottoNumberGenerator.autoGenerateNumbers()));
         }
         return lottoNumbers;
     }
 
-    public List<LottoNumbers> manualPurchaseLotto(PurchaseCount purchaseCount) {
+    public List<LottoNumbers> manualPurchaseLotto(PurchaseQuantity quantity) {
+        purchase(quantity);
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < purchaseCount.getPurchaseCount(); i++) {
-            minusBalance();
+        for (int i = 0; i < quantity.getPurchaseQuantity(); i++) {
             lottoNumbers.add(LottoNumbers.from(lottoNumberGenerator.manualGenerateNumbers()));
         }
         return lottoNumbers;
