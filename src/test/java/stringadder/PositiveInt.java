@@ -15,7 +15,15 @@ public class PositiveInt {
     }
 
     public static PositiveInt parse(String value) {
-        return new PositiveInt(Integer.parseInt(value));
+        return new PositiveInt(parseInt(value));
+    }
+
+    private static int parseInt(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("정수여야 합니다. value=[" + value + "]");
+        }
     }
 
     public PositiveInt plus(final PositiveInt other) {

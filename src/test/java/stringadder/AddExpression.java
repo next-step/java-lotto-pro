@@ -8,6 +8,7 @@ public class AddExpression {
     private static final String EXPRESSION_REGEX = "(?://(?<DELIMITER>.)\\n)?(?<TOKENS>.*)";
     private static final Pattern EXPRESSION_PATTERN = Pattern.compile(EXPRESSION_REGEX);
     private static final String DEFAULT_DELIMITERS = ",:";
+    private static final Pattern DEFAULT_SPLITTER = Pattern.compile("[" + DEFAULT_DELIMITERS + "]");
 
 
     private final String customDelimiter;
@@ -31,14 +32,14 @@ public class AddExpression {
     }
 
     public String[] parseTokens() {
-        return tokenString.split("[" + getDelimiters() + "]");
+        return getTokenSplitter().split(tokenString);
     }
 
-    private String getDelimiters() {
+    private Pattern getTokenSplitter() {
         if (Objects.isNull(this.customDelimiter)) {
-            return DEFAULT_DELIMITERS;
+            return DEFAULT_SPLITTER;
         }
-        return DEFAULT_DELIMITERS + this.customDelimiter;
+        return Pattern.compile("[" + DEFAULT_DELIMITERS + this.customDelimiter + "]");
     }
 
     @Override

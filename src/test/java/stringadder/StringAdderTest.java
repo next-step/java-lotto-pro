@@ -1,7 +1,6 @@
 package stringadder;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDER;
 
@@ -70,8 +69,8 @@ public class StringAdderTest {
     @DisplayName("숫자가 아닌 값을 입력할 수 없다.")
     @Test
     void illegalToken() {
-        assertThatExceptionOfType(NumberFormatException.class)
+        assertThatIllegalArgumentException()
                 .isThrownBy(() -> adder.calculate("&,9"))
-                .withMessage("For input string: \"&\"");
+                .withMessage("정수여야 합니다. value=[&]");
     }
 }
