@@ -20,7 +20,7 @@ public class LottoMoney {
         return number / LOTTO_MINIMUM_PRICE;
     }
 
-    public long getNumber() {
-        return number;
+    public int getNumber() {
+        return this.number;
     }
 }

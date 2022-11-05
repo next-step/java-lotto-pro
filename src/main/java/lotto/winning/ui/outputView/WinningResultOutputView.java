@@ -13,7 +13,7 @@ public class WinningResultOutputView {
     }
 
     private static void returnRate(LottoMoney lottoMoney, TotalWinningMoney totalWinningMoney) {
-        System.out.println("총 수익률은 " + totalWinningMoney.sum() / lottoMoney.getNumber() + "입니다");
+        System.out.println("총 수익률은 " + totalWinningMoney.returnRate(lottoMoney.getNumber()) + "입니다");
     }
 
     public static void winningMoney(TotalWinningMoney totalWinningMoney) {
