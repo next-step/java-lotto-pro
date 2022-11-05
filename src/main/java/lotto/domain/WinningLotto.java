@@ -1,10 +1,6 @@
 package lotto.domain;
 
 import static lotto.domain.LottoWinningRank.findRankByContainCountAndBonusContain;
-import static lotto.domain.WinningLottoType.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class WinningLotto {
 
@@ -22,11 +18,11 @@ public class WinningLotto {
         return winningLotto;
     }
 
-    public int getMatchCountByBasic(Lotto lotto) {
+    private int getMatchCountByBasic(Lotto lotto) {
         return lotto.getContainNumberCount(this.basicLotto);
     }
 
-    public boolean isContainBonusNumber(Lotto lotto) {
+    private boolean isContainBonusNumber(Lotto lotto) {
         return lotto.isContain(this.bonusNumber);
     }
 

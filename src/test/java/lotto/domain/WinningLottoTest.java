@@ -22,18 +22,6 @@ public class WinningLottoTest {
     }
 
     @Test
-    @DisplayName("당첨 번호 중 기존 6개 번호를 구매로또와 먼저 비교한다.")
-    void matchingBasic(){
-        assertThat(winningLotto.getMatchCountByBasic(lotto)).isEqualTo(FIVE);
-    }
-
-    @Test
-    @DisplayName("보너스 번호가 구매로또 중에 있는지 확인한다.")
-    void matchingBonus(){
-        assertThat(winningLotto.isContainBonusNumber(lotto)).isTrue();
-    }
-
-    @Test
     @DisplayName("당첨 로또와 구매 로또의 비교결과를 반환한다.")
     void returnResult(){
         LottoWinningRank rank = winningLotto.getLottoRank(lotto);
