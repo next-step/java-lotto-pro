@@ -21,18 +21,6 @@ public class Amount {
 		}
 	}
 
-	public static Amount from(String price) {
-		return new Amount(parseLong(price));
-	}
-
-	public static long parseLong(String price) {
-		try {
-			return Long.parseLong(price);
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("금액은 숫자이어야 합니다.");
-		}
-	}
-
 	public long getLong() {
 		return this.amount;
 	}
