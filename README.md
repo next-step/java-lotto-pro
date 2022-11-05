@@ -90,8 +90,17 @@
 ## 로또(수동)
 ### 기능 목록
 * 정적 팩토리 메소드 적용
+  * LottoNumber
 * 인스턴스 캐싱 적용
-* 구매한 로또 번호(List<LottoNumbers>)에 일급 컬렉션 적용
+  * LottoNumber
+* 일급 컬렉션
+  * List\<LottoNumbers\> -> PurchaseLottoNumbers
+  * totalMoney
+  * balance
+  * manualPurchaseCount
+  * autoPurchaseCount
+* Constant
+  * "수동으로 X장, 자동으로 XX개를 구매했습니다." 추가
 * View
   * InputView
     * "수동으로 구매할 로또 수를 입력해주세요." 추가
@@ -101,3 +110,6 @@
 * Validate
   * 입력받은 금액과 비교해서 입력한 수 만큼 구매할 수 있는지 유효성 검사하는 기능 구현
   * 사용자가 잘못된 값을 입력했을 Optional을 적용해 NullPointerException이 발생하지 않도록 한다.
+* LottoNumberGenerator
+  * 인터페이스 -> 클래스로 수정
+  * 수동 번호 생성 메소드 추가
