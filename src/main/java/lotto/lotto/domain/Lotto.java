@@ -37,7 +37,7 @@ public class Lotto {
         }
     }
 
-    private static void validateDuplicateNumber(int lottoNumber, Number number) {
+    private void validateDuplicateNumber(int lottoNumber, Number number) {
         if (new Number(lottoNumber).equals(number)) {
             throw new IllegalArgumentException(DUPLICATE_EXCEPTION_MESSAGE);
         }

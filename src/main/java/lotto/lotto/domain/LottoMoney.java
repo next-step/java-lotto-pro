@@ -10,7 +10,7 @@ public class LottoMoney {
         validateMultiple(number);
     }
 
-    private static void validateMultiple(int number) {
+    private void validateMultiple(int number) {
         if (number % LOTTO_MINIMUM_PRICE != 0) {
             throw new IllegalArgumentException(LOTTO_MINIMUM_PRICE + "의 배수만 입력가능합니다.");
         }

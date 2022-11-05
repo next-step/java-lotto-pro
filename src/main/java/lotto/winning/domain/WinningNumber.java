@@ -26,13 +26,13 @@ public class WinningNumber {
         }
     }
 
-    private static void validateDuplicateNumber(int number, Number value) {
+    private void validateDuplicateNumber(int number, Number value) {
         if (value.equals(new Number(number))) {
             throw new IllegalArgumentException(DUPLICATE_EXCEPTION_MESSAGE);
         }
     }
 
-    private static void validateSize(String[] winningNumbers) {
+    private void validateSize(String[] winningNumbers) {
         if (winningNumbers.length != WINNING_NUMBER) {
             throw new IllegalArgumentException(WINNING_NUMBER + "자리여야합니다.");
         }

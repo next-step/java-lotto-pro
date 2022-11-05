@@ -33,7 +33,7 @@ public class LottoController {
         return new TotalWinningMoney(new MatchingCount(lottos, winningNumber));
     }
 
-    private static WinningNumber createWinningNumber() {
+    private WinningNumber createWinningNumber() {
         Delimiters delimiters = new Delimiters();
         TextExtractor extractor = new TextExtractor(readWinningNumbers());
         return new WinningNumber(extractor.extract().split(delimiters.delimiter()));

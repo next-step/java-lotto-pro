@@ -19,7 +19,7 @@ public class MatchingCount {
         this.winningNumber = winningNumber;
     }
 
-    private static void validate(List<Lotto> lottos, WinningNumber winningNumber) {
+    private void validate(List<Lotto> lottos, WinningNumber winningNumber) {
         if (Objects.isNull(lottos) || lottos.isEmpty()) {
             throw new IllegalArgumentException(LOTTO_EXCEPTION_MESSAGE);
         }

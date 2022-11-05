@@ -16,18 +16,18 @@ public class Number {
         this.number = number;
     }
 
-    private static void validate(int number) {
+    private void validate(int number) {
         validateMinimumNumber(number);
         validateMaximumNumber(number);
     }
 
-    private static void validateMinimumNumber(int number) {
+    private void validateMinimumNumber(int number) {
         if (number < MINIMUM_NUMBER) {
             throw new IllegalArgumentException(MINIMUM_NUMBER + "보다 작을 수 없습니다.");
         }
     }
 
-    private static void validateMaximumNumber(int number) {
+    private void validateMaximumNumber(int number) {
         if (number > MAXIMUM_NUMBER) {
             throw new IllegalArgumentException(MAXIMUM_NUMBER + "보다 클 수 없습니다.");
         }

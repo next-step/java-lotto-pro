@@ -22,7 +22,7 @@ public class Number {
         return number;
     }
 
-    private static void validateNegativeNumber(int number) {
+    private void validateNegativeNumber(int number) {
         if (number < 0) {
             throw new IllegalArgumentException("양수만 입력 가능합니다.");
         }

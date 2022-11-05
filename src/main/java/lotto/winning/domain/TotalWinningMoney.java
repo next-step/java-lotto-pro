@@ -33,7 +33,7 @@ public class TotalWinningMoney {
         return sum;
     }
 
-    private static long winningMoney(Integer matchCount) {
+    private long winningMoney(Integer matchCount) {
         return find(matchCount).getMoney();
     }
 
