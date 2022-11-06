@@ -18,7 +18,11 @@ public class LottoResult {
     }
 
     public float earningRate() {
-        return totalPrize() / spentMoney();
+        float spentMoney = spentMoney();
+        if (spentMoney == 0) {
+            return 0f;
+        }
+        return totalPrize() / spentMoney;
     }
 
     private int totalPrize() {

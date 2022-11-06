@@ -1,17 +1,13 @@
 package domain;
 
-import static domain.LottoWinning.FOURTH_PRIZE;
-import static domain.LottoWinning.FIRST_PRIZE;
-import static domain.LottoWinning.NONE;
-import static domain.LottoWinning.SECOND_PRIZE;
-import static domain.LottoWinning.FIFTH_PRIZE;
-import static domain.LottoWinning.THIRD_PRIZE;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 
-import org.junit.jupiter.api.Test;
+import static domain.LottoWinning.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoResultTest {
     @Test
@@ -33,5 +29,13 @@ class LottoResultTest {
         assertThat(lottoResult.countOfMatch(FIFTH_PRIZE)).isEqualTo(1);
         assertThat(lottoResult.countOfMatch(NONE)).isEqualTo(1);
         assertThat(lottoResult.earningRate()).isEqualTo(338592.5f);
+    }
+
+    @Test
+    void 로또를_구매하지_않은_경우_수익률_예외처리() {
+        Lottos lottos = new Lottos(Collections.emptyList());
+        LottoResult lottoResult = LottoResult.of(lottos,
+                new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7));
+        assertThat(lottoResult.earningRate()).isEqualTo(0.0f);
     }
 }
