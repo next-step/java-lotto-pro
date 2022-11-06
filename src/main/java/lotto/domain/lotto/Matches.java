@@ -21,20 +21,6 @@ public enum Matches {
         this.predicate = predicate;
     }
 
-    /**
-     * @deprecated 이 메서드는 보너스 일치 여부 도입 후 지워질 예정입니다.
-     * <p> 대신 {@link Matches#of(long, boolean)}를 사용해 주세요.
-     */
-    @Deprecated
-    public static Matches of(final long matchCount) {
-        requireCountInValidRange(matchCount);
-
-        return CHECKLIST.stream()
-                .filter((matches -> matches.predicate.test(matchCount, false)))
-                .findFirst()
-                .orElse(BLANK);
-    }
-
     public static Matches of(final long matchCount, final boolean containsBonusNumber) {
         requireCountInValidRange(matchCount);
 

@@ -34,10 +34,22 @@ public class Lotto {
         }
     }
 
+    /**
+     * @deprecated 이 메서드는 보너스 일치 여부 도입 후 지워질 예정입니다.
+     * <p> 대신 {@link Lotto#match(Lotto, LottoNumber)}를 사용해 주세요.
+     */
+    @Deprecated
     public Matches match(Lotto winningNumbers) {
         requireNotNull(winningNumbers, "당첨 번호는 null이 아니어야 합니다.");
 
-        return Matches.of(countMatchedNumber(winningNumbers));
+        return Matches.of(countMatchedNumber(winningNumbers), false);
+    }
+
+    public Matches match(Lotto winningNumbers, LottoNumber bonusNumber) {
+        requireNotNull(winningNumbers, "당첨 번호는 null이 아니어야 합니다.");
+        requireNotNull(bonusNumber, "보너스 번호는 null이 아니어야 합니다.");
+
+        return Matches.of(countMatchedNumber(winningNumbers), contains(bonusNumber));
     }
 
     public List<Integer> toList() {
