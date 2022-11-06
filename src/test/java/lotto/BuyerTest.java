@@ -30,4 +30,18 @@ public class BuyerTest {
         assertThat(buyer.getLottos()).hasSize(10);
 
     }
+
+    @Test
+    public void 수동입력_테스트() {
+        // given
+        String inputStr =
+                "8, 21, 23, 41, 42, 43\n" +
+                "3, 5, 11, 16, 32, 38\n" +
+                "7, 11, 16, 35, 36, 44";
+        Buyer buyer = new Buyer("10000", inputStr);
+        // when
+        buyer.buyLotto();
+        // then
+        assertThat(buyer.getLottos().get(0)).isEqualTo(new Lotto("8, 21, 23, 41, 42, 43"));
+    }
 }
