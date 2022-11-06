@@ -43,12 +43,16 @@ public class InputView {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBER);
     }
 
-    LottoNumbers inputWinningNumberLastWeek() {
-        printInputWinningNumberLastWeek();
+    LottoNumbers inputManualLottoNumber() {
         String input = scanner.nextLine();
         Validate.isEmpty(input);
         Validate.isDuplicate(input);
         return LottoNumbers.from(spliter.splitToList(input));
+    }
+
+    LottoNumbers inputWinningNumberLastWeek() {
+        printInputWinningNumberLastWeek();
+        return inputManualLottoNumber();
     }
 
     private void printInputWinningNumberLastWeek() {

@@ -32,11 +32,15 @@ public class LottoGame {
         amount.purchase(quantity);
     }
 
+    public void isPurchase(Quantity quantity) {
+        amount.isPurchase(quantity);
+    }
+
     public List<LottoNumbers> autoPurchaseLotto(Quantity quantity) {
         purchase(quantity);
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < quantity.getQuantity(); i++) {
-            lottoNumbers.add(LottoNumbers.from(lottoNumberGenerator.autoGenerateNumbers()));
+            lottoNumbers.add(lottoNumberGenerator.autoGenerateNumbers());
         }
         return lottoNumbers;
     }
@@ -45,12 +49,8 @@ public class LottoGame {
         purchase(quantity);
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < quantity.getQuantity(); i++) {
-            lottoNumbers.add(LottoNumbers.from(lottoNumberGenerator.manualGenerateNumbers()));
+            lottoNumbers.add(lottoNumberGenerator.manualGenerateNumbers());
         }
         return lottoNumbers;
-    }
-
-    public void isPurchase(Quantity quantity) {
-        amount.isPurchase(quantity);
     }
 }
