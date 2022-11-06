@@ -19,7 +19,7 @@ class LottoTicketMachineTest {
 
 	@BeforeEach
 	void init() {
-		lottoTicketMachine = LottoTicketMachine.create();
+		lottoTicketMachine = LottoTicketMachine.getInstance();
 	}
 
 	@Test

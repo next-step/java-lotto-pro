@@ -28,7 +28,7 @@ public class LottoGameController {
 	}
 
 	public LottoGameController() {
-		this(new InputView(), new ResultView(), LottoTicketMachine.create());
+		this(new InputView(), new ResultView(), LottoTicketMachine.getInstance());
 	}
 
 	public void play() {

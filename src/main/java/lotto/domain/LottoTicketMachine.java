@@ -16,6 +16,14 @@ public class LottoTicketMachine {
 	private LottoTicketMachine() {
 	}
 
+	private static class LottoTicketMachineHolder {
+		private static final LottoTicketMachine INSTANCE = new LottoTicketMachine();
+	}
+
+	public static LottoTicketMachine getInstance() {
+		return LottoTicketMachineHolder.INSTANCE;
+	}
+
 	public static LottoTicketMachine create() {
 		return new LottoTicketMachine();
 	}
