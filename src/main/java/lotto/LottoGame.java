@@ -13,8 +13,11 @@ public class LottoGame {
 
     private final Amount amount;
 
-    public LottoGame(int payment) {
-        this.amount = new Amount(payment);
+    public LottoGame(String payment) {
+        Validate.isEmpty(payment);
+        Validate.isNumber(payment);
+        Validate.isPurchasable(payment);
+        this.amount = new Amount(Integer.parseInt(payment));
     }
 
     public int getAmount() {
@@ -25,25 +28,29 @@ public class LottoGame {
         return amount.getPurchase();
     }
 
-    public void purchase(PurchaseQuantity quantity) {
+    public void purchase(Quantity quantity) {
         amount.purchase(quantity);
     }
 
-    public List<LottoNumbers> autoPurchaseLotto(PurchaseQuantity quantity) {
+    public List<LottoNumbers> autoPurchaseLotto(Quantity quantity) {
         purchase(quantity);
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < quantity.getPurchaseQuantity(); i++) {
+        for (int i = 0; i < quantity.getQuantity(); i++) {
             lottoNumbers.add(LottoNumbers.from(lottoNumberGenerator.autoGenerateNumbers()));
         }
         return lottoNumbers;
     }
 
-    public List<LottoNumbers> manualPurchaseLotto(PurchaseQuantity quantity) {
+    public List<LottoNumbers> manualPurchaseLotto(Quantity quantity) {
         purchase(quantity);
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < quantity.getPurchaseQuantity(); i++) {
+        for (int i = 0; i < quantity.getQuantity(); i++) {
             lottoNumbers.add(LottoNumbers.from(lottoNumberGenerator.manualGenerateNumbers()));
         }
         return lottoNumbers;
+    }
+
+    public void isPurchase(Quantity quantity) {
+        amount.isPurchase(quantity);
     }
 }

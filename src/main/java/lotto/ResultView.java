@@ -19,10 +19,10 @@ import static lotto.Constant.RESULT_TOTAL_EARNINGS_RATE_2;
 import static lotto.Constant.RESULT_WINNING_STATISTICS;
 
 public class ResultView {
-    void printResultPay(PurchaseQuantity autoPurchaseQuantity, PurchaseQuantity manualPurchaseQuantity) {
+    void printResultPay(Quantity autoQuantity, Quantity manualQuantity) {
         System.out.println(
-                RESULT_BOUGHT_1 + manualPurchaseQuantity.getPurchaseQuantity() + RESULT_BOUGHT_2
-                        + autoPurchaseQuantity.getPurchaseQuantity() + RESULT_BOUGHT_3);
+                RESULT_BOUGHT_1 + manualQuantity.getQuantity() + RESULT_BOUGHT_2
+                        + autoQuantity.getQuantity() + RESULT_BOUGHT_3);
     }
 
     void printResultPurchase(PurchaseLottoNumbers purchaseLottoNumbers) {

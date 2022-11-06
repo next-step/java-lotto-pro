@@ -24,7 +24,7 @@ public class LottoNumbersTest {
     @Test
     void 당첨_번호에게_로또_번호_3개가_동일한지_물어보기() {
         LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumbers winningNumber = LottoNumbers.from(Arrays.asList(1, 2, 3, 40, 50, 60));
+        LottoNumbers winningNumber = LottoNumbers.from(Arrays.asList(1, 2, 3, 40, 41, 42));
         assertThat(winningNumber.countHit(lottoNumbers)).isEqualTo(FIFTH.getCountOfMatch());
     }
 

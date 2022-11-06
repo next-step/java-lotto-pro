@@ -19,6 +19,7 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers from(List<Integer> sixNumbers) {
+        Validate.isSixNumbers(sixNumbers);
         Collections.sort(sixNumbers);
         return new LottoNumbers(sixNumbers.stream()
                 .map(LottoNumber::from)

@@ -22,19 +22,26 @@ import static lotto.Constant.NULL;
 import static lotto.Constant.REGEX_ONLY_NUMBER;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 public class Validate {
-    static void validatePurchase(String input) {
-        if (Integer.parseInt(input) < LOTTO_PRICE) {
+    static void isPurchasable(String payment) {
+        if (Integer.parseInt(payment) < LOTTO_PRICE) {
             throw new IllegalArgumentException(ERROR_LOTTO_COST);
         }
     }
 
-    static void validateEmpty(String input) {
+    static void isPurchasable(int balance, Quantity quantity) {
+        if (balance < (quantity.getQuantity() * LOTTO_PRICE)) {
+            throw new IllegalArgumentException(ERROR_EXCEED_PURCHASABLE_COUNT);
+        }
+    }
+
+    static void isEmpty(String input) {
         if (Objects.equals(input, NULL)) {
             throw new IllegalArgumentException(ERROR_EMPTY_PAY_MONEY);
         }
@@ -43,63 +50,42 @@ public class Validate {
         }
     }
 
-    static void validateOnlyNumber(String input) {
+    static void isNumber(String input) {
         if (!Pattern.matches(REGEX_ONLY_NUMBER, input)) {
             throw new IllegalArgumentException(ERROR_ONLY_NUMBER);
         }
     }
 
-    static void validateNumberRange(int number) {
+    static void isOutOfBound(int number) {
         if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
             throw new IllegalArgumentException(ERROR_NUMBER_OUT_OF_RANGE);
         }
     }
 
-    static void validateLottoNumber(String input) {
-        StringTokenizer token = new StringTokenizer(input, DELIMITER);
-        while (token.hasMoreTokens()) {
-            validateOnlyNumber(token.nextToken());
-        }
-    }
-
-    static void validateLottoNumberRange(String input) {
-        StringTokenizer token = new StringTokenizer(input, DELIMITER);
-        while (token.hasMoreTokens()) {
-            validateNumberRange(Integer.parseInt(token.nextToken()));
-        }
-    }
-
-    static void validateLottoNumberCount(String input) {
-        if (new StringTokenizer(input, DELIMITER).countTokens() != LOTTO_NUMBER_SIZE) {
+    static void isSixNumbers(List<Integer> sixNumbers) {
+        if (sixNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(ERROR_INPUT_SIX_NUMBER);
         }
     }
 
-    static void validateLottoNumberDuplicate(String input) {
-        if (isSixNumbers(input) < LOTTO_NUMBER_SIZE) {
+    static void isDuplicate(String bonus, LottoNumbers winningNumber) {
+        if (winningNumber.contains(LottoNumber.from(bonus))) {
+            throw new IllegalArgumentException(ERROR_BONUS_NUMBER_DUPLICATED);
+        }
+    }
+
+    static void isDuplicate(String input) {
+        if (inputToSet(input) < LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_DUPLICATED);
         }
     }
 
-    private static int isSixNumbers(String input) {
+    private static int inputToSet(String input) {
         Set<String> checkSet = new HashSet<>();
         StringTokenizer token = new StringTokenizer(input, DELIMITER);
         while (token.hasMoreTokens()) {
             checkSet.add(token.nextToken());
         }
         return checkSet.size();
-    }
-
-    static void validateBonusNumberDuplicate(String input, LottoNumbers winningNumber) {
-        if (winningNumber.contains(LottoNumber.from(input))) {
-            throw new IllegalArgumentException(ERROR_BONUS_NUMBER_DUPLICATED);
-        }
-    }
-
-
-    static void validatePurchasableCount(int payMoney, int purchaseCount) {
-        if (payMoney < (purchaseCount * LOTTO_PRICE)) {
-            throw new IllegalArgumentException(ERROR_EXCEED_PURCHASABLE_COUNT);
-        }
     }
 }

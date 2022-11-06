@@ -17,25 +17,22 @@ public class InputView {
     private final Scanner scanner = new Scanner(System.in);
     private final Spliter spliter = new Spliter();
 
-    int inputPay() {
+    String inputPay() {
         printInputPay();
         String input = scanner.nextLine();
-        Validate.validateEmpty(input);
-        Validate.validateOnlyNumber(input);
-        Validate.validatePay(input);
-        return Integer.parseInt(input);
+        Validate.isEmpty(input);
+        return input;
     }
 
     private void printInputPay() {
         System.out.println(INPUT_PAY_MONEY);
     }
 
-    int inputManualPurchase(int payment) {
+    String inputManualPurchase() {
         printInputManualPurchase();
         String input = scanner.nextLine();
-        Validate.validatePurchasableCount(payment, Integer.parseInt(input));
-        Validate.validateOnlyNumber(input);
-        return Integer.parseInt(input);
+        Validate.isEmpty(input);
+        return input;
     }
 
     private void printInputManualPurchase() {
@@ -49,10 +46,8 @@ public class InputView {
     LottoNumbers inputWinningNumberLastWeek() {
         printInputWinningNumberLastWeek();
         String input = scanner.nextLine();
-        Validate.validateLottoNumber(input);
-        Validate.validateLottoNumberCount(input);
-        Validate.validateLottoNumberRange(input);
-        Validate.validateLottoNumberDuplicate(input);
+        Validate.isEmpty(input);
+        Validate.isDuplicate(input);
         return LottoNumbers.from(spliter.splitToList(input));
     }
 
@@ -63,9 +58,8 @@ public class InputView {
     LottoNumber inputBonusNumberLastWeek(LottoNumbers winningNumbers) {
         printInputBonusNumberLastWeek();
         String input = scanner.nextLine();
-        Validate.validateOnlyNumber(input);
-        Validate.validateLottoNumberRange(input);
-        Validate.validateBonusNumberDuplicate(input, winningNumbers);
+        Validate.isEmpty(input);
+        Validate.isDuplicate(input, winningNumbers);
         return LottoNumber.from(input);
     }
 

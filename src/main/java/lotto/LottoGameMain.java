@@ -12,17 +12,17 @@ public class LottoGameMain {
     public static void main(String[] args) {
         LottoGame lottoGame = new LottoGame(inputView.inputPay());
 
-        PurchaseQuantity manualPurchaseQuantity = new PurchaseQuantity(
-                inputView.inputManualPurchase(lottoGame.getAmount()));
+        Quantity manualQuantity = Quantity.from(inputView.inputManualPurchase());
+        lottoGame.isPurchase(manualQuantity);
 
         inputView.printInputManualLottoNumber();
         PurchaseLottoNumbers purchaseLottoNumbers = new PurchaseLottoNumbers(
-                lottoGame.manualPurchaseLotto(manualPurchaseQuantity));
+                lottoGame.manualPurchaseLotto(manualQuantity));
 
-        PurchaseQuantity autoPurchaseQuantity = new PurchaseQuantity(lottoGame.getPurchase());
-        resultView.printResultPay(autoPurchaseQuantity, manualPurchaseQuantity);
+        Quantity autoQuantity = Quantity.from(lottoGame.getPurchase());
+        resultView.printResultPay(autoQuantity, manualQuantity);
 
-        purchaseLottoNumbers.addLottoNumbers(lottoGame.autoPurchaseLotto(autoPurchaseQuantity));
+        purchaseLottoNumbers.addLottoNumbers(lottoGame.autoPurchaseLotto(autoQuantity));
         resultView.printResultPurchase(purchaseLottoNumbers);
 
         LottoNumbers winningNumbers = inputView.inputWinningNumberLastWeek();

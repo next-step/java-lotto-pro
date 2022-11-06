@@ -7,7 +7,6 @@ import static lotto.Constant.LOTTO_START_NUMBER;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -30,12 +29,9 @@ public class LottoNumberGenerator {
     public List<Integer> manualGenerateNumbers() {
         final Scanner scanner = new Scanner(System.in);
         final Spliter spliter = new Spliter();
-        Optional<String> inputOptional = Optional.ofNullable(scanner.nextLine());
-        String input = inputOptional.orElse("");
-        Validate.validateLottoNumber(input);
-        Validate.validateLottoNumberCount(input);
-        Validate.validateLottoNumberRange(input);
-        Validate.validateLottoNumberDuplicate(input);
+        String input = scanner.nextLine();
+        Validate.isEmpty(input);
+        Validate.isDuplicate(input);
         return spliter.splitToList(input);
     }
 }

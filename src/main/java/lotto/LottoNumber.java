@@ -19,6 +19,8 @@ public class LottoNumber {
     private final int number;
 
     private LottoNumber(int number) {
+        Validate.isNumber(String.valueOf(number));
+        Validate.isOutOfBound(number);
         this.number = number;
     }
 

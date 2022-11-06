@@ -21,12 +21,12 @@ public class Amount {
         return balance;
     }
 
-    public boolean isPurchase(int quantity) {
-        return balance >= quantity * LOTTO_PRICE;
+    public void isPurchase(Quantity quantity) {
+        Validate.isPurchasable(balance, quantity);
     }
 
-    public void purchase(PurchaseQuantity quantity) {
-        balance -= LOTTO_PRICE * quantity.getPurchaseQuantity();
+    public void purchase(Quantity quantity) {
+        balance -= LOTTO_PRICE * quantity.getQuantity();
     }
 
     public int getPurchase() {
