@@ -18,9 +18,11 @@ import static lotto.Constant.LOTTO_END_NUMBER;
 import static lotto.Constant.LOTTO_NUMBER_SIZE;
 import static lotto.Constant.LOTTO_PRICE;
 import static lotto.Constant.LOTTO_START_NUMBER;
+import static lotto.Constant.NULL;
 import static lotto.Constant.REGEX_ONLY_NUMBER;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
@@ -33,6 +35,9 @@ public class Validate {
     }
 
     static void validateEmpty(String input) {
+        if (Objects.equals(input, NULL)) {
+            throw new IllegalArgumentException(ERROR_EMPTY_PAY_MONEY);
+        }
         if (input.isEmpty()) {
             throw new IllegalArgumentException(ERROR_EMPTY_PAY_MONEY);
         }

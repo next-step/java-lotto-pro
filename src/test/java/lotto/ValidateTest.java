@@ -4,12 +4,20 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 public class ValidateTest {
     @Test
     void 로또_구입금액_보다_적은_금액_입력() {
         assertThatThrownBy(() -> Validate.validatePay("500"))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void 공백_또는_null_입력(String input) {
+        assertThatThrownBy(() -> Validate.validateEmpty(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

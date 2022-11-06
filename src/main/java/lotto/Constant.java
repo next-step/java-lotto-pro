@@ -30,6 +30,7 @@ public class Constant {
     public static final int LOTTO_START_NUMBER = 1;
     public static final int LOTTO_END_NUMBER = 45;
     public static final String DELIMITER = "[, ]";
+    public static final String NULL = null;
     public static final String ERROR_EMPTY_PAY_MONEY = "금액을 입력해주세요.";
     public static final String ERROR_ONLY_NUMBER = "숫자만 입력할 수 있습니다.";
     public static final String ERROR_NUMBER_OUT_OF_RANGE = "숫자는 1 ~ 45까지 입력할 수 있습니다.";

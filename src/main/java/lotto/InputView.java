@@ -11,7 +11,6 @@ import static lotto.Constant.INPUT_MANUAL_PURCHASE;
 import static lotto.Constant.INPUT_PAY_MONEY;
 import static lotto.Constant.INPUT_WINNING_NUMBER_LAST_WEEK;
 
-import java.util.Optional;
 import java.util.Scanner;
 
 public class InputView {
@@ -20,8 +19,7 @@ public class InputView {
 
     int inputPay() {
         printInputPay();
-        Optional<String> inputOptional = Optional.ofNullable(scanner.nextLine());
-        String input = inputOptional.orElse("0");
+        String input = scanner.nextLine();
         Validate.validateEmpty(input);
         Validate.validateOnlyNumber(input);
         Validate.validatePay(input);
@@ -32,11 +30,10 @@ public class InputView {
         System.out.println(INPUT_PAY_MONEY);
     }
 
-    int inputManualPurchase(int payMoney) {
+    int inputManualPurchase(int payment) {
         printInputManualPurchase();
-        Optional<String> inputOptional = Optional.ofNullable(scanner.nextLine());
-        String input = inputOptional.orElse("0");
-        Validate.validatePurchasableCount(payMoney, Integer.parseInt(input));
+        String input = scanner.nextLine();
+        Validate.validatePurchasableCount(payment, Integer.parseInt(input));
         Validate.validateOnlyNumber(input);
         return Integer.parseInt(input);
     }
@@ -51,8 +48,7 @@ public class InputView {
 
     LottoNumbers inputWinningNumberLastWeek() {
         printInputWinningNumberLastWeek();
-        Optional<String> inputOptional = Optional.ofNullable(scanner.nextLine());
-        String input = inputOptional.orElse("");
+        String input = scanner.nextLine();
         Validate.validateLottoNumber(input);
         Validate.validateLottoNumberCount(input);
         Validate.validateLottoNumberRange(input);
@@ -66,8 +62,7 @@ public class InputView {
 
     LottoNumber inputBonusNumberLastWeek(LottoNumbers winningNumbers) {
         printInputBonusNumberLastWeek();
-        Optional<String> inputOptional = Optional.ofNullable(scanner.nextLine());
-        String input = inputOptional.orElse("");
+        String input = scanner.nextLine();
         Validate.validateOnlyNumber(input);
         Validate.validateLottoNumberRange(input);
         Validate.validateBonusNumberDuplicate(input, winningNumbers);
