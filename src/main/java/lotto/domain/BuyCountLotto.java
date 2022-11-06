@@ -15,10 +15,10 @@ public class BuyCountLotto {
         this.directBuyCount = directBuyCount;
     }
 
-    public Lotteries getLotteries(LottoCreator lottoCreator, List<Lotto> lottoList) {
-        if(directBuyCount != lottoList.size()) {
+    public Lotteries getLotteries(LottoCreator lottoCreator, Lotteries lotteries) {
+        if(!lotteries.isEqualSize(directBuyCount)) {
             throw new IllegalArgumentException("수동으로 구매할 로또 수 " + directBuyCount + "만큼 번호를 입력해 주세요.");
         }
-        return buyAmount.getLotteries(lottoCreator, directBuyCount).union(lottoList);
+        return buyAmount.getLotteries(lottoCreator, directBuyCount).union(lotteries);
     }
 }

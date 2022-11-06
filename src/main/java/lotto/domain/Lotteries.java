@@ -28,8 +28,12 @@ public class Lotteries {
                 .collect(Collectors.toList()),this);
     }
 
-    public Lotteries union(List<Lotto> lottoList) {
-        lotteries.addAll(lottoList);
-        return new Lotteries(lotteries);
+    public Lotteries union(Lotteries lotteries) {
+        this.lotteries.addAll(lotteries.lotteries);
+        return new Lotteries(this.lotteries);
+    }
+
+    public boolean isEqualSize(int directBuyCount) {
+        return directBuyCount == lotteries.size();
     }
 }

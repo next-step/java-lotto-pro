@@ -25,7 +25,7 @@ public class BuyCountLottoTest {
     void direct_lotto_auto_lotto_contain_test() {
         BuyCountLotto buyCountLotto = new BuyCountLotto(1, new BuyAmount(3000));
         assertThat(buyCountLotto.getLotteries(new AutoLottoCreator(),
-                        Arrays.asList(getLotto(Arrays.asList(1,2,3,4,5,6))))
+                        getLotteries(Arrays.asList((Arrays.asList(1,2,3,4,5,6)))))
                 .getLotteriesDto().getLotteries().stream()
                 .anyMatch((list) -> list.equals(Arrays.asList(1,2,3,4,5,6))))
                 .isTrue();
@@ -36,12 +36,12 @@ public class BuyCountLottoTest {
     void direct_lotto_auto_lotto_count_test() {
         BuyCountLotto buyCountLotto = new BuyCountLotto(1, new BuyAmount(3000));
         assertThat(buyCountLotto.getLotteries(new AutoLottoCreator(),
-                        Arrays.asList(getLotto(Arrays.asList(1,2,3,4,5,6))))
+                        getLotteries(Arrays.asList((Arrays.asList(1,2,3,4,5,6)))))
                 .getLotteriesDto().getLotteries().size())
                 .isEqualTo(3);
         BuyCountLotto buyCountLotto2 = new BuyCountLotto(1, new BuyAmount(1000));
         assertThat(buyCountLotto2.getLotteries(new AutoLottoCreator(),
-                        Arrays.asList(getLotto(Arrays.asList(1,2,3,4,5,6))))
+                        getLotteries(Arrays.asList((Arrays.asList(1,2,3,4,5,6)))))
                 .getLotteriesDto().getLotteries().size())
                 .isEqualTo(1);
     }
@@ -51,14 +51,17 @@ public class BuyCountLottoTest {
     void direct_lotto_list_size_is_not_equal_to_user_input_test() {
         BuyCountLotto buyCountLotto = new BuyCountLotto(2, new BuyAmount(3000));
         assertThatThrownBy(() -> buyCountLotto.getLotteries(new AutoLottoCreator(),
-                Arrays.asList(getLotto(Arrays.asList(1,2,3,4,5,6)))))
+                getLotteries(Arrays.asList((Arrays.asList(1,2,3,4,5,6))))))
                 .isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> buyCountLotto.getLotteries(new AutoLottoCreator(),
-                Arrays.asList(getLotto(Arrays.asList(1,2,3,4,5,6)), getLotto(Arrays.asList(1,2,3,4,5,6)),
-                        getLotto(Arrays.asList(1,2,3,4,5,6)))))
+                getLotteries(Arrays.asList(
+                         (Arrays.asList(1,2,3,4,5,6)),Arrays.asList(1,2,3,4,5,6), Arrays.asList(1,2,3,4,5,6)))))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    public Lotteries getLotteries(List<List<Integer>> intMatrix) {
+        return new Lotteries(intMatrix.stream().map(intList -> getLotto(intList)).collect(Collectors.toList()));
+    }
 
     public Lotto getLotto(List<Integer> intList) {
         return new Lotto(intList.stream().map(LottoNumber::of).collect(Collectors.toList()));
