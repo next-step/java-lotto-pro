@@ -5,19 +5,21 @@ import java.util.Collections;
 import java.util.List;
 
 public class AutoLottoMachine implements LottoMachine {
-    private static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>();
     private static final int LOTTE_MIN_NUMBER = 1;
     private static final int LOTTE_MAX_NUMBER = 45;
 
+    private static final List<LottoNumber> LOTTO_NUMBERS = setupLotto();
+
     public AutoLottoMachine() {
-        setupLotto();
+
     }
 
-    private void setupLotto() {
+    private static List<LottoNumber> setupLotto() {
+        List<LottoNumber> lottonumbers = new ArrayList<>();
         for (int i = LOTTE_MIN_NUMBER; i <= LOTTE_MAX_NUMBER; i++) {
-            LOTTO_NUMBERS.add(new LottoNumber(i));
+            lottonumbers.add(new LottoNumber(i));
         }
-
+        return lottonumbers;
     }
 
     @Override
