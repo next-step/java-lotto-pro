@@ -1,13 +1,16 @@
 package lotto;
 
+import lotto.common.LottoAutoUtils;
+
 import java.util.List;
 
 import static lotto.common.Constants.INIT_NUM;
 
 public class WinningLotto {
     private LottoNumbers winningLotto;
+    private LottoNumber bonusNum;
 
-    public WinningLotto(List<Integer> lottoNumbers) {
+    public WinningLotto(List<LottoNumber> lottoNumbers) {
         this.winningLotto = new LottoNumbers(lottoNumbers);
     }
 
@@ -19,19 +22,31 @@ public class WinningLotto {
         this.winningLotto = new LottoNumbers(lottoNumbers);
     }
 
+    public WinningLotto(String lottoNumbers, String bonusNum) {
+        this.winningLotto = new LottoNumbers(lottoNumbers);
+        this.bonusNum = LottoNumber.of(new LottoAutoUtils().stringToNumber(bonusNum));
+    }
+
     public int match(Lotto lotto) {
         int cnt = INIT_NUM;
-        for (int num : lotto.getLottoNumbers()) {
-            cnt += contains(num);
+        for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
+            cnt += contains(lottoNumber);
         }
 
         return cnt;
     }
 
-    private int contains(int num) {
-        if (this.winningLotto.getNumbers().contains(num)) {
+    private int contains(LottoNumber num) {
+        if (this.winningLotto.getLottoNumbers().contains(num)) {
             return 1;
         }
         return 0;
+    }
+
+    public boolean isMatchBonusNumber(Lotto lotto) {
+        if (lotto.getLottoNumbers().contains(this.bonusNum)) {
+            return true;
+        }
+        return false;
     }
 }
