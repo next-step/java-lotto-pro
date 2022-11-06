@@ -1,11 +1,14 @@
 package lotto.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import lotto.domain.BuyingLottoGroup;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoPayment;
 import lotto.domain.LottoResult;
 import lotto.domain.WinningLotto;
+import lotto.strategy.ConsoleLottoNumberStrategy;
 import lotto.strategy.LottoNumberStrategy;
 
 public class LottoService {
@@ -28,8 +31,16 @@ public class LottoService {
         return LottoPayment.create(payLotto);
     }
 
-    public BuyingLottoGroup generateBuyingLottoGroup(int buyLottoCount) {
-        return BuyingLottoGroup.create(buyLottoCount, this.buyingLottoNumberStrategy);
+    public List<Lotto> generateManualLotto(int manualLottoCount){
+        List<Lotto> lottoList = new ArrayList<>();
+        for(int i=0; i < manualLottoCount; i++){
+            lottoList.add(Lotto.create(new ConsoleLottoNumberStrategy().generateNumbers()));
+        }
+        return lottoList;
+    }
+
+    public BuyingLottoGroup generateBuyingLottoGroup(int buyLottoCount, int manualLottoCount) {
+        return BuyingLottoGroup.create(buyLottoCount-manualLottoCount, this.buyingLottoNumberStrategy, generateManualLotto(manualLottoCount));
     }
 
     public LottoNumber generateWinningBonusNumber(String inputBonusNumber) {

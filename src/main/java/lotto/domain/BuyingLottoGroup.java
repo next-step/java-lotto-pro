@@ -2,14 +2,19 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.lang.model.type.ArrayType;
 import lotto.strategy.LottoNumberStrategy;
 
 public class BuyingLottoGroup {
     private List<Lotto> lottos;
 
     public static BuyingLottoGroup create(int count, LottoNumberStrategy lottoNumberStrategy) {
+        return create(count, lottoNumberStrategy, new ArrayList<>());
+    }
+
+    public static BuyingLottoGroup create(int count, LottoNumberStrategy lottoNumberStrategy, List<Lotto> manualLottos) {
         BuyingLottoGroup buyingLottoGroup = new BuyingLottoGroup();
-        buyingLottoGroup.lottos = new ArrayList<>();
+        buyingLottoGroup.lottos = new ArrayList<>(manualLottos);
 
         for (int i = 0; i < count; i++) {
             buyingLottoGroup.lottos.add(Lotto.create(lottoNumberStrategy.generateNumbers()));

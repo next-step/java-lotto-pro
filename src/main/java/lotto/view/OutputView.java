@@ -15,7 +15,14 @@ public abstract class OutputView {
         println(count+"개를 구매했습니다.");
     }
 
-    public static void printLottoNumbers(List<Lotto> lottos){
+    public static void printManualLottoInput(){
+        println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+    public static void printBuyLottoCount(int autoLottoCount, int manualLottoCount){
+        println("수동으로 "+ manualLottoCount + "장, 자동으로 "+ autoLottoCount + "장을 구매했습니다." );
+    }
+
+    public static void  printLottoNumbers(List<Lotto> lottos){
         for (Lotto lotto : lottos) {
             println(lotto.toString());
         }

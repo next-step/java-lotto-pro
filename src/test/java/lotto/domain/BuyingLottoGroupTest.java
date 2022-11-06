@@ -43,4 +43,17 @@ public class BuyingLottoGroupTest {
         assertThat(group.getLottos().size()).isEqualTo(5);
         assertThat(lottos.size()).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("수동 로또가 있는 경우, 입력받은 수동 로또 정보도 포함한다.")
+    void includeManualLotto(){
+        BuyingLottoGroup buyingLottoGroup = BuyingLottoGroup.create(5, new TestLottoNumberStrategy(),
+                Arrays.asList(
+                        Lotto.create(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                        Lotto.create(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                        Lotto.create(Arrays.asList(1, 2, 3, 4, 5, 6))
+                ));
+
+        assertThat(buyingLottoGroup.getLottos().size()).isEqualTo(8);
+    }
 }
