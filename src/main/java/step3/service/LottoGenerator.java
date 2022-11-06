@@ -2,6 +2,7 @@ package step3.service;
 
 import step3.constant.StringConstant;
 import step3.model.Lotto;
+import step3.model.LottoBonus;
 import step3.model.Lottos;
 
 import java.util.ArrayList;
@@ -43,6 +44,12 @@ public class LottoGenerator {
         return new Lotto(Arrays.stream(lottoNumberText.split(StringConstant.COMMA))
                 .map(this::convertInteger)
                 .collect(Collectors.toList()));
+    }
+
+    public LottoBonus generate(String lottoNumberText, int bonus) {
+        return new LottoBonus(Arrays.stream(lottoNumberText.split(StringConstant.COMMA))
+                .map(this::convertInteger)
+                .collect(Collectors.toList()), bonus);
     }
 
     private Integer convertInteger(String number) {

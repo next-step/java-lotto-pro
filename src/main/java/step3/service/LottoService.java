@@ -23,6 +23,11 @@ public class LottoService {
 
     public LottoResult getResultComparedToLuckyNumbers(String winningLottoText, Lottos lottos) {
         Lotto winningLotto = this.lottoGenerator.generate(winningLottoText);
-        return lottos.calculate(winningLotto);
+        return LottoResult.generateFromLottos(lottos, winningLotto);
+    }
+
+    public LottoResult getResultComparedToLuckyNumbers(String winningLottoText, int bonus, Lottos lottos) {
+        Lotto winningLotto = this.lottoGenerator.generate(winningLottoText, bonus);
+        return LottoResult.generateFromLottos(lottos, winningLotto);
     }
 }

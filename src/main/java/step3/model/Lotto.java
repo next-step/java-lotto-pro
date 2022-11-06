@@ -102,4 +102,8 @@ public class Lotto {
     private Iterator<Integer> iterate() {
         return this.lotto.iterator();
     }
+
+    public boolean isMatchedBonus(Lotto winningLotto) {
+        return false;
+    }
 }

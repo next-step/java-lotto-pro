@@ -1,10 +1,9 @@
 package step3.model;
 
-import step3.service.LottoScoreType;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -31,15 +30,7 @@ public class Lottos {
                 consumer.accept(lotto.toString()));
     }
 
-    public LottoResult calculate(Lotto winningLotto) {
-        LottoResult lottoResult = new LottoResult();
-        this.lottos.forEach(lotto -> calculate(winningLotto, lottoResult, lotto));
-
-        return lottoResult;
-    }
-
-    private void calculate(Lotto winningLotto, LottoResult lottoResult, Lotto lotto) {
-        int count = lotto.getMatchedCount(winningLotto);
-        lottoResult.addByLottoScoreType(LottoScoreType.getByScore(count));
+    public Stream<Lotto> stream() {
+        return this.lottos.stream();
     }
 }

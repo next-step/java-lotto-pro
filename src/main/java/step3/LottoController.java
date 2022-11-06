@@ -19,15 +19,20 @@ public class LottoController {
         inputView.printLottos(lottos);
 
         String luckyNumberText = inputView.readyLuckyLotto();
-        LottoResult lottoResults = lottoService.getResultComparedToLuckyNumbers(luckyNumberText, lottos);
+        int bonus = inputView.readyBonus();
+        LottoResult lottoResults = lottoService.getResultComparedToLuckyNumbers(luckyNumberText, bonus, lottos);
 
         printResult(money, lottoResults);
     }
 
-    private void printResult( int money, LottoResult lottoResult) {
+    public static void main(String[] args) {
+        new LottoController().gameStart();
+    }
+
+    private void printResult(int money, LottoResult lottoResult) {
         ResultView resultView = new ResultView();
         resultView.printLottoResult(lottoResult);
 
-        resultView.printRate(lottoResult.getBenefitRate(money));
+        resultView.printRate(lottoResult.getProfitRate(money));
     }
 }

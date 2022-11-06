@@ -5,17 +5,31 @@ import step3.service.LottoScoreType;
 public class LottoResult {
     private static final double TWO_POINT_POSITION = 100;
 
-    private int threeMatchedCount;
-    private int fourMatchedCount;
-    private int fiveMatchedCount;
-    private int sixMatchedCount;
+    protected int threeMatchedCount;
+    protected int fourMatchedCount;
+    protected int fiveMatchedCount;
+    protected int fiveBonusMatchedCount;
+    protected int sixMatchedCount;
 
-    public LottoResult() {}
+    public LottoResult() {
+    }
+
     public LottoResult(int threeMatchedCount, int fourMatchedCount, int fiveMatchedCount, int sixMatchedCount) {
         this.threeMatchedCount = threeMatchedCount;
         this.fourMatchedCount = fourMatchedCount;
         this.fiveMatchedCount = fiveMatchedCount;
         this.sixMatchedCount = sixMatchedCount;
+    }
+
+    public static LottoResult generateFromLottos(Lottos lottos, Lotto winningLotto) {
+        LottoResult lottoResult = new LottoResult();
+        lottos.stream().forEach(lotto -> {
+            int matchedCount = winningLotto.getMatchedCount(lotto);
+            boolean matchedBonus = winningLotto.isMatchedBonus(lotto);
+            lottoResult.addByLottoScoreType(LottoScoreType.getByScore(matchedCount, matchedBonus));
+        });
+
+        return lottoResult;
     }
 
     public int getByLottoScoreType(LottoScoreType scoreType) {
@@ -33,6 +47,10 @@ public class LottoResult {
 
         if (LottoScoreType.FIVE.equals(scoreType)) {
             return fiveMatchedCount;
+        }
+
+        if (LottoScoreType.FIVE_BONUS.equals(scoreType)) {
+            return fiveBonusMatchedCount;
         }
 
         if (LottoScoreType.SIX.equals(scoreType)) {
@@ -59,17 +77,21 @@ public class LottoResult {
             this.fiveMatchedCount++;
         }
 
+        if (LottoScoreType.FIVE_BONUS.equals(scoreType)) {
+            this.fiveBonusMatchedCount++;
+        }
+
         if (LottoScoreType.SIX.equals(scoreType)) {
             this.sixMatchedCount++;
         }
     }
 
-    public double getBenefitRate(int money) {
+    public double getProfitRate(int money) {
         int totalBenefit = 0;
         for (LottoScoreType scoreType : LottoScoreType.values()) {
             totalBenefit += (getByLottoScoreType(scoreType) * scoreType.getMoney());
         }
 
-        return Math.floor(((double)totalBenefit / money * TWO_POINT_POSITION)) / TWO_POINT_POSITION;
+        return Math.floor(((double) totalBenefit / money * TWO_POINT_POSITION)) / TWO_POINT_POSITION;
     }
 }
