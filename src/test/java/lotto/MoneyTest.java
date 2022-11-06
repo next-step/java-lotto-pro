@@ -18,13 +18,13 @@ class MoneyTest {
         //given:
         int amount = 1000;
         //when, then:
-        assertThatNoException().isThrownBy(() -> Money.of(amount));
+        assertThatNoException().isThrownBy(() -> Money.from(amount));
     }
 
     @DisplayName("정적 팩토리 메서드 생성자 테스트")
     @Test
     void of_money_success() {
-        assertThatNoException().isThrownBy(() -> Money.of(0));
+        assertThatNoException().isThrownBy(() -> Money.from(0));
     }
 
     @ParameterizedTest(name = "나누기 메서드 테스트" + DEFAULT_DISPLAY_NAME)
@@ -32,6 +32,6 @@ class MoneyTest {
     void divide_money_success(long amount, long operandMoney) {
         //given:
         long result = 10;
-        assertThat(Money.of(amount).divide(Money.of(operandMoney))).isEqualTo(result);
+        assertThat(Money.from(amount).divide(Money.from(operandMoney))).isEqualTo(result);
     }
 }

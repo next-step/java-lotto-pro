@@ -43,7 +43,7 @@ public class Money {
         return Objects.hash(amount);
     }
 
-    public static Money of(long amount) {
+    public static Money from(long amount) {
         return new Money(amount);
     }
 }

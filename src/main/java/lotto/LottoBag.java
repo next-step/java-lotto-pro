@@ -9,7 +9,7 @@ public class LottoBag {
 
     private final List<Lotto> lottoList;
 
-    public static final Money LOTTO_PRICE = Money.of(1000);
+    public static final Money LOTTO_PRICE = Money.from(1000);
 
     public LottoBag(List<Lotto> lottoList) {
         this.lottoList = lottoList;
