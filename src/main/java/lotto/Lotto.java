@@ -34,7 +34,11 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lottoNumbers.getLottoNumbers().toString();
+        String str = "";
+        for (int i = 0; i < lottoNumbers.getLottoNumbers().size() - 1; i++) {
+            str += lottoNumbers.getLottoNumbers().get(i).getLottoNum() + ", ";
+        }
+        return str += lottoNumbers.getLottoNumbers().get(lottoNumbers.getLottoNumbers().size() -1).getLottoNum();
     }
 
     @Override
