@@ -2,7 +2,6 @@ package lotto.controller;
 
 import lotto.domain.*;
 import lotto.util.LottoGenerator;
-import lotto.util.ProfitCalculator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -14,8 +13,7 @@ public class LottoGame {
             printLottos(lottos);
             LottoResult lottoResult = lottos.findWinner(Lotto.from(InputView.inputLottoWinningNumbers())
                     , LottoNumber.from(InputView.inputBonusBall()));
-            OutputView.printLottoResult(lottoResult,
-                    ProfitCalculator.calculateProfitRatio(lottoResult, lottos.getLottos().size()));
+            OutputView.printLottoResult(lottoResult, lottos.getLottos().size());
         } catch (Exception e) {
             System.out.println("프로그램 종료." + e.getMessage());
         }

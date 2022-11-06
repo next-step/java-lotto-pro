@@ -27,11 +27,11 @@ public class OutputView {
         System.out.println(lotto);
     }
 
-    public static void printLottoResult(LottoResult lottoResult, BigDecimal profitRatio) {
+    public static void printLottoResult(LottoResult lottoResult, int lottoAmount) {
         System.out.println(OUT_MESSAGE_RESULT_STATISTICS);
         System.out.println(OUT_MESSAGE_DIVIDER_LINE);
         printLottoStatistics(lottoResult);
-        printLottoProfitRatio(profitRatio);
+        printLottoProfitRatio(lottoResult.calculateProfitRatio(lottoAmount));
     }
 
     private static void printLottoStatistics(LottoResult lottoResult) {
