@@ -96,8 +96,7 @@
 * 일급 컬렉션
   * List\<LottoNumbers\> -> PurchaseLottoNumbers
   * totalMoney, balance -> Amount
-  * manualPurchaseQuantity -> PurchaseCount
-  * autoPurchaseQuantity -> PurchaseCount
+  * purchaseQuantity -> Quantity
 * Constant
   * "수동으로 X장, 자동으로 XX개를 구매했습니다." 추가
 * View
