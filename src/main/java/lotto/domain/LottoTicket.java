@@ -62,4 +62,8 @@ public class LottoTicket {
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(", ", "[", "]"));
     }
+
+    public boolean isBonusNumber(LottoNumber bonusNumber) {
+        return this.ticket.contains(bonusNumber);
+    }
 }
