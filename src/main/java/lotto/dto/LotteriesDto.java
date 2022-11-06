@@ -16,13 +16,6 @@ public class LotteriesDto {
         this.lotteriesDomain = lotteriesDomain;
     }
 
-    public LotteriesDto(List<List<Integer>> lotteries, Lotteries lotteriesDomain, int directBuyCount, int autoBuyCount) {
-        this.lotteries = lotteries;
-        this.lotteriesDomain = lotteriesDomain;
-        this.directBuyCount = directBuyCount;
-        this.autoBuyCount = autoBuyCount;
-    }
-
     public Lotteries getLotteriesDomain() {
         return lotteriesDomain;
     }
@@ -45,5 +38,9 @@ public class LotteriesDto {
 
     public void setAutoBuyCount(int autoBuyCount) {
         this.autoBuyCount = autoBuyCount;
+    }
+
+    public void setLotteries(List<List<Integer>> lotteries) {
+        this.lotteries = lotteries;
     }
 }

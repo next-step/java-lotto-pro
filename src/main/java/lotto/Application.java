@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.domain.BuyCountLotto;
 import lotto.domain.Lotteries;
 import lotto.dto.*;
 import lotto.view.LotteriesView;
@@ -27,19 +26,26 @@ public class Application {
                         buyAmountDto);
 
         if(buyCountLottoDto.getDirectBuyCount() == 0) {
-            getLotteriesAndResult(buyCountLottoDto,
-                    new LotteriesDto(Arrays.asList(new ArrayList<>()), new Lotteries(new ArrayList<>())), buyAmountDto);
+            getLotteriesAndResult(new LotteriesDto(Arrays.asList(new ArrayList<>()), new Lotteries(new ArrayList<>())),
+                    buyCountLottoDto, buyAmountDto);
             return;
         }
 
-        LotteriesDto directLotteriesDto = lottoController.
-                getDirectLotteries(lottoInputView.readUserInput("수동으로 구매할 번호를 입력해 주세요."));
-        getLotteriesAndResult(buyCountLottoDto,directLotteriesDto,buyAmountDto);
-
+        getLotteriesAndResult(getDirectLotteries(buyCountLottoDto.getDirectBuyCount()),buyCountLottoDto,buyAmountDto);
     }
 
-    public static void getLotteriesAndResult(BuyCountLottoDto buyCountLottoDto,
-                                             LotteriesDto directLotteriesDto, BuyAmountDto buyAmountDto) {
+    private static LotteriesDto getDirectLotteries(int buyLottoCount) {
+        LotteriesDto directLotteriesDto = lottoController.
+                initDirectLotteries(lottoInputView.readUserInput("수동으로 구매할 번호를 입력해 주세요."));
+
+        for (int i = 0; i < buyLottoCount - 1; i++) {
+            lottoController.mergeLotteries(directLotteriesDto, lottoInputView.readUserInput(""));
+        }
+        return directLotteriesDto;
+    }
+
+    private static void getLotteriesAndResult(LotteriesDto directLotteriesDto,
+                                             BuyCountLottoDto buyCountLottoDto, BuyAmountDto buyAmountDto) {
         LotteriesDto lotteriesDto = lottoController.buyLotto(buyCountLottoDto, directLotteriesDto);
 
         lotteriesView.lotteriesResult(lotteriesDto);

@@ -33,6 +33,10 @@ public class Lotteries {
         return new Lotteries(this.lotteries);
     }
 
+    public void addLotto(Lotto lotto) {
+        this.lotteries.add(lotto);
+    }
+
     public boolean isEqualSize(int directBuyCount) {
         return directBuyCount == lotteries.size();
     }

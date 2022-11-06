@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class BuyCountLotto {
 
     private int directBuyCount;
@@ -19,6 +17,6 @@ public class BuyCountLotto {
         if(!lotteries.isEqualSize(directBuyCount)) {
             throw new IllegalArgumentException("수동으로 구매할 로또 수 " + directBuyCount + "만큼 번호를 입력해 주세요.");
         }
-        return buyAmount.getLotteries(lottoCreator, directBuyCount).union(lotteries);
+        return lotteries.union(buyAmount.getLotteries(lottoCreator, directBuyCount));
     }
 }

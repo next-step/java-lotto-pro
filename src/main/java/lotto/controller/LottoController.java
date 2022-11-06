@@ -22,8 +22,15 @@ public class LottoController {
         return new BuyCountLottoDto(directBuyCount, buyAmount, new BuyCountLotto(directBuyCount, buyAmount));
     }
 
-    public LotteriesDto getDirectLotteries(String userInput) {
-        return (new Lotteries(readDirectLotteries(userInput))).getLotteriesDto();
+    public LotteriesDto initDirectLotteries(String userInput) {
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(readLottoNumbers(userInput));
+        return (new Lotteries(lottoList)).getLotteriesDto();
+    }
+
+    public LotteriesDto mergeLotteries(LotteriesDto lotteriesDto, String userInput) {
+        lotteriesDto.getLotteriesDomain().addLotto(readLottoNumbers(userInput));
+        return lotteriesDto;
     }
 
     public LotteriesDto buyLotto(BuyCountLottoDto buyCountLottoDto, LotteriesDto directLotteriesDto) {
@@ -111,7 +118,7 @@ public class LottoController {
     private int checkStringNotEmptyPositiveIntAndParsing(String str) {
         checkEmpty(str);
         checkPositiveInt(str);
-        return Integer.parseInt(str);
+        return Integer.parseInt(str.trim());
     }
 
     private List<String> splitStringByComma(String userInput) {
@@ -123,16 +130,16 @@ public class LottoController {
     private List<Lotto> readDirectLotteries(String userInput) {
         checkEmpty(userInput);
         return Arrays.asList(userInput.split("\n")).stream()
-                .map((lottoString) -> new Lotto(readLottoNumbers(lottoString)))
+                .map((lottoString) -> readLottoNumbers(lottoString))
                 .collect(Collectors.toList());
     }
 
 
-    private List<LottoNumber> readLottoNumbers(String userInput) {
+    private Lotto readLottoNumbers(String userInput) {
         checkEmpty(userInput);
-        return splitStringByComma(userInput).stream()
+        return new Lotto(splitStringByComma(userInput).stream()
                 .map(str -> LottoNumber.of(checkStringNotEmptyPositiveIntAndParsing(str)))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
 }

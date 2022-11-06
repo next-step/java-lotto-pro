@@ -67,4 +67,29 @@ public class LotteriesTest {
         //then
         assertThat(matchNumber).isEqualTo(0);
     }
+
+    @Test
+    @DisplayName("로또목록끼리 union 하였을 때 정상적으로 병합되는지 테스트")
+    void union_test() {
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(numbersToLotto(Arrays.asList(1,2,3,4,5,6)));
+        Lotteries lotteries1 = new Lotteries(lottoList);
+        Lotteries lotteries2 = new Lotteries(Arrays.asList(numbersToLotto(Arrays.asList(1,2,3,4,5,7))));
+        lotteries1.union(lotteries2);
+        assertThat(lotteries1.getLotteriesDto().getLotteries().stream()
+                .anyMatch(list -> list.equals(Arrays.asList(1,2,3,4,5,7))))
+                .isTrue();
+    }
+
+    @Test
+    @DisplayName("로또목록에 로또 추가하였을 때 추가 되는지 테스트")
+    void addLotto_test() {
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(numbersToLotto(Arrays.asList(1,2,3,4,5,6)));
+        Lotteries lotteries = new Lotteries(lottoList);
+        lotteries.addLotto(numbersToLotto(Arrays.asList(1,2,3,4,5,7)));
+        assertThat(lotteries.getLotteriesDto().getLotteries().stream()
+                .anyMatch(list -> list.equals(Arrays.asList(1,2,3,4,5,7))))
+                .isTrue();
+    }
 }
