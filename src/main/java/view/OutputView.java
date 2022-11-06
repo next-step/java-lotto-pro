@@ -2,17 +2,17 @@ package view;
 
 import domain.*;
 
-public class OutputView {
+import java.util.Arrays;
+import java.util.Comparator;
 
-    private static final int WIN_MIN_NUMBER = 3;
-    private static final int WIN_MAX_NUMBER = 6;
+public class OutputView {
 
     public static void outputCountLottoTicket(int lottoTicketCount) {
         System.out.println(lottoTicketCount + "개를 구매했습니다.");
     }
 
     public static void outputPurchaseLottoList(Lottos lottos) {
-        for(Lotto lotto : lottos.getLottos()){
+        for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.getLottoNumbers());
         }
     }
@@ -25,10 +25,20 @@ public class OutputView {
     public static void MatchReportResult(WinLotto winLotto) {
         WinReport winReport = winLotto.getWinLottoReport();
 
-        for (int i = WIN_MIN_NUMBER; i < WIN_MAX_NUMBER; i++) {
-            System.out.printf("%d개 일치(%d)- %d개\n", i, PrizeMoney.valueOf(i).prizeMoney(), winReport.getLottoResult(i));
+        Arrays.stream(PrizeMoney.values())
+                .sorted(Comparator.comparingInt(PrizeMoney::getPrizeMoney))
+                .filter(prizeMoney -> prizeMoney.getCollectCount() > 2)
+                .forEach(prizeMoney -> System.out.printf(makeLottoResuiltMessage(prizeMoney)
+                        , prizeMoney.getCollectCount()
+                        , prizeMoney.getPrizeMoney()
+                        , winReport.getLottoResult(prizeMoney)));
+    }
 
+    public static String makeLottoResuiltMessage(PrizeMoney prizeMoney) {
+        if (prizeMoney.equals(PrizeMoney.SECOND_PLACE)) {
+            return "%d개 일치, 보너스 볼 일치(%d)- %d개\n";
         }
+        return "%d개 일치(%d)- %d개\n";
     }
 
     public static void outputProfit(WinLotto winLotto, int lottoTicketCount) {
