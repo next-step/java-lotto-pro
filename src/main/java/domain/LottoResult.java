@@ -42,8 +42,7 @@ public class LottoResult {
 
     private void updateWinningResult() {
         for (Lotto lotto : lottos) {
-            LottoWinning lottoWinning = lotto.findWinning(winningNumber.getWinningNumbers(),
-                winningNumber.getBonusNumber());
+            LottoWinning lottoWinning = lotto.findWinning(winningNumber);
             winningResult.put(lottoWinning, winningResult.get(lottoWinning) + 1);
         }
     }

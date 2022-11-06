@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.List;
+import java.util.Set;
 
 public class WinningNumber {
     private final List<Integer> winningNumbers;
@@ -11,11 +12,13 @@ public class WinningNumber {
         this.bonusNumber = bonusNumber;
     }
 
-    public List<Integer> getWinningNumbers() {
-        return winningNumbers;
+    public int countOfMatch(Set<Integer> numbers) {
+        return (int) numbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
     }
 
-    public int getBonusNumber() {
-        return bonusNumber;
+    public boolean isBonusNumberMatched(Set<Integer> numbers) {
+        return numbers.contains(bonusNumber);
     }
 }

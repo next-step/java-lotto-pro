@@ -19,11 +19,9 @@ public class Lotto {
         this.numbers = numberGenerateStrategy.generate(TOTAL_NUMBER_POOL, NUMBER_SIZE);
     }
 
-    public LottoWinning findWinning(List<Integer> winningNumbers, int bonusNumber) {
-        int countOfMatch = (int) numbers.stream()
-            .filter(winningNumbers::contains)
-            .count();
-        boolean isBonusNumberMatched = numbers.contains(bonusNumber);
+    public LottoWinning findWinning(WinningNumber winningNumber) {
+        int countOfMatch = winningNumber.countOfMatch(numbers);
+        boolean isBonusNumberMatched = winningNumber.isBonusNumberMatched(numbers);
         return LottoWinning.of(countOfMatch, isBonusNumberMatched);
     }
 
