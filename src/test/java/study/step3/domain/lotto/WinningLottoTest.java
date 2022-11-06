@@ -24,7 +24,7 @@ class WinningLottoTest {
 
         assertAll(
                 () -> assertThat(lottoMatchResult.lottoMatchCount()).isEqualTo(5),
-                () -> assertThat(lottoMatchResult.isGreaterThanZeroBonusMatchCount()).isTrue()
+                () -> assertThat(lottoMatchResult.isMatchedBonusLottoNumber()).isTrue()
         );
     }
 

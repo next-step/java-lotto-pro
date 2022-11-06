@@ -6,12 +6,12 @@ import study.step3.message.LottoMessage;
 import java.util.Arrays;
 
 public enum LottoRank {
-    FIRST_PLACE(new LottoMatchResult(6L, 0L), 2_000_000_000L),
-    SECOND_PLACE(new LottoMatchResult(5L, 1L), 30_000_000L),
-    THIRD_PLACE(new LottoMatchResult(5L, 0L), 1_500_000L),
-    FOURTH_PLACE(new LottoMatchResult(4L, 0L), 50_000L),
-    FIFTH_PLACE(new LottoMatchResult(3L, 0L), 5_000L),
-    NONE(new LottoMatchResult(0L, 0L), 0L);
+    FIRST_PLACE(new LottoMatchResult(6L, false), 2_000_000_000L),
+    SECOND_PLACE(new LottoMatchResult(5L, true), 30_000_000L),
+    THIRD_PLACE(new LottoMatchResult(5L, false), 1_500_000L),
+    FOURTH_PLACE(new LottoMatchResult(4L, false), 50_000L),
+    FIFTH_PLACE(new LottoMatchResult(3L, false), 5_000L),
+    NONE(new LottoMatchResult(0L, false), 0L);
 
     private final LottoMatchResult matchResult;
     private final long winningMoney;
@@ -28,7 +28,7 @@ public enum LottoRank {
     public static LottoRank ofMatchResult(LottoMatchResult matchResult) {
         return Arrays.stream(values())
                 .filter(rank -> matchResult.isEqualsLottoMatchCount(rank.matchResult))
-                .filter(rank -> matchResult.isGreaterThanOrEqualBonusMatchCount(rank.matchResult))
+                .filter(rank -> matchResult.isEqualBonusMatch(rank.matchResult))
                 .findFirst()
                 .orElse(LottoRank.NONE);
     }
@@ -46,10 +46,10 @@ public enum LottoRank {
     }
 
     public String reportBonusNumberMatchResult() {
-        if(!matchResult.isGreaterThanZeroBonusMatchCount()) {
-            return LottoMessage.OUTPUT_LOTTO_RANK_IS_NOT_MATCHED_BONUS_NUMBER.message();
+        if(matchResult.isMatchedBonusLottoNumber()) {
+            return LottoMessage.OUTPUT_LOTTO_RANK_IS_MATCHED_BONUS_NUMBER.message();
         }
-        return LottoMessage.OUTPUT_LOTTO_RANK_IS_MATCHED_BONUS_NUMBER.message();
+        return LottoMessage.OUTPUT_LOTTO_RANK_IS_NOT_MATCHED_BONUS_NUMBER.message();
     }
 
     public long reportLottoMatchResult() {

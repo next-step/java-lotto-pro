@@ -23,7 +23,7 @@ public class WinningLotto {
 
     public LottoMatchResult matchLotto(Lotto lotto) {
         long lottoMatchCount = lotto.matchLotto(this.winningLotto);
-        long bonusNumberMatchCount = lotto.isMatchedBonusLottoNumber(this.bonusNumber) ? 1L : 0L;
-        return new LottoMatchResult(lottoMatchCount, bonusNumberMatchCount);
+        boolean isMatchedBonusLottoNumber = lotto.isMatchedBonusLottoNumber(this.bonusNumber);
+        return new LottoMatchResult(lottoMatchCount, isMatchedBonusLottoNumber);
     }
 }
