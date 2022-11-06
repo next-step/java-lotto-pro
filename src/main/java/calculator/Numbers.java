@@ -5,9 +5,10 @@ import java.util.List;
 
 public class Numbers {
 
+    private static final int SUM_INIT = 0;
     private List<Number> numbers = new ArrayList<>();
 
-    protected Numbers() {
+    private Numbers() {
     }
 
     public Numbers(String[] splitText) {
@@ -16,15 +17,15 @@ public class Numbers {
         }
     }
 
-    public List<Number> getNumbers() {
-        return numbers;
-    }
-
     public int sum() {
-        int sum = 0;
+        int sum = SUM_INIT;
         for (Number number : this.numbers) {
             sum += number.getNumber();
         }
         return sum;
+    }
+
+    public List<Number> getNumbers() {
+        return numbers;
     }
 }
