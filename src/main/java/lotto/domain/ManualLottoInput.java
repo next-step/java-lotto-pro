@@ -21,6 +21,7 @@ public class ManualLottoInput {
         validateOnlyNumber(manualLottoInput.inputNumbers);
         validateCount(manualLottoInput.inputNumbers);
         validateDuplicateNumber(manualLottoInput.inputNumbers);
+        validateRange(manualLottoInput.inputNumbers);
 
         return manualLottoInput;
     }
@@ -44,6 +45,15 @@ public class ManualLottoInput {
         if(convertSet.size() != inputNumbers.size()){
             throw new IllegalArgumentException("중복된 숫자가 존재합니다.");
         }
+    }
+
+    private static void validateRange(List<String> inputNumbers) {
+        inputNumbers.forEach(number -> {
+            if(LottoNumber.MIN_NUMBER > Integer.parseInt(number) ||
+                    LottoNumber.MAX_NUMBER < Integer.parseInt(number)){
+                throw new IllegalArgumentException("로또 번호는 1~45 사이 숫자로 이루어져야 합니다.");
+            }
+        });
     }
 
     public List<Integer> convertIntegers() {

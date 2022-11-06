@@ -38,5 +38,13 @@ public class ManualLottoInputTest {
                 () -> ManualLottoInput.create("1,2,3,4,6,6")
         );
     }
+
+    @Test
+    @DisplayName("숫자의 범위는 1~45 사이여야 한다.")
+    void rangeExceptionTest(){
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> ManualLottoInput.create("1,2,3,4,46,6")
+        );
+    }
 }
 
