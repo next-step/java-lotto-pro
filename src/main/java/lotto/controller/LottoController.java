@@ -2,6 +2,7 @@ package lotto.controller;
 
 import calculator.Delimiters;
 import calculator.TextExtractor;
+import lotto.domain.Number;
 import lotto.domain.*;
 
 import static lotto.ui.inputView.LottoMoneyInputView.readPurchaseMoney;
@@ -14,6 +15,11 @@ public class LottoController {
     public void run() {
         Lottos lottos = new LottoGenerator(new LottoMoney(readPurchaseMoney())).generate();
         printLottos(lottos);
-        winningResult(new Statistics(lottos, new WinningNumber(new TextExtractor(new Delimiters(), readWinningNumbers()).extract())));
+
+        winningResult(new Statistics(lottos, new WinningNumber(winningNumbers(), new BonusBall(new Number(2)))));
+    }
+
+    private static String[] winningNumbers() {
+        return new TextExtractor(new Delimiters(), readWinningNumbers()).extract();
     }
 }

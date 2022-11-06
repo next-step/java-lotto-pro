@@ -3,13 +3,24 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.domain.Lotto.DUPLICATE_EXCEPTION_MESSAGE;
+
 public class WinningNumber {
 
     private static final int INIT_COUNT = 0;
     private final Lotto winningNumber;
+    private final BonusBall bonusBall;
 
-    public WinningNumber(String[] winningNumbers) {
+    public WinningNumber(String[] winningNumbers, BonusBall bonusBall) {
         this.winningNumber = new Lotto(numbers(winningNumbers));
+        validateDuplicateBonusBall(bonusBall);
+        this.bonusBall = bonusBall;
+    }
+
+    private void validateDuplicateBonusBall(BonusBall bonusBall) {
+        if (winningNumber.getNumbers().contains(bonusBall.getNumber())) {
+            throw new IllegalArgumentException(DUPLICATE_EXCEPTION_MESSAGE);
+        }
     }
 
     private List<Integer> numbers(String[] winningNumbers) {
