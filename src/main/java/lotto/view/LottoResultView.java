@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.LottoRankMatcher;
 import lotto.domain.Rank;
 import lotto.dto.LottoResultDto;
 
@@ -31,10 +30,10 @@ public class LottoResultView {
 
     private String rankInfo(Rank rank, int winningCount) {
         if(rank == Rank.SECOND) {
-            return (rank.getCountOfMatch() + "개 일치, 보너스 볼 일치(" + rank.getWinningMoney() + "원) - "
+            return (rank.getCountOfMatch(rank) + "개 일치, 보너스 볼 일치(" + rank.getWinningMoney() + "원) - "
                     + winningCount + "개\n");
         }
-        return (rank.getCountOfMatch() + "개 일치 (" + rank.getWinningMoney() + "원)- "
+        return (rank.getCountOfMatch(rank) + "개 일치 (" + rank.getWinningMoney() + "원)- "
                 + winningCount + "개\n");
     }
 
