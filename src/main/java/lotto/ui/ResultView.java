@@ -25,8 +25,8 @@ public class ResultView {
         return nf.format(value);
     }
 
-    public void printBuyLottoCountMessage(int buyLotto) {
-        System.out.println(buyLotto + "개를 구매하였습니다.");
+    public void printBuyLottoCountMessage(int buyLotto, String directInputLotto) {
+        System.out.println("수동으로" + directInputLotto.split("\n").length + " 장, " + "자동으로 " + buyLotto + "개를 구매하였습니다.");
     }
 
     public void printBuyLotto(List<Lotto> lottoList) {

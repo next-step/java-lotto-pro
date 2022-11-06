@@ -8,9 +8,10 @@ public class DestinyMatch {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
         String inputMoney = inputView.getInputString();
-        Buyer buyer = new Buyer(inputMoney, inputView.getDirectInputLottoNumber());
+        String directInputLotto = inputView.getDirectInputLottoNumber();
+        Buyer buyer = new Buyer(inputMoney, directInputLotto);
 
-        resultView.printBuyLottoCountMessage(buyer.buyLotto());
+        resultView.printBuyLottoCountMessage(buyer.buyLotto(), directInputLotto);
         resultView.printBuyLotto(buyer.getLottos());
 
         String inputLottoNumbers = inputView.getInputWinningNumbers();
