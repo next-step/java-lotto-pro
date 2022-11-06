@@ -19,15 +19,9 @@ public class LottoNumber {
     }
 
     public int getWinNumberCount(List<Integer> winNumber) {
-        return (int) number.stream()
-                .map(integer -> addCountIfContain(winNumber, integer))
-                .count();
-    }
-
-    private int addCountIfContain(List<Integer> winNumber, Integer targetNumber) {
-        return (int) winNumber.stream()
-                .filter(integer -> integer.equals(targetNumber))
-                .count();
+        return Math.toIntExact(number.stream()
+                .filter(winNumber::contains)
+                .count());
     }
 
     public List<Integer> getNumber() {
@@ -35,9 +29,9 @@ public class LottoNumber {
     }
 
     public int getCountOfContain(List<Integer> winNumber) {
-        return (int) winNumber.stream()
+        return Math.toIntExact(winNumber.stream()
                 .filter(this.number::contains)
-                .count();
+                .count());
     }
 
     public boolean isMatchBonusNumber(int bonusNumber) {

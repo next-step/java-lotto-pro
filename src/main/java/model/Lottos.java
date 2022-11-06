@@ -1,7 +1,6 @@
 package model;
 
-import model.strategy.NumberStrategy;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,9 +8,10 @@ public class Lottos {
 
     private final List<LottoNumber> lotto;
 
-    public Lottos(Money money, NumberStrategy strategy) {
-        int count = money.availableBuyLottoCount();
-        this.lotto = new Seller().buy(count, strategy);
+    public Lottos(List<LottoNumber> autoLottoNumber, List<LottoNumber> manualLottoNumber) {
+        this.lotto = new ArrayList<>();
+        lotto.addAll(autoLottoNumber);
+        lotto.addAll(manualLottoNumber);
     }
 
     public List<LottoNumber> getLotto() {
