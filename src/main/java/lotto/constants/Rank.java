@@ -35,9 +35,6 @@ public enum Rank {
     }
 
     public boolean isWinner() {
-        if (this.countOfMatch >= FIFTH.countOfMatch) {
-            return true;
-        }
-        return false;
+        return this.countOfMatch >= FIFTH.countOfMatch;
     }
 }
