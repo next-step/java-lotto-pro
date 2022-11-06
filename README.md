@@ -92,6 +92,9 @@
 
 ## Step5 프로그램 요구사항 정리
 * 수동 추첨 번호 입력 기능 적용
+  - 수동입력 lottos를 String으로 받음
+  - Buyer 클래스 생성자에 lottos(String)을 받아 처리하는 생성자 추가
+  - lottos size만큼 amount을 substrct 처리
 * 모든 원시값과 문자열을 포장
 * 네이밍 시 줄여쓰지 않음
 * 예외처리 시 java exception으로 에러 처리하며, optional을 적용해 NullpointerException 처리
