@@ -8,7 +8,7 @@ import static lotto.LottoNumberGenerator.LOTTO_NUMBER_SIZE;
 
 public class LottoNumberBag implements NumberBag {
 
-    static final String SPLIT_DELIMITER = ",";
+    private static final String SPLIT_DELIMITER = ",";
 
     private final List<Number> lottoNumbers;
 
