@@ -6,9 +6,7 @@
 package lotto;
 
 import static lotto.Constant.EA;
-import static lotto.Constant.RESULT_BOUGHT_1;
-import static lotto.Constant.RESULT_BOUGHT_2;
-import static lotto.Constant.RESULT_BOUGHT_3;
+import static lotto.Constant.RESULT_BOUGHT;
 import static lotto.Constant.RESULT_HIT_FIVE;
 import static lotto.Constant.RESULT_HIT_FIVE_AND_BONUS;
 import static lotto.Constant.RESULT_HIT_FOUR;
@@ -20,9 +18,7 @@ import static lotto.Constant.RESULT_WINNING_STATISTICS;
 
 public class ResultView {
     void printResultPay(Quantity autoQuantity, Quantity manualQuantity) {
-        System.out.println(
-                RESULT_BOUGHT_1 + manualQuantity.getQuantity() + RESULT_BOUGHT_2
-                        + autoQuantity.getQuantity() + RESULT_BOUGHT_3);
+        System.out.printf(RESULT_BOUGHT, manualQuantity.getQuantity(), autoQuantity.getQuantity());
     }
 
     void printResultPurchase(Lottos lottos) {
