@@ -1,8 +1,13 @@
 package study.step3.view;
 
 import study.step3.domain.lotto.PurchaseMoney;
+import study.step3.domain.lottonumber.LottoNumbers;
 import study.step3.message.LottoMachineMessage;
+import study.step3.message.LottoMessage;
 import study.step3.util.Patterns;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoMachineView {
 
@@ -10,15 +15,11 @@ public class LottoMachineView {
 
     public static PurchaseMoney getPurchaseMoney() {
         PurchaseMoney purchaseMoney = null;
-        while (isNeedToInputPurchaseMoney(purchaseMoney)) {
+        while (InputView.isNeedToRetryInputValue(purchaseMoney)) {
             ResultView.output(LottoMachineMessage.INPUT_PURCHASE_MONEY_MESSAGE.message());
             purchaseMoney = inputPurchaseMoney();
         }
         return purchaseMoney;
-    }
-
-    private static boolean isNeedToInputPurchaseMoney(PurchaseMoney purchaseMoney) {
-        return purchaseMoney == null;
     }
 
     private static PurchaseMoney inputPurchaseMoney() {
@@ -53,6 +54,36 @@ public class LottoMachineView {
     private static void validatePurchaseMoneyIsGreaterThanMinimumMoney(String purchaseMoney) {
         if(Long.parseLong(purchaseMoney) < PURCHASE_MINIMUM_MONEY) {
             throw new IllegalArgumentException(LottoMachineMessage.ERROR_PURCHASE_MONEY_IS_GREATER_THAN_MINIMUM_MONEY.message());
+        }
+    }
+
+    public static long getManualLottoCount(PurchaseMoney purchaseMoney) {
+        Long manualLottoCount = null;
+        while (InputView.isNeedToRetryInputValue(manualLottoCount)) {
+            ResultView.output(LottoMachineMessage.INPUT_MANUAL_LOTTO_COUNT.message());
+            manualLottoCount = inputManualLottoCount(purchaseMoney);
+        }
+        return manualLottoCount;
+    }
+
+    private static Long inputManualLottoCount(PurchaseMoney purchaseMoney) {
+        try {
+            String manualLottoCount = InputView.input();
+            validateManualLottoCount(purchaseMoney, manualLottoCount);
+            return Long.parseLong(manualLottoCount);
+        } catch (Exception e) {
+            ResultView.output(e.getMessage());
+            return null;
+        }
+    }
+
+    private static void validateManualLottoCount(PurchaseMoney purchaseMoney, String manualLottoCount) {
+        if(!Patterns.ONLY_NUMBERS.match(manualLottoCount)) {
+            throw new IllegalArgumentException(LottoMachineMessage.ERROR_MANUAL_LOTTO_COUNT_SHOULD_BE_NUMBER.message());
+        }
+
+        if(purchaseMoney.isLackOfMoney(Long.parseLong(manualLottoCount))) {
+            throw new IllegalArgumentException(LottoMachineMessage.ERROR_MANUAL_LOTTO_LACK_OF_MONEY.message());
         }
     }
 }

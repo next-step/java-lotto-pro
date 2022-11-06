@@ -36,4 +36,8 @@ public class Lottos {
                 .collect(collectingAndThen(toList(), Collections::unmodifiableList));
         return LottoRankCountCache.of(matchResults);
     }
+
+    public void addLottos(Lottos otherLottos) {
+        this.lottos.addAll(new ArrayList<>(otherLottos.lottos));
+    }
 }
