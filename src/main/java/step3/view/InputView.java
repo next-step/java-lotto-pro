@@ -21,7 +21,6 @@ public class InputView {
 
     public static String inputWinningNumber() {
         System.out.println(LAST_WINNING_NUMBER);
-        //sc.nextLine();
         return sc.nextLine();
     }
 
