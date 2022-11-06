@@ -20,11 +20,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private LottoNumber(int lottoNumber) {
-        InputValidator.validateLottoNumberRange(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber of(int lottoNumber) {
+    public static LottoNumber from(int lottoNumber) {
+        InputValidator.validateLottoNumberRange(lottoNumber);
         return lottoRange.get(lottoNumber);
     }
 

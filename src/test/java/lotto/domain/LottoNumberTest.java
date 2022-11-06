@@ -9,6 +9,6 @@ class LottoNumberTest {
     @Test
     @DisplayName("객체 비교 테스트")
     public void constructorTest() {
-        assertThat(LottoNumber.of(1)).isEqualTo(LottoNumber.of(1));
+        assertThat(LottoNumber.from(1)).isEqualTo(LottoNumber.from(1));
     }
 }
