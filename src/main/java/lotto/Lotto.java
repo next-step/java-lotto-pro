@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static lotto.common.Constants.BEGIN_INDEX;
 import static lotto.common.Constants.LOTTO_LENGTH;
@@ -34,5 +35,18 @@ public class Lotto {
     @Override
     public String toString() {
         return lottoNumbers.getLottoNumbers().toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

@@ -4,6 +4,7 @@ import lotto.common.exception.LottoNullException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import static lotto.common.Constants.LOTTO_MAX_NUM;
@@ -33,5 +34,18 @@ public class LottoNumber {
 
     public int getLottoNum() {
         return lottoNum;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return lottoNum == that.lottoNum;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNum);
     }
 }
