@@ -68,8 +68,8 @@ public class Validate {
         }
     }
 
-    static void isDuplicate(String bonus, Lotto winningNumber) {
-        if (winningNumber.contains(LottoNumber.from(bonus))) {
+    static void isDuplicate(LottoNumber bonus, List<LottoNumber> winningNumber) {
+        if (winningNumber.contains(bonus)) {
             throw new IllegalArgumentException(ERROR_BONUS_NUMBER_DUPLICATED);
         }
     }

@@ -2,7 +2,9 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -64,9 +66,13 @@ public class ValidateTest {
 
     @Test
     void 보너스_번호와_당첨_번호간에_중복_검사() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int i = 1; i <= 6; i++) {
+            lottoNumbers.add(LottoNumber.from(i));
+        }
+
         assertThatThrownBy(
-                () -> Validate.isDuplicate("1",
-                        Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6))))
+                () -> Validate.isDuplicate(LottoNumber.from(1), lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

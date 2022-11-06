@@ -30,6 +30,10 @@ public class Lotto {
         return sixNumbers.contains(lottoNumber);
     }
 
+    public void isContainsBonus(LottoNumber bonus) {
+        Validate.isDuplicate(bonus, sixNumbers);
+    }
+
     public int countHit(Lotto lotto) {
         return (int) sixNumbers.stream()
                 .filter(lotto::contains)

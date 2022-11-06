@@ -26,9 +26,11 @@ public class LottoGameMain {
         resultView.printResultPurchase(lottos);
 
         Lotto winningNumbers = inputView.inputWinningNumberLastWeek();
-        Statistic statistic = new Statistic(winningNumbers);
-        statistic.countPrize(lottos, inputView.inputBonusNumberLastWeek(winningNumbers));
+        LottoNumber bonus = inputView.inputBonusNumberLastWeek();
+        winningNumbers.isContainsBonus(bonus);
 
+        Statistic statistic = new Statistic(winningNumbers, bonus);
+        statistic.countPrize(lottos);
         resultView.printResultWinningStatistics(lottoGame.getAmount(), statistic);
     }
 }

@@ -20,10 +20,12 @@ import java.util.Map;
 public class Statistic {
     private final Map<Rank, Integer> prize = new HashMap<>();
     private final Lotto winningNumbers;
+    private final LottoNumber bonus;
 
-    public Statistic(Lotto winningNumbers) {
+    public Statistic(Lotto winningNumbers, LottoNumber bonus) {
         initialize();
         this.winningNumbers = winningNumbers;
+        this.bonus = bonus;
     }
 
     private void initialize() {
@@ -35,7 +37,7 @@ public class Statistic {
         prize.put(MISS, ZERO);
     }
 
-    public void countPrize(Lottos lottos, LottoNumber bonus) {
+    public void countPrize(Lottos lottos) {
         addCount(lottos.getRank(winningNumbers, bonus));
     }
 

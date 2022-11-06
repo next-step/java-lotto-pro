@@ -59,11 +59,10 @@ public class InputView {
         System.out.println(INPUT_WINNING_NUMBER_LAST_WEEK);
     }
 
-    LottoNumber inputBonusNumberLastWeek(Lotto winningNumbers) {
+    LottoNumber inputBonusNumberLastWeek() {
         printInputBonusNumberLastWeek();
         String input = scanner.nextLine();
         Validate.isEmpty(input);
-        Validate.isDuplicate(input, winningNumbers);
         return LottoNumber.from(input);
     }
 
