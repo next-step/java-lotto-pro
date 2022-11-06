@@ -52,20 +52,22 @@ class MoneyTest {
 			.isInstanceOf(InvalidMoneyException.class);
 	}
 
-	@Test
+	@ParameterizedTest
+	@CsvSource(value = {"1000:1000:0", "1000:500:500", "10000:2000:8000"}, delimiter = ':')
 	@DisplayName("금액을 뺀 값을 반환")
-	void subtractTest() {
-		Money inputMoney = Money.from(1000L);
-		Money prizeMoney = Money.from(500L);
-		assertThat(inputMoney.subtract(prizeMoney)).isEqualTo(Money.from(500L));
+	void subtractTest(long input, long subtract, long expected) {
+		Money money = Money.from(input);
+		Money subtractMoney = Money.from(subtract);
+		assertThat(money.subtract(subtractMoney)).isEqualTo(Money.from(expected));
 	}
 
-	@Test
+	@ParameterizedTest
+	@CsvSource(value = {"1000:2000", "1000:1001", "10000:11000"}, delimiter = ':')
 	@DisplayName("금액을 뺀 값이 0보다 작을 경우 InvalidMoneyException 발생")
-	void throwInvalidMoneyExceptionWhenSubtractTest() {
-		Money inputMoney = Money.from(1000L);
-		Money prizeMoney = Money.from(2000L);
-		assertThatThrownBy(() -> inputMoney.subtract(prizeMoney))
+	void throwInvalidMoneyExceptionWhenSubtractTest(long input, long subtract) {
+		Money money = Money.from(input);
+		Money subtractMoney = Money.from(subtract);
+		assertThatThrownBy(() -> money.subtract(subtractMoney))
 			.isInstanceOf(InvalidMoneyException.class);
 	}
 
