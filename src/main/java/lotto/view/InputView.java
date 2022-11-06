@@ -16,6 +16,8 @@ public class InputView {
     private static final String EMPTY_STRING = "";
     private static final String ASK_MESSAGE_USER_WRITTEN_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
 
+    private static final String ASK_MESSAGE_USER_WRITTEN_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
+
     public static int inputPayAmount() {
         System.out.println(ASK_MESSAGE_PAY_AMOUNT);
         return nextInt();
@@ -41,10 +43,24 @@ public class InputView {
         String input = new Scanner(System.in).nextLine().replaceAll(WHITE_SPACE, EMPTY_STRING);
         List<Integer> lottoNumbers = new ArrayList<>();
         for (String stringFormatNumber : input.split(WINNING_NUMBERS_DELIMITER)) {
-            InputValidator.validateNumberFormat(stringFormatNumber);
+            InputValidator.validateLottoNumber(stringFormatNumber);
             lottoNumbers.add(Integer.parseInt(stringFormatNumber));
         }
+        InputValidator.validateDuplicateInt(lottoNumbers);
         return lottoNumbers;
+    }
+
+    public static List<List<Integer>> inputUserWrittenLottoNumbers(int userWrittenLottoAmount) {
+        if (userWrittenLottoAmount > 0) {
+            System.out.println(ASK_MESSAGE_USER_WRITTEN_LOTTO_NUMBERS);
+        }
+        List<List<Integer>> userWrittenLottos = new ArrayList<>();
+        for (int i = 0; i < userWrittenLottoAmount; i++) {
+            List<Integer> userWrittenLotto = inputLottoNumbers();
+            InputValidator.validateDuplicateInt(userWrittenLotto);
+            userWrittenLottos.add(userWrittenLotto);
+        }
+        return userWrittenLottos;
     }
 
     public static int inputUserWrittenLottoCount() {

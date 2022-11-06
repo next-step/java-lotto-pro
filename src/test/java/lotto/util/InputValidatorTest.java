@@ -1,5 +1,6 @@
 package lotto.util;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,12 +42,10 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("당첨번호 중복 테스트")
-    public void validateDuplicateLottoNumberTest() {
-        List<LottoNumber> lottoNumberList = Arrays.stream(new int[]{1, 1, 2, 3, 4, 5})
-                .mapToObj(LottoNumber::of)
-                .collect(Collectors.toList());
+    public void validateDuplicateLottoIntTest() {
+        List<Integer> lottoNumberList = Arrays.stream(new int[]{1, 1, 2, 3, 4, 5}).boxed().collect(Collectors.toList());
         assertThatThrownBy(
-                () -> validateDuplicateLottoNumber(lottoNumberList)
+                () -> InputValidator.validateDuplicateInt(lottoNumberList)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
@@ -55,9 +54,9 @@ class InputValidatorTest {
     @DisplayName("보너스볼 중복 테스트")
     public void validateDuplicateBonusBallTest() {
         assertThatThrownBy(
-                () -> validateDuplicateBonusBall(Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
+                () -> validateDuplicateBonusBall(Lotto.from(Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
                         .boxed()
-                        .collect(Collectors.toList()), 1)
+                        .collect(Collectors.toList())), LottoNumber.from(1))
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
