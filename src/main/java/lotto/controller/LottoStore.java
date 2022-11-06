@@ -21,10 +21,10 @@ public class LottoStore {
     private final Scanner scanner = new Scanner(System.in);
 
     public void entrance() {
-        System.out.println("구매 금액을 입력해 주세요.");
+        InputView.inputMoney();
         GenerateCount availableCount = new GenerateCount(LottoBag.availableCount(new Money(scanner.nextLine())));
 
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        InputView.inputManualCount();
         GenerateCount manualCount = new GenerateCount(scanner.nextLine());
         availableCount.validGreaterThan(manualCount);
 
@@ -47,7 +47,7 @@ public class LottoStore {
 
     private List<LottoNumberBag> inputNumber(GenerateCount manualCount) {
         long count = manualCount.getCount();
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        InputView.inputManualNumbers();
         List<LottoNumberBag> lottoNumberBags = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottoNumberBags.add(LottoNumberBag.fromManualNumbers(scanner.nextLine()));
@@ -56,10 +56,10 @@ public class LottoStore {
     }
 
     private void result(LottoBag lottoBag) {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        InputView.inputLastWinningNumbers();
         WinningLottoBallBag winningLottoBallBag = new WinningLottoBallBag(scanner.nextLine());
 
-        System.out.println("보너스 볼을 입력해 주세요.");
+        InputView.inputBonusNumber();
         winningLottoBallBag.add(LottoBall.fromStringBonus(scanner.nextLine()));
 
         WinningResultBag results = LottoIssuer.result(lottoBag, winningLottoBallBag);
