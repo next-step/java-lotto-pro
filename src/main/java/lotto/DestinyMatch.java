@@ -16,8 +16,9 @@ public class DestinyMatch {
         String inputLottoNumbers = inputView.getInputWinningNumbers();
         String inputBonusNumber = inputView.getInputBonusNumbers();
 
-        WinningMatcher winningMatcher = new WinningMatcher(buyer, new LottoNumbers(inputLottoNumbers), inputBonusNumber);
-        winningMatcher.printWinningStatistics();
-        winningMatcher.printProfit(inputMoney);
+        WinningMatcher winningMatcher = new WinningMatcher(buyer, new WinningLotto(inputLottoNumbers, inputBonusNumber));
+        resultView.printWinningStatistics(winningMatcher);
+        resultView.printProfit(winningMatcher, inputMoney);
+
     }
 }

@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.common.Constants;
+import lotto.ui.ResultView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class WinningMatcherTest {
     private static final String ONCE = "1000";
     private static final int ZERO = 0;
-    private static final String BONUS_NUMBER = "10";
+    private static final String BONUS_NUMBER = "6";
 
     private OutputStream captor;
     Lottos lottos;
@@ -23,7 +24,7 @@ class WinningMatcherTest {
     @BeforeEach
     void setUp() {
         lottos = new Lottos();
-        lottos.add(new Lotto("1,2,3,4,5,6"));
+        lottos.add(new Lotto("1,2,3,4,5,7"));
         captor = new ByteArrayOutputStream();
         System.setOut(new PrintStream(captor));
     }
@@ -33,8 +34,8 @@ class WinningMatcherTest {
         // given
         Buyer buyer = new Buyer(lottos);
         // when
-        WinningMatcher winningMatcher = new WinningMatcher(buyer, new WinningLotto("1,2,3,4,5,6", BONUS_NUMBER));
-        winningMatcher.printProfit(ONCE);
+        WinningMatcher winningMatcher = new WinningMatcher(buyer, new WinningLotto("1,2,3,4,5,7", BONUS_NUMBER));
+        new ResultView().printProfit(winningMatcher, ONCE);
         // then
         float expected = Rank.FIRST.getWinningMoney() / Integer.parseInt(ONCE);
         assertThat(output()).contains(cutDecimal(Constants.DECIMAL_POINT, expected));
@@ -43,10 +44,12 @@ class WinningMatcherTest {
     @Test
     public void 결과_테스트_2등() {
         // given
+        Lottos lottos = new Lottos();
+        lottos.add(new Lotto("1,2,3,4,5,6"));
         Buyer buyer = new Buyer(lottos);
         // when
-        WinningMatcher winningMatcher = new WinningMatcher(buyer, new WinningLotto("1,2,3,4,5,10", BONUS_NUMBER));
-        winningMatcher.printProfit(ONCE);
+        WinningMatcher winningMatcher = new WinningMatcher(buyer, new WinningLotto("1,2,3,4,5,7", BONUS_NUMBER));
+        print(winningMatcher, ONCE);
         // then
         float expected = Rank.SECOND.getWinningMoney() / Integer.parseInt(ONCE);
         assertThat(output()).contains(cutDecimal(Constants.DECIMAL_POINT, expected));
@@ -58,7 +61,7 @@ class WinningMatcherTest {
         Buyer buyer = new Buyer(lottos);
         // when
         WinningMatcher winningMatcher = new WinningMatcher(buyer, new WinningLotto("1,2,3,4,5,8", BONUS_NUMBER));
-        winningMatcher.printProfit(ONCE);
+        print(winningMatcher, ONCE);
         // then
         float expected = Rank.THIRD.getWinningMoney() / Integer.parseInt(ONCE);
         assertThat(output()).contains(cutDecimal(Constants.DECIMAL_POINT, expected));
@@ -70,7 +73,7 @@ class WinningMatcherTest {
         Buyer buyer = new Buyer(lottos);
         // when
         WinningMatcher winningMatcher = new WinningMatcher(buyer, new WinningLotto("12,11,10,9,7,8", BONUS_NUMBER));
-        winningMatcher.printProfit(ONCE);
+        print(winningMatcher, ONCE);
         // then
         float expected = ZERO;
         assertThat(output()).contains(cutDecimal(Constants.DECIMAL_POINT, expected));
@@ -86,5 +89,9 @@ class WinningMatcherTest {
         nf.setGroupingUsed(false);
 
         return nf.format(value);
+    }
+
+    public void print(WinningMatcher winningMatcher, String price) {
+        new ResultView().printProfit(winningMatcher, price);
     }
 }

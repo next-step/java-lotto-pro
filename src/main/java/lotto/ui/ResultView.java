@@ -2,7 +2,9 @@ package lotto.ui;
 
 import lotto.Lotto;
 import lotto.Rank;
+import lotto.WinningMatcher;
 import lotto.common.Constants;
+import lotto.common.LottoAutoUtils;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -33,6 +35,12 @@ public class ResultView {
         }
     }
 
+    public void printWinningStatistics(WinningMatcher winningMatcher) {
+        Rank[] ranks = Rank.values();
+        for (Rank rank : ranks) {
+            printWinningStatisticsMessage(rank, winningMatcher.getMatchNumberMap().value(rank));
+        }
+    }
     public void printWinningStatisticsMessage(Rank rank, int value) {
         if (rank == Rank.MISS) {
             return;
@@ -42,6 +50,10 @@ public class ResultView {
             return;
         }
         sb.append(rank.getCountOfMatch() + "개 일치(" + rank.getWinningMoney() + "원)-" + value + "개\n");
+    }
+
+    public void printProfit(WinningMatcher WinningMatcher, String inputMoney) {
+        printProfitMessage(new LottoAutoUtils().stringToNumber(inputMoney), WinningMatcher.getMatchNumberMap().profit());
     }
 
     public void printProfitMessage(int inputMoney, float profit) {

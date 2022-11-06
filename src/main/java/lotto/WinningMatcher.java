@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.common.LottoAutoUtils;
 import lotto.ui.ResultView;
 
 import java.util.List;
@@ -26,15 +25,7 @@ public class WinningMatcher {
         this.matchNumberMap.put(rank, this.matchNumberMap.get(rank) + 1);
     }
 
-    // TODO
-    public void printWinningStatistics() {
-        Rank[] ranks = Rank.values();
-        for (Rank rank : ranks) {
-            resultView.printWinningStatisticsMessage(rank, matchNumberMap.value(rank));
-        }
-    }
-
-    public void printProfit(String inputMoney) {
-        resultView.printProfitMessage(new LottoAutoUtils().stringToNumber(inputMoney), matchNumberMap.profit());
+    public MatchNumberMap getMatchNumberMap() {
+        return matchNumberMap;
     }
 }
