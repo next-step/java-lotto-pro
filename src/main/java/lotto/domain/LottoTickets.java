@@ -11,9 +11,9 @@ public class LottoTickets {
         this.ticketList = ticketList;
     }
 
-    public Rewards check(LottoTicket winningTicket) {
+    public Rewards check(WinningLottoNumber winningLottoNumber) {
         return this.ticketList.stream()
-                .map(LottoTicket -> Rank.valueOf(LottoTicket.compareTicket(winningTicket)))
+                .map(winningLottoNumber::check)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Rewards::new));
     }
 
