@@ -6,16 +6,21 @@ import java.util.Objects;
 
 public class WinLotto {
     private static final String DEFAULT_SPLIT_DILIMETER = ",";
-
+    
     private final Lotto winLottoNumbers;
     private final WinReport winLottoReport;
 
-    public WinLotto(String inputWinLottoNumbers, WinReport winLottoReport) {
+    private final LottoNumber bonusNumber;
+
+    public WinLotto(String inputWinLottoNumbers, WinReport winLottoReport, LottoNumber bonusNumber) {
         this.winLottoNumbers = splitWinLottoNumbers(inputWinLottoNumbers);
         this.winLottoReport = winLottoReport;
+        this.bonusNumber = bonusNumber;
     }
-    public WinLotto(String inputWinLottoNumbers) {
+
+    public WinLotto(String inputWinLottoNumbers, LottoNumber bonusNumber) {
         this.winLottoNumbers = splitWinLottoNumbers(inputWinLottoNumbers);
+        this.bonusNumber = bonusNumber;
         this.winLottoReport = new WinReport();
     }
 
@@ -33,19 +38,21 @@ public class WinLotto {
         for (Lotto lotto : lottos.getLottos()) {
             winLottoReport.putLottoResult(countCollectNumber(lotto));
         }
+
         return winLottoReport;
     }
+
 
     public WinReport getWinLottoReport() {
         return winLottoReport;
     }
 
-    public int countCollectNumber(Lotto inputLotto) {
+    public PrizeMoney countCollectNumber(Lotto inputLotto) {
         int collectCount = 0;
         for (LottoNumber lottoNumber : inputLotto.getLottoNumbers()) {
             collectCount += containNumbers(lottoNumber);
         }
-        return collectCount;
+        return PrizeMoney.valueOf(collectCount, containBonusNumber(inputLotto));
     }
 
     private int containNumbers(LottoNumber lottoNumber) {
@@ -53,6 +60,10 @@ public class WinLotto {
             return 1;
         }
         return 0;
+    }
+
+    public boolean containBonusNumber(Lotto lotto) {
+        return lotto.getLottoNumbers().contains(bonusNumber);
     }
 
     @Override
