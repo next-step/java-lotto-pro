@@ -6,17 +6,17 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
-    private final List<Lotto> lottos;
+    private final Lottos lottos;
     private final WinningNumber winningNumber;
     private final Map<LottoWinning, Integer> winningResult = new HashMap<LottoWinning, Integer>() {{
         Arrays.stream(LottoWinning.values()).forEach(lottoWinning -> put(lottoWinning, 0));
     }};
 
-    public static LottoResult of(List<Lotto> lottos, WinningNumber winningNumber) {
+    public static LottoResult of(Lottos lottos, WinningNumber winningNumber) {
         return new LottoResult(lottos, winningNumber);
     }
 
-    private LottoResult(List<Lotto> lottos, WinningNumber winningNumber) {
+    private LottoResult(Lottos lottos, WinningNumber winningNumber) {
         this.lottos = lottos;
         this.winningNumber = winningNumber;
         updateWinningResult();
@@ -41,7 +41,7 @@ public class LottoResult {
     }
 
     private void updateWinningResult() {
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
             LottoWinning lottoWinning = lotto.findWinning(winningNumber);
             winningResult.put(lottoWinning, winningResult.get(lottoWinning) + 1);
         }

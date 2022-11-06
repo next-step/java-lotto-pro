@@ -1,9 +1,7 @@
 package controller;
 
-import domain.Lotto;
-import domain.LottoMachine;
-import domain.LottoResult;
-import domain.WinningNumber;
+import domain.*;
+
 import java.util.List;
 import view.InputView;
 import view.ResultView;
@@ -11,7 +9,7 @@ import view.ResultView;
 public class LottoController {
     public void purchase() {
         int money = InputView.inputMoney();
-        List<Lotto> lottos = LottoMachine.issueLottos(money);
+        Lottos lottos = LottoMachine.issueLottos(money);
         ResultView.printLottos(lottos);
 
         List<Integer> winningNumbers = InputView.inputWinningNumbers();

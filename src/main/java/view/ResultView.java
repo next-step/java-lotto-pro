@@ -5,6 +5,8 @@ import static domain.LottoWinning.NONE;
 import domain.Lotto;
 import domain.LottoResult;
 import domain.LottoWinning;
+import domain.Lottos;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,9 +17,9 @@ public class ResultView {
         printEarningRate(lottoResult.getEarningRate());
     }
 
-    public static void printLottos(List<Lotto> lottos) {
+    public static void printLottos(Lottos lottos) {
         System.out.printf("%d개를 구매했습니다\n", lottos.size());
-        lottos.forEach(System.out::println);
+        lottos.getLottos().forEach(System.out::println);
         System.out.print("\n");
     }
 
