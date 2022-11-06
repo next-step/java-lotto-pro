@@ -1,16 +1,8 @@
 package domain;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class LottoResult {
     private final Lottos lottos;
-    private final WinningNumber winningNumber;
-    private final Map<LottoWinning, Integer> winningResult = new HashMap<LottoWinning, Integer>() {{
-        Arrays.stream(LottoWinning.values()).forEach(lottoWinning -> put(lottoWinning, 0));
-    }};
+    private final WinningResult winningResult;
 
     public static LottoResult of(Lottos lottos, WinningNumber winningNumber) {
         return new LottoResult(lottos, winningNumber);
@@ -18,32 +10,22 @@ public class LottoResult {
 
     private LottoResult(Lottos lottos, WinningNumber winningNumber) {
         this.lottos = lottos;
-        this.winningNumber = winningNumber;
-        updateWinningResult();
+        this.winningResult = lottos.winningResult(winningNumber);
     }
 
-    public int getCountOfWinning(LottoWinning lottoWinning) {
-        return winningResult.get(lottoWinning);
+    public int countOfMatch(LottoWinning lottoWinning) {
+        return winningResult.countOfMatch(lottoWinning);
     }
 
-    public float getEarningRate() {
-        return getTotalPrize() / getSpentMoney();
+    public float earningRate() {
+        return totalPrize() / spentMoney();
     }
 
-    private int getTotalPrize() {
-        return Arrays.stream(LottoWinning.values())
-            .map(l -> winningResult.get(l) * l.getPrize())
-            .reduce(0, Integer::sum);
+    private int totalPrize() {
+        return winningResult.totalPrize();
     }
 
-    private float getSpentMoney() {
-        return lottos.size() * Lotto.SELL_PRICE;
-    }
-
-    private void updateWinningResult() {
-        for (Lotto lotto : lottos.getLottos()) {
-            LottoWinning lottoWinning = lotto.findWinning(winningNumber);
-            winningResult.put(lottoWinning, winningResult.get(lottoWinning) + 1);
-        }
+    private float spentMoney() {
+        return lottos.spentMoney();
     }
 }

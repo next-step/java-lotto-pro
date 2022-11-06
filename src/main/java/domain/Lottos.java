@@ -27,4 +27,17 @@ public class Lottos {
     public List<Lotto> getLottos() {
         return lottos;
     }
+
+    public WinningResult winningResult(WinningNumber winningNumber) {
+        WinningResult winningResult = new WinningResult();
+        for (Lotto lotto : lottos) {
+            LottoWinning lottoWinning = lotto.findWinning(winningNumber);
+            winningResult.increment(lottoWinning);
+        }
+        return winningResult;
+    }
+
+    public float spentMoney() {
+        return size() * Lotto.SELL_PRICE;
+    }
 }

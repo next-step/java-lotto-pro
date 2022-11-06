@@ -10,7 +10,7 @@
     - [x] 수익률을 계산한다.
     - [x] 보너스볼 추가
   - [x] 로또 묶음 일등컬렉션 구현 (Lottos)
-  - [ ] 당첨 결과 일등컬렉션 구현 (WinningResult) 
+  - [x] 당첨 결과 일등컬렉션 구현 (WinningResult) 
 - view
   - [x] 입력을 받는 view 구현 (InputView)
     - [x] 보너스볼 입력 추가

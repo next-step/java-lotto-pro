@@ -2,19 +2,17 @@ package view;
 
 import static domain.LottoWinning.NONE;
 
-import domain.Lotto;
 import domain.LottoResult;
 import domain.LottoWinning;
 import domain.Lottos;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class ResultView {
     public static void printLottoResult(LottoResult lottoResult) {
         printLottoResultPrefix();
         printWinningResult(lottoResult);
-        printEarningRate(lottoResult.getEarningRate());
+        printEarningRate(lottoResult.earningRate());
     }
 
     public static void printLottos(Lottos lottos) {
@@ -34,7 +32,7 @@ public class ResultView {
             .forEach(lottoWinning -> System.out.printf(ResultMessage.getMessage(lottoWinning),
                 lottoWinning.getMaxNumberMatched(),
                 lottoWinning.getPrize(),
-                lottoResult.getCountOfWinning(lottoWinning)));
+                lottoResult.countOfMatch(lottoWinning)));
     }
 
     private static void printEarningRate(float earningRate) {

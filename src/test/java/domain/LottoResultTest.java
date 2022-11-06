@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 class LottoResultTest {
@@ -26,12 +26,12 @@ class LottoResultTest {
         LottoResult lottoResult = LottoResult.of(lottos,
             new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7));
 
-        assertThat(lottoResult.getCountOfWinning(FIRST_PRIZE)).isEqualTo(1);
-        assertThat(lottoResult.getCountOfWinning(SECOND_PRIZE)).isEqualTo(1);
-        assertThat(lottoResult.getCountOfWinning(THIRD_PRIZE)).isEqualTo(1);
-        assertThat(lottoResult.getCountOfWinning(FOURTH_PRIZE)).isEqualTo(1);
-        assertThat(lottoResult.getCountOfWinning(FIFTH_PRIZE)).isEqualTo(1);
-        assertThat(lottoResult.getCountOfWinning(NONE)).isEqualTo(1);
-        assertThat(lottoResult.getEarningRate()).isEqualTo(338592.5f);
+        assertThat(lottoResult.countOfMatch(FIRST_PRIZE)).isEqualTo(1);
+        assertThat(lottoResult.countOfMatch(SECOND_PRIZE)).isEqualTo(1);
+        assertThat(lottoResult.countOfMatch(THIRD_PRIZE)).isEqualTo(1);
+        assertThat(lottoResult.countOfMatch(FOURTH_PRIZE)).isEqualTo(1);
+        assertThat(lottoResult.countOfMatch(FIFTH_PRIZE)).isEqualTo(1);
+        assertThat(lottoResult.countOfMatch(NONE)).isEqualTo(1);
+        assertThat(lottoResult.earningRate()).isEqualTo(338592.5f);
     }
 }
