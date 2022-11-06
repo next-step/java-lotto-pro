@@ -9,7 +9,7 @@ import step3.domain.Rewards;
 public class OutputView {
     private static final String RESULT_FORMAT = "%d개 일치 (%d원)- %d개\n";
     private static final String PROFIT_RATE = "총 수익률은 %s입니다.";
-    private static final String SECOND_MATCH_COUNT = "5개 일치, 보너스 볼 일치(30000000원)- %d개%n";
+    private static final String SECOND_MATCH_COUNT = "%d개 일치, 보너스 볼 일치(%d원)- %d개%n";
     private static final String PURCHASE_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.%n";
 
     public static void showPurchaseLottoCount(int count) {
