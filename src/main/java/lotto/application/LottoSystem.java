@@ -31,22 +31,45 @@ public class LottoSystem implements AutoCloseable {
     }
 
     public void run() {
+        int money = inputMoney();
+        int selfLottoCount = inputSelfLottoCount();
+
+        Lottos manualLottos = inputManaulLottos(selfLottoCount);
+        Lottos buyLottos = lottoMachine.issue(money, manualLottos);
+        output.lottos(buyLottos);
+
+        WinningLotto winningLotto = createWinningLotto();
+        Statistics statistics = buyLottos.contains(winningLotto);
+
+        output.result(statistics);
+    }
+
+    private Lottos inputManaulLottos(int selfLottoCount) {
+        if(selfLottoCount == 0) {
+            return Lottos.empty();
+        }
+        output.inputSelfLottoNumbers();
+        return input.manualLottos(selfLottoCount);
+    }
+
+    private int inputSelfLottoCount() {
+        output.inputSelfLottoCount();
+        return input.selfLottoCount();
+    }
+
+    private int inputMoney() {
         output.inputMoney();
-        int money = input.money();
+        return input.money();
+    }
 
-        Lottos lottos = lottoMachine.issue(money);
-        output.lottos(lottos);
-
+    private WinningLotto createWinningLotto() {
         output.inputWinningLottoNumbers();
-        Lotto lotto = new Lotto(input.lottoNumbers());
+        Lotto lotto = Lotto.manual(input.lottoNumbers());
 
         output.bonusNumber();
         LottoNumber bonusNumber = input.bonusNumber();
 
-        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
-        Statistics statistics = lottos.contains(winningLotto);
-
-        output.result(statistics);
+        return new WinningLotto(lotto, bonusNumber);
     }
 
     @Override

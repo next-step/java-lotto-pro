@@ -16,14 +16,14 @@ class LottoTests {
     void should_Create() {
         List<LottoNumber> lottoNumbers = createLottoNumbers(6);
 
-        assertThatCode(() -> new Lotto(lottoNumbers))
+        assertThatCode(() -> Lotto.auto(lottoNumbers))
             .doesNotThrowAnyException();
     }
 
     @Test
     @DisplayName("로또 번호가 6개 미만이면 예외가 발생한다")
     void should_IllegalArgumentException_When_LottoNumbers6Less() {
-        assertThatThrownBy(() -> new Lotto(createLottoNumbers(0)))
+        assertThatThrownBy(() -> Lotto.auto(createLottoNumbers(0)))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("로또 번호는 6개여야 합니다. (lottoNumbers: 0)");
     }
@@ -33,7 +33,7 @@ class LottoTests {
     void should_IllegalArgumebntException_When_LottoNumbers6Over() {
         List<LottoNumber> lottoNumbers = createLottoNumbers(7);
 
-        assertThatThrownBy(() -> new Lotto(lottoNumbers))
+        assertThatThrownBy(() -> Lotto.auto(lottoNumbers))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("로또 번호는 6개여야 합니다. (lottoNumbers: 7)");
     }
@@ -49,7 +49,7 @@ class LottoTests {
         lottoNumbers.add(new LottoNumber(6));
         lottoNumbers.add(new LottoNumber(6));
 
-        assertThatThrownBy(() -> new Lotto(lottoNumbers))
+        assertThatThrownBy(() -> Lotto.auto(lottoNumbers))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("로또 번호는 중복될 수 없습니다. (lottoNumbers: [1, 2, 3, 4, 6, 6])");
     }
