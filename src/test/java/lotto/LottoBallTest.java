@@ -24,16 +24,12 @@ class LottoBallTest {
     @DisplayName("생성 실패 - 숫자가 아닌 값 입력")
     @Test
     void create_ball_NumberFormatException() {
-        //given:
-        LottoBall lottoBall = LottoBall.fromStringNormal("asc");
-        assertThatThrownBy(lottoBall::getIntNumber).isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> LottoBall.fromStringNormal("asc")).isInstanceOf(NumberFormatException.class);
     }
 
     @DisplayName("생성 실패 - 로또 숫자 범위를 벗어난 값 입력")
     @Test
     void create_ball_IllegalArgumentException() {
-        //given:
-        LottoBall lottoBall = LottoBall.fromStringNormal("46");
-        assertThatThrownBy(lottoBall::getIntNumber).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> LottoBall.fromStringNormal("46")).isInstanceOf(IllegalArgumentException.class);
     }
 }

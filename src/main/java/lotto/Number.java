@@ -4,5 +4,5 @@ public interface Number {
 
     int getIntNumber();
 
-    void validNumber();
+    void validNumber(String number);
 }
