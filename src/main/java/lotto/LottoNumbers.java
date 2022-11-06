@@ -25,7 +25,7 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(List<Integer> inputNumList) {
-        numbers = inputNumList;
+        this.numbers = new ArrayList<>(inputNumList);
     }
 
     private void setUp() {
