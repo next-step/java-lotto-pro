@@ -12,7 +12,7 @@ public class LottoNumbersTest {
     public void 당첨로또번호_저장_확인(int Expected) {
         String inputStr = "1, 2, 3, 4, 5, 6";
         LottoNumbers lottoNumbers = new LottoNumbers(inputStr);
-        assertThat(lottoNumbers.getNumbers()).contains(Expected);
+        assertThat(lottoNumbers.getLottoNumbers()).contains(LottoNumber.of(Expected));
     }
 
     @ParameterizedTest
@@ -24,6 +24,6 @@ public class LottoNumbersTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     public void 숫자_예외_테스트(int input) {
-        assertThatThrownBy(() -> new LottoNumbers().add(input)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new LottoNumbers().add(LottoNumber.of(input))).isInstanceOf(IllegalArgumentException.class);
     }
 }

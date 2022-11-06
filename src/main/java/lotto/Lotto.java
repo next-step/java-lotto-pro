@@ -18,21 +18,21 @@ public class Lotto {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers.getNumbers();
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers.getLottoNumbers();
     }
 
     private void makeLottoNumbers() {
         for (int num = 1; num <= 45; num++) {
-            lottoNumbers.add(num);
+            lottoNumbers.add(LottoNumber.of(num));
         }
-        Collections.shuffle(lottoNumbers.getNumbers());
-        lottoNumbers = new LottoNumbers(lottoNumbers.getNumbers().subList(BEGIN_INDEX, BEGIN_INDEX + LOTTO_LENGTH));
-        Collections.sort(lottoNumbers.getNumbers());
+        Collections.shuffle(lottoNumbers.getLottoNumbers());
+        lottoNumbers = new LottoNumbers(lottoNumbers.getLottoNumbers().subList(BEGIN_INDEX, BEGIN_INDEX + LOTTO_LENGTH));
+        lottoNumbers.sort();
     }
 
     @Override
     public String toString() {
-        return lottoNumbers.getNumbers().toString();
+        return lottoNumbers.getLottoNumbers().toString();
     }
 }
