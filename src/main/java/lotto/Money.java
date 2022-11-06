@@ -7,7 +7,7 @@ public class Money {
     private final long amount;
 
     private Money(long amount) {
-        this.amount = amount;
+        this(String.valueOf(amount));
     }
 
     public Money(String amount) {

@@ -13,7 +13,7 @@ public class LottoNumberBag implements NumberBag {
     private final List<Number> lottoNumbers;
 
     public LottoNumberBag(NumberGenerator numberGenerator) {
-        this.lottoNumbers = numberGenerator.generate();
+        this(numberGenerator.generate());
     }
 
     public LottoNumberBag(List<Number> numbers) {

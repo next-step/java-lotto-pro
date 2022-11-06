@@ -6,16 +6,16 @@ public class GenerateCount {
 
     private final long count;
 
+    public GenerateCount(long count) {
+        this(String.valueOf(count));
+    }
+
     public GenerateCount(String count) {
         try {
             this.count = Long.parseLong(count);
         } catch (NumberFormatException e) {
             throw new NumberFormatException("구매 수는 숫자여야 합니다. 입력값:" + count);
         }
-    }
-
-    public GenerateCount(long count) {
-        this.count = count;
     }
 
     public long getCount() {
