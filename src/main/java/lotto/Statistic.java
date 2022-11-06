@@ -68,7 +68,7 @@ public class Statistic {
     }
 
     public double calculateTotalEarningsRate(int payMoney) {
-        return Math.floor((calculateTotalEarnings() / payMoney) * 100) / 100.0;
+        return calculateTotalEarnings() / payMoney;
     }
 
     public double calculateTotalEarnings() {

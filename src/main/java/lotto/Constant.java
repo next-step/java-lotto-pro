@@ -10,11 +10,11 @@ public class Constant {
     public static final int LOTTO_NUMBER_SIZE = 6;
     public static final String REGEX_ONLY_NUMBER = "^[0-9]*$";
     public static final String INPUT_PAY_MONEY = "구입금액을 입력해 주세요.";
-    public static final String INPUT_MANUAL_PURCHASE = "수동으로 구매할 로또 수를 입력해 주세요.";
-    public static final String INPUT_MANUAL_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
+    public static final String INPUT_MANUAL_PURCHASE = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String INPUT_MANUAL_LOTTO_NUMBER = "\n수동으로 구매할 번호를 입력해 주세요.";
     public static final String INPUT_WINNING_NUMBER_LAST_WEEK = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String INPUT_BONUS_NUMBER_LAST_WEEK = "보너스 볼을 입력해 주세요.";
-    public static final String RESULT_BOUGHT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
+    public static final String RESULT_BUY = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     public static final String RESULT_WINNING_STATISTICS = "당첨 통계\n---------";
     public static final String EA = "개";
     public static final String RESULT_HIT_THREE = "3개 일치 (5000원)-";
@@ -22,8 +22,7 @@ public class Constant {
     public static final String RESULT_HIT_FIVE = "5개 일치 (1500000원)- ";
     public static final String RESULT_HIT_FIVE_AND_BONUS = "5개 일치, 보너스 볼 일치(30000000원)- ";
     public static final String RESULT_HIT_SIX = "6개 일치 (2000000000원)- ";
-    public static final String RESULT_TOTAL_EARNINGS_RATE_1 = "총 수익률은 ";
-    public static final String RESULT_TOTAL_EARNINGS_RATE_2 = "입니다.";
+    public static final String RESULT_TOTAL_EARNINGS_RATE = "총 수익률은 %.2f입니다.\n";
     public static final int ZERO = 0;
     public static final int LOTTO_START_NUMBER = 1;
     public static final int LOTTO_END_NUMBER = 45;

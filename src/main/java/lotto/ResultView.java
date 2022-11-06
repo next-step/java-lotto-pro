@@ -6,19 +6,18 @@
 package lotto;
 
 import static lotto.Constant.EA;
-import static lotto.Constant.RESULT_BOUGHT;
+import static lotto.Constant.RESULT_BUY;
 import static lotto.Constant.RESULT_HIT_FIVE;
 import static lotto.Constant.RESULT_HIT_FIVE_AND_BONUS;
 import static lotto.Constant.RESULT_HIT_FOUR;
 import static lotto.Constant.RESULT_HIT_SIX;
 import static lotto.Constant.RESULT_HIT_THREE;
-import static lotto.Constant.RESULT_TOTAL_EARNINGS_RATE_1;
-import static lotto.Constant.RESULT_TOTAL_EARNINGS_RATE_2;
+import static lotto.Constant.RESULT_TOTAL_EARNINGS_RATE;
 import static lotto.Constant.RESULT_WINNING_STATISTICS;
 
 public class ResultView {
     void printResultPay(Quantity autoQuantity, Quantity manualQuantity) {
-        System.out.printf(RESULT_BOUGHT, manualQuantity.getQuantity(), autoQuantity.getQuantity());
+        System.out.printf(RESULT_BUY, manualQuantity.getQuantity(), autoQuantity.getQuantity());
     }
 
     void printResultPurchase(Lottos lottos) {
@@ -40,6 +39,6 @@ public class ResultView {
     }
 
     private void printResultTotalEarningsRate(double totalEarningsRate) {
-        System.out.println(RESULT_TOTAL_EARNINGS_RATE_1 + totalEarningsRate + RESULT_TOTAL_EARNINGS_RATE_2);
+        System.out.printf(RESULT_TOTAL_EARNINGS_RATE, totalEarningsRate);
     }
 }
