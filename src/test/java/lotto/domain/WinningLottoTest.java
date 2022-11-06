@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @DisplayName("당첨번호")
-class WinningNumberTest {
+class WinningLottoTest {
 
     @DisplayName("6개 일치 갯수 판별")
     @ParameterizedTest
@@ -34,8 +34,8 @@ class WinningNumberTest {
     @DisplayName("6자리 미만일 수 없다.")
     @ParameterizedTest
     @MethodSource("lotto.fixture.WinningNumberFixture#size")
-    void size(String[] numbers, int bonusBall) {
-        assertThatThrownBy(() -> new WinningNumber(numbers, new BonusBall(new Number(bonusBall))))
+    void size(String[] numbers, String bonusBall) {
+        assertThatThrownBy(() -> new WinningLotto(numbers, new BonusBall(bonusBall)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(LOTTO_SIZE + "개여야합니다.");
     }
@@ -43,8 +43,8 @@ class WinningNumberTest {
     @DisplayName("중복된 수를 입력할 수 없다.")
     @ParameterizedTest
     @MethodSource("lotto.fixture.WinningNumberFixture#duplicate")
-    void duplicateNumber(String[] numbers, int bonusBall) {
-        assertThatThrownBy(() -> new WinningNumber(numbers, new BonusBall(new Number(bonusBall))))
+    void duplicateNumber(String[] numbers, String bonusBall) {
+        assertThatThrownBy(() -> new WinningLotto(numbers, new BonusBall(bonusBall)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(DUPLICATE_EXCEPTION_MESSAGE);
     }
@@ -52,23 +52,23 @@ class WinningNumberTest {
     @DisplayName("숫자만 입력 가능하다.")
     @ParameterizedTest
     @MethodSource("lotto.fixture.WinningNumberFixture#type")
-    void type(String[] numbers, int bonusBall) {
-        assertThatThrownBy(() -> new WinningNumber(numbers, new BonusBall(new Number(bonusBall))))
+    void type(String[] numbers, String bonusBall) {
+        assertThatThrownBy(() -> new WinningLotto(numbers, new BonusBall(bonusBall)))
                 .isInstanceOf(NumberFormatException.class);
     }
 
     @DisplayName("생성")
     @ParameterizedTest
     @MethodSource("lotto.fixture.WinningNumberFixture#constructor")
-    void constructor(String[] numbers, int bonusBall) {
-        assertThatNoException().isThrownBy(() -> new WinningNumber(numbers, new BonusBall(new Number(bonusBall))));
+    void constructor(String[] numbers, String bonusBall) {
+        assertThatNoException().isThrownBy(() -> new WinningLotto(numbers, new BonusBall(bonusBall)));
     }
 
     @DisplayName("보너스 볼은 당첨번호와 중복할 수 없다.")
     @ParameterizedTest
     @MethodSource("lotto.fixture.WinningNumberFixture#duplicateBonusBall")
-    void duplicateBonusBall(String[] numbers, int bonusBall) {
-        assertThatThrownBy(() -> new WinningNumber(numbers, new BonusBall(new Number(bonusBall))))
+    void duplicateBonusBall(String[] numbers, String bonusBall) {
+        assertThatThrownBy(() -> new WinningLotto(numbers, new BonusBall(bonusBall)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(DUPLICATE_EXCEPTION_MESSAGE);
     }

@@ -11,19 +11,19 @@ public class Statistics {
     public static final int SUM_INIT = 0;
     public static final int DIGIT = 2;
     private final Lottos lottos;
-    private final WinningNumber winningNumber;
+    private final WinningLotto winningLotto;
 
-    public Statistics(Lottos lottos, WinningNumber winningNumber) {
+    public Statistics(Lottos lottos, WinningLotto winningLotto) {
         this.lottos = lottos;
-        this.winningNumber = winningNumber;
+        this.winningLotto = winningLotto;
     }
 
-    public WinningNumber getWinningNumber() {
-        return winningNumber;
+    public WinningLotto getWinningNumber() {
+        return winningLotto;
     }
 
     public Map<Integer, Lottos> lottosMap() {
-        return this.lottos.matchLottos(this.winningNumber);
+        return this.lottos.matchLottos(this.winningLotto);
     }
 
     public double returnRate() {
@@ -32,7 +32,7 @@ public class Statistics {
 
     public int sum() {
         int sum = SUM_INIT;
-        Map<Integer, Lottos> map = this.lottos.matchLottos(this.winningNumber);
+        Map<Integer, Lottos> map = this.lottos.matchLottos(this.winningLotto);
         for (Integer count : map.keySet()) {
             sum += find(count, false).getMoney() * map.get(count).size();
         }

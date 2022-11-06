@@ -5,13 +5,13 @@ import java.util.List;
 
 import static lotto.domain.Lotto.DUPLICATE_EXCEPTION_MESSAGE;
 
-public class WinningNumber {
+public class WinningLotto {
     private static final int INIT_COUNT = 0;
 
     private final Lotto winningNumber;
     private final BonusBall bonusBall;
 
-    public WinningNumber(String[] winningNumbers, BonusBall bonusBall) {
+    public WinningLotto(String[] winningNumbers, BonusBall bonusBall) {
         this.winningNumber = new Lotto(numbers(winningNumbers));
         validateDuplicateBonusBall(bonusBall);
         this.bonusBall = bonusBall;
