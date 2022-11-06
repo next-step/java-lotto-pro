@@ -38,7 +38,7 @@ public class RandomLottoIssuanceStrategy implements LottoIssuanceStrategy {
     private LottoNumbers createRandomLottoNumbers() {
         Collections.shuffle(LOTTO_RANDOM_NUMBERS);
         List<LottoNumber> lottoNumbers = LOTTO_RANDOM_NUMBERS.subList(0, 6).stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
         return new LottoNumbers(lottoNumbers);
     }

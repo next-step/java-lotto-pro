@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class LottoView {
 
@@ -62,7 +61,7 @@ public class LottoView {
     }
 
     private static LottoNumbers mapToLottoNumbers(String lottoNumbers) {
-        String[] numbers = lottoNumbers.split(",");
+        String[] numbers = lottoNumbers.trim().split("\\s*,\\s*");
         return LottoNumbers.of(numbers);
     }
 
@@ -79,7 +78,7 @@ public class LottoView {
             ResultView.output(LottoMessage.INPUT_BONUS_NUMBER.message());
             String bonusNumber = InputView.input();
             validateBonusNumber(winningNumbers, bonusNumber);
-            return new LottoNumber(Integer.parseInt(bonusNumber));
+            return LottoNumber.of(bonusNumber);
         } catch (Exception e) {
             ResultView.output(e.getMessage());
             return null;

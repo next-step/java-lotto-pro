@@ -20,15 +20,14 @@ public class LottoNumbers {
 
     public static LottoNumbers of(int... numbers) {
         List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
         return new LottoNumbers(lottoNumbers);
     }
 
     public static LottoNumbers of(String... numbers) {
         List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
-                .mapToInt(Integer::parseInt)
-                .mapToObj(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
         return new LottoNumbers(lottoNumbers);
     }
