@@ -18,6 +18,10 @@ public class TicketCount {
 		return value;
 	}
 
+	public boolean isZero() {
+		return value == 0;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

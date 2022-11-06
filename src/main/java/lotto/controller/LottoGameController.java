@@ -55,12 +55,24 @@ public class LottoGameController {
 
 	private LottoTickets purchasedTickets(Money money) {
 		TicketCount manualLottoCount = inputView.readManualLottoCount();
-		Money manualLottoPrice = Money.from(LottoTicketMachine.LOTTO_COST_PER_TICKET * manualLottoCount.count());
-		Money randomLottoPrice = money.subtract(manualLottoPrice);
+		if (manualLottoCount.isZero()) {
+			return randomLottoTickets(money);
+		}
+
+		Money manualLottoPrice = manualLottoPrice(manualLottoCount);
+		Money randomLottoPrice = randomLottoPrice(money, manualLottoPrice);
 
 		LottoTickets lottoTickets = purchasedLottoTickets(manualLottoPrice, randomLottoPrice);
 		resultView.printLottoTickets(lottoTickets);
 		return lottoTickets;
+	}
+
+	private Money randomLottoPrice(Money money, Money manualLottoPrice) {
+		return money.subtract(manualLottoPrice);
+	}
+
+	private Money manualLottoPrice(TicketCount manualLottoCount) {
+		return Money.from(LottoTicketMachine.LOTTO_COST_PER_TICKET * manualLottoCount.count());
 	}
 
 	private WinningLottoTicket winningTicket() {
