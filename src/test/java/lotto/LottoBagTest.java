@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,8 +40,9 @@ class LottoBagTest {
         Lotto targetLotto = new Lotto(numberGenerator);
         LottoBag targetBag = new LottoBag(Collections.singletonList(targetLotto));
         //when:
+        LottoBag expected = new LottoBag(Arrays.asList(sourceLotto, targetLotto));
         LottoBag result = LottoBag.concat(sourceBag, targetBag);
         //then:
-        assertThat(result.getLottoList()).containsExactly(sourceLotto, targetLotto);
+        assertThat(result).usingRecursiveComparison().isEqualTo(expected);
     }
 }
