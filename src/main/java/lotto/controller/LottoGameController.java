@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.ConsoleNumberReader;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicketMachine;
@@ -94,7 +95,7 @@ public class LottoGameController {
 
 	private LottoTickets manualLottoTickets(Money manualLottoPrice) {
 		resultView.printManualLottiTicketsMessage();
-		return lottoTicketMachine.lottoTickets(manualLottoPrice, new ManualGenerateStrategy());
+		return lottoTicketMachine.lottoTickets(manualLottoPrice, new ManualGenerateStrategy(new ConsoleNumberReader()));
 	}
 
 }
