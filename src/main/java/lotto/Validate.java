@@ -28,7 +28,7 @@ import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 public class Validate {
-    static void validatePay(String input) {
+    static void validatePurchase(String input) {
         if (Integer.parseInt(input) < LOTTO_PRICE) {
             throw new IllegalArgumentException(ERROR_LOTTO_COST);
         }

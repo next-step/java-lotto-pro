@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 public class ValidateTest {
     @Test
     void 로또_구입금액_보다_적은_금액_입력() {
-        assertThatThrownBy(() -> Validate.validatePay("500"))
+        assertThatThrownBy(() -> Validate.validatePurchase("500"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
