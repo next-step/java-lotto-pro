@@ -97,6 +97,9 @@
   * List\<LottoNumbers\> -> PurchaseLottoNumbers
   * totalMoney, balance -> Amount
   * purchaseQuantity -> Quantity
+* 클래스 이름 변경
+  * PurchaseLottoNumbers -> Lottos
+  * LottoNumbers -> Lotto
 * Constant
   * "수동으로 X장, 자동으로 XX개를 구매했습니다." 추가
 * LottoGame
