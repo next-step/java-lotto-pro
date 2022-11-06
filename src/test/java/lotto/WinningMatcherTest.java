@@ -33,7 +33,7 @@ class WinningMatcherTest {
         // given
         Buyer buyer = new Buyer(lottos);
         // when
-        WinningMatcher winningMatcher = new WinningMatcher(buyer, new LottoNumbers("1,2,3,4,5,6"), BONUS_NUMBER);
+        WinningMatcher winningMatcher = new WinningMatcher(buyer, new WinningLotto("1,2,3,4,5,6", BONUS_NUMBER));
         winningMatcher.printProfit(ONCE);
         // then
         float expected = Rank.FIRST.getWinningMoney() / Integer.parseInt(ONCE);
@@ -45,7 +45,7 @@ class WinningMatcherTest {
         // given
         Buyer buyer = new Buyer(lottos);
         // when
-        WinningMatcher winningMatcher = new WinningMatcher(buyer, new LottoNumbers("1,2,3,4,5,8"), BONUS_NUMBER);
+        WinningMatcher winningMatcher = new WinningMatcher(buyer, new WinningLotto("1,2,3,4,5,10", BONUS_NUMBER));
         winningMatcher.printProfit(ONCE);
         // then
         float expected = Rank.SECOND.getWinningMoney() / Integer.parseInt(ONCE);
@@ -57,7 +57,7 @@ class WinningMatcherTest {
         // given
         Buyer buyer = new Buyer(lottos);
         // when
-        WinningMatcher winningMatcher = new WinningMatcher(buyer, new LottoNumbers("1,2,3,4,5,10"), BONUS_NUMBER);
+        WinningMatcher winningMatcher = new WinningMatcher(buyer, new WinningLotto("1,2,3,4,5,8", BONUS_NUMBER));
         winningMatcher.printProfit(ONCE);
         // then
         float expected = Rank.THIRD.getWinningMoney() / Integer.parseInt(ONCE);
@@ -69,7 +69,7 @@ class WinningMatcherTest {
         // given
         Buyer buyer = new Buyer(lottos);
         // when
-        WinningMatcher winningMatcher = new WinningMatcher(buyer, new LottoNumbers("12,11,10,9,7,8"), BONUS_NUMBER);
+        WinningMatcher winningMatcher = new WinningMatcher(buyer, new WinningLotto("12,11,10,9,7,8", BONUS_NUMBER));
         winningMatcher.printProfit(ONCE);
         // then
         float expected = ZERO;
