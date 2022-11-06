@@ -1,5 +1,7 @@
 package lotto.ui;
 
+import static java.lang.Integer.parseInt;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -15,10 +17,12 @@ public class WinningStatisticsView {
 
     public static WinningNumbersInput receiveWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-
         final List<Integer> winningNumbers = readWinningNumbers();
 
-        return new WinningNumbersInput(winningNumbers);
+        System.out.println("보너스 볼을 입력해 주세요.");
+        final int bonus = readBonus();
+
+        return new WinningNumbersInput(winningNumbers, bonus);
     }
 
     private static List<Integer> readWinningNumbers() {
@@ -48,6 +52,28 @@ public class WinningStatisticsView {
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    private static int readBonus() {
+        try {
+            return readPositiveInt();
+        } catch (NumberFormatException e) {
+            System.out.println("정수를 입력해 주세요.");
+            return readBonus();
+        }
+    }
+
+    private static int readPositiveInt() {
+        final String nextLine = scanner.nextLine();
+
+        final int integer = parseInt(nextLine);
+
+        if (integer < 0) {
+            System.out.println("양수를 입력해 주세요.");
+            return readPositiveInt();
+        }
+
+        return integer;
     }
 
     public static void printResult(WinningStatisticsOutput output) {
