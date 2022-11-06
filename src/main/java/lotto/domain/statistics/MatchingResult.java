@@ -13,8 +13,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Matches;
 import lotto.domain.lotto.Money;
+import lotto.domain.lotto.WinningNumbers;
 
 public class MatchingResult {
     private final Map<Matches, Long> result;
@@ -27,6 +29,11 @@ public class MatchingResult {
         this.totalSpendAmount = totalSpendAmount;
     }
 
+    /**
+     * @deprecated 이 메서드는 보너스 일치 여부 도입 후 지워질 예정입니다.
+     * <p> 대신 {@link MatchingResult#analyze(List, Money, WinningNumbers)}를 사용해 주세요.
+     */
+    @Deprecated
     public static MatchingResult analyze(
             final List<Lotto> lottos,
             final Money lottoUnitPrice,
@@ -37,12 +44,26 @@ public class MatchingResult {
         requireNotNull(winningNumbers, "당첨 번호는 null이 아니어야 합니다.");
 
         final Money totalSpendAmount = lottoUnitPrice.multiply(lottos.size());
+        return new MatchingResult(countByMatches(lottos, new WinningNumbers(winningNumbers, new LottoNumber(1))),
+                totalSpendAmount);
+    }
+
+    public static MatchingResult analyze(
+            final List<Lotto> lottos,
+            final Money lottoUnitPrice,
+            final WinningNumbers winningNumbers
+    ) {
+        requireNotNull(lottos, "로또 목록은 null이 아니어야 합니다.");
+        requireNotNull(lottoUnitPrice, "로또 단위 가격은 null이 아니어야 합니다.");
+        requireNotNull(winningNumbers, "당첨 번호는 null이 아니어야 합니다.");
+
+        final Money totalSpendAmount = lottoUnitPrice.multiply(lottos.size());
         return new MatchingResult(countByMatches(lottos, winningNumbers), totalSpendAmount);
     }
 
-    private static Map<Matches, Long> countByMatches(final List<Lotto> lottos, final Lotto winningNumbers) {
+    private static Map<Matches, Long> countByMatches(final List<Lotto> lottos, final WinningNumbers winningNumbers) {
         return lottos.stream()
-                .map(lotto -> lotto.match(winningNumbers))
+                .map(winningNumbers::match)
                 .collect(groupingBy(identity(), counting()));
     }
 

@@ -5,8 +5,10 @@ public class Fixture {
         return new Pick123456Strategy();
     }
 
-    public static Lotto winningNumbers123456() {
-        return new Lotto(1, 2, 3, 4, 5, 6);
+    public static WinningNumbers winningNumbers123456() {
+        final Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
+        final LottoNumber bonus = new LottoNumber(7);
+        return new WinningNumbers(winningNumbers, bonus);
     }
 
     public static Money lottoUnitPrice1000() {
