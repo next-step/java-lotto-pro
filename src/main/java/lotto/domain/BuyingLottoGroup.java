@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.lang.model.type.ArrayType;
 import lotto.strategy.LottoNumberStrategy;
 
 public class BuyingLottoGroup {
