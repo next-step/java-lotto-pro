@@ -25,6 +25,14 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
 
+    public static LottoNumbers of(String... numbers) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
+                .mapToInt(Integer::parseInt)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+        return new LottoNumbers(lottoNumbers);
+    }
+
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
         validateIsSixLottoNumbers(lottoNumbers);
         validateHasDuplicatedLottoNumber(lottoNumbers);

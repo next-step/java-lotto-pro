@@ -62,12 +62,8 @@ public class LottoView {
     }
 
     private static LottoNumbers mapToLottoNumbers(String lottoNumbers) {
-        String[] numberArray = lottoNumbers.split(",");
-        List<LottoNumber> numbers = Arrays.stream(numberArray)
-                .mapToInt(number -> Integer.parseInt(number.trim()))
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
-        return new LottoNumbers(numbers);
+        String[] numbers = lottoNumbers.split(",");
+        return LottoNumbers.of(numbers);
     }
 
     public static LottoNumber getBonusNumber(LottoNumbers winningNumbers) {
