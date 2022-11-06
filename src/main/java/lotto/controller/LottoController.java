@@ -13,7 +13,7 @@ import static lotto.ui.outputView.StatisticsOutputView.winningResult;
 public class LottoController {
 
     public void run() {
-        Lottos lottos = new LottoGenerator(new LottoMoney(readPurchaseMoney())).generate();
+        Lottos lottos = new LottoGenerator().generate(new LottoMoney(readPurchaseMoney()).purchaseCount());
         printLottos(lottos);
         winningResult(new Statistics(lottos, new WinningLotto(winningNumbers(), new BonusBall(readBonusBall()))));
     }

@@ -14,18 +14,9 @@ public class LottoGenerator {
     public static final int ZERO = 0;
     public static final String NULL_EXCEPTION_MESSAGE = "null 일 수 없습니다.";
     private final List<Integer> range = new ArrayList<>();
-    private final LottoMoney lottoMoney;
 
-    public LottoGenerator(LottoMoney lottoMoney) {
-        validateNull(lottoMoney);
+    public LottoGenerator() {
         init();
-        this.lottoMoney = lottoMoney;
-    }
-
-    private static void validateNull(LottoMoney lottoMoney) {
-        if (Objects.isNull(lottoMoney)) {
-            throw new IllegalArgumentException(NULL_EXCEPTION_MESSAGE);
-        }
     }
 
     private void init() {
@@ -34,8 +25,7 @@ public class LottoGenerator {
         }
     }
 
-    public Lottos generate() {
-        int purchaseCount = this.lottoMoney.purchaseCount();
+    public Lottos generate(int purchaseCount) {
         validatePurchaseCount(purchaseCount);
         return createLottos(purchaseCount);
     }

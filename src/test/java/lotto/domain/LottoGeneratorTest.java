@@ -15,22 +15,14 @@ class LottoGeneratorTest {
     @ParameterizedTest
     @ValueSource(ints = {10000})
     void constructor(int lottoMoney) {
-        assertThatNoException().isThrownBy(() -> new LottoGenerator(new LottoMoney(lottoMoney)));
-    }
-
-    @DisplayName("구매 금액은 null일 수 없다.")
-    @ParameterizedTest
-    @NullSource
-    void maxSize(LottoMoney lottoMoney) {
-        assertThatThrownBy(() -> new LottoGenerator(lottoMoney))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(NULL_EXCEPTION_MESSAGE);
+        new LottoMoney(lottoMoney);
+        assertThatNoException().isThrownBy(() -> new LottoGenerator());
     }
 
     @DisplayName("구매횟수만큼 로또 번호들 리스트 생성")
     @ParameterizedTest
     @ValueSource(ints = {3000, 4000, 5000})
     void generate(int lottoMoney) {
-        assertThat(new LottoGenerator(new LottoMoney(lottoMoney)).generate().getLottos()).hasSize(lottoMoney / 1000);
+        assertThat(new LottoGenerator().generate(new LottoMoney(lottoMoney).purchaseCount()).getLottos()).hasSize(lottoMoney / 1000);
     }
 }
