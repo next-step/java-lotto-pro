@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Arrays;
+
 public enum Rank {
     MISS(0, 0),
     FIFTH(3, 5_000),
@@ -29,21 +31,14 @@ public enum Rank {
         if (countOfMatch == SECOND_COUNT_OF_MATCH && isMatchBonus) {
             return SECOND;
         }
-        Rank[] ranks = values();
-        Rank rank = MISS;
-        for (Rank tempRank : ranks) {
-            rank = findCountOfMatch(tempRank, countOfMatch) == true ? tempRank : rank;
-        }
-        if (rank.countOfMatch == SECOND_COUNT_OF_MATCH) {
-            rank = Rank.THIRD;
-        }
-        return rank;
+
+        return Arrays.stream(values())
+                .filter(rank -> rank.findCountOfMatch(countOfMatch))
+                .findFirst()
+                .orElse(MISS);
     }
 
-    private static boolean findCountOfMatch(Rank rank, int countOfMatch) {
-        if (rank.countOfMatch == countOfMatch) {
-            return true;
-        }
-        return false;
+    private boolean findCountOfMatch(int countOfMatch) {
+        return this.countOfMatch == countOfMatch;
     }
 }
