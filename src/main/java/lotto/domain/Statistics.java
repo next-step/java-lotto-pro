@@ -30,7 +30,7 @@ public class Statistics {
         int sum = SUM_INIT;
         Map<Integer, Lottos> map = this.lottos.matchLottos(this.winningNumber);
         for (Integer count : map.keySet()) {
-            sum += find(count).getMoney() * map.get(count).size();
+            sum += find(count, false).getMoney() * map.get(count).size();
         }
         return sum;
     }

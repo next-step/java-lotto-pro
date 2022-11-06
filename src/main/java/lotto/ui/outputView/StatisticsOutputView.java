@@ -20,7 +20,7 @@ public class StatisticsOutputView {
         System.out.println("--------------");
         for (Integer matchCount : statistics.lottosMap().keySet()) {
             System.out.print(matchCount + "개 일치 ");
-            System.out.print("(" + find(matchCount).getMoney() + "원)-");
+            System.out.print("(" + find(matchCount, false).getMoney() + "원)-");
             System.out.println(statistics.lottosMap().get(matchCount).getLottos().size() + "개");
         }
     }
