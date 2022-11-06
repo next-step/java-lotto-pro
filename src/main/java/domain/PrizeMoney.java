@@ -12,7 +12,6 @@ public enum PrizeMoney {
 
     private final int collectCount;
     private final int prizeMoney;
-
     private final boolean matchBonus;
 
     PrizeMoney(int collectCount, int prizeMoney, boolean matchBonus) {
