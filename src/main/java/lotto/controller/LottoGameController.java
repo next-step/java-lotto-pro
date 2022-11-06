@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.domain.ConsoleNumberReader;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicketMachine;
@@ -12,6 +11,7 @@ import lotto.domain.RankResult;
 import lotto.domain.Ranks;
 import lotto.domain.TicketCount;
 import lotto.domain.WinningLottoTicket;
+import lotto.reader.ConsoleNumberReader;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 

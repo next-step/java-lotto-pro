@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.strategy.GenerateStrategy;
+import lotto.reader.NumberReader;
 
 public class ManualGenerateStrategy implements GenerateStrategy {
 
