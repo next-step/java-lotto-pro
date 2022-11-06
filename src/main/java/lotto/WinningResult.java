@@ -12,7 +12,7 @@ public enum WinningResult {
     WIN_SECOND(score -> score.equals(Score.of(5)), Money.from(1500000)),
     WIN_SECOND_BONUS(score -> score.isBetween(5.5, 6), Money.from(30000000)),
     WIN_FIRST(score -> score.isBetween(6, 7), Money.from(2000000000));
-    private Predicate<Score> matchScoreRange;
+    private final Predicate<Score> matchScoreRange;
     private final Money winningPrice;
 
     WinningResult(Predicate<Score> matchScoreRange, Money winningResult) {
