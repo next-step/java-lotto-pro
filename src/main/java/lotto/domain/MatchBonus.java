@@ -5,12 +5,8 @@ import java.util.Map;
 
 public class MatchBonus {
 
-    private int countOfMatch;
-    private boolean bonus;
-
-    final static MatchBonus MATCH_COUNT_MISS = new MatchBonus(0, false);
-
-    final static Map<Integer, MatchBonus> MATCH_COUNT_BY_MATCH_BONUS_FALSE = new HashMap<Integer, MatchBonus>() {
+    static final MatchBonus MATCH_COUNT_MISS = new MatchBonus(0, false);
+    static final Map<Integer, MatchBonus> MATCH_COUNT_BY_MATCH_BONUS_FALSE = new HashMap<Integer, MatchBonus>() {
         {
             put(6, new MatchBonus(6, false));
             put(5, new MatchBonus(5, false));
@@ -18,12 +14,14 @@ public class MatchBonus {
             put(3, new MatchBonus(3, false));
         }
     };
-
-    final static Map<Integer, MatchBonus> MATCH_COUNT_BY_MATCH_BONUS_TRUE = new HashMap<Integer, MatchBonus>() {
+    static final Map<Integer, MatchBonus> MATCH_COUNT_BY_MATCH_BONUS_TRUE = new HashMap<Integer, MatchBonus>() {
         {
             put(5, new MatchBonus(5, true));
         }
     };
+
+    private final int countOfMatch;
+    private final boolean bonus;
 
     MatchBonus(int countOfMatch, boolean bonus) {
         this.countOfMatch = countOfMatch;

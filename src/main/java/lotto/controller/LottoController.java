@@ -34,13 +34,9 @@ public class LottoController {
     }
 
     public LotteriesDto buyLotto(BuyCountLottoDto buyCountLottoDto, LotteriesDto directLotteriesDto) {
-        LotteriesDto lotteriesDto =  buyCountLottoDto.getBuyCountLotto()
+        return buyCountLottoDto.getBuyCountLotto()
                 .getLotteries(new AutoLottoCreator(), directLotteriesDto.getLotteriesDomain())
-                .getLotteriesDto();
-        int directBuyCount = buyCountLottoDto.getDirectBuyCount();
-        lotteriesDto.setDirectBuyCount(directBuyCount);
-        lotteriesDto.setAutoBuyCount(lotteriesDto.getLotteries().size() - directBuyCount);
-        return lotteriesDto;
+                .getLotteriesDto(buyCountLottoDto.getDirectBuyCount());
     }
 
     public LotteriesDto buyLotto(String userInput) {

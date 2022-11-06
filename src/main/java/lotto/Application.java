@@ -17,6 +17,8 @@ public class Application {
     private static final LottoResultView lottoResultView = new LottoResultView();
     private static final LottoController lottoController = new LottoController();
 
+    private static final int ALL_AUTO_DIRECT_BUY_NUMBER = 0;
+
     public static void main(String[] args) {
         BuyAmountDto buyAmountDto = lottoController
                 .getBuyAmount(lottoInputView.readUserInput("구입금액을 입력해 주세요."));
@@ -25,7 +27,7 @@ public class Application {
                 getBuyCountLotto(lottoInputView.readUserInput("수동으로 구매할 로또 수를 입력해 주세요."),
                         buyAmountDto);
 
-        if(buyCountLottoDto.getDirectBuyCount() == 0) {
+        if(buyCountLottoDto.getDirectBuyCount() == ALL_AUTO_DIRECT_BUY_NUMBER) {
             getLotteriesAndResult(new LotteriesDto(Arrays.asList(new ArrayList<>()), new Lotteries(new ArrayList<>())),
                     buyCountLottoDto, buyAmountDto);
             return;
