@@ -22,8 +22,13 @@ public class RandomLottoIssuanceStrategy implements LottoIssuanceStrategy {
     }
 
     @Override
-    public Lottos issueLottos(PurchaseMoney purchaseMoney) {
-        List<Lotto> lottos = LongStream.range(0, purchaseMoney.numberOfAvailableLottoTickets())
+    public boolean isIssuableLottos(LottoIssuance lottoIssuance) {
+        return lottoIssuance.isRandomLottos();
+    }
+
+    @Override
+    public Lottos issueLottos(LottoIssuance lottoIssuance) {
+        List<Lotto> lottos = LongStream.range(0, lottoIssuance.count())
                 .mapToObj(i -> createRandomLottoNumbers())
                 .map(Lotto::new)
                 .collect(Collectors.toList());
