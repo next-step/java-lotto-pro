@@ -27,4 +27,9 @@ public class Lotteries {
                 .map(lotto -> lotto.getLottoDto().getLotto())
                 .collect(Collectors.toList()),this);
     }
+
+    public Lotteries union(List<Lotto> lottoList) {
+        lotteries.addAll(lottoList);
+        return new Lotteries(lotteries);
+    }
 }
