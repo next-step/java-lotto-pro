@@ -1,9 +1,11 @@
 package lotto;
 
 import lotto.common.LottoAutoUtils;
+import lotto.common.exception.LottoNullException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static lotto.common.Constants.DELIMITER;
 import static lotto.common.Constants.LOTTO_LENGTH;
@@ -30,9 +32,8 @@ public class LottoNumbers {
     }
 
     private void stringToNumbersByToken(String inputStr) {
-        if (inputStr == null) {
-            throw new IllegalArgumentException("입력하신 내용이 없습니다.");
-        }
+        Optional.ofNullable(inputStr)
+                .orElseThrow(() -> new LottoNullException("입력하신 내용이 없습니다."));
         String[] str = inputStr.split(DELIMITER);
         if (str.length != LOTTO_LENGTH) {
             throw new IllegalArgumentException("로또의  길이는 " + LOTTO_LENGTH + " 입니다.");

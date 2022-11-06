@@ -1,7 +1,10 @@
 package lotto;
 
+import lotto.common.exception.LottoNullException;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static lotto.common.Constants.LOTTO_MAX_NUM;
 import static lotto.common.Constants.LOTTO_MIN_NUM;
@@ -22,9 +25,9 @@ public class LottoNumber {
 
     public static LottoNumber of(int num) {
         LottoNumber lottoNumber = lottoNumbers.get(num);
-        if (lottoNumber == null) {
-            throw new IllegalArgumentException("로또의 숫자 범위는 1~45입니다.");
-        }
+        Optional.ofNullable(lottoNumbers.get(num))
+                .orElseThrow(() -> new LottoNullException("로또의 숫자 범위는 1~45입니다."));
+
         return lottoNumber;
     }
 
