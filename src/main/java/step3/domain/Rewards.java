@@ -3,7 +3,7 @@ package step3.domain;
 import java.util.List;
 
 public class Rewards {
-    private static final long LOTTO_PRICE = 1000L;
+    private static final int LOTTO_PRICE = 1000;
     private final List<Rank> rankList;
     private final long totalPrize;
 

@@ -17,6 +17,10 @@ public class Money {
         }
     }
 
+    public Money pay(Money price) {
+        return new Money(this.money - price.money);
+    }
+
     public int getMoney() {
         return money;
     }

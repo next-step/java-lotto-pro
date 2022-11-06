@@ -11,4 +11,8 @@ public class LottoUtil {
         return money.getMoney() / LOTTO_PRICE;
     }
 
+    public static int add(int cnt) {
+        return cnt * LOTTO_PRICE;
+    }
+
 }

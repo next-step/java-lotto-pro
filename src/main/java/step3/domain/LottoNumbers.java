@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -26,7 +27,8 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(String receiveWinningNumber) {
-        String trimWinningNumber = WHITE_SPACE.matcher(receiveWinningNumber).replaceAll(EMPTY_STRING);
+        String trimWinningNumber = WHITE_SPACE.matcher(receiveWinningNumber)
+            .replaceAll(EMPTY_STRING);
         this.lottoNumberSet = Arrays.stream(SPLIT_DELIMITER.split(trimWinningNumber))
             .map((number) -> new LottoNumber(Integer.parseInt(number)))
             .collect(Collectors.toSet());
@@ -57,5 +59,22 @@ public class LottoNumbers {
 
     public boolean containsNumber(LottoNumber lottoNumber) {
         return this.lottoNumberSet.contains(lottoNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(lottoNumberSet, that.lottoNumberSet);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumberSet);
     }
 }
