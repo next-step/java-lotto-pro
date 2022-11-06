@@ -2,6 +2,8 @@ package lotto;
 
 import lotto.common.LottoAutoUtils;
 
+import static lotto.common.Constants.DEFAULT_PRICE;
+
 public class Money {
     private final int DEFAULT_MONEY = 0;
     private int money;
@@ -26,5 +28,9 @@ public class Money {
         this.money = this.money - subtractMoney;
 
         return this.money;
+    }
+
+    public void substractMoney(int length) {
+        this.money = this.money - (length * new LottoAutoUtils().stringToNumber(DEFAULT_PRICE));
     }
 }
