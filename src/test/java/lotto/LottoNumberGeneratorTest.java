@@ -30,12 +30,12 @@ public class LottoNumberGeneratorTest {
     void 번호_수동_생성(String input) {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         new Scanner(System.in);
-        LottoNumbers lottoNumbers = new LottoNumberGenerator().manualGenerateNumbers();
-        assertThat(lottoNumbers.contains(LottoNumber.from(1))).isTrue();
-        assertThat(lottoNumbers.contains(LottoNumber.from(2))).isTrue();
-        assertThat(lottoNumbers.contains(LottoNumber.from(3))).isTrue();
-        assertThat(lottoNumbers.contains(LottoNumber.from(4))).isTrue();
-        assertThat(lottoNumbers.contains(LottoNumber.from(5))).isTrue();
-        assertThat(lottoNumbers.contains(LottoNumber.from(6))).isTrue();
+        Lotto lotto = new LottoNumberGenerator().manualGenerateNumbers();
+        assertThat(lotto.contains(LottoNumber.from(1))).isTrue();
+        assertThat(lotto.contains(LottoNumber.from(2))).isTrue();
+        assertThat(lotto.contains(LottoNumber.from(3))).isTrue();
+        assertThat(lotto.contains(LottoNumber.from(4))).isTrue();
+        assertThat(lotto.contains(LottoNumber.from(5))).isTrue();
+        assertThat(lotto.contains(LottoNumber.from(6))).isTrue();
     }
 }

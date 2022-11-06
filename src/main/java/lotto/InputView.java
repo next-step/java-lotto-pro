@@ -43,14 +43,14 @@ public class InputView {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBER);
     }
 
-    LottoNumbers inputManualLottoNumber() {
+    Lotto inputManualLottoNumber() {
         String input = scanner.nextLine();
         Validate.isEmpty(input);
         Validate.isDuplicate(input);
-        return LottoNumbers.from(spliter.splitToList(input));
+        return Lotto.from(spliter.splitToList(input));
     }
 
-    LottoNumbers inputWinningNumberLastWeek() {
+    Lotto inputWinningNumberLastWeek() {
         printInputWinningNumberLastWeek();
         return inputManualLottoNumber();
     }
@@ -59,7 +59,7 @@ public class InputView {
         System.out.println(INPUT_WINNING_NUMBER_LAST_WEEK);
     }
 
-    LottoNumber inputBonusNumberLastWeek(LottoNumbers winningNumbers) {
+    LottoNumber inputBonusNumberLastWeek(Lotto winningNumbers) {
         printInputBonusNumberLastWeek();
         String input = scanner.nextLine();
         Validate.isEmpty(input);

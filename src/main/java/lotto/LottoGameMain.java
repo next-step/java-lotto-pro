@@ -16,18 +16,18 @@ public class LottoGameMain {
         lottoGame.isPurchase(manualQuantity);
 
         inputView.printInputManualLottoNumber();
-        PurchaseLottoNumbers purchaseLottoNumbers = new PurchaseLottoNumbers(
+        Lottos lottos = new Lottos(
                 lottoGame.manualPurchaseLotto(manualQuantity));
 
         Quantity autoQuantity = Quantity.from(lottoGame.getPurchase());
         resultView.printResultPay(autoQuantity, manualQuantity);
 
-        purchaseLottoNumbers.addLottoNumbers(lottoGame.autoPurchaseLotto(autoQuantity));
-        resultView.printResultPurchase(purchaseLottoNumbers);
+        lottos.addLottoNumbers(lottoGame.autoPurchaseLotto(autoQuantity));
+        resultView.printResultPurchase(lottos);
 
-        LottoNumbers winningNumbers = inputView.inputWinningNumberLastWeek();
+        Lotto winningNumbers = inputView.inputWinningNumberLastWeek();
         Statistic statistic = new Statistic(winningNumbers);
-        statistic.countPrize(purchaseLottoNumbers, inputView.inputBonusNumberLastWeek(winningNumbers));
+        statistic.countPrize(lottos, inputView.inputBonusNumberLastWeek(winningNumbers));
 
         resultView.printResultWinningStatistics(lottoGame.getAmount(), statistic);
     }

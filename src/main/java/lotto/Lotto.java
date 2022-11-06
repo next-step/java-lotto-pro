@@ -11,17 +11,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class Lotto {
     private final List<LottoNumber> sixNumbers;
 
-    private LottoNumbers(List<LottoNumber> sixNumbers) {
+    private Lotto(List<LottoNumber> sixNumbers) {
         this.sixNumbers = sixNumbers;
     }
 
-    public static LottoNumbers from(List<Integer> sixNumbers) {
+    public static Lotto from(List<Integer> sixNumbers) {
         Validate.isSixNumbers(sixNumbers);
         Collections.sort(sixNumbers);
-        return new LottoNumbers(sixNumbers.stream()
+        return new Lotto(sixNumbers.stream()
                 .map(LottoNumber::from)
                 .collect(Collectors.toList()));
     }
@@ -30,13 +30,13 @@ public class LottoNumbers {
         return sixNumbers.contains(lottoNumber);
     }
 
-    public int countHit(LottoNumbers lottoNumbers) {
+    public int countHit(Lotto lotto) {
         return (int) sixNumbers.stream()
-                .filter(lottoNumbers::contains)
+                .filter(lotto::contains)
                 .count();
     }
 
-    public Rank getRank(LottoNumbers winningNumbers, LottoNumber bonus) {
+    public Rank getRank(Lotto winningNumbers, LottoNumber bonus) {
         return valueOf(countHit(winningNumbers), contains(bonus));
     }
 

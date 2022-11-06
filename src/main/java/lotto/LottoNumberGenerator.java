@@ -20,14 +20,14 @@ public class LottoNumberGenerator {
 
     InputView inputView = new InputView();
 
-    public LottoNumbers autoGenerateNumbers() {
+    public Lotto autoGenerateNumbers() {
         Collections.shuffle(lottoNumberKeys);
-        return LottoNumbers.from(lottoNumberKeys.stream()
+        return Lotto.from(lottoNumberKeys.stream()
                 .limit(LOTTO_NUMBER_SIZE)
                 .collect(Collectors.toList()));
     }
 
-    public LottoNumbers manualGenerateNumbers() {
+    public Lotto manualGenerateNumbers() {
         return inputView.inputManualLottoNumber();
     }
 }

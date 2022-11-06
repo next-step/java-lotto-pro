@@ -25,8 +25,8 @@ public class ResultView {
                         + autoQuantity.getQuantity() + RESULT_BOUGHT_3);
     }
 
-    void printResultPurchase(PurchaseLottoNumbers purchaseLottoNumbers) {
-        System.out.println(purchaseLottoNumbers.printPurchaseLottoNumber());
+    void printResultPurchase(Lottos lottos) {
+        System.out.println(lottos.printPurchaseLottoNumber());
     }
 
     void printResultWinningStatistics(int payMoney, Statistic statistic) {

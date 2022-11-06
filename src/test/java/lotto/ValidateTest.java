@@ -66,7 +66,7 @@ public class ValidateTest {
     void 보너스_번호와_당첨_번호간에_중복_검사() {
         assertThatThrownBy(
                 () -> Validate.isDuplicate("1",
-                        LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6))))
+                        Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6))))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

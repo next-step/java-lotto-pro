@@ -36,18 +36,18 @@ public class LottoGame {
         amount.isPurchase(quantity);
     }
 
-    public List<LottoNumbers> autoPurchaseLotto(Quantity quantity) {
+    public List<Lotto> autoPurchaseLotto(Quantity quantity) {
         purchase(quantity);
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        List<Lotto> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < quantity.getQuantity(); i++) {
             lottoNumbers.add(lottoNumberGenerator.autoGenerateNumbers());
         }
         return lottoNumbers;
     }
 
-    public List<LottoNumbers> manualPurchaseLotto(Quantity quantity) {
+    public List<Lotto> manualPurchaseLotto(Quantity quantity) {
         purchase(quantity);
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        List<Lotto> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < quantity.getQuantity(); i++) {
             lottoNumbers.add(lottoNumberGenerator.manualGenerateNumbers());
         }
