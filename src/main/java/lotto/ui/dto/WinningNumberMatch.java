@@ -7,6 +7,7 @@ public enum WinningNumberMatch {
     THREE(Matches.THREE, "3개 일치", true),
     FOUR(Matches.FOUR, "4개 일치", true),
     FIVE(Matches.FIVE, "5개 일치", true),
+    FIVE_WITH_BONUS(Matches.FIVE_WITH_BONUS, "5개 일치, 보너스 볼 일치", true),
     SIX(Matches.SIX, "6개 일치", true),
     ;
 

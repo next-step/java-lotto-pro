@@ -126,6 +126,7 @@ class MatchingResultTest {
         );
         final Map<Matches, Long> expected = new HashMap<Matches, Long>() {{
             put(Matches.SIX, 1L);
+            put(Matches.FIVE_WITH_BONUS, 0L);
             put(Matches.FIVE, 0L);
             put(Matches.FOUR, 0L);
             put(Matches.THREE, 0L);
