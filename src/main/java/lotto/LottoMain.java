@@ -25,9 +25,8 @@ public class LottoMain {
         LottoPayment lottoPayment = lottoService.buyLotto(payLotto());
         buyLottoCountPrint(lottoPayment.getLottoCount());
 
-        ManualLottoCount manualLottoCount = ManualLottoCount.create(buyManualLotto(),
-                lottoPayment.getLottoCount());
-        printManualLottoInput();
+        ManualLottoCount manualLottoCount = lottoService.generateManualLottoCount(lottoPayment);
+        printManualLottoInput(manualLottoCount.getCount());
         BuyingLottoGroup buyingLottoGroup = lottoService.generateBuyingLottoGroup(lottoPayment.getLottoCount(),
                 manualLottoCount.getCount());
         printBuyLottoCount(lottoPayment.getLottoCount() - manualLottoCount.getCount(),
@@ -36,7 +35,7 @@ public class LottoMain {
 
         printLastWeekWinningNumber();
         Lotto basicLotto = lottoService.generateWinningBasicLotto();
-        LottoNumber bonusNumber = lottoService.generateWinningBonusNumber(inputBonusNumber());
+        LottoNumber bonusNumber = lottoService.generateWinningBonusNumber();
 
         WinningLotto winningLotto = WinningLotto.create(basicLotto, bonusNumber);
         LottoResult result = lottoService.getMatchingResultBuyingLottoGroupAndWinningLotto(

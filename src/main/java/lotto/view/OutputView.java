@@ -11,12 +11,16 @@ import static lotto.io.PrintUtils.println;
 
 public abstract class OutputView {
 
+    public static final int ZERO = 0;
+
     public static void buyLottoCountPrint(int count){
         println(count+"개를 구매했습니다.");
     }
 
-    public static void printManualLottoInput(){
-        println("수동으로 구매할 번호를 입력해 주세요.");
+    public static void printManualLottoInput(int manualLottoCount){
+        if(manualLottoCount > ZERO){
+            println("수동으로 구매할 번호를 입력해 주세요.");
+        }
     }
     public static void printBuyLottoCount(int autoLottoCount, int manualLottoCount){
         println("수동으로 "+ manualLottoCount + "장, 자동으로 "+ autoLottoCount + "장을 구매했습니다." );
