@@ -52,7 +52,7 @@ public class OutputView {
     }
 
     private static void printLottoProfitRatio(BigDecimal profitRatio) {
-        System.out.printf(OUT_MESSAGE_PROFIT_RATIO, profitRatio.setScale(PROFIT_RATIO_DECIMAL_POINT, RoundingMode.CEILING));
+        System.out.printf(OUT_MESSAGE_PROFIT_RATIO, profitRatio.setScale(PROFIT_RATIO_DECIMAL_POINT, RoundingMode.DOWN));
         if (profitRatio.compareTo(EVEN_POINT_PROFIT_RATIO) < 0) {
             System.out.println(OUT_MESSAGE_PROFIT_LESS_THAN_EVEN_POINT);
         }
