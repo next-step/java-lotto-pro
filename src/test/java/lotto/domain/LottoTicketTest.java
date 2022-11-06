@@ -16,7 +16,7 @@ public class LottoTicketTest {
     @DisplayName("로또_티켓_생성")
     void 로또_티켓_생성() {
         Set<LottoNumber> lottoTicket = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
         assertThat(new LottoTicket(lottoTicket)).isEqualTo(new LottoTicket(lottoTicket));
     }
@@ -25,7 +25,7 @@ public class LottoTicketTest {
     @DisplayName("로또_번호_중복_확인")
     void 로또_번호_중복_확인() {
         Set<LottoNumber> lottoTicket = Stream.of(1, 2, 3, 4, 5, 5)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
         assertThatThrownBy(() -> new LottoTicket(lottoTicket))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -53,7 +53,7 @@ public class LottoTicketTest {
     void 로또_티켓_비교() {
         String lottoNumbers = "1,2,3,4,6,7";
         Set<LottoNumber> lottoTicketSet = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
         LottoTicket winningTicket = new LottoTicket(lottoNumbers);
         LottoTicket purchaseLottoTicket = new LottoTicket(lottoTicketSet);

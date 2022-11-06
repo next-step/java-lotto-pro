@@ -8,7 +8,7 @@ public class WinningLottoNumber {
 
     public WinningLottoNumber(String winningLottoTicket, int bonusNumber) {
         this.winningLottoTicket = new LottoTicket(winningLottoTicket);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.valueOf(bonusNumber);
         validateDuplication();
     }
 

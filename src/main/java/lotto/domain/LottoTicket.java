@@ -23,7 +23,7 @@ public class LottoTicket {
     public LottoTicket(String strNumber) {
         this(Arrays.stream(DEFAULT_DELIMITER_PATTERN.split
                         (SPACE_DELIMITER_PATTERN.matcher(strNumber).replaceAll(EMPTY_STRING)))
-                .map((number) -> new LottoNumber(Integer.parseInt(number)))
+                .map((number) -> LottoNumber.valueOf(Integer.parseInt(number)))
                 .collect(Collectors.toSet()));
     }
 

@@ -23,7 +23,7 @@ public class LottoStore {
     public static LottoTicket ticketPrinting(LottoNumberGenerateStrategy lottoNumberGenerateStrategy) {
         Set<Integer> generatedNumber = lottoNumberGenerateStrategy.generate();
         return new LottoTicket(generatedNumber.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet()));
     }
 }
