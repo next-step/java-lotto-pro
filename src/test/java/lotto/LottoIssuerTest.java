@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,12 +29,12 @@ class LottoIssuerTest {
     @Test
     void issueManually_lottoList_success() {
         //given:
-        NumberGenerator numberGenerator = new LottoNumberGenerator();
-        List<LottoNumberBag> lottoNumberBags = Arrays.asList(
-                new LottoNumberBag(numberGenerator),
-                new LottoNumberBag(numberGenerator));
+        List<LottoNumberManualGenerator> lottoNumberManualGeneratorList = new ArrayList<>(
+                Arrays.asList(
+                        new LottoNumberManualGenerator("1,2,3,4,5,6"),
+                        new LottoNumberManualGenerator("2,3,4,5,6,7")));
         //when, then:
-        assertThatNoException().isThrownBy(() -> LottoIssuer.issueManual(lottoNumberBags));
+        assertThatNoException().isThrownBy(() -> LottoIssuer.issueManuals(lottoNumberManualGeneratorList));
     }
 
     @DisplayName("로또 당첨 결과 성공")
@@ -43,6 +44,5 @@ class LottoIssuerTest {
         WinningLottoBallBag winningLottoBallBag = new WinningLottoBallBag("1,2,3,4,5,6");
         assertThatNoException().isThrownBy(() -> LottoIssuer.result(lottoList, winningLottoBallBag));
     }
-
 
 }

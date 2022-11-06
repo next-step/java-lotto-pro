@@ -6,6 +6,7 @@ import lotto.LottoBall;
 import lotto.LottoIssuer;
 import lotto.LottoNumberBag;
 import lotto.LottoNumberGenerator;
+import lotto.LottoNumberManualGenerator;
 import lotto.Money;
 import lotto.WinningLottoBallBag;
 import lotto.WinningResultBag;
@@ -37,22 +38,22 @@ public class LottoStore {
     }
 
     private LottoBag issueLotto(GenerateCount autoCount, GenerateCount manualCount) {
-        List<LottoNumberBag> manualLottoNumbers = inputNumber(manualCount);
+        List<LottoNumberManualGenerator> manualLottoNumbers = inputNumber(manualCount);
 
         InputView.printManualAutoCount(manualCount.getCount(), autoCount.getCount());
 
-        return LottoBag.concat(LottoIssuer.issueManual(manualLottoNumbers),
+        return LottoBag.concat(LottoIssuer.issueManuals(manualLottoNumbers),
                 LottoIssuer.issueAuto(autoCount.getCount(), new LottoNumberGenerator()));
     }
 
-    private List<LottoNumberBag> inputNumber(GenerateCount manualCount) {
+    private List<LottoNumberManualGenerator> inputNumber(GenerateCount manualCount) {
         long count = manualCount.getCount();
         InputView.inputManualNumbers();
-        List<LottoNumberBag> lottoNumberBags = new ArrayList<>();
+        List<LottoNumberManualGenerator> lottoNumberManualGeneratorList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottoNumberBags.add(LottoNumberBag.fromManualNumbers(scanner.nextLine()));
+            lottoNumberManualGeneratorList.add(new LottoNumberManualGenerator(scanner.nextLine()));
         }
-        return lottoNumberBags;
+        return lottoNumberManualGeneratorList;
     }
 
     private void result(LottoBag lottoBag) {

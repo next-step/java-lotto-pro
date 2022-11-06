@@ -18,8 +18,8 @@ public class LottoIssuer {
         return new LottoBag(lottoList);
     }
 
-    public static LottoBag issueManual(List<LottoNumberBag> lottoNumberBags) {
-        return new LottoBag(lottoNumberBags.stream().map(Lotto::new)
+    public static LottoBag issueManuals(List<LottoNumberManualGenerator> lottoNumberManualGenerators) {
+        return new LottoBag(lottoNumberManualGenerators.stream().map(Lotto::new)
                 .collect(Collectors.toList()));
     }
 

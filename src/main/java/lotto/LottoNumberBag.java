@@ -1,14 +1,11 @@
 package lotto;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static lotto.LottoNumberGenerator.LOTTO_NUMBER_SIZE;
 
 public class LottoNumberBag implements NumberBag {
-
-    private static final String SPLIT_DELIMITER = ",";
 
     private final List<Number> lottoNumbers;
 
@@ -31,7 +28,6 @@ public class LottoNumberBag implements NumberBag {
     }
 
     private void validNumbers(List<Number> numbers) {
-        // 정적 팩토리 메서드의 객체 생성을 위해 인자값을 물고다니는 구조 괜찮은가..?
         validNumberSize(numbers);
         validUnique(numbers);
     }
@@ -52,11 +48,5 @@ public class LottoNumberBag implements NumberBag {
                             .map(it -> String.valueOf(it.getIntNumber()))
                             .collect(Collectors.joining(",")));
         }
-    }
-
-    public static LottoNumberBag fromManualNumbers(String input) {
-        return new LottoNumberBag(Arrays.stream(input.split(SPLIT_DELIMITER))
-                .map(it -> new LottoNumber(it.trim()))
-                .collect(Collectors.toList()));
     }
 }
