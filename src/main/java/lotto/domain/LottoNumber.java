@@ -4,7 +4,7 @@ import lotto.common.ErrorMessage;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int START_INCLUSIVE = 1;
     private static final int END_INCLUSIVE = 45;
     private final int lottoNumber;
@@ -40,5 +40,10 @@ public class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(this.lottoNumber);
+    }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return this.lottoNumber - other.lottoNumber;
     }
 }
