@@ -6,8 +6,8 @@ import java.util.List;
 import static lotto.domain.Lotto.DUPLICATE_EXCEPTION_MESSAGE;
 
 public class WinningNumber {
-
     private static final int INIT_COUNT = 0;
+
     private final Lotto winningNumber;
     private final BonusBall bonusBall;
 
@@ -21,6 +21,10 @@ public class WinningNumber {
         if (winningNumber.getNumbers().contains(bonusBall.getNumber())) {
             throw new IllegalArgumentException(DUPLICATE_EXCEPTION_MESSAGE);
         }
+    }
+
+    public BonusBall getBonusBall() {
+        return bonusBall;
     }
 
     private List<Integer> numbers(String[] winningNumbers) {

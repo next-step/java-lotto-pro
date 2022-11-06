@@ -18,6 +18,10 @@ public class Statistics {
         this.winningNumber = winningNumber;
     }
 
+    public WinningNumber getWinningNumber() {
+        return winningNumber;
+    }
+
     public Map<Integer, Lottos> lottosMap() {
         return this.lottos.matchLottos(this.winningNumber);
     }
