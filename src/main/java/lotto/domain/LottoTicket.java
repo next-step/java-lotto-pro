@@ -21,11 +21,10 @@ public class LottoTicket {
     }
 
     public LottoTicket(String strNumber) {
-        String trimStrNumber = SPACE_DELIMITER_PATTERN.matcher(strNumber).replaceAll(EMPTY_STRING);
-        this.ticket = Arrays.stream(DEFAULT_DELIMITER_PATTERN.split(trimStrNumber))
+        this(Arrays.stream(DEFAULT_DELIMITER_PATTERN.split
+                        (SPACE_DELIMITER_PATTERN.matcher(strNumber).replaceAll(EMPTY_STRING)))
                 .map((number) -> new LottoNumber(Integer.parseInt(number)))
-                .collect(Collectors.toSet());
-        this.validateDuplication(ticket);
+                .collect(Collectors.toSet()));
     }
 
     private void validateDuplication(Set<LottoNumber> lottoTicket) {
