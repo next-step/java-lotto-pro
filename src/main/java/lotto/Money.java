@@ -4,48 +4,26 @@ import java.util.Objects;
 
 public class Money {
 
-    private final int amount;
+    private final long amount;
 
-    public Money(int amount) {
-        this.amount = amount;
+    private Money(long amount) {
+        this(String.valueOf(amount));
     }
 
     public Money(String amount) {
         try {
-            this.amount = Integer.parseInt(amount);
+            this.amount = Long.parseLong(amount);
         } catch (NumberFormatException e) {
             throw new NumberFormatException("금액은 숫자여야 합니다. 입력 값:" + amount);
         }
     }
 
-    public Money minus(int minusAmount) {
-        if (amount >= minusAmount) {
-            return new Money(amount - minusAmount);
-        }
-        return this;
+    public long divide(Money operandMoney) {
+        return this.amount / operandMoney.getAmount();
     }
 
-    public Money minus(Money minusMoney) {
-        if (amount >= minusMoney.amount) {
-            return new Money(amount - minusMoney.amount);
-        }
-        return this;
-    }
-
-    public int divide(Money money) {
-        return this.amount / money.getAmount();
-    }
-
-    public int getAmount() {
+    public long getAmount() {
         return amount;
-    }
-
-    public boolean isEqualsOrGreater(int operandAmount) {
-        return amount >= operandAmount;
-    }
-
-    public boolean isEqualsOrGreater(Money operandMoney) {
-        return amount >= operandMoney.amount;
     }
 
     @Override
@@ -63,5 +41,9 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
+    }
+
+    public static Money from(long amount) {
+        return new Money(amount);
     }
 }

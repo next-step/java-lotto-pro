@@ -10,10 +10,11 @@ public class LottoNumberBag implements NumberBag {
     private final List<Number> lottoNumbers;
 
     public LottoNumberBag(NumberGenerator numberGenerator) {
-        this.lottoNumbers = numberGenerator.generate();
+        this(numberGenerator.generate());
     }
 
     public LottoNumberBag(List<Number> numbers) {
+        validNumbers(numbers);
         this.lottoNumbers = numbers;
     }
 
@@ -23,37 +24,29 @@ public class LottoNumberBag implements NumberBag {
 
     @Override
     public List<Number> getNumbers() {
-        validNumbers();
         return lottoNumbers;
     }
 
-    private void validNumbers() {
-        validNumberSize();
-        validUnique();
-        validRange();
+    private void validNumbers(List<Number> numbers) {
+        validNumberSize(numbers);
+        validUnique(numbers);
     }
 
-    private void validNumberSize() {
-        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
+    private void validNumberSize(List<Number> numbers) {
+        if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(
-                    "로또 숫자는 6개여야 합니다. 입력 값:" + lottoNumbers.stream()
+                    "로또 숫자는 6개여야 합니다. 입력 값:" + numbers.stream()
                             .map(it -> String.valueOf(it.getIntNumber()))
                             .collect(Collectors.joining(",")));
         }
     }
 
-    private void validUnique() {
-        if (lottoNumbers.stream().distinct().count() != lottoNumbers.size()) {
+    private void validUnique(List<Number> numbers) {
+        if (numbers.stream().distinct().count() != numbers.size()) {
             throw new IllegalArgumentException(
-                    "로또 숫자는 중복되지 않은 값이어야 합니다. 입력 값:" + lottoNumbers.stream()
+                    "로또 숫자는 중복되지 않은 값이어야 합니다. 입력 값:" + numbers.stream()
                             .map(it -> String.valueOf(it.getIntNumber()))
                             .collect(Collectors.joining(",")));
-        }
-    }
-
-    private void validRange() {
-        for (Number number : lottoNumbers) {
-            number.validNumber();
         }
     }
 }

@@ -3,9 +3,6 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -31,24 +28,12 @@ class LottoNumberTest {
     @DisplayName("숫자 값 반환 실패 - 문자열이 포함 된 값")
     @Test
     void getIntValue_lottoNumber_NumberFormatException() {
-        //given:
-        LottoNumber lottoNumber = new LottoNumber("1a");
-        //when, then:
-        assertThatThrownBy(lottoNumber::getIntNumber).isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> new LottoNumber("1a")).isInstanceOf(NumberFormatException.class);
     }
 
     @DisplayName("숫자 값 반환 실패 - 로또 숫자 범위를 벗어난 값")
     @Test
     void getIntValue_lottoNumber_IllegalArgumentException() {
-        //given:
-        LottoNumber lottoNumber = new LottoNumber("46");
-        //when, then:
-        assertThatThrownBy(lottoNumber::getIntNumber).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    static List<Number> makeLottoNumbers(List<String> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+        assertThatThrownBy(() -> new LottoNumber("46")).isInstanceOf(IllegalArgumentException.class);
     }
 }
