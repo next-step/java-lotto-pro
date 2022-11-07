@@ -10,15 +10,15 @@ public class WinningLotto {
     private final Lotto winningLotto;
     private final BonusBall bonusBall;
 
-    public WinningLotto(String[] winningNumbers, BonusBall bonusBall) {
-        this.winningLotto = new Lotto(numbers(winningNumbers));
+    public WinningLotto(String[] winningLottos, BonusBall bonusBall) {
+        this.winningLotto = new Lotto(numbers(winningLottos));
         validateDuplicateBonusBall(bonusBall);
         this.bonusBall = bonusBall;
     }
 
-    private List<Integer> numbers(String[] winningNumbers) {
+    private List<Integer> numbers(String[] winningLottos) {
         List<Integer> numbers = new ArrayList<>();
-        for (String number : winningNumbers) {
+        for (String number : winningLottos) {
             numbers.add(Integer.parseInt(number));
         }
         return numbers;
