@@ -42,9 +42,7 @@ public class LottoController {
     }
 
     private MoneyToBuy userInputMoneyToBuy() {
-        final MoneyToBuy moneyToBuy = moneyToBuyAcceptor.accept();
-        NumberOfLottoTicketsPrinters.print(moneyToBuy);
-        return moneyToBuy;
+        return moneyToBuyAcceptor.accept();
     }
 
     private LottoTicket buyOneLottoTicket(LottoTicketsBucket lottoTicketsBucket) {

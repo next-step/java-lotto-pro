@@ -1,7 +1,8 @@
 package lotto.model.money.to.buy;
 
+import lotto.model.lotto.ticket.LottoTicketsBucket;
+
 public class MoneyToBuy {
-    private static final int PRICE_OF_SINGLE_LOTTO_TICKET = 1000;
     protected final int money;
     private int boughtLottoCount;
 
@@ -26,7 +27,11 @@ public class MoneyToBuy {
     }
 
     private boolean divisibleWithoutRemainder(int inputMoney) {
-        return inputMoney % PRICE_OF_SINGLE_LOTTO_TICKET == 0;
+        return inputMoney % LottoTicketsBucket.PRICE_OF_SINGLE_LOTTO_TICKET == 0;
+    }
+
+    public int affordableTicketCount() {
+        return money / LottoTicketsBucket.PRICE_OF_SINGLE_LOTTO_TICKET;
     }
 
     public double profitRatio(double sumOfPrizesFromLottoResult) {
