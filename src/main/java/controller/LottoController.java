@@ -11,8 +11,8 @@ import view.ResultView;
 public class LottoController {
     public void purchase() {
         int money = InputView.inputMoney();
-
         int countOfSelfPickLotto = InputView.inputCountOfSelfPickLotto();
+        List<Set<Integer>> selfPickNumbers = InputView.inputSelfPickNumbers(countOfSelfPickLotto);
 
         Lottos lottos = LottoMachine.issueLottos(money);
         ResultView.printLottos(lottos);
