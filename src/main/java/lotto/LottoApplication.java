@@ -18,17 +18,17 @@ public class LottoApplication {
 
         int manualLottoTicketCount = manualLottos.lottos().size();
         int autoLottoTicketCount = purchaseAmount.getLottoTicketCount() - manualLottoTicketCount;
-        resultView.printAllLottoTicketCount(manualLottoTicketCount, autoLottoTicketCount);
+        Lottos lottos = getAllLottos(manualLottos, autoLottoTicketCount);
 
-        Lottos lottos = getAllLottos(manualLottos, purchaseAmount);
+        resultView.printAllLottoTicketCount(manualLottoTicketCount, autoLottoTicketCount);
         resultView.printLottos(lottos);
 
         WinningLotto winningLotto = inputView.readWinningLotto();
         resultView.printWinningResult(winningLotto, lottos);
     }
 
-    private static Lottos getAllLottos(Lottos manualLottos, PurchaseAmount purchaseAmount) {
-        Lottos autoLottos = LottoSeller.sellAutoLottos(purchaseAmount.getLottoTicketCount());
+    private static Lottos getAllLottos(Lottos manualLottos, int autoLottoTicketCount) {
+        Lottos autoLottos = LottoSeller.sellAutoLottos(autoLottoTicketCount);
         return LottoSeller.integrationLottos(manualLottos, autoLottos);
     }
 }
