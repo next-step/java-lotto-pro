@@ -8,7 +8,7 @@ import java.util.List;
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
 
-    private List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateLottoSize(lottoNumbers);
@@ -25,19 +25,19 @@ public class Lotto {
         }
     }
 
-    public int countNumberOfMatching(Lotto winLotto) {
+    public int countNumberOfMatching(WinningLotto winningLotto) {
         return (int) lottoNumbers.stream()
-                .filter(winLotto::containsNumber)
+                .filter(winningLotto::contains)
                 .count();
-    }
-
-    private boolean containsNumber(LottoNumber lottoNumber) {
-        return lottoNumbers.stream()
-                .anyMatch(number -> number.compare(lottoNumber) == 0);
     }
 
     @Override
     public String toString() {
         return lottoNumbers.toString();
+    }
+
+    public boolean hasBonusBall(BonusBall bonusBall) {
+        return lottoNumbers.stream()
+                .anyMatch(bonusBall::isEqualValue);
     }
 }

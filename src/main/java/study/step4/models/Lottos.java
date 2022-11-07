@@ -26,11 +26,11 @@ public class Lottos {
         return lottos.toString();
     }
 
-    public Winners findWinners(Lotto winLotto) {
+    public Winners findWinners(WinningLotto winLotto, BonusBall bonusBall) {
         Winners winners = new Winners();
         for (Lotto lotto : lottos) {
             int numberOfMatching = lotto.countNumberOfMatching(winLotto);
-            winners.add(Rank.valueOf(numberOfMatching));
+            winners.add(Rank.valueOf(numberOfMatching, lotto.hasBonusBall(bonusBall)));
         }
         return winners;
     }
