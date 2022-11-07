@@ -16,7 +16,7 @@ public class Winners {
     }
 
     public int numberOfRankers(Rank rank) {
-        return winners.get(rank);
+        return winners.getOrDefault(rank, 0);
     }
 
     public double earningRate(Money inputMoney) {
