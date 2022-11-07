@@ -7,6 +7,7 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class LottoGame {
     private static final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
@@ -36,7 +37,7 @@ public class LottoGame {
         amount.isPurchase(quantity);
     }
 
-    public List<Lotto> autoPurchaseLotto(Quantity quantity) {
+    public List<Lotto> purchaseLotto(Quantity quantity) {
         purchase(quantity);
         List<Lotto> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < quantity.getQuantity(); i++) {
@@ -45,11 +46,11 @@ public class LottoGame {
         return lottoNumbers;
     }
 
-    public List<Lotto> manualPurchaseLotto(Quantity quantity) {
+    public List<Lotto> purchaseLotto(Quantity quantity, Supplier<Lotto> supplier) {
         purchase(quantity);
         List<Lotto> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < quantity.getQuantity(); i++) {
-            lottoNumbers.add(lottoNumberGenerator.manualGenerateNumbers());
+            lottoNumbers.add(lottoNumberGenerator.manualGenerateNumbers(supplier));
         }
         return lottoNumbers;
     }

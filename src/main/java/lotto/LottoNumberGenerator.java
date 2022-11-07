@@ -7,6 +7,7 @@ import static lotto.Constant.LOTTO_START_NUMBER;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class LottoNumberGenerator {
@@ -18,8 +19,6 @@ public class LottoNumberGenerator {
         }
     }
 
-    InputView inputView = new InputView();
-
     public Lotto autoGenerateNumbers() {
         Collections.shuffle(lottoNumberKeys);
         return Lotto.from(lottoNumberKeys.stream()
@@ -27,7 +26,7 @@ public class LottoNumberGenerator {
                 .collect(Collectors.toList()));
     }
 
-    public Lotto manualGenerateNumbers() {
-        return inputView.inputManualLottoNumber();
+    public Lotto manualGenerateNumbers(Supplier<Lotto> supplier) {
+        return supplier.get();
     }
 }
