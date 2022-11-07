@@ -1,13 +1,12 @@
 package lotto.ui;
 
 import lotto.domain.Lotto;
-import lotto.domain.PurchaseAmount;
 
 import java.util.List;
 
 public class ConsoleResultView implements ResultView {
 
-    private static final String MESSAGE_FOR_PRINT_LOTTO_TICKETS = "개를 구매했습니다.";
+    private static final String MESSAGE_FOR_PRINT_LOTTO_TICKETS = "수동으로 %d장, 자동으로 %d개를 구매했습니다.%n";
     private static final String MESSAGE_FOR_PRINT_TOTAL_YIELD = "총 수익률은 %.2f입니다.";
 
     @Override
@@ -18,8 +17,8 @@ public class ConsoleResultView implements ResultView {
     }
 
     @Override
-    public void printLottoTickets(PurchaseAmount purchaseAmount) {
-        System.out.println(purchaseAmount.getLottoTicketCount() + MESSAGE_FOR_PRINT_LOTTO_TICKETS);
+    public void printLottoTickets(int manualLottoTicketCount, int autoLottoTicketCount) {
+        System.out.printf(MESSAGE_FOR_PRINT_LOTTO_TICKETS, manualLottoTicketCount, autoLottoTicketCount);
     }
 
     @Override

@@ -8,10 +8,11 @@ public class LottoSeller {
 
     }
 
-    public static List<Lotto> sellLottos(PurchaseAmount purchaseAmount) {
+    public static List<Lotto> sellLottos(PurchaseAmount purchaseAmount, List<Lotto> manualLottos) {
         int lottoTicketCount = purchaseAmount.getLottoTicketCount();
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoTicketCount; i++) {
+        int manualLottoTicketCount = manualLottos.size();
+        List<Lotto> lottos = new ArrayList<>(manualLottos);
+        for (int i = 0; i < lottoTicketCount - manualLottoTicketCount; i++) {
             lottos.add(getLotto(new AutoLottoCreateStrategy()));
         }
         return lottos;

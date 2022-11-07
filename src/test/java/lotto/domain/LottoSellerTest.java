@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,7 +18,7 @@ public class LottoSellerTest {
     @ValueSource(ints = {14000, 9000, 3500, 4000, 1000})
     void 로또판매(int purchaseAmount) {
         PurchaseAmount amount = new PurchaseAmount(purchaseAmount);
-        List<Lotto> lottos = LottoSeller.sellLottos(amount);
+        List<Lotto> lottos = LottoSeller.sellLottos(amount, new ArrayList<>());
 
         assertThat(lottos).hasSize(amount.getLottoTicketCount());
     }
@@ -26,7 +27,7 @@ public class LottoSellerTest {
     @ParameterizedTest
     @ValueSource(ints = {-1000, 900, 800, 500})
     void 로또판매_금액부족예외(int purchaseAmount) {
-        assertThatThrownBy(() -> LottoSeller.sellLottos(new PurchaseAmount(purchaseAmount)))
+        assertThatThrownBy(() -> LottoSeller.sellLottos(new PurchaseAmount(purchaseAmount), new ArrayList<>()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(PurchaseAmount.EXCEPTION_MESSAGE_FOR_MINIMUM_PURCHASE_AMOUNT);
     }
