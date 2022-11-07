@@ -10,10 +10,10 @@ public class OutputView {
     public static void outputCountLottoTicket(int lottoTicketCount, int manualLottoTicketCount) {
         int autoTicketCount = lottoTicketCount - manualLottoTicketCount;
 
-        if(manualLottoTicketCount > 0){
-            System.out.print("수동으로 "+manualLottoTicketCount+"장,");
+        if (manualLottoTicketCount > 0) {
+            System.out.print("수동으로 " + manualLottoTicketCount + "장,");
         }
-        System.out.println("자동으로 "+ autoTicketCount +"장");
+        System.out.println("자동으로 " + autoTicketCount + "장");
     }
 
     public static void outputPurchaseLottoList(Lottos lottos) {
@@ -38,7 +38,7 @@ public class OutputView {
     }
 
     public static String makeLottoResuiltMessage(PrizeMoney prizeMoney) {
-        if (prizeMoney.equals(PrizeMoney.SECOND_PLACE)) {
+        if (prizeMoney.isSecondPlace(prizeMoney)) {
             return "%d개 일치, 보너스 볼 일치(%d)- %d개\n";
         }
         return "%d개 일치(%d)- %d개\n";

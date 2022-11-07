@@ -37,4 +37,9 @@ public enum PrizeMoney {
                 .orElse(OTHER_PLACE);
     }
 
+    public boolean isSecondPlace(PrizeMoney prizeMoney) {
+        return SECOND_PLACE.equals(prizeMoney);
+    }
+
+
 }
