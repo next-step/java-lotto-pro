@@ -3,24 +3,40 @@ package lotto.domain;
 import lotto.constants.Rank;
 import lotto.util.InputValidator;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.util.InputValidator.ERROR_MESSAGE_DUPLICATED_NUMBER;
+
 public class Lotto {
 
-    private static final int COLLECT_ADD_NUMBER = 1;
+    public static final int COLLECT_ADD_NUMBER = 1;
     private static final int NOT_COLLECT_ADD_NUMBER = 0;
 
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers){
+    private Lotto(List<LottoNumber> lottoNumbers) {
+        InputValidator.validateLottoNumberCount(lottoNumbers.size());
+        validateDuplicateLottoNumber(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto of(List<Integer> lottoNumbers){
-        InputValidator.validateLottoNumberCount(lottoNumbers.size());
-        InputValidator.validateDuplicateLottoNumber(lottoNumbers);
-        return new Lotto(lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toList()));
+    public static Lotto from(List<Integer> lottoNumbers) {
+        return new Lotto(lottoNumbers.stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toList()));
+    }
+
+    private void validateDuplicateLottoNumber(List<LottoNumber> numbers) {
+        if (numbers.size() != new HashSet<>(numbers).size()) {
+            try {
+                throw new IllegalArgumentException(ERROR_MESSAGE_DUPLICATED_NUMBER);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                throw e;
+            }
+        }
     }
 
     public Rank countCollectNumber(Lotto winningNumbers, LottoNumber bonusBall) {

@@ -1,9 +1,12 @@
 package lotto.util;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static lotto.util.InputValidator.*;
@@ -16,7 +19,7 @@ class InputValidatorTest {
         assertThatThrownBy(
                 () -> validateNumberFormat("1d")
         ).isInstanceOf(IllegalArgumentException.class)
-         .hasMessageContaining("[ERROR]");
+                .hasMessageContaining("[ERROR]");
     }
 
     @Test
@@ -25,7 +28,7 @@ class InputValidatorTest {
         assertThatThrownBy(
                 () -> validateLottoNumberRange(46)
         ).isInstanceOf(IllegalArgumentException.class)
-         .hasMessageContaining("[ERROR]");
+                .hasMessageContaining("[ERROR]");
     }
 
     @Test
@@ -34,15 +37,36 @@ class InputValidatorTest {
         assertThatThrownBy(
                 () -> validateLottoNumberCount(7)
         ).isInstanceOf(IllegalArgumentException.class)
-         .hasMessageContaining("[ERROR]");
+                .hasMessageContaining("[ERROR]");
     }
 
     @Test
     @DisplayName("당첨번호 중복 테스트")
-    public void validateDuplicateLottoNumberTest(){
+    public void validateDuplicateLottoIntTest() {
+        List<Integer> lottoNumberList = Arrays.stream(new int[]{1, 1, 2, 3, 4, 5}).boxed().collect(Collectors.toList());
         assertThatThrownBy(
-                () -> validateDuplicateLottoNumber(Arrays.stream(new int[]{1,1,2,3,4,5}).boxed().collect(Collectors.toList()))
+                () -> InputValidator.validateDuplicateInt(lottoNumberList)
         ).isInstanceOf(IllegalArgumentException.class)
-         .hasMessageContaining("[ERROR]");
+                .hasMessageContaining("[ERROR]");
+    }
+
+    @Test
+    @DisplayName("보너스볼 중복 테스트")
+    public void validateDuplicateBonusBallTest() {
+        assertThatThrownBy(
+                () -> validateDuplicateBonusBall(Lotto.from(Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
+                        .boxed()
+                        .collect(Collectors.toList())), LottoNumber.from(1))
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
+
+    @Test
+    @DisplayName("수동 로또 수 입력 유효성검사 테스트")
+    public void validateUserWrittenLottoAmountTest() {
+        assertThatThrownBy(
+                () -> validateUserWrittenLottoAmount(1, 2)
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
     }
 }

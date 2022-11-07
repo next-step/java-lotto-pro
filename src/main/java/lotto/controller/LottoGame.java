@@ -1,58 +1,39 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.util.InputValidator;
-import lotto.util.LottoNumberGenerator;
-import lotto.util.ProfitCalculator;
+import lotto.util.LottoGenerator;
+import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoGame {
-
-    private final PayAmount payAmount;
-    private final Lottos lottos;
-
-    public LottoGame(PayAmount payAmount, Lottos lottos){
-        this.payAmount = payAmount;
-        this.lottos = lottos;
-    }
-
-    public static LottoGame of(int inputPayAmount){
-        PayAmount payAmount = new PayAmount(inputPayAmount);
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < payAmount.lottoAmount(); i++) {
-            Lotto lotto = Lotto.of(LottoNumberGenerator.generateLottoNumbers());
-            lottos.add(lotto);
+    public void start() {
+        try {
+            LottoAmount lottoAmount = getLottoAmount();
+            Lottos lottos = generateLottos(lottoAmount);
+            printLottos(lottos);
+            LottoResult lottoResult = lottos.findWinner(Lotto.from(InputView.inputLottoWinningNumbers())
+                    , LottoNumber.from(InputView.inputBonusBall()));
+            OutputView.printLottoResult(lottoResult, lottos.getLottos().size());
+        } catch (Exception e) {
+            System.out.println("프로그램 종료." + e.getMessage());
         }
-        return new LottoGame(payAmount, new Lottos(lottos));
     }
 
-    public void printLottoAmount() {
-        OutputView.printLottoAmount(payAmount.lottoAmount());
+    private LottoAmount getLottoAmount() {
+        return LottoAmount.of(new PayAmount(InputView.inputPayAmount()).totalLottoAmount(), InputView.inputUserWrittenLottoCount());
     }
 
-    public void printLottos() {
+    private Lottos generateLottos(LottoAmount lottoAmount) {
+        Lottos userWrittenLottos = LottoGenerator.createUserWrittenLottos(
+                InputView.inputUserWrittenLottoNumbers(lottoAmount.getUserWrittenLottoAmount()));
+        Lottos autoWrittenLottos = LottoGenerator.createAutoLottos(lottoAmount.getAutoLottoAmount());
+        OutputView.printLottoAmount(lottoAmount.getUserWrittenLottoAmount(), lottoAmount.getAutoLottoAmount());
+        return autoWrittenLottos.addAll(userWrittenLottos);
+    }
+
+    private void printLottos(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
             OutputView.printLottos(lotto);
         }
-    }
-
-    public void start(List<Integer> winningNumbers, int bonusBall) {
-        validateDuplicateBonusBall(winningNumbers, bonusBall);
-        LottoResult lottoResult = lottos.findWinner(Lotto.of(winningNumbers), new LottoNumber(bonusBall));
-        double profitRatio = ProfitCalculator.calculateProfitRatio(lottoResult, lottos.getLottos().size());
-        printLottoResult(lottoResult, profitRatio);
-    }
-
-    public void validateDuplicateBonusBall(List<Integer> winningNumbers, int bonusBall) {
-        List<Integer> lottoNumberIncludeBonusBall = new ArrayList<>(winningNumbers);
-        lottoNumberIncludeBonusBall.add(bonusBall);
-        InputValidator.validateDuplicateLottoNumber(lottoNumberIncludeBonusBall);
-    }
-
-    private void printLottoResult(LottoResult lottoResult, double profitRatio) {
-        OutputView.printLottoResult(lottoResult, profitRatio);
     }
 }

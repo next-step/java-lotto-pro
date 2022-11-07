@@ -33,4 +33,8 @@ public enum Rank {
                 .findFirst()
                 .orElse(MISS);
     }
+
+    public boolean isWinner() {
+        return this.countOfMatch >= FIFTH.countOfMatch;
+    }
 }
