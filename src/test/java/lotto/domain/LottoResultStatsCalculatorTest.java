@@ -12,27 +12,33 @@ import org.junit.jupiter.api.Test;
 class LottoResultStatsCalculatorTest {
 
     private static final Money LOTTO_FEE = Money.wons(8_000);
-    private static List<LottoTicket> tickets;
-    private static LottoNumber bonusBall;
+    private static List<LottoTicket> purchased;
+    private static LottoResultStatsCalculator target;
 
     @BeforeEach
     void setUp() {
-        tickets = Arrays.asList(
+        purchased = Arrays.asList(
             new LottoTicket(LOTTO_FEE, LottoNumbers.of(1, 2, 3, 4, 5, 6)),
             new LottoTicket(LOTTO_FEE, LottoNumbers.of(7, 8, 9, 10, 11, 12))
         );
-        bonusBall = LottoNumber.valueOf(7);
+        target = createTarget(LottoNumbers.of(1, 2, 3, 4, 5, 6), LottoNumber.valueOf(7));
+    }
+
+    private static LottoResultStatsCalculator createTarget(
+        final LottoNumbers winingLottoNumbers,
+        final LottoNumber bonusBall
+    ) {
+        return new LottoResultStatsCalculator(
+            purchased,
+            new WiningLotto(winingLottoNumbers, bonusBall)
+        );
     }
 
     @DisplayName("아무것도 당첨되지 않았을 경우, 모든 당첨 횟수는 ZERO여야 한다")
     @Test
     void computeResultStats_winingNothing() {
-        final LottoResultStatsCalculator calculator = new LottoResultStatsCalculator(
-            tickets,
-            LottoNumbers.of(10, 15, 20, 25, 30, 35),
-            bonusBall
-        );
-        final LottoResultStatistics resultStats = calculator.computeLottoResultStats();
+        target = createTarget(LottoNumbers.of(10, 15, 20, 25, 30, 35), LottoNumber.valueOf(7));
+        final LottoResultStatistics resultStats = target.computeLottoResultStats();
 
         assertThat(resultStats.getFirstRankCount()).isZero();
         assertThat(resultStats.getSecondRankCount()).isZero();
@@ -45,12 +51,8 @@ class LottoResultStatsCalculatorTest {
     @DisplayName("1등이 당첨되었을 경우, 1등을 제외한 당첨 횟수는 ZERO여야 한다")
     @Test
     void computeResultStats_winingFirst() {
-        final LottoResultStatsCalculator calculator = new LottoResultStatsCalculator(
-            tickets,
-            LottoNumbers.of(1, 2, 3, 4, 5, 6),
-            bonusBall
-        );
-        final LottoResultStatistics resultStats = calculator.computeLottoResultStats();
+        target = createTarget(LottoNumbers.of(1, 2, 3, 4, 5, 6), LottoNumber.valueOf(7));
+        final LottoResultStatistics resultStats = target.computeLottoResultStats();
 
         assertThat(resultStats.getFirstRankCount()).isEqualTo(1);
         assertThat(resultStats.getSecondRankCount()).isZero();
@@ -64,12 +66,8 @@ class LottoResultStatsCalculatorTest {
     @DisplayName("2등이 당첨되었을 경우, 2등을 제외한 당첨 횟수는 ZERO여야 한다")
     @Test
     void computeResultStats_winingSecond() {
-        final LottoResultStatsCalculator calculator = new LottoResultStatsCalculator(
-            tickets,
-            LottoNumbers.of(1, 2, 3, 4, 5, 8),
-            LottoNumber.valueOf(6)
-        );
-        final LottoResultStatistics resultStats = calculator.computeLottoResultStats();
+        target = createTarget(LottoNumbers.of(1, 2, 3, 4, 5, 8), LottoNumber.valueOf(6));
+        final LottoResultStatistics resultStats = target.computeLottoResultStats();
 
         assertThat(resultStats.getFirstRankCount()).isZero();
         assertThat(resultStats.getSecondRankCount()).isEqualTo(1);
@@ -80,16 +78,11 @@ class LottoResultStatsCalculatorTest {
             .isEqualTo(resultStats.getSecondRankPrizeMoney());
     }
 
-
     @DisplayName("3등이 당첨되었을 경우, 3등을 제외한 당첨 횟수는 ZERO여야 한다")
     @Test
     void computeResultStats_winingThird() {
-        final LottoResultStatsCalculator calculator = new LottoResultStatsCalculator(
-            tickets,
-            LottoNumbers.of(1, 2, 3, 4, 5, 45),
-            bonusBall
-        );
-        final LottoResultStatistics resultStats = calculator.computeLottoResultStats();
+        target = createTarget(LottoNumbers.of(1, 2, 3, 4, 5, 45), LottoNumber.valueOf(7));
+        final LottoResultStatistics resultStats = target.computeLottoResultStats();
 
         assertThat(resultStats.getFirstRankCount()).isZero();
         assertThat(resultStats.getSecondRankCount()).isZero();
@@ -103,12 +96,8 @@ class LottoResultStatsCalculatorTest {
     @DisplayName("4등이 당첨되었을 경우, 4등을 제외한 당첨 횟수는 ZERO여야 한다")
     @Test
     void computeResultStats_winingFourth() {
-        final LottoResultStatsCalculator calculator = new LottoResultStatsCalculator(
-            tickets,
-            LottoNumbers.of(1, 2, 3, 4, 40, 45),
-            bonusBall
-        );
-        final LottoResultStatistics resultStats = calculator.computeLottoResultStats();
+        target = createTarget(LottoNumbers.of(1, 2, 3, 4, 40, 45), LottoNumber.valueOf(7));
+        final LottoResultStatistics resultStats = target.computeLottoResultStats();
 
         assertThat(resultStats.getFirstRankCount()).isZero();
         assertThat(resultStats.getSecondRankCount()).isZero();
@@ -122,12 +111,8 @@ class LottoResultStatsCalculatorTest {
     @DisplayName("5등이 당첨되었을 경우, 5등을 제외한 당첨 횟수는 ZERO여야 한다")
     @Test
     void computeResultStats_winingFifth() {
-        final LottoResultStatsCalculator calculator = new LottoResultStatsCalculator(
-            tickets,
-            LottoNumbers.of(1, 2, 3, 35, 40, 45),
-            bonusBall
-        );
-        final LottoResultStatistics resultStats = calculator.computeLottoResultStats();
+        target = createTarget(LottoNumbers.of(1, 2, 3, 35, 40, 45), LottoNumber.valueOf(7));
+        final LottoResultStatistics resultStats = target.computeLottoResultStats();
 
         assertThat(resultStats.getFirstRankCount()).isZero();
         assertThat(resultStats.getSecondRankCount()).isZero();
@@ -141,7 +126,7 @@ class LottoResultStatsCalculatorTest {
     @DisplayName("복수의 로또가 당첨되었을 경우, 각 등수의 당첨 횟수를 반환해야 한다")
     @Test
     void computeResultStats_winingAll() {
-        tickets = Arrays.asList(
+        purchased = Arrays.asList(
             // First
             new LottoTicket(Money.ONE, LottoNumbers.of(1, 2, 3, 4, 5, 6)),
             // Second
@@ -160,13 +145,11 @@ class LottoResultStatsCalculatorTest {
             new LottoTicket(Money.ONE, LottoNumbers.of(1, 20, 30, 35, 40, 45)),
             new LottoTicket(Money.ONE, LottoNumbers.of(10, 20, 30, 35, 40, 45))
         );
-
-        final LottoResultStatsCalculator calculator = new LottoResultStatsCalculator(
-            tickets,
-            LottoNumbers.of(1, 2, 3, 4, 5, 6),
-            LottoNumber.valueOf(7)
+        target = new LottoResultStatsCalculator(
+            purchased,
+            new WiningLotto(LottoNumbers.of(1, 2, 3, 4, 5, 6), LottoNumber.valueOf(7))
         );
-        final LottoResultStatistics resultStats = calculator.computeLottoResultStats();
+        final LottoResultStatistics resultStats = target.computeLottoResultStats();
 
         final Money expectedTotalWiningMoney = resultStats
             .getFirstRankPrizeMoney().multiply(resultStats.getFirstRankCount())
@@ -187,24 +170,15 @@ class LottoResultStatsCalculatorTest {
     @DisplayName("당첨 되지 않았을 경우, 수익률은 0이어야 한다")
     @Test
     void computeProfitRate_zero() {
-        final LottoResultStatsCalculator calculator = new LottoResultStatsCalculator(
-            tickets,
-            LottoNumbers.of(10, 15, 20, 25, 30, 35),
-            bonusBall
-        );
-        assertThat(calculator.computeProfitRate()).isZero();
+        target = createTarget(LottoNumbers.of(10, 15, 20, 25, 30, 35), LottoNumber.valueOf(7));
+        assertThat(target.computeProfitRate()).isZero();
     }
 
     @DisplayName("로또 구입 금액보다, 로또 당첨 상금이 낮을때, 수익률은 1이하여야 한다")
     @Test
     void computeProfitRate_lessThanOne() {
-        final LottoResultStatsCalculator calculator = new LottoResultStatsCalculator(
-            tickets,
-            LottoNumbers.of(1, 2, 3, 10, 15, 20),
-            bonusBall
-        );
-
-        assertThat(calculator.computeProfitRate()).isLessThan(Double.valueOf(1));
+        target = createTarget(LottoNumbers.of(1, 2, 3, 10, 15, 20), LottoNumber.valueOf(7));
+        assertThat(target.computeProfitRate()).isLessThan(Double.valueOf(1));
     }
 
     @DisplayName("로또 구입 금액과, 로또 당첨 상금이 같으면, 수익률은 1이여야 한다")
@@ -214,24 +188,19 @@ class LottoResultStatsCalculatorTest {
             Money.wons(5_000),
             LottoNumbers.of(1, 2, 3, 4, 5, 6));
 
-        final LottoResultStatsCalculator calculator = new LottoResultStatsCalculator(
+        target = new LottoResultStatsCalculator(
             Collections.singletonList(purchased),
-            LottoNumbers.of(1, 2, 3, 10, 15, 20),
-            bonusBall
+            new WiningLotto(LottoNumbers.of(1, 2, 3, 10, 15, 20), LottoNumber.valueOf(7))
         );
 
-        assertThat(calculator.computeProfitRate()).isEqualTo(Double.valueOf(1));
+        assertThat(target.computeProfitRate()).isEqualTo(Double.valueOf(1));
     }
 
     @DisplayName("로또 구입 금액보다, 로또 당첨 상금이 높으면, 수익률은 1이상이여야 한다")
     @Test
     void computeProfitRate_greaterThanOne() {
-        final LottoResultStatsCalculator calculator = new LottoResultStatsCalculator(
-            tickets,
-            LottoNumbers.of(1, 2, 3, 4, 5, 6),
-            bonusBall
-        );
-        assertThat(calculator.computeProfitRate()).isGreaterThan(Double.valueOf(1));
+        target = createTarget(LottoNumbers.of(1, 2, 3, 4, 5, 6), LottoNumber.valueOf(7));
+        assertThat(target.computeProfitRate()).isGreaterThan(Double.valueOf(1));
     }
 
 }

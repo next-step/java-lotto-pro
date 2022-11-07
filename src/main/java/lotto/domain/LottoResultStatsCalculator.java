@@ -6,37 +6,26 @@ import java.util.stream.Collectors;
 public final class LottoResultStatsCalculator {
 
     private final List<LottoTicket> lottoTickets;
-    private final LottoNumbers winingLottoNumbers;
-    private final LottoNumber bonusLottoNumber;
+    private final WiningLotto winingLotto;
 
     public LottoResultStatsCalculator(
         final List<LottoTicket> lottoTickets,
-        final LottoNumbers winingLottoNumbers,
-        final LottoNumber bonusLottoNumber
+        final WiningLotto winingLotto
     ) {
         this.lottoTickets = lottoTickets;
-        this.winingLottoNumbers = winingLottoNumbers;
-        this.bonusLottoNumber = bonusLottoNumber;
+        this.winingLotto = winingLotto;
     }
 
     public LottoResultStatistics computeLottoResultStats() {
         final List<LottoResult> lottoResults = lottoTickets.stream()
             .map(LottoTicket::getLottoNumbers)
-            .map(this::mapToLottoResult)
+            .map((winingLotto::computeLottoResult))
             .collect(Collectors.toList());
         return new LottoResultStatistics(lottoResults);
     }
 
-    private LottoResult mapToLottoResult(final LottoNumbers lottoNumbers) {
-        return LottoResult.valueOf(lottoNumbers.matchTo(winingLottoNumbers),
-            lottoNumbers.contains(bonusLottoNumber));
-    }
-
     public Double computeProfitRate() {
         final Money investedAmount = computeTotalLottoTicketsFee(lottoTickets);
-        if (investedAmount.isLessThan(Money.ONE)) {
-            return Money.ZERO.doubleValue();
-        }
         final Money totalWiningAmount = computeLottoResultStats().getTotalWiningMoney();
         if (totalWiningAmount.isLessThan(Money.ONE)) {
             return Money.ZERO.doubleValue();

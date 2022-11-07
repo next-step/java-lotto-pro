@@ -25,4 +25,8 @@ public final class Wallet {
     public Money getUsedAmount() {
         return initialAmount.minus(remainingAmount);
     }
+
+    public int getPurchasableCount(final Money fee) {
+        return remainingAmount.divide(fee).intValue();
+    }
 }
