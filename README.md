@@ -107,3 +107,23 @@
 ### View
 - Input
   - [x] 보너스 번호 입력받아 당첨로또 구성
+
+### 4단계 피드백
+- WinningLottoRank
+  - [ ] toString 부분 View로 변경
+- Lottos 일급 컬렉션 삭제
+
+## 5단계 - 로또(수동)
+### 프로그래밍 요구사항
+- NPE 발생 가능 부분 파악
+  - [ ] Optional 로 wrapping
+
+### domain
+- 로또
+  - [ ] 피드백 강의 내용 반영 - List --> Set
+- 로또판매자
+  - [ ] 로또 판매 시 수동으로 입력한 List<Lotto> 를 포함하여 발급
+
+### view
+- inputView
+  - [ ] 수동 발급 로또 리스트 입력받기(만약 수동 발급이 0개라면?)
