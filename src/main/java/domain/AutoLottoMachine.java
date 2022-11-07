@@ -22,19 +22,22 @@ public class AutoLottoMachine implements LottoMachine {
         return lottonumbers;
     }
 
-    @Override
     public Lotto createLottoNumber() {
         Collections.shuffle(LOTTO_NUMBERS);
         return new Lotto(new ArrayList<>(LOTTO_NUMBERS.subList(0, 6)));
     }
 
     @Override
-    public Lottos purchaseLotto(int lottoTicketCount) {
-        Lottos lottos = new Lottos(new ArrayList<>());
+    public Lottos purchaseLotto(int lottoTicketCount, Lottos lottos) {
         for (int i = 0; i < lottoTicketCount; i++) {
             lottos.add(createLottoNumber());
         }
         return lottos;
+    }
+
+    @Override
+    public Lotto splitPurchaseLottoNumbers(String inputWinLottNumbers) {
+        return null;
     }
 
 }

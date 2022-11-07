@@ -7,8 +7,13 @@ import java.util.Comparator;
 
 public class OutputView {
 
-    public static void outputCountLottoTicket(int lottoTicketCount) {
-        System.out.println(lottoTicketCount + "개를 구매했습니다.");
+    public static void outputCountLottoTicket(int lottoTicketCount, int manualLottoTicketCount) {
+        int autoTicketCount = lottoTicketCount - manualLottoTicketCount;
+
+        if(manualLottoTicketCount > 0){
+            System.out.print("수동으로 "+manualLottoTicketCount+"장,");
+        }
+        System.out.println("자동으로 "+ autoTicketCount +"장");
     }
 
     public static void outputPurchaseLottoList(Lottos lottos) {

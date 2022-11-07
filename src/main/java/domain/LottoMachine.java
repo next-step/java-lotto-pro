@@ -1,8 +1,9 @@
 package domain;
 
 public interface LottoMachine {
-    Lotto createLottoNumber();
 
-    Lottos purchaseLotto(int lottoTicketCount);
+    Lottos purchaseLotto(int lottoTicketCount, Lottos lottos);
+
+    public Lotto splitPurchaseLottoNumbers(String inputWinLottNumbers);
 
 }

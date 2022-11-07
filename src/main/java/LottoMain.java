@@ -2,20 +2,22 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
+import java.util.ArrayList;
+
 public class LottoMain {
 
     public static void main(String[] args) {
         LottoMain lottoMain = new LottoMain();
-        //입력받은 금액 설정
-        Money money = new Money(InputView.inputReadPurchaseMoney());
-        int lottoTicketCount = money.countOfLottoTicket();
-        //입력받은 금액에 횟수 반환
-        OutputView.outputCountLottoTicket(lottoTicketCount);
+
+        //입력받은 금액, 횟수 설정
+        int lottoTicketCount = lottoMain.getLottoTicketCount();
+        //수동 구매 횟수 입력
+        int manualLottoTicketCount = InputView.inputManualLottoCount();
+
         // 자동으로 발급된 로또 번호 저장
-        LottoMachine lottoMachine = new AutoLottoMachine();
-        Lottos lottos = lottoMachine.purchaseLotto(lottoTicketCount);
-        // 지난주 당첨번호 입력
-        OutputView.outputPurchaseLottoList(lottos);
+        Lottos lottos = lottoMain.purchaseLotto(lottoTicketCount, manualLottoTicketCount);
+
+
 
         // 당첨 비교
         WinLotto winLotto = new WinLotto(InputView.inputWinLottoNumbers(), new LottoNumber(InputView.inputBonusNumber()));
@@ -30,6 +32,29 @@ public class LottoMain {
     public void getResultPrintMessage(WinReport winReport, int lottoTicketCount) {
         OutputView.MatchReportResult(winReport);
         OutputView.outputProfit(winReport, lottoTicketCount);
+    }
+
+    public int getLottoTicketCount(){
+        Money money = new Money(InputView.inputReadPurchaseMoney());
+        int lottoTicketCount = money.countOfLottoTicket();
+
+
+        return lottoTicketCount;
+    }
+    public Lottos purchaseLotto(int lottoTicketCount, int manualTicketCount){
+        Lottos lottos = new Lottos(new ArrayList<>());
+        LottoMachine lottoMachine = new ManualLottoMachine();
+
+        lottos = InputView.inputManualLottos(manualTicketCount,lottos);
+
+        lottoMachine = new AutoLottoMachine();
+        lottoMachine.purchaseLotto(lottoTicketCount-manualTicketCount, lottos );
+
+        OutputView.outputCountLottoTicket(lottoTicketCount, manualTicketCount);
+        // 지난주 당첨번호 입력
+        OutputView.outputPurchaseLottoList(lottos);
+
+        return lottos;
     }
 
 }
