@@ -19,15 +19,17 @@ public class LottoMain {
 
         // 당첨 비교
         WinLotto winLotto = new WinLotto(InputView.inputWinLottoNumbers(), new LottoNumber(InputView.inputBonusNumber()));
-        winLotto.findWinner(lottos);
+        WinReport winReport = new WinReport();
+
+        winReport.findWinner(winLotto,lottos);
         OutputView.outputReportStart();
         // 결과 출력
-        lottoMain.getResultPrintMessage(winLotto, lottoTicketCount);
+        lottoMain.getResultPrintMessage(winReport, lottoTicketCount);
     }
 
-    public void getResultPrintMessage(WinLotto winLotto, int lottoTicketCount) {
-        OutputView.MatchReportResult(winLotto);
-        OutputView.outputProfit(winLotto, lottoTicketCount);
+    public void getResultPrintMessage(WinReport winReport, int lottoTicketCount) {
+        OutputView.MatchReportResult(winReport);
+        OutputView.outputProfit(winReport, lottoTicketCount);
     }
 
 }

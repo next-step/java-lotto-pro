@@ -22,9 +22,7 @@ public class OutputView {
         System.out.println("--------");
     }
 
-    public static void MatchReportResult(WinLotto winLotto) {
-        WinReport winReport = winLotto.getWinLottoReport();
-
+    public static void MatchReportResult(WinReport winReport) {
         Arrays.stream(PrizeMoney.values())
                 .sorted(Comparator.comparingInt(PrizeMoney::getPrizeMoney))
                 .filter(prizeMoney -> prizeMoney.getCollectCount() > 2)
@@ -41,8 +39,7 @@ public class OutputView {
         return "%d개 일치(%d)- %d개\n";
     }
 
-    public static void outputProfit(WinLotto winLotto, int lottoTicketCount) {
-        WinReport winReport = winLotto.getWinLottoReport();
+    public static void outputProfit(WinReport winReport, int lottoTicketCount) {
         double profit = winReport.calculateProfit(lottoTicketCount);
 
         System.out.printf("총 수익률은 %.2f 입니다.", profit);
