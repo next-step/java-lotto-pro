@@ -29,7 +29,7 @@ public class Application {
 
         final int maxCount = customer.getPurchasableCount(DEFAULT_LOTTO_FEE);
         final int manualCount = getValidManualLottoCount(maxCount);
-        final List<LottoTicket> manualTickets = getManualLottoTickets(manualCount);
+        final List<LottoTicket> manualTickets = getValidManualLottoTickets(manualCount);
         final List<LottoTicket> autoTickets = createAutoLottoTickets(maxCount - manualCount);
 
         final LottoStore lottoStore = new LottoStore(mergeTickets(manualTickets, autoTickets));
@@ -72,7 +72,7 @@ public class Application {
         return parseInt(InputView.getManualLottoCount());
     }
 
-    private static List<LottoTicket> getManualLottoTickets(final int count) {
+    private static List<LottoTicket> getValidManualLottoTickets(final int count) {
         return mapToTickets(getValidManualLottoNumbers(count));
     }
 
@@ -118,11 +118,12 @@ public class Application {
     }
 
     private static LottoResultStatsCalculator createResultCalculator(
-        final List<LottoTicket> lottoTickets) {
-        return new LottoResultStatsCalculator(lottoTickets, getWiningLotto());
+        final List<LottoTicket> lottoTickets
+    ) {
+        return new LottoResultStatsCalculator(lottoTickets, getValidWiningLotto());
     }
 
-    private static WiningLotto getWiningLotto() {
+    private static WiningLotto getValidWiningLotto() {
         return new WiningLotto(getValidWiningLottoNumbers(), getValidBonusLottoNumber());
     }
 
