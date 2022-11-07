@@ -14,13 +14,13 @@ public class LottoTest {
     @Test
     @DisplayName("로또의 사이즈가 6인지 테스트")
     void lotto_size_test() {
-        assertThat(new Lotto().getLotto()).hasSize(6);
+        assertThat(new AutoLottoGenerator().genAutoLotto().getLotto()).hasSize(6);
     }
 
     @Test
     @DisplayName("생성된 로또가 중복되지 않은 숫자로 이루어졌는지 테스트")
     void not_duplicate_composition_test() {
-        Lotto lotto = new Lotto();
+        Lotto lotto = new AutoLottoGenerator().genAutoLotto();
         Set<LottoNumber> lottoComposition = new HashSet<>(lotto.getLotto());
         assertThat(lottoComposition).hasSize(6);
     }

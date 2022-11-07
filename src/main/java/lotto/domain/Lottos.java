@@ -26,7 +26,7 @@ public class Lottos {
 
     public void genAutoLotto(int autoLottoCnt) {
         for (int i = 0; i < autoLottoCnt; i++) {
-            lottos.add(new Lotto());
+            lottos.add(new AutoLottoGenerator().genAutoLotto());
         }
     }
 }

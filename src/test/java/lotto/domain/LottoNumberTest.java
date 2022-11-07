@@ -31,19 +31,19 @@ public class LottoNumberTest {
     @Test
     @DisplayName("보너스 볼 생성 테스트")
     void create_bonusBall_test() {
-        assertThat(new LottoNumber(new Lotto("1,2,3,4,5,6"), "7")).isNotNull();
+        assertThat(new Lotto("1,2,3,4,5,6").getBonusBall("7")).isNotNull();
     }
 
     @Test
     @DisplayName("당첨번호에 포함된 보너스 볼 예외처리 테스트")
     void bonusBall_already_exits_test() {
-        assertThatThrownBy(() -> new LottoNumber(new Lotto("1,2,3,4,5,6"), "6")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lotto("1,2,3,4,5,6").getBonusBall("6")).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("숫자가 아닌 보너스 볼 예외처리 테스트")
     void not_number_type_bonusBall_test() {
-        assertThatThrownBy(() -> new LottoNumber(new Lotto("1,2,3,4,5,6"), "a")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lotto("1,2,3,4,5,6").getBonusBall("a")).isInstanceOf(IllegalArgumentException.class);
     }
 
 }

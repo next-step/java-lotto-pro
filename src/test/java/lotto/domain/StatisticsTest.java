@@ -25,7 +25,7 @@ public class StatisticsTest {
         Lottos lottos = new Lottos(lottoList);
 
         Lotto winLotto = new Lotto("1,2,3,4,5,6");
-        LottoNumber bonusBall = new LottoNumber(winLotto, "7");
+        LottoNumber bonusBall = winLotto.getBonusBall("7");
 
         //when
         Statistics statistics = new Statistics(lottos, winLotto, bonusBall);
@@ -49,7 +49,7 @@ public class StatisticsTest {
     void winning_info_by_matchBonus_test() {
         //given
         Lotto winLotto = new Lotto("1,2,3,4,5,6");
-        LottoNumber bonusBall = new LottoNumber(winLotto, "7");
+        LottoNumber bonusBall = winLotto.getBonusBall("7");
 
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(new Lotto("1,2,3,4,5,7"));
@@ -68,7 +68,7 @@ public class StatisticsTest {
     void valid_yield_test() {
         //given
         Lotto winLotto = new Lotto("1,2,3,4,5,6");
-        LottoNumber bonusBall = new LottoNumber(winLotto, "7");
+        LottoNumber bonusBall = winLotto.getBonusBall("7");
 
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(new Lotto("1,2,3,11,12,13"));

@@ -14,7 +14,7 @@ public class AutoLottoService {
         Payment payment = getPayment();
         Lottos lottos = purchaseLotto(payment);
         Lotto winLotto = new Lotto(InputView.printConsoleMsg(Messages.ASK_LAST_WIN_LOTTO_NUMBERS));
-        LottoNumber bonusBall = new LottoNumber(InputView.printConsoleMsg(Messages.ASK_BONUS_NUMBERS));
+        LottoNumber bonusBall = winLotto.getBonusBall(InputView.printConsoleMsg(Messages.ASK_BONUS_NUMBERS));
         Statistics statistics = new Statistics(lottos, winLotto, bonusBall);
         ResultView.printTotalResult(payment, statistics);
     }
@@ -37,5 +37,5 @@ public class AutoLottoService {
 
         return lottos;
     }
-    
+
 }

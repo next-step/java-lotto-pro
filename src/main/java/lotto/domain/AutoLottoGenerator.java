@@ -25,10 +25,10 @@ public class AutoLottoGenerator {
         return lottoNumbers;
     }
 
-    public List<LottoNumber> getShuffledNum() {
+    public Lotto genAutoLotto() {
         Collections.shuffle(lottoNumbers);
         List<LottoNumber> subList = new ArrayList<>(lottoNumbers.subList(0, 6));
         Collections.sort(subList);
-        return subList;
+        return new Lotto(subList);
     }
 }
