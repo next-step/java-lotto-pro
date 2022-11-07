@@ -10,12 +10,11 @@ public class InputView {
 
     public static int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public static List<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        scanner.nextLine();
         String s = scanner.nextLine();
         List<Integer> winningNumbers = Arrays.stream(s.split(","))
             .map(String::trim)
@@ -23,5 +22,10 @@ public class InputView {
             .collect(Collectors.toList());
         System.out.print("\n");
         return winningNumbers;
+    }
+
+    public static int inputBonusWinningNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return Integer.parseInt(scanner.nextLine());
     }
 }

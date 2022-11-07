@@ -1,49 +1,35 @@
 package domain;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class LottoResult {
-    private final List<Lotto> lottos;
-    private final List<Integer> winningNumbers;
-    private final Map<LottoWinning, Integer> winningResult = new HashMap<LottoWinning, Integer>() {{
-        Arrays.stream(LottoWinning.values()).forEach(lottoWinning -> put(lottoWinning, 0));
-    }};
+    private final Lottos lottos;
+    private final WinningResult winningResult;
 
-    public static LottoResult of(List<Lotto> lottos, List<Integer> winningNumbers) {
-        return new LottoResult(lottos, winningNumbers);
+    public static LottoResult of(Lottos lottos, WinningNumber winningNumber) {
+        return new LottoResult(lottos, winningNumber);
     }
 
-    private LottoResult(List<Lotto> lottos, List<Integer> winningNumbers) {
+    private LottoResult(Lottos lottos, WinningNumber winningNumber) {
         this.lottos = lottos;
-        this.winningNumbers = winningNumbers;
-        updateWinningResult();
+        this.winningResult = lottos.winningResult(winningNumber);
     }
 
-    public int findWinning(LottoWinning lottoWinning) {
-        return winningResult.get(lottoWinning);
+    public int countOfMatch(LottoWinning lottoWinning) {
+        return winningResult.countOfMatch(lottoWinning);
     }
 
-    public float getEarningRate() {
-        return getTotalPrize() / getSpentMoney();
-    }
-
-    private int getTotalPrize() {
-        return Arrays.stream(LottoWinning.values())
-            .map(l -> winningResult.get(l) * l.getPrize())
-            .reduce(0, Integer::sum);
-    }
-
-    private float getSpentMoney() {
-        return lottos.size() * Lotto.SELL_PRICE;
-    }
-
-    private void updateWinningResult() {
-        for (Lotto lotto : lottos) {
-            LottoWinning lottoWinning = lotto.findWinning(winningNumbers);
-            winningResult.put(lottoWinning, winningResult.get(lottoWinning) + 1);
+    public float earningRate() {
+        float spentMoney = spentMoney();
+        if (spentMoney == 0) {
+            return 0f;
         }
+        return totalPrize() / spentMoney;
+    }
+
+    private int totalPrize() {
+        return winningResult.totalPrize();
+    }
+
+    private float spentMoney() {
+        return lottos.spentMoney();
     }
 }
