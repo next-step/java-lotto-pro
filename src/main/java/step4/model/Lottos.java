@@ -1,5 +1,6 @@
 package step4.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -7,6 +8,10 @@ import java.util.stream.Stream;
 
 public class Lottos {
     private final List<Lotto> lottos;
+
+    public Lottos() {
+        this.lottos = new ArrayList<>();
+    }
 
     public Lottos(Lotto lotto) {
         this.lottos = Stream.of(lotto).collect(Collectors.toList());

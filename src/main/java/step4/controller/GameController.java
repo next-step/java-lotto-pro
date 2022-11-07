@@ -13,19 +13,26 @@ public class GameController {
 
     public void startGame() {
         Money money = new Money(InputView.inputLottoBuyMoney());
+        LottoBuyCount lottoTotalCount = new LottoBuyCount(money);
         LottoBuyCount lottoManualBuyCount = new LottoBuyCount(InputView.inputBuyManualLottoCount());
-        game = new Game(money, lottoManualBuyCount);
-        Lottos manualLottos = game.startLottoGame((new LottoManualGenerator(InputView.inputBuyManualLottos(lottoManualBuyCount), lottoManualBuyCount)));
-        Lottos autoLottos = game.startLottoGame(new LottoAutoGenerator(game.getLottoAutoBuyCount(lottoManualBuyCount)));
+        LottoBuyCount lottoAutoBuyCount = lottoTotalCount.minus(lottoManualBuyCount);
 
-        OutputView.printLottoBuyCount(lottoManualBuyCount, game.getLottoAutoBuyCount(lottoManualBuyCount));
-        Lottos totalLottos = manualLottos.plus(autoLottos);
-        OutputView.printBuyLottoResult(totalLottos);
+        game = new Game();
+
+        game.startLottoGame(
+                new LottoManualGenerator(InputView.inputBuyManualLottos(lottoManualBuyCount), lottoManualBuyCount)
+        );
+        game.startLottoGame(new LottoAutoGenerator(lottoAutoBuyCount));
+
+        OutputView.printLottoBuyCount(lottoManualBuyCount, lottoAutoBuyCount);
+        OutputView.printBuyLottoResult(game.getTotalLottos());
 
         Lotto winLotto = new Lotto(StringUtil.parseLottoText(InputView.inputWinnerLottoResult()));
         LottoNumber bonusLottoNumber = LottoNumber.valueOf(InputView.inputLottoBonusNumber());
 
-        LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(totalLottos, new WinningLotto(winLotto, bonusLottoNumber));
+        LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(
+                game.getTotalLottos(), new WinningLotto(winLotto, bonusLottoNumber)
+        );
         OutputView.printLottoStatistics(lottoWinningStatistics.getLottoWinningStatistics()
                 , lottoWinningStatistics.getTotalProfitPercent(money));
     }

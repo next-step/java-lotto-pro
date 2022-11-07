@@ -1,39 +1,17 @@
 package step4.model;
 
-import step4.constant.ErrorMessageConstant;
-import step4.exception.LottoFormatException;
 import step4.model.generator.LottoGenerator;
 
 public class Game {
-    private final LottoBuyCount totalLottoBuyCount;
-    private final Money buyMoney;
+    private Lottos totalLottos = new Lottos();
 
-    public Game(final int count) {
-        this.buyMoney = new Money();
-        this.totalLottoBuyCount = new LottoBuyCount(count);
+    public void startLottoGame(LottoGenerator lottoGenerator) {
+        Lottos result = lottoGenerator.createLottos();
+        totalLottos = totalLottos.plus(result);
     }
 
-    public Game(String money) {
-        this.buyMoney = new Money(money);
-        this.totalLottoBuyCount = new LottoBuyCount(this.buyMoney);
+    public Lottos getTotalLottos() {
+        return totalLottos;
     }
 
-    public Game(Money money, LottoBuyCount manualBuyCount) {
-        this.buyMoney = money;
-        this.totalLottoBuyCount = new LottoBuyCount(this.buyMoney);
-        if (totalLottoBuyCount.isLessThan(manualBuyCount)) {
-            throw new LottoFormatException(ErrorMessageConstant.MANUAL_BUY_LOTTO_GREATER_THAN_TOTAL_BUY_LOTTO);
-        }
-    }
-
-    public LottoBuyCount getLottoAutoBuyCount(LottoBuyCount manualLottoBuyCount) {
-        if (totalLottoBuyCount.isLessThan(manualLottoBuyCount)) {
-            throw new LottoFormatException(ErrorMessageConstant.MANUAL_BUY_LOTTO_GREATER_THAN_TOTAL_BUY_LOTTO);
-        }
-        return totalLottoBuyCount.minus(manualLottoBuyCount);
-    }
-
-    public Lottos startLottoGame(LottoGenerator lottoGenerator) {
-        return lottoGenerator.createLottos();
-    }
 }

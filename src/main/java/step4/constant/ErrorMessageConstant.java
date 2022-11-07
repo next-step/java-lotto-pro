@@ -10,5 +10,5 @@ public class ErrorMessageConstant {
     public final static String ZERO_LOTTO_BUY_COUNT = "구매할 수 있는 로또의 개수가 0개 입니다.";
     public final static String BONUS_NUMBER_IN_LOTTO_WIN_RESULT = "보너스 번호는 당첨 번호와 같으면 안됩니다.";
     public final static String MANUAL_BUY_LOTTO_EQUAL_NOT_SIZE = "수동 구매할 로또 수와 구매할 번호 입력수가 다릅니다.";
-    public final static String MANUAL_BUY_LOTTO_GREATER_THAN_TOTAL_BUY_LOTTO = "총 구매할 수 있는 로또수보다 수동으로 구매하려 하는 개수가 큽니다.";
+    public final static String BUY_LOTTO_GREATER_THAN_TOTAL_BUY_LOTTO = "총 구매할 수 있는 로또수보다 구매하려 하는 개수가 큽니다.";
 }
