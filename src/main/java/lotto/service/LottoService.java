@@ -1,6 +1,5 @@
 package lotto.service;
 
-import lotto.model.dto.PurchaseAmount;
 import lotto.model.domain.Lotto;
 import lotto.model.domain.Lottos;
 import lotto.model.domain.Profit;
@@ -46,8 +45,8 @@ public interface LottoService {
     /**
      * 수익률 계산
      *
-     * @param purchaseAmount 구입 금액
-     * @param winResult      당첨 결과
+     * @param purchaseInfo 구입정보
+     * @param winResult    당첨 결과
      * @return 수익률
      */
     Profit calculateProfit(PurchaseInfo purchaseInfo, WinResult winResult);

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.StringJoiner;
 import lotto.model.constants.ErrorMessage;
 import lotto.model.constants.LottoConstants;
 

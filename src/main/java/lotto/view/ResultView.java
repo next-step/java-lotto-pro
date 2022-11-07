@@ -8,12 +8,12 @@ import java.util.StringJoiner;
 import lotto.model.constants.LottoConstants;
 import lotto.model.domain.Lotto;
 import lotto.model.domain.LottoNumber;
-import lotto.model.domain.WinCriterion;
-import lotto.model.dto.LottoResult;
 import lotto.model.domain.Lottos;
 import lotto.model.domain.Profit;
 import lotto.model.domain.PurchaseInfo;
+import lotto.model.domain.WinCriterion;
 import lotto.model.domain.WinResult;
+import lotto.model.dto.LottoResult;
 
 public class ResultView {
 
