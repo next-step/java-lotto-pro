@@ -50,5 +50,5 @@ public interface LottoService {
      * @param winResult      당첨 결과
      * @return 수익률
      */
-    Profit calculateProfit(PurchaseAmount purchaseAmount, WinResult winResult);
+    Profit calculateProfit(PurchaseInfo purchaseInfo, WinResult winResult);
 }

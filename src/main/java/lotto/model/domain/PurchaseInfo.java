@@ -64,6 +64,10 @@ public class PurchaseInfo {
         return Objects.hash(purchaseCount);
     }
 
+    public long getPurchaseAmount() {
+        return purchaseAmount;
+    }
+
     public long getPurchaseCount() {
         return purchaseCount;
     }

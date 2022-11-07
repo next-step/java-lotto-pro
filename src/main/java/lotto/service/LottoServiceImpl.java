@@ -17,7 +17,7 @@ public class LottoServiceImpl implements LottoService {
     /**
      * 구입한 개수만큼 로또 발급
      *
-     * @param purchaseInfo 구입정보 (금액, 개수)
+     * @param purchaseInfo 구입정보
      * @return 발급한 로또(전체)
      */
     @Override
@@ -81,8 +81,8 @@ public class LottoServiceImpl implements LottoService {
      * @return 수익률
      */
     @Override
-    public Profit calculateProfit(PurchaseAmount purchaseAmount, WinResult winResult) {
-        long buyAmount = purchaseAmount.getPurchaseAmount();
+    public Profit calculateProfit(PurchaseInfo purchaseInfo, WinResult winResult) {
+        long buyAmount = purchaseInfo.getPurchaseAmount();
         long winAmount = winResult.calculateWinAmount();
         return new Profit(buyAmount, winAmount);
     }
