@@ -9,18 +9,16 @@ import step4.model.Lottos;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoAutoGenerator implements LottoGenerator {
 
     private static final List<LottoNumber> lottoCandidateNumbers;
-    private final LottoBuyCount lottoBuyCount;
 
     static {
-        lottoCandidateNumbers = IntStream.rangeClosed(LottoConstant.LOTTO_MIN_NUM, LottoConstant.LOTTO_MAX_NUM)
-                .mapToObj(LottoNumber::of).collect(Collectors.toList());
+        lottoCandidateNumbers = LottoNumber.getLottoCandidateNumbers();
     }
+
+    private final LottoBuyCount lottoBuyCount;
 
     public LottoAutoGenerator(int lottoBuyCount) {
         this(new LottoBuyCount(lottoBuyCount));

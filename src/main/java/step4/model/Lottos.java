@@ -17,7 +17,10 @@ public class Lottos {
     }
 
     public Lottos plus(Lottos otherLottos) {
-        return new Lottos(Stream.concat(lottos.stream(), otherLottos.lottos.stream()).collect(Collectors.toList()));
+        return new Lottos(
+                Stream.concat(lottos.stream(), otherLottos.lottos.stream())
+                        .collect(Collectors.toList())
+        );
     }
 
     public int count() {

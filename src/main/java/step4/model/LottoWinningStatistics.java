@@ -1,6 +1,7 @@
 package step4.model;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoWinningStatistics {
     private static final Map<Rank, Integer> lottoWinningStatistics;
@@ -25,13 +26,9 @@ public class LottoWinningStatistics {
     }
 
     private static Map<Rank, Integer> initLottoWinningStatistics() {
-        Map<Rank, Integer> lottoWinningStatistics = new LinkedHashMap<>();
-        List<Rank> ranks = Arrays.asList(Rank.values());
-        Collections.reverse(ranks);
-        for (Rank rank : ranks) {
-            lottoWinningStatistics.put(rank, 0);
-        }
-        return lottoWinningStatistics;
+        return Arrays.stream(Rank.values())
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toMap(rank -> rank, rank -> 0, (r1, r2) -> r1, LinkedHashMap::new));
     }
 
     private void setLottoWinningStatistics(Lottos lottos, WinningLotto winningLotto) {

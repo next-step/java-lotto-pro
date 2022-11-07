@@ -4,14 +4,11 @@ import step4.constant.ErrorMessageConstant;
 import step4.constant.LottoConstant;
 import step4.exception.LottoFormatException;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
-    private final int number;
 
     static {
         IntStream.rangeClosed(LottoConstant.LOTTO_MIN_NUM, LottoConstant.LOTTO_MAX_NUM)
@@ -19,6 +16,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
                         lottoNumbers.put(num, new LottoNumber(num))
                 );
     }
+
+    private final int number;
 
     private LottoNumber(int number) {
         this.number = number;
@@ -44,6 +43,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
             throw new LottoFormatException(ErrorMessageConstant.NOT_NUMBER);
         }
         return result;
+    }
+
+    public static List<LottoNumber> getLottoCandidateNumbers() {
+        return new ArrayList<>(lottoNumbers.values());
     }
 
     @Override

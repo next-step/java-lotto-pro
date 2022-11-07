@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import step4.exception.LottoFormatException;
 
@@ -33,9 +35,18 @@ public class LottoBuyCountTest {
 
     @DisplayName("생성자_체크_문자나_음수가_들어오면_에러")
     @ParameterizedTest
-    @ValueSource(strings = {"-1", "-100", "a", ""})
+    @ValueSource(strings = {"-1", "-100", "a"})
     public void LottoBuyCount_fail_01(String count) {
         assertThatThrownBy(() -> new LottoBuyCount(count))
+                .isInstanceOf(LottoFormatException.class);
+    }
+
+    @DisplayName("생성자_체크_빈값이나_NULL이_들어오면_에러")
+    @ParameterizedTest
+    @NullSource
+    @EmptySource
+    void nullEmptyStrings(String text) {
+        assertThatThrownBy(() -> new LottoBuyCount(text))
                 .isInstanceOf(LottoFormatException.class);
     }
 
