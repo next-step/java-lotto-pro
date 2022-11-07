@@ -42,4 +42,8 @@ public final class LottoCustomer {
     public int getPurchasedCount() {
         return purchased.size();
     }
+
+    public int getPurchasableCount(final Money fee) {
+        return wallet.getPurchasableCount(fee);
+    }
 }

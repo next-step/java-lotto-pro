@@ -2,9 +2,11 @@ package lotto.view;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.LottoException;
 import lotto.domain.LottoNumberMatchCount;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResultStatistics;
+import lotto.domain.LottoResultStatsCalculator;
 import lotto.domain.Money;
 
 public final class ResultView {
@@ -16,10 +18,26 @@ public final class ResultView {
     private static final String LOTTO_RESULT_STATS_BODY_FORMAT = "%d개 일치 (%d원)- %d개";
     private static final String LOTTO_RESULT_STATS_BONUS_BODY_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
     private static final String PROFIT_RATE_FORMAT = "총 수익률은 %.2f입니다.";
-    private static final String PURCHASED_COUNT_FORMAT = "%d개를 구매했습니다.";
+    private static final String PURCHASED_COUNT_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String PURCHASED_LOTTO_NUMBERS_FORMAT = "[%s]";
 
     private ResultView() {
+    }
+
+    public static void printException(final LottoException exception) {
+        print(exception.getMessage());
+    }
+
+    public static void printPurchasedLottoNumbers(final List<LottoNumbers> lottoNumbers) {
+        lottoNumbers.forEach(ResultView::printPurchaseLottoNumbers);
+        printEmptyLine();
+    }
+
+    public static void printResult(final LottoResultStatsCalculator resultCalculator) {
+        printLottoResultStatsTitle();
+        printDivider();
+        printLottoResultStatsBody(resultCalculator.computeLottoResultStats());
+        printProfitRate(resultCalculator.computeProfitRate());
     }
 
     private static void print(final String message) {
@@ -30,14 +48,9 @@ public final class ResultView {
         System.out.println();
     }
 
-    public static void printPurchaseLottoNumbersList(
-        final List<LottoNumbers> purchasedLottoNumbersList) {
-        purchasedLottoNumbersList.forEach(ResultView::printPurchaseLottoNumbers);
-    }
-
-    private static void printPurchaseLottoNumbers(final LottoNumbers purchasedLottoNumbers) {
+    private static void printPurchaseLottoNumbers(final LottoNumbers lottoNumbers) {
         print(String.format(PURCHASED_LOTTO_NUMBERS_FORMAT,
-            getPurchaseLottoNumbersMessage(purchasedLottoNumbers)));
+            getPurchaseLottoNumbersMessage(lottoNumbers)));
     }
 
     private static String getPurchaseLottoNumbersMessage(final LottoNumbers purchasedLottoNumbers) {
@@ -46,8 +59,8 @@ public final class ResultView {
             .collect(Collectors.joining(COMMA + SPACE));
     }
 
-    public static void printPurchasedCount(final int purchasedCount) {
-        print(String.format(PURCHASED_COUNT_FORMAT, purchasedCount));
+    public static void printPurchasedCount(final int manualLottoCount, final int autoLottoCount) {
+        print(String.format(PURCHASED_COUNT_FORMAT, manualLottoCount, autoLottoCount));
     }
 
     public static void printProfitRate(final Double profitRate) {
@@ -126,4 +139,5 @@ public final class ResultView {
             prizeMoney.intValue(),
             rankCount);
     }
+
 }
