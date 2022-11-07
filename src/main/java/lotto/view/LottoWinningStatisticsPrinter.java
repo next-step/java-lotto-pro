@@ -12,10 +12,10 @@ public class LottoWinningStatisticsPrinter {
         final Set<LottoNumberMatchCount> keySet = prizeMoney.keySet();
         final List<LottoNumberMatchCount> numbersMatchCandidates = new ArrayList<>(keySet.size());
         numbersMatchCandidates.addAll(keySet);
-        numbersMatchCandidates.sort((a, b) -> a.getValue() - b.getValue());
+        numbersMatchCandidates.sort((a, b) -> a.value() - b.value());
 
         for (LottoNumberMatchCount numbersMatch : numbersMatchCandidates) {
-            System.out.println(String.format(MESSAGE_FOR_EACH_NUMBERS_MATCH, numbersMatch.getValue(),
+            System.out.println(String.format(MESSAGE_FOR_EACH_NUMBERS_MATCH, numbersMatch.value(),
                     lottoResult.prizeMoneyForNumbersMatch(numbersMatch),
                     lottoResult.lottoCountForNumbersMatch(numbersMatch)));
         }
