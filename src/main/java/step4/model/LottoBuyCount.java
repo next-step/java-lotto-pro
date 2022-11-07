@@ -5,7 +5,6 @@ import step4.constant.LottoConstant;
 import step4.exception.LottoFormatException;
 
 import java.util.Objects;
-import java.util.Optional;
 
 public class LottoBuyCount {
 
@@ -30,14 +29,11 @@ public class LottoBuyCount {
     }
 
     private static int convertNumber(String text) {
-        Optional<String> convertText = Optional.ofNullable(text);
-        int result;
         try {
-            result = Integer.parseInt(convertText.orElseThrow(() -> new LottoFormatException(ErrorMessageConstant.NOT_NUMBER)));
+            return Integer.parseInt(text);
         } catch (NumberFormatException e) {
             throw new LottoFormatException(ErrorMessageConstant.NOT_NUMBER);
         }
-        return result;
     }
 
     public void plus() {

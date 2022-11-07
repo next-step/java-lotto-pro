@@ -23,7 +23,7 @@ public class GameController {
         OutputView.printBuyLottoResult(totalLottos);
 
         Lotto winLotto = new Lotto(StringUtil.parseLottoText(InputView.inputWinnerLottoResult()));
-        LottoNumber bonusLottoNumber = LottoNumber.of(InputView.inputLottoBonusNumber());
+        LottoNumber bonusLottoNumber = LottoNumber.valueOf(InputView.inputLottoBonusNumber());
 
         LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(totalLottos, new WinningLotto(winLotto, bonusLottoNumber));
         OutputView.printLottoStatistics(lottoWinningStatistics.getLottoWinningStatistics()

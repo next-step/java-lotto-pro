@@ -16,8 +16,8 @@ public class LottoTest {
     void Lotto_pass_01() {
         assertThatNoException().isThrownBy(() -> new Lotto(
                 Arrays.asList(
-                        LottoNumber.of("1"), LottoNumber.of("2"), LottoNumber.of("3"),
-                        LottoNumber.of("4"), LottoNumber.of("5"), LottoNumber.of("6")
+                        LottoNumber.valueOf("1"), LottoNumber.valueOf("2"), LottoNumber.valueOf("3"),
+                        LottoNumber.valueOf("4"), LottoNumber.valueOf("5"), LottoNumber.valueOf("6")
                 )
         ));
     }
@@ -29,8 +29,8 @@ public class LottoTest {
         Lotto numbers = new Lotto(inputNumberTexts);
         assertThat(numbers).isEqualTo(new Lotto(
                         Arrays.asList(
-                                LottoNumber.of("1"), LottoNumber.of("2"), LottoNumber.of("3"),
-                                LottoNumber.of("4"), LottoNumber.of("5"), LottoNumber.of("6")
+                                LottoNumber.valueOf("1"), LottoNumber.valueOf("2"), LottoNumber.valueOf("3"),
+                                LottoNumber.valueOf("4"), LottoNumber.valueOf("5"), LottoNumber.valueOf("6")
                         )
                 )
         );
@@ -61,7 +61,7 @@ public class LottoTest {
     void Lotto_pass_05() {
         String[] inputNumberTexts = new String[]{"6", "4", "5", "3", "2", "1"};
         Lotto lotto = new Lotto(inputNumberTexts);
-        assertThat(lotto.isContains(LottoNumber.of(6))).isTrue();
+        assertThat(lotto.isContains(LottoNumber.valueOf(6))).isTrue();
     }
 
     @DisplayName("Lotto_중복값_들어오면_에러를_반환한다.")
@@ -90,7 +90,7 @@ public class LottoTest {
     void Lotto_fail_04() {
         String[] inputNumberTexts = new String[]{"6", "4", "5", "3", "2", "1"};
         Lotto lotto = new Lotto(inputNumberTexts);
-        assertThat(lotto.isContains(LottoNumber.of(7))).isFalse();
+        assertThat(lotto.isContains(LottoNumber.valueOf(7))).isFalse();
     }
 
 }

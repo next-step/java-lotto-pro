@@ -15,16 +15,16 @@ public class LottoNumberTest {
     @ParameterizedTest
     @CsvSource(value = {"1:1", "45:45"}, delimiter = ':')
     void Number_pass_01(String text, int expectedNumber) {
-        LottoNumber lottoNumber = LottoNumber.of(text);
-        assertThat(LottoNumber.of(expectedNumber)).isEqualTo(lottoNumber);
-        assertThat(LottoNumber.of(expectedNumber) == lottoNumber).isTrue();
+        LottoNumber lottoNumber = LottoNumber.valueOf(text);
+        assertThat(LottoNumber.valueOf(expectedNumber)).isEqualTo(lottoNumber);
+        assertThat(LottoNumber.valueOf(expectedNumber) == lottoNumber).isTrue();
     }
 
     @DisplayName("Number_숫자_아니면_에러")
     @ParameterizedTest
     @ValueSource(strings = {",", "a", "a1", ""})
     void Number_fail_01(String text) {
-        assertThatThrownBy(() -> LottoNumber.of(text))
+        assertThatThrownBy(() -> LottoNumber.valueOf(text))
                 .isInstanceOf(LottoFormatException.class);
     }
 
@@ -32,7 +32,7 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(strings = {"-1", "0", "46"})
     void Number_fail_02(String text) {
-        assertThatThrownBy(() -> LottoNumber.of(text))
+        assertThatThrownBy(() -> LottoNumber.valueOf(text))
                 .isInstanceOf(LottoFormatException.class);
     }
 
@@ -41,8 +41,8 @@ public class LottoNumberTest {
     @ParameterizedTest
     @CsvSource(value = {"1:1:true", "45:45:true", "1:45:false"}, delimiter = ':')
     void Number_equal_test_01(String num, String otherNum, boolean expected) {
-        LottoNumber number = LottoNumber.of(num);
-        LottoNumber otherNumber = LottoNumber.of(otherNum);
+        LottoNumber number = LottoNumber.valueOf(num);
+        LottoNumber otherNumber = LottoNumber.valueOf(otherNum);
         assertThat(number.equals(otherNumber)).isEqualTo(expected);
     }
 }

@@ -65,7 +65,7 @@ public class LottosTest {
                         new Lotto("1,2,3,4,5,6")
                 )
         );
-        WinningLotto winningLotto = new WinningLotto(new Lotto("1,2,3,4,5,6"), LottoNumber.of("7"));
+        WinningLotto winningLotto = new WinningLotto(new Lotto("1,2,3,4,5,6"), LottoNumber.valueOf("7"));
 
         assertThat(lottos.matchCountAboutRank(winningLotto, Rank.FIRST)).isEqualTo(4);
     }

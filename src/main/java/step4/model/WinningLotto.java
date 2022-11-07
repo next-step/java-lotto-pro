@@ -19,7 +19,7 @@ public class WinningLotto {
     }
 
     public WinningLotto(String lottoNumbers, String bonusNo) {
-        this(new Lotto(StringUtil.parseLottoText(lottoNumbers)), LottoNumber.of(bonusNo));
+        this(new Lotto(StringUtil.parseLottoText(lottoNumbers)), LottoNumber.valueOf(bonusNo));
     }
 
     public Rank match(Lotto userLotto) {

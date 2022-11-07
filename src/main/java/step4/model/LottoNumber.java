@@ -23,7 +23,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public static LottoNumber of(int number) {
+    public static LottoNumber valueOf(int number) {
         LottoNumber lottoNumber = lottoNumbers.get(number);
         if (lottoNumber == null) {
             throw new LottoFormatException(ErrorMessageConstant.OUT_OF_SIZE_LOTTO_NUMBER);
@@ -31,18 +31,16 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return lottoNumber;
     }
 
-    public static LottoNumber of(String text) {
-        return of(convertNumber(text));
+    public static LottoNumber valueOf(String text) {
+        return valueOf(convertNumber(text));
     }
 
     private static int convertNumber(String text) {
-        int result;
         try {
-            result = Integer.parseInt(text);
+            return Integer.parseInt(text);
         } catch (NumberFormatException e) {
             throw new LottoFormatException(ErrorMessageConstant.NOT_NUMBER);
         }
-        return result;
     }
 
     public static List<LottoNumber> getLottoCandidateNumbers() {
