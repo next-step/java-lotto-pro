@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("로또 구매 금액")
@@ -25,5 +26,12 @@ class LottoPurchaseAmountTest {
         assertThatThrownBy(() -> new LottoPurchaseAmount(number))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("1000의 배수만 입력가능합니다.");
+    }
+
+    @DisplayName("로또 구매 금액을 생성한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"1000"})
+    public void constructor(String number) {
+        assertThatNoException().isThrownBy(() -> new LottoPurchaseAmount(number));
     }
 }
