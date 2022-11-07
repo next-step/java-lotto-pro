@@ -19,8 +19,12 @@ public enum WinningLottoRank {
         this.reward = reward;
     }
 
+    public int getMatchCount() {
+        return this.matchCount;
+    }
+
     public int getReward() {
-        return reward;
+        return this.reward;
     }
 
     public static WinningLottoRank getRank(int matchCount, boolean matchBonus) {
@@ -31,20 +35,5 @@ public enum WinningLottoRank {
                 .filter(v -> v.matchCount == matchCount)
                 .findFirst()
                 .orElse(MISS);
-    }
-
-    @Override
-    public String toString() {
-        StringBuffer sb = new StringBuffer();
-        sb.append(matchCount);
-        sb.append("개 일치");
-        if (this == SECOND) {
-            sb.append(", 보너스 볼 일치");
-        }
-        sb.append(" (");
-        sb.append(reward);
-        sb.append("원)");
-
-        return sb.toString();
     }
 }
