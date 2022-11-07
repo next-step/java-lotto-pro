@@ -3,6 +3,7 @@ package domain;
 import domain.strategy.RandomNumberGenerateStrategy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
@@ -25,7 +26,7 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 
     public WinningResult winningResult(WinningNumber winningNumber) {
