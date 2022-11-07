@@ -58,9 +58,6 @@ public class LottoController {
         WinResult winResult = lottoService.checkLottoResult(winLotto, lottos);
         Profit profit = lottoService.calculateProfit(purchaseAmount, winResult);
 
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.setWinResult(winResult);
-        lottoResult.setProfit(profit);
-        return lottoResult;
+        return new LottoResult(winResult, profit);
     }
 }
