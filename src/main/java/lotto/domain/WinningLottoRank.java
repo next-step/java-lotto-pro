@@ -12,9 +12,9 @@ public enum WinningLottoRank {
 
     public static final int MATCH_COUNT_FOR_SECOND_OR_THIRD = 5;
     private final int matchCount;
-    private final int reward;
+    private final long reward;
 
-    WinningLottoRank(int matchCount, int reward) {
+    WinningLottoRank(int matchCount, long reward) {
         this.matchCount = matchCount;
         this.reward = reward;
     }
@@ -23,7 +23,7 @@ public enum WinningLottoRank {
         return this.matchCount;
     }
 
-    public int getReward() {
+    public long getReward() {
         return this.reward;
     }
 

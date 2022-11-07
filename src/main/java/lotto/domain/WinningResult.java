@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class WinningResult {
@@ -17,8 +16,8 @@ public class WinningResult {
         }
     }
 
-    public Map<WinningLottoRank, Integer> reportRanks(WinningLotto winningLotto, List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
+    public Map<WinningLottoRank, Integer> reportRanks(WinningLotto winningLotto, Lottos lottos) {
+        for (Lotto lotto : lottos.lottos()) {
             addRank(winningLotto.rank(lotto));
         }
         return Collections.unmodifiableMap(ranks);
@@ -29,7 +28,7 @@ public class WinningResult {
     }
 
     public double reportYield(PurchaseAmount purchaseAmount) {
-        int totalReward = 0;
+        long totalReward = 0;
         for (WinningLottoRank rank : ranks.keySet()) {
             totalReward += ranks.get(rank) * rank.getReward();
         }

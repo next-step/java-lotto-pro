@@ -139,7 +139,7 @@
 - Lotto 
   - [x] NPE 테스트 코드 추가
 - WinningResult
-  - [ ] int Overflow를 고려할 것
+  - [x] int Overflow를 고려할 것
 - LottoSeller
   - [x] `자동판매`와 `수동판매` 메소드를 분리해 볼 것(자동 + 수동 로직 고려)
 - 일급컬렉션 전체
