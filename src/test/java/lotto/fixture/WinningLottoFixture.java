@@ -6,13 +6,17 @@ import org.junit.jupiter.params.provider.Arguments;
 
 import java.util.stream.Stream;
 
-public class WinningNumberFixture {
-    public static WinningLotto winningNumber() {
+public class WinningLottoFixture {
+    public static WinningLotto winningLotto() {
         return new WinningLotto(new String[]{"1", "2", "3", "4", "5", "6"}, new BonusBall("7"));
     }
 
-    public static WinningLotto winningNumber_one() {
-        return new WinningLotto(new String[]{"4", "5", "6", "9", "10", "11"}, new BonusBall("7"));
+    public static WinningLotto five_match_and_bonus_ball_match() {
+        return new WinningLotto(new String[]{"1", "2", "3", "4", "5", "7"}, new BonusBall("6"));
+    }
+
+    public static WinningLotto five_match() {
+        return new WinningLotto(new String[]{"1", "2", "3", "4", "5", "7"}, new BonusBall("6"));
     }
 
     static Stream<Arguments> size() {
