@@ -6,17 +6,23 @@ import lotto.model.constants.LottoConstants;
 
 public class PurchaseInfo {
 
-    long purchaseAmount;
-    long purchaseCount;
+    private long purchaseAmount;
+    private long purchaseCount;
 
     public PurchaseInfo(long purchaseAmount) {
+        validatePositive(purchaseAmount);
         validatePurchaseAmount(purchaseAmount);
         this.purchaseAmount = purchaseAmount;
-        checkLottoUnitPrice(); // 개수 유효성 체크
+        checkLottoUnitPrice(); // 단가 유효성 체크
         checkChange(purchaseAmount); // 잔액 발생 확인
         //개수 계산
         this.purchaseCount = calculatePurchaseCount(purchaseAmount);
-        validatePositive(purchaseCount);
+    }
+
+    private void validatePositive(long purchaseAmount) {
+        if (purchaseAmount <= 0) {
+            throw new IllegalArgumentException(ErrorMessage.PURCHASE_AMOUNT_MUST_POSITIVE);
+        }
     }
 
     private void validatePurchaseAmount(long purchaseAmount) {
@@ -41,11 +47,6 @@ public class PurchaseInfo {
         return purchaseAmount / LottoConstants.LOTTO_UNIT_PRICE;
     }
 
-    private void validatePositive(long purchaseCount) {
-        if (purchaseCount <= 0) {
-            throw new IllegalArgumentException(ErrorMessage.PURCHASE_COUNT_MUST_POSITIVE);
-        }
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -56,12 +57,12 @@ public class PurchaseInfo {
             return false;
         }
         PurchaseInfo that = (PurchaseInfo) o;
-        return purchaseCount == that.purchaseCount;
+        return purchaseAmount == that.purchaseAmount && purchaseCount == that.purchaseCount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(purchaseCount);
+        return Objects.hash(purchaseAmount, purchaseCount);
     }
 
     public long getPurchaseAmount() {
