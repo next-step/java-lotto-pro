@@ -16,11 +16,11 @@ public class LottoMain {
         Lottos lottos = lottoMachine.purchaseLotto(lottoTicketCount);
         // 지난주 당첨번호 입력
         OutputView.outputPurchaseLottoList(lottos);
+
         // 당첨 비교
-        WinLotto winLotto = new WinLotto(InputView.inputWinLottoNumbers());
+        WinLotto winLotto = new WinLotto(InputView.inputWinLottoNumbers(), new LottoNumber(InputView.inputBonusNumber()));
         winLotto.findWinner(lottos);
         OutputView.outputReportStart();
-
         // 결과 출력
         lottoMain.getResultPrintMessage(winLotto, lottoTicketCount);
     }

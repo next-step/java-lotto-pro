@@ -5,24 +5,24 @@ import java.util.Map;
 
 public class WinReport {
     private static final int LOTTE_PRICE = 1000;
-    private static final int WIN_MIN_NUMBER = 3;
-    private static final int WIN_MAX_NUMBER = 6;
 
-    private final Map<Integer, Integer> result = new HashMap<>();
+    private final Map<PrizeMoney, Integer> result = new HashMap<>();
 
-    public void putLottoResult(int collectNumber) {
+    public void putLottoResult(PrizeMoney collectNumber) {
         result.put(collectNumber, getLottoResult(collectNumber) + 1);
     }
 
-    public int getLottoResult(int collectNumber) {
+    public int getLottoResult(PrizeMoney collectNumber) {
         return result.getOrDefault(collectNumber, 0);
     }
 
     public double calculateProfit(int lottoTicketCount) {
         double profit = 0;
-        for (int i = WIN_MIN_NUMBER; i < WIN_MAX_NUMBER; i++) {
-            profit += getLottoResult(i) * PrizeMoney.valueOf(i).prizeMoney();
+
+        for (PrizeMoney prizeMoney : result.keySet()) {
+            profit += prizeMoney.getPrizeMoney() * getLottoResult(prizeMoney);
         }
+
         return Math.floor(profit / (lottoTicketCount * LOTTE_PRICE) * 100) / 100;
     }
 

@@ -15,24 +15,24 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void isValidLottoNumbers(List<LottoNumber> lottoNumbers){
+    private void isValidLottoNumbers(List<LottoNumber> lottoNumbers) {
         isValidDuplicateLottoNumbers(lottoNumbers);
         isValidSizeNotEqualsLottoNumber(lottoNumbers);
     }
 
-    private void isValidDuplicateLottoNumbers(List<LottoNumber> lottoNumbers){
-        if(new HashSet<>(lottoNumbers).size() != lottoNumbers.size()){
+    private void isValidDuplicateLottoNumbers(List<LottoNumber> lottoNumbers) {
+        if (new HashSet<>(lottoNumbers).size() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또번호는 중복 발행 불가능 합니다");
         }
     }
 
-    private void isValidSizeNotEqualsLottoNumber(List<LottoNumber> lottoNumbers){
-        if(lottoNumbers.size() != LOTTO_SIZE){
+    private void isValidSizeNotEqualsLottoNumber(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또번호는 6개 입력 되어야 합니다.");
         }
     }
 
-    public List<LottoNumber> getLottoNumbers(){
+    public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
@@ -55,4 +55,5 @@ public class Lotto {
                 "lottoNumbers=" + lottoNumbers +
                 '}';
     }
+    
 }

@@ -7,7 +7,6 @@ public class StringAddCalculator {
     private static final String DEFALUT_DELIMETER = ",|:";
     private static final String CUSTOM_DELIMETER = "//(.)\n(.*)";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_DELIMETER);
-
     public static final int CUSTOM_PATTHERN_DELIMITER_INDEX = 1;
     public static final int CUSTOM_PATTERN_TEXT_INDEX = 2;
 

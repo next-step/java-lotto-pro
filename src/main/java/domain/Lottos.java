@@ -11,11 +11,11 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public void add(Lotto lotto){
+    public void add(Lotto lotto) {
         lottos.add(lotto);
     }
 
-    public List<Lotto> getLottos(){
+    public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
 
