@@ -27,4 +27,25 @@ public class Lotteries {
                 .map(lotto -> lotto.getLottoDto().getLotto())
                 .collect(Collectors.toList()),this);
     }
+
+
+    public LotteriesDto getLotteriesDto(int directBuyCount) {
+        return new LotteriesDto(lotteries.stream()
+                .map(lotto -> lotto.getLottoDto().getLotto())
+                .collect(Collectors.toList()),
+                this, directBuyCount, lotteries.size()-directBuyCount);
+    }
+
+    public Lotteries union(Lotteries lotteries) {
+        this.lotteries.addAll(lotteries.lotteries);
+        return new Lotteries(this.lotteries);
+    }
+
+    public void addLotto(Lotto lotto) {
+        this.lotteries.add(lotto);
+    }
+
+    public boolean isEqualSize(int directBuyCount) {
+        return directBuyCount == lotteries.size();
+    }
 }

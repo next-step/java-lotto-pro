@@ -7,7 +7,8 @@ import java.util.stream.Collectors;
 
 public class BonusNumber {
 
-    private static Map<LottoNumber,BonusNumber> bonusNumbers;
+    private static final Map<LottoNumber,BonusNumber> bonusNumbers;
+
     private LottoNumber lottoNumber;
 
     static {

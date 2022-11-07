@@ -18,7 +18,11 @@ public class BuyAmount {
     }
 
     public Lotteries getLotteries(LottoCreator lottoCreator) {
-        return lottoCreator.createLotteries(buyAmount/LOTTO_PRICE);
+        return getLotteries(lottoCreator, 0);
+    }
+
+    public Lotteries getLotteries(LottoCreator lottoCreator, int directLottoBuyCount) {
+        return lottoCreator.createLotteries(buyAmount/LOTTO_PRICE - directLottoBuyCount);
     }
 
     @Override
@@ -44,5 +48,12 @@ public class BuyAmount {
 
     public double getProfit(int winningPrice) {
         return (double)winningPrice/(double)buyAmount;
+    }
+
+    public boolean isValidDirectBuyCount(int directBuyCount) {
+        if(directBuyCount * LOTTO_PRICE > buyAmount) {
+            return false;
+        }
+        return true;
     }
 }

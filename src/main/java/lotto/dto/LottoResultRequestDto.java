@@ -4,12 +4,12 @@ public class LottoResultRequestDto {
 
     private LotteriesDto lotteriesDto;
     private WinningNumbersDto winningNumbers;
-    private String buyAmountUserInput;
+    private BuyAmountDto buyAmountDto;
 
-    public LottoResultRequestDto(LotteriesDto lotteriesDto, WinningNumbersDto winningNumbers, String buyAmountUserInput) {
+    public LottoResultRequestDto(LotteriesDto lotteriesDto, WinningNumbersDto winningNumbers, BuyAmountDto buyAmountDto) {
         this.lotteriesDto = lotteriesDto;
         this.winningNumbers = winningNumbers;
-        this.buyAmountUserInput = buyAmountUserInput;
+        this.buyAmountDto = buyAmountDto;
     }
 
     public LotteriesDto getLotteriesDto() {
@@ -20,8 +20,7 @@ public class LottoResultRequestDto {
         return winningNumbers;
     }
 
-
-    public String getBuyAmountUserInput() {
-        return buyAmountUserInput;
+    public BuyAmountDto getBuyAmountDto() {
+        return buyAmountDto;
     }
 }

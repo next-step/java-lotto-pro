@@ -11,6 +11,34 @@ import java.util.stream.Collectors;
 
 public class LottoController {
 
+    public BuyAmountDto getBuyAmount(String userInput) {
+        int buyAmount = readBuyAmount(userInput);
+        return new BuyAmountDto(buyAmount, new BuyAmount(buyAmount));
+    }
+
+    public BuyCountLottoDto getBuyCountLotto(String userInput, BuyAmountDto buyAmountDto) {
+        int directBuyCount = readDirectBuyCount(userInput);
+        BuyAmount buyAmount = buyAmountDto.getBuyAmountDomain();
+        return new BuyCountLottoDto(directBuyCount, buyAmount, new BuyCountLotto(directBuyCount, buyAmount));
+    }
+
+    public LotteriesDto initDirectLotteries(String userInput) {
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(readLottoNumbers(userInput));
+        return (new Lotteries(lottoList)).getLotteriesDto();
+    }
+
+    public LotteriesDto mergeLotteries(LotteriesDto lotteriesDto, String userInput) {
+        lotteriesDto.getLotteriesDomain().addLotto(readLottoNumbers(userInput));
+        return lotteriesDto;
+    }
+
+    public LotteriesDto buyLotto(BuyCountLottoDto buyCountLottoDto, LotteriesDto directLotteriesDto) {
+        return buyCountLottoDto.getBuyCountLotto()
+                .getLotteries(new AutoLottoCreator(), directLotteriesDto.getLotteriesDomain())
+                .getLotteriesDto(buyCountLottoDto.getDirectBuyCount());
+    }
+
     public LotteriesDto buyLotto(String userInput) {
         BuyAmount buyAmount = new BuyAmount(readBuyAmount(userInput));
         Lotteries lotteries = buyAmount.getLotteries(new AutoLottoCreator());
@@ -29,26 +57,32 @@ public class LottoController {
     public LottoResultDto lottoResult(LottoResultRequestDto lottoResultRequestDto) {
         return new LottoResult(lottoResultRequestDto.getLotteriesDto().getLotteriesDomain(),
                 lottoResultRequestDto.getWinningNumbers().getWinningNumbersDomain(),
-                new BuyAmount(readBuyAmount(lottoResultRequestDto.getBuyAmountUserInput())))
+                lottoResultRequestDto.getBuyAmountDto().getBuyAmountDomain())
                 .getLottoResultDto();
     }
 
 
     private int readBuyAmount(String userInput) {
         checkEmpty(userInput);
-        checkIntType(userInput);
+        checkPositiveInt(userInput);
+        return Integer.parseInt(userInput);
+    }
+
+    private int readDirectBuyCount(String userInput) {
+        checkEmpty(userInput);
+        checkPositiveInt(userInput);
         return Integer.parseInt(userInput);
     }
 
     private List<Integer> readWinningNumbers(String userInput) {
         checkEmpty(userInput);
         return splitStringByComma(userInput).stream()
-                .map(str -> checkStringNotEmptyTypeIntAndParsing(str))
+                .map(str -> checkStringNotEmptyPositiveIntAndParsing(str))
                 .collect(Collectors.toList());
     }
 
     private int readBonusNumber(String userInput) {
-        return checkStringNotEmptyTypeIntAndParsing(userInput);
+        return checkStringNotEmptyPositiveIntAndParsing(userInput);
     }
 
     private boolean isEmpty(String str) {
@@ -64,29 +98,44 @@ public class LottoController {
         }
     }
 
-    private boolean isIntType(String str) {
+    private boolean isPositiveInt(String str) {
         if(!str.trim().matches("\\d+")) {
             return true;
         }
         return false;
     }
 
-    private void checkIntType (String str) {
-        if(isIntType(str)) {
+    private void checkPositiveInt (String str) {
+        if(isPositiveInt(str)) {
             throw new IllegalArgumentException("자연수 형식이 아닙니다.");
         }
     }
 
-    private int checkStringNotEmptyTypeIntAndParsing(String str) {
+    private int checkStringNotEmptyPositiveIntAndParsing(String str) {
         checkEmpty(str);
-        checkIntType(str);
-        return Integer.parseInt(str);
+        checkPositiveInt(str);
+        return Integer.parseInt(str.trim());
     }
 
     private List<String> splitStringByComma(String userInput) {
         return Optional.ofNullable(userInput)
                 .map(str -> Arrays.asList(str.split(",")))
                 .orElse(new ArrayList<>());
+    }
+
+    private List<Lotto> readDirectLotteries(String userInput) {
+        checkEmpty(userInput);
+        return Arrays.asList(userInput.split("\n")).stream()
+                .map((lottoString) -> readLottoNumbers(lottoString))
+                .collect(Collectors.toList());
+    }
+
+
+    private Lotto readLottoNumbers(String userInput) {
+        checkEmpty(userInput);
+        return new Lotto(splitStringByComma(userInput).stream()
+                .map(str -> LottoNumber.of(checkStringNotEmptyPositiveIntAndParsing(str)))
+                .collect(Collectors.toList()));
     }
 
 }

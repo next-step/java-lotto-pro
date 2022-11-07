@@ -1,33 +1,48 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MatchBonus {
-    
-    private int countOfMatch;
-    private boolean bonus;
-    private static Map<Integer, MatchBonus> matchBonusTrues;
-    private static Map<Integer, MatchBonus> matchBonusFalses;
-    
-    static {
-        matchBonusTrues = new HashMap<>();
-        matchBonusFalses = new HashMap<>();
-        for (int countOfMatch = 0; countOfMatch <= 6; countOfMatch++) {
-            matchBonusTrues.put(countOfMatch, new MatchBonus(countOfMatch, true));
-            matchBonusFalses.put(countOfMatch, new MatchBonus(countOfMatch, false));    
+
+    static final MatchBonus MATCH_COUNT_MISS = new MatchBonus(0, false);
+    static final Map<Integer, MatchBonus> MATCH_COUNT_BY_MATCH_BONUS_FALSE = new HashMap<Integer, MatchBonus>() {
+        {
+            put(6, new MatchBonus(6, false));
+            put(5, new MatchBonus(5, false));
+            put(4, new MatchBonus(4, false));
+            put(3, new MatchBonus(3, false));
         }
-    }
-    
-    private MatchBonus(int countOfMatch, boolean bonus) {
+    };
+    static final Map<Integer, MatchBonus> MATCH_COUNT_BY_MATCH_BONUS_TRUE = new HashMap<Integer, MatchBonus>() {
+        {
+            put(5, new MatchBonus(5, true));
+        }
+    };
+
+    private final int countOfMatch;
+    private final boolean bonus;
+
+    MatchBonus(int countOfMatch, boolean bonus) {
         this.countOfMatch = countOfMatch;
         this.bonus = bonus;
     }
-    
-    public static MatchBonus of(int countOfMatch, boolean bonus) {
-        if(bonus) {
-            return matchBonusTrues.get(countOfMatch);
-        }
-        return matchBonusFalses.get(countOfMatch);
+
+    int getCountOfMatch() {
+        return countOfMatch;
     }
-    
+
+    static MatchBonus of(int countOfMatch, boolean bonus) {
+        if(!MATCH_COUNT_BY_MATCH_BONUS_TRUE.keySet().contains(countOfMatch) &&
+                !MATCH_COUNT_BY_MATCH_BONUS_FALSE.keySet().contains(countOfMatch)) {
+            return MATCH_COUNT_MISS;
+        }
+        if(!MATCH_COUNT_BY_MATCH_BONUS_TRUE.keySet().contains(countOfMatch)) {
+            bonus = false;
+        }
+        if(bonus) {
+            return MATCH_COUNT_BY_MATCH_BONUS_TRUE.get(countOfMatch);
+        }
+        return MATCH_COUNT_BY_MATCH_BONUS_FALSE.get(countOfMatch);
+    }
 }
