@@ -34,10 +34,11 @@ public class Lotto {
         }
     }
 
-    public Matches match(Lotto winningNumbers) {
+    public Matches match(Lotto winningNumbers, LottoNumber bonusNumber) {
         requireNotNull(winningNumbers, "당첨 번호는 null이 아니어야 합니다.");
+        requireNotNull(bonusNumber, "보너스 번호는 null이 아니어야 합니다.");
 
-        return Matches.of(countMatchedNumber(winningNumbers));
+        return Matches.of(countMatchedNumber(winningNumbers), contains(bonusNumber));
     }
 
     public List<Integer> toList() {
@@ -48,9 +49,13 @@ public class Lotto {
     }
 
     private long countMatchedNumber(Lotto winningNumbers) {
-        return winningNumbers.numbers.stream()
-                .filter(this.numbers::contains)
+        return this.numbers.stream()
+                .filter(winningNumbers::contains)
                 .count();
+    }
+
+    private boolean contains(LottoNumber number) {
+        return this.numbers.contains(number);
     }
 
     @Override

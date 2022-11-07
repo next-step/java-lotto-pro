@@ -13,6 +13,7 @@ import lotto.domain.lotto.Fixture;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Matches;
 import lotto.domain.lotto.Money;
+import lotto.domain.lotto.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -55,7 +56,7 @@ class MatchingResultTest {
     @DisplayName("당첨 번호는 null이 아니어야 한다.")
     @ParameterizedTest(name = ParameterizedTest.DISPLAY_NAME_PLACEHOLDER)
     @NullSource
-    void 당첨번호_null(final Lotto winningNumbers) {
+    void 당첨번호_null(final WinningNumbers winningNumbers) {
         final List<Lotto> lottos = Collections.singletonList(new Lotto(1, 2, 3, 4, 5, 6));
 
         assertThatIllegalArgumentException()
@@ -126,6 +127,7 @@ class MatchingResultTest {
         );
         final Map<Matches, Long> expected = new HashMap<Matches, Long>() {{
             put(Matches.SIX, 1L);
+            put(Matches.FIVE_WITH_BONUS, 0L);
             put(Matches.FIVE, 0L);
             put(Matches.FOUR, 0L);
             put(Matches.THREE, 0L);
