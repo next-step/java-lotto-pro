@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import lotto.strategy.LottoNumberStrategy;
 
@@ -8,7 +9,7 @@ public class BuyingLottoGroup {
     private List<Lotto> lottos;
 
     public static BuyingLottoGroup create(int count, LottoNumberStrategy lottoNumberStrategy) {
-        return create(count, lottoNumberStrategy, new ArrayList<>());
+        return create(count, lottoNumberStrategy, Collections.emptyList());
     }
 
     public static BuyingLottoGroup create(int count, LottoNumberStrategy lottoNumberStrategy, List<Lotto> manualLottos) {
