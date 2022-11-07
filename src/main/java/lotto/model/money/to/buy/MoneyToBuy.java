@@ -26,8 +26,7 @@ public class MoneyToBuy {
     }
 
     private boolean divisibleWithoutRemainder(int inputMoney) {
-        int moneyRemainderDiscarded = inputMoney / PRICE_OF_SINGLE_LOTTO_TICKET * PRICE_OF_SINGLE_LOTTO_TICKET;
-        return inputMoney == moneyRemainderDiscarded;
+        return inputMoney % PRICE_OF_SINGLE_LOTTO_TICKET == 0;
     }
 
     public double profitRatio(double sumOfPrizesFromLottoResult) {
