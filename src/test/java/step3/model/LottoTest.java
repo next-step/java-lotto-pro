@@ -83,7 +83,7 @@ class LottoTest {
     @CsvSource(value = {"1,10,20,32,42,45:6", "1,10,20,30,31,40:3", "2,3,4,5,6,7:0"}, delimiter = ':')
     @DisplayName("구매한 로또에서 당첨번호가 n 개 있으면 n 개를 리턴")
     void givenWinningLotto_whenGetMatchedCount_thenMatchedCount(String text, int expectedMatchedCount) {
-        Lotto winningLotto = new Lotto(generateNumbersByText(text));
-        assertThat(this.lotto.getMatchedCount(winningLotto)).isEqualTo(expectedMatchedCount);
+        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(generateNumbersByText(text));
+        assertThat(this.lotto.getMatchedCount(lottoWinningNumber)).isEqualTo(expectedMatchedCount);
     }
 }

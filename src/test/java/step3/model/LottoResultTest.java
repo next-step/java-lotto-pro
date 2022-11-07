@@ -8,6 +8,9 @@ import step3.service.LottoGenerator;
 import step3.service.LottoScoreType;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,10 +21,14 @@ class LottoResultTest {
 
     @BeforeEach
     private void setUp() {
-        this.lottoResult = new LottoResult(1, 2, 3, 4);
+        this.lottoResult = new LottoResult(List.of(
+                LottoScoreType.THREE,
+                LottoScoreType.FOUR, LottoScoreType.FOUR,
+                LottoScoreType.FIVE, LottoScoreType.FIVE, LottoScoreType.FIVE,
+                LottoScoreType.SIX, LottoScoreType.SIX, LottoScoreType.SIX, LottoScoreType.SIX));
         lottos = new Lottos();
-        lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottos.add(new Lotto(Arrays.asList(20, 30, 32, 40, 42, 43)));
+        lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
+        lottos.add(new Lotto(List.of(20, 30, 32, 40, 42, 43)));
     }
 
     @ParameterizedTest
@@ -48,7 +55,12 @@ class LottoResultTest {
     @DisplayName("money 에 따라 로또수익률을 확인할때 실수갑으로 리턴한다.")
     void whenGetProfitRate_thenRate(int money, int threeCount, int fourCount, int fiveCount, int sixCount,
             double expectedRate) {
-        LottoResult simpleLottoResult = new LottoResult(threeCount, fourCount, fiveCount, sixCount);
+        List<LottoScoreType> lottoScoreTypes = createLottoScoreType(LottoScoreType.THREE, threeCount);
+        lottoScoreTypes.addAll(createLottoScoreType(LottoScoreType.FOUR, fourCount));
+        lottoScoreTypes.addAll(createLottoScoreType(LottoScoreType.FIVE, fiveCount));
+        lottoScoreTypes.addAll(createLottoScoreType(LottoScoreType.SIX, sixCount));
+
+        LottoResult simpleLottoResult = new LottoResult(lottoScoreTypes);
 
         double rate = simpleLottoResult.getProfitRate(money);
 
@@ -60,8 +72,8 @@ class LottoResultTest {
     @DisplayName("구매한 n 개의 로또와 당첨번호 로또를 가지고 로또 결과를 리턴한다.")
     void givenWinningLotto_whenGenerateFromLottos_thenLottoResult(String lottoText, int expectedCount) {
         LottoGenerator lottoGenerator = new LottoGenerator();
-        Lotto winningLotto = lottoGenerator.generate(lottoText);
-        LottoResult lottoResult = LottoResult.generateFromLottos(lottos, winningLotto);
+        LottoWinningNumber lottoWinningNumber = lottoGenerator.generateLottoWinningNumber(lottoText);
+        LottoResult lottoResult = LottoResult.getLottoResultFromLotto(lottos, lottoWinningNumber);
         int matchedCount = lottoResult.getByLottoScoreType(LottoScoreType.THREE);
 
         assertThat(matchedCount).isEqualTo(expectedCount);
@@ -73,10 +85,16 @@ class LottoResultTest {
     void givenWinningLotto_whenGenerateFromLottos_thenLottoResult2(String lottoText, int expectedCount,
             int bonusNumber) {
         LottoGenerator lottoGenerator = new LottoGenerator();
-        Lotto winningLotto = lottoGenerator.generate(lottoText, bonusNumber);
-        LottoResult lottoResult = LottoResult.generateFromLottos(lottos, winningLotto);
+        LottoWinningNumber lottoWinningNumber = lottoGenerator.generateLottoWinningNumber(lottoText, bonusNumber);
+        LottoResult lottoResult = LottoResult.getLottoResultFromLotto(lottos, lottoWinningNumber);
         int matchedCount = lottoResult.getByLottoScoreType(LottoScoreType.FIVE_BONUS);
 
         assertThat(matchedCount).isEqualTo(expectedCount);
+    }
+
+    private List<LottoScoreType> createLottoScoreType(LottoScoreType lottoScoreType, int count) {
+        return IntStream.range(0, count)
+                .mapToObj(i -> lottoScoreType)
+                .collect(Collectors.toList());
     }
 }

@@ -2,6 +2,7 @@ package step3.service;
 
 import step3.model.LottoResult;
 import step3.model.Lotto;
+import step3.model.LottoWinningNumber;
 import step3.model.Lottos;
 
 public class LottoService {
@@ -21,13 +22,13 @@ public class LottoService {
         return lottoGenerator.generateByTimes(money / DEFAULT_TICKET_PRICE);
     }
 
-    public LottoResult getResultComparedToLuckyNumbers(String winningLottoText, Lottos lottos) {
-        Lotto winningLotto = this.lottoGenerator.generate(winningLottoText);
-        return LottoResult.generateFromLottos(lottos, winningLotto);
+    public LottoResult getResultComparedToWinningNumbers(String winningLottoText, Lottos lottos) {
+        LottoWinningNumber lottoWinning = this.lottoGenerator.generateLottoWinningNumber(winningLottoText);
+        return LottoResult.getLottoResultFromLotto(lottos, lottoWinning);
     }
 
-    public LottoResult getResultComparedToLuckyNumbers(String winningLottoText, int bonus, Lottos lottos) {
-        Lotto winningLotto = this.lottoGenerator.generate(winningLottoText, bonus);
-        return LottoResult.generateFromLottos(lottos, winningLotto);
+    public LottoResult getResultComparedToWinningNumbers(String winningLottoText, int bonus, Lottos lottos) {
+        LottoWinningNumber lottoWinning = this.lottoGenerator.generateLottoWinningNumber(winningLottoText, bonus);
+        return LottoResult.getLottoResultFromLotto(lottos, lottoWinning);
     }
 }

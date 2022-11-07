@@ -1,29 +1,34 @@
 package step3.model;
 
-import step3.constant.StringConstant;
 import step3.service.LottoGenerator;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-public class Lotto {
-    private List<Integer> lotto;
+/**
+ * 로또 당첨 번호
+ */
+public class LottoWinningNumber {
 
-    public Lotto(List<Integer> lotto) {
-        validateWinningNumbers(lotto);
+    private final List<Integer> winningNumbers;
+    private int bonusNumber;
 
-        this.lotto = generateLotto(lotto);
+    public LottoWinningNumber(List<Integer> winningNumbers) {
+        validateWinningNumbers(winningNumbers);
+        this.winningNumbers = winningNumbers;
     }
 
-    private List<Integer> generateLotto(List<Integer> lottoNumbers) {
-        List<Integer> lotto = new ArrayList<>();
-        for (Integer number : lottoNumbers) {
-            lotto.add(number);
+    public LottoWinningNumber(List<Integer> winningNumbers, int bonusNumber) {
+        this(winningNumbers);
+        this.bonusNumber = bonusNumber;
+        validateUniqueBonus(winningNumbers, bonusNumber);
+    }
+
+    private void validateUniqueBonus(List<Integer> winningNumbers, int bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new RuntimeException("번호가 동일한게 존재합니다.");
         }
-
-        Collections.sort(lotto);
-
-        return lotto;
     }
 
     private void validateWinningNumbers(List<Integer> winningNumbers) {
@@ -69,39 +74,11 @@ public class Lotto {
         return uniqueNumbers.size() != winningNumbers.size();
     }
 
-    public boolean contains(int number) {
-        return this.lotto.contains(number);
+    public boolean containWinningNumber(int lottoNumber) {
+        return winningNumbers.contains(lottoNumber);
     }
 
-    @Override
-    public String toString() {
-        return lotto.stream()
-                .map(Object::toString)
-                .collect(Collectors.joining(StringConstant.COMMA));
-    }
-
-    public int getMatchedCount(LottoWinningNumber lottoWinning) {
-        int count = 0;
-        for (int lottoNumber : this.lotto) {
-            count = getCount(count, lottoWinning.containWinningNumber(lottoNumber));
-        }
-
-        return count;
-    }
-
-    private int getCount(int count, boolean isContain) {
-        if (isContain) {
-            count++;
-        }
-
-        return count;
-    }
-
-    public boolean isMatchedBonus(LottoWinningNumber winningLotto) {
-        boolean isMatched = false;
-        for (int lottoNumber : lotto) {
-            isMatched = isMatched || winningLotto.isMatchedBonusNumber(lottoNumber);
-        }
-        return isMatched;
+    public boolean isMatchedBonusNumber(int lottoNumber) {
+        return lottoNumber == bonusNumber;
     }
 }

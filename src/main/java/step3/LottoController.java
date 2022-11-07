@@ -18,15 +18,11 @@ public class LottoController {
 
         inputView.printLottos(lottos);
 
-        String luckyNumberText = inputView.readyLuckyLotto();
+        String winningNumberText = inputView.readyWinningLotto();
         int bonus = inputView.readyBonus();
-        LottoResult lottoResults = lottoService.getResultComparedToLuckyNumbers(luckyNumberText, bonus, lottos);
+        LottoResult lottoResults = lottoService.getResultComparedToWinningNumbers(winningNumberText, bonus, lottos);
 
         printResult(money, lottoResults);
-    }
-
-    public static void main(String[] args) {
-        new LottoController().gameStart();
     }
 
     private void printResult(int money, LottoResult lottoResult) {

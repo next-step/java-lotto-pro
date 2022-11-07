@@ -2,14 +2,14 @@ package step3.service;
 
 import step3.constant.StringConstant;
 import step3.model.Lotto;
-import step3.model.LottoBonus;
+import step3.model.LottoWinningNumber;
 import step3.model.Lottos;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoGenerator {
     private static final int LOTTO_START_INDEX = 0;
@@ -40,14 +40,14 @@ public class LottoGenerator {
         return new Lotto(numbers.subList(LOTTO_START_INDEX, LOTTO_END_INDEX));
     }
 
-    public Lotto generate(String lottoNumberText) {
-        return new Lotto(Arrays.stream(lottoNumberText.split(StringConstant.COMMA))
+    public LottoWinningNumber generateLottoWinningNumber(String lottoNumberText) {
+        return new LottoWinningNumber(Stream.of(lottoNumberText.split(StringConstant.COMMA))
                 .map(this::convertInteger)
                 .collect(Collectors.toList()));
     }
 
-    public LottoBonus generate(String lottoNumberText, int bonus) {
-        return new LottoBonus(Arrays.stream(lottoNumberText.split(StringConstant.COMMA))
+    public LottoWinningNumber generateLottoWinningNumber(String lottoNumberText, int bonus) {
+        return new LottoWinningNumber(Stream.of(lottoNumberText.split(StringConstant.COMMA))
                 .map(this::convertInteger)
                 .collect(Collectors.toList()), bonus);
     }

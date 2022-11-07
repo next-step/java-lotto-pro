@@ -2,62 +2,37 @@ package step3.model;
 
 import step3.service.LottoScoreType;
 
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
+
 public class LottoResult {
     private static final double TWO_POINT_POSITION = 100;
 
-    protected int threeMatchedCount;
-    protected int fourMatchedCount;
-    protected int fiveMatchedCount;
-    protected int fiveBonusMatchedCount;
-    protected int sixMatchedCount;
+    protected Map<LottoScoreType, Integer> winningMap = new EnumMap<>(LottoScoreType.class);
 
     public LottoResult() {
+        Stream.of(LottoScoreType.values())
+                .forEach(type -> winningMap.put(type, 0));
     }
 
-    public LottoResult(int threeMatchedCount, int fourMatchedCount, int fiveMatchedCount, int sixMatchedCount) {
-        this.threeMatchedCount = threeMatchedCount;
-        this.fourMatchedCount = fourMatchedCount;
-        this.fiveMatchedCount = fiveMatchedCount;
-        this.sixMatchedCount = sixMatchedCount;
+    public LottoResult(List<LottoScoreType> lottoWinningScoreTypeList) {
+        this();
+        for (LottoScoreType lottoScoreType : lottoWinningScoreTypeList) {
+            winningMap.put(lottoScoreType, winningMap.get(lottoScoreType) + 1);
+        }
     }
 
-    public static LottoResult generateFromLottos(Lottos lottos, Lotto winningLotto) {
-        LottoResult lottoResult = new LottoResult();
-        lottos.stream().forEach(lotto -> {
-            int matchedCount = winningLotto.getMatchedCount(lotto);
-            boolean matchedBonus = winningLotto.isMatchedBonus(lotto);
-            lottoResult.addByLottoScoreType(LottoScoreType.getByScore(matchedCount, matchedBonus));
-        });
-
-        return lottoResult;
+    public static LottoResult getLottoResultFromLotto(Lottos lottos, LottoWinningNumber winningLotto) {
+        return new LottoResult(lottos.confirmLottoWinningNumber(winningLotto));
     }
 
     public int getByLottoScoreType(LottoScoreType scoreType) {
         if (scoreType == null) {
             return 0;
         }
-
-        if (LottoScoreType.THREE.equals(scoreType)) {
-            return threeMatchedCount;
-        }
-
-        if (LottoScoreType.FOUR.equals(scoreType)) {
-            return fourMatchedCount;
-        }
-
-        if (LottoScoreType.FIVE.equals(scoreType)) {
-            return fiveMatchedCount;
-        }
-
-        if (LottoScoreType.FIVE_BONUS.equals(scoreType)) {
-            return fiveBonusMatchedCount;
-        }
-
-        if (LottoScoreType.SIX.equals(scoreType)) {
-            return sixMatchedCount;
-        }
-
-        return 0;
+        return winningMap.get(scoreType);
     }
 
     public void addByLottoScoreType(LottoScoreType scoreType) {
@@ -65,25 +40,7 @@ public class LottoResult {
             return;
         }
 
-        if (LottoScoreType.THREE.equals(scoreType)) {
-            this.threeMatchedCount++;
-        }
-
-        if (LottoScoreType.FOUR.equals(scoreType)) {
-            this.fourMatchedCount++;
-        }
-
-        if (LottoScoreType.FIVE.equals(scoreType)) {
-            this.fiveMatchedCount++;
-        }
-
-        if (LottoScoreType.FIVE_BONUS.equals(scoreType)) {
-            this.fiveBonusMatchedCount++;
-        }
-
-        if (LottoScoreType.SIX.equals(scoreType)) {
-            this.sixMatchedCount++;
-        }
+        winningMap.put(scoreType, winningMap.get(scoreType) + 1);
     }
 
     public double getProfitRate(int money) {

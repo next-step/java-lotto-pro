@@ -28,7 +28,7 @@ public class InputView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public String readyLuckyLotto() {
+    public String readyWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return this.scanner.next() + this.scanner.nextLine();
     }
