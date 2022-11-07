@@ -1,7 +1,10 @@
 package lotto;
 
 import lotto.configuration.AppConfig;
-import lotto.domain.*;
+import lotto.domain.LottoSeller;
+import lotto.domain.Lottos;
+import lotto.domain.PurchaseAmount;
+import lotto.domain.WinningLotto;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
