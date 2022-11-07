@@ -6,15 +6,15 @@ import static lotto.view.OutputView.*;
 
 import lotto.domain.*;
 import lotto.service.LottoService;
-import lotto.strategy.AutoLottoNumberStrategy;
-import lotto.strategy.ConsoleLottoNumberStrategy;
-import lotto.strategy.LottoNumberStrategy;
+import lotto.strategy.AutoLottoGenerateStrategy;
+import lotto.strategy.ConsoleLottoGenerateStrategy;
+import lotto.strategy.LottoGenerateStrategy;
 
 public class LottoMain {
     public static void main(String[] args) {
 
-        LottoNumberStrategy buyingLottoStrategy = new AutoLottoNumberStrategy();
-        LottoNumberStrategy winningLottoStrategy = new ConsoleLottoNumberStrategy();
+        LottoGenerateStrategy buyingLottoStrategy = new AutoLottoGenerateStrategy();
+        LottoGenerateStrategy winningLottoStrategy = new ConsoleLottoGenerateStrategy();
 
         LottoService lottoService = new LottoService(buyingLottoStrategy, winningLottoStrategy);
         LottoPayment lottoPayment = lottoService.buyLotto(payLotto());

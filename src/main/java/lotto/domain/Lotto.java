@@ -12,6 +12,7 @@ public class Lotto {
     private List<LottoNumber> numbers;
     private Lotto(){}
     public static Lotto create(List<Integer> numbers) {
+        validateCount(numbers);
         validateDuplicateLottoNumber(numbers);
         Lotto lotto = new Lotto();
         lotto.numbers = numbers.stream()
@@ -26,6 +27,12 @@ public class Lotto {
         Set<Integer> convertedNumbers = new HashSet<>(numbers);
         if(convertedNumbers.size() != numbers.size()){
             throw new IllegalArgumentException("로또 번호 내 중복된 번호가 존재합니다.");
+        }
+    }
+
+    private static void validateCount(List<Integer> numbers){
+        if(numbers.size() != NUMBER_COUNT){
+            throw new IllegalArgumentException("입력받은 숫자는 6개여야 합니다.");
         }
     }
 

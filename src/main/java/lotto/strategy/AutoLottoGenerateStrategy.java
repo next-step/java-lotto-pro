@@ -1,17 +1,18 @@
 package lotto.strategy;
 
+import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
 import static java.util.Collections.*;
 import static lotto.domain.Lotto.*;
 
-public class AutoLottoNumberStrategy implements LottoNumberStrategy{
+public class AutoLottoGenerateStrategy implements LottoGenerateStrategy{
     @Override
-    public List<Integer> generateNumbers() {
-
+    public Lotto generateLotto() {
         List<Integer> numbers = LottoNumber.CACHE;
         shuffle(numbers);
-        return numbers.subList(0, NUMBER_COUNT);
+        return Lotto.create(new ArrayList<>(numbers.subList(0, NUMBER_COUNT)));
     }
 }

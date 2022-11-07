@@ -14,23 +14,23 @@ import lotto.domain.LottoPayment;
 import lotto.domain.LottoResult;
 import lotto.domain.ManualLottoCount;
 import lotto.domain.WinningLotto;
-import lotto.strategy.ConsoleLottoNumberStrategy;
-import lotto.strategy.LottoNumberStrategy;
+import lotto.strategy.ConsoleLottoGenerateStrategy;
+import lotto.strategy.LottoGenerateStrategy;
 
 public class LottoService {
 
     private Logger log = LoggerFactory.getLogger(LottoService.class);
-    private LottoNumberStrategy buyingLottoNumberStrategy;
-    private LottoNumberStrategy winningLottoNumberStrategy;
+    private LottoGenerateStrategy buyingLottoGenerateStrategy;
+    private LottoGenerateStrategy winningLottoGenerateStrategy;
 
 
-    public LottoService(LottoNumberStrategy buyingLottoNumberStrategy, LottoNumberStrategy winningLottoNumberStrategy) {
-        this.buyingLottoNumberStrategy = buyingLottoNumberStrategy;
-        this.winningLottoNumberStrategy = winningLottoNumberStrategy;
+    public LottoService(LottoGenerateStrategy buyingLottoGenerateStrategy, LottoGenerateStrategy winningLottoGenerateStrategy) {
+        this.buyingLottoGenerateStrategy = buyingLottoGenerateStrategy;
+        this.winningLottoGenerateStrategy = winningLottoGenerateStrategy;
     }
 
     public Lotto generateWinningBasicLotto() {
-        return Lotto.create(winningLottoNumberStrategy.generateNumbers());
+        return winningLottoGenerateStrategy.generateLotto();
     }
 
     public ManualLottoCount generateManualLottoCount(LottoPayment lottoPayment){
@@ -49,13 +49,13 @@ public class LottoService {
     public List<Lotto> generateManualLotto(int manualLottoCount){
         List<Lotto> lottoList = new ArrayList<>();
         for(int i=0; i < manualLottoCount; i++){
-            lottoList.add(Lotto.create(new ConsoleLottoNumberStrategy().generateNumbers()));
+            lottoList.add(new ConsoleLottoGenerateStrategy().generateLotto());
         }
         return lottoList;
     }
 
     public BuyingLottoGroup generateBuyingLottoGroup(int buyLottoCount, int manualLottoCount) {
-        return BuyingLottoGroup.create(buyLottoCount-manualLottoCount, this.buyingLottoNumberStrategy, generateManualLotto(manualLottoCount));
+        return BuyingLottoGroup.create(buyLottoCount-manualLottoCount, this.buyingLottoGenerateStrategy, generateManualLotto(manualLottoCount));
     }
 
     public LottoNumber generateWinningBonusNumber() {
