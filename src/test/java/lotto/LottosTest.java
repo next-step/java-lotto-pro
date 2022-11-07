@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class PurchaseLottoTest {
+public class LottosTest {
     private final List<Lotto> fakePurchaseLottoNumbers = new ArrayList<>();
     private final List<Lotto> fakePurchaseLotto2 = new ArrayList<>();
 
