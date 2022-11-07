@@ -5,26 +5,32 @@
  */
 package lotto;
 
-import java.util.List;
-
 public class LottoGameMain {
     private static final InputView inputView = new InputView();
     private static final ResultView resultView = new ResultView();
 
     public static void main(String[] args) {
-        int payMoney = inputView.inputPay();
-        LottoGame lottoGame = new LottoGame(payMoney, new AutoLottoNumberGenerator());
+        LottoGame lottoGame = new LottoGame(inputView.inputPay());
 
-        int purchaseCount = lottoGame.getPurchaseCount();
-        resultView.printResultPay(purchaseCount);
+        Quantity manualQuantity = Quantity.from(inputView.inputManualPurchase());
+        lottoGame.isPurchase(manualQuantity);
 
-        List<LottoNumbers> lottoNumbers = lottoGame.purchaseLotto(purchaseCount);
-        resultView.printResultPurchase(lottoNumbers);
+        inputView.printInputManualLottoNumber();
+        Lottos lottos = new Lottos(
+                lottoGame.purchaseLotto(manualQuantity, inputView::inputManualLottoNumber));
 
-        List<LottoNumber> winningNumbers = inputView.inputWinningNumberLastWeek();
-        Statistic statistic = new Statistic(new LottoNumbers(winningNumbers));
-        statistic.countPrize(lottoNumbers, inputView.inputBonusNumberLastWeek(winningNumbers));
+        Quantity autoQuantity = Quantity.from(lottoGame.getPurchase());
+        resultView.printResultPay(autoQuantity, manualQuantity);
 
-        resultView.printResultWinningStatistics(payMoney, statistic);
+        lottos.addLottoNumbers(lottoGame.purchaseLotto(autoQuantity));
+        resultView.printResultPurchase(lottos);
+
+        Lotto winningNumbers = inputView.inputWinningNumberLastWeek();
+        LottoNumber bonus = inputView.inputBonusNumberLastWeek();
+        winningNumbers.isContainsBonus(bonus);
+
+        Statistic statistic = new Statistic(winningNumbers, bonus);
+        statistic.countPrize(lottos);
+        resultView.printResultWinningStatistics(lottoGame.getAmount(), statistic);
     }
 }

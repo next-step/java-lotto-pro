@@ -63,7 +63,6 @@
   * 맞춘 개수, 보상 금액
 
 * * *
-
 ## 로또(2등)
 ### 기능 목록
 * 4단계 미션 문서에 enum Rank 소스에 따라 Prize 소스 수정
@@ -86,3 +85,33 @@
   * 지난주 당첨 번호에 입력했던 번호 입력 불가
     * "입력하신 보너스 번호는 지난주 당첨 번호에 이미 있는 번호입니다." 추가 
     * IllegalArgumentException
+
+* * *
+## 로또(수동)
+### 기능 목록
+* 정적 팩토리 메소드 적용
+  * LottoNumber
+* 인스턴스 캐싱 적용
+  * LottoNumber
+* 일급 컬렉션
+  * List\<LottoNumbers\> -> PurchaseLottoNumbers
+  * totalMoney, balance -> Amount
+  * purchaseQuantity -> Quantity
+* 클래스 이름 변경
+  * PurchaseLottoNumbers -> Lottos
+  * LottoNumbers -> Lotto
+* Constant
+  * "\수동으로 %d장, 자동으로 %d개를 구매했습니다.\n" 추가
+  * "총 수익률은 %.2f입니다.\n"로 변경
+* LottoGame
+  * 입력받은 금액과 비교해서 입력한 수 만큼 구매할 수 있는지 유효성 검사
+* View
+  * InputView
+    * "\n수동으로 구매할 로또 수를 입력해주세요." 추가 
+    * "\n수동으로 구매할 번호를 입력해주세요." 추가
+* Validate
+  * 메소드 이름을 유효성 검사 대상을 유추하기 쉽게 변경
+  * 수동으로 구매할 로또의 금액이 가지고 있는 금액보다 크면 예외 처리
+* LottoNumberGenerator
+  * 인터페이스 -> 클래스로 수정
+  * InputView 수동 번호 입력 기능을 호출하여 수동으로 로또 번호를 생성하는 기능

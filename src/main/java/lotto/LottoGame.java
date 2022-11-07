@@ -5,28 +5,52 @@
  */
 package lotto;
 
-import static lotto.Constant.LOTTO_PRICE;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class LottoGame {
-    private final LottoNumberGenerator lottoNumberGenerator;
-    private final int money;
+    private static final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
 
-    public LottoGame(int money, LottoNumberGenerator lottoNumberGenerator) {
-        this.money = money;
-        this.lottoNumberGenerator = lottoNumberGenerator;
+    private final Amount amount;
+
+    public LottoGame(String payment) {
+        Validate.isEmpty(payment);
+        Validate.isNumber(payment);
+        Validate.isPurchasable(payment);
+        this.amount = new Amount(Integer.parseInt(payment));
     }
 
-    public int getPurchaseCount() {
-        return money / LOTTO_PRICE;
+    public int getAmount() {
+        return amount.getAmount();
     }
 
-    public List<LottoNumbers> purchaseLotto(int purchaseCount) {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < purchaseCount; i++) {
-            lottoNumbers.add(new LottoNumbers(lottoNumberGenerator.generateSixNumbers()));
+    public int getPurchase() {
+        return amount.getPurchase();
+    }
+
+    public void purchase(Quantity quantity) {
+        amount.purchase(quantity);
+    }
+
+    public void isPurchase(Quantity quantity) {
+        amount.isPurchase(quantity);
+    }
+
+    public List<Lotto> purchaseLotto(Quantity quantity) {
+        purchase(quantity);
+        List<Lotto> lottoNumbers = new ArrayList<>();
+        for (int i = 0; i < quantity.getQuantity(); i++) {
+            lottoNumbers.add(lottoNumberGenerator.autoGenerateNumbers());
+        }
+        return lottoNumbers;
+    }
+
+    public List<Lotto> purchaseLotto(Quantity quantity, Supplier<Lotto> supplier) {
+        purchase(quantity);
+        List<Lotto> lottoNumbers = new ArrayList<>();
+        for (int i = 0; i < quantity.getQuantity(); i++) {
+            lottoNumbers.add(lottoNumberGenerator.manualGenerateNumbers(supplier));
         }
         return lottoNumbers;
     }

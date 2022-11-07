@@ -1,12 +1,32 @@
-/*
- * LottoNumberGenerator.java
- * v0.1
- * 2022.10.30
- */
 package lotto;
 
-import java.util.List;
+import static lotto.Constant.LOTTO_END_NUMBER;
+import static lotto.Constant.LOTTO_NUMBER_SIZE;
+import static lotto.Constant.LOTTO_START_NUMBER;
 
-public interface LottoNumberGenerator {
-    List<LottoNumber> generateSixNumbers();
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+
+public class LottoNumberGenerator {
+    private static final List<Integer> lottoNumberKeys = new ArrayList<>();
+
+    static {
+        for (int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
+            lottoNumberKeys.add(number);
+        }
+    }
+
+    public Lotto autoGenerateNumbers() {
+        Collections.shuffle(lottoNumberKeys);
+        return Lotto.from(lottoNumberKeys.stream()
+                .limit(LOTTO_NUMBER_SIZE)
+                .collect(Collectors.toList()));
+    }
+
+    public Lotto manualGenerateNumbers(Supplier<Lotto> supplier) {
+        return supplier.get();
+    }
 }

@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 public class Spliter {
-    public List<LottoNumber> split(String input) {
+    public List<Integer> splitToList(String input) {
+        List<Integer> lottoNumbers = new ArrayList<>();
         StringTokenizer token = new StringTokenizer(input, DELIMITER);
-        List<LottoNumber> winningNumbers = new ArrayList<>();
         while (token.hasMoreTokens()) {
-            winningNumbers.add(new LottoNumber(Integer.parseInt(token.nextToken())));
+            lottoNumbers.add(Integer.parseInt(token.nextToken()));
         }
-        return winningNumbers;
+        return lottoNumbers;
     }
 }
