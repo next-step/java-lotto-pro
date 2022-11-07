@@ -4,6 +4,7 @@ import lotto.fixture.WinningLottoFixture;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Collections;
 
@@ -36,11 +37,11 @@ class LottosTest {
         assertThat(lottos().matchLottoCount(count, Collections.singletonList(true), WinningLottoFixture.five_match())).isEqualTo(expected);
     }
 
-//    @DisplayName("수익률 계산")
-//    @ParameterizedTest
-//    @ValueSource(ints = {5})
-//    void returnRate(double expected) {
-//        assertThat(new Statistics(lottos(), winningLotto_one()).returnRate()).isEqualTo(expected);
-//    }
-//
+    @DisplayName("수익률 계산")
+    @ParameterizedTest
+    @ValueSource(ints = {30000})
+    void returnRate(double expected) {
+        assertThat(lottos().returnRate(WinningLottoFixture.five_match())).isEqualTo(expected);
+    }
+
 }
