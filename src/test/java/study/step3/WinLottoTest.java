@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +40,8 @@ class WinLottoTest {
 
         lottos.add(lotto);
 
-        winReport = winLotto.findWinner(lottos);
+        winReport = new WinReport();
+        winReport.findWinner(winLotto, lottos);
 
         assertThat(winReport.getLottoResult(PrizeMoney.valueOf(collectNumber,false))).isEqualTo(1);
     }
