@@ -18,17 +18,15 @@ public class Lottos {
         return false;
     }
 
-    public void print() {
-        for (Lotto lotto : this.lottos) {
-            lotto.print();
-        }
-    }
-
     public MatchCounts compareWinLotto(WinLotto winLotto) {
         MatchCounts matchCounts = new MatchCounts();
         for (Lotto lotto : this.lottos) {
             matchCounts.addMatchCount(winLotto.compareWithLotto(lotto));
         }
         return matchCounts;
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }

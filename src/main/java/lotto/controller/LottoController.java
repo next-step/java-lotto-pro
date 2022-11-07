@@ -50,7 +50,7 @@ public class LottoController {
      */
     private Lottos generateLotto(PurchaseInfo purchaseInfo) {
         Lottos lottos = lottoService.generateAutoLotto(purchaseInfo);
-        resultView.printLotto(lottos);
+        resultView.printLottos(lottos);
         return lottos;
     }
 

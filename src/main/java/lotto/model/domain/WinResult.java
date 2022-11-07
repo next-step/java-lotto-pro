@@ -21,13 +21,7 @@ public class WinResult {
         return winAmount;
     }
 
-    public void print() {
-        List<WinCriterion> keySet = new ArrayList<>(winResult.keySet());
-        Collections.sort(keySet);
-        for (WinCriterion key : keySet) {
-            key.print();
-            System.out.println("- " + winResult.get(key) + "개");
-        }
+    public Map<WinCriterion, Integer> getWinResult() {
+        return winResult;
     }
-
 }

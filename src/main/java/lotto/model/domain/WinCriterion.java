@@ -49,8 +49,12 @@ public class WinCriterion implements Comparable<WinCriterion> {
         return this.prize * count;
     }
 
-    public void print() {
-        System.out.print(matchCount + "개 일치 (" + prize + "원)");
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public long getPrize() {
+        return prize;
     }
 
     @Override

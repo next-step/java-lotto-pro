@@ -64,14 +64,8 @@ public class Lotto {
         Collections.sort(this.lotto);
     }
 
-    public void print() {
-        System.out.print(LottoConstants.LOTTO_PRINT_START);
-        StringJoiner sj = new StringJoiner(LottoConstants.LOTTO_PRINT_DELIMITER);
-        for (LottoNumber lottoNumber : lotto) {
-            sj.add(lottoNumber.getLottoNumber() + "");
-        }
-        System.out.print(sj);
-        System.out.println(LottoConstants.LOTTO_PRINT_END);
+    public List<LottoNumber> getLotto() {
+        return lotto;
     }
 
     @Override
