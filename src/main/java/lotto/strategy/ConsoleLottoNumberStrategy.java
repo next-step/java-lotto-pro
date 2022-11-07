@@ -1,5 +1,7 @@
 package lotto.strategy;
 
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +15,7 @@ import static lotto.io.InputUtils.*;
 
 public class ConsoleLottoNumberStrategy implements LottoNumberStrategy{
 
+    private Logger log = LoggerFactory.getLogger(ConsoleLottoNumberStrategy.class);
     public static final String ONLY_NUMBER_REGEX = "^\\d*$";
 
     @Override
@@ -40,7 +43,7 @@ public class ConsoleLottoNumberStrategy implements LottoNumberStrategy{
             validateCount(numberStrings);
             validateDuplicateNumber(numberStrings);
         }catch(IllegalArgumentException e){
-            System.err.println("[ERROR] 입력에 오류가 있습니다. 다시 입력해주세요.");
+            log.error("[ERROR] 입력에 오류가 있습니다. 다시 입력해주세요.");
             return false;
         }
         return true;

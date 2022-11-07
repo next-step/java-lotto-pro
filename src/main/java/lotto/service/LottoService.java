@@ -3,6 +3,8 @@ package lotto.service;
 import static lotto.view.InputView.buyManualLotto;
 import static lotto.view.InputView.inputBonusNumber;
 
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.BuyingLottoGroup;
@@ -17,6 +19,7 @@ import lotto.strategy.LottoNumberStrategy;
 
 public class LottoService {
 
+    private Logger log = LoggerFactory.getLogger(LottoService.class);
     private LottoNumberStrategy buyingLottoNumberStrategy;
     private LottoNumberStrategy winningLottoNumberStrategy;
 
@@ -34,7 +37,7 @@ public class LottoService {
         try{
             return ManualLottoCount.create(buyManualLotto(), lottoPayment.getLottoCount());
         }catch(IllegalArgumentException e){
-            System.err.println("[ERROR] "+e.getLocalizedMessage());
+            log.error("[ERROR] " + e.getLocalizedMessage());
             return generateManualLottoCount(lottoPayment);
         }
     }
@@ -59,7 +62,7 @@ public class LottoService {
         try{
             return LottoNumber.create(Integer.parseInt(inputBonusNumber()));
         }catch(IllegalArgumentException e){
-            System.err.println("[ERROR] " + e.getLocalizedMessage());
+            log.error("[ERROR] " + e.getLocalizedMessage());
             return generateWinningBonusNumber();
         }
     }
