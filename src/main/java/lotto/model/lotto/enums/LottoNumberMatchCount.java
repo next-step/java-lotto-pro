@@ -3,8 +3,8 @@ package lotto.model.lotto.enums;
 public enum LottoNumberMatchCount {
     THREE(3),
     FOUR(4),
-    FIVE(4),
-    SIX(4);
+    FIVE(5),
+    SIX(6);
 
     private final int value;
 
