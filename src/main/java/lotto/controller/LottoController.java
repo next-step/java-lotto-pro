@@ -2,11 +2,11 @@ package lotto.controller;
 
 import lotto.model.dto.LottoResult;
 import lotto.model.dto.PurchaseAmount;
-import lotto.model.vo.Lottos;
-import lotto.model.vo.Profit;
-import lotto.model.vo.PurchaseInfo;
-import lotto.model.vo.WinLotto;
-import lotto.model.vo.WinResult;
+import lotto.model.domain.Lottos;
+import lotto.model.domain.Profit;
+import lotto.model.domain.PurchaseInfo;
+import lotto.model.domain.WinLotto;
+import lotto.model.domain.WinResult;
 import lotto.service.LottoServiceImpl;
 import lotto.view.InputView;
 import lotto.view.ResultView;

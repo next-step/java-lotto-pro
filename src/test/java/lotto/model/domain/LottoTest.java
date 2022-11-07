@@ -1,4 +1,4 @@
-package lotto.model.vo;
+package lotto.model.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;

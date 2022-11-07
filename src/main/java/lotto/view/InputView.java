@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.model.dto.PurchaseAmount;
-import lotto.model.vo.WinLotto;
+import lotto.model.domain.WinLotto;
 import utils.InputConsole;
 
 public class InputView {

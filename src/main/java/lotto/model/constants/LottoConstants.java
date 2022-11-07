@@ -2,8 +2,8 @@ package lotto.model.constants;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.model.vo.WinCriteria;
-import lotto.model.vo.WinCriterion;
+import lotto.model.domain.WinCriteria;
+import lotto.model.domain.WinCriterion;
 
 public class LottoConstants {
 

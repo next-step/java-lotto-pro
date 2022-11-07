@@ -1,4 +1,4 @@
-package lotto.model.vo;
+package lotto.model.domain;
 
 import java.util.Objects;
 import lotto.model.constants.ErrorMessage;
