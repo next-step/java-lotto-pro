@@ -4,7 +4,7 @@ import lotto.model.dto.LottoResult;
 import lotto.model.dto.PurchaseAmount;
 import lotto.model.vo.Lottos;
 import lotto.model.vo.Profit;
-import lotto.model.vo.PurchaseCount;
+import lotto.model.vo.PurchaseInfo;
 import lotto.model.vo.WinLotto;
 import lotto.model.vo.WinResult;
 import lotto.service.LottoServiceImpl;
@@ -22,7 +22,9 @@ public class LottoController {
      */
     public void play() {
         PurchaseAmount purchaseAmount = inputView.purchaseAmountInput();
-        Lottos lottos = generateLotto(purchaseAmount);
+        PurchaseInfo purchaseInfo = new PurchaseInfo(purchaseAmount.getPurchaseAmount());
+        resultView.printPurchaseCount(purchaseInfo);
+        Lottos lottos = generateLotto(purchaseInfo);
 
         WinLotto winLotto = inputView.winLottoInput();
 
@@ -33,13 +35,11 @@ public class LottoController {
     /**
      * 로또 발급
      *
-     * @param purchaseAmount 구입금액
+     * @param purchaseInfo 구입정보 (금액, 개수)
      * @return 발급된 로또(전체)
      */
-    private Lottos generateLotto(PurchaseAmount purchaseAmount) {
-        PurchaseCount purchaseCount = lottoService.getPurchaseCount(purchaseAmount);
-        resultView.printPurchaseCount(purchaseCount);
-        Lottos lottos = lottoService.generateAutoLotto(purchaseCount);
+    private Lottos generateLotto(PurchaseInfo purchaseInfo) {
+        Lottos lottos = lottoService.generateAutoLotto(purchaseInfo);
         resultView.printLotto(lottos);
         return lottos;
     }

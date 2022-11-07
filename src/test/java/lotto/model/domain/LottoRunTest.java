@@ -4,20 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import lotto.model.vo.Lotto;
 import lotto.model.vo.LottoNumber;
-import lotto.model.vo.PurchaseCount;
 import lotto.model.vo.WinLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoRunTest {
-
-    @DisplayName("구매 개수 계산 확인")
-    @Test
-    void 로또_구매_개수() {
-        long buyAmount = 14000;
-        PurchaseCount expected = new PurchaseCount(14);
-        assertThat(LottoRun.getPurchaseCount(buyAmount)).isEqualTo(expected);
-    }
 
     @DisplayName("당첨번호 대비 일치 개수 확인")
     @Test

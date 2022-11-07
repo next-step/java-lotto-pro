@@ -9,33 +9,22 @@ import lotto.model.vo.LottoNumber;
 import lotto.model.vo.Lottos;
 import lotto.model.vo.MatchCounts;
 import lotto.model.vo.Profit;
-import lotto.model.vo.PurchaseCount;
+import lotto.model.vo.PurchaseInfo;
 import lotto.model.vo.WinLotto;
 import lotto.model.vo.WinResult;
 
 public class LottoServiceImpl implements LottoService {
 
     /**
-     * 구입금액으로 로또 구매 개수 계산
-     *
-     * @param purchaseAmount 구입금액
-     * @return 구입한 로또 개수
-     */
-    @Override
-    public PurchaseCount getPurchaseCount(PurchaseAmount purchaseAmount) {
-        return LottoRun.getPurchaseCount(purchaseAmount.getPurchaseAmount());
-    }
-
-    /**
      * 구입한 개수만큼 로또 발급
      *
-     * @param purchaseCount 구입 개수
+     * @param purchaseInfo 구입정보 (금액, 개수)
      * @return 발급한 로또(전체)
      */
     @Override
-    public Lottos generateAutoLotto(PurchaseCount purchaseCount) {
+    public Lottos generateAutoLotto(PurchaseInfo purchaseInfo) {
         Lottos lottos = new Lottos();
-        for (int i = 0; i < purchaseCount.getPurchaseCount(); i++) {
+        for (int i = 0; i < purchaseInfo.getPurchaseCount(); i++) {
             addOneLotto(lottos);
         }
         return lottos;

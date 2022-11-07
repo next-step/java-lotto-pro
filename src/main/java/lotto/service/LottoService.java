@@ -4,19 +4,11 @@ import lotto.model.dto.PurchaseAmount;
 import lotto.model.vo.Lotto;
 import lotto.model.vo.Lottos;
 import lotto.model.vo.Profit;
-import lotto.model.vo.PurchaseCount;
+import lotto.model.vo.PurchaseInfo;
 import lotto.model.vo.WinLotto;
 import lotto.model.vo.WinResult;
 
 public interface LottoService {
-
-    /**
-     * 구입금액으로 로또 구매 개수 계산
-     *
-     * @param purchaseAmount 구입금액
-     * @return 구입한 로또 개수
-     */
-    PurchaseCount getPurchaseCount(PurchaseAmount purchaseAmount);
 
     /**
      * 구입한 개수만큼 로또 발급
@@ -24,7 +16,7 @@ public interface LottoService {
      * @param purchaseCount 구입 개수
      * @return 발급한 로또(전체)
      */
-    Lottos generateAutoLotto(PurchaseCount purchaseCount);
+    Lottos generateAutoLotto(PurchaseInfo purchaseCount);
 
     /**
      * 로또 한 장 생성
