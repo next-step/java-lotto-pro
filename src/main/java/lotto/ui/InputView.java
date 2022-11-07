@@ -1,17 +1,13 @@
 package lotto.ui;
 
-import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningLotto;
-
-import java.util.List;
 
 public interface InputView {
     PurchaseAmount readPurchaseAmount();
 
-    WinningLotto readWinningLottoNumbers();
+    Lottos readManualLottos(PurchaseAmount purchaseAmount);
 
-    int readManualLottoTicketCount(int allLottoTicketCount);
-
-    List<Lotto> readManualLottos(int manualLottoTicketCount);
+    WinningLotto readWinningLotto();
 }

@@ -1,15 +1,12 @@
 package lotto.ui;
 
 import lotto.configuration.AppConfig;
-import lotto.domain.Lotto;
 import lotto.domain.LottoSeller;
+import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ResultViewTest {
     private ResultView resultView;
@@ -23,7 +20,7 @@ public class ResultViewTest {
     @Test
     void Lottos_출력테스트() {
         PurchaseAmount purchaseAmount = new PurchaseAmount(14000);
-        List<Lotto> lottos = LottoSeller.sellLottos(purchaseAmount, new ArrayList<>());
+        Lottos lottos = LottoSeller.sellAutoLottos(purchaseAmount.getLottoTicketCount());
 
         resultView.printLottos(lottos);
     }

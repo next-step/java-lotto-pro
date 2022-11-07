@@ -1,13 +1,12 @@
 package lotto.ui;
 
-import lotto.domain.Lotto;
-
-import java.util.List;
+import lotto.domain.Lottos;
+import lotto.domain.WinningLotto;
 
 public interface ResultView {
-    void printLottos(List<Lotto> lottos);
+    void printLottos(Lottos lottos);
 
-    void printLottoTickets(int manualLottoTicketCount, int autoLottoTicketCount);
+    void printAllLottoTicketCount(int manualLottoTicketCount, int autoLottoTicketCount);
 
-    void printWinningResult(WinningResultDTO winningResultDTO);
+    void printWinningResult(WinningLotto winningLotto, Lottos lottos);
 }

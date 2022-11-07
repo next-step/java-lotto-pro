@@ -1,9 +1,6 @@
 package lotto.ui;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.PurchaseAmount;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,33 +31,35 @@ public class ConsoleInputView implements InputView {
     }
 
     @Override
-    public WinningLotto readWinningLottoNumbers() {
-        System.out.println(MESSAGE_FOR_INPUT_WINNING_LOTTO_NUMBERS);
-        Lotto lotto = readLottoNumbersForLotto();
-        int bonusNumber = readBonusNumberForWinningLotto();
-        return new WinningLotto(lotto, LottoNumber.of(bonusNumber));
+    public Lottos readManualLottos(PurchaseAmount purchaseAmount) {
+        return readManualLottos(readManualLottoTicketCount(purchaseAmount));
     }
 
     @Override
-    public int readManualLottoTicketCount(int allLottoTicketCount) {
-        System.out.println(MESSAGE_FOR_INPUT_MANUAL_LOTTO_TICKET_COUNT);
-        int manualLottoTicketCount = Integer.parseInt(scanner.nextLine());
-        if (manualLottoTicketCount > allLottoTicketCount) {
-            throw new IllegalStateException(EXCEPTION_MESSAGE_FOR_OVER_PURCHASE_TICKET_COUNT);
-        }
-        return manualLottoTicketCount;
+    public WinningLotto readWinningLotto() {
+        return new WinningLotto(readWinningLottoNumbers(), readBonusNumberForWinningLotto());
     }
 
-    @Override
-    public List<Lotto> readManualLottos(int manualLottoTicketCount) {
-        List<Lotto> manualLottos = new ArrayList<>();
+    private Lottos readManualLottos(int manualLottoTicketCount) {
         if (manualLottoTicketCount > 0) {
             System.out.println(MESSAGE_FOR_INPUT_MANUAL_LOTTO_NUMBER);
         }
+
+        List<Lotto> manualLottos = new ArrayList<>();
         for (int i = 0; i < manualLottoTicketCount; i++) {
             manualLottos.add(readLottoNumbersForLotto());
         }
-        return manualLottos;
+
+        return LottoSeller.sellManualLottos(manualLottos);
+    }
+
+    private int readManualLottoTicketCount(PurchaseAmount purchaseAmount) {
+        System.out.println(MESSAGE_FOR_INPUT_MANUAL_LOTTO_TICKET_COUNT);
+        int manualLottoTicketCount = Integer.parseInt(scanner.nextLine());
+        if (manualLottoTicketCount > purchaseAmount.getLottoTicketCount()) {
+            throw new IllegalStateException(EXCEPTION_MESSAGE_FOR_OVER_PURCHASE_TICKET_COUNT);
+        }
+        return manualLottoTicketCount;
     }
 
     private Lotto readLottoNumbersForLotto() {
@@ -72,9 +71,14 @@ public class ConsoleInputView implements InputView {
                 .collect(Collectors.toList()));
     }
 
-    private int readBonusNumberForWinningLotto() {
+    private Lotto readWinningLottoNumbers() {
+        System.out.println(MESSAGE_FOR_INPUT_WINNING_LOTTO_NUMBERS);
+        return readLottoNumbersForLotto();
+    }
+
+    private LottoNumber readBonusNumberForWinningLotto() {
         System.out.println(MESSAGE_FOR_INPUT_BONUS_NUMBER);
         String bonusNumber = scanner.nextLine();
-        return Integer.parseInt(bonusNumber);
+        return LottoNumber.of(Integer.parseInt(bonusNumber));
     }
 }

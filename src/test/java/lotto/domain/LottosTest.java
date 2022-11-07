@@ -17,7 +17,6 @@ public class LottosTest {
     @BeforeEach
     void setUp() {
         List<Lotto> lottoList = new ArrayList<>();
-        LottoCreateStrategy strategy = new AutoLottoCreateStrategy();
         lottoList.add(new Lotto(Arrays.asList(
                 LottoNumber.of(1),
                 LottoNumber.of(2),
@@ -70,12 +69,23 @@ public class LottosTest {
 
         // when
         int beforeSize = lottos.lottos().size();
-        lottos.addLottos(lottoList);
+        lottos.addLottos(new Lottos(lottoList));
         int afterSize = lottos.lottos().size();
 
         // then
         assertThat(afterSize - lottoList.size()).isEqualTo(beforeSize);
     }
 
-
+    @DisplayName("Lottos 에서 winningLotto를 입력받아 WinningResult를 반환한다")
+    @Test
+    void 로또결과_report() {
+        WinningResult result = lottos.match(new WinningLotto(new Lotto(Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6))), LottoNumber.of(7)));
+        assertThat(result.reportYield()).isEqualTo(666666.6666666666);
+    }
 }

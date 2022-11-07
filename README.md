@@ -133,7 +133,7 @@
 ### 5단계 피드백
 - Lottos 타입 관리 필요
   - [x] List<Lotto> 를 필드로 가지는 일급컬렉션
-  - [ ] 피드백 강의에서 다루었던 Lottos 메소드 기능 개선
+  - [x] 피드백 강의에서 다루었던 Lottos 메소드 기능 개선
     - input : WinningLotto
     - output : WinningResult
 - Lotto 

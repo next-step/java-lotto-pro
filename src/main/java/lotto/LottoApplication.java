@@ -4,49 +4,31 @@ import lotto.configuration.AppConfig;
 import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
-import lotto.ui.WinningResultDTO;
-
-import java.util.List;
-import java.util.Map;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        run();
-    }
-
-    private static void run() {
         InputView inputView = AppConfig.inputView();
         ResultView resultView = AppConfig.resultView();
-
-        PurchaseAmount purchaseAmount = getPurchaseAmount(inputView);
-        List<Lotto> manualLottos = getManualLottos(inputView, purchaseAmount);
-        List<Lotto> lottos = getLottos(resultView, manualLottos, purchaseAmount);
-
-        WinningResultDTO winningResultDTO = getWinningResultDTO(inputView, purchaseAmount, lottos);
-        resultView.printWinningResult(winningResultDTO);
+        run(inputView, resultView);
     }
 
-    private static List<Lotto> getManualLottos(InputView inputView, PurchaseAmount purchaseAmount) {
-        int manualLottoTicketCount = inputView.readManualLottoTicketCount(purchaseAmount.getLottoTicketCount());
-        return inputView.readManualLottos(manualLottoTicketCount);
-    }
+    private static void run(InputView inputView, ResultView resultView) {
+        PurchaseAmount purchaseAmount = inputView.readPurchaseAmount();
+        Lottos manualLottos = inputView.readManualLottos(purchaseAmount);
 
-    private static WinningResultDTO getWinningResultDTO(InputView inputView, PurchaseAmount purchaseAmount, List<Lotto> lottos) {
-        WinningLotto winningLotto = inputView.readWinningLottoNumbers();
-        WinningResult result = new WinningResult();
-        Map<WinningLottoRank, Integer> ranks = result.reportRanks(winningLotto, lottos);
-        double yield = result.reportYield(purchaseAmount);
-        return new WinningResultDTO(ranks, yield);
-    }
+        int manualLottoTicketCount = manualLottos.lottos().size();
+        int autoLottoTicketCount = purchaseAmount.getLottoTicketCount() - manualLottoTicketCount;
+        resultView.printAllLottoTicketCount(manualLottoTicketCount, autoLottoTicketCount);
 
-    private static List<Lotto> getLottos(ResultView resultView, List<Lotto> manualLottos, PurchaseAmount purchaseAmount) {
-        List<Lotto> lottos = LottoSeller.sellLottos(purchaseAmount, manualLottos);
-        resultView.printLottoTickets(manualLottos.size(), lottos.size() - manualLottos.size());
+        Lottos lottos = getAllLottos(manualLottos, purchaseAmount);
         resultView.printLottos(lottos);
-        return lottos;
+
+        WinningLotto winningLotto = inputView.readWinningLotto();
+        resultView.printWinningResult(winningLotto, lottos);
     }
 
-    private static PurchaseAmount getPurchaseAmount(InputView inputView) {
-        return inputView.readPurchaseAmount();
+    private static Lottos getAllLottos(Lottos manualLottos, PurchaseAmount purchaseAmount) {
+        Lottos autoLottos = LottoSeller.sellAutoLottos(purchaseAmount.getLottoTicketCount());
+        return LottoSeller.integrationLottos(manualLottos, autoLottos);
     }
 }
