@@ -1,7 +1,6 @@
 package step3.service;
 
 import step3.model.LottoResult;
-import step3.model.Lotto;
 import step3.model.LottoWinningNumber;
 import step3.model.Lottos;
 
@@ -20,11 +19,6 @@ public class LottoService {
         }
 
         return lottoGenerator.generateByTimes(money / DEFAULT_TICKET_PRICE);
-    }
-
-    public LottoResult getResultComparedToWinningNumbers(String winningLottoText, Lottos lottos) {
-        LottoWinningNumber lottoWinning = this.lottoGenerator.generateLottoWinningNumber(winningLottoText);
-        return LottoResult.getLottoResultFromLotto(lottos, lottoWinning);
     }
 
     public LottoResult getResultComparedToWinningNumbers(String winningLottoText, int bonus, Lottos lottos) {

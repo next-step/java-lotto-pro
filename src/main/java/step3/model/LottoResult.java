@@ -12,13 +12,9 @@ public class LottoResult {
 
     protected Map<LottoScoreType, Integer> winningMap = new EnumMap<>(LottoScoreType.class);
 
-    public LottoResult() {
+    public LottoResult(List<LottoScoreType> lottoWinningScoreTypeList) {
         Stream.of(LottoScoreType.values())
                 .forEach(type -> winningMap.put(type, 0));
-    }
-
-    public LottoResult(List<LottoScoreType> lottoWinningScoreTypeList) {
-        this();
         for (LottoScoreType lottoScoreType : lottoWinningScoreTypeList) {
             winningMap.put(lottoScoreType, winningMap.get(lottoScoreType) + 1);
         }

@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import step3.service.LottoGenerator;
 import step3.service.LottoScoreType;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -27,8 +26,8 @@ class LottoResultTest {
                 LottoScoreType.FIVE, LottoScoreType.FIVE, LottoScoreType.FIVE,
                 LottoScoreType.SIX, LottoScoreType.SIX, LottoScoreType.SIX, LottoScoreType.SIX));
         lottos = new Lottos();
-        lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
-        lottos.add(new Lotto(List.of(20, 30, 32, 40, 42, 43)));
+        lottos.add(new Lotto(new LottoNumber(List.of(1, 2, 3, 4, 5, 6))));
+        lottos.add(new Lotto(new LottoNumber(List.of(20, 30, 32, 40, 42, 43))));
     }
 
     @ParameterizedTest
