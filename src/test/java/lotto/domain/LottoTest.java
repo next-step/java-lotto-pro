@@ -40,6 +40,13 @@ public class LottoTest {
         assertThat(lotto).isInstanceOf(Lotto.class);
     }
 
+    @DisplayName("null 을 넘겨줄 경우 예외")
+    @Test
+    void 로또생성_NPE() {
+        assertThatThrownBy(() -> new Lotto(null))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @DisplayName("로또는 로또번호 6개가 아닌경우는 예외")
     @Test
     void 로또생성시_6개가_아닌경우_예외() {

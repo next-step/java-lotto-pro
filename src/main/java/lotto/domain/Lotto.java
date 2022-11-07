@@ -36,7 +36,7 @@ public class Lotto {
     }
 
     private static void validateNullPointException(List<LottoNumber> lottoNumbers) {
-        Optional.ofNullable(lottoNumbers.size())
+        Optional.ofNullable(lottoNumbers)
                 .orElseThrow(() -> new IllegalArgumentException(EXCEPTION_MESSAGE_FOR_LOTTO_NUMBERS_EMPTY));
     }
 

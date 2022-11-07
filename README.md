@@ -137,7 +137,7 @@
     - input : WinningLotto
     - output : WinningResult
 - Lotto 
-  - [ ] NPE 테스트 코드 추가
+  - [x] NPE 테스트 코드 추가
 - WinningResult
   - [ ] int Overflow를 고려할 것
 - LottoSeller
