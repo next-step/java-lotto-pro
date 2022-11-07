@@ -46,12 +46,11 @@ public class ResultView {
     }
 
     private void printWinResult(WinResult winResult) {
-        Map<WinCriterion, Integer> winResultInfo = winResult.getWinResult();
-        List<WinCriterion> keySet = new ArrayList<>(winResultInfo.keySet());
-        Collections.sort(keySet);
-        for (WinCriterion key : keySet) {
-            System.out.print(key.getMatchCount() + "개 일치 (" + key.getPrize() + "원)");
-            System.out.println("- " + winResultInfo.get(key) + "개");
+        List<WinCriterion> winCriteria = winResult.getWinCriterionFromWinResult();
+        Collections.sort(winCriteria);
+        for (WinCriterion winCriterion : winCriteria) {
+            System.out.print(winCriterion.getMatchCount() + "개 일치 (" + winCriterion.getPrize() + "원)");
+            System.out.println("- " + winResult.getCountByWinCriterion(winCriterion) + "개");
         }
     }
 

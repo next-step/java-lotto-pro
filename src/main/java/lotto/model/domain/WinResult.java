@@ -1,5 +1,7 @@
 package lotto.model.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class WinResult {
@@ -18,7 +20,11 @@ public class WinResult {
         return winAmount;
     }
 
-    public Map<WinCriterion, Integer> getWinResult() {
-        return winResult;
+    public List<WinCriterion> getWinCriterionFromWinResult() {
+        return new ArrayList<>(winResult.keySet());
+    }
+
+    public int getCountByWinCriterion(WinCriterion winCriterion) {
+        return winResult.get(winCriterion);
     }
 }
