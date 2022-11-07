@@ -3,7 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,9 +22,9 @@ public class LottoCreateStrategyTest {
     @Test
     void 로또_일급컬렉션_getter테스트() {
         Lotto lotto = new AutoLottoCreateStrategy().createLotto();
-        List<LottoNumber> lottoNumbers = lotto.lottoNumbers();
-        lottoNumbers.remove(5);
-        lottoNumbers.add(new LottoNumber(10));
+        Set<LottoNumber> lottoNumbers = lotto.lottoNumbers();
+        lottoNumbers.remove(LottoNumber.of(5));
+        lottoNumbers.add(LottoNumber.of(10));
 
         assertThat(lottoNumbers.equals(lotto.lottoNumbers())).isFalse();
     }

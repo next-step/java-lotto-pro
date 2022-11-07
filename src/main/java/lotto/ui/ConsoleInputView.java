@@ -30,7 +30,7 @@ public class ConsoleInputView implements InputView {
     public WinningLotto readWinningLottoNumbers() {
         Lotto lotto = readLottoNumbersForWinningLotto();
         int bonusNumber = readBonusNumberForWinningLotto();
-        return new WinningLotto(lotto, new LottoNumber(bonusNumber));
+        return new WinningLotto(lotto, LottoNumber.of(bonusNumber));
     }
 
     private Lotto readLottoNumbersForWinningLotto() {
@@ -39,7 +39,7 @@ public class ConsoleInputView implements InputView {
         String[] split = winningLottoNumbers.split(",");
         return new Lotto(Arrays.stream(split)
                 .mapToInt(i -> Integer.parseInt(i.trim()))
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()));
     }
 

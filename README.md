@@ -116,11 +116,13 @@
 ## 5단계 - 로또(수동)
 ### 프로그래밍 요구사항
 - NPE 발생 가능 부분 파악
-  - [ ] Optional 로 wrapping
+  - [x] Optional 로 wrapping
 
 ### domain
 - 로또
-  - [ ] 피드백 강의 내용 반영 - List --> Set
+  - [x] 피드백 강의 내용 반영 : List --> Set
+- 로또번호
+  - [x] 피드백 강의 내용 반영 : 로또번호 캐싱을 Strategy --> LottoNumber로 변경
 - 로또판매자
   - [ ] 로또 판매 시 수동으로 입력한 List<Lotto> 를 포함하여 발급
 

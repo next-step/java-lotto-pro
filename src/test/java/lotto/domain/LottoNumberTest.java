@@ -13,16 +13,16 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 25, 45})
     void 로또번호_생성(int number) {
-        LottoNumber lottoNumber = new LottoNumber(number);
+        LottoNumber lottoNumber = LottoNumber.of(number);
 
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(number));
+        assertThat(lottoNumber).isEqualTo(LottoNumber.of(number));
     }
 
     @DisplayName("로또번호 생성 예외 테스트 1~45 이외 숫자")
     @ParameterizedTest
     @ValueSource(ints = {-1, 46})
     void 로또번호_예외(int number) {
-        assertThatThrownBy(() -> new LottoNumber(number))
+        assertThatThrownBy(() -> LottoNumber.of(number))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -18,19 +18,19 @@ public class LottoTest {
     @BeforeEach
     void setUp() {
         normalLottoNumbers = new ArrayList<>();
-        normalLottoNumbers.add(new LottoNumber(1));
-        normalLottoNumbers.add(new LottoNumber(2));
-        normalLottoNumbers.add(new LottoNumber(3));
-        normalLottoNumbers.add(new LottoNumber(4));
-        normalLottoNumbers.add(new LottoNumber(5));
-        normalLottoNumbers.add(new LottoNumber(6));
+        normalLottoNumbers.add(LottoNumber.of(1));
+        normalLottoNumbers.add(LottoNumber.of(2));
+        normalLottoNumbers.add(LottoNumber.of(3));
+        normalLottoNumbers.add(LottoNumber.of(4));
+        normalLottoNumbers.add(LottoNumber.of(5));
+        normalLottoNumbers.add(LottoNumber.of(6));
 
         abnormalLottoNumbers = new ArrayList<>();
-        abnormalLottoNumbers.add(new LottoNumber(1));
-        abnormalLottoNumbers.add(new LottoNumber(2));
-        abnormalLottoNumbers.add(new LottoNumber(3));
-        abnormalLottoNumbers.add(new LottoNumber(4));
-        abnormalLottoNumbers.add(new LottoNumber(5));
+        abnormalLottoNumbers.add(LottoNumber.of(1));
+        abnormalLottoNumbers.add(LottoNumber.of(2));
+        abnormalLottoNumbers.add(LottoNumber.of(3));
+        abnormalLottoNumbers.add(LottoNumber.of(4));
+        abnormalLottoNumbers.add(LottoNumber.of(5));
     }
 
     @DisplayName("로또는 로또번호 6개로 구성된다")
@@ -50,7 +50,7 @@ public class LottoTest {
     @DisplayName("로또번호에 대한 중복체크")
     @Test
     void 로또생성시_중복체크_예외() {
-        abnormalLottoNumbers.add(new LottoNumber(5));
+        abnormalLottoNumbers.add(LottoNumber.of(5));
 
         assertThatThrownBy(() -> new Lotto(abnormalLottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
