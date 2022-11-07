@@ -4,8 +4,8 @@ public class Profit {
 
     private double profit;
 
-    public Profit(double profit) {
-        this.profit = profit;
+    public Profit(long buyAmount, long winAmount) {
+        this.profit = Math.floor(winAmount * 1.0 / buyAmount * 100) / 100.0;
     }
 
     public void print() {
@@ -14,5 +14,9 @@ public class Profit {
             System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
         System.out.println();
+    }
+
+    public double getProfit() {
+        return profit;
     }
 }

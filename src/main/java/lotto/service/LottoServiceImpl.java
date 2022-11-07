@@ -2,7 +2,6 @@ package lotto.service;
 
 import java.util.Collections;
 import lotto.model.constants.LottoConstants;
-import lotto.model.domain.LottoRun;
 import lotto.model.dto.PurchaseAmount;
 import lotto.model.vo.Lotto;
 import lotto.model.vo.LottoNumber;
@@ -85,6 +84,6 @@ public class LottoServiceImpl implements LottoService {
     public Profit calculateProfit(PurchaseAmount purchaseAmount, WinResult winResult) {
         long buyAmount = purchaseAmount.getPurchaseAmount();
         long winAmount = winResult.calculateWinAmount();
-        return new Profit(LottoRun.calculateProfit(buyAmount, winAmount));
+        return new Profit(buyAmount, winAmount);
     }
 }

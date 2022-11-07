@@ -1,14 +1,11 @@
-package lotto.model.domain;
+package lotto.model.vo;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import lotto.model.vo.Lotto;
-import lotto.model.vo.LottoNumber;
-import lotto.model.vo.WinLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoRunTest {
+public class ProfitTest {
 
     @DisplayName("수익률 계산")
     @Test
@@ -16,7 +13,7 @@ public class LottoRunTest {
         long buyAmount = 14000;
         long winAmount = 5000;
         double expected = 0.35;
-        assertThat(LottoRun.calculateProfit(buyAmount, winAmount)).isEqualTo(expected);
+        Profit profit = new Profit(buyAmount, winAmount);
+        assertThat(profit.getProfit()).isEqualTo(expected);
     }
-
 }

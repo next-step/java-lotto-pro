@@ -2,7 +2,6 @@ package lotto.model.vo;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.model.domain.LottoRun;
 
 public class Lottos {
 
