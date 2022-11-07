@@ -11,7 +11,7 @@
     - [x] 보너스볼 추가
   - [x] 로또 묶음 일등컬렉션 구현 (Lottos)
   - [x] 당첨 결과 일등컬렉션 구현 (WinningResult)
-  - [ ] 수동 로또 묶음 도메인 클래스 구현 (SelfPickLottos)
+  - [x] 수동 로또 묶음 도메인 클래스 구현 (SelfPickLottos)
   - [ ] 자동 로또 묶음 도메인 클래스 구현 (QuickPickLottos)
   - [ ] 돈을 일등컬렉션으로 수정 (Money)
 - view
