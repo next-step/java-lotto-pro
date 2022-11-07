@@ -1,15 +1,17 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import static lotto.domain.WinningMoney.NONE;
+import static lotto.domain.LottoMoney.LOTTO_MINIMUM_PRICE;
+import static lotto.domain.WinningMoney.find;
 
 public class Lottos {
-    private static final int INIT_COUNT = 0;
-    private List<Lotto> lottos = new ArrayList<>();
+    public static final int INIT_SUM = 0;
+    public static final int DIGIT = 2;
+    private final List<Lotto> lottos = new ArrayList<>();
 
     public List<Lotto> getLottos() {
         return this.lottos;
@@ -19,45 +21,27 @@ public class Lottos {
         this.lottos.add(lotto);
     }
 
+    public double returnRate(WinningLotto winningLotto) {
+        return BigDecimal.valueOf(sum(winningLotto))
+                .divide(BigDecimal.valueOf((int) this.lottos.size() * LOTTO_MINIMUM_PRICE), DIGIT, RoundingMode.HALF_UP)
+                .doubleValue();
+    }
+
+    public int sum(WinningLotto winningLotto) {
+        int sum = INIT_SUM;
+        for (Lotto lotto : this.lottos) {
+            sum += find(lotto.matchCount(winningLotto), lotto.isMatchBonusBall(winningLotto)).getMoney();
+        }
+        return sum;
+    }
+
     public int size() {
         return this.lottos.size();
     }
 
-    public Map<Integer, Lottos> matchLottos(WinningLotto winningLotto) {
-        Map<Integer, Lottos> map = new HashMap<>();
-        for (WinningMoney winningMoney : WinningMoney.values()) {
-            map.put(winningMoney.getCount(), findLottosByMatchCount(winningMoney.getCount(), winningLotto));
-        }
-        map.remove(NONE.getCount());
-        return map;
-    }
-
-    private Lottos findLottosByMatchCount(int matchCount, WinningLotto winningLotto) {
-        Lottos lottos = new Lottos();
-        for (Lotto lotto : this.lottos) {
-            addLotto(matchCount, winningLotto, lottos, lotto);
-        }
-        return lottos;
-    }
-
-    private void addLotto(int matchCount, WinningLotto winningLotto, Lottos lottos, Lotto lotto) {
-        if (isMatch(matchCount, winningLotto, lotto)) {
-            lottos.add(lotto);
-        }
-    }
-
-    private boolean isMatch(int matchCount, WinningLotto winningLotto, Lotto lotto) {
-        int count = INIT_COUNT;
-        for (Number number : lotto.getNumbers()) {
-            count = countUp(winningLotto, count, number);
-        }
-        return count == matchCount;
-    }
-
-    private static int countUp(WinningLotto winningLotto, int count, Number number) {
-        if (winningLotto.contains(number)) {
-            count++;
-        }
-        return count;
+    public int matchLottoCount(int count, List<Boolean> isMatchBonusBalls, WinningLotto winningLotto) {
+        return (int) this.lottos.stream()
+                .filter(lotto -> lotto.matchCount(winningLotto) == count && isMatchBonusBalls.contains(lotto.isMatchBonusBall(winningLotto)))
+                .count();
     }
 }

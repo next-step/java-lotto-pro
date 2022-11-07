@@ -15,7 +15,7 @@ public class LottoController {
     public void run() {
         Lottos lottos = new LottoGenerator().generate(new LottoMoney(readPurchaseMoney()).purchaseCount());
         printLottos(lottos);
-        winningResult(new Statistics(lottos, new WinningLotto(winningNumbers(), new BonusBall(readBonusBall()))));
+        winningResult(lottos, new WinningLotto(winningNumbers(), new BonusBall(readBonusBall())));
     }
 
     private static String[] winningNumbers() {
