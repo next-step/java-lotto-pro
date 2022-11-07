@@ -12,9 +12,11 @@ public class LottoApplication {
         Lottos lottos = LottoMaker.makeLottos(money);
         ResultView.printLottos(lottos);
 
-        Lotto winLotto = new Lotto(InputView.inputWinningNumbers());
+        WinningLotto winningLotto = new WinningLotto(InputView.inputWinningNumbers());
 
-        Winners winners = lottos.findWinners(winLotto);
+        BonusBall bonusBall = new BonusBall(InputView.inputBonusBallNumber());
+        bonusBall.validateNotInWinningLotto(winningLotto);
+        Winners winners = lottos.findWinners(winningLotto, bonusBall);
         ResultView.printLottoWinners(winners);
         ResultView.printEarningRate(winners, money);
     }
