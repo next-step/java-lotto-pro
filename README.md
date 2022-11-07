@@ -129,3 +129,16 @@
 ### view
 - inputView
   - [x] 수동 발급 로또 리스트 입력받기
+
+### 5단계 피드백
+- Lottos 타입 관리 필요
+  - [ ] List<Lotto> 를 필드로 가지는 일급컬렉션
+  - [ ] 피드백 강의에서 다루었던 Lottos 메소드 기능 개선
+    - input : WinningLotto
+    - output : WinningResult
+- Lotto 
+  - [ ] NPE 테스트 코드 추가
+- WinningResult
+  - [ ] int Overflow를 고려할 것
+- LottoSeller
+  - [ ] `자동판매`와 `수동판매` 메소드를 분리해 볼 것(자동 + 수동 로직 고려)
