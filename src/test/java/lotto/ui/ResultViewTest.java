@@ -15,10 +15,10 @@ public class ResultViewTest {
         resultView = AppConfig.resultView();
     }
 
-    @DisplayName("Lottos 출력 테스트")
+    @DisplayName("Lotto List 출력 테스트")
     @Test
     void Lottos_출력테스트() {
         resultView.printLottoTickets(new PurchaseAmount(14000));
-        resultView.printLottos(LottoSeller.sellLottos(new PurchaseAmount(14000)).lottos());
+        resultView.printLottos(LottoSeller.sellLottos(new PurchaseAmount(14000)));
     }
 }

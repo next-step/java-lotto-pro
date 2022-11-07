@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -15,9 +17,9 @@ public class LottoSellerTest {
     @ValueSource(ints = {14000, 9000, 3500, 4000, 1000})
     void 로또판매(int purchaseAmount) {
         PurchaseAmount amount = new PurchaseAmount(purchaseAmount);
-        Lottos lottos = LottoSeller.sellLottos(amount);
+        List<Lotto> lottos = LottoSeller.sellLottos(amount);
 
-        assertThat(lottos.lottos()).hasSize(amount.getLottoTicketCount());
+        assertThat(lottos).hasSize(amount.getLottoTicketCount());
     }
 
     @DisplayName("구입금액만큼 로또를 발급하여 반환해주는 테스트")

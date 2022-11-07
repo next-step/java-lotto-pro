@@ -111,7 +111,7 @@
 ### 4단계 피드백
 - WinningLottoRank
   - [x] toString 부분 View로 변경
-- Lottos 일급 컬렉션 삭제
+- [x] Lottos 일급 컬렉션 삭제
 
 ## 5단계 - 로또(수동)
 ### 프로그래밍 요구사항
