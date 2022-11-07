@@ -15,7 +15,7 @@ public class LottoTest {
     void match_bonus_lotto_Number_test() {
         LottoNumbers lottoNumbers = LottoNumbersGenerator.createLottoNumbers(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(lottoNumbers);
-        LottoNumber bonusNumber = new LottoNumber(1);
+        LottoNumber bonusNumber = LottoNumber.of(1);
 
         boolean isMatchedBonusLottoNumber = lotto.isMatchedBonusLottoNumber(bonusNumber);
 
@@ -27,7 +27,7 @@ public class LottoTest {
     void not_match_bonus_lotto_Number_test() {
         LottoNumbers lottoNumbers = LottoNumbersGenerator.createLottoNumbers(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(lottoNumbers);
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.of(7);
 
         boolean isMatchedBonusLottoNumber = lotto.isMatchedBonusLottoNumber(bonusNumber);
 

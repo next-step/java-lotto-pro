@@ -19,7 +19,7 @@ class LottosTest {
     @DisplayName("당첨 번호와 보너스볼 번호를 비교하여 당첨 등수별 개수가 담긴 결과를 반환한다")
     void match_winning_numbers_and_bonus_number_test() {
         LottoNumbers winningNumbers = LottoNumbersGenerator.createLottoNumbers(1, 2, 3, 4, 5, 8);
-        LottoNumber bonusNumber = new LottoNumber(9);
+        LottoNumber bonusNumber = LottoNumber.of(9);
         WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), bonusNumber);
 
         Lottos lottos = LottosGenerator.createLottos(Arrays.asList(

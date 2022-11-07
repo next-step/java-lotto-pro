@@ -17,13 +17,13 @@ class LottoNumbersTest {
     @DisplayName("로또 번호 컬렉션 생성시 6개의 로또 번호가 주어지지 않으면 [IllegalArgumentException] 예외처리 한다")
     void create_with_greater_than_six_lotto_number_test() {
         List<LottoNumber> lottoNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(12),
-                new LottoNumber(23),
-                new LottoNumber(33),
-                new LottoNumber(44),
-                new LottoNumber(45),
-                new LottoNumber(43)
+                LottoNumber.of(1),
+                LottoNumber.of(12),
+                LottoNumber.of(23),
+                LottoNumber.of(33),
+                LottoNumber.of(44),
+                LottoNumber.of(45),
+                LottoNumber.of(43)
         );
 
         assertThatThrownBy(() -> new LottoNumbers(lottoNumbers))
@@ -35,12 +35,12 @@ class LottoNumbersTest {
     @DisplayName("로또 번호 컬렉션 생성시 중복 된 로또 번호가 있으면 [IllegalArgumentException] 예외처리 한다")
     void create_with_duplicated_lotto_number_test() {
         List<LottoNumber> lottoNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(12),
-                new LottoNumber(23),
-                new LottoNumber(33),
-                new LottoNumber(44),
-                new LottoNumber(44)
+                LottoNumber.of(1),
+                LottoNumber.of(12),
+                LottoNumber.of(23),
+                LottoNumber.of(33),
+                LottoNumber.of(44),
+                LottoNumber.of(44)
         );
         assertThatThrownBy(() -> new LottoNumbers(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
