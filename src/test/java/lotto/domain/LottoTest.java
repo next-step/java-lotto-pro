@@ -29,4 +29,12 @@ public class LottoTest {
                 () -> Lotto.create(Arrays.asList(1, 2, 3, 4, 5, 5))
         );
     }
+
+    @Test
+    @DisplayName("로또 번호 갯수 예외 테스트")
+    void lottoNumberSizeExceptionTest(){
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> Lotto.create(Arrays.asList(1, 2, 3, 4, 5, 5, 7))
+        );
+    }
 }
