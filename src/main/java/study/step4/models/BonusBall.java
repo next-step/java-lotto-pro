@@ -9,6 +9,10 @@ public class BonusBall {
         this.bonusBallNumber = bonusBallNumber;
     }
 
+    public BonusBall(String bonusBallNumber) {
+        this(new LottoNumber(Integer.parseInt(bonusBallNumber)));
+    }
+
     public void validateNotInWinningLotto(WinningLotto winningLotto) {
         if (winningLotto.contains(bonusBallNumber)) {
             throw new BonusBallNumberInWinningLottoException("보너스 번호는 당첨 번호와 달라야 합니다.");
