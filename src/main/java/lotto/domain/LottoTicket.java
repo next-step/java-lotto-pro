@@ -64,7 +64,7 @@ public class LottoTicket {
                 .collect(Collectors.joining(", ", "[", "]"));
     }
 
-    public boolean isBonusNumber(LottoNumber bonusNumber) {
+    public boolean includedBonusNumber(LottoNumber bonusNumber) {
         return this.ticket.contains(bonusNumber);
     }
 }

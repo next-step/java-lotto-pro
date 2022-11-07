@@ -13,12 +13,12 @@ public class WinningLottoNumber {
     }
 
     private void validateDuplication() {
-        if (this.winningLottoTicket.isBonusNumber(bonusNumber)) {
+        if (this.winningLottoTicket.includedBonusNumber(bonusNumber)) {
             throw new IllegalArgumentException(ErrorMessage.ERROR_LOTTO_BONUS_NUMBER_DUPLICATION);
         }
     }
 
     public Rank check(LottoTicket lottoTicket) {
-        return Rank.valueOf(lottoTicket.compareTicket(this.winningLottoTicket), lottoTicket.isBonusNumber(this.bonusNumber));
+        return Rank.valueOf(lottoTicket.compareTicket(this.winningLottoTicket), lottoTicket.includedBonusNumber(this.bonusNumber));
     }
 }

@@ -9,12 +9,12 @@ public class Rewards {
     private static final int LOTTO_PRICE = 1000;
     private final List<Rank> rankList;
     private final double totalPrize;
-    private final Map<Rank, Integer> countRankMap;
+    private final Map<Rank, Integer> countByRank;
 
     public Rewards(List<Rank> rankList) {
         this.rankList = rankList;
         this.totalPrize = calculateTotalPrize(rankList);
-        this.countRankMap = countTotalRank(rankList);
+        this.countByRank = countTotalRank(rankList);
     }
 
 
@@ -30,7 +30,7 @@ public class Rewards {
     }
 
     public int count(final Rank rank) {
-        return this.countRankMap.getOrDefault(rank, 0);
+        return this.countByRank.getOrDefault(rank, 0);
     }
 
     public double calculateRateReward() {
