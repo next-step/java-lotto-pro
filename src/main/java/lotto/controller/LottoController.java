@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.controller.acceptor.BonusAcceptor;
 import lotto.controller.acceptor.MoneyToBuyAcceptor;
 import lotto.controller.acceptor.WinningNumbersAcceptor;
 import lotto.controller.displayer.LottoResultStatisticsDisplayer;
@@ -21,13 +22,16 @@ public class LottoController {
     private final MoneyToBuyAcceptor moneyToBuyAcceptor;
     private final LottoNumberGenerator lottoNumberGenerator;
     private final WinningNumbersAcceptor winningNumbersAcceptor;
+    private final BonusAcceptor bonusAcceptor;
 
     public LottoController(Map<LottoNumberMatchCount, Integer> prizeMoney, MoneyToBuyAcceptor moneyToBuyAcceptor,
-                           LottoNumberGenerator lottoNumberGenerator, WinningNumbersAcceptor winningNumbersAcceptor) {
+                           LottoNumberGenerator lottoNumberGenerator, WinningNumbersAcceptor winningNumbersAcceptor,
+                           BonusAcceptor bonusAcceptor) {
         this.prizeMoney = prizeMoney;
         this.moneyToBuyAcceptor = moneyToBuyAcceptor;
         this.lottoNumberGenerator = lottoNumberGenerator;
         this.winningNumbersAcceptor = winningNumbersAcceptor;
+        this.bonusAcceptor = bonusAcceptor;
     }
 
     public void run() {
@@ -37,7 +41,8 @@ public class LottoController {
             final LottoTicket newLottoTicket = buyOneLottoTicket(lottoTicketsBucket);
             displayEachLottoTicket(newLottoTicket);
         }
-        final WinningNumbers winningNumbers = userInputWinningNumbers();
+        final WinningNumbers winningNumbersBefore = userInputWinningNumbers();
+        final WinningNumbers winningNumbers = userInputBonusNumber(winningNumbersBefore);
         displayLottoResult(lottoTicketsBucket, winningNumbers, moneyToBuy);
     }
 
@@ -58,6 +63,12 @@ public class LottoController {
 
     private WinningNumbers userInputWinningNumbers() {
         return winningNumbersAcceptor.accept();
+    }
+
+    private WinningNumbers userInputBonusNumber(WinningNumbers winningNumbers) {
+        final LottoNumber bonusNumber = bonusAcceptor.accept();
+        winningNumbers.setBonus(bonusNumber);
+        return new WinningNumbers(winningNumbers);
     }
 
     private void displayLottoResult(LottoTicketsBucket lottoTicketsBucket, WinningNumbers winningNumbers,

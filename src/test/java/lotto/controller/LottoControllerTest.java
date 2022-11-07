@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.controller.acceptor.BonusAcceptor;
 import lotto.controller.acceptor.MoneyToBuyAcceptor;
 import lotto.controller.acceptor.WinningNumbersAcceptor;
 import lotto.model.lotto.enums.LottoNumberMatchCount;
@@ -25,7 +26,8 @@ public class LottoControllerTest {
         final MoneyToBuyAcceptor moneyToBuyAcceptor = new MoneyToBuyAcceptor();
         final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
         final WinningNumbersAcceptor winningNumbersAcceptor = new WinningNumbersAcceptor();
+        final BonusAcceptor bonusAcceptor = new BonusAcceptor();
         assertDoesNotThrow(() -> new LottoController(prizes, moneyToBuyAcceptor, lottoNumberGenerator,
-                winningNumbersAcceptor));
+                winningNumbersAcceptor, bonusAcceptor));
     }
 }
