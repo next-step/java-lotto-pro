@@ -14,17 +14,17 @@ public class ResultView {
     public static void printLottoWinners(Winners winners) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        printMatchingResult(winners, Rank.FOURTH);
-        printMatchingResult(winners, Rank.THIRD);
-        printMatchingResult(winners, Rank.SECOND);
-        printMatchingResult(winners, Rank.FIRST);
+        for (Rank rank : Rank.values()) {
+            printMatchingResult(winners, rank);
+        }
     }
 
     private static void printMatchingResult(Winners winners, Rank rank) {
-        System.out.printf("%d개 일치 (%d원)- %d개\n"
-                , rank.getNumberOfMatching()
-                , rank.getReward()
-                , winners.numberOfRankers(rank));
+        if (rank.isShow()) {
+            System.out.printf("%s- %d개\n"
+                    , rank.getMessage()
+                    , winners.numberOfRankers(rank));
+        }
     }
 
     public static void printEarningRate(Winners winners, Money money) {
