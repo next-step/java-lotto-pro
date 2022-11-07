@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -32,7 +29,7 @@ public class LottoNumber implements Comparable {
     }
 
     public static Map<Integer, LottoNumber> lottoNumberMap() {
-        return new HashMap<>(lottoNumberMap);
+        return Collections.unmodifiableMap(lottoNumberMap);
     }
 
     public static LottoNumber of(int number) {

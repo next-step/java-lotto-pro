@@ -142,3 +142,5 @@
   - [ ] int Overflow를 고려할 것
 - LottoSeller
   - [ ] `자동판매`와 `수동판매` 메소드를 분리해 볼 것(자동 + 수동 로직 고려)
+- 일급컬렉션 전체
+  - [x] Collections.unmodifiable* 확인 후 교체

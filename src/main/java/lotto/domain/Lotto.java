@@ -18,7 +18,7 @@ public class Lotto {
     }
 
     public Set<LottoNumber> lottoNumbers() {
-        return new HashSet<>(lottoNumbers);
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
     public int getMatchPoint(LottoNumber lottoNumber) {

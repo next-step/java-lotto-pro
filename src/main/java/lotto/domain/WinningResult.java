@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class WinningResult {
         for (Lotto lotto : lottos) {
             addRank(winningLotto.rank(lotto));
         }
-        return new HashMap<>(ranks);
+        return Collections.unmodifiableMap(ranks);
     }
 
     public void addRank(WinningLottoRank rank) {
