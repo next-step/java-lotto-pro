@@ -28,7 +28,7 @@ public class Lottos {
     public MatchCounts compareWinLotto(WinLotto winLotto) {
         MatchCounts matchCounts = new MatchCounts();
         for (Lotto lotto : this.lottos) {
-            matchCounts.addMatchCount(LottoRun.countMatchNumber(winLotto, lotto));
+            matchCounts.addMatchCount(winLotto.compareWithLotto(lotto));
         }
         return matchCounts;
     }
