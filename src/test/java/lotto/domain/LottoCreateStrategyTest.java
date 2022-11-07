@@ -3,8 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Set;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoCreateStrategyTest {
@@ -16,16 +14,5 @@ public class LottoCreateStrategyTest {
 
         assertThat(lotto).isInstanceOf(Lotto.class);
         assertThat(lotto.lottoNumbers()).hasSize(6);
-    }
-
-    @DisplayName("로또 발급 후 일급컬렉션 getter 테스트")
-    @Test
-    void 로또_일급컬렉션_getter테스트() {
-        Lotto lotto = new AutoLottoCreateStrategy().createLotto();
-        Set<LottoNumber> lottoNumbers = lotto.lottoNumbers();
-        lottoNumbers.remove(LottoNumber.of(5));
-        lottoNumbers.add(LottoNumber.of(10));
-
-        assertThat(lottoNumbers.equals(lotto.lottoNumbers())).isFalse();
     }
 }
