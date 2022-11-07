@@ -22,8 +22,8 @@ public class StatisticsOutputView {
     private static void print(Lottos lottos, WinningMoney winningMoney, WinningLotto winningLotto) {
         if (winningMoney.isShow()) {
             System.out.print(winningMoney.getMessage());
-            System.out.print(winningMoney.getMoney() + "원");
-            System.out.println(lottos.matchLottoCount(winningMoney.getCount(), winningMoney.getIsMatchBonusBalls(), winningLotto) + "개");
+            System.out.print(" ("+winningMoney.getMoney() + "원)");
+            System.out.println(" - " + lottos.matchLottoCount(winningMoney.getCount(), winningMoney.getIsMatchBonusBalls(), winningLotto) + "개");
         }
     }
 
