@@ -28,4 +28,22 @@ public class LottoNumberTest {
         assertThat(new LottoNumber(2).compareTo(new LottoNumber(1))).isEqualTo(1);
     }
 
+    @Test
+    @DisplayName("보너스 볼 생성 테스트")
+    void create_bonusBall_test() {
+        assertThat(new Lotto("1,2,3,4,5,6").getBonusBall("7")).isNotNull();
+    }
+
+    @Test
+    @DisplayName("당첨번호에 포함된 보너스 볼 예외처리 테스트")
+    void bonusBall_already_exits_test() {
+        assertThatThrownBy(() -> new Lotto("1,2,3,4,5,6").getBonusBall("6")).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("숫자가 아닌 보너스 볼 예외처리 테스트")
+    void not_number_type_bonusBall_test() {
+        assertThatThrownBy(() -> new Lotto("1,2,3,4,5,6").getBonusBall("a")).isInstanceOf(IllegalArgumentException.class);
+    }
+
 }

@@ -48,6 +48,7 @@
 * 로또 1장의 가격은 1000원
 * 2등을 위한 보너스 볼 추첨
 * 당첨 통계에도 2등 추가
+* 사용자가 수동으로 추첨 번호를 입력할 수 있는 기능 추가
 
 ### 프로그래밍 요구사항
 * 모든 기능을 TDD로 구현해 단위 테스트 필요 (단 UI 로직은 제외)
@@ -70,3 +71,6 @@
 * 입력받은 지난 주 당첨 번호가 ,(comma)로 구분되지 않은 경우 IllegalArguemntException을 반환한다.
 * 로또 번호가 숫자가 아닌 경우 IllegalArgumentException을 반환한다.
 * 추첨한 보너스 볼이 기존 당첨번호에 포함된 경우 IllegalArgumentException을 반환한다.
+* 수동 로또 구매 개수가 숫자가 아닌 경우 IllegalArgumentException을 반환한다.
+* 수동 로또 구매 개수가 양의 정수가 아닌 경우 IllegalArgumentException을 반환한다.
+* 구입 금액 이상의 수동 로또 구매 개수가 입력되는 경우 IllegalArgumentException을 반환한다.

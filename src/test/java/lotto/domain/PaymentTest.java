@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import calculator.StringAddCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -31,9 +30,10 @@ public class PaymentTest {
     }
 
     @Test
-    @DisplayName("구매한 로또 개수 확인 테스트")
+    @DisplayName("구매한 자동 로또 개수 확인 테스트")
     void check_purchased_lotto_cnt_by_payment_test() {
-        assertThat(new Payment("100000").getPurchasedLottoCnt()).isEqualTo(100);
+        int manualLottoCnt = 50;
+        assertThat(new Payment("100000").getAutoLottoCnt(manualLottoCnt)).isEqualTo(50);
     }
 
 }

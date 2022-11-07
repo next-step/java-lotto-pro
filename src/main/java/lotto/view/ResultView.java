@@ -4,8 +4,9 @@ import lotto.domain.*;
 
 public class ResultView {
 
-    public static void printPurchasedLottoCnt(Lottos lottos) {
-        System.out.println(lottos.getLottosSize() + Messages.NOTIFY_PURCHASES.getMsg());
+    public static void printPurchasedLottoCnt(int manualLottoCnt, int autoLottoCnt) {
+        String msg = String.format(Messages.NOTIFY_PURCHASES.getMsg(), manualLottoCnt, autoLottoCnt);
+        System.out.println(msg);
     }
 
     public static void printGeneratedLotto(Lottos lottos) {

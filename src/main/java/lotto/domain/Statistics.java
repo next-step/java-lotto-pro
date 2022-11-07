@@ -9,16 +9,16 @@ public class Statistics {
     private static final int DEFAULT_COUNT = 0;
     private Map<Winning, Integer> statistics;
 
-    public Statistics(Lottos lottos, WinLotto winLotto) {
-        statistics = setStatistics(lottos, winLotto);
+    public Statistics(Lottos lottos, Lotto winLotto, LottoNumber bonusBall) {
+        statistics = setStatistics(lottos, winLotto, bonusBall);
     }
 
-    private Map<Winning, Integer> setStatistics(Lottos lottos, WinLotto winLotto) {
+    private Map<Winning, Integer> setStatistics(Lottos lottos, Lotto winLotto, LottoNumber bonusBall) {
         Map<Winning, Integer> statistics = new HashMap<>();
 
         for (Lotto lotto : lottos.getLottoList()) {
             int matches = lotto.countMatchNum(winLotto);
-            boolean matchBonus = lotto.isContained(winLotto.getBonusNumber());
+            boolean matchBonus = lotto.isContained(bonusBall);
             Winning winning = Winning.valueOf(matches, matchBonus);
             int lottoCnt = statistics.getOrDefault(winning, DEFAULT_COUNT);
             statistics.put(winning, lottoCnt + 1);

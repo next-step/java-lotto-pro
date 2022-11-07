@@ -1,10 +1,13 @@
 package lotto.domain;
 
+import lotto.util.Common;
+
 public class LottoNumber implements Comparable<LottoNumber>{
 
     private static final int MIN_LOTTO_NUM = 1;
     private static final int MAX_LOTTO_NUM = 45;
     private static final String INVALID_NUMBER_MESSAGE = "로또 번호는 1 이상 45 이하의 숫자여야 합니다.";
+
     private int lottoNumber;
 
     public LottoNumber(int number) {
@@ -13,7 +16,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
     }
 
     public LottoNumber(String number) {
-        int tempLottoNumber = Integer.parseInt(number);
+        int tempLottoNumber = Common.validateNumberType(number);
         validateLottoNumber(tempLottoNumber);
         this.lottoNumber = tempLottoNumber;
     }

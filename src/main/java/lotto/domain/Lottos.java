@@ -8,27 +8,25 @@ public class Lottos {
 
     private List<Lotto> lottos;
 
+    public Lottos() {
+        this.lottos = new ArrayList<>();
+    }
+
     public Lottos(List<Lotto> lottoList) {
         this.lottos = lottoList;
     }
 
-    public Lottos(int lottoCnt) {
-        this.lottos = generateLottos(lottoCnt);
-    }
-
-    private List<Lotto> generateLottos(int lottoCnt) {
-        lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCnt; i++) {
-            lottos.add(new Lotto());
-        }
-        return lottos;
-    }
-
-    public int getLottosSize() {
-        return this.lottos.size();
-    }
-
     public List<Lotto> getLottoList() {
         return Collections.unmodifiableList(lottos);
+    }
+
+    public void addManualLotto(Lotto lotto) {
+        this.lottos.add(lotto);
+    }
+
+    public void genAutoLotto(int autoLottoCnt) {
+        for (int i = 0; i < autoLottoCnt; i++) {
+            lottos.add(new AutoLottoGenerator().genAutoLotto());
+        }
     }
 }

@@ -14,10 +14,11 @@ public class Lotto {
     private static final String INVALID_LENGTH_MESSAGE = "로또 당첨 번호는 6자리여야 합니다.";
     private static final String INVALID_DELIMITER_MESSAGE = "로또 당첨 번호는 ,(콤마)로 구분되어야 합니다.";
     private static final String DUPLICATE_NUMBER_MESSAGE = "로또 당첨 번호는 중복되지 않은 값이어야 합니다.";
+    private static final String ALREADY_EXITS_NUMBER_MESSAGE = "보너스 볼은 당첨 번호와 다른 값이어야 합니다.";
     private List<LottoNumber> lotto;
 
-    public Lotto() {
-        this.lotto = new AutoLottoGenerator().getShuffledNum();
+    public Lotto(List<LottoNumber> input) {
+        this.lotto = input;
     }
 
     public Lotto(String input) {
@@ -74,6 +75,14 @@ public class Lotto {
 
     public int countMatchNum(Lotto winLotto) {
         return (int) lotto.stream().filter(winLotto::isContained).count();
+    }
+
+    public LottoNumber getBonusBall(String input) {
+        LottoNumber bonusBall = new LottoNumber(input);
+        if (this.isContained(bonusBall)) {
+            throw new IllegalArgumentException(ALREADY_EXITS_NUMBER_MESSAGE);
+        }
+        return bonusBall;
     }
 
     @Override
