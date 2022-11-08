@@ -1,9 +1,5 @@
 package view;
 
-import domain.LottoMachine;
-import domain.Lottos;
-import domain.ManualLottoMachine;
-
 import java.util.Scanner;
 
 public class InputView {
@@ -24,21 +20,25 @@ public class InputView {
         return sc.nextInt();
     }
 
-    public static int inputManualLottoCount(){
+    public static int inputManualLottoCount() {
         sc.nextLine();
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         return sc.nextInt();
     }
 
-    public static Lottos inputManualLottos(int manualLottoCount, Lottos lottos ){
+    public static void inputManualLottosPrint(){
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static String[] inputManualLottos(int manualLottoCount) {
+        String[] inputManualLottoNumbers = new String[manualLottoCount];
         sc.nextLine();
-        LottoMachine lottoMachine = new ManualLottoMachine();
-        for(int i=0; i<manualLottoCount; i++){
-          lottos.add(lottoMachine.splitPurchaseLottoNumbers(sc.nextLine()));
+
+        for (int i = 0; i < inputManualLottoNumbers.length; i++) {
+            inputManualLottoNumbers[i] = sc.nextLine();
         }
 
-        return lottos;
+        return inputManualLottoNumbers;
     }
 
 }

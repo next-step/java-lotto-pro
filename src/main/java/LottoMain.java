@@ -13,7 +13,7 @@ public class LottoMain {
         int lottoTicketCount = lottoMain.getLottoTicketCount();
         //수동 구매 횟수 입력
         int manualLottoTicketCount = InputView.inputManualLottoCount();
-        // 자동으로 발급된 로또 번호 저장
+        // 자동,수동 발급된 로또 번호 저장
         Lottos lottos = lottoMain.purchaseLotto(lottoTicketCount, manualLottoTicketCount);
         // 당첨 비교
         WinLotto winLotto = new WinLotto(InputView.inputWinLottoNumbers(), new LottoNumber(InputView.inputBonusNumber()));
@@ -40,16 +40,18 @@ public class LottoMain {
 
     public Lottos purchaseLotto(int lottoTicketCount, int manualTicketCount) {
         Lottos lottos = new Lottos(new ArrayList<>());
-
+        // 수동 로또 구입
         if (manualTicketCount > 0) {
-            lottos = InputView.inputManualLottos(manualTicketCount, lottos);
+            InputView.inputManualLottosPrint();
+            String[] manualLottoNumbers = InputView.inputManualLottos(manualTicketCount);
+            LottoMachine lottoMachine = new ManualLottoMachine(manualLottoNumbers, lottos);
+            lottoMachine.purchaseLotto();
         }
-
-        LottoMachine lottoMachine = new AutoLottoMachine();
-        lottoMachine.purchaseLotto(lottoTicketCount - manualTicketCount, lottos);
+        // 자동 로또 구입
+        LottoMachine lottoMachine = new AutoLottoMachine(lottoTicketCount - manualTicketCount, lottos);
+        lottoMachine.purchaseLotto();
 
         OutputView.outputCountLottoTicket(lottoTicketCount, manualTicketCount);
-        // 지난주 당첨번호 입력
         OutputView.outputPurchaseLottoList(lottos);
 
         return lottos;

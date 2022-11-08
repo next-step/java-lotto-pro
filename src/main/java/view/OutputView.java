@@ -1,6 +1,7 @@
 package view;
 
 import domain.*;
+
 import java.util.Arrays;
 import java.util.Comparator;
 
