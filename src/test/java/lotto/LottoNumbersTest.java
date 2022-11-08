@@ -12,7 +12,7 @@ public class LottoNumbersTest {
     public void 당첨로또번호_저장_확인(int Expected) {
         String inputStr = "1, 2, 3, 4, 5, 6";
         LottoNumbers lottoNumbers = new LottoNumbers(inputStr);
-        assertThat(lottoNumbers.getLottoNumbers()).contains(LottoNumber.of(Expected));
+        assertThat(lottoNumbers.LottoNumbersToListOfLottoNumber()).contains(LottoNumber.of(Expected));
     }
 
     @ParameterizedTest

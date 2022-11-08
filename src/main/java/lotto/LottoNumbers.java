@@ -44,7 +44,7 @@ public class LottoNumbers {
         }
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public List<LottoNumber> LottoNumbersToListOfLottoNumber() {
         return lottoNumbers;
     }
 

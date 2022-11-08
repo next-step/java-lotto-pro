@@ -40,7 +40,7 @@ public class Buyer {
     public int buyLotto() {
         int cnt = INIT_NUM;
         while (amount.getMoney() > 0) {
-            lottos.add(new Lotto());
+            lottos.add(LottoGenerator.generateLotto());
             this.amount.substractMoney(DEFAULT_PRICE);
             cnt++;
         }
