@@ -18,8 +18,11 @@ public class PurchaseMoney {
     }
 
     public long numberOfRandomLottos(long manualLottoCount) {
-        long totalLottoCount = money() / ONE_LOTTO_PRICE.money();
-        return totalLottoCount - manualLottoCount;
+        return divide(ONE_LOTTO_PRICE) - manualLottoCount;
+    }
+
+    public long divide(Money otherMoney) {
+        return this.money.money() / otherMoney.money();
     }
 
     public boolean isLackOfMoney(long manualLottoCount) {
