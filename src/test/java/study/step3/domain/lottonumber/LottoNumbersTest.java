@@ -32,7 +32,7 @@ class LottoNumbersTest {
     }
 
     @Test
-    @DisplayName("로또 번호 컬렉션 생성시 중복 된 로또 번호가 있으면 [IllegalArgumentException] 예외처리 한다")
+    @DisplayName("로또 번호 컬렉션 생성시 중복 된 로또 번호가 있으면 [IllegalArgum외entException] 예외처리 한다")
     void create_with_duplicated_lotto_number_test() {
         List<LottoNumber> lottoNumbers = Arrays.asList(
                 LottoNumber.of(1),
@@ -54,5 +54,13 @@ class LottoNumbersTest {
         LottoNumbers winningsLottoNumbers = LottoNumbersGenerator.createLottoNumbers(1, 12, 22, 33, 32, 31);
         long matchCount = lottoNumbers.match(winningsLottoNumbers);
         assertThat(matchCount).isEqualTo(4L);
+    }
+
+    @Test
+    @DisplayName("주어진 로또 번호의 포함 여부를 반환한다")
+    void contains_with_lotto_number_test() {
+        LottoNumbers lottoNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6);
+        LottoNumber lottoNumber = LottoNumber.of(1);
+        assertThat(lottoNumbers.contains(lottoNumber)).isTrue();
     }
 }
