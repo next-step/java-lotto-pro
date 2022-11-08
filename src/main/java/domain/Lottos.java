@@ -4,6 +4,8 @@ import domain.strategy.RandomNumberGenerateStrategy;
 
 import java.util.List;
 
+import static domain.strategy.RandomNumberGenerateStrategy.DEFAULT;
+
 public class Lottos {
     private final SelfPickLottos selfPickLottos;
     private final QuickPickLottos quickPickLottos;
@@ -13,9 +15,9 @@ public class Lottos {
         this.quickPickLottos = quickPickLottos;
     }
 
-    public static Lottos createLottos(SelfPickLottos selfPickLottos, int money) {
-        QuickPickLottos quickPickLottos = QuickPickLottos.of(money - selfPickLottos.price(),
-                RandomNumberGenerateStrategy.DEFAULT);
+    public static Lottos createLottos(SelfPickLottos selfPickLottos, Money money) {
+        int remain = money.spend(selfPickLottos.price()).getMoney();
+        QuickPickLottos quickPickLottos = QuickPickLottos.of(remain, DEFAULT);
         return new Lottos(selfPickLottos, quickPickLottos);
     }
 

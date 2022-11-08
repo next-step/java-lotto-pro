@@ -10,7 +10,7 @@ import view.ResultView;
 
 public class LottoController {
     public void purchase() {
-        int money = InputView.inputMoney();
+        Money money = new Money(InputView.inputMoney());
         SelfPickLottos selfPickLottos = new SelfPickLottos(getSelfPickNumbers());
 
         Lottos lottos = LottoMachine.issueLottos(selfPickLottos, money);

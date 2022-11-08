@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoMachineTest {
     @ParameterizedTest
     @MethodSource("arrangeIssueLottos")
-    void 금액에_따른_로또를_발급한다(SelfPickLottos selfPickNumbers, int money, int expectedAmount) {
+    void 금액에_따른_로또를_발급한다(SelfPickLottos selfPickNumbers, Money money, int expectedAmount) {
         Lottos lottos = LottoMachine.issueLottos(selfPickNumbers, money);
         assertThat(lottos.size()).isEqualTo(expectedAmount);
     }
@@ -24,8 +24,8 @@ class LottoMachineTest {
         Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         return Stream.of(
                 Arguments.arguments(
-                        new SelfPickLottos(Collections.emptyList()), 1000, 1,
-                        new SelfPickLottos(Collections.singletonList(numbers)), 1000, 1,
-                        new SelfPickLottos(Arrays.asList(numbers, numbers)), 10000, 10));
+                        new SelfPickLottos(Collections.emptyList()), new Money(1000), 1,
+                        new SelfPickLottos(Collections.singletonList(numbers)), new Money(1000), 1,
+                        new SelfPickLottos(Arrays.asList(numbers, numbers)), new Money(10000), 10));
     }
 }
