@@ -23,12 +23,6 @@ public class Buyer {
         this.lottos = lottos;
     }
 
-    public Buyer(String inputMoney, String directInputLottoNumber) {
-        amount = new Money(inputMoney);
-        lottos = new Lottos();
-        makeDirectInputLottoNumber(directInputLottoNumber);
-    }
-
     private void makeDirectInputLottoNumber(String directInputLottoNumber) {
         if (directInputLottoNumber.length() == ZERO) {
             return;
@@ -59,5 +53,9 @@ public class Buyer {
 
     public List<Lotto> getLottos() {
         return lottos.getLottos();
+    }
+
+    public void buyLotto(String directInputLottoNumber) {
+        makeDirectInputLottoNumber(directInputLottoNumber);
     }
 }
