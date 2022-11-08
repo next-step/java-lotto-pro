@@ -4,7 +4,7 @@ import lotto.constant.LottoMessage;
 
 public class Money {
     private static final int LOTTO_PRICE = 1000;
-    private static int price;
+    private final int price;
     public Money(int price) {
         this.price = validateMoney(price);
     }
@@ -27,7 +27,7 @@ public class Money {
         }
     }
 
-    public static int lottoCount() {
+    public int lottoCount() {
         return price / LOTTO_PRICE;
     }
 
@@ -35,7 +35,7 @@ public class Money {
         return price;
     }
 
-    public static int totalLottoPrice() {
+    public int totalLottoPrice() {
         return lottoCount() * LOTTO_PRICE;
     }
 }

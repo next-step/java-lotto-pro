@@ -64,4 +64,15 @@ public class LottoTest {
         Lotto winLotto = new Lotto(winNumbers);
         assertThat(lotto.countMatchNumber(winLotto)).isEqualTo(4);
     }
+
+    @Test
+    @DisplayName("Lotto Bonus 숫자와 당첨 번호 중복 시, 에러 발생")
+    public void Lotto_bonus_숫자_duplicate_win_lottos_에러_발생() {
+        assertThatThrownBy(() -> {
+            List<Integer> winNumbers = new ArrayList<>(Arrays.asList(1, 20, 30, 40, 34, 45));
+            Lotto winLotto = new Lotto(winNumbers);
+            LottoNumber bonus = new LottoNumber(1);
+            winLotto.duplicateWinBonus(bonus);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }

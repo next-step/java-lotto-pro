@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoResultTest {
     LottoResult result;
     Lottos lottos;
-    LottoNumber lottoNumber;
+    LottoNumber bonusNumber;
 
     @BeforeEach
     void init() {
@@ -26,8 +26,8 @@ public class LottoResultTest {
       lottoList.add(new Lotto(Arrays.asList(1,10,22,36,42,44)));
       Lotto winLotto = new Lotto(Arrays.asList(1,10,20,35,38,41));
       lottos = new Lottos(lottoList);
-      lottoNumber = new LottoNumber(3);
-      result = new LottoResult(lottos, winLotto, 6000,lottoNumber);
+        bonusNumber = new LottoNumber(3);
+      result = new LottoResult(lottos, winLotto, 6000,bonusNumber);
     }
 
     @Test

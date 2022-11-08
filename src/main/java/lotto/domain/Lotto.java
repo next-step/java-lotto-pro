@@ -63,4 +63,10 @@ public class Lotto {
     public boolean matchBonus(LottoNumber bonus) {
         return lottoNumbers.contains(bonus);
     }
+
+    public void duplicateWinBonus(LottoNumber bonusNumber) {
+        if (lottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(LottoMessage.ERROR_MESSAGE_DUPLICATE_BONUS_WIN);
+        }
+    }
 }

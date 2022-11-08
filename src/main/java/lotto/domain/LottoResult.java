@@ -24,7 +24,7 @@ public class LottoResult {
     }
 
     private void calculateWinCount(Lottos lottos, Lotto winLotto, LottoNumber bonus) {
-        rewardMap = Lottos.calculateWinResult(lottos, winLotto, bonus);
+        rewardMap = lottos.calculateWinResult(winLotto, bonus);
     }
 
     public int getRewardMapCount(Rank type) {

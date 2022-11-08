@@ -3,12 +3,12 @@ package lotto.domain;
 import java.util.*;
 
 public class Lottos{
-    static List<Lotto> lottoList;
+    List<Lotto> lottoList;
     public Lottos(List<Lotto> lottoList) {
         this.lottoList = lottoList;
     }
 
-    public static Map<Rank, Integer> calculateWinResult(Lottos lottos, Lotto winLotto, LottoNumber bonus) {
+    public Map<Rank, Integer> calculateWinResult(Lotto winLotto, LottoNumber bonus) {
         Map<Rank, Integer> rewardMap = new HashMap<>();
         for (Lotto lotto : lottoList) {
             Rank rewardType = Rank.valueOf(lotto.countMatchNumber(winLotto), lotto.matchBonus(bonus));
