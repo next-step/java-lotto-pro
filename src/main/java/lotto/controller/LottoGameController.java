@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import java.util.List;
+
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicketMachine;
@@ -11,7 +13,6 @@ import lotto.domain.RankResult;
 import lotto.domain.Ranks;
 import lotto.domain.TicketCount;
 import lotto.domain.WinningLottoTicket;
-import lotto.reader.ConsoleNumberReader;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -90,12 +91,25 @@ public class LottoGameController {
 	}
 
 	private LottoTickets randomLottoTickets(Money randomLottoPrice) {
-		return lottoTicketMachine.lottoTickets(randomLottoPrice, new RandomGenerateStrategy());
+		List<LottoNumbers> randomLottoNumbersList = randomLottoNumbers(randomLottoPrice);
+		return lottoTicketMachine.lottoTickets(randomLottoNumbersList);
 	}
 
 	private LottoTickets manualLottoTickets(Money manualLottoPrice) {
+		List<LottoNumbers> manualLottoNumbers = manualLottoNumbers(manualLottoPrice);
+		return lottoTicketMachine.lottoTickets(manualLottoNumbers);
+	}
+
+	private List<LottoNumbers> randomLottoNumbers(Money randomLottoPrice) {
+		TicketCount randomTicketCount = lottoTicketMachine.ticketCount(randomLottoPrice);
+		return randomTicketCount.map(i -> RandomGenerateStrategy.getInstance().generate());
+	}
+
+	private List<LottoNumbers> manualLottoNumbers(Money manualLottoPrice) {
 		resultView.printManualLottiTicketsMessage();
-		return lottoTicketMachine.lottoTickets(manualLottoPrice, new ManualGenerateStrategy(new ConsoleNumberReader()));
+		TicketCount ticketCount = lottoTicketMachine.ticketCount(manualLottoPrice);
+		LottoNumbers lottoNumbers = InputView.readLottoNumbers();
+		return ticketCount.map(i -> ManualGenerateStrategy.from(lottoNumbers).generate());
 	}
 
 }

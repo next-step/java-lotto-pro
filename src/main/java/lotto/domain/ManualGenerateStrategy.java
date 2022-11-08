@@ -1,18 +1,21 @@
 package lotto.domain;
 
 import lotto.domain.strategy.GenerateStrategy;
-import lotto.reader.NumberReader;
 
 public class ManualGenerateStrategy implements GenerateStrategy {
 
-	private final NumberReader<LottoNumbers> numberReader;
+	private final LottoNumbers lottoNumbers;
 
-	public ManualGenerateStrategy(NumberReader<LottoNumbers> numberReader) {
-		this.numberReader = numberReader;
+	private ManualGenerateStrategy(LottoNumbers lottoNumbers) {
+		this.lottoNumbers = lottoNumbers;
+	}
+
+	public static ManualGenerateStrategy from(LottoNumbers lottoNumbers) {
+		return new ManualGenerateStrategy(lottoNumbers);
 	}
 
 	@Override
 	public LottoNumbers generate() {
-		return numberReader.read();
+		return this.lottoNumbers;
 	}
 }

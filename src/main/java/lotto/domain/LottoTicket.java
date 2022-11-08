@@ -20,6 +20,10 @@ public class LottoTicket {
 		return new LottoTicket(LottoNumbers.from(lottoNumbers));
 	}
 
+	public static LottoTicket from(LottoNumbers lottoNumbers) {
+		return new LottoTicket(lottoNumbers);
+	}
+
 	public LottoNumbers lottonumbers() {
 		return lottoNumbers;
 	}
@@ -32,6 +36,7 @@ public class LottoTicket {
 	public String toString() {
 		return "[" + lottoNumbers.toString() + "]";
 	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -31,26 +32,29 @@ class LottoTicketMachineTest {
 	@Test
 	@DisplayName("천원 이하의 값을 입력 시 InvalidMoneyException 발생")
 	void throwInvalidMoneyExceptionTest() {
-		Money money = Money.from(500);
-		TestGenerateStrategy strategy = new TestGenerateStrategy();
-		assertThatThrownBy(() -> lottoTicketMachine.lottoTickets(money, strategy))
+		Money moneyLessThan1_000 = Money.from(500);
+		assertThatThrownBy(() -> lottoTicketMachine.ticketCount(moneyLessThan1_000))
 			.isInstanceOf(InvalidMoneyException.class);
 	}
 
 	@ParameterizedTest
 	@CsvSource(value = {"1000:1", "2000:2", "3000:3", "4000:4", "5000:5", "6000:6", "7000:7", "8000:8", "9000:9",
 		"10000:10"}, delimiter = ':')
-	@DisplayName("입력한 금액에 따라 로또 티켓 구매")
+	@DisplayName("입력한 금액에 따라 로또 티켓 수 반환")
 	void buyLottoTicketsTest(int money, int expected) {
-		LottoTickets lottoTickets = lottoTicketMachine.lottoTickets(Money.from(money), new TestGenerateStrategy());
-		assertThat(lottoTickets.count()).isEqualTo(expected);
+		Money inputMoney = Money.from(money);
+		assertThat(lottoTicketMachine.ticketCount(inputMoney).count()).isEqualTo(expected);
 	}
 
 	@Test
-	@DisplayName("생성 전략에서 지정한 번호로 로또 티켓 생성")
-	void generateLottoTicketTest() {
-		LottoTickets lottoTickets = lottoTicketMachine.lottoTickets(Money.from(1000), new TestGenerateStrategy());
-		LottoTicket lottoTicket = lottoTickets.getLottoTickets().get(0);
-		assertThat(lottoTicket).isEqualTo(LottoTicket.from(Set.of(1, 2, 3, 4, 5, 6)));
+	@DisplayName("로또 번호 리스트를 통해 로또 티켓 생성")
+	void createLottoTicketTest() {
+		TestGenerateStrategy strategy = new TestGenerateStrategy();
+		List<LottoNumbers> lottoNumbersList = List.of(strategy.generate(), strategy.generate());
+
+		LottoTickets lottoTickets = lottoTicketMachine.lottoTickets(lottoNumbersList);
+		assertThat(lottoTickets.getLottoTickets())
+			.hasSize(2)
+			.containsExactly(LottoTicket.from(Set.of(1, 2, 3, 4, 5, 6)), LottoTicket.from(Set.of(1, 2, 3, 4, 5, 6)));
 	}
 }
