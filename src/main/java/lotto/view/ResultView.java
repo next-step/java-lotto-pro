@@ -11,6 +11,7 @@ import lotto.model.domain.PurchaseInfo;
 import lotto.model.domain.WinCriterion;
 import lotto.model.domain.WinResult;
 import lotto.model.dto.LottoResult;
+import utils.MoneyFormat;
 
 public class ResultView {
 
@@ -45,7 +46,7 @@ public class ResultView {
     private void printWinResult(WinResult winResult) {
         List<WinCriterion> winCriteria = winResult.getWinCriterionFromWinResult();
         for (WinCriterion winCriterion : winCriteria) {
-            System.out.print(winCriterion.getMatchCount() + "개 일치 (" + winCriterion.getPrize() + "원)");
+            System.out.print(winCriterion.getMatchCount() + "개 일치 (" + MoneyFormat.getMoneyExpression(winCriterion.getPrize()) + "원)");
             System.out.println("- " + winResult.getCountByWinCriterion(winCriterion) + "개");
         }
     }
