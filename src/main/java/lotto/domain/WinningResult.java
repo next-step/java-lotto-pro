@@ -1,7 +1,10 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import static lotto.domain.PurchaseAmount.LOTTO_TICKET_PRICE;
 
 public class WinningResult {
     private static final int DEFAULT_VALUE = 0;
@@ -15,22 +18,29 @@ public class WinningResult {
         }
     }
 
-    public Map<WinningLottoRank, Integer> reportRanks(WinningLotto winningLotto, Lottos lottos) {
-        for (Lotto lotto : lottos.lottos()) {
-            addRank(winningLotto.rank(lotto));
-        }
-        return new HashMap<>(ranks);
-    }
-
     public void addRank(WinningLottoRank rank) {
         ranks.put(rank, ranks.get(rank) + DEFAULT_ADD_VALUE);
     }
 
-    public double reportYield(PurchaseAmount purchaseAmount) {
-        int totalReward = 0;
-        for (WinningLottoRank rank : ranks.keySet()) {
-            totalReward += ranks.get(rank) * rank.getReward();
-        }
-        return (double) totalReward / (double) purchaseAmount.purchaseAmount();
+    public Map<WinningLottoRank, Integer> reportRanks() {
+        return Collections.unmodifiableMap(ranks);
+    }
+
+    public double reportYield() {
+        return (double) totalReward() / (double) totalPurchaseAmount();
+    }
+
+    private long totalReward() {
+        return ranks.keySet()
+                .stream()
+                .mapToLong(rank -> rank.getReward() * ranks.get(rank))
+                .sum();
+    }
+
+    private int totalPurchaseAmount() {
+        return ranks.keySet()
+                .stream()
+                .mapToInt(ranks::get)
+                .sum() * LOTTO_TICKET_PRICE;
     }
 }

@@ -107,3 +107,40 @@
 ### View
 - Input
   - [x] 보너스 번호 입력받아 당첨로또 구성
+
+### 4단계 피드백
+- WinningLottoRank
+  - [x] toString 부분 View로 변경
+- [x] Lottos 일급 컬렉션 삭제
+
+## 5단계 - 로또(수동)
+### 프로그래밍 요구사항
+- NPE 발생 가능 부분 파악
+  - [x] Optional 로 wrapping
+
+### domain
+- 로또
+  - [x] 피드백 강의 내용 반영 : List --> Set
+- 로또번호
+  - [x] 피드백 강의 내용 반영 : 로또번호 캐싱을 Strategy --> LottoNumber로 변경
+- 로또판매자
+  - [x] 로또 판매 시 수동으로 입력한 List<Lotto> 를 포함하여 발급
+
+### view
+- inputView
+  - [x] 수동 발급 로또 리스트 입력받기
+
+### 5단계 피드백
+- Lottos 타입 관리 필요
+  - [x] List<Lotto> 를 필드로 가지는 일급컬렉션
+  - [x] 피드백 강의에서 다루었던 Lottos 메소드 기능 개선
+    - input : WinningLotto
+    - output : WinningResult
+- Lotto 
+  - [x] NPE 테스트 코드 추가
+- WinningResult
+  - [x] int Overflow를 고려할 것
+- LottoSeller
+  - [x] `자동판매`와 `수동판매` 메소드를 분리해 볼 것(자동 + 수동 로직 고려)
+- 일급컬렉션 전체
+  - [x] Collections.unmodifiable* 확인 후 교체

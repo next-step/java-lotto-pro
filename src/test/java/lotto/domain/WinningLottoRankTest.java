@@ -17,7 +17,7 @@ public class WinningLottoRankTest {
     @BeforeEach
     void setUp() {
         lotto = new Lotto(IntStream.rangeClosed(1, 6)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()));
     }
 
@@ -26,9 +26,9 @@ public class WinningLottoRankTest {
     void FIRST_테스트() {
         WinningLotto winningLotto = new WinningLotto(new Lotto(IntStream
                 .rangeClosed(1, 6)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()))
-                , new LottoNumber(7));
+                , LottoNumber.of(7));
         WinningLottoRank rank = winningLotto.rank(lotto);
 
         assertThat(rank).isEqualTo(WinningLottoRank.FIRST);
@@ -39,9 +39,9 @@ public class WinningLottoRankTest {
     void SECOND_테스트() {
         WinningLotto winningLotto = new WinningLotto(new Lotto(IntStream
                 .rangeClosed(2, 7)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()))
-                , new LottoNumber(1));
+                , LottoNumber.of(1));
         WinningLottoRank rank = winningLotto.rank(lotto);
 
         assertThat(rank).isEqualTo(WinningLottoRank.SECOND);
@@ -52,9 +52,9 @@ public class WinningLottoRankTest {
     void THIRD_테스트() {
         WinningLotto winningLotto = new WinningLotto(new Lotto(IntStream
                 .rangeClosed(2, 7)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()))
-                , new LottoNumber(8));
+                , LottoNumber.of(8));
         WinningLottoRank rank = winningLotto.rank(lotto);
 
         assertThat(rank).isEqualTo(WinningLottoRank.THIRD);
@@ -65,9 +65,9 @@ public class WinningLottoRankTest {
     void FOURTH_테스트() {
         WinningLotto winningLotto = new WinningLotto(new Lotto(IntStream
                 .rangeClosed(3, 8)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()))
-                , new LottoNumber(9));
+                , LottoNumber.of(9));
         WinningLottoRank rank = winningLotto.rank(lotto);
 
         assertThat(rank).isEqualTo(WinningLottoRank.FOURTH);
@@ -78,9 +78,9 @@ public class WinningLottoRankTest {
     void FIFTH_테스트() {
         WinningLotto winningLotto = new WinningLotto(new Lotto(IntStream
                 .rangeClosed(4, 9)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()))
-                , new LottoNumber(10));
+                , LottoNumber.of(10));
         WinningLottoRank rank = winningLotto.rank(lotto);
 
         assertThat(rank).isEqualTo(WinningLottoRank.FIFTH);
@@ -99,9 +99,9 @@ public class WinningLottoRankTest {
     void MISS_테스트(int left, int right, int bonusNumber) {
         WinningLotto winningLotto = new WinningLotto(new Lotto(IntStream
                 .rangeClosed(left, right)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()))
-                , new LottoNumber(bonusNumber));
+                , LottoNumber.of(bonusNumber));
         WinningLottoRank rank = winningLotto.rank(lotto);
         assertThat(rank).isEqualTo(WinningLottoRank.MISS);
     }

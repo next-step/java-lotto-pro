@@ -5,16 +5,23 @@ import java.util.List;
 
 public class LottoSeller {
     private LottoSeller() {
-
     }
 
-    public static Lottos sellLottos(PurchaseAmount purchaseAmount) {
-        int lottoTicketCount = purchaseAmount.getLottoTicketCount();
-        List<Lotto> lottos = new ArrayList<>();
+    public static Lottos sellManualLottos(List<Lotto> manualLottos) {
+        return new Lottos(manualLottos);
+    }
+
+    public static Lottos sellAutoLottos(int lottoTicketCount) {
+        List<Lotto> autoLottos = new ArrayList<>();
         for (int i = 0; i < lottoTicketCount; i++) {
-            lottos.add(getLotto(new AutoLottoCreateStrategy()));
+            autoLottos.add(getLotto(new AutoLottoCreateStrategy()));
         }
-        return new Lottos(lottos);
+        return new Lottos(autoLottos);
+    }
+
+    public static Lottos integrationLottos(Lottos source, Lottos target) {
+        source.addLottos(target);
+        return source;
     }
 
     private static Lotto getLotto(LottoCreateStrategy lottoCreateStrategy) {

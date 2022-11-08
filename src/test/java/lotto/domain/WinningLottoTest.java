@@ -15,9 +15,9 @@ public class WinningLottoTest {
     @Test
     void 당첨로또_생성() {
         WinningLotto winningLotto = new WinningLotto(new Lotto(IntStream.rangeClosed(1, 6)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()))
-                , new LottoNumber(7));
+                , LottoNumber.of(7));
 
         assertThat(winningLotto).isInstanceOf(WinningLotto.class);
     }
@@ -26,9 +26,9 @@ public class WinningLottoTest {
     @Test
     void 당첨로또_보너스번호_중복_예외() {
         assertThatThrownBy(() -> new WinningLotto(new Lotto(IntStream.rangeClosed(1, 6)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()))
-                , new LottoNumber(6)))
+                , LottoNumber.of(6)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -2,6 +2,7 @@ package lotto.ui;
 
 import lotto.configuration.AppConfig;
 import lotto.domain.LottoSeller;
+import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,10 +16,12 @@ public class ResultViewTest {
         resultView = AppConfig.resultView();
     }
 
-    @DisplayName("Lottos 출력 테스트")
+    @DisplayName("Lotto List 출력 테스트")
     @Test
     void Lottos_출력테스트() {
-        resultView.printLottoTickets(new PurchaseAmount(14000));
-        resultView.printLottos(LottoSeller.sellLottos(new PurchaseAmount(14000)).lottos());
+        PurchaseAmount purchaseAmount = new PurchaseAmount(14000);
+        Lottos lottos = LottoSeller.sellAutoLottos(purchaseAmount.getLottoTicketCount());
+
+        resultView.printLottos(lottos);
     }
 }

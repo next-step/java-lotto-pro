@@ -1,16 +1,27 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public Lottos(List<Lotto> lottoList) {
+        this.lottos = lottoList;
     }
 
     public List<Lotto> lottos() {
-        return new ArrayList<>(lottos);
+        return Collections.unmodifiableList(lottos);
+    }
+
+    public void addLottos(Lottos addLottos) {
+        this.lottos.addAll(addLottos.lottos());
+    }
+
+
+    public WinningResult match(WinningLotto winningLotto) {
+        WinningResult result = new WinningResult();
+        lottos.forEach(lotto -> result.addRank(winningLotto.rank(lotto)));
+        return result;
     }
 }
