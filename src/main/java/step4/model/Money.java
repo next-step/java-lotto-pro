@@ -9,6 +9,10 @@ public class Money implements Comparable<Money> {
 
     private double money;
 
+    public Money() {
+        this.money = 0;
+    }
+
     public Money(String text) {
         int money = convertNumber(text);
         checkOutOfSize(money);
@@ -20,14 +24,12 @@ public class Money implements Comparable<Money> {
         this.money = money;
     }
 
-    private int convertNumber(String text) {
-        int result;
+    private static int convertNumber(String text) {
         try {
-            result = Integer.parseInt(text);
+            return Integer.parseInt(text);
         } catch (NumberFormatException e) {
             throw new LottoFormatException(ErrorMessageConstant.NOT_NUMBER);
         }
-        return result;
     }
 
     private void checkOutOfSize(double number) {

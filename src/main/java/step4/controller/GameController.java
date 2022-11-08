@@ -1,31 +1,39 @@
 package step4.controller;
 
-import step4.model.Game;
-import step4.model.LottoNumber;
-import step4.model.LottoResult;
-import step4.model.LottoWinningStatistics;
+import step4.model.*;
+import step4.model.generator.LottoAutoGenerator;
+import step4.model.generator.LottoManualGenerator;
 import step4.util.StringUtil;
 import step4.view.InputView;
 import step4.view.OutputView;
-
-import java.util.List;
 
 public class GameController {
 
     Game game;
 
     public void startGame() {
-        game = new Game(InputView.inputLottoBuyMoney());
-        OutputView.printLottoBuyCount(game.getLottoBuyCount());
-        List<LottoResult> lottoResults = game.startLottoGame();
-        OutputView.printBuyLottoResult(lottoResults);
-        
-        LottoResult winLottoResult = new LottoResult(StringUtil.parseLottoText(InputView.inputWinnerLottoResult()));
-        LottoNumber bonusLottoNumber = new LottoNumber(InputView.inputLottoBonusNumber());
+        Money money = new Money(InputView.inputLottoBuyMoney());
+        LottoBuyCount lottoTotalCount = new LottoBuyCount(money);
+        LottoBuyCount lottoManualBuyCount = new LottoBuyCount(InputView.inputBuyManualLottoCount());
+        LottoBuyCount lottoAutoBuyCount = lottoTotalCount.minus(lottoManualBuyCount);
 
-        LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(lottoResults, winLottoResult, bonusLottoNumber);
+        game = new Game();
+
+        game.startLottoGame(
+                new LottoManualGenerator(InputView.inputBuyManualLottos(lottoManualBuyCount), lottoManualBuyCount)
+        );
+        game.startLottoGame(new LottoAutoGenerator(lottoAutoBuyCount));
+
+        OutputView.printLottoBuyCount(lottoManualBuyCount, lottoAutoBuyCount);
+        OutputView.printBuyLottoResult(game.getTotalLottos());
+
+        Lotto winLotto = new Lotto(StringUtil.parseLottoText(InputView.inputWinnerLottoResult()));
+        LottoNumber bonusLottoNumber = LottoNumber.valueOf(InputView.inputLottoBonusNumber());
+
+        LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(
+                game.getTotalLottos(), new WinningLotto(winLotto, bonusLottoNumber)
+        );
         OutputView.printLottoStatistics(lottoWinningStatistics.getLottoWinningStatistics()
-                , lottoWinningStatistics.getTotalProfitPercent(game.getBuyMoney()));
+                , lottoWinningStatistics.getTotalProfitPercent(money));
     }
-
 }

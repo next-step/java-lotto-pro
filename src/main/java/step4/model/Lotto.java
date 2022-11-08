@@ -3,22 +3,27 @@ package step4.model;
 import step4.constant.ErrorMessageConstant;
 import step4.constant.LottoConstant;
 import step4.exception.LottoFormatException;
+import step4.util.StringUtil;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class LottoResult {
-    List<LottoNumber> lottoNumbers;
+public class Lotto {
+    private final List<LottoNumber> lottoNumbers;
 
-    public LottoResult(List<LottoNumber> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         checkLottoOutOfSize((int) lottoNumbers.stream().distinct().count());
         this.lottoNumbers = lottoNumbers.stream().distinct().sorted().collect(Collectors.toList());
     }
 
-    public LottoResult(String[] lottoNumbersText) {
+    public Lotto(String[] lottoNumbersText) {
         this(getLottoNumbersFromTexts(lottoNumbersText));
+    }
+
+    public Lotto(String lottoNumbersText) {
+        this(StringUtil.parseLottoText(lottoNumbersText));
     }
 
     private static List<LottoNumber> getLottoNumbersFromTexts(String[] lottoNumbers) {
@@ -26,7 +31,7 @@ public class LottoResult {
             throw new IllegalArgumentException(ErrorMessageConstant.EMPTY_TEXT);
         }
 
-        return Arrays.stream(lottoNumbers).map(LottoNumber::new).collect(Collectors.toList());
+        return Arrays.stream(lottoNumbers).map(LottoNumber::valueOf).collect(Collectors.toList());
     }
 
     private void checkLottoOutOfSize(int lottoNumbersSize) {
@@ -35,8 +40,8 @@ public class LottoResult {
         }
     }
 
-    public int getEqualCount(LottoResult otherLottoResult) {
-        return (int) this.lottoNumbers.stream().filter(otherLottoResult::isContains).count();
+    public int getEqualCount(Lotto otherLotto) {
+        return (int) this.lottoNumbers.stream().filter(otherLotto::isContains).count();
     }
 
 
@@ -52,7 +57,7 @@ public class LottoResult {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        LottoResult that = (LottoResult) o;
+        Lotto that = (Lotto) o;
         return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 

@@ -4,37 +4,47 @@ import step4.constant.ErrorMessageConstant;
 import step4.constant.LottoConstant;
 import step4.exception.LottoFormatException;
 
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+
+    static {
+        IntStream.rangeClosed(LottoConstant.LOTTO_MIN_NUM, LottoConstant.LOTTO_MAX_NUM)
+                .forEach(num ->
+                        lottoNumbers.put(num, new LottoNumber(num))
+                );
+    }
 
     private final int number;
 
-    public LottoNumber(String text) {
-        int lottoNumber = convertNumber(text);
-        checkOutOfSize(lottoNumber);
-        this.number = lottoNumber;
-    }
-
-    public LottoNumber(int number) {
-        checkOutOfSize(number);
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private int convertNumber(String text) {
-        int result;
+    public static LottoNumber valueOf(int number) {
+        LottoNumber lottoNumber = lottoNumbers.get(number);
+        if (lottoNumber == null) {
+            throw new LottoFormatException(ErrorMessageConstant.OUT_OF_SIZE_LOTTO_NUMBER);
+        }
+        return lottoNumber;
+    }
+
+    public static LottoNumber valueOf(String text) {
+        return valueOf(convertNumber(text));
+    }
+
+    private static int convertNumber(String text) {
         try {
-            result = Integer.parseInt(text);
+            return Integer.parseInt(text);
         } catch (NumberFormatException e) {
             throw new LottoFormatException(ErrorMessageConstant.NOT_NUMBER);
         }
-        return result;
     }
 
-    private void checkOutOfSize(int number) {
-        if (number < LottoConstant.LOTTO_MIN_NUM || number > LottoConstant.LOTTO_MAX_NUM) {
-            throw new LottoFormatException(ErrorMessageConstant.OUT_OF_SIZE_LOTTO_NUMBER);
-        }
+    public static List<LottoNumber> getLottoCandidateNumbers() {
+        return new ArrayList<>(lottoNumbers.values());
     }
 
     @Override

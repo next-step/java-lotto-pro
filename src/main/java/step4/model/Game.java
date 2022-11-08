@@ -1,37 +1,17 @@
 package step4.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import step4.model.generator.LottoGenerator;
 
 public class Game {
-    private final LottoGenerator lottoGenerator = new LottoGenerator();
-    private final LottoBuyCount lottoBuyCount;
-    private Money buyMoney;
+    private Lottos totalLottos = new Lottos();
 
-    public Game(int count) {
-        this.lottoBuyCount = new LottoBuyCount(count);
+    public void startLottoGame(LottoGenerator lottoGenerator) {
+        Lottos result = lottoGenerator.createLottos();
+        totalLottos = totalLottos.plus(result);
     }
 
-    public Game(String money) {
-        this.buyMoney = new Money(money);
-        this.lottoBuyCount = new LottoBuyCount(this.buyMoney);
+    public Lottos getTotalLottos() {
+        return totalLottos;
     }
 
-    public LottoBuyCount getLottoBuyCount() {
-        return lottoBuyCount;
-    }
-
-    public List<LottoResult> startLottoGame() {
-        List<LottoResult> result = new ArrayList<>();
-        LottoBuyCount index = new LottoBuyCount(0);
-        while (!index.equals(this.lottoBuyCount)) {
-            result.add(lottoGenerator.createLottoResult());
-            index.plus();
-        }
-        return result;
-    }
-
-    public Money getBuyMoney() {
-        return buyMoney;
-    }
 }

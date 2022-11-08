@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
 @DisplayName("로또_생성_클래스")
-public class LottoGeneratorTest {
+public class LottoAutoGeneratorTest {
     @DisplayName("로또생성 테스트")
     @Test
     void createLottoResult_pass_01() {

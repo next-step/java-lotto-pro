@@ -24,8 +24,32 @@ public class LottoBuyCount {
         this.lottoBuyCount = count;
     }
 
+    public LottoBuyCount(String count) {
+        this(convertNumber(count));
+    }
+
+    private static int convertNumber(String text) {
+        try {
+            return Integer.parseInt(text);
+        } catch (NumberFormatException e) {
+            throw new LottoFormatException(ErrorMessageConstant.NOT_NUMBER);
+        }
+    }
+
     public void plus() {
         this.lottoBuyCount++;
+    }
+
+    public LottoBuyCount minus(LottoBuyCount otherLottoBuyCount) {
+        return new LottoBuyCount(this.lottoBuyCount - otherLottoBuyCount.lottoBuyCount);
+    }
+
+    public boolean isEqualValue(int count) {
+        return this.lottoBuyCount == count;
+    }
+
+    public boolean isLessThan(LottoBuyCount otherLottoBuyCount) {
+        return this.lottoBuyCount < otherLottoBuyCount.lottoBuyCount;
     }
 
     @Override

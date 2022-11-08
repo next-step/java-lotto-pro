@@ -1,44 +1,44 @@
 package step4.model;
 
-import step3.exception.LottoFormatException;
-import step4.constant.ErrorMessageConstant;
-
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoWinningStatistics {
-    private final Map<Rank, Integer> lottoWinningStatistics = new LinkedHashMap<>();
+    private static final Map<Rank, Integer> lottoWinningStatistics;
+
+    static {
+        lottoWinningStatistics = initLottoWinningStatistics();
+    }
+
     private final Money totalProfit = new Money(0);
 
-    public LottoWinningStatistics(List<LottoResult> lottoResults, LottoResult winLottoResult, LottoNumber bonusLottoNumber) {
-        validWinLottoResult(winLottoResult, bonusLottoNumber);
-        initLottoWinningStatistics();
-        setLottoWinningStatistics(lottoResults, winLottoResult, bonusLottoNumber);
+    public LottoWinningStatistics(List<Lotto> lottos, Lotto winLotto, LottoNumber bonusLottoNumber) {
+        this(lottos, new WinningLotto(winLotto, bonusLottoNumber));
+    }
+
+    public LottoWinningStatistics(List<Lotto> lottos, WinningLotto winLotto) {
+        this(new Lottos(lottos), winLotto);
+    }
+
+    public LottoWinningStatistics(Lottos lottos, WinningLotto winLotto) {
+        setLottoWinningStatistics(lottos, winLotto);
         setTotalProfit();
     }
 
-    private void validWinLottoResult(LottoResult winLottoResult, LottoNumber bonusLottoNumber) {
-        if (winLottoResult.isContains(bonusLottoNumber)) {
-            throw new LottoFormatException(ErrorMessageConstant.BONUS_NUMBER_IN_LOTTO_WIN_RESULT);
+    private static Map<Rank, Integer> initLottoWinningStatistics() {
+        return Arrays.stream(Rank.values())
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toMap(rank -> rank, rank -> 0, (r1, r2) -> r1, LinkedHashMap::new));
+    }
+
+    private void setLottoWinningStatistics(Lottos lottos, WinningLotto winningLotto) {
+        for (Rank rank : lottoWinningStatistics.keySet()) {
+            setLottoWinningStatistic(lottos, winningLotto, rank);
         }
     }
 
-    private void initLottoWinningStatistics() {
-        List<Rank> ranks = Arrays.asList(Rank.values());
-        Collections.reverse(ranks);
-        for (Rank rank : ranks) {
-            this.lottoWinningStatistics.put(rank, 0);
-        }
-    }
-
-    private void setLottoWinningStatistics(List<LottoResult> lottoResults, LottoResult winLottoResult, LottoNumber bonusLottoNumber) {
-        for (LottoResult lottoResult : lottoResults) {
-            int matchedCount = lottoResult.getEqualCount(winLottoResult);
-            setLottoWinningStatistic(Rank.valueOf(matchedCount, lottoResult.isContains(bonusLottoNumber)));
-        }
-    }
-
-    private void setLottoWinningStatistic(Rank rank) {
-        this.lottoWinningStatistics.put(rank, lottoWinningStatistics.get(rank) + 1);
+    private void setLottoWinningStatistic(Lottos lottos, WinningLotto winningLotto, Rank rank) {
+        lottoWinningStatistics.put(rank, lottos.matchCountAboutRank(winningLotto, rank));
     }
 
     public Map<Rank, Integer> getLottoWinningStatistics() {
@@ -64,11 +64,11 @@ public class LottoWinningStatistics {
             return false;
         }
         LottoWinningStatistics that = (LottoWinningStatistics) o;
-        return Objects.equals(lottoWinningStatistics, that.lottoWinningStatistics);
+        return Objects.equals(totalProfit, that.totalProfit);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoWinningStatistics);
+        return Objects.hash(totalProfit);
     }
 }
