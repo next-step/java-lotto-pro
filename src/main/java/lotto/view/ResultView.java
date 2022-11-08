@@ -1,9 +1,6 @@
 package lotto.view;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.StringJoiner;
 import lotto.model.constants.LottoConstants;
 import lotto.model.domain.Lotto;
@@ -47,7 +44,6 @@ public class ResultView {
 
     private void printWinResult(WinResult winResult) {
         List<WinCriterion> winCriteria = winResult.getWinCriterionFromWinResult();
-        Collections.sort(winCriteria);
         for (WinCriterion winCriterion : winCriteria) {
             System.out.print(winCriterion.getMatchCount() + "개 일치 (" + winCriterion.getPrize() + "원)");
             System.out.println("- " + winResult.getCountByWinCriterion(winCriterion) + "개");
