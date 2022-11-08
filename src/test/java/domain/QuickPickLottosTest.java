@@ -10,13 +10,14 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import static domain.strategy.RandomNumberGenerateStrategy.DEFAULT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class QuickPickLottosTest {
     @ParameterizedTest
     @CsvSource(value = {"10000|10", "14000|14"}, delimiter = '|')
     void 자동로또_수량_반환(int price, int size) {
-        QuickPickLottos quickPickLottos = QuickPickLottos.of(price);
+        QuickPickLottos quickPickLottos = QuickPickLottos.of(price, DEFAULT);
         assertThat(quickPickLottos.size()).isEqualTo(size);
     }
 

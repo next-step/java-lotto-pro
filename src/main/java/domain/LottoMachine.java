@@ -1,9 +1,7 @@
 package domain;
 
-import domain.strategy.RandomNumberGenerateStrategy;
-
 public class LottoMachine {
-    public static Lottos issueLottos(int price) {
-        return Lottos.createLottos(price);
+    public static Lottos issueLottos(SelfPickLottos selfPickLottos, int money) {
+        return Lottos.createLottos(selfPickLottos, money);
     }
 }
