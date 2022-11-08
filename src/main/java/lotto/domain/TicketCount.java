@@ -1,5 +1,10 @@
 package lotto.domain;
 
+import java.util.List;
+import java.util.function.IntFunction;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 public class TicketCount {
 	private final int value;
 
@@ -16,6 +21,16 @@ public class TicketCount {
 
 	public int count() {
 		return value;
+	}
+
+	public boolean isZero() {
+		return value == 0;
+	}
+
+	public <T> List<T> map(IntFunction<T> function) {
+		return IntStream.range(0, value)
+			.mapToObj(function)
+			.collect(Collectors.toList());
 	}
 
 	@Override

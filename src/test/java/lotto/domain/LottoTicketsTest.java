@@ -50,4 +50,19 @@ class LottoTicketsTest {
 		assertThat(ranks.size()).isEqualTo(count);
 	}
 
+	@Test
+	@DisplayName("로또 티켓 collection 합치기")
+	void addLottoTicketsTest() {
+		// given
+		LottoTicket lottoTicket = LottoTicket.from(new TestGenerateStrategy());
+		LottoTickets lottoTickets = LottoTickets.from(List.of(lottoTicket));
+		LottoTickets lottoTickets2 = LottoTickets.from(List.of(lottoTicket));
+
+		// when
+		LottoTickets lottoTickets3 = lottoTickets.add(lottoTickets2);
+
+		// then
+		assertThat(lottoTickets3.getLottoTickets())
+			.containsExactly(lottoTicket, lottoTicket);
+	}
 }

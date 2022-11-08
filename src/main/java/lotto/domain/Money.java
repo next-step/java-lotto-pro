@@ -18,7 +18,7 @@ public class Money {
 	}
 
 	public static Money from(long value) {
-		return new Money( value);
+		return new Money(value);
 	}
 
 	private static void validate(long value) {
@@ -57,5 +57,9 @@ public class Money {
 	@Override
 	public int hashCode() {
 		return (int)(value ^ (value >>> 32));
+	}
+
+	public Money subtract(Money money) {
+		return Money.from(this.value - money.value);
 	}
 }

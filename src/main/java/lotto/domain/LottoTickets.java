@@ -25,6 +25,12 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
+    public LottoTickets add(LottoTickets lottoTickets) {
+        List<LottoTicket> newLottoTickets = new ArrayList<>(this.lottoTickets);
+        newLottoTickets.addAll(lottoTickets.getLottoTickets());
+        return LottoTickets.from(newLottoTickets);
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

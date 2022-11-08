@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("티켓 수 테스트")
 class TicketCountTest {
@@ -27,6 +29,14 @@ class TicketCountTest {
 	void equalsTest() {
 		TicketCount ticketCount = TicketCount.from(10);
 		assertThat(ticketCount).isEqualTo(TicketCount.from(10));
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
+	@DisplayName("티켓 수에 따른 객체 생성")
+	void mapTest(int count) {
+		TicketCount ticketCount = TicketCount.from(count);
+		assertThat(ticketCount.map(i -> new Object())).hasSize(count);
 	}
 
 }

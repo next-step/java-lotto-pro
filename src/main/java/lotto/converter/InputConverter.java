@@ -6,9 +6,14 @@ import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
+import lotto.domain.TicketCount;
 import lotto.exception.InvalidUserInputException;
 
 public class InputConverter {
+
+	private static final String DELIMITER = ",";
+	private static final String BLANK_REGEX = "\\s";
+	private static final String REPLACEMENT = "";
 
 	private InputConverter() {
 	}
@@ -30,13 +35,17 @@ public class InputConverter {
 
 	public static LottoNumbers toLottoNumbers(String input) {
 		validate(input);
-		String[] split = input.split(",");
+		String[] split = input.split(DELIMITER);
 		return lottoNumbers(split);
 	}
 
 	public static LottoNumber toLottoNumber(String input) {
 		validate(input);
 		return LottoNumber.from(toInt(input));
+	}
+
+	public static TicketCount toLottoCount(String nextLine) {
+		return TicketCount.from(toInt(nextLine));
 	}
 
 	private static LottoNumbers lottoNumbers(String[] split) {
@@ -47,7 +56,7 @@ public class InputConverter {
 	}
 
 	private static String removeBlank(String input) {
-		return input.replaceAll("\\s", "");
+		return input.replaceAll(BLANK_REGEX, REPLACEMENT);
 	}
 
 	private static void validate(String input) {
@@ -59,5 +68,4 @@ public class InputConverter {
 	private static boolean isBlank(String input) {
 		return input == null || input.isEmpty();
 	}
-
 }
