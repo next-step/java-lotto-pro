@@ -6,20 +6,29 @@ import java.util.List;
 public class ManualLottoMachine implements LottoMachine {
     private static final String DEFAULT_SPLIT_DILIMETER = ",";
 
-    @Override
-    public Lotto splitPurchaseLottoNumbers(String inputWinLottNumbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private final String[] inputManualLottoNumbers;
+    private final Lottos lottos;
 
-        for (String winNumber : inputWinLottNumbers.split(DEFAULT_SPLIT_DILIMETER)) {
-            lottoNumbers.add(new LottoNumber(Integer.parseInt(winNumber.trim())));
-        }
-
-        return new Lotto(lottoNumbers);
+    public ManualLottoMachine(String[] inputManualLottoNumbers, Lottos lottos) {
+        this.inputManualLottoNumbers = inputManualLottoNumbers;
+        this.lottos = lottos;
     }
 
     @Override
-    public Lottos purchaseLotto(int lottoTicketCount, Lottos lottos) {
-        return null;
+    public void purchaseLotto() {
+        for (int i = 0; i < inputManualLottoNumbers.length; i++) {
+            lottos.add(splitPurchaseLottoNumbers(inputManualLottoNumbers[i]));
+        }
+    }
+
+    private Lotto splitPurchaseLottoNumbers(String inputManualLottoNumber) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+        for (String manualLottoNumber : inputManualLottoNumber.split(DEFAULT_SPLIT_DILIMETER)) {
+            lottoNumbers.add(new LottoNumber(Integer.parseInt(manualLottoNumber.trim())));
+        }
+
+        return new Lotto(lottoNumbers);
     }
 
 }
