@@ -14,7 +14,7 @@
   - [x] 수동 로또 묶음 도메인 클래스 구현 (SelfPickLottos)
   - [x] 자동 로또 묶음 도메인 클래스 구현 (QuickPickLottos)
   - [x] 돈을 일등컬렉션으로 수정 (Money)
-  - [ ] 보너스볼을 일등컬렉션으로 수정 (BonusWinningNumber)
+  - [x] 보너스볼을 일등컬렉션으로 수정 (BonusWinningNumber)
 - view
   - [x] 입력을 받는 view 구현 (InputView)
     - [x] 보너스볼 입력 추가

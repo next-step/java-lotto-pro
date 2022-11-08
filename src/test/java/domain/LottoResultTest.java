@@ -19,7 +19,7 @@ class LottoResultTest {
             new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 7)));
         Lottos lottos = new Lottos(new SelfPickLottos(selfPickNumbers),
                 QuickPickLottos.of(1000, (numberPool, size) -> new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
-        LottoResult lottoResult = LottoResult.of(lottos, new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7));
+        LottoResult lottoResult = LottoResult.of(lottos, new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), new BonusWinningNumber(7)));
 
         assertThat(lottoResult.countOfMatch(FIRST_PRIZE)).isEqualTo(1);
         assertThat(lottoResult.countOfMatch(SECOND_PRIZE)).isEqualTo(1);
@@ -34,7 +34,7 @@ class LottoResultTest {
     void 로또를_구매하지_않은_경우_수익률_예외처리() {
         Lottos lottos = new Lottos(new SelfPickLottos(Collections.emptyList()), QuickPickLottos.of(0, DEFAULT));
         LottoResult lottoResult = LottoResult.of(lottos,
-                new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7));
+                new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), new BonusWinningNumber(7)));
         assertThat(lottoResult.earningRate()).isEqualTo(0.0f);
     }
 }

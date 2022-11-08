@@ -23,11 +23,11 @@ class LottoTest {
         Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         return Stream.of(
             Arguments.arguments(
-                new Lotto((n, s) -> numbers), new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7), FIRST_PRIZE,
-                new Lotto((n, s) -> numbers), new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 7), 7), SECOND_PRIZE,
-                new Lotto((n, s) -> numbers), new WinningNumber(Arrays.asList(1, 2, 3, 4, 7, 8), 7), THIRD_PRIZE,
-                new Lotto((n, s) -> numbers), new WinningNumber(Arrays.asList(1, 2, 3, 7, 8, 9), 7), FOURTH_PRIZE,
-                new Lotto((n, s) -> numbers), new WinningNumber(Arrays.asList(1, 2, 3, 7, 8, 9), 7), FIFTH_PRIZE,
-                new Lotto((n, s) -> numbers), new WinningNumber(Arrays.asList(7, 8, 9, 10, 11, 12), 7), NONE));
+                new Lotto((n, s) -> numbers), new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), new BonusWinningNumber(7)), FIRST_PRIZE,
+                new Lotto((n, s) -> numbers), new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 7), new BonusWinningNumber(7)), SECOND_PRIZE,
+                new Lotto((n, s) -> numbers), new WinningNumber(Arrays.asList(1, 2, 3, 4, 7, 8), new BonusWinningNumber(7)), THIRD_PRIZE,
+                new Lotto((n, s) -> numbers), new WinningNumber(Arrays.asList(1, 2, 3, 7, 8, 9), new BonusWinningNumber(7)), FOURTH_PRIZE,
+                new Lotto((n, s) -> numbers), new WinningNumber(Arrays.asList(1, 2, 3, 7, 8, 9), new BonusWinningNumber(7)), FIFTH_PRIZE,
+                new Lotto((n, s) -> numbers), new WinningNumber(Arrays.asList(7, 8, 9, 10, 11, 12), new BonusWinningNumber(7)), NONE));
     }
 }

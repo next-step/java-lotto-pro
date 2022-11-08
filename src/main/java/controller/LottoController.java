@@ -17,7 +17,7 @@ public class LottoController {
         ResultView.printLottos(lottos);
 
         List<Integer> winningNumbers = InputView.inputWinningNumbers();
-        int bonusWinningNumber = InputView.inputBonusWinningNumber();
+        BonusWinningNumber bonusWinningNumber = new BonusWinningNumber(InputView.inputBonusWinningNumber());
         WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusWinningNumber);
         LottoResult lottoResult = LottoResult.of(lottos, winningNumber);
         ResultView.printLottoResult(lottoResult);
