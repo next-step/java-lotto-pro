@@ -17,16 +17,16 @@ public class WinLottoTest {
         lotto.addLottoNumber(new LottoNumber(4));
         lotto.addLottoNumber(new LottoNumber(5));
         lotto.addLottoNumber(new LottoNumber(6));
-        WinLotto winLotto = new WinLotto(lotto);
+        WinLotto winLotto = new WinLotto(lotto, new LottoNumber(9));
         Lotto userLotto = new Lotto();
         userLotto.addLottoNumber(new LottoNumber(1));
         userLotto.addLottoNumber(new LottoNumber(2));
         userLotto.addLottoNumber(new LottoNumber(3));
-        userLotto.addLottoNumber(new LottoNumber(7));
-        userLotto.addLottoNumber(new LottoNumber(8));
+        userLotto.addLottoNumber(new LottoNumber(4));
+        userLotto.addLottoNumber(new LottoNumber(5));
         userLotto.addLottoNumber(new LottoNumber(9));
 
-        int expected = 3;
+        MatchCount expected = new MatchCount(5, 1);
 
         assertThat(winLotto.compareWithLotto(userLotto)).isEqualTo(expected);
     }
