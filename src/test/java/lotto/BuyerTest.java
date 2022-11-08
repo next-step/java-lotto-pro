@@ -38,7 +38,8 @@ public class BuyerTest {
                 "8, 21, 23, 41, 42, 43\n" +
                 "3, 5, 11, 16, 32, 38\n" +
                 "7, 11, 16, 35, 36, 44";
-        Buyer buyer = new Buyer("10000", inputStr);
+        Buyer buyer = new Buyer("10000");
+        buyer.buyLotto( inputStr);
         // when
         buyer.buyLotto();
         // then
