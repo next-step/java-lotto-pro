@@ -46,9 +46,19 @@ public class ResultView {
     private void printWinResult(WinResult winResult) {
         List<WinCriterion> winCriteria = winResult.getWinCriterionFromWinResult();
         for (WinCriterion winCriterion : winCriteria) {
-            System.out.print(winCriterion.getMatchCount() + "개 일치 (" + MoneyFormat.getMoneyExpression(winCriterion.getPrize()) + "원)");
+            printWinCriteria(winCriterion);
             System.out.println("- " + winResult.getCountByWinCriterion(winCriterion) + "개");
         }
+    }
+
+    private void printWinCriteria(WinCriterion winCriterion) {
+        //, 보너스 볼 일치
+        String criterionExpression = winCriterion.getMatchCount() + "개 일치";
+        if (winCriterion.checkBonusMatch()) {
+            criterionExpression += ", 보너스 볼 일치";
+        }
+        criterionExpression += " (" + MoneyFormat.getMoneyExpression(winCriterion.getPrize()) + "원)";
+        System.out.print(criterionExpression);
     }
 
     private void printProfit(Profit profit) {

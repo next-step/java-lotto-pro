@@ -24,7 +24,9 @@ public class LottoController {
         PurchaseInfo purchaseInfo = purchaseLotto();
         Lottos lottos = generateLotto(purchaseInfo);
 
-        WinLotto winLotto = inputView.winLottoInput();
+        String winLottoInput = inputView.winLottoInput();
+        String bonusBallInput = inputView.bonusBallInput();
+        WinLotto winLotto = new WinLotto(winLottoInput, bonusBallInput);
 
         LottoResult lottoResult = getLottoStatistics(purchaseInfo, lottos, winLotto);
         resultView.printLottoResult(lottoResult);

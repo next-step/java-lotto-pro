@@ -29,8 +29,8 @@ public enum WinCriterion {
         return winResult;
     }
 
-    public boolean compareMatchCount(int matchCount) {
-        return this.matchCount == matchCount;
+    public boolean compareMatchCount(MatchCount matchCount) {
+        return matchCount.checkCount(this.matchCount, bonusCount);
     }
 
     public long calculatePrize(int count) {
@@ -47,5 +47,9 @@ public enum WinCriterion {
 
     public long getPrize() {
         return prize;
+    }
+
+    public boolean checkBonusMatch() {
+        return this.bonusCount > 0;
     }
 }
