@@ -75,4 +75,8 @@ public class LottoNumbers {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
+    public boolean has(LottoNumber num) {
+        return this.lottoNumbers.contains(num);
+    }
 }

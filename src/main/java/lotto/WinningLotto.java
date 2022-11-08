@@ -37,7 +37,7 @@ public class WinningLotto {
     }
 
     private int contains(LottoNumber num) {
-        if (this.winningLotto.getLottoNumbers().contains(num)) {
+        if (this.winningLotto.has(num)) {
             return 1;
         }
         return 0;
