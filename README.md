@@ -21,6 +21,6 @@
     - [x] 수동으로 구매할 로또 번호 입력
   - [x] 결과를 출력하는 view 구현 (ResultView)
     - [x] 보너스볼이 일치한 2등 당첨 결과 출력 추가
-    - [ ] 수동 및 자동으로 구매한 로또 출력
+    - [x] 수동 및 자동으로 구매한 로또 출력
 - controller
   - [x] view와 domain을 연결 (LottoController)
