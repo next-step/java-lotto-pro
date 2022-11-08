@@ -2,8 +2,6 @@ package lotto.model.constants;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.model.domain.WinCriteria;
-import lotto.model.domain.WinCriterion;
 
 public class LottoConstants {
 
@@ -24,13 +22,4 @@ public class LottoConstants {
     public static final String LOTTO_PRINT_START = "[";
     public static final String LOTTO_PRINT_END = "]";
     public static final String LOTTO_PRINT_DELIMITER = ", ";
-
-    public static final WinCriteria LOTTO_WIN_CRITERIA = new WinCriteria() {
-        {
-            addWinCriterion(new WinCriterion(1, 6, 2000000000));
-            addWinCriterion(new WinCriterion(2, 5, 1500000));
-            addWinCriterion(new WinCriterion(3, 4, 50000));
-            addWinCriterion(new WinCriterion(4, 3, 5000));
-        }
-    };
 }

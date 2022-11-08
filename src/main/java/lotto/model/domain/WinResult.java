@@ -9,8 +9,8 @@ public class WinResult {
 
     private Map<WinCriterion, Integer> winResult;
 
-    public WinResult(WinCriteria winCriteria, MatchCounts matchCounts) {
-        this.winResult = winCriteria.getWinCount(matchCounts);
+    public WinResult(MatchCounts matchCounts) {
+        this.winResult = WinCriterion.getWinCount(matchCounts);
     }
 
     public long calculateWinAmount() {

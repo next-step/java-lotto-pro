@@ -1,44 +1,32 @@
 package lotto.model.domain;
 
-import lotto.model.constants.ErrorMessage;
+import java.util.HashMap;
+import java.util.Map;
 
-public class WinCriterion implements Comparable<WinCriterion> {
+public enum WinCriterion {
 
-    private int rank; // 등수
+    FIFTH(3, 0, 5000),
+    FORTH(4, 0, 50000),
+    THIRD(5, 0, 1500000),
+    SECOND(5, 1, 30000000),
+    FIRST(6, 0, 2000000000);
+
     private int matchCount; // 일치하는 숫자 개수
+    private int bonusCount; // 보너스볼 일치 개수
     private long prize; // 상금
 
-    public WinCriterion(int rank, int matchCount, long prize) {
-        if (validateRank(rank)) {
-            this.rank = rank;
-        }
-        if (validateMatchCount(matchCount)) {
-            this.matchCount = matchCount;
-        }
-        if (validatePrize(prize)) {
-            this.prize = prize;
-        }
+    WinCriterion(int matchCount, int bonusCount, long prize) {
+        this.matchCount = matchCount;
+        this.bonusCount = bonusCount;
+        this.prize = prize;
     }
 
-    private boolean validateRank(int rank) {
-        if (rank <= 0) {
-            throw new IllegalArgumentException(ErrorMessage.RANK_NOT_POSITIVE);
+    public static Map<WinCriterion, Integer> getWinCount(MatchCounts matchCounts) {
+        Map<WinCriterion, Integer> winResult = new HashMap<>();
+        for (WinCriterion winCriterion : WinCriterion.values()) {
+            winResult.put(winCriterion, matchCounts.countWin(winCriterion));
         }
-        return true;
-    }
-
-    private boolean validateMatchCount(int matchCount) {
-        if (matchCount < 0) {
-            throw new IllegalArgumentException(ErrorMessage.MATCH_COUNT_NEGATIVE);
-        }
-        return true;
-    }
-
-    private boolean validatePrize(long prize) {
-        if (prize <= 0) {
-            throw new IllegalArgumentException(ErrorMessage.PRIZE_NOT_POSITIVE);
-        }
-        return true;
+        return winResult;
     }
 
     public boolean compareMatchCount(int matchCount) {
@@ -53,12 +41,11 @@ public class WinCriterion implements Comparable<WinCriterion> {
         return matchCount;
     }
 
-    public long getPrize() {
-        return prize;
+    public int getBonusCount() {
+        return bonusCount;
     }
 
-    @Override
-    public int compareTo(WinCriterion o) {
-        return o.rank - this.rank;
+    public long getPrize() {
+        return prize;
     }
 }
