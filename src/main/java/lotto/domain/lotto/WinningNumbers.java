@@ -5,10 +5,10 @@ import static lotto.utils.Validations.requireNotNull;
 import java.util.Objects;
 
 public class WinningNumbers {
-    private final Lotto winningNumbers;
+    private final LottoNumbers winningNumbers;
     private final LottoNumber bonus;
 
-    public WinningNumbers(Lotto winningNumbers, LottoNumber bonus) {
+    public WinningNumbers(LottoNumbers winningNumbers, LottoNumber bonus) {
         requireNotNull(winningNumbers, "당첨 번호는 null이 아니어야 합니다.");
         requireNotNull(bonus, "보너스는 null이 아니어야 합니다.");
 

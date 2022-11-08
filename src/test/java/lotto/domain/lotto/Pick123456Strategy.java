@@ -7,9 +7,9 @@ import java.util.stream.Stream;
 
 public class Pick123456Strategy implements NumberPickStrategy {
     @Override
-    public List<Lotto> pickNumbers(final int quantity) {
+    public List<LottoNumbers> pickNumbers(final int quantity) {
         return Stream.generate(this::generateNumbers)
-                .map(Lotto::new)
+                .map(LottoNumbers::new)
                 .limit(quantity)
                 .collect(Collectors.toList());
     }

@@ -1,8 +1,8 @@
 package lotto.ui.dto;
 
 import java.util.List;
-import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoNumbers;
 import lotto.domain.lotto.WinningNumbers;
 
 public class WinningNumbersInput {
@@ -15,7 +15,7 @@ public class WinningNumbersInput {
     }
 
     public WinningNumbers toWinningNumbers() {
-        final Lotto winningNumbers = new Lotto(this.winningNumbers);
+        final LottoNumbers winningNumbers = new LottoNumbers(this.winningNumbers);
         final LottoNumber bonus = new LottoNumber(this.bonus);
 
         return new WinningNumbers(winningNumbers, bonus);

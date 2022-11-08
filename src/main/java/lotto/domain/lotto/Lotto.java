@@ -5,53 +5,38 @@ import static lotto.utils.Validations.requireNotNull;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_NUMBERS_SIZE = 6;
-    private final Set<LottoNumber> numbers;
+    private final LottoNumbers numbers;
 
     public Lotto(Integer... numbers) {
         this(Arrays.asList(numbers));
     }
 
     public Lotto(final List<Integer> numbers) {
-        requireNotNull(numbers, "null이 아니어야 합니다.");
-
-        final Set<LottoNumber> distinctNumbers = numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
-
-        requireDistinctSizeIsSix(distinctNumbers);
-
-        this.numbers = distinctNumbers;
+        this(new LottoNumbers(numbers));
     }
 
-    private static void requireDistinctSizeIsSix(Set<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException("서로 다른 숫자 6개여야 합니다. numbers=" + numbers);
-        }
+    public Lotto(final LottoNumbers numbers) {
+        requireNotNull(numbers, "숫자들은 null이 아니어야 합니다.");
+
+        this.numbers = numbers;
     }
 
-    public Matches match(Lotto winningNumbers, LottoNumber bonusNumber) {
+    public Matches match(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         requireNotNull(winningNumbers, "당첨 번호는 null이 아니어야 합니다.");
         requireNotNull(bonusNumber, "보너스 번호는 null이 아니어야 합니다.");
 
         return Matches.of(countMatchedNumber(winningNumbers), contains(bonusNumber));
     }
 
-    public List<Integer> toList() {
-        return this.numbers.stream()
-                .map(LottoNumber::toInt)
-                .sorted()
-                .collect(Collectors.toList());
+    public List<Integer> toInts() {
+        return this.numbers.toInts();
     }
 
-    private long countMatchedNumber(Lotto winningNumbers) {
-        return this.numbers.stream()
-                .filter(winningNumbers::contains)
-                .count();
+    private long countMatchedNumber(LottoNumbers winningNumbers) {
+        return this.numbers.countMatchedNumber(winningNumbers);
     }
 
     private boolean contains(LottoNumber number) {

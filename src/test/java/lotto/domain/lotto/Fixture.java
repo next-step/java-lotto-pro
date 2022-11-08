@@ -6,7 +6,7 @@ public class Fixture {
     }
 
     public static WinningNumbers winningNumbers123456() {
-        final Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
+        final LottoNumbers winningNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
         final LottoNumber bonus = new LottoNumber(7);
         return new WinningNumbers(winningNumbers, bonus);
     }

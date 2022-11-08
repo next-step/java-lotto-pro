@@ -5,6 +5,7 @@ import static lotto.utils.Validations.requireNotNull;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoStore {
     private final Money lottoUnitPrice;
@@ -31,6 +32,10 @@ public class LottoStore {
         final BigDecimal quotient = money.divide(this.lottoUnitPrice);
         final int quantity = quotient.intValue();
 
-        return pickStrategy.pickNumbers(quantity);
+        final List<LottoNumbers> numbers = pickStrategy.pickNumbers(quantity);
+
+        return numbers.stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList());
     }
 }

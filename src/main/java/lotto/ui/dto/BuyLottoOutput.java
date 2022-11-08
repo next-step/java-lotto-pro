@@ -13,7 +13,7 @@ public class BuyLottoOutput {
 
     public List<BoughtLotto> getBoughtLottos() {
         return lottos.stream()
-                .map(Lotto::toList)
+                .map(Lotto::toInts)
                 .map(BoughtLotto::new)
                 .collect(Collectors.toList());
     }

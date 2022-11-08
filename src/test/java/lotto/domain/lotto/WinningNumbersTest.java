@@ -13,7 +13,7 @@ class WinningNumbersTest {
     @DisplayName("당첨 번호는 null이 아니어야 한다.")
     @ParameterizedTest(name = ParameterizedTest.DISPLAY_NAME_PLACEHOLDER)
     @NullSource
-    void 당첨_번호_null(final Lotto winningNumbers) {
+    void 당첨_번호_null(final LottoNumbers winningNumbers) {
         final LottoNumber bonus = new LottoNumber(7);
 
         assertThatIllegalArgumentException()
@@ -26,7 +26,7 @@ class WinningNumbersTest {
     @ParameterizedTest(name = ParameterizedTest.DISPLAY_NAME_PLACEHOLDER)
     @NullSource
     void 보너스_null(final LottoNumber bonus) {
-        final Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
+        final LottoNumbers winningNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new WinningNumbers(winningNumbers, bonus))
@@ -36,8 +36,8 @@ class WinningNumbersTest {
     @DisplayName("당첨번호와 보너스가 모두 일치하면 동일한 객체이다.")
     @Test
     void 동일성() {
-        final WinningNumbers one = new WinningNumbers(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(7));
-        final WinningNumbers another = new WinningNumbers(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(7));
+        final WinningNumbers one = new WinningNumbers(new LottoNumbers(1, 2, 3, 4, 5, 6), new LottoNumber(7));
+        final WinningNumbers another = new WinningNumbers(new LottoNumbers(1, 2, 3, 4, 5, 6), new LottoNumber(7));
 
         assertThat(one).isEqualTo(another);
     }
@@ -64,7 +64,7 @@ class WinningNumbersTest {
     ) {
         final Lotto myLotto = new Lotto(no1, no2, no3, no4, no5, no6);
         final WinningNumbers winningNumbers = new WinningNumbers(
-                new Lotto(1, 2, 3, 4, 5, 6),
+                new LottoNumbers(1, 2, 3, 4, 5, 6),
                 new LottoNumber(7)
         );
 

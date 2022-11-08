@@ -25,12 +25,12 @@ class QuickPickStrategyTest {
     void 숫자_생성기가_생성한_숫자들로_로또_생성() {
         final QuickPickStrategy strategy = new QuickPickStrategy(() -> Arrays.asList(11, 12, 13, 14, 15, 16));
         final int quantity = 2;
-        final List<Lotto> expected = Arrays.asList(
-                new Lotto(11, 12, 13, 14, 15, 16),
-                new Lotto(11, 12, 13, 14, 15, 16)
+        final List<LottoNumbers> expected = Arrays.asList(
+                new LottoNumbers(11, 12, 13, 14, 15, 16),
+                new LottoNumbers(11, 12, 13, 14, 15, 16)
         );
 
-        final List<Lotto> actual = strategy.pickNumbers(quantity);
+        final List<LottoNumbers> actual = strategy.pickNumbers(quantity);
         Assertions.assertThat(actual).containsExactlyElementsOf(expected);
     }
 
