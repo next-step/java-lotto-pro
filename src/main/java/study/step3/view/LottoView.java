@@ -5,51 +5,47 @@ import study.step3.domain.lottonumber.LottoNumber;
 import study.step3.domain.lottonumber.LottoNumbers;
 import study.step3.message.LottoMessage;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class LottoView {
 
     private static final String REGEX_ONLY_NUMBER_AND_COMMA = "^\\d{1,2}(,\\d})*(\\.\\d+)?";
     private static final Pattern PATTERN_NUMBER_AND_COMMA = Pattern.compile(REGEX_ONLY_NUMBER_AND_COMMA);
 
-    public static void printLottos(Lottos lottos) {
+    public static void printLottos(long manualLottoCount, Lottos lottos) {
         StringBuilder printer = new StringBuilder();
-        printer.append(String.format(LottoMessage.OUTPUT_COUNTS_OF_LOTTOS_FORMAT.message(), lottos.size()))
+        printer.append(String.format(LottoMessage.OUTPUT_COUNTS_OF_LOTTOS_FORMAT.message(), manualLottoCount, lottos.size() - manualLottoCount))
                 .append(lottos.report());
         ResultView.output(printer);
     }
 
     public static LottoNumbers getWinningNumbers() {
         LottoNumbers winningNumbers = null;
-        while (isNeedToInputWinningNumbers(winningNumbers)) {
-            winningNumbers = inputWinningNumbers();
+        while (InputView.isNeedToRetryInputValue(winningNumbers)) {
+            ResultView.output(LottoMessage.INPUT_WINNING_NUMBERS.message());
+            winningNumbers = inputWinningLottoNumbers();
         }
         ResultView.newline();
         return winningNumbers;
     }
 
-    private static boolean isNeedToInputWinningNumbers(LottoNumbers winningNumbers) {
-        return winningNumbers == null;
-    }
-
-    private static LottoNumbers inputWinningNumbers() {
+    public static LottoNumbers inputWinningLottoNumbers() {
         try {
-            ResultView.output(LottoMessage.INPUT_WINNING_NUMBERS.message());
             String winningNumbers = InputView.input();
-            validateWinningNumbers(winningNumbers);
-            return mapToWinningNumbers(winningNumbers);
+            validateWinningLottoNumbers(winningNumbers);
+            return mapToLottoNumbers(winningNumbers);
         } catch (Exception e) {
             ResultView.output(e.getMessage());
             return null;
         }
     }
 
-    private static void validateWinningNumbers(String winningNumbers) {
-        validateLottoNumberIsNotEmpty(winningNumbers, LottoMessage.ERROR_WINNING_NUMBERS_SHOULD_BE_NOT_EMPTY);
-        validateLottoNumberIsNumber(winningNumbers);
+    private static void validateWinningLottoNumbers(String lottoNumbers) {
+        validateLottoNumberIsNotEmpty(lottoNumbers, LottoMessage.ERROR_WINNING_NUMBERS_SHOULD_BE_NOT_EMPTY);
+        validateLottoNumberIsNumber(lottoNumbers);
     }
 
     private static void validateLottoNumberIsNotEmpty(String winningNumbers, LottoMessage message) {
@@ -64,25 +60,17 @@ public class LottoView {
         }
     }
 
-    private static LottoNumbers mapToWinningNumbers(String winningNumbers) {
-        String[] numbers = winningNumbers.split(",");
-        List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
-                .mapToInt(number -> Integer.parseInt(number.trim()))
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
-        return new LottoNumbers(lottoNumbers);
+    private static LottoNumbers mapToLottoNumbers(String lottoNumbers) {
+        String[] numbers = lottoNumbers.trim().split("\\s*,\\s*");
+        return LottoNumbers.of(numbers);
     }
 
     public static LottoNumber getBonusNumber(LottoNumbers winningNumbers) {
         LottoNumber bonusNumber = null;
-        while (isNeedToInputBonusNumber(bonusNumber)) {
+        while (InputView.isNeedToRetryInputValue(bonusNumber)) {
             bonusNumber = inputBonusNumber(winningNumbers);
         }
         return bonusNumber;
-    }
-
-    private static boolean isNeedToInputBonusNumber(LottoNumber bonusNumber) {
-        return bonusNumber == null;
     }
 
     private static LottoNumber inputBonusNumber(LottoNumbers winningNumbers) {
@@ -90,7 +78,7 @@ public class LottoView {
             ResultView.output(LottoMessage.INPUT_BONUS_NUMBER.message());
             String bonusNumber = InputView.input();
             validateBonusNumber(winningNumbers, bonusNumber);
-            return new LottoNumber(Integer.parseInt(bonusNumber));
+            return LottoNumber.of(bonusNumber);
         } catch (Exception e) {
             ResultView.output(e.getMessage());
             return null;
@@ -106,5 +94,38 @@ public class LottoView {
         if(winningNumbers.contains(LottoNumber.of(bonusNumber))) {
             throw new IllegalArgumentException(LottoMessage.ERROR_BONUS_NUMBER_IS_INCLUDING_WINNING_NUMBERS.message());
         }
+    }
+
+    public static List<LottoNumbers> getManualLottoNumbers(long manualLottoCount) {
+        List<LottoNumbers> lottoNumbers = null;
+        while (InputView.isNeedToRetryInputValue(lottoNumbers)) {
+            ResultView.output(LottoMessage.INPUT_MANUAL_LOTTO_NUMBERS.message());
+            lottoNumbers = inputManualLottoNumbers(manualLottoCount);
+        }
+
+        return lottoNumbers;
+    }
+
+    private static List<LottoNumbers> inputManualLottoNumbers(long manualLottoCount) {
+        List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
+        while(manualLottoNumbers.size() != manualLottoCount) {
+            inputManualLottoNumbers(manualLottoNumbers);
+        }
+        return manualLottoNumbers;
+    }
+
+    private static void inputManualLottoNumbers(List<LottoNumbers> lottoNumbers) {
+        try {
+            String inputLottoNumbers = InputView.input();
+            validateManualLottoNumbers(inputLottoNumbers);
+            lottoNumbers.add(mapToLottoNumbers(inputLottoNumbers));
+        } catch (Exception e) {
+            ResultView.output(e.getMessage());
+        }
+    }
+
+    private static void validateManualLottoNumbers(String lottoNumbers) {
+        validateLottoNumberIsNotEmpty(lottoNumbers, LottoMessage.ERROR_LOTTO_NUMBER_SHOULD_BE_NOT_EMPTY);
+        validateLottoNumberIsNumber(lottoNumbers);
     }
 }

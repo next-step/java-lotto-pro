@@ -3,11 +3,11 @@ package study.step3.domain.lottonumber;
 public class LottoMatchResult implements Comparable<LottoMatchResult> {
 
     private final long matchCount;
-    private final long bonusMatchCount;
+    private final boolean isMatchedBonusLottoNumber;
 
-    public LottoMatchResult(long matchCount, long bonusMatchCount) {
+    public LottoMatchResult(long matchCount, boolean isMatchedBonusLottoNumber) {
         this.matchCount = matchCount;
-        this.bonusMatchCount = bonusMatchCount;
+        this.isMatchedBonusLottoNumber = isMatchedBonusLottoNumber;
     }
 
     public boolean isGreaterThanOrEqualMatchCount(LottoMatchResult lottoMatchResult) {
@@ -18,12 +18,12 @@ public class LottoMatchResult implements Comparable<LottoMatchResult> {
         return this.matchCount == lottoMatchResult.matchCount;
     }
 
-    public boolean isGreaterThanOrEqualBonusMatchCount(LottoMatchResult lottoMatchResult) {
-        return this.bonusMatchCount >= lottoMatchResult.bonusMatchCount;
+    public boolean isEqualBonusMatch(LottoMatchResult lottoMatchResult) {
+        return this.isMatchedBonusLottoNumber == lottoMatchResult.isMatchedBonusLottoNumber;
     }
 
-    public boolean isGreaterThanZeroBonusMatchCount() {
-        return this.bonusMatchCount > 0L;
+    public boolean isMatchedBonusLottoNumber() {
+        return this.isMatchedBonusLottoNumber;
     }
 
     public long lottoMatchCount() {
@@ -33,7 +33,7 @@ public class LottoMatchResult implements Comparable<LottoMatchResult> {
     @Override
     public int compareTo(LottoMatchResult otherMatchCount) {
         if(isEqualsLottoMatchCount(otherMatchCount)) {
-            return (int) (this.bonusMatchCount - otherMatchCount.bonusMatchCount);
+            return Boolean.compare(this.isMatchedBonusLottoNumber, otherMatchCount.isMatchedBonusLottoNumber);
         }
 
         return (int) (this.matchCount - otherMatchCount.matchCount);
@@ -47,13 +47,13 @@ public class LottoMatchResult implements Comparable<LottoMatchResult> {
         LottoMatchResult that = (LottoMatchResult) o;
 
         if (matchCount != that.matchCount) return false;
-        return bonusMatchCount == that.bonusMatchCount;
+        return isMatchedBonusLottoNumber == that.isMatchedBonusLottoNumber;
     }
 
     @Override
     public int hashCode() {
         int result = (int) (matchCount ^ (matchCount >>> 32));
-        result = 31 * result + (int) (bonusMatchCount ^ (bonusMatchCount >>> 32));
+        result = 31 * result + (isMatchedBonusLottoNumber ? 1 : 0);
         return result;
     }
 }

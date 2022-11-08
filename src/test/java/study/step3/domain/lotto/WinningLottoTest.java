@@ -18,13 +18,13 @@ class WinningLottoTest {
         LottoNumbers lottoNumbers = LottoNumbersGenerator.createLottoNumbers(1, 2, 3, 4, 5, 12);
         Lotto lotto = new Lotto(lottoNumbers);
         LottoNumbers winningNumbers = LottoNumbersGenerator.createLottoNumbers(1, 2, 3, 4, 5, 6);
-        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), new LottoNumber(12));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), LottoNumber.of(12));
 
         LottoMatchResult lottoMatchResult = winningLotto.matchLotto(lotto);
 
         assertAll(
                 () -> assertThat(lottoMatchResult.lottoMatchCount()).isEqualTo(5),
-                () -> assertThat(lottoMatchResult.isGreaterThanZeroBonusMatchCount()).isTrue()
+                () -> assertThat(lottoMatchResult.isMatchedBonusLottoNumber()).isTrue()
         );
     }
 

@@ -22,8 +22,13 @@ public class RandomLottoIssuanceStrategy implements LottoIssuanceStrategy {
     }
 
     @Override
-    public Lottos issueLottos(PurchaseMoney purchaseMoney) {
-        List<Lotto> lottos = LongStream.range(0, purchaseMoney.numberOfAvailableLottoTickets())
+    public boolean isIssuableLottos(LottoIssuance lottoIssuance) {
+        return lottoIssuance.isRandomLottos();
+    }
+
+    @Override
+    public Lottos issueLottos(LottoIssuance lottoIssuance) {
+        List<Lotto> lottos = LongStream.range(0, lottoIssuance.count())
                 .mapToObj(i -> createRandomLottoNumbers())
                 .map(Lotto::new)
                 .collect(Collectors.toList());
@@ -33,7 +38,7 @@ public class RandomLottoIssuanceStrategy implements LottoIssuanceStrategy {
     private LottoNumbers createRandomLottoNumbers() {
         Collections.shuffle(LOTTO_RANDOM_NUMBERS);
         List<LottoNumber> lottoNumbers = LOTTO_RANDOM_NUMBERS.subList(0, 6).stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
         return new LottoNumbers(lottoNumbers);
     }

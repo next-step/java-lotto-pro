@@ -17,7 +17,15 @@ public class PurchaseMoney {
         return this.money.money();
     }
 
-    public long numberOfAvailableLottoTickets() {
-        return money() / ONE_LOTTO_PRICE.money();
+    public long numberOfRandomLottos(long manualLottoCount) {
+        return divide(ONE_LOTTO_PRICE) - manualLottoCount;
+    }
+
+    public long divide(Money otherMoney) {
+        return this.money.money() / otherMoney.money();
+    }
+
+    public boolean isLackOfMoney(long manualLottoCount) {
+        return numberOfRandomLottos(manualLottoCount) < 0L;
     }
 }

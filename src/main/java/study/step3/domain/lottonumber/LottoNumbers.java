@@ -3,6 +3,7 @@ package study.step3.domain.lottonumber;
 import study.step3.message.LottoNumberMessage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +16,20 @@ public class LottoNumbers {
     public LottoNumbers(final List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
+    }
+
+    public static LottoNumbers of(int... numbers) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toList());
+        return new LottoNumbers(lottoNumbers);
+    }
+
+    public static LottoNumbers of(String... numbers) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
+        return new LottoNumbers(lottoNumbers);
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {

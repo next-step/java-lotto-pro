@@ -16,4 +16,8 @@ public class InputView {
         }
         return input;
     }
+
+    public static boolean isNeedToRetryInputValue(Object inputValue) {
+        return inputValue == null;
+    }
 }

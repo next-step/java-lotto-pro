@@ -10,6 +10,8 @@ import study.step3.domain.lottonumber.LottoNumber;
 import study.step3.domain.lottonumber.LottoNumbers;
 import study.step3.domain.lottostatistics.LottoStatistics;
 
+import java.util.List;
+
 public class ConsoleMainView {
 
     private final LottoMachineController lottoMachineController;
@@ -22,8 +24,10 @@ public class ConsoleMainView {
 
     public void render() {
         PurchaseMoney purchaseMoney = LottoMachineView.getPurchaseMoney();
-        Lottos lottos = lottoMachineController.issueLottos(purchaseMoney);
-        LottoView.printLottos(lottos);
+        long manualLottoCount = LottoMachineView.getManualLottoCount(purchaseMoney);
+        List<LottoNumbers> manualLottoNumbers = LottoView.getManualLottoNumbers(manualLottoCount);
+        Lottos lottos = lottoMachineController.issueLottos(purchaseMoney, manualLottoNumbers);
+        LottoView.printLottos(manualLottoCount, lottos);
 
         LottoNumbers winnerNumbers = LottoView.getWinningNumbers();
         LottoNumber bonusNumber = LottoView.getBonusNumber(winnerNumbers);

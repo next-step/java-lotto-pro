@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class LottoNumbersGenerator {
     public static LottoNumbers createLottoNumbers(int... numbers) {
         List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
         return new LottoNumbers(lottoNumbers);
     }
