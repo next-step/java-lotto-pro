@@ -1,13 +1,14 @@
-package step3.view;
+package step4.view;
 
-import step3.model.LottoResult;
-import step3.service.LottoScoreType;
+import step4.model.LottoResult;
+import step4.service.LottoScoreType;
 
 import java.util.Arrays;
 
 public class ResultView {
 
     private static final String RESULT_FORMAT = "%d개 일치 (%d원) - %d개";
+    private static final String RESULT_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
 
     public void printLottoResult(LottoResult lottoResults) {
         System.out.println("당첨 통계");
@@ -19,6 +20,10 @@ public class ResultView {
             int money = scoreType.getMoney();
 
             String result = String.format(RESULT_FORMAT, score, money, matchedCount);
+            if (LottoScoreType.FIVE_BONUS.equals(scoreType)) {
+                result = String.format(RESULT_BONUS_FORMAT, score, money, matchedCount);
+            }
+
             System.out.println(result);
         });
     }
