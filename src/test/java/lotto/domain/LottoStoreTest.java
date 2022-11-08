@@ -17,7 +17,7 @@ public class LottoStoreTest {
     void 로또_티켓_구매() {
         LottoTicket buyTicket = LottoStore.ticketPrinting(() -> new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         Set<LottoNumber> lottoTicket = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
         assertThat(buyTicket).isEqualTo(new LottoTicket(lottoTicket));
     }

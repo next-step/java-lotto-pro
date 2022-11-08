@@ -11,8 +11,8 @@ public class LottoService {
         LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(InputProvider.purchaseAmount());
         LottoTickets lottoTickets = lottoStore.buy((lottoPurchaseAmount.getQuantity()));
         OutputProvider.printLottoTicket(lottoTickets);
-        LottoTicket winningNumbers = new LottoTicket(InputProvider.lottoNumbers());
-        Rewards rewards = lottoTickets.check(winningNumbers);
+        WinningLottoNumber winningLottoNumber = new WinningLottoNumber(InputProvider.lottoNumbers(), InputProvider.bonusNumber());
+        Rewards rewards = lottoTickets.check(winningLottoNumber);
         OutputProvider.printRewards(rewards);
     }
 }

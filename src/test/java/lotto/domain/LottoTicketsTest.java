@@ -21,8 +21,8 @@ public class LottoTicketsTest {
     @Test
     @DisplayName("로또_티켓_당첨_비교")
     void 로또_티켓_당첨_비교() {
-        LottoTicket winningTicket = new LottoTicket("1, 2, 3, 7, 8, 9");
-        Rewards checkResult = lottoTickets.check(winningTicket);
+        WinningLottoNumber winningLottoNumber = new WinningLottoNumber("1, 2, 3, 7, 8, 9", 10);
+        Rewards checkResult = lottoTickets.check(winningLottoNumber);
         assertThat(checkResult.count(Rank.FOURTH)).isEqualTo(1);
         assertThat(checkResult.count(Rank.FIFTH)).isEqualTo(1);
     }
