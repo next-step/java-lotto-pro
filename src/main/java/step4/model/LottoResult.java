@@ -1,6 +1,6 @@
-package step3.model;
+package step4.model;
 
-import step3.service.LottoScoreType;
+import step4.service.LottoScoreType;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -12,7 +12,7 @@ public class LottoResult {
 
     protected Map<LottoScoreType, Integer> winningMap = new EnumMap<>(LottoScoreType.class);
 
-    public LottoResult(List<LottoScoreType> lottoWinningScoreTypeList) {
+    protected LottoResult(List<LottoScoreType> lottoWinningScoreTypeList) {
         Stream.of(LottoScoreType.values())
                 .forEach(type -> winningMap.put(type, 0));
         for (LottoScoreType lottoScoreType : lottoWinningScoreTypeList) {
@@ -20,7 +20,7 @@ public class LottoResult {
         }
     }
 
-    public static LottoResult getLottoResultFromLotto(Lottos lottos, LottoWinningNumber winningLotto) {
+    public static LottoResult getLottoResultFromLotto(Lottos lottos, LottoWinningNumbers winningLotto) {
         return new LottoResult(lottos.confirmLottoWinningNumber(winningLotto));
     }
 

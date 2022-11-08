@@ -1,10 +1,10 @@
-package step3.service;
+package step4.service;
 
-import step3.constant.StringConstant;
-import step3.model.Lotto;
-import step3.model.LottoNumber;
-import step3.model.LottoWinningNumber;
-import step3.model.Lottos;
+import step4.constant.StringConstant;
+import step4.model.Lotto;
+import step4.model.LottoNumber;
+import step4.model.LottoWinningNumbers;
+import step4.model.Lottos;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,19 +38,20 @@ public class LottoGenerator {
 
     private Lotto generate() {
         Collections.shuffle(numbers);
-        return new Lotto(new LottoNumber(numbers.subList(LOTTO_START_INDEX, LOTTO_END_INDEX)));
+        return new Lotto(numbers.subList(LOTTO_START_INDEX, LOTTO_END_INDEX).stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
     }
 
-    public LottoWinningNumber generateLottoWinningNumber(String lottoNumberText) {
-        return new LottoWinningNumber(new LottoNumber(Stream.of(lottoNumberText.split(StringConstant.COMMA))
+    public List<LottoNumber> generateLottoNumbers(String lottoNumberText) {
+        return Stream.of(lottoNumberText.split(StringConstant.COMMA))
                 .map(this::convertInteger)
-                .collect(Collectors.toList())));
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
-    public LottoWinningNumber generateLottoWinningNumber(String lottoNumberText, int bonus) {
-        return new LottoWinningNumber(new LottoNumber(Stream.of(lottoNumberText.split(StringConstant.COMMA))
-                .map(this::convertInteger)
-                .collect(Collectors.toList())), bonus);
+    public LottoWinningNumbers generateLottoWinningNumber(List<LottoNumber> lottoNumbers, int bonus) {
+        return new LottoWinningNumbers(new Lotto(lottoNumbers), new LottoNumber(bonus));
     }
 
     private Integer convertInteger(String number) {

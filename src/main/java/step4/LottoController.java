@@ -1,10 +1,13 @@
-package step3;
+package step4;
 
-import step3.model.LottoResult;
-import step3.model.Lottos;
-import step3.service.LottoService;
-import step3.view.InputView;
-import step3.view.ResultView;
+import step4.model.LottoNumber;
+import step4.model.LottoResult;
+import step4.model.Lottos;
+import step4.service.LottoService;
+import step4.view.InputView;
+import step4.view.ResultView;
+
+import java.util.List;
 
 public class LottoController {
 
@@ -19,8 +22,10 @@ public class LottoController {
         inputView.printLottos(lottos);
 
         String winningNumberText = inputView.readyWinningLotto();
+        List<LottoNumber> winningNumbers = lottoService.getLottoNumbers(winningNumberText);
+
         int bonus = inputView.readyBonus();
-        LottoResult lottoResults = lottoService.getResultComparedToWinningNumbers(winningNumberText, bonus, lottos);
+        LottoResult lottoResults = lottoService.getResultComparedToWinningNumbers(winningNumbers, bonus, lottos);
 
         printResult(money, lottoResults);
     }

@@ -1,6 +1,6 @@
-package step3.view;
+package step4.view;
 
-import step3.model.Lottos;
+import step4.model.Lottos;
 
 import java.util.Scanner;
 
@@ -34,9 +34,6 @@ public class InputView {
     }
 
     public void printLottos(Lottos lottos) {
-        lottos.print(lottoNumbers -> {
-            String status = String.format(LOTTO_NUMBER_STATUS, lottoNumbers);
-            System.out.println(status);
-        });
+        lottos.print(System.out::println);
     }
 }

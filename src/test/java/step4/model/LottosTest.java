@@ -1,10 +1,11 @@
-package step3.model;
+package step4.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,8 +16,12 @@ class LottosTest {
     @BeforeEach
     private void setUp() {
         lottos = new Lottos();
-        lottos.add(new Lotto(new LottoNumber(List.of(1, 2, 3, 4, 5, 6))));
-        lottos.add(new Lotto(new LottoNumber(List.of(20,30,32,40,42,43))));
+        lottos.add(new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList())));
+        lottos.add(new Lotto(Stream.of(20,30,32,40,42,43)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList())));
     }
 
     @Test

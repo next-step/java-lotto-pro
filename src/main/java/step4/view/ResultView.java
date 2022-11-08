@@ -1,7 +1,7 @@
-package step3.view;
+package step4.view;
 
-import step3.model.LottoResult;
-import step3.service.LottoScoreType;
+import step4.model.LottoResult;
+import step4.service.LottoScoreType;
 
 import java.util.Arrays;
 

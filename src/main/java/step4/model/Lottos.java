@@ -1,12 +1,10 @@
-package step3.model;
+package step4.model;
 
-import step3.service.LottoScoreType;
+import step4.service.LottoScoreType;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -32,11 +30,11 @@ public class Lottos {
         this.lottos.forEach(lotto -> consumer.accept(lotto.toString()));
     }
 
-    public List<LottoScoreType> confirmLottoWinningNumber(LottoWinningNumber winningLotto) {
+    public List<LottoScoreType> confirmLottoWinningNumber(LottoWinningNumbers winningLotto) {
         List<LottoScoreType> scoreTypes = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            int matchedCount = lotto.getMatchedCount(winningLotto);
-            boolean matchedBonus = lotto.isMatchedBonus(winningLotto);
+            int matchedCount = winningLotto.getMatchedCount(lotto);
+            boolean matchedBonus = winningLotto.isMatchedBonus(lotto);
             LottoScoreType lottoScoreType = LottoScoreType.getByScore(matchedCount, matchedBonus);
             addLottoScoreType(scoreTypes, lottoScoreType);
         }

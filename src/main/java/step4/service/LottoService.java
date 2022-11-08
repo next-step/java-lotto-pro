@@ -1,8 +1,11 @@
-package step3.service;
+package step4.service;
 
-import step3.model.LottoResult;
-import step3.model.LottoWinningNumber;
-import step3.model.Lottos;
+import step4.model.LottoNumber;
+import step4.model.LottoResult;
+import step4.model.LottoWinningNumbers;
+import step4.model.Lottos;
+
+import java.util.List;
 
 public class LottoService {
     private static final int DEFAULT_TICKET_PRICE = 1000;
@@ -21,8 +24,12 @@ public class LottoService {
         return lottoGenerator.generateByTimes(money / DEFAULT_TICKET_PRICE);
     }
 
-    public LottoResult getResultComparedToWinningNumbers(String winningLottoText, int bonus, Lottos lottos) {
-        LottoWinningNumber lottoWinning = this.lottoGenerator.generateLottoWinningNumber(winningLottoText, bonus);
+    public List<LottoNumber> getLottoNumbers(String winningLottoText) {
+        return this.lottoGenerator.generateLottoNumbers(winningLottoText);
+    }
+
+    public LottoResult getResultComparedToWinningNumbers(List<LottoNumber> lottoNumbers, int bonus, Lottos lottos) {
+        LottoWinningNumbers lottoWinning = this.lottoGenerator.generateLottoWinningNumber(lottoNumbers, bonus);
         return LottoResult.getLottoResultFromLotto(lottos, lottoWinning);
     }
 }

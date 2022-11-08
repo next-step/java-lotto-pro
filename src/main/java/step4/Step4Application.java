@@ -1,6 +1,6 @@
-package step3;
+package step4;
 
-public class Step3Application {
+public class Step4Application {
     public static void main(String[] args) {
         LottoController lottoController = new LottoController();
         lottoController.gameStart();
