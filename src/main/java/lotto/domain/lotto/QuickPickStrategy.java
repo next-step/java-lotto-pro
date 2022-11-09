@@ -3,7 +3,6 @@ package lotto.domain.lotto;
 import static lotto.utils.Validations.requireNotNull;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class QuickPickStrategy implements NumberPickStrategy {
@@ -15,11 +14,10 @@ public class QuickPickStrategy implements NumberPickStrategy {
     }
 
     @Override
-    public List<LottoNumbers> pickNumbers(final int quantity) {
+    public Stream<LottoNumbers> pickNumbers(final int quantity) {
         return Stream.generate(this::generateNumbers)
-                .map(LottoNumbers::new)
                 .limit(quantity)
-                .collect(Collectors.toList());
+                .map(LottoNumbers::new);
     }
 
     private List<Integer> generateNumbers() {

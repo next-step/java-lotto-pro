@@ -3,7 +3,7 @@ package lotto.domain.lotto;
 import static lotto.utils.Validations.requireNotNull;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PlayerPickStrategy implements NumberPickStrategy {
     private final List<LottoNumbers> pickedNumbers;
@@ -15,9 +15,7 @@ public class PlayerPickStrategy implements NumberPickStrategy {
     }
 
     @Override
-    public List<LottoNumbers> pickNumbers(int quantity) {
-        return pickedNumbers.stream()
-                .limit(quantity)
-                .collect(Collectors.toList());
+    public Stream<LottoNumbers> pickNumbers(int quantity) {
+        return pickedNumbers.stream();
     }
 }

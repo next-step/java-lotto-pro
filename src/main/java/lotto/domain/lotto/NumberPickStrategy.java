@@ -1,8 +1,8 @@
 package lotto.domain.lotto;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 @FunctionalInterface
 public interface NumberPickStrategy {
-    List<LottoNumbers> pickNumbers(final int quantity);
+    Stream<LottoNumbers> pickNumbers(final int quantity);
 }

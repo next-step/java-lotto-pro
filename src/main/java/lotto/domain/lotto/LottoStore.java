@@ -32,9 +32,7 @@ public class LottoStore {
         final BigDecimal quotient = money.divide(this.lottoUnitPrice);
         final int quantity = quotient.intValue();
 
-        final List<LottoNumbers> numbers = pickStrategy.pickNumbers(quantity);
-
-        return numbers.stream()
+        return pickStrategy.pickNumbers(quantity)
                 .map(Lotto::new)
                 .collect(Collectors.toList());
     }

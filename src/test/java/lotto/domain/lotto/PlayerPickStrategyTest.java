@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -42,11 +43,12 @@ class PlayerPickStrategyTest {
         );
         final NumberPickStrategy pickStrategy = new PlayerPickStrategy(picks);
 
-        final List<LottoNumbers> actual = pickStrategy.pickNumbers(2);
+        final Stream<LottoNumbers> actual = pickStrategy.pickNumbers(2);
 
         assertThat(actual).containsExactly(
                 new LottoNumbers(1, 2, 3, 4, 5, 6),
-                new LottoNumbers(2, 3, 4, 5, 6, 7)
+                new LottoNumbers(2, 3, 4, 5, 6, 7),
+                new LottoNumbers(3, 4, 5, 6, 7, 8)
         );
     }
 
@@ -61,7 +63,7 @@ class PlayerPickStrategyTest {
         );
         final NumberPickStrategy pickStrategy = new PlayerPickStrategy(picks);
 
-        final List<LottoNumbers> actual = pickStrategy.pickNumbers(pickingQuantity);
+        final Stream<LottoNumbers> actual = pickStrategy.pickNumbers(pickingQuantity);
 
         assertThat(actual).containsExactly(
                 new LottoNumbers(1, 2, 3, 4, 5, 6),
