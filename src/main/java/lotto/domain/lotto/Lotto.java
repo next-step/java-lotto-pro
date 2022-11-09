@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    public static final int LOTTO_NUMBERS_SIZE = 6;
     private final LottoNumbers numbers;
 
     public Lotto(Integer... numbers) {

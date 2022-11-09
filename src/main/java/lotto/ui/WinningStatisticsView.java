@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumbers;
 import lotto.ui.dto.MatchingCount;
 import lotto.ui.dto.WinningNumbersInput;
 import lotto.ui.dto.WinningStatisticsOutput;
@@ -28,11 +28,11 @@ public class WinningStatisticsView {
     private static List<Integer> readWinningNumbers() {
         final List<Integer> ints = readIntegers();
 
-        if (ints.size() == Lotto.LOTTO_NUMBERS_SIZE) {
+        if (ints.size() == LottoNumbers.SIZE) {
             return ints;
         }
 
-        System.out.println("숫자 " + Lotto.LOTTO_NUMBERS_SIZE + "개를 입력해주세요.");
+        System.out.println("숫자 " + LottoNumbers.SIZE + "개를 입력해주세요.");
         return readWinningNumbers();
     }
 

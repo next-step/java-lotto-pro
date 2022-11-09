@@ -16,7 +16,7 @@ public class DefaultRandomNumberGenerator implements RandomNumberGenerator {
 
     private List<Integer> takeLottoSize(List<Integer> allNumbers) {
         return allNumbers.stream()
-                .limit(Lotto.LOTTO_NUMBERS_SIZE)
+                .limit(LottoNumbers.SIZE)
                 .collect(Collectors.toList());
     }
 }

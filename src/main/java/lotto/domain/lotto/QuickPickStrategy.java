@@ -29,8 +29,8 @@ public class QuickPickStrategy implements NumberPickStrategy {
     }
 
     private void checkNumbersSize(List<Integer> numbers) {
-        if (numbers.size() != Lotto.LOTTO_NUMBERS_SIZE) {
-            throw new IllegalStateException("생성된 숫자의 길이가 " + Lotto.LOTTO_NUMBERS_SIZE + "이어야 합니다. elements=" + numbers);
+        if (numbers.size() != LottoNumbers.SIZE) {
+            throw new IllegalStateException("생성된 숫자의 길이가 " + LottoNumbers.SIZE + "이어야 합니다. elements=" + numbers);
         }
     }
 }
