@@ -15,7 +15,7 @@ public class LottoNumber {
     private final int value;
 
     public LottoNumber(int value) {
-        if (value < MIN_NUMBER || value > MAX_NUMBER) {
+        if (isNotValid(value)) {
             throw new IllegalArgumentException("숫자는 1에서 45 사이여야 합니다. value=[" + value + "]");
         }
         this.value = value;
@@ -23,6 +23,10 @@ public class LottoNumber {
 
     public static List<Integer> allNumbers() {
         return new ArrayList<>(ALL_NUMBERS);
+    }
+
+    public static boolean isNotValid(final int value) {
+        return !(MIN_NUMBER <= value && value <= MAX_NUMBER);
     }
 
     public int toInt() {

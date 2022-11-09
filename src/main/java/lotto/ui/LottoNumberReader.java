@@ -24,6 +24,9 @@ public class LottoNumberReader {
         } catch (LottoNumberSizeException e) {
             System.out.println("숫자 " + LottoNumbers.SIZE + "개를 입력해주세요.");
             return readLottoNumbers();
+        } catch (IllegalLottoNumberException e) {
+            System.out.println("올바른 로또 번호 범위 내에서 입력해 주세요.");
+            return readLottoNumbers();
         }
     }
 }
