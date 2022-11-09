@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public abstract class Lotto {
-	public final static Money LOTTO_PRICE = new Money(1000L);
+	public final static Money PRICE = new Money(1000L);
 	private final static int SIZE_OF_LOTTO = 6;
 
 	private final Set<LottoNumber> numbers;

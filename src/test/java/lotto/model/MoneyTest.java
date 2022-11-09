@@ -16,7 +16,7 @@ public class MoneyTest {
 	@Test
 	void 특정_금액의_구입_가능_갯수_확인() {
 		Money money = new Money(14001L);
-		assertThat(money.calculateQuantity(Lotto.LOTTO_PRICE)).isEqualTo(14L);
+		assertThat(money.calculateQuantity(Lotto.PRICE)).isEqualTo(14L);
 	}
 
 	@Test

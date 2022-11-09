@@ -24,7 +24,7 @@ public class Ranks {
 	}
 
 	public float getIncomeRatio() {
-		return Lotto.LOTTO_PRICE
+		return Lotto.PRICE
 			.multiply(ranks.size())
 			.ratio(getTotalPrize());
 	}

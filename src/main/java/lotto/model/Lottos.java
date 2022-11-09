@@ -19,7 +19,7 @@ public class Lottos {
 	}
 
 	public Money getTotalSpent() {
-		return Lotto.LOTTO_PRICE.multiply(lottos.size());
+		return Lotto.PRICE.multiply(lottos.size());
 	}
 
 	public Lottos merge(final Lottos otherLotto) {
