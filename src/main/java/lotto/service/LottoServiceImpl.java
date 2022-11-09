@@ -69,7 +69,7 @@ public class LottoServiceImpl implements LottoService {
         // 일치 개수 리스트 생성
         MatchCounts matchCounts = lottos.compareWinLotto(winLotto);
         // 당첨 기준에 따라 WinResult 생성
-        return new WinResult(LottoConstants.LOTTO_WIN_CRITERIA, matchCounts);
+        return new WinResult(matchCounts);
     }
 
     /**

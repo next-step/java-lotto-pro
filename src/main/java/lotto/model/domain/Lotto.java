@@ -44,7 +44,7 @@ public class Lotto {
         }
     }
 
-    private int contains(LottoNumber lottoNumber) {
+    public int contains(LottoNumber lottoNumber) {
         if (lotto.contains(lottoNumber)) {
             return LOTTO_NUMBER_EXIST;
         }

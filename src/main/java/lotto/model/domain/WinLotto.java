@@ -5,21 +5,24 @@ import lotto.model.constants.LottoConstants;
 public class WinLotto {
 
     private Lotto winLotto;
+    private LottoNumber bonusBall;
 
-    public WinLotto(String input) {
+    public WinLotto(String winLottoInput, String bonusBallInput) {
         this.winLotto = new Lotto();
-        String[] winLottoNumbers = input.split(LottoConstants.WIN_LOTTO_DELIMITER);
+        String[] winLottoNumbers = winLottoInput.split(LottoConstants.WIN_LOTTO_DELIMITER);
         for (String winLottoNumber : winLottoNumbers) {
             this.winLotto.addLottoNumber(new LottoNumber(winLottoNumber));
         }
         winLotto.checkLottoNumberCount();
+        this.bonusBall = new LottoNumber(bonusBallInput);
     }
 
-    public WinLotto(Lotto lotto) {
+    public WinLotto(Lotto lotto, LottoNumber bonusBall) {
         this.winLotto = lotto;
+        this.bonusBall = bonusBall;
     }
 
-    public int compareWithLotto(Lotto userLotto) {
-        return winLotto.compare(userLotto);
+    public MatchCount compareWithLotto(Lotto userLotto) {
+        return new MatchCount(winLotto.compare(userLotto), userLotto.contains(bonusBall));
     }
 }
