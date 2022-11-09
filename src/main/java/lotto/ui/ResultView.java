@@ -2,7 +2,9 @@ package lotto.ui;
 
 import lotto.Lotto;
 import lotto.Rank;
+import lotto.WinningMatcher;
 import lotto.common.Constants;
+import lotto.common.LottoAutoUtils;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -23,8 +25,8 @@ public class ResultView {
         return nf.format(value);
     }
 
-    public void printBuyLottoCountMessage(int buyLotto) {
-        System.out.println(buyLotto + "개를 구매하였습니다.");
+    public void printBuyLottoCountMessage(int buyLotto, String directInputLotto) {
+        System.out.println("수동으로" + directInputLotto.split("\n").length + " 장, " + "자동으로 " + buyLotto + "개를 구매하였습니다.");
     }
 
     public void printBuyLotto(List<Lotto> lottoList) {
@@ -33,6 +35,12 @@ public class ResultView {
         }
     }
 
+    public void printWinningStatistics(WinningMatcher winningMatcher) {
+        Rank[] ranks = Rank.values();
+        for (Rank rank : ranks) {
+            printWinningStatisticsMessage(rank, winningMatcher.getMatchNumberMap().value(rank));
+        }
+    }
     public void printWinningStatisticsMessage(Rank rank, int value) {
         if (rank == Rank.MISS) {
             return;
@@ -42,6 +50,10 @@ public class ResultView {
             return;
         }
         sb.append(rank.getCountOfMatch() + "개 일치(" + rank.getWinningMoney() + "원)-" + value + "개\n");
+    }
+
+    public void printProfit(WinningMatcher WinningMatcher, String inputMoney) {
+        printProfitMessage(new LottoAutoUtils().stringToNumber(inputMoney), WinningMatcher.getMatchNumberMap().profit());
     }
 
     public void printProfitMessage(int inputMoney, float profit) {

@@ -1,5 +1,7 @@
 package lotto.ui;
 
+import lotto.common.LottoAutoUtils;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -27,4 +29,15 @@ public class InputView {
         return scanner.nextLine();
     }
 
+    public String getDirectInputLottoNumber() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int cnt = new LottoAutoUtils().stringToNumber(consoleInput());
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        String directInputLottoNumbers = "";
+        for (int i = 1; i < cnt; i++) {
+            directInputLottoNumbers += consoleInput() + "\n";
+        }
+        ;
+        return directInputLottoNumbers += consoleInput();
+    }
 }

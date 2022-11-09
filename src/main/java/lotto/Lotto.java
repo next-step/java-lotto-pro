@@ -1,38 +1,42 @@
 package lotto;
 
-import java.util.Collections;
 import java.util.List;
-
-import static lotto.common.Constants.BEGIN_INDEX;
-import static lotto.common.Constants.LOTTO_LENGTH;
+import java.util.Objects;
 
 public class Lotto {
     private LottoNumbers lottoNumbers;
-
-    public Lotto() {
-        lottoNumbers = new LottoNumbers();
-        makeLottoNumbers();
-    }
 
     public Lotto(String lottoNumbers) {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers.getNumbers();
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
-    private void makeLottoNumbers() {
-        for (int num = 1; num <= 45; num++) {
-            lottoNumbers.add(num);
-        }
-        Collections.shuffle(lottoNumbers.getNumbers());
-        lottoNumbers = new LottoNumbers(lottoNumbers.getNumbers().subList(BEGIN_INDEX, BEGIN_INDEX + LOTTO_LENGTH));
-        Collections.sort(lottoNumbers.getNumbers());
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers.LottoNumbersToListOfLottoNumber();
     }
 
     @Override
     public String toString() {
-        return lottoNumbers.getNumbers().toString();
+        String str = "";
+        for (int i = 0; i < lottoNumbers.LottoNumbersToListOfLottoNumber().size() - 1; i++) {
+            str += lottoNumbers.LottoNumbersToListOfLottoNumber().get(i).getLottoNum() + ", ";
+        }
+        return str += lottoNumbers.LottoNumbersToListOfLottoNumber().get(lottoNumbers.LottoNumbersToListOfLottoNumber().size() -1).getLottoNum();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

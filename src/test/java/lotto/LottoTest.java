@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoTest {
     @Test
     public void 숫자_6개_생성() {
-        Lotto lotto = new Lotto();
+        Lotto lotto = LottoGenerator.generateLotto();
         assertThat(lotto.getLottoNumbers()).hasSize(6);
     }
 }

@@ -10,4 +10,6 @@ public class Constants {
     public static final int INIT_NUM = 0;
     public static final int DECIMAL_POINT = 2;
     public static final int ZERO = 0;
+
+    public static final String COMMON_ERROR_MESSAGE = "[ERROR]";
 }

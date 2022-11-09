@@ -12,7 +12,7 @@
 ## Step1 회고
 * Step1 리뷰 시 리뷰어인 민제님께서 요구사항 작성도 있었으면 좋겠다라는 피드백을 주심.
 * 아차! 하며, 단순한 프로그램이라도 요구사항 작성하는 습관을 들이는 것이 중요하다라는 생각이 들어 Step2부터 작성.
-* 
+
 ## Step2 문자열 덧셈 계산기 요구사항 정리
 
 * 쉼표(,) 또는 콜론(:)을 기본 구분자로 가지며, 구분자 기준으로 분리한 각 숫자의 합을 반환
@@ -81,3 +81,47 @@
 * 당첨번호 5개 + 보너스 볼을 맞추면 2등
 * 일급콜렉션을 사용(필수)
 * enum 클래스 사용(필수)
+
+## step3, step4 회고
+* 방어적복사 적용으로 좀 더 견고한 서비스 만들기 가능 
+  - ASIS LottoNumbers에 List<Integer>로 생성하면, 외부 변경에 의해 취약
+* 객체간의 메시지를 활용할 것.
+  - 습관적으로 get~ 메서드를 활용하게 되는데, 객체 설계 시 좀 더 연습이 필요하다.
+* Steam 활용
+  - 미션수행할 때 Stream 활용하면 안되는줄 알았는데, 앞으로 Stream 활용하여 알기 쉽게 적용해야 겠다.
+
+## Step5 프로그램 요구사항 정리
+* 수동 추첨 번호 입력 기능 적용
+  - 수동입력 lottos를 String으로 받음
+  - Buyer 클래스 생성자에 lottos(String)을 받아 처리하는 생성자 추가
+  - lottos size만큼 amount을 substrct 처리
+* 모든 원시값과 문자열을 포장
+* 네이밍 시 줄여쓰지 않음
+* 예외처리 시 java exception으로 에러 처리하며, optional을 적용해 NullpointerException 처리
+## step5 회고 
+* LottoGenerator 구현 
+  - LottoNumbers (로또번호 List) 또한 정적 팩토리 메서드를 적용
+  - ASIS
+    - LottoNumber(1~45) 만 정적팩토리메서드로 구현하였음
+    - Lotto에서 LottoNumbers (LottoNumber의 List) 를 만들기 위해 반복문 기반으로 LottoNumbers 생성하는 로직 존재
+    - Lotto 생성 시 매번 새로운 LottoNumbers를 새로 생성함
+  - TOBE
+    - LottoGenerator라는 새로운 클래스를 만들어 LottoNumbers를 정적팩토리메서드 적용
+    - Lotto 객체 생성 시 새로운 LottoNumbers를 만들 필요가 없어짐
+* Buyer 리팩토링
+  - 수동생성 기능을 생성자를 통해 해결하려 함 -> new Buyer(inputMoney, directInputLottoNumber)
+  - 사용자가 이해하기 쉽게, 일관성 있는 메세지(메서드)를 보내는 것이 나아 보인다는 민제님의 리뷰
+  - buyer.buyLotto() -> 자동생성 / buyer.buyLotto(directInputLottoNumber) -> 수동생성
+  - 위와 같이 수정함으로써 자바의 특징을 활용하면서 buyLotto라는 메세지를 통해 처리 가능
+  
+## 로또 회고
+* 클래스의 책임 분리
+  - 요구사항을 '행위자':class "행위":message 로 나누는 좋은 경험이 되었습니다.
+* 생성자의 역할
+  - 적절한 생성자는 많을수록 좋고 테스트를 위한 생성자 생성은 괜찮다 라는 자바지기님의 가르침이 계속 맴도는 미션이었습니다.
+* 테스트코드 및 TDD
+  - 어느정도 TDD와 친해지게된 미션이었습니다.
+* 견고한 프로그램 설계
+  - 개발자도 사람이고, 사람은 실수하기 때문에 실수를 줄일 수 있는 코드를 작성해야 한다고 마음속으로 늘 생각했습니다.
+  - 하지만 뭔가 기간 내에 PR을 보내야한다는 압박에 그러지 못했습니다.
+  - 민제님이 리뷰 덕에 방어적복사에 대해 염두하게된 계기가 되었습니다.

@@ -4,20 +4,32 @@ package lotto;
   import lotto.ui.ResultView;
 
 public class DestinyMatch {
-    public void start() {
-        InputView inputView = new InputView();
-        ResultView resultView = new ResultView();
-        String inputMoney = inputView.getInputString();
-        Buyer buyer = new Buyer(inputMoney);
+    private InputView inputView;
+    private ResultView resultView;
+    private String inputMoney;
+    private String directInputLotto;
+    private Buyer buyer;
 
-        resultView.printBuyLottoCountMessage(buyer.buyLotto());
+    public DestinyMatch() {
+        inputView = new InputView();
+        resultView = new ResultView();
+        this.inputMoney = inputView.getInputString();
+        this.directInputLotto = inputView.getDirectInputLottoNumber();
+        this.buyer = new Buyer(inputMoney);
+    }
+
+    public void start() {
+        buyer.buyLotto(directInputLotto);
+
+        resultView.printBuyLottoCountMessage(buyer.buyLotto(), directInputLotto);
         resultView.printBuyLotto(buyer.getLottos());
 
-        String inputLottoNumbers = inputView.getInputWinningNumbers();
-        String inputBonusNumber = inputView.getInputBonusNumbers();
+        resultPrint(inputView.getInputWinningNumbers(), inputView.getInputBonusNumbers());
+    }
 
-        WinningMatcher winningMatcher = new WinningMatcher(buyer, new LottoNumbers(inputLottoNumbers), inputBonusNumber);
-        winningMatcher.printWinningStatistics();
-        winningMatcher.printProfit(inputMoney);
+    private void resultPrint(String inputLottoNumbers, String inputBonusNumber) {
+        WinningMatcher winningMatcher = new WinningMatcher(buyer, new WinningLotto(inputLottoNumbers, inputBonusNumber));
+        resultView.printWinningStatistics(winningMatcher);
+        resultView.printProfit(winningMatcher, inputMoney);
     }
 }
