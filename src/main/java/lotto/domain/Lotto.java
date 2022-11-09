@@ -62,7 +62,7 @@ public class Lotto {
     }
 
     public boolean isMatchBonusBall(WinningLotto winningLotto) {
-        return this.numbers.contains(winningLotto.getBonusBall().getNumber());
+        return this.numbers.contains(winningLotto.getBonusBall());
     }
 
     public boolean contains(Number number) {

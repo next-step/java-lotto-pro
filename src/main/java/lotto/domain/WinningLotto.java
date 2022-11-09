@@ -8,9 +8,9 @@ import static lotto.domain.Lotto.DUPLICATE_EXCEPTION_MESSAGE;
 public class WinningLotto {
 
     private final Lotto winningLotto;
-    private final BonusBall bonusBall;
+    private final Number bonusBall;
 
-    public WinningLotto(String[] winningLottos, BonusBall bonusBall) {
+    public WinningLotto(String[] winningLottos, Number bonusBall) {
         this.winningLotto = new Lotto(numbers(winningLottos));
         validateDuplicateBonusBall(bonusBall);
         this.bonusBall = bonusBall;
@@ -24,14 +24,14 @@ public class WinningLotto {
         return numbers;
     }
 
-    private void validateDuplicateBonusBall(BonusBall bonusBall) {
-        if (winningLotto.getNumbers().contains(bonusBall.getNumber())) {
+    private void validateDuplicateBonusBall(Number bonusBall) {
+        if (winningLotto.contains(bonusBall)) {
             throw new IllegalArgumentException(DUPLICATE_EXCEPTION_MESSAGE);
         }
     }
 
-    public BonusBall getBonusBall() {
-        return bonusBall;
+    public Number getBonusBall() {
+        return this.bonusBall;
     }
 
     public boolean contains(Number number) {

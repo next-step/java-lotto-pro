@@ -40,7 +40,7 @@ class LottosTest {
     @DisplayName("수익률 계산")
     @ParameterizedTest
     @ValueSource(ints = {30000})
-    void returnRate(double expected) {
+    void return_rate(double expected) {
         assertThat(lottos().returnRate(WinningLottoFixture.five_match())).isEqualTo(expected);
     }
 
