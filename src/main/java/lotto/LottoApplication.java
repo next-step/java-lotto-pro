@@ -1,11 +1,14 @@
 package lotto;
 
 import java.util.List;
+import lotto.domain.lotto.CombinedNumberPickStrategy;
 import lotto.domain.lotto.DefaultRandomNumberGenerator;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumbers;
 import lotto.domain.lotto.LottoStore;
 import lotto.domain.lotto.Money;
 import lotto.domain.lotto.NumberPickStrategy;
+import lotto.domain.lotto.PlayerPickStrategy;
 import lotto.domain.lotto.QuickPickStrategy;
 import lotto.domain.statistics.MatchingResult;
 import lotto.ui.BuyLottoView;
@@ -31,9 +34,15 @@ public class LottoApplication {
     private static List<Lotto> buyLotto() {
         final LottoStore store = new LottoStore(LOTTO_UNIT_PRICE);
         final BuyLottoInput buyLottoInput = BuyLottoView.buyLotto();
-        final List<Lotto> lottos = store.buyLottos(buyLottoInput.toMoney(), QUICK_PICK);
 
-        BuyLottoView.printLottos(new BuyLottoOutput(lottos));
+        final List<LottoNumbers> playerPicks = buyLottoInput.getPlayerPicks();
+        final NumberPickStrategy pickStrategy = new CombinedNumberPickStrategy(
+                new PlayerPickStrategy(playerPicks),
+                QUICK_PICK
+        );
+        final List<Lotto> lottos = store.buyLottos(buyLottoInput.getMoney(), pickStrategy);
+
+        BuyLottoView.printLottos(new BuyLottoOutput(lottos, playerPicks.size()));
         return lottos;
     }
 
