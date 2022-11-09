@@ -7,8 +7,13 @@ import java.util.Comparator;
 
 public class OutputView {
 
-    public static void outputCountLottoTicket(int lottoTicketCount) {
-        System.out.println(lottoTicketCount + "개를 구매했습니다.");
+    public static void outputCountLottoTicket(int lottoTicketCount, int manualLottoTicketCount) {
+        int autoTicketCount = lottoTicketCount - manualLottoTicketCount;
+
+        if (manualLottoTicketCount > 0) {
+            System.out.print("수동으로 " + manualLottoTicketCount + "장,");
+        }
+        System.out.println("자동으로 " + autoTicketCount + "장");
     }
 
     public static void outputPurchaseLottoList(Lottos lottos) {
@@ -22,9 +27,7 @@ public class OutputView {
         System.out.println("--------");
     }
 
-    public static void MatchReportResult(WinLotto winLotto) {
-        WinReport winReport = winLotto.getWinLottoReport();
-
+    public static void MatchReportResult(WinReport winReport) {
         Arrays.stream(PrizeMoney.values())
                 .sorted(Comparator.comparingInt(PrizeMoney::getPrizeMoney))
                 .filter(prizeMoney -> prizeMoney.getCollectCount() > 2)
@@ -35,14 +38,13 @@ public class OutputView {
     }
 
     public static String makeLottoResuiltMessage(PrizeMoney prizeMoney) {
-        if (prizeMoney.equals(PrizeMoney.SECOND_PLACE)) {
+        if (prizeMoney.isSecondPlace(prizeMoney)) {
             return "%d개 일치, 보너스 볼 일치(%d)- %d개\n";
         }
         return "%d개 일치(%d)- %d개\n";
     }
 
-    public static void outputProfit(WinLotto winLotto, int lottoTicketCount) {
-        WinReport winReport = winLotto.getWinLottoReport();
+    public static void outputProfit(WinReport winReport, int lottoTicketCount) {
         double profit = winReport.calculateProfit(lottoTicketCount);
 
         System.out.printf("총 수익률은 %.2f 입니다.", profit);

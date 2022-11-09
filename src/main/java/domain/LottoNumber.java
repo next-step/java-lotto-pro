@@ -6,7 +6,7 @@ public class LottoNumber {
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
 
-    int number;
+    private final int number;
 
     public LottoNumber(int number) {
         isValidNumber(number);
@@ -15,7 +15,6 @@ public class LottoNumber {
 
     private void isValidNumber(int number) {
         isValidRangeNumber(number);
-
     }
 
     private void isValidRangeNumber(int number) {

@@ -1,6 +1,5 @@
 package study.step3;
 
-import domain.Lotto;
 import domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

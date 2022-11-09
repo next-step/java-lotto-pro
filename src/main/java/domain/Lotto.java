@@ -32,6 +32,25 @@ public class Lotto {
         }
     }
 
+    public PrizeMoney countCollectNumber(Lotto winLottoNumbers, LottoNumber bonusNumber) {
+        int collectCount = 0;
+        for (LottoNumber winNumber : winLottoNumbers.getLottoNumbers()) {
+            collectCount += containNumbers(winNumber);
+        }
+        return PrizeMoney.valueOf(collectCount, containBonusNumber(bonusNumber));
+    }
+
+    public boolean containBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
+    private int containNumbers(LottoNumber winNumber) {
+        if (lottoNumbers.contains(winNumber)) {
+            return 1;
+        }
+        return 0;
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
@@ -55,5 +74,5 @@ public class Lotto {
                 "lottoNumbers=" + lottoNumbers +
                 '}';
     }
-    
+
 }

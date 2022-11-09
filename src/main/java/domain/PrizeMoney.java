@@ -12,6 +12,7 @@ public enum PrizeMoney {
 
     private final int collectCount;
     private final int prizeMoney;
+
     private final boolean matchBonus;
 
     PrizeMoney(int collectCount, int prizeMoney, boolean matchBonus) {
@@ -35,5 +36,10 @@ public enum PrizeMoney {
                 .findFirst()
                 .orElse(OTHER_PLACE);
     }
+
+    public boolean isSecondPlace(PrizeMoney prizeMoney) {
+        return SECOND_PLACE.equals(prizeMoney);
+    }
+
 
 }

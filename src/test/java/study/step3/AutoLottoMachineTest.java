@@ -3,7 +3,10 @@ package study.step3;
 import domain.AutoLottoMachine;
 import domain.Lotto;
 
+import domain.Lottos;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,10 +16,11 @@ public class AutoLottoMachineTest {
     @Test
     void 로또번호_생성() {
 
-        autoLottoMachine = new AutoLottoMachine();
-        Lotto lotto = autoLottoMachine.createLottoNumber();
+        Lottos lottos = new Lottos(new ArrayList<>());
+        autoLottoMachine = new AutoLottoMachine(3, lottos);
+        autoLottoMachine.purchaseLotto();
 
-        assertThat(lotto).isNotNull();
+        assertThat(lottos).isNotNull();
     }
 
 

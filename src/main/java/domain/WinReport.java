@@ -26,4 +26,10 @@ public class WinReport {
         return Math.floor(profit / (lottoTicketCount * LOTTE_PRICE) * 100) / 100;
     }
 
+    public void findWinner(WinLotto winLotto, Lottos lottos){
+            for (Lotto lotto : lottos.getLottos()) {
+                putLottoResult(lotto.countCollectNumber(winLotto.getWinLottoNumbers(), winLotto.getBonusNumber()));
+            }
+    }
+
 }
