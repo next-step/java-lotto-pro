@@ -3,17 +3,16 @@ package lotto.ui;
 import static java.lang.Integer.parseInt;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import lotto.domain.lotto.LottoNumbers;
 import lotto.ui.dto.MatchingCount;
 import lotto.ui.dto.WinningNumbersInput;
 import lotto.ui.dto.WinningStatisticsOutput;
 
 public class WinningStatisticsView {
     private static final Scanner scanner = new Scanner(System.in);
+
+    private static final LottoNumberReader lottoNumberReader = new LottoNumberReader(scanner);
 
     public static WinningNumbersInput receiveWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
@@ -26,32 +25,7 @@ public class WinningStatisticsView {
     }
 
     private static List<Integer> readWinningNumbers() {
-        final List<Integer> ints = readIntegers();
-
-        if (ints.size() == LottoNumbers.SIZE) {
-            return ints;
-        }
-
-        System.out.println("숫자 " + LottoNumbers.SIZE + "개를 입력해주세요.");
-        return readWinningNumbers();
-    }
-
-    private static List<Integer> readIntegers() {
-        final String nextLine = scanner.nextLine();
-
-        try {
-            return parseIntegers(nextLine);
-        } catch (NumberFormatException e) {
-            System.out.println("정수를 입력해 주세요.");
-            return readIntegers();
-        }
-    }
-
-    private static List<Integer> parseIntegers(String nextLine) {
-        return Arrays.stream(nextLine.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        return lottoNumberReader.readLottoNumbers();
     }
 
     private static int readBonus() {
