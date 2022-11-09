@@ -19,14 +19,25 @@ public class LottoApplication {
 
     public static final Money LOTTO_UNIT_PRICE = new Money(1000);
     public static final NumberPickStrategy QUICK_PICK = new QuickPickStrategy(
-            new DefaultRandomNumberGenerator());
+            new DefaultRandomNumberGenerator()
+    );
 
     public static void main(String[] args) {
+        final List<Lotto> lottos = buyLotto();
+
+        showLottoResults(lottos);
+    }
+
+    private static List<Lotto> buyLotto() {
         final LottoStore store = new LottoStore(LOTTO_UNIT_PRICE);
         final BuyLottoInput buyLottoInput = BuyLottoView.buyLotto();
         final List<Lotto> lottos = store.buyLottos(buyLottoInput.toMoney(), QUICK_PICK);
-        BuyLottoView.printLottos(new BuyLottoOutput(lottos));
 
+        BuyLottoView.printLottos(new BuyLottoOutput(lottos));
+        return lottos;
+    }
+
+    private static void showLottoResults(List<Lotto> lottos) {
         final WinningNumbersInput winningNumbersInput = WinningStatisticsView.receiveWinningNumbers();
         final MatchingResult matchingResult = MatchingResult.analyze(
                 lottos,
