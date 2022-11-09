@@ -16,12 +16,8 @@ public class LottoUtils {
         return winNumbers;
     }
 
-    public static int StringToBonusNumber(String bonus) {
-        return validateInt(bonus);
-    }
-
-    public static int stringToMoney(String money) {
-        return validateInt(money);
+    public static int StringToInt(String str) {
+        return validateInt(str);
     }
 
     private static Integer validateInt(String str) {

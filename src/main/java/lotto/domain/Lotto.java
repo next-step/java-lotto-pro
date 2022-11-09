@@ -54,13 +54,13 @@ public class Lotto {
         return list;
     }
 
-    public int countMatchNumber(Lotto winLotto) {
+    private int countMatchNumber(Lotto winLotto) {
         return (int) lottoNumbers.stream()
                 .filter(winLotto.lottoNumbers::contains)
                 .count();
     }
 
-    public boolean matchBonus(LottoNumber bonus) {
+    private boolean matchBonus(LottoNumber bonus) {
         return lottoNumbers.contains(bonus);
     }
 
@@ -68,5 +68,9 @@ public class Lotto {
         if (lottoNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(LottoMessage.ERROR_MESSAGE_DUPLICATE_BONUS_WIN);
         }
+    }
+
+    public Rank findRank(Lotto winLotto, LottoNumber bonus) {
+        return Rank.valueOf(countMatchNumber(winLotto), matchBonus(bonus));
     }
 }

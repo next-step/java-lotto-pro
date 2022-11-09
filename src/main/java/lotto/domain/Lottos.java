@@ -11,7 +11,7 @@ public class Lottos{
     public Map<Rank, Integer> calculateWinResult(Lotto winLotto, LottoNumber bonus) {
         Map<Rank, Integer> rewardMap = new HashMap<>();
         for (Lotto lotto : lottoList) {
-            Rank rewardType = Rank.valueOf(lotto.countMatchNumber(winLotto), lotto.matchBonus(bonus));
+            Rank rewardType = lotto.findRank(winLotto, bonus);
             rewardMap.put(rewardType, rewardMap.getOrDefault(rewardType, 0) + 1);
         }
         return rewardMap;
