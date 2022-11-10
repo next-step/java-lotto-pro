@@ -31,24 +31,15 @@ public enum WinningMoney {
         return money;
     }
 
-    public int getCount() {
-        return count;
-    }
-
     public String getMessage() {
         return message;
     }
 
     public static WinningMoney find(int count, boolean isMatchBonusBall) {
-        return Arrays
-                .stream(values())
-                .filter(winningMoney -> winningMoney.count == count && winningMoney.getIsMatchBonusBalls().contains(isMatchBonusBall))
+        return Arrays.stream(values())
+                .filter(winningMoney -> winningMoney.count == count && winningMoney.isMatchBonusBalls.contains(isMatchBonusBall))
                 .findFirst()
                 .orElse(NONE);
-    }
-
-    public List<Boolean> getIsMatchBonusBalls() {
-        return this.isMatchBonusBalls;
     }
 
     public boolean isShow() {

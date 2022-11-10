@@ -11,10 +11,6 @@ import static lotto.domain.Number.MINIMUM_NUMBER;
 public class LottoGenerator {
     public static final String PURCHASE_MINIMUM_COUNT_EXCEPTION_MESSAGE = "1개 이상부터 구매가능합니다.";
     public static final int ZERO = 0;
-    public static final String NULL_EXCEPTION_MESSAGE = "null 일 수 없습니다.";
-
-    public LottoGenerator() {
-    }
 
     public static Lottos generate(int generateCount) {
         validateGenerateCount(generateCount);
