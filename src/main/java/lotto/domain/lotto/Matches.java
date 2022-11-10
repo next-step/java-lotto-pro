@@ -31,7 +31,7 @@ public enum Matches {
     }
 
     private static void requireCountInValidRange(long matchCount) {
-        if (matchCount < 0 || matchCount > Lotto.LOTTO_NUMBERS_SIZE) {
+        if (matchCount < 0 || matchCount > LottoNumbers.SIZE) {
             throw new IllegalArgumentException("일치 개수는 로또 길이 이내여야 합니다. value=" + matchCount);
         }
     }

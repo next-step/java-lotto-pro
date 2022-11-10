@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoNumberTest {
@@ -15,6 +16,17 @@ class LottoNumberTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoNumber(value))
                 .withMessageContaining("숫자는 1에서 45 사이여야 합니다.");
+    }
+
+    @ParameterizedTest(name = "숫자는 1에서 45 사이여야 한다. value=[{0}], isValid=[{1}]")
+    @CsvSource({
+            "0, true",
+            "1, false",
+            "45, false",
+            "46, true"
+    })
+    void 숫자_유효성_체크함수(final int value, final boolean expected) {
+        assertThat(LottoNumber.isNotValid(value)).isEqualTo(expected);
     }
 
     @DisplayName("순서와 상관없이 들어있는 숫자 목록이 같으면 동일하다.")

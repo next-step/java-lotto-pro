@@ -1,17 +1,16 @@
-package lotto.domain.lotto;
+package lotto.domain.lotto.pick;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lotto.domain.lotto.LottoNumbers;
 
 public class Pick123456Strategy implements NumberPickStrategy {
     @Override
-    public List<Lotto> pickNumbers(final int quantity) {
+    public Stream<LottoNumbers> pickNumbers(final int quantity) {
         return Stream.generate(this::generateNumbers)
-                .map(Lotto::new)
                 .limit(quantity)
-                .collect(Collectors.toList());
+                .map(LottoNumbers::new);
     }
 
     private List<Integer> generateNumbers() {

@@ -1,8 +1,11 @@
-package lotto.domain.lotto;
+package lotto.domain.lotto.pick;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.lotto.RandomNumberGenerator;
 
 public class DefaultRandomNumberGenerator implements RandomNumberGenerator {
     @Override
@@ -16,7 +19,7 @@ public class DefaultRandomNumberGenerator implements RandomNumberGenerator {
 
     private List<Integer> takeLottoSize(List<Integer> allNumbers) {
         return allNumbers.stream()
-                .limit(Lotto.LOTTO_NUMBERS_SIZE)
+                .limit(LottoNumbers.SIZE)
                 .collect(Collectors.toList());
     }
 }

@@ -1,12 +1,15 @@
 package lotto.domain.lotto;
 
+import lotto.domain.lotto.pick.NumberPickStrategy;
+import lotto.domain.lotto.pick.Pick123456Strategy;
+
 public class Fixture {
     public static NumberPickStrategy pick123456() {
         return new Pick123456Strategy();
     }
 
     public static WinningNumbers winningNumbers123456() {
-        final Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
+        final LottoNumbers winningNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
         final LottoNumber bonus = new LottoNumber(7);
         return new WinningNumbers(winningNumbers, bonus);
     }

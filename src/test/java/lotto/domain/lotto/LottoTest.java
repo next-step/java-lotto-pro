@@ -57,7 +57,7 @@ class LottoTest {
     @DisplayName("당첨 번호는 null이 아니어야 한다.")
     @ParameterizedTest(name = ParameterizedTest.DISPLAY_NAME_PLACEHOLDER)
     @NullSource
-    void 당첨_번호_null(final Lotto winningNumbers) {
+    void 당첨_번호_null(final LottoNumbers winningNumbers) {
         final Lotto myLotto = new Lotto(1, 2, 3, 4, 5, 6);
         final LottoNumber bonusNumber = new LottoNumber(7);
 
@@ -71,7 +71,7 @@ class LottoTest {
     @NullSource
     void 보너스_번호_null(final LottoNumber bonusNumber) {
         final Lotto myLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        final Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
+        final LottoNumbers winningNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> myLotto.match(winningNumbers, bonusNumber))
@@ -99,7 +99,7 @@ class LottoTest {
             final Matches expected
     ) {
         final Lotto myLotto = new Lotto(no1, no2, no3, no4, no5, no6);
-        final Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
+        final LottoNumbers winningNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
         final LottoNumber bonusNumber = new LottoNumber(7);
 
         final Matches actual = myLotto.match(winningNumbers, bonusNumber);
@@ -136,7 +136,7 @@ class LottoTest {
                 givenNo6
         );
 
-        final List<Integer> actual = lotto.toList();
+        final List<Integer> actual = lotto.toInts();
 
         assertThat(actual).containsExactly(
                 expectedNo1,

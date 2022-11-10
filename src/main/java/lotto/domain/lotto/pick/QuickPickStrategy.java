@@ -1,10 +1,11 @@
-package lotto.domain.lotto;
+package lotto.domain.lotto.pick;
 
 import static lotto.utils.Validations.requireNotNull;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.lotto.RandomNumberGenerator;
 
 public class QuickPickStrategy implements NumberPickStrategy {
     private final RandomNumberGenerator randomNumberGenerator;
@@ -15,11 +16,10 @@ public class QuickPickStrategy implements NumberPickStrategy {
     }
 
     @Override
-    public List<Lotto> pickNumbers(final int quantity) {
+    public Stream<LottoNumbers> pickNumbers(final int quantity) {
         return Stream.generate(this::generateNumbers)
-                .map(Lotto::new)
                 .limit(quantity)
-                .collect(Collectors.toList());
+                .map(LottoNumbers::new);
     }
 
     private List<Integer> generateNumbers() {
@@ -31,8 +31,8 @@ public class QuickPickStrategy implements NumberPickStrategy {
     }
 
     private void checkNumbersSize(List<Integer> numbers) {
-        if (numbers.size() != Lotto.LOTTO_NUMBERS_SIZE) {
-            throw new IllegalStateException("생성된 숫자의 길이가 " + Lotto.LOTTO_NUMBERS_SIZE + "이어야 합니다. elements=" + numbers);
+        if (numbers.size() != LottoNumbers.SIZE) {
+            throw new IllegalStateException("생성된 숫자의 길이가 " + LottoNumbers.SIZE + "이어야 합니다. elements=" + numbers);
         }
     }
 }
