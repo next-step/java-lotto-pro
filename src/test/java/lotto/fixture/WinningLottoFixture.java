@@ -17,7 +17,7 @@ public class WinningLottoFixture {
     }
 
     public static WinningLotto five_match() {
-        return new WinningLotto(new String[]{"1", "2", "3", "4", "5", "7"}, new Number(6));
+        return new WinningLotto(new String[]{"1", "2", "3", "4", "5", "7"}, new Number(8));
     }
 
     static Stream<Arguments> size() {

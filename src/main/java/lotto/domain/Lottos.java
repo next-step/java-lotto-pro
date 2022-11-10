@@ -39,9 +39,10 @@ public class Lottos {
         return this.lottos.size();
     }
 
-    public int matchLottoCount(int count, List<Boolean> isMatchBonusBalls, WinningLotto winningLotto) {
-        return (int) this.lottos.stream()
-                .filter(lotto -> lotto.matchCount(winningLotto) == count && isMatchBonusBalls.contains(lotto.isMatchBonusBall(winningLotto)))
+    public int matchLottoCount(WinningMoney winningMoney, WinningLotto winningLotto) {
+        return (int) this.lottos
+                .stream()
+                .filter(lotto -> find(lotto.matchCount(winningLotto), lotto.isMatchBonusBall(winningLotto)) == winningMoney)
                 .count();
     }
 }
