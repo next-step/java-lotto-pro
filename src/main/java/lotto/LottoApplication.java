@@ -5,10 +5,10 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumbers;
 import lotto.domain.lotto.LottoStore;
 import lotto.domain.lotto.Money;
-import lotto.domain.lotto.pick.CombinedNumberPickStrategy;
 import lotto.domain.lotto.pick.DefaultRandomNumberGenerator;
 import lotto.domain.lotto.pick.NumberPickStrategy;
 import lotto.domain.lotto.pick.PlayerPickStrategy;
+import lotto.domain.lotto.pick.PlayerPickThenQuickPickStrategy;
 import lotto.domain.lotto.pick.QuickPickStrategy;
 import lotto.domain.statistics.MatchingResult;
 import lotto.ui.BuyLottoView;
@@ -21,7 +21,7 @@ import lotto.ui.dto.WinningStatisticsOutput;
 public class LottoApplication {
 
     public static final Money LOTTO_UNIT_PRICE = new Money(1000);
-    public static final NumberPickStrategy QUICK_PICK = new QuickPickStrategy(
+    public static final QuickPickStrategy QUICK_PICK = new QuickPickStrategy(
             new DefaultRandomNumberGenerator()
     );
 
@@ -36,7 +36,7 @@ public class LottoApplication {
         final BuyLottoInput buyLottoInput = BuyLottoView.buyLotto();
 
         final List<LottoNumbers> playerPicks = buyLottoInput.getPlayerPicks();
-        final NumberPickStrategy pickStrategy = new CombinedNumberPickStrategy(
+        final NumberPickStrategy pickStrategy = new PlayerPickThenQuickPickStrategy(
                 new PlayerPickStrategy(playerPicks),
                 QUICK_PICK
         );
