@@ -2,11 +2,11 @@ package lotto.view;
 
 import java.util.Optional;
 import java.util.Scanner;
+import lotto.util.Constants;
 import lotto.util.IntUtil;
 
 public class InputView {
     private static int INTEGER_INIT_VALUE = 0;
-    public static String STRING_INIT_VALUE = "";
     
     private static Scanner scanner = new Scanner(System.in);
 
@@ -15,7 +15,7 @@ public class InputView {
         String input = scanner.nextLine();
         Optional<String> optionalInput = Optional.ofNullable(input);
         
-        return optionalInput.orElse(STRING_INIT_VALUE);
+        return optionalInput.orElse(Constants.INIT_VALUE);
     }
     
     public static Integer getIntegerInput() {
