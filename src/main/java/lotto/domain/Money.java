@@ -34,4 +34,8 @@ public class Money {
     public int getPrice() {
         return price;
     }
+
+    public int totalLottoPrice() {
+        return lottoCount() * LOTTO_PRICE;
+    }
 }

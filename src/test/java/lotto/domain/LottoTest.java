@@ -56,12 +56,24 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("Lotto 내 기준 Lotto 와 match 되는 숫자 개수를 반환")
+    @DisplayName("Lotto 내 기준 Lotto 와 bonus 일치에 따른 rank 반환")
     public void Lotto_match_count() {
         List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 20, 10, 6, 34, 45));
         List<Integer> winNumbers = new ArrayList<>(Arrays.asList(1, 20, 30, 40, 34, 45));
         Lotto lotto = new Lotto(numbers);
         Lotto winLotto = new Lotto(winNumbers);
-        assertThat(lotto.countMatchNumber(winLotto)).isEqualTo(4);
+        LottoNumber bonus = new LottoNumber(1);
+        assertThat(lotto.findRank(winLotto, bonus)).isEqualTo(Rank.FOURTH);
+    }
+
+    @Test
+    @DisplayName("Lotto Bonus 숫자와 당첨 번호 중복 시, 에러 발생")
+    public void Lotto_bonus_숫자_duplicate_win_lottos_에러_발생() {
+        assertThatThrownBy(() -> {
+            List<Integer> winNumbers = new ArrayList<>(Arrays.asList(1, 20, 30, 40, 34, 45));
+            Lotto winLotto = new Lotto(winNumbers);
+            LottoNumber bonus = new LottoNumber(1);
+            winLotto.duplicateWinBonus(bonus);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }

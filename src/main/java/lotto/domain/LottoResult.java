@@ -4,34 +4,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    private static final int LOTTO_PRICE = 1000;
-    Map<RewardType, Integer> rewardMap = new HashMap<>();
+    Map<Rank, Integer> rewardMap = new HashMap<>();
     int totalReward;
     double totalProfit;
-    public LottoResult(Lottos lottos, Lotto winLotto) {
-        calculateWinCount(lottos, winLotto);
+    public LottoResult(Lottos lottos, Lotto winLotto, int totalLottoPrice, LottoNumber bonus) {
+        calculateWinCount(lottos, winLotto, bonus);
         calculateTotalReward();
-        calculateProfit(lottos.size());
+        calculateProfit(totalLottoPrice);
     }
 
-    private void calculateProfit(int lottoSize) {
-        totalProfit = (double) totalReward / (lottoSize * LOTTO_PRICE);
+    private void calculateProfit(int totalLottoPrice) {
+        totalProfit = (double) totalReward / totalLottoPrice;
     }
 
     private void calculateTotalReward() {
-        for (RewardType reward : RewardType.values()) {
-            totalReward += rewardMap.getOrDefault(reward,0) * reward.getRewardPrice();
+        for (Rank reward : Rank.values()) {
+            totalReward += rewardMap.getOrDefault(reward,0) * reward.getWinningMoney();
         }
     }
 
-    private void calculateWinCount(Lottos lottos, Lotto winLotto) {
-        for (Lotto lotto : lottos) {
-            RewardType rewardType = RewardType.match(lotto, winLotto);
-            rewardMap.put(rewardType, rewardMap.getOrDefault(rewardType, 0) + 1);
-        }
+    private void calculateWinCount(Lottos lottos, Lotto winLotto, LottoNumber bonus) {
+        rewardMap = lottos.calculateWinResult(winLotto, bonus);
     }
 
-    public int getRewardMapCount(RewardType type) {
+    public int getRewardMapCount(Rank type) {
         return rewardMap.getOrDefault(type, 0);
     }
 
