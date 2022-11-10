@@ -1,27 +1,33 @@
 package lotto.ui.outputView;
 
-import lotto.domain.Statistics;
-
-import static lotto.domain.WinningMoney.find;
+import lotto.domain.Lottos;
+import lotto.domain.WinningLotto;
+import lotto.domain.WinningMoney;
 
 public class StatisticsOutputView {
 
-    public static void winningResult(Statistics statistics) {
-        winningMoney(statistics);
-        returnRate(statistics);
+    public static void winningResult(Lottos lottos, WinningLotto winningLotto) {
+        winningMoney(lottos, winningLotto);
+        returnRate(lottos, winningLotto);
     }
 
-    private static void returnRate(Statistics statistics) {
-        System.out.println("총 수익률은 " + statistics.returnRate() + "입니다");
-    }
-
-    public static void winningMoney(Statistics statistics) {
+    public static void winningMoney(Lottos lottos, WinningLotto winningLotto) {
         System.out.println("당첨통계");
         System.out.println("--------------");
-        for (Integer matchCount : statistics.lottosMap().keySet()) {
-            System.out.print(matchCount + "개 일치 ");
-            System.out.print("(" + find(matchCount).getMoney() + "원)-");
-            System.out.println(statistics.lottosMap().get(matchCount).getLottos().size() + "개");
+        for (WinningMoney winningMoney : WinningMoney.values()) {
+            print(lottos, winningMoney, winningLotto);
         }
+    }
+
+    private static void print(Lottos lottos, WinningMoney winningMoney, WinningLotto winningLotto) {
+        if (winningMoney.isShow()) {
+            System.out.print(winningMoney.getMessage());
+            System.out.print(" (" + winningMoney.getMoney() + "원)");
+            System.out.println(" - " + lottos.matchLottoCount(winningMoney, winningLotto) + "개");
+        }
+    }
+
+    private static void returnRate(Lottos lottos, WinningLotto winningLotto) {
+        System.out.println("총 수익률은 " + lottos.returnRate(winningLotto) + "입니다");
     }
 }

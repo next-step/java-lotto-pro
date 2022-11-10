@@ -9,13 +9,11 @@ public class Lotto {
     public static final String DUPLICATE_EXCEPTION_MESSAGE = "중복된 숫자를 입력할 수 없습니다.";
     public static final int LOTTO_SIZE = 6;
 
-    private List<Number> numbers = new ArrayList<>();
+    private final List<Number> numbers = new ArrayList<>();
 
     public Lotto(List<Integer> lottoNumbers) {
         validateSize(lottoNumbers);
-        for (int lottoNumber : lottoNumbers) {
-            add(lottoNumber);
-        }
+        addLottoNumbers(lottoNumbers);
     }
 
     private void validateSize(List<Integer> lottoNumbers) {
@@ -24,9 +22,11 @@ public class Lotto {
         }
     }
 
-    private void add(int lottoNumber) {
-        validateLottoNumbers(lottoNumber);
-        this.numbers.add(new Number(lottoNumber));
+    private void addLottoNumbers(List<Integer> lottoNumbers) {
+        for (int lottoNumber : lottoNumbers) {
+            validateLottoNumbers(lottoNumber);
+            this.numbers.add(new Number(lottoNumber));
+        }
     }
 
     private void validateLottoNumbers(int lottoNumber) {
@@ -41,14 +41,6 @@ public class Lotto {
         }
     }
 
-    public List<Number> getNumbers() {
-        return this.numbers;
-    }
-
-    public List<Number> getLotto() {
-        return this.numbers;
-    }
-
     public List<Integer> sort() {
         List<Integer> list = new ArrayList<>();
         for (Number number : this.numbers) {
@@ -56,5 +48,20 @@ public class Lotto {
         }
         Collections.sort(list);
         return list;
+    }
+
+    public int matchCount(WinningLotto winningLotto) {
+        return (int) this.numbers
+                .stream()
+                .filter(winningLotto::contains)
+                .count();
+    }
+
+    public boolean isMatchBonusBall(WinningLotto winningLotto) {
+        return this.numbers.contains(winningLotto.getBonusBall());
+    }
+
+    public boolean contains(Number number) {
+        return this.numbers.contains(number);
     }
 }

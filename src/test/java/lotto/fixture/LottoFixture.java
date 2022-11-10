@@ -13,10 +13,6 @@ public class LottoFixture {
         return new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
-    public static Lotto lotto_five() {
-        return new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
-    }
-
     public static Stream<Arguments> lottoSize() {
         List<Arguments> listOfArguments = new LinkedList<>();
         listOfArguments.add(Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
