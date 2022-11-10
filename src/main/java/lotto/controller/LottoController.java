@@ -2,12 +2,10 @@ package lotto.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.LottoShop;
 import lotto.model.Lottos;
-import lotto.model.ManualLotto;
 import lotto.model.Money;
 import lotto.model.Ranks;
 import lotto.model.Winner;
@@ -17,29 +15,30 @@ import lotto.view.Output;
 
 public class LottoController {
 
-	public static void main(String[] args) {
-		Money payment = Input.inputPayment();
-		Lottos manualLottos = new Lottos(getManualLottos());
+    public static void main(String[] args) {
+        Money payment = Input.inputPayment();
+        Lottos manualLottos = new Lottos(getManualLottos());
 
-		LottoShop lottoShop = new LottoShop(new LottoRandomCreateStrategy());
-		Lottos lottos = lottoShop.buyLottos(payment, manualLottos);
+        LottoShop lottoShop = new LottoShop(new LottoRandomCreateStrategy());
+        Lottos autoLottos = lottoShop.buy(payment.minus(manualLottos.getTotalSpent()));
 
-		Output.printLottos(lottos);
+        Output.printLottos(manualLottos, autoLottos);
 
-		Lotto winnerLotto = new ManualLotto(Input.inputWinnerLottoNumber());
-		LottoNumber bonusNumber = Input.inputBonusNumber();
-		Ranks ranks = lottos.match(new Winner(winnerLotto, bonusNumber));
+        Lotto winnerLotto = new Lotto(Input.inputWinnerLottoNumber());
+        LottoNumber bonusNumber = Input.inputBonusNumber();
+        Lottos lottos = manualLottos.merge(autoLottos);
+        Ranks ranks = lottos.match(new Winner(winnerLotto, bonusNumber));
 
-		Output.printResult(ranks);
-	}
+        Output.printResult(ranks);
+    }
 
-	private static List<Lotto> getManualLottos() {
-		int lottoCount = Input.inputManualLottoNumbers();
-		Output.requestManualLotto();
-		List<Lotto> manualLottoList = new ArrayList<>();
-		for (int i = 0; i < lottoCount; i++) {
-			manualLottoList.add(new ManualLotto(Input.inputManualLottoNumber()));
-		}
-		return manualLottoList;
-	}
+    private static List<Lotto> getManualLottos() {
+        int lottoCount = Input.inputManualLottoNumbers();
+        Output.requestManualLotto();
+        List<Lotto> manualLottoList = new ArrayList<>();
+        for (int i = 0; i < lottoCount; i++) {
+            manualLottoList.add(new Lotto(Input.inputManualLottoNumber()));
+        }
+        return manualLottoList;
+    }
 }
