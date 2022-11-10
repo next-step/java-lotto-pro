@@ -10,7 +10,6 @@ public class InputView {
     
     private static Scanner scanner = new Scanner(System.in);
 
-    
     public static String getStringInput() {
         String input = scanner.nextLine();
         Optional<String> optionalInput = Optional.ofNullable(input);

@@ -51,5 +51,4 @@ public class LottoController {
             lottoMachine.buyLottoManual(InputView.getStringInput());
         });
     }
-
 }
