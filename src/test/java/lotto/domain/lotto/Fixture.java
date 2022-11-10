@@ -1,5 +1,8 @@
 package lotto.domain.lotto;
 
+import lotto.domain.lotto.pick.NumberPickStrategy;
+import lotto.domain.lotto.pick.Pick123456Strategy;
+
 public class Fixture {
     public static NumberPickStrategy pick123456() {
         return new Pick123456Strategy();

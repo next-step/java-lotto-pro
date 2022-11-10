@@ -1,15 +1,15 @@
 package lotto;
 
 import java.util.List;
-import lotto.domain.lotto.CombinedNumberPickStrategy;
-import lotto.domain.lotto.DefaultRandomNumberGenerator;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumbers;
 import lotto.domain.lotto.LottoStore;
 import lotto.domain.lotto.Money;
-import lotto.domain.lotto.NumberPickStrategy;
-import lotto.domain.lotto.PlayerPickStrategy;
-import lotto.domain.lotto.QuickPickStrategy;
+import lotto.domain.lotto.pick.CombinedNumberPickStrategy;
+import lotto.domain.lotto.pick.DefaultRandomNumberGenerator;
+import lotto.domain.lotto.pick.NumberPickStrategy;
+import lotto.domain.lotto.pick.PlayerPickStrategy;
+import lotto.domain.lotto.pick.QuickPickStrategy;
 import lotto.domain.statistics.MatchingResult;
 import lotto.ui.BuyLottoView;
 import lotto.ui.WinningStatisticsView;

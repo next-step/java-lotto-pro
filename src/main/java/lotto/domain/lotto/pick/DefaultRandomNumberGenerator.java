@@ -1,8 +1,11 @@
-package lotto.domain.lotto;
+package lotto.domain.lotto.pick;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.lotto.RandomNumberGenerator;
 
 public class DefaultRandomNumberGenerator implements RandomNumberGenerator {
     @Override

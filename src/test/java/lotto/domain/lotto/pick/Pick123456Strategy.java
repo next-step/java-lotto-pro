@@ -1,8 +1,9 @@
-package lotto.domain.lotto;
+package lotto.domain.lotto.pick;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
+import lotto.domain.lotto.LottoNumbers;
 
 public class Pick123456Strategy implements NumberPickStrategy {
     @Override

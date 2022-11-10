@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.lotto.pick.NumberPickStrategy;
 
 public class LottoStore {
     private final Money lottoUnitPrice;

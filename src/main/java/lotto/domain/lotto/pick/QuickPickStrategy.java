@@ -1,9 +1,11 @@
-package lotto.domain.lotto;
+package lotto.domain.lotto.pick;
 
 import static lotto.utils.Validations.requireNotNull;
 
 import java.util.List;
 import java.util.stream.Stream;
+import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.lotto.RandomNumberGenerator;
 
 public class QuickPickStrategy implements NumberPickStrategy {
     private final RandomNumberGenerator randomNumberGenerator;

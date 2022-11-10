@@ -1,9 +1,10 @@
-package lotto.domain.lotto;
+package lotto.domain.lotto.pick;
 
 import static lotto.utils.Validations.requireNotNull;
 
 import java.util.List;
 import java.util.stream.Stream;
+import lotto.domain.lotto.LottoNumbers;
 
 public class PlayerPickStrategy implements NumberPickStrategy {
     private final List<LottoNumbers> pickedNumbers;
