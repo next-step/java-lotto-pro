@@ -13,7 +13,7 @@ public class LottoController {
         Money money = new Money(InputView.inputMoney());
         SelfPickLottos selfPickLottos = new SelfPickLottos(getSelfPickNumbers());
 
-        Lottos lottos = LottoMachine.issueLottos(selfPickLottos, money);
+        Lottos lottos = Lottos.createLottos(selfPickLottos, money);
         ResultView.printLottos(lottos);
 
         List<Integer> winningNumbers = InputView.inputWinningNumbers();
