@@ -6,8 +6,9 @@ import java.util.Map;
 
 public class Result {
     private int prizeMoney;
-    public Map<Rank, Integer> winningMap;
+    
     public double returnRate;
+    public Map<Rank, Integer> winningMap;
 
     public Result() {
         this.winningMap = new EnumMap<>(Rank.class);
@@ -27,8 +28,8 @@ public class Result {
         }
     }
 
-    public void checkResultRate(Money usedMoney) {
-        double returnRate = (double) this.prizeMoney / usedMoney.amount;
+    public void checkResultRate(Money insertedMoney) {
+        double returnRate = (double) this.prizeMoney / insertedMoney.amount;
         this.returnRate = Math.floor(returnRate * 100) / 100;
     }
 }

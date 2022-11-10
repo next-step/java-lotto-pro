@@ -2,112 +2,54 @@ package lotto.controller;
 
 import java.util.stream.IntStream;
 import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
 import lotto.domain.Money;
 import lotto.domain.Result;
-import lotto.domain.ticket.Ticket;
-import lotto.domain.ticket.Tickets;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
-    private Lotto lotto;
-    private Money money;
-    private Tickets myTickets;
-    private Ticket winningTicket;
-    private Result myResult;
-    
-    private int manualTicketBuyCount;
-    private int autoTicketBuyCount;
     
     public void playLotto() {
-        initLotto();
-        
-        setMoney();
-        
-        setAutoTickets();
-        
-        setManualTickets();
-        
-        this.myTickets = lotto.getMyTickets();
-
-        OutputView.printHowManyTicketsPurchased(manualTicketBuyCount, autoTicketBuyCount);
-        OutputView.print(this.myTickets.toString());
-        
-        setWinningTicket();
-
-        checkResult();
-    }
-    
-    private void initLotto() {
-        this.lotto = new Lotto();
-    }
-    
-    private void setMoney() {
         try {
+            //1. insert money
             OutputView.startLottoOutput();
             
-            this.money = new Money(InputView.getStringInput());
-        }catch(IllegalArgumentException e) {
-            OutputView.print(e.getMessage());
-            
-            setMoney();
-        }
-    }
-    
-    private void setAutoTickets() {
-        try {
+            Money money = new Money(InputView.getStringInput());
+            LottoMachine lottoMachine = new LottoMachine(money);
+
+            //2. buy tickets
             OutputView.printHowManyManualTickets();
             
-            this.manualTicketBuyCount = InputView.getIntegerInput();
-            this.autoTicketBuyCount = lotto.buyAutoTickets(money, manualTicketBuyCount);
-        }catch(IllegalArgumentException e) {
-            OutputView.print(e.getMessage());
+            int manualTicketBuyCount = InputView.getIntegerInput();
+            int autoTicketBuyCount = lottoMachine.buyLottoAuto(manualTicketBuyCount);
             
-            setAutoTickets();
-        }
-    }
+            buyManualTicketsWithInput(manualTicketBuyCount, lottoMachine);
     
-    private void setManualTickets() {
-        try {
-            OutputView.printBuyManualTickets();
+            OutputView.printHowManyTicketsPurchased(manualTicketBuyCount, autoTicketBuyCount);
+            OutputView.print(lottoMachine.getLottoList());
             
-            buyManualTicketsWithInput();
-        }catch(IllegalArgumentException e) {
-            OutputView.print(e.getMessage());
-            
-            setManualTickets();
-        }
-    }
-    
-    private void buyManualTicketsWithInput() {
-        IntStream.range(0, manualTicketBuyCount).forEach(i -> {
-            this.lotto.buyManualTicket(InputView.getStringInput());
-        });
-    }
-    
-    private void setWinningTicket() {
-        try {
+            //3. set winningTicket
             OutputView.printWinningLottoNumOutput();
-            
-            String winningTicketNumbers = InputView.getStringInput();
+            Lotto winningTicket = new Lotto(InputView.getStringInput());
     
             OutputView.printBonusNumOutput();
+            winningTicket.setBonusNum(InputView.getStringInput());
             
-            this.winningTicket = new Ticket(winningTicketNumbers, InputView.getStringInput());
+            //4. get result
+            Result myResult = lottoMachine.getResult(winningTicket);
+            OutputView.printResultOutput(myResult.winningMap, myResult.returnRate);
         }catch(IllegalArgumentException e) {
             OutputView.print(e.getMessage());
             
-            setWinningTicket();
+            playLotto();
         }
     }
     
-    private void checkResult() {
-        this.myResult = new Result();
-        
-        this.myTickets.countTicketResult(this.myResult, this.winningTicket);
-        this.myResult.checkResultRate(this.money);
-        
-        OutputView.printResultOutput(this.myResult.winningMap, this.myResult.returnRate);
+    private void buyManualTicketsWithInput(int manualTicketBuyCount, LottoMachine lottoMachine) {
+        IntStream.range(0, manualTicketBuyCount).forEach(i -> {
+            lottoMachine.buyLottoManual(InputView.getStringInput());
+        });
     }
 
 }

@@ -1,43 +1,59 @@
 package lotto.domain;
 
-import java.util.stream.IntStream;
-import lotto.domain.ticket.Ticket;
-import lotto.domain.ticket.Tickets;
+import java.util.List;
+import lotto.util.Constants;
 
 public class Lotto {
-    private static final String ERR_BUY_MORE_THAN_MONEY = "소지금이 부족합니다.";
-    private static final int TICKET_VALUE = 1000;
-    private Tickets tickets;
-    
-    public Lotto() {
-        this.tickets = new Tickets();
-    }
+    private final List<LottoNumber> numbers;
+    private LottoNumber bonusNumber;
 
-    public Lotto(Tickets myTickets) {
-        this.tickets = myTickets;
+    public Lotto(String LottoNumber) {
+        this.numbers = new LottoGenerator().generate(LottoNumber);
     }
     
-    public int buyAutoTickets(Money money, int manualTicketBuyCount) {
-        int autoTicketBuyCount = (int)(money.amount / TICKET_VALUE) - manualTicketBuyCount;
+    public Lotto(String LottoNumber, String bonusNumber) {
+        this.numbers = new LottoGenerator().generate(LottoNumber);
+        this.bonusNumber = new LottoNumber(bonusNumber);
         
-        if(autoTicketBuyCount < 0) {
-            throw new IllegalArgumentException(ERR_BUY_MORE_THAN_MONEY);
+        if(LottoNumber.contains(bonusNumber)) {
+            throw new IllegalArgumentException(Constants.ERR_DUP_NUMBERS);
+        }
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        for (LottoNumber l : this.numbers) {
+            sb.append(l.num).append(Constants.COMMA);
         }
 
-        IntStream.rangeClosed(1, autoTicketBuyCount).forEach(i -> {
-            this.tickets.addTicket(new Ticket());
-        });
-        
-        return autoTicketBuyCount;
+        return sb.toString();
     }
     
-    public void buyManualTicket(String number) {
-        Ticket t = new Ticket(number);
-        
-        this.tickets.addTicket(t);
+    public void setBonusNum(String bonusNum) {
+        this.bonusNumber = new LottoNumber(bonusNum);
     }
     
-    public Tickets getMyTickets() {
-        return this.tickets;
+    public List<LottoNumber> getLottoNumbers(){
+        return this.numbers;
+    }
+    
+    public LottoNumber getBonusNumber() {
+        return this.bonusNumber;
+    }
+    
+    public int getCountOfMatch(Lotto cmpLotto) {
+        int countOfMatch = 0;
+        
+        for(LottoNumber n : cmpLotto.getLottoNumbers()) {
+            countOfMatch += Boolean.compare(this.numbers.contains(n), false);
+        }
+
+        return countOfMatch;
+    }    
+    
+    public boolean getMatchBonus(Lotto winningTicket) {
+        return this.numbers.contains(winningTicket.getBonusNumber());
     }
 }
