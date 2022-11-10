@@ -11,11 +11,11 @@ public class WinningLottoFixture {
         return new WinningLotto(new String[]{"1", "2", "3", "4", "5", "6"}, new Number(7));
     }
 
-    public static WinningLotto five_match_and_bonus_ball_match() {
+    public static WinningLotto fiveMatchAndBonusBallMatch() {
         return new WinningLotto(new String[]{"1", "2", "3", "4", "5", "7"}, new Number(6));
     }
 
-    public static WinningLotto five_match() {
+    public static WinningLotto fiveMatch() {
         return new WinningLotto(new String[]{"1", "2", "3", "4", "5", "7"}, new Number(8));
     }
 
