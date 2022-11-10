@@ -1,6 +1,6 @@
-package step4.model;
+package step5.model;
 
-import step4.service.LottoScoreType;
+import step5.service.LottoScoreType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,8 @@ public class Lottos {
 
     private List<Lotto> lottos;
 
-    public Lottos() {
-        this.lottos = new ArrayList<>();
+    public Lottos(List<Lotto> manualLottos) {
+        this.lottos = new ArrayList<>(manualLottos);
     }
 
     public void add(Lotto lotto) {
@@ -30,7 +30,7 @@ public class Lottos {
         this.lottos.forEach(lotto -> consumer.accept(lotto.toString()));
     }
 
-    public List<LottoScoreType> confirmLottoWinningNumber(LottoWinningNumbers winningLotto) {
+    public List<LottoScoreType> confirmLottoWinningNumber(LottoWinningNos winningLotto) {
         List<LottoScoreType> scoreTypes = new ArrayList<>();
         for (Lotto lotto : lottos) {
             int matchedCount = winningLotto.getMatchedCount(lotto);

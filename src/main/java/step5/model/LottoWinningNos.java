@@ -1,23 +1,23 @@
-package step4.model;
+package step5.model;
 
 /**
  * 로또 당첨 번호
  */
-public class LottoWinningNumbers {
+public class LottoWinningNos {
     private final Lotto winningNumbers;
-    private LottoNumber bonusNumber;
+    private LottoNo bonusNumber;
 
-    public LottoWinningNumbers(Lotto winningNumbers) {
+    public LottoWinningNos(Lotto winningNumbers) {
         this.winningNumbers = winningNumbers;
     }
 
-    public LottoWinningNumbers(Lotto winningNumbers, LottoNumber bonusNumber) {
+    public LottoWinningNos(Lotto winningNumbers, LottoNo bonusNumber) {
         this(winningNumbers);
         this.bonusNumber = bonusNumber;
         validateUniqueBonus(winningNumbers, bonusNumber);
     }
 
-    private void validateUniqueBonus(Lotto winningNumbers, LottoNumber bonusNumber) {
+    private void validateUniqueBonus(Lotto winningNumbers, LottoNo bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
             throw new RuntimeException("번호가 동일한게 존재합니다.");
         }

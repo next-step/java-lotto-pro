@@ -1,12 +1,13 @@
-package step4.model;
+package step5.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step4.constant.StringConstant;
-import step4.service.LottoGenerator;
-import step4.service.LottoScoreType;
+import step5.constant.StringConstant;
+import step5.model.*;
+import step5.service.LottoGenerator;
+import step5.service.LottoScoreType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,12 +29,12 @@ class LottoResultTest {
                 LottoScoreType.FOUR, LottoScoreType.FOUR,
                 LottoScoreType.FIVE, LottoScoreType.FIVE, LottoScoreType.FIVE,
                 LottoScoreType.SIX, LottoScoreType.SIX, LottoScoreType.SIX, LottoScoreType.SIX));
-        lottos = new Lottos();
+        lottos = new Lottos(List.of());
         lottos.add(new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNo::new)
                 .collect(Collectors.toList())));
         lottos.add(new Lotto(Stream.of(20, 30, 32, 40, 42, 43)
-                .map(LottoNumber::new)
+                .map(LottoNo::new)
                 .collect(Collectors.toList())));
     }
 
@@ -78,7 +79,7 @@ class LottoResultTest {
     @DisplayName("구매한 n 개의 로또와 당첨번호 로또를 가지고 로또 결과를 리턴한다.")
     void givenWinningLotto_whenGenerateFromLottos_thenLottoResult(String lottoText, int expectedCount) {
         LottoGenerator lottoGenerator = new LottoGenerator();
-        LottoWinningNumbers lottoWinningNumber = lottoGenerator.generateLottoWinningNumber(generateNumbersByText(lottoText), 44);
+        LottoWinningNos lottoWinningNumber = lottoGenerator.generateLottoWinningNumber(generateLottoByText(lottoText), 44);
         LottoResult lottoResult = LottoResult.getLottoResultFromLotto(lottos, lottoWinningNumber);
         int matchedCount = lottoResult.getByLottoScoreType(LottoScoreType.THREE);
 
@@ -91,7 +92,7 @@ class LottoResultTest {
     void givenWinningLotto_whenGenerateFromLottos_thenLottoResult2(String lottoText, int expectedCount,
                                                                    int bonusNumber) {
         LottoGenerator lottoGenerator = new LottoGenerator();
-        LottoWinningNumbers lottoWinningNumber = lottoGenerator.generateLottoWinningNumber(generateNumbersByText(lottoText), bonusNumber);
+        LottoWinningNos lottoWinningNumber = lottoGenerator.generateLottoWinningNumber(generateLottoByText(lottoText), bonusNumber);
         LottoResult lottoResult = LottoResult.getLottoResultFromLotto(lottos, lottoWinningNumber);
         int matchedCount = lottoResult.getByLottoScoreType(LottoScoreType.FIVE_BONUS);
 
@@ -104,10 +105,10 @@ class LottoResultTest {
                 .collect(Collectors.toList());
     }
 
-    private List<LottoNumber> generateNumbersByText(String text) {
-        return Arrays.stream(text.split(StringConstant.COMMA))
+    private Lotto generateLottoByText(String text) {
+        return new Lotto(Arrays.stream(text.split(StringConstant.COMMA))
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .map(LottoNo::new)
+                .collect(Collectors.toList()));
     }
 }
