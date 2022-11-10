@@ -5,8 +5,8 @@ import java.util.Scanner;
 import lotto.util.IntUtil;
 
 public class InputView {
-    private static String STRING_INIT_VALUE = "";
     private static int INTEGER_INIT_VALUE = 0;
+    public static String STRING_INIT_VALUE = "";
     
     private static Scanner scanner = new Scanner(System.in);
 
