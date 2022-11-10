@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.fixture.LottosFixture;
 import lotto.fixture.WinningLottoFixture;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -41,4 +42,10 @@ class LottosTest {
         assertThat(lottos().returnRate(WinningLottoFixture.five_match())).isEqualTo(expected);
     }
 
+    @DisplayName("수익률 계산이 소수점 두자리로 제한")
+    @ParameterizedTest
+    @ValueSource(doubles = {1.67})
+    void point(double expected) {
+        assertThat(LottosFixture.point().returnRate(WinningLottoFixture.threeMatch())).isEqualTo(expected);
+    }
 }

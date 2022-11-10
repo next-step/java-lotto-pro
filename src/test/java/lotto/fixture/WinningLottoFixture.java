@@ -1,6 +1,5 @@
 package lotto.fixture;
 
-import lotto.domain.BonusBall;
 import lotto.domain.Number;
 import lotto.domain.WinningLotto;
 import org.junit.jupiter.params.provider.Arguments;
@@ -18,6 +17,10 @@ public class WinningLottoFixture {
 
     public static WinningLotto five_match() {
         return new WinningLotto(new String[]{"1", "2", "3", "4", "5", "7"}, new Number(8));
+    }
+
+    public static WinningLotto threeMatch() {
+        return new WinningLotto(new String[]{"1", "2", "3", "10", "11", "12"}, new Number(8));
     }
 
     static Stream<Arguments> size() {
