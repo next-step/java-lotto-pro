@@ -29,8 +29,8 @@ class LottoMoneyTest {
 
     @DisplayName("로또 구매 횟수를 계산한다.")
     @ParameterizedTest
-    @CsvSource(value = {"3000:3", "2500:2", "7000:7"}, delimiter = ':')
-    public void constructor(int money, int expect) {
-        assertThat(new LottoMoney(money).purchaseCount()).isEqualTo(expect);
+    @CsvSource(value = {"3000:1:2", "2500:1:1", "7000:1:6"}, delimiter = ':')
+    public void constructor(int money, int manualLottoCount, int expect) {
+        assertThat(new LottoMoney(money).purchaseCount(manualLottoCount)).isEqualTo(expect);
     }
 }

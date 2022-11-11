@@ -16,8 +16,8 @@ public class LottoMoney {
         }
     }
 
-    public int purchaseCount() {
-        return number / LOTTO_MINIMUM_PRICE;
+    public int purchaseCount(int manualLottoCount) {
+        return number / LOTTO_MINIMUM_PRICE - manualLottoCount;
     }
 
 }
