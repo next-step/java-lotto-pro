@@ -24,7 +24,7 @@ public class StatisticsOutputView {
     private static void print(Map<String, Lottos> lottos, WinningMoney winningMoney, WinningLotto winningLotto) {
         if (winningMoney.isShow()) {
             System.out.print(winningMoney.getMessage());
-            System.out.print(" (" + winningMoney.getMoney() + "원)");
+            System.out.printf("(%d원)", winningMoney.getMoney());
             System.out.println(" - " + (lottos.get("auto").matchLottoCount(winningMoney, winningLotto) + lottos.get("manual").matchLottoCount(winningMoney, winningLotto)) + "개");
         }
     }

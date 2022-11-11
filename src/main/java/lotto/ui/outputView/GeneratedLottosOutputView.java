@@ -9,8 +9,8 @@ import java.util.Map;
 public class GeneratedLottosOutputView {
 
     public static void printLottos(Map<String, Lottos> lottos) {
-        System.out.print("수동으로 " + lottos.get("manual").size() + "장");
-        System.out.println("자동으로 " + lottos.get("manual").size() + "개를 구매했습니다.");
+        System.out.print("수동으로 " + lottos.get("manual").size() + "장 ");
+        System.out.println("자동으로 " + lottos.get("auto").size() + "개를 구매했습니다.");
         print(lottos.get("manual"));
         print(lottos.get("auto"));
         System.out.println();

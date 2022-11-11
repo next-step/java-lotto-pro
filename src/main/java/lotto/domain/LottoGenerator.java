@@ -12,7 +12,7 @@ public class LottoGenerator {
     public static final String PURCHASE_MINIMUM_COUNT_EXCEPTION_MESSAGE = "1개 이상부터 구매가능합니다.";
     public static final int ZERO = 0;
 
-    public static Lottos generate(int generateCount) {
+    public static Lottos generate(int generateCount) throws IllegalArgumentException {
         validateGenerateCount(generateCount);
         return createLottos(generateCount);
     }
