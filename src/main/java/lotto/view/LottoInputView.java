@@ -20,4 +20,9 @@ public class LottoInputView {
         System.out.println(LottoMessage.INPUT_BONUS);
         return scan.nextLine();
     }
+
+    public static String readManualLottoCount() {
+        System.out.println(LottoMessage.INPUT_MANUAL_LOTTO_COUNT);
+        return scan.nextLine();
+    }
 }
