@@ -25,8 +25,8 @@ public class LottoPurchaseAmount {
         return new LottoPurchaseAmount((this.quantity - purchaseCount) * LOTTO_PRICE);
     }
 
-    private boolean isPositiveNumber(int money) {
-        return money > 0;
+    private boolean isPositiveNumber(int number) {
+        return number >= 0;
     }
 
     private boolean isOverPurchaseAmount(int money) {

@@ -43,4 +43,13 @@ public class LottoPurchaseAmountTest {
         LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(15000);
         assertThat(lottoPurchaseAmount.pay(3).getQuantity()).isEqualTo(12);
     }
+
+    @Test
+    @DisplayName("구입후_남은티겟_양수_채크")
+    void 구입후_남은티겟_양수_채크() {
+        LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(1000);
+        assertThatThrownBy(() -> lottoPurchaseAmount.pay(2))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.ERROR_PURCHASE_AMOUNT_RANGE);
+    }
 }
