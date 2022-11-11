@@ -17,7 +17,7 @@ class NumberUtilTest {
     @ParameterizedTest
     @MethodSource("convert")
     void convert(String[] text) {
-        assertThat(NumberUtil.numbers(text)).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(NumberUtil.convert(text)).containsExactly(1, 2, 3, 4, 5, 6);
     }
 
     static Stream<Arguments> convert() {
