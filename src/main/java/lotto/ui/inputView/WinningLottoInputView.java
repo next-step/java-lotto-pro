@@ -9,7 +9,7 @@ public class WinningLottoInputView {
         return new Scanner(System.in).nextLine();
     }
 
-    public static String readWinningLotto1() {
+    public static String readManualLotto() {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         return new Scanner(System.in).nextLine();
     }
