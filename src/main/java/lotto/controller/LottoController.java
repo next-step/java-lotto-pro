@@ -24,7 +24,7 @@ public class LottoController {
     public void run() {
         Map<String, Lottos> lottosMap = createLottos();
         printLottos(lottosMap);
-        winningResult(lottosMap, new WinningLotto(winningLottos(), new Number(readBonusBall())));
+        winningResult(lottosMap, new WinningLotto(new Lotto(numbers(winningLottos())), new Number(readBonusBall())));
     }
 
     private static List<Integer> numbers(String[] winningLottos) {
