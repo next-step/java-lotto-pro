@@ -21,6 +21,10 @@ public class Lottos {
         this.lottos.add(lotto);
     }
 
+    public void addAll(List<Lotto> lottos) {
+        this.lottos.addAll(lottos);
+    }
+
     public double returnRate(WinningLotto winningLotto) {
         return BigDecimal.valueOf(sum(winningLotto))
                 .divide(BigDecimal.valueOf((int) this.lottos.size() * LOTTO_MINIMUM_PRICE), DIGIT, RoundingMode.HALF_UP)
