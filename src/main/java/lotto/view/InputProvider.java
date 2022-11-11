@@ -15,23 +15,22 @@ public class InputProvider {
 
     public static Integer purchaseAmount() {
         System.out.println(ENTER_PURCHASE_AMOUNT);
-        return SCANNER.nextInt();
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
     public static String lottoNumbers() {
         System.out.println(ENTER_WINNING_NUMBERS);
-        SCANNER.nextLine();
         return SCANNER.nextLine();
     }
 
     public static int bonusNumber() {
         System.out.println(ENTER_BONUS_NUMBERS);
-        return SCANNER.nextInt();
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
     public static int manualLottoCount() {
         System.out.println(ENTER_MANUAL_LOTTO_COUNT);
-        return SCANNER.nextInt();
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
     public static List<String> manualLottoNumbers(int purchaseCount) {
