@@ -8,6 +8,10 @@ import java.util.Map;
 
 public class StatisticsOutputView {
 
+    public static final String RETURN_RATE = "총 수익률은 %f 입니다";
+    public static final String MATCH_COUNT = " - %d 개";
+    public static final String MONEY_PER = "(%d원)";
+
     public static void winningResult(Map<String, Lottos> lottos, WinningLotto winningLotto) {
         winningMoney(lottos, winningLotto);
         returnRate(lottos, winningLotto);
@@ -24,8 +28,9 @@ public class StatisticsOutputView {
     private static void print(Map<String, Lottos> lottos, WinningMoney winningMoney, WinningLotto winningLotto) {
         if (winningMoney.isShow()) {
             System.out.print(winningMoney.getMessage());
-            System.out.printf("(%d원)", winningMoney.getMoney());
-            System.out.println(" - " + (lottos.get("auto").matchLottoCount(winningMoney, winningLotto) + lottos.get("manual").matchLottoCount(winningMoney, winningLotto)) + "개");
+            System.out.printf(MONEY_PER, winningMoney.getMoney());
+            System.out.printf(MATCH_COUNT, lottos.get("auto").matchLottoCount(winningMoney, winningLotto) + lottos.get("manual").matchLottoCount(winningMoney, winningLotto));
+            System.out.println();
         }
     }
 
@@ -33,6 +38,6 @@ public class StatisticsOutputView {
         Lottos lottos = new Lottos();
         lottos.addAll(lottosMap.get("manual").getLottos());
         lottos.addAll(lottosMap.get("auto").getLottos());
-        System.out.println("총 수익률은 " + lottos.returnRate(winningLotto) + "입니다");
+        System.out.printf(RETURN_RATE, lottos.returnRate(winningLotto));
     }
 }
