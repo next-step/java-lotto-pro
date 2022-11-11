@@ -26,7 +26,7 @@ public class StatisticsOutputView {
     }
 
     private static void print(Map<String, Lottos> lottos, WinningMoney winningMoney, WinningLotto winningLotto) {
-        if (winningMoney.isShow()) {
+        if (winningMoney.isAbleToShow()) {
             System.out.print(winningMoney.getMessage());
             System.out.printf(MONEY_PER, winningMoney.getMoney());
             System.out.printf(MATCH_COUNT, lottos.get("auto").matchLottoCount(winningMoney, winningLotto) + lottos.get("manual").matchLottoCount(winningMoney, winningLotto));
