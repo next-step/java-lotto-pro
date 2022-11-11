@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -12,12 +13,21 @@ public class LottoStore {
         this.lottoNumberGenerateStrategy = lottoNumberGenerateStrategy;
     }
 
-    public LottoTickets buy(int purchaseAmount) {
+    public LottoTickets buy(int purchaseCount) {
         List<LottoTicket> lottoList = new ArrayList<>();
-        for (int i = 0; i < purchaseAmount; i++) {
+        for (int i = 0; i < purchaseCount; i++) {
             lottoList.add(ticketPrinting(lottoNumberGenerateStrategy));
         }
         return new LottoTickets(lottoList);
+    }
+
+    public LottoTickets buy(List<String> manualLottoNumbers) {
+        if (!manualLottoNumbers.isEmpty()) {
+            return manualLottoNumbers.stream()
+                    .map(LottoTicket::new)
+                    .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::new));
+        }
+        return new LottoTickets(Collections.emptyList());
     }
 
     public static LottoTicket ticketPrinting(LottoNumberGenerateStrategy lottoNumberGenerateStrategy) {
