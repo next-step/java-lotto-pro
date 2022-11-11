@@ -1,12 +1,12 @@
 package view;
 
-import static domain.LottoWinning.NONE;
-
 import domain.LottoResult;
 import domain.LottoWinning;
 import domain.Lottos;
 
 import java.util.Arrays;
+
+import static domain.LottoWinning.NONE;
 
 public class ResultView {
     public static void printLottoResult(LottoResult lottoResult) {
@@ -16,8 +16,9 @@ public class ResultView {
     }
 
     public static void printLottos(Lottos lottos) {
-        System.out.printf("%d개를 구매했습니다\n", lottos.size());
-        lottos.getLottos().forEach(System.out::println);
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다\n", lottos.selfPickLottoSize(), lottos.quickPickLottoSize());
+        lottos.getSelfPickLottos().forEach(System.out::println);
+        lottos.getQuickPickLottos().forEach(System.out::println);
         System.out.print("\n");
     }
 

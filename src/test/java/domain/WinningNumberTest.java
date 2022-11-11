@@ -25,20 +25,21 @@ class WinningNumberTest {
     }
 
     static Stream<Arguments> arrangeCountOfMatchCondition() {
+        BonusWinningNumber bonusWinningNumber = new BonusWinningNumber(6);
         return Stream.of(
                 Arguments.arguments(
-                        new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(Arrays.asList(1, 12, 13, 14, 15, 16), 6), 1,
-                        new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(Arrays.asList(1, 2, 13, 14, 15, 16), 6), 2,
-                        new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(Arrays.asList(1, 2, 3, 14, 15, 16), 6), 3,
-                        new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(Arrays.asList(1, 2, 3, 4, 15, 16), 6), 4,
-                        new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 16), 6), 5,
-                        new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7), 6));
+                        new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(Arrays.asList(1, 12, 13, 14, 15, 16), bonusWinningNumber), 1,
+                        new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(Arrays.asList(1, 2, 13, 14, 15, 16), bonusWinningNumber), 2,
+                        new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(Arrays.asList(1, 2, 3, 14, 15, 16), bonusWinningNumber), 3,
+                        new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(Arrays.asList(1, 2, 3, 4, 15, 16), bonusWinningNumber), 4,
+                        new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 16), bonusWinningNumber), 5,
+                        new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), bonusWinningNumber), 6));
     }
 
     static Stream<Arguments> arrangeBonusNumberCondition() {
         return Stream.of(
                 Arguments.arguments(
-                        new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 7), 6), true,
-                        new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7), false));
+                        new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 7), new BonusWinningNumber(6)), true,
+                        new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), new BonusWinningNumber(7)), false));
     }
 }

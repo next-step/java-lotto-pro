@@ -5,11 +5,11 @@ import java.util.Set;
 
 public class WinningNumber {
     private final List<Integer> winningNumbers;
-    private final int bonusNumber;
+    private final BonusWinningNumber bonusWinningNumber;
 
-    public WinningNumber(List<Integer> winningNumbers, int bonusNumber) {
+    public WinningNumber(List<Integer> winningNumbers, BonusWinningNumber bonusWinningNumber) {
         this.winningNumbers = winningNumbers;
-        this.bonusNumber = bonusNumber;
+        this.bonusWinningNumber = bonusWinningNumber;
     }
 
     public int countOfMatch(Set<Integer> numbers) {
@@ -19,6 +19,6 @@ public class WinningNumber {
     }
 
     public boolean isBonusNumberMatched(Set<Integer> numbers) {
-        return numbers.contains(bonusNumber);
+        return bonusWinningNumber.in(numbers);
     }
 }

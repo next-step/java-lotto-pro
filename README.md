@@ -10,11 +10,18 @@
     - [x] 수익률을 계산한다.
     - [x] 보너스볼 추가
   - [x] 로또 묶음 일등컬렉션 구현 (Lottos)
-  - [x] 당첨 결과 일등컬렉션 구현 (WinningResult) 
+  - [x] 당첨 결과 일등컬렉션 구현 (WinningResult)
+  - [x] 수동 로또 묶음 도메인 클래스 구현 (SelfPickLottos)
+  - [x] 자동 로또 묶음 도메인 클래스 구현 (QuickPickLottos)
+  - [x] 돈을 일등컬렉션으로 수정 (Money)
+  - [x] 보너스볼을 일등컬렉션으로 수정 (BonusWinningNumber)
 - view
   - [x] 입력을 받는 view 구현 (InputView)
     - [x] 보너스볼 입력 추가
+    - [x] 수동 구매할 로또 개수 입력
+    - [x] 수동으로 구매할 로또 번호 입력
   - [x] 결과를 출력하는 view 구현 (ResultView)
     - [x] 보너스볼이 일치한 2등 당첨 결과 출력 추가
+    - [x] 수동 및 자동으로 구매한 로또 출력
 - controller
   - [x] view와 domain을 연결 (LottoController)

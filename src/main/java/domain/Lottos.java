@@ -2,42 +2,52 @@ package domain;
 
 import domain.strategy.RandomNumberGenerateStrategy;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Lottos {
-    private final List<Lotto> lottos;
+import static domain.strategy.RandomNumberGenerateStrategy.DEFAULT;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+public class Lottos {
+    private final SelfPickLottos selfPickLottos;
+    private final QuickPickLottos quickPickLottos;
+
+    public Lottos(SelfPickLottos selfPickLottos, QuickPickLottos quickPickLottos) {
+        this.selfPickLottos = selfPickLottos;
+        this.quickPickLottos = quickPickLottos;
     }
 
-    public static Lottos createLottos(int price) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = price; i >= Lotto.SELL_PRICE; i -= Lotto.SELL_PRICE) {
-            lottos.add(new Lotto(RandomNumberGenerateStrategy.DEFAULT));
-        }
-        return new Lottos(lottos);
+    public static Lottos createLottos(SelfPickLottos selfPickLottos, Money money) {
+        int remain = money.spend(selfPickLottos.price()).getMoney();
+        QuickPickLottos quickPickLottos = QuickPickLottos.of(remain, DEFAULT);
+        return new Lottos(selfPickLottos, quickPickLottos);
     }
 
     public int size() {
-        return lottos.size();
+        return selfPickLottos.size() + quickPickLottos.size();
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    public int quickPickLottoSize() {
+        return quickPickLottos.size();
+    }
+
+    public int selfPickLottoSize() {
+        return selfPickLottos.size();
     }
 
     public WinningResult winningResult(WinningNumber winningNumber) {
-        WinningResult winningResult = new WinningResult();
-        for (Lotto lotto : lottos) {
-            LottoWinning lottoWinning = lotto.findWinning(winningNumber);
-            winningResult.increment(lottoWinning);
-        }
-        return winningResult;
+        WinningResult selfPickWinningResult = selfPickLottos.winningResult(winningNumber);
+        WinningResult quickPickWinningResult = quickPickLottos.winningResult(winningNumber);
+        return WinningResult.merge(selfPickWinningResult, quickPickWinningResult);
     }
 
     public float spentMoney() {
         return size() * Lotto.SELL_PRICE;
+    }
+
+    public List<Lotto> getSelfPickLottos() {
+        return selfPickLottos.getLottos();
+    }
+
+    public List<Lotto> getQuickPickLottos() {
+        return quickPickLottos.getLottos();
     }
 }
