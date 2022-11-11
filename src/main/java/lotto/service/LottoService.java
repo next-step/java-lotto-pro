@@ -10,8 +10,8 @@ public class LottoService {
     public void execute() {
         LottoTickets lottoTickets = buyTickets(new LottoPurchaseAmount(InputProvider.purchaseAmount()));
         OutputProvider.printLottoTicket(lottoTickets);
-        WinningLottoNumber winningLottoNumber = new WinningLottoNumber(InputProvider.lottoNumbers(), InputProvider.bonusNumber());
-        Rewards rewards = lottoTickets.check(winningLottoNumber);
+        WinningLottoNumber winningNumbers = new WinningLottoNumber(InputProvider.lottoNumbers(), InputProvider.bonusNumber());
+        Rewards rewards = lottoTickets.check(winningNumbers);
         OutputProvider.printRewards(rewards);
     }
 
