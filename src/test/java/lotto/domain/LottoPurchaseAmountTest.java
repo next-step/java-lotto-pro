@@ -36,4 +36,11 @@ public class LottoPurchaseAmountTest {
         LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(15000);
         assertThat(lottoPurchaseAmount.getQuantity()).isEqualTo(15);
     }
+
+    @Test
+    @DisplayName("구입후_남은티겟_개수_채크")
+    void 구입후_남은티겟_개수_채크() {
+        LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(15000);
+        assertThat(lottoPurchaseAmount.pay(3).getQuantity()).isEqualTo(12);
+    }
 }

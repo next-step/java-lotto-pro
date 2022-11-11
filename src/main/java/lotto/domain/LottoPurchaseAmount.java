@@ -2,8 +2,6 @@ package lotto.domain;
 
 import lotto.common.ErrorMessage;
 
-import java.net.InetAddress;
-
 public class LottoPurchaseAmount {
     private static final int LOTTO_PRICE = 1000;
     private static final int PURCHASE_AMOUNT_MAX = 200000;
@@ -23,16 +21,16 @@ public class LottoPurchaseAmount {
         return money / LOTTO_PRICE;
     }
 
+    public LottoPurchaseAmount pay(int purchaseCount) {
+        return new LottoPurchaseAmount((this.quantity - purchaseCount) * LOTTO_PRICE);
+    }
+
     private boolean isPositiveNumber(int money) {
         return money > 0;
     }
 
     private boolean isOverPurchaseAmount(int money) {
         return money > PURCHASE_AMOUNT_MAX;
-    }
-
-    private boolean isPurchaseAmountUnit(int money) {
-        return money % LOTTO_PRICE == 0;
     }
 
     public int getQuantity() {
