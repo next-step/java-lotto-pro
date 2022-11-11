@@ -8,12 +8,12 @@ import java.util.Map;
 
 public class GeneratedLottosOutputView {
 
-    public static final String MANUAL_COUNT = "수동으로 %d 장 ";
-    public static final String AUTO_COUNT = "자동으로 %d 개를 구매했습니다.";
+    public static final String MANUAL_COUNT_MESSAGE = "수동으로 %d 장 ";
+    public static final String AUTO_COUNT_MESSAGE = "자동으로 %d 개를 구매했습니다.";
 
     public static void printLottos(Map<String, Lottos> lottos) {
-        System.out.printf(MANUAL_COUNT, lottos.get("manual").size());
-        System.out.printf(AUTO_COUNT, lottos.get("auto").size());
+        System.out.printf(MANUAL_COUNT_MESSAGE, lottos.get("manual").size());
+        System.out.printf(AUTO_COUNT_MESSAGE, lottos.get("auto").size());
         System.out.println();
         print(lottos.get("manual"));
         print(lottos.get("auto"));

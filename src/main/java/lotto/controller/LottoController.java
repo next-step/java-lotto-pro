@@ -21,9 +21,9 @@ import static utils.NumberUtil.convert;
 public class LottoController {
 
     public void run() {
-        Map<String, Lottos> lottosMap = createLottos(readPurchaseMoney());
-        printLottos(lottosMap);
-        winningResult(lottosMap, createWinningLotto());
+        Map<String, Lottos> lottos = createLottos(readPurchaseMoney());
+        printLottos(lottos);
+        winningResult(lottos, createWinningLotto());
     }
 
     private static Map<String, Lottos> createLottos(int purchaseMoney) {
