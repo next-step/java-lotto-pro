@@ -11,7 +11,10 @@ public class LottoGenerator {
     private static final int MIN_LOTTO_INDEX = 0;
     private static final int LOTTO_SIZE = 6;
 
-    public static List<Integer> generateLottoNumbers() {
+    private LottoGenerator() {
+    }
+
+    static List<Integer> generateLottoNumbers() {
 
         List<Integer> rangeNumbers = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .boxed().collect(Collectors.toList());

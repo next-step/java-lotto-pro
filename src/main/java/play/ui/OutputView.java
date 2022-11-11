@@ -1,8 +1,10 @@
 package play.ui;
 
+import java.util.Map;
 import play.domain.Lotto;
 import play.domain.LottoResult;
 import play.domain.Lottos;
+import play.domain.Rank;
 
 public class OutputView {
     public static void printCompletePurchaseLotto(Lottos lottos) {
@@ -19,9 +21,18 @@ public class OutputView {
     }
 
     public static void printLottoResult(LottoResult lottoResult) {
-        for (String result : lottoResult.convertResultMapToString()) {
-            System.out.println(result);
+        Map<Rank, Integer> resultMap = lottoResult.getResultMap();
+        for (Rank rank : resultMap.keySet()) {
+            if (lottoResult.isValidNothing(rank)) {
+                continue;
+            }
+            printResult(rank, resultMap.get(rank));
         }
         System.out.println(lottoResult.convertYieldToString());
     }
+
+    private static void printResult(Rank rank, Integer count) {
+        System.out.printf("%d개 일치 (%d원)- %d개%n", rank.containsCount(), rank.getMoney(), count);
+    }
+
 }

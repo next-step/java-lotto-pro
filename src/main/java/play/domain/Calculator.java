@@ -3,24 +3,25 @@ package play.domain;
 public class Calculator {
     public static final int LOTTO_PRICE = 1000;
     private static final String NUMBER_REGEX = "[0-9]+";
-    private final Lottos lottos;
+    //private final Lottos lottos;
 
-    public Calculator(String inputMoney) {
-        this.lottos = buyLotto(inputMoney);
+    public Calculator() {
+        //this.lottos = buyLotto(inputMoney);
     }
 
-    public Lottos getLottos() {
-        return this.lottos;
-    }
+//    public Lottos getLottos() {
+//        return this.lottos;
+//    }
 
     public Lottos buyLotto(String inputMoney) {
         validInputMoney(inputMoney);
 
         int lottoAmount = calculateLottoAmount(inputMoney);
 
-        Lottos lottos = new Lottos(lottoAmount);
+        //Lottos lottos = new Lottos(lottoAmount);
+        return new Lottos(lottoAmount);
 
-        return lottos;
+        //return lottos;
     }
 
     private int calculateLottoAmount(String input) {

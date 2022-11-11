@@ -14,24 +14,25 @@ public class LottoController {
 
     private void generateLotto() {
         Lottos lottos = payToCounter();
-        PrizeNumbers winningLotto = prizeNumbers();
+        PrizeNumbers winningLotto = getPrizeNumbers();
         generateLottoResult(lottos, winningLotto);
     }
 
     private Lottos payToCounter() {
-        Calculator calculator = new Calculator(InputView.inputMoneyPurchaseLotto());
-        Lottos lottos = calculator.getLottos();
+        Calculator calculator = new Calculator();
+        Lottos lottos = calculator.buyLotto(InputView.inputMoneyPurchaseLotto());
         OutputView.printCompletePurchaseLotto(lottos);
         return lottos;
     }
 
-    private PrizeNumbers prizeNumbers() {
+    private PrizeNumbers getPrizeNumbers() {
         return new PrizeNumbers(InputView.inputWinningLottoNumber());
     }
 
     private void generateLottoResult(Lottos lottoList, PrizeNumbers winningLotto) {
         OutputView.printResultHead();
-        LottoResult lottoResult = new LottoResult(lottoList, winningLotto);
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.calculateLottoResult(lottoList, winningLotto);
         OutputView.printLottoResult(lottoResult);
     }
 }
