@@ -1,5 +1,6 @@
-package lotto.domain.ticket;
+package lotto.domain;
 
+import lotto.util.IntUtil;
 import lotto.util.Validator;
 
 public class LottoNumber {
@@ -14,10 +15,10 @@ public class LottoNumber {
     }
     
     private int generateNumber(String str) {
-        Validator.validateIsNull(str);;
+        Validator.validateIsEmpty(str);
         Validator.validateLottoNumberBoundary(str);
 
-        int i = Integer.parseInt(str);
+        int i = IntUtil.parseInt(str);
         
         return i;
     }

@@ -1,7 +1,7 @@
 package lotto.util;
 
 import java.util.Comparator;
-import lotto.domain.ticket.LottoNumber;
+import lotto.domain.LottoNumber;
 
 public class LottoNumberComparator implements Comparator<LottoNumber>{
     @Override

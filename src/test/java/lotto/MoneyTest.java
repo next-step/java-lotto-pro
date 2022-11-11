@@ -13,15 +13,9 @@ public class MoneyTest {
     }
     
     @Test
-    @DisplayName("구입금액이 null인 경우 오류 발생")
-    public void money_validate_null() {
-        assertThatThrownBy(() -> new Money(null)).hasMessage("값을 입력해 주세요");
-    }
-    
-    @Test
     @DisplayName("구입금액이 빈값인 경우 오류 발생")
     public void money_validate_emtpy() {
-        assertThatThrownBy(() -> new Money("")).hasMessage("값을 입력해 주세요");
+        assertThatThrownBy(() -> new Money("")).hasMessage("올바른 숫자를 입력해 주세요.");
     }
     
     @Test

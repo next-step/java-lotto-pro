@@ -1,37 +1,59 @@
 package lotto.domain;
 
-import java.util.stream.IntStream;
-import lotto.domain.ticket.Ticket;
-import lotto.domain.ticket.Tickets;
+import java.util.List;
+import lotto.util.Constants;
 
 public class Lotto {
-    private static final int TICKET_VALUE = 1000;
+    private final List<LottoNumber> numbers;
+    private LottoNumber bonusNumber;
+
+    public Lotto(String LottoNumber) {
+        this.numbers = new LottoGenerator().generate(LottoNumber);
+    }
     
-    public Tickets tickets;
-    public Result result;
-
-    public Lotto(String money) {
-        buyLotto(new Money(money));
-    }
-
-    public Lotto(Tickets myTickets) {
-        this.tickets = myTickets;
-    }
-
-    public void checkResult(Ticket winningTicket) {
-        this.result = new Result();
-        this.tickets.countTicketResult(result, winningTicket);
+    public Lotto(String LottoNumber, String bonusNumber) {
+        this.numbers = new LottoGenerator().generate(LottoNumber);
+        this.bonusNumber = new LottoNumber(bonusNumber);
         
-        int usedMoney = this.tickets.size() * TICKET_VALUE;
-        result.checkResultRate(usedMoney);
+        if(LottoNumber.contains(bonusNumber)) {
+            throw new IllegalArgumentException(Constants.ERR_DUP_NUMBERS);
+        }
     }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
 
-    private void buyLotto(Money money) {
-        int buyCount = money.amount / TICKET_VALUE;
-        tickets = new Tickets();
+        for (LottoNumber l : this.numbers) {
+            sb.append(l.num).append(Constants.COMMA);
+        }
 
-        IntStream.rangeClosed(1, buyCount).forEach(i -> {
-            tickets.addTicket(new Ticket());
-        });
+        return sb.toString();
+    }
+    
+    public void setBonusNum(String bonusNum) {
+        this.bonusNumber = new LottoNumber(bonusNum);
+    }
+    
+    public List<LottoNumber> getLottoNumbers(){
+        return this.numbers;
+    }
+    
+    public LottoNumber getBonusNumber() {
+        return this.bonusNumber;
+    }
+    
+    public int getCountOfMatch(Lotto cmpLotto) {
+        int countOfMatch = 0;
+        
+        for(LottoNumber n : cmpLotto.getLottoNumbers()) {
+            countOfMatch += Boolean.compare(this.numbers.contains(n), false);
+        }
+
+        return countOfMatch;
+    }    
+    
+    public boolean getMatchBonus(Lotto winningTicket) {
+        return this.numbers.contains(winningTicket.getBonusNumber());
     }
 }

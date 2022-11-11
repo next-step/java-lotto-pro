@@ -8,15 +8,20 @@ import lotto.util.Validator;
 public class Money {
     private static final String ERR_MORE_THAN_1000 = "1000 이상의 숫자를 입력해 주세요.";
     private static final String REGEX_NUMBER = "^[0-9]+$";
+    private static final int TICKET_VALUE = 1000;
     
     public final int amount;
 
     public Money(String amount) {
-        this.amount = validate(amount);
+        this.amount = generate(amount);
     }
-
-    private int validate(String amount) {
-        Validator.validateIsNull(amount);
+    
+    public int getBuyCount() {
+        return this.amount / TICKET_VALUE;
+    }
+    
+    private int generate(String amount) {
+        Validator.validateIsEmpty(amount);
         validateIsNumber(amount);
 
         int result = IntUtil.parseInt(amount);
