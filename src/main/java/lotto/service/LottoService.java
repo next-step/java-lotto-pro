@@ -19,6 +19,7 @@ public class LottoService {
         LottoTickets manualLottoTickets = lottoStore.buy(InputProvider.manualLottoNumbers(InputProvider.manualLottoCount()));
         LottoPurchaseAmount change = lottoPurchaseAmount.pay(manualLottoTickets.getTicketCount());
         LottoTickets autoLottoTickets = lottoStore.buy((change.getQuantity()));
+        OutputProvider.printTicketCount(manualLottoTickets.getTicketCount(), autoLottoTickets.getTicketCount());
         return manualLottoTickets.merge(autoLottoTickets);
     }
 }
