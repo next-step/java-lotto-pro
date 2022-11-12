@@ -3,9 +3,6 @@ package step5.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step5.model.Lotto;
-import step5.model.LottoNo;
-import step5.model.Lottos;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +15,7 @@ class LottosTest {
     private Lottos lottos;
 
     @BeforeEach
-    private void setUp() {
+    void setUp() {
         lottos = new Lottos(List.of());
         lottos.add(new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNo::new)

@@ -7,9 +7,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import step5.constant.StringConstant;
-import step5.model.Lotto;
-import step5.model.LottoNo;
-import step5.model.LottoWinningNos;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +22,7 @@ class LottoTest {
     private LottoWinningNos lottoWinningNumber;
 
     @BeforeEach
-    private void setUp() {
+    void setUp() {
         this.lotto = new Lotto(Stream.of(1, 10, 20, 32, 42, 45)
                 .map(LottoNo::new)
                 .collect(Collectors.toList()));

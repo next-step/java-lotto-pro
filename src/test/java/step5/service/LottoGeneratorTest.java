@@ -2,21 +2,27 @@ package step5.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import step5.model.Lotto;
+import step5.model.LottoNo;
+import step5.model.LottoWinningNos;
 import step5.model.Lottos;
-import step5.service.LottoGenerator;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoGeneratorTest {
 
     private LottoGenerator lottoGenerator;
 
     @BeforeEach
-    private void setUp() {
+    void setUp() {
         this.lottoGenerator = new LottoGenerator();
     }
 

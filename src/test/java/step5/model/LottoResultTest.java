@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import step5.constant.StringConstant;
-import step5.model.*;
 import step5.service.LottoGenerator;
 import step5.service.LottoScoreType;
 
@@ -23,7 +22,7 @@ class LottoResultTest {
     private Lottos lottos;
 
     @BeforeEach
-    private void setUp() {
+    void setUp() {
         this.lottoResult = new LottoResult(List.of(
                 LottoScoreType.THREE,
                 LottoScoreType.FOUR, LottoScoreType.FOUR,

@@ -17,7 +17,7 @@ class LottoServiceTest {
     private LottoService lottoService;
 
     @BeforeEach
-    private void setUp() {
+    void setUp() {
         this.lottoService = new LottoService();
     }
 
