@@ -12,7 +12,7 @@ public interface LottoService {
     /**
      * 수동 로또 발급
      *
-     * @param lottos 발급된 로또
+     * @param lottos             발급된 로또
      * @param manualLottoNumbers 입력된 수동 로또 번호 목록
      */
     void generateManualLotto(Lottos lottos, String[] manualLottoNumbers);
@@ -20,7 +20,7 @@ public interface LottoService {
     /**
      * 수동 로또 추가
      *
-     * @param lottos 발급된 로또
+     * @param lottos      발급된 로또
      * @param manualLotto 수동 로또 입력값
      */
     void addManualLotto(Lottos lottos, String manualLotto);
@@ -28,7 +28,7 @@ public interface LottoService {
     /**
      * 자동 로또 발급
      *
-     * @param lottos 발급된 로또
+     * @param lottos       발급된 로또
      * @param purchaseInfo 구입정보
      */
     void generateAutoLotto(Lottos lottos, PurchaseInfo purchaseInfo);

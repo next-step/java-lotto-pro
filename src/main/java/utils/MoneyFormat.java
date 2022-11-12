@@ -6,7 +6,8 @@ public final class MoneyFormat {
 
     private static final DecimalFormat DF = new DecimalFormat("###,###");
 
-    private MoneyFormat() {}
+    private MoneyFormat() {
+    }
 
     public static String getMoneyExpression(long money) {
         return DF.format(money);

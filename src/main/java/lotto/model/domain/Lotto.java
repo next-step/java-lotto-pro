@@ -13,7 +13,8 @@ public class Lotto {
     private static final int LOTTO_NUMBER_DO_NOT_EXIST = 0;
     private List<LottoNumber> lotto;
 
-    public Lotto(){}
+    public Lotto() {
+    }
 
     public Lotto(String lottoNumbersInput) {
         String[] lottoNumbers = lottoNumbersInput.split(LottoConstants.WIN_LOTTO_DELIMITER);

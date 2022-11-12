@@ -17,7 +17,7 @@ public class LottoServiceImpl implements LottoService {
     /**
      * 수동 로또 발급
      *
-     * @param lottos 발급된 로또
+     * @param lottos             발급된 로또
      * @param manualLottoNumbers 입력된 수동 로또 번호 목록
      */
     @Override
@@ -30,7 +30,7 @@ public class LottoServiceImpl implements LottoService {
     /**
      * 수동 로또 추가
      *
-     * @param lottos 발급된 로또
+     * @param lottos      발급된 로또
      * @param manualLotto 수동 로또 입력값
      */
     @Override
@@ -43,7 +43,7 @@ public class LottoServiceImpl implements LottoService {
     /**
      * 자동 로또 발급
      *
-     * @param lottos 발급된 로또
+     * @param lottos       발급된 로또
      * @param purchaseInfo 구입정보
      */
     @Override
