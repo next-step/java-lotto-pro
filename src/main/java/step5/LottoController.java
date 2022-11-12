@@ -22,36 +22,41 @@ public class LottoController {
      * 7. 당첨 통계 출력
      */
     public void gameStart() {
-        InputView inputView = new InputView();
-        LottoService lottoService = new LottoService();
+        try {
 
-        //구입 금액 입력
-        int money = inputView.readyBuyingLotto();
-        lottoService.validBuyLottosByMoney(money);
+            InputView inputView = new InputView();
+            LottoService lottoService = new LottoService();
 
-        //수동 구매 로또 수 입력
-        int countManualLottos = inputView.readyBuyingManualLotto();
-        lottoService.validManualLottosCount(money, countManualLottos);
+            //구입 금액 입력
+            int money = inputView.readyBuyingLotto();
+            lottoService.validBuyLottosByMoney(money);
 
-        //수동 구매 로또 번호 입력
-        List<Lotto> manualLottos = inputView.readyManualLottos(countManualLottos)
-                .stream()
-                .map(lottoService::getLottoByLottoNumbers)
-                .collect(Collectors.toList());
+            //수동 구매 로또 수 입력
+            int countManualLottos = inputView.readyBuyingManualLotto();
+            lottoService.validManualLottosCount(money, countManualLottos);
 
-        //수동, 자동 구매 개수 확인 출력
-        Lottos lottos = lottoService.buyLottosByMoney(money, manualLottos);
-        inputView.printBoughtLottoCountAndManualLottoCount(lottos.count(), countManualLottos);
-        inputView.printLottos(lottos);
+            //수동 구매 로또 번호 입력
+            List<Lotto> manualLottos = inputView.readyManualLottos(countManualLottos)
+                    .stream()
+                    .map(lottoService::getLottoByLottoNumbers)
+                    .collect(Collectors.toList());
 
-        //당첨 번호 입력
-        Lotto winningLotto = lottoService.getLottoByLottoNumbers(inputView.readyWinningLotto());
+            //수동, 자동 구매 개수 확인 출력
+            Lottos lottos = lottoService.buyLottosByMoney(money, manualLottos);
+            inputView.printBoughtLottoCountAndManualLottoCount(lottos.count(), countManualLottos);
+            inputView.printLottos(lottos);
 
-        //보너스 번호 입력
-        int bonus = inputView.readyBonus();
-        LottoResult lottoResults = lottoService.getResultComparedToWinningNumbers(winningLotto, bonus, lottos);
+            //당첨 번호 입력
+            Lotto winningLotto = lottoService.getLottoByLottoNumbers(inputView.readyWinningLotto());
 
-        printResult(money, lottoResults);
+            //보너스 번호 입력
+            int bonus = inputView.readyBonus();
+            LottoResult lottoResults = lottoService.getResultComparedToWinningNumbers(winningLotto, bonus, lottos);
+
+            printResult(money, lottoResults);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     private void printResult(int money, LottoResult lottoResult) {
