@@ -40,7 +40,7 @@ public class Lotto {
         return lottoNumbers.toString();
     }
 
-    public boolean hasBonusBall(LottoNumber bonusBall) {
+    public boolean contains(LottoNumber bonusBall) {
         return lottoNumbers.contains(bonusBall);
     }
 }

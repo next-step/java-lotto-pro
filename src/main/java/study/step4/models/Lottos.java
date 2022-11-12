@@ -28,7 +28,7 @@ public class Lottos {
         Map<Rank, Integer> winningLottos = new EnumMap<>(Rank.class);
         for (Lotto lotto : lottos) {
             int numberOfMatching = lotto.countNumberOfMatching(winLotto);
-            Rank rank = Rank.valueOf(numberOfMatching, lotto.hasBonusBall(bonusBall));
+            Rank rank = Rank.valueOf(numberOfMatching, lotto.contains(bonusBall));
             winningLottos.put(rank, winningLottos.getOrDefault(rank, 0) + 1);
         }
         return winningLottos;
