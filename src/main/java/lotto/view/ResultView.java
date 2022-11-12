@@ -16,7 +16,8 @@ import utils.MoneyFormat;
 public class ResultView {
 
     public void printPurchaseCount(PurchaseInfo purchaseInfo) {
-        System.out.println(purchaseInfo.getPurchaseCount() + "개를 구매했습니다.");
+        System.out.print("수동으로 " + purchaseInfo.getManualLottoCount() + "장");
+        System.out.println(", 자동으로 " + purchaseInfo.getAutoLottoCount() + "개를 구매했습니다.");
     }
 
     public void printLottos(Lottos lottos) {
