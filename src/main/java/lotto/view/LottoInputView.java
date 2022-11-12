@@ -2,6 +2,8 @@ package lotto.view;
 
 import lotto.constant.LottoMessage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class LottoInputView {
@@ -24,5 +26,14 @@ public class LottoInputView {
     public static String readManualLottoCount() {
         System.out.println(LottoMessage.INPUT_MANUAL_LOTTO_COUNT);
         return scan.nextLine();
+    }
+
+    public static List<String> readManualLotto(int manualLottoCount) {
+        System.out.println(LottoMessage.INPUT_MANUAL_LOTTO_COUNT);
+        List<String> manualLottoStr = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            manualLottoStr.add(scan.nextLine());
+        }
+        return manualLottoStr;
     }
 }

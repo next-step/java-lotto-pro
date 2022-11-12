@@ -8,14 +8,6 @@ public class Lottos{
         this.lottoList = lottoList;
     }
 
-    public static Lottos buyManualLottos(int manulLottoCount) {
-        List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < manulLottoCount; i++) {
-            lottoList.add(Lotto.createLotto());
-        }
-        return new Lottos(lottoList);
-    }
-
     public Map<Rank, Integer> calculateWinResult(Lotto winLotto, LottoNumber bonus) {
         Map<Rank, Integer> rewardMap = new HashMap<>();
         for (Lotto lotto : lottoList) {
@@ -35,6 +27,13 @@ public class Lottos{
             lottoList.add(Lotto.createLotto());
         }
         return new Lottos(lottoList);
+    }
+
+    public static Lottos mergeLottos(Lottos manualLottos, Lottos autoLottos) {
+        List<Lotto> totalLottos = new ArrayList<>();
+        totalLottos.addAll(manualLottos.getLottosAsUnmodifiableList());
+        totalLottos.addAll(autoLottos.getLottosAsUnmodifiableList());
+        return new Lottos(totalLottos);
     }
 
     public List<Lotto> getLottosAsUnmodifiableList() {
