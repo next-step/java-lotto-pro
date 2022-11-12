@@ -1,8 +1,7 @@
 package study.step4.models;
 
-import study.step4.Rank;
-
-import java.util.*;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class Winners {
     private final Map<Rank, Integer> winners;

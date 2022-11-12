@@ -1,6 +1,6 @@
 package study.step4.views;
 
-import study.step4.Rank;
+import study.step4.models.Rank;
 import study.step4.models.Lottos;
 import study.step4.models.Money;
 import study.step4.models.Winners;

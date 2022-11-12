@@ -1,7 +1,5 @@
 package study.step4.models;
 
-import study.step4.Rank;
-
 import java.util.List;
 
 public class Lottos {

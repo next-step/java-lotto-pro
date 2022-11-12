@@ -1,4 +1,4 @@
-package study.step4;
+package study.step4.models;
 
 import java.util.Arrays;
 
