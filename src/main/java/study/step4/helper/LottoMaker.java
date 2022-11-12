@@ -1,6 +1,9 @@
 package study.step4.helper;
 
-import study.step4.models.*;
+import study.step4.models.Lotto;
+import study.step4.models.LottoNumber;
+import study.step4.models.Lottos;
+import study.step4.models.Money;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,9 +23,8 @@ public class LottoMaker {
     }
 
     private static Lotto makeLotto() {
-        List<LottoNumber> numbers = new ArrayList<>(LottoNumbers.shuffledLottoNumbers()
-                .subList(SUB_LIST_START_INDEX, SUB_LIST_END_INDEX));
-        Collections.sort(numbers, LottoNumber::compare);
-        return new Lotto(numbers);
+        List<LottoNumber> numbers = new ArrayList<>(LottoNumber.getLottoNumbers());
+        Collections.shuffle(numbers);
+        return new Lotto(new ArrayList<>(numbers.subList(SUB_LIST_START_INDEX, SUB_LIST_END_INDEX)));
     }
 }
