@@ -13,7 +13,7 @@ public class MatchCount {
     }
 
     public boolean checkCount(int matchCount, int bonusCount) {
-        return this.matchCount == matchCount && this.bonusBallCount == bonusCount;
+        return this.matchCount == matchCount && (this.bonusBallCount == bonusCount || bonusCount == 0);
     }
 
     @Override

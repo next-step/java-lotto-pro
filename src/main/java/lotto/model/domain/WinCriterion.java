@@ -30,7 +30,7 @@ public enum WinCriterion {
     }
 
     public boolean compareMatchCount(MatchCount matchCount) {
-        return matchCount.checkCount(this.matchCount, bonusCount);
+        return matchCount.checkCount(this.matchCount, this.bonusCount);
     }
 
     public long calculatePrize(int count) {
