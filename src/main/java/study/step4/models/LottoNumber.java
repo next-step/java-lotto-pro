@@ -18,6 +18,10 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public LottoNumber(String bonusBall) {
+        this(Integer.parseInt(bonusBall));
+    }
+
     public int getNumber() {
         return number;
     }

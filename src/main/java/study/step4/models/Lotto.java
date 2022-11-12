@@ -36,8 +36,7 @@ public class Lotto {
         return lottoNumbers.toString();
     }
 
-    public boolean hasBonusBall(BonusBall bonusBall) {
-        return lottoNumbers.stream()
-                .anyMatch(bonusBall::isEqualValue);
+    public boolean hasBonusBall(LottoNumber bonusBall) {
+        return lottoNumbers.contains(bonusBall);
     }
 }

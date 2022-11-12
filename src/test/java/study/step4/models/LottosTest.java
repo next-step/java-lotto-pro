@@ -16,7 +16,7 @@ public class LottosTest {
                         new Lotto("2, 3, 4, 5, 6, 7"),
                         new Lotto("2, 4, 5, 6, 7, 8"),
                         new Lotto("3, 4, 5, 6, 7, 8")));
-        BonusBall bonusBall = new BonusBall(new LottoNumber(3));
+        LottoNumber bonusBall = new LottoNumber(3);
 
         Winners winners = lottos.findWinners(winLottoNumbers, bonusBall);
 

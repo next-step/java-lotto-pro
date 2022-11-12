@@ -24,7 +24,7 @@ public class Lottos {
         return lottos.toString();
     }
 
-    public Winners findWinners(WinningLotto winLotto, BonusBall bonusBall) {
+    public Winners findWinners(WinningLotto winLotto, LottoNumber bonusBall) {
         Winners winners = new Winners();
         for (Lotto lotto : lottos) {
             int numberOfMatching = lotto.countNumberOfMatching(winLotto);

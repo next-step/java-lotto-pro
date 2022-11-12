@@ -16,7 +16,7 @@ public class WinnersTest {
                         new Lotto("1, 2, 3, 4, 5, 6"),
                         new Lotto("2, 3, 4, 5, 6, 7"),
                         new Lotto("3, 4, 5, 6, 7, 8")));
-        BonusBall bonusBall = new BonusBall(new LottoNumber(10));
+        LottoNumber bonusBall = new LottoNumber(10);
         Winners winners = lottos.findWinners(winningLotto, bonusBall);
 
         Money inputMoney = new Money(String.valueOf(lottos.size() * PRICE_PER_LOTTO));
