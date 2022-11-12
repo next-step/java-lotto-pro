@@ -17,7 +17,7 @@ public class WinnersTest {
                         new Lotto("2, 3, 4, 5, 6, 7"),
                         new Lotto("3, 4, 5, 6, 7, 8")));
         LottoNumber bonusBall = new LottoNumber(10);
-        Winners winners = lottos.findWinners(winningLotto, bonusBall);
+        Winners winners = new Winners(lottos.findWinningLottos(winningLotto, bonusBall));
 
         Money inputMoney = new Money(String.valueOf(lottos.size() * PRICE_PER_LOTTO));
         double earningRate = winners.earningRate(inputMoney);

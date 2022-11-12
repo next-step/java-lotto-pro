@@ -1,14 +1,9 @@
 package study.step4.models;
 
-import java.util.EnumMap;
 import java.util.Map;
 
 public class Winners {
     private final Map<Rank, Integer> winners;
-
-    public Winners() {
-        winners = new EnumMap<>(Rank.class);
-    }
 
     public Winners(Map<Rank, Integer> winners) {
         this.winners = winners;
@@ -28,9 +23,5 @@ public class Winners {
             total += map.getKey().getReward() * map.getValue();
         }
         return total;
-    }
-
-    public void add(Rank rank) {
-        winners.put(rank, winners.getOrDefault(rank, 0) + 1);
     }
 }

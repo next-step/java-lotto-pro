@@ -18,7 +18,7 @@ public class LottosTest {
                         new Lotto("3, 4, 5, 6, 7, 8")));
         LottoNumber bonusBall = new LottoNumber(3);
 
-        Winners winners = lottos.findWinners(winLottoNumbers, bonusBall);
+        Winners winners = new Winners(lottos.findWinningLottos(winLottoNumbers, bonusBall));
 
         // 4, 5, 6
         assertThat(winners.numberOfRankers(Rank.FIFTH)).isEqualTo(1);

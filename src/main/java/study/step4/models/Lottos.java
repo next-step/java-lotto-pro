@@ -1,6 +1,8 @@
 package study.step4.models;
 
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lottos {
     private List<Lotto> lottos;
@@ -22,12 +24,13 @@ public class Lottos {
         return lottos.toString();
     }
 
-    public Winners findWinners(WinningLotto winLotto, LottoNumber bonusBall) {
-        Winners winners = new Winners();
+    public Map<Rank, Integer> findWinningLottos(WinningLotto winLotto, LottoNumber bonusBall) {
+        Map<Rank, Integer> winningLottos = new EnumMap<>(Rank.class);
         for (Lotto lotto : lottos) {
             int numberOfMatching = lotto.countNumberOfMatching(winLotto);
-            winners.add(Rank.valueOf(numberOfMatching, lotto.hasBonusBall(bonusBall)));
+            Rank rank = Rank.valueOf(numberOfMatching, lotto.hasBonusBall(bonusBall));
+            winningLottos.put(rank, winningLottos.getOrDefault(rank, 0) + 1);
         }
-        return winners;
+        return winningLottos;
     }
 }
