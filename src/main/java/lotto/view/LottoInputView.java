@@ -29,7 +29,7 @@ public class LottoInputView {
     }
 
     public static List<String> readManualLotto(int manualLottoCount) {
-        System.out.println(LottoMessage.INPUT_MANUAL_LOTTO_COUNT);
+        System.out.println(LottoMessage.INPUT_MANUAL_LOTTO);
         List<String> manualLottoStr = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
             manualLottoStr.add(scan.nextLine());

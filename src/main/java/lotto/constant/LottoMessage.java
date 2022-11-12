@@ -7,7 +7,9 @@ public class LottoMessage {
     public static final String ERROR_MONEY_NEGATIVE = "[ERROR] 구입금액은 음수를 입력할 수 없습니다.";
     public static final String ERROR_MONEY_MIN_PRICE = "[ERROR] Lotto 1장의 가격은 1000 입니다.";
     public static final String ERROR_INVALD_NUM = "[Error] 올바른 숫자가 아닙니다.";
+    public static final String ERROR_NUM_NEGATIVE = "[Error] 음수를 입력할 수 없습니다.";
     public static final String ERROR_MESSAGE_DUPLICATE_BONUS_WIN = "[Error] 지난 주 당첨 번호와 보너스 볼은 중복될 수 없습니다.";
+    public static final String ERROR_MESSAGE_MANUAL_LOTTO_COUNT = "[Error] 수동 로또 개수는 총 로또 구입 개수 이상일 수 없습니다.";
 
     public static final String INPUT_PRICE = "구입금액을 입력해 주세요.";
     public static final String INPUT_WIN_LOTTO = "지난 주 당첨 번호를 입력해 주세요.";

@@ -32,4 +32,13 @@ public class LottoUtilsTest {
             LottoUtils.StringToInt(str);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("LottoUtils 음수 값 입력 시, 에러 발생")
+    public void LottoUtils_음수_값_에러_발생() {
+        assertThatThrownBy(() -> {
+            String str = "-1";
+            LottoUtils.StringToInt(str);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }

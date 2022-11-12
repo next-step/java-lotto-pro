@@ -1,5 +1,6 @@
 package lotto.Controller;
 
+import lotto.constant.LottoMessage;
 import lotto.domain.*;
 import lotto.utils.LottoUtils;
 import lotto.view.LottoInputView;
@@ -12,13 +13,19 @@ public class LottoController {
 
     public static void start() {
         Money money = new Money(LottoUtils.StringToInt(LottoInputView.readMoney()));
-        int manualLottoCount = LottoUtils.StringToInt(LottoInputView.readManualLottoCount());
-        Lottos manualLottos = readBuyManualLottos(manualLottoCount, LottoInputView.readManualLotto(manualLottoCount));
+        int manualLottoCount = LottoUtils.StringToIntNum(LottoInputView.readManualLottoCount());
+        Lottos manualLottos = new Lottos(new ArrayList<>());
+        if (manualLottoCount > money.lottoCount()) {
+            throw new IllegalArgumentException(LottoMessage.ERROR_MESSAGE_MANUAL_LOTTO_COUNT);
+        }
+        if (manualLottoCount > 0) {
+            manualLottos = readBuyManualLottos(manualLottoCount, LottoInputView.readManualLotto(manualLottoCount));
+        }
         Lottos autoLottos = Lottos.buyAutoLottos(money.lottoCount()-manualLottoCount);
         Lottos totalLottos = Lottos.mergeLottos(manualLottos, autoLottos);
         LottoOutPutView.writeBuyLottos(manualLottos, autoLottos);
         Lotto winLotto = readWinLotto(LottoInputView.readLottoWinNumber());
-        int bonusNumber = LottoUtils.StringToInt(LottoInputView.readBonusNumber());
+        int bonusNumber = LottoUtils.StringToIntNum(LottoInputView.readBonusNumber());
         LottoNumber bonus = new LottoNumber(bonusNumber);
         winLotto.duplicateWinBonus(bonus);
         LottoResult result = new LottoResult(totalLottos, winLotto, money.totalLottoPrice(), bonus);
