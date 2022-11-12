@@ -15,6 +15,7 @@ public class LottoApplication {
         WinningLotto winningLotto = new WinningLotto(InputView.inputWinningNumbers());
 
         LottoNumber bonusBall = new LottoNumber(InputView.inputBonusBall());
+        winningLotto.validateNotInWinningLotto(bonusBall);
         Winners winners = lottos.findWinners(winningLotto, bonusBall);
         ResultView.printLottoWinners(winners);
         ResultView.printEarningRate(winners, money);
