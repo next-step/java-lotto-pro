@@ -50,14 +50,14 @@ public class LottoGenerator {
                 .collect(Collectors.toList()));
     }
 
-    public List<LottoNo> generateLottoNumbers(String lottoNumberText) {
+    public List<LottoNo> generateLottoNos(String lottoNumberText) {
         return Stream.of(lottoNumberText.split(StringConstant.COMMA))
                 .map(this::convertInteger)
                 .map(LottoNo::new)
                 .collect(Collectors.toList());
     }
 
-    public LottoWinningNos generateLottoWinningNumber(Lotto lotto, int bonus) {
+    public LottoWinningNos generateLottoWinningNos(Lotto lotto, int bonus) {
         return new LottoWinningNos(lotto, new LottoNo(bonus));
     }
 

@@ -30,11 +30,11 @@ public class LottoService {
     }
 
     public Lotto getLottoByLottoNumbers(String lottoNumbers) {
-        return new Lotto(this.lottoGenerator.generateLottoNumbers(lottoNumbers));
+        return new Lotto(this.lottoGenerator.generateLottoNos(lottoNumbers));
     }
 
     public LottoResult getResultComparedToWinningNumbers(Lotto lotto, int bonus, Lottos lottos) {
-        LottoWinningNos lottoWinning = this.lottoGenerator.generateLottoWinningNumber(lotto, bonus);
+        LottoWinningNos lottoWinning = this.lottoGenerator.generateLottoWinningNos(lotto, bonus);
         return LottoResult.getLottoResultFromLotto(lottos, lottoWinning);
     }
 

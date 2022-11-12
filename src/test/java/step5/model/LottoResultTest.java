@@ -78,7 +78,7 @@ class LottoResultTest {
     @DisplayName("구매한 n 개의 로또와 당첨번호 로또를 가지고 로또 결과를 리턴한다.")
     void givenWinningLotto_whenGenerateFromLottos_thenLottoResult(String lottoText, int expectedCount) {
         LottoGenerator lottoGenerator = new LottoGenerator();
-        LottoWinningNos lottoWinningNumber = lottoGenerator.generateLottoWinningNumber(generateLottoByText(lottoText), 44);
+        LottoWinningNos lottoWinningNumber = lottoGenerator.generateLottoWinningNos(generateLottoByText(lottoText), 44);
         LottoResult lottoResult = LottoResult.getLottoResultFromLotto(lottos, lottoWinningNumber);
         int matchedCount = lottoResult.getByLottoScoreType(LottoScoreType.THREE);
 
@@ -91,7 +91,7 @@ class LottoResultTest {
     void givenWinningLotto_whenGenerateFromLottos_thenLottoResult2(String lottoText, int expectedCount,
                                                                    int bonusNumber) {
         LottoGenerator lottoGenerator = new LottoGenerator();
-        LottoWinningNos lottoWinningNumber = lottoGenerator.generateLottoWinningNumber(generateLottoByText(lottoText), bonusNumber);
+        LottoWinningNos lottoWinningNumber = lottoGenerator.generateLottoWinningNos(generateLottoByText(lottoText), bonusNumber);
         LottoResult lottoResult = LottoResult.getLottoResultFromLotto(lottos, lottoWinningNumber);
         int matchedCount = lottoResult.getByLottoScoreType(LottoScoreType.FIVE_BONUS);
 
