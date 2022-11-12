@@ -13,6 +13,17 @@ public class Lotto {
     private static final int LOTTO_NUMBER_DO_NOT_EXIST = 0;
     private List<LottoNumber> lotto;
 
+    public Lotto(){}
+
+    public Lotto(String lottoNumbersInput) {
+        String[] lottoNumbers = lottoNumbersInput.split(LottoConstants.WIN_LOTTO_DELIMITER);
+        lotto = new ArrayList<>();
+        for (String lottoNumber : lottoNumbers) {
+            lotto.add(LottoNumber.getLottoNumberByString(lottoNumber));
+        }
+        checkLottoNumberCount();
+    }
+
     public void addLottoNumber(LottoNumber lottoNumber) {
         if (this.lotto == null) {
             this.lotto = new ArrayList<>();
@@ -57,6 +68,10 @@ public class Lotto {
             count += userLotto.contains(lottoNumber);
         }
         return count;
+    }
+
+    public boolean lottoNumberExist(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
     }
 
     public void sortNumbers() {

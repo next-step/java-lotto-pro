@@ -1,6 +1,7 @@
 package lotto.service;
 
 import java.util.Collections;
+import lotto.model.constants.ErrorMessage;
 import lotto.model.constants.LottoConstants;
 import lotto.model.domain.Lotto;
 import lotto.model.domain.LottoNumber;
@@ -14,18 +15,42 @@ import lotto.model.domain.WinResult;
 public class LottoServiceImpl implements LottoService {
 
     /**
-     * 구입한 개수만큼 로또 발급
+     * 수동 로또 발급
      *
-     * @param purchaseInfo 구입정보
-     * @return 발급한 로또(전체)
+     * @param lottos 발급된 로또
+     * @param manualLottoNumbers 입력된 수동 로또 번호 목록
      */
     @Override
-    public Lottos generateAutoLotto(PurchaseInfo purchaseInfo) {
-        Lottos lottos = new Lottos();
-        for (int i = 0; i < purchaseInfo.getPurchaseCount(); i++) {
+    public void generateManualLotto(Lottos lottos, String[] manualLottoNumbers) {
+        for (String manualLotto : manualLottoNumbers) {
+            addManualLotto(lottos, manualLotto);
+        }
+    }
+
+    /**
+     * 수동 로또 추가
+     *
+     * @param lottos 발급된 로또
+     * @param manualLotto 수동 로또 입력값
+     */
+    @Override
+    public void addManualLotto(Lottos lottos, String manualLotto) {
+        if (!lottos.addLotto(new Lotto(manualLotto))) {
+            throw new IllegalArgumentException(ErrorMessage.MANUAL_LOTTO_DUPLICATE);
+        }
+    }
+
+    /**
+     * 자동 로또 발급
+     *
+     * @param lottos 발급된 로또
+     * @param purchaseInfo 구입정보
+     */
+    @Override
+    public void generateAutoLotto(Lottos lottos, PurchaseInfo purchaseInfo) {
+        for (int i = 0; i < purchaseInfo.getAutoLottoCount(); i++) {
             addOneLotto(lottos);
         }
-        return lottos;
     }
 
     /**
@@ -33,6 +58,7 @@ public class LottoServiceImpl implements LottoService {
      *
      * @return 생성한 로또(1장)
      */
+    @Override
     public Lotto generateOneLotto() {
         Lotto lotto = new Lotto();
         Collections.shuffle(LottoConstants.LOTTO_NUMBER_POOL);
@@ -50,6 +76,7 @@ public class LottoServiceImpl implements LottoService {
      *
      * @param lottos 발급된 로또 목록
      */
+    @Override
     public void addOneLotto(Lottos lottos) {
         Lotto lotto;
         do {

@@ -23,6 +23,8 @@ public class LottoController {
     public void play() {
         PurchaseInfo purchaseInfo = purchaseLotto();
         Lottos lottos = generateLotto(purchaseInfo);
+        resultView.printPurchaseCount(purchaseInfo);
+        resultView.printLottos(lottos);
 
         String winLottoInput = inputView.winLottoInput();
         String bonusBallInput = inputView.bonusBallInput();
@@ -40,7 +42,8 @@ public class LottoController {
     private PurchaseInfo purchaseLotto() {
         PurchaseAmount purchaseAmount = inputView.purchaseAmountInput();
         PurchaseInfo purchaseInfo = new PurchaseInfo(purchaseAmount.getPurchaseAmount());
-        resultView.printPurchaseCount(purchaseInfo);
+        String manualLottoCount = inputView.manualLottoCountInput();
+        purchaseInfo.assignManualLottoCount(manualLottoCount);
         return purchaseInfo;
     }
 
@@ -51,8 +54,10 @@ public class LottoController {
      * @return 발급된 로또(전체)
      */
     private Lottos generateLotto(PurchaseInfo purchaseInfo) {
-        Lottos lottos = lottoService.generateAutoLotto(purchaseInfo);
-        resultView.printLottos(lottos);
+        Lottos lottos = new Lottos();
+        String[] manualLottoNumbers = inputView.manualLottoNumbersInput(purchaseInfo.getManualLottoCount());
+        lottoService.generateManualLotto(lottos, manualLottoNumbers);
+        lottoService.generateAutoLotto(lottos, purchaseInfo);
         return lottos;
     }
 
