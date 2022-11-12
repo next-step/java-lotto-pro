@@ -31,6 +31,10 @@ public class Lotto {
                 .count();
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     @Override
     public String toString() {
         return lottoNumbers.toString();

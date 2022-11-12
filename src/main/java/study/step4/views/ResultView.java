@@ -1,9 +1,8 @@
 package study.step4.views;
 
-import study.step4.models.Rank;
-import study.step4.models.Lottos;
-import study.step4.models.Money;
-import study.step4.models.Winners;
+import study.step4.models.*;
+
+import java.util.Collections;
 
 public class ResultView {
     private static final String PURCHASE_COUNT_DESCRIPTION = "%d개를 구매했습니다.\n";
@@ -16,7 +15,10 @@ public class ResultView {
 
     public static void printLottos(Lottos lottos) {
         System.out.printf(PURCHASE_COUNT_DESCRIPTION, lottos.size());
-        lottos.printAll();
+        for (Lotto lotto : lottos.getLottos()) {
+            Collections.sort(lotto.getLottoNumbers(), LottoNumber::compare);
+            System.out.println(lotto);
+        }
     }
 
     public static void printLottoWinners(Winners winners) {

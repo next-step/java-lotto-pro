@@ -13,10 +13,8 @@ public class Lottos {
         return lottos.size();
     }
 
-    public void printAll() {
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto);
-        }
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     @Override
