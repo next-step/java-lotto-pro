@@ -11,20 +11,20 @@ public class WinLottoTest {
     @Test
     void 일치_개수_확인() {
         Lotto lotto = new Lotto();
-        lotto.addLottoNumber(new LottoNumber(1));
-        lotto.addLottoNumber(new LottoNumber(2));
-        lotto.addLottoNumber(new LottoNumber(3));
-        lotto.addLottoNumber(new LottoNumber(4));
-        lotto.addLottoNumber(new LottoNumber(5));
-        lotto.addLottoNumber(new LottoNumber(6));
-        WinLotto winLotto = new WinLotto(lotto, new LottoNumber(9));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(1));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(2));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(3));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(4));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(5));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(6));
+        WinLotto winLotto = new WinLotto(lotto, LottoNumber.getLottoNumberByInt(9));
         Lotto userLotto = new Lotto();
-        userLotto.addLottoNumber(new LottoNumber(1));
-        userLotto.addLottoNumber(new LottoNumber(2));
-        userLotto.addLottoNumber(new LottoNumber(3));
-        userLotto.addLottoNumber(new LottoNumber(4));
-        userLotto.addLottoNumber(new LottoNumber(5));
-        userLotto.addLottoNumber(new LottoNumber(9));
+        userLotto.addLottoNumber(LottoNumber.getLottoNumberByInt(1));
+        userLotto.addLottoNumber(LottoNumber.getLottoNumberByInt(2));
+        userLotto.addLottoNumber(LottoNumber.getLottoNumberByInt(3));
+        userLotto.addLottoNumber(LottoNumber.getLottoNumberByInt(4));
+        userLotto.addLottoNumber(LottoNumber.getLottoNumberByInt(5));
+        userLotto.addLottoNumber(LottoNumber.getLottoNumberByInt(9));
 
         MatchCount expected = new MatchCount(5, 1);
 

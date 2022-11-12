@@ -1,20 +1,36 @@
 package lotto.model.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import lotto.model.constants.ErrorMessage;
 import lotto.model.constants.LottoConstants;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
     private int lottoNumber;
 
-    public LottoNumber(int lottoNumber) {
+    static {
+        for (int i = LottoConstants.LOTTO_NUMBER_MIN; i <= LottoConstants.LOTTO_NUMBER_MAX; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
+    }
+
+    private LottoNumber(int lottoNumber) {
         setLottoNumber(lottoNumber);
     }
 
-    public LottoNumber(String lottoNumber) {
+    public static LottoNumber getLottoNumberByInt(int lottoNumber) {
+        if (lottoNumbers.get(lottoNumber) == null) {
+            return new LottoNumber(lottoNumber);
+        }
+        return lottoNumbers.get(lottoNumber);
+    }
+
+    public static LottoNumber getLottoNumberByString(String lottoNumber) {
         int number = parseInt(lottoNumber);
-        setLottoNumber(number);
+        return getLottoNumberByInt(number);
     }
 
     protected static boolean validateNumber(int checkValue) {

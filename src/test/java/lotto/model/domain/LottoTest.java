@@ -12,15 +12,15 @@ public class LottoTest {
     @Test
     void 로또_숫자_개수_불일치_예외처리() {
         Lotto lotto = new Lotto();
-        lotto.addLottoNumber(new LottoNumber(1));
-        lotto.addLottoNumber(new LottoNumber(2));
-        lotto.addLottoNumber(new LottoNumber(3));
-        lotto.addLottoNumber(new LottoNumber(4));
-        lotto.addLottoNumber(new LottoNumber(5));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(1));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(2));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(3));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(4));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(5));
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
             lotto.checkLottoNumberCount();
         });
-        lotto.addLottoNumber(new LottoNumber(6));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(6));
         lotto.checkLottoNumberCount();
     }
 
@@ -28,13 +28,13 @@ public class LottoTest {
     @Test
     void 로또_중복_숫자_예외처리() {
         Lotto lotto = new Lotto();
-        lotto.addLottoNumber(new LottoNumber(1));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(1));
 
-        lotto.checkLottoNumberExist(new LottoNumber(2));
-        lotto.addLottoNumber(new LottoNumber(2));
+        lotto.checkLottoNumberExist(LottoNumber.getLottoNumberByInt(2));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(2));
 
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            lotto.checkLottoNumberExist(new LottoNumber(2));
+            lotto.checkLottoNumberExist(LottoNumber.getLottoNumberByInt(2));
         });
     }
 
@@ -42,13 +42,13 @@ public class LottoTest {
     @Test
     void 로또_숫자_개수_초과_예외처리() {
         Lotto lotto = new Lotto();
-        lotto.addLottoNumber(new LottoNumber(1));
-        lotto.addLottoNumber(new LottoNumber(2));
-        lotto.addLottoNumber(new LottoNumber(3));
-        lotto.addLottoNumber(new LottoNumber(4));
-        lotto.addLottoNumber(new LottoNumber(5));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(1));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(2));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(3));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(4));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(5));
         lotto.validateLottoNumberCount();
-        lotto.addLottoNumber(new LottoNumber(6));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(6));
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
             lotto.validateLottoNumberCount();
         });
@@ -58,28 +58,28 @@ public class LottoTest {
     @Test
     void 로또_일치_확인() {
         Lotto lotto = new Lotto();
-        lotto.addLottoNumber(new LottoNumber(1));
-        lotto.addLottoNumber(new LottoNumber(2));
-        lotto.addLottoNumber(new LottoNumber(3));
-        lotto.addLottoNumber(new LottoNumber(4));
-        lotto.addLottoNumber(new LottoNumber(5));
-        lotto.addLottoNumber(new LottoNumber(6));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(1));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(2));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(3));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(4));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(5));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(6));
 
         Lotto lotto2 = new Lotto();
-        lotto2.addLottoNumber(new LottoNumber(1));
-        lotto2.addLottoNumber(new LottoNumber(2));
-        lotto2.addLottoNumber(new LottoNumber(5));
-        lotto2.addLottoNumber(new LottoNumber(3));
-        lotto2.addLottoNumber(new LottoNumber(4));
-        lotto2.addLottoNumber(new LottoNumber(6));
+        lotto2.addLottoNumber(LottoNumber.getLottoNumberByInt(1));
+        lotto2.addLottoNumber(LottoNumber.getLottoNumberByInt(2));
+        lotto2.addLottoNumber(LottoNumber.getLottoNumberByInt(5));
+        lotto2.addLottoNumber(LottoNumber.getLottoNumberByInt(3));
+        lotto2.addLottoNumber(LottoNumber.getLottoNumberByInt(4));
+        lotto2.addLottoNumber(LottoNumber.getLottoNumberByInt(6));
 
         Lotto lotto3 = new Lotto();
-        lotto3.addLottoNumber(new LottoNumber(1));
-        lotto3.addLottoNumber(new LottoNumber(2));
-        lotto3.addLottoNumber(new LottoNumber(3));
-        lotto3.addLottoNumber(new LottoNumber(4));
-        lotto3.addLottoNumber(new LottoNumber(5));
-        lotto3.addLottoNumber(new LottoNumber(7));
+        lotto3.addLottoNumber(LottoNumber.getLottoNumberByInt(1));
+        lotto3.addLottoNumber(LottoNumber.getLottoNumberByInt(2));
+        lotto3.addLottoNumber(LottoNumber.getLottoNumberByInt(3));
+        lotto3.addLottoNumber(LottoNumber.getLottoNumberByInt(4));
+        lotto3.addLottoNumber(LottoNumber.getLottoNumberByInt(5));
+        lotto3.addLottoNumber(LottoNumber.getLottoNumberByInt(7));
 
         assertThat(lotto.equals(lotto2)).isTrue();
         assertThat(lotto.equals(lotto3)).isFalse();
@@ -89,20 +89,20 @@ public class LottoTest {
     @Test
     void 로또_비교() {
         Lotto lotto = new Lotto();
-        lotto.addLottoNumber(new LottoNumber(1));
-        lotto.addLottoNumber(new LottoNumber(2));
-        lotto.addLottoNumber(new LottoNumber(3));
-        lotto.addLottoNumber(new LottoNumber(4));
-        lotto.addLottoNumber(new LottoNumber(5));
-        lotto.addLottoNumber(new LottoNumber(6));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(1));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(2));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(3));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(4));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(5));
+        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(6));
 
         Lotto lotto2 = new Lotto();
-        lotto2.addLottoNumber(new LottoNumber(1));
-        lotto2.addLottoNumber(new LottoNumber(2));
-        lotto2.addLottoNumber(new LottoNumber(7));
-        lotto2.addLottoNumber(new LottoNumber(8));
-        lotto2.addLottoNumber(new LottoNumber(9));
-        lotto2.addLottoNumber(new LottoNumber(10));
+        lotto2.addLottoNumber(LottoNumber.getLottoNumberByInt(1));
+        lotto2.addLottoNumber(LottoNumber.getLottoNumberByInt(2));
+        lotto2.addLottoNumber(LottoNumber.getLottoNumberByInt(7));
+        lotto2.addLottoNumber(LottoNumber.getLottoNumberByInt(8));
+        lotto2.addLottoNumber(LottoNumber.getLottoNumberByInt(9));
+        lotto2.addLottoNumber(LottoNumber.getLottoNumberByInt(10));
 
         int expected = 2;
         assertThat(lotto.compare(lotto2)).isEqualTo(expected);

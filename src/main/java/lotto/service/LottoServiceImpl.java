@@ -37,7 +37,7 @@ public class LottoServiceImpl implements LottoService {
         Lotto lotto = new Lotto();
         Collections.shuffle(LottoConstants.LOTTO_NUMBER_POOL);
         for (int i = 0; i < LottoConstants.LOTTO_NUMBER_COUNT; i++) {
-            lotto.addLottoNumber(new LottoNumber(LottoConstants.LOTTO_NUMBER_POOL.get(i)));
+            lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(LottoConstants.LOTTO_NUMBER_POOL.get(i)));
         }
         lotto.sortNumbers();
         return lotto;

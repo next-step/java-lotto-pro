@@ -11,10 +11,10 @@ public class WinLotto {
         this.winLotto = new Lotto();
         String[] winLottoNumbers = winLottoInput.split(LottoConstants.WIN_LOTTO_DELIMITER);
         for (String winLottoNumber : winLottoNumbers) {
-            this.winLotto.addLottoNumber(new LottoNumber(winLottoNumber));
+            this.winLotto.addLottoNumber(LottoNumber.getLottoNumberByString(winLottoNumber));
         }
         winLotto.checkLottoNumberCount();
-        this.bonusBall = new LottoNumber(bonusBallInput);
+        this.bonusBall = LottoNumber.getLottoNumberByString(bonusBallInput);
     }
 
     public WinLotto(Lotto lotto, LottoNumber bonusBall) {
