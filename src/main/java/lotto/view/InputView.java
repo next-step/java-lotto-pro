@@ -16,6 +16,24 @@ public class InputView {
     }
 
     /**
+     * 수동 로또 구입 개수 입력
+     *
+     * @return 사용자 입력값
+     */
+    public String manualLottoCountInput() {
+        return InputConsole.inputLine("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    /**
+     * 수동 로또 구입 번 입력
+     *
+     * @return 사용자 입력값
+     */
+    public String[] manualLottoNumbersInput(long count) {
+        return InputConsole.inputLines("수동으로 구매할 번호를 입력해 주세요.", count);
+    }
+
+    /**
      * 지난주 당첨번호 입력
      *
      * @return 사용자 입력값
