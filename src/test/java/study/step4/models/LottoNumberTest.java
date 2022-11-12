@@ -3,8 +3,9 @@ package study.step4.models;
 import org.junit.jupiter.api.Test;
 import study.step4.exception.LottoNumberOutOfRangeException;
 
-import static org.assertj.core.api.Assertions.assertThatNoException;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import java.util.Set;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class LottoNumberTest {
     @Test
@@ -18,5 +19,12 @@ public class LottoNumberTest {
                 .isInstanceOf(LottoNumberOutOfRangeException.class);
         assertThatThrownBy(() -> new LottoNumber(46))
                 .isInstanceOf(LottoNumberOutOfRangeException.class);
+    }
+
+    @Test
+    void 숫자_SET_반환_1부터_45까지() {
+        Set<LottoNumber> lottoNumbers = LottoNumber.getLottoNumbers();
+
+        assertThat(lottoNumbers).hasSize(45);
     }
 }

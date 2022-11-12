@@ -1,11 +1,16 @@
 package study.step4.models;
 
 import study.step4.exception.LottoNumberOutOfRangeException;
-import study.step4.helper.LottoNumbers;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class LottoNumber {
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
+    private static final Set<LottoNumber> lottoNumbers = new HashSet<>();
+
     private int number;
 
     public LottoNumber(int number) {
@@ -22,9 +27,22 @@ public class LottoNumber {
     }
 
     private void validateNumberInRange(int number) {
-        if (number > LottoNumbers.MAX_NUMBER || number < LottoNumbers.MIN_NUMBER) {
+        if (number > MAX_NUMBER || number < MIN_NUMBER) {
             throw new LottoNumberOutOfRangeException(
-                    String.format("로또 숫자는 %d이상 %d이하의 숫자만 가능합니다.", LottoNumbers.MIN_NUMBER, LottoNumbers.MAX_NUMBER));
+                    String.format("로또 숫자는 %d이상 %d이하의 숫자만 가능합니다.", MIN_NUMBER, MAX_NUMBER));
+        }
+    }
+
+    public static Set<LottoNumber> getLottoNumbers() {
+        if (lottoNumbers.isEmpty()) {
+            makeLottoNumbers();
+        }
+        return lottoNumbers;
+    }
+
+    private static void makeLottoNumbers() {
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            lottoNumbers.add(new LottoNumber(i));
         }
     }
 
