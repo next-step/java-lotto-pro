@@ -1,7 +1,12 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
+
+import static lotto.domain.LottoMoney.LOTTO_MINIMUM_PRICE;
+import static lotto.domain.Lottos.DIGIT;
 
 public class LottosMap {
 
@@ -28,10 +33,14 @@ public class LottosMap {
     }
 
     public double returnRate(WinningLotto winningLotto) {
-        double returnRate = 0d;
+
+        int sum = 0;
         for (Lottos lottos : this.lottos.values()) {
-            returnRate += lottos.returnRate(winningLotto);
+            sum += lottos.sum(winningLotto);
         }
-        return returnRate;
+
+        return BigDecimal.valueOf(sum)
+                .divide(BigDecimal.valueOf((int) this.lottos.size() * LOTTO_MINIMUM_PRICE), DIGIT, RoundingMode.HALF_UP)
+                .doubleValue();
     }
 }

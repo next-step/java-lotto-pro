@@ -1,11 +1,8 @@
 package lotto.domain;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.domain.LottoMoney.LOTTO_MINIMUM_PRICE;
 import static lotto.domain.WinningMoney.find;
 
 public class Lottos {
@@ -23,12 +20,6 @@ public class Lottos {
 
     public void addAll(List<Lotto> lottos) {
         this.lottos.addAll(lottos);
-    }
-
-    public double returnRate(WinningLotto winningLotto) {
-        return BigDecimal.valueOf(sum(winningLotto))
-                .divide(BigDecimal.valueOf((int) this.lottos.size() * LOTTO_MINIMUM_PRICE), DIGIT, RoundingMode.HALF_UP)
-                .doubleValue();
     }
 
     public int sum(WinningLotto winningLotto) {

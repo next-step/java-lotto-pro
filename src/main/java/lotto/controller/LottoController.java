@@ -5,9 +5,6 @@ import calculator.TextExtractor;
 import lotto.domain.Number;
 import lotto.domain.*;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static lotto.domain.LottoGenerator.generate;
 import static lotto.domain.NumberUtil.convert;
 import static lotto.ui.inputView.BonusBallInputView.readBonusBall;
@@ -21,22 +18,22 @@ import static lotto.ui.outputView.StatisticsOutputView.winningResult;
 public class LottoController {
 
     public void run() {
-        Map<String, Lottos> lottos = createLottos(readPurchaseMoney());
+        LottosMap lottos = createLottos(readPurchaseMoney());
         printLottos(lottos);
         winningResult(lottos, createWinningLotto());
     }
 
-    private static Map<String, Lottos> createLottos(int purchaseMoney) {
+    private static LottosMap createLottos(int purchaseMoney) {
         int manualLottoCount = readManualLottoCount();
-        Map<String, Lottos> lottos = new HashMap<>();
+        LottosMap lottosMap = new LottosMap();
         try {
-            lottos.put("manual", createManualLottos(manualLottoCount));
-            lottos.put("auto", generate(new LottoMoney(purchaseMoney).purchaseCount(manualLottoCount)));
+            lottosMap.put(LottoType.MANUAL, createManualLottos(manualLottoCount));
+            lottosMap.put(LottoType.AUTO, generate(new LottoMoney(purchaseMoney).purchaseCount(manualLottoCount)));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return createLottos(purchaseMoney);
         }
-        return lottos;
+        return lottosMap;
     }
 
     private static Lottos createManualLottos(int manualLottoCount) throws NumberFormatException {
