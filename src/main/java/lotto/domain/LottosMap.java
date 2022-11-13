@@ -26,4 +26,12 @@ public class LottosMap {
         }
         return count;
     }
+
+    public double returnRate(WinningLotto winningLotto) {
+        double returnRate = 0d;
+        for (Lottos lottos : this.lottos.values()) {
+            returnRate += lottos.returnRate(winningLotto);
+        }
+        return returnRate;
+    }
 }

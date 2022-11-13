@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.fixture.LottoFixture;
 import lotto.fixture.LottosFixture;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -42,5 +43,16 @@ class LottosMapTest {
         lottosMap.put(type, LottosFixture.lottos());
 
         assertThat(lottosMap.matchLottoCount(WinningMoney.SIX_MATCH, new WinningLotto(LottoFixture.lotto(), new Number(8)))).isEqualTo(1);
+    }
+
+    @DisplayName("수익율을 구한다.")
+    @Test
+    void returnRate() {
+
+        LottosMap lottosMap = new LottosMap();
+        lottosMap.put(LottoType.AUTO, LottosFixture.lottos());
+        lottosMap.put(LottoType.MANUAL, LottosFixture.lottos());
+
+        assertThat(lottosMap.returnRate(new WinningLotto(LottoFixture.lotto(), new Number(8)))).isEqualTo(4000000.0);
     }
 }
