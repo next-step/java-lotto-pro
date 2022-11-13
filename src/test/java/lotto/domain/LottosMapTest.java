@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.fixture.LottoFixture;
 import lotto.fixture.LottosFixture;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,5 +31,16 @@ class LottosMapTest {
         lottosMap.put(type, LottosFixture.lottos());
 
         assertThat(lottosMap.getLottos(type).size()).isEqualTo(1);
+    }
+
+    @DisplayName("당첨되는 로또의 갯수를 구한다.")
+    @ParameterizedTest
+    @CsvSource({"AUTO", "MANUAL"})
+    void matchCount(LottoType type) {
+
+        LottosMap lottosMap = new LottosMap();
+        lottosMap.put(type, LottosFixture.lottos());
+
+        assertThat(lottosMap.matchLottoCount(WinningMoney.SIX_MATCH, new WinningLotto(LottoFixture.lotto(), new Number(8)))).isEqualTo(1);
     }
 }

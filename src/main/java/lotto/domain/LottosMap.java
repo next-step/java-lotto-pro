@@ -18,4 +18,12 @@ public class LottosMap {
     public int size(LottoType type) {
         return this.lottos.get(type).getLottos().size();
     }
+
+    public int matchLottoCount(WinningMoney winningMoney, WinningLotto winningLotto) {
+        int count = 0;
+        for (Lottos lottos : this.lottos.values()) {
+            count += lottos.matchLottoCount(winningMoney, winningLotto);
+        }
+        return count;
+    }
 }
