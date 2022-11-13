@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +23,10 @@ public class Lottos {
         this.lottos.addAll(lottos);
     }
 
-    public int sum(WinningLotto winningLotto) {
-        int sum = INIT_SUM;
+    public BigDecimal sum(WinningLotto winningLotto) {
+        BigDecimal sum = BigDecimal.ZERO;
         for (Lotto lotto : this.lottos) {
-            sum += find(lotto.matchCount(winningLotto), lotto.isMatchBonusBall(winningLotto)).getMoney();
+            sum = sum.add(BigDecimal.valueOf(find(lotto.matchCount(winningLotto), lotto.isMatchBonusBall(winningLotto)).getMoney()));
         }
         return sum;
     }

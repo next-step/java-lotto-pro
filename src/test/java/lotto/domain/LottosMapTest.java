@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.fixture.LottoFixture;
 import lotto.fixture.LottosFixture;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -47,15 +46,16 @@ class LottosMapTest {
         assertThat(lottosMap.matchLottoCount(WinningMoney.SIX_MATCH, new WinningLotto(LottoFixture.lotto(), new Number(8)))).isEqualTo(1);
     }
 
-    @DisplayName("수익율을 구한다.")
-    @Test
-    void returnRate() {
+    @DisplayName("수익률을 구한다.")
+    @ParameterizedTest
+    @ValueSource(doubles = {2000000.0})
+    void returnRate(double expected) {
 
         LottosMap lottosMap = new LottosMap();
         lottosMap.put(LottoType.AUTO, LottosFixture.lottos());
         lottosMap.put(LottoType.MANUAL, LottosFixture.lottos());
 
-        assertThat(lottosMap.returnRate(new WinningLotto(LottoFixture.lotto(), new Number(8)))).isEqualTo(2000000.0);
+        assertThat(lottosMap.returnRate(new WinningLotto(LottoFixture.lotto(), new Number(8)))).isEqualTo(expected);
     }
 
 

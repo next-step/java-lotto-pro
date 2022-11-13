@@ -41,7 +41,7 @@ public class LottosMap {
     private BigDecimal sum(WinningLotto winningLotto) {
         BigDecimal sum = BigDecimal.ZERO;
         for (Lottos lottos : this.lottos.values()) {
-            sum = sum.add(BigDecimal.valueOf(lottos.sum(winningLotto)));
+            sum = sum.add(lottos.sum(winningLotto));
         }
         return sum;
     }
