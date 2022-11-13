@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static lotto.domain.LottoGenerator.generate;
+import static lotto.domain.NumberUtil.convert;
 import static lotto.ui.inputView.BonusBallInputView.readBonusBall;
 import static lotto.ui.inputView.LottoMoneyInputView.readPurchaseMoney;
 import static lotto.ui.inputView.ManualLottoInputView.readManualLotto;
@@ -16,7 +17,6 @@ import static lotto.ui.inputView.ManualLottoInputView.readManualLottoCount;
 import static lotto.ui.inputView.WinningLottoInputView.readWinningLotto;
 import static lotto.ui.outputView.GeneratedLottosOutputView.printLottos;
 import static lotto.ui.outputView.StatisticsOutputView.winningResult;
-import static utils.NumberUtil.convert;
 
 public class LottoController {
 
