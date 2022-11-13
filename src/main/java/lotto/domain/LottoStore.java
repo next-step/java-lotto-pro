@@ -8,14 +8,16 @@ import java.util.stream.Collectors;
 
 public class LottoStore {
     private final LottoNumberGenerateStrategy lottoNumberGenerateStrategy;
+    private static final Money LOTTO_PRICE = new Money(1000);
 
     public LottoStore(final LottoNumberGenerateStrategy lottoNumberGenerateStrategy) {
         this.lottoNumberGenerateStrategy = lottoNumberGenerateStrategy;
     }
 
-    public LottoTickets buy(int purchaseCount) {
+    public LottoTickets buy(Money purchaseAmount) {
         List<LottoTicket> lottoList = new ArrayList<>();
-        for (int i = 0; i < purchaseCount; i++) {
+        while (purchaseAmount.canBuy()) {
+            purchaseAmount = purchaseAmount.pay(LOTTO_PRICE);
             lottoList.add(ticketPrinting(lottoNumberGenerateStrategy));
         }
         return new LottoTickets(lottoList);

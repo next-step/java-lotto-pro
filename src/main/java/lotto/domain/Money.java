@@ -2,13 +2,13 @@ package lotto.domain;
 
 import lotto.common.ErrorMessage;
 
-public class LottoPurchaseAmount {
+public class Money {
     private static final int LOTTO_PRICE = 1000;
     private static final int PURCHASE_AMOUNT_MAX = 200000;
-    private final int quantity;
+    private final int value;
 
-    public LottoPurchaseAmount(int money) {
-        this.quantity = this.validate(money);
+    public Money(int values) {
+        this.value = this.validate(values);
     }
 
     private int validate(int money) {
@@ -18,11 +18,19 @@ public class LottoPurchaseAmount {
         if (isOverPurchaseAmount(money)) {
             throw new IllegalArgumentException(ErrorMessage.ERROR_PURCHASE_AMOUNT_MAX);
         }
-        return money / LOTTO_PRICE;
+        return money;
     }
 
-    public LottoPurchaseAmount pay(int purchaseCount) {
-        return new LottoPurchaseAmount((this.quantity - purchaseCount) * LOTTO_PRICE);
+    public boolean canBuy() {
+        return this.value >= LOTTO_PRICE;
+    }
+
+    public Money pay(Money purchaseAmount) {
+        return new Money(this.value - purchaseAmount.value);
+    }
+
+    public Money payForTickets(int ticketsCount) {
+        return new Money(this.value - ticketsCount * LOTTO_PRICE);
     }
 
     private boolean isPositiveNumber(int number) {
@@ -33,7 +41,7 @@ public class LottoPurchaseAmount {
         return money > PURCHASE_AMOUNT_MAX;
     }
 
-    public int getQuantity() {
-        return this.quantity;
+    public int getValues() {
+        return this.value;
     }
 }
