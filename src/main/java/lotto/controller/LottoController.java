@@ -5,8 +5,10 @@ import calculator.TextExtractor;
 import lotto.domain.Number;
 import lotto.domain.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static lotto.domain.LottoGenerator.generate;
-import static lotto.domain.NumberUtil.convert;
 import static lotto.ui.inputView.BonusBallInputView.readBonusBall;
 import static lotto.ui.inputView.LottoMoneyInputView.readPurchaseMoney;
 import static lotto.ui.inputView.ManualLottoInputView.readManualLotto;
@@ -75,5 +77,13 @@ public class LottoController {
             System.out.println(e.getMessage());
             return createBonusBall();
         }
+    }
+
+    public static List<Integer> convert(String[] text) {
+        List<Integer> numbers = new ArrayList<>();
+        for (String number : text) {
+            numbers.add(Integer.parseInt(number));
+        }
+        return numbers;
     }
 }

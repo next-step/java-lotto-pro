@@ -14,7 +14,7 @@ class LottoGeneratorTest {
     @DisplayName("생성")
     @Test
     void constructor() {
-        assertThatNoException().isThrownBy(() -> new LottoGenerator());
+        assertThatNoException().isThrownBy(LottoGenerator::new);
     }
 
     @DisplayName("구매횟수만큼 로또 번호들 리스트 생성")
