@@ -1,7 +1,8 @@
-package study.step3;
+package study.step4.models;
 
 import org.junit.jupiter.api.Test;
-import study.step3.exception.LottoInputMoneyTypeException;
+import study.step4.exception.LottoInputMoneyInvalidUnitException;
+import study.step4.exception.LottoInputMoneyTypeException;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -15,6 +16,16 @@ public class MoneyTest {
     void 돈_객체_생성_예외() {
         assertThatThrownBy(() -> new Money("123$#!"))
                 .isInstanceOf(LottoInputMoneyTypeException.class);
+    }
+
+    @Test
+    void 구매_단위에_맞지_않은_경우_예외() {
+        assertThatThrownBy(() -> new Money("0"))
+                .isInstanceOf(LottoInputMoneyInvalidUnitException.class);
+        assertThatThrownBy(() -> new Money("300"))
+                .isInstanceOf(LottoInputMoneyInvalidUnitException.class);
+        assertThatThrownBy(() -> new Money("1500"))
+                .isInstanceOf(LottoInputMoneyInvalidUnitException.class);
     }
 
     @Test

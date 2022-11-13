@@ -1,4 +1,4 @@
-package study.step3;
+package study.step4.views;
 
 import java.util.Scanner;
 
@@ -12,6 +12,11 @@ public class InputView {
 
     public static String inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return scanner.nextLine();
+    }
+
+    public static String inputBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
         return scanner.nextLine();
     }
 }
