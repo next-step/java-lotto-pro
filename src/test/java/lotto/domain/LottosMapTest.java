@@ -16,4 +16,12 @@ class LottosMapTest {
         lottosMap.putManualLottos(LottosFixture.lottos());
         assertThat(lottosMap.getManualLottos().getLottos()).hasSize(1);
     }
+
+    @DisplayName("자동 로또 집합을 저장한다.")
+    @Test
+    void putAutoLottos() {
+        LottosMap lottosMap = new LottosMap();
+        lottosMap.putAutoLottos(LottosFixture.lottos());
+        assertThat(lottosMap.getAutoLottos().getLottos()).hasSize(1);
+    }
 }
