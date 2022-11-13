@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static lotto.domain.Lotto.DUPLICATE_EXCEPTION_MESSAGE;
 
 public class WinningLotto {

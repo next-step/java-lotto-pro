@@ -7,7 +7,6 @@ import java.util.List;
 import static lotto.domain.WinningMoney.find;
 
 public class Lottos {
-    public static final int INIT_SUM = 0;
     public static final int DIGIT = 2;
     private final List<Lotto> lottos = new ArrayList<>();
 
@@ -19,9 +18,6 @@ public class Lottos {
         this.lottos.add(lotto);
     }
 
-    public void addAll(List<Lotto> lottos) {
-        this.lottos.addAll(lottos);
-    }
 
     public BigDecimal sum(WinningLotto winningLotto) {
         BigDecimal sum = BigDecimal.ZERO;
