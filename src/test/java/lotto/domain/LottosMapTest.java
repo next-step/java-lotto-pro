@@ -15,35 +15,35 @@ class LottosMapTest {
 
     @DisplayName("로또 집합을 저장한다.")
     @ParameterizedTest
-    @CsvSource({"AUTO", "MANUAL"})
-    void put(LottoType type) {
+    @CsvSource(value = {"AUTO:1", "MANUAL:1"}, delimiter = ':')
+    void put(LottoType type, int expected) {
 
         LottosMap lottosMap = new LottosMap();
         lottosMap.put(type, LottosFixture.lottos());
 
-        assertThat(lottosMap.getLottos(type).getLottos()).hasSize(1);
+        assertThat(lottosMap.getLottos(type).getLottos()).hasSize(expected);
     }
 
     @DisplayName("로또 집합 갯수를 구한다.")
     @ParameterizedTest
-    @CsvSource({"AUTO", "MANUAL"})
-    void size(LottoType type) {
+    @CsvSource(value = {"AUTO:1", "MANUAL:1"}, delimiter = ':')
+    void size(LottoType type, int expected) {
 
         LottosMap lottosMap = new LottosMap();
         lottosMap.put(type, LottosFixture.lottos());
 
-        assertThat(lottosMap.getLottos(type).size()).isEqualTo(1);
+        assertThat(lottosMap.getLottos(type).size()).isEqualTo(expected);
     }
 
     @DisplayName("당첨되는 로또의 갯수를 구한다.")
     @ParameterizedTest
-    @CsvSource({"AUTO", "MANUAL"})
-    void matchCount(LottoType type) {
+    @CsvSource(value = {"AUTO:1", "MANUAL:1"}, delimiter = ':')
+    void matchCount(LottoType type, int expected) {
 
         LottosMap lottosMap = new LottosMap();
         lottosMap.put(type, LottosFixture.lottos());
 
-        assertThat(lottosMap.matchLottoCount(WinningMoney.SIX_MATCH, new WinningLotto(LottoFixture.lotto(), new Number(8)))).isEqualTo(1);
+        assertThat(lottosMap.matchLottoCount(WinningMoney.SIX_MATCH, new WinningLotto(LottoFixture.lotto(), new Number(8)))).isEqualTo(expected);
     }
 
     @DisplayName("수익률을 구한다.")
