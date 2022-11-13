@@ -6,7 +6,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import static lotto.fixture.WinningLottoFixture.threeMatch;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("로또맵")
@@ -53,6 +55,16 @@ class LottosMapTest {
         lottosMap.put(LottoType.AUTO, LottosFixture.lottos());
         lottosMap.put(LottoType.MANUAL, LottosFixture.lottos());
 
-        assertThat(lottosMap.returnRate(new WinningLotto(LottoFixture.lotto(), new Number(8)))).isEqualTo(4000000.0);
+        assertThat(lottosMap.returnRate(new WinningLotto(LottoFixture.lotto(), new Number(8)))).isEqualTo(2000000.0);
+    }
+
+
+    @DisplayName("수익률 계산이 소수점 두자리로 제한")
+    @ParameterizedTest
+    @ValueSource(doubles = {1.67})
+    void point(double expected) {
+        LottosMap lottosMap = new LottosMap();
+        lottosMap.put(LottoType.MANUAL, LottosFixture.point());
+        assertThat(lottosMap.returnRate(threeMatch())).isEqualTo(expected);
     }
 }

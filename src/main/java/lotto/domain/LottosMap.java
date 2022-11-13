@@ -33,14 +33,24 @@ public class LottosMap {
     }
 
     public double returnRate(WinningLotto winningLotto) {
-
-        int sum = 0;
-        for (Lottos lottos : this.lottos.values()) {
-            sum += lottos.sum(winningLotto);
-        }
-
-        return BigDecimal.valueOf(sum)
-                .divide(BigDecimal.valueOf((int) this.lottos.size() * LOTTO_MINIMUM_PRICE), DIGIT, RoundingMode.HALF_UP)
+        return sum(winningLotto)
+                .divide(BigDecimal.valueOf((long) size() * LOTTO_MINIMUM_PRICE), DIGIT, RoundingMode.HALF_UP)
                 .doubleValue();
+    }
+
+    private BigDecimal sum(WinningLotto winningLotto) {
+        BigDecimal sum = BigDecimal.ZERO;
+        for (Lottos lottos : this.lottos.values()) {
+            sum = sum.add(BigDecimal.valueOf(lottos.sum(winningLotto)));
+        }
+        return sum;
+    }
+
+    private int size() {
+        int size = 0;
+        for (Lottos lottos : this.lottos.values()) {
+            size += lottos.size();
+        }
+        return size;
     }
 }

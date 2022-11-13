@@ -35,18 +35,4 @@ class LottosTest {
     void fiveMatch(WinningMoney winningMoney, int expected) {
         assertThat(lottos().matchLottoCount(winningMoney, WinningLottoFixture.fiveMatch())).isEqualTo(expected);
     }
-
-    @DisplayName("수익률 계산")
-    @ParameterizedTest
-    @ValueSource(ints = {1500})
-    void returnRate(double expected) {
-        assertThat(lottos().returnRate(WinningLottoFixture.fiveMatch())).isEqualTo(expected);
-    }
-
-    @DisplayName("수익률 계산이 소수점 두자리로 제한")
-    @ParameterizedTest
-    @ValueSource(doubles = {1.67})
-    void point(double expected) {
-        assertThat(LottosFixture.point().returnRate(threeMatch())).isEqualTo(expected);
-    }
 }
