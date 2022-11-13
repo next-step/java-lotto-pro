@@ -1,11 +1,20 @@
 package lotto.domain;
 
-import java.util.*;
+import lotto.utils.LottoUtils;
 
-public class Lottos{
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Lottos {
     List<Lotto> lottoList;
     public Lottos(List<Lotto> lottoList) {
         this.lottoList = lottoList;
+    }
+
+    public static Lottos buyManualLottos(List<String> readManualLotto) {
+        return new Lottos(readManualLotto.stream()
+                .map(LottoUtils::stringToLottoNumbers).map(Lotto::new)
+                .collect(Collectors.toList()));
     }
 
     public Map<Rank, Integer> calculateWinResult(Lotto winLotto, LottoNumber bonus) {

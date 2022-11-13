@@ -37,6 +37,24 @@ public class MoneyTest {
     @CsvSource(value = {"5000:5", "1001:1", "1999:1"}, delimiter = ':')
     void Money_구매가능_lotto_개수(int amount, int count){
         Money money = new Money(amount);
-        assertThat(money.lottoCount()).isEqualTo(count);
+        assertThat(money.lottoTotalCount()).isEqualTo(count);
+    }
+
+    @Test
+    @DisplayName("수동 Lotto 개수 음수 입력하면 예외가 발생해야 한다.")
+    public void Money_수동_Lotto_Count_음수() {
+        assertThatThrownBy(() -> {
+            Money money = new Money(1000);
+            money.checkManualLottoCount(-100);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("수동 Lotto 개수 price로 구입 가능한 Lotto 개수를 초과하여 입력하면 예외가 발생해야 한다.")
+    public void Money_수동_Lotto_Count_초과_total_Lotto_Count() {
+        assertThatThrownBy(() -> {
+            Money money = new Money(1000);
+            money.checkManualLottoCount(100);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }

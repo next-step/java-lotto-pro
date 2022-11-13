@@ -20,22 +20,11 @@ public class LottoUtils {
         return validateInt(str);
     }
 
-    public static int StringToIntNum(String str) {
-        return validatePositive(validateInt(str));
-    }
-
     private static Integer validateInt(String str) {
         try {
             return Integer.parseInt(str);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(LottoMessage.ERROR_INVALD_NUM);
         }
-    }
-
-    private static Integer validatePositive(int num) {
-        if (num < 0) {
-            throw new IllegalArgumentException(LottoMessage.ERROR_NUM_NEGATIVE);
-        }
-        return num;
     }
 }
