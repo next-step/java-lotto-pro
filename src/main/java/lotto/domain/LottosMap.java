@@ -14,4 +14,8 @@ public class LottosMap {
     public Lottos getLottos(LottoType type) {
         return this.lottos.get(type);
     }
+
+    public int size(LottoType type) {
+        return this.lottos.get(type).getLottos().size();
+    }
 }
