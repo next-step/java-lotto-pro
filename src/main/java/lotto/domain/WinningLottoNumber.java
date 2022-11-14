@@ -18,7 +18,7 @@ public class WinningLottoNumber {
         }
     }
 
-    public Rank check(LottoTicket lottoTicket) {
-        return Rank.valueOf(lottoTicket.compareTicket(this.winningLottoTicket), lottoTicket.includedBonusNumber(this.bonusNumber));
+    public Rank check(LottoTicket purchasedTicket) {
+        return Rank.valueOf(purchasedTicket.compareTicket(this.winningLottoTicket), purchasedTicket.includedBonusNumber(this.bonusNumber));
     }
 }
