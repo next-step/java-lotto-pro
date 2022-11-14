@@ -1,10 +1,10 @@
-package step4.service;
+package step5.service;
 
-import step4.constant.StringConstant;
-import step4.model.Lotto;
-import step4.model.LottoNumber;
-import step4.model.LottoWinningNumbers;
-import step4.model.Lottos;
+import step5.constant.StringConstant;
+import step5.model.Lotto;
+import step5.model.LottoNo;
+import step5.model.LottoWinningNos;
+import step5.model.Lottos;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,8 +27,15 @@ public class LottoGenerator {
         }
     }
 
-    public Lottos generateByTimes(int needLottoCount) {
-        Lottos lottos = new Lottos();
+    /**
+     * 자동, 수동 구매한 로또 생성
+     *
+     * @param needLottoCount 자동 로또 구매 수
+     * @param manualLottos   수동 로또
+     * @return 로또 리스트 출력
+     */
+    public Lottos generateByTimesAndManualLotto(int needLottoCount, List<Lotto> manualLottos) {
+        Lottos lottos = new Lottos(manualLottos);
         for (int index = 0; index < needLottoCount; index++) {
             lottos.add(generate());
         }
@@ -39,19 +46,19 @@ public class LottoGenerator {
     private Lotto generate() {
         Collections.shuffle(numbers);
         return new Lotto(numbers.subList(LOTTO_START_INDEX, LOTTO_END_INDEX).stream()
-                .map(LottoNumber::new)
+                .map(LottoNo::new)
                 .collect(Collectors.toList()));
     }
 
-    public List<LottoNumber> generateLottoNumbers(String lottoNumberText) {
+    public List<LottoNo> generateLottoNos(String lottoNumberText) {
         return Stream.of(lottoNumberText.split(StringConstant.COMMA))
                 .map(this::convertInteger)
-                .map(LottoNumber::new)
+                .map(LottoNo::new)
                 .collect(Collectors.toList());
     }
 
-    public LottoWinningNumbers generateLottoWinningNumber(List<LottoNumber> lottoNumbers, int bonus) {
-        return new LottoWinningNumbers(new Lotto(lottoNumbers), new LottoNumber(bonus));
+    public LottoWinningNos generateLottoWinningNos(Lotto lotto, int bonus) {
+        return new LottoWinningNos(lotto, new LottoNo(bonus));
     }
 
     private Integer convertInteger(String number) {

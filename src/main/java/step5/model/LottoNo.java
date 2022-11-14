@@ -1,12 +1,12 @@
-package step4.model;
+package step5.model;
 
-import step4.service.LottoGenerator;
+import step5.service.LottoGenerator;
 
-public class LottoNumber implements Comparable<LottoNumber> {
+public class LottoNo implements Comparable<LottoNo> {
 
     private final int number;
 
-    public LottoNumber(int number) {
+    public LottoNo(int number) {
         isNotBetween(number);
         this.number = number;
     }
@@ -24,8 +24,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof LottoNumber) {
-            return ((LottoNumber) obj).number == number;
+        if (obj instanceof LottoNo) {
+            return ((LottoNo) obj).number == number;
         }
         return super.equals(obj);
     }
@@ -36,7 +36,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     @Override
-    public int compareTo(LottoNumber o) {
+    public int compareTo(LottoNo o) {
         return this.number - o.number;
     }
 }

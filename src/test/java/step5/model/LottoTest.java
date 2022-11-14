@@ -1,4 +1,4 @@
-package step4.model;
+package step5.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import step4.constant.StringConstant;
+import step5.constant.StringConstant;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,16 +19,16 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class LottoTest {
 
     private Lotto lotto;
-    private LottoWinningNumbers lottoWinningNumber;
+    private LottoWinningNos lottoWinningNumber;
 
     @BeforeEach
-    private void setUp() {
+    void setUp() {
         this.lotto = new Lotto(Stream.of(1, 10, 20, 32, 42, 45)
-                .map(LottoNumber::new)
+                .map(LottoNo::new)
                 .collect(Collectors.toList()));
-        this.lottoWinningNumber = new LottoWinningNumbers(new Lotto(Stream.of(1, 11, 20, 24, 40, 42)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())), new LottoNumber(10));
+        this.lottoWinningNumber = new LottoWinningNos(new Lotto(Stream.of(1, 11, 20, 24, 40, 42)
+                .map(LottoNo::new)
+                .collect(Collectors.toList())), new LottoNo(10));
     }
 
     @Test
@@ -70,14 +70,14 @@ class LottoTest {
     @ValueSource(ints = {1, 10, 20})
     @DisplayName("주어진 번호가 로또 번호에 포함된 경우 true 를 리턴")
     void givenNumber_whenContains_thenTrue(int number) {
-        assertThat(lotto.contains(new LottoNumber(number))).isTrue();
+        assertThat(lotto.contains(new LottoNo(number))).isTrue();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {2, 11, 15})
     @DisplayName("주어진 번호가 로또 번호에 포함되지 않은 경우 false 를 리턴")
     void givenNumber_whenContains_thenFalse(int number) {
-        assertThat(lotto.contains(new LottoNumber(number))).isFalse();
+        assertThat(lotto.contains(new LottoNo(number))).isFalse();
     }
 
     @Test
@@ -90,14 +90,14 @@ class LottoTest {
     @CsvSource(value = {"1,10,20,32,42,45:6", "1,10,20,30,31,40:3", "2,3,4,5,6,7:0"}, delimiter = ':')
     @DisplayName("구매한 로또에서 당첨번호가 n 개 있으면 n 개를 리턴")
     void givenWinningLotto_whenGetMatchedCount_thenMatchedCount(String text, int expectedMatchedCount) {
-        LottoWinningNumbers lottoWinningNumber = new LottoWinningNumbers(new Lotto(generateNumbersByText(text)));
+        LottoWinningNos lottoWinningNumber = new LottoWinningNos(new Lotto(generateNumbersByText(text)));
         assertThat(lottoWinningNumber.getMatchedCount(lotto)).isEqualTo(expectedMatchedCount);
     }
 
-    private List<LottoNumber> generateNumbersByText(String text) {
+    private List<LottoNo> generateNumbersByText(String text) {
         return Arrays.stream(text.split(StringConstant.COMMA))
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNo::new)
                 .collect(Collectors.toList());
     }
 }

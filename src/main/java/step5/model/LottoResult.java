@@ -1,6 +1,6 @@
-package step4.model;
+package step5.model;
 
-import step4.service.LottoScoreType;
+import step5.service.LottoScoreType;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -20,7 +20,7 @@ public class LottoResult {
         }
     }
 
-    public static LottoResult getLottoResultFromLotto(Lottos lottos, LottoWinningNumbers winningLotto) {
+    public static LottoResult getLottoResultFromLotto(Lottos lottos, LottoWinningNos winningLotto) {
         return new LottoResult(lottos.confirmLottoWinningNumber(winningLotto));
     }
 

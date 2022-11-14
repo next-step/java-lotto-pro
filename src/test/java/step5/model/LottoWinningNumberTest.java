@@ -1,11 +1,11 @@
-package step4.model;
+package step5.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step4.constant.StringConstant;
+import step5.constant.StringConstant;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,15 +18,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class LottoWinningNumberTest {
 
     private Lotto lotto;
-    private LottoWinningNumbers lottoWinningNumber;
+    private LottoWinningNos lottoWinningNumber;
 
     @BeforeEach
-    private void setUp() {
-        this.lottoWinningNumber = new LottoWinningNumbers(new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())), new LottoNumber(7));
+    void setUp() {
+        this.lottoWinningNumber = new LottoWinningNos(new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNo::new)
+                .collect(Collectors.toList())), new LottoNo(7));
         this.lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 7)
-                .map(LottoNumber::new)
+                .map(LottoNo::new)
                 .collect(Collectors.toList()));
     }
 
@@ -39,9 +39,9 @@ class LottoWinningNumberTest {
     @Test
     @DisplayName("당첨 번호와 보너스 번호가 같을 경우 에러를 던진다.")
     void whenWinningNumberEqualsBonusNumber_thenThrow() {
-        assertThrows(RuntimeException.class, () -> new LottoWinningNumbers(new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())), new LottoNumber(6)));
+        assertThrows(RuntimeException.class, () -> new LottoWinningNos(new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNo::new)
+                .collect(Collectors.toList())), new LottoNo(6)));
     }
 
     @ParameterizedTest
@@ -52,10 +52,10 @@ class LottoWinningNumberTest {
         assertThat(lottoWinningNumber.getMatchedCount(otherLotto)).isEqualTo(expectedMatchedCount);
     }
 
-    private List<LottoNumber> generateNumbersByText(String text) {
+    private List<LottoNo> generateNumbersByText(String text) {
         return Arrays.stream(text.split(StringConstant.COMMA))
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNo::new)
                 .collect(Collectors.toList());
     }
 }
