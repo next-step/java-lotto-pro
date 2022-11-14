@@ -18,12 +18,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private LottoNumber(int lottoNumber) {
-        setLottoNumber(lottoNumber);
+        validateNumber(lottoNumber);
+        this.lottoNumber = lottoNumber;
     }
 
     public static LottoNumber getLottoNumberByInt(int lottoNumber) {
         if (lottoNumbers.get(lottoNumber) == null) {
-            return new LottoNumber(lottoNumber);
+            validateNumber(lottoNumber);
         }
         return lottoNumbers.get(lottoNumber);
     }
@@ -33,8 +34,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return getLottoNumberByInt(number);
     }
 
-    protected static boolean validateNumber(int checkValue) {
-        return checkValue >= LottoConstants.LOTTO_NUMBER_MIN && checkValue <= LottoConstants.LOTTO_NUMBER_MAX;
+    protected static void validateNumber(int checkValue) {
+        if (checkValue < LottoConstants.LOTTO_NUMBER_MIN || checkValue > LottoConstants.LOTTO_NUMBER_MAX) {
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_CONSTRAINT);
+        }
     }
 
     protected static int parseInt(String number) {
@@ -47,13 +50,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public int getLottoNumber() {
         return lottoNumber;
-    }
-
-    private void setLottoNumber(int lottoNumber) {
-        if (!validateNumber(lottoNumber)) {
-            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_CONSTRAINT);
-        }
-        this.lottoNumber = lottoNumber;
     }
 
     @Override
