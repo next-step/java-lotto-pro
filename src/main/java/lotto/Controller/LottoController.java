@@ -11,15 +11,20 @@ public class LottoController {
 
     public static void start() {
         Money money = new Money(LottoUtils.StringToInt(LottoInputView.readMoney()));
-        Lottos lottos = Lottos.buyLottos(money.lottoCount());
-        LottoOutPutView.writeBuyLottos(lottos);
+        int manualLottoCount = LottoUtils.StringToInt(LottoInputView.readManualLottoCount());
+        money.checkManualLottoCount(manualLottoCount);
+        Lottos manualLottos = Lottos.buyManualLottos(LottoInputView.readManualLotto(manualLottoCount));
+        Lottos autoLottos = Lottos.buyAutoLottos(money.lottoTotalCount()-manualLottoCount);
+        Lottos totalLottos = Lottos.mergeLottos(manualLottos, autoLottos);
+        LottoOutPutView.writeBuyLottos(manualLottos, autoLottos);
         Lotto winLotto = readWinLotto(LottoInputView.readLottoWinNumber());
         int bonusNumber = LottoUtils.StringToInt(LottoInputView.readBonusNumber());
         LottoNumber bonus = new LottoNumber(bonusNumber);
         winLotto.duplicateWinBonus(bonus);
-        LottoResult result = new LottoResult(lottos, winLotto, money.totalLottoPrice(), bonus);
+        LottoResult result = new LottoResult(totalLottos, winLotto, money.totalLottoPrice(), bonus);
         LottoOutPutView.writeWinResult(result);
     }
+
 
     private static Lotto readWinLotto(String lottoWinNumber) {
         List<Integer> winLottoNumbers = LottoUtils.stringToLottoNumbers(lottoWinNumber);

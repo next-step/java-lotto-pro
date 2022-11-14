@@ -1,11 +1,20 @@
 package lotto.domain;
 
-import java.util.*;
+import lotto.utils.LottoUtils;
 
-public class Lottos{
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Lottos {
     List<Lotto> lottoList;
     public Lottos(List<Lotto> lottoList) {
         this.lottoList = lottoList;
+    }
+
+    public static Lottos buyManualLottos(List<String> readManualLotto) {
+        return new Lottos(readManualLotto.stream()
+                .map(LottoUtils::stringToLottoNumbers).map(Lotto::new)
+                .collect(Collectors.toList()));
     }
 
     public Map<Rank, Integer> calculateWinResult(Lotto winLotto, LottoNumber bonus) {
@@ -21,12 +30,19 @@ public class Lottos{
         return lottoList.size();
     }
 
-    public static Lottos buyLottos(int lottoCount) {
+    public static Lottos buyAutoLottos(int lottoCount) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             lottoList.add(Lotto.createLotto());
         }
         return new Lottos(lottoList);
+    }
+
+    public static Lottos mergeLottos(Lottos manualLottos, Lottos autoLottos) {
+        List<Lotto> totalLottos = new ArrayList<>();
+        totalLottos.addAll(manualLottos.getLottosAsUnmodifiableList());
+        totalLottos.addAll(autoLottos.getLottosAsUnmodifiableList());
+        return new Lottos(totalLottos);
     }
 
     public List<Lotto> getLottosAsUnmodifiableList() {

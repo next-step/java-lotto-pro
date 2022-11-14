@@ -27,7 +27,7 @@ public class Money {
         }
     }
 
-    public int lottoCount() {
+    public int lottoTotalCount() {
         return price / LOTTO_PRICE;
     }
 
@@ -36,6 +36,23 @@ public class Money {
     }
 
     public int totalLottoPrice() {
-        return lottoCount() * LOTTO_PRICE;
+        return lottoTotalCount() * LOTTO_PRICE;
+    }
+
+    public void checkManualLottoCount(int manualLottoCount) {
+        validatePositiveCount(manualLottoCount);
+        validateMaxLottoCount(manualLottoCount);
+    }
+
+    private void validatePositiveCount(int manualLottoCount) {
+        if (manualLottoCount < 0) {
+            throw new IllegalArgumentException(LottoMessage.ERROR_NUM_NEGATIVE);
+        }
+    }
+
+    private void validateMaxLottoCount(int manualLottoCount) {
+        if (manualLottoCount > lottoTotalCount()) {
+            throw new IllegalArgumentException(LottoMessage.ERROR_MESSAGE_MANUAL_LOTTO_COUNT);
+        }
     }
 }

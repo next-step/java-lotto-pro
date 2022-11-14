@@ -39,7 +39,7 @@ public enum Rank {
 
     private boolean isMatch(int countOfMatch, boolean checkBonus) {
         if (countOfMatch != RANK_BONUS_COUNT)
-            checkBonus = false;
+            return this.countOfMatch == countOfMatch;
         return this.countOfMatch == countOfMatch && this.checkBonus == checkBonus;
     }
 

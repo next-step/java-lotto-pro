@@ -7,9 +7,12 @@ import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
 public class LottoOutPutView {
-    public static void writeBuyLottos(Lottos lottos) {
-        System.out.printf(LottoMessage.OUTPUT_LOTTO_COUNT, lottos.size());
-        for (Lotto lotto : lottos.getLottosAsUnmodifiableList()) {
+    public static void writeBuyLottos(Lottos manualLottos, Lottos autoLottos) {
+        System.out.printf(LottoMessage.OUTPUT_LOTTO_COUNT, manualLottos.size(), autoLottos.size());
+        for (Lotto lotto : manualLottos.getLottosAsUnmodifiableList()) {
+            System.out.println(lotto.lottoNumbers());
+        }
+        for (Lotto lotto : autoLottos.getLottosAsUnmodifiableList()) {
             System.out.println(lotto.lottoNumbers());
         }
     }

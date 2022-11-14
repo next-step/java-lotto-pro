@@ -32,4 +32,5 @@ public class LottoUtilsTest {
             LottoUtils.StringToInt(str);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
 }
