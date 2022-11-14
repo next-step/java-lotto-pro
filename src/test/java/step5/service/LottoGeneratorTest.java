@@ -16,6 +16,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoGeneratorTest {
 
@@ -27,7 +28,7 @@ class LottoGeneratorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {1,3,4,6,8})
+    @ValueSource(ints = { 1, 3, 4, 6, 8 })
     @DisplayName("generateByTimes 사용할때 지정된 갯수만큼 가지고있는 lottos 리턴")
     void generateByTimes(int count) {
         Lottos lottos = this.lottoGenerator.generateByTimesAndManualLotto(count, List.of());
@@ -38,25 +39,25 @@ class LottoGeneratorTest {
     @Test
     @DisplayName("입력 받은 텍스트를 로또 번호 리스트로 리턴")
     void generateLottoNos() {
-        //given
+        // given
         String lottoText = "1,2,3,4,5,7";
-        List<LottoNo> primitiveLottoNos = List.of(1,2,3,4,5,7).stream()
+        List<LottoNo> primitiveLottoNos = List.of(1, 2, 3, 4, 5, 7).stream()
                 .map(LottoNo::new)
                 .collect(Collectors.toList());
 
-        //when
+        // when
         List<LottoNo> lottoNos = lottoGenerator.generateLottoNos(lottoText);
 
-        //then
+        // then
         assertThat(lottoNos).hasSize(primitiveLottoNos.size());
         assertThat(lottoNos).containsAll(primitiveLottoNos);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,d,5,6", "1,2,3,4,-5d,6"})
+    @ValueSource(strings = { "1,2,3,d,5,6", "1,2,3,4,-5d,6" })
     @DisplayName("입력 받은 텍스트가 번호로만 이루어지지 않았을 때 에러")
     void givenLottoText_whenGenerateLottoNos_thenThrow(String lottoText) {
-        //when then
+        // when then
         assertThatThrownBy(() -> lottoGenerator.generateLottoNos(lottoText))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("숫자를 기입");
@@ -65,8 +66,8 @@ class LottoGeneratorTest {
     @Test
     @DisplayName("입력 받은 텍스트를 당첨 로또로 리턴")
     void generateLottoWinningNos() {
-        //given
-        final List<LottoNo> lottoNos = Stream.of(1,2,3,4,5,6)
+        // given
+        final List<LottoNo> lottoNos = Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNo::new)
                 .collect(Collectors.toList());
         final List<LottoNo> includeBonusNoLottoNos = Stream.of(1, 2, 3, 4, 5, 24)
@@ -76,12 +77,12 @@ class LottoGeneratorTest {
         final int bonusNo = 24;
         final Lotto includeBonusNoLotto = new Lotto(includeBonusNoLottoNos);
 
-        //when
+        // when
         LottoWinningNos lottoWinningNos = lottoGenerator.generateLottoWinningNos(lotto, bonusNo);
 
-        //then
-        assertThat(lottoWinningNos).isNotNull();
-        assertThat(lottoWinningNos.getMatchedCount(lotto)).isEqualTo(lottoNos.size());
-        assertThat(lottoWinningNos.isMatchedBonus(includeBonusNoLotto)).isTrue();
+        // then
+        assertAll(() -> assertThat(lottoWinningNos).isNotNull(),
+                () -> assertThat(lottoWinningNos.getMatchedCount(lotto)).isEqualTo(lottoNos.size()),
+                () -> assertThat(lottoWinningNos.isMatchedBonus(includeBonusNoLotto)).isTrue());
     }
 }
