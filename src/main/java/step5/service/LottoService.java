@@ -59,4 +59,32 @@ public class LottoService {
             throw new RuntimeException("수동 구매가 가능한 로또 개수는 최대 " + (money / DEFAULT_TICKET_PRICE) + "개 까지 구매가 가능합니다.");
         }
     }
+
+    /**
+     * 정수로 변환 후 유효성 검사
+     * 
+     * @param line 입력 값
+     * @return 변환된 정수 값
+     */
+    public int parseInteger(String line) {
+        try {
+            return validInteger(line);
+        } catch (Exception e) {
+            throw new RuntimeException("정수 숫자만 입력해주세요.");
+        }
+    }
+
+    /**
+     * 입력된 값이 실수인 경우 예외 처리
+     * 
+     * @param line 입력 값
+     * @return 변환된 정수 값
+     */
+    private int validInteger(String line) {
+        int value = Integer.parseInt(line);
+        if (!String.valueOf(value).equals(line)) {
+            throw new RuntimeException("정수 숫자만 입력해주세요.");
+        }
+        return value;
+    }
 }

@@ -8,6 +8,7 @@ import step5.view.InputView;
 import step5.view.ResultView;
 
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class LottoController {
@@ -22,40 +23,56 @@ public class LottoController {
      * 7. 당첨 통계 출력
      */
     public void gameStart() {
+        final InputView inputView = new InputView();
+        final LottoService lottoService = new LottoService();
+
+        // 구입 금액 입력
+        int money = repeatIfThrows(() -> {
+            int inputMoney = lottoService.parseInteger(inputView.readyBuyingLotto());
+            lottoService.validBuyLottosByMoney(inputMoney);
+            return inputMoney;
+        });
+
+        // 수동 구매 로또 수 입력
+        int countManualLottos = repeatIfThrows(() -> {
+            int inputCountManualLottos = lottoService.parseInteger(inputView.readyBuyingManualLotto());
+            lottoService.validManualLottosCount(money, inputCountManualLottos);
+            return inputCountManualLottos;
+        });
+
+        // 수동 구매 로또 번호 입력
+        List<Lotto> manualLottos = repeatIfThrows(() -> inputView.readyManualLottos(countManualLottos)
+                .stream()
+                .map(lottoService::getLottoByLottoNumbers)
+                .collect(Collectors.toList()));
+
+        // 수동, 자동 구매 개수 확인 출력
+        Lottos lottos = repeatIfThrows(() -> lottoService.buyLottosByMoney(money, manualLottos));
+        inputView.printBoughtLottoCountAndManualLottoCount(lottos.count(), countManualLottos);
+        inputView.printLottos(lottos);
+
+        // 당첨 번호 입력
+        Lotto winningLotto = repeatIfThrows(
+                () -> lottoService.getLottoByLottoNumbers(inputView.readyWinningLotto()));
+
+        // 보너스 번호 입력
+        LottoResult lottoResults = repeatIfThrows(() -> {
+            int inputBonus = lottoService.parseInteger(inputView.readyBonus());
+            LottoResult inputLottoResults = lottoService.getResultComparedToWinningNumbers(winningLotto, inputBonus,
+                    lottos);
+            return inputLottoResults;
+        });
+
+        printResult(money, lottoResults);
+
+    }
+
+    private <R> R repeatIfThrows(Supplier<R> function) {
         try {
-
-            InputView inputView = new InputView();
-            LottoService lottoService = new LottoService();
-
-            //구입 금액 입력
-            int money = inputView.readyBuyingLotto();
-            lottoService.validBuyLottosByMoney(money);
-
-            //수동 구매 로또 수 입력
-            int countManualLottos = inputView.readyBuyingManualLotto();
-            lottoService.validManualLottosCount(money, countManualLottos);
-
-            //수동 구매 로또 번호 입력
-            List<Lotto> manualLottos = inputView.readyManualLottos(countManualLottos)
-                    .stream()
-                    .map(lottoService::getLottoByLottoNumbers)
-                    .collect(Collectors.toList());
-
-            //수동, 자동 구매 개수 확인 출력
-            Lottos lottos = lottoService.buyLottosByMoney(money, manualLottos);
-            inputView.printBoughtLottoCountAndManualLottoCount(lottos.count(), countManualLottos);
-            inputView.printLottos(lottos);
-
-            //당첨 번호 입력
-            Lotto winningLotto = lottoService.getLottoByLottoNumbers(inputView.readyWinningLotto());
-
-            //보너스 번호 입력
-            int bonus = inputView.readyBonus();
-            LottoResult lottoResults = lottoService.getResultComparedToWinningNumbers(winningLotto, bonus, lottos);
-
-            printResult(money, lottoResults);
+            return function.get();
         } catch (Exception e) {
             System.err.println(e.getMessage());
+            return repeatIfThrows(function);
         }
     }
 
