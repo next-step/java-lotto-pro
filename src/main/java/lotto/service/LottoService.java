@@ -1,6 +1,5 @@
 package lotto.service;
 
-import lotto.model.domain.Lotto;
 import lotto.model.domain.Lottos;
 import lotto.model.domain.Profit;
 import lotto.model.domain.PurchaseInfo;
@@ -32,13 +31,6 @@ public interface LottoService {
      * @param purchaseInfo 구입정보
      */
     void generateAutoLotto(Lottos lottos, PurchaseInfo purchaseInfo);
-
-    /**
-     * 로또 한 장 생성
-     *
-     * @return 생성한 로또(1장)
-     */
-    Lotto generateOneLotto();
 
     /**
      * 생성한 로또 추가

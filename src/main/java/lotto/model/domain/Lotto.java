@@ -13,7 +13,6 @@ public class Lotto {
     private static final int LOTTO_NUMBER_DO_NOT_EXIST = 0;
     private List<LottoNumber> lotto;
 
-    public Lotto() {
     public Lotto(List<Integer> numbers) {
         lotto = new ArrayList<>();
         for (int number : numbers) {
@@ -28,6 +27,17 @@ public class Lotto {
             lotto.add(LottoNumber.getLottoNumberByString(lottoNumber));
         }
         checkLottoNumberCount();
+    }
+
+    public static Lotto generateOneAutoLotto() {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        Collections.shuffle(LottoConstants.LOTTO_NUMBER_POOL);
+        for (int i = 0; i < LottoConstants.LOTTO_NUMBER_COUNT; i++) {
+            lottoNumbers.add(LottoConstants.LOTTO_NUMBER_POOL.get(i));
+        }
+        Lotto lotto = new Lotto(lottoNumbers);
+        lotto.sortNumbers();
+        return lotto;
     }
 
     public void addLottoNumber(LottoNumber lottoNumber) {

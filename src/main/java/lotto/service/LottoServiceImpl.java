@@ -1,10 +1,7 @@
 package lotto.service;
 
-import java.util.Collections;
 import lotto.model.constants.ErrorMessage;
-import lotto.model.constants.LottoConstants;
 import lotto.model.domain.Lotto;
-import lotto.model.domain.LottoNumber;
 import lotto.model.domain.Lottos;
 import lotto.model.domain.MatchCounts;
 import lotto.model.domain.Profit;
@@ -54,22 +51,6 @@ public class LottoServiceImpl implements LottoService {
     }
 
     /**
-     * 로또 한 장 생성
-     *
-     * @return 생성한 로또(1장)
-     */
-    @Override
-    public Lotto generateOneLotto() {
-        Lotto lotto = new Lotto();
-        Collections.shuffle(LottoConstants.LOTTO_NUMBER_POOL);
-        for (int i = 0; i < LottoConstants.LOTTO_NUMBER_COUNT; i++) {
-            lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(LottoConstants.LOTTO_NUMBER_POOL.get(i)));
-        }
-        lotto.sortNumbers();
-        return lotto;
-    }
-
-    /**
      * 생성한 로또 추가
      * <p>
      * 중복여부 검사하여 이미 추가된 경우 다시 생성하여 추가
@@ -80,7 +61,7 @@ public class LottoServiceImpl implements LottoService {
     public void addOneLotto(Lottos lottos) {
         Lotto lotto;
         do {
-            lotto = generateOneLotto();
+            lotto = Lotto.generateOneAutoLotto();
         } while (!lottos.addLotto(lotto));
     }
 
