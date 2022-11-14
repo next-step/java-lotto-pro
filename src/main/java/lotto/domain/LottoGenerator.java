@@ -11,8 +11,17 @@ import static lotto.domain.Number.MINIMUM_NUMBER;
 public class LottoGenerator {
     public static final String PURCHASE_MINIMUM_COUNT_EXCEPTION_MESSAGE = "1개 이상부터 구매가능합니다.";
     public static final int ZERO = 0;
+    private static final List<Integer> RANGES;
 
-    public static Lottos generate(int generateCount) {
+    static {
+        List<Integer> ranges = new ArrayList<>();
+        for (int i = MINIMUM_NUMBER; i <= MAXIMUM_NUMBER; i++) {
+            ranges.add(i);
+        }
+        RANGES = ranges;
+    }
+
+    public static Lottos generate(int generateCount) throws IllegalArgumentException {
         validateGenerateCount(generateCount);
         return createLottos(generateCount);
     }
@@ -32,16 +41,7 @@ public class LottoGenerator {
     }
 
     private static Lotto createLotto() {
-        List<Integer> ranges = ranges();
-        Collections.shuffle(ranges);
-        return new Lotto(ranges.subList(ZERO, LOTTO_SIZE));
-    }
-
-    private static List<Integer> ranges() {
-        final List<Integer> ranges = new ArrayList<>();
-        for (int i = MINIMUM_NUMBER; i <= MAXIMUM_NUMBER; i++) {
-            ranges.add(i);
-        }
-        return ranges;
+        Collections.shuffle(RANGES);
+        return new Lotto(RANGES.subList(ZERO, LOTTO_SIZE));
     }
 }

@@ -15,6 +15,7 @@ public enum WinningMoney {
     FIVE_MATCH_AND_BONUS_BALL_MATCH("5개 일치, 보너스 볼 일치", 30_000_000, 5, singletonList(true)),
     SIX_MATCH("6개 일치", 2_000_000_000L, 6, asList(true, false));
 
+    public static final int IS_ABLE_TO_SHOW_CONDITION = 3;
     private final int count;
     private final long money;
     private final String message;
@@ -42,7 +43,7 @@ public enum WinningMoney {
                 .orElse(NONE);
     }
 
-    public boolean isShow() {
-        return this.count >= 3;
+    public boolean isAbleToShow() {
+        return this.count >= IS_ABLE_TO_SHOW_CONDITION;
     }
 }

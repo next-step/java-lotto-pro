@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static lotto.domain.Lotto.DUPLICATE_EXCEPTION_MESSAGE;
 
 public class WinningLotto {
@@ -10,18 +7,10 @@ public class WinningLotto {
     private final Lotto winningLotto;
     private final Number bonusBall;
 
-    public WinningLotto(String[] winningLottos, Number bonusBall) {
-        this.winningLotto = new Lotto(numbers(winningLottos));
+    public WinningLotto(Lotto lotto, Number bonusBall) {
+        this.winningLotto = lotto;
         validateDuplicateBonusBall(bonusBall);
         this.bonusBall = bonusBall;
-    }
-
-    private List<Integer> numbers(String[] winningLottos) {
-        List<Integer> numbers = new ArrayList<>();
-        for (String number : winningLottos) {
-            numbers.add(Integer.parseInt(number));
-        }
-        return numbers;
     }
 
     private void validateDuplicateBonusBall(Number bonusBall) {
