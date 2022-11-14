@@ -14,6 +14,11 @@ public class Lotto {
     private List<LottoNumber> lotto;
 
     public Lotto() {
+    public Lotto(List<Integer> numbers) {
+        lotto = new ArrayList<>();
+        for (int number : numbers) {
+            lotto.add(LottoNumber.getLottoNumberByInt(number));
+        }
     }
 
     public Lotto(String lottoNumbersInput) {
@@ -39,7 +44,7 @@ public class Lotto {
         }
     }
 
-    protected void validateLottoNumberCount() {
+    protected void checkLottoNumberAddable() {
         if (this.lotto.size() >= LottoConstants.LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_COUNT_MAX);
         }
@@ -47,7 +52,7 @@ public class Lotto {
 
     private void validateLotto(LottoNumber lottoNumber) {
         checkLottoNumberExist(lottoNumber);
-        validateLottoNumberCount();
+        checkLottoNumberAddable();
     }
 
     protected void checkLottoNumberCount() {
