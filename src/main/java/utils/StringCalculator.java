@@ -33,7 +33,7 @@ public class StringCalculator {
 
     private static String[] splitInputText(String inputText) {
         List<String> delimiters = new ArrayList<>(Arrays.asList(BASIC_DELIMITER));
-        customDelimiterHandle(inputText, delimiters);
+        inputText = customDelimiterHandle(inputText, delimiters);
         String splitRegExp = getSplitRegExp(delimiters);
         return inputText.split(splitRegExp);
     }
@@ -46,12 +46,13 @@ public class StringCalculator {
         return result.toString();
     }
 
-    private static void customDelimiterHandle(String inputText, List<String> delimiters) {
+    private static String customDelimiterHandle(String inputText, List<String> delimiters) {
         Matcher m = CUSTOM_DELIMITER_PATTERN.matcher(inputText);
         if (m.find()) {
             inputText = removeCustomDelimiterPattern(m);
             addDelimiter(inputText, delimiters, m.group(DELIMITER_INDEX));
         }
+        return inputText;
     }
 
     private static String removeCustomDelimiterPattern(Matcher m) {

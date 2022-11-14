@@ -1,6 +1,5 @@
 package lotto.service;
 
-import lotto.model.domain.Lotto;
 import lotto.model.domain.Lottos;
 import lotto.model.domain.Profit;
 import lotto.model.domain.PurchaseInfo;
@@ -10,19 +9,28 @@ import lotto.model.domain.WinResult;
 public interface LottoService {
 
     /**
-     * 구입한 개수만큼 로또 발급
+     * 수동 로또 발급
      *
-     * @param purchaseCount 구입 개수
-     * @return 발급한 로또(전체)
+     * @param lottos             발급된 로또
+     * @param manualLottoNumbers 입력된 수동 로또 번호 목록
      */
-    Lottos generateAutoLotto(PurchaseInfo purchaseCount);
+    void generateManualLotto(Lottos lottos, String[] manualLottoNumbers);
 
     /**
-     * 로또 한 장 생성
+     * 수동 로또 추가
      *
-     * @return 생성한 로또(1장)
+     * @param lottos      발급된 로또
+     * @param manualLotto 수동 로또 입력값
      */
-    Lotto generateOneLotto();
+    void addManualLotto(Lottos lottos, String manualLotto);
+
+    /**
+     * 자동 로또 발급
+     *
+     * @param lottos       발급된 로또
+     * @param purchaseInfo 구입정보
+     */
+    void generateAutoLotto(Lottos lottos, PurchaseInfo purchaseInfo);
 
     /**
      * 생성한 로또 추가

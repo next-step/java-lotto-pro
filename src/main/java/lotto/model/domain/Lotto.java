@@ -13,6 +13,33 @@ public class Lotto {
     private static final int LOTTO_NUMBER_DO_NOT_EXIST = 0;
     private List<LottoNumber> lotto;
 
+    public Lotto(List<Integer> numbers) {
+        lotto = new ArrayList<>();
+        for (int number : numbers) {
+            lotto.add(LottoNumber.getLottoNumberByInt(number));
+        }
+    }
+
+    public Lotto(String lottoNumbersInput) {
+        String[] lottoNumbers = lottoNumbersInput.split(LottoConstants.WIN_LOTTO_DELIMITER);
+        lotto = new ArrayList<>();
+        for (String lottoNumber : lottoNumbers) {
+            lotto.add(LottoNumber.getLottoNumberByString(lottoNumber));
+        }
+        checkLottoNumberCount();
+    }
+
+    public static Lotto generateOneAutoLotto() {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        Collections.shuffle(LottoConstants.LOTTO_NUMBER_POOL);
+        for (int i = 0; i < LottoConstants.LOTTO_NUMBER_COUNT; i++) {
+            lottoNumbers.add(LottoConstants.LOTTO_NUMBER_POOL.get(i));
+        }
+        Lotto lotto = new Lotto(lottoNumbers);
+        lotto.sortNumbers();
+        return lotto;
+    }
+
     public void addLottoNumber(LottoNumber lottoNumber) {
         if (this.lotto == null) {
             this.lotto = new ArrayList<>();
@@ -27,7 +54,7 @@ public class Lotto {
         }
     }
 
-    protected void validateLottoNumberCount() {
+    protected void checkLottoNumberAddable() {
         if (this.lotto.size() >= LottoConstants.LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_COUNT_MAX);
         }
@@ -35,7 +62,7 @@ public class Lotto {
 
     private void validateLotto(LottoNumber lottoNumber) {
         checkLottoNumberExist(lottoNumber);
-        validateLottoNumberCount();
+        checkLottoNumberAddable();
     }
 
     protected void checkLottoNumberCount() {
@@ -57,6 +84,10 @@ public class Lotto {
             count += userLotto.contains(lottoNumber);
         }
         return count;
+    }
+
+    public boolean lottoNumberExist(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
     }
 
     public void sortNumbers() {

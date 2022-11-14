@@ -15,4 +15,10 @@ public class ErrorMessage {
     public static final String PURCHASE_AMOUNT_NOT_ENOUGH = "구입 금액이 1장 가격보다 작습니다.";
     public static final String INVALID_LOTTO_UNIT_PRICE = "로또 1장 가격이 잘 못 설정되어있습니다.";
     public static final String INVALID_PURCHASE_AMOUNT = "잘 못된 구입금액입니다. 잔액이 발생했습니다.";
+    public static final String PURCHASE_TOTAL_COUNT_NOT_POSITIVE = "구입 총 개수는 0보다 커야 합니다.";
+    public static final String MANUAL_LOTTO_PURCHASE_COUNT_NEGATIVE = "수동 로또 구입 개수는 음수일 수 없습니다.";
+    public static final String INVALID_MANUAL_LOTTO_PURCHASE_COUNT = "수동 로또 구입 개수는 숫자로 입력해주세요.";
+    public static final String MANUAL_LOTTO_PURCHASE_COUNT_EXCEED = "수동 로또 구입 개수는 총 구입 개수보다 클 수 없습니다.";
+    public static final String BONUS_BALL_NUMBER_EXIST = "보너스볼은 당첨 번호와 중복될 수 없습니다.";
+    public static final String MANUAL_LOTTO_DUPLICATE = "중복 입력된 수동 로또 번호가 있습니다.";
 }

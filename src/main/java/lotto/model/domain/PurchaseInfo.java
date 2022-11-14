@@ -7,7 +7,7 @@ import lotto.model.constants.LottoConstants;
 public class PurchaseInfo {
 
     private long purchaseAmount;
-    private long purchaseCount;
+    private PurchaseCount purchaseCount;
 
     public PurchaseInfo(long purchaseAmount) {
         validatePositive(purchaseAmount);
@@ -16,7 +16,7 @@ public class PurchaseInfo {
         checkLottoUnitPrice(); // 단가 유효성 체크
         checkChange(purchaseAmount); // 잔액 발생 확인
         //개수 계산
-        this.purchaseCount = calculatePurchaseCount(purchaseAmount);
+        this.purchaseCount = PurchaseCount.totalCountOf(calculatePurchaseCount(purchaseAmount));
     }
 
     private void validatePositive(long purchaseAmount) {
@@ -47,6 +47,21 @@ public class PurchaseInfo {
         return purchaseAmount / LottoConstants.LOTTO_UNIT_PRICE;
     }
 
+    public void assignManualLottoCount(String manualLottoCount) {
+        purchaseCount.manualCountSetting(manualLottoCount);
+    }
+
+    public long getAutoLottoCount() {
+        return purchaseCount.calculateAutoLottoCount();
+    }
+
+    public long getManualLottoCount() {
+        return purchaseCount.getManualLottoCount();
+    }
+
+    public long getPurchaseAmount() {
+        return purchaseAmount;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -57,19 +72,11 @@ public class PurchaseInfo {
             return false;
         }
         PurchaseInfo that = (PurchaseInfo) o;
-        return purchaseAmount == that.purchaseAmount && purchaseCount == that.purchaseCount;
+        return purchaseAmount == that.purchaseAmount && Objects.equals(purchaseCount, that.purchaseCount);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(purchaseAmount, purchaseCount);
-    }
-
-    public long getPurchaseAmount() {
-        return purchaseAmount;
-    }
-
-    public long getPurchaseCount() {
-        return purchaseCount;
     }
 }

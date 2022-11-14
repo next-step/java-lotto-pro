@@ -5,17 +5,17 @@ import java.util.Map;
 
 public enum WinCriterion {
 
-    FIFTH(3, 0, 5000),
-    FORTH(4, 0, 50000),
-    THIRD(5, 0, 1500000),
-    SECOND(5, 1, 30000000),
-    FIRST(6, 0, 2000000000);
+    FIFTH(3, BonusBallMatch.DOES_NOT_MATTER, 5000),
+    FORTH(4, BonusBallMatch.DOES_NOT_MATTER, 50000),
+    THIRD(5, BonusBallMatch.NOT_MATCH, 1500000),
+    SECOND(5, BonusBallMatch.MUST_MATCH, 30000000),
+    FIRST(6, BonusBallMatch.DOES_NOT_MATTER, 2000000000);
 
     private int matchCount; // 일치하는 숫자 개수
-    private int bonusCount; // 보너스볼 일치 개수
+    private BonusBallMatch bonusCount; // 보너스볼 일치 여부
     private long prize; // 상금
 
-    WinCriterion(int matchCount, int bonusCount, long prize) {
+    WinCriterion(int matchCount, BonusBallMatch bonusCount, long prize) {
         this.matchCount = matchCount;
         this.bonusCount = bonusCount;
         this.prize = prize;
@@ -30,7 +30,7 @@ public enum WinCriterion {
     }
 
     public boolean compareMatchCount(MatchCount matchCount) {
-        return matchCount.checkCount(this.matchCount, bonusCount);
+        return matchCount.checkCount(this.matchCount, this.bonusCount);
     }
 
     public long calculatePrize(int count) {
@@ -41,15 +41,11 @@ public enum WinCriterion {
         return matchCount;
     }
 
-    public int getBonusCount() {
-        return bonusCount;
-    }
-
     public long getPrize() {
         return prize;
     }
 
     public boolean checkBonusMatch() {
-        return this.bonusCount > 0;
+        return this.bonusCount == BonusBallMatch.MUST_MATCH;
     }
 }
