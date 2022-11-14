@@ -13,12 +13,10 @@ public class LottoTest {
     @DisplayName("로또 숫자 개수 불일치 시 예외처리")
     @Test
     void 로또_숫자_개수_불일치_예외처리() {
-        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5));
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            lotto.checkLottoNumberCount();
+            Lotto.checkLottoNumberCount(5);
         });
-        lotto.addLottoNumber(LottoNumber.getLottoNumberByInt(6));
-        lotto.checkLottoNumberCount();
+        Lotto.checkLottoNumberCount(6);
     }
 
     @DisplayName("로또 중복 숫자 추가 예외처리")
