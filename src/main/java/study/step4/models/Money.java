@@ -1,8 +1,9 @@
 package study.step4.models;
 
-import study.step4.exception.LottoInputMoneyInvalidUnitException;
 import study.step4.constants.PatternConstants;
+import study.step4.exception.LottoInputMoneyInvalidUnitException;
 import study.step4.exception.LottoInputMoneyTypeException;
+import study.step4.exception.NotEnoughToBuyLottoException;
 
 public class Money {
     public static final int PRICE_PER_LOTTO = 1000;
@@ -34,5 +35,11 @@ public class Money {
 
     public double divide(int totalReward) {
         return (double) totalReward / money;
+    }
+
+    public void validateEnoughToBuyLotto(int numberOfManualLotto) {
+        if (PRICE_PER_LOTTO * numberOfManualLotto > money) {
+            throw new NotEnoughToBuyLottoException("로또를 사기에 금액이 부족합니다.");
+        }
     }
 }
