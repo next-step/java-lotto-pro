@@ -9,7 +9,9 @@ public class LottoApplication {
     public static void main(String[] args) {
         Money money = new Money(InputView.inputMoney());
 
-        Lottos lottos = LottoMaker.makeLottos(money);
+        int numberOfManualLotto = InputView.inputNumberOfManualLotto();
+        money.validateEnoughToBuyLotto(numberOfManualLotto);
+        Lottos lottos = LottoMaker.makeLottos(money.numberAvailable());
         ResultView.printLottos(lottos);
 
         Lotto winningLottoNumbers = new Lotto(InputView.inputWinningNumbers());

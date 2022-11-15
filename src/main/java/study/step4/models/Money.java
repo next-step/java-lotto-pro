@@ -29,8 +29,8 @@ public class Money {
         }
     }
 
-    public int dividedBy(int pricePerLotto) {
-        return money / pricePerLotto;
+    public int numberAvailable() {
+        return money / PRICE_PER_LOTTO;
     }
 
     public double divide(int totalReward) {

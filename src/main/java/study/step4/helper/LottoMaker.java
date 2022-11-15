@@ -3,7 +3,6 @@ package study.step4.helper;
 import study.step4.models.Lotto;
 import study.step4.models.LottoNumber;
 import study.step4.models.Lottos;
-import study.step4.models.Money;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,10 +12,9 @@ public class LottoMaker {
     private static final int SUB_LIST_START_INDEX = 0;
     private static final int SUB_LIST_END_INDEX = 6;
 
-    public static Lottos makeLottos(Money inputMoney) {
+    public static Lottos makeLottos(int number) {
         List<Lotto> lottoList = new ArrayList<>();
-        int num = inputMoney.dividedBy(Money.PRICE_PER_LOTTO);
-        for (int i = 0; i < num; i++) {
+        for (int i = 0; i < number; i++) {
             lottoList.add(makeLotto());
         }
         return new Lottos(lottoList);
