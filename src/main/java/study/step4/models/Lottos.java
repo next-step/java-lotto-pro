@@ -24,11 +24,11 @@ public class Lottos {
         return lottos.toString();
     }
 
-    public Map<Rank, Integer> findWinningLottos(WinningLotto winLotto, LottoNumber bonusBall) {
+    public Map<Rank, Integer> findWinningLottos(WinningLotto winningLotto) {
         Map<Rank, Integer> winningLottos = new EnumMap<>(Rank.class);
         for (Lotto lotto : lottos) {
-            int numberOfMatching = lotto.countNumberOfMatching(winLotto);
-            Rank rank = Rank.valueOf(numberOfMatching, lotto.contains(bonusBall));
+            int numberOfMatching = lotto.countNumberOfMatching(winningLotto);
+            Rank rank = Rank.valueOf(numberOfMatching, winningLotto.hasBonusBall(lotto));
             winningLottos.put(rank, winningLottos.getOrDefault(rank, 0) + 1);
         }
         return winningLottos;

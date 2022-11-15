@@ -4,13 +4,20 @@ import study.step4.exception.BonusBallNumberInWinningLottoException;
 
 public class WinningLotto {
     private final Lotto winningLottoNumbers;
+    private final LottoNumber bonusBall;
 
-    public WinningLotto(String winningLottoNumbers) {
-        this.winningLottoNumbers = new Lotto(winningLottoNumbers);
+    public WinningLotto(Lotto winningLottoNumbers, LottoNumber bonusBall) {
+        this.winningLottoNumbers = winningLottoNumbers;
+        validateNotInWinningLotto(bonusBall);
+        this.bonusBall = bonusBall;
     }
 
     public boolean contains(LottoNumber bonusBallNumber) {
         return winningLottoNumbers.contains(bonusBallNumber);
+    }
+
+    public boolean hasBonusBall(Lotto lotto) {
+        return lotto.contains(bonusBall);
     }
 
     public void validateNotInWinningLotto(LottoNumber bonusBall) {
