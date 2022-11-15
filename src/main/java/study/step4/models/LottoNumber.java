@@ -41,7 +41,7 @@ public class LottoNumber {
         if (lottoNumbers.isEmpty()) {
             makeLottoNumbers();
         }
-        return lottoNumbers;
+        return new HashSet<>(lottoNumbers);
     }
 
     private static void makeLottoNumbers() {
