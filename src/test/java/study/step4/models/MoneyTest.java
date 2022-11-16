@@ -37,13 +37,6 @@ public class MoneyTest {
     }
 
     @Test
-    void 입력_값으로_나누기() {
-        Money money = new Money("3000");
-
-        assertThat(money.dividedBy(500)).isEqualTo(6);
-    }
-
-    @Test
     void 수동_로또_갯수_주어졌을_때_금액을_넘어갈_때_예외() {
         Money money = new Money("3000");
 
