@@ -1,13 +1,17 @@
 package study.step4.models;
 
+import study.step4.exception.LottoNumberDuplicateException;
+
 import java.util.EnumMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 public class Lottos {
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
+        validateDifferentLotto(lottos);
         this.lottos = lottos;
     }
 
@@ -22,6 +26,20 @@ public class Lottos {
     @Override
     public String toString() {
         return lottos.toString();
+    }
+
+    private void validateDifferentLotto(List<Lotto> lottos) {
+        if (hasDuplicateLotto(lottos)) {
+            throw new LottoNumberDuplicateException("로또는 중복될 수 없습니다.");
+        }
+    }
+
+    private boolean hasDuplicateLotto(List<Lotto> lottos) {
+        return lottos.size() != new HashSet<>(lottos).size();
+    }
+
+    public boolean contains(Lotto lotto) {
+        return lottos.contains(lotto);
     }
 
     public Map<Rank, Integer> findWinningLottos(WinningLotto winningLotto) {
