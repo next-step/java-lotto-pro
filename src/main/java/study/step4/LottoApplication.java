@@ -15,14 +15,14 @@ public class LottoApplication {
         money.validateEnoughToBuyLotto(numberOfManualLotto);
 
         List<String> manualLottosString = InputView.inputManualLottoNumber(numberOfManualLotto);
-        IntegratedLottos integratedLottos = LottoMaker.makeLottos(money.numberAvailable(), manualLottosString);
-        ResultView.printIntegratedLottos(integratedLottos);
+        Lottos lottos = LottoMaker.makeLottos(money.numberAvailable(), manualLottosString);
+        ResultView.printIntegratedLottos(lottos, manualLottosString.size());
 
         Lotto winningLottoNumbers = new Lotto(InputView.inputWinningNumbers());
         LottoNumber bonusBall = new LottoNumber(InputView.inputBonusBall());
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusBall);
 
-        Winners winners = new Winners(integratedLottos.findWinningLottos(winningLotto));
+        Winners winners = new Winners(winningLotto.findWinningLottos(lottos));
         ResultView.printLottoWinners(winners);
         ResultView.printEarningRate(winners, money);
     }

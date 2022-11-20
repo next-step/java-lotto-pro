@@ -13,10 +13,9 @@ public class ResultView {
     private static final String TOTAL_EARNING_RATE_DESCRIPTION = "총 수익률은 %.2f입니다.";
     private static final String UNDER_ONE_DESCRIPTION = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public static void printIntegratedLottos(IntegratedLottos integratedLottos) {
-        System.out.printf(PURCHASE_COUNT_DESCRIPTION, integratedLottos.manualSize(), integratedLottos.autoSize());
-        printLottos(integratedLottos.getManualLottos());
-        printLottos(integratedLottos.getAutoLottos());
+    public static void printIntegratedLottos(Lottos lottos, int manualSize) {
+        System.out.printf(PURCHASE_COUNT_DESCRIPTION, manualSize, lottos.size());
+        printLottos(lottos);
     }
 
     private static void printLottos(Lottos lottos) {
