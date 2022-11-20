@@ -1,6 +1,5 @@
 package study.step4.helper;
 
-import study.step4.models.IntegratedLottos;
 import study.step4.models.Lotto;
 import study.step4.models.LottoNumber;
 import study.step4.models.Lottos;
@@ -13,33 +12,27 @@ public class LottoMaker {
     private static final int SUB_LIST_START_INDEX = 0;
     private static final int SUB_LIST_END_INDEX = 6;
 
-    public static IntegratedLottos makeLottos(int number, List<String> manualLottosString) {
-        Lottos manualLottos = makeManualLottoList(manualLottosString);
-        List<Lotto> lottoList = new ArrayList<>();
-        int autoLottoCount = number - manualLottos.size();
+    public static Lottos makeLottos(int number, List<String> manualLottosString) {
+        List<Lotto> manualLottosList = makeManualLottoList(manualLottosString);
+        List<Lotto> autoLottoList = new ArrayList<>();
+        int autoLottoCount = number - manualLottosList.size();
         for (int i = 0; i < autoLottoCount; i++) {
-            lottoList.add(makeLotto(manualLottos));
+            autoLottoList.add(makeLotto());
         }
-        return new IntegratedLottos(manualLottos, new Lottos(lottoList));
+        return new Lottos(manualLottosList, autoLottoList);
     }
 
-    private static Lottos makeManualLottoList(List<String> manualLottosString) {
+    private static List<Lotto> makeManualLottoList(List<String> manualLottosString) {
         List<Lotto> manualLottos = new ArrayList<>();
         for (String manualLottoString : manualLottosString) {
             manualLottos.add(new Lotto(manualLottoString));
         }
-        return new Lottos(manualLottos);
+        return manualLottos;
     }
 
-    private static Lotto makeLotto(Lottos manualLottos) {
+    private static Lotto makeLotto() {
         List<LottoNumber> numbers = new ArrayList<>(LottoNumber.getLottoNumbers());
-        Lotto lotto;
-        boolean isDuplicate;
-        do {
-            Collections.shuffle(numbers);
-            lotto = new Lotto(new ArrayList<>(numbers.subList(SUB_LIST_START_INDEX, SUB_LIST_END_INDEX)));
-            isDuplicate = manualLottos.contains(lotto);
-        } while (isDuplicate);
-        return lotto;
+        Collections.shuffle(numbers);
+        return new Lotto(new ArrayList<>(numbers.subList(SUB_LIST_START_INDEX, SUB_LIST_END_INDEX)));
     }
 }
