@@ -34,7 +34,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return getLottoNumberByInt(number);
     }
 
-    protected static void validateNumber(int checkValue) {
+    private static void validateNumber(int checkValue) {
         if (checkValue < LottoConstants.LOTTO_NUMBER_MIN || checkValue > LottoConstants.LOTTO_NUMBER_MAX) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_CONSTRAINT);
         }
