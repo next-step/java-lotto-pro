@@ -16,7 +16,8 @@ public class LottoMaker {
     public static IntegratedLottos makeLottos(int number, List<String> manualLottosString) {
         Lottos manualLottos = makeManualLottoList(manualLottosString);
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < number - manualLottos.size(); i++) {
+        int autoLottoCount = number - manualLottos.size();
+        for (int i = 0; i < autoLottoCount; i++) {
             lottoList.add(makeLotto(manualLottos));
         }
         return new IntegratedLottos(manualLottos, new Lottos(lottoList));
