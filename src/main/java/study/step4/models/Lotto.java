@@ -26,9 +26,9 @@ public class Lotto {
         }
     }
 
-    public int countNumberOfMatching(WinningLotto winningLotto) {
+    public int countNumberOfMatching(Lotto winningLottoNumbers) {
         return (int) lottoNumbers.stream()
-                .filter(winningLotto::contains)
+                .filter(winningLottoNumbers::contains)
                 .count();
     }
 
@@ -56,5 +56,9 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    public boolean hasBonusBall(LottoNumber bonusBall) {
+        return lottoNumbers.contains(bonusBall);
     }
 }
