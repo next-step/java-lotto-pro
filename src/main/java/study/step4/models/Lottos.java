@@ -3,12 +3,18 @@ package study.step4.models;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public Lottos(List<Lotto> manualLottosList, List<Lotto> autoLottoList) {
+        this(Stream.concat(manualLottosList.stream(), autoLottoList.stream()).collect(Collectors.toList()));
     }
 
     public int size() {
@@ -24,13 +30,13 @@ public class Lottos {
         return lottos.toString();
     }
 
-    public Map<Rank, Integer> findWinningLottos(WinningLotto winLotto, LottoNumber bonusBall) {
-        Map<Rank, Integer> winningLottos = new EnumMap<>(Rank.class);
+    public Map<Rank, Integer> evaluateRankResult(Lotto winningLotto, LottoNumber bonusBall) {
+        Map<Rank, Integer> winningResult = new EnumMap<>(Rank.class);
         for (Lotto lotto : lottos) {
-            int numberOfMatching = lotto.countNumberOfMatching(winLotto);
-            Rank rank = Rank.valueOf(numberOfMatching, lotto.contains(bonusBall));
-            winningLottos.put(rank, winningLottos.getOrDefault(rank, 0) + 1);
+            int numberOfMatching = winningLotto.countNumberOfMatching(lotto);
+            Rank rank = Rank.valueOf(numberOfMatching, lotto.hasBonusBall(bonusBall));
+            winningResult.put(rank, winningResult.getOrDefault(rank, 0) + 1);
         }
-        return winningLottos;
+        return winningResult;
     }
 }

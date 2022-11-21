@@ -35,9 +35,9 @@ public class LottoTest {
     @Test
     void 로또_비교해서_일치하는_갯수_구하기() {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-        WinningLotto winLotto = new WinningLotto("1, 2, 3, 7, 8, 9");
+        Lotto winningLotto = new Lotto("1, 2, 3, 7, 8, 9");
 
-        int numberOfMatching = lotto.countNumberOfMatching(winLotto);
+        int numberOfMatching = lotto.countNumberOfMatching(winningLotto);
 
         assertThat(numberOfMatching).isEqualTo(3);
     }

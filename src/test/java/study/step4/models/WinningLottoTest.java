@@ -11,23 +11,20 @@ public class WinningLottoTest {
     @Test
     void 당첨번호_생성() {
         assertThatNoException()
-                .isThrownBy(() -> new WinningLotto("1, 2, 3, 4, 5, 6"));
+                .isThrownBy(() -> new WinningLotto(new Lotto("1, 2, 3, 4, 5, 6"), new LottoNumber("7")));
     }
 
     @Test
     void 당첨번호_생성_예외() {
-        assertThatThrownBy(() -> new WinningLotto("1, 2, 3, 4, 5, 6, 7"))
+        assertThatThrownBy(() -> new WinningLotto(new Lotto("1, 2, 3, 4, 5, 6, 7"), new LottoNumber("8")))
                 .isInstanceOf(LottoInvalidSizeException.class);
-        assertThatThrownBy(() -> new WinningLotto("1, 2, 3, 4, 5"))
+        assertThatThrownBy(() -> new WinningLotto(new Lotto("1, 2, 3, 4, 5"), new LottoNumber("6")))
                 .isInstanceOf(LottoInvalidSizeException.class);;
     }
 
     @Test
     void 보너스볼_생성_예외() {
-        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
-        LottoNumber bonusBall = new LottoNumber("1");
-
-        assertThatThrownBy(() -> winningLotto.validateNotInWinningLotto(bonusBall))
+        assertThatThrownBy(() -> new WinningLotto(new Lotto("1, 2, 3, 4, 5, 6"), new LottoNumber("1")))
                 .isInstanceOf(BonusBallNumberInWinningLottoException.class);
     }
 }

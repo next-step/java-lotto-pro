@@ -3,6 +3,7 @@ package study.step4.models;
 import org.junit.jupiter.api.Test;
 import study.step4.exception.LottoInputMoneyInvalidUnitException;
 import study.step4.exception.LottoInputMoneyTypeException;
+import study.step4.exception.NotEnoughToBuyLottoException;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -36,9 +37,10 @@ public class MoneyTest {
     }
 
     @Test
-    void 입력_값으로_나누기() {
+    void 수동_로또_갯수_주어졌을_때_금액을_넘어갈_때_예외() {
         Money money = new Money("3000");
 
-        assertThat(money.dividedBy(500)).isEqualTo(6);
+        assertThatThrownBy(() -> money.validateEnoughToBuyLotto(4))
+                .isInstanceOf(NotEnoughToBuyLottoException.class);
     }
 }
