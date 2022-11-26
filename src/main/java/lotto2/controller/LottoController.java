@@ -22,7 +22,7 @@ public class LottoController {
         final List<Lotto> lottoBucket = generateManyLotto(money);
         final Lotto winningNumbers = acceptWinningNumbers();
         final LottoNumber bonusNumber = acceptBonusNumber();
-        final Map<WinningRank, Integer> result = calculateLotto(lottoBucket, winningNumbers, bonusNumber);
+        final Map<WinningRankEnum, Integer> result = calculateLotto(lottoBucket, winningNumbers, bonusNumber);
         final List<WinningRankCountDto> winningRankCounts = winningRankCountsAsArray(result);
         displayStatistics(winningRankCounts);
         final double profitRatio = calculateProfitRatio(money, winningRankCounts);
@@ -60,16 +60,16 @@ public class LottoController {
         return inputView.inputBonusNumber();
     }
 
-    private Map<WinningRank, Integer> calculateLotto(
+    private Map<WinningRankEnum, Integer> calculateLotto(
             List<Lotto> lottoBucket,
             Lotto winningNumbers,
             LottoNumber bonusNumber) {
-        final Map<WinningRank, Integer> countForEachWinningRank = new HashMap<>();
-        countForEachWinningRank.put(WinningRank.FIFTH, 0);
-        countForEachWinningRank.put(WinningRank.FOURTH, 0);
-        countForEachWinningRank.put(WinningRank.THIRD, 0);
-        countForEachWinningRank.put(WinningRank.SECOND, 0);
-        countForEachWinningRank.put(WinningRank.FIRST, 0);
+        final Map<WinningRankEnum, Integer> countForEachWinningRank = new HashMap<>();
+        countForEachWinningRank.put(WinningRankEnum.FIFTH, 0);
+        countForEachWinningRank.put(WinningRankEnum.FOURTH, 0);
+        countForEachWinningRank.put(WinningRankEnum.THIRD, 0);
+        countForEachWinningRank.put(WinningRankEnum.SECOND, 0);
+        countForEachWinningRank.put(WinningRankEnum.FIRST, 0);
         final List<LottoNumber> lottoWinningNumbers = winningNumbers.lottoNumbers();
         for (Lotto eachLotto : lottoBucket) {
             int winningCount = 0;
@@ -82,38 +82,38 @@ public class LottoController {
                 continue;
             }
             if (winningCount == 3) {
-                final int count = countForEachWinningRank.get(WinningRank.FIFTH);
-                countForEachWinningRank.put(WinningRank.FIFTH, count + 1);
+                final int count = countForEachWinningRank.get(WinningRankEnum.FIFTH);
+                countForEachWinningRank.put(WinningRankEnum.FIFTH, count + 1);
                 continue;
             }
             if (winningCount == 4) {
                 if (eachLotto.contains(bonusNumber)) {
-                    final int count = countForEachWinningRank.get(WinningRank.SECOND);
-                    countForEachWinningRank.put(WinningRank.SECOND, count + 1);
+                    final int count = countForEachWinningRank.get(WinningRankEnum.SECOND);
+                    countForEachWinningRank.put(WinningRankEnum.SECOND, count + 1);
                     continue;
                 }
-                final int count = countForEachWinningRank.get(WinningRank.FOURTH);
-                countForEachWinningRank.put(WinningRank.FOURTH, count + 1);
+                final int count = countForEachWinningRank.get(WinningRankEnum.FOURTH);
+                countForEachWinningRank.put(WinningRankEnum.FOURTH, count + 1);
                 continue;
             }
             if (winningCount == 5) {
-                final int count = countForEachWinningRank.get(WinningRank.THIRD);
-                countForEachWinningRank.put(WinningRank.THIRD, count + 1);
+                final int count = countForEachWinningRank.get(WinningRankEnum.THIRD);
+                countForEachWinningRank.put(WinningRankEnum.THIRD, count + 1);
                 continue;
             }
-            final int count = countForEachWinningRank.get(WinningRank.FIRST);
-            countForEachWinningRank.put(WinningRank.FIRST, count + 1);
+            final int count = countForEachWinningRank.get(WinningRankEnum.FIRST);
+            countForEachWinningRank.put(WinningRankEnum.FIRST, count + 1);
         }
         return countForEachWinningRank;
     }
 
-    private List<WinningRankCountDto> winningRankCountsAsArray(Map<WinningRank, Integer> result) {
+    private List<WinningRankCountDto> winningRankCountsAsArray(Map<WinningRankEnum, Integer> result) {
         final List<WinningRankCountDto> winningRankCounts = new ArrayList<>(result.size());
-        winningRankCounts.add(new WinningRankCountDto(LottoPrizeEnum.FIFTH, result.get(WinningRank.FIFTH)));
-        winningRankCounts.add(new WinningRankCountDto(LottoPrizeEnum.FOURTH, result.get(WinningRank.FOURTH)));
-        winningRankCounts.add(new WinningRankCountDto(LottoPrizeEnum.THIRD, result.get(WinningRank.THIRD)));
-        winningRankCounts.add(new WinningRankCountDto(LottoPrizeEnum.SECOND, result.get(WinningRank.SECOND)));
-        winningRankCounts.add(new WinningRankCountDto(LottoPrizeEnum.FIRST, result.get(WinningRank.FIRST)));
+        winningRankCounts.add(new WinningRankCountDto(LottoPrizeEnum.FIFTH, result.get(WinningRankEnum.FIFTH)));
+        winningRankCounts.add(new WinningRankCountDto(LottoPrizeEnum.FOURTH, result.get(WinningRankEnum.FOURTH)));
+        winningRankCounts.add(new WinningRankCountDto(LottoPrizeEnum.THIRD, result.get(WinningRankEnum.THIRD)));
+        winningRankCounts.add(new WinningRankCountDto(LottoPrizeEnum.SECOND, result.get(WinningRankEnum.SECOND)));
+        winningRankCounts.add(new WinningRankCountDto(LottoPrizeEnum.FIRST, result.get(WinningRankEnum.FIRST)));
         return winningRankCounts;
     }
 

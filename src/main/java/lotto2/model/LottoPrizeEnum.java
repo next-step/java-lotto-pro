@@ -7,8 +7,8 @@ public enum LottoPrizeEnum {
     FOURTH(4, 50_000),
     FIFTH(3, 5_000);
 
-    private int numberMatch;
-    private int prize;
+    private final int numberMatch;
+    private final int prize;
 
     LottoPrizeEnum(int numberMatch, int prize) {
         this.numberMatch = numberMatch;
