@@ -36,6 +36,10 @@ public class LottoNumber {
         return tokenValue < LottoConstant.LOTTO_MINIMUM_NUMBER || LottoConstant.LOTTO_MAXIMUM_NUMBER < tokenValue;
     }
 
+    public int value() {
+        return value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
