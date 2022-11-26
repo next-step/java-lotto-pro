@@ -6,20 +6,27 @@ public class MoneyToBuy {
     private final int count;
 
     public MoneyToBuy(String input) {
-        int inputMoney;
+        int inputMoney = parseInt(input);
+        validateInputMoney(inputMoney);
+        value = inputMoney;
+        count = inputMoney / PRICE_OF_SINGLE_LOTTO_TICKET;
+    }
+
+    private int parseInt(String input) {
         try {
-            inputMoney = Integer.parseInt(input);
+            return Integer.parseInt(input);
         } catch (Exception e) {
             throw new NumberFormatException("구입 금액은 반드시 숫자여야 합니다.");
         }
+    }
+
+    private void validateInputMoney(int inputMoney) {
         if (isNegative(inputMoney)) {
             throw new NumberFormatException("구입 금액은 음수가 될 수 없습니다.");
         }
         if (!divisibleWithoutRemainder(inputMoney)) {
             throw new NumberFormatException("구입 금액은 로또 한 장 가격 단위로 입력해주세요. (로또 한 장 가격: 1000 원)");
         }
-        value = inputMoney;
-        count = inputMoney / PRICE_OF_SINGLE_LOTTO_TICKET;
     }
 
     private boolean isNegative(int input) {
