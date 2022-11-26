@@ -69,9 +69,8 @@ public class LottoController {
         final LottoCalculationUtils lottoCalculationUtils = new LottoCalculationUtils();
         Map<WinningRank, Integer> countForEachWinningRank = lottoCalculationUtils.initializeCountMap();
         for (Lotto eachLotto : lottoBucket) {
-            final int matchCount = lottoCalculationUtils.getMatchCount(eachLotto, winningNumbers);
-            final WinningRank winningRank = lottoCalculationUtils.winningRankForMatchCount(
-                    matchCount,
+            final int matchCount = eachLotto.getMatchCount(winningNumbers);
+            final WinningRank winningRank = lottoCalculationUtils.winningRankForMatchCount(matchCount,
                     eachLotto.contains(bonusNumber));
             countForEachWinningRank = lottoCalculationUtils.setCountForEachWinningRank(
                     countForEachWinningRank, winningRank);

@@ -27,10 +27,21 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    public int getMatchCount(Lotto other) {
+        final List<LottoNumber> otherNumbers = other.lottoNumbers();
+        int matchCount = 0;
+        for (LottoNumber lottoNumber : otherNumbers) {
+            if (lottoNumbers.contains(lottoNumber)) {
+                ++matchCount;
+            }
+        }
+        return matchCount;
+    }
+
     @Override
     public String toString() {
         final List<LottoNumber> listToPrint = new ArrayList<>(lottoNumbers);
-        Collections.sort(listToPrint, (o1, o2) -> Integer.compare(o1.value(), o2.value()));
+        Collections.sort(listToPrint, Comparator.comparingInt(LottoNumber::value));
         return listToPrint.toString();
     }
 }
