@@ -6,16 +6,14 @@ import lotto2.model.constant.LottoConstant;
 import lotto2.model.LottoNumber;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-public class LottoGeneratorFromWinningNumbers {
+public class LottoGeneratorFromUserInput {
     private final String input;
 
     private static final String LOTTO_NUMBERS_STRING_DELIMITER_REGEX = ",";
 
-    public LottoGeneratorFromWinningNumbers(String input) {
+    public LottoGeneratorFromUserInput(String input) {
         this.input = input;
     }
 
@@ -25,7 +23,6 @@ public class LottoGeneratorFromWinningNumbers {
             throw new IllegalArgumentException("당첨 번호는 반드시 6 개를 입력해야 합니다.");
         }
         final List<LottoNumber> winningLottoNumbers = toLottoNumbers(tokens);
-        checkDuplicateNumberInList(winningLottoNumbers);
         return new Lotto(winningLottoNumbers);
     }
 
@@ -59,12 +56,5 @@ public class LottoGeneratorFromWinningNumbers {
             lottoNumbersData.add(lottoNumber);
         }
         return lottoNumbersData;
-    }
-
-    private void checkDuplicateNumberInList(List<LottoNumber> winningLottoNumbers) throws IllegalArgumentException {
-        final Set<LottoNumber> duplicateCheck = new HashSet<>(winningLottoNumbers);
-        if (duplicateCheck.size() != LottoConstant.COUNT_OF_NUMBER_IN_LOTTO) {
-            throw new IllegalArgumentException("최종적으로 당첨 번호는 반드시 6 개가 되어야 합니다.");
-        }
     }
 }
