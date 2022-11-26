@@ -5,7 +5,8 @@ public enum WinningRank {
     SECOND(2, 5),
     THIRD(3, 5),
     FOURTH(4, 4),
-    FIFTH(5, 3);
+    FIFTH(5, 3),
+    NONE(0, 0);
 
     private final int rank;
 
