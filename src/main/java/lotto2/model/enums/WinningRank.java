@@ -1,6 +1,6 @@
-package lotto2.model;
+package lotto2.model.enums;
 
-public enum WinningRankEnum {
+public enum WinningRank {
     FIRST(1, 6),
     SECOND(2, 5),
     THIRD(3, 5),
@@ -11,8 +11,16 @@ public enum WinningRankEnum {
 
     private final int numberMatch;
 
-    WinningRankEnum(int rank, int numberMatch) {
+    WinningRank(int rank, int numberMatch) {
         this.rank = rank;
         this.numberMatch = numberMatch;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public int getNumberMatch() {
+        return numberMatch;
     }
 }

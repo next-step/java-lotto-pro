@@ -1,6 +1,6 @@
-package lotto2.model;
+package lotto2.model.enums;
 
-public enum LottoPrizeEnum {
+public enum LottoPrize {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
@@ -10,7 +10,7 @@ public enum LottoPrizeEnum {
     private final int numberMatch;
     private final int prize;
 
-    LottoPrizeEnum(int numberMatch, int prize) {
+    LottoPrize(int numberMatch, int prize) {
         this.numberMatch = numberMatch;
         this.prize = prize;
     }

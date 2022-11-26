@@ -1,16 +1,18 @@
 package lotto2.model;
 
+import lotto2.model.enums.LottoPrize;
+
 public class WinningRankCountDto {
-    private final LottoPrizeEnum lottoPrizeEnum;
+    private final LottoPrize lottoPrize;
     private final int count;
 
-    public WinningRankCountDto(LottoPrizeEnum lottoPrizeEnum, int count) {
-        this.lottoPrizeEnum = lottoPrizeEnum;
+    public WinningRankCountDto(LottoPrize lottoPrize, int count) {
+        this.lottoPrize = lottoPrize;
         this.count = count;
     }
 
-    public LottoPrizeEnum getLottoPrizeEnum() {
-        return lottoPrizeEnum;
+    public LottoPrize getLottoPrize() {
+        return lottoPrize;
     }
 
     public int getCount() {

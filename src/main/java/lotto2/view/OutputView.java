@@ -1,6 +1,7 @@
 package lotto2.view;
 
 import lotto2.model.*;
+import lotto2.model.enums.LottoPrize;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -27,17 +28,17 @@ public class OutputView {
         System.out.print("\n당첨 통계\n" +
                 "---------\n");
         for (WinningRankCountDto eachWinningRankCount : winningRankCounts) {
-            if (eachWinningRankCount.getLottoPrizeEnum() == LottoPrizeEnum.SECOND) {
+            if (eachWinningRankCount.getLottoPrize() == LottoPrize.SECOND) {
                 System.out.printf("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n",
-                        eachWinningRankCount.getLottoPrizeEnum().getNumberMatch(),
-                        eachWinningRankCount.getLottoPrizeEnum().getPrize(),
+                        eachWinningRankCount.getLottoPrize().getNumberMatch(),
+                        eachWinningRankCount.getLottoPrize().getPrize(),
                         eachWinningRankCount.getCount()
                 );
                 continue;
             }
             System.out.printf("%d개 일치 (%d원)- %d개\n",
-                    eachWinningRankCount.getLottoPrizeEnum().getNumberMatch(),
-                    eachWinningRankCount.getLottoPrizeEnum().getPrize(),
+                    eachWinningRankCount.getLottoPrize().getNumberMatch(),
+                    eachWinningRankCount.getLottoPrize().getPrize(),
                     eachWinningRankCount.getCount()
             );
         }
