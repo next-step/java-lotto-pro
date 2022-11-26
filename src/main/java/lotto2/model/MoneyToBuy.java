@@ -1,25 +1,32 @@
-package lotto.model.money.to.buy;
-
-import lotto.model.lotto.ticket.LottoTicketsBucket;
+package lotto2.model;
 
 public class MoneyToBuy {
-    protected final int money;
-    private int boughtLottoCount;
+    private static final int PRICE_OF_SINGLE_LOTTO_TICKET = 1000;
+    private final int value;
+    private final int count;
 
     public MoneyToBuy(String input) {
-        int inputMoney;
+        int inputMoney = parseInt(input);
+        validateInputMoney(inputMoney);
+        value = inputMoney;
+        count = inputMoney / PRICE_OF_SINGLE_LOTTO_TICKET;
+    }
+
+    private int parseInt(String input) {
         try {
-            inputMoney = Integer.parseInt(input);
+            return Integer.parseInt(input);
         } catch (Exception e) {
             throw new NumberFormatException("구입 금액은 반드시 숫자여야 합니다.");
         }
+    }
+
+    private void validateInputMoney(int inputMoney) {
         if (isNegative(inputMoney)) {
             throw new NumberFormatException("구입 금액은 음수가 될 수 없습니다.");
         }
         if (!divisibleWithoutRemainder(inputMoney)) {
             throw new NumberFormatException("구입 금액은 로또 한 장 가격 단위로 입력해주세요. (로또 한 장 가격: 1000 원)");
         }
-        money = inputMoney;
     }
 
     private boolean isNegative(int input) {
@@ -27,18 +34,14 @@ public class MoneyToBuy {
     }
 
     private boolean divisibleWithoutRemainder(int inputMoney) {
-        return inputMoney % LottoTicketsBucket.PRICE_OF_SINGLE_LOTTO_TICKET == 0;
+        return inputMoney % PRICE_OF_SINGLE_LOTTO_TICKET == 0;
     }
 
-    public int affordableTicketCount() {
-        return money / LottoTicketsBucket.PRICE_OF_SINGLE_LOTTO_TICKET;
+    public int getValue() {
+        return value;
     }
 
-    public double profitRatio(double sumOfPrizesFromLottoResult) {
-        return sumOfPrizesFromLottoResult / money;
-    }
-
-    public int value() {
-        return money;
+    public int getCount() {
+        return count;
     }
 }

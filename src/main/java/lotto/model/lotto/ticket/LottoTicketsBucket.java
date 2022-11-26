@@ -7,7 +7,7 @@ import lotto.model.winning.numbers.WinningNumbers;
 import java.util.*;
 
 public class LottoTicketsBucket {
-    private static final int PRICE_OF_SINGLE_LOTTO_TICKET = 1000;
+    public static final int PRICE_OF_SINGLE_LOTTO_TICKET = 1000;
     protected final int money;
     private int boughtLottoCount;
     protected final List<LottoTicket> lottoTickets;
