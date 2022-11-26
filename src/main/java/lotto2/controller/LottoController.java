@@ -1,15 +1,18 @@
 package lotto2.controller;
 
 import lotto2.model.*;
-import lotto2.view.LottoView;
+import lotto2.view.InputView;
+import lotto2.view.OutputView;
 
 import java.util.*;
 
 public class LottoController {
-    private final LottoView lottoView;
+    private final InputView inputView;
+    private final OutputView outputView;
 
-    public LottoController(LottoView lottoView) {
-        this.lottoView = lottoView;
+    public LottoController(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
     }
 
     public void run() {
@@ -18,7 +21,6 @@ public class LottoController {
         final WinningNumbers winningNumbers = acceptWinningNumbers();
         final LottoNumber bonusNumber = acceptBonusNumber();
         final Map<WinningRank, Integer> result = calculateLotto(lottoBucket, winningNumbers, bonusNumber);
-        lottoView.printResultTitle();
         final List<WinningRankCountDto> winningRankCounts = winningRankCountsAsArray(result);
         displayStatistics(winningRankCounts);
         final double profitRatio = calculateProfitRatio(money, winningRankCounts);
@@ -26,11 +28,8 @@ public class LottoController {
     }
 
     private MoneyToBuy acceptInputMoney() {
-        lottoView.printDemandInputMoney();
-        final Scanner scanner = new Scanner(System.in);
-        final String input = scanner.nextLine();
-        final MoneyToBuy money = new MoneyToBuy(input);
-        lottoView.printNumberOfBoughtLotto(money.getCount());
+        final MoneyToBuy money = inputView.inputMoney();
+        outputView.printNumberOfBoughtLotto(money);
         return money;
     }
 
@@ -41,7 +40,7 @@ public class LottoController {
             round.goNext();
             lottoBucket.add(generateEachLotto());
         }
-        lottoView.printListOfLotto(lottoBucket);
+        outputView.printListOfLotto(lottoBucket);
         return lottoBucket;
     }
 
@@ -51,19 +50,11 @@ public class LottoController {
     }
 
     private WinningNumbers acceptWinningNumbers() {
-        lottoView.printDemandWinningNumbers();
-        final Scanner scanner = new Scanner(System.in);
-        final String input = scanner.nextLine();
-        final WinningNumbers winningNumbers = new WinningNumbers(input);
-        return winningNumbers;
+        return inputView.inputWinningNumbers();
     }
 
     private LottoNumber acceptBonusNumber() {
-        lottoView.printDemandBonusNumber();
-        final Scanner scanner = new Scanner(System.in);
-        final String input = scanner.nextLine();
-        final LottoNumber bonusNumber = new LottoNumber(input);
-        return bonusNumber;
+        return inputView.inputBonusNumber();
     }
 
     private Map<WinningRank, Integer> calculateLotto(
@@ -124,7 +115,7 @@ public class LottoController {
     }
 
     private void displayStatistics(List<WinningRankCountDto> winningRankCounts) {
-        lottoView.printStatistics(winningRankCounts);
+        outputView.printStatistics(winningRankCounts);
     }
 
     private double calculateProfitRatio(MoneyToBuy money, List<WinningRankCountDto> winningRankCounts) {
@@ -136,6 +127,6 @@ public class LottoController {
     }
 
     private void displayProfitRatio(double profitRatio) {
-        lottoView.printProfitRatio(profitRatio);
+        outputView.printProfitRatio(profitRatio);
     }
 }
