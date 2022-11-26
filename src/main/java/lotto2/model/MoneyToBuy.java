@@ -37,11 +37,11 @@ public class MoneyToBuy {
         return inputMoney % PRICE_OF_SINGLE_LOTTO_TICKET == 0;
     }
 
-    public int getValue() {
+    public int value() {
         return value;
     }
 
-    public int getCount() {
+    public int count() {
         return count;
     }
 }

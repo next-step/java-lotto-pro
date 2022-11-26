@@ -9,15 +9,11 @@ import java.util.List;
 public class OutputView {
     private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
-    public void printNumberOfBoughtLotto(MoneyToBuy money) {
-        System.out.printf("%d개를 구매했습니다.\n", money.getCount());
-    }
-
-    public void printListOfLotto(List<Lotto> lottoBucket) {
+    public void printListOfLotto(ManualLottoCount manualLottoCount, int automaticLottoCount, List<Lotto> lottoBucket) {
+        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottoCount.count(), automaticLottoCount);
         for (Lotto lotto : lottoBucket) {
             printEachLotto(lotto);
         }
-        System.out.println();
     }
 
     private void printEachLotto(Lotto lotto) {

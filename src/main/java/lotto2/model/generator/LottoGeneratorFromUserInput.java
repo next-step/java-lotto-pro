@@ -8,12 +8,12 @@ import lotto2.model.LottoNumber;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoGeneratorFromWinningNumbers {
+public class LottoGeneratorFromUserInput {
     private final String input;
 
     private static final String LOTTO_NUMBERS_STRING_DELIMITER_REGEX = ",";
 
-    public LottoGeneratorFromWinningNumbers(String input) {
+    public LottoGeneratorFromUserInput(String input) {
         this.input = input;
     }
 
