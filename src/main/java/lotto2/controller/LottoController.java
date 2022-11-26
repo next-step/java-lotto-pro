@@ -64,29 +64,18 @@ public class LottoController {
             List<Lotto> lottoBucket,
             Lotto winningNumbers,
             LottoNumber bonusNumber) {
-        final Map<WinningRankEnum, Integer> countForEachWinningRank = new HashMap<>();
-        countForEachWinningRank.put(WinningRankEnum.FIFTH, 0);
-        countForEachWinningRank.put(WinningRankEnum.FOURTH, 0);
-        countForEachWinningRank.put(WinningRankEnum.THIRD, 0);
-        countForEachWinningRank.put(WinningRankEnum.SECOND, 0);
-        countForEachWinningRank.put(WinningRankEnum.FIRST, 0);
-        final List<LottoNumber> lottoWinningNumbers = winningNumbers.lottoNumbers();
+        final Map<WinningRankEnum, Integer> countForEachWinningRank = initializeCountMap();
         for (Lotto eachLotto : lottoBucket) {
-            int winningCount = 0;
-            for (LottoNumber currentWinningNumber : lottoWinningNumbers) {
-                if (eachLotto.contains(currentWinningNumber)) {
-                    ++winningCount;
-                }
-            }
-            if (winningCount < 3 || 6 < winningCount) {
+            int matchCount = getMatchCount(eachLotto, winningNumbers);
+            if (matchCount < 3 || 6 < matchCount) {
                 continue;
             }
-            if (winningCount == 3) {
+            if (matchCount == 3) {
                 final int count = countForEachWinningRank.get(WinningRankEnum.FIFTH);
                 countForEachWinningRank.put(WinningRankEnum.FIFTH, count + 1);
                 continue;
             }
-            if (winningCount == 4) {
+            if (matchCount == 4) {
                 if (eachLotto.contains(bonusNumber)) {
                     final int count = countForEachWinningRank.get(WinningRankEnum.SECOND);
                     countForEachWinningRank.put(WinningRankEnum.SECOND, count + 1);
@@ -96,7 +85,7 @@ public class LottoController {
                 countForEachWinningRank.put(WinningRankEnum.FOURTH, count + 1);
                 continue;
             }
-            if (winningCount == 5) {
+            if (matchCount == 5) {
                 final int count = countForEachWinningRank.get(WinningRankEnum.THIRD);
                 countForEachWinningRank.put(WinningRankEnum.THIRD, count + 1);
                 continue;
@@ -105,6 +94,27 @@ public class LottoController {
             countForEachWinningRank.put(WinningRankEnum.FIRST, count + 1);
         }
         return countForEachWinningRank;
+    }
+
+    private Map<WinningRankEnum, Integer> initializeCountMap() {
+        final Map<WinningRankEnum, Integer> countForEachWinningRank = new HashMap<>();
+        countForEachWinningRank.put(WinningRankEnum.FIFTH, 0);
+        countForEachWinningRank.put(WinningRankEnum.FOURTH, 0);
+        countForEachWinningRank.put(WinningRankEnum.THIRD, 0);
+        countForEachWinningRank.put(WinningRankEnum.SECOND, 0);
+        countForEachWinningRank.put(WinningRankEnum.FIRST, 0);
+        return countForEachWinningRank;
+    }
+
+    private int getMatchCount(Lotto eachLotto, Lotto winningNumbers) {
+        final List<LottoNumber> lottoWinningNumbers = winningNumbers.lottoNumbers();
+        int matchCount = 0;
+        for (LottoNumber currentWinningNumber : lottoWinningNumbers) {
+            if (eachLotto.contains(currentWinningNumber)) {
+                ++matchCount;
+            }
+        }
+        return matchCount;
     }
 
     private List<WinningRankCountDto> winningRankCountsAsArray(Map<WinningRankEnum, Integer> result) {
