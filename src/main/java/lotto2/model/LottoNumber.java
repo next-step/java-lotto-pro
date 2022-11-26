@@ -1,6 +1,7 @@
 package lotto2.model;
 
 import lotto2.common.StringUtils;
+import lotto2.model.constant.LottoConstant;
 
 import java.util.Objects;
 
@@ -32,7 +33,7 @@ public class LottoNumber {
     }
 
     private boolean lottoNumberOutOfRange(int tokenValue) {
-        return tokenValue < LottoGenerator.LOTTO_MINIMUM_NUMBER || LottoGenerator.LOTTO_MAXIMUM_NUMBER < tokenValue;
+        return tokenValue < LottoConstant.LOTTO_MINIMUM_NUMBER || LottoConstant.LOTTO_MAXIMUM_NUMBER < tokenValue;
     }
 
     @Override

@@ -1,15 +1,23 @@
-package lotto2.model;
+package lotto2.model.generator;
 
 import lotto2.common.StringUtils;
+import lotto2.model.Lotto;
+import lotto2.model.constant.LottoConstant;
+import lotto2.model.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WinningNumbers {
-    private static final String LOTTO_NUMBERS_STRING_DELIMITER_REGEX = ",";
-    private final List<LottoNumber> winningNumbers;
+public class LottoGeneratorFromWinningNumbers {
+    private final String input;
 
-    public WinningNumbers(String input) {
+    private static final String LOTTO_NUMBERS_STRING_DELIMITER_REGEX = ",";
+
+    public LottoGeneratorFromWinningNumbers(String input) {
+        this.input = input;
+    }
+
+    public Lotto generate() {
         if (StringUtils.isNullOrEmpty(input)) {
             throw new IllegalArgumentException("올바르지 않은 값을 당첨 번호로 입력했습니다.");
         }
@@ -21,7 +29,11 @@ public class WinningNumbers {
         if (numberMissingInWinningNumbersInput(tokens)) {
             throw new IllegalArgumentException("당첨 번호는 반드시 6 개를 입력해야 합니다.");
         }
-        winningNumbers = toLottoNumbers(tokens);
+        final List<LottoNumber> winningLottoNumbers = toLottoNumbers(tokens);
+        if (winningLottoNumbers.size() != LottoConstant.COUNT_OF_NUMBER_IN_LOTTO) {
+            throw new IllegalArgumentException("최종적으로 당첨 번호는 반드시 6 개가 되어야 합니다");
+        }
+        return new Lotto(winningLottoNumbers);
     }
 
     private boolean isCommaPrefixOrPostfix(String input) {
@@ -33,7 +45,7 @@ public class WinningNumbers {
     }
 
     private boolean numberMissingInWinningNumbersInput(String[] tokens) {
-        return tokens.length != LottoGenerator.COUNT_OF_NUMBER_IN_LOTTO;
+        return tokens.length != LottoConstant.COUNT_OF_NUMBER_IN_LOTTO;
     }
 
     private List<LottoNumber> toLottoNumbers(String[] tokens) {
@@ -43,9 +55,5 @@ public class WinningNumbers {
             lottoNumbersData.add(lottoNumber);
         }
         return lottoNumbersData;
-    }
-
-    public List<LottoNumber> getWinningNumbers() {
-        return winningNumbers;
     }
 }

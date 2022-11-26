@@ -13,6 +13,10 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
+    public List<LottoNumber> lottoNumbers() {
+        return lottoNumbers;
+    }
+
     @Override
     public String toString() {
         return lottoNumbers.toString();

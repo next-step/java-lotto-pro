@@ -1,4 +1,8 @@
-package lotto2.model;
+package lotto2.model.generator;
+
+import lotto2.model.Lotto;
+import lotto2.model.constant.LottoConstant;
+import lotto2.model.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,15 +10,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoGenerator {
-    public static final int LOTTO_MINIMUM_NUMBER = 1;
-    public static final int LOTTO_MAXIMUM_NUMBER = 45;
-    public static final int COUNT_OF_NUMBER_IN_LOTTO = 6;
+public class LottoGeneratorRandom {
     public static final List<LottoNumber> fullCandidateList;
 
     static {
         fullCandidateList = Collections.unmodifiableList(
-                IntStream.rangeClosed(LOTTO_MINIMUM_NUMBER, LOTTO_MAXIMUM_NUMBER)
+                IntStream.rangeClosed(LottoConstant.LOTTO_MINIMUM_NUMBER, LottoConstant.LOTTO_MAXIMUM_NUMBER)
                         .mapToObj(LottoNumber::new)
                         .collect(Collectors.toList())
         );
@@ -23,6 +24,6 @@ public class LottoGenerator {
     public static Lotto generate() {
         final List<LottoNumber> listToShuffle = new ArrayList<>(fullCandidateList);
         Collections.shuffle(listToShuffle);
-        return new Lotto(new ArrayList<>(listToShuffle.subList(0, COUNT_OF_NUMBER_IN_LOTTO)));
+        return new Lotto(new ArrayList<>(listToShuffle.subList(0, LottoConstant.COUNT_OF_NUMBER_IN_LOTTO)));
     }
 }

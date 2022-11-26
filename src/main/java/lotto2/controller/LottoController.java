@@ -1,6 +1,8 @@
 package lotto2.controller;
 
 import lotto2.model.*;
+import lotto2.model.generator.LottoGeneratorFromWinningNumbers;
+import lotto2.model.generator.LottoGeneratorRandom;
 import lotto2.view.InputView;
 import lotto2.view.OutputView;
 
@@ -18,7 +20,7 @@ public class LottoController {
     public void run() {
         final MoneyToBuy money = acceptInputMoney();
         final List<Lotto> lottoBucket = generateManyLotto(money);
-        final WinningNumbers winningNumbers = acceptWinningNumbers();
+        final Lotto winningNumbers = acceptWinningNumbers();
         final LottoNumber bonusNumber = acceptBonusNumber();
         final Map<WinningRank, Integer> result = calculateLotto(lottoBucket, winningNumbers, bonusNumber);
         final List<WinningRankCountDto> winningRankCounts = winningRankCountsAsArray(result);
@@ -45,11 +47,13 @@ public class LottoController {
     }
 
     private Lotto generateEachLotto() {
-        return LottoGenerator.generate();
+        return LottoGeneratorRandom.generate();
     }
 
-    private WinningNumbers acceptWinningNumbers() {
-        return inputView.inputWinningNumbers();
+    private Lotto acceptWinningNumbers() {
+        final String input = inputView.inputWinningNumbers();
+        final LottoGeneratorFromWinningNumbers lottoGenerator = new LottoGeneratorFromWinningNumbers(input);
+        return lottoGenerator.generate();
     }
 
     private LottoNumber acceptBonusNumber() {
@@ -58,7 +62,7 @@ public class LottoController {
 
     private Map<WinningRank, Integer> calculateLotto(
             List<Lotto> lottoBucket,
-            WinningNumbers winningNumbers,
+            Lotto winningNumbers,
             LottoNumber bonusNumber) {
         final Map<WinningRank, Integer> countForEachWinningRank = new HashMap<>();
         countForEachWinningRank.put(WinningRank.FIFTH, 0);
@@ -66,7 +70,7 @@ public class LottoController {
         countForEachWinningRank.put(WinningRank.THIRD, 0);
         countForEachWinningRank.put(WinningRank.SECOND, 0);
         countForEachWinningRank.put(WinningRank.FIRST, 0);
-        final List<LottoNumber> lottoWinningNumbers = winningNumbers.getWinningNumbers();
+        final List<LottoNumber> lottoWinningNumbers = winningNumbers.lottoNumbers();
         for (Lotto eachLotto : lottoBucket) {
             int winningCount = 0;
             for (LottoNumber currentWinningNumber : lottoWinningNumbers) {

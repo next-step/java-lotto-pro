@@ -12,11 +12,10 @@ public class InputView {
         return new MoneyToBuy(input);
     }
 
-    public WinningNumbers inputWinningNumbers() {
+    public String inputWinningNumbers() {
         System.out.print("지난 주 당첨 번호를 입력해 주세요.\n");
         final Scanner scanner = new Scanner(System.in);
-        final String input = scanner.nextLine();
-        return new WinningNumbers(input);
+        return scanner.nextLine();
     }
 
     public LottoNumber inputBonusNumber() {
