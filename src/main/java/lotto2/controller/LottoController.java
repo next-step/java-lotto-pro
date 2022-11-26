@@ -17,7 +17,7 @@ public class LottoController {
 
     public void run() {
         final MoneyToBuy money = acceptInputMoney();
-        final List<List<LottoNumber>> lottoBucket = generateManyLotto(money);
+        final List<Lotto> lottoBucket = generateManyLotto(money);
         final WinningNumbers winningNumbers = acceptWinningNumbers();
         final LottoNumber bonusNumber = acceptBonusNumber();
         final Map<WinningRank, Integer> result = calculateLotto(lottoBucket, winningNumbers, bonusNumber);
@@ -33,8 +33,8 @@ public class LottoController {
         return money;
     }
 
-    private List<List<LottoNumber>> generateManyLotto(MoneyToBuy money) {
-        final List<List<LottoNumber>> lottoBucket = new ArrayList<>();
+    private List<Lotto> generateManyLotto(MoneyToBuy money) {
+        final List<Lotto> lottoBucket = new ArrayList<>();
         final Round round = new Round(money.getCount());
         while (round.hasNext()) {
             round.goNext();
@@ -44,9 +44,8 @@ public class LottoController {
         return lottoBucket;
     }
 
-    private List<LottoNumber> generateEachLotto() {
-        final List<LottoNumber> lotto = LottoGenerator.generate();
-        return lotto;
+    private Lotto generateEachLotto() {
+        return LottoGenerator.generate();
     }
 
     private WinningNumbers acceptWinningNumbers() {
@@ -58,7 +57,7 @@ public class LottoController {
     }
 
     private Map<WinningRank, Integer> calculateLotto(
-            List<List<LottoNumber>> lottoBucket,
+            List<Lotto> lottoBucket,
             WinningNumbers winningNumbers,
             LottoNumber bonusNumber) {
         final Map<WinningRank, Integer> countForEachWinningRank = new HashMap<>();
@@ -68,7 +67,7 @@ public class LottoController {
         countForEachWinningRank.put(WinningRank.SECOND, 0);
         countForEachWinningRank.put(WinningRank.FIRST, 0);
         final List<LottoNumber> lottoWinningNumbers = winningNumbers.getWinningNumbers();
-        for (List<LottoNumber> eachLotto : lottoBucket) {
+        for (Lotto eachLotto : lottoBucket) {
             int winningCount = 0;
             for (LottoNumber currentWinningNumber : lottoWinningNumbers) {
                 if (eachLotto.contains(currentWinningNumber)) {

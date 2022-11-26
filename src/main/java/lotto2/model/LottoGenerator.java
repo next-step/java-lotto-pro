@@ -20,9 +20,9 @@ public class LottoGenerator {
         );
     }
 
-    public static List<LottoNumber> generate() {
+    public static Lotto generate() {
         final List<LottoNumber> listToShuffle = new ArrayList<>(fullCandidateList);
         Collections.shuffle(listToShuffle);
-        return new ArrayList<>(listToShuffle.subList(0, COUNT_OF_NUMBER_IN_LOTTO));
+        return new Lotto(new ArrayList<>(listToShuffle.subList(0, COUNT_OF_NUMBER_IN_LOTTO)));
     }
 }

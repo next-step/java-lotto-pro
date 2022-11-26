@@ -1,9 +1,6 @@
 package lotto2.view;
 
-import lotto2.model.LottoNumber;
-import lotto2.model.LottoPrizeEnum;
-import lotto2.model.MoneyToBuy;
-import lotto2.model.WinningRankCountDto;
+import lotto2.model.*;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -15,14 +12,14 @@ public class OutputView {
         System.out.printf("%d개를 구매했습니다.\n", money.getCount());
     }
 
-    public void printListOfLotto(List<List<LottoNumber>> lottoBucket) {
-        for (List<LottoNumber> lotto : lottoBucket) {
+    public void printListOfLotto(List<Lotto> lottoBucket) {
+        for (Lotto lotto : lottoBucket) {
             printEachLotto(lotto);
         }
         System.out.println();
     }
 
-    private void printEachLotto(List<LottoNumber> lotto) {
+    private void printEachLotto(Lotto lotto) {
         System.out.print(lotto + "\n");
     }
 
