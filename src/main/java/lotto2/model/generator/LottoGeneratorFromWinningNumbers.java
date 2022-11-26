@@ -18,6 +18,15 @@ public class LottoGeneratorFromWinningNumbers {
     }
 
     public Lotto generate() {
+        final String[] tokens = tokensOfSplitInput();
+        if (numberMissingInWinningNumbersInput(tokens)) {
+            throw new IllegalArgumentException("당첨 번호는 반드시 6 개를 입력해야 합니다.");
+        }
+        final List<LottoNumber> winningLottoNumbers = toLottoNumbers(tokens);
+        return new Lotto(winningLottoNumbers);
+    }
+
+    private String[] tokensOfSplitInput() {
         if (StringUtils.isNullOrEmpty(input)) {
             throw new IllegalArgumentException("올바르지 않은 값을 당첨 번호로 입력했습니다.");
         }
@@ -25,15 +34,7 @@ public class LottoGeneratorFromWinningNumbers {
         if (isCommaPrefixOrPostfix(trimmedInput)) {
             throw new IllegalArgumentException("쉽표가 맨 앞 또는 맨 뒤에 올 수 없습니다.");
         }
-        final String[] tokens = splitBLottoDelimiter(trimmedInput);
-        if (numberMissingInWinningNumbersInput(tokens)) {
-            throw new IllegalArgumentException("당첨 번호는 반드시 6 개를 입력해야 합니다.");
-        }
-        final List<LottoNumber> winningLottoNumbers = toLottoNumbers(tokens);
-        if (winningLottoNumbers.size() != LottoConstant.COUNT_OF_NUMBER_IN_LOTTO) {
-            throw new IllegalArgumentException("최종적으로 당첨 번호는 반드시 6 개가 되어야 합니다");
-        }
-        return new Lotto(winningLottoNumbers);
+        return splitBLottoDelimiter(trimmedInput);
     }
 
     private boolean isCommaPrefixOrPostfix(String input) {
