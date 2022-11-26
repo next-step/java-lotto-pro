@@ -22,9 +22,9 @@ public class LottoController {
     public void run() {
         final MoneyToBuy money = acceptInputMoney();
         final List<Lotto> lottoBucket = generateManyLotto(money);
-        final Lotto winningNumbers = acceptWinningNumbers();
-        final LottoNumber bonusNumber = acceptBonusNumber();
-        final Map<WinningRank, Integer> result = calculateLotto(lottoBucket, winningNumbers, bonusNumber);
+        final WinningLotto winningLotto = acceptWinningNumbers();
+        acceptBonusNumber(winningLotto);
+        final Map<WinningRank, Integer> result = calculateLotto(lottoBucket, winningLotto);
         final List<WinningRankCountDto> winningRankCounts = winningRankCountsAsArray(result);
         displayStatistics(winningRankCounts);
         final double profitRatio = calculateProfitRatio(money, winningRankCounts);
@@ -52,26 +52,25 @@ public class LottoController {
         return LottoGeneratorRandom.generate();
     }
 
-    private Lotto acceptWinningNumbers() {
+    private WinningLotto acceptWinningNumbers() {
         final String input = inputView.inputWinningNumbers();
         final LottoGeneratorFromWinningNumbers lottoGenerator = new LottoGeneratorFromWinningNumbers(input);
-        return lottoGenerator.generate();
+        return new WinningLotto(lottoGenerator.generate());
     }
 
-    private LottoNumber acceptBonusNumber() {
-        return inputView.inputBonusNumber();
+    private WinningLotto acceptBonusNumber(WinningLotto winningLotto) {
+        final LottoNumber bonusNumber = inputView.inputBonusNumber();
+        winningLotto.setBonusNumber(bonusNumber);
+        return winningLotto;
     }
 
-    private Map<WinningRank, Integer> calculateLotto(
-            List<Lotto> lottoBucket,
-            Lotto winningNumbers,
-            LottoNumber bonusNumber) {
+    private Map<WinningRank, Integer> calculateLotto(List<Lotto> lottoBucket, WinningLotto winningLotto) {
         final LottoCalculationUtils lottoCalculationUtils = new LottoCalculationUtils();
         Map<WinningRank, Integer> countForEachWinningRank = lottoCalculationUtils.initializeCountMap();
         for (Lotto eachLotto : lottoBucket) {
-            final int matchCount = eachLotto.getMatchCount(winningNumbers);
+            final int matchCount = eachLotto.getMatchCount(winningLotto.getLotto());
             final WinningRank winningRank = lottoCalculationUtils.winningRankForMatchCount(matchCount,
-                    eachLotto.contains(bonusNumber));
+                    eachLotto.contains(winningLotto.getBonusNumber()));
             countForEachWinningRank = lottoCalculationUtils.setCountForEachWinningRank(
                     countForEachWinningRank, winningRank);
         }
