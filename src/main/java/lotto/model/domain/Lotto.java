@@ -22,11 +22,11 @@ public class Lotto {
 
     public Lotto(String lottoNumbersInput) {
         String[] lottoNumbers = lottoNumbersInput.split(LottoConstants.WIN_LOTTO_DELIMITER);
+        checkLottoNumberCount(lottoNumbers.length);
         lotto = new ArrayList<>();
         for (String lottoNumber : lottoNumbers) {
             lotto.add(LottoNumber.getLottoNumberByString(lottoNumber));
         }
-        checkLottoNumberCount();
     }
 
     public static Lotto generateOneAutoLotto() {
@@ -38,6 +38,12 @@ public class Lotto {
         Lotto lotto = new Lotto(lottoNumbers);
         lotto.sortNumbers();
         return lotto;
+    }
+
+    protected static void checkLottoNumberCount(int count) {
+        if (count != LottoConstants.LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_COUNT_NOT_MATCH);
+        }
     }
 
     public void addLottoNumber(LottoNumber lottoNumber) {
@@ -63,12 +69,6 @@ public class Lotto {
     private void validateLotto(LottoNumber lottoNumber) {
         checkLottoNumberExist(lottoNumber);
         checkLottoNumberAddable();
-    }
-
-    protected void checkLottoNumberCount() {
-        if (this.lotto.size() != LottoConstants.LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_COUNT_NOT_MATCH);
-        }
     }
 
     public int contains(LottoNumber lottoNumber) {
